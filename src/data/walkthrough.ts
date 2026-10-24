@@ -5872,7 +5872,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "gaia-return-shop-stock",
             kind: "optional",
             text: "Before going to the Iifa Tree, visit Black Mage Village's Item Shop, Weapon Shop, and Black Cat Synthesis Shop, then check Daguerreo's Weapon Shop. The Disc IV stock includes Wizard Rod, Siren's Flute, High Mage Staff, Thief Hat, Holy Miter, Dark Gear, and Daguerreo's new weapons and armor; compare abilities and recipes with your goals.",
-            detail: "Black Mage Village's Disc IV Item Shop adds Magic Tag and Vaccine (100 Gil each). Its Weapon Shop lists Wizard Rod (3,990), Siren's Flute (7,000), High Mage Staff (6,000), Thief Hat (7,100), Holy Miter (8,300), and Dark Gear (16,300). Daguerreo's Disc IV Weapon Shop lists Orichalcon (17,000), Defender (9,340), Ultima Sword (14,000), Holy Lance (11,000), Avenger (16,000), Kaiser Knuckles (18,000), Mythril Racket (2,250), Fork (1,100), Bistro Fork (10,300), Rising Sun (500), Magic Armlet (1,000), Egoist's Armlet (2,000), Dragon Wrist (4,800), Power Wrist (5,100), Defense Gloves (6,000), Aegis Gloves (7,000), Lamia's Tiara (800), Golden Hairpin (3,700), Coronet (4,400), Flash Hat (5,200), Adaman Hat (6,100), Platinum Helm (4,600), Kaiser Helm (7,120), Demon's Vest (10,250), Minerva's Plate (12,200), Ninja Gear (14,000), Platina Armor (10,500), Carabini Mail (12,300), and Dragon Mail (14,000). These Disc IV stocks replace the earlier Black Mage Village weapon and Daguerreo weapon inventories. Black Cat's full synthesis recipes are still being audited; the separate Daguerreo Item and Synthesis Shops retain their earlier stock.",
+            detail: "Black Mage Village's Disc IV Item Shop adds Magic Tag and Vaccine (100 Gil each). Its Weapon Shop lists Wizard Rod (3,990), Siren's Flute (7,000), High Mage Staff (6,000), Thief Hat (7,100), Holy Miter (8,300), and Dark Gear (16,300). Daguerreo's Disc IV Weapon Shop lists Orichalcon (17,000), Defender (9,340), Ultima Sword (14,000), Holy Lance (11,000), Avenger (16,000), Kaiser Knuckles (18,000), Mythril Racket (2,250), Fork (1,100), Bistro Fork (10,300), Rising Sun (500), Magic Armlet (1,000), Egoist's Armlet (2,000), Dragon Wrist (4,800), Power Wrist (5,100), Defense Gloves (6,000), Aegis Gloves (7,000), Lamia's Tiara (800), Golden Hairpin (3,700), Coronet (4,400), Flash Hat (5,200), Adaman Hat (6,100), Platinum Helm (4,600), Kaiser Helm (7,120), Demon's Vest (10,250), Minerva's Plate (12,200), Ninja Gear (14,000), Platina Armor (10,500), Carabini Mail (12,300), and Dragon Mail (14,000). These Disc IV stocks replace the earlier Black Mage Village weapon and Daguerreo weapon inventories. The Black Cat's full recipe list is still under audit; Grand Armor is confirmed as Mythril Sword + Mythril Armor for 45,000 Gil. The separate Daguerreo Item and Synthesis Shops retain their earlier stock.",
             objectiveIds: ["disc-4.return-to-gaia.updated-shops"],
           },
         ],
@@ -5946,7 +5946,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-alexandria-and-treno",
         title: "Alexandria and Treno — Stiltzkin #8, Behemoth, and auctions",
         summary: "Stiltzkin has returned to Alexandria's steeple for his final bundle. Treno's Weapon Shop has advanced to Behemoth, and the auction adds late Disc IV items.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
         steps: [
           {
             id: "gaia-return-stiltzkin-eighth",
@@ -5968,6 +5968,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Check the Treno Auction House for the Disc IV Ribbon, and speak to the card players in the stadium for their new card pools.",
             detail: "The Ribbon is an expensive auction item. The Magical Fingertip appears only after its sidequest trigger and auction prerequisites are satisfied; use the dedicated step below rather than assuming it is in the first bid rotation.",
             objectiveIds: ["disc-3.on-the-high-seas.auction-house"],
+          },
+          {
+            id: "gaia-return-grand-armor-material-check",
+            kind: "optional",
+            text: "If Grand Armor is part of your goal and you retained a Mythril Sword, buy Mythril Armor in Treno for 1,830 Gil if needed. Keep both ingredients until you can synthesize Grand Armor at Black Mage Village for 45,000 Gil.",
+            detail: "GameFAQs lists Mythril Armor in Treno on Discs III–IV and Mythril Sword's final shop source at Esto Gaza before Desert Palace. If the sword is gone, Nova Dragon's one-time Grand Armor steal is the remaining documented route. An older synthesis table lists Mythril Armlet in error; a later correction identifies Mythril Armor.",
+            objectiveIds: ["disc-4.return-to-gaia.grand-armor-synthesis"],
           },
         ],
       },

@@ -13,7 +13,8 @@ export type ItemAcquisitionMethod =
   | "quest-reward"
   | "steal"
   | "drop"
-  | "chocograph";
+  | "chocograph"
+  | "synthesis";
 
 export type ItemAcquisitionAvailability = "single-use" | "one-time-encounter" | "limited-window" | "conditional" | "repeatable" | "window-unverified";
 
@@ -40,6 +41,7 @@ export type ItemAcquisitionPath = {
   availability: ItemAcquisitionAvailability;
   shopId?: string;
   shopName?: string;
+  recipeId?: string;
   recommendedBeforeChapterId?: string;
   conditions?: string;
   notes?: string;
@@ -74,17 +76,21 @@ export const itemCatalogCoverage = {
     "disc-1.burmecia",
     "disc-1.exploring-lindblum-kingdom",
     "disc-2.journey-to-treno",
+    "disc-2.treno",
+    "disc-2.return-to-alexandria",
     "disc-2.journey-to-outer-continent",
     "disc-2.outer-continent",
     "disc-3.picking-up-the-trail",
     "disc-3.forgotten-continent",
     "disc-3.desert-palace",
     "disc-3.lost-continent",
+    "disc-3.on-the-high-seas",
     "disc-3.aerial-exploration",
     "disc-3.preparing-to-leave",
     "disc-4.return-to-gaia",
+    "disc-4.second-battle-of-iifa-tree",
   ],
-  note: "Partial acquisition catalog: Burmecia, Oeilvert and Mount Gulug pickups, Mognet rewards, Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, and select alternate rewards. Shop cutoffs, recovery paths, and item-level completeness still need independent review.",
+  note: "Partial acquisition catalog: Burmecia, Oeilvert and Mount Gulug pickups, Mognet rewards, Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and the first structured synthesis recipe. Most recipes, shop cutoffs, recovery paths, and item-level completeness still need independent review.",
 };
 
 const burmeciaSources = [
@@ -98,6 +104,7 @@ const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-
 const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"];
 const oeilvertSources = ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"];
 const mountGulugSources = ["gamefaqs-lost-continent-71891", "gamefaqs-items-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
+const grandArmorSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon", "rpgclassics-armor", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"];
 
 export const gameItems: GameItem[] = [
   { id: "game-item.cancer-stellazzio", name: "Cancer Stellazzio", category: "key-item", sourceIds: [...burmeciaSources, "jegged-stellazzio"], verification: "partial" },
@@ -124,7 +131,9 @@ export const gameItems: GameItem[] = [
   { id: "game-item.gaia-gear", name: "Gaia Gear", category: "equipment", sourceIds: [...oeilvertSources, ...mountGulugSources], verification: "partial" },
   { id: "game-item.pumice-piece", name: "Pumice Piece", category: "equipment", sourceIds: oeilvertSources, verification: "partial" },
   { id: "game-item.chain-plate", name: "Chain Plate", category: "equipment", sourceIds: burmeciaSources, verification: "partial" },
-  { id: "game-item.mythril-sword", name: "Mythril Sword", category: "equipment", sourceIds: burmeciaSources, verification: "partial" },
+  { id: "game-item.mythril-sword", name: "Mythril Sword", category: "equipment", sourceIds: [...burmeciaSources, "gamefaqs-item-locations-54996", "gamefaqs-items-71891", "gamefaqs-shops-71891"], verification: "partial" },
+  { id: "game-item.mythril-armor", name: "Mythril Armor", category: "equipment", sourceIds: [...grandArmorSources, "gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"], verification: "partial" },
+  { id: "game-item.grand-armor", name: "Grand Armor", category: "equipment", sourceIds: grandArmorSources, verification: "partial" },
   { id: "game-item.bandana", name: "Bandana", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.leather-plate", name: "Leather Plate", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.mythril-vest", name: "Mythril Vest", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
@@ -343,6 +352,85 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
 export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc3ShopPaths,
   ...disc4ShopPaths,
+  {
+    id: "item-path.disc-2.treno.mythril-sword-shop",
+    itemId: "game-item.mythril-sword",
+    chapterId: "disc-2.treno",
+    method: "shop",
+    quantity: 1,
+    availability: "window-unverified",
+    shopId: "treno.weapon-shop",
+    shopName: "Treno Weapon Shop (Disc II)",
+    conditions: "GameFAQs lists Mythril Sword in Treno on Disc II. Its later stock window is not established by the item-location entry; Esto Gaza is the final documented shop source.",
+    cost: { currency: "gil", amount: 1300 },
+    sourceIds: ["gamefaqs-item-locations-54996", "gamefaqs-shops-71891"],
+  },
+  {
+    id: "item-path.disc-3.on-the-high-seas.esto-gaza-mythril-sword",
+    itemId: "game-item.mythril-sword",
+    chapterId: "disc-3.on-the-high-seas",
+    method: "shop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "esto-gaza.shop",
+    shopName: "Esto Gaza Shop",
+    recommendedBeforeChapterId: "disc-3.on-the-high-seas",
+    conditions: "The final documented Mythril Sword shop source before the Desert Palace transition. This source also contributes to the perfect-inventory target of five copies.",
+    cost: { currency: "gil", amount: 1300 },
+    walkthroughObjectiveIds: ["disc-3.on-the-high-seas.mythril-swords"],
+    sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "jegged-blue-narciss"],
+  },
+  {
+    id: "item-path.disc-2.return-to-alexandria.thorn-mythril-armor",
+    itemId: "game-item.mythril-armor",
+    chapterId: "disc-2.return-to-alexandria",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Steal from Thorn during the scripted Zorn and Thorn battle.",
+    walkthroughObjectiveIds: ["disc-2.return-to-alexandria.zorn-thorn-steals"],
+    sourceIds: ["gamefaqs-return-to-alexandria-71891", "gamefaqs-item-locations-54996"],
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.treno-mythril-armor",
+    itemId: "game-item.mythril-armor",
+    chapterId: "disc-4.return-to-gaia",
+    method: "shop",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "treno.weapon-shop.disc-4",
+    shopName: "Treno Weapon & Armor Shop (Disc IV)",
+    conditions: "The item reference lists Mythril Armor in Treno on Discs III and IV; this is a repeatable way to replace a spent copy before the Nova Dragon encounter.",
+    cost: { currency: "gil", amount: 1830 },
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.grand-armor-synthesis"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891"],
+  },
+  {
+    id: "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-grand-armor-steal",
+    itemId: "game-item.grand-armor",
+    chapterId: "disc-4.second-battle-of-iifa-tree",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Rare steal from Nova Dragon. GameFAQs labels it rare; Jegged calls it very rare. The boss cannot be fought again after victory.",
+    walkthroughObjectiveIds: ["disc-4.second-battle-of-iifa-tree.nova-dragon-steals"],
+    sourceIds: ["gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon", "gamefaqs-items-71891", "rpgclassics-armor"],
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.black-mage-village-grand-armor-synthesis",
+    itemId: "game-item.grand-armor",
+    chapterId: "disc-4.return-to-gaia",
+    method: "synthesis",
+    recipeId: "synthesis-recipe.grand-armor",
+    quantity: 1,
+    availability: "conditional",
+    shopId: "black-mage-village.black-cat",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    conditions: "Requires one Mythril Sword, one Mythril Armor, and 45,000 Gil. Mythril Armor can be replaced from Treno on Disc IV; no post-Desert-Palace Mythril Sword shop source is documented, so retain the sword or use the Nova Dragon steal.",
+    cost: { currency: "gil", amount: 45000 },
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.grand-armor-synthesis"],
+    sourceIds: grandArmorSources,
+  },
   {
     id: "item-path.disc-2.chocograph-five-diamond-gloves",
     itemId: "game-item.diamond-gloves",
@@ -985,6 +1073,8 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.trident.luna", itemId: "game-item.trident", abilityName: "Luna", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
+  { id: "item-ability.grand-armor.chemist", itemId: "game-item.grand-armor", abilityName: "Chemist", verification: "partial", sourceIds: ["gamefaqs-items-71891", "rpgclassics-armor"] },
+  { id: "item-ability.grand-armor.restore-hp", itemId: "game-item.grand-armor", abilityName: "Restore HP", verification: "partial", sourceIds: ["gamefaqs-items-71891", "rpgclassics-armor"] },
   { id: "item-ability.diamond-armor.ability-up", itemId: "game-item.diamond-armor", abilityName: "Ability Up", verification: "partial", sourceIds: ["gamefaqs-items-71891", "rpgclassics-armor"] },
   { id: "item-ability.diamond-sword.power-break", itemId: "game-item.diamond-sword", abilityName: "Power Break", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.flame-saber.magic-break", itemId: "game-item.flame-saber", abilityName: "Magic Break", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"] },

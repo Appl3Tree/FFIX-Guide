@@ -5,6 +5,7 @@ import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupI
 import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
+import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const errors: string[] = [];
@@ -23,6 +24,7 @@ checkUnique("objective", objectives.map((objective) => objective.id));
 checkUnique("missable", missables.map((missable) => missable.id));
 checkUnique("game item", gameItems.map((item) => item.id));
 checkUnique("item acquisition path", itemAcquisitionPaths.map((path) => path.id));
+checkUnique("synthesis recipe", synthesisRecipes.map((recipe) => recipe.id));
 checkUnique("source inventory target", sourceInventoryTargets.map((target) => target.id));
 checkUnique("equipment ability claim", equipmentAbilityClaims.map((claim) => claim.id));
 checkUnique("Steam achievement", steamAchievements.map((achievement) => achievement.id));
@@ -43,6 +45,7 @@ checkUnique("game route link", gameRouteEdges.map((edge) => `${edge.fromChapterI
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
 const gameItemIds = new Set(gameItems.map((item) => item.id));
+const synthesisRecipeIds = new Set(synthesisRecipes.map((recipe) => recipe.id));
 const areaIds = new Set(guideAreas.map((area) => area.id));
 const walkthroughChapterIds = new Set(walkthroughChapters.map((chapter) => chapter.areaId));
 const achievementCatalogs = [
@@ -326,9 +329,18 @@ for (const path of itemAcquisitionPaths) {
   if (path.recommendedBeforeChapterId && !areaIds.has(path.recommendedBeforeChapterId)) {
     errors.push(`Item acquisition path ${path.id} recommends an unknown cutoff chapter ${path.recommendedBeforeChapterId}.`);
   }
-  if (path.method === "shop" || path.method === "mogshop" || path.method === "moogle-shop") {
+  if (path.method === "shop" || path.method === "mogshop" || path.method === "moogle-shop" || path.method === "synthesis") {
     if (!path.shopId?.trim() || !path.shopName?.trim()) errors.push(`Shop acquisition path ${path.id} needs a shop ID and name.`);
     if (path.cost?.currency !== "gil") errors.push(`Shop acquisition path ${path.id} needs a Gil price.`);
+  }
+  if (path.method === "synthesis") {
+    if (!path.recipeId || !synthesisRecipeIds.has(path.recipeId)) {
+      errors.push(`Synthesis acquisition path ${path.id} needs a known recipe ID.`);
+    } else if (synthesisRecipes.find((recipe) => recipe.id === path.recipeId)?.resultItemId !== path.itemId) {
+      errors.push(`Synthesis acquisition path ${path.id} item does not match recipe ${path.recipeId}.`);
+    }
+  } else if (path.recipeId) {
+    errors.push(`Non-synthesis acquisition path ${path.id} must not reference a recipe.`);
   }
   for (const objectiveId of path.walkthroughObjectiveIds ?? []) {
     if (!objectiveIds.has(objectiveId)) errors.push(`Item acquisition path ${path.id} references unknown objective ${objectiveId}.`);
@@ -351,6 +363,26 @@ for (const path of itemAcquisitionPaths) {
     if (!sourceIds.has(sourceId)) errors.push(`Item acquisition path ${path.id} references unknown source ${sourceId}.`);
   }
   acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
+}
+for (const recipe of synthesisRecipes) {
+  if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
+  if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
+    errors.push(`Synthesis recipe ${recipe.id} references a chapter without authored walkthrough content.`);
+  }
+  if (!recipe.shopId.trim() || !recipe.shopName.trim()) errors.push(`Synthesis recipe ${recipe.id} needs a shop ID and name.`);
+  if (!Number.isSafeInteger(recipe.cost.amount) || recipe.cost.amount < 0) errors.push(`Synthesis recipe ${recipe.id} has an invalid Gil cost.`);
+  if (recipe.cost.currency !== "gil") errors.push(`Synthesis recipe ${recipe.id} must use Gil as its cost currency.`);
+  if (recipe.ingredients.length === 0) errors.push(`Synthesis recipe ${recipe.id} needs at least one ingredient.`);
+  for (const ingredient of recipe.ingredients) {
+    if (!gameItemIds.has(ingredient.itemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown ingredient ${ingredient.itemId}.`);
+    if (!Number.isSafeInteger(ingredient.quantity) || ingredient.quantity < 1) {
+      errors.push(`Synthesis recipe ${recipe.id} needs positive integer ingredient quantities.`);
+    }
+  }
+  if (recipe.sourceIds.length === 0) errors.push(`Synthesis recipe ${recipe.id} has no provenance.`);
+  for (const sourceId of recipe.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Synthesis recipe ${recipe.id} references unknown source ${sourceId}.`);
+  }
 }
 for (const target of sourceInventoryTargets) {
   if (!gameItemIds.has(target.itemId)) errors.push(`Inventory target ${target.id} references unknown item ${target.itemId}.`);
@@ -406,7 +438,7 @@ if (guideAreas.some((area) => area.state === "verified")) warnings.push("A chapt
 
 console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} coverage warning(s).`);
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
-console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
+console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);
 if (errors.length > 0) process.exitCode = 1;
