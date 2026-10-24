@@ -296,6 +296,29 @@ h1, h2, p { margin-top: 0; }
 .route-current-button:disabled { color: #446756; border-color: #bdd0bd; background: #e8efe7; cursor: default; }
 .route-map-source { grid-template-columns: auto minmax(0, 1fr); align-items: start; }
 .route-map-source small, .route-map-source a { grid-column: 2; }
+.game-route-section { margin-top: 28px; padding: 18px 20px; border: 1px solid #e1e3dc; background: #fbfaf6; }
+.game-route-heading { display: flex; align-items: end; justify-content: space-between; gap: 12px; padding-bottom: 9px; border-bottom: 1px solid #dcded5; }
+.game-route-heading .eyebrow { color: #8b7650; font-size: 8px; }
+.game-route-heading h2 { margin: 3px 0 0; color: #354840; font: 500 21px var(--serif); }
+.game-route-scope { color: #858d85; font: 8px var(--mono); }
+.game-route-intro, .game-route-caveat { max-width: 850px; color: #78827a; font-size: 10px; line-height: 1.6; }
+.game-route-intro { margin: 11px 0 10px; }
+.game-route-counts { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px; }
+.game-route-counts span, .game-route-kind { display: inline-flex; align-items: center; padding: 4px 7px; color: #61746a; border: 1px solid #d8ddd5; border-radius: 2px; background: #f2f4ee; font: 8px var(--mono); }
+.game-route-list { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--hairline); }
+.game-route-entry { padding: 11px 2px 12px; border-top: 1px solid #e9e7df; }
+.game-route-edge-topline { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.game-route-edge-endpoints { min-width: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 8px; color: #9a8b65; }
+.game-route-edge-endpoints strong { color: #3c4c44; font: 500 13px var(--serif); }
+.game-route-edge-endpoints span { font: 11px var(--mono); }
+.game-route-entry.is-optional-detour .game-route-kind, .game-route-entry.is-optional-return .game-route-kind, .game-route-entry.is-rejoin .game-route-kind { color: #806c47; border-color: #e7dcc1; background: #f8f3e8; }
+.game-route-entry > p { margin: 5px 0 0; color: #78827a; font-size: 10px; line-height: 1.55; }
+.game-route-sources { margin-top: 6px; color: #63766b; font-size: 9px; }
+.game-route-sources summary { width: fit-content; cursor: pointer; }
+.game-route-sources > div { display: flex; flex-wrap: wrap; gap: 5px 12px; margin: 6px 0 0 12px; }
+.game-route-sources a { display: inline-flex; align-items: center; gap: 4px; color: #5c766c; text-decoration: none; }
+.game-route-sources a:hover { text-decoration: underline; }
+.game-route-caveat { margin: 12px 0 0; }
 .chapter-list { border-bottom: 1px solid var(--hairline); }
 .chapter-entry { border-top: 1px solid var(--hairline); }
 .chapter-row { min-height: 58px; display: grid; grid-template-columns: 35px minmax(0, 1fr) 130px; align-items: center; gap: 12px; padding: 8px 6px; border-top: 1px solid var(--hairline); }
@@ -529,6 +552,11 @@ h1, h2, p { margin-top: 0; }
   .overview-profile-select select { max-width: 220px; padding-left: 0; text-align: left; }
   .page-heading h1 { font-size: 30px; }
   .route-map-summary { grid-template-columns: 1fr; gap: 6px; padding: 11px 12px; }
+  .game-route-section { padding: 14px 12px; }
+  .game-route-heading { align-items: flex-start; flex-direction: column; gap: 5px; }
+  .game-route-edge-topline { align-items: flex-start; flex-direction: column; gap: 6px; }
+  .game-route-edge-endpoints { gap: 6px; }
+  .game-route-edge-endpoints strong { font-size: 12px; }
   .guide-route-entry { grid-template-columns: 29px minmax(0, 1fr); align-items: start; gap: 6px 8px; }
   .guide-route-copy strong { font-size: 13px; }
   .guide-route-actions { grid-column: 2; justify-content: start; }

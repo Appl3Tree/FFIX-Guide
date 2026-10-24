@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
+import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
@@ -31,6 +31,9 @@ checkUnique("ATE progress objective", activeTimeEvents.map((event) => event.obje
 checkUnique("objective dependency edge", objectiveDependencies.map((edge) => `${edge.prerequisiteObjectiveId}->${edge.dependentObjectiveId}`));
 checkUnique("guide sequence chapter", guideChapterSequence);
 checkUnique("guide sequence edge", guideSequenceEdges.map((edge) => `${edge.fromChapterId}->${edge.toChapterId}`));
+checkUnique("game route covered chapter", [...gameRouteCoverage.chapterIds]);
+checkUnique("game route edge", gameRouteEdges.map((edge) => edge.id));
+checkUnique("game route link", gameRouteEdges.map((edge) => `${edge.fromChapterId}->${edge.toChapterId}`));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
@@ -65,6 +68,44 @@ for (const [index, edge] of guideSequenceEdges.entries()) {
   for (const sourceId of edge.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`Guide sequence edge ${edge.fromChapterId} -> ${edge.toChapterId} references unknown source ${sourceId}.`);
   }
+}
+if (gameRouteCoverage.status !== "partial") errors.push("Game route coverage must stay explicitly partial until all story branches and gates are researched.");
+if (!areaIds.has(gameRouteCoverage.throughChapterId)) errors.push(`Game route coverage ends at unknown chapter ${gameRouteCoverage.throughChapterId}.`);
+if (gameRouteCoverage.chapterIds.at(-1) !== gameRouteCoverage.throughChapterId) errors.push("Game route coverage endpoint does not match its final covered chapter.");
+for (const [index, chapterId] of gameRouteCoverage.chapterIds.entries()) {
+  if (!areaIds.has(chapterId)) errors.push(`Game route coverage references unknown chapter ${chapterId}.`);
+  if (chapterId !== guideChapterSequence[index]) errors.push(`Game route coverage chapter ${chapterId} is not part of the declared source-order prefix.`);
+}
+const gameRouteCoverageIds = new Set<string>(gameRouteCoverage.chapterIds);
+const supportedGameRouteRelationships = new Set(["required-story", "optional-detour", "optional-return", "rejoin"]);
+for (const edge of gameRouteEdges) {
+  if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
+    errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);
+  }
+  if (!supportedGameRouteRelationships.has(edge.relationship)) errors.push(`Game route edge ${edge.id} has unsupported relationship ${edge.relationship}.`);
+  if (!areaIds.has(edge.fromChapterId) || !areaIds.has(edge.toChapterId)) {
+    errors.push(`Game route edge ${edge.id} references an unknown chapter.`);
+  }
+  if (!edge.summary.trim()) errors.push(`Game route edge ${edge.id} has no explanation.`);
+  if (edge.sourceIds.length === 0) errors.push(`Game route edge ${edge.id} has no source provenance.`);
+  for (const sourceId of edge.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Game route edge ${edge.id} references unknown source ${sourceId}.`);
+  }
+}
+const reachableGameRouteChapters = new Set<string>();
+const pendingGameRouteChapters = gameRouteCoverage.chapterIds.slice(0, 1);
+while (pendingGameRouteChapters.length > 0) {
+  const chapterId = pendingGameRouteChapters.shift();
+  if (!chapterId || reachableGameRouteChapters.has(chapterId)) continue;
+  reachableGameRouteChapters.add(chapterId);
+  for (const edge of gameRouteEdges) {
+    if (edge.fromChapterId === chapterId && !reachableGameRouteChapters.has(edge.toChapterId)) {
+      pendingGameRouteChapters.push(edge.toChapterId);
+    }
+  }
+}
+for (const chapterId of gameRouteCoverage.chapterIds) {
+  if (!reachableGameRouteChapters.has(chapterId)) errors.push(`Game route chapter ${chapterId} is unreachable from the researched opening route.`);
 }
 for (const event of activeTimeEvents) {
   if (!areaIds.has(event.chapterId)) errors.push(`ATE ${event.id} references unknown chapter ${event.chapterId}.`);

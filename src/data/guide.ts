@@ -326,7 +326,7 @@ export const sources = [
     title: "Cleyra Walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/14-Cleyra.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Cleyra cutoff and Stiltzkin #2 location; lists the four Cleyra ATEs, Quina prerequisite, and evacuation route. The final evacuation response differs across secondary reports, so the conservative guide choice is recorded with a conflict note.",
   },
   {
@@ -334,7 +334,7 @@ export const sources = [
     title: "Cleyra — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/cleyra",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Cleyra's Trunk, hidden pickups, settlement ATEs and Quina pit, Antlion, Mognet, evacuation, and Beatrix. It records an Inn letter check before Antlion, another Inn check after Antlion, and Mopli's letter for Serino during the attack; pickup labels and final cutoff are compared with other routes.",
   },
   {
@@ -358,7 +358,7 @@ export const sources = [
     title: "Return to Alexandria — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-alexandria",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Red Rose Mognet, the 30-minute Alexandria Castle escape, Tent and Ice Brand chests, Zorn and Thorn, Friendship ATE, Beatrix's third battle, party handoffs, Mosh's letter, and Ralvuimago. Enemy statistics and later-item alternatives are cross-checked before promotion.",
   },
   {
@@ -366,7 +366,7 @@ export const sources = [
     title: "Alexandria Castle Revisited — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/15-Alexandria-Castle.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the cage escape, timed rescue, Tantarian opportunity, treasure platform, Zorn and Thorn, Friendship ATE, Beatrix steals, party swaps, and Ralvuimago. Exact enemy values and steal percentages are not repeated where only one source supports them.",
   },
   {
@@ -470,7 +470,7 @@ export const sources = [
     title: "Pinnacle Rocks — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/pinnacle-rocks",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the five Ramuh fragments, three interior chests, Mosh's letter, Stiltzkin's post-Ramuh letter, and the jump-off transition. The fragment coordinates are checked against other routes because guides sequence and describe them differently.",
   },
   {
@@ -478,7 +478,7 @@ export const sources = [
     title: "Pinnacle Rocks — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/16-Pinnacle-Rocks.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for Monty's Mognet exchange, all five manifestations, the three chests, Ramuh's answer sequence, Peridot reward, and the final jump choice. Its description is compared with other routes where fragment placement differs.",
   },
   {
@@ -510,7 +510,7 @@ export const sources = [
     title: "Return to Lindblum — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-lindblum",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the city return, three ATEs, pickups, Serino/Moodon/Moonte letters, shop cutoff, Chain Mail stock, Pinnacle Rocks entrance treasure return, and Dragon's Gate departure. Achievement, synthesis, and Mognet consequences are cross-checked separately.",
   },
   {
@@ -518,7 +518,7 @@ export const sources = [
     title: "Lindblum — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/17-Lindblum.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the ATE trigger, two Card Freak Gon chests, hidden card, Mognet, Theater District, Lowell, three ATE sequence, Dragon's Gate Bandana, and Outer Continent lead-in.",
   },
   {
@@ -550,7 +550,7 @@ export const sources = [
     title: "Journey to the Outer Continent — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-the-outer-continent",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Quina's return, Frog Catching, Kupo Nut detours, Chocograph #5, Lani, Fossil Roo's chests and Mognet, mining rewards, and the one-way Gargant exit. Frog-pool advice differs from the guide's breeding-pair recommendation; the conflict is retained.",
   },
   {
@@ -558,7 +558,7 @@ export const sources = [
     title: "Outer Continent — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/outer-continent",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Outer Continent encounters, Ragtime Mouse availability, Qu's Marsh, Blue Magic, Chocograph #5, Conde Petie pickups and five first-visit ATEs. Its ATE routing is compared with Jegged and Gamer Guides; map directions vary among sources.",
   },
   {
@@ -566,7 +566,7 @@ export const sources = [
     title: "Magdalene Forest — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/magdalene-forest",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the Magdalene Forest and Dead Forest encounters, four-branch owl puzzle, six Black Mage Village ATEs, Mogryo's time-limited letter to Mocchi, village pickups, shops, and story exit. The page says the first three ATEs are safe before collecting the letter, then recommends collecting it before any further ATE or screen.",
   },
   {
@@ -574,7 +574,7 @@ export const sources = [
     title: "Black Mage Village — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/20-Black-Mage-Village.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the forest approach, owl puzzle, six first-visit ATEs, Mogryo's letter, Ladybug, hidden village pickups, eavesdropping and the Black Belt, synthesis suggestions, Virgo, and the story route back toward Conde Petie.",
   },
   {
@@ -598,7 +598,7 @@ export const sources = [
     title: "Conde Petie Mountain Path — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/codie-petie-mountain-path",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the second Conde Petie visit, Nuptial Joy, the Diamond recovery, party transition, four colored stones and Moonstone, Oglop capture, Suzuna and Stiltzkin #4, and Hilgigars. Its route and item/steal lists are checked against independent sources.",
   },
   {
@@ -606,7 +606,7 @@ export const sources = [
     title: "Conde Petie Mountain Path — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/21-Conde-Petie-Mountain-Path.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the second Conde Petie visit and Mountain Path, including Nuptial Joy, the Diamond, Eiko's entry, chests, stones, Stiltzkin, Mognet, Hilgigars' status vulnerabilities and steals, Moonstone, and the Lucid Plains exit.",
   },
   {
@@ -734,7 +734,7 @@ export const sources = [
     title: "Fossil Roo — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/18-Fossil-Roo.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the Armodullahan chase, Lani fight, entrance Elixir, Stiltzkin and Mogki, gargant-switch paths, Kuppo excavation, Survival Vest, and final exit. Boss HP/steal odds are not repeated where references differ.",
   },
   {
@@ -798,7 +798,7 @@ export const sources = [
     title: "Alexandria walkthrough — bover_87",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/alexandria",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Detailed Disc I route for Alexandria town, the performance, Moonstone claim, guardhouse, Knights of Pluto, and escape. Original PlayStation guide; some pickup placements and enemy data differ across guides.",
   },
   {
@@ -862,7 +862,7 @@ export const sources = [
     title: "Evil Forest walkthrough — bover_87",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/evil-forest",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Crash Site, ATEs, two Prison Cage fights, Prima Vista wreckage sweep, Baku, Monty/Mognet, spring, Plant Brain, and escape route. Its Movie Critic sidebar lists eight events and groups Lesson 2 with Evil Forest; the Moogle FAQ places Lesson 2 after freeing Mois in Ice Cavern, so this guide tracks it there. Steal odds and some enemy data are cross-checked rather than repeated where disputed.",
   },
   {
@@ -926,7 +926,7 @@ export const sources = [
     title: "Ice Cavern walkthrough — bover_87",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ice-cavern",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Room route, eight chests, mist-jet encounters, Mogster Lesson 2, Mois's Mognet letter, boss stats/steals, and solo Zidane strategy. Original PlayStation guide; later releases may differ in achievements and controls.",
   },
   {
@@ -1038,7 +1038,7 @@ export const sources = [
     title: "Village of Dali walkthrough — bover_87",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/village-of-dali",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "First-visit route, six Dali ATEs, Mognet, windmill, underground route, Black Waltz 2 data, and pre-departure Ice Cavern check. Its pickup list omits the Eye Drops recorded by other sources; Black Waltz 2 is filed under Observatory Mountain although the encounter field is disputed.",
   },
   {
@@ -1094,7 +1094,7 @@ export const sources = [
     title: "Cargo Ship — Disc I walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/cargo-ship",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route, confirms no listed ship items, the bridge sequence, party setup, Black Waltz 3's stats and attacks, and its three steals. Its steal odds are recorded as rarity classes and a 1-in-16 rare-slot chance.",
   },
   {
@@ -1134,7 +1134,7 @@ export const sources = [
     title: "Lindblum — Disc I walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/lindblum",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for castle, city pickups, six local ATEs, one-time Autograph/Moogle Suit visit, Festival of the Hunt, and Base Level exit. Used as one route reference; its prize and cutoff statements are cross-checked separately.",
   },
   {
@@ -1222,7 +1222,7 @@ export const sources = [
     title: "Exploring Lindblum Kingdom — Disc I walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/exploring-lindblum-kingdom",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Optional route through Qu's Marsh, Lindblum Plateau, Pinnacle Rocks, Chocobo's Forest, and Bohden Arch. Lists Quina recruitment, regional Blue Magic, available Chocographs and rewards, Moccha Coffee, and the Ether pickup. Its chapter inventory groups items from several distinct areas, so the guide names each pickup's actual location.",
   },
   {
@@ -1278,7 +1278,7 @@ export const sources = [
     title: "Journey to Burmecia — Disc I walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-burmecia",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. Boss steal percentages and some conditional event details are not copied where sources disagree.",
   },
   {
@@ -1312,6 +1312,14 @@ export const sources = [
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/kupo-nuts",
     accessed: "2026-10-23",
     notes: "Documents Moguta's Kupo Nut rewards, including the first Disc I delivery's fixed Holy Bell prize, later per-disc rewards, random repeat rewards, and the one-nut-at-a-time inventory limit.",
+  },
+  {
+    id: "jegged-kupo-nuts",
+    title: "Kupo Nuts — sidequest guide",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Kupo-Nuts.html",
+    accessed: "2026-10-24",
+    notes: "Cross-checks the return to Gizamaluke's Grotto, one-nut inventory limit, Disc II reward, and repeat-delivery rewards. Its recommendation to deliver once per disc is distinguished from the optional random reward on the Cleyra approach.",
   },
   {
     id: "gamefaqs-items-71891",
@@ -1350,7 +1358,7 @@ export const sources = [
     title: "Burmecia — Disc I walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/burmecia",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the Cancer coin, hidden pickups and floor trap, Wei and Kal dialogue prerequisite, Mognet and Kupo Nut, Stiltzkin, Atla's shop, Beatrix, and boss steals. Its Beatrix HP/MP/level figures differ from most other sources.",
   },
   {
@@ -1406,7 +1414,7 @@ export const sources = [
     title: "Journey to Treno — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-treno",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Covers Summit Station, Nazna's Mognet handoff, the second Black Waltz 3 battle, South Gate route, Bentini Heights, and Quan's Dwelling. Some equipment stock and exact battle values are not independently confirmed.",
   },
   {
@@ -1414,7 +1422,7 @@ export const sources = [
     title: "Summit Station, Alexandria Station, and South Gate",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/11-Summit-Station-Alexandria-Station-South-Gate.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the Phoenix Down, Nazna's two-step letter handoff, shop, Black Waltz 3 rematch, Dali return, South Gate Gil, Bentini Heights, Ghost, and Quan's Dwelling.",
   },
   {
@@ -1446,7 +1454,7 @@ export const sources = [
     title: "Treno — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/treno",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Primary route reference for the seven local ATEs, screen order, Power Belt, first-visit pickup sweep, Mogrich, Stellazzio, weapon-shop Griffin, and the Supersoft story transition. Its first-pass auction-house visit is a story scene rather than a complete auction itinerary.",
   },
   {
@@ -1454,7 +1462,7 @@ export const sources = [
     title: "Dark City Treno — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/12-Treno.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent ATE route and item sweep; covers Power Belt capture, fountain Gemini, slum Yeti Card and Taurus, Mogrich, shop and synthesis stock, Griffin challenge reward, Mythril Dagger, Supersoft, and final Crime and Punishment ATE.",
   },
   {
@@ -1494,8 +1502,16 @@ export const sources = [
     title: "Journey to Cleyra — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-cleyra",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Covers the return to Zidane's party, Treno equipment update, optional Kupo Nut delivery and Qu's Marsh frog stop, then the route west to Cleyra. Original PlayStation source.",
+  },
+  {
+    id: "jegged-gargan-roo",
+    title: "Gargan Roo and the Cleyra approach — Disc II walkthrough",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/13-Gargan-Roo.html",
+    accessed: "2026-10-24",
+    notes: "Independent route confirming the Treno-to-Gargan Roo-to-Cleyra chronology, the return to Zidane's party in Burmecia, and the optional Gizamaluke's Grotto Kupo Nut visit before continuing west to Cleyra.",
   },
   {
     id: "elitegrindlab-gargan-roo",
@@ -1526,7 +1542,7 @@ export const sources = [
     title: "Madain Sari — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/madain-sari",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the five first-visit ATEs, Libra, Tent, dinner-room items, Kirman Coffee, the mandatory rest, and Morrison's return-visit shop. It recommends viewing every ATE before entering the kitchen as Zidane.",
   },
   {
@@ -1534,7 +1550,7 @@ export const sources = [
     title: "Madain Sari — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/22-Madain-Sari.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route and achievement cross-check for the five ATEs, village pickups, best-dinner choices, Kirman Coffee, party transition, and post-rest Morrison shop. Its ATE ordering differs from GameFAQs and other routes, so the chapter records that disagreement.",
   },
   {
@@ -1566,7 +1582,7 @@ export const sources = [
     title: "Return to Madain Sari — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-madain-sari",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the post-Iifa return, Survival Vest/Phoenix Down chests, Eidolon Wall rewards and healing, Scarlet Hair, Memory Earring, Amarant recruitment, first party selection, and the return to Iifa Tree. Scarlet Hair's published HP conflicts with other references, so the chapter does not print it.",
   },
   {
@@ -1574,7 +1590,7 @@ export const sources = [
     title: "Madain Sari (Second Visit) — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/24-Madain-Sari.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent return-route cross-check for the hidden room, Eidolon Wall rewards, Zidane-only Scarlet Hair fight, Memory Earring, Amarant, party selection, and Morrison's Poison Knuckles shop. Its 8,985-HP figure differs from GameFAQs and is not repeated in the guide.",
   },
   {
@@ -1622,7 +1638,7 @@ export const sources = [
     title: "Journey to the Iifa Tree — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-the-iifa-tree",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route from Madain Sari through the Hilgigars fork to Pualei Plains; identifies the overland encounter list and the forest-only Friendly Nymph, its three-Ore request, and its 30 AP/Emerald reward.",
   },
   {
@@ -1630,7 +1646,7 @@ export const sources = [
     title: "Iifa Tree — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/23-Iifa-Tree.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route cross-check for the return through Conde Petie Mountain Path, north exit to Pualei Plains, the forest Nymph conditional greeting, and its three-Ore reward.",
   },
   {
@@ -1646,7 +1662,7 @@ export const sources = [
     title: "Iifa Tree — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/iifa-tree",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the outer seal, Mogryo-to-Mocchi delivery, inner-root switches and chests, lower-floor pickups, fixed encounters, Soulcage steals and strategy, and the story cutoff. It lists a hidden Ether and warns that the areas past the elevator close after story progression.",
   },
   {
@@ -1662,7 +1678,7 @@ export const sources = [
     title: "Battle of the Iifa Tree — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/battle-of-the-iifa-tree",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the second Iifa Tree visit, party selection, Mistodon battles, Insomniac preparation, Mocchi's Stiltzkin letter, Aquamarine, and the Disc III transition. Its statement that Mistodons keep coming after leaving and returning conflicts with EliteGrindLab's no-refarming audit.",
   },
   {
@@ -1670,7 +1686,7 @@ export const sources = [
     title: "Iifa Tree (Revisited) — Disc II walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/25-Iifa-Tree.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route cross-check for the later party selection, Dagger's departure, Mistodon waves and steal/drop table, Mocchi's letter, Aquamarine, and Disc II ending. It reports a solo Mistodon after Dagger leaves; the exact battle count is not repeated as a requirement.",
   },
   {

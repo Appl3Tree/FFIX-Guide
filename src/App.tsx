@@ -29,7 +29,7 @@ import {
   parseClock,
 } from "./data/excalibur2";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "./data/ates";
-import { guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "./data/progression";
+import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "./data/progression";
 import {
   achievementSourceCounts,
   arcs,
@@ -1072,9 +1072,20 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
   const routeSources = routeSourceIds
     .map((sourceId) => sources.find((source) => source.id === sourceId))
     .filter((source): source is (typeof sources)[number] => Boolean(source));
+  const gameRouteCounts = gameRouteEdges.reduce((counts, edge) => {
+    counts[edge.relationship] += 1;
+    return counts;
+  }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
+  const gameRouteRelationshipLabels = {
+    "required-story": "Story gate",
+    "optional-detour": "Optional detour",
+    "optional-return": "Optional return",
+    rejoin: "Rejoins story",
+  } as const;
+  const chapterTitle = (chapterId: string) => guideAreas.find((area) => area.id === chapterId)?.title ?? chapterId;
 
   return <>
-    <PageHeading eyebrow="CHAPTER NAVIGATION · SOURCE ORDER" title="Route Map" lead="Browse all 44 walkthrough chapters in the order used by the source guide's table of contents. This is a guide navigation sequence; optional detours, returns, and in-game unlock requirements are not represented as a single linear game map." />
+    <PageHeading eyebrow="CHAPTER NAVIGATION · GUIDE ORDER" title="Route Map" lead="Browse all 44 walkthrough chapters in the source guide's table-of-contents order. A separate evidence-backed graph below shows researched in-game gates and an optional detour; that graph is currently partial." />
     <section className="route-map-summary" aria-label="Guide route summary">
       <div><span className="eyebrow">SOURCE-ORDERED CHAPTERS</span><strong>{orderedAreas.length} chapters · {guideSequenceEdges.length} guide-order links</strong></div>
       <p>{profile.currentAreaId ? `Current-area marker: ${guideAreas.find((area) => area.id === profile.currentAreaId)?.title ?? "Unknown chapter"}.` : "Set a current-area marker to see its position in the guide sequence."} Changing the marker can open the existing missable cutoff review.</p>
@@ -1103,6 +1114,32 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
         </section>;
       })}
     </div>
+    <section className="game-route-section" aria-labelledby="game-route-heading">
+      <div className="game-route-heading">
+        <div><span className="eyebrow">IN-GAME PROGRESSION · PARTIAL</span><h2 id="game-route-heading">Verified story route</h2></div>
+        <span className="game-route-scope">Through {chapterTitle(gameRouteCoverage.throughChapterId)}</span>
+      </div>
+      <p className="game-route-intro">These links describe source-checked gameplay gates through the party's return to Madain Sari after the first Iifa Tree descent. They show the Dagger-and-Steiner Treno branch, the return to Zidane's party, an optional Pinnacle Rocks pickup return, and two optional trips to Gizamaluke's Grotto for Kupo Nut rewards. Later story branches and chapter gates still need research.</p>
+      <div className="game-route-counts" aria-label="Route relationship counts">
+        <span>{gameRouteCounts["required-story"]} story gates</span><span>{gameRouteCounts["optional-detour"]} optional detour{gameRouteCounts["optional-detour"] === 1 ? "" : "s"}</span><span>{gameRouteCounts["optional-return"]} optional return{gameRouteCounts["optional-return"] === 1 ? "" : "s"}</span><span>{gameRouteCounts.rejoin} rejoin{gameRouteCounts.rejoin === 1 ? "" : "s"}</span>
+      </div>
+      <ol className="game-route-list">
+        {gameRouteEdges.map((edge) => {
+          const edgeSources = edge.sourceIds
+            .map((sourceId) => sources.find((source) => source.id === sourceId))
+            .filter((source): source is (typeof sources)[number] => Boolean(source));
+          return <li className={`game-route-entry is-${edge.relationship}`} key={edge.id}>
+            <div className="game-route-edge-topline">
+              <div className="game-route-edge-endpoints"><strong>{chapterTitle(edge.fromChapterId)}</strong><span aria-hidden="true">→</span><strong>{chapterTitle(edge.toChapterId)}</strong></div>
+              <span className="game-route-kind">{gameRouteRelationshipLabels[edge.relationship]}</span>
+            </div>
+            <p>{edge.summary}</p>
+            <details className="game-route-sources"><summary>Sources ({edgeSources.length})</summary><div>{edgeSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div></details>
+          </li>;
+        })}
+      </ol>
+      <p className="game-route-caveat">Source coverage: original PlayStation walkthroughs, with independent chapter routes linked per relationship where available. “Story gate” means the documented main-story transition; it does not imply that every optional objective in the source chapter is required.</p>
+    </section>
     <div className="source-footnote route-map-source"><span>Sequence source</span><span>The chapter list follows the registered GameFAQs walkthrough contents page.</span><small>TOC order is not evidence of hard prerequisites between every pair of chapters.</small>{routeSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div>
   </>;
 }
