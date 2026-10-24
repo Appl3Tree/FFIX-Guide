@@ -31,8 +31,8 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 - **Priority:** Critical
 - **Status:** In progress
 - **Owner:** Codex
-- **Current evidence:** 83 named events, 80 eligible choices, 3 non-achievement tutorials, the mutually exclusive Treno pair, a 79-scene target, and 14 direct prerequisite edges are structured and linked to the tracker. Some triggers, route order, and version behavior remain disputed or partial.
-- **Next work:** Verify each event's exact availability trigger, screen/movement sequence, choice, deadline, later dependency, item/reward, source/version coverage, and single-save feasibility. Resolve Bran Bal title/order, Pandemonium elevator sequence, Lindblum prior-scene/low-Gil conditions, and Madain Sari ordering.
+- **Current evidence:** 83 named events, 80 eligible choices, 3 non-achievement tutorials, the mutually exclusive Treno pair, a 79-scene target, and 17 direct prerequisite edges are structured and linked to the tracker. Bran Bal's four-event order is cross-checked against GameFAQs, Jegged, and RPGClassics; its third-title variant is retained and the first three events now gate The Truth.
+- **Next work:** Verify each event's exact availability trigger, screen/movement sequence, choice, deadline, later dependency, item/reward, source/version coverage, and single-save feasibility. Resolve the Pandemonium elevator sequence, Lindblum prior-scene/low-Gil conditions, and Madain Sari ordering.
 - **Completion evidence:** Audited event table and chronological contextual walkthrough route per supported build; graph and achievement mappings pass source/ID checks; an end-to-end 79-scene simulation proves a feasible 79-of-80 single-save plan for each confirmed platform set.
 - **Dependencies:** B01 and B06.
 

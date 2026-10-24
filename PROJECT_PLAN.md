@@ -168,6 +168,7 @@ The researched main story reaches the final battle across all 44 chapter heading
 - [x] Twenty-seventh slice: Picking Up the Trail through the Hilda Garde departure, including Black Mage Village directions, eastern sinkholes, temporary story lock-in, and party planning; partial and source-linked.
 - [x] Added the next seven Disc III chapters in order: Forgotten Continent, Desert Palace, Lost Continent, Aerial Exploration, Ipsen's Castle, Breaking the Seal, and Preparing to Leave; partial and source-linked.
 - [x] Twenty-eighth chronological slice: Portal to Another World from Terra through Bran Bal, Pandemonium, and the Disc IV handoff aboard the Invincible, including five Pandemonium pickups, the Elevator ATE, Mozme's letter exchange, boss steal windows, and the three-fight climax; partial and source-linked.
+- [x] Bran Bal's four ATE triggers and order cross-checked against GameFAQs, Jegged, and RPGClassics; title variation preserved and the first three events recorded as prerequisites for The Truth, increasing the audited objective dependency graph to 17 edges.
 - [x] Author all 44 chapter headings in chronological order, including Final Preparations and The Final Battle; each has source-linked route instructions and shared objective IDs, but remains partial pending full content verification.
 - [ ] Audit each chapter for goal/route applicability and shared checklist relationships.
 - [x] Simulate the standard route chapter by chapter through the ending; this is a source-based static review, not live gameplay verification.

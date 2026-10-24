@@ -23,7 +23,7 @@ function scene(
   groupObjectiveId: string,
   location: string,
   trigger: string,
-  options: Partial<Pick<ActiveTimeEvent, "countsTowardMovieCritic" | "exclusiveGroupId" | "prerequisites" | "note" | "objectiveId">> = {},
+  options: Partial<Pick<ActiveTimeEvent, "countsTowardMovieCritic" | "exclusiveGroupId" | "prerequisites" | "note" | "objectiveId" | "sourceIds">> = {},
 ): ActiveTimeEvent {
   const objectiveId = options.objectiveId ?? `ate.${slug}`;
   const eligible = options.countsTowardMovieCritic ?? true;
@@ -39,7 +39,7 @@ function scene(
     ...(options.exclusiveGroupId ? { exclusiveGroupId: options.exclusiveGroupId } : {}),
     ...(options.prerequisites ? { prerequisites: options.prerequisites } : {}),
     ...(options.note ? { note: options.note } : {}),
-    sourceIds: [...routeSources, ...achievementSources],
+    sourceIds: [...routeSources, ...achievementSources, ...(options.sourceIds ?? [])],
   };
 }
 
@@ -137,10 +137,10 @@ const events: ActiveTimeEvent[] = [
   scene("lindblum-team", "Team", "disc-3.lost-continent", "disc-3.lost-continent.lindblum-ates", "Lindblum — return route", "View the forced ATE after the Mount Gulug sequence."),
   scene("lindblum-recovery", "Recovery", "disc-3.lost-continent", "disc-3.lost-continent.lindblum-ates", "Lindblum — return route", "View the second forced ATE during the same return sequence."),
 
-  scene("bran-bal-place-to-call-home", "Place To Call Home", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — storage/meeting hall", "View after gaining control of Eiko."),
-  scene("bran-bal-where-the-heart-is", "Where The Heart Is", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — pond", "Walk around the left side of the pond and check the right side."),
-  scene("bran-bal-came-into-this-world", "Came Into This World", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — pond/gate", "Go around the pond to the right and check outside the gate."),
-  scene("bran-bal-the-truth", "The Truth", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — hilltop", "Check the hilltop by the gate."),
+  scene("bran-bal-place-to-call-home", "Place To Call Home", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — Inn", "View the prompt after gaining control of Eiko inside the Inn.", { sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
+  scene("bran-bal-where-the-heart-is", "Where The Heart Is", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — pond", "Leave the Inn, then view the prompt outside.", { sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
+  scene("bran-bal-came-into-this-world", "Came Into This World", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — screen east of the Inn", "Move one screen right/east of the Inn and view the prompt.", { note: "GameFAQs titles this ATE 'Came Into the World'; Jegged and RPGClassics use 'Came Into This World.'", sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
+  scene("bran-bal-the-truth", "The Truth", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — northern Meeting Hall", "After viewing the first three Bran Bal ATEs, enter the northern Meeting Hall.", { prerequisites: ["ate.bran-bal-place-to-call-home", "ate.bran-bal-where-the-heart-is", "ate.bran-bal-came-into-this-world"], sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
   scene("pandemonium-the-lift", "The Lift — Both Groups Work Together", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.elevator-ate", "Pandemonium — elevator", "Set the elevator heading to 0, check the three blocked entrances, change it to 2, check them again, then return to the elevator room."),
 ];
 
