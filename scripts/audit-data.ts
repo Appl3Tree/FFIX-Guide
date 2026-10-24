@@ -4,6 +4,7 @@ import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
 import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
+import { gameItems, itemAcquisitionPaths, itemCatalogCoverage } from "../src/data/items.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const errors: string[] = [];
@@ -20,6 +21,8 @@ function checkUnique(label: string, ids: string[]) {
 checkUnique("source", sources.map((source) => source.id));
 checkUnique("objective", objectives.map((objective) => objective.id));
 checkUnique("missable", missables.map((missable) => missable.id));
+checkUnique("game item", gameItems.map((item) => item.id));
+checkUnique("item acquisition path", itemAcquisitionPaths.map((path) => path.id));
 checkUnique("Steam achievement", steamAchievements.map((achievement) => achievement.id));
 checkUnique("PS4 trophy", ps4Trophies.map((achievement) => achievement.id));
 checkUnique("Xbox achievement", xboxAchievements.map((achievement) => achievement.id));
@@ -37,6 +40,7 @@ checkUnique("game route link", gameRouteEdges.map((edge) => `${edge.fromChapterI
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
+const gameItemIds = new Set(gameItems.map((item) => item.id));
 const areaIds = new Set(guideAreas.map((area) => area.id));
 const walkthroughChapterIds = new Set(walkthroughChapters.map((chapter) => chapter.areaId));
 const achievementCatalogs = [
@@ -300,6 +304,39 @@ for (const missable of missables) {
   if (missable.verification !== "verified") warnings.push(`${missable.id} is implemented but not fully verified.`);
 }
 
+const acquisitionCounts = new Map<string, number>();
+for (const item of gameItems) {
+  if (!item.name.trim()) errors.push(`Game item ${item.id} is missing a name.`);
+  if (item.sourceIds.length === 0) errors.push(`Game item ${item.id} has no provenance.`);
+  for (const sourceId of item.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Game item ${item.id} references unknown source ${sourceId}.`);
+  }
+}
+for (const path of itemAcquisitionPaths) {
+  if (!gameItemIds.has(path.itemId)) errors.push(`Item acquisition path ${path.id} references unknown item ${path.itemId}.`);
+  if (!areaIds.has(path.chapterId)) errors.push(`Item acquisition path ${path.id} references unknown chapter ${path.chapterId}.`);
+  if (!walkthroughChapterIds.has(path.chapterId)) errors.push(`Item acquisition path ${path.id} has no authored walkthrough for ${path.chapterId}.`);
+  if (!Number.isSafeInteger(path.quantity) || path.quantity < 1) errors.push(`Item acquisition path ${path.id} needs a positive integer quantity.`);
+  if (path.sourceIds.length === 0) errors.push(`Item acquisition path ${path.id} has no provenance.`);
+  if (path.cost && (!Number.isSafeInteger(path.cost.amount) || path.cost.amount < 0)) {
+    errors.push(`Item acquisition path ${path.id} has an invalid currency cost.`);
+  }
+  for (const objectiveId of path.walkthroughObjectiveIds ?? []) {
+    if (!objectiveIds.has(objectiveId)) errors.push(`Item acquisition path ${path.id} references unknown objective ${objectiveId}.`);
+  }
+  for (const sourceId of path.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Item acquisition path ${path.id} references unknown source ${sourceId}.`);
+  }
+  acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
+}
+for (const item of gameItems) {
+  if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
+}
+for (const chapterId of itemCatalogCoverage.chapterIds) {
+  if (!areaIds.has(chapterId)) errors.push(`Item catalog coverage references unknown chapter ${chapterId}.`);
+  if (!walkthroughChapterIds.has(chapterId)) errors.push(`Item catalog coverage chapter ${chapterId} has no authored walkthrough.`);
+}
+
 for (const arc of arcs) {
   if (arc.areas.length === 0) errors.push(`${arc.label} has no inventory areas.`);
   checkUnique(`${arc.id} area`, arc.areas.map((area) => area.id));
@@ -324,6 +361,7 @@ if (guideAreas.some((area) => area.state === "verified")) warnings.push("A chapt
 
 console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} coverage warning(s).`);
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
+console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices.`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);
 if (errors.length > 0) process.exitCode = 1;

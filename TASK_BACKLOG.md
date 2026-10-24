@@ -48,9 +48,10 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 ### B05 — Build the item, equipment, shop, synthesis, and acquisition database
 
 - **Priority:** Required
-- **Status:** Not started
+- **Status:** In progress
 - **Owner:** Codex
-- **Next work:** Establish a deduplicated item inventory and acquisition graph covering pickups, steals, drops, shops, synthesis, auctions, minigames, quests, and late replacements. Capture quantity, price/cost, earliest/latest access, alternatives, equipment abilities, and version differences only when supported.
+- **Current evidence:** Added a partial, source-linked slice of 14 item records and 20 acquisition paths centered on Burmecia. It includes chest/pickup, Chocograph, Mognet, Stiltzkin, and boss-steal methods plus the cited Germinas Boots and Lightning Staff alternatives. The data audit checks path identity, quantities, costs, and chapter/objective/source links.
+- **Next work:** Grow the deduplicated inventory by disc and item class, adding all supported pickup, steal/drop, shop, synthesis, auction, minigame, quest, and replacement paths. Capture exact quantities, costs, earliest/latest access, ability sources, and version differences only when sourced; add a reference UI after coverage is meaningful.
 - **Completion evidence:** Every obtainable item has sourced acquisition paths and availability/recovery status; one-copy and limited-quantity constraints are reconciled; shops/synthesis have time-aware stock and ingredient requirements; walkthrough and missable trackers share stable IDs.
 - **Dependencies:** B01, B02, B04, B06.
 
