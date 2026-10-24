@@ -13,6 +13,7 @@ import {
   Database,
   ExternalLink,
   Menu,
+  Map,
   Search,
   ShieldAlert,
   Sparkles,
@@ -28,7 +29,7 @@ import {
   parseClock,
 } from "./data/excalibur2";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "./data/ates";
-import { objectiveDependencies } from "./data/progression";
+import { guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "./data/progression";
 import {
   achievementSourceCounts,
   arcs,
@@ -59,10 +60,11 @@ import {
 } from "./domain/progress";
 import { unmetObjectivePrerequisites } from "./domain/progression";
 
-type View = "overview" | "walkthrough" | "ates" | "missables" | "achievements" | "reference";
+type View = "overview" | "route" | "walkthrough" | "ates" | "missables" | "achievements" | "reference";
 
 const navItems: { id: View; label: string; icon: typeof Compass }[] = [
   { id: "overview", label: "Overview", icon: Compass },
+  { id: "route", label: "Route Map", icon: Map },
   { id: "walkthrough", label: "Walkthrough", icon: BookOpen },
   { id: "ates", label: "ATE Tracker", icon: Clapperboard },
   { id: "missables", label: "Missables", icon: ShieldAlert },
@@ -185,10 +187,10 @@ function ateGroupIsComplete(profile: PlaythroughProfile, objectiveId: string) {
 function missableProgressState(record: (typeof missables)[number], profile: PlaythroughProfile) {
   if (!missableAppliesToProfile(record, profile)) return "excluded" as const;
   if (objectiveIsComplete(profile, record.objectiveId)) return "complete" as const;
-  const currentIndex = guideAreas.findIndex((area) => area.id === profile.currentAreaId);
+  const currentIndex = guideChapterSequence.indexOf(profile.currentAreaId ?? "");
   if (currentIndex < 0 || !record.warningChapterIds?.length) return "unplaced" as const;
   const warningIndexes = record.warningChapterIds
-    .map((chapterId) => guideAreas.findIndex((area) => area.id === chapterId))
+    .map((chapterId) => guideChapterSequence.indexOf(chapterId))
     .filter((index) => index >= 0);
   if (warningIndexes.length === 0) return "unplaced" as const;
   const firstWarningIndex = Math.min(...warningIndexes);
@@ -326,8 +328,8 @@ function App() {
       updateProfile({ currentAreaId: targetAreaId });
       return;
     }
-    const currentIndex = guideAreas.findIndex((area) => area.id === currentAreaId);
-    const targetIndex = guideAreas.findIndex((area) => area.id === targetAreaId);
+    const currentIndex = guideChapterSequence.indexOf(currentAreaId);
+    const targetIndex = guideChapterSequence.indexOf(targetAreaId);
     if (targetIndex <= currentIndex || currentIndex < 0 || targetIndex < 0) {
       updateProfile({ currentAreaId: targetAreaId });
       return;
@@ -342,7 +344,7 @@ function App() {
         || classification === "time-sensitive",
       );
       if (!hasCutoffClassification || !record.warningChapterIds?.length) return false;
-      const warningIndexes = record.warningChapterIds.map((chapterId) => guideAreas.findIndex((area) => area.id === chapterId)).filter((index) => index >= 0);
+      const warningIndexes = record.warningChapterIds.map((chapterId) => guideChapterSequence.indexOf(chapterId)).filter((index) => index >= 0);
       if (warningIndexes.length === 0) return false;
       const finalWarningIndex = Math.max(...warningIndexes);
       return finalWarningIndex >= currentIndex && finalWarningIndex < targetIndex;
@@ -550,6 +552,7 @@ function App() {
             onExport={exportProgress}
             onImport={() => importInput.current?.click()}
           />}
+          {view === "route" && <RouteMap profile={activeProfile} onOpenChapter={openChapter} onSetCurrentArea={requestCurrentAreaChange} />}
           {view === "walkthrough" && <Walkthrough profile={activeProfile} search={search} onClearSearch={() => setSearch("")} onNavigate={navigate} onToggleObjective={toggleObjective} onSetCurrentArea={requestCurrentAreaChange} onAcknowledgeWarning={acknowledgeWarning} />}
           {view === "ates" && <AteTracker profile={activeProfile} onToggle={toggleObjective} onOpenChapter={openChapter} />}
           {view === "missables" && <Missables profile={activeProfile} onToggle={toggleObjective} onAcknowledgeWarning={acknowledgeWarning} />}
@@ -885,9 +888,9 @@ function suggestedExcaliburCheckpoint(currentAreaId: string | null, routeCheckpo
     checkpoint.chapterId === currentAreaId && checkpoint.targetSeconds > nextTargetSeconds && unrecorded(checkpoint.id),
   );
   if (inCurrentArea) return inCurrentArea.id;
-  const currentIndex = guideAreas.findIndex((area) => area.id === currentAreaId);
+  const currentIndex = guideChapterSequence.indexOf(currentAreaId ?? "");
   return excalibur2Checkpoints.find((checkpoint) => {
-    const checkpointIndex = guideAreas.findIndex((area) => area.id === checkpoint.chapterId);
+    const checkpointIndex = guideChapterSequence.indexOf(checkpoint.chapterId);
     return unrecorded(checkpoint.id) && checkpoint.targetSeconds > nextTargetSeconds && (currentIndex < 0 || checkpointIndex >= currentIndex);
   })?.id ?? latestRecorded?.id ?? excalibur2Checkpoints[excalibur2Checkpoints.length - 1].id;
 }
@@ -1052,6 +1055,55 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
       {visibleEvents.length === 0 && <div className="empty-state">No ATE names or trigger notes match “{query}”.</div>}
     </div>
     <div className="source-footnote"><span>Source status</span><span>Scene names and route anchors use a chronological community checklist, cross-checked against Movie Critic achievement/trophy guides.</span><small>Some screen-order and version-specific triggers remain partial and are flagged beside their scene.</small><div className="ate-source-links">{ateSourceRecords.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div></div>
+  </>;
+}
+
+function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
+  profile: PlaythroughProfile;
+  onOpenChapter: (chapterId: string) => void;
+  onSetCurrentArea: (chapterId: string) => void;
+}) {
+  const orderedAreas = guideChapterSequence.flatMap((chapterId) => {
+    const area = guideAreas.find((candidate) => candidate.id === chapterId);
+    return area ? [area] : [];
+  });
+  const currentIndex = guideChapterSequence.indexOf(profile.currentAreaId ?? "");
+  const routeSourceIds = [...new Set(guideSequenceEdges.flatMap((edge) => edge.sourceIds))];
+  const routeSources = routeSourceIds
+    .map((sourceId) => sources.find((source) => source.id === sourceId))
+    .filter((source): source is (typeof sources)[number] => Boolean(source));
+
+  return <>
+    <PageHeading eyebrow="CHAPTER NAVIGATION · SOURCE ORDER" title="Route Map" lead="Browse all 44 walkthrough chapters in the order used by the source guide's table of contents. This is a guide navigation sequence; optional detours, returns, and in-game unlock requirements are not represented as a single linear game map." />
+    <section className="route-map-summary" aria-label="Guide route summary">
+      <div><span className="eyebrow">SOURCE-ORDERED CHAPTERS</span><strong>{orderedAreas.length} chapters · {guideSequenceEdges.length} guide-order links</strong></div>
+      <p>{profile.currentAreaId ? `Current-area marker: ${guideAreas.find((area) => area.id === profile.currentAreaId)?.title ?? "Unknown chapter"}.` : "Set a current-area marker to see its position in the guide sequence."} Changing the marker can open the existing missable cutoff review.</p>
+    </section>
+    <div className="route-map-discs">
+      {arcs.map((arc) => {
+        const discAreas = orderedAreas.filter((area) => area.arcId === arc.id);
+        return <section className="route-map-disc" key={arc.id} aria-labelledby={`route-${arc.id}`}>
+          <div className="route-map-disc-heading"><div><span className="eyebrow">{arc.label.toUpperCase()}</span><h2 id={`route-${arc.id}`}>{arc.label}</h2></div><span>{discAreas.length} chapters</span></div>
+          <ol className="guide-route-list">
+            {discAreas.map((area) => {
+              const sequenceIndex = guideChapterSequence.indexOf(area.id);
+              const isCurrent = profile.currentAreaId === area.id;
+              const position = isCurrent ? "Current marker" : currentIndex < 0 ? "Marker not set" : sequenceIndex < currentIndex ? "Earlier in guide order" : "Later in guide order";
+              const contentState = area.state === "partial" ? "Partial content" : "Outline only";
+              return <li className={`guide-route-entry ${isCurrent ? "is-current" : ""}`} key={area.id}>
+                <span className="guide-route-number">{String(sequenceIndex + 1).padStart(2, "0")}</span>
+                <div className="guide-route-copy"><strong>{area.title}</strong><span>{position} · {contentState}</span></div>
+                <div className="guide-route-actions">
+                  <button type="button" className="route-open-button" onClick={() => onOpenChapter(area.id)}>Open walkthrough</button>
+                  <button type="button" className="route-current-button" onClick={() => onSetCurrentArea(area.id)} disabled={isCurrent}>{isCurrent ? "Current area" : "Set current area"}</button>
+                </div>
+              </li>;
+            })}
+          </ol>
+        </section>;
+      })}
+    </div>
+    <div className="source-footnote route-map-source"><span>Sequence source</span><span>The chapter list follows the registered GameFAQs walkthrough contents page.</span><small>TOC order is not evidence of hard prerequisites between every pair of chapters.</small>{routeSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div>
   </>;
 }
 

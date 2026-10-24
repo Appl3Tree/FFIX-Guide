@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { objectiveDependencies } from "../src/data/progression.ts";
+import { guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
@@ -29,10 +29,13 @@ checkUnique("Excalibur II checkpoint", excalibur2Checkpoints.map((checkpoint) =>
 checkUnique("ATE", activeTimeEvents.map((event) => event.id));
 checkUnique("ATE progress objective", activeTimeEvents.map((event) => event.objectiveId));
 checkUnique("objective dependency edge", objectiveDependencies.map((edge) => `${edge.prerequisiteObjectiveId}->${edge.dependentObjectiveId}`));
+checkUnique("guide sequence chapter", guideChapterSequence);
+checkUnique("guide sequence edge", guideSequenceEdges.map((edge) => `${edge.fromChapterId}->${edge.toChapterId}`));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
 const areaIds = new Set(guideAreas.map((area) => area.id));
+const walkthroughChapterIds = new Set(walkthroughChapters.map((chapter) => chapter.areaId));
 const achievementCatalogs = [
   { platform: "steam" as const, records: steamAchievements, expectedCount: achievementSourceCounts.steam.count },
   { platform: "ps4" as const, records: ps4Trophies, expectedCount: achievementSourceCounts.ps4.count },
@@ -44,6 +47,25 @@ if (movieCriticEligibleEvents.length !== 80) errors.push(`Movie Critic candidate
 if (activeTimeEvents.filter((event) => !event.countsTowardMovieCritic).length !== 3) errors.push("The three Mogster tutorials must remain outside Movie Critic progress.");
 if (activeTimeEvents.filter((event) => event.exclusiveGroupId === movieCriticExclusiveGroupId).length !== 2) errors.push("Movie Critic must have exactly two mutually exclusive Treno branch events.");
 if (movieCriticEligibleEvents.length - 1 !== movieCriticTarget) errors.push("Movie Critic target must equal eligible choices minus the single mutually exclusive branch.");
+if (guideChapterSequence.length !== 44) errors.push(`Guide navigation sequence has ${guideChapterSequence.length} chapters; expected 44.`);
+if (guideChapterSequence.join("|") !== guideAreas.map((area) => area.id).join("|")) errors.push("Guide navigation sequence order does not match the source-ordered chapter inventory used by progression checks.");
+if (guideSequenceEdges.length !== Math.max(guideChapterSequence.length - 1, 0)) errors.push("Guide navigation sequence must have exactly one edge between each adjacent chapter pair.");
+for (const chapterId of guideChapterSequence) {
+  if (!areaIds.has(chapterId)) errors.push(`Guide sequence references unknown chapter ${chapterId}.`);
+  if (!walkthroughChapterIds.has(chapterId)) errors.push(`Guide sequence chapter ${chapterId} has no authored walkthrough content.`);
+}
+for (const [index, edge] of guideSequenceEdges.entries()) {
+  if (edge.relationship !== "guide-order") errors.push(`Guide sequence edge ${edge.fromChapterId} -> ${edge.toChapterId} has an unsupported relationship type.`);
+  if (edge.fromChapterId !== guideChapterSequence[index] || edge.toChapterId !== guideChapterSequence[index + 1]) {
+    errors.push(`Guide sequence edge ${edge.fromChapterId} -> ${edge.toChapterId} does not match the chapter list order.`);
+  }
+  if (!areaIds.has(edge.fromChapterId) || !areaIds.has(edge.toChapterId)) {
+    errors.push(`Guide sequence edge ${edge.fromChapterId} -> ${edge.toChapterId} references an unknown chapter.`);
+  }
+  for (const sourceId of edge.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Guide sequence edge ${edge.fromChapterId} -> ${edge.toChapterId} references unknown source ${sourceId}.`);
+  }
+}
 for (const event of activeTimeEvents) {
   if (!areaIds.has(event.chapterId)) errors.push(`ATE ${event.id} references unknown chapter ${event.chapterId}.`);
   if (!objectiveIds.has(event.objectiveId)) errors.push(`ATE ${event.id} references unknown progress objective ${event.objectiveId}.`);

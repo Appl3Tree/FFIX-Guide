@@ -166,8 +166,8 @@ export const sources = [
     title: "FFIX Walkthrough and Guide by bover_87",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891",
-    accessed: "2026-10-22",
-    notes: "Original PlayStation guide; used for the initial four-disc chapter inventory only.",
+    accessed: "2026-10-24",
+    notes: "Original PlayStation guide. Its 44-entry table of contents is the source for the guide navigation sequence; TOC order does not by itself establish hard game prerequisites, optional-area gates, or release-version differences.",
   },
   {
     id: "gamefaqs-perfect-game-41181",

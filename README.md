@@ -4,9 +4,12 @@ An offline-first, source-linked completion guide for *Final Fantasy IX*. The pro
 
 Expected public URL: <https://appl3tree.github.io/FFIX-Guide/>
 
+Project tracking: [task backlog](TASK_BACKLOG.md) · [coverage matrix](CONTENT_COVERAGE.md) · [project plan](PROJECT_PLAN.md) · [user setup checklist](USER_SETUP_CHECKLIST.md)
+
 ## Current state
 
 - React, TypeScript, and Vite application scaffolded for GitHub Pages.
+- Route Map shows the 44 source-ordered chapter headings and provides chapter navigation; sequence edges are labeled as guide order, not universal in-game prerequisites.
 - Individual ATE tracker catalogs 83 scenes, excludes the three tutorials from Movie Critic, counts 79 of 80 eligible choices for one save, and handles Vivi's mutually exclusive Treno outcomes.
 - A reusable prerequisite graph currently covers 14 documented ATE dependencies; the tracker shows linked objectives' marks per playthrough without guessing prompt availability.
 - Four-disc chapter inventory based on the table of contents of the GameFAQs PlayStation walkthrough.

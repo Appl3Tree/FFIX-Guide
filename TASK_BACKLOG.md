@@ -1,0 +1,117 @@
+# Project task backlog
+
+Last updated: 2026-10-24
+
+This backlog tracks the full guide objective. A working feature or an inventory count is not completion evidence by itself. Keep the [project plan](PROJECT_PLAN.md), [coverage matrix](CONTENT_COVERAGE.md), [research register](RESEARCH_SOURCES.md), and [user setup checklist](USER_SETUP_CHECKLIST.md) aligned as tasks move.
+
+## Current execution order
+
+### B01 — Verify the main route and model real progression gates
+
+- **Priority:** Critical
+- **Status:** In progress
+- **Owner:** Codex
+- **Current evidence:** All 44 walkthrough headings are authored and source-linked; the Route Map follows the registered GameFAQs contents order with 43 guide-order links. Fourteen explicit objective dependencies cover existing ATE prerequisites. These describe guide navigation and a small prerequisite subset, not the complete in-game route.
+- **Next work:** Research mandatory story gates, optional regions, return trips, route conditions, one-way progression points, and objective dependencies. Record source evidence per relationship, distinguish guide order from actual unlock requirements, and resolve where current-area chronology is too coarse for a safe warning.
+- **Completion evidence:** Source-backed graph covers every story chapter, branch/return route, and structured prerequisite; IDs and edge semantics pass the data audit; standard and supported alternate routes have simulated end-to-end without false “missed” or “available” states.
+- **Dependencies:** Source review and richer chapter/area data; coordinate with B02/B03 for shared one-way windows.
+
+### B02 — Complete missable inventory, recovery paths, and cutoff review
+
+- **Priority:** Critical
+- **Status:** In progress
+- **Owner:** Codex
+- **Current evidence:** 124 profile-scoped missable records, warning acknowledgements, and high/critical cutoff review gates are implemented. The current audit reports partial route, version, and item-replacement coverage.
+- **Next work:** Audit all unique treasure, pickup, shop stock, steal/drop, ATE, letter, sidequest, card, minigame, ending, and achievement windows; verify exact cutoff action and latest safe warning point; record later recovery by item/record and build version.
+- **Completion evidence:** Reconciled source-backed registry with correct permanent/recoverable/limited/conditional/version-specific classification; every mapped warning appears before the relevant action; player route simulations confirm no false permanent-loss warnings or silently skipped high-risk items.
+- **Dependencies:** B01 for route order; B03/B04/B05/B06 for category inventories and replacement paths.
+
+### B03 — Verify ATE triggers and single-save Movie Critic route
+
+- **Priority:** Critical
+- **Status:** In progress
+- **Owner:** Codex
+- **Current evidence:** 83 named events, 80 eligible choices, 3 non-achievement tutorials, the mutually exclusive Treno pair, a 79-scene target, and 14 direct prerequisite edges are structured and linked to the tracker. Some triggers, route order, and version behavior remain disputed or partial.
+- **Next work:** Verify each event's exact availability trigger, screen/movement sequence, choice, deadline, later dependency, item/reward, source/version coverage, and single-save feasibility. Resolve Bran Bal title/order, Pandemonium elevator sequence, Lindblum prior-scene/low-Gil conditions, and Madain Sari ordering.
+- **Completion evidence:** Audited event table and chronological contextual walkthrough route per supported build; graph and achievement mappings pass source/ID checks; an end-to-end 79-scene simulation proves a feasible 79-of-80 single-save plan for each confirmed platform set.
+- **Dependencies:** B01 and B06.
+
+### B04 — Build the enemy, encounter, and boss reference
+
+- **Priority:** Required
+- **Status:** Not started
+- **Owner:** Codex
+- **Next work:** Establish complete enemy/variant inventory and source hierarchy; capture location, encounter group, stats by version where relevant, steals, drops, Blue Magic, status/element interactions, fixed/scripted behavior, and boss strategies. Cross-link every record to route windows and missables.
+- **Completion evidence:** Source-backed records for every enemy, encounter variant, and boss; version scope and disagreements are explicit; every one-time steal/drop window links to B02 and walkthrough context.
+- **Dependencies:** B01, B02, B05.
+
+### B05 — Build the item, equipment, shop, synthesis, and acquisition database
+
+- **Priority:** Required
+- **Status:** Not started
+- **Owner:** Codex
+- **Next work:** Establish a deduplicated item inventory and acquisition graph covering pickups, steals, drops, shops, synthesis, auctions, minigames, quests, and late replacements. Capture quantity, price/cost, earliest/latest access, alternatives, equipment abilities, and version differences only when supported.
+- **Completion evidence:** Every obtainable item has sourced acquisition paths and availability/recovery status; one-copy and limited-quantity constraints are reconciled; shops/synthesis have time-aware stock and ingredient requirements; walkthrough and missable trackers share stable IDs.
+- **Dependencies:** B01, B02, B04, B06.
+
+### B06 — Complete platform achievements, abilities, and side-content mapping
+
+- **Priority:** Required
+- **Status:** In progress
+- **Owner:** Codex
+- **Current evidence:** Steam (85), PS4 (51 gameplay criteria plus Platinum), and Xbox (51) catalogs are imported with walkthrough pointers. Trigger conditions and missability are incomplete; Switch and mobile achievement services are unresolved. Ability, Blue Magic, summon, card, minigame, and sidequest references are partial.
+- **Next work:** Audit native identifiers and triggers for supported catalogues; establish Switch/mobile support from platform evidence; finish abilities/Blue Magic/summons and side-content inventories with acquisition, prerequisite, availability, and reward paths.
+- **Completion evidence:** Exact supported platform/service catalogs; every criterion has a trigger route, missability/recovery analysis, stable shared objective mapping, and verified platform applicability. Every learnable/stealable/quest ability and meaningful side activity is inventoried and route-linked.
+- **Dependencies:** B01–B05.
+
+### B07 — Add evidence-based levels, difficulty, and preparation guidance
+
+- **Priority:** Required
+- **Status:** Not started
+- **Owner:** Codex
+- **Next work:** Establish a source-backed standard for expected level ranges, difficulty, party configuration, equipment/ability preparation, and optional grinding at meaningful milestones; keep Excalibur II/low-experience routes distinct.
+- **Completion evidence:** Every chapter and meaningful boss has guidance grounded in comparable version/route evidence or is explicitly labeled when sources cannot support a recommendation; no guessed level values.
+- **Dependencies:** B01, B04, B05, B06.
+
+### B08 — Complete Excalibur II and advanced perfect-game routes
+
+- **Priority:** Required for selected challenge goals
+- **Status:** In progress
+- **Owner:** Codex
+- **Current evidence:** Static PS1 NTSC source trace reaches Excalibur II after Lich at 11:13:07; the profile timer contains 45 baseline checkpoint targets. Alternative path budgets, platform timer behavior, live validation, and a Burmecia pickup conflict remain open.
+- **Next work:** Resolve disputed route instructions, calculate each supported detour/stat path, test timer/pause/booster behavior by build, and separate standard-game route from exploit/mod routes.
+- **Completion evidence:** Source-linked itinerary and independently checked budget for each route; checkpoint/timer semantics verified on supported builds or explicitly bounded; full route simulation reaches Excalibur II within the target and lists incompatible completion goals.
+- **Dependencies:** B01–B07 and platform access/evidence.
+
+### B09 — Finish local profile and accessibility workflows
+
+- **Priority:** Required
+- **Status:** In progress
+- **Owner:** Codex
+- **Current evidence:** Local profile-scoped marks, route selection, current-area warnings, manual timer/checkpoints, and JSON export/restore exist. Profile editing/deletion, category selection, full scenarios, accessibility review, and content responsiveness remain.
+- **Next work:** Complete profile management and per-profile goal categories; review keyboard/screen-reader semantics, focus, contrast, zoom/reflow, reduced motion, tap targets, and responsive behavior at 320/375/768/1024/1440 CSS px; automate accessibility checks.
+- **Completion evidence:** Manual and automated accessibility evidence plus multi-profile/export/restore scenarios; no horizontal overflow or clipped controls across target widths; all user progress actions persist and remain recoverable.
+- **Dependencies:** B01–B08 for finished interface/data scope.
+
+### B10 — Implement Firebase authentication and synchronization
+
+- **Priority:** Required for full cross-device functionality
+- **Status:** Blocked until Codex has authored and locally tested the implementation contract
+- **Owner:** Codex, then user for Firebase account configuration
+- **Next work:** Define provider, Firebase initialization/config contract, profile ownership schema, rules/indexes, migrations, offline queue, merge/conflict review, emulator tests, and secrets/environment handling. Update [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md) before asking for any account-side action.
+- **Completion evidence:** Emulator security/migration/sync tests, offline and conflict scenarios, and production-origin authentication/multi-device smoke tests pass; no credentials are committed.
+- **Dependencies:** B09 and a stable profile schema. User steps remain in the setup checklist and must not be requested one at a time.
+
+### B11 — Publish and verify the production guide
+
+- **Priority:** Required for public delivery
+- **Status:** Blocked on repository owner setup
+- **Owner:** Codex and user
+- **Current evidence:** GitHub Pages workflow and base path exist locally. No remote repository or live deployment has been verified.
+- **Next work:** Codex completes and tests autonomous implementation first. User creates the documented public repository and configures Pages when the setup checklist marks each action Ready for User; Codex then pushes/verifies the existing history, CI, deployed site, and release smoke tests.
+- **Completion evidence:** Green deployment workflow, live Pages URL serving the verified build, end-to-end product/auth/sync/mobile acceptance, and no required setup tasks left undocumented.
+- **Dependencies:** B01–B10; user actions are sequenced in [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md).
+
+## User-owned actions
+
+Do not ask the user to complete blocked setup early. The ordered Firebase, GitHub, authorization, and final-acceptance actions—with exact values and verification steps—are maintained in [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md). Codex must finish the corresponding implementation and mark the task **Ready for User** before requesting account configuration.

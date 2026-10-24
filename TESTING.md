@@ -4,7 +4,7 @@ Last updated: 2026-10-24
 
 ## Latest change status
 
-All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the objective prerequisite graph update on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for these updates. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, Movie Critic's live scene count and tracker link, and prerequisite status changing as Time To Escape was marked and cleared. This does not establish full trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
+All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the Route Map and source-ordered chapter sequence update on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for these updates. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, Movie Critic's live scene count and tracker link, and prerequisite status changing as Time To Escape was marked and cleared. Route Map browser QA confirmed all 44 chapters, 43 guide-order edges, four disc groupings, source link, and navigation to Alexandria; it preserved the active profile's Final Preparations marker. This does not establish the full in-game route graph, ATE trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
 
 ## Automated checks
 
@@ -18,11 +18,11 @@ The repository defines:
 
 The audit reports incomplete content as warnings. It should fail on broken IDs/relationships, not on honestly documented unresearched categories.
 
-The data audit also requires each of the three Teach Me, Mogster! tutorial objectives to remain side-content, have exactly one walkthrough pointer in its correct chapter, and stay outside achievement catalog mappings. It validates the 83-event ATE index, all 80 eligible event objectives, the three excluded tutorials, every chapter/source/prerequisite link, the 14-edge objective dependency graph (including endpoints, sources, duplicates, and cycles), and the 79-view Movie Critic target with its single exclusive branch.
+The data audit also requires each of the three Teach Me, Mogster! tutorial objectives to remain side-content, have exactly one walkthrough pointer in its correct chapter, and stay outside achievement catalog mappings. It validates the 44-chapter source-ordered sequence, all 43 adjacent guide-order edges, their source links, and the distinction between guide order and game prerequisites. It also validates the 83-event ATE index, all 80 eligible event objectives, the three excluded tutorials, every chapter/source/prerequisite link, the 14-edge objective dependency graph (including endpoints, sources, duplicates, and cycles), and the 79-view Movie Critic target with its single exclusive branch.
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,152.70 kB (304.67 kB gzip), and CSS is 44.33 kB (10.01 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,157.50 kB (305.86 kB gzip), and CSS is 46.61 kB (10.36 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 
@@ -92,7 +92,7 @@ Responsive testing is mandatory at 320, 375, 768, 1024, and 1440 CSS pixels. Che
 
 Accessibility review must cover keyboard-only use, visible focus, heading order, screen-reader names, labels, checkbox state, navigation landmark, warning semantics beyond color, text contrast, reduced motion, mobile tap targets, and zoom/reflow. Use automated axe or equivalent checks plus manual review; neither replaces the other.
 
-The current layout includes responsive breakpoints, semantic buttons and labels, status text alongside color, keyboard focus styles, Escape-close behavior for search, and reduced-motion handling. Automated axe/equivalent checks, keyboard-only review, screen-reader review, zoom/reflow review, and full profile/export/restore scenarios remain outstanding.
+The current layout includes responsive breakpoints, semantic buttons and labels, status text alongside color, keyboard focus styles, Escape-close behavior for search, and reduced-motion handling. Route Map has been visually reviewed at the desktop browser viewport; its required 320/375/768/1024/1440 px checks remain outstanding. Automated axe/equivalent checks, keyboard-only review, screen-reader review, zoom/reflow review, and full profile/export/restore scenarios remain outstanding.
 
 ## Manual playthrough scenarios
 

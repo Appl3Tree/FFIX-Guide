@@ -4,6 +4,8 @@ Last updated: 2026-10-24
 
 The target remains the full, source-verified FFIX guide in the project brief. A working interface, a heading inventory, or a few authored chapters do not count as complete coverage.
 
+See [TASK_BACKLOG.md](TASK_BACKLOG.md) for the ordered, evidence-based work queue, [CONTENT_COVERAGE.md](CONTENT_COVERAGE.md) for subsystem completion evidence, and [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md) for consolidated account-owner actions.
+
 ## Current milestone: Phase 3 — completion systems
 
 Forty-four partial content slices now cover the story from the Prima Vista opening through Necron and the ending on Disc IV. Each slice has source-linked instructions and shared profile checklist IDs; they remain partial pending broader route and version verification. The Excalibur II timer is complete for the baseline source schedule, the profile-aware warning states and one-way cutoff review pass local browser checks, and the individual ATE tracker now maps all named scenes to stable progress IDs.
@@ -73,11 +75,12 @@ Forty-four partial content slices now cover the story from the Prima Vista openi
 - Added profile-scoped warning acknowledgement separate from objective completion. Missables now resolve to actionable, available-later, missed, recoverable, complete, unplaced, or excluded states. Moving the current area past unacknowledged high/critical cutoff windows opens a review dialog; confirming records acknowledgement separately from objective progress. Overview and walkthrough area changes use the same gate.
 - Reworked `USER_SETUP_CHECKLIST.md` into a dependency-ordered account-owner handoff covering GitHub repository creation, Pages, Firebase web-app setup, Authentication, Firestore rules/indexes, deployment configuration, production acceptance, and optional App Check. Account-side configuration stays blocked until Codex finishes the tested cloud-sync implementation; no credentials or guessed Firebase values are requested.
 - Added a reusable objective prerequisite graph for the 14 direct relationships already recorded on ATE data. The tracker reports active-profile prerequisite marks without treating them as live availability predictions; the structural audit checks graph endpoints, source references, duplicates, and cycles. Browser QA marked and cleared Time To Escape and confirmed My Little Baby's dependent status updated both ways.
-- After this prerequisite graph update on 2026-10-24, typecheck, lint, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 chapter headings, 124 missable records, 596 objectives, and 263 sources. The production JavaScript bundle is 1,152.70 kB (304.67 kB gzip) and CSS is 44.33 kB (10.01 kB gzip); Vite's JavaScript chunk advisory remains. The unit suite was not rerun for these UI/data-audit changes.
+- Added the Route Map from the 44 chapter headings in the registered GameFAQs table of contents, with 43 source-linked guide-order edges and direct links to each walkthrough/current-area marker. The map and cutoff/checkpoint position logic now share this canonical sequence; it is expressly a navigation order, not a complete in-game unlock graph. Browser QA confirmed all four disc groups, the 44/43 counts, and chapter navigation to Alexandria.
+- After the Route Map and source-ordered chapter sequence update on 2026-10-24, typecheck, lint, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 chapter headings, 124 missable records, 596 objectives, and 263 sources. The production JavaScript bundle is 1,157.50 kB (305.86 kB gzip) and CSS is 46.61 kB (10.36 kB gzip); Vite's JavaScript chunk advisory remains. The unit suite was not rerun for these UI/data-audit changes.
 
 ### Next prioritized chunk
 
-Extend the initial ATE prerequisite graph into a sourced chapter route and broader objective dependency map; then build the item, enemy, ability, and sidequest reference databases and audit platform achievement triggers/missability. The ATE index covers all 83 named events and maps Movie Critic's 79-of-80 single-save target, but event triggers and version-specific behavior still need verification. The Excalibur II route reaches the pickup in static source tracing and its profile timer records the 45 baseline checkpoint targets; source/platform verification, alternative stat-path checkpoint budgets, and the earlier Burmecia pickup conflict remain open. All 44 story headings are still partial.
+Research and encode actual game progression gates, optional branches/return routes, and objective prerequisites beyond the source-ordered chapter navigation and 14 documented ATE edges; then build the item, enemy, ability, and sidequest reference databases and audit platform achievement triggers/missability. The ATE index covers all 83 named events and maps Movie Critic's 79-of-80 single-save target, but event triggers and version-specific behavior still need verification. The Excalibur II route reaches the pickup in static source tracing and its profile timer records the 45 baseline checkpoint targets; source/platform verification, alternative stat-path checkpoint budgets, and the earlier Burmecia pickup conflict remain open. All 44 story headings are still partial.
 
 ### Research still outstanding
 
@@ -109,7 +112,7 @@ Extend the initial ATE prerequisite graph into a sourced chapter route and broad
 
 ## Phase 3 — critical completion systems
 
-- [ ] Complete the sourced chapter route and objective prerequisite graph; the reusable graph currently covers 14 documented ATE dependency edges. Missables expose actionable, available-later, missed, recoverable, complete, unplaced, and excluded states.
+- [ ] Complete the in-game route and objective prerequisite graph. The source-ordered 44-chapter Route Map and 43 guide-order edges are implemented; the reusable objective graph currently covers 14 documented ATE dependency edges. In-game gates, optional detours/returns, and wider prerequisites remain incomplete. Missables expose actionable, available-later, missed, recoverable, complete, unplaced, and excluded states.
 - [x] Central warning acknowledgement and one-way gate flow for mapped high/critical cutoff windows.
 - [x] ATE scene and Movie Critic objective mapping, including the 79-of-80 mutually exclusive single-save target; route-trigger and version verification remain in progress.
 - [ ] Complete Excalibur II and advanced perfect-game itineraries, checkpoints, timer behavior, and version constraints.
