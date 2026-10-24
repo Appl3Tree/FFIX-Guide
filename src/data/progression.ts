@@ -482,6 +482,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-final-preparations-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"],
   },
   {
+    id: "detour.journey-to-treno-dali-return",
+    fromChapterId: "disc-2.journey-to-treno",
+    toChapterId: "disc-1.village-of-dali",
+    relationship: "optional-return",
+    summary: "At Alexandria Station, the left fork returns Dagger and Steiner to Dali and the Observatory; the Dali garden chest is now accessible for an Elixir. This optional sweep can also include the Cotton Robe shop loop before returning to the station.",
+    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamefaqs-dali-71891", "flactem-disc-2-south-gate-treno"],
+  },
+  {
+    id: "detour.journey-to-treno-dali-rejoin",
+    fromChapterId: "disc-1.village-of-dali",
+    toChapterId: "disc-2.journey-to-treno",
+    relationship: "rejoin",
+    summary: "Return from Dali to Alexandria Station, take the right fork through South Gate, then continue to Treno.",
+    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "flactem-disc-2-south-gate-treno"],
+  },
+  {
     id: "detour.card-tournament-dali-return",
     fromChapterId: "disc-3.card-tournament",
     toChapterId: "disc-1.village-of-dali",
