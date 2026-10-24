@@ -28,6 +28,7 @@ import {
   parseClock,
 } from "./data/excalibur2";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "./data/ates";
+import { objectiveDependencies } from "./data/progression";
 import {
   achievementSourceCounts,
   arcs,
@@ -56,6 +57,7 @@ import {
   type PlaythroughProfile,
   type ProgressLibrary,
 } from "./domain/progress";
+import { unmetObjectivePrerequisites } from "./domain/progression";
 
 type View = "overview" | "walkthrough" | "ates" | "missables" | "achievements" | "reference";
 
@@ -973,6 +975,7 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
     return applies && matches;
   });
   const markedCount = movieCriticEligibleEvents.filter((event) => profile.marks[event.objectiveId]?.complete === true).length;
+  const markedDependencyCount = objectiveDependencies.filter((dependency) => objectiveIsComplete(profile, dependency.prerequisiteObjectiveId)).length;
   const legacyGroupIds = [...new Set(activeTimeEvents.map((event) => event.groupObjectiveId))]
     .filter((groupId) => profile.marks[groupId]?.complete === true && !ateGroupIsComplete(profile, groupId));
   const ateSourceRecords = [...new Set(activeTimeEvents.flatMap((event) => event.sourceIds))]
@@ -985,6 +988,10 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
       <div><span className="eyebrow">MOVIE CRITIC · STEAM / PS4 / XBOX</span><strong>{markedCount} / {movieCriticTarget} target scenes marked</strong><small>{markedCount >= movieCriticTarget ? "The single-save target is reached." : `${Math.max(0, movieCriticTarget - markedCount)} more eligible scene${movieCriticTarget - markedCount === 1 ? "" : "s"} to reach the target.`}</small></div>
       <div className="ate-progress-meter" role="progressbar" aria-label="Movie Critic target scenes marked" aria-valuemin={0} aria-valuemax={movieCriticTarget} aria-valuenow={Math.min(markedCount, movieCriticTarget)}><span style={{ width: `${Math.min(100, markedCount / movieCriticTarget * 100)}%` }} /></div>
     </section>
+    {objectiveDependencies.length > 0 && <section className="ate-dependency-summary" aria-label="Tracked ATE prerequisite links">
+      <div><span className="eyebrow">DOCUMENTED PREREQUISITES</span><strong>{markedDependencyCount} / {objectiveDependencies.length} linked prerequisite objectives marked</strong></div>
+      <p>These links describe earlier tracked objectives. They do not predict whether an ATE prompt is currently available; trigger timing is still being verified.</p>
+    </section>}
     <div className="ate-source-note"><p><strong>80 eligible scene choices are listed, but only 79 countable scenes fit on one save.</strong> Choose one of the two Vivi outcomes in Treno. Comprehensive and Custom profiles can track the three Teach Me, Mogster! tutorials as separate non-achievement checkboxes. ATE trigger ordering can vary by route; unresolved directions stay labeled.</p>
       {profile.platform === "ps1" && <p>Original PlayStation has no platform achievement list. This page still tracks scenes for story and completionist reference.</p>}
       {(profile.platform === "switch" || profile.platform === "ios" || profile.platform === "android") && <p>Achievement support for this release is not verified. The 79-scene counter reflects the Steam, PS4, and Xbox Movie Critic criteria; use it as a scene reference until the selected platform's achievement service is confirmed.</p>}
@@ -1022,9 +1029,16 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
                       </fieldset>;
                     }
                     const done = profile.marks[event.objectiveId]?.complete === true;
+                    const prerequisites = unmetObjectivePrerequisites(event.objectiveId, objectiveDependencies, (id) => objectiveIsComplete(profile, id));
+                    const allPrerequisites = objectiveDependencies.filter((dependency) => dependency.dependentObjectiveId === event.objectiveId);
                     return <label className={`ate-event-row ${done ? "is-complete" : ""}`} key={event.objectiveId}>
                       <input type="checkbox" checked={done} onChange={() => onToggle(event.objectiveId)} />
-                      <span className="ate-event-copy"><strong>{event.title}</strong><small>{event.location} · {event.trigger}</small>{event.note && <small className="ate-event-note">{event.note}</small>}</span>
+                      <span className="ate-event-copy"><strong>{event.title}</strong><small>{event.location} · {event.trigger}</small>{allPrerequisites.length > 0 && <small className="ate-prerequisite-note"><strong>Prerequisites {prerequisites.length > 0 ? "not all marked" : "marked"}:</strong> {allPrerequisites.map((dependency) => {
+                        const title = activeTimeEvents.find((candidate) => candidate.objectiveId === dependency.prerequisiteObjectiveId)?.title
+                          ?? objectives.find((objective) => objective.id === dependency.prerequisiteObjectiveId)?.title
+                          ?? dependency.prerequisiteObjectiveId;
+                        return `${title} (${objectiveIsComplete(profile, dependency.prerequisiteObjectiveId) ? "marked" : "not marked"})`;
+                      }).join("; ")}</small>}{event.note && <small className="ate-event-note">{event.note}</small>}</span>
                       <span className={`ate-event-kind ${event.countsTowardMovieCritic ? "is-eligible" : "is-tutorial"}`}>{event.countsTowardMovieCritic ? "Counts" : "Tutorial"}</span>
                     </label>;
                   })}

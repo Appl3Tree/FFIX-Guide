@@ -8,6 +8,7 @@ Expected public URL: <https://appl3tree.github.io/FFIX-Guide/>
 
 - React, TypeScript, and Vite application scaffolded for GitHub Pages.
 - Individual ATE tracker catalogs 83 scenes, excludes the three tutorials from Movie Critic, counts 79 of 80 eligible choices for one save, and handles Vivi's mutually exclusive Treno outcomes.
+- A reusable prerequisite graph currently covers 14 documented ATE dependencies; the tracker shows linked objectives' marks per playthrough without guessing prompt availability.
 - Four-disc chapter inventory based on the table of contents of the GameFAQs PlayStation walkthrough.
 - Alexandria chapter authored from the Tantalus opening through the Prima Vista crash, with pickup directions, optional activities, source notes, cutoff rewards, and interactive objectives.
 - Evil Forest chapter authored from the crash site through Plant Brain and the campsite, with the Prima Vista backtrack, pickup sweep, six Movie Critic-eligible ATEs, separately tracked Mogster Lesson 1, boss steals, Mognet, escape preparation, and item-recovery warnings. Lesson 2 is correctly placed in Ice Cavern; all three tutorials are excluded from the 79-event achievement count.

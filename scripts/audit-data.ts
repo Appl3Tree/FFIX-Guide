@@ -2,6 +2,8 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
+import { objectiveDependencies } from "../src/data/progression.ts";
+import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const errors: string[] = [];
@@ -26,6 +28,7 @@ checkUnique("walkthrough chapter", walkthroughChapters.map((chapter) => chapter.
 checkUnique("Excalibur II checkpoint", excalibur2Checkpoints.map((checkpoint) => checkpoint.id));
 checkUnique("ATE", activeTimeEvents.map((event) => event.id));
 checkUnique("ATE progress objective", activeTimeEvents.map((event) => event.objectiveId));
+checkUnique("objective dependency edge", objectiveDependencies.map((edge) => `${edge.prerequisiteObjectiveId}->${edge.dependentObjectiveId}`));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
@@ -53,6 +56,23 @@ for (const event of activeTimeEvents) {
       errors.push(`ATE ${event.id} references unknown prerequisite ${prerequisiteId}.`);
     }
   }
+}
+const expectedDependencyEdges = activeTimeEvents.flatMap((event) =>
+  (event.prerequisites ?? []).map((prerequisiteObjectiveId) => `${prerequisiteObjectiveId}->${event.objectiveId}`),
+).sort();
+const actualDependencyEdges = objectiveDependencies.map((edge) => `${edge.prerequisiteObjectiveId}->${edge.dependentObjectiveId}`).sort();
+if (expectedDependencyEdges.join("|") !== actualDependencyEdges.join("|")) {
+  errors.push("Objective dependency graph does not include exactly the prerequisites declared by ATE records.");
+}
+for (const dependency of objectiveDependencies) {
+  if (!objectiveIds.has(dependency.prerequisiteObjectiveId)) errors.push(`Dependency references unknown prerequisite objective ${dependency.prerequisiteObjectiveId}.`);
+  if (!objectiveIds.has(dependency.dependentObjectiveId)) errors.push(`Dependency references unknown dependent objective ${dependency.dependentObjectiveId}.`);
+  for (const sourceId of dependency.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Dependency ${dependency.prerequisiteObjectiveId} -> ${dependency.dependentObjectiveId} references unknown source ${sourceId}.`);
+  }
+}
+for (const cycle of findObjectiveDependencyCycles(objectiveDependencies)) {
+  errors.push(`Objective dependency cycle: ${cycle.join(" -> ")}.`);
 }
 for (const { platform, records } of achievementCatalogs) {
   const movieCritic = records.find((achievement) =>

@@ -4,7 +4,7 @@ Last updated: 2026-10-24
 
 ## Latest change status
 
-All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the ATE tracker and achievement cross-link updates on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for these updates. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, Movie Critic's live scene count and tracker link, and cleanup of the QA marks. This does not establish full trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
+All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the objective prerequisite graph update on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for these updates. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, Movie Critic's live scene count and tracker link, and prerequisite status changing as Time To Escape was marked and cleared. This does not establish full trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
 
 ## Automated checks
 
@@ -18,11 +18,11 @@ The repository defines:
 
 The audit reports incomplete content as warnings. It should fail on broken IDs/relationships, not on honestly documented unresearched categories.
 
-The data audit also requires each of the three Teach Me, Mogster! tutorial objectives to remain side-content, have exactly one walkthrough pointer in its correct chapter, and stay outside achievement catalog mappings. It validates the 83-event ATE index, all 80 eligible event objectives, the three excluded tutorials, every chapter/source/prerequisite link, and the 79-view Movie Critic target with its single exclusive branch.
+The data audit also requires each of the three Teach Me, Mogster! tutorial objectives to remain side-content, have exactly one walkthrough pointer in its correct chapter, and stay outside achievement catalog mappings. It validates the 83-event ATE index, all 80 eligible event objectives, the three excluded tutorials, every chapter/source/prerequisite link, the 14-edge objective dependency graph (including endpoints, sources, duplicates, and cycles), and the 79-view Movie Critic target with its single exclusive branch.
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The JavaScript bundle is 1,151.42 kB (304.31 kB gzip), and CSS is 43.69 kB (9.90 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,152.70 kB (304.67 kB gzip), and CSS is 44.33 kB (10.01 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 

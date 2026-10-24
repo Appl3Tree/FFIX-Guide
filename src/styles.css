@@ -219,6 +219,11 @@ h1, h2, p { margin-top: 0; }
 .ate-progress-panel small { color: #87908a; font-size: 9px; }
 .ate-progress-meter { height: 8px; overflow: hidden; border-radius: 8px; background: #dfded5; }
 .ate-progress-meter span { display: block; height: 100%; border-radius: inherit; background: #5f8175; transition: width .2s ease; }
+.ate-dependency-summary { display: grid; grid-template-columns: minmax(190px, auto) minmax(0, 1fr); align-items: center; gap: 12px 22px; margin: 0 0 12px; padding: 11px 14px; border: 1px solid #e1e6df; background: #f7f8f3; }
+.ate-dependency-summary > div { display: grid; gap: 4px; }
+.ate-dependency-summary .eyebrow { color: #71847a; font-size: 8px; }
+.ate-dependency-summary strong { color: #53685e; font-size: 10px; font-weight: 600; }
+.ate-dependency-summary p { margin: 0; color: #7f8981; font-size: 9px; line-height: 1.6; }
 .ate-source-note { display: grid; gap: 7px; margin: 0 0 16px; padding: 11px 14px; border-left: 2px solid #bd9d5e; background: #f5f0e5; }
 .ate-source-note p { margin: 0; color: #788078; font-size: 9px; line-height: 1.65; }
 .ate-source-note strong { color: #59665c; }
@@ -242,6 +247,8 @@ h1, h2, p { margin-top: 0; }
 .ate-event-copy strong { color: #526159; font-size: 10px; font-weight: 600; }
 .ate-event-copy small { color: #8a928a; font-size: 8px; line-height: 1.5; }
 .ate-event-copy .ate-event-note { color: #947d57; }
+.ate-event-copy .ate-prerequisite-note { color: #687c70; }
+.ate-prerequisite-note strong { font-weight: 600; }
 .ate-event-row.is-complete .ate-event-copy strong { color: #73857a; }
 .ate-event-status, .ate-event-kind { margin-top: 2px; color: #8a928a; font: 8px var(--mono); white-space: nowrap; }
 .ate-event-kind { padding: 3px 5px; border: 1px solid #dce0d7; border-radius: 2px; }
@@ -500,6 +507,7 @@ h1, h2, p { margin-top: 0; }
   .page-heading h1 { font-size: 30px; }
   .ate-progress-panel { grid-template-columns: 1fr; gap: 12px; padding: 13px; }
   .ate-progress-panel strong { font-size: 16px; }
+  .ate-dependency-summary { grid-template-columns: 1fr; gap: 5px; padding: 10px 12px; }
   .ate-chapter-heading { align-items: flex-start; flex-direction: column; gap: 8px; }
   .ate-event-row { grid-template-columns: 18px minmax(0, 1fr); }
   .ate-event-status, .ate-event-kind { grid-column: 2; justify-self: start; margin-top: -4px; }
