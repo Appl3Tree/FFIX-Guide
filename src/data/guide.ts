@@ -1167,7 +1167,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops",
     accessed: "2026-10-24",
-    notes: "Shop inventory cross-check for the Disc III final-stock list and separate Disc IV stock tables, as well as later Lindblum availability of the Festival boss's Mythril Gloves and Needle Fork steals and Morrison's 5,000-Gil Poison Knuckles stock at Madain Sari. BMV and Daguerreo Disc III stock persistence is marked unverified; the shop table also conflicts with the pre-departure table on Tiger Fangs price (8,000 vs 13,500 Gil).",
+    notes: "Shop inventory cross-check for the Disc III final-stock list and separate Disc IV stock tables. The Disc IV lists replace the Black Mage Village weapon stock and refresh Daguerreo's weapon stock; the return walkthrough also identifies these inventory changes. The source covers later Lindblum availability of the Festival boss's Mythril Gloves and Needle Fork steals and Morrison's 5,000-Gil Poison Knuckles stock at Madain Sari. Its Tiger Fangs price (8,000 Gil) conflicts with the pre-departure and item references (13,500 Gil).",
   },
   {
     id: "xboxachievements-final-fantasy-ix",
@@ -2175,7 +2175,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-gaia",
     accessed: "2026-10-24",
-    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed shops, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. Its area list also identifies earlier quest opportunities that have closed.",
+    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It says the other Daguerreo shops retain their previous inventories and identifies earlier quest opportunities that have closed.",
   },
   {
     id: "rpgclassics-disc-4-walkthrough",
