@@ -421,6 +421,9 @@ h1, h2, p { margin-top: 0; }
 .achievement-guide-links[open] > div { display: grid; justify-items: start; gap: 2px; padding: 4px 0 0; }
 .achievement-guide-context { grid-column: 2 / 4; grid-row: 3; min-width: 0; display: grid; gap: 5px; color: #7c867f; font-size: 8px; line-height: 1.55; }
 .achievement-guide-context p { display: flex; align-items: flex-start; gap: 4px; margin: 0; }
+.achievement-guide-context .achievement-ate-progress { align-items: center; justify-content: space-between; gap: 9px; }
+.achievement-ate-progress > span { min-width: 0; }
+.achievement-ate-progress > button { display: inline-flex; flex: 0 0 auto; align-items: center; gap: 4px; white-space: nowrap; }
 .achievement-guide-context a { display: inline-flex; flex: 0 0 auto; align-items: center; margin: 1px 0 0 2px; color: #668276; }
 .achievement-missable-note { color: #9a6737; }
 .achievement-missable-note svg, .achievement-missable-list summary svg { flex: 0 0 auto; margin-top: 1px; }

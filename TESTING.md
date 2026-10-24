@@ -4,7 +4,7 @@ Last updated: 2026-10-24
 
 ## Latest change status
 
-All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the ATE tracker update on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for this update. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, and cleanup of the QA marks. This does not establish full trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
+All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the ATE tracker and achievement cross-link updates on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for these updates. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, Movie Critic's live scene count and tracker link, and cleanup of the QA marks. This does not establish full trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
 
 ## Automated checks
 
@@ -22,7 +22,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The JavaScript bundle is 1,150.93 kB (304.17 kB gzip), and CSS is 43.42 kB (9.86 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The JavaScript bundle is 1,151.42 kB (304.31 kB gzip), and CSS is 43.69 kB (9.90 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 

@@ -551,7 +551,7 @@ function App() {
           {view === "walkthrough" && <Walkthrough profile={activeProfile} search={search} onClearSearch={() => setSearch("")} onNavigate={navigate} onToggleObjective={toggleObjective} onSetCurrentArea={requestCurrentAreaChange} onAcknowledgeWarning={acknowledgeWarning} />}
           {view === "ates" && <AteTracker profile={activeProfile} onToggle={toggleObjective} onOpenChapter={openChapter} />}
           {view === "missables" && <Missables profile={activeProfile} onToggle={toggleObjective} onAcknowledgeWarning={acknowledgeWarning} />}
-          {view === "achievements" && <Achievements profile={activeProfile} platform={activeProfile.platform} onPlatformChange={(platform) => updateProfile({ platform })} onToggle={toggleObjective} onOpenChapter={openChapter} />}
+          {view === "achievements" && <Achievements profile={activeProfile} platform={activeProfile.platform} onPlatformChange={(platform) => updateProfile({ platform })} onToggle={toggleObjective} onOpenChapter={openChapter} onOpenAteTracker={() => navigate("ates")} />}
           {view === "reference" && <Reference
             profileCount={library.profiles.length}
             profileMessage={profileMessage}
@@ -1192,7 +1192,14 @@ function Missables({ profile, onToggle, onAcknowledgeWarning }: { profile: Playt
   );
 }
 
-function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenChapter }: { profile: PlaythroughProfile; platform: PlatformChoice; onPlatformChange: (platform: PlatformChoice) => void; onToggle: (id: string) => void; onOpenChapter: (chapterId: string) => void }) {
+function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenChapter, onOpenAteTracker }: {
+  profile: PlaythroughProfile;
+  platform: PlatformChoice;
+  onPlatformChange: (platform: PlatformChoice) => void;
+  onToggle: (id: string) => void;
+  onOpenChapter: (chapterId: string) => void;
+  onOpenAteTracker: () => void;
+}) {
   const steam = achievementSourceCounts.steam;
   const ps4 = achievementSourceCounts.ps4;
   const xbox = achievementSourceCounts.xbox;
@@ -1227,6 +1234,8 @@ function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenCha
             const linkedAreas = achievementGuideAreas(achievement);
             const linkedMissables = achievementGuideMissables(achievement);
             const linkedSources = (achievement.guideSourceIds ?? []).map((sourceId) => sources.find((source) => source.id === sourceId)).filter((source): source is (typeof sources)[number] => Boolean(source));
+            const isMovieCritic = achievement.id === "movie-critic" || ("parityId" in achievement && achievement.parityId === "movie-critic");
+            const ateMarkedCount = isMovieCritic ? movieCriticEligibleEvents.filter((event) => profile.marks[event.objectiveId]?.complete === true).length : 0;
             const controlId = `${activeCatalog.id}-achievement-${achievement.id}`;
             const chapterLink = (area: GuideArea) => <button type="button" key={area.id} onClick={() => onOpenChapter(area.id)} aria-label={`Open ${area.title} walkthrough`}><BookOpen size={12} aria-hidden="true" /> {area.title}</button>;
             return <div className={`achievement-entry ${done ? "achievement-entry-done" : ""}`} key={achievement.id}>
@@ -1238,7 +1247,8 @@ function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenCha
               <span className="achievement-entry-state">{done ? "Unlocked" : "Not marked"}</span>
               {linkedAreas.length === 1 && <div className="achievement-guide-links">{chapterLink(linkedAreas[0])}</div>}
               {linkedAreas.length > 1 && <details className="achievement-guide-links"><summary>Guide sections · {linkedAreas.length}</summary><div>{linkedAreas.map(chapterLink)}</div></details>}
-              {(achievement.guideNote || linkedMissables.length > 0) && <div className="achievement-guide-context">
+              {(achievement.guideNote || linkedMissables.length > 0 || isMovieCritic) && <div className="achievement-guide-context">
+                {isMovieCritic && <p className="achievement-ate-progress"><span><strong>ATE scenes marked:</strong> {Math.min(ateMarkedCount, movieCriticTarget)} / {movieCriticTarget}</span><button className="text-action" type="button" onClick={onOpenAteTracker}><Clapperboard size={12} aria-hidden="true" /> Open ATE Tracker</button></p>}
                 {achievement.guideNote && <p>{achievement.guideNote}{linkedSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" aria-label={`Open source: ${source.title}`} key={source.id}><ExternalLink size={11} aria-hidden="true" /></a>)}</p>}
                 {linkedMissables.length === 1 && <p className="achievement-missable-note"><AlertTriangle size={12} aria-hidden="true" /><span><strong>Missable cutoff:</strong> {linkedMissables[0].deadline}</span></p>}
                 {linkedMissables.length > 1 && <details className="achievement-missable-list"><summary><AlertTriangle size={12} aria-hidden="true" /> Missable windows · {linkedMissables.length}</summary><ul>{linkedMissables.map((record) => <li key={record.id}><strong>{record.title}:</strong> {record.deadline}</li>)}</ul></details>}
