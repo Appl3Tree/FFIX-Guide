@@ -17,8 +17,7 @@ export type SynthesisRecipe = {
   notes?: string;
 };
 
-// The recipe table starts with a source-cross-checked endgame recipe tied to
-// the Nova Dragon missable warning. It is not yet a complete synthesis list.
+// This is an initial, source-cross-checked recipe slice, not a complete list.
 export const synthesisRecipes: SynthesisRecipe[] = [
   {
     id: "synthesis-recipe.grand-armor",
@@ -42,5 +41,19 @@ export const synthesisRecipes: SynthesisRecipe[] = [
       "gamefaqs-synthesis-correction-25681",
     ],
     notes: "Xiamut's older GameFAQs table lists Mythril Armlet + Mythril Sword; CouchPotato's later revision explicitly corrects the ingredient to Mythril Armor, and the current item reference plus independent synthesis lists agree. The recipe is conditional on retaining a Mythril Sword through Disc IV.",
+  },
+  {
+    id: "synthesis-recipe.battle-boots",
+    resultItemId: "game-item.battle-boots",
+    ingredients: [
+      { itemId: "game-item.feather-boots", quantity: 1 },
+      { itemId: "game-item.wing-edge", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 6500 },
+    sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-synthesis", "elitegrindlab-synthesis"],
+    notes: "GameFAQs, RPGClassics, Jegged, and EliteGrindLab agree on the Feather Boots + Wing Edge recipe at Daguerreo. RPGClassics and EliteGrindLab give the 6,500-Gil price; GameFAQs notes the separate 45-frog reward and other acquisition paths.",
   },
 ];

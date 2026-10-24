@@ -1231,7 +1231,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/frog-catching",
     accessed: "2026-10-24",
-    notes: "Frog-pool locations, persistent count, respawn timing, and strategy. Confirms Silver Fork at 23 frogs and Bistro Fork at 33, correcting the Disc III preparation table's mislabeled Silver Fork target. Supports leaving a male and female frog (and the golden frog, if present) in the pond; the route does not ask players to empty a pool or farm a target count here.",
+    notes: "Frog-pool locations, persistent count, respawn timing, and strategy. Confirms Battle Boots at 45 frogs, Silver Fork at 23 frogs, and Bistro Fork at 33, correcting the Disc III preparation table's mislabeled Silver Fork target. Supports leaving a male and female frog (and the golden frog, if present) in the pond; the route does not ask players to empty a pool or farm a target count here.",
   },
   {
     id: "gamefaqs-chocobo-hot-cold-71891",
@@ -1327,7 +1327,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items",
     accessed: "2026-10-24",
-    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. Confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It also lists Grand Armor's Disc IV Black Mage Village recipe as Mythril Sword + Mythril Armor and records its Nova Dragon steal. Individual quantities and version-specific availability still need a full item audit.",
+    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Battle Boots as a 45-frog reward and a Daguerreo recipe from Feather Boots + Wing Edge, alongside its Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It also lists Grand Armor's Disc IV Black Mage Village recipe as Mythril Sword + Mythril Armor and records its Nova Dragon steal. Individual quantities and version-specific availability still need a full item audit.",
   },
   {
     id: "cavesofnarshe-ff9-claws",
@@ -2274,12 +2274,20 @@ export const sources = [
     notes: "Independent original PlayStation equipment reference listing Grand Armor as obtainable from Nova Dragon or synthesis, used as a second check on the acquisition routes. Its armor table lists Diamond Armor as obtainable from Daguerreo, matching GameFAQs' Disc III-only listing.",
   },
   {
+    id: "rpgclassics-synthesis",
+    title: "Final Fantasy IX Synthesis Shop Reference",
+    publisher: "RPGClassics",
+    url: "https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml",
+    accessed: "2026-10-24",
+    notes: "Independent original PlayStation synthesis table. Lists Battle Boots at Daguerreo for 6,500 Gil from Feather Boots + Wing Edge, and cross-checks other synthesis recipes and shop locations.",
+  },
+  {
     id: "jegged-synthesis",
     title: "Synthesis — Final Fantasy IX recipe list",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Synthesis/",
     accessed: "2026-10-24",
-    notes: "Independent recipe reference listing Grand Armor from Mythril Sword + Mythril Armor at the Black Mage Village Disc IV synthesis shop. Cross-checks the 45,000-Gil cost against EliteGrindLab and GameFAQs equipment data.",
+    notes: "Independent recipe reference listing Grand Armor from Mythril Sword + Mythril Armor at the Black Mage Village Disc IV synthesis shop, and Battle Boots from Feather Boots + Wing Edge at Daguerreo. Cross-checks the recipe prices against EliteGrindLab and GameFAQs equipment data.",
   },
   {
     id: "elitegrindlab-synthesis",
@@ -2287,7 +2295,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/synthesis/",
     accessed: "2026-10-24",
-    notes: "Independent synthesis reference listing Grand Armor from Mythril Sword + Mythril Armor for 45,000 Gil at the Disc IV Black Cat shop. Used as a separate check on recipe, cost, and shop identity.",
+    notes: "Independent synthesis reference listing Grand Armor from Mythril Sword + Mythril Armor for 45,000 Gil at the Disc IV Black Cat shop and Battle Boots from Feather Boots + Wing Edge for 6,500 Gil at Daguerreo. Used as a separate check on recipes, costs, and shop identities.",
   },
   {
     id: "gamefaqs-synthesis-xiamut-38565",
@@ -2537,7 +2545,7 @@ export const objectives: GameObjective[] = [
   },
   {
     id: "disc-1.exploring-lindblum-kingdom.frog-catching",
-    title: "Start Frog Catching and preserve a breeding pair",
+    title: "Start Frog Catching, track the rewards, and preserve a breeding pair",
     category: "side-content",
     sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-frog-catching-71891"],
     chapterIds: ["disc-1.exploring-lindblum-kingdom"],
@@ -7106,7 +7114,7 @@ export const missables: MissableRecord[] = [
     id: "missable.disc-4.second-battle-of-iifa-tree.grand-armor",
     objectiveId: "disc-4.second-battle-of-iifa-tree.nova-dragon-steals",
     title: "Nova Dragon's Grand Armor steal window",
-    classification: ["missable-opportunity", "recommended-now", "conditional", "permanently-missable"],
+    classification: ["missable-opportunity", "recommended-now", "conditional", "recoverable-later"],
     warningChapterIds: ["disc-4.second-battle-of-iifa-tree"],
     consequence: "Defeating Nova Dragon closes this encounter's steal table. Grand Armor can still be synthesized at Black Mage Village for 45,000 Gil if a Mythril Sword was retained; without one, no post-Desert-Palace source for the sword is documented, making the armor unobtainable after the boss for that inventory state.",
     deadline: "Before defeating Nova Dragon at the Iifa Tree's purple orb.",

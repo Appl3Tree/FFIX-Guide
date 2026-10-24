@@ -1053,7 +1053,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "explore-frog-catching-start",
             kind: "optional",
             text: "When Quina offers to catch frogs, start the minigame and take the frogs you want from this first pond. Frog progress is a long-term sidequest; there is no need to chase a target count during this visit.",
-            detail: "For faster future respawns, leave at least one adult male and one adult female in the pond, and leave the golden frog if one is present. Frog maturation depends on time spent away; repeatedly checking the pond resets its interval. The frog Zidane caught to recruit Quina does not count toward the sidequest total. The marsh itself has no field-item pickup route: nearby Ether, coffee, and treasure are at the separately named locations below.",
+            detail: "The 45-frog milestone awards Battle Boots; other rewards have their own listed thresholds. For faster future respawns, leave at least one adult male and one adult female in the pond, and leave the golden frog if one is present. Frog maturation depends on time spent away; repeatedly checking the pond resets its interval. The frog Zidane caught to recruit Quina does not count toward the sidequest total. The marsh itself has no field-item pickup route: nearby Ether, coffee, and treasure are at the separately named locations below.",
             objectiveIds: ["disc-1.exploring-lindblum-kingdom.frog-catching"],
           },
           {
@@ -5083,7 +5083,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-daguerreo-rank-and-synthesis",
             kind: "optional",
             text: "Continue to the Four-Armed Man. After your treasure sweep, ask him to check your Treasure Hunter rank; if he awards Rank S, return to the entrance area for the Rank S Medal. Save first if you still need to win cards from him.",
-            detail: "The exact medal handoff order differs between sources. The Rank S award depends on the save's hidden-treasure and event-item history, not just this visit. Ride the lift to Noggy and inspect the synthesis shop while here.",
+            detail: "The exact medal handoff order differs between sources. The Rank S award depends on the save's hidden-treasure and event-item history, not just this visit. Ride the lift to Noggy and inspect the synthesis shop; if Battle Boots are part of your item goal and you have Feather Boots plus Wing Edge, the recipe costs 6,500 Gil.",
             objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep"],
           },
           {

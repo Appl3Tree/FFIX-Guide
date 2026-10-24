@@ -6,7 +6,7 @@ Last updated: 2026-10-24
 
 The project records the claim, source, relevant section, version/platform, access date, verification state, and known conflict for each fact. Walkthroughs are used for scope discovery and fact checking, not copied prose. Critical deadlines and missable consequences require corroboration. Where references disagree, the conflict stays open until evidence resolves it.
 
-The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 267-source register and walkthrough do not establish that the game's content has been comprehensively researched.
+The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 272-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
 ## FFIX references inspected
 
@@ -218,6 +218,7 @@ The implementation remains incomplete. All 44 chapters are partially authored an
 | [GameFAQs Items reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) | Mythril and Grand Armor locations, recipe components, and abilities | Lists Grand Armor as a Nova Dragon steal or a Disc IV Black Mage Village synthesis from Mythril Sword + Mythril Armor; also lists Mythril Armor's later shop and Thorn-steal sources. |
 | [Jegged Synthesis list](https://jegged.com/Games/Final-Fantasy-IX/Synthesis/) | Independent Grand Armor recipe cross-check | Lists Mythril Sword + Mythril Armor at Black Mage Village on Disc IV. |
 | [EliteGrindLab synthesis reference](https://elitegrindlab.com/ff9/synthesis/) | Grand Armor recipe, Gil cost, and Disc IV Black Cat shop | Independently confirms Mythril Sword + Mythril Armor for 45,000 Gil at the Disc IV Black Cat synthesis shop. |
+| [RPGClassics Synthesis](https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml) | Battle Boots synthesis recipe and other shop formulas | Lists Feather Boots + Wing Edge for 6,500 Gil at Daguerreo. |
 | [GameFAQs Synthesis Guide by Xiamut](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/38565) | Historical ingredient conflict | Its older table incorrectly lists Mythril Armlet + Mythril Sword for Grand Armor; retained only to explain the conflict. |
 | [GameFAQs Synthesis Guide by CouchPotato](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/25681) | Explicit correction to the older recipe table | The 2004 revision says Mythril Armor, not Mythril Armlet. The corrected ingredient agrees with current GameFAQs and independent recipe references. |
 | [GameFAQs Magical Fingertip](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/magical-fingertip) | Daguerreo trigger, Treno auction requirements, and Excalibur reward | Lists the four key items to buy/resell, a 40,000-Gil minimum bid expectation, and the exchange for Steiner's Excalibur. |
