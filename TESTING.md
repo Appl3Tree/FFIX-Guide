@@ -4,7 +4,7 @@ Last updated: 2026-10-24
 
 ## Latest change status
 
-All 44 walkthrough chapters have authored, source-linked content from Alexandria through Necron and the ending, but remain partial. The latest B01 route expansion adds the Disc II Dali/Observatory return from Alexandria Station and rejoin at South Gate, bringing the graph to 54 links: 41 required-story gates, two optional detours, five optional returns, and six rejoins. The route includes the Oeilvert/Desert Palace party split and the optional return to Gaia after Deathguise. The latest B05 work adds 74 item records and 100 paths across 12 chapter slices, including the Disc III and Disc IV shop stock, 24 source-specific Disc III inventory targets, and 10 partial ability claims. The data audit now also requires limited-window paths with a recommended cutoff chapter to link to a missable objective with a warning and walkthrough checklist step in that chapter; all 39 Disc III final-stock shop paths point to the Preparing to Leave checkpoint. `npm run typecheck`, `npm run lint`, `npm run audit:data`, `npm run build`, and `git diff --check` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 597 objectives, and 267 sources. The production build emitted 1,191.25 kB JavaScript (313.35 kB gzip) and 48.89 kB CSS (10.72 kB gzip); Vite's chunk-size advisory remains. The unit suite was not run. No app components changed; the current Route Map rendering and expanded 54-link graph remain unverified.
+All 44 walkthrough chapters have authored, source-linked content from Alexandria through Necron and the ending, but remain partial. The latest B01 route expansion adds the Disc II Dali/Observatory return from Alexandria Station and rejoin at South Gate, bringing the graph to 54 links: 41 required-story gates, two optional detours, five optional returns, and six rejoins. The route includes the Oeilvert/Desert Palace party split and the optional return to Gaia after Deathguise. The latest B05 work adds 74 item records and 100 paths across 12 chapter slices, including the Disc III and Disc IV shop stock, 24 source-specific Disc III inventory targets, and 11 partial ability claims. B02 now tracks Diamond Armor's source-backed Daguerreo-only Disc III window as an item-specific, version-scoped warning. The data audit requires limited-window paths with a recommended cutoff chapter to link to a missable objective with a warning and walkthrough checklist step in that chapter; all 39 Disc III final-stock shop paths point to the Preparing to Leave checkpoint. `npm run typecheck`, `npm run lint`, `npm run audit:data`, `npm run build`, and `git diff --check` passed. The audit reported 0 errors and 167 coverage warnings across 44 authored chapter headings, 125 missable records, 598 objectives, and 267 sources. The production build emitted 1,194.37 kB JavaScript (314.07 kB gzip) and 48.89 kB CSS (10.72 kB gzip); Vite's chunk-size advisory remains. The unit suite was not run. No app components changed; the current Route Map rendering and expanded 54-link graph remain unverified.
 
 An internal item data slice was added with 14 item records and 20 source-linked acquisition paths across three chapters. Typecheck, lint, audit, build, and diff checks passed after the addition. The audit remains at 0 errors and 166 coverage warnings; the data rules validate item/path IDs, chapter/objective/source links, quantities, and costs. The slice adds no browser-visible behavior, and the catalog remains partial with no reference UI.
 
@@ -26,7 +26,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,186.57 kB (311.98 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 167 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,194.37 kB (314.07 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 
@@ -126,7 +126,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,186.57 kB (311.98 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 167 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,194.37 kB (314.07 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 

@@ -25,7 +25,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 **Status:** Ready for User
 
-**Purpose:** The checkout has local Git history on `main` through commit `0cec689`, but no remote. GitHub API lookup and a direct push attempt to the expected `Appl3Tree/FFIX-Guide` URL returned 404. That response does not establish whether the repository is missing or the connected account lacks access; the owner needs to create the repository or grant access.
+**Purpose:** The checkout contains the guide's local Git history on `main`, but no remote is configured. GitHub API lookup and a direct push attempt to the expected `Appl3Tree/FFIX-Guide` URL returned 404. That response does not establish whether the repository is missing or the connected account lacks access; the owner needs to create the repository or grant access.
 
 ### Exact instructions
 

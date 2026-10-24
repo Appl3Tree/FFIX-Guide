@@ -133,7 +133,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.obelisk", name: "Obelisk", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.rune-blade", name: "Rune Blade", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.tiger-fangs", name: "Tiger Fangs", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "cavesofnarshe-ff9-claws"], verification: "partial" },
-  { id: "game-item.diamond-armor", name: "Diamond Armor", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
+  { id: "game-item.diamond-armor", name: "Diamond Armor", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-return-to-gaia-71891", "rpgclassics-armor"], verification: "partial" },
   { id: "game-item.orichalcon", name: "Orichalcon", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.defender", name: "Defender", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.ultima-sword", name: "Ultima Sword", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
@@ -235,7 +235,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
   { id: "daguerreo.obelisk", itemId: "game-item.obelisk", chapterId: "disc-3.aerial-exploration", shopId: "daguerreo", shopName: "Daguerreo weapon shop", method: "shop", price: 6000, availability: "limited-window", conditions: "Listed in the Disc III final-stock inventory. Daguerreo's Disc IV weapon shop has changed stock, so this exact item listing is only available through the pre-departure window." },
   { id: "daguerreo.rune-blade", itemId: "game-item.rune-blade", chapterId: "disc-3.aerial-exploration", shopId: "daguerreo", shopName: "Daguerreo weapon shop", method: "shop", price: 8900, availability: "limited-window", conditions: "Listed in the Disc III final-stock inventory. Daguerreo's Disc IV weapon shop has changed stock, so this exact item listing is only available through the pre-departure window." },
   { id: "daguerreo.tiger-fangs", itemId: "game-item.tiger-fangs", chapterId: "disc-3.aerial-exploration", shopId: "daguerreo", shopName: "Daguerreo weapon shop", method: "shop", price: 13500, availability: "limited-window", conditions: "Listed in the Disc III final-stock inventory. Daguerreo's Disc IV weapon shop has changed stock, so this exact item listing is only available through the pre-departure window.", notes: "The GameFAQs shop table gives 8,000 Gil, while its pre-departure table, its item reference, Caves of Narshe, and FFOnline give 13,500 Gil. The path uses 13,500 pending direct game verification.", additionalSourceIds: ["gamefaqs-items-71891", "cavesofnarshe-ff9-claws"] },
-  { id: "daguerreo.diamond-armor", itemId: "game-item.diamond-armor", chapterId: "disc-3.aerial-exploration", shopId: "daguerreo", shopName: "Daguerreo weapon shop", method: "shop", price: 8800, availability: "limited-window", conditions: "Listed in the Disc III final-stock inventory. Daguerreo's Disc IV weapon shop has changed stock, so this exact item listing is only available through the pre-departure window." },
+  { id: "daguerreo.diamond-armor", itemId: "game-item.diamond-armor", chapterId: "disc-3.aerial-exploration", shopId: "daguerreo", shopName: "Daguerreo weapon shop", method: "shop", price: 8800, availability: "limited-window", conditions: "GameFAQs and RPGClassics list Daguerreo as the only documented Diamond Armor source; the Disc IV weapon inventory omits it. This path is source-backed but not directly game-verified.", notes: "GameFAQs recommends buying three Diamond Armors and says they can only be obtained at Daguerreo. RPGClassics independently lists Daguerreo as the acquisition source. No alternate post-transition source appears in the reviewed references.", additionalSourceIds: ["gamefaqs-items-71891", "gamefaqs-return-to-gaia-71891", "rpgclassics-armor"] },
 ] satisfies Disc3ShopPathInput[]).map((path) => ({
   id: `item-path.disc-3-stock.${path.id}`,
   itemId: path.itemId,
@@ -246,7 +246,10 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
   shopId: path.shopId,
   shopName: path.shopName,
   recommendedBeforeChapterId: "disc-3.preparing-to-leave",
-  walkthroughObjectiveIds: ["disc-3.aerial-exploration.daguerreo-stock"],
+  walkthroughObjectiveIds: [
+    "disc-3.aerial-exploration.daguerreo-stock",
+    ...(path.id === "daguerreo.diamond-armor" ? ["disc-3.aerial-exploration.diamond-armor"] : []),
+  ],
   conditions: path.conditions,
   ...(path.notes ? { notes: path.notes } : {}),
   cost: { currency: "gil" as const, amount: path.price },
@@ -596,6 +599,7 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.trident.luna", itemId: "game-item.trident", abilityName: "Luna", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-abilities-71891"] },
+  { id: "item-ability.diamond-armor.ability-up", itemId: "game-item.diamond-armor", abilityName: "Ability Up", verification: "partial", sourceIds: ["gamefaqs-items-71891", "rpgclassics-armor"] },
   { id: "item-ability.diamond-sword.power-break", itemId: "game-item.diamond-sword", abilityName: "Power Break", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.flame-saber.magic-break", itemId: "game-item.flame-saber", abilityName: "Magic Break", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.heavy-lance.six-dragons", itemId: "game-item.heavy-lance", abilityName: "Six Dragons", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-abilities-71891"] },
