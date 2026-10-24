@@ -4,9 +4,9 @@ Last updated: 2026-10-24
 
 The target remains the full, source-verified FFIX guide in the project brief. A working interface, a heading inventory, or a few authored chapters do not count as complete coverage.
 
-## Current milestone: Phase 4 — chronological walkthrough content
+## Current milestone: Phase 3 — completion systems
 
-Forty-four partial content slices now cover the story from the Prima Vista opening through Necron and the ending on Disc IV. Each slice has source-linked instructions and shared profile checklist IDs; they remain partial pending broader route and version verification. Continue by auditing route coverage, optional completion systems, and supported platform behavior.
+Forty-four partial content slices now cover the story from the Prima Vista opening through Necron and the ending on Disc IV. Each slice has source-linked instructions and shared profile checklist IDs; they remain partial pending broader route and version verification. The Excalibur II timer is complete for the baseline source schedule, and the profile-aware warning states and one-way cutoff review now pass local browser checks.
 
 ### Completed in this session
 
@@ -69,12 +69,13 @@ Forty-four partial content slices now cover the story from the Prima Vista openi
 - Continued the Excalibur II source trace through the start of Disc III at 06:17:31. Mapped the D2-09 to D2-17 splits, source-reported encounter counts, Fossil Roo and Moguta Elixir detour costs, Madain Sari ATE time branch, Iifa Tree EXP/Trance setup, and the Stop/Silence Mistodon route. Added the narrative trace and chapter comparisons. The full ATE/achievement and optional-content route, platform timer behavior, independent timing, and Burmecia pickup conflict remain open; next source checkpoint is D3-01 Bentini Heights.
 - Continued the source trace through the D3-13 Disc IV transition at 10:28:25. Recorded the Desert Palace bloodstone and Valia Pira route, Mount Gulug's one-pass pickups and fixed fights, Path C/Combined Chocobo detours, Ipsen's Taharka steal, the four shrines/Earth Guardian steals, Terra and Bran Bal, Pandemonium's EXP-sensitive party splits, and the three end-of-disc boss fights. Added corresponding chapter timed-route notes and source comparisons. Full achievement/ATE coverage, optional-stat cost arithmetic, timer/version verification, and the Burmecia pickup conflict remain open; the Disc IV continuation is recorded below.
 - Continued the Excalibur II source trace from the Disc IV transition through Memoria and the Lich pickup at 11:13:07. Recorded the Nero Family return detours, Nova Dragon, Memoria checkpoints, encounter assumptions, and the four required Guardian steals. Added a profile-scoped manual clock, all 45 source checkpoint targets, saved checkpoint splits, remaining-time display, and a five-minute-behind alert. These targets remain static original PlayStation NTSC references; alternative stat-path budgets, platform/booster behavior, full completion branches, and the Burmecia pickup conflict remain open.
+- Added profile-scoped warning acknowledgement separate from objective completion. Missables now resolve to actionable, available-later, missed, recoverable, complete, unplaced, or excluded states. Moving the current area past unacknowledged high/critical cutoff windows opens a review dialog; confirming records acknowledgement separately from objective progress. Overview and walkthrough area changes use the same gate.
 - Reworked `USER_SETUP_CHECKLIST.md` into a dependency-ordered account-owner handoff covering GitHub repository creation, Pages, Firebase web-app setup, Authentication, Firestore rules/indexes, deployment configuration, production acceptance, and optional App Check. Account-side configuration stays blocked until Codex finishes the tested cloud-sync implementation; no credentials or guessed Firebase values are requested.
-- After the timer update on 2026-10-24, `npm run lint`, `npm test` (7/7), and `npm run build` passed. The build ran typecheck and the data audit; the audit reported 0 errors and 166 coverage warnings across 44 chapter headings, 124 missable records, 516 objectives, and 262 sources. The production JS bundle was 1,116.69 kB (295.17 kB gzip), above Vite's 500 kB advisory threshold. Browser QA confirmed the manual clock, countdown, target comparison, saved split, and reload persistence.
+- After the warning-gate update on 2026-10-24, lint passed, `npm test` passed 8/8, and `npm run build` passed typecheck, audit, and production bundling. The audit reported 0 errors and 166 coverage warnings across 44 chapter headings, 124 missable records, 516 objectives, and 262 sources. The production JS bundle was 1,121.96 kB (296.60 kB gzip), above Vite's 500 kB advisory threshold. Browser QA confirmed the warning dialog, stay/continue behavior, separate acknowledgement and objective states, and the existing manual timer/split persistence.
 
 ### Next prioritized chunk
 
-Continue with the next critical completion systems: route-sensitive progression and warning acknowledgement, then the reference databases and Firebase sync architecture. The Excalibur II route reaches the pickup in static source tracing and its profile timer records the 45 baseline checkpoint targets; source/platform verification, alternative stat-path checkpoint budgets, and the earlier Burmecia pickup conflict remain open. The item, enemy, ability, and sidequest reference databases and achievement trigger/missability audit remain incomplete; all 44 story headings are still partial.
+Continue with ATE and platform-achievement dependency mapping, then the general route/objective progression graph and reference databases. The Excalibur II route reaches the pickup in static source tracing and its profile timer records the 45 baseline checkpoint targets; source/platform verification, alternative stat-path checkpoint budgets, and the earlier Burmecia pickup conflict remain open. The item, enemy, ability, and sidequest reference databases and achievement trigger/missability audit remain incomplete; all 44 story headings are still partial.
 
 ### Research still outstanding
 
@@ -106,8 +107,8 @@ Continue with the next critical completion systems: route-sensitive progression 
 
 ## Phase 3 — critical completion systems
 
-- [ ] Progression graph with actionable, available-later, missed, recoverable, and excluded states.
-- [ ] Central warning acknowledgement and one-way gate flow; current warning cards do not yet provide acknowledgement behavior.
+- [ ] Complete the progression graph for all objectives and prerequisites; missables now expose actionable, available-later, missed, recoverable, complete, unplaced, and excluded states.
+- [x] Central warning acknowledgement and one-way gate flow for mapped high/critical cutoff windows.
 - [ ] ATE and platform-achievement dependency mapping.
 - [ ] Complete Excalibur II and advanced perfect-game itineraries, checkpoints, timer behavior, and version constraints.
 - [ ] Source and integrate level/preparation guidance.
@@ -160,6 +161,6 @@ Continue with the next critical completion systems: route-sensitive progression 
 
 ## Current blockers and limits
 
-- `/Users/forrest/Repos/FFIX-Guide` is not currently a Git repository (`git rev-parse` fails), and no remote or live deployment is configured. GitHub currently returns 404 for `Appl3Tree/FFIX-Guide`; the local `gh` CLI reports an invalid saved login. The owner-side repository creation/access task and follow-up are documented in `USER_SETUP_CHECKLIST.md`; no push or deployment is claimed.
+- The local repository is initialized on `main` with root commit `4838e55`; no remote or live deployment is configured. GitHub currently returns 404 for `Appl3Tree/FFIX-Guide`, and the local `gh` CLI reports an invalid saved login. The owner-side repository creation/access task and follow-up are documented in `USER_SETUP_CHECKLIST.md`; no push or deployment is claimed.
 - The Playwright CLI wrapper could not retrieve its package metadata in the restricted network environment. Responsive and interaction checks were completed with the in-app browser instead.
 - The walkthrough has 44 partially authored chapters out of 44; the standard route has been statically simulated through the ending, and the Excalibur II route has a source-based trace through the 11:13:07 pickup with profile timer/checkpoint support, but no independent timer run. Firebase sync, complete reference databases, remaining missables, alternative route budgets, and full release verification remain unfinished.

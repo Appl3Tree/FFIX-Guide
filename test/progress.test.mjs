@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createDefaultLibrary, mergeMarks, normalizeLibrary, setMark } from "../src/domain/progress.ts";
+import { createDefaultLibrary, mergeMarks, normalizeLibrary, setMark, setWarningAcknowledgement } from "../src/domain/progress.ts";
 import { formatClock, parseClock } from "../src/data/excalibur2.ts";
 
 test("the initial profile has a stable ID independent of list position", () => {
@@ -40,9 +40,10 @@ test("equal timestamp merges resolve deterministically", () => {
 
 test("legacy profiles migrate to checkpoint storage and valid split times survive backup restore", () => {
   const source = createDefaultLibrary(10);
-  const legacyProfile = { ...source.profiles[0], routeCheckpointTimes: undefined };
+  const legacyProfile = { ...source.profiles[0], routeCheckpointTimes: undefined, acknowledgedWarnings: undefined };
   const restored = normalizeLibrary({ ...source, schemaVersion: 1, profiles: [legacyProfile] });
   assert.deepEqual(restored.profiles[0].routeCheckpointTimes, {});
+  assert.deepEqual(restored.profiles[0].acknowledgedWarnings, {});
 
   const withSplits = normalizeLibrary({
     ...source,
@@ -60,4 +61,16 @@ test("manual save clocks preserve seconds and reject malformed values", () => {
   assert.equal(parseClock("12:00"), 43_200);
   assert.equal(parseClock("12:60:00"), undefined);
   assert.equal(parseClock(""), null);
+});
+
+test("warning acknowledgement is stored separately from objective completion", () => {
+  const source = createDefaultLibrary(10);
+  const profile = source.profiles[0];
+  const acknowledged = setWarningAcknowledgement(profile, "missable.one-way-gate", true, source.deviceId, 12);
+  assert.equal(acknowledged.acknowledgedWarnings["missable.one-way-gate"].complete, true);
+  assert.equal(acknowledged.marks["missable.one-way-gate"], undefined);
+
+  const restored = normalizeLibrary({ ...source, profiles: [acknowledged] });
+  assert.equal(restored.profiles[0].acknowledgedWarnings["missable.one-way-gate"].complete, true);
+  assert.deepEqual(restored.profiles[0].marks, {});
 });

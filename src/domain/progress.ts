@@ -1,6 +1,6 @@
 import type { GoalProfile, PlatformChoice, RouteChoice } from "../data/guide.ts";
 
-export const LIBRARY_SCHEMA_VERSION = 2;
+export const LIBRARY_SCHEMA_VERSION = 3;
 export const STORAGE_KEY = "FFIX-Guide.progress";
 
 export type ProgressMark = {
@@ -19,6 +19,7 @@ export type PlaythroughProfile = {
   currentAreaId: string | null;
   playtimeSeconds: number | null;
   routeCheckpointTimes: Record<string, number>;
+  acknowledgedWarnings: Record<string, ProgressMark>;
   marks: Record<string, ProgressMark>;
   createdAt: number;
   updatedAt: number;
@@ -47,6 +48,7 @@ export function createDefaultLibrary(now = Date.now()): ProgressLibrary {
     currentAreaId: null,
     playtimeSeconds: null,
     routeCheckpointTimes: {},
+    acknowledgedWarnings: {},
     marks: {},
     createdAt: now,
     updatedAt: now,
@@ -81,6 +83,12 @@ export function normalizeLibrary(value: unknown): ProgressLibrary {
           return normalized ? [[id, normalized]] : [];
         }))
       : {};
+    const acknowledgedWarnings = isRecord(raw.acknowledgedWarnings)
+      ? Object.fromEntries(Object.entries(raw.acknowledgedWarnings).flatMap(([id, mark]) => {
+          const normalized = normalizeMark(mark);
+          return normalized ? [[id, normalized]] : [];
+        }))
+      : {};
     const goal = isGoal(raw.goal) ? raw.goal : "comprehensive";
     const route = isRoute(raw.route) ? raw.route : "standard";
     const platform = isPlatform(raw.platform) ? raw.platform : "unselected";
@@ -102,6 +110,7 @@ export function normalizeLibrary(value: unknown): ProgressLibrary {
       currentAreaId: typeof raw.currentAreaId === "string" ? raw.currentAreaId : null,
       playtimeSeconds: typeof raw.playtimeSeconds === "number" ? raw.playtimeSeconds : null,
       routeCheckpointTimes,
+      acknowledgedWarnings,
       marks,
       createdAt,
       updatedAt,
@@ -123,6 +132,23 @@ export function setMark(profile: PlaythroughProfile, objectiveId: string, comple
       ...profile.marks,
       [objectiveId]: {
         complete,
+        updatedAt: now,
+        deviceId,
+        revision: (previous?.revision ?? 0) + 1,
+      },
+    },
+  };
+}
+
+export function setWarningAcknowledgement(profile: PlaythroughProfile, warningId: string, acknowledged: boolean, deviceId: string, now = Date.now()): PlaythroughProfile {
+  const previous = profile.acknowledgedWarnings[warningId];
+  return {
+    ...profile,
+    updatedAt: now,
+    acknowledgedWarnings: {
+      ...profile.acknowledgedWarnings,
+      [warningId]: {
+        complete: acknowledged,
         updatedAt: now,
         deviceId,
         revision: (previous?.revision ?? 0) + 1,

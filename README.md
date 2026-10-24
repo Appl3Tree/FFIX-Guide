@@ -57,6 +57,7 @@ Expected public URL: <https://appl3tree.github.io/FFIX-Guide/>
 - A source-backed Excalibur II deadline record, manual save-clock countdown, 45 source-target comparisons, and profile-saved route splits for the baseline NTSC schedule.
 - Local playthrough profiles, manual game-clock entry, progress export, and restore. The app does not read a game save file.
 - Stable progress IDs and a merge-ready per-objective mark model.
+- Profile-aware warning states, separate warning acknowledgements, and a confirmation gate before moving past known high/critical cutoff windows.
 - Data integrity audit and unit tests for progress normalization and mark merging.
 - Firebase authentication and Firestore synchronization are **not wired yet**. The UI is clear that progress currently stays on the device.
 
@@ -87,7 +88,7 @@ The Vite base path is set to `/FFIX-Guide/`. The build copies `index.html` to `4
 
 ## Progress and profiles
 
-Progress is stored in the browser under `FFIX-Guide.progress`. A profile contains its goal, route, specific platform release, optional manually entered game clock, recorded Excalibur II checkpoint times, and objective marks. The timer shows time remaining to 12 hours and compares the entered clock with the selected source checkpoint; it warns when the clock is more than five minutes behind that target. The 45 checkpoint targets are source-reported for original PlayStation NTSC baseline paths A, B, and Level 1; they have not been independently timed and are not verified for other releases or alternate stat paths. The app does not read game save files. Older broad PlayStation/mobile profile values remain readable in restored backups. Export downloads all profiles as JSON; restore replaces the browser library with a validated backup.
+Progress is stored in the browser under `FFIX-Guide.progress`. A profile contains its goal, route, specific platform release, optional manually entered game clock, recorded Excalibur II checkpoint times, objective marks, and warning acknowledgements. Missable records show actionable, available-later, missed, recoverable, complete, unplaced, or excluded status. Before advancing the current area past known high/critical warning windows, the guide asks the player to review and acknowledge them. Acknowledgement is separate from objective completion. The timer shows time remaining to 12 hours and compares the entered clock with the selected source checkpoint; it warns when the clock is more than five minutes behind that target. The 45 checkpoint targets are source-reported for original PlayStation NTSC baseline paths A, B, and Level 1; they have not been independently timed and are not verified for other releases or alternate stat paths. The app does not read game save files. Older broad PlayStation/mobile profile values remain readable in restored backups. Export downloads all profiles as JSON; restore replaces the browser library with a validated backup.
 
 Objective IDs are stable domain identifiers, not list positions or UI labels. An unchecked change is represented as a timestamped `false` mark, so a future sync merge can preserve removals instead of treating every checkbox as an add-only set. Cloud conflict resolution and cross-device validation are still outstanding work.
 
@@ -101,7 +102,7 @@ The eventual web-app configuration is public client configuration, not a passwor
 
 `.github/workflows/deploy.yml` validates pull requests and deploys the `main` branch to GitHub Pages. It runs lint, typecheck, unit tests, data audit, and production build before uploading `dist/`.
 
-Enable GitHub Pages with **GitHub Actions** as the source. The current checkout has no Git repository or remote, and GitHub returned 404 for the expected `Appl3Tree/FFIX-Guide` repository; the owner-side repository creation step is documented in [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md). No push or live deployment is claimed.
+Enable GitHub Pages with **GitHub Actions** as the source. The checkout now has local Git history on `main` (root commit `4838e55`) but no remote, and GitHub returned 404 for the expected `Appl3Tree/FFIX-Guide` repository. The owner-side repository creation step is documented in [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md). No push or live deployment is claimed.
 
 ## Architecture
 

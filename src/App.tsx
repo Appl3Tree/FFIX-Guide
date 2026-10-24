@@ -38,6 +38,7 @@ import {
   type GuideArea,
   type GoalProfile,
   type MissableClassification,
+  type MissableRecord,
   type PlatformChoice,
   type RouteChoice,
   type WalkthroughStepKind,
@@ -47,6 +48,7 @@ import {
   normalizeLibrary,
   readLibrary,
   STORAGE_KEY,
+  setWarningAcknowledgement,
   toggleMark,
   type PlaythroughProfile,
   type ProgressLibrary,
@@ -157,6 +159,7 @@ function missableAppliesToProfile(record: (typeof missables)[number], profile: P
 }
 
 function missableProgressState(record: (typeof missables)[number], profile: PlaythroughProfile) {
+  if (!missableAppliesToProfile(record, profile)) return "excluded" as const;
   if (profile.marks[record.objectiveId]?.complete === true) return "complete" as const;
   const currentIndex = guideAreas.findIndex((area) => area.id === profile.currentAreaId);
   if (currentIndex < 0 || !record.warningChapterIds?.length) return "unplaced" as const;
@@ -164,7 +167,13 @@ function missableProgressState(record: (typeof missables)[number], profile: Play
     .map((chapterId) => guideAreas.findIndex((area) => area.id === chapterId))
     .filter((index) => index >= 0);
   if (warningIndexes.length === 0) return "unplaced" as const;
-  return Math.max(...warningIndexes) < currentIndex ? "past" as const : "upcoming" as const;
+  const firstWarningIndex = Math.min(...warningIndexes);
+  const lastWarningIndex = Math.max(...warningIndexes);
+  if (currentIndex < firstWarningIndex) return "available-later" as const;
+  if (currentIndex > lastWarningIndex) {
+    return record.classification.includes("recoverable-later") ? "recoverable" as const : "missed" as const;
+  }
+  return "actionable" as const;
 }
 
 function applicableMissables(profile: PlaythroughProfile) {
@@ -173,6 +182,10 @@ function applicableMissables(profile: PlaythroughProfile) {
 
 function pendingMissables(profile: PlaythroughProfile) {
   return applicableMissables(profile).filter((record) => missableProgressState(record, profile) !== "complete");
+}
+
+function warningIsAcknowledged(record: MissableRecord, profile: PlaythroughProfile) {
+  return profile.acknowledgedWarnings[record.id]?.complete === true;
 }
 
 function readView(): View {
@@ -192,6 +205,7 @@ function makeProfile(name: string, now = Date.now()): PlaythroughProfile {
     currentAreaId: null,
     playtimeSeconds: null,
     routeCheckpointTimes: {},
+    acknowledgedWarnings: {},
     marks: {},
     createdAt: now,
     updatedAt: now,
@@ -206,6 +220,7 @@ function App() {
   const [profileName, setProfileName] = useState("");
   const [profileMessage, setProfileMessage] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
+  const [pendingGateReview, setPendingGateReview] = useState<{ profileId: string; targetAreaId: string; records: MissableRecord[] } | null>(null);
   const importInput = useRef<HTMLInputElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
 
@@ -271,6 +286,64 @@ function App() {
   const updateGoal = (goal: GoalProfile) => {
     const route: RouteChoice = goal === "excalibur-ii" ? "excalibur-ii" : goal === "perfect" ? "advanced-perfect" : "standard";
     updateProfile({ goal, route });
+  };
+
+  const requestCurrentAreaChange = (targetAreaId: string | null) => {
+    const currentAreaId = activeProfile.currentAreaId;
+    if (!targetAreaId || !currentAreaId) {
+      updateProfile({ currentAreaId: targetAreaId });
+      return;
+    }
+    const currentIndex = guideAreas.findIndex((area) => area.id === currentAreaId);
+    const targetIndex = guideAreas.findIndex((area) => area.id === targetAreaId);
+    if (targetIndex <= currentIndex || currentIndex < 0 || targetIndex < 0) {
+      updateProfile({ currentAreaId: targetAreaId });
+      return;
+    }
+    const gateRecords = applicableMissables(activeProfile).filter((record) => {
+      if (record.severity === "info" || activeProfile.marks[record.objectiveId]?.complete === true || warningIsAcknowledged(record, activeProfile)) return false;
+      const hasCutoffClassification = record.classification.some((classification) =>
+        classification === "permanently-missable"
+        || classification === "missable-opportunity"
+        || classification === "limited-quantity"
+        || classification === "mutually-exclusive"
+        || classification === "time-sensitive",
+      );
+      if (!hasCutoffClassification || !record.warningChapterIds?.length) return false;
+      const warningIndexes = record.warningChapterIds.map((chapterId) => guideAreas.findIndex((area) => area.id === chapterId)).filter((index) => index >= 0);
+      if (warningIndexes.length === 0) return false;
+      const finalWarningIndex = Math.max(...warningIndexes);
+      return finalWarningIndex >= currentIndex && finalWarningIndex < targetIndex;
+    });
+    if (gateRecords.length > 0) setPendingGateReview({ profileId: activeProfile.id, targetAreaId, records: gateRecords });
+    else updateProfile({ currentAreaId: targetAreaId });
+  };
+
+  const acknowledgeWarning = (warningId: string) => {
+    setLibrary((current) => ({
+      ...current,
+      profiles: current.profiles.map((profile) => profile.id === activeProfile.id
+        ? setWarningAcknowledgement(profile, warningId, !profile.acknowledgedWarnings[warningId]?.complete, current.deviceId)
+        : profile),
+    }));
+  };
+
+  const acknowledgeGateAndContinue = () => {
+    if (!pendingGateReview) return;
+    const { profileId, targetAreaId, records } = pendingGateReview;
+    const now = Date.now();
+    setLibrary((current) => ({
+      ...current,
+      profiles: current.profiles.map((profile) => {
+        if (profile.id !== profileId) return profile;
+        const nextProfile = records.reduce(
+          (next, record) => setWarningAcknowledgement(next, record.id, true, current.deviceId, now),
+          profile,
+        );
+        return { ...nextProfile, currentAreaId: targetAreaId, updatedAt: now };
+      }),
+    }));
+    setPendingGateReview(null);
   };
 
   const addProfile = () => {
@@ -378,7 +451,8 @@ function App() {
             onGoalChange={updateGoal}
             onRouteChange={(route) => updateProfile({ route })}
             onPlatformChange={(platform) => updateProfile({ platform })}
-            onCurrentAreaChange={(currentAreaId) => updateProfile({ currentAreaId })}
+            onCurrentAreaChange={requestCurrentAreaChange}
+            onAcknowledgeWarning={acknowledgeWarning}
             onPlaytimeChange={(playtimeSeconds) => updateProfile({ playtimeSeconds })}
             onRecordRouteCheckpoint={(checkpointId, seconds) => updateProfile({
               routeCheckpointTimes: { ...activeProfile.routeCheckpointTimes, [checkpointId]: seconds },
@@ -388,8 +462,8 @@ function App() {
             onExport={exportProgress}
             onImport={() => importInput.current?.click()}
           />}
-          {view === "walkthrough" && <Walkthrough profile={activeProfile} search={search} onClearSearch={() => setSearch("")} onNavigate={navigate} onToggleObjective={toggleObjective} onSetCurrentArea={(currentAreaId) => updateProfile({ currentAreaId })} />}
-          {view === "missables" && <Missables profile={activeProfile} onToggle={toggleObjective} />}
+          {view === "walkthrough" && <Walkthrough profile={activeProfile} search={search} onClearSearch={() => setSearch("")} onNavigate={navigate} onToggleObjective={toggleObjective} onSetCurrentArea={requestCurrentAreaChange} onAcknowledgeWarning={acknowledgeWarning} />}
+          {view === "missables" && <Missables profile={activeProfile} onToggle={toggleObjective} onAcknowledgeWarning={acknowledgeWarning} />}
           {view === "achievements" && <Achievements profile={activeProfile} platform={activeProfile.platform} onPlatformChange={(platform) => updateProfile({ platform })} onToggle={toggleObjective} onOpenChapter={(chapterId) => {
             const area = guideAreas.find((item) => item.id === chapterId);
             if (!area) return;
@@ -404,9 +478,49 @@ function App() {
           />}
         </main>
       </div>
+      {pendingGateReview && <GateReviewDialog
+        targetAreaId={pendingGateReview.targetAreaId}
+        records={pendingGateReview.records}
+        onCancel={() => setPendingGateReview(null)}
+        onAcknowledgeAndContinue={acknowledgeGateAndContinue}
+      />}
       <input ref={importInput} className="sr-only" type="file" accept="application/json,.json" aria-label="Restore progress backup" onChange={importProgress} />
     </div>
   );
+}
+
+function GateReviewDialog({ targetAreaId, records, onCancel, onAcknowledgeAndContinue }: {
+  targetAreaId: string;
+  records: MissableRecord[];
+  onCancel: () => void;
+  onAcknowledgeAndContinue: () => void;
+}) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const stayButtonRef = useRef<HTMLButtonElement>(null);
+  const targetArea = guideAreas.find((area) => area.id === targetAreaId);
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (!dialog.open) dialog.showModal();
+    stayButtonRef.current?.focus();
+    return () => {
+      if (dialog.open) dialog.close();
+    };
+  }, []);
+
+  return <dialog
+    ref={dialogRef}
+    className="gate-review-dialog"
+    aria-labelledby="gate-review-title"
+    aria-describedby="gate-review-description"
+    onCancel={(event) => { event.preventDefault(); onCancel(); }}
+  >
+    <div className="gate-review-heading"><span className="gate-review-icon"><AlertTriangle size={18} aria-hidden="true" /></span><div><span className="eyebrow">ONE-WAY GATE REVIEW</span><h2 id="gate-review-title">Review cutoff warnings before moving on</h2></div></div>
+    <p id="gate-review-description">Moving your current area to <strong>{targetArea?.title ?? "the selected chapter"}</strong> passes one or more open warning windows. Acknowledging them records that you reviewed the route; it does not mark their objectives complete.</p>
+    <ul className="gate-warning-list">{records.map((record) => <li key={record.id}><strong>{record.title}</strong><span>{record.deadline} {record.action}</span></li>)}</ul>
+    <div className="gate-review-actions"><button ref={stayButtonRef} className="secondary-button" type="button" onClick={onCancel}>Stay in current area</button><button className="record-checkpoint-button" type="button" onClick={onAcknowledgeAndContinue}>Acknowledge warnings and continue</button></div>
+  </dialog>;
 }
 
 function Sidebar({
@@ -462,6 +576,7 @@ function Overview({
   onRouteChange,
   onPlatformChange,
   onCurrentAreaChange,
+  onAcknowledgeWarning,
   onPlaytimeChange,
   onRecordRouteCheckpoint,
   onNavigate,
@@ -482,6 +597,7 @@ function Overview({
   onRouteChange: (route: RouteChoice) => void;
   onPlatformChange: (platform: PlatformChoice) => void;
   onCurrentAreaChange: (areaId: string | null) => void;
+  onAcknowledgeWarning: (warningId: string) => void;
   onPlaytimeChange: (seconds: number | null) => void;
   onRecordRouteCheckpoint: (checkpointId: string, seconds: number) => void;
   onNavigate: (view: View) => void;
@@ -490,10 +606,12 @@ function Overview({
   onImport: () => void;
 }) {
   const pendingMissableRecords = pendingMissables(profile);
-  const nextOpenMissable = pendingMissableRecords.find((record) => missableProgressState(record, profile) === "upcoming");
-  const firstMissedMissable = pendingMissableRecords.find((record) => missableProgressState(record, profile) === "past");
-  const unplacedMissable = pendingMissableRecords.find((record) => missableProgressState(record, profile) === "unplaced");
-  const nextMissable = nextOpenMissable ?? firstMissedMissable ?? unplacedMissable;
+  const unacknowledgedMissables = pendingMissableRecords.filter((record) => !warningIsAcknowledged(record, profile));
+  const warningCandidates = unacknowledgedMissables.length > 0 ? unacknowledgedMissables : pendingMissableRecords;
+  const warningOrder = ["actionable", "available-later", "unplaced", "recoverable", "missed"] as const;
+  const nextMissable = warningOrder.flatMap((state) => warningCandidates.filter((record) => missableProgressState(record, profile) === state))[0];
+  const nextMissableAcknowledged = nextMissable ? warningIsAcknowledged(nextMissable, profile) : false;
+  const nextMissableState = nextMissable ? missableProgressState(nextMissable, profile) : null;
   const [clockInput, setClockInput] = useState(profile.playtimeSeconds === null ? "" : formatClock(profile.playtimeSeconds));
 
   useEffect(() => {
@@ -578,21 +696,26 @@ function Overview({
           {profile.route === "excalibur-ii" && <ExcaliburTimer profile={profile} onRecordCheckpoint={onRecordRouteCheckpoint} />}
         </section>
 
-        <aside className={`risk-panel ${nextMissable?.severity === "critical" ? "risk-active" : ""}`} aria-labelledby="risk-heading">
-          <div className="risk-header"><span className="risk-icon"><AlertTriangle size={17} /></span><span className="eyebrow">{!nextMissable ? "PROFILE CHECK" : profile.currentAreaId === null ? "SET CURRENT AREA" : missableProgressState(nextMissable, profile) === "past" ? "UNMARKED PAST CUTOFF" : missableProgressState(nextMissable, profile) === "unplaced" ? "WARNING TIMING NEEDS RESEARCH" : "NEXT OPEN WINDOW"}</span></div>
+        <aside className={`risk-panel ${nextMissable?.severity === "critical" && nextMissableState === "actionable" ? "risk-active" : ""}`} aria-labelledby="risk-heading">
+          <div className="risk-header"><span className="risk-icon"><AlertTriangle size={17} /></span><span className="eyebrow">{!nextMissable ? "PROFILE CHECK" : nextMissableAcknowledged ? "ACKNOWLEDGED · STILL UNMARKED" : nextMissableState === "missed" ? "UNMARKED PAST CUTOFF" : nextMissableState === "recoverable" ? "RECOVERABLE LATER" : nextMissableState === "unplaced" ? "WARNING TIMING NEEDS RESEARCH" : nextMissableState === "actionable" ? "CURRENT WARNING WINDOW" : profile.currentAreaId === null ? "SET CURRENT AREA" : "UPCOMING WINDOW"}</span></div>
           <h2 id="risk-heading">{nextMissable?.title ?? "No unmarked missable objective."}</h2>
           <p>{nextMissable
-            ? profile.currentAreaId === null
-              ? `Set your current story area to place this warning. ${nextMissable.deadline} ${nextMissable.action}`
-              : missableProgressState(nextMissable, profile) === "unplaced"
-                ? "This warning is not linked to a cutoff chapter yet. Review its details and the walkthrough before relying on route timing."
-                : `${nextMissable.deadline} ${nextMissable.action}`
-            : "Every missable objective currently included in this profile is marked complete. The content inventory is still being expanded."}</p>
-          {nextMissable && <label className="objective-check">
+            ? nextMissableAcknowledged
+              ? "You acknowledged this warning, but the objective is still unmarked. Acknowledgement does not count as completion; review the recovery details or mark the objective complete."
+              : profile.currentAreaId === null
+                ? `Set your current story area to place this warning. ${nextMissable.deadline} ${nextMissable.action}`
+                : nextMissableState === "unplaced"
+                  ? "This warning is not linked to a cutoff chapter yet. Review its details and the walkthrough before relying on route timing."
+                  : `${nextMissable.deadline} ${nextMissable.action}`
+            : "Every applicable missable objective is marked complete. The content inventory is still being expanded."}</p>
+          {nextMissable && <div className="risk-actions">
+            <button className="acknowledge-warning-button" type="button" aria-pressed={nextMissableAcknowledged} onClick={() => onAcknowledgeWarning(nextMissable.id)}>{nextMissableAcknowledged ? "Clear acknowledgement" : "Acknowledge warning"}</button>
+            <label className="objective-check">
             <input type="checkbox" checked={false} onChange={() => onToggle(nextMissable.objectiveId)} />
             <span className="custom-check" aria-hidden="true"><Check size={13} /></span>
             <span>Mark this objective complete</span>
-          </label>}
+            </label>
+          </div>}
           <button className="risk-link" onClick={() => onNavigate("missables")}>Review {pendingMissableRecords.length} applicable missable objective{pendingMissableRecords.length === 1 ? "" : "s"} <span aria-hidden="true">→</span></button>
         </aside>
       </div>
@@ -721,13 +844,14 @@ function ExcaliburTimer({ profile, onRecordCheckpoint }: {
   );
 }
 
-function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjective, onSetCurrentArea }: {
+function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjective, onSetCurrentArea, onAcknowledgeWarning }: {
   profile: PlaythroughProfile;
   search: string;
   onClearSearch: () => void;
   onNavigate: (view: View) => void;
   onToggleObjective: (id: string) => void;
   onSetCurrentArea: (areaId: string) => void;
+  onAcknowledgeWarning: (warningId: string) => void;
 }) {
   const [activeArc, setActiveArc] = useState(arcs[0].id);
   const [expandedChapterId, setExpandedChapterId] = useState<string | null>("disc-1.alexandria");
@@ -737,7 +861,7 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
     if (!query || area.title.toLowerCase().includes(query)) return true;
     return walkthroughSearchText(area.id).includes(query);
   }), [activeArc, query]);
-  const relevantPending = pendingMissables(profile).filter((record) => missableProgressState(record, profile) === "upcoming");
+  const relevantPending = pendingMissables(profile).filter((record) => ["actionable", "available-later", "unplaced"].includes(missableProgressState(record, profile)));
 
   useEffect(() => {
     if (!query) return;
@@ -783,7 +907,10 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
             {chapter && <article className="walkthrough-chapter" id={`chapter-content-${area.id}`} aria-label={`${area.title} instructions`} hidden={!isExpanded}>
               <div className="walkthrough-chapter-header">
                   <div><span className="eyebrow">{storyArc?.label.toUpperCase() ?? "STORY"} · CHAPTER {String(arcChapterIndex + 1).padStart(2, "0")}</span><p>{chapter.overview}</p></div>
-                <button className={`chapter-current-button ${profile.currentAreaId === area.id ? "is-current" : ""}`} onClick={() => onSetCurrentArea(area.id)} disabled={profile.currentAreaId === area.id}>{profile.currentAreaId === area.id ? "Current area" : "Set current area"}</button>
+                <div className="chapter-header-actions">
+                  {areaWarnings.some((record) => !warningIsAcknowledged(record, profile)) && <button className="chapter-acknowledge-button" type="button" onClick={() => areaWarnings.filter((record) => !warningIsAcknowledged(record, profile)).forEach((record) => onAcknowledgeWarning(record.id))}>Acknowledge {areaWarnings.filter((record) => !warningIsAcknowledged(record, profile)).length} warnings</button>}
+                  <button className={`chapter-current-button ${profile.currentAreaId === area.id ? "is-current" : ""}`} onClick={() => onSetCurrentArea(area.id)} disabled={profile.currentAreaId === area.id}>{profile.currentAreaId === area.id ? "Current area" : "Set current area"}</button>
+                </div>
               </div>
               {profile.route !== "standard" && chapter.timedRouteNote && <div className="chapter-route-note"><AlertTriangle size={16} aria-hidden="true" /><p>{chapter.timedRouteNote}</p></div>}
               <div className="walkthrough-sections">
@@ -819,23 +946,27 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
   );
 }
 
-function Missables({ profile, onToggle }: { profile: PlaythroughProfile; onToggle: (id: string) => void }) {
+function Missables({ profile, onToggle, onAcknowledgeWarning }: { profile: PlaythroughProfile; onToggle: (id: string) => void; onAcknowledgeWarning: (warningId: string) => void }) {
   const records = applicableMissables(profile);
+  const excludedRecords = missables.filter((record) => !missableAppliesToProfile(record, profile));
   const trackedObjectiveIds = new Set(records.map((record) => record.objectiveId));
   const completedCount = [...trackedObjectiveIds].filter((objectiveId) => profile.marks[objectiveId]?.complete === true).length;
+  const acknowledgedCount = records.filter((record) => warningIsAcknowledged(record, profile) && profile.marks[record.objectiveId]?.complete !== true).length;
   return (
     <>
       <PageHeading eyebrow="DEADLINES & ONE-WAY CUTS" title="Missables" lead="Warnings are classified by consequence. An unavailable pickup is not automatically a permanently lost item." />
-      <div className="registry-summary"><div><span className="summary-icon"><ShieldAlert size={18} /></span><div><strong>{completedCount} of {trackedObjectiveIds.size} tracked objectives complete</strong><small>Showing missables relevant to {goalLabels[profile.goal]}; registry coverage remains incomplete.</small></div></div><span className="coverage-status">{records.length} applicable · partial registry</span></div>
+      <div className="registry-summary"><div><span className="summary-icon"><ShieldAlert size={18} /></span><div><strong>{completedCount} of {trackedObjectiveIds.size} tracked objectives complete</strong><small>{acknowledgedCount} warning{acknowledgedCount === 1 ? "" : "s"} acknowledged but still incomplete · showing {goalLabels[profile.goal]}</small></div></div><span className="coverage-status">{records.length} applicable · {excludedRecords.length} excluded</span></div>
       <section className="missable-list" aria-label="Missable records for this profile">
         {records.map((record) => {
           const progressState = missableProgressState(record, profile);
           const done = progressState === "complete";
+          const acknowledged = warningIsAcknowledged(record, profile);
           const severityLabel = record.severity === "critical" ? "Critical cutoff" : record.severity === "high" ? "One-time window" : "Follow-up needed";
           const verificationLabel = record.verification === "verified" ? "Source-checked" : "Partial · follow-up review";
-          return <article className={`missable-record record-severity-${record.severity} ${done ? "missable-done" : progressState === "past" ? "missable-past" : record.severity === "critical" ? "missable-active" : ""}`} key={record.id}>
+          const progressLabel = done ? "MARKED COMPLETE" : acknowledged ? "ACKNOWLEDGED · STILL UNMARKED" : progressState === "actionable" ? "OPEN WINDOW · ACT NOW" : progressState === "available-later" ? "AVAILABLE LATER" : progressState === "missed" ? "MISSED · REVIEW RECOVERY" : progressState === "recoverable" ? "RECOVERABLE LATER" : "CUTOFF TIMING NEEDS REVIEW";
+          return <article className={`missable-record record-severity-${record.severity} ${done ? "missable-done" : progressState === "missed" ? "missable-past" : record.severity === "critical" && progressState === "actionable" ? "missable-active" : ""}`} key={record.id}>
             <div className="missable-main">
-              <div className="missable-top"><div className="missable-title-line"><span className="severity-icon"><AlertTriangle size={18} /></span><div><span className="eyebrow">{done ? "MARKED COMPLETE" : progressState === "past" ? "PAST CUTOFF · REVIEW RECOVERY" : progressState === "unplaced" ? profile.currentAreaId === null ? "SET CURRENT AREA TO PLACE ROUTE" : "CUTOFF CHAPTER NOT MAPPED" : "APPLIES TO THIS PROFILE"}</span><h2>{record.title}</h2><div className="missable-classifications">{record.classification.map((classification) => <span className="classification-tag" key={classification}>{missableClassificationLabels[classification]}</span>)}</div></div></div><span className={`tag ${record.severity === "critical" ? "tag-critical" : record.severity === "high" ? "tag-high" : "tag-info"}`}>{severityLabel}</span></div>
+              <div className="missable-top"><div className="missable-title-line"><span className="severity-icon"><AlertTriangle size={18} /></span><div><span className="eyebrow">{progressLabel}</span><h2>{record.title}</h2><div className="missable-classifications">{record.classification.map((classification) => <span className="classification-tag" key={classification}>{missableClassificationLabels[classification]}</span>)}</div></div></div><span className={`tag ${record.severity === "critical" ? "tag-critical" : record.severity === "high" ? "tag-high" : "tag-info"}`}>{severityLabel}</span></div>
               <p className="missable-consequence">{record.consequence}</p>
               <div className="missable-facts">
                 <div><span className="label-muted">WHEN TO ACT</span><p>{record.deadline}</p></div>
@@ -849,10 +980,12 @@ function Missables({ profile, onToggle }: { profile: PlaythroughProfile; onToggl
               })}</div></div>
             </div>
             <label className="objective-check missable-check"><input type="checkbox" checked={done} onChange={() => onToggle(record.objectiveId)} /><span className="custom-check" aria-hidden="true"><Check size={13} /></span><span>Mark this objective complete</span></label>
+            {!done && <button className="missable-acknowledgement" type="button" aria-pressed={acknowledged} onClick={() => onAcknowledgeWarning(record.id)}>{acknowledged ? "Clear warning acknowledgement" : "I reviewed this warning"}</button>}
           </article>;
         })}
         {records.length === 0 && <div className="empty-state">No researched missable objectives are assigned to this profile yet.</div>}
       </section>
+      {excludedRecords.length > 0 && <details className="excluded-missables"><summary>{excludedRecords.length} warning records excluded by this profile</summary><p>These records are outside the selected goal, route, or platform. They do not count as missing progress for this profile.</p><ul>{excludedRecords.map((record) => <li key={record.id}><strong>{record.title}</strong><span>{record.classification.map((classification) => missableClassificationLabels[classification]).join(" · ")}</span></li>)}</ul></details>}
       <section className="classification-guide">
         <div className="eyebrow">CLASSIFICATION RULE</div>
         <p><strong>Permanent loss</strong> means no normal acquisition path remains on this save. A missed opportunity with a later shop, synthesis, or encounter source will be labeled separately.</p>

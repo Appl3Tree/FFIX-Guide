@@ -1,6 +1,6 @@
 # Data model
 
-Last updated: 2026-10-23
+Last updated: 2026-10-24
 
 ## Content records
 
@@ -19,13 +19,13 @@ The data layer is normalized around stable domain IDs and explicit relationships
 
 ## Progress IDs and views
 
-Contextual walkthrough checklists and global trackers point to the same objective ID. Alexandria demonstrates this with opening and sword-fight steals, Moonstone, Jump Rope, Mognet, card, pickup-sweep, and Knights of Pluto checkboxes; Evil Forest adds ATE, Steam-only achievement, boss-steal, and party-equipment objectives. A progress mark is scoped to a playthrough profile, so one save can include an item while another remains independent. The current implementation uses namespaced strings such as `advanced.excalibur-ii.acquire`; chapter inventory IDs are explicit and independent of their displayed names. Authored chapters can set the profile's current story area, which feeds the same cutoff-warning logic used by the overview. The data audit checks that every mapped missable warning chapter has a walkthrough checklist step linked to that missable's objective.
+Contextual walkthrough checklists and global trackers point to the same objective ID. Alexandria demonstrates this with opening and sword-fight steals, Moonstone, Jump Rope, Mognet, card, pickup-sweep, and Knights of Pluto checkboxes; Evil Forest adds ATE, Steam-only achievement, boss-steal, and party-equipment objectives. A progress mark is scoped to a playthrough profile, so one save can include an item while another remains independent. The current implementation uses namespaced strings such as `advanced.excalibur-ii.acquire`; chapter inventory IDs are explicit and independent of their displayed names. Authored chapters can set the profile's current story area, which feeds the cutoff-warning logic. Objective completion and warning acknowledgement use separate profile maps, so reading a warning never satisfies its objective. The data audit checks that every mapped missable warning chapter has a walkthrough checklist step linked to that missable's objective.
 
 Do not renumber records or derive IDs from an array index. If an objective is split or merged, retain an explicit migration map and preserve the previous mark for review; do not silently discard it.
 
 ## Profile schema
 
-The local library currently has a `schemaVersion`, a stable per-browser `deviceId`, profile list, and selected profile ID. Each profile stores its goal, route, selected product/platform, current story area, optional manually entered game clock, and sparse objective marks. The overview's current-area selector supports contextual warning status: with an area selected, an unchecked warning before that area is shown as past and current or later warnings remain open. Until an area is selected, or if a warning lacks a mapped chapter, its timing remains unplaced. A past warning prompts recovery review and does not itself prove permanent loss. Platform choices distinguish the original PlayStation, Steam, PS4 release, Xbox One/Series/Windows app, Switch, iOS/iPadOS, and Android; early broad PlayStation/mobile values remain readable when restoring foundation backups.
+The local library uses schema version 3, a stable per-browser `deviceId`, profile list, and selected profile ID. Each profile stores its goal, route, selected product/platform, current story area, manually entered game clock, saved Excalibur II route splits, sparse objective marks, and warning acknowledgements. Normalization adds empty checkpoint and acknowledgement maps to older backups. The Excalibur II timer compares the manual clock with the selected source checkpoint and keeps actual splits separate from target data. Platform choices distinguish the original PlayStation, Steam, PS4 release, Xbox One/Series/Windows app, Switch, iOS/iPadOS, and Android; early broad PlayStation/mobile values remain readable when restoring foundation backups.
 
 Achievement sets are keyed to the product build and service: Steam achievements, PlayStation trophies, Xbox achievements, and mobile in-app or account-linked achievements must not be assumed to share a single list. Steam's 85 visible names and criteria now have stable local objective IDs and manual unlock marks; those IDs are not claimed to be Steam's internal API names. All 85 Steam entries have guide pointers, while some cumulative criteria only have general notes; trigger verification, complete missability review, and the per-entry PS4/Xbox catalogs remain open. The Switch listing remains unresolved until checked in-game. Record product features and achievement service evidence separately from audited criteria and walkthrough triggers.
 
@@ -35,7 +35,7 @@ The app currently persists to `localStorage` and supports JSON export/restore. F
 
 ## Availability and completion
 
-Each objective should resolve to a state based on selected profile, route, platform, and progression. Missable records may carry explicit `warningChapterIds` and route constraints; objectives carry goal-profile and optional achievement-platform applicability. The current UI uses these links to show chapter warning counts, profile-specific missable rows, and an overview's earliest open cutoff or first unmarked past cutoff; warnings without a selected current area or mapped chapter remain unplaced. Passing a warning chapter prompts recovery review without claiming permanent loss. For example, the Steam-only Getting Emotional objective is hidden when the selected profile is not Steam. Current area is manually selected and does not claim sub-area precision.
+Each objective should resolve to a state based on selected profile, route, platform, and progression. Missable records may carry explicit `warningChapterIds` and route constraints; objectives carry goal-profile and optional achievement-platform applicability. The current UI uses these links to show chapter warning counts, profile-specific missable rows, and the overview's next unacknowledged warning. Missables distinguish actionable, available-later, missed, recoverable, complete, unplaced, and excluded records. Moving forward past unacknowledged high/critical one-time warnings opens a gate review; confirming records acknowledgement separately from completion. Warnings without a selected current area or mapped chapter remain unplaced. For example, the Steam-only Getting Emotional objective is excluded when the selected profile is not Steam. Current area is manually selected and does not claim sub-area precision.
 
 Availability states:
 
