@@ -7,6 +7,7 @@ import {
   BookOpen,
   Check,
   ChevronDown,
+  Clapperboard,
   CircleHelp,
   Compass,
   Database,
@@ -26,6 +27,7 @@ import {
   formatClock,
   parseClock,
 } from "./data/excalibur2";
+import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "./data/ates";
 import {
   achievementSourceCounts,
   arcs,
@@ -48,17 +50,19 @@ import {
   normalizeLibrary,
   readLibrary,
   STORAGE_KEY,
+  setMark,
   setWarningAcknowledgement,
   toggleMark,
   type PlaythroughProfile,
   type ProgressLibrary,
 } from "./domain/progress";
 
-type View = "overview" | "walkthrough" | "missables" | "achievements" | "reference";
+type View = "overview" | "walkthrough" | "ates" | "missables" | "achievements" | "reference";
 
 const navItems: { id: View; label: string; icon: typeof Compass }[] = [
   { id: "overview", label: "Overview", icon: Compass },
   { id: "walkthrough", label: "Walkthrough", icon: BookOpen },
+  { id: "ates", label: "ATE Tracker", icon: Clapperboard },
   { id: "missables", label: "Missables", icon: ShieldAlert },
   { id: "achievements", label: "Achievements", icon: Trophy },
   { id: "reference", label: "Reference", icon: Database },
@@ -158,9 +162,27 @@ function missableAppliesToProfile(record: (typeof missables)[number], profile: P
   return objectiveApplies && routeApplies;
 }
 
+function objectiveIsComplete(profile: PlaythroughProfile, objectiveId: string) {
+  if (profile.marks[objectiveId]?.complete === true) return true;
+  const groupedEvents = activeTimeEvents.filter((event) => event.groupObjectiveId === objectiveId);
+  return groupedEvents.length > 0 && ateGroupIsComplete(profile, objectiveId);
+}
+
+function ateGroupIsComplete(profile: PlaythroughProfile, objectiveId: string) {
+  const groupedEvents = activeTimeEvents.filter((event) => event.groupObjectiveId === objectiveId);
+  if (groupedEvents.length === 0) return false;
+  const checkedExclusiveGroups = new Set<string>();
+  return groupedEvents.every((event) => {
+    if (!event.exclusiveGroupId) return profile.marks[event.objectiveId]?.complete === true;
+    if (checkedExclusiveGroups.has(event.exclusiveGroupId)) return true;
+    checkedExclusiveGroups.add(event.exclusiveGroupId);
+    return groupedEvents.some((candidate) => candidate.exclusiveGroupId === event.exclusiveGroupId && profile.marks[candidate.objectiveId]?.complete === true);
+  });
+}
+
 function missableProgressState(record: (typeof missables)[number], profile: PlaythroughProfile) {
   if (!missableAppliesToProfile(record, profile)) return "excluded" as const;
-  if (profile.marks[record.objectiveId]?.complete === true) return "complete" as const;
+  if (objectiveIsComplete(profile, record.objectiveId)) return "complete" as const;
   const currentIndex = guideAreas.findIndex((area) => area.id === profile.currentAreaId);
   if (currentIndex < 0 || !record.warningChapterIds?.length) return "unplaced" as const;
   const warningIndexes = record.warningChapterIds
@@ -221,6 +243,7 @@ function App() {
   const [profileMessage, setProfileMessage] = useState("");
   const [searchOpen, setSearchOpen] = useState(false);
   const [pendingGateReview, setPendingGateReview] = useState<{ profileId: string; targetAreaId: string; records: MissableRecord[] } | null>(null);
+  const [pendingAteChoice, setPendingAteChoice] = useState<{ groupObjectiveId: string; events: typeof activeTimeEvents } | null>(null);
   const importInput = useRef<HTMLInputElement>(null);
   const searchInput = useRef<HTMLInputElement>(null);
 
@@ -272,6 +295,13 @@ function App() {
     setSearchOpen(false);
     if (window.location.hash !== `#${nextView}`) window.location.hash = nextView;
     window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
+  const openChapter = (chapterId: string) => {
+    const area = guideAreas.find((item) => item.id === chapterId);
+    if (!area) return;
+    setSearch(area.title);
+    navigate("walkthrough");
   };
 
   const updateProfile = (updates: Partial<PlaythroughProfile>) => {
@@ -359,12 +389,68 @@ function App() {
   };
 
   const toggleObjective = (id: string) => {
+    const groupedEvents = activeTimeEvents.filter((event) => event.groupObjectiveId === id);
+    const event = activeTimeEvents.find((item) => item.objectiveId === id);
+    if (groupedEvents.length > 0 && !objectiveIsComplete(activeProfile, id)) {
+      const choiceEvents = groupedEvents.filter((candidate) => candidate.exclusiveGroupId);
+      const selectedChoice = choiceEvents.find((candidate) => activeProfile.marks[candidate.objectiveId]?.complete === true);
+      if (choiceEvents.length > 0 && !selectedChoice) {
+        setPendingAteChoice({ groupObjectiveId: id, events: choiceEvents });
+        return;
+      }
+    }
     setLibrary((current) => ({
       ...current,
-      profiles: current.profiles.map((profile) => profile.id === activeProfile.id
-        ? toggleMark(profile, id, current.deviceId)
-        : profile),
+      profiles: current.profiles.map((profile) => {
+        if (profile.id !== activeProfile.id) return profile;
+        const now = Date.now();
+        if (groupedEvents.length > 0) {
+          const complete = !objectiveIsComplete(profile, id);
+          const selectedChoice = groupedEvents.find((candidate) => candidate.exclusiveGroupId && profile.marks[candidate.objectiveId]?.complete === true);
+          const nextProfile = groupedEvents.reduce((next, groupedEvent) => {
+            const eventComplete = groupedEvent.exclusiveGroupId
+              ? complete && groupedEvent.objectiveId === selectedChoice?.objectiveId
+              : complete;
+            return setMark(next, groupedEvent.objectiveId, eventComplete, current.deviceId, now);
+          }, profile);
+          return setMark(nextProfile, id, complete, current.deviceId, now);
+        }
+        if (event) {
+          const complete = !profile.marks[id]?.complete;
+          let nextProfile = profile;
+          if (complete && event.exclusiveGroupId) {
+            nextProfile = activeTimeEvents
+              .filter((candidate) => candidate.exclusiveGroupId === event.exclusiveGroupId && candidate.objectiveId !== id)
+              .reduce((next, sibling) => setMark(next, sibling.objectiveId, false, current.deviceId, now), nextProfile);
+          }
+          nextProfile = setMark(nextProfile, id, complete, current.deviceId, now);
+          const allGroupEventsComplete = ateGroupIsComplete(nextProfile, event.groupObjectiveId);
+          return setMark(nextProfile, event.groupObjectiveId, allGroupEventsComplete, current.deviceId, now);
+        }
+        return toggleMark(profile, id, current.deviceId, now);
+      }),
     }));
+  };
+
+  const completeAteGroup = (groupObjectiveId: string, selectedBranchObjectiveId: string) => {
+    const groupEvents = activeTimeEvents.filter((event) => event.groupObjectiveId === groupObjectiveId);
+    const branchGroupId = groupEvents.find((event) => event.objectiveId === selectedBranchObjectiveId)?.exclusiveGroupId;
+    if (!branchGroupId) return;
+    setLibrary((current) => ({
+      ...current,
+      profiles: current.profiles.map((profile) => {
+        if (profile.id !== activeProfile.id) return profile;
+        const now = Date.now();
+        const nextProfile = groupEvents.reduce((next, event) => {
+          const complete = event.exclusiveGroupId === branchGroupId
+            ? event.objectiveId === selectedBranchObjectiveId
+            : true;
+          return setMark(next, event.objectiveId, complete, current.deviceId, now);
+        }, profile);
+        return setMark(nextProfile, groupObjectiveId, true, current.deviceId, now);
+      }),
+    }));
+    setPendingAteChoice(null);
   };
 
   const exportProgress = () => {
@@ -463,13 +549,9 @@ function App() {
             onImport={() => importInput.current?.click()}
           />}
           {view === "walkthrough" && <Walkthrough profile={activeProfile} search={search} onClearSearch={() => setSearch("")} onNavigate={navigate} onToggleObjective={toggleObjective} onSetCurrentArea={requestCurrentAreaChange} onAcknowledgeWarning={acknowledgeWarning} />}
+          {view === "ates" && <AteTracker profile={activeProfile} onToggle={toggleObjective} onOpenChapter={openChapter} />}
           {view === "missables" && <Missables profile={activeProfile} onToggle={toggleObjective} onAcknowledgeWarning={acknowledgeWarning} />}
-          {view === "achievements" && <Achievements profile={activeProfile} platform={activeProfile.platform} onPlatformChange={(platform) => updateProfile({ platform })} onToggle={toggleObjective} onOpenChapter={(chapterId) => {
-            const area = guideAreas.find((item) => item.id === chapterId);
-            if (!area) return;
-            setSearch(area.title);
-            navigate("walkthrough");
-          }} />}
+          {view === "achievements" && <Achievements profile={activeProfile} platform={activeProfile.platform} onPlatformChange={(platform) => updateProfile({ platform })} onToggle={toggleObjective} onOpenChapter={openChapter} />}
           {view === "reference" && <Reference
             profileCount={library.profiles.length}
             profileMessage={profileMessage}
@@ -483,6 +565,12 @@ function App() {
         records={pendingGateReview.records}
         onCancel={() => setPendingGateReview(null)}
         onAcknowledgeAndContinue={acknowledgeGateAndContinue}
+      />}
+      {pendingAteChoice && <AteBranchChoiceDialog
+        key={pendingAteChoice.groupObjectiveId}
+        events={pendingAteChoice.events}
+        onCancel={() => setPendingAteChoice(null)}
+        onConfirm={(objectiveId) => completeAteGroup(pendingAteChoice.groupObjectiveId, objectiveId)}
       />}
       <input ref={importInput} className="sr-only" type="file" accept="application/json,.json" aria-label="Restore progress backup" onChange={importProgress} />
     </div>
@@ -523,6 +611,33 @@ function GateReviewDialog({ targetAreaId, records, onCancel, onAcknowledgeAndCon
   </dialog>;
 }
 
+function AteBranchChoiceDialog({ events, onCancel, onConfirm }: {
+  events: typeof activeTimeEvents;
+  onCancel: () => void;
+  onConfirm: (objectiveId: string) => void;
+}) {
+  const dialogRef = useRef<HTMLDialogElement>(null);
+  const confirmButtonRef = useRef<HTMLButtonElement>(null);
+  const [selectedId, setSelectedId] = useState(events[0]?.objectiveId ?? "");
+
+  useEffect(() => {
+    const dialog = dialogRef.current;
+    if (!dialog) return;
+    if (!dialog.open) dialog.showModal();
+    confirmButtonRef.current?.focus();
+    return () => {
+      if (dialog.open) dialog.close();
+    };
+  }, []);
+
+  return <dialog ref={dialogRef} className="gate-review-dialog" aria-labelledby="ate-choice-title" aria-describedby="ate-choice-description" onCancel={(event) => { event.preventDefault(); onCancel(); }}>
+    <div className="gate-review-heading"><span className="gate-review-icon"><Clapperboard size={18} aria-hidden="true" /></span><div><span className="eyebrow">ONE SAVE · ONE BRANCH</span><h2 id="ate-choice-title">Which Treno ATE did you view?</h2></div></div>
+    <p id="ate-choice-description">Vivi's Treno decision produces one of two scenes. Choose the scene on this save so the chapter checklist can track the 79-event Movie Critic route without counting both alternatives.</p>
+    <fieldset className="ate-choice-options"><legend>Recorded scene</legend>{events.map((event) => <label key={event.objectiveId}><input type="radio" name="ate-choice" value={event.objectiveId} checked={selectedId === event.objectiveId} onChange={() => setSelectedId(event.objectiveId)} /><span><strong>{event.title}</strong><small>{event.trigger}</small></span></label>)}</fieldset>
+    <div className="gate-review-actions"><button className="secondary-button" type="button" onClick={onCancel}>Cancel</button><button ref={confirmButtonRef} className="record-checkpoint-button" type="button" disabled={!selectedId} onClick={() => onConfirm(selectedId)}>Record branch and complete checklist</button></div>
+  </dialog>;
+}
+
 function Sidebar({
   activeView,
   mobileOpen,
@@ -555,7 +670,7 @@ function Sidebar({
           <span className="sidebar-note-icon"><Sparkles size={15} /></span>
           <div><strong>Built for careful runs</strong><p>Source-linked content with research status shown.</p></div>
         </div>
-        <div className="sidebar-version"><span className="status-dot" /> Phase 1 · Foundation</div>
+      <div className="sidebar-version"><span className="status-dot" /> Phase 3 · Completion systems</div>
       </div>
       <button className="mobile-close" aria-label="Close navigation" onClick={onClose}><X size={18} /></button>
     </aside>
@@ -711,7 +826,7 @@ function Overview({
           {nextMissable && <div className="risk-actions">
             <button className="acknowledge-warning-button" type="button" aria-pressed={nextMissableAcknowledged} onClick={() => onAcknowledgeWarning(nextMissable.id)}>{nextMissableAcknowledged ? "Clear acknowledgement" : "Acknowledge warning"}</button>
             <label className="objective-check">
-            <input type="checkbox" checked={false} onChange={() => onToggle(nextMissable.objectiveId)} />
+            <input type="checkbox" checked={objectiveIsComplete(profile, nextMissable.objectiveId)} onChange={() => onToggle(nextMissable.objectiveId)} />
             <span className="custom-check" aria-hidden="true"><Check size={13} /></span>
             <span>Mark this objective complete</span>
             </label>
@@ -844,6 +959,88 @@ function ExcaliburTimer({ profile, onRecordCheckpoint }: {
   );
 }
 
+function AteTracker({ profile, onToggle, onOpenChapter }: {
+  profile: PlaythroughProfile;
+  onToggle: (id: string) => void;
+  onOpenChapter: (chapterId: string) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const normalizedQuery = query.trim().toLowerCase();
+  const visibleEvents = activeTimeEvents.filter((event) => {
+    const objective = objectives.find((item) => item.id === event.objectiveId);
+    const applies = !objective || objectiveAppliesToProfile(objective, profile);
+    const matches = !normalizedQuery || `${event.title} ${event.location} ${event.trigger} ${event.note ?? ""}`.toLowerCase().includes(normalizedQuery);
+    return applies && matches;
+  });
+  const markedCount = movieCriticEligibleEvents.filter((event) => profile.marks[event.objectiveId]?.complete === true).length;
+  const legacyGroupIds = [...new Set(activeTimeEvents.map((event) => event.groupObjectiveId))]
+    .filter((groupId) => profile.marks[groupId]?.complete === true && !ateGroupIsComplete(profile, groupId));
+  const ateSourceRecords = [...new Set(activeTimeEvents.flatMap((event) => event.sourceIds))]
+    .map((sourceId) => sources.find((source) => source.id === sourceId))
+    .filter((source): source is (typeof sources)[number] => Boolean(source));
+
+  return <>
+    <PageHeading eyebrow="SIDE CONTENT · SCENE INDEX" title="Active Time Events" lead="Track each named ATE and its trigger in story order. Three Mogster tutorials do not count toward Movie Critic; a mutually exclusive Treno branch leaves 79 scenes achievable on one save." />
+    <section className="ate-progress-panel" aria-label="Movie Critic event progress">
+      <div><span className="eyebrow">MOVIE CRITIC · STEAM / PS4 / XBOX</span><strong>{markedCount} / {movieCriticTarget} target scenes marked</strong><small>{markedCount >= movieCriticTarget ? "The single-save target is reached." : `${Math.max(0, movieCriticTarget - markedCount)} more eligible scene${movieCriticTarget - markedCount === 1 ? "" : "s"} to reach the target.`}</small></div>
+      <div className="ate-progress-meter" role="progressbar" aria-label="Movie Critic target scenes marked" aria-valuemin={0} aria-valuemax={movieCriticTarget} aria-valuenow={Math.min(markedCount, movieCriticTarget)}><span style={{ width: `${Math.min(100, markedCount / movieCriticTarget * 100)}%` }} /></div>
+    </section>
+    <div className="ate-source-note"><p><strong>80 eligible scene choices are listed, but only 79 countable scenes fit on one save.</strong> Choose one of the two Vivi outcomes in Treno. Comprehensive and Custom profiles can track the three Teach Me, Mogster! tutorials as separate non-achievement checkboxes. ATE trigger ordering can vary by route; unresolved directions stay labeled.</p>
+      {profile.platform === "ps1" && <p>Original PlayStation has no platform achievement list. This page still tracks scenes for story and completionist reference.</p>}
+      {(profile.platform === "switch" || profile.platform === "ios" || profile.platform === "android") && <p>Achievement support for this release is not verified. The 79-scene counter reflects the Steam, PS4, and Xbox Movie Critic criteria; use it as a scene reference until the selected platform's achievement service is confirmed.</p>}
+    </div>
+    {legacyGroupIds.length > 0 && <p className="ate-legacy-note" role="status">This profile has {legacyGroupIds.length} earlier chapter-level ATE mark{legacyGroupIds.length === 1 ? "" : "s"} without scene-by-scene details. Those marks remain preserved; review the rows to get an exact Movie Critic count.</p>}
+    <label className="ate-search"><Search size={16} aria-hidden="true" /><span className="sr-only">Search ATEs</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search scene, location, or trigger" /></label>
+    <div className="ate-disc-list">
+      {arcs.map((arc) => {
+        const arcAreas = guideAreas.filter((area) => area.arcId === arc.id);
+        const hasEvents = arcAreas.some((area) => visibleEvents.some((event) => event.chapterId === area.id));
+        if (!hasEvents) return null;
+        return <section className="ate-disc-section" key={arc.id} aria-labelledby={`ate-${arc.id}`}>
+          <div className="ate-disc-heading"><span className="eyebrow">{arc.label.toUpperCase()}</span><h2 id={`ate-${arc.id}`}>{arc.label}</h2></div>
+          {arcAreas.map((area) => {
+            const chapterEvents = visibleEvents.filter((event) => event.chapterId === area.id);
+            if (chapterEvents.length === 0) return null;
+            const chapterGroupIds = [...new Set(chapterEvents.map((event) => event.groupObjectiveId))];
+            return <section className="ate-chapter-group" key={area.id} aria-labelledby={`ate-area-${area.id}`}>
+              <div className="ate-chapter-heading"><div><h3 id={`ate-area-${area.id}`}>{area.title}</h3><span>{chapterEvents.filter((event) => event.countsTowardMovieCritic).length} eligible · {chapterEvents.filter((event) => !event.countsTowardMovieCritic).length} tutorial</span></div><button type="button" className="text-action" onClick={() => onOpenChapter(area.id)}>Open walkthrough <span aria-hidden="true">↗</span></button></div>
+              {chapterGroupIds.map((groupObjectiveId) => {
+                const groupEvents = chapterEvents.filter((event) => event.groupObjectiveId === groupObjectiveId);
+                const renderedChoice = new Set<string>();
+                return <div className="ate-event-list" key={groupObjectiveId}>
+                  {groupEvents.map((event) => {
+                    if (event.exclusiveGroupId) {
+                      if (renderedChoice.has(event.exclusiveGroupId)) return null;
+                      renderedChoice.add(event.exclusiveGroupId);
+                      const choices = groupEvents.filter((candidate) => candidate.exclusiveGroupId === event.exclusiveGroupId);
+                      return <fieldset className="ate-choice-card" key={event.exclusiveGroupId}>
+                        <legend>Vivi's mutually exclusive Treno outcome · choose one</legend>
+                        {choices.map((choice) => <label className="ate-event-row" key={choice.objectiveId}>
+                          <input type="radio" name={choice.exclusiveGroupId} checked={profile.marks[choice.objectiveId]?.complete === true} onChange={() => onToggle(choice.objectiveId)} />
+                          <span className="ate-event-copy"><strong>{choice.title}</strong><small>{choice.location} · {choice.trigger}</small></span><span className="ate-event-status">{profile.marks[choice.objectiveId]?.complete ? "Viewed" : "Alternate"}</span>
+                        </label>)}
+                      </fieldset>;
+                    }
+                    const done = profile.marks[event.objectiveId]?.complete === true;
+                    return <label className={`ate-event-row ${done ? "is-complete" : ""}`} key={event.objectiveId}>
+                      <input type="checkbox" checked={done} onChange={() => onToggle(event.objectiveId)} />
+                      <span className="ate-event-copy"><strong>{event.title}</strong><small>{event.location} · {event.trigger}</small>{event.note && <small className="ate-event-note">{event.note}</small>}</span>
+                      <span className={`ate-event-kind ${event.countsTowardMovieCritic ? "is-eligible" : "is-tutorial"}`}>{event.countsTowardMovieCritic ? "Counts" : "Tutorial"}</span>
+                    </label>;
+                  })}
+                  <div className="ate-group-state"><span>{objectiveIsComplete(profile, groupObjectiveId) ? "Chapter checklist complete" : "Chapter checklist open"}</span><button type="button" className="ate-group-toggle" onClick={() => onToggle(groupObjectiveId)}>{objectiveIsComplete(profile, groupObjectiveId) ? "Clear chapter checklist" : "Mark chapter checklist complete"}</button></div>
+                </div>;
+              })}
+            </section>;
+          })}
+        </section>;
+      })}
+      {visibleEvents.length === 0 && <div className="empty-state">No ATE names or trigger notes match “{query}”.</div>}
+    </div>
+    <div className="source-footnote"><span>Source status</span><span>Scene names and route anchors use a chronological community checklist, cross-checked against Movie Critic achievement/trophy guides.</span><small>Some screen-order and version-specific triggers remain partial and are flagged beside their scene.</small><div className="ate-source-links">{ateSourceRecords.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div></div>
+  </>;
+}
+
 function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjective, onSetCurrentArea, onAcknowledgeWarning }: {
   profile: PlaythroughProfile;
   search: string;
@@ -923,7 +1120,7 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
                         <div className="walkthrough-step-top"><span className="step-kind">{walkthroughStepLabels[step.kind]}</span><p>{step.text}</p></div>
                         {step.detail && <p className="walkthrough-step-detail">{step.detail}</p>}
                         {linkedObjectives.map((objective) => objective && <label className="chapter-objective" key={objective.id}>
-                          <input type="checkbox" checked={profile.marks[objective.id]?.complete === true} onChange={() => onToggleObjective(objective.id)} />
+                          <input type="checkbox" checked={objectiveIsComplete(profile, objective.id)} onChange={() => onToggleObjective(objective.id)} />
                           <span className="custom-check" aria-hidden="true"><Check size={13} /></span>
                           <span>{objective.title}</span>
                         </label>)}
@@ -950,8 +1147,8 @@ function Missables({ profile, onToggle, onAcknowledgeWarning }: { profile: Playt
   const records = applicableMissables(profile);
   const excludedRecords = missables.filter((record) => !missableAppliesToProfile(record, profile));
   const trackedObjectiveIds = new Set(records.map((record) => record.objectiveId));
-  const completedCount = [...trackedObjectiveIds].filter((objectiveId) => profile.marks[objectiveId]?.complete === true).length;
-  const acknowledgedCount = records.filter((record) => warningIsAcknowledged(record, profile) && profile.marks[record.objectiveId]?.complete !== true).length;
+  const completedCount = [...trackedObjectiveIds].filter((objectiveId) => objectiveIsComplete(profile, objectiveId)).length;
+  const acknowledgedCount = records.filter((record) => warningIsAcknowledged(record, profile) && !objectiveIsComplete(profile, record.objectiveId)).length;
   return (
     <>
       <PageHeading eyebrow="DEADLINES & ONE-WAY CUTS" title="Missables" lead="Warnings are classified by consequence. An unavailable pickup is not automatically a permanently lost item." />

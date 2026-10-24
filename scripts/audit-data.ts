@@ -1,6 +1,7 @@
 import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sources } from "../src/data/guide.ts";
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
+import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const errors: string[] = [];
@@ -23,16 +24,51 @@ checkUnique("Xbox achievement", xboxAchievements.map((achievement) => achievemen
 checkUnique("area", guideAreas.map((area) => area.id));
 checkUnique("walkthrough chapter", walkthroughChapters.map((chapter) => chapter.areaId));
 checkUnique("Excalibur II checkpoint", excalibur2Checkpoints.map((checkpoint) => checkpoint.id));
+checkUnique("ATE", activeTimeEvents.map((event) => event.id));
+checkUnique("ATE progress objective", activeTimeEvents.map((event) => event.objectiveId));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
 const areaIds = new Set(guideAreas.map((area) => area.id));
-
 const achievementCatalogs = [
   { platform: "steam" as const, records: steamAchievements, expectedCount: achievementSourceCounts.steam.count },
   { platform: "ps4" as const, records: ps4Trophies, expectedCount: achievementSourceCounts.ps4.count },
   { platform: "xbox" as const, records: xboxAchievements, expectedCount: achievementSourceCounts.xbox.count },
 ];
+
+if (activeTimeEvents.length !== 83) errors.push(`ATE index has ${activeTimeEvents.length} events; expected 83.`);
+if (movieCriticEligibleEvents.length !== 80) errors.push(`Movie Critic candidate list has ${movieCriticEligibleEvents.length} eligible ATE choices; expected 80.`);
+if (activeTimeEvents.filter((event) => !event.countsTowardMovieCritic).length !== 3) errors.push("The three Mogster tutorials must remain outside Movie Critic progress.");
+if (activeTimeEvents.filter((event) => event.exclusiveGroupId === movieCriticExclusiveGroupId).length !== 2) errors.push("Movie Critic must have exactly two mutually exclusive Treno branch events.");
+if (movieCriticEligibleEvents.length - 1 !== movieCriticTarget) errors.push("Movie Critic target must equal eligible choices minus the single mutually exclusive branch.");
+for (const event of activeTimeEvents) {
+  if (!areaIds.has(event.chapterId)) errors.push(`ATE ${event.id} references unknown chapter ${event.chapterId}.`);
+  if (!objectiveIds.has(event.objectiveId)) errors.push(`ATE ${event.id} references unknown progress objective ${event.objectiveId}.`);
+  if (!objectiveIds.has(event.groupObjectiveId)) errors.push(`ATE ${event.id} references unknown chapter checklist ${event.groupObjectiveId}.`);
+  for (const sourceId of event.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`ATE ${event.id} references unknown source ${sourceId}.`);
+  }
+  for (const prerequisiteId of event.prerequisites ?? []) {
+    if (!objectiveIds.has(prerequisiteId) && !activeTimeEvents.some((candidate) => candidate.objectiveId === prerequisiteId)) {
+      errors.push(`ATE ${event.id} references unknown prerequisite ${prerequisiteId}.`);
+    }
+  }
+}
+for (const { platform, records } of achievementCatalogs) {
+  const movieCritic = records.find((achievement) =>
+    ("parityId" in achievement ? achievement.parityId : achievement.id) === "movie-critic",
+  );
+  for (const event of movieCriticEligibleEvents) {
+    if (!movieCritic?.guideObjectiveIds?.includes(event.objectiveId)) {
+      errors.push(`${platform} Movie Critic achievement is missing ATE pointer ${event.objectiveId}.`);
+    }
+  }
+  for (const tutorial of activeTimeEvents.filter((event) => !event.countsTowardMovieCritic)) {
+    if (movieCritic?.guideObjectiveIds?.includes(tutorial.objectiveId)) {
+      errors.push(`${platform} Movie Critic achievement must exclude tutorial ${tutorial.objectiveId}.`);
+    }
+  }
+}
 
 const tutorialAteObjectives = [
   { id: "disc-1.evil-forest.mogster-lesson-1", chapterId: "disc-1.evil-forest" },

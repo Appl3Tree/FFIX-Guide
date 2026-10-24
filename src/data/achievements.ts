@@ -1,3 +1,5 @@
+import { movieCriticEligibleEvents } from "./ates.ts";
+
 export type SteamAchievement = {
   id: string;
   objectiveId: string;
@@ -200,7 +202,8 @@ const steamAchievementGuideMap: Record<string, Pick<SteamAchievement, "guideObje
     "disc-3.card-tournament.ates",
     "disc-3.portal-to-another-world.bran-bal-ates",
     "disc-3.portal-to-another-world.elevator-ate",
-  ] },
+    ...movieCriticEligibleEvents.map((event) => event.objectiveId),
+  ], guideSourceIds: ["steam-community-ate-guide", "gamerguides-movie-critic-guide", "playstationtrophies-movie-critic", "xboxachievements-movie-critic"] },
   "let-the-bodies-hit-the-floor-i": {
     guideChapterIds: ["disc-4.final-preparations"],
     guideNote: "Cumulative battle count for this save. It has no unique story trigger; check the total near the end and use repeatable encounters only if you still need progress.",

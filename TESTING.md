@@ -1,10 +1,10 @@
 # Testing and quality checks
 
-Last updated: 2026-10-23
+Last updated: 2026-10-24
 
 ## Latest change status
 
-All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the final route and source-reference edits on 2026-10-23, `npm run lint`, `npm test` (5/5), `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 516 objectives, and 262 sources. The standard-route simulation covers all 44 chapters, including Final Preparations, both final boss fights, their steal tables, Necron party setup, the Hammer ending-scene choice, and postgame completion checks. It remains a source-based static review, not live gameplay verification. These checks do not verify full-game content correctness, complete accessibility, an Excalibur II timed route, or cloud sync.
+All 44 partial slices run from Alexandria through Necron and the ending on Disc IV. After the ATE tracker update on 2026-10-24, `npm run lint`, `npm run typecheck`, `npm run audit:data`, and `npm run build` passed. The audit reported 0 errors and 166 coverage warnings across 44 authored chapter headings, 124 missable records, 596 objectives, and 263 sources. The unit suite most recently passed 8/8 on the earlier warning-gate change and was not rerun for this update. ATE browser QA confirmed the 79-target meter, a nine-scene Treno group action, exclusive branch selection, reload persistence, and cleanup of the QA marks. This does not establish full trigger/version verification, full-game content correctness, complete accessibility, or cloud sync.
 
 ## Automated checks
 
@@ -18,11 +18,11 @@ The repository defines:
 
 The audit reports incomplete content as warnings. It should fail on broken IDs/relationships, not on honestly documented unresearched categories.
 
-The data audit also requires each of the three Teach Me, Mogster! tutorial objectives to remain side-content, have exactly one walkthrough pointer in its correct chapter, and stay outside achievement catalog mappings. This guards against counting tutorial scenes toward Movie Critic or placing Ice Cavern Lesson 2 in the Evil Forest list.
+The data audit also requires each of the three Teach Me, Mogster! tutorial objectives to remain side-content, have exactly one walkthrough pointer in its correct chapter, and stay outside achievement catalog mappings. It validates the 83-event ATE index, all 80 eligible event objectives, the three excluded tutorials, every chapter/source/prerequisite link, and the 79-view Movie Critic target with its single exclusive branch.
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The JavaScript bundle is 1,099.92 kB (289.41 kB gzip), and CSS is 33.24 kB (7.78 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 166 coverage warnings, and completed the Vite production build. The JavaScript bundle is 1,150.93 kB (304.17 kB gzip), and CSS is 43.42 kB (9.86 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 
@@ -81,6 +81,8 @@ Memoria was expanded and reviewed at a 320 px mobile viewport and 1440 px deskto
 Final Preparations and The Final Battle were expanded and checked at 320 px and 1440 px. The document widths were 305 and 1425 px; each chapter measured 273 and 1006.81 px, with no horizontal overflow. Final Preparations rendered 10 source links and 19 unchecked controls; The Final Battle rendered eight source links and nine unchecked controls. The mobile layout wrapped route and source text within the viewport. No browser console errors appeared, and the viewport was reset after review.
 
 The Achievements page shows the Steam count (85), PS4 count (52, including Platinum), and Xbox count (51), with links to their lists and notes about remaining research. The Steam tracker was reviewed at 320, 375, 768, 1024, and 1440 CSS pixels. Document widths were 305, 360, 753, 1009, and 1425 px, with no horizontal overflow; all 85 entries rendered at every width. At 1440 px, the Steam entries exposed 137 walkthrough links and 9 direct missable cutoff notes plus 3 expandable groups; no achievement marks were set. The My Little Airship row showed Morrid's Shimmering Island deadline, and Carbuncle's route no longer inherited the unrelated Iifa Tree treasure warning. The Movie Critic entry expanded to 17 chapter links. Opening One Nag Too Many now expands Evil Forest and displays the 17-call Moguo route.
+
+The individual ATE Tracker rendered all 83 scene records at the current desktop viewport, with 80 eligible choices, three tutorial rows, a 79-scene counter, and four source links. Marking the Card Tournament chapter checklist recorded nine scenes and one Treno branch; selecting the alternate branch cleared the first without increasing the count. The branch and count persisted after reload. Clearing the group returned the QA profile to zero ATE marks. Responsive-width checks for the new tracker remain outstanding.
 
 The new PS4 and Xbox catalogs were reviewed at the current browser viewport. Their headings and totals showed 52 trophies (including Heroes of Gaia Platinum) and 51 achievements respectively; every displayed entry had a walkthrough pointer, all rows were unmarked, and shared console criteria used separate platform progress IDs. The One Nag Too Many objective is shown for all three supported catalogs. Switching back to Steam showed its 85-entry catalog and zero marked unlocks. The profile was restored to Comprehensive Playthrough / Choose platform / Not started, Overview, and an empty search. No objective marks were changed. The browser had no error-level console messages. New console-catalog responsive-width checks remain to be run; Switch and mobile achievement coverage remain unresolved.
 

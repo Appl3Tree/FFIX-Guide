@@ -7,6 +7,7 @@ Expected public URL: <https://appl3tree.github.io/FFIX-Guide/>
 ## Current state
 
 - React, TypeScript, and Vite application scaffolded for GitHub Pages.
+- Individual ATE tracker catalogs 83 scenes, excludes the three tutorials from Movie Critic, counts 79 of 80 eligible choices for one save, and handles Vivi's mutually exclusive Treno outcomes.
 - Four-disc chapter inventory based on the table of contents of the GameFAQs PlayStation walkthrough.
 - Alexandria chapter authored from the Tantalus opening through the Prima Vista crash, with pickup directions, optional activities, source notes, cutoff rewards, and interactive objectives.
 - Evil Forest chapter authored from the crash site through Plant Brain and the campsite, with the Prima Vista backtrack, pickup sweep, six Movie Critic-eligible ATEs, separately tracked Mogster Lesson 1, boss steals, Mognet, escape preparation, and item-recovery warnings. Lesson 2 is correctly placed in Ice Cavern; all three tutorials are excluded from the 79-event achievement count.
@@ -110,6 +111,7 @@ Enable GitHub Pages with **GitHub Actions** as the source. The checkout now has 
 - `src/data/walkthrough.ts` — authored walkthrough sections and source-linked steps; current partial coverage spans nine Disc I chapters, sixteen Disc II chapters, fourteen Disc III chapters, and five Disc IV chapters through Necron and the ending.
 - `src/domain/progress.ts` — versioned local library, stable profiles, checkpoint split persistence, and merge-ready objective marks.
 - `src/data/excalibur2.ts` — source-target checkpoint schedule and manual save-clock parsing/formatting.
+- `src/data/ates.ts` — source-linked ATE scene records, individual progress IDs, prerequisites, and the Movie Critic target/branch data.
 - `src/App.tsx` and `src/styles.css` — responsive guide workspace.
 - `scripts/audit-data.ts` — duplicate-ID and source/objective/chapter relationship checks; incomplete research is reported as a warning, never as completion.
 - Root-level project documents — research sources, audit strategy, current coverage, architecture, and testing records.

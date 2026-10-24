@@ -1,4 +1,5 @@
 import { ps4Trophies, steamAchievements, xboxAchievements } from "./achievements.ts";
+import { activeTimeEventObjectives } from "./ates.ts";
 
 export type ArcId = "disc-1" | "disc-2" | "disc-3" | "disc-4";
 
@@ -207,6 +208,14 @@ export const sources = [
     url: "https://steamcommunity.com/app/377840/discussions/0/1368380934248147863/",
     accessed: "2026-10-23",
     notes: "Player discussion describes the 83-scene pool, excludes the three Teach Me, Mogster! tutorials from the achievement counter, and explains the 79-of-80 eligible-scene target caused by a mutually exclusive pair. Secondary corroboration only; the PS4 and Xbox achievement guides are used for the explicit criteria.",
+  },
+  {
+    id: "steam-community-ate-guide",
+    title: "Active Time Events (ATEs) — scene checklist",
+    publisher: "Steam Community Guide",
+    url: "https://steamcommunity.com/sharedfiles/filedetails/?id=665189459",
+    accessed: "2026-10-24",
+    notes: "Player-authored chronological checklist used to seed the 83 named ATE records and route anchors. The guide itself flags uncertain triggers and version timing; achievement eligibility is cross-checked against the PS4 and Xbox Movie Critic references.",
   },
   {
     id: "gamefaqs-achievements-71891",
@@ -5170,6 +5179,7 @@ export const objectives: GameObjective[] = [
     profileIds: ["achievements", "custom"],
     verification: "partial",
   })),
+  ...activeTimeEventObjectives,
 ];
 
 export const missables: MissableRecord[] = [
