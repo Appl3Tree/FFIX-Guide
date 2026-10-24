@@ -326,7 +326,7 @@ for (const path of itemAcquisitionPaths) {
   if (path.recommendedBeforeChapterId && !areaIds.has(path.recommendedBeforeChapterId)) {
     errors.push(`Item acquisition path ${path.id} recommends an unknown cutoff chapter ${path.recommendedBeforeChapterId}.`);
   }
-  if (path.method === "shop" || path.method === "mogshop") {
+  if (path.method === "shop" || path.method === "mogshop" || path.method === "moogle-shop") {
     if (!path.shopId?.trim() || !path.shopName?.trim()) errors.push(`Shop acquisition path ${path.id} needs a shop ID and name.`);
     if (path.cost?.currency !== "gil") errors.push(`Shop acquisition path ${path.id} needs a Gil price.`);
   }
