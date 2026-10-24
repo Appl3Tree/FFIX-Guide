@@ -21,8 +21,8 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 - **Priority:** Critical
 - **Status:** In progress
 - **Owner:** Codex
-- **Current evidence:** 124 profile-scoped missable records, warning acknowledgements, and high/critical cutoff review gates are implemented. The current audit reports partial route, version, and item-replacement coverage.
-- **Next work:** Audit all unique treasure, pickup, shop stock, steal/drop, ATE, letter, sidequest, card, minigame, ending, and achievement windows; verify exact cutoff action and latest safe warning point; record later recovery by item/record and build version.
+- **Current evidence:** 124 profile-scoped missable records, warning acknowledgements, and high/critical cutoff review gates are implemented. Disc III's final-stock shop paths link to the Preparing to Leave cutoff objective, and the data audit checks that each limited-window path with a recommended cutoff has a warning and checklist step at that checkpoint. The warning names the replaced Black Mage Village and Daguerreo weapon listings separately from the closed Oeilvert, Desert Palace, and Esto Gaza shops.
+- **Next work:** Extend the same path-to-cutoff audit across other unique treasure, pickup, steal/drop, ATE, letter, sidequest, card, minigame, ending, and achievement windows; verify the exact cutoff action and latest safe warning point; record later recovery by item/record and build version.
 - **Completion evidence:** Reconciled source-backed registry with correct permanent/recoverable/limited/conditional/version-specific classification; every mapped warning appears before the relevant action; player route simulations confirm no false permanent-loss warnings or silently skipped high-risk items.
 - **Dependencies:** B01 for route order; B03/B04/B05/B06 for category inventories and replacement paths.
 

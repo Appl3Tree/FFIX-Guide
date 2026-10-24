@@ -246,6 +246,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
   shopId: path.shopId,
   shopName: path.shopName,
   recommendedBeforeChapterId: "disc-3.preparing-to-leave",
+  walkthroughObjectiveIds: ["disc-3.aerial-exploration.daguerreo-stock"],
   conditions: path.conditions,
   ...(path.notes ? { notes: path.notes } : {}),
   cost: { currency: "gil" as const, amount: path.price },

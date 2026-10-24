@@ -333,6 +333,20 @@ for (const path of itemAcquisitionPaths) {
   for (const objectiveId of path.walkthroughObjectiveIds ?? []) {
     if (!objectiveIds.has(objectiveId)) errors.push(`Item acquisition path ${path.id} references unknown objective ${objectiveId}.`);
   }
+  if (path.availability === "limited-window" && path.recommendedBeforeChapterId) {
+    const hasLinkedCutoffWarning = (path.walkthroughObjectiveIds ?? []).some((objectiveId) =>
+      missables.some((missable) =>
+        missable.objectiveId === objectiveId &&
+        missable.warningChapterIds?.includes(path.recommendedBeforeChapterId!) &&
+        walkthroughChapters
+          .find((chapter) => chapter.areaId === path.recommendedBeforeChapterId)
+          ?.sections.some((section) => section.steps.some((step) => step.objectiveIds?.includes(objectiveId))),
+      ),
+    );
+    if (!hasLinkedCutoffWarning) {
+      errors.push(`Limited-window item acquisition path ${path.id} needs a linked cutoff warning in ${path.recommendedBeforeChapterId}.`);
+    }
+  }
   for (const sourceId of path.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`Item acquisition path ${path.id} references unknown source ${sourceId}.`);
   }
