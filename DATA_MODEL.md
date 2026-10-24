@@ -1,0 +1,62 @@
+# Data model
+
+Last updated: 2026-10-23
+
+## Content records
+
+The data layer is normalized around stable domain IDs and explicit relationships. Display text, order, route, and source URL must not be used as progress identity.
+
+- **Source** — publisher, URL, section or claim, platform/version, access date, verification status, conflict note.
+- **Chapter/area** — explicit ID, disc-era grouping, title, predecessor/successor, route conditions, walkthrough blocks, and source links.
+- **Walkthrough content** — a chapter `areaId`, overview, optional route note, ordered sections, and source-linked steps. Each step has a stable local ID, instruction kind, original text, optional detail, and zero or more shared objective IDs. A section's source IDs apply to its authored steps; disagreements stay in the copy and source notes until resolved.
+- **Objective** — stable ID, category, prerequisites, associated chapter, rewards, platform constraints, and availability state.
+- **Acquisition path** — object/enemy/event source, earliest/latest progression, conditions, probability or cost when verified, recoverability, and source IDs.
+- **Missable** — classification, consequence, cutoff trigger, warning point, recovery path/difficulty, route applicability, and acknowledgement rule.
+- **Enemy/boss** — variants, location/encounter sets, stats, steal/drop/Blue Magic interactions, abilities, strategy, and version scope.
+- **Achievement** — platform-specific native ID/name/criteria, triggering objective, missability, and walkthrough relationships. Steam records use stable local slugs, source IDs, links to guide objectives or chapters, supplemental route notes, and extra source links for trigger details; the data audit validates those relationships. Achievement cards derive missable windows from their linked objectives when the same objective is tracked as a cutoff. Steam native IDs and complete trigger/missability review remain open.
+- **Recommended preparation** — optional level range, expected difficulty, party/equipment/ability setup, source and confidence; no invented default values.
+- **Product build** — stable build ID, storefront/platform, edition, region, native achievement service, booster capabilities, timer notes, and source evidence. Facts that differ by release attach here instead of to the abstract game record.
+
+## Progress IDs and views
+
+Contextual walkthrough checklists and global trackers point to the same objective ID. Alexandria demonstrates this with opening and sword-fight steals, Moonstone, Jump Rope, Mognet, card, pickup-sweep, and Knights of Pluto checkboxes; Evil Forest adds ATE, Steam-only achievement, boss-steal, and party-equipment objectives. A progress mark is scoped to a playthrough profile, so one save can include an item while another remains independent. The current implementation uses namespaced strings such as `advanced.excalibur-ii.acquire`; chapter inventory IDs are explicit and independent of their displayed names. Authored chapters can set the profile's current story area, which feeds the same cutoff-warning logic used by the overview. The data audit checks that every mapped missable warning chapter has a walkthrough checklist step linked to that missable's objective.
+
+Do not renumber records or derive IDs from an array index. If an objective is split or merged, retain an explicit migration map and preserve the previous mark for review; do not silently discard it.
+
+## Profile schema
+
+The local library currently has a `schemaVersion`, a stable per-browser `deviceId`, profile list, and selected profile ID. Each profile stores its goal, route, selected product/platform, current story area, optional manually entered game clock, and sparse objective marks. The overview's current-area selector supports contextual warning status: with an area selected, an unchecked warning before that area is shown as past and current or later warnings remain open. Until an area is selected, or if a warning lacks a mapped chapter, its timing remains unplaced. A past warning prompts recovery review and does not itself prove permanent loss. Platform choices distinguish the original PlayStation, Steam, PS4 release, Xbox One/Series/Windows app, Switch, iOS/iPadOS, and Android; early broad PlayStation/mobile values remain readable when restoring foundation backups.
+
+Achievement sets are keyed to the product build and service: Steam achievements, PlayStation trophies, Xbox achievements, and mobile in-app or account-linked achievements must not be assumed to share a single list. Steam's 85 visible names and criteria now have stable local objective IDs and manual unlock marks; those IDs are not claimed to be Steam's internal API names. All 85 Steam entries have guide pointers, while some cumulative criteria only have general notes; trigger verification, complete missability review, and the per-entry PS4/Xbox catalogs remain open. The Switch listing remains unresolved until checked in-game. Record product features and achievement service evidence separately from audited criteria and walkthrough triggers.
+
+Objective marks include `complete`, `updatedAt`, `deviceId`, and per-objective `revision`. An unchecked action is stored as `complete: false` rather than deleting the key, so a future sync can preserve an intentional uncheck. Equal-version ties need a deterministic policy, and clock skew must be considered before shipping Firestore synchronization.
+
+The app currently persists to `localStorage` and supports JSON export/restore. Firebase Auth/Firestore sync is planned, not implemented.
+
+## Availability and completion
+
+Each objective should resolve to a state based on selected profile, route, platform, and progression. Missable records may carry explicit `warningChapterIds` and route constraints; objectives carry goal-profile and optional achievement-platform applicability. The current UI uses these links to show chapter warning counts, profile-specific missable rows, and an overview's earliest open cutoff or first unmarked past cutoff; warnings without a selected current area or mapped chapter remain unplaced. Passing a warning chapter prompts recovery review without claiming permanent loss. For example, the Steam-only Getting Emotional objective is hidden when the selected profile is not Steam. Current area is manually selected and does not claim sub-area precision.
+
+Availability states:
+
+- achieved;
+- available now/actionable;
+- available later;
+- temporarily unavailable;
+- missed but recoverable;
+- permanently missed;
+- intentionally excluded by criteria;
+- mutually exclusive with a selected outcome;
+- not applicable to the selected version.
+
+Completion percentages are computed from only the selected criteria. Incompatible outcomes must not share a denominator, and unknown or unverified data must not be counted as complete.
+
+## Sync design target
+
+Firestore should store per-user, per-guide, per-profile documents. Authenticated users may read/write only their own data. Cloud writes should be debounced, offline changes queued, and sync conflicts presented with a reviewable choice. Merge objective marks by their version metadata, preserving explicit false marks. Profile settings and imported libraries need a separate conflict policy; they must not be silently merged as though they were checkboxes.
+
+Before sync is enabled, test first sign-in, same-account multi-device edits, concurrent check/uncheck conflicts, offline sign-out/in, profile creation/deletion, schema migration, export restore, and Firestore rules using a local emulator.
+
+## Walkthrough data validation
+
+The data audit checks that each authored chapter maps to a known area and has a non-planned coverage state. Every section must have steps and at least one valid source ID; every step's objective IDs must exist. Content coverage remains partial until the chapter's research and route checks pass—the existence of valid structured content alone does not imply verification.
