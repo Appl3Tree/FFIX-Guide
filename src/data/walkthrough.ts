@@ -4712,9 +4712,16 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lost-continent-esto-gaza-shop",
             kind: "optional",
-            text: "Use the hallway on the right to reach the newly restocked shop. Buy Vaccines for the upcoming boss and check the gear against your collection goal. Octagon Rod teaches Vivi Firaga, Blizzaga, and Thundaga; this is the only documented shop that sells it.",
-            detail: "GameFAQs' advanced inventory route recommends totals of two Flame Sabers, Heavy Lances, Scissor Fangs, and Silver Forks (one Fork if the Frog Catching reward is already owned), plus three Diamond Gloves and Gold Armors. Treat those copy counts as an inventory target, not a story requirement. The shop stays available later in Disc III, so you can return during the next open-world chapter. Its earlier Mythril Sword window is tracked separately in On the High Seas.",
+            text: "Use the hallway on the right to reach the newly restocked shop. Buy Vaccines for the upcoming boss and check the gear against your collection goal.",
+            detail: "GameFAQs' advanced inventory route recommends totals of two Flame Sabers, Heavy Lances, Scissor Fangs, and Silver Forks (one Fork if the Frog Catching reward is already owned), plus three Diamond Gloves and Gold Armors. Treat those copy counts as an inventory target, not a story requirement. Esto Gaza remains available during the next open-world chapter. Its earlier Mythril Sword window is tracked separately in On the High Seas.",
             objectiveIds: ["disc-3.lost-continent.esto-gaza-stock"],
+          },
+          {
+            id: "lost-continent-esto-gaza-octagon-rod",
+            kind: "optional",
+            text: "If Octagon Rod matches your item or ability goals, buy it here or during the next open-world visit to Daguerreo. It teaches Vivi Firaga, Blizzaga, and Thundaga.",
+            detail: "Both shops stock Octagon Rod during Disc III, and Daguerreo's weapon inventory changes at the Shimmering Island transition. GameFAQs lists two copies as an inventory target; that is a profile-specific quantity, not a universal minimum. Sources differ on whether all three spells have alternate ability sources.",
+            objectiveIds: ["disc-3.lost-continent.octagon-rod"],
           },
           {
             id: "lost-continent-esto-gaza-wing-edge",
@@ -5089,6 +5096,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Fix the lower hydrolift: pull the left lever twice, inspect the hole revealed behind the lowered platform, take the rod beside the levers and insert it, then pull the right lever twice. Ride the platform to the Weaponsmith and review the Disc III stock before leaving.",
             detail: "The advanced stock target in GameFAQs is two each of Asura's Rod, Hamelin, Obelisk, Tiger Fangs, and Octagon Rod, three Diamond Armors, and eight total Zorlin Shapes/Sargatanas for synthesis. This is a route-specific collection target, not a story requirement. Jegged calls Rune Blade and Obelisk final ability sources; GameFAQs lists Hamelin, Rune Blade, and Octagon Rod, so equip and learn any ability you need and keep the disagreement visible.",
             objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock"],
+          },
+          {
+            id: "aerial-daguerreo-octagon-rod",
+            kind: "optional",
+            text: "If Octagon Rod is still part of your item or ability goals, buy it from the Disc III Weapon Shop before leaving Daguerreo or return for it before the Shimmering Island transition.",
+            detail: "This is the later Disc III purchase point if it was skipped at Esto Gaza. The GameFAQs copy target is two across its inventory plan; choose the quantity that matches your profile and check Vivi's learned abilities.",
+            objectiveIds: ["disc-3.lost-continent.octagon-rod"],
           },
         ],
       },
@@ -5477,9 +5491,16 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo"],
         steps: [
           {
+            id: "preparing-leave-octagon-rod",
+            kind: "cutoff",
+            text: "If Octagon Rod is still part of your item or ability goals, buy it from Esto Gaza or Daguerreo before travelling to Shimmering Island.",
+            detail: "Both are Disc III shops. Daguerreo's weapon stock changes after the transition; the reviewed Disc IV stock list no longer includes Octagon Rod. Its quantity is a profile-specific inventory target, and its ability-source claims remain under review.",
+            objectiveIds: ["disc-3.lost-continent.octagon-rod"],
+          },
+          {
             id: "preparing-leave-shop-inventory",
             kind: "optional",
-            text: "Before departing, compare your inventory with GameFAQs' last-stock list: Black Mage Village (Bandana, Chain Plate, Leather Plate, Mythril Vest); Oeilvert and Desert Palace Mogshops (Fairy Flute, Mythril Claws, Trident, Green Beret, Gold Armor, Judo Uniform, Diamond Gloves, Diamond Sword); Esto Gaza (including Flame Saber, Heavy Lance, Scissor Fangs, Silver Fork, Black Hood, Asura's Rod, Hamelin, and Octagon Rod); Daguerreo (including Obelisk, Rune Blade, Tiger Fangs, and Diamond Armor).",
+            text: "Before departing, compare your inventory with GameFAQs' last-stock list: Black Mage Village (Bandana, Chain Plate, Leather Plate, Mythril Vest); Oeilvert and Desert Palace Mogshops (Fairy Flute, Mythril Claws, Trident, Green Beret, Gold Armor, Judo Uniform, Diamond Gloves, Diamond Sword); Esto Gaza (including Flame Saber, Heavy Lance, Scissor Fangs, Silver Fork, Black Hood, Asura's Rod, Hamelin, and Octagon Rod); Daguerreo (including Octagon Rod, Obelisk, Rune Blade, Tiger Fangs, and Diamond Armor).",
             detail: "The cited guide supplies endgame quantity targets, including Bandana ×12, Mythril Vest ×10, Green Beret ×7, and Black Hood ×6. Those are inventory-planning counts, not universal minimums: subtract pieces already used in synthesis and purchase only what your profile needs. The ability column names Luna (Trident), Power Break (Diamond Sword), Magic Break (Flame Saber), Six Dragons (Heavy Lance), Death (Black Hood), Jewel (Hamelin), Firaga/Blizzaga/Thundaga (Octagon Rod), and Iai Strike (Rune Blade). The sources disagree on the complete final ability-source set, so check what each character has actually learned before buying duplicates.",
             objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock"],
           },

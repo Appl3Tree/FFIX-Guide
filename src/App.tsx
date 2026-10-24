@@ -1085,7 +1085,7 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
   const chapterTitle = (chapterId: string) => guideAreas.find((area) => area.id === chapterId)?.title ?? chapterId;
 
   return <>
-    <PageHeading eyebrow="CHAPTER NAVIGATION · GUIDE ORDER" title="Route Map" lead="Browse all 44 walkthrough chapters in the source guide's table-of-contents order. A separate evidence-backed graph below shows researched in-game gates and an optional detour; that graph is currently partial." />
+    <PageHeading eyebrow="CHAPTER NAVIGATION · GUIDE ORDER" title="Route Map" lead="Browse all 44 walkthrough chapters in the source guide's table-of-contents order. A separate evidence-backed graph below follows researched story gates through the ending, with optional branches and cutoffs still incomplete." />
     <section className="route-map-summary" aria-label="Guide route summary">
       <div><span className="eyebrow">SOURCE-ORDERED CHAPTERS</span><strong>{orderedAreas.length} chapters · {guideSequenceEdges.length} guide-order links</strong></div>
       <p>{profile.currentAreaId ? `Current-area marker: ${guideAreas.find((area) => area.id === profile.currentAreaId)?.title ?? "Unknown chapter"}.` : "Set a current-area marker to see its position in the guide sequence."} Changing the marker can open the existing missable cutoff review.</p>
@@ -1119,7 +1119,7 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
         <div><span className="eyebrow">IN-GAME PROGRESSION · PARTIAL</span><h2 id="game-route-heading">Verified story route</h2></div>
         <span className="game-route-scope">Through {chapterTitle(gameRouteCoverage.throughChapterId)}</span>
       </div>
-      <p className="game-route-intro">These links describe source-checked gameplay gates through the party's return to Madain Sari after the first Iifa Tree descent. They show the Dagger-and-Steiner Treno branch, the return to Zidane's party, an optional Pinnacle Rocks pickup return, and two optional trips to Gizamaluke's Grotto for Kupo Nut rewards. Later story branches and chapter gates still need research.</p>
+      <p className="game-route-intro">These source-checked links follow the main story through the final battle, including the forced Oeilvert/Desert Palace party split and the optional return to Gaia after Deathguise. They also record the Dagger-and-Steiner Treno branch and four optional area returns. Many side routes, cutoff conditions, and objective prerequisites remain outside this partial graph.</p>
       <div className="game-route-counts" aria-label="Route relationship counts">
         <span>{gameRouteCounts["required-story"]} story gates</span><span>{gameRouteCounts["optional-detour"]} optional detour{gameRouteCounts["optional-detour"] === 1 ? "" : "s"}</span><span>{gameRouteCounts["optional-return"]} optional return{gameRouteCounts["optional-return"] === 1 ? "" : "s"}</span><span>{gameRouteCounts.rejoin} rejoin{gameRouteCounts.rejoin === 1 ? "" : "s"}</span>
       </div>

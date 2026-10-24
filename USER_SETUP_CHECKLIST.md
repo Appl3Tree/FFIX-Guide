@@ -25,7 +25,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 **Status:** Ready for User
 
-**Purpose:** The checkout now has local Git on `main` with root commit `4838e55`, but no remote. GitHub confirms that `Appl3Tree/FFIX-Guide` does not exist or is not visible to the connected account. The existing reference repositories are accessible, but this project repository is not.
+**Purpose:** The checkout has local Git history on `main` through commit `0cec689`, but no remote. GitHub API lookup and a direct push attempt to the expected `Appl3Tree/FFIX-Guide` URL returned 404. That response does not establish whether the repository is missing or the connected account lacks access; the owner needs to create the repository or grant access.
 
 ### Exact instructions
 
@@ -39,7 +39,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 **Required values:** Owner `Appl3Tree`; repository `FFIX-Guide`; public visibility; empty repository; intended default branch `main`. No credential value is needed in this file.  
 **Depends on:** None.  
 **Verification:** The repository opens at `https://github.com/Appl3Tree/FFIX-Guide`, and Codex confirms it can read the repository and publish a commit.  
-**Codex follow-up:** Add the new repository as the remote, push the existing local commit history, verify the remote commit, and inspect Actions. The local `gh` CLI currently reports an invalid saved login; Codex will use the connected GitHub integration where possible and will report if reauthorization is truly required.
+**Codex follow-up:** Once the repository is created or visible to the connected account, add it as the remote, push the existing local commit history, verify the remote commit, and inspect Actions. Do not create another local repository or competing first commit.
 
 ## 2. Enable GitHub Pages
 

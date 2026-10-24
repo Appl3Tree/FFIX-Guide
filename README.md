@@ -9,7 +9,7 @@ Project tracking: [task backlog](TASK_BACKLOG.md) · [coverage matrix](CONTENT_C
 ## Current state
 
 - React, TypeScript, and Vite application scaffolded for GitHub Pages.
-- Route Map shows the 44 source-ordered chapter headings and provides chapter navigation; its separate, source-linked game-route graph covers 22 story gates, one optional detour, three optional returns, and three explicit rejoins through the party's return to Madain Sari after the first Iifa Tree descent. Later route coverage remains open.
+- Route Map shows the 44 source-ordered chapter headings and provides chapter navigation; its separate, source-linked game-route graph maps all 44 chapter headings and follows the main story through the final battle: 41 story gates, two optional detours, four optional returns, and five rejoins. The graph remains partial because most side routes, cutoff conditions, and objective prerequisites are not modeled.
 - Individual ATE tracker catalogs 83 scenes, excludes the three tutorials from Movie Critic, counts 79 of 80 eligible choices for one save, and handles Vivi's mutually exclusive Treno outcomes.
 - A reusable prerequisite graph currently covers 14 documented ATE dependencies; the tracker shows linked objectives' marks per playthrough without guessing prompt availability.
 - Four-disc chapter inventory based on the table of contents of the GameFAQs PlayStation walkthrough.
@@ -107,7 +107,7 @@ The eventual web-app configuration is public client configuration, not a passwor
 
 `.github/workflows/deploy.yml` validates pull requests and deploys the `main` branch to GitHub Pages. It runs lint, typecheck, unit tests, data audit, and production build before uploading `dist/`.
 
-Enable GitHub Pages with **GitHub Actions** as the source. The checkout now has local Git history on `main` (root commit `4838e55`) but no remote, and GitHub returned 404 for the expected `Appl3Tree/FFIX-Guide` repository. The owner-side repository creation step is documented in [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md). No push or live deployment is claimed.
+Enable GitHub Pages with **GitHub Actions** as the source. The checkout has local Git history on `main`, including baseline commit `0cec689`, but no remote. GitHub API lookup and a direct push attempt to the expected `Appl3Tree/FFIX-Guide` URL returned 404, which does not distinguish a missing repository from an account access issue. The owner-side repository creation or access step is documented in [USER_SETUP_CHECKLIST.md](USER_SETUP_CHECKLIST.md). No push or live deployment is claimed.
 
 ## Architecture
 

@@ -190,7 +190,7 @@ export const sources = [
     title: "Memoria — Disc IV walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/memoria",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Memoria's five hidden weapons, five Tetra Master phantoms, Nero Family checkpoints, four guardian bosses and steal tables, Hades detour, Crystal World, and Deathguise. It also confirms the post-Deathguise return path for the final-preparation window.",
   },
   {
@@ -390,7 +390,7 @@ export const sources = [
     title: "Trouble on the Home Front — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/trouble160on-the-home-front",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Alexandria's Disc III defense, the final Tantarian fight, Running Shoes reward, and last library cutoff before the tower. Steal odds and boss values remain outside the completion route until cross-checked.",
   },
   {
@@ -398,7 +398,7 @@ export const sources = [
     title: "Attack on Alexandria — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://mail.jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/28-Alexandria-Attack.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the four correct Knight assignments and detailed reward ladder, Beatrix/Steiner's Mistodon sequence, Alexander's summon, and the final Tantarian opportunity. It reports approximately seven Mistodon battles and gives the same 21,997 HP Tantarian figure as GameFAQs.",
   },
   {
@@ -406,7 +406,7 @@ export const sources = [
     title: "The Aftermath — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-aftermath",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the eight Lindblum ATE slots, castle and city pickups, three potions for Regent Cid, Gil threshold, Quina scene, and Blue Narciss departure. The route records the sources' stated triggers and does not claim untested ATE recovery paths.",
   },
   {
@@ -414,7 +414,7 @@ export const sources = [
     title: "Return to Lindblum Castle — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/29-Lindblum.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for the guest-room ATE choice, castle chests, Mognet, Sagittarius, potion search, Gil preparation, optional Lindblum ATEs, and departure on the Blue Narciss. Notes that The Rally depends on the Burmecia rescue and Give Me My Money requires fewer than 50 Gil.",
   },
   {
@@ -438,7 +438,7 @@ export const sources = [
     title: "On the High Seas — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/on-the-high-seas",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Blue Narciss party selection, the delayed Tantalus Gil chests, Quina's regional Blue Magic and frog pond, Esto Gaza's final Mythril Sword stock, Alexandria ruins, Mognet/Kupo Nut, Chocograph progression, South Gates, Treno auction, and Chocobo dive spots. Its advanced inventory target is kept distinct from ordinary completion.",
   },
   {
@@ -446,7 +446,7 @@ export const sources = [
     title: "The Blue Narciss — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/30-The-Blue-Narciss.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent cross-check for Blue Magic enemy areas, Esto Gaza and Mythril stock, Alexandria pickups, Chocobo's Lagoon access and ability-gated Chocographs. Pickup directions are kept attached to their actual docks and screens.",
   },
   {
@@ -646,7 +646,7 @@ export const sources = [
     title: "Preparing to Leave — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/preparing-to-leave",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Disc III point-of-no-return checklist covering changing shop stock, final location and Treasure Hunter sweeps, Morrid's Coffees, Treno's Amdusias, Conde Petie's Colored Stones, and Oglop Trading. Its quantity targets are endgame inventory planning values, not universal minimums; alternate sources and version-specific availability still need item-by-item review.",
   },
   {
@@ -1702,7 +1702,7 @@ export const sources = [
     title: "The Home Front — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-home-front",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Vivi's Alexandria return, four Vivi ATEs, Hippaul Racing, Stiltzkin #5, Mognet and card stops, Garnet's three gems, Zidane's party/shop phase, Nero Brothers' shuffle, and the castle transition. Its prose gives a different dock-Gil figure from its own item heading and other guides; the route uses the cross-checked value.",
   },
   {
@@ -1710,7 +1710,7 @@ export const sources = [
     title: "Returning to Alexandria — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/26-Returning-to-Alexandria.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route for Disc III's third Alexandria visit, the Hippaul cutoff and rewards, six ATEs, Stiltzkin's 777 Gil bundle, Kupo/Mognet, return-to-Zidane shopping, Found in the Shuffle, Leo Stellazzio, and the story move to Treno. Kupo Nut advice differs from GameFAQs, so the walkthrough preserves the one-nut inventory constraint.",
   },
   {
@@ -1766,7 +1766,7 @@ export const sources = [
     title: "Card Tournament — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/card-tournament",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Treno's nine-ATE chain, the Vivi branch choice, the three-round tournament, Namingway Card opportunity, Dali return for Mini-Brahne/Mayor's Key/Burman Coffee, the Catoblepas challenge, and the Rebirth Ring. Its advice to reload after a final loss is presented as an optional way to retry for the reward, not as a story requirement.",
   },
   {
@@ -1782,7 +1782,7 @@ export const sources = [
     title: "Returning to Treno — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/27-Treno.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent check for the Card Stadium rounds, Rebirth Ring, and the timing of the tournament ATEs. It specifically warns that Hallucination must be viewed before changing screens after the second win and links it to the later Something Washed Ashore ATE.",
   },
   {
@@ -1822,7 +1822,7 @@ export const sources = [
     title: "Picking Up the Trail — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/picking-up-the-trail",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for optional Friendly Creatures through Nymph, No. 288's directions from Black Mage Village, the four eastern sinkholes and temporary story lock-in, party split, Oeilvert's anti-magic restrictions, Quina's Desert Palace LV5 Death use, and suggested status abilities. Party advice is treated as a recommendation, not a required roster.",
   },
   {
@@ -1830,7 +1830,7 @@ export const sources = [
     title: "Desert Palace — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/31-Desert-Palace.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route cross-check for the party-selection scene, anti-magic seal at Oeilvert, role-based party considerations, Quina's LV5 Death advantage in the Desert Palace, and the Hilda Garde departure to the Forgotten Continent.",
   },
   {
@@ -1838,7 +1838,7 @@ export const sources = [
     title: "Forgotten Continent — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/forgotten-continent",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the Forgotten Continent field, Qu's Marsh, Chocographs #15–16, Dead Pepper cracks, Friendly Jabberwock, Oeilvert's anti-magic hazards and treasure route, Stiltzkin #6, and Ark. Its Mountain Crack #2/#3 reward labels conflict with Jegged's dedicated crack guide, so the walkthrough identifies those rewards by location rather than number.",
   },
   {
@@ -1846,7 +1846,7 @@ export const sources = [
     title: "Oeilvert — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/32-Oeilvert.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent Oeilvert room route and cross-check for Mimoza's letter, the Mogshop, Stiltzkin #6, all eight listed chests, the light sequence, Ark preparation/attacks, steals, drops, and the Desert Palace transition.",
   },
   {
@@ -1886,7 +1886,7 @@ export const sources = [
     title: "Desert Palace — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/desert-palace",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Cid's timed escape, Mojito/Mogsam Mognet, the six bloodstones and puzzle route, Fairy Earrings chest, Valia Pira, the Namingway Card fallback, and post-boss Kupo Nut deliveries. Its Valia Pira HP and weakness details conflict with the larger consensus; the walkthrough avoids unsupported precision.",
   },
   {
@@ -1894,7 +1894,7 @@ export const sources = [
     title: "Returning to the Desert Palace — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/33-Returning-to-Desert-Palace.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route cross-check for Cid's two-part escape game, the party's equipment/setup, six bloodstones and their items, Mogsam's letter/save, Valia Pira, the Eiko equipment handoff, Namingway Card, and the ladder exit to the Lost Continent.",
   },
   {
@@ -1926,7 +1926,7 @@ export const sources = [
     title: "Lost Continent — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/lost-continent",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route from the return to the Lost Continent through Esto Gaza, Mount Gulug, Meltigemini, and the Lindblum return. Includes the Feather Circle, shop stock, Mognet handoffs, treasures, fixed Red Dragon encounters, Blue Magic, and forced ATEs; its 9,963-Gil route typo conflicts with its own item table and independent lists at 9,693 Gil.",
   },
   {
@@ -1942,7 +1942,7 @@ export const sources = [
     title: "Mount Gulug — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/35-Mount-Gulug.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent screen route and cross-check for Mount Gulug's hidden pickups, Moolan/Mogtaka letters, fixed Red Dragon fights, the solo-dragon Elixir chest, Eiko's story Ribbon, Meltigemini's steals and status effects, and Lindblum return.",
   },
   {
@@ -1966,7 +1966,7 @@ export const sources = [
     title: "Aerial Exploration — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/aerial-exploration",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. Sidequest and stock claims are cross-checked against dedicated guides.",
   },
   {
@@ -1974,7 +1974,7 @@ export const sources = [
     title: "Lindblum and Hilda Garde III — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/36-Lindblum-and-Hilda-Garde-III.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Cross-check for the Mogki-to-Kumool letter, Hilda Garde flight/Elixir, Sky Chocobo fragments and abilities, Chocobo Air Garden, Friendly Yan, Daguerreo, and Queen Stella return.",
   },
   {
@@ -1982,23 +1982,23 @@ export const sources = [
     title: "Daguerreo — optional area and side quests",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Daguerreo.html",
-    accessed: "2026-10-23",
-    notes: "Independent route for the Daguerreo entrance and hydrolift puzzle, Aquamarine maker, cards, two Elixirs, Namingway Card service, shops, and Disc III inventory changes. It specifically identifies Rune Blade and Obelisk as last-shop ability sources; GameFAQs and other item references differ on the full unique-ability list.",
+    accessed: "2026-10-24",
+    notes: "Independent route for the Daguerreo entrance and hydrolift puzzle, Aquamarine maker, cards, two Elixirs, Namingway Card service, shops, and Disc III inventory changes. It lists Octagon Rod in the Disc III weapon shop but specifically identifies Rune Blade and Obelisk as abilities with no other source; GameFAQs also calls Hamelin and Octagon Rod unique ability sources.",
   },
   {
     id: "gamefaqs-daguerreo-71891",
     title: "Daguerreo — sidequest walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/daguerreo",
-    accessed: "2026-10-23",
-    notes: "Original PlayStation Daguerreo route for Capricorn, the Four-Armed Man, cards, elevators, shops, and stock targets. It says Disc III weapons are available through the end of that disc and documents the altered Disc IV armory; its set of unique ability sources differs from Jegged's list.",
+    accessed: "2026-10-24",
+    notes: "Original PlayStation Daguerreo route for Capricorn, the Four-Armed Man, cards, elevators, shops, and stock targets. It lists Octagon Rod among the Disc III weapons, says this stock remains available through that disc and changes in Disc IV, and identifies Hamelin, Rune Blade, and Octagon Rod as unique ability sources; its ability list differs from Jegged's.",
   },
   {
     id: "elitegrindlab-daguerreo",
     title: "Daguerreo — completionist route and missable audit",
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/daguerreo/",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Completionist cross-check for the two Elixirs, shop-stock window before the Shimmering Island transition, Rune Blade and Obelisk ability sources, and the location/availability of Disc III inventory. Its direct-play findings are distinguished from claims not yet checked in this project.",
   },
   {
@@ -2030,7 +2030,7 @@ export const sources = [
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ipsens-castle",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation room route for the inverted weapon-power mechanic, Kumool and Mognet, castle pickups, fresco and pot puzzles, four mirrors, Taharka, steals, and Amarant's return. Its Taharka HP is more precise than some independent guides; the walkthrough avoids publishing disputed boss values.",
   },
   {
@@ -2038,7 +2038,7 @@ export const sources = [
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/37-Ipsens-Castle.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent cross-check for the entrance choice, weak-weapon rule, party setup, letter and Kupo Nut conditions, room-by-room chests, fresco puzzle, and Quina's Veteran Blue Magic opportunity. It confirms the castle can be entered by airship or Sky Chocobo.",
   },
   {
@@ -2062,7 +2062,7 @@ export const sources = [
     title: "Breaking the Seal — four shrines and Earth Guardian",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/breaking-the-seal",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for the four shrine locations and fixed party assignments, pre-shrine preparation, Earth Shrine movement, Earth Guardian steals, elements, status vulnerabilities, Quina's Earth Shake opportunity, and automatic return to the Hilda Garde 3. Exact steal rates are not repeated as completion requirements.",
   },
   {
@@ -2070,7 +2070,7 @@ export const sources = [
     title: "The Four Shrines and Terra — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/38-Four-Seals-Terra.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent cross-check for shrine locations, restoring the normal weapon loadout after Ipsen, preparing Quina and the Earth Guardian fight, post-battle party selection, the upcoming Shimmering Island cutoff, and listed equipment ability sources.",
   },
   {
@@ -2094,7 +2094,7 @@ export const sources = [
     title: "Portal to Another World — Disc III story walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/portal-to-another-world",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including the party splits, five Pandemonium pickups, timed puzzle, elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations.",
   },
   {
@@ -2158,7 +2158,7 @@ export const sources = [
     title: "Return to Gaia — Disc IV walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-gaia",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed shops, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. Its area list also identifies earlier quest opportunities that have closed.",
   },
   {
@@ -2182,7 +2182,7 @@ export const sources = [
     title: "Memoria — walkthrough and Nova Dragon encounter",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/42-Memoria.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent route, pickup, boss, and achievement cross-check for Memoria. The preceding chapter used this page for Nova Dragon's attacks and steals; this chapter also uses it for the five hidden weapons, guardian sequence, and Crystal World handoff.",
   },
   {
@@ -2206,7 +2206,7 @@ export const sources = [
     title: "Final Preparations — Disc IV walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/final-preparations",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Confirms post-Deathguise access to previously available activities before the final boss, identifies Hades as the last Running Shoes acquisition opportunity, and provides optional final-leveling, AP, and Gil preparation context.",
   },
   {
@@ -2214,7 +2214,7 @@ export const sources = [
     title: "The Final Battle — Disc IV walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-final-battle",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Original PlayStation route for Trance Kuja and Necron, their steal tables, mechanics, elemental/status preparation, the final sequence, and the All's Well that Ends Well achievement criterion. Boss HP is omitted because secondary sources disagree.",
   },
   {
@@ -2222,7 +2222,7 @@ export const sources = [
     title: "Kuja and Necron — final showdown walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/45-Kuja-and-Necron-Final-Showdown.html",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Independent walkthrough cross-check for the final return through Memoria, Trance Kuja and Necron steal tables, party-change window, Grand Cross preparation, and ending. It corroborates the battle flow; the guide avoids relying on conflicting boss HP reports.",
   },
   {
@@ -4183,8 +4183,17 @@ export const objectives: GameObjective[] = [
     id: "disc-3.lost-continent.esto-gaza-stock",
     title: "Check Esto Gaza's restocked gear and collect its hidden Wing Edge",
     category: "collection",
-    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables"],
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-missables"],
     chapterIds: ["disc-3.lost-continent"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-3.lost-continent.octagon-rod",
+    title: "Acquire Octagon Rod from a Disc III shop if it fits your goal",
+    category: "collection",
+    sourceIds: ["gamefaqs-lost-continent-71891", "gamefaqs-preparing-to-leave-71891", "gamefaqs-daguerreo-71891", "jegged-esto-gaza", "jegged-daguerreo"],
+    chapterIds: ["disc-3.lost-continent", "disc-3.aerial-exploration", "disc-3.preparing-to-leave"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
   },
@@ -6356,17 +6365,17 @@ export const missables: MissableRecord[] = [
   },
   {
     id: "missable.disc-3.lost-continent.octagon-rod",
-    objectiveId: "disc-3.lost-continent.esto-gaza-stock",
-    title: "Octagon Rod — Esto Gaza's only documented shop",
+    objectiveId: "disc-3.lost-continent.octagon-rod",
+    title: "Octagon Rod — last purchase window before Shimmering Island",
     classification: ["missable-opportunity", "recommended-now"],
-    warningChapterIds: ["disc-3.lost-continent"],
-    consequence: "Esto Gaza is the only shop documented to sell Octagon Rod, which teaches Vivi Firaga, Blizzaga, and Thundaga. The settlement remains reachable later in Disc III, so this is a reminder to check its stock, not a one-screen deadline.",
-    deadline: "Before entering the Shimmering Island passage that closes Esto Gaza near the end of Disc III.",
-    nextAvailability: "The shop remains accessible during the Hilda Garde 3 open-world chapter. Other equipment may teach some of Vivi's spells; the complete later ability-source audit is still in progress.",
-    action: "Buy an Octagon Rod for Vivi if you want the three elemental spells it teaches. Consider two copies if you are following the GameFAQs advanced inventory route, and buy Vaccines for the next boss sequence.",
-    recovery: "Return to Esto Gaza during the next open-world period if you did not buy it now. After the Shimmering Island transition, no later shop source is documented.",
-    note: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab identify Octagon Rod in the restocked Esto Gaza shop; the unique-shop cutoff is reported by the completionist audit. Its lost item type is distinguished from whether the learned spells have alternate sources.",
-    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "elitegrindlab-missables"],
+    warningChapterIds: ["disc-3.lost-continent", "disc-3.aerial-exploration", "disc-3.preparing-to-leave"],
+    consequence: "Octagon Rod teaches Vivi Firaga, Blizzaga, and Thundaga. Both Esto Gaza and Daguerreo sell it during Disc III; Daguerreo's weapon stock changes after the Shimmering Island transition, and the reviewed Disc IV stock lists do not include Octagon Rod. The spell-source audit remains incomplete, so a missed purchase is not treated as proof that the spells themselves are permanently lost.",
+    deadline: "Before travelling through Shimmering Island. Daguerreo's Disc III Weapon Shop remains an acquisition source through the end of the disc.",
+    nextAvailability: "After the Shimmering Island transition, Daguerreo's weapon inventory changes and these sources do not list Octagon Rod in its Disc IV stock. Alternate sources for Vivi's spells remain under review.",
+    action: "If you want Octagon Rod, buy it from the restocked Esto Gaza shop or return to Daguerreo's Disc III Weapon Shop before the Shimmering Island transition. GameFAQs lists two copies as an inventory target; treat that as a route-specific quantity, not a universal minimum. Confirm Vivi has learned any desired abilities before leaving.",
+    recovery: "If you skipped the Esto Gaza purchase, return to Daguerreo before the transition while the Disc III stock is active. Afterward, no later shop source appears in the reviewed lists; check the ability and item references before concluding that a specific spell is unavailable.",
+    note: "GameFAQs' final inventory list names both Esto Gaza and Daguerreo as Octagon Rod shops, and its Daguerreo section says the Disc III weapon stock remains available through the end of that disc before changing in Disc IV. Jegged lists Octagon Rod in Daguerreo but specifically identifies Rune Blade and Obelisk as its unique ability sources; GameFAQs calls Octagon Rod's spells unique. Preserve that ability-source disagreement.",
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamefaqs-preparing-to-leave-71891", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "gamerguides-mount-gulug", "elitegrindlab-missables"],
     verification: "partial",
     severity: "info",
   },
