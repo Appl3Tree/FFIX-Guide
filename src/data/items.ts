@@ -126,7 +126,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.heavy-lance", name: "Heavy Lance", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.scissor-fangs", name: "Scissor Fangs", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.silver-fork", name: "Silver Fork", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-frog-catching-71891"], verification: "partial" },
-  { id: "game-item.black-hood", name: "Black Hood", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
+  { id: "game-item.black-hood", name: "Black Hood", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-desert-palace-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"], verification: "partial" },
   { id: "game-item.asuras-rod", name: "Asura's Rod", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.hamelin", name: "Hamelin", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-abilities-71891", "jegged-esto-gaza", "jegged-daguerreo"], verification: "partial" },
   { id: "game-item.octagon-rod", name: "Octagon Rod", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
@@ -224,7 +224,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
   { id: "esto-gaza.heavy-lance", itemId: "game-item.heavy-lance", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 4700, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition." },
   { id: "esto-gaza.scissor-fangs", itemId: "game-item.scissor-fangs", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 8000, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition." },
   { id: "esto-gaza.silver-fork", itemId: "game-item.silver-fork", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 7400, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition." },
-  { id: "esto-gaza.black-hood", itemId: "game-item.black-hood", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 2550, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition." },
+  { id: "esto-gaza.black-hood", itemId: "game-item.black-hood", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 2550, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition.", notes: "GameFAQs lists Death on Black Hood and identifies the Esto Gaza shop as an acquisition source. This is a final documented Disc III learning opportunity; later sources remain unverified.", additionalSourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-lost-continent-71891"] },
   { id: "esto-gaza.asuras-rod", itemId: "game-item.asuras-rod", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 3180, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition." },
   { id: "esto-gaza.hamelin", itemId: "game-item.hamelin", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 5700, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition.", notes: "GameFAQs lists Jewel on Hamelin and names Esto Gaza as an acquisition source. This is the final documented Disc III purchase/learning window in the reviewed references; alternate post-transition sources remain unverified.", additionalSourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-abilities-71891", "jegged-esto-gaza"] },
   { id: "esto-gaza.octagon-rod", itemId: "game-item.octagon-rod", chapterId: "disc-3.lost-continent", shopId: "esto-gaza", shopName: "Esto Gaza shop", method: "shop", price: 4500, availability: "limited-window", conditions: "Esto Gaza becomes inaccessible after the Shimmering Island transition." },
@@ -255,6 +255,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
     ...(path.id === "esto-gaza.hamelin" || path.id === "daguerreo.hamelin"
       ? ["disc-3.lost-continent.hamelin-jewel"]
       : []),
+    ...(path.id === "esto-gaza.black-hood" ? ["disc-3.desert-palace.black-hood-death"] : []),
   ],
   conditions: path.conditions,
   ...(path.notes ? { notes: path.notes } : {}),
@@ -360,8 +361,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "single-use",
     conditions: "Claim the Black Hood from the Shadow Chamber bloodstone reward during the Desert Palace sequence.",
-    walkthroughObjectiveIds: ["disc-3.desert-palace.bloodstones"],
-    sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-items-71891"],
+    walkthroughObjectiveIds: ["disc-3.desert-palace.bloodstones", "disc-3.desert-palace.black-hood-death"],
+    sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"],
   },
   {
     id: "item-path.burmecia.cancer",
