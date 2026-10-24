@@ -4342,6 +4342,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Speak to Mimoza and shop for the equipment and supplies your two teams need. Green Beret teaches Clear Headed, which prevents Confuse; consider enough copies for characters who may face Ark.",
             detail: "GameFAQs says the Mogshop remains available throughout Disc III, while a completionist audit marks taking the Gulug Stone as Oeilvert's point of no return. Use the safe timing and buy what you need before entering. Oeilvert's exterior encounter is Ogre.",
+            objectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {
             id: "oeilvert-mimoza-letter",
@@ -4410,6 +4411,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "In the left-side planetarium room, approach the floor circle from the south to view the hologram. Collect the Diamond Sword and Shield Armor chests before taking the lower stairs.",
             detail: "Both guides place these two chests on this route; exact room names differ between walkthrough layouts.",
+            objectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {
             id: "oeilvert-lower-room-chests",
@@ -4512,6 +4514,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "From the prison room, take the right-hand path to Mojito. Restock at his Mogshop and use Mognet to accept his letter addressed to Mogsam before entering the palace maze.",
             detail: "Mojito's Mogshop carries the same general inventory listed for the Oeilvert moogle shop. The letter can be delivered to Mogsam in the library once the hidden room opens. If you are carrying a Kupo Nut, defer that delivery until the nut is turned in; Mojito's letter can still be delivered on a later return through the mountain passage.",
+            objectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
           },
         ],
       },
@@ -4714,7 +4717,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Use the hallway on the right to reach the newly restocked shop. Buy Vaccines for the upcoming boss and check the gear against your collection goal, including Hamelin if Eiko still needs Jewel.",
             detail: "GameFAQs' advanced inventory route recommends totals of two Flame Sabers, Heavy Lances, Scissor Fangs, and Silver Forks (one Fork if the Frog Catching reward is already owned), plus three Diamond Gloves and Gold Armors. Treat those copy counts as an inventory target, not a story requirement. GameFAQs lists Jewel on Hamelin; buy and equip one for Eiko before the Shimmering Island cutoff if she still needs the ability. Esto Gaza remains available during the next open-world chapter. Its earlier Mythril Sword window is tracked separately in On the High Seas.",
-            objectiveIds: ["disc-3.lost-continent.esto-gaza-stock", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death"],
+            objectiveIds: ["disc-3.lost-continent.esto-gaza-stock", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {
             id: "lost-continent-esto-gaza-octagon-rod",
@@ -5502,7 +5505,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Before departing, compare your inventory with GameFAQs' last-stock list: Black Mage Village (Bandana, Chain Plate, Leather Plate, Mythril Vest); Oeilvert and Desert Palace Mogshops (Fairy Flute, Mythril Claws, Trident, Green Beret, Gold Armor, Judo Uniform, Diamond Gloves, Diamond Sword); Esto Gaza (Gold Armor, Judo Uniform, Diamond Gloves, Diamond Sword, Flame Saber, Heavy Lance, Scissor Fangs, Silver Fork, Black Hood, Asura's Rod, Hamelin, Octagon Rod); Daguerreo (Asura's Rod, Hamelin, Octagon Rod, Obelisk, Rune Blade, Tiger Fangs, Diamond Armor).",
             detail: "Source-specific total targets are Bandana ×12, Chain Plate ×3, Leather Plate ×3, Mythril Vest ×10; Fairy Flute ×2, Mythril Claws ×2, Trident ×2, Green Beret ×7, Gold Armor ×3, Judo Uniform ×7, Diamond Gloves ×3, Diamond Sword ×2; Flame Saber ×2, Heavy Lance ×2, Scissor Fangs ×2, Silver Fork ×2, Black Hood ×6, Asura's Rod ×2, Hamelin ×2, Octagon Rod ×2, Obelisk ×2, Rune Blade ×2, Tiger Fangs ×2, Diamond Armor ×3. These are the cited guide's inventory-planning totals, not universal minimums: count existing copies, subtract pieces consumed in synthesis, and buy only what your goals require. Oeilvert, Desert Palace, and Esto Gaza close at the Shimmering Island transition. Black Mage Village and Daguerreo replace their Disc III weapon stock with new Disc IV lists, so buy these listed items before leaving if you need those exact shop sources. The source's frog-reward line labels 33 frogs as Silver Fork, but its item and frog pages plus independent references place Silver Fork at 23 and Bistro Fork at 33. Tiger Fangs is listed at 8,000 Gil in the GameFAQs shops table and 13,500 in its preparation/item lists and Caves of Narshe; direct game verification is still needed. Ability claims are partial: Luna (Trident), Power Break (Diamond Sword), Magic Break (Flame Saber), Six Dragons (Heavy Lance), Death (Black Hood), Jewel (Hamelin), Firaga/Blizzaga/Thundaga (Octagon Rod), and Iai Strike (Rune Blade). If Eiko still needs Jewel, learn it from Hamelin before leaving; the reviewed sources do not establish permanent ability loss after the cutoff. Check what each character has learned before buying duplicates.",
-            objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock", "disc-3.aerial-exploration.diamond-armor", "disc-3.aerial-exploration.daguerreo-unique-abilities", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death"],
+            objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock", "disc-3.aerial-exploration.diamond-armor", "disc-3.aerial-exploration.daguerreo-unique-abilities", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review"],
           },
         ],
       },
