@@ -50,8 +50,8 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 - **Priority:** Required
 - **Status:** In progress
 - **Owner:** Codex
-- **Current evidence:** Added a partial, source-linked slice of 14 item records and 20 acquisition paths centered on Burmecia. It includes chest/pickup, Chocograph, Mognet, Stiltzkin, and boss-steal methods plus the cited Germinas Boots and Lightning Staff alternatives. The data audit checks path identity, quantities, costs, and chapter/objective/source links.
-- **Next work:** Grow the deduplicated inventory by disc and item class, adding all supported pickup, steal/drop, shop, synthesis, auction, minigame, quest, and replacement paths. Capture exact quantities, costs, earliest/latest access, ability sources, and version differences only when sourced; add a reference UI after coverage is meaningful.
+- **Current evidence:** The partial catalog has 37 item records and 62 acquisition paths across 11 chapter slices. It includes the original Burmecia/early-game paths, the Disc III final-stock shop list, three alternate reward/pickup routes, 24 source-specific inventory targets, and 10 partial equipment-ability claims. Shop persistence and price/reward conflicts are recorded rather than hidden. The audit checks catalog relationships, quantities, costs, shop metadata, targets, and ability provenance.
+- **Next work:** Continue growing the deduplicated inventory by disc and item class, adding remaining pickup, steal/drop, shop, synthesis, auction, minigame, quest, and replacement paths. Reconcile shop cutoffs and prices against direct game/version evidence; capture exact quantities, costs, earliest/latest access, ability sources, and version differences only when sourced. Add synthesis recipes and a reference UI after coverage is meaningful.
 - **Completion evidence:** Every obtainable item has sourced acquisition paths and availability/recovery status; one-copy and limited-quantity constraints are reconciled; shops/synthesis have time-aware stock and ingredient requirements; walkthrough and missable trackers share stable IDs.
 - **Dependencies:** B01, B02, B04, B06.
 

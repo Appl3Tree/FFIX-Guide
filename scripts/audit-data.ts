@@ -4,7 +4,7 @@ import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
 import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
-import { gameItems, itemAcquisitionPaths, itemCatalogCoverage } from "../src/data/items.ts";
+import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const errors: string[] = [];
@@ -23,6 +23,8 @@ checkUnique("objective", objectives.map((objective) => objective.id));
 checkUnique("missable", missables.map((missable) => missable.id));
 checkUnique("game item", gameItems.map((item) => item.id));
 checkUnique("item acquisition path", itemAcquisitionPaths.map((path) => path.id));
+checkUnique("source inventory target", sourceInventoryTargets.map((target) => target.id));
+checkUnique("equipment ability claim", equipmentAbilityClaims.map((claim) => claim.id));
 checkUnique("Steam achievement", steamAchievements.map((achievement) => achievement.id));
 checkUnique("PS4 trophy", ps4Trophies.map((achievement) => achievement.id));
 checkUnique("Xbox achievement", xboxAchievements.map((achievement) => achievement.id));
@@ -321,6 +323,13 @@ for (const path of itemAcquisitionPaths) {
   if (path.cost && (!Number.isSafeInteger(path.cost.amount) || path.cost.amount < 0)) {
     errors.push(`Item acquisition path ${path.id} has an invalid currency cost.`);
   }
+  if (path.recommendedBeforeChapterId && !areaIds.has(path.recommendedBeforeChapterId)) {
+    errors.push(`Item acquisition path ${path.id} recommends an unknown cutoff chapter ${path.recommendedBeforeChapterId}.`);
+  }
+  if (path.method === "shop" || path.method === "mogshop") {
+    if (!path.shopId?.trim() || !path.shopName?.trim()) errors.push(`Shop acquisition path ${path.id} needs a shop ID and name.`);
+    if (path.cost?.currency !== "gil") errors.push(`Shop acquisition path ${path.id} needs a Gil price.`);
+  }
   for (const objectiveId of path.walkthroughObjectiveIds ?? []) {
     if (!objectiveIds.has(objectiveId)) errors.push(`Item acquisition path ${path.id} references unknown objective ${objectiveId}.`);
   }
@@ -328,6 +337,28 @@ for (const path of itemAcquisitionPaths) {
     if (!sourceIds.has(sourceId)) errors.push(`Item acquisition path ${path.id} references unknown source ${sourceId}.`);
   }
   acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
+}
+for (const target of sourceInventoryTargets) {
+  if (!gameItemIds.has(target.itemId)) errors.push(`Inventory target ${target.id} references unknown item ${target.itemId}.`);
+  if (!areaIds.has(target.chapterId) || !walkthroughChapterIds.has(target.chapterId)) {
+    errors.push(`Inventory target ${target.id} references a chapter without authored walkthrough content.`);
+  }
+  if (!Number.isSafeInteger(target.targetQuantity) || target.targetQuantity < 1) {
+    errors.push(`Inventory target ${target.id} needs a positive integer quantity.`);
+  }
+  if (!target.interpretation.trim()) errors.push(`Inventory target ${target.id} needs an interpretation note.`);
+  if (target.sourceIds.length === 0) errors.push(`Inventory target ${target.id} has no provenance.`);
+  for (const sourceId of target.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Inventory target ${target.id} references unknown source ${sourceId}.`);
+  }
+}
+for (const claim of equipmentAbilityClaims) {
+  if (!gameItemIds.has(claim.itemId)) errors.push(`Equipment ability claim ${claim.id} references unknown item ${claim.itemId}.`);
+  if (!claim.abilityName.trim()) errors.push(`Equipment ability claim ${claim.id} is missing an ability name.`);
+  if (claim.sourceIds.length === 0) errors.push(`Equipment ability claim ${claim.id} has no provenance.`);
+  for (const sourceId of claim.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Equipment ability claim ${claim.id} references unknown source ${sourceId}.`);
+  }
 }
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
@@ -361,7 +392,7 @@ if (guideAreas.some((area) => area.state === "verified")) warnings.push("A chapt
 
 console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} coverage warning(s).`);
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
-console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices.`);
+console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);
 if (errors.length > 0) process.exitCode = 1;
