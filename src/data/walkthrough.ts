@@ -1148,7 +1148,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-before-enter-grotto-lindblum-cutoff",
             kind: "cutoff",
             text: "Before entering Gizamaluke's Grotto, finish any remaining Lindblum castle or district visits, first-visit ATEs, Key Items, Mognet letters, and shopping. Entry stops the trolley and closes the three districts for a stretch of the story; the Dragon's Gate stays open with a basic item shop. If anything remains, backtrack to Dragon's Gate and use the trolley before you cross the Grotto threshold.",
-            detail: "GameFAQs phrases the trolley cutoff as after the Grotto sequence in one passage, but also warns that Lindblum access is lost upon entry; Gamer Guides, GameRevolution, and EliteGrindLab explicitly put it at entry. This guide uses the earlier safe point. First-visit permanent windows are listed separately in the Lindblum chapter.",
+            detail: "GameFAQs, Gamer Guides, GameRevolution, and EliteGrindLab explicitly place the trolley/district lockout at entry. GameFAQs' later wording about the trolley being unavailable after the Grotto does not contradict its earlier warning that Lindblum access is lost as soon as you enter. First-visit permanent windows are listed separately in the Lindblum chapter; the exact later trolley/district reopening remains unverified.",
             objectiveIds: ["disc-1.exploring-lindblum-kingdom.before-grotto-check"],
           },
           {

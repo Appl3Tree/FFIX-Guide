@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest route audit confirms the Lindblum cutoff at entry to Gizamaluke's Grotto from four walkthroughs and keeps the later reopening question open.
+
 No account-owner setup action changed. The latest guide-content milestone reconciles Cleyra's evacuation directions and removes an unsupported version-dependent label; repository lint, typecheck, audit, build, and whitespace checks pass. Direct game/release verification remains open.
 
 No account-owner setup action changed in this guide-content slice. The Alexandria post-destruction Inn match guidance keeps the first Disc III visit as the safe checkpoint and recommends trying the Inn again on Disc IV if missed; an Xbox achievement guide reports an endgame opportunity, while a Steam player disputes Disc IV availability. The optional matches and exact visit-history/release behavior remain unresolved. GitHub, Firebase, deployment, and live sign-in work remain unchanged. Lint, typecheck, data audit, production build, and whitespace checks pass with 0 errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 351 sources; all warnings link to 93 cutoff windows. The route graph has 70 links. Catalog: 206 items, 813 acquisition paths, 38 recipes, 112 targets, and 196 ability claims. Bundle: 1,935.28 kB JavaScript (472.65 kB gzip), 60.22 kB CSS (12.77 kB gzip). Tests, browser review, and direct game/release verification were not run. TrueAchievements returned HTTP 402; its indexed text is secondary evidence.

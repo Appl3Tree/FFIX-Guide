@@ -79,6 +79,22 @@ if (
   errors.push("Cleyra's evacuation route must preserve Right/Left/Right, identify Not Yet as recommended rather than confirmed, and cite the fourth-choice conflict.");
 }
 
+const lindblumTrolleyWarning = missablesById.get("missable.disc-1.lindblum.trolley-cutoff");
+const lindblumTrolleyCutoff = cutoffsById.get("cutoff.lindblum-grotto-entry.trolley-lockout");
+const lindblumTrolleyStep = walkthroughChapters
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.id === "journey-before-enter-grotto-lindblum-cutoff");
+if (
+  !lindblumTrolleyWarning?.deadline.includes("Before entering Gizamaluke's Grotto") ||
+  !lindblumTrolleyWarning.note?.includes("explicitly place the trolley/district lockout at Grotto entry") ||
+  !["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumTrolleyWarning.sourceIds.includes(sourceId)) ||
+  lindblumTrolleyCutoff?.certainty !== "source-supported" ||
+  !lindblumTrolleyCutoff.trigger.includes("Entering Gizamaluke's Grotto stops the trolley") ||
+  !lindblumTrolleyStep?.detail.includes("explicitly place the trolley/district lockout at entry")
+) {
+  errors.push("Lindblum's trolley cutoff must use the source-supported Grotto-entry trigger and retain its four walkthrough sources.");
+}
+
 if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
 for (const chapterId of enemyCatalogCoverage.chapterIds) {
   if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);
