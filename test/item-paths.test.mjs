@@ -403,7 +403,7 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 306);
+  assert.equal(itemAcquisitionPaths.length, 314);
   assert.equal(synthesisRecipes.length, 10);
 });
 
@@ -726,7 +726,7 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   const cleyraTreasureMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
   const pinnacleMissable = missables.find((entry) => entry.id === "missable.disc-2.pinnacle-rocks.treasure-sweep");
 
-  assert.equal(itemAcquisitionPaths.length, 306);
+  assert.equal(itemAcquisitionPaths.length, 314);
   assert.ok(newPaths.every(Boolean), "all 20 earlier/recovery paths should exist");
   assert.deepEqual(
     pricedPaths.map((path) => [path?.itemId, path?.cost?.amount]).sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),

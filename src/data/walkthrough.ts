@@ -1545,7 +1545,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-city-pickups-and-mognet",
         title: "First-visit sweep — coins, cards, Mogrich, and hidden Gil",
         summary: "Finish the collectible route before triggering the next story sequence. Treno's first Auction House visit is a story scene, not the later bidding itinerary.",
-        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891"],
+        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891"],
         steps: [
           {
             id: "treno-gemini-and-slums",
@@ -1558,7 +1558,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-mogrich-letter",
             kind: "optional",
             text: "Continue to the Knight's House tower and speak to Mogrich, the Moogle being chased by a dog. Save and choose Mognet to read Stiltzkin's letter, then use the Weapon Shop if you want to buy equipment or inspect synthesis options.",
-            detail: "Stiltzkin does not sell a bundle in Treno; this is a Mognet letter stop. One missables source calls this the last shop window for Air Racket, Silver Gloves, Iron Helm, Chain Mail, Bandana, Chain Plate, and Leather Plate; the other shop route does not confirm that cutoff. If following a perfect-inventory list, check those quantities now, but treat the permanent cutoff as unresolved.",
+            detail: "Stiltzkin does not sell a bundle in Treno; this is a Mognet letter stop. The Disc II weapon stock includes Mythril Spear for 1,100 Gil and Lightning Staff for 1,200 Gil; Kumool's Mogshop in Ipsen's Castle later sells Mythril Spear, while Black Mage Village and Alexandria retain Lightning Staff as later documented sources. One missables source calls this the last shop window for Air Racket, Silver Gloves, Iron Helm, Chain Mail, Bandana, Chain Plate, and Leather Plate; the other shop route does not confirm that cutoff. If following a perfect-inventory list, check those quantities now, but treat the permanent cutoff as unresolved.",
             objectiveIds: ["disc-2.treno.mogrich-letter"],
           },
           {
@@ -4707,7 +4707,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lost-continent-esto-gaza",
         title: "Esto Gaza — restocked equipment, Vaccine, and Mogrika's letter",
         summary: "Enter the central building for the story scene, then shop on the right and collect the hidden Wing Edge before continuing through the back of the settlement.",
-        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables"],
+        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables", "gamefaqs-items-71891", "gamefaqs-item-locations-54996"],
         steps: [
           {
             id: "lost-continent-esto-gaza-story",
@@ -4719,7 +4719,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lost-continent-esto-gaza-shop",
             kind: "optional",
             text: "Use the hallway on the right to reach the newly restocked shop. Buy Vaccines for the upcoming boss and check the gear against your collection goal, including Hamelin if Eiko still needs Jewel.",
-            detail: "GameFAQs' advanced inventory route recommends totals of two Flame Sabers, Heavy Lances, Scissor Fangs, and Silver Forks (one Fork if the Frog Catching reward is already owned), plus three Diamond Gloves and Gold Armors. Treat those copy counts as an inventory target, not a story requirement. GameFAQs lists Jewel on Hamelin; buy and equip one for Eiko before the Shimmering Island cutoff if she still needs the ability. Esto Gaza remains available during the next open-world chapter. Its earlier Mythril Sword window is tracked separately in On the High Seas.",
+            detail: "GameFAQs' advanced inventory route recommends totals of two Flame Sabers, Heavy Lances, Scissor Fangs, and Silver Forks (one Fork if the Frog Catching reward is already owned), plus three Diamond Gloves and Gold Armors. Treat those copy counts as an inventory target, not a story requirement. The initial Mythril stock also lists Mythril Spear for 1,100 Gil; its shop entry is replaced after Desert Palace, and Kumool sells it later in Ipsen's Castle, so this is an optional extra source rather than a permanent-loss window. GameFAQs lists Jewel on Hamelin; buy and equip one for Eiko before the Shimmering Island cutoff if she still needs the ability. Esto Gaza remains available during the next open-world chapter. Its earlier Mythril Sword window is tracked separately in On the High Seas.",
             objectiveIds: ["disc-3.lost-continent.esto-gaza-stock", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {
@@ -5180,7 +5180,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "ipsens-entrance-and-kumool",
         title: "Entrance hall and Kumool — collect the first items and save",
         summary: "Search the foyer and the moogle room before descending the pole.",
-        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle"],
+        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891"],
         steps: [
           {
             id: "ipsens-foyer-pickups",
@@ -5192,8 +5192,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "ipsens-kumool-mognet-shop",
             kind: "save",
-            text: "In the next room, speak to Kumool and use Mognet to deliver Mogki's letter if it is in your inventory. If you delivered the previous Kupo Nut to Moguta, Kumool can provide the next one. Check the Mogshop for weak weapons and supplies, then save.",
-            detail: "A Kupo Nut can only be carried one at a time. The castle remains accessible after this story visit, so a skipped letter or optional shop purchase does not close with the mirror sequence.",
+            text: "In the next room, speak to Kumool and use Mognet to deliver Mogki's letter if it is in your inventory. If you delivered the previous Kupo Nut to Moguta, Kumool can provide the next one. Check the Mogshop for weak weapons and supplies, then save; Mythril Spear is listed here for 1,100 Gil if you still need it.",
+            detail: "A Kupo Nut can only be carried one at a time. The castle remains accessible after this story visit, so a skipped letter or optional shop purchase does not close with the mirror sequence. Kumool's Mogshop is a later Mythril Spear source if the Burmecia, Treno, or early Esto Gaza copy was missed.",
             objectiveIds: ["disc-3.ipsens-castle.mognet"],
           },
           {

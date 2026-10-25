@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The Disc III Alexandria and Treno item-catalog expansions, the Rebirth Ring model, and the Chain Plate/Leather Plate/Mythril Vest recovery-route audit are complete and introduce no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The Disc III Alexandria and Treno item-catalog expansions, the Rebirth Ring model, the Chain Plate/Leather Plate/Mythril Vest recovery-route audit, and Mythril Spear's three shop recovery paths and Lightning Staff's five shop sources are complete and introduce no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 
