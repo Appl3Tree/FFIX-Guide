@@ -3373,7 +3373,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   {
     areaId: "disc-3.the-home-front",
     overview: "Disc III opens with Vivi in Alexandria while Dagger prepares for her coronation. Complete Hippaul's one-time race, the first four ATEs, Stiltzkin's fifth purchase, the steeple and city pickups, then watch the play to receive Dagger's three Eidolon gems. After control returns to Zidane, view the remaining ATEs, reunite with Freya and Amarant, check the reopened shops, and finish the castle-side sweep before the story moves to Treno.",
-    timedRouteNote: "The EII source's D3-01 checkpoint reaches Bentini Heights at 06:57:02 after Hippaul level 80 (+11:00), Alexandria's Artemicion/card/letter sweep, and the Treno opening. Its zero-random-encounter target does not budget the full eligible Movie Critic or platform achievement route. The six-ATE total, Kupo Nut timing, and exact broad cutoff wording remain under research; the safe route completes every local objective before the coronation story advances.",
+    timedRouteNote: "The EII source's D3-01 checkpoint reaches Bentini Heights at 06:57:02 after Hippaul level 80 (+11:00), Alexandria's Artemicion/card/letter sweep, and the Treno opening. Its zero-random-encounter target does not budget the full eligible Movie Critic or platform achievement route. The source-backed route separates the Vivi-phase Hippaul/Stiltzkin/first-four-ATE cutoff at Ruby's play from Zidane's later Nero Brothers/final-two-ATE window; exact final city closure remains conservative. Kupo Nut timing is still under research.",
     sections: [
       {
         id: "home-front-vivi-and-race",
@@ -3467,7 +3467,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "home-front-zidane-and-shops",
         title: "Zidane rejoins — ATEs, shops, and the Nero Brothers",
-        summary: "Use the last Alexandria free-roam window to prepare the party and finish the second ATE phase.",
+        summary: "Use the later Alexandria free-roam window to prepare the party, finish the second ATE phase, and win the Nero Brothers challenge.",
         sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "xboxachievements-final-fantasy-ix", "steam-achievements", "gamefaqs-shops-71891"],
         steps: [
           {
@@ -3506,7 +3506,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "home-front-castle-sweep",
         title: "Castle grounds — collect the last pickups and Leo",
-        summary: "Before the coronation sequence carries the party to Treno, clear the castle dock and west tower.",
+        summary: "After the city phase, clear the castle dock and west tower before continuing the coronation scenes to Treno.",
         sourceIds: ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "jegged-stellazzio"],
         steps: [
           {
@@ -3519,8 +3519,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "home-front-check-ates-and-transition",
             kind: "cutoff",
-            text: "Before continuing through the coronation scenes, confirm the four Vivi ATEs plus I Forgot! and Clowns on a Dark Night, along with the level-80 Hippaul reward, Stiltzkin #5, the steeple cards, and the castle sweep. Then follow the story to Treno for the Card Tournament chapter.",
-            detail: "The broader cutoff is described as either leaving Alexandria or leaving for Treno. This guide uses the safe route: finish all local errands before the castle-to-Treno transition. ATE threshold and platform-specific achievement consequences remain partial.",
+            text: "Before continuing from the castle to Treno, confirm that the four Vivi ATEs, Hippaul's level-80 reward, and Stiltzkin #5 were completed before Ruby's play; then confirm I Forgot!, Clowns on a Dark Night, the Nero Brothers' nine-win streak, the steeple cards, and the castle sweep.",
+            detail: "The early Hippaul and Stiltzkin windows close at Ruby's play. Sources differ on whether remaining optional city content closes when leaving Alexandria or only at the chapter transition, so finish the Zidane-phase checks before advancing. The ATE threshold and platform-specific achievement consequences remain partial.",
             objectiveIds: ["disc-3.the-home-front.ates"],
           },
         ],
