@@ -93,6 +93,34 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "GameFAQs' Shops table and RPGClassics list Fairy Earrings from Magic Armlet + Soft for 3,200 Gil, while the GameFAQs Items table gives 3,000 Gil; retain the disagreement and use the two shop/synthesis tables for the modeled price. GameFAQs lists the recipe at Black Mage Village, Alexandria, Treno, Lindblum, and Daguerreo; the item also has a later Desert Palace chest and repeatable Treno Auction source first available in Disc II. Magic Armlet's shop routes and Soft's common restock paths are modeled separately.",
   },
   {
+    id: "synthesis-recipe.angel-earrings",
+    resultItemId: "game-item.angel-earrings",
+    ingredients: [
+      { itemId: "game-item.fairy-earrings", quantity: 1 },
+      { itemId: "game-item.barette", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 8000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-synthesis", "elitegrindlab-synthesis"],
+    notes: "The Daguerreo recipe is Fairy Earrings + Barette for 8,000 Gil. The GameFAQs, RPGClassics, Jegged, and EliteGrindLab synthesis references agree; Angel Earrings also has earlier conditional Knights of Pluto and Bran Bal pickup routes.",
+  },
+  {
+    id: "synthesis-recipe.barette",
+    resultItemId: "game-item.barette",
+    ingredients: [
+      { itemId: "game-item.needle-fork", quantity: 1 },
+      { itemId: "game-item.barbut", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 1800 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "Needle Fork + Barbut synthesizes Barette for 1,800 Gil at Daguerreo. Other shops and the Ipsen's Castle/Hot & Cold sources are not fully modeled in this slice.",
+  },
+  {
     id: "synthesis-recipe.feather-boots",
     resultItemId: "game-item.feather-boots",
     ingredients: [

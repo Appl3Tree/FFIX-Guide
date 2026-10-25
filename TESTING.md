@@ -4,9 +4,11 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint` and `npm run build` (including typecheck and the data audit) pass for the Bran Bal route refinement. The audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 322 sources; all missable warnings link to 88 cutoff windows, including all 79 high/critical records. The item catalog has 198 records and 750 paths across 40 chapter slices, with 36 recipes, 75 targets, and 153 ability claims. Bundle: 1,692.48 kB JavaScript (417.79 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite's chunk-size advisory remains. `git diff --check` passes. Tests and in-game/release/UI verification were not run.
+`npm run lint` and `npm run build` (including typecheck and the data audit) pass for the Angel Earrings/Barette item slice. The audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 322 sources; all missable warnings link to 88 cutoff windows, including all 79 high/critical records. The item catalog has 200 records and 756 paths across 41 chapter slices, with 38 recipes, 75 targets, and 159 ability claims. Bundle: 1,693.86 kB JavaScript (418.13 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite's chunk-size advisory remains. `git diff --check` passes. Tests and in-game/release/UI verification were not run.
 
 ## Latest change status
+
+The latest B02/B05 slice adds the Angel Earrings and Barette acquisition and synthesis chain, their equipment abilities, and the revised Knights of Pluto recovery warning. Source evidence is cross-checked; the reward ladder and modern-release behavior remain untested in-game.
 
 The latest B01/B02 slice records the linear post-Kuja passage back through Bran Bal and keeps the earlier treasure-room sweep cutoff conservative because the route sources do not verify free chest access. The preceding B02 slice supports a post-boss Mois-letter return before Cargo Ship departure while retaining the Game8/Jinsoku timing disagreement; the Desert Palace slice identifies where world-map travel resumes after the sinkhole lock-in. Lint, typecheck, audit, production build, and `git diff --check` pass. Tests and direct game/release/UI verification were not run.
 

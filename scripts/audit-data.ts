@@ -889,6 +889,58 @@ if (
 ) {
   errors.push("Bran Bal's treasure warning must retain the conservative pre-gate checkpoint and distinguish story traversal from pickup recovery.");
 }
+const angelEarringsItemId = "game-item.angel-earrings";
+const angelEarringsItem = gameItems.find((item) => item.id === angelEarringsItemId);
+const angelEarringsPickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.bran-bal-angel-earrings-pickup");
+const angelEarringsReward = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.trouble-on-the-home-front.knights-orders-angel-earrings-reward");
+const angelEarringsSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.angel-earrings-synthesis-daguerreo");
+const angelEarringsRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.angel-earrings");
+const angelEarringsWarning = missablesById.get("missable.disc-3.trouble-on-the-home-front.knights-orders");
+const angelEarringsAbilityNames = new Set(
+  equipmentAbilityClaims.filter((claim) => claim.itemId === angelEarringsItemId).map((claim) => claim.abilityName),
+);
+const baretteItem = gameItems.find((item) => item.id === "game-item.barette");
+const baretteHotCold = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.barette-hot-cold");
+const baretteIpsensChest = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.ipsens-castle.barette-fresco-chest");
+const baretteSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.barette-daguerreo-synthesis");
+const baretteRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.barette");
+const baretteAbilityNames = new Set(
+  equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.barette").map((claim) => claim.abilityName),
+);
+if (
+  angelEarringsItem?.name !== "Angel Earrings" ||
+  !angelEarringsItem.sourceIds.includes("gamefaqs-items-71891") ||
+  !angelEarringsPickup || angelEarringsPickup.itemId !== angelEarringsItemId ||
+  angelEarringsPickup.chapterId !== "disc-3.portal-to-another-world" ||
+  angelEarringsPickup.method !== "hidden-pickup" || angelEarringsPickup.availability !== "single-use" ||
+  !angelEarringsPickup.walkthroughObjectiveIds?.includes("disc-3.portal-to-another-world.bran-bal-treasures") ||
+  !angelEarringsReward || angelEarringsReward.itemId !== angelEarringsItemId ||
+  angelEarringsReward.method !== "quest-reward" || angelEarringsReward.availability !== "conditional" ||
+  !angelEarringsReward.walkthroughObjectiveIds?.includes("disc-3.trouble-on-the-home-front.knights-orders") ||
+  !angelEarringsRecipe || angelEarringsRecipe.resultItemId !== angelEarringsItemId ||
+  angelEarringsRecipe.chapterId !== "disc-3.aerial-exploration" ||
+  angelEarringsRecipe.shopId !== "daguerreo.synthesis-expert" || angelEarringsRecipe.cost.amount !== 8000 ||
+  angelEarringsRecipe.ingredients.length !== 2 ||
+  !angelEarringsRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.fairy-earrings" && ingredient.quantity === 1) ||
+  !angelEarringsRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.barette" && ingredient.quantity === 1) ||
+  !angelEarringsSynthesisPath || angelEarringsSynthesisPath.recipeId !== angelEarringsRecipe.id ||
+  angelEarringsSynthesisPath.availability !== "repeatable" || angelEarringsSynthesisPath.cost?.amount !== 8000 ||
+  !["Auto-Regen", "MP+20%", "Reis's Wind"].every((abilityName) => angelEarringsAbilityNames.has(abilityName)) ||
+  !angelEarringsWarning?.nextAvailability?.includes("hidden pickup at Bran Bal") ||
+  !angelEarringsWarning.recovery?.includes("repeatable Daguerreo synthesis") ||
+  !angelEarringsWarning.note?.includes("rather than permanent item-type loss") ||
+  !itemCatalogCoverage.chapterIds.includes("disc-3.trouble-on-the-home-front") ||
+  baretteItem?.name !== "Barette" ||
+  !baretteHotCold || baretteHotCold.itemId !== "game-item.barette" || baretteHotCold.availability !== "repeatable" ||
+  !baretteIpsensChest || baretteIpsensChest.itemId !== "game-item.barette" || baretteIpsensChest.method !== "chest" ||
+  !baretteSynthesisPath || baretteSynthesisPath.recipeId !== "synthesis-recipe.barette" || baretteSynthesisPath.cost?.amount !== 1800 ||
+  !baretteRecipe || baretteRecipe.resultItemId !== "game-item.barette" || baretteRecipe.cost.amount !== 1800 ||
+  !baretteRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.needle-fork" && ingredient.quantity === 1) ||
+  !baretteRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.barbut" && ingredient.quantity === 1) ||
+  !["Chemist", "Cura", "Gamble Defense"].every((abilityName) => baretteAbilityNames.has(abilityName))
+) {
+  errors.push("Angel Earrings and its Barette ingredient must link their acquisition routes, recipes, abilities, and recoverability warning.");
+}
 const friendlyCreatureObjectiveIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
   "disc-2.journey-to-treno.friendly-ghost",
