@@ -2889,13 +2889,19 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "madain-sari-arrival",
         title: "Lucid Plains — save before the village",
         summary: "Reach Eiko's home from the Mountain Path and make a world-map save before entering the only village in the game without a save moogle.",
-        sourceIds: ["gamefaqs-madain-sari-71891", "gamerguides-madain-sari", "elitegrindlab-madain-sari"],
+        sourceIds: ["gamefaqs-madain-sari-71891", "gamerguides-madain-sari", "elitegrindlab-madain-sari", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-a-c"],
         steps: [
           {
             id: "madain-sari-world-map-save",
             kind: "save",
             text: "From the Lucid Plains exit, follow the world map to the rock-shaped village ahead. Save at a field moogle before entering Madain Sari; there is no save moogle inside the village.",
             detail: "If the friendly Yeti on the forested approach is still waiting, give it 2 Ore for an Elixir and 20 AP; that optional encounter is tracked in the previous Mountain Path chapter.",
+          },
+          {
+            id: "madain-sari-banyano-shores-encounter",
+            kind: "optional",
+            text: "For an optional coastal bestiary encounter, explore Banyano Shores near Madain Sari and look for Blazer Beetle. The source does not provide a complete shoreline roster.",
+            detail: "RPGClassics places Blazer Beetle on Banyano Shores as well as Pualei Plains. This location record stays separate from the Lucid Plains route pool, and it does not assert encounter formations or rates.",
           },
           {
             id: "madain-sari-enter-village",

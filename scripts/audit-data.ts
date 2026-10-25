@@ -3581,6 +3581,27 @@ if (
 ) {
   errors.push("Pualei Plains needs a sourced Blazer Beetle/Goblin Mage/Troll pool and a separate Friendly Nymph record with its 3-Ore, 30-AP, Emerald quest reward.");
 }
+const banyanoShoresPool = enemyEncounters.find((encounter) => encounter.id === "encounter.madain-sari.banyano-shores-pool");
+const banyanoShoresBlazer = enemyRecords.find((enemy) => enemy.id === "enemy.blazer-beetle");
+const madainSariArrival = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.madain-sari")?.sections.find((section) => section.id === "madain-sari-arrival");
+const banyanoShoresStep = madainSariArrival?.steps.find((step) => step.id === "madain-sari-banyano-shores-encounter");
+if (
+  !banyanoShoresPool
+  || banyanoShoresPool.kind !== "random-pool"
+  || banyanoShoresPool.chapterId !== "disc-2.madain-sari"
+  || banyanoShoresPool.formation.length !== 1
+  || banyanoShoresPool.formation[0]?.enemyId !== "enemy.blazer-beetle"
+  || !banyanoShoresPool.sourceIds.includes("rpgclassics-bestiary-a-c")
+  || !banyanoShoresPool.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || !banyanoShoresPool.notes.some((note) => note.includes("does not establish a complete shoreline roster") && note.includes("rates"))
+  || !banyanoShoresBlazer?.encounterIds.includes("encounter.madain-sari.banyano-shores-pool")
+  || !enemyCatalogCoverage.chapterIds.includes("disc-2.madain-sari")
+  || !banyanoShoresStep?.text.includes("Banyano Shores")
+  || !banyanoShoresStep.text.includes("complete shoreline roster")
+  || !madainSariArrival?.sourceIds.includes("rpgclassics-bestiary-a-c")
+) {
+  errors.push("Madain Sari's Banyano Shores record must link the confirmed Blazer Beetle location, source evidence, partial roster limitation, and walkthrough context.");
+}
 const desertPalacePool = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.random-pool");
 const desertPalaceBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.valia-pira");
 const desertPalaceTeachers = [

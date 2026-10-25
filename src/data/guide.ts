@@ -2874,6 +2874,14 @@ export const sources = [
     notes: "Original PlayStation bestiary with separate Kraken tentacle entries. It lists 18,169/18,168 HP for the left/right components, Elixir/Wing Edge steals, and Lightning weakness. The higher HP values conflict with GameFAQs' 10,001-HP reports; the right-side Wing Edge also conflicts with the newer GameFAQs walkthrough's Elixir-per-tentacle description.",
   },
   {
+    id: "rpgclassics-bestiary-a-c",
+    title: "Final Fantasy IX Bestiary A–C",
+    publisher: "RPGClassics",
+    url: "https://shrines.rpgclassics.com/psx/ffix/bestiary1.shtml",
+    accessed: "2026-10-25",
+    notes: "Original PlayStation bestiary cross-check. It places Blazer Beetle at Banyano Shores and Pualei Plains and agrees with GameFAQs on its level, HP, MP, EXP, AP, Gil, card, steal/drop slots, and Limit Glove teacher entry. It does not provide a complete shoreline formation table or encounter rates.",
+  },
+  {
     id: "rpgclassics-bestiary-n-s",
     title: "Final Fantasy IX Bestiary N–S",
     publisher: "RPGClassics",
