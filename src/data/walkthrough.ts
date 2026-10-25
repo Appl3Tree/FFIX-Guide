@@ -4116,14 +4116,21 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "high-seas-alexandria-ruins",
         title: "Alexandria — sweep the accessible harbor and ruined town",
-        summary: "The castle is inaccessible, but the gondola dock and town streets still contain pickups and a card.",
-        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"],
+        summary: "The castle is inaccessible, but the gondola dock and town streets still contain pickups, a card, and an optional first-visit Inn match event.",
+        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins"],
         steps: [
           {
             id: "high-seas-alexandria-harbor",
             kind: "pickup",
             text: "Land at Alexandria's harbor and search the gondola-dock area for an Opal, Peridot, and Sapphire. Ride the gondola to town; do not spend time trying to enter the closed castle.",
             objectiveIds: ["disc-3.on-the-high-seas.alexandria-ruins"],
+          },
+          {
+            id: "high-seas-alexandria-first-visit-card-players",
+            kind: "cutoff",
+            text: "If this is your first visit to Alexandria after its destruction, enter the Inn and try the Tetra Master matches with the male Red Mage, female Red Mage, and Kabao (Cour89's label) before leaving town. If you have not visited Alexandria yet by the end of this Blue Narciss route, keep this check open for your later first visit on Disc IV.",
+            detail: "Cour89 says these three Inn matches are limited to the first post-destruction visit, when Kabao's welcome event occurs, and says Kabao's Wife is available afterward. GameFAQs' PlayStation card list places two Red Mages and Hippaul at the Inn for Discs III–IV without describing the event condition. Treat the first visit as the safe checkpoint; this optional match objective does not gate card types or an achievement.",
+            objectiveIds: ["disc-3.on-the-high-seas.alexandria-first-visit-card-players"],
           },
           {
             id: "high-seas-alexandria-square",
@@ -6022,8 +6029,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-alexandria-and-treno",
         title: "Alexandria and Treno — Stiltzkin #8, Behemoth, and auctions",
         summary: "Stiltzkin has returned to Alexandria's steeple for his final bundle. Treno's Weapon Shop has advanced to Behemoth, and the auction adds late Disc IV items.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-card-locations-24067", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-card-locations-24067", "cour89-card-players", "rpgclassics-alexandria-ruins", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
         steps: [
+          {
+            id: "gaia-return-alexandria-first-visit-card-players",
+            kind: "cutoff",
+            text: "If this is your first visit to Alexandria since its destruction, go to the Inn and try the Tetra Master matches with the male Red Mage, female Red Mage, and Kabao (Cour89's label) before leaving town. If you already visited Alexandria on Disc III, this first-visit event has passed; check the card-opponent warning for the source disagreement.",
+            detail: "Cour89 says these three matches are limited to the first post-destruction visit, while GameFAQs lists two Red Mages and Hippaul at the Inn on Discs III–IV without the first-visit condition. The Inn event is described by RPGClassics, but its exact match timing has not been directly tested. This checklist tracks optional matches only, not card-type or achievement completion.",
+            objectiveIds: ["disc-3.on-the-high-seas.alexandria-first-visit-card-players"],
+          },
           {
             id: "gaia-return-stiltzkin-eighth",
             kind: "optional",

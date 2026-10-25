@@ -2424,6 +2424,47 @@ if (
 ) {
   errors.push("The Disc III Alexandria card checklist must preserve the original four-opponent objective, add the separately tracked Cour89 roster entries, cite the modern-release roster source, and remain separate from permanent card-type loss.");
 }
+const postDestructionAlexandriaCardObjectiveId = "disc-3.on-the-high-seas.alexandria-first-visit-card-players";
+const postDestructionAlexandriaCardWarning = missables.find((missable) =>
+  missable.id === "missable.disc-3.on-the-high-seas.alexandria-first-visit-card-players",
+);
+const postDestructionAlexandriaCardObjective = objectives.find((objective) => objective.id === postDestructionAlexandriaCardObjectiveId);
+const postDestructionAlexandriaCardSteps = walkthroughChapters
+  .filter((chapter) => ["disc-3.on-the-high-seas", "disc-4.return-to-gaia"].includes(chapter.areaId))
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .filter((step) => step.objectiveIds?.includes(postDestructionAlexandriaCardObjectiveId));
+const postDestructionAlexandriaCardCutoffs = gameRouteCutoffs.filter((cutoff) =>
+  cutoff.missableIds.includes(postDestructionAlexandriaCardWarning?.id ?? ""),
+);
+const postDestructionAlexandriaDetour = gameRouteEdges.find((edge) => edge.id === "detour.high-seas-alexandria-ruins");
+const postDestructionAlexandriaDetourRejoin = gameRouteEdges.find((edge) => edge.id === "detour.alexandria-ruins-rejoin-high-seas");
+if (
+  !postDestructionAlexandriaCardObjective
+  || !postDestructionAlexandriaCardObjective.sourceIds.includes("cour89-card-players")
+  || !postDestructionAlexandriaCardObjective.sourceIds.includes("gamefaqs-card-locations-24067")
+  || !postDestructionAlexandriaCardObjective.chapterIds?.includes("disc-3.on-the-high-seas")
+  || !postDestructionAlexandriaCardObjective.chapterIds.includes("disc-4.return-to-gaia")
+  || !postDestructionAlexandriaCardWarning
+  || postDestructionAlexandriaCardWarning.classification.includes("permanently-missable")
+  || !postDestructionAlexandriaCardWarning.sourceIds.includes("cour89-card-players")
+  || !postDestructionAlexandriaCardWarning.sourceIds.includes("gamefaqs-card-locations-24067")
+  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs' card-location FAQ lists two Red Mages and Hippaul")
+  || !postDestructionAlexandriaCardWarning.note.includes("direct game testing")
+  || postDestructionAlexandriaCardSteps.length !== 2
+  || !postDestructionAlexandriaCardSteps.every((step) =>
+    ["male Red Mage", "female Red Mage", "Kabao"].every((name) => step.text.includes(name)),
+  )
+  || postDestructionAlexandriaCardCutoffs.length !== 2
+  || postDestructionAlexandriaCardCutoffs.some((cutoff) => cutoff.certainty !== "disputed")
+  || !postDestructionAlexandriaDetour
+  || postDestructionAlexandriaDetour.relationship !== "optional-return"
+  || postDestructionAlexandriaDetour.toChapterId !== "disc-1.alexandria"
+  || !postDestructionAlexandriaDetourRejoin
+  || postDestructionAlexandriaDetourRejoin.relationship !== "rejoin"
+  || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not identify or time its card matches")
+) {
+  errors.push("The post-destruction Alexandria Inn matches must preserve both Disc III/IV first-visit reminders, the Cour89/GameFAQs timing conflict, optional-match scope, and the sourced return route.");
+}
 const oglopTradeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card";
 const oglopCardTypeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card-type";
 const oglopTradeWarning = missables.find((missable) => missable.id === "missable.disc-3.preparing-to-leave.oglop-trading");
