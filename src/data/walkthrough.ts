@@ -2014,7 +2014,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "pinnacle-rocks-arrival-and-monty",
         title: "Crash site — Monty, Mognet, and Mythril Vest",
         summary: "Complete the letter handoff before following the forest paths toward the exit.",
-        sourceIds: ["gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-pinnacle-rocks", "flactem-mognet"],
+        sourceIds: ["gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-pinnacle-rocks", "flactem-mognet", "gamefaqs-enemy-list-71891", "cavesofnarshe-pinnacle-rocks", "cavesofnarshe-enemies", "elitegrindlab-pinnacle-rocks"],
         steps: [
           {
             id: "pinnacle-rocks-monty-mosh-letter",
@@ -2022,6 +2022,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "After the Gargant ride, descend to Monty and use Mognet to deliver the letter from Mosh. Save and heal here, then open the nearby lower-path chest for a Mythril Vest.",
             detail: "Mosh's letter was collected from Mosh in Alexandria Castle after the party split. The Mognet action completes that handoff; it is separate from the Stiltzkin letter that appears only after Ramuh's story.",
             objectiveIds: ["disc-2.pinnacle-rocks.mosh-letter"],
+          },
+          {
+            id: "pinnacle-rocks-enemy-roster",
+            kind: "optional",
+            text: "The Pinnacle Rocks encounter roster is Sand Scorpion, Seeker Bat, and Zaghnol [B]. If Quina is available and Night is still missing, use Eat on a weakened Seeker Bat to learn it.",
+            detail: "The bestiary shares Sand Scorpion with its Burmecia/Cleyra entries and Zaghnol [B] with the Outer Continent world-map table; the Festival Zaghnol is a separate opponent. Quina's availability is not guaranteed for every field fight. The shared Night checklist also covers the earlier Nymph opportunity. Seeker Bat steal/drop data retains the Caves of Narshe table conflict.",
+            objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
           },
           {
             id: "pinnacle-rocks-entry-sweep-note",

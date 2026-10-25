@@ -1732,6 +1732,27 @@ if (!friendlyYeti || friendlyYeti.kind !== "friendly" || friendlyYeti.stats.some
   !lucidPlainsPool?.formation.some((member) => member.enemyId === "enemy.goblin-mage")) {
   errors.push("Lucid Plains must keep Friendly Yeti separate from ordinary Yeti combat and preserve Goblin Mage's shared Outer Continent record.");
 }
+const pinnacleRocksPools = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.pinnacle-rocks");
+const pinnacleRocksPool = pinnacleRocksPools.find((encounter) => encounter.id === "encounter.pinnacle-rocks.random-pool");
+const seekerBat = enemyRecords.find((enemy) => enemy.id === "enemy.seeker-bat");
+const pinnacleSandScorpion = enemyRecords.find((enemy) => enemy.id === "enemy.sand-scorpion");
+const regularZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-b");
+const festivalZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
+if (pinnacleRocksPools.length !== 1 || !pinnacleRocksPool || pinnacleRocksPool.kind !== "random-pool" ||
+  !sameSortedValues(pinnacleRocksPool.formation.map((member) => member.enemyId), ["enemy.sand-scorpion", "enemy.seeker-bat", "enemy.zaghnol-b"]) ||
+  pinnacleRocksPool.formation.some((member) => member.quantity !== null) ||
+  !["gamefaqs-pinnacle-rocks-71891", "gamefaqs-enemy-list-71891", "cavesofnarshe-pinnacle-rocks"].every((sourceId) => pinnacleRocksPool.sourceIds.includes(sourceId)) ||
+  !seekerBat || seekerBat.chapterId !== "disc-2.pinnacle-rocks" ||
+  ![ ["level", 12], ["HP", 594], ["MP", 377], ["EXP", 449], ["AP", 2], ["Gil", 366] ].every(([field, value]) => seekerBat.stats.some((stat) => stat.field === field && stat.value === value)) ||
+  !seekerBat.blueMagic.some((skill) => skill.name === "Night" && skill.command === "Eat" && skill.objectiveIds.includes("disc-1.journey-to-burmecia.blue-magic-night")) ||
+  !seekerBat.routeObjectiveIds.includes("disc-1.journey-to-burmecia.blue-magic-night") ||
+  !pinnacleRocksPool.objectiveIds.includes("disc-1.journey-to-burmecia.blue-magic-night") ||
+  !seekerBat.notes.some((note) => note.includes("transposes") && note.includes("Caves of Narshe")) ||
+  !pinnacleSandScorpion?.encounterIds.includes("encounter.pinnacle-rocks.random-pool") ||
+  !regularZaghnol?.encounterIds.includes("encounter.pinnacle-rocks.random-pool") ||
+  festivalZaghnol?.encounterIds.includes("encounter.pinnacle-rocks.random-pool")) {
+  errors.push("Pinnacle Rocks must preserve its source-backed Sand Scorpion/Seeker Bat/regular Zaghnol pool, Seeker Bat's partial teacher/table data, and distinct Festival form.");
+}
 const huntZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
 if (outerZaghnol?.encounterIds.includes("encounter.lindblum.festival-zaghnol") || huntZaghnol?.encounterIds.some((encounterId) => encounterId.startsWith("encounter.outer-continent."))) {
   errors.push("The world-map Zaghnol [B] and Festival of the Hunt Zaghnol must remain separate variants.");

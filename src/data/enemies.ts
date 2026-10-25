@@ -99,6 +99,7 @@ const meltigeminiCutoffId = "cutoff.mount-gulug.meltigemini-steals";
 const enemyListSourceId = "gamefaqs-enemy-list-71891";
 const outerContinentChapterId = "disc-2.outer-continent";
 const magdaleneForestChapterId = "disc-2.magdalene-forest";
+const pinnacleRocksChapterId = "disc-2.pinnacle-rocks";
 const mountainPathChapterId = "disc-2.conde-petie-mountain-path";
 const outerContinentBlueMagicObjectiveId = "disc-2.outer-continent.blue-magic";
 const outerContinentFriendlyLadybugObjectiveId = "disc-2.outer-continent.friendly-ladybug";
@@ -112,6 +113,7 @@ const deadForestEnemySources = [enemyListSourceId, "gamefaqs-magdalene-forest-71
 const mountainPathEnemySources = [enemyListSourceId, "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-abilities-71891"];
 const lucidPlainsEnemySources = [...mountainPathEnemySources, "gamefaqs-monster-list-20490"];
 const friendlyYetiSources = ["gamefaqs-monster-list-20490", "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"];
+const pinnacleRocksEnemySources = [enemyListSourceId, "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "cavesofnarshe-pinnacle-rocks", "cavesofnarshe-enemies", "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks", "gamefaqs-abilities-71891", "rpgclassics-bestiary-n-s"];
 const outerContinentEnemySources = [enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-outer-continent-71891", "jegged-conde-petie", "rpgclassics-outer-continent", "gamefaqs-abilities-71891"];
 const cactuarSources = [...outerContinentEnemySources, "jegged-world-map-cactuar"];
 const goblinMageSources = [...outerContinentEnemySources, "jegged-world-map-goblin-mage"];
@@ -1149,6 +1151,60 @@ const mountainPathEncounters: EnemyEncounter[] = [
   },
 ];
 
+const pinnacleRocksEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.pinnacle-rocks.random-pool",
+    title: "Pinnacle Rocks random encounters",
+    chapterId: pinnacleRocksChapterId,
+    location: "Forest paths and crash-site screens at Pinnacle Rocks",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.sand-scorpion", quantity: null },
+      { enemyId: "enemy.seeker-bat", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: pinnacleRocksEnemySources,
+    objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Route references list Sand Scorpion, Seeker Bat, and Zaghnol for the area; the enemy table and independent route sources provide their combat data. The group records the area roster without inferring formations, encounter rates, or exact screen-specific availability."],
+  },
+];
+
+const pinnacleRocksEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.seeker-bat",
+    name: "Seeker Bat",
+    encounterIds: ["encounter.pinnacle-rocks.random-pool"],
+    stats: crossCheckedStats([["level", 12], ["HP", 594], ["MP", 377], ["EXP", 449], ["AP", 2], ["Gil", 366]], [enemyListSourceId, "gamefaqs-item-locations-54996"]),
+    steals: [
+      sourcedLoot("common", "game-item.eye-drops", [enemyListSourceId, "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks"]),
+      sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId, "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks"]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.echo-screen", [enemyListSourceId, "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks"]),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId, "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks"]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks"]),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", pinnacleRocksEnemySources),
+      sourcedFact("elemental-weakness", "Fire and Wind", pinnacleRocksEnemySources),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", pinnacleRocksEnemySources),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Scratch", [enemyListSourceId, "elitegrindlab-pinnacle-rocks"], "Physical damage."),
+      sourcedFact("attack", "Darkness", [enemyListSourceId, "elitegrindlab-pinnacle-rocks"], "Can inflict Darkness."),
+      sourcedFact("attack", "Absorb", [enemyListSourceId, "elitegrindlab-pinnacle-rocks"], "Drains HP; the route table also names stronger Absorb variants."),
+    ],
+    blueMagic: [{ name: "Night", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "rpgclassics-bestiary-n-s"], objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"] }],
+    strategies: [{ title: "Use Fire or Wind and prepare for Darkness", detail: "Fire and Wind exploit the listed weaknesses; Earth damage is nullified. Scratch and Absorb are modest, but Darkness can make physical attacks miss. Quina can learn Night if available in the party and the skill is still missing.", sourceIds: pinnacleRocksEnemySources }],
+    routeObjectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
+    notes: ["GameFAQs, the item-location guide, and other reviewed tables put Eye Drops and Tent in the steal list and Echo Screen, Hi-Potion, and Ether in the drop list. EliteGrindLab reports that Caves of Narshe transposes the Seeker Bat steal/drop lists; the disputed table is not silently merged."],
+  }, pinnacleRocksChapterId, pinnacleRocksEnemySources),
+];
+
 const deadForestEncounters: EnemyEncounter[] = [
   {
     id: "encounter.magdalene-forest.dead-forest-pool",
@@ -1530,7 +1586,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -2863,7 +2919,7 @@ const burmeciaEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.sand-scorpion",
     name: "Sand Scorpion",
-    encounterIds: ["encounter.burmecia-region.world-map-pool", "encounter.cleyra-trunk.quicksand.random-pool", "encounter.cleyra-trunk.quicksand-pit.sand-scorpion"],
+    encounterIds: ["encounter.burmecia-region.world-map-pool", "encounter.cleyra-trunk.quicksand.random-pool", "encounter.cleyra-trunk.quicksand-pit.sand-scorpion", "encounter.pinnacle-rocks.random-pool"],
     stats: enemyStats([["level", 10], ["HP", 526], ["MP", 360], ["EXP", 400], ["AP", 1], ["Gil", 315]]),
     steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
     drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.annoyntment"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.hi-potion")],
@@ -2876,7 +2932,7 @@ const burmeciaEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
     strategies: [{ title: "Use Ice and avoid Water", detail: "Ice exploits its weakness, while it absorbs Water. Be ready to cure Poison if a non-fatal hit triggers Poison Counter.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: [],
-    notes: ["Sand Scorpion is part of the world-map regional roster around Burmecia and Cleyra, not the indoor Burmecia pool. Cleyra's Trunk also lists it in the quicksand-pit area and uses it for a separate forced pit-fall battle."],
+    notes: ["Sand Scorpion is part of the world-map regional roster around Burmecia and Cleyra, not the indoor Burmecia pool. Cleyra's Trunk also lists it in the quicksand-pit area and uses it for a separate forced pit-fall battle. Pinnacle Rocks route references list the same enemy there."],
   }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891", ...cleyraEncounterSources]),
   chapterEnemy({
     id: "enemy.yeti",
@@ -3859,11 +3915,12 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
   }, magdaleneForestChapterId, deadForestEnemySources),
   chapterEnemy({
     id: "enemy.zaghnol-b",
-    name: "Zaghnol [B] — Outer Continent",
+    name: "Zaghnol [B] (regular world-map form)",
     encounterIds: [
       "encounter.outer-continent.dirt-pool", "encounter.outer-continent.grass-pool",
       "encounter.outer-continent.marsh-pool", "encounter.outer-continent.forest-pool",
       "encounter.outer-continent.beach-pool", "encounter.magdalene-forest.outer-forest-pool",
+      "encounter.pinnacle-rocks.random-pool",
     ],
     stats: [
       { field: "level", value: 16, sourceIds: worldMapZaghnolStatSources, verification: "cross-checked" },
@@ -3898,7 +3955,7 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "gamefaqs-monster-list-20490", "jegged-world-map-zaghnol", "rpgclassics-outer-continent"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
     strategies: [{ title: "Use Water and avoid Lightning", detail: "Water exploits Zaghnol's weakness, while it halves Lightning damage. Quina can learn Matra Magic from this world-map form if it was missed from Dragonfly in Cleyra's Trunk.", sourceIds: [...worldMapZaghnolSources, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
     routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
-    notes: ["This is the normal world-map Zaghnol [B], not the one-time Festival of the Hunt boss record. The Enemy List gives MP 489/AP 2; Jegged and the older Monster List give MP 499, while AP is printed as 3 by Jegged and 2–3 in the older Monster List."],
+    notes: ["This is the standard Zaghnol [B] table shared by the Outer Continent, Magdalene Forest world map, and Pinnacle Rocks area; it is not the one-time Festival of the Hunt boss. The Enemy List gives MP 489/AP 2; Jegged and the older Monster List give MP 499, while AP is printed as 3 by Jegged and 2–3 in the older Monster List."],
   }, outerContinentChapterId, [...worldMapZaghnolSources, "gamefaqs-cleyra-71891", "jegged-cleyra"]),
   {
     id: "enemy.friendly-ladybird",
@@ -4099,6 +4156,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...lindblumAreaEnemyRecords,
   ...outerContinentEnemyRecords,
   ...mountainPathEnemyRecords,
+  ...pinnacleRocksEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -4222,8 +4280,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

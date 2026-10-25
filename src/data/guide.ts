@@ -530,6 +530,14 @@ export const sources = [
     notes: "Independent PlayStation route cross-check for the Mognet handoff, all five fragments, three chests, story order, and final exit. Its route order differs from other publishers, so the checklist asks players to inspect each branch rather than relying on a single fragment sequence.",
   },
   {
+    id: "cavesofnarshe-pinnacle-rocks",
+    title: "Pinnacle Rocks — Disc II walkthrough",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/walkthrough.php?chapter=2-7%3Bff9spoilers%3Don",
+    accessed: "2026-10-25",
+    notes: "Independent route and area roster listing Zaghnol, Sand Scorpion, and Seeker Bat; also cross-checks the five Ramuh fragments, Mognet letter, and treasure route.",
+  },
+  {
     id: "gamefaqs-return-to-lindblum-71891",
     title: "Return to Lindblum — Disc II walkthrough",
     publisher: "GameFAQs",
@@ -1015,7 +1023,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/enemy-list",
     accessed: "2026-10-25",
-    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. The Burmecia tables cover its city enemies and the world-map roster surrounding Burmecia and Cleyra, including Skeletons; the guide keeps the city pool, Mimic chest fights, scripted Type A pair, and regional pool separate. Cleyra's Trunk entries cover Carrion Worm, Sand Golem Core, Soldier [A], and Type B; its room pools and fixed battles are separated using the walkthrough, and Blue Magic teachers Dragonfly and Zuu are included without inferring formation rates. The Disc II Mountain Path entries include Gnoll, Ochu, Troll, and Hilgigars' slot table; the same Troll record also appears in the Lucid Plains pool with Blazer Beetle and Goblin Mage. Gnoll/Ochu/Troll/Blazer Beetle stat, loot, element/status, attack, and Eat claims are modeled from this table. Quina leaves on entering the path, and the guide does not assume later re-entry with Quina. Its Dead Forest table covers Myconid and Zemzelett, with the field roster kept separate from Magdalene Forest world-map encounters; both records carry the source-listed stats, steal/drop slots, elemental traits, status vulnerabilities, and Eat skills. The Outer Continent entries include standard Cactuar, Goblin Mage, Griffin, and Zaghnol [B] data; the guide retains the Cactuar level/AP and Goblin Mage AP differences against other references. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
+    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. The Burmecia tables cover its city enemies and the world-map roster surrounding Burmecia and Cleyra, including Skeletons; the guide keeps the city pool, Mimic chest fights, scripted Type A pair, and regional pool separate. Cleyra's Trunk entries cover Carrion Worm, Sand Golem Core, Soldier [A], and Type B; its room pools and fixed battles are separated using the walkthrough, and Blue Magic teachers Dragonfly and Zuu are included without inferring formation rates. The Disc II Mountain Path entries include Gnoll, Ochu, Troll, and Hilgigars' slot table; the same Troll record also appears in the Lucid Plains pool with Blazer Beetle and Goblin Mage. Gnoll/Ochu/Troll/Blazer Beetle stat, loot, element/status, attack, and Eat claims are modeled from this table. Quina leaves on entering the path, and the guide does not assume later re-entry with Quina. The Pinnacle Rocks table supplies Seeker Bat data, while the normal Zaghnol [B] row is shared with the Outer Continent forms; the Festival battle remains a separate variant. Its Dead Forest table covers Myconid and Zemzelett, with the field roster kept separate from Magdalene Forest world-map encounters; both records carry the source-listed stats, steal/drop slots, elemental traits, status vulnerabilities, and Eat skills. The Outer Continent entries include standard Cactuar, Goblin Mage, Griffin, and Zaghnol [B] data; the guide retains the Cactuar level/AP and Goblin Mage AP differences against other references. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
   },
   {
     id: "gamefaqs-monster-list-20490",
@@ -1399,7 +1407,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/enemies.php?type=all",
     accessed: "2026-10-25",
-    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, Burmecia, Cleyra, and boss records. It reports Beatrix's level-14, 3,630-HP, 3,467-MP Burmecia profile and her three steals, and cross-checks Cleyra Beatrix at Level 17, 4,736 HP, and 3,964 MP. It distinguishes the Cleyra Soldier (Level 10/523 HP) from the Alexandria Soldier variant and supports the Antlion, Trunk enemy, and Type B dossiers. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
+    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, Burmecia, Cleyra, Pinnacle Rocks, and boss records. It reports Beatrix's level-14, 3,630-HP, 3,467-MP Burmecia profile and her three steals, and cross-checks Cleyra Beatrix at Level 17, 4,736 HP, and 3,964 MP. It distinguishes the Cleyra Soldier (Level 10/523 HP) from the Alexandria Soldier variant and supports the Antlion, Trunk enemy, Type B, and Seeker Bat dossiers. Its Seeker Bat table is reported as transposing steal/drop items against other references; the guide preserves that disagreement. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
   },
   {
     id: "cavesofnarshe-gizamaluke",
@@ -3233,10 +3241,10 @@ export const objectives: GameObjective[] = [
   },
   {
     id: "disc-1.journey-to-burmecia.blue-magic-night",
-    title: "Learn Night from a Nymph with Quina",
+    title: "Learn Night with Quina",
     category: "collection",
-    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-abilities-71891", "steam-missable-content-guide-2988011418"],
-    chapterIds: ["disc-1.journey-to-burmecia"],
+    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-abilities-71891", "steam-missable-content-guide-2988011418", "gamefaqs-pinnacle-rocks-71891", "gamefaqs-enemy-list-71891"],
+    chapterIds: ["disc-1.journey-to-burmecia", "disc-2.pinnacle-rocks"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
   },
