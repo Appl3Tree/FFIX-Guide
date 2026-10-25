@@ -253,6 +253,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Wrist + Steepled Hat makes Cotton Robe. GameFAQs' Shops table and RPGClassics list the recipe for 1,000 Gil at the documented shops; the GameFAQs Items table lists 2,000 Gil. The item is also a two-copy Chocograph #2 reward, and Daguerreo appears in the detailed shop tables even though the Items table's location list omits it.",
   },
   {
+    id: "synthesis-recipe.yellow-scarf",
+    resultItemId: "game-item.yellow-scarf",
+    ingredients: [
+      { itemId: "game-item.feather-hat", quantity: 1 },
+      { itemId: "game-item.steepled-hat", quantity: 1 },
+    ],
+    chapterId: "disc-1.lindblum",
+    shopId: "lindblum.synthesis-shop.disc-1",
+    shopName: "Torres' Synthesis Shop (Lindblum, Disc I)",
+    cost: { currency: "gil", amount: 400 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-treno"],
+    notes: "Feather Hat + Steepled Hat makes Yellow Scarf for 400 Gil. GameFAQs lists synthesis windows at Lindblum, Treno, Black Mage Village, and Alexandria; its shop tables separate the Disc I, Disc II, Disc III–IV, and Disc IV inventories. The Cleyra Cathedral pickup is an additional direct copy.",
+  },
+  {
     id: "synthesis-recipe.gluttons-robe",
     resultItemId: "game-item.gluttons-robe",
     ingredients: [
