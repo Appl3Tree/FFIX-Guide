@@ -1722,7 +1722,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-trunk",
         title: "Cleyra's Trunk — sandfalls and hidden branches",
         summary: "Search each branch before activating the sandfall passage; it locks the entrance behind you.",
-        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement", "cavesofnarshe-enemies", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "cleyra-trunk-save-and-chests",
@@ -1833,7 +1833,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-stiltzkin-and-inn-mognet",
             kind: "pickup",
             text: "At the Inn, buy Stiltzkin's 444-Gil bundle (Hi-Potion, Ether, and Phoenix Pinion). Check Mognet with Mopli and read the letter available after the Antlion sequence, then return to the settlement entrance to rejoin Zidane, Vivi, and Quina.",
-            detail: "Stiltzkin's second purchase is required for the eight-stop chain. GameFAQs identifies a new letter from Monev at this second Inn visit; Flactem's list does not include that extra message. Check Mognet again and record any new mail. The separate attack letter to Serino is collected from Mopli during the assault and delivered aboard the Red Rose.",
+            detail: "This is the safe purchase point: GameFAQs and Jegged place the bundle during Freya's separate post-Antlion Inn phase. RPGClassics mentions another Stiltzkin encounter at the Sandpit during the later attack return, but only directs the player to check Mognet; it does not confirm that the bundle remains for sale. EliteGrindLab records conflicting deadline reports and possible Sandpit/Inn script declarations without identifying which location is active. GameFAQs identifies a new letter from Monev at this Inn visit; check Mognet and record any new mail. The separate attack letter to Serino is collected from Mopli during the assault and delivered aboard the Red Rose.",
             objectiveIds: ["disc-2.cleyra.stiltzkin-2", "disc-2.cleyra.mognet-mail"],
           },
           {

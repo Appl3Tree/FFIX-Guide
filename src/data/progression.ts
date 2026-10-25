@@ -559,8 +559,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.cleyra",
     toChapterId: "disc-2.return-to-alexandria",
     relationship: "required-story",
-    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game after Beatrix. The route now marks Freya's post-Antlion Emerald/Stiltzkin window and the missed-Trunk-chest cleanup before the bridge separately from evacuation rewards and Beatrix's steals. Guides disagree on the broad last-safe-action label: Jegged's Point of No Return callout precedes the forced Trunk return, while GameFAQs explicitly permits missed chests during it.",
-    sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-return-to-alexandria-71891", "jegged-cleyra", "jegged-return-to-alexandria-castle", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game after Beatrix. The route marks Freya's post-Antlion Emerald/Stiltzkin window and the missed-Trunk-chest cleanup before the bridge separately from evacuation rewards and Beatrix's steals. RPGClassics mentions Stiltzkin again on the attack return but does not confirm another purchase; keep Freya's segment as the safe bundle checkpoint. Guides disagree on the broad last-safe-action label: Jegged's Point of No Return callout precedes the forced Trunk return, while GameFAQs explicitly permits missed chests during it.",
+    sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-return-to-alexandria-71891", "jegged-cleyra", "jegged-return-to-alexandria-castle", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"],
   },
   {
     id: "story.return-to-alexandria-to-pinnacle-rocks",
@@ -1101,9 +1101,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.cleyra-to-return-to-alexandria",
     title: "Freya's post-Antlion Emerald and Stiltzkin window",
     certainty: "conservative",
-    trigger: "During Freya's separate control segment after Antlion, collect the High Priest's Emerald and buy Stiltzkin's second bundle before returning to the settlement entrance. This is the safe checkpoint; sources differ on whether the bundle is restricted to Freya's phase or remains available farther into the attack route.",
+    trigger: "During Freya's separate control segment after Antlion, collect the High Priest's Emerald and buy Stiltzkin's second bundle before returning to the settlement entrance. This is the safe checkpoint: GameFAQs and Jegged place the purchase here, while EliteGrindLab records conflicting deadline reports and RPGClassics mentions a later Stiltzkin encounter during the attack return without confirming that the bundle remains purchasable.",
     missableIds: ["missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
-    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"],
   },
   {
     id: "cutoff.cleyra-trunk-return.before-bridge",
@@ -1139,7 +1139,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "disputed",
     trigger: "The aggregate treasure warning spans separate windows: first-visit pickups, ATEs, and shops before Antlion; Freya's Emerald and Stiltzkin #2 before rejoining the party; missed Trunk chests on the required return before crossing the bridge; and evacuation rewards before exiting the Cathedral to fight Beatrix. Beatrix's steals happen during that final battle; after it, the story moves to the Red Rose and closes Cleyra. Sources differ on the broad last-chance label: Jegged places its Point of No Return callout before the forced Trunk return, while GameFAQs explicitly allows missed Trunk chests on that return. Use the separate safe checkpoints listed here.",
     missableIds: ["missable.disc-2.cleyra.treasures", "missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
-    sourceIds: ["gamefaqs-missables-71891", "jegged-missables", "jegged-cleyra", "gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+    sourceIds: ["gamefaqs-missables-71891", "jegged-missables", "jegged-cleyra", "gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"],
   },
   {
     id: "cutoff.alexandria-vivi.before-mini-theater",

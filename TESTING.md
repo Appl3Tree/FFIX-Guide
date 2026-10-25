@@ -4,7 +4,7 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Cleyra route-cutoff update. The audit reports 0 errors and 181 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 353 sources; all warnings link to 98 cutoff windows. The build emits 1,946.14 kB JavaScript (475.26 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
+`npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Cleyra route-cutoff and Stiltzkin source follow-up. The audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 354 sources; all warnings link to 98 cutoff windows. The build emits 1,948.79 kB JavaScript (476.03 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
 
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Treno ATE fallback source update. The audit reports 0 errors and 181 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 353 sources; all warnings link to 96 cutoff windows. The build emits 1,944.99 kB JavaScript (475.06 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
 

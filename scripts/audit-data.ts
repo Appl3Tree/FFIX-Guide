@@ -64,6 +64,7 @@ const achievementCatalogs = [
 ];
 
 const cleyraEvacuationWarning = missablesById.get("missable.disc-2.cleyra.out-of-harms-way");
+const cleyraStiltzkinWarning = missablesById.get("missable.disc-2.cleyra.stiltzkin-2");
 const cleyraEvacuationCutoff = cutoffsById.get("cutoff.cleyra-evacuation.choice-window");
 const cleyraFreyaCutoff = cutoffsById.get("cutoff.cleyra-freya.before-reunion");
 const cleyraTrunkReturnCutoff = cutoffsById.get("cutoff.cleyra-trunk-return.before-bridge");
@@ -85,13 +86,20 @@ if (
   !cleyraFreyaCutoff.trigger.includes("Freya's separate control segment") ||
   !cleyraFreyaCutoff.trigger.includes("before returning to the settlement entrance") ||
   !["missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"].every((missableId) => cleyraFreyaCutoff.missableIds.includes(missableId)) ||
-  !["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"].every((sourceId) => cleyraFreyaCutoff.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"].every((sourceId) => cleyraFreyaCutoff.sourceIds.includes(sourceId)) ||
   cleyraTrunkReturnCutoff?.certainty !== "source-supported" ||
   !cleyraTrunkReturnCutoff.trigger.includes("before crossing the bridge") ||
   !cleyraTrunkReturnCutoff.missableIds.includes("missable.disc-2.cleyra.treasures") ||
   !cleyraTrunkReturnCutoff.sourceIds.includes("gamefaqs-cleyra-71891")
 ) {
   errors.push("Cleyra's route map must separate the conservative Freya-phase Emerald/Stiltzkin checkpoint from the source-supported Trunk-chest return before the bridge.");
+}
+if (
+  cleyraStiltzkinWarning?.verification !== "partial" ||
+  !cleyraStiltzkinWarning.note.includes("does not confirm that the bundle remains for sale") ||
+  !["elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"].every((sourceId) => cleyraStiltzkinWarning.sourceIds.includes(sourceId))
+) {
+  errors.push("Cleyra's Stiltzkin warning must preserve the unresolved later-visit evidence and its RPGClassics/EliteGrindLab provenance.");
 }
 
 const lindblumTrolleyWarning = missablesById.get("missable.disc-1.lindblum.trolley-cutoff");
