@@ -1910,6 +1910,45 @@ const mythrilDaggerLindblumPath = itemAcquisitionPaths.find((path) => path.id ==
 if (!mythrilDaggerLindblumPath || mythrilDaggerLindblumPath.itemId !== "game-item.mythril-dagger" || mythrilDaggerLindblumPath.cost?.currency !== "gil" || mythrilDaggerLindblumPath.cost.amount !== 950) {
   errors.push("Mythril Dagger's early Lindblum recovery path must remain cataloged at 950 Gil.");
 }
+const iceCavernTreasureObjectiveId = "disc-1.ice-cavern.treasure-sweep";
+const iceCavernTreasureWarning = missablesById.get("missable.disc-1.ice-cavern.treasures");
+const iceCavernChestPaths = [
+  ["item-path.disc-1.ice-cavern.tent-chest", "game-item.tent"],
+  ["item-path.disc-1.ice-cavern.ether-chest", "game-item.ether"],
+  ["item-path.disc-1.ice-cavern.lower-ice-path-potion-chest", "game-item.potion"],
+  ["item-path.disc-1.ice-cavern.icicle-field-potion-chest", "game-item.potion"],
+  ["item-path.disc-1.ice-cavern.mage-masher-chest", "game-item.mage-masher"],
+  ["item-path.disc-1.ice-cavern.elixir-chest", "game-item.elixir"],
+  ["item-path.disc-1.ice-cavern.phoenix-down-chest", "game-item.phoenix-down"],
+  ["item-path.disc-1.ice-cavern.leather-wrist-chest", "game-item.leather-wrist"],
+];
+const iceCavernLaterRecoveryPaths = [
+  ["item-path.disc-2.cleyra.tent-shop", "game-item.tent"],
+  ["item-path.disc-2.journey-to-outer-continent.stiltzkin-3-ether", "game-item.ether"],
+  ["item-path.disc-2.cleyra.potion-shop", "game-item.potion"],
+  ["item-path.disc-3.ipsens-castle.kumool-mogshop.mage-masher", "game-item.mage-masher"],
+  ["item-path.disc-3.home-front.stiltzkin-5-elixir", "game-item.elixir"],
+  ["item-path.disc-2.cleyra.phoenix-down-shop", "game-item.phoenix-down"],
+  ["item-path.disc-2.treno.leather-wrist-shop", "game-item.leather-wrist"],
+];
+if (
+  !iceCavernTreasureWarning?.classification.includes("recoverable-later") ||
+  !iceCavernTreasureWarning.action.includes("two Potions") ||
+  !iceCavernTreasureWarning.recovery.includes("Stiltzkin's third bundle at Fossil Roo") ||
+  !iceCavernTreasureWarning.recovery.includes("Stiltzkin's fifth bundle at Alexandria") ||
+  !iceCavernTreasureWarning.recovery.includes("not the lost Ice Cavern chest copies") ||
+  !iceCavernTreasureWarning.consequence.includes("Treasure Hunter rank remains unresolved") ||
+  !iceCavernTreasureWarning.sourceIds.includes("gamefaqs-stiltzkin-shopping-71891") ||
+  !iceCavernTreasureWarning.sourceIds.includes("gamefaqs-home-front-71891") ||
+  !iceCavernTreasureWarning.sourceIds.includes("gamefaqs-ipsens-castle-71891") ||
+  iceCavernChestPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) =>
+    path.id === pathId && path.itemId === itemId && path.chapterId === "disc-1.ice-cavern" && path.method === "chest" &&
+    path.availability === "single-use" && path.walkthroughObjectiveIds?.includes(iceCavernTreasureObjectiveId) &&
+    path.sourceIds.includes("gamefaqs-ice-cavern-71891"))) ||
+  iceCavernLaterRecoveryPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === itemId))
+) {
+  errors.push("The Ice Cavern treasure warning must connect all eight one-time chests to their documented later item-type routes and preserve the unresolved rank effect.");
+}
 const nolrichPool = enemyEncounters.find((encounter) => encounter.id === "encounter.nolrich-heights.world-map-pool");
 const nolrichEnemyIds = ["enemy.carve-spider", "enemy.mu", "enemy.python"];
 if (!nolrichPool || nolrichPool.kind !== "random-pool" || nolrichPool.chapterId !== "disc-1.ice-cavern" ||
