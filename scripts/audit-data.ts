@@ -2266,6 +2266,52 @@ if (bentiniTrickSparrow?.stats.find((stat) => stat.field === "HP")?.value !== 19
   !bentiniTrickSparrow?.notes.some((note) => note.includes("Festival version") && note.includes("ordinary enemy table"))) {
   errors.push("Bentini Heights' ordinary Trick Sparrow profile must include its sourced stat/loot table and remain distinct from the Festival variant.");
 }
+const garganRooPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gargan-roo.random-pool");
+const garganRooBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.gargan-roo.ralvurahva");
+const crawlerRecord = enemyRecords.find((enemy) => enemy.id === "enemy.crawler");
+const dragonflyRecord = enemyRecords.find((enemy) => enemy.id === "enemy.dragonfly");
+const ralvurahvaRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvurahva");
+if (!garganRooPool || garganRooPool.kind !== "random-pool" ||
+  garganRooPool.chapterId !== "disc-2.journey-to-cleyra" ||
+  !garganRooPool.formation.some((entry) => entry.enemyId === "enemy.crawler" && entry.quantity === null) ||
+  !garganRooPool.formation.some((entry) => entry.enemyId === "enemy.dragonfly" && entry.quantity === null) ||
+  !garganRooPool.notes.some((note) => note.includes("Quina is absent") && note.includes("Matra Magic")) ||
+  !dragonflyRecord?.encounterIds.includes("encounter.gargan-roo.random-pool") ||
+  !dragonflyRecord?.sourceIds.includes("jegged-gargan-roo")) {
+  errors.push("Gargan Roo must keep its Crawler/Dragonfly area pool separate, source-linked, and explicit about Quina's absence.");
+}
+if (crawlerRecord?.chapterId !== "disc-2.journey-to-cleyra" ||
+  crawlerRecord.stats.find((stat) => stat.field === "HP")?.value !== 625 ||
+  crawlerRecord.steals.find((slot) => slot.slot === "common")?.itemId !== "game-item.antidote" ||
+  crawlerRecord.steals.find((slot) => slot.slot === "rare")?.itemId !== "game-item.phoenix-pinion" ||
+  crawlerRecord.drops.find((slot) => slot.slot === "uncommon")?.itemId !== "game-item.ether" ||
+  !crawlerRecord.facts.some((fact) => fact.category === "elemental-weakness" && fact.label === "Ice") ||
+  !crawlerRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Drain")) {
+  errors.push("Crawler must retain its Gargan Roo stats, sourced steal/drop table, Ice weakness, and Drain attack.");
+}
+const ralvurahvaHpClaims = ralvurahvaRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
+if (!garganRooBossEncounter || garganRooBossEncounter.kind !== "boss" ||
+  garganRooBossEncounter.chapterId !== "disc-2.journey-to-cleyra" ||
+  !garganRooBossEncounter.formation.some((entry) => entry.enemyId === "enemy.ralvurahva" && entry.quantity === 1) ||
+  !garganRooBossEncounter.objectiveIds.includes("disc-2.journey-to-cleyra.ralvurahva-steals") ||
+  !garganRooBossEncounter.missableIds.includes("missable.disc-2.journey-to-cleyra.ralvurahva-steals") ||
+  !garganRooBossEncounter.cutoffIds.includes("cutoff.gargan-roo.ralvurahva-steals") ||
+  !ralvurahvaRecord || ralvurahvaRecord.kind !== "boss" ||
+  ralvurahvaRecord.stats.find((stat) => stat.field === "level")?.value !== 13 ||
+  ralvurahvaRecord.stats.find((stat) => stat.field === "MP")?.value !== 3649 ||
+  !ralvurahvaHpClaims.some((stat) => stat.value === 2296 && stat.verification === "disputed") ||
+  !ralvurahvaHpClaims.some((stat) => stat.value === 2200 && stat.verification === "disputed") ||
+  !ralvurahvaHpClaims.some((stat) => stat.value === 2500 && stat.verification === "disputed") ||
+  !ralvurahvaRecord.steals.some((slot) => slot.slot === "common" && slot.itemId === "game-item.bone-wrist") ||
+  !ralvurahvaRecord.steals.some((slot) => slot.slot === "uncommon" && slot.itemId === "game-item.mythril-fork") ||
+  ralvurahvaRecord.drops.some((slot) => slot.itemId !== null) ||
+  !ralvurahvaRecord.routeObjectiveIds.includes("disc-2.journey-to-cleyra.ralvurahva-steals") ||
+  !ralvurahvaRecord.missableIds.includes("missable.disc-2.journey-to-cleyra.ralvurahva-steals") ||
+  !ralvurahvaRecord.cutoffIds.includes("cutoff.gargan-roo.ralvurahva-steals") ||
+  !ralvurahvaRecord.notes.some((note) => note.includes("70%/23%") && note.includes("100%/25%")) ||
+  !ralvurahvaRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Devil's Kiss")) {
+  errors.push("Gargan Roo must link Ralvurahva's boss profile to its existing steal warning/cutoff and preserve the HP and steal-rate source differences.");
+}
 const lindblumMountainPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.mountain-pool");
 const lindblumForestPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.forest-pool");
 if (!lindblumMountainPool || lindblumMountainPool.kind !== "random-pool" ||

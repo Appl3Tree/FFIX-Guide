@@ -85,6 +85,7 @@ const evilForestChapterId = "disc-1.evil-forest";
 const iceCavernChapterId = "disc-1.ice-cavern";
 const daliChapterId = "disc-1.village-of-dali";
 const summitStationChapterId = "disc-2.journey-to-treno";
+const garganRooChapterId = "disc-2.journey-to-cleyra";
 const lindblumChapterId = "disc-1.lindblum";
 const exploringLindblumChapterId = "disc-1.exploring-lindblum-kingdom";
 const journeyToBurmeciaChapterId = "disc-1.journey-to-burmecia";
@@ -157,6 +158,11 @@ const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
 const summitStationEnemySources = ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "elitegrindlab-south-gate"];
 const bentiniHeightsEnemySources = [enemyListSourceId, "gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station"];
+const garganRooEnemySources = [enemyListSourceId, "gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"];
+const garganRooBossSources = ["gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"];
+const garganRooRalvurahvaObjectiveId = "disc-2.journey-to-cleyra.ralvurahva-steals";
+const garganRooRalvurahvaMissableId = "missable.disc-2.journey-to-cleyra.ralvurahva-steals";
+const garganRooRalvurahvaCutoffId = "cutoff.gargan-roo.ralvurahva-steals";
 const lindblumPlateauSources = [enemyListSourceId, "gamefaqs-exploring-lindblum-71891", "cavesofnarshe-lindblum-walkthrough", "ffwiki-lindblum"];
 const lindblumLowlandSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891"];
 const qusMarshSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "elitegrindlab-qus-marsh", "gamefaqs-abilities-71891"];
@@ -934,6 +940,38 @@ const bentiniHeightsEncounters: EnemyEncounter[] = [
     missableIds: [],
     cutoffIds: [],
     notes: ["GameFAQs lists Mu, Mandragora, and Trick Sparrow for Bentini Heights; Jegged's broader Treno-area list also names Carve Spider and Ladybird. The friendly Ghost is a sidequest visitor, not a hostile random encounter. Exact formations and encounter rates are not published."],
+  },
+];
+
+const garganRooEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.gargan-roo.random-pool",
+    title: "Gargan Roo random encounters",
+    chapterId: garganRooChapterId,
+    location: "Gargan Roo tunnel",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.crawler", quantity: null },
+      { enemyId: "enemy.dragonfly", quantity: null },
+    ],
+    sourceIds: garganRooEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The sources identify Crawler and Dragonfly as the area roster but do not establish exact formation rates here. Quina is absent from the temporary Dagger/Steiner/Marcus party, so Dragonfly's Matra Magic should be learned earlier in Cleyra if desired."],
+  },
+  {
+    id: "encounter.gargan-roo.ralvurahva",
+    title: "Ralvurahva — outbound Gargant boss",
+    chapterId: garganRooChapterId,
+    location: "Outbound Gargant ride from Gargan Roo toward Alexandria",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.ralvurahva", quantity: 1 }],
+    sourceIds: garganRooBossSources,
+    objectiveIds: [garganRooRalvurahvaObjectiveId],
+    missableIds: [garganRooRalvurahvaMissableId],
+    cutoffIds: [garganRooRalvurahvaCutoffId],
+    notes: ["This is the one-time outbound fight before the party reaches Alexandria. Ralvurahva escapes at 0 HP, so finish any selected steals before attacking it down."],
   },
 ];
 
@@ -1944,7 +1982,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -3615,6 +3653,7 @@ const cleyraEnemyRecords: EnemyRecord[] = [
       "encounter.cleyra-trunk.path-to-cleyra.random-pool",
       "encounter.cleyra-trunk.sand-fork.random-pool",
       "encounter.cleyra-trunk.quicksand.random-pool",
+      "encounter.gargan-roo.random-pool",
     ],
     stats: enemyStats([["level", 8], ["HP", 348], ["MP", 295], ["EXP", 249], ["AP", 1], ["Gil", 307]]),
     steals: [enemyLoot("common", "game-item.eye-drops"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
@@ -3630,8 +3669,8 @@ const cleyraEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [cleyraBlueMagicObjectiveId] }],
     strategies: [{ title: "Use Ice or Wind and learn Matra Magic", detail: "Ice and Wind exploit Dragonfly's weaknesses. Quina can learn Matra Magic with Eat; watch for Buzz's Berserk and its Fira spell.", sourceIds: [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
     routeObjectiveIds: [cleyraBlueMagicObjectiveId],
-    notes: ["Dragonfly appears in every listed Cleyra Trunk pool. GameFAQs lists it alongside Carrion Worm and Sand Scorpion in the wider Cleyra reference, while room-specific routes distinguish the Trunk pools."],
-  }, cleyraChapterId, cleyraEnemySources),
+    notes: ["Dragonfly appears in every listed Cleyra Trunk pool and the Gargan Roo random pool. GameFAQs lists it alongside Carrion Worm and Sand Scorpion in the wider Cleyra reference, while room-specific routes distinguish the Trunk pools. Quina is absent during the Gargan Roo passage, so learn Matra Magic earlier in Cleyra if desired."],
+  }, cleyraChapterId, [...cleyraEnemySources, ...garganRooEnemySources]),
   chapterEnemy({
     id: "enemy.sand-golem",
     name: "Sand Golem",
@@ -4081,6 +4120,89 @@ const summitStationEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [],
     notes: ["GameFAQs describes Trick Sparrow as the same enemy across areas and says the Festival version differs only in drops. Its separate Hunt record preserves the event-specific reward and steal disagreement; this profile records the ordinary enemy table."],
   }, summitStationChapterId, bentiniHeightsEnemySources),
+];
+
+const garganRooEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.crawler",
+    name: "Crawler",
+    encounterIds: ["encounter.gargan-roo.random-pool"],
+    stats: enemyStats([["level", 10], ["HP", 625], ["MP", 358], ["EXP", 480], ["AP", 2], ["Gil", 323]]),
+    steals: [
+      enemyLoot("common", "game-item.antidote"),
+      enemyLoot("uncommon", "game-item.phoenix-down"),
+      enemyLoot("semi-rare", "game-item.hi-potion"),
+      enemyLoot("rare", "game-item.phoenix-pinion"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"),
+      enemyLoot("common", "game-item.ore"),
+      enemyLoot("uncommon", "game-item.ether"),
+      enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "Bug"),
+      enemyFact("elemental-weakness", "Ice"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Claws", [enemyListSourceId], "A physical attack that typically deals around 100 damage."),
+      sourcedFact("attack", "Stomach", [enemyListSourceId], "A physical attack that typically deals around 100 damage; GameFAQs describes it as slightly stronger than Claws."),
+      sourcedFact("attack", "Drain", [enemyListSourceId], "A physical attack that typically deals around 100 damage; GameFAQs describes it as slightly stronger than Claws."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Use Ice and defeat it before its attacks add up", detail: "Crawler is weak to Ice. Its Claws, Stomach, and Drain attacks can each deal roughly 100 damage, so remove it promptly if the party is under-geared.", sourceIds: [enemyListSourceId, "gamefaqs-treno-71891", "jegged-gargan-roo"] }],
+    routeObjectiveIds: [],
+    notes: ["The GameFAQs enemy table supplies the stat, steal, drop, type, and weakness profile. Gargan Roo is also described as an optional grinding area; its Crawler formations and encounter rates are not modeled here."],
+  }, garganRooChapterId, garganRooEnemySources),
+  chapterBoss({
+    id: "enemy.ralvurahva",
+    name: "Ralvurahva",
+    encounterIds: ["encounter.gargan-roo.ralvurahva"],
+    stats: [
+      { field: "level", value: 13, sourceIds: ["gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo"], verification: "cross-checked" },
+      { field: "HP", value: 2296, sourceIds: ["gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo"], verification: "disputed" },
+      { field: "HP", value: 2200, sourceIds: ["elitegrindlab-gargan-roo"], verification: "disputed" },
+      { field: "HP", value: 2500, sourceIds: ["elitegrindlab-gargan-roo"], verification: "disputed" },
+      { field: "MP", value: 3649, sourceIds: ["gamefaqs-treno-71891"], verification: "single-source" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo"], verification: "cross-checked" },
+      { field: "AP", value: 0, sourceIds: ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo"], verification: "cross-checked" },
+      { field: "Gil", value: 0, sourceIds: ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo"], verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.bone-wrist", garganRooBossSources),
+      sourcedLoot("uncommon", "game-item.mythril-fork", garganRooBossSources),
+      sourcedLoot("semi-rare", null, ["gamefaqs-treno-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-treno-71891"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, garganRooBossSources, "Nothing"),
+      sourcedLoot("common", null, garganRooBossSources, "Nothing"),
+      sourcedLoot("uncommon", null, garganRooBossSources, "Nothing"),
+      sourcedLoot("rare", null, garganRooBossSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "None", ["gamefaqs-treno-71891"]),
+      sourcedFact("elemental-weakness", "Ice", ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo"]),
+      sourcedFact("elemental-resistance", "None listed", ["gamefaqs-treno-71891"]),
+      sourcedFact("status-vulnerability", "Darkness and Slow", ["gamefaqs-treno-71891", "jegged-gargan-roo"]),
+      sourcedFact("attack", "String", ["gamefaqs-treno-71891"], "Deals roughly 170 damage and can inflict Slow."),
+      sourcedFact("attack", "Devil's Kiss", ["gamefaqs-treno-71891"], "Deals roughly 140 damage and can inflict Poison."),
+      sourcedFact("attack", "Blizzara", ["gamefaqs-treno-71891"], "Deals roughly 125 damage."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Take the steals before reducing it to 0 HP", detail: "Marcus can use Attack, Steal, and Item but has no abilities. Keep him attempting Bone Wrist and Mythril Fork while Dagger heals with Cure or tries Blind; Steiner can handle most of the damage after the steals. Ralvurahva escapes at 0 HP and awards no spoils.", sourceIds: garganRooBossSources },
+      { title: "Protect the temporary party from status effects", detail: "Equip Antibody on Dagger and Steiner if available. Blind and Slow are listed vulnerabilities; the boss can inflict Slow with String and Poison with Devil's Kiss.", sourceIds: ["gamefaqs-treno-71891", "jegged-gargan-roo", "gamerguides-gargan-roo"] },
+    ],
+    routeObjectiveIds: [garganRooRalvurahvaObjectiveId],
+    notes: [
+      "GameFAQs, Jegged, and EliteGrindLab's publisher comparison support Level 13 and HP 2,296. EliteGrindLab also reports outlier HP claims of 2,200 and 2,500 from other references, so all three values remain marked disputed.",
+      "The boss's steal tiers are Bone Wrist then Mythril Fork, but published odds disagree: some route tables print 70%/23%, while other sources imply 100%/25%. The catalog records the items and tiers without encoding percentages.",
+      "The temporary party is Dagger, Steiner, and Marcus. Quina is not available for the Gargan Roo Dragonfly encounter; the area random pool records the roster without formation probabilities.",
+      "Ralvurahva escapes at 0 HP, so it grants no EXP, AP, Gil, or drops. The item steals are the only rewards from this encounter.",
+      "The profile is based on PlayStation walkthrough sources; parity with remastered releases has not been audited.",
+    ],
+  }, garganRooChapterId, garganRooBossSources, [garganRooRalvurahvaMissableId], [garganRooRalvurahvaCutoffId]),
 ];
 
 const lindblumEnemyRecords: EnemyRecord[] = [
@@ -4824,6 +4946,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...grottoEnemyRecords,
   ...burmeciaEnemyRecords,
   ...cleyraEnemyRecords,
+  ...garganRooEnemyRecords,
   chapterBoss({
     id: "enemy.beatrix-alexandria",
     name: "Beatrix (Alexandria)",
@@ -4986,8 +5109,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, summitStationChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, summitStationChapterId, garganRooChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
