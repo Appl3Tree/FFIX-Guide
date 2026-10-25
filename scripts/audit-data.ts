@@ -1125,6 +1125,53 @@ for (const itemId of cleyraProductIds) {
     errors.push(`Cleyra shop product ${itemId} has no modeled acquisition path after Cleyra.`);
   }
 }
+const cleyraBossSteals = [
+  { pathId: "item-path.disc-2.cleyra.antlion-annoyntment-steal", itemId: "game-item.annoyntment", objectiveId: "disc-2.cleyra.antlion-steals" },
+  { pathId: "item-path.disc-2.cleyra.mythril-vest-antlion-steal", itemId: "game-item.mythril-vest", objectiveId: "disc-2.cleyra.antlion-steals" },
+  { pathId: "item-path.disc-2.cleyra.antlion-gold-helm-steal", itemId: "game-item.gold-helm", objectiveId: "disc-2.cleyra.antlion-steals" },
+  { pathId: "item-path.disc-2.cleyra.beatrix-phoenix-down-steal", itemId: "game-item.phoenix-down", objectiveId: "disc-2.cleyra.beatrix-steals" },
+  { pathId: "item-path.disc-2.cleyra.beatrix-thunder-gloves-steal", itemId: "game-item.thunder-gloves", objectiveId: "disc-2.cleyra.beatrix-steals" },
+  { pathId: "item-path.disc-2.cleyra.beatrix-ice-brand-steal", itemId: "game-item.ice-brand", objectiveId: "disc-2.cleyra.beatrix-steals" },
+];
+for (const expected of cleyraBossSteals) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!path) {
+    errors.push(`Cleyra boss-steal coverage is missing ${expected.pathId}.`);
+    continue;
+  }
+  if (path.itemId !== expected.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== "steal" ||
+    path.quantity !== 1 || path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
+    errors.push(`Cleyra boss-steal path ${expected.pathId} must match its item, one-time encounter, and warning objective.`);
+  }
+  for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"]) {
+    if (!path.sourceIds.includes(sourceId)) errors.push(`Cleyra boss-steal path ${expected.pathId} is missing source ${sourceId}.`);
+  }
+  if (!itemAcquisitionPaths.some((candidate) => candidate.itemId === expected.itemId &&
+    guideAreas.findIndex((area) => area.id === candidate.chapterId) > cleyraChapterIndex)) {
+    errors.push(`Cleyra boss-steal item ${expected.itemId} needs a later item-type recovery path.`);
+  }
+}
+const antlionAnnoyntmentDrop = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.antlion-annoyntment-drop");
+if (!antlionAnnoyntmentDrop || antlionAnnoyntmentDrop.itemId !== "game-item.annoyntment" ||
+  antlionAnnoyntmentDrop.chapterId !== "disc-2.cleyra" || antlionAnnoyntmentDrop.method !== "drop" ||
+  antlionAnnoyntmentDrop.quantity !== 1 || antlionAnnoyntmentDrop.availability !== "one-time-encounter" ||
+  !antlionAnnoyntmentDrop.walkthroughObjectiveIds?.includes("disc-2.cleyra.antlion-steals") ||
+  !antlionAnnoyntmentDrop.sourceIds.includes("gamefaqs-cleyra-71891") ||
+  !antlionAnnoyntmentDrop.sourceIds.includes("elitegrindlab-cleyra")) {
+  errors.push("Antlion's separate guaranteed Annoyntment drop needs a sourced one-time drop path linked to the Cleyra boss checklist.");
+}
+const cleyraAnnoyntmentRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.cleyra-recovery.annoyntment");
+if (!cleyraAnnoyntmentRecovery || cleyraAnnoyntmentRecovery.itemId !== "game-item.annoyntment" || cleyraAnnoyntmentRecovery.cost?.amount !== 150) {
+  errors.push("Cleyra Annoyntment recovery needs the priced 150-Gil Lindblum Disc II item-shop path.");
+}
+const cleyraPhoenixDownRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.cleyra-recovery.phoenix-down");
+if (!cleyraPhoenixDownRecovery || cleyraPhoenixDownRecovery.itemId !== "game-item.phoenix-down" || cleyraPhoenixDownRecovery.cost?.amount !== 150) {
+  errors.push("Cleyra Phoenix Down recovery needs the priced 150-Gil Lindblum Disc II item-shop path.");
+}
+const cleyraGoldHelmRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.cleyra-recovery.gold-helm-treno-shop");
+if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.cost?.amount !== 1800) {
+  errors.push("Cleyra Gold Helm recovery needs the Disc III Treno shop path priced at 1,800 Gil.");
+}
 const broadswordId = "game-item.broadsword";
 const broadswordPathIds = [
   "item-path.disc-1.alexandria.broadsword-steiner-starting-equipment",
