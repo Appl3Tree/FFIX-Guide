@@ -2812,7 +2812,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "mountain-path-encounters-and-boss-prep",
             kind: "optional",
             text: "The path's listed field encounters are Gnoll, Ochu, and Troll. Heal the party, check Eiko's abilities, and use the back row for the upcoming Hilgigars fight.",
-            detail: "No full enemy or encounter database has been verified for this area yet; the names above follow the reviewed route list.",
+            detail: "The Mountain Path pool is Gnoll, Ochu, and Troll; the Lucid Plains pool is Blazer Beetle, Goblin Mage, and Troll. The bestiary records their source-listed combat tables. Quina leaves as soon as this path begins, so Gnoll's Vanish, Ochu's LV3 Def-less, Troll's Vanish, and Blazer Beetle's Limit Glove cannot be learned here on the first pass. Hornet, Lamia, and Mandragora are earlier teachers for those skills; later Mountain Path access with Quina remains unverified.",
           },
           {
             id: "mountain-path-hilgigars-boss",
@@ -2847,8 +2847,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lucid-plains-friendly-yeti",
             kind: "optional",
-            text: "Check the forested route outside Madain Sari for the friendly Yeti. Give it 2 Ore to receive 20 AP and an Elixir, then continue to the village if you are ready.",
-            detail: "The route sources place the encounter on Lucid Plains or in the nearby forest by Madain Sari; the guide keeps that map-area wording broad. This is an optional Friendly Creatures stop.",
+            text: "Check the forested Lucid Plains route outside Madain Sari for the Friendly Yeti. Give it 2 Ore to receive 20 AP and an Elixir, then continue to the village if you are ready.",
+            detail: "The Lucid Plains regular pool is Blazer Beetle, Goblin Mage, and Troll; the Friendly Yeti is tracked as its own non-hostile encounter, separate from the ordinary Yeti. The older PlayStation Monster List provides its partial stats, while the route sources give its 2-Ore reward.",
             objectiveIds: ["disc-2.conde-petie-mountain-path.friendly-yeti"],
           },
           {

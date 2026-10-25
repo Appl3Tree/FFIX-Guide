@@ -4,11 +4,11 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint` and `git diff --check` pass. `npm run build` passes typecheck, data audit, and production build with 0 audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 340 sources. All 136 missable records link to 88 cutoff windows, including all 79 high/critical records. The catalog has 200 items and 767 paths across 42 slices, 38 recipes, 75 targets, and 159 ability claims; the bestiary has 92 partial records across 17 slices and 77 encounter groups. Bundle: 1,839.70 kB JavaScript (448.46 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. Tests, browser review of the new bestiary entries, and direct game/release verification were not run.
+`npm run lint` and `git diff --check` pass. `npm run build` passes typecheck, data audit, and production build with 0 audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 340 sources. All 136 missable records link to 88 cutoff windows, including all 79 high/critical records. The catalog has 200 items and 767 paths across 42 slices, 38 recipes, 75 targets, and 159 ability claims; the bestiary has 98 partial records across 18 slices and 81 encounter groups. Bundle: 1,854.55 kB JavaScript (451.34 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. Tests, browser review of the new bestiary entries, and direct game/release verification were not run.
 
 ## Latest change status
 
-The latest B04 slice adds a separate Dead Forest field pool for Griffin, Myconid, and Zemzelett, plus Myconid's Mighty Guard and Zemzelett's White Wind teacher records. The audit protects the Dead Forest roster from the separate Magdalene Forest world-map pool. Lint, audit/build, and whitespace checks pass; direct game/release and browser verification remain open.
+The latest B04 slice adds the Conde Petie Mountain Path and Lucid Plains pools, Hilgigars, and a separate Friendly Yeti record. The audit protects the separate encounter rosters, Hilgigars item/cutoff links, and friendly/ordinary Yeti distinction. Lint, audit/build, and whitespace checks pass; direct game/release and browser verification remain open.
 
 The preceding B01/B02 slices record the linear post-Kuja passage back through Bran Bal and keep the earlier treasure-room sweep cutoff conservative because the route sources do not verify free chest access. The Mois-letter return before Cargo Ship departure retains a Game8/Jinsoku timing disagreement; the Desert Palace slice identifies where world-map travel resumes after the sinkhole lock-in. Lint, typecheck, audit, production build, and `git diff --check` pass. Tests and direct game/release/UI verification were not run.
 

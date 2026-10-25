@@ -99,11 +99,19 @@ const meltigeminiCutoffId = "cutoff.mount-gulug.meltigemini-steals";
 const enemyListSourceId = "gamefaqs-enemy-list-71891";
 const outerContinentChapterId = "disc-2.outer-continent";
 const magdaleneForestChapterId = "disc-2.magdalene-forest";
+const mountainPathChapterId = "disc-2.conde-petie-mountain-path";
 const outerContinentBlueMagicObjectiveId = "disc-2.outer-continent.blue-magic";
 const outerContinentFriendlyLadybugObjectiveId = "disc-2.outer-continent.friendly-ladybug";
+const mountainPathFriendlyYetiObjectiveId = "disc-2.conde-petie-mountain-path.friendly-yeti";
+const hilgigarsStealsObjectiveId = "disc-2.conde-petie-mountain-path.hilgigars-steals";
+const hilgigarsStealsMissableId = "missable.disc-2.conde-petie-mountain-path.hilgigars-steals";
+const hilgigarsStealsCutoffId = "cutoff.conde-petie.hilgigars-steals";
 const outerContinentEncounterSources = ["gamefaqs-monster-list-20490"];
 const deadForestEncounterSources = ["gamefaqs-magdalene-forest-71891", enemyListSourceId];
 const deadForestEnemySources = [enemyListSourceId, "gamefaqs-magdalene-forest-71891", "gamefaqs-abilities-71891"];
+const mountainPathEnemySources = [enemyListSourceId, "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-abilities-71891"];
+const lucidPlainsEnemySources = [...mountainPathEnemySources, "gamefaqs-monster-list-20490"];
+const friendlyYetiSources = ["gamefaqs-monster-list-20490", "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"];
 const outerContinentEnemySources = [enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-outer-continent-71891", "jegged-conde-petie", "rpgclassics-outer-continent", "gamefaqs-abilities-71891"];
 const cactuarSources = [...outerContinentEnemySources, "jegged-world-map-cactuar"];
 const goblinMageSources = [...outerContinentEnemySources, "jegged-world-map-goblin-mage"];
@@ -1078,6 +1086,69 @@ const outerContinentEncounters: EnemyEncounter[] = [
   },
 ];
 
+const mountainPathEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.conde-petie-mountain-path.random-pool",
+    title: "Conde Petie Mountain Path random encounters",
+    chapterId: mountainPathChapterId,
+    location: "Mountain Path screens before and after the Hilgigars fork",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.gnoll", quantity: null },
+      { enemyId: "enemy.ochu", quantity: null },
+      { enemyId: "enemy.troll", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", enemyListSourceId],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs lists Gnoll, Ochu, and Troll for the path. The reference table does not establish exact formations or encounter frequencies."],
+  },
+  {
+    id: "encounter.conde-petie-mountain-path.hilgigars",
+    title: "Hilgigars — Mountain Path boss",
+    chapterId: mountainPathChapterId,
+    location: "Upper root path west of Suzuna and Stiltzkin",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.hilgigars", quantity: 1 }],
+    sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"],
+    objectiveIds: [hilgigarsStealsObjectiveId],
+    missableIds: [hilgigarsStealsMissableId],
+    cutoffIds: [hilgigarsStealsCutoffId],
+    notes: ["Hilgigars' three steal targets link to the existing one-fight warning and item acquisition paths. Published drop tables differ, so the record preserves the GameFAQs table with the Jegged prose disagreement noted."],
+  },
+  {
+    id: "encounter.conde-petie-mountain-path.lucid-plains-pool",
+    title: "Lucid Plains world-map encounters",
+    chapterId: mountainPathChapterId,
+    location: "World-map grass and forest approach between the Mountain Path exit and Madain Sari",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.blazer-beetle", quantity: null },
+      { enemyId: "enemy.goblin-mage", quantity: null },
+      { enemyId: "enemy.troll", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "gamefaqs-monster-list-20490", enemyListSourceId],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route lists Blazer Beetle, Goblin Mage, and Troll on Lucid Plains; the older monster list and enemy table supply the combat entries. This roster does not imply exact formations or rates."],
+  },
+  {
+    id: "encounter.conde-petie-mountain-path.friendly-yeti",
+    title: "Friendly Yeti — Lucid Plains",
+    chapterId: mountainPathChapterId,
+    location: "Forest terrain on Lucid Plains",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.friendly-yeti", quantity: null }],
+    sourceIds: friendlyYetiSources,
+    objectiveIds: [mountainPathFriendlyYetiObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is the optional Friendly Creature encounter, separate from the ordinary Yeti battle record. Feed it 2 Ore for 20 AP and an Elixir; encounter odds are not modeled."],
+  },
+];
+
 const deadForestEncounters: EnemyEncounter[] = [
   {
     id: "encounter.magdalene-forest.dead-forest-pool",
@@ -1459,7 +1530,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -3653,7 +3724,7 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.goblin-mage",
     name: "Goblin Mage",
-    encounterIds: ["encounter.outer-continent.dirt-pool", "encounter.outer-continent.grass-pool"],
+    encounterIds: ["encounter.outer-continent.dirt-pool", "encounter.outer-continent.grass-pool", "encounter.conde-petie-mountain-path.lucid-plains-pool"],
     stats: [
       { field: "level", value: 15, sourceIds: goblinMageStatSources, verification: "cross-checked" },
       { field: "HP", value: 983, sourceIds: goblinMageStatSources, verification: "cross-checked" },
@@ -3851,6 +3922,172 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
   },
 ];
 
+const mountainPathEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.gnoll",
+    name: "Gnoll",
+    encounterIds: ["encounter.conde-petie-mountain-path.random-pool"],
+    stats: enemyStats([["level", 18], ["HP", 1375], ["MP", 586], ["EXP", 1368], ["AP", 1], ["Gil", 691]]),
+    steals: [
+      enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Nothing"),
+      enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Sapphire"),
+      enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("elemental-weakness", "None listed"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Blizzara and Gnoll Attack", "Both are direct attacks; Gnoll can also cast Vanish and Might on itself."),
+      enemyFact("attack", "Vanish and Might", "Self-targeting support spells."),
+    ],
+    blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Defeat it before it buffs itself", detail: "GameFAQs warns that Gnoll can use Vanish and Might on itself; Blizzara and Gnoll Attack are its direct damage options. Quina leaves before the path's encounters begin, so this is not an Eat opportunity on the first pass.", sourceIds: mountainPathEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["The Enemy List gives the four steal and four drop slots shown here. Vanish is also taught earlier by Hornet in Gizamaluke's Grotto; the Mountain Path re-entry window with Quina has not been established."],
+  }, mountainPathChapterId, mountainPathEnemySources),
+  chapterEnemy({
+    id: "enemy.ochu",
+    name: "Ochu",
+    encounterIds: ["encounter.conde-petie-mountain-path.random-pool"],
+    stats: enemyStats([["level", 16], ["HP", 3568], ["MP", 622], ["EXP", 2093], ["AP", 2], ["Gil", 845]]),
+    steals: [
+      enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Nothing"),
+      enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"),
+      enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether"),
+    ],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("elemental-weakness", "Fire"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Thorn Whip", "Single-target physical damage."),
+      enemyFact("attack", "Blizzara", "Single-target Ice-elemental damage."),
+      enemyFact("attack", "Slow", "Inflicts Slow."),
+    ],
+    blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Fire and watch for Slow", detail: "Ochu is weak to Fire. Thorn Whip and Blizzara deal damage, while Slow can reduce a character's turns. Quina leaves before the path's encounters begin, so this is not an Eat opportunity on the first pass.", sourceIds: mountainPathEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["The Enemy List lists LV3 Def-less as Ochu's Eat result. Lamia in Gizamaluke's Grotto is an earlier teacher for this skill; the Mountain Path re-entry window with Quina has not been established."],
+  }, mountainPathChapterId, mountainPathEnemySources),
+  chapterEnemy({
+    id: "enemy.troll",
+    name: "Troll",
+    encounterIds: ["encounter.conde-petie-mountain-path.random-pool", "encounter.conde-petie-mountain-path.lucid-plains-pool"],
+    stats: enemyStats([["level", 20], ["HP", 1469], ["MP", 623], ["EXP", 2093], ["AP", 1], ["Gil", 854]]),
+    steals: [
+      enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.tent"),
+      enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"),
+      enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("elemental-weakness", "None listed"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Spear", "Single-target physical damage."),
+      enemyFact("attack", "Solution", "Physical damage that can inflict Berserk."),
+      enemyFact("attack", "Blizzara", "Ice-elemental damage."),
+      enemyFact("attack", "Counter", "Can counter damage with a physical attack."),
+    ],
+    blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Plan for its strong counterattacks", detail: "The source lists Spear, Blizzara, and Counter as damaging moves; Solution also inflicts Berserk. GameFAQs says Troll also appears around Madain Sari, including the Lucid Plains roster.", sourceIds: mountainPathEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["Troll is listed in both the Mountain Path and Madain Sari/Lucid Plains encounter areas. It is also an alternate Vanish teacher, though Hornet is available earlier in Gizamaluke's Grotto."],
+  }, mountainPathChapterId, mountainPathEnemySources),
+  chapterEnemy({
+    id: "enemy.blazer-beetle",
+    name: "Blazer Beetle",
+    encounterIds: ["encounter.conde-petie-mountain-path.lucid-plains-pool"],
+    stats: enemyStats([["level", 19], ["HP", 1468], ["MP", 603], ["EXP", 1548], ["AP", 1], ["Gil", 740]]),
+    steals: [
+      enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Nothing"),
+      enemyLoot("semi-rare", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"),
+      enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether"),
+    ],
+    facts: [
+      enemyFact("type", "Bug"),
+      enemyFact("elemental-weakness", "None listed"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Fira and Charge", "The Enemy List describes both as dealing heavy damage."),
+      enemyFact("attack", "Hit", "A physical attack."),
+    ],
+    blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Bug Killer and check Limit Glove", detail: "The Enemy List recommends Bug Killer against Blazer Beetle. Quina can learn Limit Glove with Eat if the skill is still missing, though Mandragora is an earlier teacher on the Lindblum Plateau.", sourceIds: mountainPathEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["The Enemy List provides the stat, steal/drop, elemental, status, and attack table. Its location section groups this enemy among Madain Sari-area encounters; the Disc II route lists it on Lucid Plains."],
+  }, mountainPathChapterId, lucidPlainsEnemySources),
+  chapterBoss({
+    id: "enemy.hilgigars",
+    name: "Hilgigars",
+    encounterIds: ["encounter.conde-petie-mountain-path.hilgigars"],
+    stats: [
+      ...crossCheckedStats([["level", 28], ["HP", 8106]], ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"]),
+      ...sourcedStats([["MP", 908], ["EXP", 0], ["AP", 9], ["Gil", 2136]], ["gamefaqs-conde-petie-mountain-path-71891"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.phoenix-down", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"]),
+      sourcedLoot("uncommon", "game-item.mythril-fork", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"]),
+      sourcedLoot("semi-rare", null, ["gamefaqs-conde-petie-mountain-path-71891"], "Nothing"),
+      sourcedLoot("rare", "game-item.fairy-flute", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"]),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.tent", ["gamefaqs-conde-petie-mountain-path-71891"]),
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-conde-petie-mountain-path-71891"]),
+      sourcedLoot("uncommon", "game-item.elixir", ["gamefaqs-conde-petie-mountain-path-71891"]),
+      sourcedLoot("rare", "game-item.elixir", ["gamefaqs-conde-petie-mountain-path-71891"]),
+    ],
+    facts: [
+      sourcedFact("type", "Human", ["gamefaqs-conde-petie-mountain-path-71891"]),
+      sourcedFact("elemental-weakness", "None listed", ["gamefaqs-conde-petie-mountain-path-71891"]),
+      sourcedFact("elemental-resistance", "None listed", ["gamefaqs-conde-petie-mountain-path-71891"]),
+      sourcedFact("status-vulnerability", "Mini, Silence, and Slow", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"]),
+      sourcedFact("attack", "Hiphop and Knockdown", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"], "Heavy physical attacks."),
+      sourcedFact("attack", "Earthquake", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"], "Earth-elemental attack; Float can protect the party."),
+      sourcedFact("attack", "Curaga", ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"], "Self-healing spell that Silence can prevent."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Silence and Slow before attempting steals", detail: "Silence prevents Curaga and Slow reduces the boss's turns. Use Float to protect against Earthquake, and stop stealing if the party's survival is at risk.", sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"] },
+      { title: "Fairy Flute is the rare steal", detail: "The steal table lists Phoenix Down, Mythril Fork, and Fairy Flute; Jegged describes Fairy Flute as a very rare target. The item-type recovery routes are linked from the existing steal objective.", sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"] },
+    ],
+    routeObjectiveIds: [hilgigarsStealsObjectiveId],
+    notes: ["The GameFAQs walkthrough's boss table lists Always Tent and three Elixir drop slots. Jegged's prose instead names Phoenix Down and Elixir without assigning slots, so the published drop-table disagreement is retained; this entry does not turn the conflict into a guaranteed extra item."],
+  }, mountainPathChapterId, ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"], [hilgigarsStealsMissableId], [hilgigarsStealsCutoffId]),
+  {
+    ...chapterEnemy({
+      id: "enemy.friendly-yeti",
+      name: "Friendly Yeti",
+      encounterIds: ["encounter.conde-petie-mountain-path.friendly-yeti"],
+      stats: sourcedStats([["level", 6], ["MP", 265], ["EXP", 0], ["AP", 20], ["Gil", 0]], ["gamefaqs-monster-list-20490"]),
+      steals: [],
+      drops: [],
+      facts: [],
+      blueMagic: [],
+      strategies: [{ title: "Feed 2 Ore for the Friendly Creature reward", detail: "Give the friendly Yeti two Ore to receive 20 AP and an Elixir. This quest reward is kept in the strategy note rather than represented as a normal steal or battle drop.", sourceIds: friendlyYetiSources }],
+      routeObjectiveIds: [mountainPathFriendlyYetiObjectiveId],
+      notes: ["The older PlayStation Monster List marks the friendly form as Lucid Plains, Level 6, 265 MP, 20 AP, and no HP value. Its reward is distinct from the normal Yeti's combat table."],
+    }, mountainPathChapterId, friendlyYetiSources),
+    kind: "friendly" as const,
+    versionScope: "Older PAL PlayStation Friendly Creature reference; release and region parity have not been audited.",
+    missableIds: [],
+    cutoffIds: [],
+  },
+];
+
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
@@ -3861,6 +4098,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...lindblumEnemyRecords,
   ...lindblumAreaEnemyRecords,
   ...outerContinentEnemyRecords,
+  ...mountainPathEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -3984,8 +4222,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

@@ -1692,6 +1692,46 @@ if (!friendlyLadybird || friendlyLadybird.kind !== "friendly" || friendlyLadybir
   outerContinentPools.some((pool) => pool.formation.some((member) => member.enemyId === "enemy.ladybird"))) {
   errors.push("Friendly Ladybird must remain a separate non-hostile record and must not inherit ordinary Ladybird combat loot or stats.");
 }
+const mountainPathPoolExpectations = [
+  { id: "encounter.conde-petie-mountain-path.random-pool", kind: "random-pool", roster: ["enemy.gnoll", "enemy.ochu", "enemy.troll"] },
+  { id: "encounter.conde-petie-mountain-path.hilgigars", kind: "boss", roster: ["enemy.hilgigars"] },
+  { id: "encounter.conde-petie-mountain-path.lucid-plains-pool", kind: "random-pool", roster: ["enemy.blazer-beetle", "enemy.goblin-mage", "enemy.troll"] },
+  { id: "encounter.conde-petie-mountain-path.friendly-yeti", kind: "random-pool", roster: ["enemy.friendly-yeti"] },
+];
+const mountainPathEncounters = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.conde-petie-mountain-path");
+if (mountainPathEncounters.length !== mountainPathPoolExpectations.length || mountainPathPoolExpectations.some(({ id, kind, roster }) => {
+  const encounter = mountainPathEncounters.find((candidate) => candidate.id === id);
+  const expectedSource = id === "encounter.conde-petie-mountain-path.random-pool" ? "gamefaqs-enemy-list-71891" : "gamefaqs-conde-petie-mountain-path-71891";
+  return !encounter || encounter.kind !== kind || !sameSortedValues(encounter.formation.map((member) => member.enemyId), roster) ||
+    (kind === "random-pool" && encounter.formation.some((member) => member.quantity !== null)) ||
+    !encounter.sourceIds.includes(expectedSource);
+})) {
+  errors.push("Conde Petie Mountain Path and Lucid Plains must retain their separate source-backed rosters and the dedicated Friendly Yeti encounter without inferred formations.");
+}
+const hilgigarsEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.conde-petie-mountain-path.hilgigars");
+const hilgigarsRecord = enemyRecords.find((enemy) => enemy.id === "enemy.hilgigars");
+const hilgigarsStealPathSlugs = itemAcquisitionPaths
+  .filter((path) => path.walkthroughObjectiveIds?.includes("disc-2.conde-petie-mountain-path.hilgigars-steals"))
+  .map((path) => path.itemId);
+if (!hilgigarsEncounter || !hilgigarsRecord || hilgigarsRecord.kind !== "boss" ||
+  !hilgigarsEncounter.objectiveIds.includes("disc-2.conde-petie-mountain-path.hilgigars-steals") ||
+  !hilgigarsEncounter.missableIds.includes("missable.disc-2.conde-petie-mountain-path.hilgigars-steals") ||
+  !hilgigarsEncounter.cutoffIds.includes("cutoff.conde-petie.hilgigars-steals") ||
+  !["game-item.phoenix-down", "game-item.mythril-fork", "game-item.fairy-flute"].every((itemId) => hilgigarsStealPathSlugs.includes(itemId)) ||
+  !hilgigarsRecord.notes.some((note) => note.includes("drop slots") && note.includes("Jegged"))) {
+  errors.push("Hilgigars must link its boss record to the existing steal objective, warning, cutoff, three item paths, and source-specific drop disagreement.");
+}
+const friendlyYeti = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-yeti");
+const ordinaryYeti = enemyRecords.find((enemy) => enemy.id === "enemy.yeti");
+const lucidPlainsPool = enemyEncounters.find((encounter) => encounter.id === "encounter.conde-petie-mountain-path.lucid-plains-pool");
+if (!friendlyYeti || friendlyYeti.kind !== "friendly" || friendlyYeti.stats.some((stat) => stat.field === "HP") ||
+  !friendlyYeti.stats.some((stat) => stat.field === "AP" && stat.value === 20) || friendlyYeti.steals.length !== 0 || friendlyYeti.drops.length !== 0 ||
+  !friendlyYeti.routeObjectiveIds.includes("disc-2.conde-petie-mountain-path.friendly-yeti") ||
+  !ordinaryYeti || ordinaryYeti.kind !== "ordinary" || ordinaryYeti.id === friendlyYeti.id ||
+  lucidPlainsPool?.formation.some((member) => member.enemyId === "enemy.friendly-yeti") ||
+  !lucidPlainsPool?.formation.some((member) => member.enemyId === "enemy.goblin-mage")) {
+  errors.push("Lucid Plains must keep Friendly Yeti separate from ordinary Yeti combat and preserve Goblin Mage's shared Outer Continent record.");
+}
 const huntZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
 if (outerZaghnol?.encounterIds.includes("encounter.lindblum.festival-zaghnol") || huntZaghnol?.encounterIds.some((encounterId) => encounterId.startsWith("encounter.outer-continent."))) {
   errors.push("The world-map Zaghnol [B] and Festival of the Hunt Zaghnol must remain separate variants.");
