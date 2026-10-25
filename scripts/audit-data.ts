@@ -1706,6 +1706,79 @@ const cleyraGoldHelmRecovery = itemAcquisitionPaths.find((path) => path.id === "
 if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.cost?.amount !== 1800) {
   errors.push("Cleyra Gold Helm recovery needs the Disc III Treno shop path priced at 1,800 Gil.");
 }
+const cleyraTreasureWarning = missablesById.get("missable.disc-2.cleyra.treasures");
+const cleyraPickupExpectations = [
+  ["trunk-phoenix-down-chest", "game-item.phoenix-down", "chest"],
+  ["trunk-ether-chest", "game-item.ether", "chest"],
+  ["trunk-needle-fork-chest", "game-item.needle-fork", "chest"],
+  ["trunk-tent-chest", "game-item.tent", "chest"],
+  ["trunk-remedy-chest", "game-item.remedy", "chest"],
+  ["trunk-mythril-gloves-chest", "game-item.mythril-gloves", "chest"],
+  ["trunk-potion-chest", "game-item.potion", "chest"],
+  ["trunk-elixir-chest", "game-item.elixir", "chest"],
+  ["trunk-hipotion-whirlpool-chest", "game-item.hi-potion", "chest"],
+  ["trunk-ladder-gysahl-greens-chest", "game-item.gysahl-greens", "chest"],
+  ["settlement-water-mill-thunder-gloves", "game-item.thunder-gloves", "hidden-pickup"],
+  ["settlement-southeast-ore", "game-item.ore", "hidden-pickup"],
+  ["settlement-inn-echo-screen", "game-item.echo-screen", "fixed-pickup"],
+  ["settlement-inn-ether", "game-item.ether", "fixed-pickup"],
+  ["settlement-inn-stairway-remedy", "game-item.remedy", "hidden-pickup"],
+  ["settlement-cathedral-echo-screen", "game-item.echo-screen", "hidden-pickup"],
+  ["post-antlion-harp-room-ether", "game-item.ether", "hidden-pickup"],
+  ["post-antlion-harp-room-ore", "game-item.ore", "hidden-pickup"],
+] as const;
+if (
+  !cleyraTreasureWarning?.classification.includes("recoverable-later") ||
+  !cleyraTreasureWarning.consequence.includes("forced return after Antlion") ||
+  !cleyraTreasureWarning.consequence.includes("before crossing the bridge") ||
+  !cleyraTreasureWarning.recovery.includes("Treasure Hunter rank impact remains unknown") ||
+  !cleyraTreasureWarning.nextAvailability.includes("every modeled Cleyra pickup") ||
+  cleyraPickupExpectations.some(([slug, itemId, method]) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.cleyra.${slug}`);
+    const hasOtherSource = itemAcquisitionPaths.some((candidate) =>
+      candidate.itemId === itemId && candidate.chapterId !== "disc-2.cleyra" &&
+      (guideAreas.findIndex((area) => area.id === candidate.chapterId) > cleyraChapterIndex || candidate.availability === "repeatable"),
+    );
+    return !path || path.itemId !== itemId || path.chapterId !== "disc-2.cleyra" || path.method !== method ||
+      path.quantity !== 1 || path.availability !== "single-use" ||
+      !path.walkthroughObjectiveIds?.includes("disc-2.cleyra.treasure-sweep") ||
+      !["gamefaqs-cleyra-71891", "jegged-cleyra"].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+      !gameItemIds.has(itemId) || !hasOtherSource;
+  })
+) {
+  errors.push("Cleyra's fixed Trunk/settlement pickup catalog must cover all newly audited item locations, shared sweep links, source citations, alternative item-type sources, the forced-return cutoff, and the unresolved rank effect.");
+}
+const cleyraEvacuationItemRewards = [
+  ["evacuation-phoenix-down-reward", "game-item.phoenix-down"],
+  ["evacuation-remedy-reward", "game-item.remedy"],
+  ["evacuation-elixir-reward", "game-item.elixir"],
+  ["evacuation-ether-reward", "game-item.ether"],
+  ["evacuation-cathedral-phoenix-pinion", "game-item.phoenix-pinion"],
+] as const;
+if (cleyraEvacuationItemRewards.some(([slug, itemId]) => {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.cleyra.${slug}`);
+  return !path || path.itemId !== itemId || path.chapterId !== "disc-2.cleyra" ||
+    path.method !== "quest-reward" || path.availability !== "conditional" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.cleyra.out-of-harms-way") ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.cleyra.treasure-sweep") ||
+    !["gamefaqs-cleyra-71891", "jegged-cleyra"].every((sourceId) => path.sourceIds.includes(sourceId));
+})) {
+  errors.push("Cleyra's evacuation must have five separate source-linked conditional item-reward paths connected to the evacuation and treasure objectives.");
+}
+const cleyraStiltzkinProducts = [
+  ["stiltzkin-2-hi-potion", "game-item.hi-potion"],
+  ["stiltzkin-2-ether", "game-item.ether"],
+  ["stiltzkin-2-phoenix-pinion", "game-item.phoenix-pinion"],
+] as const;
+if (cleyraStiltzkinProducts.some(([slug, itemId]) => {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.cleyra.${slug}`);
+  return !path || path.itemId !== itemId || path.chapterId !== "disc-2.cleyra" ||
+    path.method !== "moogle-shop" || path.availability !== "limited-window" ||
+    path.cost?.currency !== "gil" || path.cost.amount !== 444 || path.cost.bundleId !== "cleyra-stiltzkin-second-bundle" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.cleyra.stiltzkin-2");
+})) {
+  errors.push("Cleyra's Stiltzkin #2 bundle must catalog its Hi-Potion, Ether, and Phoenix Pinion paths at a shared 444-Gil price and checkpoint.");
+}
 const hilgigarsChapterIndex = guideAreas.findIndex((area) => area.id === "disc-2.conde-petie-mountain-path");
 const hilgigarsSteals = [
   { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal", itemId: "game-item.phoenix-down" },

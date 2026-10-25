@@ -1731,8 +1731,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-trunk-save-and-chests",
             kind: "save",
-            text: "Save at the entrance and explore every open branch before dropping through the sandfall hole. Collect the Phoenix Down, Magician Shoes, Ice Staff, and Ether from the Trunk chests.",
-            detail: "The walkthroughs agree on the four chest items but describe their exact positions differently. Sweep both sides of the path and check the dead ends instead of relying on a single screen-edge label.",
+            text: "Save at the entrance and explore every open branch before dropping through the sandfall hole. Pull the lever and take the Phoenix Down chest; in the sand room collect the Magician Shoes from the lower chest and the Ice Staff hidden behind the tree. On the exterior path, enter the small room for the Ether before opening the sandfall hole.",
+            detail: "GameFAQs and Jegged list these four Trunk items. If any ascent chest is missed, the forced post-Antlion return lets you collect it before crossing the bridge; the point-of-no-return labels in some guides are broader than that recovery step.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep"],
           },
           {
@@ -1745,14 +1745,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-trunk-flame-staff",
             kind: "pickup",
-            text: "At the path split, take the branch with the Flame Staff, then search the sand paths for the Remedy, Desert Boots, Mythril Vest, Mythril Gloves, Potion, and Elixir before opening the route onward.",
-            detail: "The path descriptions vary between guides; sweep both branches and inspect the sand-side ledges. Activating the sandfall hole locks the entrance behind you, so collect these items first.",
+            text: "At the path split, take the side branch for Flame Staff. In the large cavern, take Remedy from the far-right chest, Desert Boots from behind the central root, and Mythril Vest from the hidden rear alcove. Exit through the rear cave for Mythril Gloves by the lever; pull it, return to the cavern, take the upper-left Potion chest, then follow the northeast branch for Elixir.",
+            detail: "GameFAQs and Jegged document these separate chest positions. If you miss any, the inactive-sand return after Antlion is the final documented chance to open the Trunk chests before crossing the bridge.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep"],
           },
           {
             id: "cleyra-quicksand-and-blue-magic",
             kind: "optional",
-            text: "Check the quicksand pits for 900 Gil and a Hi-Potion, then search behind the ladder for Gysahl Greens. If Quina's Blue Magic is part of your goal, use Eat on Carrion Worm for Auto-Life, Dragonfly for Matra Magic, and Zuu for White Wind while those enemies are available.",
+            text: "In the whirlpool room, jump between the pits to reach the 900-Gil and Hi-Potion chests if safe. Before climbing into Cleyra, take the Gysahl Greens chest behind the ladder. If Quina's Blue Magic is part of your goal, use Eat on Carrion Worm for Auto-Life, Dragonfly for Matra Magic, and Zuu for White Wind while those enemies are available.",
             detail: "Failing to jump out of a quicksand pit triggers the fixed Sand Scorpion battle and returns Zidane to a previous area. The bestiary keeps the Trunk's five room pools separate; against Sand Golem, select its Core and use Ice magic because striking the body can trigger counters. Quina's three Blue Magic opportunities are tracked in the shared objective; later-source coverage is not yet complete enough to call these skills permanently missable.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.blue-magic"],
           },
@@ -1788,14 +1788,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-lower-settlement-items",
             kind: "pickup",
             text: "Sweep the lower settlement and pond: take 970 Gil from the garbage pit near the wooden structure, the Phoenix Pinion by the first stairs, Thunder Gloves by the pond structure, and Ore near the southeast building.",
-            detail: "The 970-Gil garbage pit is separate from the rubbish pit that led to the two inaccessible Trunk chests. Search the stair landing, pond edge, and southeast building approach as well.",
+            detail: "The 970-Gil garbage pit is separate from the rubbish pit that led to the two inaccessible Trunk chests. The source-linked item catalog records the Phoenix Pinion, Thunder Gloves, and Ore as separate location copies; sweep the stair landing, pond-side structure, and southeast building approach.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep"],
           },
           {
             id: "cleyra-inn-windmill-cathedral-items",
             kind: "pickup",
             text: "In the Inn, collect the Echo Screen, 1,250 Gil, and the upstairs Ether. Also take the Remedy by the stairway, Phoenix Pinion near the Windmill bridge, Gysahl Greens in the grass, Echo Screen in the flowers by the Cathedral, and Yellow Scarf inside the Cathedral. Check Mognet with Mopli for the Inn letter.",
-            detail: "Check both the grass and flowers near the Cathedral; the two hidden pickups are separate. GameFAQs and Flactem differ on the sender of the Inn message; read the pending letter with Mopli, then check him again after Antlion and during the attack.",
+            detail: "Check both the grass and flowers near the Cathedral; the two hidden pickups are separate. The Inn Echo Screen, Ether, stairway Remedy, and both Cathedral-area pickups each have individual catalog paths. GameFAQs and Flactem differ on the sender of the Inn message; read the pending letter with Mopli, then check him again after Antlion and during the attack.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.mognet-mail"],
           },
           {
@@ -1857,9 +1857,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-evacuation-choices",
             kind: "cutoff",
-            text: "During the evacuation, direct residents Right, then Left, then across the bridge to the Right. At the observatory, choose Not Yet to follow the published route, then speak with every rescued resident in the Cathedral lobby to collect their rewards. The fourth response's achievement effect is disputed.",
+            text: "During the evacuation, direct residents Right, then Left, then across the bridge to the Right. At the observatory, choose Not Yet to follow the published route, then speak with every rescued resident in the Cathedral lobby to collect the Phoenix Down, Remedy, Elixir, Ether, Phoenix Pinion, and both listed cards. The fourth response's achievement effect is disputed.",
             detail: "Jegged and Gamer Guides include the not-safe-yet response in their achievement routes; Jegged and PlayStationTrophies label it Not Yet, while Gamer Guides prints We're not safe yet. A Steam walkthrough says the fourth observatory choice does not dictate the outcome, so this guide does not present it as a confirmed requirement. Speak to every survivor: reward lists agree on Phoenix Down, Remedy, Nymph Card, Elixir, Zuu Card, and Ether; GameFAQs and a Steam walkthrough also list a Phoenix Pinion, so check every NPC until no reward remains.",
-            objectiveIds: ["disc-2.cleyra.out-of-harms-way"],
+            objectiveIds: ["disc-2.cleyra.out-of-harms-way", "disc-2.cleyra.treasure-sweep"],
           },
           {
             id: "cleyra-beatrix-steals",

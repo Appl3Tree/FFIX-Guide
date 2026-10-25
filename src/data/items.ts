@@ -297,7 +297,7 @@ const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs
 const oeilvertSources = ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"];
 const mountGulugSources = ["gamefaqs-lost-continent-71891", "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
 const tantarianSources = ["gamefaqs-return-to-alexandria-71891", "gamefaqs-trouble-on-home-front-71891", "gamefaqs-items-71891", "rpgclassics-bestiary-t-z", "jegged-return-to-alexandria-castle", "jegged-trouble-on-home-front", "gamerguides-alexandria-castle-2"];
-const cleyraSources = ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"];
+const cleyraSources = ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"];
 const iifaTreeSources = ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "elitegrindlab-iifa-tree", "rpgclassics-iifa-tree"];
 const alexandriaSources = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];
 const phoenixPinionSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "cavesofnarshe-ff9-items"];
@@ -2775,6 +2775,74 @@ const cleyraLaterRecoveryPaths: ItemAcquisitionPath[] = [
   },
 ];
 
+const cleyraFixedPickupInputs: Array<[slug: string, itemSlug: string, method: ItemAcquisitionMethod, conditions: string]> = [
+  ["trunk-phoenix-down-chest", "phoenix-down", "chest", "After pulling the lever beside the locked entrance door, open the Phoenix Down chest in the next room. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-ether-chest", "ether", "chest", "Before putting your hand into the hole that opens the sandfall, enter the small room off the upper exterior path and take the Ether chest. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-needle-fork-chest", "needle-fork", "chest", "In the sandfall room, open the lower chest at the base of the sand river for Needle Fork. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-tent-chest", "tent", "chest", "In the sandfall room, take the upper chest above the Needle Fork chest for Tent. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-remedy-chest", "remedy", "chest", "In the large Sand Fork cavern, open the chest at the far-right edge for Remedy. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-mythril-gloves-chest", "mythril-gloves", "chest", "Exit the large Sand Fork cavern through the rear cave and open the chest by the lever for Mythril Gloves. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-potion-chest", "potion", "chest", "After opening the lever route, return through the large cavern and take the Potion chest on the upper-left path. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-elixir-chest", "elixir", "chest", "After opening the lever route, take the northeast branch from the upper-left path to the Elixir chest. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-hipotion-whirlpool-chest", "hi-potion", "chest", "In the whirlpool room, time the jumps to reach the chest containing Hi-Potion. If missed during the ascent, collect it on the forced return after Antlion and before crossing the bridge."],
+  ["trunk-ladder-gysahl-greens-chest", "gysahl-greens", "chest", "Before climbing the final ladder into Cleyra Settlement, open the chest behind the ladder for Gysahl Greens."],
+  ["settlement-water-mill-thunder-gloves", "thunder-gloves", "hidden-pickup", "After returning from the rubbish-pit detour, search the structure opposite the pond in the Water Mill Area for the hidden Thunder Gloves."],
+  ["settlement-southeast-ore", "ore", "hidden-pickup", "Search among the flowers beside the southeast building in the Town Area for Ore."],
+  ["settlement-inn-echo-screen", "echo-screen", "fixed-pickup", "In the Inn, search the northwest corner of the first floor by the bucket for Echo Screen."],
+  ["settlement-inn-ether", "ether", "fixed-pickup", "In the Inn, search the upstairs bedstand for Ether."],
+  ["settlement-inn-stairway-remedy", "remedy", "hidden-pickup", "After leaving the Inn, search behind the tree at the far-right edge of the stairway for Remedy."],
+  ["settlement-cathedral-echo-screen", "echo-screen", "hidden-pickup", "Near the Cathedral entrance, search the flowers on the right side for a second Echo Screen pickup."],
+  ["post-antlion-harp-room-ether", "ether", "hidden-pickup", "After Antlion, return as Freya to the Cathedral's rear harp room and search by the pillar left of the entrance for Ether."],
+  ["post-antlion-harp-room-ore", "ore", "hidden-pickup", "After Antlion, return as Freya to the Cathedral's rear harp room and search the altar for Ore."],
+];
+
+const cleyraFixedPickupPaths: ItemAcquisitionPath[] = cleyraFixedPickupInputs.map(([slug, itemSlug, method, conditions]) => ({
+  id: `item-path.disc-2.cleyra.${slug}`,
+  itemId: `game-item.${itemSlug}`,
+  chapterId: "disc-2.cleyra",
+  method,
+  quantity: 1,
+  availability: "single-use",
+  conditions,
+  walkthroughObjectiveIds: ["disc-2.cleyra.treasure-sweep"],
+  sourceIds: [...cleyraSources, "gamefaqs-items-71891"],
+}));
+
+const cleyraEvacuationRewardInputs = [
+  ["phoenix-down", "Phoenix Down"],
+  ["remedy", "Remedy"],
+  ["elixir", "Elixir"],
+  ["ether", "Ether"],
+] as const;
+
+const cleyraEvacuationRewardPaths: ItemAcquisitionPath[] = cleyraEvacuationRewardInputs.map(([slug, itemName]) => ({
+  id: `item-path.disc-2.cleyra.evacuation-${slug}-reward`,
+  itemId: `game-item.${slug}`,
+  chapterId: "disc-2.cleyra",
+  method: "quest-reward",
+  quantity: 1,
+  availability: "conditional",
+  conditions: `During the evacuation, direct the rescued residents along the route that brings them to the Cathedral, then speak to the residents in the lobby to claim ${itemName}. The published reward list presents this as conditional on the evacuation route.`,
+  walkthroughObjectiveIds: ["disc-2.cleyra.out-of-harms-way", "disc-2.cleyra.treasure-sweep"],
+  sourceIds: cleyraSources,
+}));
+
+const cleyraStiltzkinBundlePaths: ItemAcquisitionPath[] = ["hi-potion", "ether"].map((slug) => ({
+  id: `item-path.disc-2.cleyra.stiltzkin-2-${slug}`,
+  itemId: `game-item.${slug}`,
+  chapterId: "disc-2.cleyra",
+  method: "moogle-shop",
+  quantity: 1,
+  availability: "limited-window",
+  recommendedBeforeChapterId: "disc-2.cleyra",
+  shopId: "stiltzkin-cleyra-second",
+  shopName: "Stiltzkin's second Cleyra bundle",
+  conditions: "Buy this item in Stiltzkin's one-time bundle with a Hi-Potion, Ether, and Phoenix Pinion for 444 Gil.",
+  cost: { currency: "gil", amount: 444, bundleId: "cleyra-stiltzkin-second-bundle" },
+  walkthroughObjectiveIds: ["disc-2.cleyra.stiltzkin-2"],
+  sourceIds: [...cleyraSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin"],
+}));
+
 const zornThornShopRecoveryPath = (route: {
   id: string;
   itemSlug: string;
@@ -3413,6 +3481,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc4ShopPaths,
   ...cleyraShopStockPaths,
   ...cleyraLaterRecoveryPaths,
+  ...cleyraFixedPickupPaths,
+  ...cleyraEvacuationRewardPaths,
+  ...cleyraStiltzkinBundlePaths,
   ...evilForestPickupPaths,
   ...primaVistaCinnaShopPaths,
   ...bronzeGlovesAcquisitionPaths,
@@ -5076,7 +5147,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "conditional",
     conditions: "During the evacuation, direct the residents along the route that brings them to the cathedral, then speak with the residents in the lobby. The Pinion is a separate conditional reward from Cleyra's three fixed pickups.",
-    walkthroughObjectiveIds: ["disc-2.cleyra.out-of-harms-way"],
+    walkthroughObjectiveIds: ["disc-2.cleyra.out-of-harms-way", "disc-2.cleyra.treasure-sweep"],
     sourceIds: [...cleyraSources, ...phoenixPinionSources],
   },
   {
