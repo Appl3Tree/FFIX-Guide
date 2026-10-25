@@ -241,7 +241,7 @@ const localEnemyRecords: EnemyRecord[] = [
     encounterIds: ["encounter.mount-gulug.common-pool"],
     stats: enemyStats([["level", 35], ["HP", 4022], ["MP", 1214], ["EXP", 6933], ["AP", 2], ["Gil", 1326]]),
     steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", "game-item.ether")],
-    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Topaz"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.topaz"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing")],
     facts: [
       enemyFact("type", "Aerial"),
       enemyFact("elemental-weakness", "Ice and Wind"),
@@ -252,7 +252,7 @@ const localEnemyRecords: EnemyRecord[] = [
     blueMagic: [quinaSkill("Mustard Bomb")],
     strategies: [{ title: "Use Ice or Wind damage", detail: "Both elements exploit Vepal's weaknesses. Quina can learn Mustard Bomb with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
     routeObjectiveIds: [],
-    notes: ["Vepal (Red) is listed throughout the dungeon; this record refers to the red Mount Gulug form, not the later Vepal (Green). Topaz is retained as source text because it is not a normalized item record yet."],
+    notes: ["Vepal (Red) is listed throughout the dungeon; this record refers to the red Mount Gulug form, not the later Vepal (Green)."],
   }),
   localEnemy({
     id: "enemy.worm-hydra",
@@ -263,7 +263,7 @@ const localEnemyRecords: EnemyRecord[] = [
       { field: "HP", value: 4846, sourceIds: [enemyListSourceId, "jegged-mount-gulug"], verification: "disputed" },
       { field: "HP", value: 4486, sourceIds: ["gamefaqs-lost-continent-71891"], verification: "disputed" },
     ],
-    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
     drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
     facts: [
       enemyFact("type", "Dragon"),
@@ -283,7 +283,7 @@ const localEnemyRecords: EnemyRecord[] = [
     encounterIds: ["encounter.mount-gulug.outside-pool"],
     stats: enemyStats([["level", 36], ["HP", 4686], ["MP", 1239], ["EXP", 8950], ["AP", 2], ["Gil", 1654]]),
     steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
-    drops: [enemyLoot("always", null, "Opal"), enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", null, "Echo Screen"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", "game-item.opal"), enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", null, "Nothing")],
     facts: [
       enemyFact("type", "Aerial and Undead"),
       enemyFact("elemental-weakness", "Fire, Wind, and Holy"),
@@ -294,15 +294,15 @@ const localEnemyRecords: EnemyRecord[] = [
     blueMagic: [quinaSkill("Frost")],
     strategies: [{ title: "Use its Undead weakness", detail: "Healing effects and Fire attacks are especially effective. Quina can learn Frost with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
     routeObjectiveIds: [],
-    notes: ["Both Wraith color forms are listed outside the buildings. Opal and Echo Screen are preserved as table results because those items are not normalized in the current catalog."],
+    notes: ["Both Wraith color forms are listed outside the buildings."],
   }),
   localEnemy({
     id: "enemy.wraith-red",
     name: "Wraith (Red)",
     encounterIds: ["encounter.mount-gulug.outside-pool"],
     stats: enemyStats([["level", 37], ["HP", 4846], ["MP", 1268], ["EXP", 8010], ["AP", 2], ["Gil", 1345]]),
-    steals: [enemyLoot("common", null, "Topaz"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", null, "Nothing")],
-    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Topaz"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.ether")],
+    steals: [enemyLoot("common", "game-item.topaz"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.topaz"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.ether")],
     facts: [
       enemyFact("type", "Aerial and Undead"),
       enemyFact("elemental-weakness", "Ice, Wind, and Holy"),
@@ -313,7 +313,7 @@ const localEnemyRecords: EnemyRecord[] = [
     blueMagic: [quinaSkill("Mustard Bomb")],
     strategies: [{ title: "Use Ice, Wind, or healing", detail: "Its Undead nature makes healing effective; Ice and Wind are listed weaknesses. Quina can learn Mustard Bomb with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
     routeObjectiveIds: [],
-    notes: ["Wraith (Red) is one of the two color variants listed outside the buildings. Topaz is retained as source text because it is not a normalized item record yet."],
+    notes: ["Wraith (Red) is one of the two color variants listed outside the buildings."],
   }),
 ];
 
