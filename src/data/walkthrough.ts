@@ -2267,14 +2267,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "fossil-roo-entrance-and-lani",
         title: "Fossil Roo entrance — Armodullahan and Lani",
         summary: "Pass the trap corridor, fight Lani, then backtrack for the Elixir before entering the Gargant tunnels.",
-        sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"],
+        sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-enemy-list-71891"],
         steps: [
           {
             id: "fossil-roo-prepare",
             kind: "optional",
-            text: "Before going down the tunnel, equip Man Eater on Zidane if available and confirm that Dagger can heal the party. The random enemies here include Abomination, Feather Circle, Griffin, and Seeker Bat; use Quina's Eat command on Feather Circle for LV4 Holy and on Griffin for White Wind if those skills are still missing.",
-            detail: "The Blue Magic skill may have other acquisition opportunities, so do not treat these as proven last chances. No chapter level range has been verified. The corridor also contains the Armodullahan chase; avoiding its swinging axes prevents unnecessary fights.",
-            objectiveIds: ["disc-2.journey-to-outer-continent.blue-magic"],
+            text: "Before going down the tunnel, equip Man Eater on Zidane if available and confirm that Dagger can heal the party. The random enemies here include Abomination, Feather Circle, Griffin, and Seeker Bat; use Quina's Eat command on Abomination (or Seeker Bat) for Night, Feather Circle for LV4 Holy, and Griffin for White Wind if those skills are still missing.",
+            detail: "These are additional Blue Magic opportunities, not proven last chances. Night is also available from Nymph; LV4 Holy and White Wind have later teachers. No chapter level range has been verified. The corridor also contains the Armodullahan chase; avoiding its swinging axes prevents unnecessary fights.",
+            objectiveIds: ["disc-2.journey-to-outer-continent.blue-magic", "disc-1.journey-to-burmecia.blue-magic-night"],
           },
           {
             id: "fossil-roo-armodullahan-chase",
@@ -4738,7 +4738,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lost-continent-party-and-field",
         title: "Mitmakis Ice Field — set the party and check the friendly Feather Circle",
         summary: "Zidane and Vivi are needed for the next story scenes, and Eiko is unavailable until the Mount Gulug sequence. Optional Quina skills and a Friendly Creature appear on the snowy field.",
-        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-abilities-71891"],
+        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-abilities-71891", "rpgclassics-lost-continent", "gamefaqs-enemy-list-71891", "jegged-friendly-monsters", "cavesofnarshe-friendly-creatures"],
         steps: [
           {
             id: "lost-continent-party-setup",
@@ -4758,6 +4758,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "If Quina is with you and still needs them, use Eat on Whale Zombies along the Lost Continent beaches to learn LV5 Death, and on Feather Circles in the snowy field to learn LV4 Holy.",
             detail: "These are optional field encounters. The Blue Magic checklist is shared with the earlier On the High Seas chapter; do not repeat a skill already learned. The Friendly Feather Circle and ordinary Feather Circle are different encounter types.",
+            objectiveIds: ["disc-3.on-the-high-seas.blue-magic"],
           },
           {
             id: "lost-continent-kupo-nut-detour",

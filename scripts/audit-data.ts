@@ -1753,6 +1753,41 @@ if (pinnacleRocksPools.length !== 1 || !pinnacleRocksPool || pinnacleRocksPool.k
   festivalZaghnol?.encounterIds.includes("encounter.pinnacle-rocks.random-pool")) {
   errors.push("Pinnacle Rocks must preserve its source-backed Sand Scorpion/Seeker Bat/regular Zaghnol pool, Seeker Bat's partial teacher/table data, and distinct Festival form.");
 }
+const fossilRooPools = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.journey-to-outer-continent");
+const fossilRooPool = enemyEncounters.find((encounter) => encounter.id === "encounter.fossil-roo.random-pool");
+const abomination = enemyRecords.find((enemy) => enemy.id === "enemy.abomination");
+const featherCircle = enemyRecords.find((enemy) => enemy.id === "enemy.feather-circle");
+const griffin = enemyRecords.find((enemy) => enemy.id === "enemy.griffin");
+const fossilSeekerBat = enemyRecords.find((enemy) => enemy.id === "enemy.seeker-bat");
+const lostContinentFeatherTeacher = enemyEncounters.find((encounter) => encounter.id === "encounter.lost-continent.feather-circle-teacher");
+const friendlyFeatherEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.lost-continent.friendly-feather-circle");
+const friendlyFeather = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-feather-circle");
+if (fossilRooPools.length !== 1 || !fossilRooPool || fossilRooPool.kind !== "random-pool" ||
+  !sameSortedValues(fossilRooPool.formation.map((member) => member.enemyId), ["enemy.abomination", "enemy.feather-circle", "enemy.griffin", "enemy.seeker-bat"]) ||
+  fossilRooPool.formation.some((member) => member.quantity !== null) ||
+  !["gamefaqs-enemy-list-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo"].every((sourceId) => fossilRooPool.sourceIds.includes(sourceId)) ||
+  !fossilRooPool.objectiveIds.includes("disc-2.journey-to-outer-continent.blue-magic") ||
+  !fossilRooPool.objectiveIds.includes("disc-1.journey-to-burmecia.blue-magic-night") ||
+  !abomination?.encounterIds.includes("encounter.fossil-roo.random-pool") ||
+  !abomination.blueMagic.some((skill) => skill.name === "Night" && skill.command === "Eat" && skill.objectiveIds.includes("disc-1.journey-to-burmecia.blue-magic-night")) ||
+  !featherCircle?.encounterIds.includes("encounter.fossil-roo.random-pool") ||
+  !featherCircle.blueMagic.some((skill) => skill.name === "LV4 Holy" && skill.command === "Eat" && skill.objectiveIds.includes("disc-2.journey-to-outer-continent.blue-magic")) ||
+  !featherCircle.notes.some((note) => note.includes("Caves of Narshe") && note.includes("Water resistance")) ||
+  !griffin?.encounterIds.includes("encounter.fossil-roo.random-pool") ||
+  !griffin.blueMagic.some((skill) => skill.name === "White Wind" && skill.objectiveIds.includes("disc-2.outer-continent.blue-magic")) ||
+  !fossilSeekerBat?.encounterIds.includes("encounter.fossil-roo.random-pool") ||
+  !lostContinentFeatherTeacher || lostContinentFeatherTeacher.chapterId !== "disc-3.lost-continent" ||
+  !sameSortedValues(lostContinentFeatherTeacher.formation.map((member) => member.enemyId), ["enemy.feather-circle"]) ||
+  !lostContinentFeatherTeacher.notes.some((note) => note.includes("not a complete Lost Continent encounter roster")) ||
+  !friendlyFeatherEncounter || !sameSortedValues(friendlyFeatherEncounter.formation.map((member) => member.enemyId), ["enemy.friendly-feather-circle"]) ||
+  !friendlyFeatherEncounter.objectiveIds.includes("disc-3.lost-continent.feather-circle") ||
+  !friendlyFeather || friendlyFeather.kind !== "friendly" || friendlyFeather.stats.length !== 0 ||
+  !friendlyFeather.routeObjectiveIds.includes("disc-3.lost-continent.feather-circle") ||
+  !friendlyFeather.strategies.some((strategy) => strategy.detail.includes("Moonstone") && strategy.detail.includes("Lapis Lazuli") && strategy.detail.includes("30 AP")) ||
+  fossilRooPool?.formation.some((member) => member.enemyId === "enemy.friendly-feather-circle") ||
+  friendlyFeatherEncounter?.formation.some((member) => member.enemyId === "enemy.feather-circle")) {
+  errors.push("Fossil Roo must preserve its four-enemy pool, source-backed Blue Magic links, scoped Lost Continent Feather Circle opportunity, and separate Friendly Feather Circle record/reward.");
+}
 const huntZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
 if (outerZaghnol?.encounterIds.includes("encounter.lindblum.festival-zaghnol") || huntZaghnol?.encounterIds.some((encounterId) => encounterId.startsWith("encounter.outer-continent."))) {
   errors.push("The world-map Zaghnol [B] and Festival of the Hunt Zaghnol must remain separate variants.");
