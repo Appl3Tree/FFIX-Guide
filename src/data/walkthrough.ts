@@ -1576,7 +1576,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "combat",
             text: "Before leaving Treno, consider the first Knight's House Monster Challenge. Speak with the Weapon Shop owner and ask about the monster below to fight the Griffin solo as Steiner. If you have Queen Stella's Blood Sword or Bird Killer available, equip them; winning awards a Tonberry Card.",
             detail: "This is the Disc II stage of a multi-visit arena ladder. Later visits offer different monsters, and sources say the Griffin stage cannot be restarted once skipped. No fixed level is required here; this is an optional battle with a one-time reward window.",
-            objectiveIds: ["disc-2.treno.griffin-challenge"],
+            objectiveIds: ["disc-2.treno.griffin-challenge", "disc-2.tonberry-card"],
           },
         ],
       },
@@ -2622,7 +2622,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "black-mage-village-pickups-and-shops",
         title: "Black Mage Village — pickups, shops, and letters",
         summary: "Sweep the village pickups, collect Virgo, check the Mognet inbox after the mandatory rest, and use the local shops for needed upgrades or synthesis.",
-        sourceIds: ["gamefaqs-magdalene-forest-71891", "jegged-black-mage-village", "cavesofnarshe-black-mage-village", "elitegrindlab-black-mage-village", "gamefaqs-shops-71891", "gamefaqs-moogle-faq-23306"],
+        sourceIds: ["gamefaqs-magdalene-forest-71891", "jegged-black-mage-village", "cavesofnarshe-black-mage-village", "elitegrindlab-black-mage-village", "gamefaqs-shops-71891", "gamefaqs-moogle-faq-23306", "gamefaqs-card-locations-24067"],
         steps: [
           {
             id: "black-mage-village-pickup-sweep",
@@ -2630,6 +2630,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Collect Gysahl Greens from the wall inside the Chocobo Stable, the Elixir in the bucket outside the Weapon Shop, 2,000 Gil from the hidden chest at the back of the Synthesis Shop, and 843 Gil from its upper level. In the Item Shop, take the hidden Ether from the cabinet near the western entrance.",
             detail: "After Everyday Life or the roof eavesdrop, speak to Item Shop owner No. 163 and choose “Give me the usual.” Climb to the upper level of the shop and hop onto the bed for the Black Belt Add-On. This is separate from the eavesdrop itself.",
             objectiveIds: ["disc-2.magdalene-forest.treasure-sweep"],
+          },
+          {
+            id: "black-mage-village-tonberry-card-recovery",
+            kind: "optional",
+            text: "If you missed the Griffin's Tonberry Card in Treno and still want the card, challenge Black Mage No. 33 or No. 111 by the Water Mill, or No. 56 at the Cemetery. GameFAQs lists all three as Disc II sources for Tonberry.",
+            detail: "This recovers the card type, not the one-time Griffin fight or its arena reward record. The same card FAQ lists later opponents and a Tonberry enemy drop; it is a PlayStation source and does not verify remastered-release timing.",
+            objectiveIds: ["disc-2.tonberry-card"],
           },
           {
             id: "black-mage-village-eavesdrop",

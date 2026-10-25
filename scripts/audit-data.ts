@@ -804,6 +804,29 @@ const hippaulWarning = missables.find((missable) => missable.id === "missable.di
 if (!hippaulWarning?.sourceIds.includes("gamefaqs-tetra-master-71891") || !hippaulWarning.note?.includes("only Namingway is missable")) {
   errors.push("Hippaul's warning must distinguish the unique Athlete Queen cutoff from recoverable Tetra Master cards.");
 }
+const griffinCardWarning = missables.find((missable) => missable.id === "missable.disc-2.treno.griffin-challenge");
+const tonberryCardObjectiveId = "disc-2.tonberry-card";
+const tonberryCardSteps = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-2.magdalene-forest")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .filter((step) => step.objectiveIds?.includes(tonberryCardObjectiveId));
+const griffinCardStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-2.treno")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.objectiveIds?.includes("disc-2.treno.griffin-challenge") && step.objectiveIds.includes(tonberryCardObjectiveId));
+if (
+  !griffinCardWarning
+  || !griffinCardWarning.classification.includes("permanently-missable")
+  || griffinCardWarning.classification.includes("recoverable-later")
+  || !griffinCardWarning.sourceIds.includes("gamefaqs-card-locations-24067")
+  || griffinCardWarning.nextAvailability !== null
+  || !griffinCardWarning.recovery.includes("separate card objective")
+) {
+  errors.push("The Griffin warning must classify the one-time fight separately from recovery of its Tonberry Card.");
+}
+if (!objectiveIds.has(tonberryCardObjectiveId) || tonberryCardSteps.length === 0 || !griffinCardStep) {
+  errors.push("The Tonberry Card objective needs both its Treno reward step and a later Black Mage Village recovery step.");
+}
 const thirdJewelEvent = movieCriticEligibleEvents.find((event) => event.id === "ate-lindblum-third-jewel");
 const thirdJewelWarning = missables.find((missable) => missable.id === "missable.disc-2.return-to-lindblum.the-third-jewel");
 if (!thirdJewelEvent || thirdJewelEvent.exclusiveGroupId || thirdJewelEvent.chapterId !== "disc-2.return-to-lindblum") {
