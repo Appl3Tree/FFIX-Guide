@@ -2202,6 +2202,14 @@ export const sources = [
     notes: "Route cross-check for Pandemonium's three forced party-split battles, Moorock and Holy Miter, timed orb room, elevator ATE and treasure headings, maze pickups, Mozme's conditional Kupo Nut, and Silver Dragon/Garland/Kuja sequence. Boss HP figures are excluded because references conflict; the post-boss route through Bran Bal is linear and does not establish free recovery or reopening Moorock's shop.",
   },
   {
+    id: "flactem-pandemonium",
+    title: "Pandemonium — Disc III walkthrough",
+    publisher: "Flactem Guides",
+    url: "https://guides.flactem.com/final-fantasy-ix/disc-3/pandemonium/",
+    accessed: "2026-10-25",
+    notes: "Independent cross-check for Pandemonium's enemy roster, scripted party-split battles, and Quina's Blue Magic opportunities. It distinguishes the repeatable Abadon and Shell Dragon learning opportunities from the scripted Abadon fight; Earth Shake availability during the scripted Shell Dragon battle remains unresolved across guides.",
+  },
+  {
     id: "elitegrindlab-pandemonium",
     title: "Pandemonium — completionist walkthrough and source audit",
     publisher: "EliteGrindLab",

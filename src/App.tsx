@@ -135,6 +135,12 @@ function walkthroughChapterContent(areaId: string) {
   return walkthroughChapters.find((chapter) => chapter.areaId === areaId);
 }
 
+function enemyChapterScope(areaId: string) {
+  const area = guideAreas.find((chapter) => chapter.id === areaId);
+  const arc = area ? arcs.find((entry) => entry.id === area.arcId) : undefined;
+  return area ? `${arc?.label ?? "Story"} · ${area.title}` : areaId;
+}
+
 function walkthroughSearchText(areaId: string) {
   const content = walkthroughChapterContent(areaId);
   if (!content) return "";
@@ -1517,10 +1523,15 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
         <div className="enemy-reference-heading">
           <div>
             <div className="eyebrow">BESTIARY · PARTIAL COVERAGE</div>
-            <h2 id="enemy-reference-heading">Mount Gulug encounters</h2>
+            <h2 id="enemy-reference-heading">Enemy and boss encounters</h2>
             <p>{enemyRecords.length} enemy records · {enemyEncounters.length} encounter groups ({encounterKindCounts.fixed} fixed, {encounterKindCounts.boss} boss, {encounterKindCounts["random-pool"]} random pools) · {enemyCatalogCoverage.note}</p>
           </div>
-          <button className="secondary-button" type="button" onClick={() => onOpenChapter("disc-3.lost-continent")}>Open walkthrough <span aria-hidden="true">→</span></button>
+          <div className="enemy-reference-actions">
+            {enemyCatalogCoverage.chapterIds.map((chapterId) => {
+              const area = guideAreas.find((chapter) => chapter.id === chapterId);
+              return <button className="secondary-button" type="button" key={chapterId} onClick={() => onOpenChapter(chapterId)}>Open {area?.title ?? "walkthrough"} <span aria-hidden="true">→</span></button>;
+            })}
+          </div>
         </div>
         <div className="enemy-reference-toolbar">
           <label className="enemy-search-label">
@@ -1557,7 +1568,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
               <summary className="enemy-record-summary">
                 <span className="reference-index">{String(index + 1).padStart(2, "0")}</span>
                 <span className="enemy-record-name"><strong>{enemy.name}</strong><small>{enemy.kind === "boss" ? "Story boss" : encounterTitles.some((encounter) => encounter.kind === "random-pool") ? "Random encounter enemy" : "Fixed encounter enemy"} · {encounterTitles.length} linked {encounterTitles.length === 1 ? "encounter group" : "encounter groups"}</small></span>
-                <span className="enemy-record-scope">Disc III · Mount Gulug</span>
+                <span className="enemy-record-scope">{enemyChapterScope(enemy.chapterId)}</span>
                 <ChevronDown className="enemy-record-chevron" size={16} aria-hidden="true" />
               </summary>
               <div className="enemy-record-body">
@@ -1622,7 +1633,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
           })}
           {filteredEnemies.length === 0 && <p className="empty-state">No enemy records match those filters.</p>}
         </div>
-        <p className="enemy-coverage-footnote">The source-listed Mount Gulug enemy roster is represented here; other areas and release-by-release parity are not yet catalogued. Unverified source differences stay visible in each record.</p>
+        <p className="enemy-coverage-footnote">This bestiary is partial. Expand a dossier to review its source scope, loot, encounter links, and any unresolved differences. Other areas and release-by-release parity remain to be researched.</p>
       </section>
       <section className="reference-coverage" aria-label="Reference database inventory">
         {referenceInventory.map((item, index) => {

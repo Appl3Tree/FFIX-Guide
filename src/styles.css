@@ -540,7 +540,8 @@ h1, h2, p { margin-top: 0; }
 .enemy-reference-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
 .enemy-reference-heading h2 { margin: 6px 0 5px; color: #36433e; font: 500 23px var(--serif); }
 .enemy-reference-heading p { max-width: 760px; margin: 0; color: #7b857e; font-size: 10px; line-height: 1.65; }
-.enemy-reference-heading > button { min-height: 37px; flex: 0 0 auto; }
+.enemy-reference-actions { display: flex; align-items: center; justify-content: flex-end; gap: 8px; flex: 0 0 auto; flex-wrap: wrap; }
+.enemy-reference-actions .secondary-button { min-height: 37px; }
 .enemy-reference-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 12px; margin: 17px 0 8px; }
 .enemy-search-label { min-height: 42px; display: flex; align-items: center; gap: 9px; padding: 0 11px; color: #75847a; border: 1px solid #dedfd6; background: #fbfaf6; }
 .enemy-search-label:focus-within { border-color: #97aa9d; outline: 2px solid #e2e9df; }
@@ -746,7 +747,8 @@ h1, h2, p { margin-top: 0; }
   .achievement-source-row .status-label { grid-column: 2; }
   .achievement-source-row > a { grid-column: 3; grid-row: 1; }
   .enemy-reference-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
-  .enemy-reference-heading > button { min-height: 40px; }
+  .enemy-reference-actions { width: 100%; justify-content: flex-start; }
+  .enemy-reference-actions .secondary-button { min-height: 40px; }
   .enemy-reference-toolbar { grid-template-columns: minmax(0, 1fr); }
   .enemy-record-summary { grid-template-columns: 26px minmax(0, 1fr) 18px; gap: 7px; }
   .enemy-record-scope { display: none; }
