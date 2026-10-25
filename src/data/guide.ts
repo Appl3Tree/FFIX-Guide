@@ -1247,7 +1247,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold",
     accessed: "2026-10-23",
-    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. The route uses it for the first two reachable Chocograph treasures and defers the broader ability-gated sidequest map.",
+    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Its repeatable digging pool includes Anklet as a random 16-point item; its separate point-redemption prize list does not include Anklet. The route uses it for the first two reachable Chocograph treasures and defers the broader ability-gated sidequest map.",
   },
   {
     id: "jegged-chocographs",

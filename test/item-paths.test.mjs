@@ -168,8 +168,13 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.aerial-exploration.diamond-sea-at-dusk"));
   assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.aerial-exploration.diamond-friendly-garuda"));
   assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.portal-to-another-world.stiltzkin-diamond"));
-  assert.equal(ankletPaths.length, 1);
-  assert.equal(ankletPaths[0]?.id, "item-path.disc-3.desert-palace.anklet-fire-chamber");
+  assert.equal(ankletPaths.length, 2);
+  assert.ok(ankletPaths.some((path) => path.id === "item-path.disc-3.desert-palace.anklet-fire-chamber"));
+  const hotAndColdAnklet = ankletPaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.anklet-hot-cold");
+  assert.equal(hotAndColdAnklet?.availability, "repeatable");
+  assert.ok(hotAndColdAnklet?.conditions?.includes("16 digging points"));
+  assert.ok(hotAndColdAnklet?.conditions?.includes("not a Mene point-redemption prize"));
+  assert.ok(hotAndColdAnklet?.walkthroughObjectiveIds?.includes("disc-1.exploring-lindblum-kingdom.choco-recruit"));
 
   for (const path of [...rebirthPaths, ...diamondPaths, ...ankletPaths]) {
     for (const sourceId of path.sourceIds) {

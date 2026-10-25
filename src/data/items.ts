@@ -482,6 +482,17 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace"],
   },
   {
+    id: "item-path.disc-1.exploring-lindblum-kingdom.anklet-hot-cold",
+    itemId: "game-item.anklet",
+    chapterId: "disc-1.exploring-lindblum-kingdom",
+    method: "quest-reward",
+    quantity: 1,
+    availability: "repeatable",
+    conditions: "After recruiting Choco, play the repeatable Hot & Cold digging game. Anklet is a random buried item worth 16 digging points when found; this is not a Mene point-redemption prize.",
+    walkthroughObjectiveIds: ["disc-1.exploring-lindblum-kingdom.choco-recruit"],
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "gamefaqs-exploring-lindblum-71891"],
+  },
+  {
     id: "item-path.disc-3.aerial-exploration.daguerreo-rebirth-ring-synthesis",
     itemId: "game-item.rebirth-ring",
     chapterId: "disc-3.aerial-exploration",
