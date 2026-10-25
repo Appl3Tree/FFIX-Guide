@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed in this slice. The Mythril Rod catalog and route checks were completed locally; account, Firebase, deployment, and live sign-in work remain in their existing project statuses.
+
 The current B02 follow-up corrects Black Hood timing: Shimmering Island ends the reviewed PlayStation acquisition sources, but a retained hood can still teach Vivi Death later. The six-copy inventory target is optional, and other release behavior remains under review. Lint, tests (36/36), data audit, build, and whitespace checks pass with 0 audit errors and 178 coverage warnings; scope is 44 chapters, 136 missables, 616 objectives, and 343 sources. The catalog has 201 items and 776 paths; the bestiary has 108 partial records. No GitHub/Firebase owner setup changed. Cross-release and direct game verification remain open.
 
 

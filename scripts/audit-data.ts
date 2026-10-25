@@ -2471,6 +2471,38 @@ if (
 ) {
   errors.push("Black Hood's Shimmering Island warning must distinguish final item acquisition from later Death learning with a retained copy, link its two item routes and provenance, and keep the six-copy target optional.");
 }
+const mythrilRod = gameItems.find((item) => item.id === "game-item.mythril-rod");
+const mythrilRodPathIds = [
+  "item-path.disc-2.journey-to-treno.mythril-rod-summit-station",
+  "item-path.disc-2.treno.mythril-rod-shop",
+  "item-path.disc-2.cleyra.mythril-rod-shop",
+  "item-path.disc-3.lost-continent.mythril-rod-esto-gaza-shop",
+  "item-path.disc-3.ipsens-castle.mythril-rod-kumool-mogshop",
+];
+const mythrilRodPaths = mythrilRodPathIds.map((pathId) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const mythrilRodNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.mythril-rod-need-two");
+const mythrilRodEndTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.mythril-rod-end-inventory-five");
+const mythrilRodAbilityNames = equipmentAbilityClaims
+  .filter((claim) => claim.itemId === "game-item.mythril-rod")
+  .map((claim) => claim.abilityName)
+  .sort();
+if (
+  mythrilRodPaths.some((path) => !path || path.cost?.amount !== 560 || !path.sourceIds.includes("gamefaqs-items-71891") || !path.sourceIds.includes("gamefaqs-shops-71891"))
+  || mythrilRodPaths.filter(Boolean).length !== 5
+  || mythrilRodPaths[3]?.availability !== "limited-window"
+  || mythrilRodPaths[4]?.availability !== "repeatable"
+  || !mythrilRodPaths[4]?.sourceIds.includes("rpgclassics-shops")
+  || !mythrilRod?.sourceIds.includes("rpgclassics-abilities")
+  || !mythrilRodNeedTarget
+  || mythrilRodNeedTarget.targetQuantity !== 2
+  || !mythrilRodNeedTarget.interpretation.includes("optional source-specific")
+  || !mythrilRodEndTarget
+  || mythrilRodEndTarget.targetQuantity !== 5
+  || !mythrilRodEndTarget.interpretation.includes("distinct from Need 2")
+  || mythrilRodAbilityNames.join("|") !== "Life|Shell|Silence"
+) {
+  errors.push("Mythril Rod must retain all five 560-Gil source-backed shops, including the later Ipsen Mogshop source, the separate optional Need/end-inventory targets, and its Life/Silence/Shell claims.");
+}
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
   "missable.disc-1.journey-to-burmecia.grimo-letter",
