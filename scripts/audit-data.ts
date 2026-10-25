@@ -592,6 +592,42 @@ for (const edge of gameRouteEdges) {
     if (!sourceIds.has(sourceId)) errors.push(`Game route edge ${edge.id} references unknown source ${sourceId}.`);
   }
 }
+const routeStartChapterId = gameRouteCoverage.chapterIds[0];
+const routeEndChapterId = gameRouteCoverage.throughChapterId;
+if (!routeStartChapterId) {
+  errors.push("Game route coverage must have a starting chapter.");
+} else {
+  const requiredStoryReachable = new Set<string>();
+  const pendingRequiredStoryChapters = [routeStartChapterId];
+  while (pendingRequiredStoryChapters.length > 0) {
+    const chapterId = pendingRequiredStoryChapters.shift();
+    if (!chapterId || requiredStoryReachable.has(chapterId)) continue;
+    requiredStoryReachable.add(chapterId);
+    for (const edge of gameRouteEdges) {
+      if (edge.relationship === "required-story" && edge.fromChapterId === chapterId && !requiredStoryReachable.has(edge.toChapterId)) {
+        pendingRequiredStoryChapters.push(edge.toChapterId);
+      }
+    }
+  }
+  if (!requiredStoryReachable.has(routeEndChapterId)) {
+    errors.push(`The required-story links do not connect the opening chapter to the declared route endpoint ${routeEndChapterId}.`);
+  }
+}
+const chaptersAbleToReachRouteEnd = new Set([routeEndChapterId]);
+let routeEndReachabilityChanged = true;
+while (routeEndReachabilityChanged) {
+  routeEndReachabilityChanged = false;
+  for (const edge of gameRouteEdges) {
+    if (chaptersAbleToReachRouteEnd.has(edge.toChapterId) && !chaptersAbleToReachRouteEnd.has(edge.fromChapterId)) {
+      chaptersAbleToReachRouteEnd.add(edge.fromChapterId);
+      routeEndReachabilityChanged = true;
+    }
+  }
+}
+const routeChaptersWithoutRejoin = gameRouteCoverage.chapterIds.filter((chapterId) => !chaptersAbleToReachRouteEnd.has(chapterId));
+if (routeChaptersWithoutRejoin.length > 0) {
+  errors.push(`Game route chapters have no directed path to the declared endpoint ${routeEndChapterId}: ${routeChaptersWithoutRejoin.join(", ")}.`);
+}
 const supportedGameRouteCutoffCertainties = new Set(["source-supported", "conservative", "disputed"]);
 const linkedRouteMissableIds = new Set<string>();
 for (const cutoff of gameRouteCutoffs) {
