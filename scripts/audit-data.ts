@@ -2589,6 +2589,36 @@ const ipsensAbilityMismatch = ipsensAbilityClaims.some(([slug, abilityName]) => 
 if (ipsensEquipmentStock.length !== 22 || ipsensEquipmentPaths.length !== 22 || ipsensStockRouteMismatch || ipsensTargetMismatch || ipsensAbilityMismatch) {
   errors.push("Ipsen's Castle equipment stock must retain 22 source-linked Mogshop routes, the GameFAQs/RPGClassics Poison Knuckles and stock-table differences, each Need count and positive end-inventory target except Rising Sun, zero-count end-inventory source notes, and the listed equipment abilities.");
 }
+const ipsensSupplyStock = [
+  ["potion", 50], ["hi-potion", 200], ["phoenix-down", 150], ["echo-screen", 50],
+  ["soft", 100], ["antidote", 50], ["eye-drops", 50], ["magic-tag", 100],
+  ["remedy", 300], ["vaccine", 100], ["annoyntment", 150], ["tent", 800],
+] as const;
+const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice]) => {
+  const itemId = `game-item.${slug}`;
+  const item = gameItems.find((candidate) => candidate.id === itemId);
+  const paths = itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.shopId === "ipsens-castle.kumool-mogshop");
+  const path = paths[0];
+  if (
+    !item
+    || paths.length !== 1
+    || path?.id !== `item-path.disc-3.ipsens-castle.kumool-mogshop.${slug}`
+    || path?.chapterId !== "disc-3.ipsens-castle"
+    || path?.method !== "mogshop"
+    || path?.availability !== "window-unverified"
+    || path?.cost?.amount !== expectedPrice
+    || !path?.sourceIds.includes("gamefaqs-items-71891")
+    || !path?.sourceIds.includes("gamefaqs-shops-71891")
+    || !path?.sourceIds.includes("rpgclassics-shops")
+    || !item.sourceIds.includes("gamefaqs-items-71891")
+    || !item.sourceIds.includes("rpgclassics-shops")
+  ) return true;
+  if (slug === "remedy") return !path.conditions.includes("RPGClassics") || !path.conditions.includes("omits Remedy");
+  return !path.conditions.includes("GameFAQs Shops") || !path.conditions.includes("RPGClassics");
+});
+if (ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34 || ipsensSupplyRouteMismatch) {
+  errors.push("Ipsen's Castle Mogshop must retain all 12 source-linked consumable prices alongside its 22 equipment routes, including GameFAQs' 300-Gil Remedy listing that RPGClassics omits.");
+}
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
   "missable.disc-1.journey-to-burmecia.grimo-letter",

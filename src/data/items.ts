@@ -2260,13 +2260,13 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
 
 export const gameItems: GameItem[] = [
   { id: "game-item.cancer-stellazzio", name: "Cancer Stellazzio", category: "key-item", sourceIds: [...burmeciaSources, "jegged-stellazzio"], verification: "partial" },
-  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources, ...iifaTreeSources, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "partial" },
+  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...new Set([...fossilRooSources, ...oeilvertSources, ...iifaTreeSources, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.elixir", name: "Elixir", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources, ...mountGulugSources, ...tantarianSources, ...iifaTreeSources, "gamefaqs-journey-to-burmecia-71891", "gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "jegged-crystal-world", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], verification: "partial" },
   { id: "game-item.emerald", name: "Emerald", category: "consumable", sourceIds: oeilvertSources, verification: "partial" },
-  { id: "game-item.echo-screen", name: "Echo Screen", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.echo-screen", name: "Echo Screen", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.red-hat", name: "Red Hat", category: "equipment", sourceIds: [...mountGulugSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.wing-edge", name: "Wing Edge", category: "equipment", sourceIds: [...mountGulugSources, "jegged-esto-gaza", ...wingEdgeReferenceSources, "gamefaqs-on-the-high-seas-71891", "gamefaqs-portal-to-another-world-71891", "gamefaqs-memoria-71891", "gamefaqs-second-battle-iifa-tree-71891", "gamefaqs-master-synthesist-71891"], verification: "partial" },
   { id: "game-item.reflect-ring", name: "Reflect Ring", category: "equipment", sourceIds: ["gamefaqs-master-synthesist-71891", "gamefaqs-items-71891", "rpgclassics-memoria"], verification: "partial" },
@@ -2301,7 +2301,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.anklet", name: "Anklet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-desert-palace-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-treno-auction-71891", "jegged-returning-desert-palace", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.rebirth-ring", name: "Rebirth Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "gamefaqs-card-tournament-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-the-final-battle-71891", "gamefaqs-missables-21725", "jegged-treno-tournament", "jegged-chocographs", "jegged-kuja-necron-final-showdown", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.ribbon", name: "Ribbon", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-aerial-exploration-71891", "jegged-chocographs", "gamefaqs-treno-auction-71891", "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "jegged-add-ons"], verification: "partial" },
-  { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bestiary-n-s", "elitegrindlab-madain-sari-eidolon-wall"], verification: "partial" },
+  { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bestiary-n-s", "elitegrindlab-madain-sari-eidolon-wall"], verification: "partial" },
   { id: "game-item.mythril-spear", name: "Mythril Spear", category: "equipment", sourceIds: [...burmeciaSources, ...mythrilSpearReferenceSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.lightning-staff", name: "Lightning Staff", category: "equipment", sourceIds: [...burmeciaSources, ...lightningStaffReferenceSources], verification: "partial" },
   { id: "game-item.air-racket", name: "Air Racket", category: "equipment", sourceIds: airRacketReferenceSources, verification: "partial" },
@@ -2317,7 +2317,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.glass-armlet", name: "Glass Armlet", category: "equipment", sourceIds: glassArmletReferenceSources, verification: "partial" },
   { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: leatherWristReferenceSources, verification: "partial" },
   { id: "game-item.kupo-nut", name: "Kupo Nut", category: "key-item", sourceIds: [...burmeciaSources, "gamefaqs-kupo-nuts-71891", "gamefaqs-moogle-faq-23306", ...mountGulugSources], verification: "partial" },
-  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...burmeciaSources, ...iifaTreeSources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891"], verification: "partial" },
+  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...burmeciaSources, ...iifaTreeSources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.shield-armor", name: "Shield Armor", category: "equipment", sourceIds: [...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.power-vest", name: "Power Vest", category: "equipment", sourceIds: [...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.feather-boots", name: "Feather Boots", category: "equipment", sourceIds: [...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-on-the-high-seas-71891", "gamefaqs-treno-auction-71891", "gamefaqs-memoria-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
@@ -2398,8 +2398,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.thief-hat", name: "Thief Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.holy-miter", name: "Holy Miter", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.dark-gear", name: "Dark Gear", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
-  { id: "game-item.magic-tag", name: "Magic Tag", category: "consumable", sourceIds: disc4ShopSources, verification: "partial" },
-  { id: "game-item.vaccine", name: "Vaccine", category: "consumable", sourceIds: [...disc4ShopSources, ...mountGulugSources, "gamefaqs-enemy-list-71891"], verification: "partial" },
+  { id: "game-item.magic-tag", name: "Magic Tag", category: "consumable", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.vaccine", name: "Vaccine", category: "consumable", sourceIds: [...new Set([...disc4ShopSources, ...mountGulugSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.genji-armor", name: "Genji Armor", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
   { id: "game-item.masamune", name: "Masamune", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
   { id: "game-item.blood-sword", name: "Blood Sword", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-treno-71891"], verification: "partial" },
@@ -2454,8 +2454,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.thunder-gloves", name: "Thunder Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
   { id: "game-item.mages-hat", name: "Mage's Hat", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.mythril-helm", name: "Mythril Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.annoyntment", name: "Annoyntment", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
+  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.annoyntment", name: "Annoyntment", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
   { id: "game-item.headgear", name: "Headgear", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
   { id: "game-item.barbut", name: "Barbut", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
   { id: "game-item.barette", name: "Barette", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-ipsens-castle-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-ipsens-castle", "jegged-add-ons", "rpgclassics-addons", "rpgclassics-synthesis"], verification: "partial" },
@@ -2956,6 +2956,37 @@ const ipsensMogshopEquipmentPaths: ItemAcquisitionPath[] = ipsensMogshopEquipmen
   sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops"],
 }));
 
+const ipsensMogshopSupplyProducts = [
+  ["potion", "Potion", 50],
+  ["hi-potion", "Hi-Potion", 200],
+  ["phoenix-down", "Phoenix Down", 150],
+  ["echo-screen", "Echo Screen", 50],
+  ["soft", "Soft", 100],
+  ["antidote", "Antidote", 50],
+  ["eye-drops", "Eye Drops", 50],
+  ["magic-tag", "Magic Tag", 100],
+  ["remedy", "Remedy", 300],
+  ["vaccine", "Vaccine", 100],
+  ["annoyntment", "Annoyntment", 150],
+  ["tent", "Tent", 800],
+] as const;
+
+const ipsensMogshopSupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProducts.map(([slug, itemName, price]) => ({
+  id: `item-path.disc-3.ipsens-castle.kumool-mogshop.${slug}`,
+  itemId: `game-item.${slug}`,
+  chapterId: "disc-3.ipsens-castle",
+  method: "mogshop",
+  quantity: 1,
+  availability: "window-unverified",
+  shopId: "ipsens-castle.kumool-mogshop",
+  shopName: "Kumool's Mogshop (Ipsen's Castle)",
+  cost: { currency: "gil", amount: price },
+  conditions: slug === "remedy"
+    ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop. RPGClassics corroborates the rest of the listed Ipsen supplies but omits Remedy; exact post-story shop access has not been independently verified."
+    : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. Exact post-story shop access has not been independently verified.`,
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"],
+}));
+
 const iifaTreeBrigandineStealPath: ItemAcquisitionPath = {
   id: "item-path.disc-2.iifa-tree.soulcage-brigandine-steal",
   itemId: "game-item.brigandine",
@@ -2986,6 +3017,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...cleyraShopStockPaths,
   ...cleyraLaterRecoveryPaths,
   ...ipsensMogshopEquipmentPaths,
+  ...ipsensMogshopSupplyPaths,
   ...zornThornShopRecoveryPaths,
   ...zornThornStealPaths,
   {
