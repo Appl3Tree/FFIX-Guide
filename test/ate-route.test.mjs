@@ -20,6 +20,22 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   assert.equal(branchEvents.length, 2);
   assert.equal(objectiveDependencies.length, 20);
 
+  assert.deepEqual(
+    movieCriticEligibleEvents
+      .filter((event) => event.chapterId === "disc-2.treno")
+      .map((event) => event.objectiveId),
+    [
+      "ate.treno-tradition",
+      "ate.treno-pursuit",
+      "ate.treno-confusion",
+      "ate.treno-ambition",
+      "ate.treno-meeting-place",
+      "ate.treno-unexpected-visitor",
+      "ate.treno-crime-and-punishment",
+    ],
+    "Treno's Movie Critic route follows the four-source safe screen order",
+  );
+
   for (const branchEvent of branchEvents) {
     const route = movieCriticEligibleEvents.filter((event) =>
       event.exclusiveGroupId !== movieCriticExclusiveGroupId || event.objectiveId === branchEvent.objectiveId,

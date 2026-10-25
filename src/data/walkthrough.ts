@@ -1517,7 +1517,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "treno-ate-route",
         title: "First visit — follow the ATE route before exploring",
-        summary: "The first six ATEs are screen-dependent. Avoid the Auction House screen and item sweep until the route reaches them.",
+        summary: "The first six ATEs follow a safe screen route. Avoid the Auction House screen and city item sweep until all six are checked.",
         sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"],
         steps: [
           {
@@ -1530,7 +1530,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-six-screen-ates",
             kind: "cutoff",
             text: "Follow Dagger's path in order: go west for Pursuit, descend the stairs for Confusion, head south for Ambition, return to the entrance and take the right-hand stairs for Meeting Place, then go north one screen for Unexpected Visitor. Do not enter the Auction House or stop for city pickups before the route reaches Unexpected Visitor.",
-            detail: "The ATE path depends on which screens you enter; visiting the Auction House early can close prompts that have not appeared yet. TrueAchievements appears to place Unexpected Visitor before Ambition, but four other routes agree on this order. If preserving ATE eligibility, keep the outside-Treno save until all seven are checked.",
+            detail: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab agree on this screen route. GameFAQs says entering the Auction House closes any unviewed ATE except Unexpected Visitor and Crime and Punishment, so finish the first six before exploring. A TrueAchievements checklist appears to place Unexpected Visitor before Ambition; this route preserves the four-source order. Keep the outside-Treno save until all seven are checked.",
           },
           {
             id: "treno-power-belt-intercept",
@@ -1599,7 +1599,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-crime-and-punishment-ate",
             kind: "cutoff",
             text: "After Doctor Tot opens the hatch, climb back up through the tower and leave it to trigger Crime and Punishment. Confirm all seven Treno ATEs are checked before returning to the hatch and descending into Gargan Roo.",
-            detail: "Crime and Punishment is the seventh local ATE and appears around the Gargan Roo access sequence. Leaving Treno through the hatch without viewing it closes this scene window.",
+            detail: "GameFAQs and Jegged place this scene after Doctor Tot opens the Gargan Roo hatch and before Steiner descends. Climb out of the tower, confirm Crime and Punishment, then return to the hatch. Leaving Treno through the hatch without viewing it closes this scene window.",
             objectiveIds: ["disc-2.treno.ates"],
           },
         ],

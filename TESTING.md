@@ -6,7 +6,7 @@ Last updated: 2026-10-24
 
 All 44 walkthrough chapters have authored, source-linked content, but remain partial. The B01 graph has 63 links across 44 chapters, and the B05 catalog remains partial at 88 item records and 142 acquisition paths. B03 now tracks 83 ATEs, 80 eligible scenes, three excluded tutorials, 20 prerequisite edges, and one mutually exclusive Treno pair. The Madain Sari route follows the three-source Vivi → Dagger → Eiko sequence while recording Jegged’s conflicting prose. A new automated route test checks both Treno branch plans at 79 scenes and verifies event ordering and achievement pointers for Steam, PS4, and Xbox. This is a static model check; complete trigger-by-trigger and release verification remain open.
 
-Latest validation: `npm test` passes 9 tests; `npm run lint` passes; `npm run build` passes with 0 audit errors and 171 coverage warnings across 44 chapters, 129 missables, 603 objectives, and 273 sources. The production bundle is 1,223.06 kB JavaScript (320.87 kB gzip) and 48.89 kB CSS (10.72 kB gzip). Vite’s chunk-size notice remains advisory. No browser-visible UI changed in this data and test slice; responsive Route Map and accessibility review remain outstanding.
+Latest validation: `npm test` passes 9 tests; `npm run lint` passes; `npm run build` passes with 0 audit errors and 171 coverage warnings across 44 chapters, 129 missables, 603 objectives, and 273 sources. The Treno ATE test now asserts the first-visit route order from Tradition through Crime and Punishment. The production bundle is 1,224.95 kB JavaScript (321.31 kB gzip) and 48.89 kB CSS (10.72 kB gzip). Vite’s chunk-size notice remains advisory. No browser-visible UI changed in this data and test slice; responsive Route Map and accessibility review remain outstanding.
 
 An internal item data slice was added with 14 item records and 20 source-linked acquisition paths across three chapters. Typecheck, lint, audit, build, and diff checks passed after the addition. The audit remains at 0 errors and 166 coverage warnings; the data rules validate item/path IDs, chapter/objective/source links, quantities, and costs. The slice adds no browser-visible behavior, and the catalog remains partial with no reference UI.
 
@@ -22,7 +22,7 @@ The repository defines:
 - `npm run audit:data` — duplicate IDs, source/objective/item references, missable fields, warning-to-checklist chapter links, limited-window item path-to-cutoff warning links, item-shop metadata, source inventory targets, ability-claim provenance, and coverage-state warnings.
 - `npm run build` — typecheck, data audit, and Vite production build.
 
-The test `test/ate-route.test.mjs` statically checks both mutually exclusive Treno choices, the 79-scene route length, ATE prerequisite ordering, the earlier Wei/Kal prerequisite, and event pointers in Steam, PS4, and Xbox. It does not verify live prompts or release-specific trigger behavior.
+The test `test/ate-route.test.mjs` statically checks both mutually exclusive Treno choices, the 79-scene route length, the four-source Treno ATE order, ATE prerequisite ordering, the earlier Wei/Kal prerequisite, and event pointers in Steam, PS4, and Xbox. It does not verify live prompts or release-specific trigger behavior.
 
 The audit reports incomplete content as warnings. It should fail on broken IDs/relationships, not on honestly documented unresearched categories.
 
@@ -30,7 +30,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 171 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,223.06 kB (320.87 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 171 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,224.95 kB (321.31 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 
@@ -124,7 +124,7 @@ The repository defines:
 - `npm run audit:data` — duplicate IDs, source references, objective references, missable fields, warning-to-checklist chapter links, and coverage-state warnings.
 - `npm run build` — typecheck, data audit, and Vite production build.
 
-The test `test/ate-route.test.mjs` statically checks both mutually exclusive Treno choices, the 79-scene route length, ATE prerequisite ordering, the earlier Wei/Kal prerequisite, and event pointers in Steam, PS4, and Xbox. It does not verify live prompts or release-specific trigger behavior.
+The test `test/ate-route.test.mjs` statically checks both mutually exclusive Treno choices, the 79-scene route length, the four-source Treno ATE order, ATE prerequisite ordering, the earlier Wei/Kal prerequisite, and event pointers in Steam, PS4, and Xbox. It does not verify live prompts or release-specific trigger behavior.
 
 The audit reports incomplete content as warnings. It should fail on broken IDs/relationships, not on honestly documented unresearched categories.
 
@@ -132,7 +132,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 171 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,223.06 kB (320.87 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
+`npm run build` passed typecheck, reported 0 data-audit errors and 171 coverage warnings, and completed the Vite production build. The latest JavaScript bundle is 1,224.95 kB (321.31 kB gzip), and CSS is 48.89 kB (10.72 kB gzip). The JavaScript bundle is above Vite's 500 kB advisory threshold; the size warning is advisory, not a build failure.
 
 ## Browser checks completed in this phase
 
