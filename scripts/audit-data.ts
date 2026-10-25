@@ -4373,6 +4373,111 @@ const requiredMoonstonePaths = [
   { id: "item-path.disc-3.forgotten-continent.moonstone-friendly-jabberwock", objectiveId: "disc-3.forgotten-continent.jabberwock" },
   { id: "item-path.disc-4.return-to-gaia.moonstone-stiltzkin-eighth-bundle", objectiveId: "disc-4.return-to-gaia.stiltzkin-eighth-bundle" },
 ];
+const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
+const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
+const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");
+const earthGuardianCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.earth-guardian.steals");
+const earthGuardianStealExpectations = [
+  { itemId: "game-item.avenger", slot: "common", pathId: "item-path.disc-3.breaking-the-seal.earth-guardian-avenger-steal", rate: "70%" },
+  { itemId: "game-item.rubber-suit", slot: "uncommon", pathId: "item-path.disc-3.breaking-the-seal.earth-guardian-rubber-suit-steal", rate: "23%" },
+];
+if (!earthGuardianRecord || earthGuardianRecord.kind !== "boss" ||
+  !earthGuardianRecord.encounterIds.includes("encounter.breaking-the-seal.earth-guardian") ||
+  !earthGuardianRecord.stats.some((claim) => claim.field === "HP" && claim.value === 20756 && claim.verification === "cross-checked") ||
+  !earthGuardianRecord.blueMagic.some((skill) => skill.name === "Earth Shake" && skill.objectiveIds.includes("disc-3.breaking-the-seal.earth-shake")) ||
+  !earthGuardianRecord.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.phoenix-pinion")) {
+  errors.push("Earth Guardian's bestiary profile must include its fixed encounter, cross-checked HP, Earth Shake opportunity, and guaranteed Phoenix Pinion.");
+}
+if (!earthGuardianEncounter || earthGuardianEncounter.kind !== "boss" ||
+  !earthGuardianEncounter.formation.some((entry) => entry.enemyId === "enemy.earth-guardian" && entry.quantity === 1) ||
+  !earthGuardianEncounter.objectiveIds.includes("disc-3.breaking-the-seal.earth-guardian-steals") ||
+  !earthGuardianEncounter.objectiveIds.includes("disc-3.breaking-the-seal.earth-shake") ||
+  !earthGuardianEncounter.missableIds.includes("missable.disc-3.breaking-the-seal.earth-guardian-steals") ||
+  !earthGuardianEncounter.cutoffIds.includes("cutoff.earth-guardian.steals")) {
+  errors.push("Earth Guardian's fixed Earth Shrine encounter must link its steal, Earth Shake, missable, and cutoff records.");
+}
+for (const expected of earthGuardianStealExpectations) {
+  const steal = earthGuardianRecord?.steals.find((slot) => slot.slot === expected.slot && slot.itemId === expected.itemId);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!steal || !path || path.itemId !== expected.itemId || path.method !== "steal" ||
+    path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-3.breaking-the-seal.earth-guardian-steals") ||
+    !path.conditions?.includes(expected.rate)) {
+    errors.push(`Earth Guardian's ${expected.itemId} one-time steal must match its slot, objective, and sourced chance note.`);
+  }
+  if (!itemAcquisitionPaths.some((candidate) => candidate.itemId === expected.itemId &&
+    candidate.chapterId !== "disc-3.breaking-the-seal" &&
+    guideAreas.findIndex((area) => area.id === candidate.chapterId) > guideAreas.findIndex((area) => area.id === "disc-3.breaking-the-seal"))) {
+    errors.push(`Earth Guardian's ${expected.itemId} steal must have a later item-type recovery path.`);
+  }
+}
+const earthGuardianAvengerRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.avenger-bran-bal-mogshop");
+const earthGuardianRubberSuitRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.rubber-suit-synthesis");
+if (!earthGuardianAvengerRecovery || earthGuardianAvengerRecovery.itemId !== "game-item.avenger" ||
+  earthGuardianAvengerRecovery.method !== "mogshop" || earthGuardianAvengerRecovery.cost?.amount !== 16000 ||
+  !earthGuardianRubberSuitRecovery || earthGuardianRubberSuitRecovery.itemId !== "game-item.rubber-suit" ||
+  earthGuardianRubberSuitRecovery.method !== "synthesis" || earthGuardianRubberSuitRecovery.cost?.amount !== 20000) {
+  errors.push("Earth Guardian steal recovery must link Avenger's Bran Bal purchase and Rubber Suit's Disc IV synthesis.");
+}
+if (!earthGuardianWarning?.classification.includes("recoverable-later") ||
+  !earthGuardianWarning.nextAvailability.includes("Bran Bal Mogshop") ||
+  !earthGuardianWarning.nextAvailability.includes("Black Cat synthesis") ||
+  !earthGuardianWarning.recovery.includes("Black Mage Village") ||
+  !earthGuardianCutoff?.missableIds.includes("missable.disc-3.breaking-the-seal.earth-guardian-steals")) {
+  errors.push("Earth Guardian's steal warning must distinguish one-time encounter loss from the documented shop and synthesis recovery routes.");
+}
+const tantarianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.tantarian");
+const tantarianDisc2Encounter = enemyEncounters.find((encounter) => encounter.id === "encounter.tantarian.disc-2-library");
+const tantarianDisc3Encounter = enemyEncounters.find((encounter) => encounter.id === "encounter.tantarian.disc-3-library");
+const tantarianWarning = missablesById.get("missable.disc-3.trouble-on-the-home-front.tantarian");
+const tantarianCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.alexandria-defense.tantarian");
+const tantarianStealExpectations = [
+  { itemId: "game-item.ether", slot: "common", pathId: "item-path.disc-2.return-to-alexandria.tantarian-ether-steal" },
+  { itemId: "game-item.elixir", slot: "uncommon", pathId: "item-path.disc-2.return-to-alexandria.tantarian-elixir-steal" },
+  { itemId: "game-item.silver-fork", slot: "semi-rare", pathId: "item-path.disc-2.return-to-alexandria.tantarian-silver-fork-steal" },
+  { itemId: "game-item.demons-mail", slot: "rare", pathId: "item-path.disc-2.return-to-alexandria.tantarian-demons-mail-steal" },
+];
+if (!tantarianRecord || tantarianRecord.kind !== "boss" ||
+  !tantarianRecord.encounterIds.includes("encounter.tantarian.disc-2-library") ||
+  !tantarianRecord.encounterIds.includes("encounter.tantarian.disc-3-library") ||
+  !tantarianRecord.stats.some((claim) => claim.field === "level" && claim.value === 41 && claim.verification === "cross-checked") ||
+  !tantarianRecord.stats.some((claim) => claim.field === "HP" && claim.value === 21997 && claim.verification === "cross-checked") ||
+  !tantarianRecord.stats.some((claim) => claim.field === "MP" && claim.value === 1456) ||
+  !tantarianRecord.stats.some((claim) => claim.field === "EXP" && claim.value === 12585) ||
+  !tantarianRecord.stats.some((claim) => claim.field === "AP" && claim.value === 30) ||
+  !tantarianRecord.stats.some((claim) => claim.field === "Gil" && claim.value === 4472) ||
+  !tantarianRecord.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.running-shoes") ||
+  !tantarianRecord.facts.some((fact) => fact.category === "elemental-weakness" && fact.label === "Holy") ||
+  !tantarianRecord.facts.some((fact) => fact.category === "elemental-weakness" && fact.label.includes("Fire") && fact.detail === undefined)) {
+  errors.push("Tantarian's shared boss profile must retain its cross-checked stats, two encounter windows, weaknesses, and guaranteed Running Shoes.");
+}
+if (!tantarianDisc2Encounter || tantarianDisc2Encounter.chapterId !== "disc-2.return-to-alexandria" ||
+  !tantarianDisc2Encounter.notes.some((note) => note.includes("first of two")) ||
+  !tantarianDisc3Encounter || tantarianDisc3Encounter.chapterId !== "disc-3.trouble-on-the-home-front" ||
+  !tantarianDisc3Encounter.objectiveIds.includes("disc-2.return-to-alexandria.tantarian") ||
+  !tantarianDisc3Encounter.missableIds.includes("missable.disc-3.trouble-on-the-home-front.tantarian") ||
+  !tantarianDisc3Encounter.cutoffIds.includes("cutoff.alexandria-defense.tantarian") ||
+  !tantarianWarning?.classification.includes("conditional") ||
+  !tantarianWarning?.classification.includes("recoverable-later") ||
+  !tantarianCutoff?.missableIds.includes("missable.disc-3.trouble-on-the-home-front.tantarian")) {
+  errors.push("Tantarian's Disc II and Disc III windows must share one objective and link the final chance to its conditional warning and cutoff.");
+}
+for (const expected of tantarianStealExpectations) {
+  const steal = tantarianRecord?.steals.find((slot) => slot.slot === expected.slot && slot.itemId === expected.itemId);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!steal || !path || path.itemId !== expected.itemId || path.method !== "steal" ||
+    path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.return-to-alexandria.tantarian")) {
+    errors.push(`Tantarian's ${expected.itemId} steal must match its bestiary slot and shared one-time encounter objective.`);
+  }
+}
+const tantarianRunningShoesPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-alexandria.tantarian-running-shoes");
+if (!tantarianRunningShoesPath || tantarianRunningShoesPath.itemId !== "game-item.running-shoes" ||
+  tantarianRunningShoesPath.method !== "drop" ||
+  !tantarianRunningShoesPath.walkthroughObjectiveIds?.includes("disc-2.return-to-alexandria.tantarian") ||
+  !tantarianRecord?.notes.some((note) => note.includes("not separate victories"))) {
+  errors.push("Tantarian's guaranteed Running Shoes route must be shared across the two alternative story windows.");
+}
 if (!gameItems.some((item) => item.id === moonstoneId && item.name === "Moonstone" && item.category === "equipment")) {
   errors.push("Moonstone must be present in the equipment catalog.");
 }
