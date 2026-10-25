@@ -552,6 +552,56 @@ for (const abilityName of ["Ability Up", "Concentrate", "Madeen"]) {
 if (!sourceInventoryTargets.some((target) => target.itemId === ribbonItemId && target.targetQuantity === 4)) {
   errors.push("Ribbon needs the source-listed Need 4 inventory target with its version caveat.");
 }
+const laniStealObjectiveId = "disc-2.journey-to-outer-continent.lani-steals";
+const expectedLaniStealPaths = [
+  { id: "item-path.disc-2.journey-to-outer-continent.lani-ether-steal", itemId: "game-item.ether" },
+  { id: "item-path.disc-2.journey-to-outer-continent.lani-gladius-steal", itemId: "game-item.gladius" },
+  { id: "item-path.disc-2.journey-to-outer-continent.lani-coral-sword-steal", itemId: "game-item.coral-sword" },
+];
+for (const expected of expectedLaniStealPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id && entry.itemId === expected.itemId);
+  if (!path || path.method !== "steal" || !path.walkthroughObjectiveIds?.includes(laniStealObjectiveId)) {
+    errors.push(`Lani's one-time-steal checklist must link ${expected.itemId} to acquisition path ${expected.id}.`);
+  }
+}
+const expectedLaniRecoveryPathIds = [
+  "item-path.disc-2.outer-continent.gladius-black-mage-village-shop",
+  "item-path.disc-2.madain-sari.gladius-shop",
+  "item-path.disc-3.the-home-front.gladius-alexandria-shop",
+  "item-path.disc-3.card-tournament.gladius-treno-shop",
+  "item-path.disc-3.lost-continent.gladius-esto-gaza-shop",
+  "item-path.disc-3.aerial-exploration.gladius-daguerreo-shop",
+  "item-path.disc-3.portal-to-another-world.gladius-bran-bal-mogshop",
+  "item-path.disc-3.card-tournament.coral-sword-treno-shop",
+  "item-path.disc-3.on-the-high-seas.coral-sword-lindblum-shop",
+];
+for (const pathId of expectedLaniRecoveryPathIds) {
+  if (!itemAcquisitionPaths.some((path) => path.id === pathId && path.method !== "steal")) {
+    errors.push(`Lani's later item-type recovery catalog is missing ${pathId}.`);
+  }
+}
+const laniWarning = missables.find((record) => record.id === "missable.disc-2.journey-to-outer-continent.lani-steals");
+if (!laniWarning?.classification.includes("recoverable-later") || laniWarning.recovery.includes("under research")) {
+  errors.push("The Lani warning must distinguish one-time steal copies from later Gladius and Coral Sword recovery.");
+}
+for (const [itemId, abilityNames] of [
+  ["game-item.gladius", ["Annoy", "Lucky Seven"]],
+  ["game-item.coral-sword", ["Charge!"]],
+] as const) {
+  if (!gameItems.some((item) => item.id === itemId)) {
+    errors.push(`Lani's recovery scope needs ${itemId} in the item catalog.`);
+  }
+  for (const abilityName of abilityNames) {
+    if (!equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName)) {
+      errors.push(`${itemId} needs its ${abilityName} ability claim.`);
+    }
+  }
+}
+for (const [itemId, quantity] of [["game-item.gladius", 6], ["game-item.coral-sword", 2]] as const) {
+  if (!sourceInventoryTargets.some((target) => target.itemId === itemId && target.targetQuantity === quantity)) {
+    errors.push(`${itemId} needs its source-listed Need ${quantity} inventory target.`);
+  }
+}
 for (const cycle of findObjectiveDependencyCycles(objectiveDependencies)) {
   errors.push(`Objective dependency cycle: ${cycle.join(" -> ")}.`);
 }
