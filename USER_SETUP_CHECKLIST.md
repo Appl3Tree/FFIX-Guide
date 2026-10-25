@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The latest Disc II equipment slice adds Air Racket, Silver Gloves, Iron Helm, and Chain Mail acquisition paths and optional stock guidance, alongside the Rebirth Ring model and earlier recovery-route audits for Chain Plate, Leather Plate, Mythril Vest, Mythril Spear, and Lightning Staff. It introduces no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The latest Disc II equipment tranche adds source-linked acquisition routes and two synthesis recipes for the Power Belt and Glass Buckle chain, including the Treno Tradition reward gate and Chain Mail stock recovery. Earlier Disc II records cover Air Racket, Silver Gloves, Iron Helm, and Chain Mail, alongside the Rebirth Ring model and recovery-route audits for Chain Plate, Leather Plate, Mythril Vest, Mythril Spear, and Lightning Staff. It introduces no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 

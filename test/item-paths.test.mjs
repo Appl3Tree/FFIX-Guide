@@ -403,8 +403,8 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 329);
-  assert.equal(synthesisRecipes.length, 10);
+  assert.equal(itemAcquisitionPaths.length, 362);
+  assert.equal(synthesisRecipes.length, 12);
 });
 
 test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe paths", () => {
@@ -726,7 +726,7 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   const cleyraTreasureMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
   const pinnacleMissable = missables.find((entry) => entry.id === "missable.disc-2.pinnacle-rocks.treasure-sweep");
 
-  assert.equal(itemAcquisitionPaths.length, 329);
+  assert.equal(itemAcquisitionPaths.length, 362);
   assert.ok(newPaths.every(Boolean), "all 20 earlier/recovery paths should exist");
   assert.deepEqual(
     pricedPaths.map((path) => [path?.itemId, path?.cost?.amount]).sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),
@@ -827,7 +827,7 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
   const cleyraShopStep = cleyraChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "cleyra-shop-stock");
   const chainMailStep = lindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-perfect-chain-mail-stock");
 
-  assert.equal(itemAcquisitionPaths.length, 329);
+  assert.equal(itemAcquisitionPaths.length, 362);
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.return-to-lindblum"));
   assert.deepEqual(equipment.map(([itemId]) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), equipment.map(([, count]) => count));
   assert.deepEqual(routeIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id)?.id), routeIds);
@@ -877,6 +877,98 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
   for (const path of itemAcquisitionPaths.filter((entry) => routeIds.includes(entry.id))) {
     for (const sourceId of path.sourceIds) {
       assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
+  const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
+  const pathCounts = [7, 9, 8, 9];
+  const powerBelt = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.power-belt");
+  const glassBuckle = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.glass-buckle");
+  const powerBeltPaths = itemAcquisitionPaths.filter((path) => path.itemId === itemIds[0]);
+  const glassBucklePaths = itemAcquisitionPaths.filter((path) => path.itemId === itemIds[1]);
+  const directReward = powerBeltPaths.find((path) => path.id === "item-path.disc-2.treno.power-belt-four-armed-man");
+  const trenoChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.treno");
+  const lindblumChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-lindblum");
+  const interceptStep = trenoChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "treno-power-belt-intercept");
+  const chainMailStep = lindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-perfect-chain-mail-stock");
+
+  assert.deepEqual(gameItems.filter((item) => itemIds.includes(item.id)).map((item) => item.id).sort(), [...itemIds].sort());
+  assert.deepEqual(itemIds.map((itemId) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), pathCounts);
+  assert.equal(gameItems.length, 112);
+  assert.equal(itemAcquisitionPaths.length, 362);
+  assert.equal(synthesisRecipes.length, 12);
+  assert.equal(equipmentAbilityClaims.length, 58);
+
+  assert.deepEqual(powerBelt?.ingredients, [
+    { itemId: "game-item.glass-buckle", quantity: 1 },
+    { itemId: "game-item.chain-mail", quantity: 1 },
+  ]);
+  assert.equal(powerBelt?.cost.amount, 2000);
+  assert.deepEqual(glassBuckle?.ingredients, [
+    { itemId: "game-item.glass-armlet", quantity: 1 },
+    { itemId: "game-item.leather-wrist", quantity: 1 },
+  ]);
+  assert.equal(glassBuckle?.cost.amount, 500);
+
+  assert.deepEqual(
+    powerBeltPaths.filter((path) => path.method === "synthesis").map((path) => path.shopId).sort(),
+    [
+      "alexandria.synthesis-shop.disc-3",
+      "black-mage-village.synthesis-shop.disc-2-3",
+      "daguerreo.synthesis-expert",
+      "lindblum.synthesis-shop.disc-2",
+      "lindblum.synthesis-shop.disc-3-4",
+      "treno.synthesis-shop.disc-3-4",
+    ].sort(),
+  );
+  assert.deepEqual(
+    glassBucklePaths.map((path) => path.shopId).sort(),
+    [
+      "alexandria.alley-synthesist",
+      "alexandria.synthesis-shop.disc-3",
+      "black-mage-village.synthesis-shop.disc-2-3",
+      "black-mage-village.synthesis-shop.disc-4",
+      "lindblum.synthesis-shop.disc-1",
+      "lindblum.synthesis-shop.disc-2",
+      "lindblum.synthesis-shop.disc-3-4",
+      "treno.synthesis-shop.disc-2",
+      "treno.synthesis-shop.disc-3",
+    ].sort(),
+  );
+  assert.equal(directReward?.availability, "limited-window");
+  assert.match(directReward?.conditions ?? "", /Treno Tradition ATE/);
+  assert.ok(directReward?.walkthroughObjectiveIds?.includes("disc-2.treno.power-belt"));
+  assert.match(interceptStep?.detail ?? "", /requires viewing Treno Tradition/);
+  assert.ok(interceptStep?.objectiveIds?.includes("disc-2.treno.power-belt"));
+  assert.match(chainMailStep?.detail ?? "", /one Glass Buckle \+ one Chain Mail for 2,000 Gil/);
+  assert.match(chainMailStep?.detail ?? "", /one Glass Armlet \+ one Leather Wrist for 500 Gil/);
+  assert.ok(objectives.some((objective) => objective.id === "disc-1.evil-forest.prison-cage-steals"));
+  assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-1.evil-forest"));
+
+  const expectedAbilities = [
+    [itemIds[0], "Counter"], [itemIds[0], "Fira"], [itemIds[0], "MP Attack"],
+    [itemIds[1], "Add Status"], [itemIds[1], "Antibody"], [itemIds[1], "Thunder"],
+    [itemIds[2], "Steal Gil"], [itemIds[2], "Antibody"],
+    [itemIds[3], "Beast Killer"], [itemIds[3], "Blizzard"],
+  ];
+  for (const [itemId, abilityName] of expectedAbilities) {
+    assert.ok(equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName), `${itemId} is missing ${abilityName}`);
+  }
+
+  for (const path of itemAcquisitionPaths.filter((entry) => itemIds.includes(entry.itemId))) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+    for (const objectiveId of path.walkthroughObjectiveIds ?? []) {
+      assert.ok(objectives.some((objective) => objective.id === objectiveId), `${path.id} references unknown objective ${objectiveId}`);
+    }
+  }
+  for (const recipe of [powerBelt, glassBuckle]) {
+    assert.ok(recipe);
+    for (const sourceId of recipe.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${recipe.id} references unknown source ${sourceId}`);
     }
   }
 });

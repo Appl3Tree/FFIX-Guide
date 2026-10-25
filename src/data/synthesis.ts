@@ -168,4 +168,32 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-robes", "rpgclassics-synthesis", "jegged-synthesis"],
     notes: "Silk Robe is also a nine-frog reward and a Cleyra Trunk chest. GameFAQs lists synthesis at Treno, Lindblum after Cleyra, Black Mage Village (Disc II-III), and Alexandria; Caves of Narshe lists Treno (Disc III), Lindblum (Disc III), Alexandria (Disc III), and Daguerreo (Disc III-IV). The available shop windows are represented separately, and Lindblum's post-Cleyra timing is retained with the sources' differing disc labels.",
   },
+  {
+    id: "synthesis-recipe.glass-buckle",
+    resultItemId: "game-item.glass-buckle",
+    ingredients: [
+      { itemId: "game-item.glass-armlet", quantity: 1 },
+      { itemId: "game-item.leather-wrist", quantity: 1 },
+    ],
+    chapterId: "disc-1.lindblum",
+    shopId: "lindblum.synthesis-shop.disc-1",
+    shopName: "Torres' Synthesis Shop (Lindblum, Disc I)",
+    cost: { currency: "gil", amount: 500 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "rpgclassics-synthesis", "gamefaqs-synthesis-xiamut-38565", "cavesofnarshe-ff9-disc-2-map"],
+    notes: "GameFAQs, RPGClassics, Xiamut, and Caves of Narshe list Glass Armlet + Leather Wrist for 500 Gil. The item catalog models the Disc I Lindblum recipe plus the other source-listed windows at Treno, post-Cleyra Lindblum, Black Mage Village, Alexandria, later Treno and Lindblum, Alexandria's alley synthesist, and Black Mage Village on Disc IV. The source list is based on PlayStation references; direct modern-release stock checks remain open.",
+  },
+  {
+    id: "synthesis-recipe.power-belt",
+    resultItemId: "game-item.power-belt",
+    ingredients: [
+      { itemId: "game-item.glass-buckle", quantity: 1 },
+      { itemId: "game-item.chain-mail", quantity: 1 },
+    ],
+    chapterId: "disc-2.return-to-lindblum",
+    shopId: "lindblum.synthesis-shop.disc-2",
+    shopName: "Lindblum Synthesis Shop (after Cleyra)",
+    cost: { currency: "gil", amount: 2000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-synthesis", "gamefaqs-synthesis-xiamut-38565", "cavesofnarshe-ff9-disc-2-map", "neoseeker-ffix-walkthrough-1816852"],
+    notes: "GameFAQs, RPGClassics, Xiamut, and Caves of Narshe list Glass Buckle + Chain Mail for 2,000 Gil. GameFAQs identifies post-Cleyra Lindblum, Black Mage Village (Discs II–III), Alexandria, Treno (Discs III–IV), and Daguerreo; RPGClassics also lists Wayne's later Lindblum shop. The Treno Tradition reward is a separate direct source. Glass Buckle is made from Glass Armlet + Leather Wrist for 500 Gil, and both ingredients have their own source-linked paths. This recipe supports the optional 15 Chain Mail-equivalent target, which can count up to 12 Power Belts; it is not a normal completion requirement. Direct stock behavior on modern releases remains unverified.",
+  },
 ];
