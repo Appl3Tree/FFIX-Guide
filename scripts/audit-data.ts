@@ -1941,6 +1941,54 @@ if (
 ) {
   errors.push("Dali's one-time inn consumables must link to the first-visit objective, later 50-Gil Cleyra stock, and a warning that keeps the rank effect unresolved.");
 }
+const daliUndergroundObjectiveId = "disc-1.village-of-dali.underground-treasure-sweep";
+const daliUndergroundWarning = missablesById.get("missable.disc-1.village-of-dali.underground-treasures");
+const daliUndergroundExpectedPaths = [
+  { pathId: "item-path.disc-1.village-of-dali.underground-hut-potion-chest", itemId: "game-item.potion", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.underground-eye-drops-chest", itemId: "game-item.eye-drops", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.underground-crates-ether-chest", itemId: "game-item.ether", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.underground-crank-potion-chest", itemId: "game-item.potion", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.underground-production-phoenix-down-chest", itemId: "game-item.phoenix-down", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.underground-production-potion-chest", itemId: "game-item.potion", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.iron-helm-underground-chest", itemId: "game-item.iron-helm", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.leather-wrist-underground-chest", itemId: "game-item.leather-wrist", method: "chest" },
+  { pathId: "item-path.disc-1.village-of-dali.underground-phoenix-pinion", itemId: "game-item.phoenix-pinion", method: "hidden-pickup" },
+];
+const daliUndergroundRecoveryPaths = [
+  ["item-path.disc-2.cleyra.potion-shop", "game-item.potion"],
+  ["item-path.disc-2.cleyra.eye-drops-shop", "game-item.eye-drops"],
+  ["item-path.disc-2.journey-to-outer-continent.stiltzkin-3-ether", "game-item.ether"],
+  ["item-path.disc-1.lindblum.iron-helm-shop", "game-item.iron-helm"],
+  ["item-path.disc-2.journey-to-treno.summit-station-iron-helm-shop", "game-item.iron-helm"],
+  ["item-path.disc-2.treno.leather-wrist-shop", "game-item.leather-wrist"],
+  ["item-path.disc-2.cleyra.phoenix-down-shop", "game-item.phoenix-down"],
+  ["item-path.disc-2.cleyra.first-staircase-phoenix-pinion", "game-item.phoenix-pinion"],
+];
+if (
+  !daliUndergroundWarning?.classification.includes("recoverable-later") ||
+  !daliUndergroundWarning.consequence.includes("nine items and 156/95 Gil") ||
+  !daliUndergroundWarning.action.includes("Collect all 11 listed pickups") ||
+  !daliUndergroundWarning.nextAvailability.includes("Cleyra shops for Potion, Eye Drops, and Phoenix Down") ||
+  !daliUndergroundWarning.nextAvailability.includes("Stiltzkin #3 at Fossil Roo for Ether") ||
+  !daliUndergroundWarning.nextAvailability.includes("Lindblum and Summit Station shops for Iron Helm") ||
+  !daliUndergroundWarning.nextAvailability.includes("Treno for Leather Wrist") ||
+  !daliUndergroundWarning.nextAvailability.includes("not the Dali copies") ||
+  !daliUndergroundWarning.recovery.includes("effect on Treasure Hunter rank remains unknown") ||
+  !daliUndergroundWarning.sourceIds.includes("gamefaqs-shops-71891") ||
+  !daliUndergroundWarning.sourceIds.includes("gamefaqs-stiltzkin-shopping-71891") ||
+  daliUndergroundExpectedPaths.some(({ pathId, itemId, method }) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+    const item = gameItems.find((candidate) => candidate.id === itemId);
+    return !path || path.itemId !== itemId || path.chapterId !== "disc-1.village-of-dali" || path.method !== method ||
+      path.quantity !== 1 || path.availability !== "single-use" ||
+      !path.walkthroughObjectiveIds?.includes(daliUndergroundObjectiveId) ||
+      !["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali"].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+      !item?.sourceIds.includes("gamefaqs-dali-71891");
+  }) ||
+  daliUndergroundRecoveryPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === itemId))
+) {
+  errors.push("Dali Underground must model all nine one-time item pickups, their shared sweep objective, later item-type recovery routes, and unresolved treasure-rank impact.");
+}
 const iceCavernTreasureObjectiveId = "disc-1.ice-cavern.treasure-sweep";
 const iceCavernTreasureWarning = missablesById.get("missable.disc-1.ice-cavern.treasures");
 const iceCavernChestPaths = [
