@@ -38,6 +38,33 @@ test("Cleyra's Magician Shoes and rubbish-pit chests have separate item paths", 
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-2.cleyra"));
 });
 
+test("Soft has repeatable shop sources through the late game", () => {
+  const softPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.soft");
+  const shops = [
+    ["item-path.burmecia.soft-atla-mogshop", "burmecia.atla-mogshop", "mogshop"],
+    ["item-path.disc-2.treno.soft-item-shop", "treno.item-shop", "shop"],
+    ["item-path.disc-2.outer-continent.soft-black-mage-village-shop", "black-mage-village.item-shop", "shop"],
+    ["item-path.disc-3.on-the-high-seas.soft-alexandria-shop", "alexandria.item-shop.disc-3-4", "shop"],
+  ];
+
+  assert.equal(softPaths.length, 7);
+  assert.ok(gameItems.find((item) => item.id === "game-item.soft")?.sourceIds.includes("gamefaqs-shops-71891"));
+  for (const [pathId, shopId, method] of shops) {
+    const path = softPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.shopId, shopId);
+    assert.equal(path.method, method);
+    assert.equal(path.availability, "repeatable");
+    assert.deepEqual(path.cost, { currency: "gil", amount: 100 });
+    assert.ok(path.sourceIds.includes("gamefaqs-shops-71891"));
+    assert.ok(sources.some((source) => source.id === "gamefaqs-shops-71891"));
+  }
+
+  const blackMageVillage = softPaths.find((path) => path.id === shops[2][0]);
+  assert.match(blackMageVillage?.conditions ?? "", /rest of the game/);
+  assert.equal(softPaths.filter((path) => path.method === "chest" || path.method === "hidden-pickup").length, 2);
+});
+
 test("Alexandria's Disc III pickups and Stiltzkin bundle have item-level paths", () => {
   const alexandria = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-3.the-home-front");
   const sourcesForAll = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];
