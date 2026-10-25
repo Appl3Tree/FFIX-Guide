@@ -294,4 +294,18 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis"],
     notes: "Mythril Fork + Cotton Robe makes Glutton's Robe at Daguerreo. The GameFAQs Shops table, RPGClassics, and EliteGrindLab list 6,000 Gil; the GameFAQs Items table lists 8,000 Gil. The recipe is the repeatable recovery route if both one-time steals from Quale and Kraken are missed.",
   },
+  {
+    id: "synthesis-recipe.priests-racket",
+    resultItemId: "game-item.priests-racket",
+    ingredients: [
+      { itemId: "game-item.air-racket", quantity: 1 },
+      { itemId: "game-item.cachusha", quantity: 1 },
+    ],
+    chapterId: "disc-4.return-to-gaia",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 11000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    notes: "Air Racket + Cachusha makes Priest's Racket for 11,000 Gil at Black Mage Village on Disc IV. GameFAQs and RPGClassics agree on the recipe and price. The GameFAQs Items table's 4,000-Gil field is the equipment's sell value, not the synthesis price.",
+  },
 ];
