@@ -287,7 +287,7 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
     result[edge.relationship] += 1;
     return result;
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
-  assert.equal(gameRouteEdges.length, 66);
-  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 12, rejoin: 11 });
-  assert.equal(storyPartySequences.length, 2);
+  assert.equal(gameRouteEdges.length, 68);
+  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 13, rejoin: 12 });
+  assert.equal(storyPartySequences.length, 3);
 });
