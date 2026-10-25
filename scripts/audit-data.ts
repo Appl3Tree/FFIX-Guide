@@ -2676,6 +2676,43 @@ if (
 ) {
   errors.push("The Mognet repair route must distinguish Cour89's six required Disc IV deliveries (#22–27) from the optional full count of 27.");
 }
+const cour89BranBal = sources.find((source) => source.id === "cour89-bran-bal");
+const cour89Pandemonium = sources.find((source) => source.id === "cour89-pandemonium");
+const moorockLetterObjective = objectivesById.get("disc-3.portal-to-another-world.moorock-mognet-letter");
+const mozmeLetterObjective = objectivesById.get("disc-3.portal-to-another-world.mozme-letter");
+const moorockLetterWarning = missablesById.get("missable.disc-3.portal-to-another-world.moorock-mognet-letter");
+const moorockLetterCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.pandemonium.moorock-mognet-letter");
+const portalChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world");
+const branBalMoorockSection = portalChapter?.sections.find((section) => section.id === "portal-bran-bal-moorock");
+const branBalMoorockStep = branBalMoorockSection?.steps.find((step) => step.id === "portal-bran-bal-wing-edge-moorock");
+const pandemoniumMoorockSection = portalChapter?.sections.find((section) => section.id === "portal-pandemonium-mind-control");
+const pandemoniumMoorockStep = pandemoniumMoorockSection?.steps.find((step) => step.id === "portal-pandemonium-moorock-holy-miter");
+const pandemoniumMazeSection = portalChapter?.sections.find((section) => section.id === "portal-pandemonium-maze-treasures");
+const mozmeDeliveryStep = pandemoniumMazeSection?.steps.find((step) => step.id === "portal-pandemonium-mozme-letter");
+if (
+  !cour89BranBal?.notes.includes("same letter remains available from Moorock in Pandemonium")
+  || !cour89Pandemonium?.notes.includes("both receiving it and delivering it to Mozme become impossible after passing through the Maze")
+  || !cour89MognetLetters?.notes.includes("Entry #21 is Moorock's letter to Mozme")
+  || !moorockLetterObjective?.title.includes("Bran Bal or Pandemonium")
+  || !moorockLetterObjective.sourceIds.includes("cour89-bran-bal")
+  || !moorockLetterObjective.sourceIds.includes("cour89-pandemonium")
+  || !mozmeLetterObjective?.sourceIds.includes("cour89-pandemonium")
+  || moorockLetterWarning?.objectiveId !== mozmeLetterObjective?.id
+  || !moorockLetterWarning?.classification.includes("recoverable-later")
+  || !moorockLetterWarning.consequence.includes("does not block Mognet Central")
+  || !moorockLetterWarning.deadline.includes("before passing through Pandemonium's Maze")
+  || !moorockLetterWarning.nextAvailability?.includes("Moorock offers the same letter in the Pandemonium Hall")
+  || !moorockLetterWarning.sourceIds.includes("cour89-mognet-letters")
+  || !moorockLetterCutoff?.missableIds.includes(moorockLetterWarning.id)
+  || moorockLetterCutoff?.certainty !== "source-supported"
+  || !branBalMoorockStep?.detail?.includes("same #21 letter")
+  || !pandemoniumMoorockStep?.text.includes("If you skipped his letter in Bran Bal")
+  || !pandemoniumMoorockStep.objectiveIds.includes(moorockLetterObjective.id)
+  || !mozmeDeliveryStep?.text.includes("before continuing through the Maze")
+  || !mozmeDeliveryStep.detail?.includes("both receipt and delivery become unavailable")
+) {
+  errors.push("Moorock's #21 letter must preserve its Bran Bal-to-Pandemonium recovery, the Maze receipt/delivery cutoff, and its optional status for the 27-letter count rather than Mognet Central repair.");
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {

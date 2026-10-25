@@ -5712,13 +5712,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-bran-bal-moorock",
         title: "Storage room — free Moorock, read Mognet, shop, and save",
         summary: "The eastern Storage room contains the Wing Edge, Moorock, the seventh Stiltzkin bundle, the local save point, and a stock check.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "jegged-pandemonium", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-moogle-faq-23306", "elitegrindlab-bran-bal", "game8-zorlin-shape"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "jegged-pandemonium", "cour89-bran-bal", "cour89-pandemonium", "cour89-mognet-letters", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-moogle-faq-23306", "elitegrindlab-bran-bal", "game8-zorlin-shape"],
         steps: [
           {
             id: "portal-bran-bal-wing-edge-moorock",
             kind: "pickup",
-            text: "Enter the eastern Storage room and open the Wing Edge chest. Examine the moving pot to free Moorock, then choose Mognet to accept his letter for Mozme in Pandemonium.",
-            detail: "The Wing Edge is not listed in Moorock's shop stock. The letter's recipient is on the upper level of the next story area; this step tracks receiving it, with the later delivery to be covered in the Pandemonium route.",
+            text: "Enter the eastern Storage room and open the Wing Edge chest. Examine the moving pot to free Moorock, then choose Mognet to receive his letter for Mozme if you want to do so here.",
+            detail: "The Wing Edge is not listed in Moorock's shop stock. Cour89 says this is one of two pickup locations: if you skip the letter in Bran Bal, Moorock offers the same #21 letter after the party regroups in Pandemonium. Deliver it to Mozme before passing through the Maze.",
             objectiveIds: ["disc-3.portal-to-another-world.bran-bal-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter"],
           },
           {
@@ -5760,8 +5760,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-bran-bal-final-sweep",
             kind: "save",
-            text: "Before leaving, confirm the Terra and Bran Bal pickup checks, Moorock's letter, Stiltzkin #7, the four ATEs, any desired purchases, and a fresh save. Then follow Mikoto through the green light and bridge to the gate of Pandemonium.",
-            detail: "After the Disc III climax, the story passes through Bran Bal on a linear route. Sources do not describe that return as a free exploration or ATE recovery window, so finish the village checks before entering the gate.",
+            text: "Before leaving, confirm the Terra and Bran Bal pickups, Stiltzkin #7, the four ATEs, any desired purchases, and a fresh save. Receive Moorock's letter here or use his Pandemonium fallback after the party regroups; then follow Mikoto through the green light and bridge.",
+            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
             objectiveIds: ["disc-3.portal-to-another-world.bran-bal-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter", "disc-3.portal-to-another-world.stiltzkin-7", "disc-3.portal-to-another-world.bran-bal-ates", "disc-3.portal-to-another-world.party-and-gate"],
           },
         ],
@@ -5769,8 +5769,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "portal-pandemonium-mind-control",
         title: "Pandemonium — survive the forced party-split battles",
-        summary: "Three story fights use fixed, changing party groups. The full party reunites afterward at the throne room, where Moorock returns.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"],
+        summary: "Three story fights use fixed, changing party groups. The full party reunites afterward in the Hall, where Moorock returns and can provide his letter if Bran Bal was skipped.",
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "cour89-pandemonium", "cour89-mognet-letters"],
         steps: [
           {
             id: "portal-pandemonium-amdusias",
@@ -5796,9 +5796,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-moorock-holy-miter",
             kind: "pickup",
-            text: "After the party reunites, return through the rooms to the throne. Speak with Moorock to save, use a Tent, shop, or change party; then examine the throne for the Holy Miter.",
-            detail: "This is the final reported Moorock Mogshop window for Zorlin Shape. Review the stock now if your synthesis target needs one; no shop or party change is available during the later boss run. The route sources list different descriptions for the ordinary Abadon encounter, so no enemy stats are repeated.",
-            objectiveIds: ["disc-3.portal-to-another-world.pandemonium-treasures"],
+            text: "After the party reunites, speak with Moorock in the Hall to save, use a Tent, shop, or change party. If you skipped his letter in Bran Bal, choose Mognet now; then return through the rooms and examine the throne for the Holy Miter.",
+            detail: "Cour89 says Moorock offers the same #21 letter here if you missed it in Bran Bal. This is the final reported Moorock Mogshop window for Zorlin Shape; review stock now if needed. Both the letter pickup and its delivery close after passing through the Maze.",
+            objectiveIds: ["disc-3.portal-to-another-world.pandemonium-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter"],
           },
         ],
       },
@@ -5835,7 +5835,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-pandemonium-maze-treasures",
         title: "Heading 4 — collect both blue-pad chests and Battle Boots",
         summary: "Ride the heading-4 elevator route into the teleport maze. Visit both blue-pad branches, then take the southern fork for Battle Boots.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "cour89-pandemonium", "cour89-mognet-letters"],
         steps: [
           {
             id: "portal-pandemonium-maze-entry",
@@ -5854,8 +5854,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-mozme-letter",
             kind: "optional",
-            text: "Back at the fork, take the north route to Mozme. Save, choose Mognet, and deliver Moorock's letter; if the earlier Kupo Nut handoff was completed, check for the conditional Kupo Nut reward.",
-            detail: "The letter exchange is optional story content and has no effect on the boss sequence. Verify the reward against your inventory because the Kupo Nut depends on earlier Mognet progress.",
+            text: "Back at the fork, take the north route to Mozme. Save, choose Mognet, and deliver Moorock's #21 letter before continuing through the Maze; if the earlier Kupo Nut handoff was completed, check for the conditional Kupo Nut reward.",
+            detail: "If the letter was skipped in Bran Bal, receive it from Moorock in the Hall after the three forced fights. Cour89 says both receipt and delivery become unavailable after passing through the Maze. This optional delivery is not required for the Mognet Central repair, which uses deliveries 22–27; verify the Kupo Nut against your inventory because it depends on earlier Mognet progress.",
             objectiveIds: ["disc-3.portal-to-another-world.moorock-mognet-letter", "disc-3.portal-to-another-world.mozme-letter"],
           },
           {

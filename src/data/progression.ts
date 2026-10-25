@@ -1457,6 +1457,15 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-bran-bal", "jegged-pandemonium", "rpgclassics-bran-bal", "gamerguides-four-shrines-terra", "gamerguides-movie-critic-guide", "gamefaqs-stiltzkin-shopping-71891"],
   },
   {
+    id: "cutoff.pandemonium.moorock-mognet-letter",
+    edgeId: "story.portal-to-return-to-gaia",
+    title: "Moorock's #21 letter — receive and deliver before passing through the Maze",
+    certainty: "source-supported",
+    trigger: "Before passing through Pandemonium's Maze. If Moorock's letter was skipped in Bran Bal, receive it from him in the Hall after the three forced fights, then deliver it to Mozme before continuing through the Maze; Cour89 says both interactions become unavailable afterward.",
+    missableIds: ["missable.disc-3.portal-to-another-world.moorock-mognet-letter"],
+    sourceIds: ["cour89-bran-bal", "cour89-pandemonium", "cour89-mognet-letters"],
+  },
+  {
     id: "cutoff.pandemonium.final-sequence",
     edgeId: "story.portal-to-return-to-gaia",
     title: "Pandemonium pickups and consecutive boss steals",
