@@ -299,6 +299,35 @@ export const storyPartySequences: StoryPartySequence[] = [
       "gamerguides-alexandria-castle-2",
     ],
   },
+  {
+    id: "party-sequence.cleyra-antlion",
+    title: "Cleyra's post-Antlion party handoff",
+    phases: [
+      {
+        party: "Zidane, Vivi, and Quina",
+        chapterIds: ["disc-2.cleyra"],
+        location: "Cleyra Settlement and Antlion encounter",
+        summary: "Finish the first-visit settlement route and Antlion battle. After the scenes, control switches to Freya while the rest of the party waits at the entrance.",
+      },
+      {
+        party: "Freya",
+        chapterIds: ["disc-2.cleyra"],
+        location: "Cleyra Cathedral and Inn",
+        summary: "Collect the Cathedral's hidden Ether, Ore, Phoenix Pinion, and High Priest's Emerald; buy Stiltzkin's 444-Gil bundle and check Mopli's new letter before returning to the settlement entrance.",
+      },
+      {
+        party: "Zidane, Vivi, and Quina, reunited with Freya",
+        chapterIds: ["disc-2.cleyra"],
+        location: "Cleyra entrance and required Trunk return",
+        summary: "Control returns to Zidane's group at the entrance. Complete the forced Trunk transit, recover missed Trunk chests before crossing the bridge, and continue the town-attack route with Freya back in the party.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-cleyra-71891",
+      "jegged-cleyra",
+      "gamerguides-cleyra",
+    ],
+  },
 ];
 
 export const gameRouteEdges: GameRouteEdge[] = [

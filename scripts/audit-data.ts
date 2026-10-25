@@ -276,6 +276,18 @@ if (!alexandriaPartySequence) {
     if (!alexandriaPartySequence.sourceIds.includes(sourceId)) errors.push(`The Disc II Alexandria sequence is missing corroborating source ${sourceId}.`);
   }
 }
+const cleyraPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.cleyra-antlion");
+if (!cleyraPartySequence) {
+  errors.push("The post-Antlion Cleyra party handoff sequence is missing.");
+} else {
+  if (cleyraPartySequence.phases.length !== 3) errors.push("The post-Antlion Cleyra sequence must retain its three party phases.");
+  if (cleyraPartySequence.phases[0]?.party !== "Zidane, Vivi, and Quina") errors.push("The post-Antlion Cleyra sequence must begin with Zidane, Vivi, and Quina.");
+  if (cleyraPartySequence.phases[1]?.party !== "Freya") errors.push("The post-Antlion Cleyra sequence must show Freya's separate control phase.");
+  if (!cleyraPartySequence.phases[2]?.summary.includes("forced Trunk transit")) errors.push("The post-Antlion Cleyra sequence must connect the reunion to the required Trunk return.");
+  for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra"]) {
+    if (!cleyraPartySequence.sourceIds.includes(sourceId)) errors.push(`The post-Antlion Cleyra sequence is missing corroborating source ${sourceId}.`);
+  }
+}
 for (const edge of gameRouteEdges) {
   if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
     errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);
