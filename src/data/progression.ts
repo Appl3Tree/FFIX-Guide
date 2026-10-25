@@ -215,6 +215,38 @@ export const storyPartySequences: StoryPartySequence[] = [
       "jegged-gargan-roo",
     ],
   },
+  {
+    id: "party-sequence.oeilvert-desert-palace",
+    title: "Oeilvert and Desert Palace party split",
+    phases: [
+      {
+        party: "Zidane and three player-selected companions",
+        chapterIds: ["disc-3.picking-up-the-trail", "disc-3.forgotten-continent"],
+        location: "Oeilvert",
+        summary: "After the correct sinkhole route, choose three companions for Oeilvert. This is a flexible roster decision, not a fixed character lineup; the destination seals Black, White, Blue, and Summon magic, so prepare equipment and the other team before departure.",
+      },
+      {
+        party: "The four companions not selected for Oeilvert, with Cid",
+        chapterIds: ["disc-3.desert-palace"],
+        location: "Desert Palace prison cells",
+        summary: "After Ark is defeated and the Gulug Stone is taken, control switches to the four characters left at Kuja's palace. Play as Cid and complete the stealth and scale sections to free them; the Oeilvert and Desert Palace assignments remain linked until both are complete.",
+      },
+      {
+        party: "Zidane's team; then the roster is re-formed",
+        chapterIds: ["disc-3.desert-palace"],
+        location: "Desert Palace exit route",
+        summary: "After Valia Pira, control returns to Zidane. Re-form the active party, collect any goal-relevant table item, and leave the palace for the Lost Continent.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-picking-up-trail-71891",
+      "gamefaqs-forgotten-continent-71891",
+      "gamefaqs-desert-palace-71891",
+      "jegged-desert-palace",
+      "jegged-oeilvert",
+      "jegged-returning-desert-palace",
+    ],
+  },
 ];
 
 export const gameRouteEdges: GameRouteEdge[] = [

@@ -1910,7 +1910,7 @@ export const sources = [
     title: "Picking Up the Trail — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/picking-up-the-trail",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Original PlayStation route for optional Friendly Creatures through Nymph, No. 288's directions from Black Mage Village, the four eastern sinkholes and temporary story lock-in, party split, Oeilvert's anti-magic restrictions, Quina's Desert Palace LV5 Death use, and suggested status abilities. Party advice is treated as a recommendation, not a required roster.",
   },
   {
@@ -1918,7 +1918,7 @@ export const sources = [
     title: "Desert Palace — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/31-Desert-Palace.html",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Independent route cross-check for the party-selection scene, anti-magic seal at Oeilvert, role-based party considerations, Quina's LV5 Death advantage in the Desert Palace, and the Hilda Garde departure to the Forgotten Continent.",
   },
   {
@@ -1926,7 +1926,7 @@ export const sources = [
     title: "Forgotten Continent — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/forgotten-continent",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Original PlayStation route for the Forgotten Continent field, Qu's Marsh, Chocographs #15–16, Dead Pepper cracks, Friendly Jabberwock, Oeilvert's anti-magic hazards and treasure route, Stiltzkin #6, and Ark. Its Mountain Crack #2/#3 reward labels conflict with Jegged's dedicated crack guide, so the walkthrough identifies those rewards by location rather than number.",
   },
   {
@@ -1934,8 +1934,8 @@ export const sources = [
     title: "Oeilvert — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/32-Oeilvert.html",
-    accessed: "2026-10-24",
-    notes: "Independent Oeilvert room route and cross-check for Mimoza's letter, the Mogshop, Stiltzkin #6, all eight listed chests, the light sequence, Ark preparation/attacks, steals, drops, and the Desert Palace transition.",
+    accessed: "2026-10-25",
+    notes: "Independent Oeilvert room route and cross-check for Mimoza's letter, the Mogshop, Stiltzkin #6, all eight listed chests, the light sequence, Ark preparation/attacks, steals, drops, the Gulug Stone trigger, and the control handoff to the Desert Palace team.",
   },
   {
     id: "jegged-chocobo-mountain-cracks",
@@ -1974,7 +1974,7 @@ export const sources = [
     title: "Desert Palace — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/desert-palace",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Original PlayStation route for Cid's timed escape, Mojito/Mogsam Mognet, the six bloodstones and puzzle route, Fairy Earrings chest, Valia Pira, the Namingway Card fallback, and post-boss Kupo Nut deliveries. Its Valia Pira HP and weakness details conflict with the larger consensus; the walkthrough avoids unsupported precision.",
   },
   {
@@ -1982,7 +1982,7 @@ export const sources = [
     title: "Returning to the Desert Palace — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/33-Returning-to-Desert-Palace.html",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Independent route cross-check for Cid's two-part escape game, the party's equipment/setup, six bloodstones and their items, Mogsam's letter/save, Valia Pira, the Eiko equipment handoff, Namingway Card, and the ladder exit to the Lost Continent.",
   },
   {
