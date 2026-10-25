@@ -2787,6 +2787,7 @@ for (const target of sourceInventoryTargets) {
 }
 const finalStockItemLocationSourceId = "gamefaqs-item-locations-54996";
 const finalStockItemSpecs = [
+  { itemId: "game-item.bandana", slug: "bandana", quantity: 12, price: 500 },
   { itemId: "game-item.chain-plate", slug: "chain-plate", quantity: 3, price: 810 },
   { itemId: "game-item.leather-plate", slug: "leather-plate", quantity: 3, price: 530 },
   { itemId: "game-item.mythril-vest", slug: "mythril-vest", quantity: 10, price: 1180 },
@@ -2795,14 +2796,15 @@ const finalStockItemLocationSource = sources.find((source) => source.id === fina
 const finalStockItemLocationWarning = missables.find((missable) => missable.id === "missable.disc-3.aerial-exploration.daguerreo-stock");
 const finalStockItemLocationObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.daguerreo-stock");
 const requiredFinalStockItemLocationEvidence = [
+  "Bandana", "Treno (Disc II)", "Fossil Roo", "no Find/Win/Steal route", "Dragon's Gate hidden pickup",
   "Chain Plate", "Leather Plate", "Mythril Vest", "Church of Lindblum", "Black Waltz 2", "Beatrix steal",
-  "Gargan Roo", "Cleyra's Trunk", "Pinnacle Rocks", "Antlion steal", "Fossil Roo", "Esto Gaza", "Disc IV",
+  "Gargan Roo", "Cleyra's Trunk", "Pinnacle Rocks", "Antlion steal", "Esto Gaza", "Disc IV",
 ];
 if (!finalStockItemLocationSource || requiredFinalStockItemLocationEvidence.some((claim) => !finalStockItemLocationSource.notes.includes(claim))) {
-  errors.push("The original PlayStation item-location source note must identify all three final-stock items, their listed pickups/steals/shops, and the reviewed Disc IV scope.");
+  errors.push("The original PlayStation item-location source note must identify all four final-stock items, their listed pickups/steals/shops, and the reviewed Disc IV scope.");
 }
 if (!finalStockItemLocationObjective?.sourceIds.includes(finalStockItemLocationSourceId)) {
-  errors.push("The final Disc III stock objective must cite the item-location guide for Chain Plate, Leather Plate, and Mythril Vest routes.");
+  errors.push("The final Disc III stock objective must cite the item-location guide for Bandana, Chain Plate, Leather Plate, and Mythril Vest routes.");
 }
 if (
   !finalStockItemLocationWarning?.sourceIds.includes(finalStockItemLocationSourceId) ||
@@ -2828,12 +2830,28 @@ for (const { itemId, slug, quantity, price } of finalStockItemSpecs) {
     errors.push(`Final-stock inventory target for ${slug} must remain the source-specific total of ${quantity}.`);
   }
 }
+const bandanaDragonGatePickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.dragon-gate-bandana-pickup");
+if (
+  !bandanaDragonGatePickup ||
+  bandanaDragonGatePickup.itemId !== "game-item.bandana" ||
+  bandanaDragonGatePickup.availability !== "single-use" ||
+  !bandanaDragonGatePickup.sourceIds.includes("gamefaqs-return-to-lindblum-71891")
+) {
+  errors.push("Bandana must retain its source-linked hidden Dragon's Gate pickup as an earlier acquisition route.");
+}
 const braveSuitRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.brave-suit");
 if (
   !braveSuitRecipe?.ingredients.some((ingredient) => ingredient.itemId === "game-item.mythril-vest" && ingredient.quantity === 1) ||
   !braveSuitRecipe.sourceIds.includes("gamefaqs-shops-71891")
 ) {
   errors.push("The Disc IV Brave Suit recipe must preserve Mythril Vest as a sourced consumed ingredient.");
+}
+const silkRobeRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.silk-robe");
+if (
+  !silkRobeRecipe?.ingredients.some((ingredient) => ingredient.itemId === "game-item.bandana" && ingredient.quantity === 1) ||
+  !silkRobeRecipe.sourceIds.includes("gamefaqs-shops-71891")
+) {
+  errors.push("The Silk Robe recipe must preserve Bandana as a sourced consumed ingredient.");
 }
 const finalStockWalkthroughSection = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.preparing-to-leave")
@@ -2842,9 +2860,11 @@ const finalStockWalkthroughStep = finalStockWalkthroughSection?.steps.find((step
 if (
   !finalStockWalkthroughSection?.sourceIds.includes(finalStockItemLocationSourceId) ||
   !finalStockWalkthroughStep?.detail.includes("Item Location Guide") ||
-  !finalStockWalkthroughStep.detail.includes("Mythril Vest is also consumed by the Disc IV Brave Suit recipe")
+  !finalStockWalkthroughStep.detail.includes("Bandana ×12") ||
+  !finalStockWalkthroughStep.detail.includes("Mythril Vest ×10") ||
+  !finalStockWalkthroughStep.detail.includes("Bandana and Mythril Vest are consumed by the Silk Robe and Brave Suit recipes respectively")
 ) {
-  errors.push("The final-stock walkthrough must link the item-location guide and explain Mythril Vest's Brave Suit synthesis use.");
+  errors.push("The final-stock walkthrough must link the item-location guide and explain Bandana/Mythril Vest recipe use.");
 }
 for (const claim of equipmentAbilityClaims) {
   if (!gameItemIds.has(claim.itemId)) errors.push(`Equipment ability claim ${claim.id} references unknown item ${claim.itemId}.`);
