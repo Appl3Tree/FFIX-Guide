@@ -343,8 +343,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.the-home-front",
     toChapterId: "disc-3.card-tournament",
     relationship: "required-story",
-    summary: "After the Alexandria opening, the party regroups and the story moves to Treno for the card tournament chapter.",
-    sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-card-tournament-71891", "jegged-home-front", "jegged-treno-tournament"],
+    summary: "After the Alexandria opening and coronation scenes, the story moves to Treno for the card tournament. Sources differ on whether every optional city activity closes on leaving Alexandria or only when leaving for Treno; use the conservative boundary and finish local ATE, minigame, Stiltzkin, card, pickup, and shop checks before advancing.",
+    sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-card-tournament-71891", "jegged-home-front", "jegged-treno-tournament", "gamerguides-home-front", "elitegrindlab-home-front"],
   },
   {
     id: "story.card-tournament-to-trouble-on-home-front",

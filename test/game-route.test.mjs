@@ -80,6 +80,41 @@ test("Cleyra's story departure records its closure and disputed local cutoff", (
   assert.match(treasureWindow.deadline, /exact final cutoff is described differently across guides/);
 });
 
+test("Disc III's Alexandria departure keeps the conservative Treno cutoff visible", () => {
+  const departure = gameRouteEdges.find((edge) => edge.id === "story.home-front-to-card-tournament");
+  assert.ok(departure);
+  assert.equal(departure.fromChapterId, "disc-3.the-home-front");
+  assert.equal(departure.toChapterId, "disc-3.card-tournament");
+  assert.equal(departure.relationship, "required-story");
+  assert.match(departure.summary, /story moves to Treno/);
+  assert.match(departure.summary, /Sources differ on whether every optional city activity closes/);
+  assert.match(departure.summary, /finish local ATE, minigame, Stiltzkin, card, pickup, and shop checks before advancing/);
+
+  for (const sourceId of ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"]) {
+    assert.ok(departure.sourceIds.includes(sourceId), `Alexandria departure is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
+  }
+
+  const localCutoff = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.the-home-front")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "home-front-check-ates-and-transition");
+  assert.ok(localCutoff);
+  assert.match(localCutoff.text, /continuing through the coronation scenes/);
+  assert.match(localCutoff.detail, /broader cutoff is described as either leaving Alexandria or leaving for Treno/);
+
+  for (const missableId of [
+    "missable.disc-3.the-home-front.hippaul-racing",
+    "missable.disc-3.the-home-front.ates",
+    "missable.disc-3.the-home-front.stiltzkin-5",
+    "missable.disc-3.the-home-front.found-in-the-shuffle",
+  ]) {
+    const warning = missables.find((entry) => entry.id === missableId);
+    assert.ok(warning, `missing Alexandria warning ${missableId}`);
+    assert.ok(warning.warningChapterIds.includes("disc-3.the-home-front"), `${missableId} is not warned in Alexandria`);
+  }
+});
+
 test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   const atlaVisit = gameRouteEdges.find((edge) => edge.id === "detour.alexandria-to-burmecia-mognet");
   assert.ok(atlaVisit);
