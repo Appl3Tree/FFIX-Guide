@@ -403,6 +403,12 @@ if (jumpRopeLetterObjective?.category !== "side-content" || !jumpRopeLetterObjec
 if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
   errors.push("The Jump Rope Mognet letter objective must cite the 50-jump Disc I source.");
 }
+if (!jumpRopeLetterObjective?.sourceIds.includes("gamerguides-alexandria") || !jumpRopeLetterWarning?.sourceIds.includes("gamerguides-alexandria")) {
+  errors.push("The Jump Rope Mognet letter objective and warning must retain Gamer Guides' independent 50-jump letter evidence.");
+}
+if (!jumpRopeLetterObjective?.sourceIds.includes("jegged-alexandria-castle") || !jumpRopeLetterWarning?.sourceIds.includes("jegged-alexandria-castle")) {
+  errors.push("The Jump Rope Mognet letter objective and warning must retain Jegged's Mosh/Mognet route confirmation.");
+}
 if (!jumpRopeLetterWarning || !jumpRopeLetterWarning.classification.includes("conditional") || jumpRopeLetterWarning.classification.includes("permanently-missable")) {
   errors.push("The Jump Rope Mognet letter warning must remain conditional without asserting permanent loss.");
 }
