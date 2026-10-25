@@ -6256,7 +6256,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-ruins-ocean-and-kraken",
         title: "Ruins and Ocean — Hades, the Master Synthesist, and Kraken",
         summary: "Find the Strong Phantom and optional Hades, then prepare for Kraken's Water attacks and steal table.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-master-synthesist-71891", "gamefaqs-final-preparations-71891"],
+        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-master-synthesist-71891", "gamefaqs-final-preparations-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamerguides-memoria-kraken", "jegged-memoria-nova-dragon"],
         steps: [
           {
             id: "memoria-ruins-checkpoints-09-10",
@@ -6283,7 +6283,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-kraken-steals",
             kind: "combat",
             text: "Equip Water protection and Body Temp, bring Zidane, and steal Genji Helmet, Wizard Rod, and Glutton's Robe. Kraken is weak to Lightning and absorbs Water; Slow works.",
-            detail: "Kraken has two tentacles. Removing them can limit its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. Once the steals are complete, target Kraken with Lightning and heal through any non-Water physical attacks. Phoenix Pinion is the listed guaranteed drop. An older item-location table lists Wing Edge as the Right Tentacle's Very Common steal, but the Memoria walkthrough lists only a Common Elixir steal for a tentacle; treat Wing Edge there as disputed.",
+            detail: "Kraken has two separately targetable tentacles. Removing them changes its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. GameFAQs lists a Common Elixir steal for each tentacle; its older monster list and RPGClassics instead list Wing Edge for the Right Tentacle. GameFAQs reports 10,001 HP per tentacle while RPGClassics lists 18,169/18,168. The guides also reverse which side uses Water-gun and Ink, so treat those component details as source-disputed. Phoenix Pinion is the body's listed guaranteed drop.",
             objectiveIds: ["disc-4.memoria.kraken-steals", "disc-4.memoria.kraken-achievement"],
           },
           {

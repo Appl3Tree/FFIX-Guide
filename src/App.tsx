@@ -1545,6 +1545,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
               <option value="all">All records</option>
               <option value="ordinary">Ordinary enemy</option>
               <option value="boss">Boss</option>
+              <option value="component">Boss component</option>
             </select>
           </label>
         </div>
@@ -1567,7 +1568,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
             return <details className="enemy-record" key={enemy.id}>
               <summary className="enemy-record-summary">
                 <span className="reference-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="enemy-record-name"><strong>{enemy.name}</strong><small>{enemy.kind === "boss" ? "Story boss" : encounterTitles.some((encounter) => encounter.kind === "random-pool") ? "Random encounter enemy" : "Fixed encounter enemy"} · {encounterTitles.length} linked {encounterTitles.length === 1 ? "encounter group" : "encounter groups"}</small></span>
+                <span className="enemy-record-name"><strong>{enemy.name}</strong><small>{enemy.kind === "boss" ? "Story boss" : enemy.kind === "component" ? "Boss component" : encounterTitles.some((encounter) => encounter.kind === "random-pool") ? "Random encounter enemy" : "Fixed encounter enemy"} · {encounterTitles.length} linked {encounterTitles.length === 1 ? "encounter group" : "encounter groups"}</small></span>
                 <span className="enemy-record-scope">{enemyChapterScope(enemy.chapterId)}</span>
                 <ChevronDown className="enemy-record-chevron" size={16} aria-hidden="true" />
               </summary>
@@ -1589,10 +1590,10 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
                     <div className="enemy-loot-tables">
                       {(["steals", "drops"] as const).map((tableName) => <div key={tableName}>
                         <h4>{tableName === "steals" ? "Steals" : "Drops"}</h4>
-                        <dl>{enemy[tableName].map((entry) => <div key={`${tableName}-${entry.slot}`}>
+                        {enemy[tableName].length === 0 ? <p>No entries in the cited table.</p> : <dl>{enemy[tableName].map((entry) => <div key={`${tableName}-${entry.slot}`}>
                           <dt>{entry.slot}</dt>
                           <dd>{lootItemName(entry.itemId, entry.itemName)}{entry.note && <small>{entry.note}</small>}</dd>
-                        </div>)}</dl>
+                        </div>)}</dl>}
                       </div>)}
                     </div>
                   </section>

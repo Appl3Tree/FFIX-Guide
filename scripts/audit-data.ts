@@ -198,11 +198,11 @@ for (const encounter of enemyEncounters) {
     else if (!enemy.encounterIds.includes(encounter.id)) errors.push(`Enemy encounter ${encounter.id} is missing from ${member.enemyId}'s encounter links.`);
     if (encounter.kind === "random-pool") {
       if (member.quantity !== null) errors.push(`Random encounter pool ${encounter.id} must not claim an exact quantity for ${member.enemyId}.`);
-      if (enemy?.kind === "boss") errors.push(`Random encounter pool ${encounter.id} cannot contain boss ${member.enemyId}.`);
+      if (enemy?.kind === "boss" || enemy?.kind === "component") errors.push(`Random encounter pool ${encounter.id} cannot contain boss or component ${member.enemyId}.`);
     } else {
       if (!Number.isInteger(member.quantity) || member.quantity === null || member.quantity < 1) errors.push(`Enemy encounter ${encounter.id} has an invalid quantity for ${member.enemyId}.`);
-      if (encounter.kind === "boss" && enemy?.kind !== "boss") errors.push(`Boss encounter ${encounter.id} contains non-boss enemy ${member.enemyId}.`);
-      if (encounter.kind === "fixed" && enemy?.kind === "boss") errors.push(`Fixed encounter ${encounter.id} contains boss enemy ${member.enemyId}.`);
+      if (encounter.kind === "boss" && enemy?.kind !== "boss" && enemy?.kind !== "component") errors.push(`Boss encounter ${encounter.id} contains non-boss enemy ${member.enemyId}.`);
+      if (encounter.kind === "fixed" && (enemy?.kind === "boss" || enemy?.kind === "component")) errors.push(`Fixed encounter ${encounter.id} contains boss or component enemy ${member.enemyId}.`);
     }
   }
   validateEnemyReferences(`Enemy encounter ${encounter.id}`, encounter.objectiveIds, encounter.missableIds, encounter.cutoffIds, encounter.chapterId);

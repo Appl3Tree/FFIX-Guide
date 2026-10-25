@@ -39,7 +39,7 @@ export type EnemyStrategy = {
 export type EnemyRecord = {
   id: string;
   name: string;
-  kind: "ordinary" | "boss";
+  kind: "ordinary" | "boss" | "component";
   chapterId: string;
   versionScope: string;
   encounterIds: string[];
@@ -99,6 +99,7 @@ const memoriaEntryObjectiveId = "disc-4.second-battle-of-iifa-tree.memoria-entry
 const novaDragonMissableId = "missable.disc-4.second-battle-of-iifa-tree.grand-armor";
 const novaDragonCutoffId = "cutoff.nova-dragon.grand-armor";
 const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"];
+const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
 
@@ -138,6 +139,10 @@ function pandemoniumBoss(record: LocalEnemyInput, missableIds: string[] = [], cu
 
 function memoriaBoss(record: LocalEnemyInput, missableId: string, cutoffId: string, sourceIds = memoriaEnemySources): EnemyRecord {
   return chapterBoss(record, memoriaChapterId, sourceIds, [missableId], [cutoffId]);
+}
+
+function memoriaComponent(record: LocalEnemyInput, sourceIds: string[]): EnemyRecord {
+  return { ...chapterEnemy(record, memoriaChapterId, sourceIds), kind: "component" };
 }
 
 function memoriaLoot(slot: EnemyTableSlot, itemId: string | null, itemName?: string): EnemyLootSlot {
@@ -456,12 +461,16 @@ const memoriaEncounters: EnemyEncounter[] = [
     chapterId: memoriaChapterId,
     location: "Ocean",
     kind: "boss",
-    formation: [{ enemyId: "enemy.kraken-memoria", quantity: 1 }],
-    sourceIds: memoriaEnemySources,
+    formation: [
+      { enemyId: "enemy.kraken-memoria", quantity: 1 },
+      { enemyId: "enemy.kraken-left-tentacle", quantity: 1 },
+      { enemyId: "enemy.kraken-right-tentacle", quantity: 1 },
+    ],
+    sourceIds: [...memoriaEnemySources, "gamefaqs-monster-list-20490", "gamerguides-memoria-kraken"],
     objectiveIds: ["disc-4.memoria.kraken-steals"],
     missableIds: ["missable.disc-4.memoria.kraken-steals"],
     cutoffIds: ["cutoff.memoria.kraken-steals"],
-    notes: ["Two tentacles join the battle and enable additional attacks. Their component-level stats and separate loot are not modeled in this partial dossier."],
+    notes: ["Kraken begins with Left Tentacle and Right Tentacle. GameFAQs lists their Water-gun and Ink attacks without assigning sides; Jegged and Gamer Guides reverse which side uses each move, so the guide leaves that mapping unresolved."],
   },
   {
     id: "encounter.memoria.lich",
@@ -984,8 +993,8 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       memoriaFact("elemental-weakness", "Lightning"),
       memoriaFact("elemental-resistance", "Water absorbed; Ice damage halved"),
       memoriaFact("status-vulnerability", "Slow"),
-      memoriaFact("attack", "Water-gun", "Water-elemental damage enabled by the right tentacle."),
-      memoriaFact("attack", "Ink", "Can inflict Darkness; enabled by the left tentacle."),
+      memoriaFact("attack", "Water-gun", "Single-target Water damage; enabled by a tentacle. Guides disagree about which side uses it.", ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken"]),
+      memoriaFact("attack", "Ink", "Can inflict Darkness; enabled by a tentacle. Guides disagree about which side uses it.", ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken"]),
       memoriaFact("attack", "Leg", "Physical damage to one character; becomes available after a tentacle is defeated and can counter attacks."),
       memoriaFact("attack", "Freeze", "Inflicts Freeze; Body Temp prevents the status."),
       memoriaFact("attack", "Waterga", "Heavy Water-elemental damage."),
@@ -993,14 +1002,72 @@ const memoriaEnemyRecords: EnemyRecord[] = [
     blueMagic: [],
     strategies: [
       { title: "Equip Water protection and Body Temp", detail: "Water resistance or absorption sharply reduces Kraken's main damage. Body Temp prevents Freeze; Bright Eyes helps with Ink's Darkness.", sourceIds: memoriaEnemySources },
-      { title: "Use Lightning after Zidane finishes stealing", detail: "Lightning exploits Kraken's weakness. The two tentacles enable Water-gun and Ink; each is separately targetable, but their stats and loot are not expanded in this partial record.", sourceIds: memoriaEnemySources },
+      { title: "Use Lightning after Zidane finishes stealing", detail: "Lightning exploits Kraken's weakness. The two tentacles enable Water-gun and Ink; each can be targeted separately. Their individual stats and loot appear in the component records.", sourceIds: memoriaEnemySources },
     ],
     routeObjectiveIds: ["disc-4.memoria.kraken-steals"],
     notes: [
       "HP claims conflict: GameFAQs lists 55,536 while Jegged lists 59,496. Both are retained pending direct game verification.",
-      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Glutton's Robe Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops. GameFAQs gives each tentacle 10,001 HP and an Elixir steal; component records remain outside this slice.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Glutton's Robe Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops. Tentacle HP and right-side steal claims conflict across the GameFAQs walkthrough, its older monster list, and RPGClassics; the component dossiers preserve those claims separately.",
     ],
-  }, "missable.disc-4.memoria.kraken-steals", "cutoff.memoria.kraken-steals"),
+  }, "missable.disc-4.memoria.kraken-steals", "cutoff.memoria.kraken-steals", [...memoriaEnemySources, "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"]),
+  memoriaComponent({
+    id: "enemy.kraken-left-tentacle",
+    name: "Kraken — Left Tentacle",
+    encounterIds: ["encounter.memoria.kraken"],
+    stats: [
+      { field: "level", value: 71, sourceIds: ["gamefaqs-monster-list-20490"], verification: "single-source" },
+      { field: "HP", value: 10001, sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490"], verification: "disputed" },
+      { field: "HP", value: 18169, sourceIds: ["rpgclassics-kraken-bestiary"], verification: "disputed" },
+      ...sourcedStats([["MP", 3339], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-monster-list-20490"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490"]),
+    ],
+    drops: [],
+    facts: [
+      sourcedFact("type", "Demon", ["gamefaqs-monster-list-20490"]),
+      sourcedFact("elemental-weakness", "Lightning", ["gamefaqs-monster-list-20490"]),
+      sourcedFact("elemental-resistance", "Water absorbed; Ice damage halved", ["gamefaqs-monster-list-20490"]),
+      sourcedFact("status-vulnerability", "None", ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490"], "GameFAQs says the tentacles have no status weaknesses; its enemy table marks their listed status effects immune."),
+      sourcedFact("attack", "Tentacle-activated attacks", ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken"], "GameFAQs lists Water-gun and Ink as Kraken attacks but does not assign them to a side. Jegged and Gamer Guides give opposite left/right assignments."),
+    ],
+    blueMagic: [],
+    strategies: [],
+    routeObjectiveIds: [],
+    notes: [
+      "GameFAQs lists 10,001 HP, but RPGClassics lists 18,169 HP. Preserve both values pending direct verification.",
+      "The older GameFAQs monster list gives the Left Tentacle a Common Elixir steal. Its current walkthrough reports a Common Elixir steal with shared tentacle details but does not print side-specific tables. GameFAQs says the tentacles have no drops.",
+    ],
+  }, memoriaTentacleSources),
+  memoriaComponent({
+    id: "enemy.kraken-right-tentacle",
+    name: "Kraken — Right Tentacle",
+    encounterIds: ["encounter.memoria.kraken"],
+    stats: [
+      { field: "level", value: 71, sourceIds: ["gamefaqs-monster-list-20490"], verification: "single-source" },
+      { field: "HP", value: 10001, sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490"], verification: "disputed" },
+      { field: "HP", value: 18168, sourceIds: ["rpgclassics-kraken-bestiary"], verification: "disputed" },
+      ...sourcedStats([["MP", 3338], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-monster-list-20490"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-memoria-71891"], "The walkthrough reports a Common Elixir steal alongside shared tentacle details but does not print a side-specific table. Its older enemy list and RPGClassics instead list Wing Edge for the Right Tentacle."),
+    ],
+    drops: [],
+    facts: [
+      sourcedFact("type", "Demon", ["gamefaqs-monster-list-20490"]),
+      sourcedFact("elemental-weakness", "Lightning", ["gamefaqs-monster-list-20490"]),
+      sourcedFact("elemental-resistance", "Water absorbed; Ice damage halved", ["gamefaqs-monster-list-20490"]),
+      sourcedFact("status-vulnerability", "None", ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490"], "GameFAQs says the tentacles have no status weaknesses; its enemy table marks their listed status effects immune."),
+      sourcedFact("attack", "Tentacle-activated attacks", ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken"], "GameFAQs lists Water-gun and Ink as Kraken attacks but does not assign them to a side. Jegged and Gamer Guides give opposite left/right assignments."),
+    ],
+    blueMagic: [],
+    strategies: [],
+    routeObjectiveIds: [],
+    notes: [
+      "GameFAQs lists 10,001 HP, but RPGClassics lists 18,168 HP. Preserve both values pending direct verification.",
+      "The Right Tentacle's steal is disputed: the GameFAQs Memoria walkthrough reports a Common Elixir steal alongside shared tentacle details but does not name a side; its older monster list and RPGClassics list Wing Edge for Right Tentacle.",
+    ],
+  }, memoriaTentacleSources),
   memoriaBoss({
     id: "enemy.lich-memoria",
     name: "Lich",
@@ -1215,5 +1282,5 @@ export const enemyCatalogCoverage = {
   chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId],
   enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, and Memoria. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds the four revived guardians and Deathguise, linking all five steal tables to their existing missable warnings and cutoffs; published HP and loot-rarity disagreements remain visible. Kraken's tentacle components and other areas remain unmodeled, and release-by-release parity remains to be researched.",
+  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, and Memoria. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, right-tentacle steal, and move-side assignments remain explicit. Other areas and release-by-release parity remain to be researched.",
 };
