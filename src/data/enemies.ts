@@ -74,6 +74,7 @@ export type EnemyEncounter = {
 const gulugSources = ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
 const mountGulugChapterId = "disc-3.lost-continent";
 const pandemoniumChapterId = "disc-3.portal-to-another-world";
+const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -91,6 +92,11 @@ const pandemoniumStealsObjectiveId = "disc-3.portal-to-another-world.pandemonium
 const pandemoniumClimaxObjectiveId = "disc-3.portal-to-another-world.pandemonium-climax";
 const pandemoniumStealsMissableId = "missable.disc-3.portal-to-another-world.pandemonium-boss-steals";
 const pandemoniumCutoffId = "cutoff.pandemonium.final-sequence";
+const novaDragonSources = ["gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon"];
+const novaDragonStealsObjectiveId = "disc-4.second-battle-of-iifa-tree.nova-dragon-steals";
+const memoriaEntryObjectiveId = "disc-4.second-battle-of-iifa-tree.memoria-entry";
+const novaDragonMissableId = "missable.disc-4.second-battle-of-iifa-tree.grand-armor";
+const novaDragonCutoffId = "cutoff.nova-dragon.grand-armor";
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
@@ -110,45 +116,61 @@ function localEnemy(record: LocalEnemyInput): EnemyRecord {
   return chapterEnemy(record, mountGulugChapterId, mountGulugEnemySources);
 }
 
-function pandemoniumEnemy(record: LocalEnemyInput): EnemyRecord {
-  return chapterEnemy(record, pandemoniumChapterId, pandemoniumEnemySources);
-}
-
-function pandemoniumBoss(record: LocalEnemyInput, missableIds: string[] = [], cutoffIds: string[] = []): EnemyRecord {
+function chapterBoss(record: LocalEnemyInput, chapterId: string, sourceIds: string[], missableIds: string[] = [], cutoffIds: string[] = []): EnemyRecord {
   return {
-    ...chapterEnemy(record, pandemoniumChapterId, pandemoniumEnemySources),
+    ...chapterEnemy(record, chapterId, sourceIds),
     kind: "boss",
     missableIds,
     cutoffIds,
   };
 }
 
+function pandemoniumEnemy(record: LocalEnemyInput): EnemyRecord {
+  return chapterEnemy(record, pandemoniumChapterId, pandemoniumEnemySources);
+}
+
+function pandemoniumBoss(record: LocalEnemyInput, missableIds: string[] = [], cutoffIds: string[] = []): EnemyRecord {
+  return chapterBoss(record, pandemoniumChapterId, pandemoniumEnemySources, missableIds, cutoffIds);
+}
+
 function pandemoniumBlueMagic(name: string, sourceIds: string[] = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891"]): EnemyBlueMagic {
   return { name, command: "Eat", sourceIds, objectiveIds: [pandemoniumBlueMagicObjectiveId] };
 }
 
+function sourcedLoot(slot: EnemyTableSlot, itemId: string | null, sourceIds: string[], itemName?: string): EnemyLootSlot {
+  return { slot, itemId, ...(itemName ? { itemName } : {}), sourceIds };
+}
+
 function enemyLoot(slot: EnemyTableSlot, itemId: string | null, itemName?: string): EnemyLootSlot {
-  return { slot, itemId, ...(itemName ? { itemName } : {}), sourceIds: [enemyListSourceId] };
+  return sourcedLoot(slot, itemId, [enemyListSourceId], itemName);
+}
+
+function sourcedFact(category: EnemyFact["category"], label: string, sourceIds: string[], detail?: string): EnemyFact {
+  return { category, label, ...(detail ? { detail } : {}), sourceIds };
 }
 
 function enemyFact(category: EnemyFact["category"], label: string, detail?: string): EnemyFact {
-  return { category, label, ...(detail ? { detail } : {}), sourceIds: [enemyListSourceId] };
+  return sourcedFact(category, label, [enemyListSourceId], detail);
+}
+
+function sourcedStats(entries: [EnemyStatField, number][], sourceIds: string[]): EnemyStatClaim[] {
+  return entries.map(([field, value]) => ({ field, value, sourceIds, verification: "single-source" }));
 }
 
 function enemyStats(entries: [EnemyStatField, number][]): EnemyStatClaim[] {
-  return entries.map(([field, value]) => ({ field, value, sourceIds: [enemyListSourceId], verification: "single-source" }));
+  return sourcedStats(entries, [enemyListSourceId]);
 }
 
 function pandemoniumStats(entries: [EnemyStatField, number][]): EnemyStatClaim[] {
-  return entries.map(([field, value]) => ({ field, value, sourceIds: ["gamefaqs-portal-to-another-world-71891"], verification: "single-source" }));
+  return sourcedStats(entries, ["gamefaqs-portal-to-another-world-71891"]);
 }
 
 function pandemoniumLoot(slot: EnemyTableSlot, itemId: string | null, itemName?: string): EnemyLootSlot {
-  return { slot, itemId, ...(itemName ? { itemName } : {}), sourceIds: ["gamefaqs-portal-to-another-world-71891"] };
+  return sourcedLoot(slot, itemId, ["gamefaqs-portal-to-another-world-71891"], itemName);
 }
 
 function pandemoniumFact(category: EnemyFact["category"], label: string, detail?: string): EnemyFact {
-  return { category, label, ...(detail ? { detail } : {}), sourceIds: ["gamefaqs-portal-to-another-world-71891"] };
+  return sourcedFact(category, label, ["gamefaqs-portal-to-another-world-71891"], detail);
 }
 
 function quinaSkill(name: string): EnemyBlueMagic {
@@ -370,7 +392,23 @@ const pandemoniumEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters];
+const iifaTreeEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.iifa-tree.nova-dragon",
+    title: "Nova Dragon — purple orb above the Iifa Tree",
+    chapterId: iifaTreeChapterId,
+    location: "Disc IV purple orb, before entering Memoria",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.nova-dragon", quantity: 1 }],
+    sourceIds: [...novaDragonSources],
+    objectiveIds: [novaDragonStealsObjectiveId, memoriaEntryObjectiveId],
+    missableIds: [novaDragonMissableId],
+    cutoffIds: [novaDragonCutoffId],
+    notes: ["This one-time battle begins after entering the purple orb and leads directly to Memoria. Grand Armor can be synthesized instead only if the player retained a Mythril Sword."],
+  },
+];
+
+export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -699,6 +737,53 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
   }, [pandemoniumStealsMissableId], [pandemoniumCutoffId]),
 ];
 
+const iifaTreeEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.nova-dragon",
+    name: "Nova Dragon",
+    encounterIds: ["encounter.iifa-tree.nova-dragon"],
+    stats: [
+      ...sourcedStats([["level", 67], ["MP", 9999], ["EXP", 0], ["AP", 13], ["Gil", 9506]], ["gamefaqs-second-battle-iifa-tree-71891"]),
+      { field: "HP", value: 54941, sourceIds: ["gamefaqs-second-battle-iifa-tree-71891"], verification: "disputed" },
+      { field: "HP", value: 54940, sourceIds: ["jegged-memoria-nova-dragon"], verification: "disputed" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.remedy", novaDragonSources),
+      sourcedLoot("uncommon", "game-item.dragon-wrist", novaDragonSources),
+      sourcedLoot("semi-rare", null, novaDragonSources, "Nothing"),
+      { ...sourcedLoot("rare", "game-item.grand-armor", novaDragonSources), note: "GameFAQs lists Grand Armor in the Rare slot; Jegged describes it as Very Rare. This display follows the GameFAQs table and keeps the wording conflict visible." },
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.wing-edge", novaDragonSources),
+      sourcedLoot("common", "game-item.ether", novaDragonSources),
+      sourcedLoot("uncommon", "game-item.elixir", novaDragonSources),
+      sourcedLoot("rare", null, ["gamefaqs-second-battle-iifa-tree-71891"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Dragon and Aerial", novaDragonSources),
+      sourcedFact("elemental-weakness", "Ice and Wind", novaDragonSources),
+      sourcedFact("elemental-resistance", "Earth nullified", novaDragonSources),
+      sourcedFact("status-vulnerability", "Darkness, Silence, Sleep, and Slow", novaDragonSources),
+      sourcedFact("attack", "Twister", novaDragonSources, "Wind damage to the party."),
+      sourcedFact("attack", "Aerial Slash", novaDragonSources, "Wind damage to the party."),
+      sourcedFact("attack", "Tidal Wave", novaDragonSources, "Water damage to the party."),
+      sourcedFact("attack", "Shockwave", ["gamefaqs-second-battle-iifa-tree-71891"], "Physical damage to the party."),
+      sourcedFact("attack", "Psychokinesis", ["gamefaqs-second-battle-iifa-tree-71891"], "Unblockable single-target attack."),
+      sourcedFact("attack", "Counter", ["gamefaqs-second-battle-iifa-tree-71891"], "Can retaliate after taking damage."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Prioritize Wind and Water protection", detail: "Equip Wind resistance first, then Water resistance. Ribbons absorb both elements; Protect Rings reduce elemental damage. Bird Killer also increases damage against this Aerial enemy.", sourceIds: novaDragonSources },
+      { title: "Use Sleep during the Grand Armor steal attempt", detail: "Sleep can keep Nova Dragon from attacking while Zidane tries to steal. Ultima Weapon's Soul Blade can inflict Sleep; Master Thief improves the very-rare steal chance. Silence may shift attacks toward Shockwave and Psychokinesis when Wind is already nullified.", sourceIds: novaDragonSources },
+    ],
+    routeObjectiveIds: [novaDragonStealsObjectiveId, memoriaEntryObjectiveId],
+    notes: [
+      "HP claims conflict by one point: GameFAQs lists 54,941 and Jegged lists 54,940. The conflict remains visible pending direct game verification.",
+      "The encounter is one-time. The linked Grand Armor warning describes the conditional Black Mage Village synthesis fallback when a Mythril Sword was retained.",
+    ],
+  }, iifaTreeChapterId, novaDragonSources, [novaDragonMissableId], [novaDragonCutoffId]),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   {
     id: "enemy.red-dragon",
@@ -815,12 +900,13 @@ export const enemyRecords: EnemyRecord[] = [
   },
   ...localEnemyRecords,
   ...pandemoniumEnemyRecords,
+  ...iifaTreeEnemyRecords,
 ];
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [mountGulugChapterId, pandemoniumChapterId],
-  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId],
+  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug and Pandemonium. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence; published boss HP disagreements remain visible. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Mount Gulug, Pandemonium, and the Disc IV Iifa Tree battle. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal; published boss HP disagreements remain visible. Other areas and release-by-release parity remain to be researched.",
 };
