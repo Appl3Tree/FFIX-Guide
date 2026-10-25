@@ -123,7 +123,6 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "kupo-mognet",
             kind: "save",
             text: "After Kupo's introduction, speak to him and choose Mognet to accept the letter for Monty. Save here before climbing to the rooftops; deliver the letter to Monty when the next area opens.",
-            detail: "If you played Jump Rope, check Mognet again after you regain control of Steiner in the castle. Guides differ on the exact first-visit jump threshold tied to a special letter, so the letter's availability is not labeled a permanent missable here.",
           },
           {
             id: "rooftop-treasures",
@@ -176,7 +175,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "guardhouse-pickup-mognet",
             kind: "save",
-            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner, save with the Moogle, and check Mognet for Mosh's letter if you played Jump Rope.",
+            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached at least 50 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; it is separate from the earlier Kupo-to-Monty delivery. Read it before advancing the escape. A later Alexandria recovery is not confirmed.",
+            objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {
             id: "find-pluto-knights",

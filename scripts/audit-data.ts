@@ -391,6 +391,28 @@ for (const tutorial of tutorialAteObjectives) {
   }
 }
 
+const jumpRopeLetterId = "disc-1.alexandria.jump-rope-mognet-letter";
+const jumpRopeLetterObjective = objectives.find((objective) => objective.id === jumpRopeLetterId);
+const jumpRopeLetterWarning = missables.find((missable) => missable.objectiveId === jumpRopeLetterId);
+const jumpRopeLetterSteps = walkthroughChapters.flatMap((chapter) =>
+  chapter.sections.flatMap((section) => section.steps.filter((step) => step.objectiveIds?.includes(jumpRopeLetterId)).map((step) => ({ chapterId: chapter.areaId, step }))),
+);
+if (jumpRopeLetterObjective?.category !== "side-content" || !jumpRopeLetterObjective.chapterIds?.includes("disc-1.alexandria")) {
+  errors.push("The Jump Rope Mognet letter must remain a Disc I Alexandria side-content objective.");
+}
+if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
+  errors.push("The Jump Rope Mognet letter objective must cite the 50-jump Disc I source.");
+}
+if (!jumpRopeLetterWarning || !jumpRopeLetterWarning.classification.includes("conditional") || jumpRopeLetterWarning.classification.includes("permanently-missable")) {
+  errors.push("The Jump Rope Mognet letter warning must remain conditional without asserting permanent loss.");
+}
+if (!jumpRopeLetterWarning?.consequence.includes("whether the special letter remains readable during the later Alexandria return is unresolved")) {
+  errors.push("The Jump Rope Mognet letter warning must preserve the unresolved Disc III recovery question.");
+}
+if (jumpRopeLetterSteps.length !== 1 || jumpRopeLetterSteps[0]?.chapterId !== "disc-1.alexandria" || jumpRopeLetterSteps[0]?.step.id !== "guardhouse-pickup-mognet") {
+  errors.push("The Jump Rope Mognet letter objective must point to Mosh's Disc I guardhouse step.");
+}
+
 for (const { platform, records, expectedCount } of achievementCatalogs) {
   if (records.length !== expectedCount) {
     errors.push(`${platform} achievement catalog has ${records.length} records, expected ${expectedCount}.`);

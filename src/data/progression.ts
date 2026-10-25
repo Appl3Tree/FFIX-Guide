@@ -1315,6 +1315,15 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     sourceIds: ["gamefaqs-alexandria-79143", "gamefaqs-dali-79143", "vgkami-evil-forest"],
   },
   {
+    id: "cutoff.alexandria.jump-rope-mognet-letter",
+    edgeId: "story.alexandria-to-evil-forest",
+    title: "Alexandria's Jump Rope Mognet letter",
+    certainty: "conservative",
+    trigger: "After reaching 50 consecutive Jump Rope jumps on Disc I, read Kupo's letter from Mosh while controlling Steiner and before the Alexandria escape. Sources call this a letter that can be missed in Alexandria; whether Mosh offers it again during the Disc III return is unresolved.",
+    missableIds: ["missable.disc-1.alexandria.jump-rope-mognet-letter"],
+    sourceIds: ["gamefaqs-jump-rope-71891", "gamefaqs-moogle-faq-23306", "gamefaqs-perfect-game-41181", "steam-missable-content-guide-2988011418"],
+  },
+  {
     id: "cutoff.ice-cavern.boss-steals",
     edgeId: "story.ice-cavern-to-dali",
     title: "Black Waltz 1 and Sealion steal windows",
