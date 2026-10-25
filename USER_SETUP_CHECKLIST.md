@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest route audit confirms the Lindblum cutoff at entry to Gizamaluke's Grotto from four walkthroughs and keeps the later reopening question open.
+No account-owner setup action changed. The latest route audit adds a separate source-supported Lindblum cutoff for the Autograph and Moogle Suit at Tantalus Hideout entry; the ATE/Javelin departure check and the Grotto-entry trolley cutoff remain distinct. Repository checks pass, while direct game/release verification and later full city/trolley reopening remain open.
 
 No account-owner setup action changed. The latest guide-content milestone reconciles Cleyra's evacuation directions and removes an unsupported version-dependent label; repository lint, typecheck, audit, build, and whitespace checks pass. Direct game/release verification remains open.
 

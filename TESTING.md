@@ -4,13 +4,13 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Lindblum cutoff review. The audit reports 0 errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 351 sources; all warnings link to 93 cutoff windows. The build emits 1,935.54 kB JavaScript (472.67 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct game/release verification were not run.
+`npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Lindblum Autograph/Moogle Suit cutoff refinement. The audit reports 0 errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 352 sources; all warnings link to 94 cutoff windows. The build emits 1,937.24 kB JavaScript (473.09 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct game/release verification were not run.
 
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Alexandria Inn source reconciliation. The audit reports 0 errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 351 sources; all warnings link to 93 cutoff windows. The route graph has 70 links (41 required story links, two optional detours, 14 optional returns, 13 rejoins). The catalog has 206 items, 813 paths across 42 slices, 38 recipes, 112 targets, and 196 ability claims. The bundle is 1,935.28 kB JavaScript (472.65 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite's chunk-size advisory remains. Tests were not run; direct game/release/browser verification remains open. TrueAchievements returned HTTP 402 during review, so its indexed endgame statement is secondary evidence.
 
 ## Latest change status
 
-The Lindblum cutoff now uses the source-supported Grotto-entry trigger across the route cutoff, missable warning, and walkthrough; an audit invariant preserves the four-source basis. Later full city/trolley reopening and direct game/release behavior remain unverified.
+The Lindblum data now separates two first-visit windows: Autograph/Moogle Suit before entering the Tantalus Hideout, and the ATE/Javelin safe-check before leaving the city. Four sources support the hideout trigger, while Revival_Flame's separate FAQ gives the broader departure boundary. A dedicated audit invariant checks the trigger, source set, warning, walkthrough objective, and separation. The independently reviewed trolley cutoff remains Gizamaluke's Grotto entry; later full city/trolley reopening and direct game/release behavior remain unverified.
 
 The Cleyra achievement warning now gives Right → Left → Right as the agreed route and recommends Not Yet without stating that the fourth response is required. Its source conflict and lack of release-specific evidence are recorded in the warning, cutoff, walkthrough, and audit invariant. No test suite or direct gameplay verification was run.
 

@@ -927,7 +927,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lindblum-theater-district",
         title: "Theater District — claim the Autograph and Moogle Suit",
         summary: "Complete Lowell's short side event and search his studio before entering the Tantalus Hideout.",
-        sourceIds: ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "gamefaqs-missables-71891", "gamefaqs-missables-21725"],
+        sourceIds: ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "gamefaqs-missables-71891", "gamefaqs-missables-21725", "elitegrindlab-lindblum"],
         steps: [
           {
             id: "lindblum-theater-ate-and-gil",

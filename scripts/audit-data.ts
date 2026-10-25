@@ -95,6 +95,28 @@ if (
   errors.push("Lindblum's trolley cutoff must use the source-supported Grotto-entry trigger and retain its four walkthrough sources.");
 }
 
+const lindblumKeyItemsWarning = missablesById.get("missable.disc-1.lindblum.autograph-moogle-suit");
+const lindblumKeyItemsCutoff = cutoffsById.get("cutoff.lindblum.tantalus-hideout.key-items");
+const lindblumDepartureCutoff = cutoffsById.get("cutoff.lindblum-departure.first-visit-windows");
+const lindblumKeyItemsSection = walkthroughChapters
+  .flatMap((chapter) => chapter.sections)
+  .find((section) => section.id === "lindblum-theater-district");
+const lindblumKeyItemsStep = lindblumKeyItemsSection?.steps.find((step) => step.id === "lindblum-lowell-autograph-moogle-suit");
+if (
+  lindblumKeyItemsCutoff?.certainty !== "source-supported" ||
+  !lindblumKeyItemsCutoff.trigger.includes("Entering the Tantalus Hideout closes") ||
+  !lindblumKeyItemsCutoff.missableIds.includes("missable.disc-1.lindblum.autograph-moogle-suit") ||
+  ["gamefaqs-lindblum-71891", "gamefaqs-missables-71891", "jegged-lindblum", "elitegrindlab-lindblum"].some((sourceId) => !lindblumKeyItemsCutoff.sourceIds.includes(sourceId)) ||
+  !lindblumKeyItemsWarning?.deadline.includes("before entering the Tantalus Hideout") ||
+  !lindblumKeyItemsWarning.note?.includes("broader boundary as leaving Lindblum for the first time") ||
+  !lindblumKeyItemsWarning?.sourceIds.includes("elitegrindlab-lindblum") ||
+  lindblumDepartureCutoff?.missableIds.includes("missable.disc-1.lindblum.autograph-moogle-suit") ||
+  !lindblumKeyItemsStep?.objectiveIds?.includes("disc-1.lindblum.autograph-moogle-suit") ||
+  !lindblumKeyItemsSection?.sourceIds.includes("elitegrindlab-lindblum")
+) {
+  errors.push("Lindblum's Autograph and Moogle Suit cutoff must be source-supported at Tantalus Hideout entry and stay separate from the broader ATE/Javelin departure checklist.");
+}
+
 if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
 for (const chapterId of enemyCatalogCoverage.chapterIds) {
   if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);
