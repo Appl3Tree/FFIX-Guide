@@ -2714,6 +2714,18 @@ if (
 ) {
   errors.push("The Mognet repair route must distinguish Cour89's six required Disc IV deliveries (#22–27) from the optional full count of 27.");
 }
+const disc4TrenoReturnEdge = gameRouteEdgesById.get("detour.return-to-gaia-treno-behemoth");
+const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoin-gaia");
+if (
+  !disc4TrenoReturnEdge?.summary.includes("Quan's Dwelling") ||
+  !disc4TrenoReturnEdge.summary.includes("Ophiucus") ||
+  !disc4TrenoReturnEdge.sourceIds.includes("ff9-kouryaku-disc4") ||
+  !disc4TrenoReturnEdge.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  !disc4TrenoRejoinEdge?.summary.includes("Quan's Dwelling") ||
+  !disc4TrenoRejoinEdge.sourceIds.includes("ff9-kouryaku-disc4")
+) {
+  errors.push("The Disc IV Gaia return route must connect Quan's Dwelling and Treno's optional late-game visits to a sourced rejoin.");
+}
 const cour89BranBal = sources.find((source) => source.id === "cour89-bran-bal");
 const cour89Pandemonium = sources.find((source) => source.id === "cour89-pandemonium");
 const moorockLetterObjective = objectivesById.get("disc-3.portal-to-another-world.moorock-mognet-letter");
