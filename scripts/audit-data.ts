@@ -827,6 +827,24 @@ if (
 if (!objectiveIds.has(tonberryCardObjectiveId) || tonberryCardSteps.length === 0 || !griffinCardStep) {
   errors.push("The Tonberry Card objective needs both its Treno reward step and a later Black Mage Village recovery step.");
 }
+const alexandriaCardPlayersObjectiveId = "disc-3.the-home-front.card-players";
+const alexandriaCardPlayersWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.card-players");
+const alexandriaCardPlayersCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.alexandria-zidane.before-treno");
+const alexandriaCardPlayersStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-3.the-home-front")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.objectiveIds?.includes(alexandriaCardPlayersObjectiveId));
+if (
+  !objectiveIds.has(alexandriaCardPlayersObjectiveId)
+  || !alexandriaCardPlayersStep
+  || !alexandriaCardPlayersWarning?.sourceIds.includes("gamefaqs-card-locations-24067")
+  || !alexandriaCardPlayersWarning.sourceIds.includes("gamefaqs-tetra-master-71891")
+  || alexandriaCardPlayersWarning.classification.includes("permanently-missable")
+  || !alexandriaCardPlayersCutoff?.missableIds.includes(alexandriaCardPlayersWarning.id)
+  || !["Michelle", "Old Lady", "Benero", "Zenero"].every((name) => alexandriaCardPlayersStep.text.includes(name))
+) {
+  errors.push("The Disc III Alexandria card-player checklist must name all four opponents, use the card-location/Tetra Master sources, and remain separate from permanent card-type loss.");
+}
 const thirdJewelEvent = movieCriticEligibleEvents.find((event) => event.id === "ate-lindblum-third-jewel");
 const thirdJewelWarning = missables.find((missable) => missable.id === "missable.disc-2.return-to-lindblum.the-third-jewel");
 if (!thirdJewelEvent || thirdJewelEvent.exclusiveGroupId || thirdJewelEvent.chapterId !== "disc-2.return-to-lindblum") {

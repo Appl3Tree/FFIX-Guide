@@ -907,8 +907,8 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     title: "Zidane's Alexandria phase before Treno",
     certainty: "conservative",
     trigger: "After Eiko's castle passage returns control to Zidane and Vivi, finish the Nero Brothers nine-win challenge and view the two remaining ATEs before leaving Alexandria for Treno. GameFAQs and Jegged mark the Nero game as missable during this phase; sources differ on whether remaining optional activities close on city exit or at the later chapter transition, so complete the city sweep before advancing.",
-    missableIds: ["missable.disc-3.the-home-front.ates", "missable.disc-3.the-home-front.found-in-the-shuffle"],
-    sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"],
+    missableIds: ["missable.disc-3.the-home-front.ates", "missable.disc-3.the-home-front.found-in-the-shuffle", "missable.disc-3.the-home-front.card-players"],
+    sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "gamefaqs-card-locations-24067", "gamefaqs-tetra-master-71891"],
   },
   {
     id: "cutoff.fossil-roo.lani-steals",

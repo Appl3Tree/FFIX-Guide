@@ -3482,7 +3482,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "home-front-zidane-and-shops",
         title: "Zidane rejoins — ATEs, shops, and the Nero Brothers",
         summary: "Use the later Alexandria free-roam window to prepare the party, finish the second ATE phase, and win the Nero Brothers challenge.",
-        sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "xboxachievements-final-fantasy-ix", "steam-achievements", "gamefaqs-shops-71891"],
+        sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "xboxachievements-final-fantasy-ix", "steam-achievements", "gamefaqs-shops-71891", "gamefaqs-card-locations-24067"],
         steps: [
           {
             id: "home-front-zidane-ate-and-theater-gil",
@@ -3508,6 +3508,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "In the Weapon Shop, speak to Genero, Benero, or Zenero and win nine consecutive rounds of their shell-shuffle game for Found in the Shuffle on supported achievement versions. The first wager is 50 Gil; stop after the ninth win if you only need the achievement.",
             detail: "Follow the brother named before each shuffle. A wrong guess ends the streak, so save before attempting it if you want a clean retry. It awards Gil rather than a unique item and is not the separate Tetra Master game.",
             objectiveIds: ["disc-3.the-home-front.found-in-the-shuffle"],
+          },
+          {
+            id: "home-front-card-players",
+            kind: "optional",
+            text: "If your checklist includes every documented card-player interaction, challenge Michelle and Old Lady on Main Street and Benero and Zenero in the Weapon Shop before leaving Alexandria.",
+            detail: "GameFAQs' PlayStation card-location FAQ lists these four opponents during Disc III; some Alexandria card entries also name opponents through Disc IV, so the exact later rematch availability is unresolved. This is an optional match checkpoint, not a claim that the card types are exclusive to these opponents.",
+            objectiveIds: ["disc-3.the-home-front.card-players"],
           },
           {
             id: "home-front-clowns-ate",
