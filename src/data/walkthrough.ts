@@ -2416,7 +2416,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "outer-continent-world-map",
         title: "Outer Continent — world-map route and optional stops",
         summary: "Loop around the plateau to the bridge town. Stop at the new marsh, check Quina's available Blue Magic, and collect the Chocograph treasure if you already dug up its clue.",
-        sourceIds: ["gamefaqs-outer-continent-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-conde-petie", "flactem-friendly-monsters"],
+        sourceIds: ["gamefaqs-outer-continent-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-conde-petie", "flactem-friendly-monsters", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "rpgclassics-outer-continent", "jegged-world-map-cactuar", "jegged-world-map-goblin-mage", "jegged-world-map-griffin", "jegged-world-map-zaghnol"],
         steps: [
           {
             id: "outer-continent-loop-to-conde-petie",
@@ -2426,8 +2426,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "outer-continent-encounters-and-blue-magic",
             kind: "optional",
-            text: "The Outer Continent field encounter list includes Cactuar, Goblin Mage, Griffin, and Zaghnol. If Quina is in the party and missing these spells, use Eat on a weakened Goblin Mage for Goblin Punch and a weakened Cactuar for 1,000 Needles.",
-            detail: "Do not assume a particular level or enemy HP total; the route sources differ on numerical data. These are optional Blue Magic opportunities, not required encounters. Ragtime Mouse may still appear in forests; its quiz sequence and reward checklist are not yet authored here.",
+            text: "Terrain determines which Outer Continent encounters can appear: dirt at Donna Plains, Dyshnose Shores, Gegalrich Shores, and Kognish Shores has Cactuar, Goblin Mage, Griffin, and Zaghnol; grass at Donna Plains and Gegalrich Shores, plus world-map forests, can also include Friendly Ladybird; beaches and Donna Plains marshes list Griffin and Zaghnol. If Quina is missing a spell, Eat a weakened Goblin Mage for Goblin Punch, Cactuar for 1,000 Needles, Griffin for White Wind, or Zaghnol for Matra Magic.",
+            detail: "The terrain guide records possible formation rosters, not encounter odds or a claim that every listed enemy appears together. White Wind and Matra Magic are also available earlier from Zuu and Dragonfly in Cleyra's Trunk. Enemy references disagree on Cactuar's level (1 or 30) and AP, Goblin Mage AP (0 or 1/2), and Zaghnol's MP/AP; the bestiary keeps those claims separate. Ragtime Mouse may still appear in forests; its quiz sequence and reward checklist are not yet authored here.",
             objectiveIds: ["disc-2.outer-continent.blue-magic"],
           },
           {
@@ -2547,7 +2547,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "magdalene-forest-and-dead-forest",
         title: "Magdalene Forest and the owl path",
         summary: "Reach the forest around the cliff, then follow the branch with fewer owls until the route reaches Black Mage Village.",
-        sourceIds: ["gamefaqs-magdalene-forest-71891", "jegged-black-mage-village", "elitegrindlab-black-mage-village"],
+        sourceIds: ["gamefaqs-magdalene-forest-71891", "jegged-black-mage-village", "elitegrindlab-black-mage-village", "gamefaqs-monster-list-20490", "gamefaqs-enemy-list-71891", "rpgclassics-outer-continent", "jegged-world-map-cactuar", "jegged-world-map-goblin-mage", "jegged-world-map-griffin", "jegged-world-map-zaghnol"],
         steps: [
           {
             id: "magdalene-forest-approach",
@@ -2558,8 +2558,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "magdalene-forest-field-encounters",
             kind: "optional",
-            text: "The Magdalene Forest world-map encounters include Cactuar, Goblin Mage, Griffin, and Zaghnol. The Dead Forest's encounter list is Griffin, Myconid, and Zemzelett. No treasure pickups are listed in either forest area.",
-            detail: "If Quina still needs Blue Magic, the earlier Outer Continent route identifies Goblin Punch from Goblin Mage and 1,000 Needles from Cactuar. Ragtime Mouse may also appear in this forest; its full quiz route and reward checklist are not authored here yet.",
+            text: "The GameFAQs terrain table lists Griffin, Friendly Ladybird, and Zaghnol in the Magdalene Forest world-map forest. Jegged's broader location lists also include Cactuar and Goblin Mage there, but does not map them to a terrain formation. The Dead Forest interior has a separate Griffin, Myconid, and Zemzelett roster.",
+            detail: "If Quina is missing White Wind or Matra Magic, the world-map Griffin and Zaghnol are alternate teachers after Cleyra's Trunk. The source difference about Cactuar/Goblin Mage here remains open; use the detailed terrain roster as the conservative encounter list. Ragtime Mouse may also appear in forests; its full quiz route and reward checklist are not authored here yet.",
+            objectiveIds: ["disc-2.outer-continent.blue-magic"],
           },
           {
             id: "dead-forest-owl-route",

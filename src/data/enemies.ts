@@ -39,7 +39,7 @@ export type EnemyStrategy = {
 export type EnemyRecord = {
   id: string;
   name: string;
-  kind: "ordinary" | "boss" | "component";
+  kind: "ordinary" | "boss" | "component" | "friendly";
   chapterId: string;
   versionScope: string;
   encounterIds: string[];
@@ -97,6 +97,21 @@ const meltigeminiObjectiveId = "disc-3.lost-continent.meltigemini-steals";
 const meltigeminiMissableId = "missable.disc-3.lost-continent.meltigemini-steals";
 const meltigeminiCutoffId = "cutoff.mount-gulug.meltigemini-steals";
 const enemyListSourceId = "gamefaqs-enemy-list-71891";
+const outerContinentChapterId = "disc-2.outer-continent";
+const magdaleneForestChapterId = "disc-2.magdalene-forest";
+const outerContinentBlueMagicObjectiveId = "disc-2.outer-continent.blue-magic";
+const outerContinentFriendlyLadybugObjectiveId = "disc-2.outer-continent.friendly-ladybug";
+const outerContinentEncounterSources = ["gamefaqs-monster-list-20490"];
+const outerContinentEnemySources = [enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-outer-continent-71891", "jegged-conde-petie", "rpgclassics-outer-continent", "gamefaqs-abilities-71891"];
+const cactuarSources = [...outerContinentEnemySources, "jegged-world-map-cactuar"];
+const goblinMageSources = [...outerContinentEnemySources, "jegged-world-map-goblin-mage"];
+const griffinSources = [...outerContinentEnemySources, "jegged-world-map-griffin"];
+const worldMapZaghnolSources = [...outerContinentEnemySources, "jegged-world-map-zaghnol"];
+const cactuarStatSources = [enemyListSourceId, "gamefaqs-monster-list-20490", "jegged-world-map-cactuar"];
+const goblinMageStatSources = [enemyListSourceId, "gamefaqs-monster-list-20490", "jegged-world-map-goblin-mage"];
+const griffinStatSources = [enemyListSourceId, "gamefaqs-monster-list-20490", "jegged-world-map-griffin"];
+const worldMapZaghnolStatSources = [enemyListSourceId, "gamefaqs-monster-list-20490", "jegged-world-map-zaghnol"];
+const outerContinentFriendlySources = ["gamefaqs-monster-list-20490", "gamefaqs-friendly-creatures-71891", "gamefaqs-outer-continent-71891", "gamefaqs-magdalene-forest-71891", "flactem-friendly-monsters", "jegged-friendly-monsters"];
 const evilForestEnemySources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestBossSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
@@ -956,6 +971,111 @@ const lindblumRegionalEncounters: EnemyEncounter[] = [
   },
 ];
 
+const outerContinentEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.outer-continent.dirt-pool",
+    title: "Outer Continent — dirt terrain encounters",
+    chapterId: outerContinentChapterId,
+    location: "Dirt at Donna Plains, Dyshnose Shores, Gegalrich Shores, and Kognish Shores",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.cactuar", quantity: null },
+      { enemyId: "enemy.goblin-mage", quantity: null },
+      { enemyId: "enemy.griffin", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: outerContinentEncounterSources,
+    objectiveIds: [outerContinentBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The source lists the same terrain roster at all four named regions. Goblin Mage appears in one- and two-enemy formations; this pool records roster membership without inferring rates or that every listed enemy appears together."],
+  },
+  {
+    id: "encounter.outer-continent.grass-pool",
+    title: "Outer Continent — grass terrain encounters",
+    chapterId: outerContinentChapterId,
+    location: "Grass at Donna Plains and Gegalrich Shores",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.goblin-mage", quantity: null },
+      { enemyId: "enemy.griffin", quantity: null },
+      { enemyId: "enemy.friendly-ladybird", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: outerContinentEncounterSources,
+    objectiveIds: [outerContinentBlueMagicObjectiveId, outerContinentFriendlyLadybugObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Ladybird (F) is the special Friendly Ladybird encounter, not the ordinary Ladybird combat record. The terrain table lists Goblin Mage in one- and two-enemy formations; encounter rates are not modeled."],
+  },
+  {
+    id: "encounter.outer-continent.marsh-pool",
+    title: "Outer Continent — marsh terrain encounters",
+    chapterId: outerContinentChapterId,
+    location: "Marsh terrain at Donna Plains",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.griffin", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: outerContinentEncounterSources,
+    objectiveIds: [outerContinentBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The Out1 terrain table lists only Griffin and Zaghnol in Donna Plains marsh encounters; this does not include the separate Qu's Marsh pond encounters."],
+  },
+  {
+    id: "encounter.outer-continent.forest-pool",
+    title: "Outer Continent — world-map forest encounters",
+    chapterId: outerContinentChapterId,
+    location: "Forest terrain at Donna Plains, Dyshnose Shores, and Kognish Shores",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.griffin", quantity: null },
+      { enemyId: "enemy.friendly-ladybird", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: outerContinentEncounterSources,
+    objectiveIds: [outerContinentBlueMagicObjectiveId, outerContinentFriendlyLadybugObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The terrain table lists Griffin, Ladybird (F), and Zaghnol in these world-map forests. The Dead Forest field area is a separate encounter location and is not included."],
+  },
+  {
+    id: "encounter.outer-continent.beach-pool",
+    title: "Outer Continent — beach encounters",
+    chapterId: outerContinentChapterId,
+    location: "Beaches at Dyshnose Shores, Gegalrich Shores, and Kognish Shores",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.griffin", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: outerContinentEncounterSources,
+    objectiveIds: [outerContinentBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The source lists a Griffin and/or Zaghnol formation on each named beach. No encounter rates are inferred."],
+  },
+  {
+    id: "encounter.magdalene-forest.outer-forest-pool",
+    title: "Magdalene Forest — world-map forest encounters",
+    chapterId: magdaleneForestChapterId,
+    location: "Forest terrain outside the Dead Forest field area",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.griffin", quantity: null },
+      { enemyId: "enemy.friendly-ladybird", quantity: null },
+      { enemyId: "enemy.zaghnol-b", quantity: null },
+    ],
+    sourceIds: outerContinentEncounterSources,
+    objectiveIds: [outerContinentBlueMagicObjectiveId, outerContinentFriendlyLadybugObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is the Outer Continent world-map forest table for Magdalene Forest. The similarly named Dead Forest is an interior field area with a different roster."],
+  },
+];
+
 const mountGulugEncounters: EnemyEncounter[] = [
   {
     id: "encounter.mount-gulug.red-dragon-return-pair",
@@ -1317,7 +1437,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -3467,6 +3587,184 @@ const lindblumAreaEnemyRecords: EnemyRecord[] = [
   }, returnToGaiaChapterId, qualeSources),
 ];
 
+const outerContinentEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.cactuar",
+    name: "Cactuar",
+    encounterIds: ["encounter.outer-continent.dirt-pool"],
+    stats: [
+      { field: "level", value: 1, sourceIds: [enemyListSourceId], verification: "disputed" },
+      { field: "level", value: 30, sourceIds: ["gamefaqs-monster-list-20490", "jegged-world-map-cactuar"], verification: "disputed" },
+      { field: "HP", value: 1939, sourceIds: cactuarStatSources, verification: "cross-checked" },
+      { field: "MP", value: 1018, sourceIds: cactuarStatSources, verification: "cross-checked" },
+      { field: "EXP", value: 4208, sourceIds: cactuarStatSources, verification: "cross-checked" },
+      { field: "AP", value: 2, sourceIds: [enemyListSourceId, "jegged-world-map-cactuar"], verification: "disputed" },
+      { field: "AP", value: 3, sourceIds: ["gamefaqs-monster-list-20490"], verification: "disputed" },
+      { field: "Gil", value: 1021, sourceIds: cactuarStatSources, verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.phoenix-down", [enemyListSourceId, "jegged-world-map-cactuar"]),
+      sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId, "jegged-world-map-cactuar"]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "jegged-world-map-cactuar"]),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.hi-potion", [enemyListSourceId, "jegged-world-map-cactuar"]),
+      sourcedLoot("common", "game-item.phoenix-down", [enemyListSourceId, "jegged-world-map-cactuar"]),
+      sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId, "jegged-world-map-cactuar"]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "jegged-world-map-cactuar"]),
+    ],
+    facts: [
+      sourcedFact("type", "None", cactuarStatSources),
+      sourcedFact("elemental-weakness", "Fire", cactuarStatSources),
+      sourcedFact("elemental-resistance", "Water (absorbs)", cactuarStatSources),
+      sourcedFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "1,000 Needles", [enemyListSourceId, "jegged-world-map-cactuar"], "GameFAQs describes it as a counter; its fixed damage can be dangerous this early."),
+      sourcedFact("attack", "Confuse", [enemyListSourceId, "jegged-world-map-cactuar"], "Can disrupt the party while attempting to Eat the Cactuar."),
+      sourcedFact("attack", "Haste", ["jegged-world-map-cactuar"], "Can cast Haste on itself."),
+    ],
+    blueMagic: [{ name: "1,000 Needles", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-world-map-cactuar"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
+    strategies: [{ title: "Eat before finishing the Cactuar", detail: "Quina can learn 1,000 Needles with Eat. Its 1,000 Needles counter and Confuse can make the attempt costly; use Fire, prepare to heal, and cure Confuse as needed.", sourceIds: [enemyListSourceId, "jegged-world-map-cactuar"] }],
+    routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
+    notes: ["The later GameFAQs Enemy List gives Level 1 and AP 2; Jegged and the older GameFAQs Monster List give Level 30, and that older list prints AP 2–3. HP, MP, EXP, and Gil agree. Jegged's broad location list includes Magdalene Forest, but the detailed GameFAQs terrain table does not list Cactuar in that forest roster; that location difference remains unresolved."],
+  }, outerContinentChapterId, cactuarSources),
+  chapterEnemy({
+    id: "enemy.goblin-mage",
+    name: "Goblin Mage",
+    encounterIds: ["encounter.outer-continent.dirt-pool", "encounter.outer-continent.grass-pool"],
+    stats: [
+      { field: "level", value: 15, sourceIds: goblinMageStatSources, verification: "cross-checked" },
+      { field: "HP", value: 983, sourceIds: goblinMageStatSources, verification: "cross-checked" },
+      { field: "MP", value: 485, sourceIds: goblinMageStatSources, verification: "cross-checked" },
+      { field: "EXP", value: 913, sourceIds: goblinMageStatSources, verification: "cross-checked" },
+      { field: "AP", value: 0, sourceIds: [enemyListSourceId], verification: "disputed" },
+      { field: "AP", value: 1, sourceIds: ["gamefaqs-monster-list-20490", "jegged-world-map-goblin-mage"], verification: "disputed" },
+      { field: "AP", value: 2, sourceIds: ["gamefaqs-monster-list-20490", "jegged-world-map-goblin-mage"], verification: "disputed" },
+      { field: "Gil", value: 568, sourceIds: goblinMageStatSources, verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.potion", [enemyListSourceId, "jegged-world-map-goblin-mage"]),
+      sourcedLoot("uncommon", "game-item.ore", [enemyListSourceId, "jegged-world-map-goblin-mage"]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("uncommon", "game-item.echo-screen", [enemyListSourceId, "jegged-world-map-goblin-mage"]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "None", goblinMageStatSources),
+      sourcedFact("elemental-weakness", "None listed", goblinMageStatSources),
+      sourcedFact("elemental-resistance", "None listed", goblinMageStatSources),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Vanish", [enemyListSourceId, "jegged-world-map-goblin-mage"], "The GameFAQs table warns that it may cast Vanish on itself, making magic useful."),
+      sourcedFact("attack", "Axe and Thundara", ["jegged-world-map-goblin-mage"]),
+    ],
+    blueMagic: [{ name: "Goblin Punch", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-world-map-goblin-mage"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
+    strategies: [{ title: "Eat if Goblin Punch is missing", detail: "Weaken the Goblin Mage and use Quina's Eat command. It may cast Vanish on itself, so keep a magical attack available if it does." , sourceIds: [enemyListSourceId, "jegged-world-map-goblin-mage"] }],
+    routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
+    notes: ["GameFAQs lists 0 AP, while the older Monster List and Jegged report 1 or 2 AP. Jegged's broad location list includes Magdalene Forest, but the detailed GameFAQs terrain table does not list Goblin Mage in that forest roster; that location difference remains unresolved. Both listed steals and the Echo Screen uncommon drop are retained; formation-dependent appearance counts are recorded only in the terrain notes."],
+  }, outerContinentChapterId, goblinMageSources),
+  chapterEnemy({
+    id: "enemy.griffin",
+    name: "Griffin",
+    encounterIds: [
+      "encounter.outer-continent.dirt-pool", "encounter.outer-continent.grass-pool",
+      "encounter.outer-continent.marsh-pool", "encounter.outer-continent.forest-pool",
+      "encounter.outer-continent.beach-pool", "encounter.magdalene-forest.outer-forest-pool",
+    ],
+    stats: crossCheckedStats([["level", 16], ["HP", 1470], ["MP", 602], ["EXP", 1858], ["AP", 2], ["Gil", 602]], griffinStatSources),
+    steals: [
+      sourcedLoot("common", "game-item.ore", [enemyListSourceId, "jegged-world-map-griffin"]),
+      sourcedLoot("uncommon", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.peridot", [enemyListSourceId, "jegged-world-map-griffin"]),
+      sourcedLoot("common", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId, "jegged-world-map-griffin"]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "jegged-world-map-griffin"]),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", griffinStatSources),
+      sourcedFact("elemental-weakness", "Wind", griffinStatSources),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", griffinStatSources),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Aera", [enemyListSourceId, "jegged-world-map-griffin"], "GameFAQs calls Aera its main threat and recommends defeating the Griffin before it can do repeated damage."),
+    ],
+    blueMagic: [{ name: "White Wind", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-world-map-griffin", "rpgclassics-outer-continent"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Wind and eat it if White Wind is missing", detail: "Wind exploits the listed weakness. Quina can learn White Wind from Griffin here if it was missed from Zuu in Cleyra's Trunk; Aera is the main danger if the fight lasts." , sourceIds: [...griffinSources, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
+    routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
+    notes: ["Griffin's published stats and table are also used for its Fossil Roo entry. This slice models the Outer Continent terrain and the separate Magdalene Forest world-map pool; Dead Forest's interior encounters are not included."],
+  }, outerContinentChapterId, [...griffinSources, "gamefaqs-cleyra-71891", "jegged-cleyra"]),
+  chapterEnemy({
+    id: "enemy.zaghnol-b",
+    name: "Zaghnol [B] — Outer Continent",
+    encounterIds: [
+      "encounter.outer-continent.dirt-pool", "encounter.outer-continent.grass-pool",
+      "encounter.outer-continent.marsh-pool", "encounter.outer-continent.forest-pool",
+      "encounter.outer-continent.beach-pool", "encounter.magdalene-forest.outer-forest-pool",
+    ],
+    stats: [
+      { field: "level", value: 16, sourceIds: worldMapZaghnolStatSources, verification: "cross-checked" },
+      { field: "HP", value: 1189, sourceIds: worldMapZaghnolStatSources, verification: "cross-checked" },
+      { field: "MP", value: 489, sourceIds: [enemyListSourceId], verification: "disputed" },
+      { field: "MP", value: 499, sourceIds: ["gamefaqs-monster-list-20490", "jegged-world-map-zaghnol"], verification: "disputed" },
+      { field: "EXP", value: 1261, sourceIds: worldMapZaghnolStatSources, verification: "cross-checked" },
+      { field: "AP", value: 2, sourceIds: [enemyListSourceId, "gamefaqs-monster-list-20490"], verification: "disputed" },
+      { field: "AP", value: 3, sourceIds: ["jegged-world-map-zaghnol"], verification: "disputed" },
+      { field: "Gil", value: 546, sourceIds: worldMapZaghnolStatSources, verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.ore", [enemyListSourceId, "jegged-world-map-zaghnol"]),
+      sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId, "jegged-world-map-zaghnol"]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "jegged-world-map-zaghnol"]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.eye-drops", [enemyListSourceId, "jegged-world-map-zaghnol"]),
+      sourcedLoot("uncommon", "game-item.ether", [enemyListSourceId, "jegged-world-map-zaghnol"]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Beast", worldMapZaghnolStatSources),
+      sourcedFact("elemental-weakness", "Water", worldMapZaghnolStatSources),
+      sourcedFact("elemental-resistance", "Lightning (half damage)", worldMapZaghnolStatSources),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Thunder", [enemyListSourceId, "jegged-world-map-zaghnol"], "Can target one character or the party."),
+      sourcedFact("attack", "Heave", ["jegged-world-map-zaghnol"]),
+    ],
+    blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "gamefaqs-monster-list-20490", "jegged-world-map-zaghnol", "rpgclassics-outer-continent"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Water and avoid Lightning", detail: "Water exploits Zaghnol's weakness, while it halves Lightning damage. Quina can learn Matra Magic from this world-map form if it was missed from Dragonfly in Cleyra's Trunk.", sourceIds: [...worldMapZaghnolSources, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
+    routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
+    notes: ["This is the normal world-map Zaghnol [B], not the one-time Festival of the Hunt boss record. The Enemy List gives MP 489/AP 2; Jegged and the older Monster List give MP 499, while AP is printed as 3 by Jegged and 2–3 in the older Monster List."],
+  }, outerContinentChapterId, [...worldMapZaghnolSources, "gamefaqs-cleyra-71891", "jegged-cleyra"]),
+  {
+    id: "enemy.friendly-ladybird",
+    name: "Friendly Ladybird (Ladybug)",
+    kind: "friendly",
+    chapterId: outerContinentChapterId,
+    versionScope: "PlayStation walkthrough data; the Friendly Creature label and name vary by version. Remastered parity has not been audited.",
+    encounterIds: ["encounter.outer-continent.grass-pool", "encounter.outer-continent.forest-pool", "encounter.magdalene-forest.outer-forest-pool"],
+    stats: sourcedStats([["level", 6], ["MP", 267], ["EXP", 0], ["AP", 20], ["Gil", 0]], ["gamefaqs-monster-list-20490"]),
+    steals: [],
+    drops: [],
+    facts: [],
+    blueMagic: [],
+    strategies: [{ title: "Feed 2 Ore for the Friendly Creature reward", detail: "Offer 2 Ore to receive 20 AP and an Ether. This special non-hostile encounter is distinct from the ordinary Ladybird/Ladybug battle table.", sourceIds: outerContinentFriendlySources }],
+    routeObjectiveIds: [outerContinentFriendlyLadybugObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    sourceIds: outerContinentFriendlySources,
+    coverage: "partial",
+    notes: ["The Out1 terrain roster labels this form Ladybird (F). The older Monster List prints no HP, 0 EXP/Gil, and 20 AP; its extra item/card result rows are not mapped to ordinary steal/drop slots because their exact trigger is not established here."],
+  },
+];
+
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
@@ -3476,6 +3774,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...earlyDaliEnemyRecords,
   ...lindblumEnemyRecords,
   ...lindblumAreaEnemyRecords,
+  ...outerContinentEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -3599,8 +3898,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. Its four Blue Magic teachers link to the Outer Continent objective, with White Wind and Matra Magic serving as alternatives if missed in Cleyra. The Dead Forest field area remains outside this terrain table. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

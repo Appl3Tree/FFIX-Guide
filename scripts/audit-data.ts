@@ -1643,6 +1643,55 @@ for (const teacher of cleyraBlueMagicTeachers) {
     errors.push(`Cleyra's ${teacher.skill} teacher must link to the existing Blue Magic objective.`);
   }
 }
+const outerContinentPoolExpectations = [
+  { id: "encounter.outer-continent.dirt-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.cactuar", "enemy.goblin-mage", "enemy.griffin", "enemy.zaghnol-b"] },
+  { id: "encounter.outer-continent.grass-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.goblin-mage", "enemy.griffin", "enemy.friendly-ladybird", "enemy.zaghnol-b"] },
+  { id: "encounter.outer-continent.marsh-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.griffin", "enemy.zaghnol-b"] },
+  { id: "encounter.outer-continent.forest-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.griffin", "enemy.friendly-ladybird", "enemy.zaghnol-b"] },
+  { id: "encounter.outer-continent.beach-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.griffin", "enemy.zaghnol-b"] },
+  { id: "encounter.magdalene-forest.outer-forest-pool", chapterId: "disc-2.magdalene-forest", roster: ["enemy.griffin", "enemy.friendly-ladybird", "enemy.zaghnol-b"] },
+];
+const outerContinentPools = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.outer-continent" || encounter.chapterId === "disc-2.magdalene-forest");
+if (outerContinentPools.length !== outerContinentPoolExpectations.length || outerContinentPoolExpectations.some(({ id, chapterId, roster }) => {
+  const pool = outerContinentPools.find((encounter) => encounter.id === id);
+  return !pool || pool.kind !== "random-pool" || pool.chapterId !== chapterId ||
+    !sameSortedValues(pool.formation.map((member) => member.enemyId), roster) || pool.formation.some((member) => member.quantity !== null) ||
+    !pool.sourceIds.includes("gamefaqs-monster-list-20490");
+})) {
+  errors.push("Outer Continent and Magdalene Forest must retain six source-backed terrain pools without inventing formation counts or encounter odds.");
+}
+const outerContinentBlueMagicTeachers = [
+  { enemyId: "enemy.cactuar", skill: "1,000 Needles" },
+  { enemyId: "enemy.goblin-mage", skill: "Goblin Punch" },
+  { enemyId: "enemy.griffin", skill: "White Wind" },
+  { enemyId: "enemy.zaghnol-b", skill: "Matra Magic" },
+];
+for (const teacher of outerContinentBlueMagicTeachers) {
+  const record = enemyRecords.find((enemy) => enemy.id === teacher.enemyId);
+  if (!record?.blueMagic.some((skill) => skill.name === teacher.skill && skill.objectiveIds.includes("disc-2.outer-continent.blue-magic")) ||
+    !record.routeObjectiveIds.includes("disc-2.outer-continent.blue-magic")) {
+    errors.push(`Outer Continent ${teacher.skill} teacher must link to its existing Blue Magic objective.`);
+  }
+}
+const outerCactuar = enemyRecords.find((enemy) => enemy.id === "enemy.cactuar");
+const outerGoblinMage = enemyRecords.find((enemy) => enemy.id === "enemy.goblin-mage");
+const outerZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-b");
+const hasDisputedStatValues = (record: typeof outerCactuar, field: string, values: number[]) => values.every((value) => record?.stats.some((stat) => stat.field === field && stat.value === value && stat.verification === "disputed"));
+if (!hasDisputedStatValues(outerCactuar, "level", [1, 30]) || !hasDisputedStatValues(outerCactuar, "AP", [2, 3]) ||
+  !hasDisputedStatValues(outerGoblinMage, "AP", [0, 1, 2]) || !hasDisputedStatValues(outerZaghnol, "MP", [489, 499]) || !hasDisputedStatValues(outerZaghnol, "AP", [2, 3])) {
+  errors.push("Outer Continent Cactuar, Goblin Mage, and Zaghnol stat disagreements must remain separate disputed claims.");
+}
+const friendlyLadybird = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-ladybird");
+if (!friendlyLadybird || friendlyLadybird.kind !== "friendly" || friendlyLadybird.stats.some((stat) => stat.field === "HP") ||
+  !friendlyLadybird.stats.some((stat) => stat.field === "AP" && stat.value === 20) || friendlyLadybird.steals.length !== 0 || friendlyLadybird.drops.length !== 0 ||
+  !friendlyLadybird.routeObjectiveIds.includes("disc-2.outer-continent.friendly-ladybug") ||
+  outerContinentPools.some((pool) => pool.formation.some((member) => member.enemyId === "enemy.ladybird"))) {
+  errors.push("Friendly Ladybird must remain a separate non-hostile record and must not inherit ordinary Ladybird combat loot or stats.");
+}
+const huntZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
+if (outerZaghnol?.encounterIds.includes("encounter.lindblum.festival-zaghnol") || huntZaghnol?.encounterIds.some((encounterId) => encounterId.startsWith("encounter.outer-continent."))) {
+  errors.push("The world-map Zaghnol [B] and Festival of the Hunt Zaghnol must remain separate variants.");
+}
 const cleyraSoldier = enemyRecords.find((enemy) => enemy.id === "enemy.soldier-a");
 const cleyraReturnIds = [
   "encounter.cleyra-trunk.return.whirlpool-soldiers",
