@@ -1001,7 +1001,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lindblum-after-festival-shops",
         title: "After the Festival — party split, equipment, and Javelin",
         summary: "Once the story reveals the next destination, restock and prepare the party before taking the lift to Base Level.",
-        sourceIds: ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamefaqs-missables-71891", "gamefaqs-missables-21725"],
+        sourceIds: ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke", "elitegrindlab-lindblum"],
         steps: [
           {
             id: "lindblum-post-hunt-party",
@@ -1012,7 +1012,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lindblum-shop-synthesis-javelin",
             kind: "optional",
-            text: "Use the Air Cab to revisit the Business District shops. Buy the Javelin while Dragoo still stocks it, and fill any gaps in healing items and equipment; later in the story the shop stock changes. The Synthesis Shop offers current upgrades, including The Ogre if you have the two Mage Mashers and 700 Gil, and Cotton Robes if you want the optional money trick.",
+            text: "Before entering Gizamaluke's Grotto, use the Air Cab to revisit the Business District shops and buy the Javelin at Dragoo's if you want the extra copy. This is the conservative safe purchase checkpoint: sources disagree about whether Lindblum's district/trolley lockout begins on Grotto entry or after completing it, and no source confirms a safe later return to Dragoo's. Fill any gaps in healing items and equipment; the Synthesis Shop offers The Ogre if you have two Mage Mashers and 700 Gil, plus Cotton Robes for the optional money trick.",
             detail: "One Javelin is already Freya's starting weapon, and a later chest supplies another; the Lindblum purchase is a convenient additional copy for collection/synthesis planning. Do not replace the Mythril Dagger before Zidane has learned Bandit.",
             objectiveIds: ["disc-1.lindblum.javelin-purchase"],
           },
@@ -1127,7 +1127,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "explore-lindblum-kingdom-exit",
             kind: "required",
             text: "When the optional sweep is done, return to Lindblum's Dragon's Gate and follow the north road toward Gizamaluke's Grotto. The next chapter covers the journey to Burmecia and the route through the grotto.",
-            detail: "The detours above do not close when you walk away from Lindblum. The trolley and city districts remain available until you enter Gizamaluke's Grotto, so you can still backtrack for unfinished city shopping before that cutoff. This chapter is a route checklist, not a claim that the wider Blue Magic or Chocobo sidequests are complete.",
+            detail: "The detours above do not close when you walk away from Lindblum. Before entering Gizamaluke's Grotto is the conservative last checkpoint for unfinished city visits: Gamer Guides and EliteGrindLab place the lockout at entry, while GameFAQs' route also describes the trolley cutoff after Grotto completion. This chapter is a route checklist, not a claim that the wider Blue Magic or Chocobo sidequests are complete.",
           },
         ],
       },
@@ -1147,8 +1147,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "journey-before-enter-grotto-lindblum-cutoff",
             kind: "cutoff",
-            text: "Before entering Gizamaluke's Grotto, finish any remaining Lindblum castle or district visits, first-visit ATEs, Key Items, Mognet letters, and shopping. Entry stops the trolley and closes the three districts for a stretch of the story; the Dragon's Gate stays open with a basic item shop. If anything remains, backtrack to Dragon's Gate and use the trolley before you cross the Grotto threshold.",
-            detail: "GameFAQs, Gamer Guides, GameRevolution, and EliteGrindLab explicitly place the trolley/district lockout at entry. GameFAQs' later wording about the trolley being unavailable after the Grotto does not contradict its earlier warning that Lindblum access is lost as soon as you enter. First-visit permanent windows are listed separately in the Lindblum chapter; the exact later trolley/district reopening remains unverified.",
+            text: "Before entering Gizamaluke's Grotto, finish any remaining Lindblum castle or district visits, first-visit ATEs, Key Items, Mognet letters, and shopping. Use this as the conservative checkpoint: some sources place the trolley/district lockout at entry, while GameFAQs' route also describes it after Grotto completion. If anything remains, backtrack to Dragon's Gate and use the trolley before you cross the threshold.",
+            detail: "Gamer Guides, GameRevolution, and EliteGrindLab place the district lockout at entry. GameFAQs' route says the Dragon's Gate remains open until the Grotto is completed and then the trolley cannot return the party to Lindblum, while also warning that city access is lost for some time on entry. Keep the pre-entry recommendation conservative until direct gameplay resolves the wording. First-visit permanent windows are listed separately in the Lindblum chapter; later trolley/district reopening remains unverified.",
             objectiveIds: ["disc-1.exploring-lindblum-kingdom.before-grotto-check"],
           },
           {

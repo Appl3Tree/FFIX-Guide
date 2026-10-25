@@ -109,13 +109,15 @@ const lindblumTrolleyStep = walkthroughChapters
   .find((step) => step.id === "journey-before-enter-grotto-lindblum-cutoff");
 if (
   !lindblumTrolleyWarning?.deadline.includes("Before entering Gizamaluke's Grotto") ||
-  !lindblumTrolleyWarning.note?.includes("explicitly place the trolley/district lockout at Grotto entry") ||
+  !lindblumTrolleyWarning.note?.includes("Keep the pre-entry checkpoint conservative") ||
+  !lindblumTrolleyWarning.note.includes("GameFAQs' route says the Dragon's Gate remains open until the Grotto is completed") ||
   !["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumTrolleyWarning.sourceIds.includes(sourceId)) ||
-  lindblumTrolleyCutoff?.certainty !== "source-supported" ||
-  !lindblumTrolleyCutoff.trigger.includes("Entering Gizamaluke's Grotto stops the trolley") ||
-  !lindblumTrolleyStep?.detail.includes("explicitly place the trolley/district lockout at entry")
+  lindblumTrolleyCutoff?.certainty !== "disputed" ||
+  !lindblumTrolleyCutoff.trigger.includes("Use entry to Gizamaluke's Grotto as the conservative last checkpoint") ||
+  !lindblumTrolleyCutoff.trigger.includes("GameFAQs' route says the Dragon's Gate remains open until Grotto completion") ||
+  !lindblumTrolleyStep?.detail.includes("GameFAQs' route says the Dragon's Gate remains open until the Grotto is completed")
 ) {
-  errors.push("Lindblum's trolley cutoff must use the source-supported Grotto-entry trigger and retain its four walkthrough sources.");
+  errors.push("Lindblum's trolley cutoff must preserve the conservative pre-entry checkpoint and the conflicting entry/completion timing sources.");
 }
 
 const lindblumKeyItemsWarning = missablesById.get("missable.disc-1.lindblum.autograph-moogle-suit");
@@ -163,20 +165,31 @@ if (
 }
 
 const lindblumJavelinWarning = missablesById.get("missable.disc-1.lindblum.javelin-shop");
+const lindblumJavelinObjective = objectivesById.get("disc-1.lindblum.javelin-purchase");
+const lindblumJavelinWalkthroughSection = walkthroughChapters
+  .flatMap((chapter) => chapter.sections)
+  .find((section) => section.id === "lindblum-after-festival-shops");
+const lindblumJavelinWalkthroughStep = lindblumJavelinWalkthroughSection?.steps.find((step) => step.id === "lindblum-shop-synthesis-javelin");
 if (
   lindblumJavelinWarning?.verification !== "partial" ||
-  !lindblumJavelinWarning.deadline.includes("during the first Lindblum visit") ||
-  !lindblumJavelinWarning.note?.includes("GameFAQs sources differ") ||
-  !lindblumJavelinWarning.note.includes("no reviewed route confirms that the player can reach this shop again") ||
+  !lindblumJavelinWarning.deadline.includes("before entering Gizamaluke's Grotto") ||
+  !lindblumJavelinWarning.note?.includes("the exact last reachable sale moment remains unresolved") ||
+  !lindblumJavelinWarning.note.includes("until the Grotto is complete") ||
+  !lindblumJavelinWarning.note.includes("describe the city-district lockout at entry") ||
+  !lindblumJavelinWarning.note.includes("Disc II Lindblum weapon stock omits Javelin") ||
   !lindblumJavelinWarning.recovery.includes("Freya's starting Javelin") ||
   !lindblumJavelinWarning.recovery.includes("Ipsen's Castle copy") ||
   lindblumDepartureCutoff?.missableIds.length !== 1 ||
   !lindblumDepartureCutoff?.missableIds.includes("missable.disc-1.lindblum.javelin-shop") ||
+  !lindblumDepartureCutoff.trigger.includes("before entering Gizamaluke's Grotto") ||
   lindblumAteCutoff?.missableIds.includes("missable.disc-1.lindblum.javelin-shop") ||
-  !["gamefaqs-lindblum-71891", "gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-items-71891", "gamefaqs-shops-71891"].every((sourceId) => lindblumJavelinWarning.sourceIds.includes(sourceId)) ||
-  !["gamefaqs-items-71891", "gamefaqs-shops-71891"].every((sourceId) => lindblumDepartureCutoff.sourceIds.includes(sourceId))
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumJavelinObjective?.sourceIds.includes(sourceId)) ||
+  !lindblumJavelinWalkthroughStep?.text.includes("Before entering Gizamaluke's Grotto") ||
+  !lindblumJavelinWalkthroughSection?.sourceIds.includes("elitegrindlab-gizamaluke") ||
+  !["gamefaqs-lindblum-71891", "gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke", "elitegrindlab-lindblum"].every((sourceId) => lindblumJavelinWarning.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumDepartureCutoff.sourceIds.includes(sourceId))
 ) {
-  errors.push("Lindblum's Javelin purchase must retain its conservative first-visit recommendation, partial timing status, later-copy recovery, and conflicting GameFAQs shop boundaries.");
+  errors.push("Lindblum's Javelin warning, objective, and walkthrough must retain the conservative pre-Grotto purchase, conflicting lockout timing, Disc II stock evidence, source provenance, partial status, and later-copy recovery.");
 }
 
 const trenoAteWarning = missablesById.get("missable.disc-2.treno.ates");

@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest B01 route update gives Lindblum Javelin a conservative pre-Grotto purchase checkpoint and records the entry-versus-completion disagreement over trolley access. The source evidence, objective, warning, route cutoff, and walkthrough are linked; no GitHub, Firebase, deployment, or live sign-in action is needed. Lint, typecheck, data audit, production build, and whitespace checks pass with 0 audit errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 354 sources; all 138 warnings map to 98 cutoff windows. Bundle: 1,951.90 kB JavaScript (476.82 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite's chunk-size advisory remains. Tests and direct browser, game, and release verification were not run.
+
 No account-owner setup action changed. The latest B01 slice separates Cleyra's post-Antlion Freya pickups from the later Trunk chest-recovery checkpoint and records the Stiltzkin source conflict: a later RPGClassics encounter does not confirm that the bundle remains purchasable, so the Freya phase stays the safe checkpoint. Lint, typecheck, audit, build, and whitespace checks pass; tests and direct browser, game, and release verification were not run.
 
 No account-owner setup action changed. The latest B01 follow-up adds GameFAQs' alternate Treno ATE fallback evidence and preserves the separate, unverified tower-return report. The source-linked route, lint, typecheck, data audit, build, and whitespace checks pass. Tests and direct browser, game, and release verification were not run.
