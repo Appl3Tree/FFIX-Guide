@@ -3316,6 +3316,22 @@ if ([...expectedMoonstoneAbilities].some((ability) => !moonstoneAbilities.has(ab
 if (moonstoneAbilities.size !== expectedMoonstoneAbilities.size) {
   errors.push("Moonstone must have exactly two sourced ability claims.");
 }
+const overTheMoonObjectives = [
+  "disc-1.alexandria.swordfight.moonstone-1",
+  "disc-2.conde-petie-mountain-path.moonstone",
+  "disc-3.forgotten-continent.jabberwock",
+  "disc-4.return-to-gaia.stiltzkin-eighth-bundle",
+];
+const overTheMoonRecords = achievementCatalogs.flatMap(({ records }) => records).filter((achievement) => achievement.id === "over-the-moon");
+if (overTheMoonRecords.length !== 3 || overTheMoonRecords.some((achievement) =>
+  JSON.stringify(achievement.guideObjectiveIds) !== JSON.stringify(overTheMoonObjectives) ||
+  achievement.guideObjectiveIds?.includes("disc-3.lost-continent.feather-circle") ||
+  !achievement.guideNote?.includes("Friendly Feather Circle is a separate request that consumes a Moonstone") ||
+  !achievement.guideSourceIds?.includes("playstationtrophies-over-the-moon") ||
+  !achievement.guideSourceIds.includes("gamefaqs-chocobo-hot-cold-ysf-9771")
+)) {
+  errors.push("Over the Moon must map the four actual Moonstone sources and distinguish Feather Circle's Moonstone cost.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }
