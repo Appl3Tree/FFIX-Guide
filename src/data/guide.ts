@@ -1783,7 +1783,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/madain-sari/",
     accessed: "2026-10-23",
-    notes: "Completionist audit for first-visit versus return-visit items, the Eidolon Wall, absence of a village save moogle/Mognet/Stiltzkin, and the uncertain second-visit refresh of first-visit pickups. It distinguishes Disc IV wall text from the current story scene.",
+    notes: "Completionist audit for first-visit versus return-visit items, the Eidolon Wall, absence of a village save moogle/Mognet/Stiltzkin, and the uncertain second-visit refresh of first-visit pickups generally. Its route places the hidden Survival Vest and Phoenix Down room on the return after the Iifa Tree; uncertainty about other pickups does not apply to this chest. It distinguishes Disc IV wall text from the current story scene.",
   },
   {
     id: "gamefaqs-return-to-madain-sari-71891",
@@ -1791,7 +1791,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-madain-sari",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the post-Iifa return, Survival Vest/Phoenix Down chests, Eidolon Wall rewards and healing, Scarlet Hair, Memory Earring, Amarant recruitment, first party selection, and the return to Iifa Tree. Scarlet Hair's published HP conflicts with other references, so the chapter does not print it.",
+    notes: "Original PlayStation route for the Disc II return after Iifa Tree; it says to open the room by the fishing area after the scene for the Survival Vest/Phoenix Down chests, then records Eidolon Wall rewards/healing, Scarlet Hair, Memory Earring, Amarant recruitment, first party selection, and the return to Iifa Tree. Scarlet Hair's published HP conflicts with other references, so the chapter does not print it.",
   },
   {
     id: "jegged-return-to-madain-sari",
@@ -1799,7 +1799,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/24-Madain-Sari.html",
     accessed: "2026-10-24",
-    notes: "Independent return-route cross-check for the hidden room, Eidolon Wall rewards, Zidane-only Scarlet Hair fight, Memory Earring, Amarant, party selection, and Morrison's Poison Knuckles shop. Its 8,985-HP figure differs from GameFAQs and is not repeated in the guide.",
+    notes: "Explicitly labels this the second Madain Sari visit after returning from Iifa Tree and places the Survival Vest in the Secret Room under Eiko's kitchen. Cross-checks Eidolon Wall rewards, Zidane-only Scarlet Hair fight, Memory Earring, Amarant, party selection, and Morrison's Poison Knuckles shop. Its 8,985-HP figure differs from GameFAQs and is not repeated in the guide.",
   },
   {
     id: "gamerguides-revisiting-madain-sari",
@@ -1807,7 +1807,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-2/revisiting-madain-sari",
     accessed: "2026-10-23",
-    notes: "Independent route cross-check for the Mountain Path exit, Zidane preparation, hidden-room chests, Eidolon Wall healing/rewards, Scarlet Hair's movement and attack cue, Memory Earring, first party choice, and Amarant preparation.",
+    notes: "Independent route cross-check for the post-Iifa return over the Mountain Path and hidden-doorway chests in Eiko's house, including the Survival Vest and Phoenix Down. Also covers Zidane preparation, Eidolon Wall healing/rewards, Scarlet Hair's movement and attack cue, Memory Earring, first party choice, and Amarant preparation.",
   },
   {
     id: "rpgclassics-bounty-hunters",
@@ -7169,10 +7169,10 @@ export const missables: MissableRecord[] = [
     warningChapterIds: ["disc-2.journey-to-outer-continent"],
     consequence: "The final Gargant ride closes Fossil Roo's interior route, so the original Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest copies cannot be collected there afterward. The item catalog now records later replacements: Elixir from Oeilvert's Stiltzkin bundle and Ark, Fairy Earrings from the Desert Palace chest, Treno Auction, or synthesis, Ether from later routes including Mount Gulug, Lamia's Tiara from later shops, and Survival Vest from Madain Sari, Beatrix, or later shops. The Stiltzkin bundle supplies a separate Ether, and Lani has an Ether steal; these item paths do not reopen the Fossil Roo pickups.",
     deadline: "Before flipping the No. 3 switch and taking the final Gargant out of Fossil Roo.",
-    nextAvailability: "The original area does not reopen. Later sources exist for every listed item type in the reviewed PlayStation catalogs; the Survival Vest chest's exact Fossil Roo room and the timing of its extra Madain Sari copy remain disputed.",
+    nextAvailability: "The original area does not reopen. Later sources exist for every listed item type in the reviewed PlayStation catalogs. Fossil Roo guides use different room labels for the Survival Vest but describe the exit-side storage/woodpile route; the separate Madain Sari chest is confirmed on the Disc II return after the Iifa Tree. Treasure-rank effects remain unverified.",
     action: "After Lani retreats, backtrack to the Armodullahan alcove for the Elixir. Collect the Fairy Earrings, Ether chest, and Lamia's Tiara along the Gargant branches, then sweep the lower route around the Nest and mining screens for the Survival Vest by the woodpile near the exit. Buy Stiltzkin's 555-Gil bundle separately for its second Ether, Remedy, and Phoenix Pinion; finish the mining and Mognet goals before the exit ride.",
     recovery: "Fossil Roo's individual chests cannot be recovered after the final ride, but missing one does not by itself prove that an item type is lost. Use the linked item paths for later purchases, synthesis, auction, or encounter sources. If the goal is the original Fossil Roo treasure sweep, only the pre-exit save can complete that location-specific objective.",
-    note: "GameFAQs, Jegged, Gamer Guides, and RPGClassics agree that the exit Gargant is one-way and document the Elixir, Fairy Earrings, Ether chest, and Lamia's Tiara. The Survival Vest item is corroborated, but guides disagree about its room. The item and synthesis references provide later sources for all five types; treasure-rank effects remain outside this specific audit.",
+    note: "GameFAQs, Jegged, Gamer Guides, and RPGClassics agree that the exit Gargant is one-way and document the Elixir, Fairy Earrings, Ether chest, and Lamia's Tiara. Fossil Roo Survival Vest descriptions use different room labels, but the route landmarks converge on the exit-side storage/woodpile area. The separate Madain Sari Survival Vest is explicitly on the Disc II return after the Iifa Tree. The item and synthesis references provide later sources for all five types; treasure-rank effects remain outside this specific audit.",
     sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-treno-auction-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "rpgclassics-armor", "rpgclassics-addons", "rpgclassics-synthesis", "elitegrindlab-fossil-roo", "elitegrindlab-madain-sari"],
     verification: "partial",
     severity: "high",

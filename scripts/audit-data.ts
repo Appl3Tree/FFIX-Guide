@@ -630,6 +630,28 @@ for (const expected of expectedFossilRooRecoveryPaths) {
     errors.push(`Fossil Roo's location-copy warning needs later recovery path ${expected.id}.`);
   }
 }
+const madainSariSurvivalVestPathId = "item-path.disc-3.on-the-high-seas.survival-vest-madain-sari-pickup";
+const madainSariSurvivalVestPath = itemAcquisitionPaths.find((path) => path.id === madainSariSurvivalVestPathId);
+const madainSariHiddenRoomObjectiveId = "disc-2.return-to-madain-sari.hidden-room";
+if (
+  !madainSariSurvivalVestPath ||
+  madainSariSurvivalVestPath.itemId !== "game-item.survival-vest" ||
+  madainSariSurvivalVestPath.chapterId !== "disc-2.return-to-madain-sari" ||
+  madainSariSurvivalVestPath.method !== "hidden-pickup" ||
+  madainSariSurvivalVestPath.availability !== "single-use" ||
+  !madainSariSurvivalVestPath.walkthroughObjectiveIds?.includes(madainSariHiddenRoomObjectiveId) ||
+  !itemCatalogCoverage.chapterIds.includes("disc-2.return-to-madain-sari")
+) {
+  errors.push("The Madain Sari Survival Vest pickup must be filed on the Disc II post-Iifa return and linked to its hidden-room objective.");
+}
+if (!madainSariSurvivalVestPath?.conditions.toLowerCase().includes("after the story returns to madain sari from the iifa tree")) {
+  errors.push("The Madain Sari Survival Vest path must preserve its source-verified post-Iifa timing.");
+}
+for (const sourceId of ["gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "gamerguides-revisiting-madain-sari"]) {
+  if (!madainSariSurvivalVestPath?.sourceIds.includes(sourceId)) {
+    errors.push(`The post-Iifa Madain Sari Survival Vest path needs source ${sourceId}.`);
+  }
+}
 const fossilRooTreasureWarning = missables.find((record) => record.id === "missable.disc-2.journey-to-outer-continent.treasure-sweep");
 if (
   !fossilRooTreasureWarning?.classification.includes("missable-opportunity") ||
