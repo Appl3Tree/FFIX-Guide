@@ -977,10 +977,10 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       ...sourcedStats([["MP", 3380], ["EXP", 0], ["AP", 10], ["Gil", 17376]], ["gamefaqs-memoria-71891"]),
     ],
     steals: [
-      memoriaLoot("common", null, "Genji Helmet"),
+      memoriaLoot("common", "game-item.genji-helmet"),
       memoriaLoot("uncommon", "game-item.wizard-rod"),
       memoriaLoot("semi-rare", null, "Nothing"),
-      memoriaLoot("rare", null, "Glutton's Robe"),
+      memoriaLoot("rare", "game-item.gluttons-robe"),
     ],
     drops: [
       memoriaLoot("always", "game-item.phoenix-pinion"),
@@ -1007,7 +1007,7 @@ const memoriaEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: ["disc-4.memoria.kraken-steals"],
     notes: [
       "HP claims conflict: GameFAQs lists 55,536 while Jegged lists 59,496. Both are retained pending direct game verification.",
-      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Glutton's Robe Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops. Tentacle HP and right-side steal claims conflict across the GameFAQs walkthrough, its older monster list, and RPGClassics; the component dossiers preserve those claims separately.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. The GameFAQs item reference calls Genji Helmet Genji Helm, while the walkthroughs use Genji Helmet. Jegged labels Glutton's Robe Very Rare and gives percentages for the conditional Phoenix Down, Ether, and Elixir drops. Tentacle HP and right-side steal claims conflict across the GameFAQs walkthrough, its older monster list, and RPGClassics; the component dossiers preserve those claims separately.",
     ],
   }, "missable.disc-4.memoria.kraken-steals", "cutoff.memoria.kraken-steals", [...memoriaEnemySources, "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"]),
   memoriaComponent({
