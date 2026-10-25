@@ -726,8 +726,8 @@ export const sources = [
     title: "Movie Critic — ATE guide",
     publisher: "Gamer Guides",
     url: "https://earth.gamerguides.com/final-fantasy-ix/guide/trophies-achievements/guide/movie-critic-guide",
-    accessed: "2026-10-23",
-    notes: "Cross-checks first-visit ATE routes in Conde Petie, Black Mage Village, and Madain Sari; some town screens close earlier prompts. The total is verified at 79 of 80 eligible scenes; Madain's exact early ordering and the full global trigger route remain under review.",
+    accessed: "2026-10-24",
+    notes: "Cross-checks first-visit ATE routes in Conde Petie, Black Mage Village, and Madain Sari; some town screens close earlier prompts. It gives the Pandemonium Lift/Elevator trigger as Heading 0, try all three blocked ledges, Heading 2, repeat, return to the controls, then re-enter the lift room and view the event. The total is 79 of 80 eligible scenes; Madain's exact early ordering and other global trigger conditions remain under review.",
   },
   {
     id: "jegged-fossil-roo",

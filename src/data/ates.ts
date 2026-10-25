@@ -141,7 +141,18 @@ const events: ActiveTimeEvent[] = [
   scene("bran-bal-where-the-heart-is", "Where The Heart Is", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — pond", "Leave the Inn, then view the prompt outside.", { sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
   scene("bran-bal-came-into-this-world", "Came Into This World", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — screen east of the Inn", "Move one screen right/east of the Inn and view the prompt.", { note: "GameFAQs titles this ATE 'Came Into the World'; Jegged and RPGClassics use 'Came Into This World.'", sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
   scene("bran-bal-the-truth", "The Truth", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.bran-bal-ates", "Bran Bal — northern Meeting Hall", "After viewing the first three Bran Bal ATEs, enter the northern Meeting Hall.", { prerequisites: ["ate.bran-bal-place-to-call-home", "ate.bran-bal-where-the-heart-is", "ate.bran-bal-came-into-this-world"], sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "rpgclassics-bran-bal"] }),
-  scene("pandemonium-the-lift", "The Lift — Both Groups Work Together", "disc-3.portal-to-another-world", "disc-3.portal-to-another-world.elevator-ate", "Pandemonium — elevator", "Set the elevator heading to 0, check the three blocked entrances, change it to 2, check them again, then return to the elevator room."),
+  scene(
+    "pandemonium-the-lift",
+    "The Lift — Both Groups Work Together",
+    "disc-3.portal-to-another-world",
+    "disc-3.portal-to-another-world.elevator-ate",
+    "Pandemonium — elevator-control room and lift room",
+    "At the controls, set Standard Heading to 0. Enter the lift room and try each of its three accessible boarding ledges; the force field blocks all three. Return to the controls, set Heading to 2, and try all three ledges again. Go back to the controls for the scene, then return to the lift room and view The Lift ATE.",
+    {
+      note: "Gamer Guides gives the explicit 0 → three blocked ledges → 2 → repeat → return to controls → re-enter lift room sequence. Jegged and RPGClassics describe repeated elevator attempts more generally; GameFAQs lists the event without the same step-by-step trigger. Verify the prompt on the active version before advancing. Some achievement guides call this event The Elevator.",
+      sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium"],
+    },
+  ),
 ];
 
 export const activeTimeEvents = events;
