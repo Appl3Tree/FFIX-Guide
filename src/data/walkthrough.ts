@@ -2439,7 +2439,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Terrain determines which Outer Continent encounters can appear: dirt at Donna Plains, Dyshnose Shores, Gegalrich Shores, and Kognish Shores has Cactuar, Goblin Mage, Griffin, and Zaghnol; grass at Donna Plains and Gegalrich Shores, plus world-map forests, can also include Friendly Ladybird; beaches and Donna Plains marshes list Griffin and Zaghnol. If Quina is missing a spell, Eat a weakened Goblin Mage for Goblin Punch, Cactuar for 1,000 Needles, Griffin for White Wind, or Zaghnol for Matra Magic.",
             detail: "The terrain guide records possible formation rosters, not encounter odds or a claim that every listed enemy appears together. White Wind and Matra Magic are also available earlier from Zuu and Dragonfly in Cleyra's Trunk. Enemy references disagree on Cactuar's level (1 or 30) and AP, Goblin Mage AP (0 or 1/2), and Zaghnol's MP/AP; the bestiary keeps those claims separate. Ragtime Mouse may still appear in forests; its quiz sequence and reward checklist are not yet authored here.",
-            objectiveIds: ["disc-2.outer-continent.blue-magic"],
+            objectiveIds: ["disc-2.outer-continent.blue-magic", "disc-3.forgotten-continent.blue-magic-recovery"],
           },
           {
             id: "outer-continent-qu-marsh-blue-magic",
@@ -4360,7 +4360,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "forgotten-continent-landing",
         title: "Blairsurpass Plains — land and choose a route",
         summary: "The Hilda Garde can serve as a basic item shop. The northern side of the landing area leads to Qu's Marsh and Chocobo tracks; Oeilvert is south across the continent.",
-        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-desert-palace", "gamefaqs-frog-catching-71891", "gamefaqs-qus-marsh-60521", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "rpgclassics-disc-3-walkthrough"],
+        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-desert-palace", "gamefaqs-frog-catching-71891", "gamefaqs-qus-marsh-60521", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "rpgclassics-disc-3-walkthrough"],
         steps: [
           {
             id: "forgotten-continent-hilda-garde-shop",
@@ -4371,14 +4371,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "forgotten-continent-encounters",
             kind: "optional",
-            text: "Expect world-map encounters while crossing the continent. Keep the party ready for local enemies and use normal attacks and abilities; reserve spells for the other team.",
-            detail: "The encounter lists differ: GameFAQs lists Armstrong, Cactuar, Catoblepas, and Jabberwock here, while Jegged's Desert Palace page lists Adamantoise, Armstrong, and Jabberwock. This route does not treat either list as a complete, version-independent bestiary.",
+            text: "Check the local encounter roster by terrain. If Quina is in the party, use Eat to learn any missing Limit Glove, Matra Magic, or 1,000 Needles; learn Earth Shake from Adamantoise if it is still missing.",
+            detail: "The older GameFAQs Monster List gives separate Blairsurpass Plains and Seaways Canyon terrain tables, including Armstrong, Cactuar, Catoblepas, and hostile Jabberwock; it places Adamantoise in the Blairsurpass overworld marsh and Seaways Canyon's Sunrise-labeled dirt. The newer GameFAQs walkthrough lists four local enemies and Jegged's Desert Palace page lists three, so those shorter summaries are not treated as complete terrain rosters. The Friendly Jabberwock is a separate non-hostile Emerald exchange, not the ordinary Jabberwock battle. No encounter rates are inferred.",
+            objectiveIds: ["disc-3.forgotten-continent.blue-magic-recovery"],
           },
           {
             id: "forgotten-continent-earth-shake",
             kind: "optional",
-            text: "If Quina is in Zidane's party and still needs Earth Shake, look for an Adamantoise encounter and use Eat when the enemy is weak enough.",
-            detail: "Jegged lists Adamantoise on the Forgotten Continent and identifies it as an Earth Shake source. GameFAQs's field-enemy table differs, so this is a conditional Blue Magic chance, not a guaranteed formation.",
+            text: "If Quina is in Zidane's party and still needs Earth Shake, look for Adamantoise in the overworld marsh outside Qu's Marsh, or in Seaways Canyon's Sunrise-labeled dirt encounter pool, and use Eat when it is weak enough.",
+            detail: "The older GameFAQs Monster List lists Adamantoise in both Forgotten Continent terrain tables; Jegged also includes it in its area list. The newer GameFAQs walkthrough does not list it, so this remains a source-backed opportunity rather than a guaranteed formation. Quina must be in the active party.",
             objectiveIds: ["disc-3.forgotten-continent.earth-shake"],
           },
           {
@@ -4427,7 +4428,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "forgotten-continent-jabberwock",
             kind: "optional",
             text: "In a forest within Seaways Canyon, find Friendly Jabberwock and give it an Emerald for 40 AP and a Moonstone.",
-            detail: "You can delay this AP reward until it will help the characters you plan to use. The item is consumed; Stiltzkin's Oeilvert bundle later includes an Emerald, but only if you buy that bundle.",
+            detail: "The Friendly Jabberwock is the special forest encounter marked Jabberwock (F) in the terrain table. It is a separate, non-hostile Emerald exchange, not the ordinary hostile Jabberwock found in dirt encounters. You can delay the 40 AP reward until it will help the characters you plan to use; the Emerald is consumed, and Stiltzkin's Oeilvert bundle later includes one if you buy it.",
             objectiveIds: ["disc-3.forgotten-continent.jabberwock"],
           },
         ],

@@ -114,6 +114,7 @@ const fossilRooBlueMagicObjectiveId = "disc-2.journey-to-outer-continent.blue-ma
 const lostContinentBlueMagicObjectiveId = "disc-3.on-the-high-seas.blue-magic";
 const lanarMarshChapterId = "disc-3.on-the-high-seas";
 const forgottenContinentChapterId = "disc-3.forgotten-continent";
+const forgottenContinentBlueMagicRecoveryObjectiveId = "disc-3.forgotten-continent.blue-magic-recovery";
 const friendlyFeatherCircleObjectiveId = "disc-3.lost-continent.feather-circle";
 const nightBlueMagicObjectiveId = "disc-1.journey-to-burmecia.blue-magic-night";
 const outerContinentFriendlyLadybugObjectiveId = "disc-2.outer-continent.friendly-ladybug";
@@ -122,6 +123,9 @@ const hilgigarsStealsObjectiveId = "disc-2.conde-petie-mountain-path.hilgigars-s
 const hilgigarsStealsMissableId = "missable.disc-2.conde-petie-mountain-path.hilgigars-steals";
 const hilgigarsStealsCutoffId = "cutoff.conde-petie.hilgigars-steals";
 const outerContinentEncounterSources = ["gamefaqs-monster-list-20490"];
+const forgottenContinentEncounterSources = ["gamefaqs-monster-list-20490"];
+const forgottenContinentEnemySources = [enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-forgotten-continent-71891", "jegged-desert-palace", "gamefaqs-abilities-71891"];
+const forgottenContinentFriendlyJabberwockSources = ["gamefaqs-monster-list-20490", "gamefaqs-friendly-creatures-71891", "gamefaqs-forgotten-continent-71891", "jegged-friendly-monsters"];
 const deadForestEncounterSources = ["gamefaqs-magdalene-forest-71891", enemyListSourceId];
 const deadForestEnemySources = [enemyListSourceId, "gamefaqs-magdalene-forest-71891", "gamefaqs-abilities-71891"];
 const mountainPathEnemySources = [enemyListSourceId, "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-abilities-71891"];
@@ -1257,6 +1261,182 @@ const outerContinentEncounters: EnemyEncounter[] = [
   },
 ];
 
+const forgottenContinentFieldEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.forgotten-continent.blairsurpass-dirt-pool",
+    title: "Blairsurpass Plains — dirt terrain encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Dirt terrain on Blairsurpass Plains",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.cactuar", quantity: null },
+      { enemyId: "enemy.catoblepas", quantity: null },
+      { enemyId: "enemy.jabberwock", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List gives separate dirt formations with one Armstrong, three or four Cactuars, one Catoblepas, or two ordinary Jabberwocks. This records species membership without inventing encounter rates; its formation counts are retained here as source notes."],
+  },
+  {
+    id: "encounter.forgotten-continent.blairsurpass-mountain-pool",
+    title: "Blairsurpass Plains — mountain terrain encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Mountain terrain on Blairsurpass Plains",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.catoblepas", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List reports one Armstrong or one Catoblepas in this terrain table. Exact encounter odds are not listed."],
+  },
+  {
+    id: "encounter.forgotten-continent.blairsurpass-grass-pool",
+    title: "Blairsurpass Plains — grass terrain encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Grass terrain on Blairsurpass Plains",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.armstrong", quantity: null }],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List reports a single Armstrong formation in this terrain table. Exact encounter odds are not listed."],
+  },
+  {
+    id: "encounter.forgotten-continent.blairsurpass-forest-pool",
+    title: "Blairsurpass Plains — forest encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Forest terrain on Blairsurpass Plains",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.friendly-jabberwock", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId, "disc-3.forgotten-continent.jabberwock"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The terrain table names one Armstrong and Jabberwock (F). The friendly form is the Emerald-feeding sidequest encounter, not the hostile Jabberwock from dirt terrain."],
+  },
+  {
+    id: "encounter.forgotten-continent.blairsurpass-marsh-pool",
+    title: "Blairsurpass Plains — marsh encounter",
+    chapterId: forgottenContinentChapterId,
+    location: "Marsh terrain on Blairsurpass Plains, outside Qu's Marsh",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.adamantoise", quantity: null }],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: ["disc-3.forgotten-continent.earth-shake"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List reports Adamantoise in the overworld marsh. This is separate from the adjacent Qu's Marsh pond and its frog-catching encounters."],
+  },
+  {
+    id: "encounter.forgotten-continent.seaways-dirt-pool",
+    title: "Seaways Canyon — dirt terrain encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Dirt terrain in Seaways Canyon",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.cactuar", quantity: null },
+      { enemyId: "enemy.catoblepas", quantity: null },
+      { enemyId: "enemy.jabberwock", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List gives separate dirt formations with one Armstrong, three or four Cactuars, one Catoblepas, or two ordinary Jabberwocks. This records the listed roster and preserves the formation counts in source notes, without estimating rates."],
+  },
+  {
+    id: "encounter.forgotten-continent.seaways-sunrise-dirt-pool",
+    title: "Seaways Canyon — Sunrise dirt encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "The Sunrise-labeled dirt terrain in Seaways Canyon",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.adamantoise", quantity: null },
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.cactuar", quantity: null },
+      { enemyId: "enemy.catoblepas", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: ["disc-3.forgotten-continent.earth-shake", forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List separates this Sunrise-labeled table from Seaways Canyon dirt and lists Adamantoise, Armstrong, three or four Cactuars, and Catoblepas. The source's label is preserved without inferring what triggers the distinction."],
+  },
+  {
+    id: "encounter.forgotten-continent.seaways-mountain-pool",
+    title: "Seaways Canyon — mountain terrain encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Mountain terrain in Seaways Canyon",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.catoblepas", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List reports one Armstrong or one Catoblepas in this terrain table. Exact encounter odds are not listed."],
+  },
+  {
+    id: "encounter.forgotten-continent.seaways-grass-pool",
+    title: "Seaways Canyon — grass terrain encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Grass terrain in Seaways Canyon",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.armstrong", quantity: null }],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List reports a single Armstrong formation in this terrain table. Exact encounter odds are not listed."],
+  },
+  {
+    id: "encounter.forgotten-continent.seaways-sunrise-grass-pool",
+    title: "Seaways Canyon — Sunrise grass encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "The Sunrise-labeled grass terrain in Seaways Canyon",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.friendly-jabberwock", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId, "disc-3.forgotten-continent.jabberwock"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List names one Armstrong and Jabberwock (F). It prints this as a separate Sunrise-labeled terrain table; the friendly Jabberwock remains distinct from the hostile form."],
+  },
+  {
+    id: "encounter.forgotten-continent.seaways-forest-pool",
+    title: "Seaways Canyon — forest encounters",
+    chapterId: forgottenContinentChapterId,
+    location: "Forest terrain in Seaways Canyon",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.armstrong", quantity: null },
+      { enemyId: "enemy.friendly-jabberwock", quantity: null },
+    ],
+    sourceIds: forgottenContinentEncounterSources,
+    objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId, "disc-3.forgotten-continent.jabberwock"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The older GameFAQs Monster List names one Armstrong and Jabberwock (F) in the forest table. The friendly creature's quest encounter is not a hostile battle."],
+  },
+];
+
 const mountainPathEncounters: EnemyEncounter[] = [
   {
     id: "encounter.conde-petie-mountain-path.random-pool",
@@ -2055,7 +2235,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lanarMarshEncounters, ...blairsurpassMarshEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...forgottenContinentFieldEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lanarMarshEncounters, ...blairsurpassMarshEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -4691,7 +4871,10 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.cactuar",
     name: "Cactuar",
-    encounterIds: ["encounter.outer-continent.dirt-pool"],
+    encounterIds: [
+      "encounter.outer-continent.dirt-pool", "encounter.forgotten-continent.blairsurpass-dirt-pool",
+      "encounter.forgotten-continent.seaways-dirt-pool", "encounter.forgotten-continent.seaways-sunrise-dirt-pool",
+    ],
     stats: [
       { field: "level", value: 1, sourceIds: [enemyListSourceId], verification: "disputed" },
       { field: "level", value: 30, sourceIds: ["gamefaqs-monster-list-20490", "jegged-world-map-cactuar"], verification: "disputed" },
@@ -4723,9 +4906,9 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
       sourcedFact("attack", "Confuse", [enemyListSourceId, "jegged-world-map-cactuar"], "Can disrupt the party while attempting to Eat the Cactuar."),
       sourcedFact("attack", "Haste", ["jegged-world-map-cactuar"], "Can cast Haste on itself."),
     ],
-    blueMagic: [{ name: "1,000 Needles", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-world-map-cactuar"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
+    blueMagic: [{ name: "1,000 Needles", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-world-map-cactuar"], objectiveIds: [outerContinentBlueMagicObjectiveId, forgottenContinentBlueMagicRecoveryObjectiveId] }],
     strategies: [{ title: "Eat before finishing the Cactuar", detail: "Quina can learn 1,000 Needles with Eat. Its 1,000 Needles counter and Confuse can make the attempt costly; use Fire, prepare to heal, and cure Confuse as needed.", sourceIds: [enemyListSourceId, "jegged-world-map-cactuar"] }],
-    routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
+    routeObjectiveIds: [outerContinentBlueMagicObjectiveId, forgottenContinentBlueMagicRecoveryObjectiveId],
     notes: ["The later GameFAQs Enemy List gives Level 1 and AP 2; Jegged and the older GameFAQs Monster List give Level 30, and that older list prints AP 2–3. HP, MP, EXP, and Gil agree. Jegged's broad location list includes Magdalene Forest, but the detailed GameFAQs terrain table does not list Cactuar in that forest roster; that location difference remains unresolved."],
   }, outerContinentChapterId, cactuarSources),
   chapterEnemy({
@@ -4927,6 +5110,164 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
     sourceIds: outerContinentFriendlySources,
     coverage: "partial",
     notes: ["The Out1 terrain roster labels this form Ladybird (F). The older Monster List prints no HP, 0 EXP/Gil, and 20 AP; its extra item/card result rows are not mapped to ordinary steal/drop slots because their exact trigger is not established here."],
+  },
+];
+
+const forgottenContinentEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.adamantoise",
+    name: "Adamantoise",
+    encounterIds: ["encounter.forgotten-continent.blairsurpass-marsh-pool", "encounter.forgotten-continent.seaways-sunrise-dirt-pool"],
+    stats: crossCheckedStats([["level", 31], ["HP", 3587], ["MP", 1043], ["EXP", 5096], ["AP", 3], ["Gil", 4433]], [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+    steals: [
+      sourcedLoot("common", "game-item.tent", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedLoot("semi-rare", "game-item.phoenix-down", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedLoot("rare", null, [enemyListSourceId, "gamefaqs-monster-list-20490"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.potion", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedLoot("common", "game-item.hi-potion", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedLoot("uncommon", "game-item.echo-screen", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+    ],
+    facts: [
+      sourcedFact("type", "None", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Lightning", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedFact("elemental-resistance", "Water (half damage)", [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      sourcedFact("status-vulnerability", "Berserk, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Earth Shake", [enemyListSourceId], "Heavy Earth-elemental damage to the whole party; Float or Earth protection can help."),
+      sourcedFact("attack", "Heave and Thundara", [enemyListSourceId], "Heave is physical; Thundara is described as less threatening at this stage."),
+      sourcedFact("attack", "Limit Glove", [enemyListSourceId], "Only works when Adamantoise is at exactly 1 HP."),
+    ],
+    blueMagic: [{ name: "Earth Shake", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-desert-palace"], objectiveIds: ["disc-3.forgotten-continent.earth-shake"] }],
+    strategies: [{ title: "Float or protect against Earth Shake", detail: "Earth Shake is the main threat. The Enemy List recommends Float or Earth protection; Quina can use Eat to learn it if the enemy is weak enough and Quina is in the party.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-desert-palace"] }],
+    routeObjectiveIds: ["disc-3.forgotten-continent.earth-shake"],
+    notes: ["The older map source lists Adamantoise in Blairsurpass Plains marsh and Seaways Canyon Sunrise dirt; Jegged also lists it in its Forgotten Continent area summary. The newer GameFAQs route's shorter enemy list omits it, so the field rosters are source-scoped rather than treated as one universal list."],
+  }, forgottenContinentChapterId, forgottenContinentEnemySources),
+  chapterEnemy({
+    id: "enemy.armstrong",
+    name: "Armstrong",
+    encounterIds: [
+      "encounter.forgotten-continent.blairsurpass-dirt-pool", "encounter.forgotten-continent.blairsurpass-mountain-pool",
+      "encounter.forgotten-continent.blairsurpass-grass-pool", "encounter.forgotten-continent.blairsurpass-forest-pool",
+      "encounter.forgotten-continent.seaways-dirt-pool", "encounter.forgotten-continent.seaways-sunrise-dirt-pool",
+      "encounter.forgotten-continent.seaways-mountain-pool", "encounter.forgotten-continent.seaways-grass-pool",
+      "encounter.forgotten-continent.seaways-sunrise-grass-pool", "encounter.forgotten-continent.seaways-forest-pool",
+    ],
+    stats: crossCheckedStats([["level", 33], ["HP", 4204], ["MP", 1165], ["EXP", 7150], ["AP", 2], ["Gil", 1456]], [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+    steals: [
+      sourcedLoot("common", "game-item.ore", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("semi-rare", "game-item.ether", [enemyListSourceId]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.soft", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    facts: [
+      sourcedFact("type", "None", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "None listed", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "None listed", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Cannon", [enemyListSourceId], "A physical counter that deals half the target's maximum HP."),
+      sourcedFact("attack", "Matra Magic", [enemyListSourceId], "Can reduce one character to 1 HP; Quina can learn it with Eat."),
+    ],
+    blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId] }],
+    strategies: [{ title: "Silence its main attacks", detail: "Silence removes most of Armstrong's arsenal. Cannon can halve a character's maximum HP, and Quina can learn Matra Magic with Eat if the skill is still missing.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    notes: ["The regional terrain table varies by land type; Armstrong appears across Blairsurpass Plains and Seaways Canyon. The shorter GameFAQs and Jegged area lists do not describe this full terrain distribution."],
+  }, forgottenContinentChapterId, forgottenContinentEnemySources),
+  chapterEnemy({
+    id: "enemy.catoblepas",
+    name: "Catoblepas",
+    encounterIds: [
+      "encounter.forgotten-continent.blairsurpass-dirt-pool", "encounter.forgotten-continent.blairsurpass-mountain-pool",
+      "encounter.forgotten-continent.seaways-dirt-pool", "encounter.forgotten-continent.seaways-sunrise-dirt-pool",
+      "encounter.forgotten-continent.seaways-mountain-pool",
+    ],
+    stats: crossCheckedStats([["level", 32], ["HP", 3727], ["MP", 1069], ["EXP", 6609], ["AP", 2], ["Gil", 1421]], [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+    steals: [
+      sourcedLoot("common", "game-item.soft", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("semi-rare", "game-item.phoenix-pinion", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.soft", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.hi-potion", [enemyListSourceId]),
+    ],
+    facts: [
+      sourcedFact("type", "Beast", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "None listed", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "None listed", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Devil's Bell", [enemyListSourceId], "Can inflict Petrify on one character."),
+      sourcedFact("attack", "Heave, Earthquake, Thundara, and Limit Glove", [enemyListSourceId], "Limit Glove only works at exactly 1 HP; the other attacks can deal heavy damage."),
+    ],
+    blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId] }],
+    strategies: [{ title: "Equip Jelly and Beast Killer", detail: "Jelly protects against Devil's Bell's Petrify effect, and Beast Killer improves damage. Quina can learn Limit Glove with Eat when Catoblepas is at 1 HP.", sourceIds: [enemyListSourceId, "gamefaqs-forgotten-continent-71891"] }],
+    routeObjectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    notes: ["These are the ordinary Forgotten Continent field stats and loot. Do not substitute them for Treno's separate Knight's House Catoblepas challenge, whose battle data is not established by this record."],
+  }, forgottenContinentChapterId, forgottenContinentEnemySources),
+  chapterEnemy({
+    id: "enemy.jabberwock",
+    name: "Jabberwock",
+    encounterIds: ["encounter.forgotten-continent.blairsurpass-dirt-pool", "encounter.forgotten-continent.seaways-dirt-pool"],
+    stats: [
+      ...crossCheckedStats([["level", 30], ["HP", 3442], ["MP", 1019], ["AP", 2], ["Gil", 1156]], [enemyListSourceId, "gamefaqs-monster-list-20490"]),
+      { field: "EXP", value: 4675, sourceIds: [enemyListSourceId], verification: "disputed" },
+      { field: "EXP", value: 4685, sourceIds: ["gamefaqs-monster-list-20490"], verification: "disputed" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.echo-screen", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.potion", [enemyListSourceId]),
+      sourcedLoot("common", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.echo-screen", [enemyListSourceId]),
+    ],
+    facts: [
+      sourcedFact("type", "None", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Lightning and Shadow", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "Water and Holy (half damage)", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Float", [enemyListSourceId], "It can add or remove Float from the party."),
+      sourcedFact("attack", "Earthquake and Aera", [enemyListSourceId], "Their danger depends partly on whether the party is Floating."),
+    ],
+    blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId] }],
+    strategies: [{ title: "Watch its Float changes", detail: "Jabberwock can change the party's Float status; Earthquake and Aera become more or less dangerous depending on that state. Quina can learn Limit Glove with Eat when the enemy is at 1 HP.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [forgottenContinentBlueMagicRecoveryObjectiveId],
+    notes: ["This is the hostile ordinary Jabberwock. The Friendly Jabberwock is a separate non-hostile Emerald exchange, gives 40 AP and a Moonstone, and has no combat loot table. GameFAQs' two Enemy List editions disagree on the ordinary Jabberwock's EXP: 4,675 versus 4,685."],
+  }, forgottenContinentChapterId, forgottenContinentEnemySources),
+  {
+    id: "enemy.friendly-jabberwock",
+    name: "Friendly Jabberwock",
+    kind: "friendly",
+    chapterId: forgottenContinentChapterId,
+    versionScope: "PlayStation Friendly Creature route data; release and region parity have not been audited.",
+    encounterIds: ["encounter.forgotten-continent.blairsurpass-forest-pool", "encounter.forgotten-continent.seaways-sunrise-grass-pool", "encounter.forgotten-continent.seaways-forest-pool"],
+    stats: sourcedStats([["AP", 40]], ["gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"]),
+    steals: [],
+    drops: [],
+    facts: [],
+    blueMagic: [],
+    strategies: [{ title: "Give it an Emerald", detail: "The friendly creature accepts an Emerald and rewards 40 AP and a Moonstone. This quest encounter is separate from the hostile Jabberwock battle table.", sourceIds: forgottenContinentFriendlyJabberwockSources }],
+    routeObjectiveIds: ["disc-3.forgotten-continent.jabberwock"],
+    missableIds: [],
+    cutoffIds: [],
+    sourceIds: forgottenContinentFriendlyJabberwockSources,
+    coverage: "partial",
+    notes: ["The Monster List marks the forest form as Jabberwock (F). This record models the non-hostile creature and quest reward only; it has no HP, steals, drops, or normal combat strategy."],
   },
 ];
 
@@ -5185,6 +5526,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...lindblumAreaEnemyRecords,
   ...lanarMarshEnemyRecords,
   ...outerContinentEnemyRecords,
+  ...forgottenContinentEnemyRecords,
   ...mountainPathEnemyRecords,
   ...pinnacleRocksEnemyRecords,
   ...fossilRooEnemyRecords,
@@ -5315,7 +5657,7 @@ export const enemyRecords: EnemyRecord[] = [
 export const enemyCatalogCoverage = {
   status: "partial" as const,
   chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, summitStationChapterId, garganRooChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, lanarMarshChapterId, forgottenContinentChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", "enemy.ralvuimago", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...lanarMarshEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", "enemy.ralvuimago", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...lanarMarshEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...forgottenContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle and Lanar Island/Blairsurpass Plains Anemone opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. The return Gargan Roo ride adds Ralvuimago as a separate boss profile and encounter linked to its existing three-steal warning, cutoff, and item recovery paths; HP, Oak Staff tier, and Ether-drop count differences remain source-marked. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad [A] pool; the later Outer Continent marsh has its own Sahagin/Gigan Toad [B] pool, while Lanar Island and Blairsurpass Plains each have a scoped Anemone Bad Breath opportunity; full pond rosters and Gigan Toad variant placements remain unresolved. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Forgotten Continent field terrains, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle and Lanar Island/Blairsurpass Plains Anemone opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. The return Gargan Roo ride adds Ralvuimago as a separate boss profile and encounter linked to its existing three-steal warning, cutoff, and item recovery paths; HP, Oak Staff tier, and Ether-drop count differences remain source-marked. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad [A] pool; the later Outer Continent marsh has its own Sahagin/Gigan Toad [B] pool, while Lanar Island and Blairsurpass Plains each have a scoped Anemone Bad Breath opportunity; full pond rosters and Gigan Toad variant placements remain unresolved. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Forgotten Continent keeps Blairsurpass Plains and Seaways Canyon terrain pools separate, including overworld Adamantoise and Friendly Jabberwock, with the shorter GameFAQs/Jegged roster differences and ordinary Jabberwock EXP disagreement retained. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

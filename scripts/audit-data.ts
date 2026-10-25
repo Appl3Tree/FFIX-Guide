@@ -2668,6 +2668,59 @@ if (outerContinentPools.length !== outerContinentPoolExpectations.length || oute
 })) {
   errors.push("Outer Continent and Magdalene Forest must retain five terrain pools, separate world-map and Dead Forest pools, and source-backed rosters without inventing formation counts or encounter odds.");
 }
+const forgottenContinentPoolExpectations = [
+  { id: "encounter.forgotten-continent.blairsurpass-dirt-pool", roster: ["enemy.armstrong", "enemy.cactuar", "enemy.catoblepas", "enemy.jabberwock"] },
+  { id: "encounter.forgotten-continent.blairsurpass-mountain-pool", roster: ["enemy.armstrong", "enemy.catoblepas"] },
+  { id: "encounter.forgotten-continent.blairsurpass-grass-pool", roster: ["enemy.armstrong"] },
+  { id: "encounter.forgotten-continent.blairsurpass-forest-pool", roster: ["enemy.armstrong", "enemy.friendly-jabberwock"] },
+  { id: "encounter.forgotten-continent.blairsurpass-marsh-pool", roster: ["enemy.adamantoise"] },
+  { id: "encounter.forgotten-continent.seaways-dirt-pool", roster: ["enemy.armstrong", "enemy.cactuar", "enemy.catoblepas", "enemy.jabberwock"] },
+  { id: "encounter.forgotten-continent.seaways-sunrise-dirt-pool", roster: ["enemy.adamantoise", "enemy.armstrong", "enemy.cactuar", "enemy.catoblepas"] },
+  { id: "encounter.forgotten-continent.seaways-mountain-pool", roster: ["enemy.armstrong", "enemy.catoblepas"] },
+  { id: "encounter.forgotten-continent.seaways-grass-pool", roster: ["enemy.armstrong"] },
+  { id: "encounter.forgotten-continent.seaways-sunrise-grass-pool", roster: ["enemy.armstrong", "enemy.friendly-jabberwock"] },
+  { id: "encounter.forgotten-continent.seaways-forest-pool", roster: ["enemy.armstrong", "enemy.friendly-jabberwock"] },
+];
+const forgottenContinentPools = forgottenContinentPoolExpectations.map(({ id }) => enemyEncounters.find((encounter) => encounter.id === id));
+if (forgottenContinentPools.some((pool, index) => {
+  const expected = forgottenContinentPoolExpectations[index];
+  return !pool || pool.kind !== "random-pool" || pool.chapterId !== "disc-3.forgotten-continent" ||
+    !sameSortedValues(pool.formation.map((entry) => entry.enemyId), expected.roster) || pool.formation.some((entry) => entry.quantity !== null) ||
+    !pool.sourceIds.includes("gamefaqs-monster-list-20490") || pool.missableIds.length !== 0 || pool.cutoffIds.length !== 0;
+})) {
+  errors.push("Forgotten Continent field pools must preserve the older terrain-specific Blairsurpass/Seaways rosters, remain repeatable, and avoid invented encounter rates.");
+}
+const forgottenContinentEnemyExpectations = [
+  { id: "enemy.adamantoise", skill: "Earth Shake", objectiveId: "disc-3.forgotten-continent.earth-shake" },
+  { id: "enemy.armstrong", skill: "Matra Magic", objectiveId: "disc-3.forgotten-continent.blue-magic-recovery" },
+  { id: "enemy.catoblepas", skill: "Limit Glove", objectiveId: "disc-3.forgotten-continent.blue-magic-recovery" },
+  { id: "enemy.jabberwock", skill: "Limit Glove", objectiveId: "disc-3.forgotten-continent.blue-magic-recovery" },
+  { id: "enemy.cactuar", skill: "1,000 Needles", objectiveId: "disc-3.forgotten-continent.blue-magic-recovery" },
+];
+for (const expected of forgottenContinentEnemyExpectations) {
+  const record = enemyRecords.find((enemy) => enemy.id === expected.id);
+  if (!record?.blueMagic.some((skill) => skill.name === expected.skill && skill.objectiveIds.includes(expected.objectiveId)) ||
+    !record.routeObjectiveIds.includes(expected.objectiveId)) {
+    errors.push(`Forgotten Continent ${expected.skill} must link from ${expected.id} to its existing or new Blue Magic objective.`);
+  }
+}
+const forgottenJabberwock = enemyRecords.find((enemy) => enemy.id === "enemy.jabberwock");
+const friendlyJabberwock = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-jabberwock");
+const forgottenContinentBlueMagicObjective = objectivesById.get("disc-3.forgotten-continent.blue-magic-recovery");
+const forgottenFieldWalkthrough = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.forgotten-continent");
+if (!forgottenJabberwock || forgottenJabberwock.kind !== "ordinary" ||
+  !forgottenJabberwock.stats.some((stat) => stat.field === "EXP" && stat.value === 4675 && stat.verification === "disputed") ||
+  !forgottenJabberwock.stats.some((stat) => stat.field === "EXP" && stat.value === 4685 && stat.verification === "disputed") ||
+  !friendlyJabberwock || friendlyJabberwock.kind !== "friendly" || friendlyJabberwock.stats.some((stat) => stat.field === "HP") ||
+  !friendlyJabberwock.stats.some((stat) => stat.field === "AP" && stat.value === 40) || friendlyJabberwock.steals.length !== 0 || friendlyJabberwock.drops.length !== 0 ||
+  !friendlyJabberwock.routeObjectiveIds.includes("disc-3.forgotten-continent.jabberwock") ||
+  forgottenContinentPools.some((pool) => pool?.formation.some((entry) => entry.enemyId === "enemy.jabberwock" && pool.id.includes("forest"))) ||
+  !forgottenContinentBlueMagicObjective?.title.includes("Limit Glove") || !forgottenContinentBlueMagicObjective.title.includes("Matra Magic") ||
+  !forgottenContinentBlueMagicObjective.title.includes("1,000 Needles") ||
+  !forgottenFieldWalkthrough?.sections.some((section) => section.steps.some((step) => step.id === "forgotten-continent-encounters" &&
+    step.objectiveIds?.includes("disc-3.forgotten-continent.blue-magic-recovery") && step.detail?.includes("Friendly Jabberwock is a separate")))) {
+  errors.push("Forgotten Continent must distinguish ordinary and Friendly Jabberwock, preserve its EXP conflict, and route each Blue Magic source without merging their encounter data.");
+}
 const outerContinentAndDeadForestBlueMagicTeachers = [
   { enemyId: "enemy.cactuar", skill: "1,000 Needles" },
   { enemyId: "enemy.goblin-mage", skill: "Goblin Punch" },
