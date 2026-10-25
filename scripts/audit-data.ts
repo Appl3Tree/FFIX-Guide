@@ -2731,6 +2731,37 @@ if (
 ) {
   errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/TrueAchievements/Steam conflict, optional-match scope, and the conditional later attempt.");
 }
+const mountainMoonstoneObjectiveId = "disc-2.conde-petie-mountain-path.moonstone";
+const mountainMoonstoneWarning = missablesById.get("missable.disc-2.conde-petie-mountain-path.moonstone");
+const mountainMoonstoneFinalWarning = missablesById.get("missable.disc-3.preparing-to-leave.colored-stones-moonstone");
+const mountainMoonstoneFirstPass = cutoffsById.get("cutoff.conde-petie-mountain-path.departure");
+const mountainMoonstoneFinalCutoff = cutoffsById.get("cutoff.shimmering-island.disc-iii-departure");
+const mountainMoonstoneObjective = objectivesById.get(mountainMoonstoneObjectiveId);
+const mountainMoonstoneReturnStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-iifa-tree")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-iifa-retrace-path");
+if (
+  !mountainMoonstoneWarning?.classification.includes("recoverable-later") ||
+  !mountainMoonstoneWarning.deadline.includes("Shimmering Island") ||
+  !mountainMoonstoneWarning.nextAvailability.includes("post-Madain Sari route re-enters Mountain Path") ||
+  !mountainMoonstoneWarning.sourceIds.includes("gamefaqs-mountain-path-return-29957") ||
+  !mountainMoonstoneObjective?.chapterIds.includes("disc-2.journey-to-iifa-tree") ||
+  mountainMoonstoneFirstPass?.certainty !== "conservative" ||
+  !mountainMoonstoneFirstPass.title.includes("checkpoint") ||
+  !mountainMoonstoneFirstPass.missableIds.includes(mountainMoonstoneWarning.id) ||
+  !mountainMoonstoneFirstPass.sourceIds.includes("gamefaqs-mountain-path-return-29957") ||
+  !mountainMoonstoneReturnStep?.objectiveIds?.includes(mountainMoonstoneObjectiveId) ||
+  !mountainMoonstoneReturnStep.text.includes("monument near Suzuna") ||
+  !gameRouteEdgesById.get("story.journey-to-iifa-tree-to-iifa-tree")?.sourceIds.includes("gamefaqs-mountain-path-return-29957") ||
+  !mountainMoonstoneFinalWarning?.consequence.includes("Shimmering Island transition") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("gamefaqs-preparing-to-leave-71891") ||
+  !mountainMoonstoneFinalCutoff?.missableIds.includes(mountainMoonstoneFinalWarning.id) ||
+  !mountainMoonstoneFinalCutoff?.sourceIds.includes("gamefaqs-preparing-to-leave-71891") ||
+  !mountainMoonstoneFinalCutoff?.sourceIds.includes("gamefaqs-mountain-path-return-29957")
+) {
+  errors.push("The Conde Petie Mountain Path Moonstone must preserve its source-backed Disc II return, conservative first-departure checkpoint, and final Shimmering Island deadline.");
+}
 const oglopTradeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card";
 const oglopCardTypeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card-type";
 const oglopTradeWarning = missables.find((missable) => missable.id === "missable.disc-3.preparing-to-leave.oglop-trading");

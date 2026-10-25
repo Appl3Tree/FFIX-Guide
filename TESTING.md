@@ -4,6 +4,8 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
+`npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Conde Petie Mountain Path Moonstone recovery correction. The audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 355 sources; all 138 warnings map to 98 cutoff windows. The build emits 1,954.77 kB JavaScript (477.44 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
+
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Lindblum Javelin/Grotto timing update. The audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 354 sources; all warnings map to 98 cutoff windows. The build emits 1,951.90 kB JavaScript (476.82 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
 
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Cleyra route-cutoff and Stiltzkin source follow-up. The audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 354 sources; all warnings link to 98 cutoff windows. The build emits 1,948.79 kB JavaScript (476.03 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.

@@ -632,7 +632,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-2.iifa-tree",
     relationship: "required-story",
     summary: "Return across Conde Petie Mountain Path by the northern fork to Pualei Plains, then travel to the Iifa Tree; the Nymph encounter along the way is optional.",
-    sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "jegged-madain-sari"],
+    sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-iifa-tree-71891", "gamefaqs-mountain-path-return-29957", "jegged-iifa-tree", "jegged-madain-sari"],
   },
   {
     id: "story.iifa-tree-to-return-to-madain-sari",
@@ -1211,7 +1211,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "source-supported",
     trigger: "Before flying through the Shimmering Island portal, review the final documented acquisition sources for selected equipment-based abilities: Octagon Rod for Vivi's spells, Hamelin for Eiko's Jewel, and Black Hood for Vivi's Death if no copy is retained and the ability is unlearned. A retained Black Hood can still teach Death later. Also finish the Aerial Exploration Daguerreo stock review, Morrid's coffee delivery, the Treno Amdusias stage, the Conde Petie Diamond and Moonstone routes, Oglop Trading, and the other listed checks.",
     missableIds: ["missable.disc-3.preparing-to-leave.final-stock-ability-review", "missable.disc-3.aerial-exploration.daguerreo-stock", "missable.disc-3.aerial-exploration.diamond-armor", "missable.disc-3.aerial-exploration.daguerreo-unique-abilities", "missable.disc-3.preparing-to-leave.conde-petie-diamond", "missable.disc-3.preparing-to-leave.morrid-coffees", "missable.disc-3.preparing-to-leave.amdasias-running-shoes", "missable.disc-3.preparing-to-leave.colored-stones-moonstone", "missable.disc-3.preparing-to-leave.oglop-trading", "missable.disc-3.lost-continent.octagon-rod", "missable.disc-3.lost-continent.hamelin-jewel", "missable.disc-3.desert-palace.black-hood-death"],
-    sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-daguerreo-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "gamefaqs-morrid-coffees-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-conde-petie-colored-stones-71891", "gamefaqs-oglop-trading-71891", "gamefaqs-card-locations-24067", "jegged-rare-coffees", "playstationtrophies-my-little-airship", "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "jegged-daguerreo", "rpgclassics-abilities", "gamefaqs-desert-palace-71891"],
+    sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-daguerreo-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "gamefaqs-morrid-coffees-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-conde-petie-colored-stones-71891", "gamefaqs-mountain-path-return-29957", "gamefaqs-oglop-trading-71891", "gamefaqs-card-locations-24067", "jegged-rare-coffees", "playstationtrophies-my-little-airship", "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "jegged-daguerreo", "rpgclassics-abilities", "gamefaqs-desert-palace-71891"],
   },
   {
     id: "cutoff.alexandria-opening-performance",
@@ -1486,11 +1486,11 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
   {
     id: "cutoff.conde-petie-mountain-path.departure",
     edgeId: "story.conde-petie-mountain-path-to-madain-sari",
-    title: "Moonstone exchange and Stiltzkin #4",
-    certainty: "source-supported",
-    trigger: "After collecting the Green Stone, return to the monument near Suzuna to exchange all four colored stones for a Moonstone; buy Stiltzkin's 666-Gil bundle before leaving his stop and continuing to Lucid Plains.",
+    title: "First Mountain Path passage — Stiltzkin and Moonstone checkpoint",
+    certainty: "conservative",
+    trigger: "Buy Stiltzkin's one-time 666-Gil bundle before leaving the moogle stop. Claim the four-stone Moonstone now if convenient; if missed, a GameFAQs route documents another opportunity on the required return after Madain Sari, and the Disc III checklist keeps it available until Shimmering Island.",
     missableIds: ["missable.disc-2.conde-petie-mountain-path.moonstone", "missable.disc-2.conde-petie-mountain-path.stiltzkin-4"],
-    sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path", "elitegrindlab-conde-petie-mountain-path", "jegged-stiltzkin"],
+    sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "gamefaqs-mountain-path-return-29957", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path", "elitegrindlab-conde-petie-mountain-path", "jegged-stiltzkin"],
   },
   {
     id: "cutoff.mount-gulug.story-exit",

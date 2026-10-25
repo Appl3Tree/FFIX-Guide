@@ -2843,7 +2843,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "mountain-path-claim-moonstone",
             kind: "cutoff",
             text: "Retrace the roots to Suzuna's screen and take the lower-right path to the large pedestal. Place the Blue, Red, Yellow, and Green Stones in it to receive the Moonstone, then return to the post-boss fork.",
-            detail: "This is one of four Moonstone opportunities associated with Over the Moon. The guide has not confirmed whether the path can be re-entered after taking the Lucid Plains exit, so collect the reward now if it matters to your profile.",
+            detail: "This is one of four Moonstone sources associated with Over the Moon. Collect it now if convenient; if you leave it, a GameFAQs route explicitly says to claim it during the required Mountain Path return after Madain Sari. The main walkthrough lists the exchange through Disc III, with Shimmering Island as the documented final cutoff.",
             objectiveIds: ["disc-2.conde-petie-mountain-path.moonstone"],
           },
           {
@@ -2861,8 +2861,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "mountain-path-final-check",
             kind: "cutoff",
-            text: "Before leaving this chapter behind, confirm Nuptial Joy if selected, the three Mountain Path chests, Stiltzkin's 666-Gil purchase, Mogmatt's delivery to Suzuna, the four-stone Moonstone, and any desired Hilgigars steals. Keep Mogryo's letter for Mocchi until the Iifa Tree.",
-            detail: "The route's Moonstone puzzle and boss steal are separate objectives. The status of returning to the Mountain Path later has not been independently verified.",
+            text: "Before leaving this chapter behind, confirm Nuptial Joy if selected, the three Mountain Path chests, Stiltzkin's 666-Gil purchase, Mogmatt's delivery to Suzuna, and any desired Hilgigars steals. Claim the four-stone Moonstone now or on the required return after Madain Sari. Keep Mogryo's letter for Mocchi until the Iifa Tree.",
+            detail: "The Moonstone puzzle can be completed on the later Disc II story pass through Mountain Path; a GameFAQs route explicitly says to collect it there if missed. The exchange remains listed through Disc III, so the first Lucid Plains departure is not its cutoff.",
             objectiveIds: ["disc-2.conde-petie-mountain-path.nuptial-joy", "disc-2.conde-petie-mountain-path.treasure-sweep", "disc-2.conde-petie-mountain-path.stiltzkin-4", "disc-2.outer-continent.suzuna-letter", "disc-2.conde-petie-mountain-path.moonstone", "disc-2.conde-petie-mountain-path.hilgigars-steals"],
           },
         ],
@@ -3009,20 +3009,21 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   },
   {
     areaId: "disc-2.journey-to-iifa-tree",
-    overview: "Leave Madain Sari and retrace Conde Petie Mountain Path to the Hilgigars fork. Take the north exit to Pualei Plains, search the forest beside the path for friendly Nymph, and trade 3 Ore for 30 AP and an Emerald. Keep the Emerald for the next friendly-creature encounter, Jabberwock, then enter the Iifa Tree to begin the next chapter.",
+    overview: "Leave Madain Sari and retrace Conde Petie Mountain Path to the Hilgigars fork. If the four-stone Moonstone was missed on the first visit, collect it at the Suzuna-side monument during this return. Then take the north exit to Pualei Plains, search the forest beside the path for friendly Nymph, and trade 3 Ore for 30 AP and an Emerald. Keep the Emerald for the next friendly-creature encounter, Jabberwock, then enter the Iifa Tree to begin the next chapter.",
     timedRouteNote: "After Madain Sari, the source exchanges the four colored stones for the Moonstone, crosses Lucid Plains, and targets 05:33:38 at the Iifa Tree roots with one random encounter allowed. The Mountain Path route skips some recoverable treasure until the later return. Its time target is original-PlayStation NTSC and untested; the Friendly Nymph detour is not included.",
     sections: [
       {
         id: "journey-iifa-mountain-path-return",
         title: "Return through Mountain Path — take the north fork",
         summary: "Retrace the Mountain Path from Madain Sari and take the north exit at the Hilgigars fork to reach Pualei Plains.",
-        sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1"],
+        sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-mountain-path-return-29957", "jegged-iifa-tree", "gamerguides-iifa-tree-1"],
         steps: [
           {
             id: "journey-iifa-retrace-path",
             kind: "required",
-            text: "Leave Madain Sari for Lucid Plains and re-enter Conde Petie Mountain Path. Follow the path west to the main fork where Hilgigars attacked; take the north exit this time and continue to the world map.",
-            detail: "The route walkthrough lists no fixed items on this approach. Random encounters on the Mountain Path/Pualei Plains route include Blazer Beetle, Gnoll, Goblin Mage, Ochu, and Troll; exact encounter tables can vary by map screen.",
+            text: "Leave Madain Sari for Lucid Plains and re-enter Conde Petie Mountain Path. If you have not claimed the four-stone Moonstone, retrace the roots to the monument near Suzuna and use the colored stones. Return to the Madain Sari-facing exit, then re-enter and take the north/Iifa Tree exit to the world map.",
+            detail: "GameFAQs' Disc II return route explicitly tells players to collect the Moonstone here if it was missed earlier, then pass back through the Madain Sari-facing exit and continue through the Iifa Tree exit. Random encounters on the Mountain Path/Pualei Plains route include Blazer Beetle, Gnoll, Goblin Mage, Ochu, and Troll; exact encounter tables can vary by map screen.",
+            objectiveIds: ["disc-2.conde-petie-mountain-path.moonstone"],
           },
           {
             id: "journey-iifa-nymph",
