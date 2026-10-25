@@ -1941,6 +1941,25 @@ if (
 ) {
   errors.push("Dali's one-time inn consumables must link to the first-visit objective, later 50-Gil Cleyra stock, and a warning that keeps the rank effect unresolved.");
 }
+const daliItemShopProducts = [
+  { pathId: "item-path.disc-1.village-of-dali.potion-shop", itemId: "game-item.potion", price: 50 },
+  { pathId: "item-path.disc-1.village-of-dali.phoenix-down-shop", itemId: "game-item.phoenix-down", price: 150 },
+  { pathId: "item-path.disc-1.village-of-dali.antidote-shop", itemId: "game-item.antidote", price: 50 },
+  { pathId: "item-path.disc-1.village-of-dali.eye-drops-shop", itemId: "game-item.eye-drops", price: 50 },
+  { pathId: "item-path.disc-1.village-of-dali.tent-shop", itemId: "game-item.tent", price: 800 },
+];
+if (daliItemShopProducts.some(({ pathId, itemId, price }) => {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+  const item = gameItems.find((candidate) => candidate.id === itemId);
+  return !path || path.itemId !== itemId || path.chapterId !== "disc-1.village-of-dali" ||
+    path.method !== "shop" || path.availability !== "repeatable" || path.quantity !== 1 ||
+    path.shopId !== "dali.item-shop" || !path.shopName?.includes("Tavern Medicine Shop") ||
+    path.cost?.currency !== "gil" || path.cost.amount !== price ||
+    !["gamefaqs-shops-71891", "rpgclassics-shops", "gamefaqs-dali-71891"].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+    !item?.sourceIds.includes("rpgclassics-shops");
+})) {
+  errors.push("Dali's five first-visit item-shop products must retain the cross-checked stock, prices, item links, and repeatable shop paths.");
+}
 const daliUndergroundObjectiveId = "disc-1.village-of-dali.underground-treasure-sweep";
 const daliUndergroundWarning = missablesById.get("missable.disc-1.village-of-dali.underground-treasures");
 const daliUndergroundExpectedPaths = [
