@@ -4,7 +4,7 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-The latest B01 Alexandria cutoff slice passes `npm run lint`, `npm run audit:data`, and `npm run build` (including typecheck). The audit reports 0 errors and 175 coverage warnings across 44 chapters, 133 missables, 608 objectives, and 287 sources; all 133 warnings link to 86 cutoff windows, including all 79 high/critical records. Production output is 1,472.01 kB JavaScript (373.58 kB gzip) and 59.99 kB CSS (12.73 kB gzip); Vite’s chunk-size notice remains advisory. Tests were not added or run; browser, in-game timing, responsive route review, and release parity remain open.
+The latest B01 Alexandria cutoff slice passes `npm run lint`, `npm run audit:data`, and `npm run build` (including typecheck). The audit reports 0 errors and 175 coverage warnings across 44 chapters, 133 missables, 608 objectives, and 287 sources; all 133 warnings link to 86 cutoff windows, including all 79 high/critical records. Production output is 1,472.01 kB JavaScript (373.57 kB gzip) and 59.99 kB CSS (12.73 kB gzip); Vite’s chunk-size notice remains advisory. Tests were not added or run; browser, in-game timing, responsive route review, and release parity remain open.
 
 ## Latest change status
 

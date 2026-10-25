@@ -6424,7 +6424,7 @@ export const missables: MissableRecord[] = [
     deadline: "After control returns to Zidane and before leaving Alexandria for Treno; finish the nine-win streak during the later city free-roam phase.",
     nextAvailability: null,
     action: "In the Weapon Shop, pay the 50 Gil entry wager and correctly follow the named brother through nine consecutive rounds. Stop after the ninth win if you only need the achievement; additional rounds raise the wager.",
-    recovery: "The minigame does not return after the Alexandria story window. Reload a save from before the gondola/castle transition or earn the achievement on another playthrough.",
+    recovery: "The minigame does not return after the Alexandria story window. Reload a save from before leaving Alexandria for Treno or earn the achievement on another playthrough.",
     note: "The GameFAQs minigame page calls the activity Double or Nothing; Jegged and platform achievement references identify the same Nero Brothers shuffle and the nine-win condition. This challenge opens after the Eiko passage returns control to Zidane, not during Vivi's earlier phase. Sources differ on the exact final city/story close, so the guide uses the safe Treno boundary. Exact odds and platform parity outside Steam, PS4, and Xbox remain unaudited.",
     sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "xboxachievements-final-fantasy-ix", "steam-achievements", "jegged-achievements"],
     verification: "partial",
