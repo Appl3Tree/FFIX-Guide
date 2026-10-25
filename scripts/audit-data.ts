@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
+import { ateObjectiveDependencies, gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
@@ -132,11 +132,13 @@ for (const event of activeTimeEvents) {
 const expectedDependencyEdges = activeTimeEvents.flatMap((event) =>
   (event.prerequisites ?? []).map((prerequisiteObjectiveId) => `${prerequisiteObjectiveId}->${event.objectiveId}`),
 ).sort();
-const actualDependencyEdges = objectiveDependencies.map((edge) => `${edge.prerequisiteObjectiveId}->${edge.dependentObjectiveId}`).sort();
-if (expectedDependencyEdges.join("|") !== actualDependencyEdges.join("|")) {
-  errors.push("Objective dependency graph does not include exactly the prerequisites declared by ATE records.");
+const actualAteDependencyEdges = ateObjectiveDependencies.map((edge) => `${edge.prerequisiteObjectiveId}->${edge.dependentObjectiveId}`).sort();
+if (expectedDependencyEdges.join("|") !== actualAteDependencyEdges.join("|")) {
+  errors.push("ATE-order dependency graph does not include exactly the prerequisites declared by ATE records.");
 }
+const supportedObjectiveDependencyKinds = new Set(["ate-sequence", "objective-access"]);
 for (const dependency of objectiveDependencies) {
+  if (!supportedObjectiveDependencyKinds.has(dependency.kind)) errors.push(`Dependency has unsupported kind ${dependency.kind}.`);
   if (!objectiveIds.has(dependency.prerequisiteObjectiveId)) errors.push(`Dependency references unknown prerequisite objective ${dependency.prerequisiteObjectiveId}.`);
   if (!objectiveIds.has(dependency.dependentObjectiveId)) errors.push(`Dependency references unknown dependent objective ${dependency.dependentObjectiveId}.`);
   for (const sourceId of dependency.sourceIds) {

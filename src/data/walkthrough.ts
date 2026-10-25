@@ -1752,9 +1752,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-quina-rubbish-pit",
             kind: "pickup",
-            text: "After the ATE sequence moves Quina to the rubbish pit beside the town entrance, speak with Quina and jump down. Collect the Silk Robe and second Magician Shoes from the two chests, then climb back to the settlement.",
+            text: "After viewing No Yummy-Yummies! and There A Mushroom!, speak with Quina at the rubbish pit beside the town entrance and jump down. Collect the Silk Robe and second Magician Shoes from the two chests, then climb back to the settlement.",
             detail: "These are the two chests above the Trunk entrance, accessed through the settlement rubbish pit after the ATE sequence. Do not confuse this pit with the Antlion sandpit or the separate 970-Gil garbage pit.",
-            objectiveIds: ["disc-2.cleyra.treasure-sweep"],
+            objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.rubbish-pit-chests"],
           },
           {
             id: "cleyra-lower-settlement-items",

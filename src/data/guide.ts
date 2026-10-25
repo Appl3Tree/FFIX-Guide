@@ -3153,6 +3153,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-2.cleyra.rubbish-pit-chests",
+    title: "Recover the Silk Robe and second Magician Shoes from Cleyra's rubbish pit",
+    category: "exploration",
+    sourceIds: ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+    chapterIds: ["disc-2.cleyra"],
+    profileIds: ["comprehensive", "achievements", "custom"],
+    verification: "partial",
+  },
+  {
     id: "disc-2.cleyra.emerald",
     title: "Collect the High Priest's one-time Emerald in Cleyra",
     category: "collection",

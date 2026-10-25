@@ -29,7 +29,14 @@ import {
   parseClock,
 } from "./data/excalibur2";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "./data/ates";
-import { gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "./data/progression";
+import {
+  ateObjectiveDependencies,
+  gameRouteCoverage,
+  gameRouteEdges,
+  guideChapterSequence,
+  guideSequenceEdges,
+  objectiveAccessDependencies,
+} from "./data/progression";
 import {
   achievementSourceCounts,
   arcs,
@@ -978,7 +985,13 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
     return applies && matches;
   });
   const markedCount = movieCriticEligibleEvents.filter((event) => profile.marks[event.objectiveId]?.complete === true).length;
-  const markedDependencyCount = objectiveDependencies.filter((dependency) => objectiveIsComplete(profile, dependency.prerequisiteObjectiveId)).length;
+  const markedDependencyCount = ateObjectiveDependencies.filter((dependency) => objectiveIsComplete(profile, dependency.prerequisiteObjectiveId)).length;
+  const accessObjectiveGroups = [...new Set(objectiveAccessDependencies.map((dependency) => dependency.dependentObjectiveId))]
+    .map((objectiveId) => ({
+      objective: objectives.find((objective) => objective.id === objectiveId),
+      dependencies: objectiveAccessDependencies.filter((dependency) => dependency.dependentObjectiveId === objectiveId),
+    }))
+    .filter((group): group is { objective: (typeof objectives)[number]; dependencies: typeof objectiveAccessDependencies } => Boolean(group.objective));
   const legacyGroupIds = [...new Set(activeTimeEvents.map((event) => event.groupObjectiveId))]
     .filter((groupId) => profile.marks[groupId]?.complete === true && !ateGroupIsComplete(profile, groupId));
   const ateSourceRecords = [...new Set(activeTimeEvents.flatMap((event) => event.sourceIds))]
@@ -991,9 +1004,25 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
       <div><span className="eyebrow">MOVIE CRITIC · STEAM / PS4 / XBOX</span><strong>{markedCount} / {movieCriticTarget} target scenes marked</strong><small>{markedCount >= movieCriticTarget ? "The single-save target is reached." : `${Math.max(0, movieCriticTarget - markedCount)} more eligible scene${movieCriticTarget - markedCount === 1 ? "" : "s"} to reach the target.`}</small></div>
       <div className="ate-progress-meter" role="progressbar" aria-label="Movie Critic target scenes marked" aria-valuemin={0} aria-valuemax={movieCriticTarget} aria-valuenow={Math.min(markedCount, movieCriticTarget)}><span style={{ width: `${Math.min(100, markedCount / movieCriticTarget * 100)}%` }} /></div>
     </section>
-    {objectiveDependencies.length > 0 && <section className="ate-dependency-summary" aria-label="Tracked ATE prerequisite links">
-      <div><span className="eyebrow">DOCUMENTED PREREQUISITES</span><strong>{markedDependencyCount} / {objectiveDependencies.length} linked prerequisite objectives marked</strong></div>
+    {ateObjectiveDependencies.length > 0 && <section className="ate-dependency-summary" aria-label="Tracked ATE prerequisite links">
+      <div><span className="eyebrow">DOCUMENTED ATE ORDER</span><strong>{markedDependencyCount} / {ateObjectiveDependencies.length} linked prerequisite objectives marked</strong></div>
       <p>These links describe earlier tracked objectives. They do not predict whether an ATE prompt is currently available; trigger timing is still being verified.</p>
+    </section>}
+    {accessObjectiveGroups.length > 0 && <section className="ate-access-dependencies" aria-label="Tracked access prerequisites for optional objectives">
+      <div className="ate-access-heading"><div><span className="eyebrow">OPTIONAL OBJECTIVE ACCESS</span><h2>Scene links that open extra routes</h2></div><p>These links describe access to optional content. They do not add an ATE order requirement or predict prompt timing.</p></div>
+      {accessObjectiveGroups.map(({ objective, dependencies }) => {
+        const markedCount = dependencies.filter((dependency) => objectiveIsComplete(profile, dependency.prerequisiteObjectiveId)).length;
+        const chapterId = objective.chapterIds?.[0];
+        return <article className="ate-access-objective" key={objective.id}>
+          <div className="ate-access-objective-heading"><strong>{objective.title}</strong><span>{markedCount} / {dependencies.length} linked scenes marked</span></div>
+          <ul>{dependencies.map((dependency) => {
+            const event = activeTimeEvents.find((candidate) => candidate.objectiveId === dependency.prerequisiteObjectiveId);
+            const done = objectiveIsComplete(profile, dependency.prerequisiteObjectiveId);
+            return <li className={done ? "is-complete" : ""} key={dependency.prerequisiteObjectiveId}><span className="ate-access-mark" aria-hidden="true">{done ? "✓" : "·"}</span><span>{event?.title ?? dependency.prerequisiteObjectiveId}</span><span>{done ? "Marked" : "Not marked"}</span></li>;
+          })}</ul>
+          {chapterId && <button type="button" className="text-action" onClick={() => onOpenChapter(chapterId)}>Open {chapterId === "disc-2.cleyra" ? "Cleyra walkthrough" : "related walkthrough"} <span aria-hidden="true">↗</span></button>}
+        </article>;
+      })}
     </section>}
     <div className="ate-source-note"><p><strong>80 eligible scene choices are listed, but only 79 countable scenes fit on one save.</strong> Choose one of the two Vivi outcomes in Treno. Comprehensive and Custom profiles can track the three Teach Me, Mogster! tutorials as separate non-achievement checkboxes. ATE trigger ordering can vary by route; unresolved directions stay labeled.</p>
       {profile.platform === "ps1" && <p>Original PlayStation has no platform achievement list. This page still tracks scenes for story and completionist reference.</p>}
@@ -1032,8 +1061,8 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
                       </fieldset>;
                     }
                     const done = profile.marks[event.objectiveId]?.complete === true;
-                    const prerequisites = unmetObjectivePrerequisites(event.objectiveId, objectiveDependencies, (id) => objectiveIsComplete(profile, id));
-                    const allPrerequisites = objectiveDependencies.filter((dependency) => dependency.dependentObjectiveId === event.objectiveId);
+                    const prerequisites = unmetObjectivePrerequisites(event.objectiveId, ateObjectiveDependencies, (id) => objectiveIsComplete(profile, id));
+                    const allPrerequisites = ateObjectiveDependencies.filter((dependency) => dependency.dependentObjectiveId === event.objectiveId);
                     return <label className={`ate-event-row ${done ? "is-complete" : ""}`} key={event.objectiveId}>
                       <input type="checkbox" checked={done} onChange={() => onToggle(event.objectiveId)} />
                       <span className="ate-event-copy"><strong>{event.title}</strong><small>{event.location} · {event.trigger}</small>{allPrerequisites.length > 0 && <small className="ate-prerequisite-note"><strong>Prerequisites {prerequisites.length > 0 ? "not all marked" : "marked"}:</strong> {allPrerequisites.map((dependency) => {

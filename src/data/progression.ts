@@ -1,6 +1,7 @@
 import { activeTimeEvents } from "./ates.ts";
 
 export type ObjectiveDependency = {
+  kind: "ate-sequence" | "objective-access";
   prerequisiteObjectiveId: string;
   dependentObjectiveId: string;
   sourceIds: string[];
@@ -667,12 +668,34 @@ export const gameRouteEdges: GameRouteEdge[] = [
   },
 ];
 
-// Start with directly documented ATE-to-ATE and side-content links. More
-// objective and chapter relationships can join this graph as they are audited.
-export const objectiveDependencies: ObjectiveDependency[] = activeTimeEvents.flatMap((event) =>
+// ATE-to-ATE ordering and cross-objective access requirements share the graph,
+// but stay typed separately so an access requirement is not misread as a hard
+// ATE trigger order.
+export const ateObjectiveDependencies: ObjectiveDependency[] = activeTimeEvents.flatMap((event) =>
   (event.prerequisites ?? []).map((prerequisiteObjectiveId) => ({
+    kind: "ate-sequence" as const,
     prerequisiteObjectiveId,
     dependentObjectiveId: event.objectiveId,
     sourceIds: event.sourceIds,
   })),
 );
+
+export const objectiveAccessDependencies: ObjectiveDependency[] = [
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "ate.cleyra-no-yummie-yummies",
+    dependentObjectiveId: "disc-2.cleyra.rubbish-pit-chests",
+    sourceIds: ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "ate.cleyra-there-a-mushroom",
+    dependentObjectiveId: "disc-2.cleyra.rubbish-pit-chests",
+    sourceIds: ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+];
+
+export const objectiveDependencies: ObjectiveDependency[] = [
+  ...ateObjectiveDependencies,
+  ...objectiveAccessDependencies,
+];

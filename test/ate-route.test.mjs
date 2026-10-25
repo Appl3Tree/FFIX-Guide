@@ -7,8 +7,9 @@ import {
   movieCriticExclusiveGroupId,
   movieCriticTarget,
 } from "../src/data/ates.ts";
-import { objectives } from "../src/data/guide.ts";
-import { guideChapterSequence, objectiveDependencies } from "../src/data/progression.ts";
+import { objectives, sources } from "../src/data/guide.ts";
+import { ateObjectiveDependencies, guideChapterSequence, objectiveAccessDependencies, objectiveDependencies } from "../src/data/progression.ts";
+import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const eventByObjective = new Map(activeTimeEvents.map((event) => [event.objectiveId, event]));
 const objectiveById = new Map(objectives.map((objective) => [objective.id, objective]));
@@ -18,7 +19,9 @@ const branchEvents = movieCriticEligibleEvents.filter((event) => event.exclusive
 test("each supported Movie Critic catalog has an ordered 79-view single-save route", () => {
   assert.equal(movieCriticEligibleEvents.length, 80);
   assert.equal(branchEvents.length, 2);
-  assert.equal(objectiveDependencies.length, 31);
+  assert.equal(ateObjectiveDependencies.length, 31);
+  assert.equal(objectiveAccessDependencies.length, 2);
+  assert.equal(objectiveDependencies.length, 33);
 
   assert.deepEqual(
     movieCriticEligibleEvents
@@ -198,4 +201,35 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
       }
     }
   }
+});
+
+test("Cleyra's Quina ATEs are linked to the rubbish-pit chest objective", () => {
+  const chestObjectiveId = "disc-2.cleyra.rubbish-pit-chests";
+  const dependencies = objectiveAccessDependencies.filter((dependency) => dependency.dependentObjectiveId === chestObjectiveId);
+  assert.deepEqual(
+    dependencies.map((dependency) => dependency.prerequisiteObjectiveId),
+    ["ate.cleyra-no-yummie-yummies", "ate.cleyra-there-a-mushroom"],
+  );
+  assert.ok(dependencies.every((dependency) => dependency.kind === "objective-access"));
+
+  const chestObjective = objectiveById.get(chestObjectiveId);
+  assert.ok(chestObjective);
+  assert.equal(chestObjective.category, "exploration");
+  assert.ok(chestObjective.chapterIds.includes("disc-2.cleyra"));
+  for (const dependency of dependencies) {
+    for (const sourceId of ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"]) {
+      assert.ok(dependency.sourceIds.includes(sourceId), `${dependency.prerequisiteObjectiveId} is missing ${sourceId}`);
+    }
+    for (const sourceId of dependency.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown dependency source ${sourceId}`);
+    }
+  }
+
+  const cleyraChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra");
+  const rubbishPitStep = cleyraChapter?.sections
+    .flatMap((section) => section.steps)
+    .find((step) => step.id === "cleyra-quina-rubbish-pit");
+  assert.ok(rubbishPitStep);
+  assert.ok(rubbishPitStep.objectiveIds.includes(chestObjectiveId));
+  assert.match(rubbishPitStep.text, /No Yummy-Yummies! and There A Mushroom!/);
 });
