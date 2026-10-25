@@ -2142,7 +2142,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.rune-tooth", name: "Rune Tooth", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.gauntlets", name: "Gauntlets", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "ffwiki-synthesis", "jegged-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.brave-suit", name: "Brave Suit", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
-  { id: "game-item.mythril-gloves", name: "Mythril Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "opatil-gizamaluke-map", "ffuniverse-ff9-guide"], verification: "partial" },
+  { id: "game-item.mythril-gloves", name: "Mythril Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-disc-2-map", "opatil-gizamaluke-map", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.mythril-rod", name: "Mythril Rod", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-esto-gaza", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.gold-helm", name: "Gold Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-ability-10332"], verification: "partial" },
   { id: "game-item.rosetta-ring", name: "Rosetta Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"], verification: "partial" },
@@ -2189,8 +2189,12 @@ const atlaDisc2ShopPaths: ItemAcquisitionPath[] = atlaDisc2ShopProducts.map(([sl
   shopId: "burmecia.atla-mogshop",
   shopName: "Atla's Mogshop (Burmecia, Disc II)",
   cost: { currency: "gil" as const, amount: price },
-  conditions: `Caves of Narshe lists ${itemName} for ${price.toLocaleString("en-US")} Gil at Atla's Disc II shop; Flactem documents the optional return before Cleyra.`,
-  sourceIds: atlaDisc2ShopSources,
+  conditions: itemName === "Mythril Gloves"
+    ? "Caves of Narshe and the GameFAQs Equipment List give Atla's Mythril Gloves price as 980 Gil. The GameFAQs Shops table lists 720 Gil at Atla, but gives 980 Gil for the same item at Summit Station, Treno, and Cleyra and lists Silver Gloves for 720; treat the Atla row as a likely table typo pending in-game verification. Flactem documents the optional return before Cleyra."
+    : `Caves of Narshe lists ${itemName} for ${price.toLocaleString("en-US")} Gil at Atla's Disc II shop; Flactem documents the optional return before Cleyra.`,
+  sourceIds: itemName === "Mythril Gloves"
+    ? [...atlaDisc2ShopSources, "gamefaqs-equipment-33383"]
+    : atlaDisc2ShopSources,
 }));
 
 const treasureSweepObjective = "disc-1.burmecia.treasure-sweep";

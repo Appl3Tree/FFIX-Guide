@@ -802,6 +802,77 @@ for (const path of itemAcquisitionPaths) {
   }
   acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
 }
+const atlaDisc2ShopPrices = new Map<string, number>([
+  ["game-item.needle-fork", 3100],
+  ["game-item.glass-armlet", 250],
+  ["game-item.mythril-gloves", 980],
+  ["game-item.steepled-hat", 260],
+  ["game-item.headgear", 330],
+  ["game-item.magus-hat", 400],
+  ["game-item.barbut", 600],
+  ["game-item.bronze-vest", 670],
+  ["game-item.linen-cuirass", 800],
+  ["game-item.potion", 50],
+  ["game-item.phoenix-down", 150],
+  ["game-item.echo-screen", 50],
+  ["game-item.soft", 100],
+  ["game-item.antidote", 50],
+  ["game-item.eye-drops", 50],
+  ["game-item.tent", 800],
+]);
+const atlaDisc2Paths = itemAcquisitionPaths.filter((path) =>
+  path.chapterId === "disc-2.journey-to-cleyra" && path.shopId === "burmecia.atla-mogshop",
+);
+const atlaDisc2ItemIds = new Set(atlaDisc2Paths.map((path) => path.itemId));
+if (atlaDisc2Paths.length !== atlaDisc2ShopPrices.size || atlaDisc2ItemIds.size !== atlaDisc2ShopPrices.size) {
+  errors.push(`Atla's Disc II Mogshop must have exactly ${atlaDisc2ShopPrices.size} distinct priced product paths; found ${atlaDisc2Paths.length} paths for ${atlaDisc2ItemIds.size} products.`);
+}
+for (const [itemId, price] of atlaDisc2ShopPrices) {
+  const path = atlaDisc2Paths.find((candidate) => candidate.itemId === itemId);
+  if (!path) {
+    errors.push(`Atla's Disc II Mogshop is missing the sourced stock path for ${itemId}.`);
+    continue;
+  }
+  if (path.method !== "mogshop" || path.quantity !== 1 || path.cost?.currency !== "gil" || path.cost.amount !== price) {
+    errors.push(`Atla's Disc II Mogshop path for ${itemId} must be one Mogshop purchase priced at ${price} Gil.`);
+  }
+  for (const sourceId of ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"]) {
+    if (!path.sourceIds.includes(sourceId)) errors.push(`Atla's Disc II Mogshop path for ${itemId} must cite ${sourceId}.`);
+  }
+  if (itemId === "game-item.mythril-gloves" && !path.sourceIds.includes("gamefaqs-equipment-33383")) {
+    errors.push("Atla's Disc II Mythril Gloves path must cite the independent GameFAQs equipment table supporting the 980-Gil price.");
+  }
+  if (itemId === "game-item.mythril-gloves" &&
+    (!path.conditions?.includes("720 Gil") || !path.conditions.includes("likely table typo"))) {
+    errors.push("Atla's Disc II Mythril Gloves path must retain the sourced 720-versus-980-Gil discrepancy note.");
+  }
+}
+const atlaDisc2Return = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-kupo-nut-return");
+if (!atlaDisc2Return || atlaDisc2Return.relationship !== "optional-return" ||
+  atlaDisc2Return.fromChapterId !== "disc-2.journey-to-cleyra" || atlaDisc2Return.toChapterId !== "disc-1.journey-to-burmecia") {
+  errors.push("Atla's Disc II Mogshop must remain on the sourced optional Burmecia return before Cleyra.");
+} else {
+  for (const sourceId of ["gamefaqs-journey-to-cleyra-71891", "flactem-disc-2-cleyra"]) {
+    if (!atlaDisc2Return.sourceIds.includes(sourceId)) errors.push(`Atla's Disc II return edge must cite ${sourceId}.`);
+  }
+  if (!atlaDisc2Return.summary.includes("does not establish access to every Disc I chest room")) {
+    errors.push("Atla's Disc II return must preserve the Burmecia pickup-room access caveat.");
+  }
+}
+const atlaDisc2Rejoin = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-rejoin");
+if (!atlaDisc2Rejoin || atlaDisc2Rejoin.relationship !== "rejoin" ||
+  atlaDisc2Rejoin.fromChapterId !== "disc-1.journey-to-burmecia" || atlaDisc2Rejoin.toChapterId !== "disc-2.journey-to-cleyra") {
+  errors.push("The optional Disc II Atla return must rejoin the Cleyra route after Gizamaluke's Grotto.");
+}
+const atlaDisc2Instruction = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-cleyra-atla-mogshop-return");
+if (!atlaDisc2Instruction || !atlaDisc2Instruction.text.includes("Atla's Mogshop on Disc II") ||
+  !atlaDisc2Instruction.detail?.includes("not the accessibility of every Disc I chest room")) {
+  errors.push("The optional Atla return needs a walkthrough instruction that preserves its Disc II access scope.");
+}
+console.log(`Atla's Disc II Mogshop: ${atlaDisc2ItemIds.size}/${atlaDisc2ShopPrices.size} sourced stock paths on the pre-Cleyra return.`);
 const cleyraShopPaths = itemAcquisitionPaths.filter((path) =>
   path.chapterId === "disc-2.cleyra" && path.shopId?.startsWith("cleyra."),
 );
