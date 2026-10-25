@@ -602,6 +602,44 @@ for (const [itemId, quantity] of [["game-item.gladius", 6], ["game-item.coral-sw
     errors.push(`${itemId} needs its source-listed Need ${quantity} inventory target.`);
   }
 }
+const fossilRooTreasureObjectiveId = "disc-2.journey-to-outer-continent.treasure-sweep";
+const expectedFossilRooTreasurePaths = [
+  { id: "item-path.disc-2.journey-to-outer-continent.fossil-roo-elixir-chest", itemId: "game-item.elixir", method: "chest" },
+  { id: "item-path.disc-2.journey-to-outer-continent.fossil-roo-fairy-earrings", itemId: "game-item.fairy-earrings", method: "chest" },
+  { id: "item-path.disc-2.journey-to-outer-continent.fossil-roo-ether-chest", itemId: "game-item.ether", method: "chest" },
+  { id: "item-path.disc-2.journey-to-outer-continent.fossil-roo-lamias-tiara", itemId: "game-item.lamias-tiara", method: "chest" },
+  { id: "item-path.disc-2.journey-to-outer-continent.fossil-roo-survival-vest", itemId: "game-item.survival-vest", method: "hidden-pickup" },
+] as const;
+for (const expected of expectedFossilRooTreasurePaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  if (!path || path.itemId !== expected.itemId || path.method !== expected.method || !path.walkthroughObjectiveIds?.includes(fossilRooTreasureObjectiveId)) {
+    errors.push(`Fossil Roo's treasure-sweep objective must link ${expected.itemId} to ${expected.id}.`);
+  }
+}
+const expectedFossilRooRecoveryPaths = [
+  { id: "item-path.disc-3.forgotten-continent.stiltzkin-elixir", itemId: "game-item.elixir" },
+  { id: "item-path.disc-3.forgotten-continent.ark-elixir-steal", itemId: "game-item.elixir" },
+  { id: "item-path.disc-3.desert-palace.fairy-earrings-light-chamber", itemId: "game-item.fairy-earrings" },
+  { id: "item-path.disc-3.lost-continent.mount-gulug-ether-rubble", itemId: "game-item.ether" },
+  { id: "item-path.disc-2.madain-sari.lamias-tiara-shop", itemId: "game-item.lamias-tiara" },
+  { id: "item-path.disc-2.madain-sari.survival-vest-shop", itemId: "game-item.survival-vest" },
+];
+for (const expected of expectedFossilRooRecoveryPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  if (!path || path.itemId !== expected.itemId || path.chapterId === "disc-2.journey-to-outer-continent") {
+    errors.push(`Fossil Roo's location-copy warning needs later recovery path ${expected.id}.`);
+  }
+}
+const fossilRooTreasureWarning = missables.find((record) => record.id === "missable.disc-2.journey-to-outer-continent.treasure-sweep");
+if (
+  !fossilRooTreasureWarning?.classification.includes("missable-opportunity") ||
+  !fossilRooTreasureWarning.consequence.includes("later replacements") ||
+  !fossilRooTreasureWarning.recovery.includes("location-specific") ||
+  !fossilRooTreasureWarning.sourceIds.includes("gamefaqs-items-71891") ||
+  !fossilRooTreasureWarning.sourceIds.includes("rpgclassics-synthesis")
+) {
+  errors.push("Fossil Roo's warning must distinguish unrecoverable location copies from documented item-type recovery.");
+}
 for (const cycle of findObjectiveDependencyCycles(objectiveDependencies)) {
   errors.push(`Objective dependency cycle: ${cycle.join(" -> ")}.`);
 }
