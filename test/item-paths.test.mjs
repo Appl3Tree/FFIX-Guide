@@ -403,7 +403,7 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 218);
+  assert.equal(itemAcquisitionPaths.length, 224);
   assert.equal(synthesisRecipes.length, 7);
 });
 
@@ -439,6 +439,41 @@ test("Silk Shirt has source-backed starting, encounter, reward, and shop routes"
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.madain-sari"));
 
   for (const path of silkShirtPaths) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Bandana has a hidden pickup and source-backed Disc II/III shop routes", () => {
+  const bandanaPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.bandana");
+  const pathsById = new Map(bandanaPaths.map((path) => [path.id, path]));
+  const pickup = pathsById.get("item-path.disc-2.return-to-lindblum.dragon-gate-bandana-pickup");
+  const cleyra = pathsById.get("item-path.disc-2.cleyra.bandana-shop");
+  const fossilRoo = pathsById.get("item-path.disc-2.journey-to-outer-continent.fossil-roo-bandana-shop");
+  const earlyBlackMageVillage = pathsById.get("item-path.disc-2.outer-continent.bandana-black-mage-village-shop");
+  const shopPaths = [
+    "item-path.disc-2.treno.bandana-shop",
+    "item-path.disc-2.cleyra.bandana-shop",
+    "item-path.disc-2.return-to-lindblum.bandana-shop",
+    "item-path.disc-2.return-to-lindblum.dragon-gate-bandana-shop",
+    "item-path.disc-2.journey-to-outer-continent.fossil-roo-bandana-shop",
+    "item-path.disc-2.outer-continent.bandana-black-mage-village-shop",
+    "item-path.disc-3-stock.black-mage-village.bandana",
+  ].map((id) => pathsById.get(id));
+
+  assert.equal(bandanaPaths.length, 8);
+  assert.equal(pickup?.method, "hidden-pickup");
+  assert.ok(pickup?.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.treasure-sweep"));
+  assert.equal(cleyra?.availability, "limited-window");
+  assert.ok(cleyra?.walkthroughObjectiveIds?.includes("disc-2.cleyra.shop-stock"));
+  assert.equal(fossilRoo?.availability, "window-unverified");
+  assert.equal(earlyBlackMageVillage?.availability, "repeatable");
+  assert.ok(shopPaths.every((path) => path?.method === "shop" && path.cost?.amount === 500));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.journey-to-outer-continent"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.outer-continent"));
+
+  for (const path of bandanaPaths) {
     for (const sourceId of path.sourceIds) {
       assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
     }
