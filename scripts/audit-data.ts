@@ -2477,28 +2477,40 @@ if (
   !postDestructionAlexandriaCardObjective
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("cour89-card-players")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("gamefaqs-card-locations-24067")
+  || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+  || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
   || !postDestructionAlexandriaCardObjective.chapterIds?.includes("disc-3.on-the-high-seas")
   || !postDestructionAlexandriaCardObjective.chapterIds.includes("disc-4.return-to-gaia")
   || !postDestructionAlexandriaCardWarning
   || postDestructionAlexandriaCardWarning.classification.includes("permanently-missable")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("cour89-card-players")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("gamefaqs-card-locations-24067")
-  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs' card-location FAQ lists two Red Mages and Hippaul")
-  || !postDestructionAlexandriaCardWarning.note.includes("direct game testing")
+  || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+  || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
+  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs' card-location FAQ labels two Red Mages and Hippaul")
+  || !postDestructionAlexandriaCardWarning.note.includes("do not imply Disc IV recovery")
   || postDestructionAlexandriaCardSteps.length !== 2
   || !postDestructionAlexandriaCardSteps.every((step) =>
     ["male Red Mage", "female Red Mage", "Kabao"].every((name) => step.text.includes(name)),
   )
   || postDestructionAlexandriaCardCutoffs.length !== 2
   || postDestructionAlexandriaCardCutoffs.some((cutoff) => cutoff.certainty !== "disputed")
+  || postDestructionAlexandriaCardCutoffs.some((cutoff) =>
+    !cutoff.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+    || !cutoff.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
+  )
   || !postDestructionAlexandriaDetour
   || postDestructionAlexandriaDetour.relationship !== "optional-return"
   || postDestructionAlexandriaDetour.toChapterId !== "disc-1.alexandria"
+  || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+  || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
   || !postDestructionAlexandriaDetourRejoin
   || postDestructionAlexandriaDetourRejoin.relationship !== "rejoin"
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not identify or time its card matches")
+  || !sources.find((source) => source.id === "steam-tetra-disc4-opponents-729676856")?.notes.includes("a 2023 comment reports that Hippaul and the Red Mage are not at Alexandria Inn on Disc IV")
+  || !sources.find((source) => source.id === "steam-tetra-opponents-disc4-2804532988")?.notes.includes("22 Alexandria opponents across Main Street, Square, and Steeple, with no Inn players")
 ) {
-  errors.push("The post-destruction Alexandria Inn matches must preserve both Disc III/IV first-visit reminders, the Cour89/GameFAQs timing conflict, optional-match scope, and the sourced return route.");
+  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/Steam roster conflict, optional-match scope, and the sourced return route.");
 }
 const oglopTradeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card";
 const oglopCardTypeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card-type";
