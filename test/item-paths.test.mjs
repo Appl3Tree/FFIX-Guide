@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { missables, objectives, sources } from "../src/data/guide.ts";
-import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage } from "../src/data/items.ts";
+import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
@@ -403,7 +403,7 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 314);
+  assert.equal(itemAcquisitionPaths.length, 329);
   assert.equal(synthesisRecipes.length, 10);
 });
 
@@ -726,7 +726,7 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   const cleyraTreasureMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
   const pinnacleMissable = missables.find((entry) => entry.id === "missable.disc-2.pinnacle-rocks.treasure-sweep");
 
-  assert.equal(itemAcquisitionPaths.length, 314);
+  assert.equal(itemAcquisitionPaths.length, 329);
   assert.ok(newPaths.every(Boolean), "all 20 earlier/recovery paths should exist");
   assert.deepEqual(
     pricedPaths.map((path) => [path?.itemId, path?.cost?.amount]).sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),
@@ -779,4 +779,104 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   assert.match(antlionMissable?.recovery ?? "", /Mythril Vest is replaceable/);
   assert.match(pinnacleMissable?.recovery ?? "", /Mythril Vest has later shop routes/);
   assert.match(finalStockMissable?.recovery ?? "", /No post-transition replacement is listed/);
+});
+
+test("Disc II Treno equipment targets preserve later recovery and optional stock semantics", () => {
+  const equipment = [
+    ["game-item.air-racket", 3],
+    ["game-item.silver-gloves", 4],
+    ["game-item.iron-helm", 4],
+    ["game-item.chain-mail", 4],
+  ];
+  const expectedAbilities = [
+    ["game-item.air-racket", "Scan"],
+    ["game-item.air-racket", "Panacea"],
+    ["game-item.silver-gloves", "Undead Killer"],
+    ["game-item.iron-helm", "Bright Eyes"],
+    ["game-item.iron-helm", "Level Up"],
+    ["game-item.chain-mail", "Bird Killer"],
+    ["game-item.chain-mail", "HP+10%"],
+  ];
+  const expectedWarnings = [
+    "missable.disc-2.journey-to-treno.summit-station-equipment-stock",
+    "missable.disc-2.treno.air-racket-purchase",
+    "missable.disc-2.return-to-lindblum.chain-mail-stock",
+  ];
+  const requiredSourceIds = ["neoseeker-item-locations-182566", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891"];
+  const routeIds = [
+    "item-path.disc-2.journey-to-treno.summit-station-air-racket-shop",
+    "item-path.disc-2.treno.air-racket-shop",
+    "item-path.disc-3.ipsens-castle.air-racket-lift-chest",
+    "item-path.disc-1.cargo-ship.silver-gloves-black-waltz-3-steal",
+    "item-path.disc-1.lindblum.silver-gloves-synthesis-shop-pickup",
+    "item-path.disc-1.lindblum.silver-gloves-shop",
+    "item-path.disc-2.journey-to-treno.summit-station-silver-gloves-shop",
+    "item-path.disc-1.evil-forest.iron-helm-plant-brain-steal",
+    "item-path.disc-1.village-of-dali.iron-helm-underground-chest",
+    "item-path.disc-1.lindblum.iron-helm-shop",
+    "item-path.disc-2.journey-to-treno.summit-station-iron-helm-shop",
+    "item-path.disc-2.treno.chain-mail-shop",
+    "item-path.disc-2.cleyra.chain-mail-shop",
+    "item-path.disc-2.cleyra.beatrix-chain-mail-equipped",
+    "item-path.disc-2.return-to-lindblum.chain-mail-shop",
+  ];
+  const trenoChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.treno");
+  const cleyraChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra");
+  const lindblumChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-lindblum");
+  const trenoExitStep = trenoChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "treno-mythril-dagger-supersoft");
+  const cleyraShopStep = cleyraChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "cleyra-shop-stock");
+  const chainMailStep = lindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-perfect-chain-mail-stock");
+
+  assert.equal(itemAcquisitionPaths.length, 329);
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.return-to-lindblum"));
+  assert.deepEqual(equipment.map(([itemId]) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), equipment.map(([, count]) => count));
+  assert.deepEqual(routeIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id)?.id), routeIds);
+
+  const airRacketIpsen = itemAcquisitionPaths.find((path) => path.id === routeIds[2]);
+  const beatrixChainMail = itemAcquisitionPaths.find((path) => path.id === routeIds[13]);
+  assert.equal(airRacketIpsen?.chapterId, "disc-3.ipsens-castle");
+  assert.match(airRacketIpsen?.conditions ?? "", /recovers one Air Racket/);
+  assert.equal(beatrixChainMail?.method, "starting-equipment");
+  assert.match(beatrixChainMail?.conditions ?? "", /not a copy available in the player's inventory/);
+
+  const targets = [
+    ["item-target.disc-2.treno.air-racket", 5],
+    ["item-target.disc-2.journey-to-treno.silver-gloves", 4],
+    ["item-target.disc-2.journey-to-treno.iron-helm", 3],
+    ["item-target.disc-2.return-to-lindblum.chain-mail", 15],
+  ];
+  for (const [targetId, quantity] of targets) {
+    const target = sourceInventoryTargets.find((entry) => entry.id === targetId);
+    assert.ok(target, `${targetId} is missing`);
+    assert.equal(target.targetQuantity, quantity);
+    assert.ok(target.sourceIds.length > 0);
+  }
+  assert.match(sourceInventoryTargets.find((target) => target.id === targets[3][0])?.interpretation ?? "", /up to 12 Power Belts/);
+  assert.match(sourceInventoryTargets.find((target) => target.id === targets[3][0])?.interpretation ?? "", /Beatrix's locked copy is excluded/);
+
+  for (const [itemId, abilityName] of expectedAbilities) {
+    const claim = equipmentAbilityClaims.find((entry) => entry.itemId === itemId && entry.abilityName === abilityName);
+    assert.ok(claim, `${itemId} is missing ${abilityName}`);
+    assert.equal(claim.verification, "partial");
+  }
+
+  for (const warningId of expectedWarnings) {
+    const warning = missables.find((entry) => entry.id === warningId);
+    assert.ok(warning, `${warningId} is missing`);
+    assert.ok(!warning.classification.includes("permanently-missable"), `${warningId} overstates permanent item loss`);
+    assert.ok(objectives.some((objective) => objective.id === warning.objectiveId));
+  }
+  assert.ok(missables.find((entry) => entry.id === expectedWarnings[1])?.classification.includes("recoverable-later"));
+  assert.ok(trenoExitStep?.objectiveIds?.includes("disc-2.treno.air-racket-purchase"));
+  assert.ok(cleyraShopStep?.objectiveIds?.includes("disc-2.cleyra.shop-stock"));
+  assert.ok(chainMailStep?.objectiveIds?.includes("disc-2.return-to-lindblum.chain-mail-stock"));
+
+  for (const sourceId of requiredSourceIds) {
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+  }
+  for (const path of itemAcquisitionPaths.filter((entry) => routeIds.includes(entry.id))) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
 });

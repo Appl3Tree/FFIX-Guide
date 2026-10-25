@@ -1425,7 +1425,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-treno-summit-station",
         title: "Summit Station — Phoenix Down, Mognet, and supplies",
         summary: "Use the rest stop before boarding. Nazna accepts Grimo's letter and has a second letter for Mochos.",
-        sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891", "gamefaqs-equipment-33383"],
+        sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-missables-71891", "gamefaqs-equipment-33383", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "journey-treno-nazna-letter",
@@ -1437,8 +1437,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "journey-treno-shop-and-train",
             kind: "save",
-            text: "Check the Summit Station shop for supplies and useful equipment for Dagger and Steiner, then speak to the attendant behind the left counter to advance the trip. Before leaving, check your Silver Gloves and Iron Helm totals: GameFAQs calls this the last chance to reach four and three copies respectively, although that cutoff is not independently confirmed. Go outside when the story sends you there; after Cinna and Marcus arrive, return to the rest area and speak with them and Steiner. Board the train when the scene is ready, then speak to Marcus to trigger the encounter.",
-            detail: "The shop is a limited-time stop in the story route. The Mythril Rod teaches Life, Silence, and Shell, while Steepled Hats support an optional Cotton Robe money-making route. The Silver Gloves/Iron Helm inventory target comes from GameFAQs; the independent shop route confirms the stock but does not establish a permanent cutoff, so treat the count as a conservative check rather than a verified loss warning.",
+            text: "Check the Summit Station shop for supplies and useful equipment for Dagger and Steiner. If following the source's perfect-inventory targets, compare stock against four Silver Gloves and three Iron Helms before leaving; the missable lists identify Summit Station as their last documented shop source. Then speak to the attendant behind the left counter to advance the trip. Go outside when the story sends you there; after Cinna and Marcus arrive, return to the rest area and speak with them and Steiner. Board the train when the scene is ready, then speak to Marcus to trigger the encounter.",
+            detail: "The counts are optional source-specific inventory targets, not requirements for normal story or achievement completion. Earlier copies are tracked separately: Black Waltz 3's Silver Gloves steal, the Lindblum synthesis-shop Silver Gloves pickup and pre-Cleyra shop, and Plant Brain/Dali/Lindblum routes for Iron Helm. GameFAQs, its item-location reference, and Neoseeker list Summit Station as the final purchase source; direct game/version testing remains open. The Mythril Rod teaches Life, Silence, and Shell, while Steepled Hats support an optional Cotton Robe money-making route.",
+            objectiveIds: ["disc-2.journey-to-treno.station-equipment-targets"],
           },
         ],
       },
@@ -1545,7 +1546,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-city-pickups-and-mognet",
         title: "First-visit sweep — coins, cards, Mogrich, and hidden Gil",
         summary: "Finish the collectible route before triggering the next story sequence. Treno's first Auction House visit is a story scene, not the later bidding itinerary.",
-        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891"],
+        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "treno-gemini-and-slums",
@@ -1558,8 +1559,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-mogrich-letter",
             kind: "optional",
             text: "Continue to the Knight's House tower and speak to Mogrich, the Moogle being chased by a dog. Save and choose Mognet to read Stiltzkin's letter, then use the Weapon Shop if you want to buy equipment or inspect synthesis options.",
-            detail: "Stiltzkin does not sell a bundle in Treno; this is a Mognet letter stop. The Disc II weapon stock includes Mythril Spear for 1,100 Gil and Lightning Staff for 1,200 Gil; Kumool's Mogshop in Ipsen's Castle later sells Mythril Spear, while Black Mage Village and Alexandria retain Lightning Staff as later documented sources. One missables source calls this the last shop window for Air Racket, Silver Gloves, Iron Helm, Chain Mail, Bandana, Chain Plate, and Leather Plate; the other shop route does not confirm that cutoff. If following a perfect-inventory list, check those quantities now, but treat the permanent cutoff as unresolved.",
-            objectiveIds: ["disc-2.treno.mogrich-letter"],
+            detail: "Stiltzkin does not sell a bundle in Treno; this is a Mognet letter stop. The Disc II weapon stock includes Air Racket for 400 Gil, Mythril Spear for 1,100 Gil, Lightning Staff for 1,200 Gil, and Chain Mail for 1,200 Gil. GameFAQs marks this as the final Air Racket purchase source, but a later chest in Ipsen's Castle recovers one copy. Summit Station is the final documented shop source for the optional Silver Gloves/Iron Helm targets, already checked on the previous route. Chain Mail also remains listed in Cleyra and the post-Cleyra Lindblum shop, so Treno is not its final shop window.",
+            objectiveIds: ["disc-2.treno.mogrich-letter", "disc-2.treno.air-racket-purchase"],
           },
           {
             id: "treno-king-house-pickup-and-queen",
@@ -1593,7 +1594,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-mythril-dagger-supersoft",
             kind: "required",
             text: "Take the west walkway toward Doctor Tot's tower and sweep around the approach for the Mythril Dagger. Enter the tower and speak with Doctor Tot at the top to receive the Supersoft key item and open the hatch to Gargan Roo.",
-            detail: "Published routes place the Mythril Dagger on different parts of the walkway; search around the tower approach before climbing. The Mythril Sword sold in Treno teaches Steiner Armor Break, so keep it equipped until he learns the ability if you bought it.",
+            detail: "Published routes place the Mythril Dagger on different parts of the walkway; search around the tower approach before climbing. Review the Air Racket shop warning before using Doctor Tot's hatch: Treno is the last documented purchase source, although an Air Racket remains in Ipsen's Castle. The five-copy goal is optional and may not be restored by that later chest. The Mythril Sword sold in Treno teaches Steiner Armor Break, so keep it equipped until he learns the ability if you bought it.",
+            objectiveIds: ["disc-2.treno.air-racket-purchase"],
           },
           {
             id: "treno-crime-and-punishment-ate",
@@ -1698,7 +1700,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-trunk",
         title: "Cleyra's Trunk — sandfalls and hidden branches",
         summary: "Search each branch before activating the sandfall passage; it locks the entrance behind you.",
-        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "cleyra-trunk-save-and-chests",
@@ -1774,7 +1776,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-shop-stock",
             kind: "optional",
             text: "Before triggering Antlion, visit both Cleyra shops: Burmecian Soldier Dan's weapon shop by the Inn and Stair Maiden Nina's item shop near the Windmill. Buy needed equipment and stock Annoyntments for Trouble.",
-            detail: "The completionist route source describes both shop inventories as a one-visit window. GameFAQs specifically recommends extra Mythril Armlet and Mage's Hat for Dagger, Mythril Helm and Mythril Armor for Steiner, and a Multina Racket if Bohden Gate was missed. The complete later-source audit remains open.",
+            detail: "The completionist route source describes both shop inventories as a one-visit window. GameFAQs specifically recommends extra Mythril Armlet and Mage's Hat for Dagger, Mythril Helm and Mythril Armor for Steiner, and a Multina Racket if Bohden Gate was missed. Burmecian Soldier Dan's weapon shop also lists Chain Mail for 1,200 Gil; Dragoos' post-Cleyra Lindblum shop is a later purchase source and the last documented chance before Dragon's Gate. The complete later-source audit remains open.",
             objectiveIds: ["disc-2.cleyra.shop-stock"],
           },
           {
@@ -2115,7 +2117,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "return-lindblum-perfect-chain-mail-stock",
             kind: "optional",
             text: "For a perfect-inventory route, check the Chain Mail stock note before leaving the shops. GameFAQs says to retain 15 Chain Mails before Dragon's Gate, counting up to 12 Power Belt add-ons toward that target.",
-            detail: "This exact inventory requirement is recorded as partial and applies only to a route preserving later synthesis options. Check your selected perfect-game plan before spending Gil or selling Chain Mail.",
+            detail: "GameFAQs allows up to 12 Power Belts to count toward the 15-piece total. This is optional perfect-inventory preparation, not a standard completion requirement; the item catalog records the Treno, Cleyra, and Lindblum purchase paths and excludes Beatrix's non-removable equipped copy. The full Power Belt synthesis and ingredient graph remains incomplete, so use the source's count as a route-specific target.",
             objectiveIds: ["disc-2.return-to-lindblum.chain-mail-stock"],
           },
           {
