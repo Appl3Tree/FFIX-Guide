@@ -2558,8 +2558,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "magdalene-forest-field-encounters",
             kind: "optional",
-            text: "The GameFAQs terrain table lists Griffin, Friendly Ladybird, and Zaghnol in the Magdalene Forest world-map forest. Jegged's broader location lists also include Cactuar and Goblin Mage there, but does not map them to a terrain formation. The Dead Forest interior has a separate Griffin, Myconid, and Zemzelett roster.",
-            detail: "If Quina is missing White Wind or Matra Magic, the world-map Griffin and Zaghnol are alternate teachers after Cleyra's Trunk. The source difference about Cactuar/Goblin Mage here remains open; use the detailed terrain roster as the conservative encounter list. Ragtime Mouse may also appear in forests; its full quiz route and reward checklist are not authored here yet.",
+            text: "The GameFAQs terrain table lists Griffin, Friendly Ladybird, and Zaghnol in the Magdalene Forest world-map forest. Jegged's broader location lists also include Cactuar and Goblin Mage there, but does not map them to a terrain formation. The Dead Forest field area has a separate Griffin, Myconid, and Zemzelett roster.",
+            detail: "In the Dead Forest, Quina can learn Mighty Guard from Myconid and White Wind from Zemzelett; the world-map Griffin is another White Wind teacher, and Zaghnol can teach Matra Magic after Cleyra's Trunk. The source difference about Cactuar/Goblin Mage here remains open; use the detailed terrain roster as the conservative world-map encounter list. Ragtime Mouse may also appear in forests; its full quiz route and reward checklist are not authored here yet.",
             objectiveIds: ["disc-2.outer-continent.blue-magic"],
           },
           {

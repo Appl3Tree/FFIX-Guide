@@ -1650,23 +1650,27 @@ const outerContinentPoolExpectations = [
   { id: "encounter.outer-continent.forest-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.griffin", "enemy.friendly-ladybird", "enemy.zaghnol-b"] },
   { id: "encounter.outer-continent.beach-pool", chapterId: "disc-2.outer-continent", roster: ["enemy.griffin", "enemy.zaghnol-b"] },
   { id: "encounter.magdalene-forest.outer-forest-pool", chapterId: "disc-2.magdalene-forest", roster: ["enemy.griffin", "enemy.friendly-ladybird", "enemy.zaghnol-b"] },
+  { id: "encounter.magdalene-forest.dead-forest-pool", chapterId: "disc-2.magdalene-forest", roster: ["enemy.griffin", "enemy.myconid", "enemy.zemzelett"] },
 ];
 const outerContinentPools = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.outer-continent" || encounter.chapterId === "disc-2.magdalene-forest");
 if (outerContinentPools.length !== outerContinentPoolExpectations.length || outerContinentPoolExpectations.some(({ id, chapterId, roster }) => {
   const pool = outerContinentPools.find((encounter) => encounter.id === id);
   return !pool || pool.kind !== "random-pool" || pool.chapterId !== chapterId ||
     !sameSortedValues(pool.formation.map((member) => member.enemyId), roster) || pool.formation.some((member) => member.quantity !== null) ||
-    !pool.sourceIds.includes("gamefaqs-monster-list-20490");
+    !pool.sourceIds.includes(id === "encounter.magdalene-forest.dead-forest-pool" ? "gamefaqs-magdalene-forest-71891" : "gamefaqs-monster-list-20490") ||
+    (id === "encounter.magdalene-forest.dead-forest-pool" && !pool.sourceIds.includes("gamefaqs-enemy-list-71891"));
 })) {
-  errors.push("Outer Continent and Magdalene Forest must retain six source-backed terrain pools without inventing formation counts or encounter odds.");
+  errors.push("Outer Continent and Magdalene Forest must retain five terrain pools, separate world-map and Dead Forest pools, and source-backed rosters without inventing formation counts or encounter odds.");
 }
-const outerContinentBlueMagicTeachers = [
+const outerContinentAndDeadForestBlueMagicTeachers = [
   { enemyId: "enemy.cactuar", skill: "1,000 Needles" },
   { enemyId: "enemy.goblin-mage", skill: "Goblin Punch" },
   { enemyId: "enemy.griffin", skill: "White Wind" },
   { enemyId: "enemy.zaghnol-b", skill: "Matra Magic" },
+  { enemyId: "enemy.myconid", skill: "Mighty Guard" },
+  { enemyId: "enemy.zemzelett", skill: "White Wind" },
 ];
-for (const teacher of outerContinentBlueMagicTeachers) {
+for (const teacher of outerContinentAndDeadForestBlueMagicTeachers) {
   const record = enemyRecords.find((enemy) => enemy.id === teacher.enemyId);
   if (!record?.blueMagic.some((skill) => skill.name === teacher.skill && skill.objectiveIds.includes("disc-2.outer-continent.blue-magic")) ||
     !record.routeObjectiveIds.includes("disc-2.outer-continent.blue-magic")) {
