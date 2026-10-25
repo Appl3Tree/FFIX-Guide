@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { ateObjectiveDependencies, gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, storyPartySequences } from "../src/data/progression.ts";
+import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, storyPartySequences } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
@@ -41,6 +41,7 @@ checkUnique("guide sequence edge", guideSequenceEdges.map((edge) => `${edge.from
 checkUnique("game route covered chapter", [...gameRouteCoverage.chapterIds]);
 checkUnique("game route edge", gameRouteEdges.map((edge) => edge.id));
 checkUnique("game route link", gameRouteEdges.map((edge) => `${edge.fromChapterId}->${edge.toChapterId}`));
+checkUnique("game route cutoff", gameRouteCutoffs.map((cutoff) => cutoff.id));
 checkUnique("story party sequence", storyPartySequences.map((sequence) => sequence.id));
 
 const sourceIds = new Set(sources.map((source) => source.id));
@@ -49,6 +50,8 @@ const gameItemIds = new Set(gameItems.map((item) => item.id));
 const synthesisRecipeIds = new Set(synthesisRecipes.map((recipe) => recipe.id));
 const areaIds = new Set(guideAreas.map((area) => area.id));
 const walkthroughChapterIds = new Set(walkthroughChapters.map((chapter) => chapter.areaId));
+const gameRouteEdgesById = new Map(gameRouteEdges.map((edge) => [edge.id, edge]));
+const missablesById = new Map(missables.map((missable) => [missable.id, missable]));
 const achievementCatalogs = [
   { platform: "steam" as const, records: steamAchievements, expectedCount: achievementSourceCounts.steam.count },
   { platform: "ps4" as const, records: ps4Trophies, expectedCount: achievementSourceCounts.ps4.count },
@@ -118,6 +121,34 @@ for (const edge of gameRouteEdges) {
   if (edge.sourceIds.length === 0) errors.push(`Game route edge ${edge.id} has no source provenance.`);
   for (const sourceId of edge.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`Game route edge ${edge.id} references unknown source ${sourceId}.`);
+  }
+}
+const supportedGameRouteCutoffCertainties = new Set(["source-supported", "conservative", "disputed"]);
+for (const cutoff of gameRouteCutoffs) {
+  const edge = gameRouteEdgesById.get(cutoff.edgeId);
+  if (!edge) errors.push(`Game route cutoff ${cutoff.id} references unknown edge ${cutoff.edgeId}.`);
+  if (!cutoff.title.trim()) errors.push(`Game route cutoff ${cutoff.id} has no title.`);
+  if (!cutoff.trigger.trim()) errors.push(`Game route cutoff ${cutoff.id} has no trigger description.`);
+  if (!supportedGameRouteCutoffCertainties.has(cutoff.certainty)) errors.push(`Game route cutoff ${cutoff.id} has unsupported certainty ${cutoff.certainty}.`);
+  if (cutoff.missableIds.length === 0) errors.push(`Game route cutoff ${cutoff.id} has no linked missable warnings.`);
+  if (cutoff.sourceIds.length === 0) errors.push(`Game route cutoff ${cutoff.id} has no source provenance.`);
+  const linkedMissables = cutoff.missableIds.flatMap((missableId) => {
+    const missable = missablesById.get(missableId);
+    if (!missable) {
+      errors.push(`Game route cutoff ${cutoff.id} references unknown missable ${missableId}.`);
+      return [];
+    }
+    if (!edge) return [missable];
+    if (!missable.warningChapterIds?.some((chapterId) => chapterId === edge.fromChapterId || chapterId === edge.toChapterId)) {
+      errors.push(`Game route cutoff ${cutoff.id} links missable ${missableId}, whose warning chapter is not on edge ${edge.id}.`);
+    }
+    return [missable];
+  });
+  if (new Set(cutoff.missableIds).size !== cutoff.missableIds.length) errors.push(`Game route cutoff ${cutoff.id} repeats a missable link.`);
+  const relatedSourceIds = new Set([...(edge?.sourceIds ?? []), ...linkedMissables.flatMap((missable) => missable.sourceIds)]);
+  for (const sourceId of cutoff.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Game route cutoff ${cutoff.id} references unknown source ${sourceId}.`);
+    else if (!relatedSourceIds.has(sourceId)) errors.push(`Game route cutoff ${cutoff.id} source ${sourceId} is not cited by its route edge or linked warnings.`);
   }
 }
 const reachableGameRouteChapters = new Set<string>();

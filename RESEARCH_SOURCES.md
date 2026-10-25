@@ -6,7 +6,7 @@ Last updated: 2026-10-25
 
 The project records the claim, source, relevant section, version/platform, access date, verification state, and known conflict for each fact. Walkthroughs are used for scope discovery and fact checking, not copied prose. Critical deadlines and missable consequences require corroboration. Where references disagree, the conflict stays open until evidence resolves it.
 
-The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 283-source register and walkthrough do not establish that the game's content has been comprehensively researched.
+The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 285-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
 ## FFIX references inspected
 
@@ -249,6 +249,17 @@ The implementation remains incomplete. All 44 chapters are partially authored an
 | [GameFAQs achievement guide](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/achievements) | Late-game weapon and guardian achievements | Lists the Memoria weapon and guardian achievements. Exact parity across all modern releases is still being audited. |
 | [RPGClassics Memoria](https://shrines.rpgclassics.com/psx/ffix/memoria.shtml) | Independent original PlayStation Memoria route | Cross-checks hidden weapon and card-player locations, guardian fights, Hades, and Quina Blue Magic; not used to assert modern achievement parity. |
 | [EliteGrindLab Memoria](https://elitegrindlab.com/ff9/walkthrough/memoria/) | Memoria combat and Quina Blue Magic cross-check | Used for guardian and Crystal World details, including enemy variants and Blue Magic opportunities; item-level recovery remains partial. |
+
+## Route cutoff cross-check
+
+The route graph now links 16 selected cutoff windows to 34 missable records. The labels separate deadlines directly supported by the reviewed sources from conservative safe points and source disagreements. Encounter windows such as Antlion, Lani, Ark, and Beatrix remain distinct from the later area-exit checks. The Route Map links each warning to its walkthrough chapter; the data audit verifies its edge, chapter, and citation references. This partial registry does not establish full route coverage or cross-release behavior.
+
+| Route window | Reviewed sources | Evidence recorded |
+| --- | --- | --- |
+| Dali departure and Ice Cavern return | [GameFAQs Ice Cavern](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ice-cavern), [GameFAQs Village of Dali](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/village-of-dali), [EliteGrindLab Ice Cavern](https://elitegrindlab.com/ff9/walkthrough/ice-cavern/), [Steam Missable & Optional Content](https://steamcommunity.com/sharedfiles/filedetails/?id=2988011418) | The Ice Cavern chest sweep remains available from Dali after the boss and closes at Cargo Ship departure. The optional post-boss Mois letter recovery is reported by one guide and kept disputed; delivery to Gumo is a separate warning. |
+| Lindblum departure and Gizamaluke's Grotto | [GameFAQs Lindblum](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/lindblum), [GameFAQs route by Shotgunnova](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/47344), [Gamer Guides Gizamaluke's Grotto](https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/gizamaluke-s-grotto), [EliteGrindLab Gizamaluke's Grotto](https://elitegrindlab.com/ff9/walkthrough/gizamalukes-grotto/) | First-visit ATEs, Key Items, and the optional Javelin purchase are linked to city departure. The trolley lockout is tied to the conservative pre-entry point because sources differ on the exact Grotto timing. |
+| Cleyra's attack and departure | [GameFAQs Cleyra](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/cleyra), [Jegged Cleyra](https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/14-Cleyra.html) | ATEs, shop stock, Antlion and Beatrix steals, evacuation choices, post-Antlion rewards, and the final settlement sweep are separate checkpoints. The guides disagree on the exact last safe action for the overall sweep, so the route uses an earlier conservative collection point. |
+| Alexandria, Fossil Roo, Oeilvert, and Shimmering Island | [GameFAQs The Home Front](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-home-front), [GameFAQs Journey to the Outer Continent](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-the-outer-continent), [GameFAQs Forgotten Continent](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/forgotten-continent), [GameFAQs Preparing to Leave](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/preparing-to-leave) | The Alexandria-to-Treno activity window, Fossil Roo's Lani and final Gargant windows, Oeilvert's Stiltzkin/Ark/chest checkpoints, and the pre-Shimmering-Island review each link to their affected warning records. |
 
 ## Platform and achievement evidence matrix
 

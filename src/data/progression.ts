@@ -23,6 +23,16 @@ export type GameRouteEdge = {
   sourceIds: string[];
 };
 
+export type GameRouteCutoff = {
+  id: string;
+  edgeId: string;
+  title: string;
+  certainty: "source-supported" | "conservative" | "disputed";
+  trigger: string;
+  missableIds: string[];
+  sourceIds: string[];
+};
+
 export type StoryPartyPhase = {
   party: string;
   chapterIds: string[];
@@ -777,6 +787,156 @@ export const gameRouteEdges: GameRouteEdge[] = [
     relationship: "rejoin",
     summary: "After the optional Moguta delivery, return to Dragon's Gate and resume the required route to Qu's Marsh and Fossil Roo.",
     sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-return-to-lindblum", "jegged-gizamaluke"],
+  },
+];
+
+// Specific warning windows are attached to the route transition they guard.
+// Encounter windows and intra-area checkpoints stay separate from the final
+// area exit when their triggers occur earlier in the same chapter.
+export const gameRouteCutoffs: GameRouteCutoff[] = [
+  {
+    id: "cutoff.dali-cargo-ship.ice-cavern-treasures",
+    edgeId: "story.dali-to-cargo-ship",
+    title: "Ice Cavern chest sweep",
+    certainty: "source-supported",
+    trigger: "Before boarding the Cargo Ship from Dali. The Ice Cavern exit itself is not the cutoff; return from Dali to finish the eight chests.",
+    missableIds: ["missable.disc-1.ice-cavern.treasures"],
+    sourceIds: ["gamefaqs-ice-cavern-71891", "elitegrindlab-ice-cavern", "gamefaqs-missables-71891", "jegged-missables"],
+  },
+  {
+    id: "cutoff.dali-cargo-ship.mois-letter",
+    edgeId: "story.dali-to-cargo-ship",
+    title: "Mois letter pickup and delivery",
+    certainty: "disputed",
+    trigger: "Accept the letter on the first Ice Cavern visit. If missed, one source reports a post-boss return; try before departure, then deliver it to Gumo before boarding. The recovery claim is not corroborated across the reviewed guides.",
+    missableIds: ["missable.disc-1.ice-cavern.mois-letter", "missable.disc-1.village-of-dali.mois-letter-delivery"],
+    sourceIds: ["gamefaqs-ice-cavern-71891", "steam-missable-content-guide-2988011418", "elitegrindlab-ice-cavern", "gamefaqs-dali-71891", "gamerguides-dali"],
+  },
+  {
+    id: "cutoff.lindblum-departure.first-visit-windows",
+    edgeId: "story.lindblum-to-journey-to-burmecia",
+    title: "Lindblum first-visit checklist",
+    certainty: "conservative",
+    trigger: "Before leaving Lindblum for the world map, finish the first-visit ATE set, collect the Autograph and Moogle Suit, and buy the Javelin if desired. For the Key Items, use the earlier safe point before visiting the Tantalus Hideout.",
+    missableIds: ["missable.disc-1.lindblum.autograph-moogle-suit", "missable.disc-1.lindblum.ates", "missable.disc-1.lindblum.javelin-shop"],
+    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum"],
+  },
+  {
+    id: "cutoff.lindblum-grotto-entry.trolley-lockout",
+    edgeId: "story.lindblum-to-journey-to-burmecia",
+    title: "Gizamaluke's Grotto entry closes city transit",
+    certainty: "conservative",
+    trigger: "Complete Lindblum Castle and district visits before entering Gizamaluke's Grotto. Sources agree the trolley and most city access close; their wording differs on whether the exact cutoff is entry or completion of the Grotto sequence, so use pre-entry as the safe boundary.",
+    missableIds: ["missable.disc-1.lindblum.trolley-cutoff"],
+    sourceIds: ["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"],
+  },
+  {
+    id: "cutoff.cleyra-antlion-sequence.local-windows",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Cleyra shops and ATEs before the attack",
+    certainty: "source-supported",
+    trigger: "Before triggering Antlion and the attack sequence, finish the four eligible Cleyra ATEs and inspect both one-visit shops. Quina is required for two of the ATEs.",
+    missableIds: ["missable.disc-2.cleyra.shop-stock", "missable.disc-2.cleyra.movie-critic-ates"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamerguides-movie-critic-guide"],
+  },
+  {
+    id: "cutoff.cleyra-antlion.boss-steals",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Antlion steal window",
+    certainty: "source-supported",
+    trigger: "Attempt Antlion's three listed steals before defeating it. The encounter does not repeat; the warning keeps item recovery caveats in the missable record.",
+    missableIds: ["missable.disc-2.cleyra.antlion-steals"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+  {
+    id: "cutoff.cleyra-evacuation.choice-window",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Cleyra evacuation choices",
+    certainty: "conservative",
+    trigger: "During the evacuation, choose Right, Left, Right, then Not Yet at the final prompt before the cutscene continues. Sources disagree on whether the last answer affects the achievement; the route follows the conservative choice.",
+    missableIds: ["missable.disc-2.cleyra.out-of-harms-way"],
+    sourceIds: ["jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra"],
+  },
+  {
+    id: "cutoff.cleyra-beatrix.boss-steals",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Beatrix steal window",
+    certainty: "source-supported",
+    trigger: "Attempt Beatrix's three listed steals before the scripted battle ends. Keep survival and the story outcome ahead of repeated steal attempts.",
+    missableIds: ["missable.disc-2.cleyra.beatrix-steals"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+  {
+    id: "cutoff.cleyra-departure.final-sweep",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Cleyra final sweep and departure",
+    certainty: "disputed",
+    trigger: "Guides describe the final pickup cutoff differently. The conservative route is to finish the settlement sweep before leaving it for the return through the Trunk, then collect the post-Antlion Emerald and Stiltzkin bundle before advancing out of Cleyra.",
+    missableIds: ["missable.disc-2.cleyra.treasures", "missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
+    sourceIds: ["gamefaqs-missables-71891", "jegged-missables", "jegged-cleyra", "gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+  {
+    id: "cutoff.alexandria-treno.home-front-windows",
+    edgeId: "story.home-front-to-card-tournament",
+    title: "Alexandria before the Treno transition",
+    certainty: "conservative",
+    trigger: "Finish Hippaul's reward ladder, the Alexandria ATE prompts, Stiltzkin's fifth bundle, and the Nero Brothers nine-win challenge before advancing from Alexandria toward Treno. Sources disagree on how broadly activities close when leaving; this is the safe boundary.",
+    missableIds: ["missable.disc-3.the-home-front.hippaul-racing", "missable.disc-3.the-home-front.ates", "missable.disc-3.the-home-front.stiltzkin-5", "missable.disc-3.the-home-front.found-in-the-shuffle"],
+    sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-hippaul-racing-71891", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"],
+  },
+  {
+    id: "cutoff.fossil-roo.lani-steals",
+    edgeId: "story.journey-to-outer-continent-to-outer-continent",
+    title: "Lani steal window",
+    certainty: "source-supported",
+    trigger: "Attempt Lani's listed steals before defeating her in Fossil Roo's entrance section. This happens before the final Gargant ride out of the area.",
+    missableIds: ["missable.disc-2.journey-to-outer-continent.lani-steals"],
+    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo"],
+  },
+  {
+    id: "cutoff.fossil-roo.final-gargant",
+    edgeId: "story.journey-to-outer-continent-to-outer-continent",
+    title: "Final Gargant and Fossil Roo exit",
+    certainty: "source-supported",
+    trigger: "Before flipping switch No. 3 and taking the final Gargant out, finish the treasure sweep, Kuppo letter, One Ring dig, Peek-A-Boo rescue, and Stiltzkin's third purchase.",
+    missableIds: ["missable.disc-2.journey-to-outer-continent.treasure-sweep", "missable.disc-2.journey-to-outer-continent.kuppo-letter", "missable.disc-2.journey-to-outer-continent.one-ring", "missable.disc-2.journey-to-outer-continent.peek-a-boo", "missable.disc-2.fossil-roo.stiltzkin-3"],
+    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-stiltzkin-shopping-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "playstationtrophies-fossil-roo", "steam-achievements", "xboxachievements-final-fantasy-ix"],
+  },
+  {
+    id: "cutoff.oeilvert.stiltzkin-sixth-stop",
+    edgeId: "story.forgotten-continent-to-desert-palace",
+    title: "Stiltzkin's sixth purchase",
+    certainty: "source-supported",
+    trigger: "Buy the 888-Gil bundle in Oeilvert's eastern moogle room before completing the hologram route and returning there after the story scene.",
+    missableIds: ["missable.disc-3.forgotten-continent.stiltzkin-6"],
+    sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert", "jegged-stiltzkin", "steam-achievements", "xboxachievements-final-fantasy-ix"],
+  },
+  {
+    id: "cutoff.oeilvert.ark-steals",
+    edgeId: "story.forgotten-continent-to-desert-palace",
+    title: "Ark steal window",
+    certainty: "source-supported",
+    trigger: "Attempt Ark's three listed steals before defeating it at the Gulug Stone elevator.",
+    missableIds: ["missable.disc-3.forgotten-continent.ark-steals"],
+    sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"],
+  },
+  {
+    id: "cutoff.oeilvert.gulug-stone-exit",
+    edgeId: "story.forgotten-continent-to-desert-palace",
+    title: "Oeilvert chest sweep before Gulug Stone",
+    certainty: "source-supported",
+    trigger: "After Ark, check all eight Oeilvert chests before taking the Gulug Stone and leaving the ruins.",
+    missableIds: ["missable.disc-3.forgotten-continent.oeilvert-treasures"],
+    sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"],
+  },
+  {
+    id: "cutoff.shimmering-island.disc-iii-departure",
+    edgeId: "story.preparing-to-leave-to-portal",
+    title: "Disc III final open-world review",
+    certainty: "source-supported",
+    trigger: "Before flying through the Shimmering Island portal, finish the final documented ability-source check, Morrid's coffee delivery, the Treno Amdusias stage, the Conde Petie Diamond and Moonstone routes, and Oglop Trading.",
+    missableIds: ["missable.disc-3.preparing-to-leave.final-stock-ability-review", "missable.disc-3.preparing-to-leave.conde-petie-diamond", "missable.disc-3.preparing-to-leave.morrid-coffees", "missable.disc-3.preparing-to-leave.amdasias-running-shoes", "missable.disc-3.preparing-to-leave.colored-stones-moonstone", "missable.disc-3.preparing-to-leave.oglop-trading"],
+    sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-morrid-coffees-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-conde-petie-colored-stones-71891", "gamefaqs-oglop-trading-71891", "jegged-rare-coffees", "playstationtrophies-my-little-airship"],
   },
 ];
 

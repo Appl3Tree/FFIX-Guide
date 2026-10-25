@@ -32,6 +32,7 @@ import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "
 import {
   ateObjectiveDependencies,
   gameRouteCoverage,
+  gameRouteCutoffs,
   gameRouteEdges,
   guideChapterSequence,
   guideSequenceEdges,
@@ -1150,8 +1151,9 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
         <span className="game-route-scope">Through {chapterTitle(gameRouteCoverage.throughChapterId)}</span>
       </div>
       <p className="game-route-intro">These source-checked links follow the main story through the final battle, including the forced Oeilvert/Desert Palace party split and the optional return to Gaia after Deathguise. They also record the Dagger-and-Steiner Treno branch and twelve optional area returns, including the pre-Cargo-Ship Dali return to Ice Cavern, the pre-Cleyra Lindblum Basin return, and the Disc IV Mognet, Kupo Nut, Treno, and Madain Sari routes. Party control handoffs are mapped separately below. Many side routes, cutoff conditions, and objective prerequisites remain outside this partial graph.</p>
-      <div className="game-route-counts" aria-label="Route relationship counts">
+      <div className="game-route-counts" aria-label="Route relationship and cutoff counts">
         <span>{gameRouteCounts["required-story"]} story gates</span><span>{gameRouteCounts["optional-detour"]} optional detour{gameRouteCounts["optional-detour"] === 1 ? "" : "s"}</span><span>{gameRouteCounts["optional-return"]} optional return{gameRouteCounts["optional-return"] === 1 ? "" : "s"}</span><span>{gameRouteCounts.rejoin} rejoin{gameRouteCounts.rejoin === 1 ? "" : "s"}</span>
+        <span>{gameRouteCutoffs.length} cutoff windows linked</span>
       </div>
       <div className="party-sequence-section">
         <h3>Party control handoffs</h3>
@@ -1179,12 +1181,42 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
           const edgeSources = edge.sourceIds
             .map((sourceId) => sources.find((source) => source.id === sourceId))
             .filter((source): source is (typeof sources)[number] => Boolean(source));
+          const edgeCutoffs = gameRouteCutoffs.filter((cutoff) => cutoff.edgeId === edge.id);
           return <li className={`game-route-entry is-${edge.relationship}`} key={edge.id}>
             <div className="game-route-edge-topline">
               <div className="game-route-edge-endpoints"><strong>{chapterTitle(edge.fromChapterId)}</strong><span aria-hidden="true">→</span><strong>{chapterTitle(edge.toChapterId)}</strong></div>
               <span className="game-route-kind">{gameRouteRelationshipLabels[edge.relationship]}</span>
             </div>
             <p>{edge.summary}</p>
+            {edgeCutoffs.length > 0 && <details className="game-route-cutoffs">
+              <summary>Cutoff review ({edgeCutoffs.length} window{edgeCutoffs.length === 1 ? "" : "s"})</summary>
+              <div className="game-route-cutoff-list">
+                {edgeCutoffs.map((cutoff) => {
+                  const linkedMissables = cutoff.missableIds
+                    .map((missableId) => missables.find((record) => record.id === missableId))
+                    .filter((record): record is (typeof missables)[number] => Boolean(record));
+                  const cutoffSources = cutoff.sourceIds
+                    .map((sourceId) => sources.find((source) => source.id === sourceId))
+                    .filter((source): source is (typeof sources)[number] => Boolean(source));
+                  return <section className="game-route-cutoff" key={cutoff.id}>
+                    <div className="game-route-cutoff-heading"><h4>{cutoff.title}</h4><span className={`game-route-certainty is-${cutoff.certainty}`}>{cutoff.certainty.replaceAll("-", " ")}</span></div>
+                    <p>{cutoff.trigger}</p>
+                    <ul className="game-route-cutoff-missables">
+                      {linkedMissables.map((record) => {
+                        const state = missableProgressState(record, profile);
+                        const warningChapterId = record.warningChapterIds?.find((chapterId) => chapterId === edge.fromChapterId || chapterId === edge.toChapterId) ?? edge.fromChapterId;
+                        return <li key={record.id}>
+                          <div className="game-route-cutoff-record"><strong>{record.title}</strong><small>Deadline: {record.deadline}</small></div>
+                          <span className={`game-route-cutoff-state is-${state}`}>{state.replaceAll("-", " ")}</span>
+                          <button type="button" className="game-route-open-warning" onClick={() => onOpenChapter(warningChapterId)}>Open warning</button>
+                        </li>;
+                      })}
+                    </ul>
+                    <details className="game-route-sources"><summary>Cutoff sources ({cutoffSources.length})</summary><div>{cutoffSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div></details>
+                  </section>;
+                })}
+              </div>
+            </details>}
             <details className="game-route-sources"><summary>Sources ({edgeSources.length})</summary><div>{edgeSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div></details>
           </li>;
         })}
