@@ -853,7 +853,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   },
   {
     areaId: "disc-1.lindblum",
-    overview: "Deliver the Dali Mognet letter, sweep Lindblum's castle and three districts, view the six first-visit ATEs, and secure the one-time Theater District key items before entering the Tantalus Hideout. Prepare for the Festival of the Hunt, steal from Zaghnol, choose the winner route that fits this save, then collect the Base Level pickups before leaving for the world map.",
+    overview: "Deliver the Dali Mognet letter and sweep Lindblum's castle and three districts. View each ATE at its prompt through the Tantalus Hideout exit, and secure the one-time Theater District key items before entering the Hideout. Prepare for the Festival of the Hunt, steal from Zaghnol, choose the winner route that fits this save, then collect the Base Level pickups before leaving for the world map.",
     timedRouteNote: "The source targets 01:51:20 at the castle Guest Room after Lindblum's first city sweep and 02:07:43 at Dragon's Gate after the post-Festival route. Its perfect-save shop loop stocks Steepled Hats and Cotton Robes; the Festival winner and Zaghnol finish must match the selected stat plan. The in-game Festival still has its separate 12-minute timer. Platform achievement/ATE goals and optional city detours need their own budget; these NTSC splits are not tested.",
     sections: [
       {
@@ -951,8 +951,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lindblum-ate-final-check",
             kind: "cutoff",
-            text: "Before leaving the Theater District, confirm that all six local ATEs have played: Teach Me, Mogster! (synthesis); Small-Town Knight in a Big City; Vivi's Shopping; Steam Engine; What Can I Do?; and Baku and His Crew.",
-            detail: "The set spans several screens and the Hideout. Lesson 3 is a tutorial and does not count toward Movie Critic; the other five are eligible scenes. Complete the checklist after the final Baku scene has appeared.",
+            text: "After leaving the Tantalus Hideout and viewing Baku and His Crew, confirm all six local ATEs have played before returning to Lindblum Castle: Teach Me, Mogster! (synthesis); Small-Town Knight in a Big City; Vivi's Shopping; Steam Engine; What Can I Do?; and Baku and His Crew.",
+            detail: "The scene prompts span the Inn, street, Air Cab station, Theater District, and Hideout entry/exit. Lesson 3 is a tutorial and does not count toward Movie Critic; the other five are eligible scenes. GameFAQs and Jegged send Zidane back to the station and Castle after Baku.",
             objectiveIds: ["disc-1.lindblum.movie-critic-ates"],
           },
           {
