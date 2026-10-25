@@ -738,7 +738,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.portal-to-another-world",
     toChapterId: "disc-4.return-to-gaia",
     relationship: "required-story",
-    summary: "After Bran Bal and the Pandemonium sequence, the Disc III ending returns the party to Gaia and opens Disc IV's world map.",
+    summary: "After Kuja, the story follows a linear path back through Bran Bal. Zidane and Dagger gather the Genomes there, then escape aboard the Invincible to Gaia as Disc IV opens. This confirms a story passage through Bran Bal, not free access to its earlier pickup rooms.",
     sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-return-to-gaia-71891", "jegged-pandemonium", "rpgclassics-disc-4-walkthrough"],
   },
   {

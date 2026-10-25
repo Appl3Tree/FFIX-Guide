@@ -868,6 +868,27 @@ if (
 ) {
   errors.push("The Dali return route must distinguish Mois's post-boss letter window from later entrance visits.");
 }
+const branBalReturnEdge = gameRouteEdgesById.get("story.portal-to-return-to-gaia");
+const branBalTreasureWarning = missablesById.get("missable.disc-3.portal-to-another-world.terra-bran-bal-treasures");
+const branBalCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.bran-bal.green-gate");
+const branBalReturnSources = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium"];
+if (
+  !branBalReturnEdge?.summary.includes("linear path back through Bran Bal") ||
+  !branBalReturnEdge.summary.includes("gather the Genomes") ||
+  !branBalReturnEdge.summary.includes("not free access to its earlier pickup rooms") ||
+  branBalReturnSources.some((sourceId) => !branBalReturnEdge.sourceIds.includes(sourceId))
+) {
+  errors.push("The post-Kuja route must document the linear Bran Bal story passage without implying a free treasure-room return.");
+}
+if (
+  branBalCutoff?.certainty !== "conservative" ||
+  !branBalCutoff.trigger.includes("Mikoto through the green gate") ||
+  !branBalTreasureWarning?.nextAvailability?.includes("Neither guide documents free access") ||
+  !branBalTreasureWarning.recovery?.includes("No reviewed source confirms a free return") ||
+  branBalReturnSources.some((sourceId) => !branBalTreasureWarning.sourceIds.includes(sourceId))
+) {
+  errors.push("Bran Bal's treasure warning must retain the conservative pre-gate checkpoint and distinguish story traversal from pickup recovery.");
+}
 const friendlyCreatureObjectiveIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
   "disc-2.journey-to-treno.friendly-ghost",
