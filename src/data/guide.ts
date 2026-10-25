@@ -1522,6 +1522,14 @@ export const sources = [
     notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges. The route defers these mountain-ability sources until Disc III and records the separate repeatable point/digging routes from the minigame.",
   },
   {
+    id: "gamefaqs-chocobo-hot-cold-ysf-9771",
+    title: "Chocobo Hot & Cold — item and Chocograph FAQ by YSF",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/9771",
+    accessed: "2026-10-25",
+    notes: "Original PlayStation Chocobo Hot & Cold reference. It names all four Moonstone sources (Brahne, Conde Petie Mountain Path, Friendly Jabberwock, and Stiltzkin's Alexandria bundle), and advises reserving one Moonstone for Feather Circle and one for Pearl Rouge synthesis. The guide records the four-copy achievement condition separately from these optional uses.",
+  },
+  {
     id: "jegged-chocographs",
     title: "Chocographs — locations and rewards",
     publisher: "Jegged",
@@ -1712,6 +1720,22 @@ export const sources = [
     url: "https://www.cavesofnarshe.com/ff9/items.php?ff9spoilers=on%3Fprintpage%3Dtrue",
     accessed: "2026-10-24",
     notes: "Cross-check for Phoenix Pinion locations at Alexandria, Alexandria Castle, Dali, Cleyra, Disc II Lindblum, Conde Petie, Madain Sari, and Disc III Alexandria; Chocographs #5 and #17; Stiltzkin's Cleyra, Fossil Roo, and Alexandria bundles; and Hades synthesis for 300 Gil plus Phoenix Down and Gysahl Greens. It lists wins from Earth Guardian, Kraken, Lich, Maliris, and Soulcage, plus steals from various enemies, but does not state each drop chance or enumerate steals.",
+  },
+  {
+    id: "cavesofnarshe-moonstone",
+    title: "Final Fantasy IX — Moonstone item reference",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/w_item.php?item=Moonstone",
+    accessed: "2026-10-25",
+    notes: "Indexed search-result text cross-checks Moonstone's equip abilities and acquisition list, but the page could not be fetched directly during this review. Its result places the Disc IV Stiltzkin copy at Black Mage Village, conflicting with GameFAQs, YSF, and Jegged, which place the final bundle at Alexandria; this guide follows the latter three sources and preserves the discrepancy rather than treating the location as directly verified.",
+  },
+  {
+    id: "cavesofnarshe-pearl-rouge",
+    title: "Final Fantasy IX — Pearl Rouge item reference",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/w_item.php?item=Pearl+Rouge",
+    accessed: "2026-10-25",
+    notes: "Indexed search-result text cross-checks Pearl Rouge as a Treno Auction item and its Moonstone + Elixir synthesis for 5,000 Gil, including listed shop locations. The page could not be fetched directly during this review; GameFAQs Items and Shops remain the primary references for the recipe, price, and shops.",
   },
   {
     id: "cavesofnarshe-ff9-chocobo-guide",
@@ -2271,7 +2295,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/stiltzkin-shopping",
     accessed: "2026-10-25",
-    notes: "Lists the eight Stiltzkin bundles, prices, one-time appearances, Ribbon reward, and the original Japanese PSX version caveat. Its Cleyra #2 bundle contains Hi-Potion, Ether, and Phoenix Pinion for 444 Gil; Fossil Roo #3 contains Phoenix Pinion, Ether, and Remedy for 555 Gil; Alexandria #5 contains Phoenix Pinion, Hi-Potion, and Elixir for 777 Gil.",
+    notes: "Lists the eight Stiltzkin bundles, prices, one-time appearances, Ribbon reward, and the original Japanese PSX version caveat. Its Cleyra #2 bundle contains Hi-Potion, Ether, and Phoenix Pinion for 444 Gil; Fossil Roo #3 contains Phoenix Pinion, Ether, and Remedy for 555 Gil; Alexandria #5 contains Phoenix Pinion, Hi-Potion, and Elixir for 777 Gil; Alexandria #8 contains Moonstone, Ruby, and Elixir for 5,555 Gil.",
   },
   {
     id: "elitegrindlab-iifa-tree-revisited",
@@ -2335,7 +2359,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/treno-auction-house",
     accessed: "2026-10-25",
-    notes: "Item-pool cross-check for Treno's auction, including Fairy Earrings (first available Disc II, repeatable, no special condition), the once-only Disc IV Ribbon offer, and Dark Matter's Odin summon. Auction prices vary by bidding, so the walkthrough does not set a fixed Gil cost.",
+    notes: "Item-pool cross-check for Treno's auction, including Fairy Earrings (first available Disc II, repeatable, no special condition), Pearl Rouge (first available Disc II, repeatable, no special condition, approximately 17,100 Gil), the once-only Disc IV Ribbon offer, and Dark Matter's Odin summon. Auction prices vary with bidding, so the walkthrough does not store Pearl Rouge's approximate price as a fixed Gil cost.",
   },
   {
     id: "jegged-treno-tournament",
@@ -2751,7 +2775,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-gaia",
     accessed: "2026-10-24",
-    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It says Atla's Mogshop remains open with the same Disc III stock; this route supports the Steepled Hat recovery. It says the other Daguerreo shops retain their previous inventories, but its replacement weapon list omits Diamond Armor; it also identifies earlier quest opportunities that have closed.",
+    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It identifies Stiltzkin's Alexandria steeple bundle as Moonstone, Ruby, and Elixir for 5,555 Gil. It says Atla's Mogshop remains open with the same Disc III stock; this route supports the Steepled Hat recovery. It says the other Daguerreo shops retain their previous inventories, but its replacement weapon list omits Diamond Armor; it also identifies earlier quest opportunities that have closed.",
   },
   {
     id: "gamerguides-side-questing-4",
@@ -2887,7 +2911,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/54996",
     accessed: "2026-10-24",
-    notes: "Original PlayStation item reference cross-check listing Phoenix Pinion's fixed pickups and Hades synthesis, but its Pinion entry has no win/steal sources, conflicting with the modern GameFAQs item reference and Caves of Narshe enemy list. It also lists Wing Edge's three fixed pickup locations, late boss drop sources, Crystal World Tiamat and Kraken Right Tentacle steal sources, Magician Shoes synthesis from Germinas Boots + Bone Wrist for 1,500 Gil, and Bone Wrist's Ralvurahva/shop sources. Its Kraken Right Tentacle Wing Edge steal conflicts with GameFAQs' Memoria walkthrough, which lists Elixir as the tentacles' steal. It also supports Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition. It describes Magician Shoes as available at Lindblum after Disc I, a timing label that differs from GameFAQs' main item table saying after Cleyra. For the final-stock audit, it lists Bandana's Treno (Disc II), Cleyra, Lindblum (Disc II), Fossil Roo, and Black Mage Village (Discs II–III) shops, with no Find/Win/Steal route; GameFAQs' newer route/item tables separately document the Dragon's Gate hidden pickup. It lists Leather Plate's Church of Lindblum pickup, Black Waltz 2 steal, and 530-Gil Lindblum/Treno/Black Mage Village shops; Chain Plate's 810-Gil Beatrix steal, Gargan Roo chest, and Treno/Cleyra/Lindblum/Fossil Roo/Black Mage Village shops; and Mythril Vest's Cleyra's Trunk and Pinnacle Rocks chests, Antlion steal, and Cleyra/Fossil Roo/Black Mage Village/Esto Gaza shops (the Esto Gaza listing is before Desert Palace). These are listed PlayStation routes; they do not establish a post-transition Disc IV source. The Disc IV Black Mage Village table separately lists changed weapon stock and omits Bandana, Chain Plate, Leather Plate, and Mythril Vest.",
+    notes: "Original PlayStation item reference cross-check listing Moonstone's four acquisition sources (Brahne, Mountain Path, Friendly Jabberwock, and Stiltzkin's Alexandria Disc IV bundle), its four-copy maximum, and its Shell and Beast Killer abilities. Pearl Rouge is listed as an auction item and as equipment that teaches Level Up, Loudmouth, and Reflect-Null. The guide also lists Phoenix Pinion's fixed pickups and Hades synthesis, but its Pinion entry has no win/steal sources, conflicting with the modern GameFAQs item reference and Caves of Narshe enemy list. It also lists Wing Edge's three fixed pickup locations, late boss drop sources, Crystal World Tiamat and Kraken Right Tentacle steal sources, Magician Shoes synthesis from Germinas Boots + Bone Wrist for 1,500 Gil, and Bone Wrist's Ralvurahva/shop sources. Its Kraken Right Tentacle Wing Edge steal conflicts with GameFAQs' Memoria walkthrough, which lists Elixir as the tentacles' steal. It also supports Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition. It describes Magician Shoes as available at Lindblum after Disc I, a timing label that differs from GameFAQs' main item table saying after Cleyra. For the final-stock audit, it lists Bandana's Treno (Disc II), Cleyra, Lindblum (Disc II), Fossil Roo, and Black Mage Village (Discs II–III) shops, with no Find/Win/Steal route; GameFAQs' newer route/item tables separately document the Dragon's Gate hidden pickup. It lists Leather Plate's Church of Lindblum pickup, Black Waltz 2 steal, and 530-Gil Lindblum/Treno/Black Mage Village shops; Chain Plate's 810-Gil Beatrix steal, Gargan Roo chest, and Treno/Cleyra/Lindblum/Fossil Roo/Black Mage Village shops; and Mythril Vest's Cleyra's Trunk and Pinnacle Rocks chests, Antlion steal, and Cleyra/Fossil Roo/Black Mage Village/Esto Gaza shops (the Esto Gaza listing is before Desert Palace). These are listed PlayStation routes; they do not establish a post-transition Disc IV source. The Disc IV Black Mage Village table separately lists changed weapon stock and omits Bandana, Chain Plate, Leather Plate, and Mythril Vest.",
   },
   {
     id: "rpgclassics-armor",

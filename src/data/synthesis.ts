@@ -559,4 +559,18 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
     notes: "Mythril Vest + Mythril Rod makes Brave Suit for 26,000 Gil at Black Cat on Disc IV. RPGClassics, Fandom, and FFUniverse agree; GameFAQs Shops lists 20,000 Gil. The GameFAQs Items table's 11,250-Gil figure is a sell value, not the synthesis cost.",
   },
+  {
+    id: "synthesis-recipe.pearl-rouge",
+    resultItemId: "game-item.pearl-rouge",
+    ingredients: [
+      { itemId: "game-item.moonstone", quantity: 1 },
+      { itemId: "game-item.elixir", quantity: 1 },
+    ],
+    chapterId: "disc-3.the-home-front",
+    shopId: "alexandria.synthesis-shop.disc-3",
+    shopName: "Alexandria Synthesis Shop (Disc III)",
+    cost: { currency: "gil", amount: 5000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-ysf-9771", "cavesofnarshe-pearl-rouge"],
+    notes: "Moonstone + Elixir makes Pearl Rouge for 5,000 Gil. GameFAQs lists the recipe at Alexandria on Disc III, Treno and Lindblum on Discs III–IV, and Daguerreo; the older YSF FAQ recommends reserving a Moonstone for this synthesis. Caves of Narshe's indexed result agrees, but its page could not be fetched directly during this review.",
+  },
 ];

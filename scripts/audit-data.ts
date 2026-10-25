@@ -3236,6 +3236,86 @@ for (const claim of equipmentAbilityClaims) {
     if (!sourceIds.has(sourceId)) errors.push(`Equipment ability claim ${claim.id} references unknown source ${sourceId}.`);
   }
 }
+const moonstoneId = "game-item.moonstone";
+const moonstonePaths = itemAcquisitionPaths.filter((path) => path.itemId === moonstoneId);
+const requiredMoonstonePaths = [
+  { id: "item-path.disc-1.alexandria.moonstone-brahne", objectiveId: "disc-1.alexandria.swordfight.moonstone-1" },
+  { id: "item-path.disc-2.conde-petie-mountain-path.moonstone-colored-stones", objectiveId: "disc-2.conde-petie-mountain-path.moonstone" },
+  { id: "item-path.disc-3.forgotten-continent.moonstone-friendly-jabberwock", objectiveId: "disc-3.forgotten-continent.jabberwock" },
+  { id: "item-path.disc-4.return-to-gaia.moonstone-stiltzkin-eighth-bundle", objectiveId: "disc-4.return-to-gaia.stiltzkin-eighth-bundle" },
+];
+if (!gameItems.some((item) => item.id === moonstoneId && item.name === "Moonstone" && item.category === "equipment")) {
+  errors.push("Moonstone must be present in the equipment catalog.");
+}
+if (moonstonePaths.length !== requiredMoonstonePaths.length) {
+  errors.push(`Moonstone must map exactly four achievement acquisition opportunities; found ${moonstonePaths.length}.`);
+}
+for (const expected of requiredMoonstonePaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  if (!path || path.itemId !== moonstoneId || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
+    errors.push(`Moonstone acquisition path ${expected.id} must link the item and objective ${expected.objectiveId}.`);
+  }
+}
+const mountainMoonstoneItemPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.conde-petie-mountain-path.moonstone-colored-stones");
+if (mountainMoonstoneItemPath?.availability !== "limited-window" ||
+  mountainMoonstoneItemPath.recommendedBeforeChapterId !== "disc-3.preparing-to-leave" ||
+  !mountainMoonstoneItemPath.sourceIds.includes("gamefaqs-mountain-path-return-29957")) {
+  errors.push("The catalog Moonstone route must keep the Disc II recovery source and Disc III final cutoff.");
+}
+const stiltzkinMoonstonePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.moonstone-stiltzkin-eighth-bundle");
+if (stiltzkinMoonstonePath?.method !== "mogshop" || stiltzkinMoonstonePath.cost?.amount !== 5555 ||
+  stiltzkinMoonstonePath.shopId !== "stiltzkin-alexandria-eighth" ||
+  !stiltzkinMoonstonePath.sourceIds.includes("gamefaqs-return-to-gaia-71891")) {
+  errors.push("The Disc IV Moonstone route must record Stiltzkin's Alexandria bundle and 5,555-Gil price.");
+}
+const pearlRougeId = "game-item.pearl-rouge";
+const pearlRougeRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.pearl-rouge");
+if (!gameItems.some((item) => item.id === pearlRougeId && item.name === "Pearl Rouge" && item.category === "equipment")) {
+  errors.push("Pearl Rouge must be present in the equipment catalog.");
+}
+if (!pearlRougeRecipe || pearlRougeRecipe.resultItemId !== pearlRougeId || pearlRougeRecipe.cost.amount !== 5000 ||
+  pearlRougeRecipe.ingredients.length !== 2 ||
+  !pearlRougeRecipe.ingredients.some((ingredient) => ingredient.itemId === moonstoneId && ingredient.quantity === 1) ||
+  !pearlRougeRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.elixir" && ingredient.quantity === 1)) {
+  errors.push("Pearl Rouge synthesis must use one Moonstone and one Elixir for 5,000 Gil.");
+}
+const pearlRougePaths = itemAcquisitionPaths.filter((path) => path.itemId === pearlRougeId);
+const pearlRougeAuction = pearlRougePaths.find((path) => path.method === "auction");
+const pearlRougeSynthesisPaths = pearlRougePaths.filter((path) => path.method === "synthesis");
+const pearlRougeSynthesisShops = new Set(pearlRougeSynthesisPaths.map((path) => path.shopId));
+if (!pearlRougeAuction || pearlRougeAuction.availability !== "repeatable" || pearlRougeAuction.chapterId !== "disc-2.treno" ||
+  pearlRougeAuction.cost || !pearlRougeAuction.conditions?.includes("17,100 Gil") ||
+  !pearlRougeAuction.sourceIds.includes("gamefaqs-treno-auction-71891")) {
+  errors.push("Pearl Rouge's Treno auction route must record its Disc II repeatable availability and variable bid price.");
+}
+for (const shopId of [
+  "alexandria.synthesis-shop.disc-3",
+  "treno.synthesis-shop.disc-3-4",
+  "lindblum.synthesis-shop.disc-3-4",
+  "daguerreo.synthesis-expert",
+]) {
+  if (!pearlRougeSynthesisShops.has(shopId)) errors.push(`Pearl Rouge synthesis is missing the source-listed shop ${shopId}.`);
+}
+if (pearlRougeSynthesisPaths.length !== 4 || pearlRougeSynthesisPaths.some((path) =>
+  path.recipeId !== "synthesis-recipe.pearl-rouge" || path.cost?.amount !== 5000)) {
+  errors.push("Pearl Rouge must have four priced synthesis paths linked to its 5,000-Gil recipe.");
+}
+const expectedPearlRougeAbilities = new Set(["Level Up", "Loudmouth", "Reflect-Null"]);
+const pearlRougeAbilities = new Set(equipmentAbilityClaims.filter((claim) => claim.itemId === pearlRougeId).map((claim) => claim.abilityName));
+if ([...expectedPearlRougeAbilities].some((ability) => !pearlRougeAbilities.has(ability))) {
+  errors.push("Pearl Rouge must link the Level Up, Loudmouth, and Reflect-Null ability claims.");
+}
+if (pearlRougeAbilities.size !== expectedPearlRougeAbilities.size) {
+  errors.push("Pearl Rouge must have exactly three sourced ability claims.");
+}
+const expectedMoonstoneAbilities = new Set(["Shell", "Beast Killer"]);
+const moonstoneAbilities = new Set(equipmentAbilityClaims.filter((claim) => claim.itemId === moonstoneId).map((claim) => claim.abilityName));
+if ([...expectedMoonstoneAbilities].some((ability) => !moonstoneAbilities.has(ability))) {
+  errors.push("Moonstone must link the Shell and Beast Killer ability claims.");
+}
+if (moonstoneAbilities.size !== expectedMoonstoneAbilities.size) {
+  errors.push("Moonstone must have exactly two sourced ability claims.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }
