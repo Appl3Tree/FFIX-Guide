@@ -101,6 +101,7 @@ const novaDragonCutoffId = "cutoff.nova-dragon.grand-armor";
 const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"];
 const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
+const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
@@ -429,6 +430,19 @@ const iifaTreeEncounters: EnemyEncounter[] = [
 ];
 
 const memoriaEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.memoria.hades",
+    title: "Hades — optional boss",
+    chapterId: memoriaChapterId,
+    location: "Birth (underwater room), behind the rock formation",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.hades", quantity: 1 }],
+    sourceIds: hadesEnemySources,
+    objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals"],
+    missableIds: ["missable.disc-4.memoria.hades-shop", "missable.disc-4.memoria.hades-running-shoes"],
+    cutoffIds: ["cutoff.final-preparations.final-battle"],
+    notes: ["Hades is hidden behind the rock formation in Birth. The optional fight can be postponed until Final Preparations, but cannot be repeated after victory; the final-battle departure closes the encounter window."],
+  },
   {
     id: "encounter.memoria.maliris",
     title: "Maliris — Guardian of Fire",
@@ -877,6 +891,49 @@ const iifaTreeEnemyRecords: EnemyRecord[] = [
 ];
 
 const memoriaEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.hades",
+    name: "Hades",
+    encounterIds: ["encounter.memoria.hades"],
+    stats: sourcedStats([["level", 92], ["HP", 55535], ["MP", 9999], ["EXP", 65535], ["AP", 30], ["Gil", 9638]], ["gamefaqs-master-synthesist-71891"]),
+    steals: [
+      sourcedLoot("common", "game-item.reflect-ring", ["gamefaqs-master-synthesist-71891"]),
+      sourcedLoot("uncommon", "game-item.running-shoes", ["gamefaqs-master-synthesist-71891"]),
+      sourcedLoot("semi-rare", "game-item.battle-boots", ["gamefaqs-master-synthesist-71891"]),
+      sourcedLoot("rare", "game-item.robe-of-lords", ["gamefaqs-master-synthesist-71891"]),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.wing-edge", ["gamefaqs-master-synthesist-71891"]),
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-master-synthesist-71891"]),
+      sourcedLoot("uncommon", "game-item.elixir", ["gamefaqs-master-synthesist-71891"]),
+      sourcedLoot("rare", "game-item.elixir", ["gamefaqs-master-synthesist-71891"]),
+    ],
+    facts: [
+      sourcedFact("type", "Demon", ["gamefaqs-master-synthesist-71891"]),
+      sourcedFact("type", "Aerial", ["gamefaqs-master-synthesist-71891"]),
+      sourcedFact("elemental-weakness", "Holy", ["gamefaqs-master-synthesist-71891"]),
+      sourcedFact("elemental-resistance", "Shadow absorbed; Earth nullified", ["gamefaqs-master-synthesist-71891"]),
+      sourcedFact("status-vulnerability", "Slow", ["gamefaqs-master-synthesist-71891"]),
+      sourcedFact("attack", "Freeze", ["gamefaqs-master-synthesist-71891"], "Can inflict Freeze; Body Temp prevents the status."),
+      sourcedFact("attack", "Mustard Bomb", ["gamefaqs-master-synthesist-71891"], "Inflicts Heat; a character who acts while heated is KO'd."),
+      sourcedFact("attack", "Cleave", ["gamefaqs-master-synthesist-71891"], "Powerful physical attack against the party."),
+      sourcedFact("attack", "Judgment Sword", ["gamefaqs-master-synthesist-71891"], "Reduces one character's HP to 1; may miss."),
+      sourcedFact("attack", "Powering Sword", ["gamefaqs-master-synthesist-71891"], "Counts down for three turns, then Hades uses Curse after odd-numbered countdowns or Doomsday after even-numbered countdowns."),
+      sourcedFact("attack", "Curse", ["gamefaqs-master-synthesist-71891"], "Deals party damage and can inflict Darkness, Confuse, Mini, Poison, or Slow."),
+      sourcedFact("attack", "Doomsday", ["gamefaqs-master-synthesist-71891"], "Deals heavy Shadow damage and heals Hades for 9,999 HP."),
+      sourcedFact("attack", "Reflect", ["gamefaqs-master-synthesist-71891"], "Hades can cast Reflect on himself."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Nullify or absorb Shadow", detail: "Doomsday deals heavy Shadow damage and can heal Hades. Use equipment that nullifies or absorbs Shadow; halving Shadow damage is not enough according to the source strategy.", sourceIds: ["gamefaqs-master-synthesist-71891"] },
+      { title: "Steal before finishing the fight", detail: "The four equipment steals are available only during this optional one-time encounter. Slow can help control Hades while Zidane attempts the selected steals; protect against Heat and status effects.", sourceIds: hadesEnemySources },
+    ],
+    routeObjectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals"],
+    notes: [
+      "GameFAQs lists Elixir in the Common, Uncommon, and Rare drop slots as well as an Always Wing Edge drop. The item-path record captures the Elixir source without assuming a drop probability or total quantity.",
+      "RPGClassics confirms Hades's location and four steals but describes a two-Pumice-Piece handoff before shop access; GameFAQs says the shop opens after victory. The source register preserves this trigger difference pending direct game verification.",
+    ],
+  }, memoriaChapterId, hadesEnemySources, ["missable.disc-4.memoria.hades-shop", "missable.disc-4.memoria.hades-running-shoes"], ["cutoff.final-preparations.final-battle"]),
   memoriaBoss({
     id: "enemy.maliris",
     name: "Maliris",
@@ -1282,5 +1339,5 @@ export const enemyCatalogCoverage = {
   chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId],
   enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, and Memoria. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, right-tentacle steal, and move-side assignments remain explicit. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, and Memoria. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Other areas and release-by-release parity remain to be researched.",
 };

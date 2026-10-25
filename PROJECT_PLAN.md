@@ -250,8 +250,8 @@ The next priority is B01: continue auditing the gameplay route's optional branch
 
 ## Latest verification update — 2026-10-25
 
-- Added ten item identities, seventeen Memoria one-time steal/drop paths, and five alternate acquisition paths for selected one-copy gear. The B04 enemy tables now link all five Memoria story bosses' steal items to the item catalog; Kraken's guaranteed Phoenix Pinion drop is separated from its conditional drops.
-- Current audited scope: 44 chapters, 133 missables, 608 objectives, 290 sources, 131 item records, 470 acquisition paths across 36 chapter slices, 15 recipes, 29 inventory targets, 73 ability claims, and 27 enemy records across 21 encounter groups.
+- Added ten item identities, seventeen Memoria story-boss steal/drop paths, and five alternate acquisition paths for selected one-copy gear, then modeled Hades with three additional item identities, four acquisition paths, and a source-linked optional boss encounter. The B04 enemy tables now link all five Memoria story bosses and Hades to item identities; Kraken's guaranteed Phoenix Pinion drop is separated from its conditional drops.
+- Current audited scope: 44 chapters, 133 missables, 608 objectives, 290 sources, 134 item records, 474 acquisition paths across 36 chapter slices, 15 recipes, 29 inventory targets, 73 ability claims, and 28 enemy records across 22 encounter groups.
 - `npm run lint`, `npm run audit:data` (0 errors, 175 coverage warnings), `npm run build` (including TypeScript), and `git diff --check` passed. The Vite chunk-size advisory remains. No tests or game/UI verification were run.
 
 ## Current blockers and limits
