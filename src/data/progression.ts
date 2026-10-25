@@ -190,8 +190,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.lindblum",
     toChapterId: "disc-1.journey-to-burmecia",
     relationship: "required-story",
-    summary: "The Festival of the Hunt concludes with a revealed next destination and party change. Leaving Lindblum starts the story route toward Gizamaluke's Grotto and Burmecia; the kingdom exploration can be skipped.",
-    sourceIds: ["gamefaqs-lindblum-71891", "gamefaqs-exploring-lindblum-71891", "gamefaqs-journey-to-burmecia-71891", "jegged-lindblum", "jegged-gizamaluke"],
+    summary: "The Festival of the Hunt concludes with a revealed next destination and party change. Leaving Lindblum starts the story route toward Gizamaluke's Grotto and Burmecia; the kingdom exploration can be skipped. Entering the Grotto stops the trolley and closes Lindblum Castle and its three districts, leaving only the basic Dragon's Gate merchant, so finish any city visits before crossing the threshold.",
+    sourceIds: ["gamefaqs-lindblum-71891", "gamefaqs-exploring-lindblum-71891", "gamefaqs-journey-to-burmecia-71891", "gamefaqs-optional-route-47344", "jegged-lindblum", "jegged-gizamaluke", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"],
   },
   {
     id: "story.journey-to-burmecia-to-burmecia",

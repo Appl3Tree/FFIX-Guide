@@ -38,6 +38,27 @@ test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => 
   assert.match(frogStop.text, /Qu's Marsh in Lindblum Basin/);
 });
 
+test("Lindblum's city cutoff is attached to the Grotto entry route", () => {
+  const lindblumExit = gameRouteEdges.find((edge) => edge.id === "story.lindblum-to-journey-to-burmecia");
+  assert.ok(lindblumExit);
+  assert.equal(lindblumExit.relationship, "required-story");
+  assert.match(lindblumExit.summary, /Entering the Grotto stops the trolley/);
+  assert.match(lindblumExit.summary, /closes Lindblum Castle and its three districts/);
+  assert.match(lindblumExit.summary, /basic Dragon's Gate merchant/);
+
+  for (const sourceId of [
+    "gamefaqs-optional-route-47344",
+    "gamerguides-gizamaluke",
+    "gamerevolution-ffix-walkthrough",
+    "elitegrindlab-gizamaluke",
+  ]) {
+    assert.ok(lindblumExit.sourceIds.includes(sourceId), `route is missing ${sourceId}`);
+  }
+  for (const sourceId of lindblumExit.sourceIds) {
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
+  }
+});
+
 test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () => {
   const returnToCavern = gameRouteEdges.find((edge) => edge.id === "return.dali-to-ice-cavern");
   assert.ok(returnToCavern, "Dali's optional Ice Cavern return is represented");
