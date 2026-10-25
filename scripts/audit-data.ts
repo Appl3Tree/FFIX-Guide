@@ -418,6 +418,25 @@ if (!jumpRopeLetterWarning?.consequence.includes("whether this Disc I letter rem
 if (jumpRopeLetterSteps.length !== 1 || jumpRopeLetterSteps[0]?.chapterId !== "disc-1.alexandria" || jumpRopeLetterSteps[0]?.step.id !== "guardhouse-pickup-mognet") {
   errors.push("The Jump Rope Mognet letter objective must point to Mosh's Disc I guardhouse step.");
 }
+const plutoKnightsId = "disc-1.alexandria.pluto-knights-elixir";
+const plutoKnightsObjective = objectivesById.get(plutoKnightsId);
+const plutoKnightsSection = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-1.alexandria")
+  .flatMap((chapter) => chapter.sections)
+  .find((section) => section.steps.some((step) => step.id === "find-pluto-knights"));
+const plutoKnightsStep = plutoKnightsSection?.steps.find((step) => step.id === "find-pluto-knights");
+if (
+  !plutoKnightsObjective?.sourceIds.includes("gamefaqs-alexandria-castle-47344")
+  || !plutoKnightsObjective.sourceIds.includes("strategywiki-alexandria")
+  || !plutoKnightsSection?.sourceIds.includes("gamefaqs-alexandria-castle-47344")
+  || !plutoKnightsSection.sourceIds.includes("strategywiki-alexandria")
+  || !plutoKnightsStep?.text.includes("northernmost bookshelf")
+  || !plutoKnightsStep.detail?.includes("Action button")
+  || !plutoKnightsStep.detail.includes("Guest Room")
+  || !plutoKnightsStep.detail.includes("East Dining Room")
+) {
+  errors.push("The Knights of Pluto route must source Laudo's leave/reenter bookshelf interaction and identify Mullenkedheim's room-label variants.");
+}
 
 const burmeciaTreasureWarning = missables.find((missable) => missable.id === "missable.disc-1.burmecia.treasures");
 const burmeciaTreasureCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.burmecia.first-visit-departure");

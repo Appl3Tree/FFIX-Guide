@@ -158,7 +158,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "alexandria-castle",
         title: "Alexandria Castle — claim the reward and find the Knights",
         summary: "The castle segment closes when the Prima Vista escapes. Claim the sword-fight prize and the optional Elixir before continuing up the West Tower.",
-        sourceIds: ["gamefaqs-alexandria-71891", "gamefaqs-story-minigames-71891", "jegged-alexandria-castle", "vgkami-alexandria-castle", "elitegrindlab-prima-vista"],
+        sourceIds: ["gamefaqs-alexandria-71891", "gamefaqs-story-minigames-71891", "gamefaqs-alexandria-castle-47344", "jegged-alexandria-castle", "vgkami-alexandria-castle", "strategywiki-alexandria", "elitegrindlab-prima-vista"],
         steps: [
           {
             id: "equip-mage-masher",
@@ -181,8 +181,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "find-pluto-knights",
             kind: "optional",
-            text: "Find the eight Knights of Pluto besides Steiner: Blutzen and Kohel are in the guardhouse; cut off the running Dojebon in the main hallway; find Mullenkedheim in the upper east-side room; speak to Laudo in the lower library and search the nearby shelves; talk to Haagen by the courtyard water; find Weimar by the West Tower; and speak to Breireicht on its spiral stairs.",
-            detail: "One source calls Mullenkedheim's room the Guest Room and another the East Dining Room. The shared route places him in the upper east-side room. The roster lists Steiner as Knight I plus eight others, so the Elixir condition is eight found, not nine additional knights.",
+            text: "Find the eight Knights of Pluto besides Steiner: Blutzen and Kohel are in the guardhouse; cut off the running Dojebon in the main hallway; find Mullenkedheim in the upper east wing's Guest Room/East Dining Room; speak to Laudo in the lower library, then leave and reenter to find him behind the northernmost bookshelf; talk to Haagen by the courtyard water; find Weimar by the West Tower; and speak to Breireicht on its spiral stairs.",
+            detail: "After returning to the library, use the Action button to find Laudo behind the northernmost bookcase and speak to him again; this sends him searching. Guides label Mullenkedheim's upper east-wing room the Guest Room, East Dining Room, or east-wing dining room. The roster lists Steiner as Knight I plus eight others, so the Elixir condition is eight found, not nine additional knights.",
           },
           {
             id: "claim-pluto-elixir",
