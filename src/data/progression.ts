@@ -238,8 +238,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.cleyra",
     toChapterId: "disc-2.return-to-alexandria",
     relationship: "required-story",
-    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle.",
-    sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-return-to-alexandria-71891", "jegged-cleyra", "jegged-return-to-alexandria-castle"],
+    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game; guides disagree on the exact last safe action for individual pickups, so complete the settlement sweep before leaving it and collect the post-Antlion rewards before advancing.",
+    sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-return-to-alexandria-71891", "jegged-cleyra", "jegged-return-to-alexandria-castle", "gamerguides-cleyra", "elitegrindlab-cleyra"],
   },
   {
     id: "story.return-to-alexandria-to-pinnacle-rocks",

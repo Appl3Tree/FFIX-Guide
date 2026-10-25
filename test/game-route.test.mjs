@@ -59,6 +59,27 @@ test("Lindblum's city cutoff is attached to the Grotto entry route", () => {
   }
 });
 
+test("Cleyra's story departure records its closure and disputed local cutoff", () => {
+  const departure = gameRouteEdges.find((edge) => edge.id === "story.cleyra-to-return-to-alexandria");
+  assert.ok(departure);
+  assert.equal(departure.relationship, "required-story");
+  assert.match(departure.summary, /story departure closes Cleyra and its Trunk/);
+  assert.match(departure.summary, /guides disagree on the exact last safe action/);
+  assert.match(departure.summary, /settlement sweep before leaving it/);
+  assert.match(departure.summary, /post-Antlion rewards before advancing/);
+
+  for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"]) {
+    assert.ok(departure.sourceIds.includes(sourceId), `route is missing ${sourceId}`);
+  }
+  for (const sourceId of departure.sourceIds) {
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
+  }
+
+  const treasureWindow = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
+  assert.ok(treasureWindow);
+  assert.match(treasureWindow.deadline, /exact final cutoff is described differently across guides/);
+});
+
 test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () => {
   const returnToCavern = gameRouteEdges.find((edge) => edge.id === "return.dali-to-ice-cavern");
   assert.ok(returnToCavern, "Dali's optional Ice Cavern return is represented");
