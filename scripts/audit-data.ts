@@ -735,6 +735,31 @@ for (const [itemId, abilityName] of ralvuimagoAbilityClaims) {
     errors.push(`Ralvuimago recovery for ${itemId} needs its ${abilityName} ability claim.`);
   }
 }
+const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
+for (const itemId of tantarianItemIds) {
+  if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);
+  const stealPath = itemAcquisitionPaths.find((path) => path.itemId === itemId && path.chapterId === "disc-2.return-to-alexandria" && path.method === "steal");
+  if (!stealPath?.walkthroughObjectiveIds?.includes("disc-2.return-to-alexandria.tantarian")) {
+    errors.push(`Tantarian recovery coverage needs the linked one-time steal path for ${itemId}.`);
+  }
+}
+const tantarianLaterRecoveryPaths = [
+  "item-path.disc-3.lost-continent.mount-gulug-ether-rubble",
+  "item-path.disc-3.forgotten-continent.oeilvert-elixir-chest",
+  "item-path.disc-3-stock.esto-gaza.silver-fork",
+  "item-path.disc-3.lost-continent.mount-gulug-demons-mail",
+  "item-path.disc-3.aerial-exploration.quan-running-shoes",
+];
+for (const pathId of tantarianLaterRecoveryPaths) {
+  if (!itemAcquisitionPaths.some((path) => path.id === pathId)) errors.push(`Tantarian recovery coverage is missing later route ${pathId}.`);
+}
+const taharkaRamuhCardId = "disc-3.ipsens-castle.taharka-ramuh-card";
+if (!objectiveIds.has(taharkaRamuhCardId)) errors.push("Tantarian's Ramuh Card recovery needs the Taharka fallback objective.");
+const taharkaRamuhCardStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-3.ipsens-castle")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.objectiveIds?.includes(taharkaRamuhCardId));
+if (!taharkaRamuhCardStep) errors.push("Taharka's Ramuh Card fallback objective needs a checklist pointer in Ipsen's Castle.");
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {

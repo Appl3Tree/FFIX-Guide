@@ -5260,7 +5260,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "ipsens-mirrors-and-taharka",
         title: "Mural room — take the mirrors and defeat Taharka",
         summary: "Prepare before removing the last mirror: Taharka attacks when you try to leave the room.",
-        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-items-71891"],
+        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-items-71891", "rpgclassics-bestiary-t-z", "gamefaqs-item-locations-54996"],
         steps: [
           {
             id: "ipsens-four-mirrors",
@@ -5273,8 +5273,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "ipsens-taharka",
             kind: "combat",
             text: "Have Zidane attempt to steal the Elixir, Mythril Claws, and Orichalcon before defeating Taharka. The boss is weak to Fire and Wind and vulnerable to Heat, Poison, Silence, Sleep, and Slow; it nullifies Earth and halves Ice damage.",
-            detail: "When open, Taharka uses Blizzaga and Chop; when closed, its defense rises and it uses Ram. Silence or Sleep can control the fight, and Mustard Bomb or an Add Status effect can inflict Heat if available. The steal encounter does not repeat, but all three item types have later sources, so no fixed number of attempts or risky prolonging is required.",
-            objectiveIds: ["disc-3.ipsens-castle.mirrors", "disc-3.ipsens-castle.taharka-steals"],
+            detail: "When open, Taharka uses Blizzaga and Chop; when closed, its defense rises and it uses Ram. Silence or Sleep can control the fight, and Mustard Bomb or an Add Status effect can inflict Heat if available. Taharka also lists a Ramuh Card, a later fallback if the card was missed from Tantarian. The steal encounter does not repeat, but the three item types have later sources, so no fixed number of attempts or risky prolonging is required.",
+            objectiveIds: ["disc-3.ipsens-castle.mirrors", "disc-3.ipsens-castle.taharka-steals", "disc-3.ipsens-castle.taharka-ramuh-card"],
           },
         ],
       },
