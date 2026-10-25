@@ -2428,7 +2428,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "conde-petie-arrival-and-ates",
         title: "Conde Petie — entrance and five first-visit ATEs",
-        summary: "Answer the gatekeeper with the local greeting. View all five ATEs in order before collecting items or starting optional conversations; visiting the Item Shop screen too early can close the first Quina prompts.",
+        summary: "Answer the gatekeeper with the local greeting. View all five ATEs in order before collecting items or starting optional conversations; visiting the Item Shop screen before Quina Can't Communicate can close earlier prompts.",
         sourceIds: ["gamefaqs-outer-continent-71891", "jegged-conde-petie", "gamerguides-movie-critic-guide", "elitegrindlab-conde-petie"],
         steps: [
           {
@@ -2439,24 +2439,25 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "conde-petie-quina-accused",
             kind: "cutoff",
-            text: "Follow the safe ATE route to Quina Accused in the side corridor near the entrance. Do not enter Wendy Grocer's Item Shop screen yet; that can close this prompt.",
-            detail: "GameFAQs and later walkthroughs describe this corridor using different compass directions. Follow the named screen and the ATE prompt rather than a left/right-only instruction.",
+            text: "After Vivi and the Couple, move through the entrance-side rooms and view Quina Accused when its prompt appears. Do not enter Wendy Grocer's Item Shop screen yet; that can close this prompt.",
+            detail: "GameFAQs places the prompt east of the entrance; Jegged and Gamer Guides describe the route through the left-side passage/Inn. Because the compass directions conflict, follow the named ATE prompt and keep clear of the Item Shop screen.",
           },
           {
             id: "conde-petie-quina-cant-communicate",
             kind: "cutoff",
-            text: "Enter the Inn from the entrance side and view Quina Can't Communicate before entering the Item Shop screen.",
+            text: "After Quina Accused, check the Inn and adjacent side doors for Quina Can't Communicate. View it before entering Wendy Grocer's Item Shop screen.",
+            detail: "GameFAQs identifies the Inn west of the entrance; Gamer Guides says to pass through either of the other two doors after Quina Accused. Keep the Item Shop screen until this ATE is confirmed.",
           },
           {
             id: "conde-petie-dagger-and-william",
             kind: "optional",
-            text: "Now enter the Item Shop screen and view Dagger and William. This is the fourth first-visit scene; wait for the ATE before talking to shopkeepers or moving upstairs.",
+            text: "After Quina Can't Communicate, return to the entrance and go east toward the Item Shop to view Dagger and William. Wait for the ATE before talking to shopkeepers or moving upstairs.",
           },
           {
             id: "conde-petie-hungry-bryan",
             kind: "cutoff",
             text: "Go upstairs from the Item Shop and speak with Vivi when ready to advance the story. View Hungry Bryan, the fifth first-visit ATE, then finish the town sweep before leaving.",
-            detail: "Talking to Vivi moves the story forward. A save before this conversation is a safe checkpoint if you want to preserve the current screen state. Nuptial Joy is a separate ATE on the later second visit and is not part of this five-scene list.",
+            detail: "GameFAQs and Jegged place this prompt after speaking to Vivi, and Gamer Guides specifies that it appears as he runs away. The four earlier first-visit ATEs gate the complete safe route. Nuptial Joy is a separate ATE on the later second visit and is not part of this five-scene list.",
             objectiveIds: ["disc-2.outer-continent.conde-petie-ates"],
           },
         ],

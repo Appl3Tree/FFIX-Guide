@@ -10,7 +10,7 @@ The static standard-route simulation covers all 44 chapters from Alexandria thro
 
 ## Movie Critic single-save route simulation
 
-The automated route check builds two versions of the eligible ATE plan: one selects **Home Sweet Home**, and the other selects **Hippo's Prize**. Each plan includes 79 of the 80 eligible ATEs, excludes the unchosen Treno branch, and maps to the Movie Critic entry in all three supported catalogs: Steam, PS4, and Xbox. It also checks that Treno follows the four-source safe route (Tradition → Pursuit → Confusion → Ambition → Meeting Place → Unexpected Visitor → Crime and Punishment), each modeled ATE prerequisite appears before its dependent scene, and the Wei and Kal prerequisite is placed in Burmecia before The Rally in Lindblum.
+The automated route check builds two versions of the eligible ATE plan: one selects **Home Sweet Home**, and the other selects **Hippo's Prize**. Each plan includes 79 of the 80 eligible ATEs, excludes the unchosen Treno branch, and maps to the Movie Critic entry in all three supported catalogs: Steam, PS4, and Xbox. It also checks the source-supported Treno order (Tradition → Pursuit → Confusion → Ambition → Meeting Place → Unexpected Visitor → Crime and Punishment), Conde Petie's five first-visit ATE order, each modeled prerequisite before its dependent scene, and the Wei and Kal prerequisite in Burmecia before The Rally in Lindblum.
 
 This is a static feasibility check of the authored event order, dependency graph, and achievement pointers. It does not verify every scene trigger through gameplay or establish service parity for every release. Those checks remain open in B03.
 

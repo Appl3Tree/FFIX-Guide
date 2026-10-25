@@ -18,7 +18,7 @@ const branchEvents = movieCriticEligibleEvents.filter((event) => event.exclusive
 test("each supported Movie Critic catalog has an ordered 79-view single-save route", () => {
   assert.equal(movieCriticEligibleEvents.length, 80);
   assert.equal(branchEvents.length, 2);
-  assert.equal(objectiveDependencies.length, 20);
+  assert.equal(objectiveDependencies.length, 23);
 
   assert.deepEqual(
     movieCriticEligibleEvents
@@ -35,6 +35,27 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
     ],
     "Treno's Movie Critic route follows the four-source safe screen order",
   );
+
+  assert.deepEqual(
+    movieCriticEligibleEvents
+      .filter((event) => event.chapterId === "disc-2.outer-continent" && event.location.startsWith("Conde Petie"))
+      .map((event) => event.objectiveId),
+    [
+      "ate.conde-petie-vivi-and-couple",
+      "ate.conde-petie-quina-accused",
+      "ate.conde-petie-quina-cant-communicate",
+      "ate.conde-petie-dagger-and-william",
+      "ate.conde-petie-hungry-bryan",
+    ],
+    "Conde Petie's first-visit ATE route follows the sourced five-scene order",
+  );
+
+  assert.deepEqual(eventByObjective.get("ate.conde-petie-hungry-bryan")?.prerequisites, [
+    "ate.conde-petie-vivi-and-couple",
+    "ate.conde-petie-quina-accused",
+    "ate.conde-petie-quina-cant-communicate",
+    "ate.conde-petie-dagger-and-william",
+  ]);
 
   for (const branchEvent of branchEvents) {
     const route = movieCriticEligibleEvents.filter((event) =>
