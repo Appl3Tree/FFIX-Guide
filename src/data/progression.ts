@@ -1443,11 +1443,11 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
   {
     id: "cutoff.mount-gulug.twister",
     edgeId: "story.lost-continent-to-aerial-exploration",
-    title: "Quina's Twister learning opportunity",
-    certainty: "disputed",
-    trigger: "If Quina still needs Twister, use Eat on a weakened Red Dragon during a fixed Mount Gulug fight before leaving the story area. Some sources report a later Memoria opportunity, but its exact route remains unverified here.",
+    title: "Quina's fixed Mount Gulug Twister window",
+    certainty: "source-supported",
+    trigger: "If Quina still needs Twister, use Eat on a weakened Red Dragon during one of Mount Gulug's fixed fights before leaving the story area. If this local window is missed, GameFAQs documents a later recovery by eating the revived Tiamat in Memoria's Crystal World before Deathguise.",
     missableIds: ["missable.disc-3.lost-continent.twister"],
-    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug", "gamefaqs-abilities-71891"],
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug", "gamefaqs-abilities-71891", "gamefaqs-memoria-71891"],
   },
   {
     id: "cutoff.mount-gulug.meltigemini-steals",

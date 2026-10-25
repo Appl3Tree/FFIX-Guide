@@ -4681,7 +4681,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   {
     areaId: "disc-3.lost-continent",
     overview: "Return to the Lost Continent after the Desert Palace and follow Kuja's route through Esto Gaza to Mount Gulug. Check the friendly creature and Quina opportunities, use the restocked shop, deliver the Moogle letters, clear the volcano's one-pass treasure route, and prepare for the Red Dragons and Meltigemini. The chapter ends back in Lindblum after Dagger regains her abilities and the party receives the Hilda Garde 3.",
-    timedRouteNote: "D3-08 starts at Esto Gaza at 08:52:28 and targets the Lindblum Castle Guest Room at 09:12:20, reporting 0 random encounters. The source route buys planned equipment at Esto Gaza, clears Mount Gulug's one-pass pickups and Mognet letters, fights the fixed Red Dragon groups and Meltigemini, then takes Eiko's automatic Ribbon story award. The local pickups, optional Mognet handoffs, solo-dragon Elixir chest, and fixed Red Dragon fights are lost when the story leaves. Sources disagree about whether Twister has another late-game learning source, so learn it here if Quina's Blue Magic is one of your goals. These are source targets, not independently timed splits.",
+    timedRouteNote: "D3-08 starts at Esto Gaza at 08:52:28 and targets the Lindblum Castle Guest Room at 09:12:20, reporting 0 random encounters. The source route buys planned equipment at Esto Gaza, clears Mount Gulug's one-pass pickups and Mognet letters, fights the fixed Red Dragon groups and Meltigemini, then takes Eiko's automatic Ribbon story award. The local pickups, optional Mognet handoffs, solo-dragon Elixir chest, and fixed Red Dragon fights are lost when the story leaves. GameFAQs also documents Twister recovery from the revived Tiamat in Memoria's Crystal World; the Mount Gulug Red Dragons remain the earlier, safer opportunity. These are source targets, not independently timed splits.",
     sections: [
       {
         id: "lost-continent-party-and-field",
@@ -4810,7 +4810,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lost-continent-gulug-first-red-dragons",
             kind: "combat",
             text: "On the return from the Gaia Gear path, fight the fixed pair of Red Dragons. If Quina still needs Twister, use Eat before defeating either dragon. Use Wind-reducing equipment or status abilities if available, and heal between attacks.",
-            detail: "Twister can hit the whole party and its damage varies. Sources agree these Red Dragons are scripted; some call them the final Twister opportunity, while another reports a later Memoria source. Learn it here if you want to secure the spell before leaving Gulug.",
+            detail: "Twister can hit the whole party and its damage varies. These Red Dragons are scripted, and this is the earlier opportunity. If Quina misses it, GameFAQs confirms another teacher in Memoria: use Eat on the revived Tiamat in Crystal World before Deathguise.",
             objectiveIds: ["disc-3.lost-continent.mount-gulug-blue-magic"],
           },
           {
@@ -4851,7 +4851,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lost-continent-gulug-final-red-dragons",
             kind: "combat",
             text: "At the bottom of the well, fight the final pair of Red Dragons. If Quina is in the party and still needs Twister, use Eat before defeating them. After the battle, recover before entering the broken wall.",
-            detail: "This is the last fixed Red Dragon group in Mount Gulug. Some references say Twister has another source later in Memoria; its exact route remains under review, so this guide treats learning it here as the safe choice.",
+            detail: "This is the last fixed Red Dragon group in Mount Gulug. GameFAQs's Memoria walkthrough confirms that the revived Tiamat in Crystal World can also teach Twister before Deathguise, so missing this local opportunity does not make the skill unavailable.",
             objectiveIds: ["disc-3.lost-continent.mount-gulug-blue-magic"],
           },
         ],
@@ -6349,7 +6349,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "After the 'beginning' scene, pass through Space into Crystal World. Register Nero Family checkpoint 17 if you still need it; at the Crystal World save point you can return to Memoria's entrance before the final fight sequence.",
             detail: "The revived Maliris, Tiamat, Kraken, and Lich variants have reduced HP and are vulnerable to statuses. Their random-encounter tables are separate from the story bosses' tables. GameFAQs' enemy table lists Wing Edge in the Semi-Rare and Rare Steal slots for Tiamat [B], although the Memoria prose says the revived guardians lack Steals and Drops; this item source is recorded as a repeatable but disputed route. Quina can still Eat them for Blue Magic; learn Doom from Ash or Veteran, Angel's Snack from Behemoth, Frost from Chimera or Crystal Kraken, Auto-Life from Stilva, Mustard Bomb from Crystal Maliris, Twister from Crystal Tiamat, and LV5 Death from Crystal Lich.",
-            objectiveIds: ["disc-4.memoria.nero-checkpoint-17", "disc-4.memoria.quina-blue-magic"],
+            objectiveIds: ["disc-4.memoria.nero-checkpoint-17", "disc-4.memoria.quina-blue-magic", "disc-3.lost-continent.mount-gulug-blue-magic"],
           },
           {
             id: "memoria-deathguise-preparation",

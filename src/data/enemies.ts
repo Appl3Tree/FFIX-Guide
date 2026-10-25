@@ -1137,13 +1137,13 @@ export const enemyRecords: EnemyRecord[] = [
       { name: "Twister", command: "Eat", sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"], objectiveIds: [twisterObjectiveId] },
     ],
     strategies: [
-      { title: "Use the fixed fights for Quina's learning opportunity", detail: "Bring Quina if Twister is missing and use Eat on a weakened dragon. The local encounters are scripted; the later Memoria alternative is still disputed in the route data.", sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"] },
+      { title: "Use a fixed fight or recover Twister in Memoria", detail: "Bring Quina if Twister is missing and use Eat on a weakened Red Dragon. This is the earlier, scripted opportunity; GameFAQs also documents the revived Tiamat in Crystal World as a later teacher before Deathguise.", sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug", "gamefaqs-memoria-71891"] },
       { title: "Prepare for Wind attacks", detail: "Wind-resistant equipment can reduce the pressure from Twister and Aerial Slash. The enemy also takes extra damage from Ice and Wind.", sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug"] },
     ],
     routeObjectiveIds: [twisterObjectiveId, sweepObjectiveId],
     missableIds: [twisterMissableId, sweepMissableId],
     cutoffIds: [twisterCutoffId, storyExitCutoffId],
-    sourceIds: [...gulugSources, "gamefaqs-abilities-71891"],
+    sourceIds: [...gulugSources, "gamefaqs-abilities-71891", "gamefaqs-memoria-71891"],
     coverage: "partial",
     notes: [
       "GameFAQs and Jegged describe a two-dragon ambush, the solo mineshaft fight, and a final pair. EliteGrindLab reports roughly five dragons across three ambushes while noting that its reviewed sources disagree on whether there are three or four encounter groups; the exact grouping remains unresolved.",
