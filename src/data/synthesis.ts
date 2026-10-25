@@ -267,6 +267,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Feather Hat + Steepled Hat makes Yellow Scarf for 400 Gil. GameFAQs lists synthesis windows at Lindblum, Treno, Black Mage Village, and Alexandria; its shop tables separate the Disc I, Disc II, Disc III–IV, and Disc IV inventories. The Cleyra Cathedral pickup is an additional direct copy.",
   },
   {
+    id: "synthesis-recipe.cachusha",
+    resultItemId: "game-item.cachusha",
+    ingredients: [
+      { itemId: "game-item.magus-hat", quantity: 1 },
+      { itemId: "game-item.rubber-helm", quantity: 1 },
+    ],
+    chapterId: "disc-2.treno",
+    shopId: "treno.synthesis-shop.disc-2",
+    shopName: "Treno Synthesis Shop (Disc II)",
+    cost: { currency: "gil", amount: 1000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "Magus Hat + Rubber Helm makes Cachusha for 1,000 Gil. GameFAQs lists Treno, Lindblum after Cleyra, Black Mage Village (Discs II–III), Alexandria, and Daguerreo as synthesis sources. The item also appears in Hot & Cold and the Dali windmill; sources disagree on the earliest Disc II/III access to that chest.",
+  },
+  {
     id: "synthesis-recipe.gluttons-robe",
     resultItemId: "game-item.gluttons-robe",
     ingredients: [

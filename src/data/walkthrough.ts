@@ -282,6 +282,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cargo-and-side-room-pickups",
             kind: "pickup",
             text: "Search the north side of the cargo room for the hidden Rubber Helm. In the south room take the Leather Hat from its chest. Visit Baku's room for the Potion chest, then return to the cargo room to start the fight.",
+            objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
           {
             id: "baku-wreckage-fight",
