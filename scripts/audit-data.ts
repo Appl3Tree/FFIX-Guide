@@ -577,6 +577,33 @@ for (const path of itemAcquisitionPaths) {
   }
   acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
 }
+const cleyraShopPaths = itemAcquisitionPaths.filter((path) =>
+  path.chapterId === "disc-2.cleyra" && path.shopId?.startsWith("cleyra."),
+);
+const cleyraProductIds = [...new Set(cleyraShopPaths.map((path) => path.itemId))];
+const cleyraChapterIndex = guideAreas.findIndex((area) => area.id === "disc-2.cleyra");
+if (cleyraShopPaths.length !== 26 || cleyraProductIds.length !== 26) {
+  errors.push(`Cleyra shop coverage needs 26 priced paths for 26 unique products; found ${cleyraShopPaths.length} paths for ${cleyraProductIds.length} products.`);
+}
+for (const path of cleyraShopPaths) {
+  if (path.cost?.currency !== "gil") errors.push(`Cleyra shop path ${path.id} needs its listed Gil price.`);
+  if (!path.walkthroughObjectiveIds?.includes("disc-2.cleyra.shop-stock")) {
+    errors.push(`Cleyra shop path ${path.id} must link to the Cleyra stock objective.`);
+  }
+  if (!path.sourceIds.includes("gamefaqs-shops-71891")) {
+    errors.push(`Cleyra shop path ${path.id} must cite the shop stock reference.`);
+  }
+}
+const cleyraProductsWithLaterPaths = cleyraProductIds.filter((itemId) =>
+  itemAcquisitionPaths.some((path) =>
+    path.itemId === itemId && guideAreas.findIndex((area) => area.id === path.chapterId) > cleyraChapterIndex,
+  ),
+);
+for (const itemId of cleyraProductIds) {
+  if (!cleyraProductsWithLaterPaths.includes(itemId)) {
+    errors.push(`Cleyra shop product ${itemId} has no modeled acquisition path after Cleyra.`);
+  }
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
@@ -653,6 +680,7 @@ console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} cove
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
 console.log(`Route cutoffs: ${gameRouteCutoffs.length} windows link ${linkedRouteMissableIds.size}/${missables.length} missable warnings; ${missables.filter((record) => record.severity === "high" || record.severity === "critical").length} high/critical records are included.`);
 console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
+console.log(`Cleyra shops: ${cleyraShopPaths.length} priced stock path(s) for ${cleyraProductIds.length} unique products; ${cleyraProductsWithLaterPaths.length} have a later acquisition path.`);
 console.log(`Enemy reference: ${enemyRecords.length} partial record(s) across ${enemyCatalogCoverage.chapterIds.length} chapter slice(s), with ${enemyEncounters.length} encounter group(s).`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);
