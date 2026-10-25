@@ -75,6 +75,7 @@ const gulugSources = ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "ga
 const mountGulugChapterId = "disc-3.lost-continent";
 const pandemoniumChapterId = "disc-3.portal-to-another-world";
 const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
+const memoriaChapterId = "disc-4.memoria";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -97,6 +98,8 @@ const novaDragonStealsObjectiveId = "disc-4.second-battle-of-iifa-tree.nova-drag
 const memoriaEntryObjectiveId = "disc-4.second-battle-of-iifa-tree.memoria-entry";
 const novaDragonMissableId = "missable.disc-4.second-battle-of-iifa-tree.grand-armor";
 const novaDragonCutoffId = "cutoff.nova-dragon.grand-armor";
+const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"];
+const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
@@ -131,6 +134,18 @@ function pandemoniumEnemy(record: LocalEnemyInput): EnemyRecord {
 
 function pandemoniumBoss(record: LocalEnemyInput, missableIds: string[] = [], cutoffIds: string[] = []): EnemyRecord {
   return chapterBoss(record, pandemoniumChapterId, pandemoniumEnemySources, missableIds, cutoffIds);
+}
+
+function memoriaBoss(record: LocalEnemyInput, missableId: string, cutoffId: string, sourceIds = memoriaEnemySources): EnemyRecord {
+  return chapterBoss(record, memoriaChapterId, sourceIds, [missableId], [cutoffId]);
+}
+
+function memoriaLoot(slot: EnemyTableSlot, itemId: string | null, itemName?: string): EnemyLootSlot {
+  return sourcedLoot(slot, itemId, ["gamefaqs-memoria-71891"], itemName);
+}
+
+function memoriaFact(category: EnemyFact["category"], label: string, detail?: string, sourceIds = memoriaEnemySources): EnemyFact {
+  return sourcedFact(category, label, sourceIds, detail);
 }
 
 function pandemoniumBlueMagic(name: string, sourceIds: string[] = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891"]): EnemyBlueMagic {
@@ -408,7 +423,75 @@ const iifaTreeEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters];
+const memoriaEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.memoria.maliris",
+    title: "Maliris — Guardian of Fire",
+    chapterId: memoriaChapterId,
+    location: "Outer Path",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.maliris", quantity: 1 }],
+    sourceIds: memoriaEnemySources,
+    objectiveIds: ["disc-4.memoria.maliris-steals"],
+    missableIds: ["missable.disc-4.memoria.maliris-steals"],
+    cutoffIds: ["cutoff.memoria.maliris-steals"],
+    notes: ["The fight follows the Outer Path approach and cannot be repeated after victory."],
+  },
+  {
+    id: "encounter.memoria.tiamat",
+    title: "Tiamat — Guardian of Wind",
+    chapterId: memoriaChapterId,
+    location: "Time Interval",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.tiamat-memoria", quantity: 1 }],
+    sourceIds: memoriaEnemySources,
+    objectiveIds: ["disc-4.memoria.tiamat-steals"],
+    missableIds: ["missable.disc-4.memoria.tiamat-steals"],
+    cutoffIds: ["cutoff.memoria.tiamat-steals"],
+    notes: ["Tiamat appears at the top of the Time Interval stairs; avoid triggering Snort by attacking while a character is floating."],
+  },
+  {
+    id: "encounter.memoria.kraken",
+    title: "Kraken — Guardian of Water",
+    chapterId: memoriaChapterId,
+    location: "Ocean",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.kraken-memoria", quantity: 1 }],
+    sourceIds: memoriaEnemySources,
+    objectiveIds: ["disc-4.memoria.kraken-steals"],
+    missableIds: ["missable.disc-4.memoria.kraken-steals"],
+    cutoffIds: ["cutoff.memoria.kraken-steals"],
+    notes: ["Two tentacles join the battle and enable additional attacks. Their component-level stats and separate loot are not modeled in this partial dossier."],
+  },
+  {
+    id: "encounter.memoria.lich",
+    title: "Lich — Guardian of Earth",
+    chapterId: memoriaChapterId,
+    location: "Gate to Space",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.lich-memoria", quantity: 1 }],
+    sourceIds: memoriaEnemySources,
+    objectiveIds: ["disc-4.memoria.lich-steals"],
+    missableIds: ["missable.disc-4.memoria.lich-steals"],
+    cutoffIds: ["cutoff.memoria.lich-steals"],
+    notes: ["The brief Nero Family checkpoint 14 window is immediately before the Lich battle; its separate warning remains linked from the walkthrough."],
+  },
+  {
+    id: "encounter.memoria.deathguise",
+    title: "Deathguise",
+    chapterId: memoriaChapterId,
+    location: "Crystal World",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.deathguise", quantity: 1 }],
+    sourceIds: deathguiseEnemySources,
+    objectiveIds: ["disc-4.memoria.deathguise-steals"],
+    missableIds: ["missable.disc-4.memoria.deathguise-steals"],
+    cutoffIds: ["cutoff.memoria.deathguise-steals"],
+    notes: ["This one-time battle precedes the final Kuja and Necron sequence. The route can return to Gaia for Final Preparations after victory."],
+  },
+];
+
+export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -784,6 +867,229 @@ const iifaTreeEnemyRecords: EnemyRecord[] = [
   }, iifaTreeChapterId, novaDragonSources, [novaDragonMissableId], [novaDragonCutoffId]),
 ];
 
+const memoriaEnemyRecords: EnemyRecord[] = [
+  memoriaBoss({
+    id: "enemy.maliris",
+    name: "Maliris",
+    encounterIds: ["encounter.memoria.maliris"],
+    stats: [
+      { field: "level", value: 72, sourceIds: memoriaEnemySources, verification: "cross-checked" },
+      { field: "HP", value: 56497, sourceIds: ["gamefaqs-memoria-71891"], verification: "disputed" },
+      { field: "HP", value: 59497, sourceIds: ["jegged-memoria-nova-dragon"], verification: "disputed" },
+      ...sourcedStats([["MP", 3381], ["EXP", 0], ["AP", 10], ["Gil", 8532]], ["gamefaqs-memoria-71891"]),
+    ],
+    steals: [
+      memoriaLoot("common", null, "Genji Armor"),
+      memoriaLoot("uncommon", "game-item.ultima-sword"),
+      memoriaLoot("semi-rare", null, "Masamune"),
+      memoriaLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      memoriaLoot("always", "game-item.phoenix-pinion"),
+      memoriaLoot("common", "game-item.phoenix-down"),
+      memoriaLoot("uncommon", "game-item.ether"),
+      memoriaLoot("rare", "game-item.elixir"),
+    ],
+    facts: [
+      memoriaFact("type", "Demon"),
+      memoriaFact("elemental-weakness", "Ice"),
+      memoriaFact("elemental-resistance", "Fire absorbed"),
+      memoriaFact("status-vulnerability", "Sleep and Slow"),
+      memoriaFact("attack", "Firaga and Flame Slash", "Fire-elemental damage to one character."),
+      memoriaFact("attack", "Sword Quiver", "Physical damage to the party."),
+      memoriaFact("attack", "Mustard Bomb", "Inflicts Heat; a character who acts while heated is immediately KO'd."),
+      memoriaFact("attack", "Raining Swords", "A heavy party-wide attack triggered at the end of the fight."),
+      memoriaFact("attack", "Reflect", "Maliris can cast Reflect on herself."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Protect against Fire and Heat", detail: "Use Fire-resistant or absorbing equipment and Body Temp. Keep the party's HP high before finishing the fight because Raining Swords follows the defeat.", sourceIds: memoriaEnemySources },
+      { title: "Sleep while Zidane steals", detail: "Ultima Weapon's Soul Blade can inflict Sleep. Attempt the three equipment steals before using Ice attacks to finish Maliris.", sourceIds: memoriaEnemySources },
+    ],
+    routeObjectiveIds: ["disc-4.memoria.maliris-steals"],
+    notes: [
+      "HP claims conflict: GameFAQs lists 56,497 while Jegged lists 59,497. Both are retained pending direct game verification.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Masamune as Rare rather than Semi-Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops.",
+    ],
+  }, "missable.disc-4.memoria.maliris-steals", "cutoff.memoria.maliris-steals"),
+  memoriaBoss({
+    id: "enemy.tiamat-memoria",
+    name: "Tiamat",
+    encounterIds: ["encounter.memoria.tiamat"],
+    stats: [
+      { field: "level", value: 72, sourceIds: memoriaEnemySources, verification: "cross-checked" },
+      { field: "HP", value: 56497, sourceIds: ["gamefaqs-memoria-71891"], verification: "disputed" },
+      { field: "HP", value: 59494, sourceIds: ["jegged-memoria-nova-dragon"], verification: "disputed" },
+      ...sourcedStats([["MP", 3381], ["EXP", 0], ["AP", 10], ["Gil", 8532]], ["gamefaqs-memoria-71891"]),
+    ],
+    steals: [
+      memoriaLoot("common", null, "Blood Sword"),
+      memoriaLoot("uncommon", "game-item.feather-boots"),
+      memoriaLoot("semi-rare", null, "Nothing"),
+      memoriaLoot("rare", null, "Grand Helm"),
+    ],
+    drops: [
+      memoriaLoot("always", "game-item.wing-edge"),
+      memoriaLoot("common", "game-item.phoenix-down"),
+      memoriaLoot("uncommon", "game-item.ether"),
+      memoriaLoot("rare", "game-item.elixir"),
+    ],
+    facts: [
+      memoriaFact("type", "Dragon"),
+      memoriaFact("elemental-weakness", "Ice"),
+      memoriaFact("elemental-resistance", "Wind absorbed"),
+      memoriaFact("status-vulnerability", "Silence, Sleep, and Slow"),
+      memoriaFact("attack", "Twister", "Wind-elemental damage to the party."),
+      memoriaFact("attack", "Float", "Floats party members; attacking a floating character can trigger Snort."),
+      memoriaFact("attack", "Absorb MP, Absorb Magic, and Absorb Strength", "Drain MP or lower one character's Magic or Strength."),
+      memoriaFact("attack", "Jet Fire", "Fire damage with a chance to inflict Heat."),
+      memoriaFact("attack", "Silent Claw", "Physical damage with a chance to inflict Silence."),
+      memoriaFact("attack", "Snort", "A counter that removes a floating character from the battle when that character is attacked."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Sleep the guardian during the steal attempt", detail: "Sleep can suppress Tiamat while Zidane works through the one-fight steal table. Keep Body Temp equipped for Jet Fire's Heat effect.", sourceIds: memoriaEnemySources },
+      { title: "Avoid the Snort counter", detail: "Do not attack Tiamat while a party member is floating. Wait for Float to expire or use Dispel before attacking; prepare Wind and Fire protection.", sourceIds: memoriaEnemySources },
+    ],
+    routeObjectiveIds: ["disc-4.memoria.tiamat-steals"],
+    notes: [
+      "HP claims conflict: GameFAQs lists 56,497 while Jegged lists 59,494. Both are retained pending direct game verification.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Grand Helm Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops.",
+    ],
+  }, "missable.disc-4.memoria.tiamat-steals", "cutoff.memoria.tiamat-steals"),
+  memoriaBoss({
+    id: "enemy.kraken-memoria",
+    name: "Kraken",
+    encounterIds: ["encounter.memoria.kraken"],
+    stats: [
+      { field: "level", value: 72, sourceIds: memoriaEnemySources, verification: "cross-checked" },
+      { field: "HP", value: 55536, sourceIds: ["gamefaqs-memoria-71891"], verification: "disputed" },
+      { field: "HP", value: 59496, sourceIds: ["jegged-memoria-nova-dragon"], verification: "disputed" },
+      ...sourcedStats([["MP", 3380], ["EXP", 0], ["AP", 10], ["Gil", 17376]], ["gamefaqs-memoria-71891"]),
+    ],
+    steals: [
+      memoriaLoot("common", null, "Genji Helmet"),
+      memoriaLoot("uncommon", "game-item.wizard-rod"),
+      memoriaLoot("semi-rare", null, "Nothing"),
+      memoriaLoot("rare", null, "Glutton's Robe"),
+    ],
+    drops: [
+      memoriaLoot("always", "game-item.phoenix-pinion"),
+      memoriaLoot("common", "game-item.phoenix-down"),
+      memoriaLoot("uncommon", "game-item.ether"),
+      memoriaLoot("rare", "game-item.elixir"),
+    ],
+    facts: [
+      memoriaFact("type", "Dragon"),
+      memoriaFact("elemental-weakness", "Lightning"),
+      memoriaFact("elemental-resistance", "Water absorbed; Ice damage halved"),
+      memoriaFact("status-vulnerability", "Slow"),
+      memoriaFact("attack", "Water-gun", "Water-elemental damage enabled by the right tentacle."),
+      memoriaFact("attack", "Ink", "Can inflict Darkness; enabled by the left tentacle."),
+      memoriaFact("attack", "Leg", "Physical damage to one character; becomes available after a tentacle is defeated and can counter attacks."),
+      memoriaFact("attack", "Freeze", "Inflicts Freeze; Body Temp prevents the status."),
+      memoriaFact("attack", "Waterga", "Heavy Water-elemental damage."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Equip Water protection and Body Temp", detail: "Water resistance or absorption sharply reduces Kraken's main damage. Body Temp prevents Freeze; Bright Eyes helps with Ink's Darkness.", sourceIds: memoriaEnemySources },
+      { title: "Use Lightning after Zidane finishes stealing", detail: "Lightning exploits Kraken's weakness. The two tentacles enable Water-gun and Ink; each is separately targetable, but their stats and loot are not expanded in this partial record.", sourceIds: memoriaEnemySources },
+    ],
+    routeObjectiveIds: ["disc-4.memoria.kraken-steals"],
+    notes: [
+      "HP claims conflict: GameFAQs lists 55,536 while Jegged lists 59,496. Both are retained pending direct game verification.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Glutton's Robe Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops. GameFAQs gives each tentacle 10,001 HP and an Elixir steal; component records remain outside this slice.",
+    ],
+  }, "missable.disc-4.memoria.kraken-steals", "cutoff.memoria.kraken-steals"),
+  memoriaBoss({
+    id: "enemy.lich-memoria",
+    name: "Lich",
+    encounterIds: ["encounter.memoria.lich"],
+    stats: [
+      { field: "level", value: 71, sourceIds: memoriaEnemySources, verification: "cross-checked" },
+      { field: "HP", value: 58554, sourceIds: memoriaEnemySources, verification: "cross-checked" },
+      ...sourcedStats([["MP", 9999], ["EXP", 0], ["AP", 10], ["Gil", 8436]], ["gamefaqs-memoria-71891"]),
+    ],
+    steals: [
+      memoriaLoot("common", null, "Genji Gloves"),
+      memoriaLoot("uncommon", "game-item.sirens-flute"),
+      memoriaLoot("semi-rare", null, "Black Robe"),
+      memoriaLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      memoriaLoot("always", "game-item.phoenix-pinion"),
+      memoriaLoot("common", "game-item.phoenix-down"),
+      memoriaLoot("uncommon", "game-item.ether"),
+      memoriaLoot("rare", "game-item.elixir"),
+    ],
+    facts: [
+      memoriaFact("type", "Demon"),
+      memoriaFact("elemental-weakness", "Fire, Wind, and Holy"),
+      memoriaFact("elemental-resistance", "Earth absorbed; Shadow damage halved"),
+      memoriaFact("status-vulnerability", "Slow"),
+      memoriaFact("attack", "LV5 Death", "KOs characters whose levels are multiples of five."),
+      memoriaFact("attack", "Death", "Can instantly KO one character."),
+      memoriaFact("attack", "Earthquake and Earth Shake", "Earth-elemental damage to the party."),
+      memoriaFact("attack", "Death Cutter", "Physical damage with a chance to inflict Doom."),
+      memoriaFact("attack", "Doom and Stop", "Status attacks that apply their named effects."),
+      memoriaFact("attack", "Venom Powder", "Inflicts Venom."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Prepare for Earth and level-based status attacks", detail: "Use Float or Earth-absorbing/resistant equipment, equip Locomotion and Antibody, and check whether character levels are multiples of five before entering.", sourceIds: memoriaEnemySources },
+      { title: "Use Slow and avoid Doomsday", detail: "Slow is effective, and Fire, Wind, or Holy attacks exploit Lich's weaknesses. Do not cast Doomsday while Lich absorbs Earth and halves Shadow damage.", sourceIds: memoriaEnemySources },
+    ],
+    routeObjectiveIds: ["disc-4.memoria.lich-steals"],
+    notes: [
+      "GameFAQs and Jegged agree on Lich's 58,554 HP, level 71, and Earth absorption. The separate checkpoint 14 warning is linked to the approach immediately before this encounter.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Black Robe Rare rather than Semi-Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops.",
+    ],
+  }, "missable.disc-4.memoria.lich-steals", "cutoff.memoria.lich-steals"),
+  memoriaBoss({
+    id: "enemy.deathguise",
+    name: "Deathguise",
+    encounterIds: ["encounter.memoria.deathguise"],
+    stats: [
+      { field: "level", value: 74, sourceIds: deathguiseEnemySources, verification: "cross-checked" },
+      { field: "HP", value: 55535, sourceIds: deathguiseEnemySources, verification: "cross-checked" },
+      ...sourcedStats([["MP", 9999], ["EXP", 0], ["AP", 0], ["Gil", 8916]], ["gamefaqs-memoria-71891"]),
+    ],
+    steals: [
+      memoriaLoot("common", "game-item.elixir"),
+      memoriaLoot("uncommon", null, "Black Belt"),
+      memoriaLoot("semi-rare", null, "Nothing"),
+      memoriaLoot("rare", null, "Duel Claws"),
+    ],
+    drops: [
+      memoriaLoot("always", "game-item.wing-edge"),
+      memoriaLoot("common", "game-item.phoenix-down"),
+      memoriaLoot("uncommon", "game-item.ether"),
+      memoriaLoot("rare", "game-item.elixir"),
+    ],
+    facts: [
+      memoriaFact("type", "Demon and Aerial", undefined, deathguiseEnemySources),
+      memoriaFact("elemental-weakness", "Ice and Wind", undefined, deathguiseEnemySources),
+      memoriaFact("elemental-resistance", "Earth nullified", undefined, deathguiseEnemySources),
+      memoriaFact("status-vulnerability", "Sleep and Slow", undefined, deathguiseEnemySources),
+      memoriaFact("attack", "Meteor", "Deathguise opens the battle with this party-wide non-elemental attack.", deathguiseEnemySources),
+      memoriaFact("attack", "Spin", "Physical damage to the whole party while Deathguise is open.", deathguiseEnemySources),
+      memoriaFact("attack", "Demon's Claw", "Physical damage to one character while Deathguise is open.", deathguiseEnemySources),
+      memoriaFact("attack", "Death and LV5 Death", "Can KO a target; LV5 Death affects characters whose levels are multiples of five.", deathguiseEnemySources),
+      memoriaFact("attack", "Twister", "Wind-elemental damage to the party while Deathguise is closed.", deathguiseEnemySources),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Protect against Wind and the opening Meteor", detail: "Equip Wind resistance and heal after the opening Meteor. Check levels that are multiples of five before the fight to reduce the risk from LV5 Death.", sourceIds: deathguiseEnemySources },
+      { title: "Use Sleep while attempting the steals", detail: "Sleep and Slow are effective. Keep Zidane stealing through the Elixir, Black Belt, and Duel Claws slots before using strong attacks to finish the fight.", sourceIds: deathguiseEnemySources },
+    ],
+    routeObjectiveIds: ["disc-4.memoria.deathguise-steals"],
+    notes: [
+      "GameFAQs and Jegged agree on 55,535 HP and level 74. The attack pattern changes between open and closed forms.",
+      "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Duel Claws Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops; the steal opportunity closes after this one-time battle.",
+    ],
+  }, "missable.disc-4.memoria.deathguise-steals", "cutoff.memoria.deathguise-steals", deathguiseEnemySources),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   {
     id: "enemy.red-dragon",
@@ -901,12 +1207,13 @@ export const enemyRecords: EnemyRecord[] = [
   ...localEnemyRecords,
   ...pandemoniumEnemyRecords,
   ...iifaTreeEnemyRecords,
+  ...memoriaEnemyRecords,
 ];
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId],
-  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId],
+  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug, Pandemonium, and the Disc IV Iifa Tree battle. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal; published boss HP disagreements remain visible. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, and Memoria. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds the four revived guardians and Deathguise, linking all five steal tables to their existing missable warnings and cutoffs; published HP and loot-rarity disagreements remain visible. Kraken's tentacle components and other areas remain unmodeled, and release-by-release parity remains to be researched.",
 };

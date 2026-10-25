@@ -190,7 +190,7 @@ export const sources = [
     title: "Memoria — Disc IV walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/memoria",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Original PlayStation route for Memoria's five hidden weapons, five Tetra Master phantoms, Nero Family checkpoints, four guardian bosses and steal tables, Hades detour, Crystal World, and Deathguise. It confirms the post-Deathguise return path for the final-preparation window and Tiamat's Feather Boots steal. Its Crystal World prose says the revived guardians lack Steals and Drops, while the item/enemy tables list Wing Edge as Tiamat [B]'s Semi-Rare and Rare steal. Its Kraken prose lists an Elixir steal for each tentacle; Xenomic's item-location table instead lists Wing Edge for the Right Tentacle, so that secondary source remains disputed.",
   },
   {
@@ -2283,11 +2283,19 @@ export const sources = [
   },
   {
     id: "jegged-memoria-nova-dragon",
-    title: "Memoria — walkthrough and Nova Dragon encounter",
+    title: "Memoria — walkthrough and boss encounters",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/42-Memoria.html",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Independent route, pickup, boss, and achievement cross-check for Memoria. The preceding chapter used this page for Nova Dragon's attacks and steals; this chapter also uses it for the five hidden weapons, guardian sequence, and Crystal World handoff.",
+  },
+  {
+    id: "jegged-crystal-world",
+    title: "Crystal World — Disc IV walkthrough",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/43-Crystal-World.html",
+    accessed: "2026-10-25",
+    notes: "Independent route and Deathguise cross-check for the Crystal World. Supports the boss level, HP, steal/drop table, attack forms, opening Meteor, weaknesses, Earth immunity, and Sleep/Slow vulnerabilities.",
   },
   {
     id: "rpgclassics-memoria",
