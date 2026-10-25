@@ -527,7 +527,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-lindblum",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the post-Cleyra city return, three ATEs, pickups, Serino/Moodon/Moonte letters, shop cutoff, Chain Mail stock, Pinnacle Rocks entrance treasure return, and Dragon's Gate departure. It documents renewed access to the Business and Theater districts and updated shops, while the church alley remains blocked; it does not establish that the trolley or every first-visit area reopens. Achievement, synthesis, and Mognet consequences are cross-checked separately.",
+    notes: "Original PlayStation route for the post-Cleyra city return, three ATEs, pickups, Serino/Moodon/Moonte letters, shop cutoff, Chain Mail stock, Pinnacle Rocks entrance treasure return, and Dragon's Gate departure. It documents renewed access to the Business and Theater districts and updated shops, while the church alley remains blocked; it does not establish that the trolley or every first-visit area reopens. The ATE list marks Brahne's Fleet Arrives and How Infuriating with asterisks and later says they start automatically at departure; the marker meaning and its 'only one ... isn't required viewing' note are not explained. It still directs players to view The Third Jewel before Dragon's Gate. Achievement, synthesis, and Mognet consequences are cross-checked separately.",
   },
   {
     id: "jegged-return-to-lindblum",
@@ -6475,7 +6475,7 @@ export const missables: MissableRecord[] = [
     nextAvailability: null,
     action: "Leave the shop square once to trigger The Third Jewel, view it, and complete the remaining city sweep before agreeing to depart.",
     recovery: "No later The Third Jewel window is documented. Reload a save from before leaving Lindblum; after the cutoff, this save cannot reach Movie Critic's 79-view target.",
-    note: "Jegged says missing The Third Jewel prevents Movie Critic, and Gamer Guides includes it in the achievement route. GameFAQs says one of Lindblum's three ATEs is not required but does not name it. The event index has 80 eligible ATEs, with only one scene in the separate Treno pair unavailable on a save, so The Third Jewel is part of the 79 reachable scenes. This is a count-based conclusion; direct game/version verification remains open.",
+    note: "GameFAQs lists three return ATEs, marks Brahne's Fleet Arrives and How Infuriating with asterisks, then describes both as playing automatically when Zidane leaves. It tells players to view The Third Jewel before Dragon's Gate. Jegged directly says missing The Third Jewel prevents Movie Critic, and Gamer Guides includes it in the achievement route. Since The Third Jewel is one of 80 eligible events outside the mutually exclusive Treno pair, missing it leaves at most 78 of the 79 reachable scenes. GameFAQs does not define its markers or explain 'only one ... isn't required viewing'. This is a count-based conclusion; direct game/version verification remains open.",
     sourceIds: ["gamefaqs-return-to-lindblum-71891", "jegged-return-to-lindblum", "gamerguides-return-to-lindblum", "rpgclassics-disc-2-walkthrough", "gamerguides-movie-critic-guide", "steam-achievements", "playstationtrophies-movie-critic", "xboxachievements-movie-critic"],
     verification: "partial",
     severity: "high",
