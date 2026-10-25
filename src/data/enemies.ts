@@ -115,6 +115,9 @@ const pinnacleRocksChapterId = "disc-2.pinnacle-rocks";
 const fossilRooChapterId = "disc-2.journey-to-outer-continent";
 const mountainPathChapterId = "disc-2.conde-petie-mountain-path";
 const pualeiPlainsChapterId = "disc-2.journey-to-iifa-tree";
+const desertPalaceChapterId = "disc-3.desert-palace";
+const desertPalaceBlueMagicObjectiveId = "disc-3.desert-palace.blue-magic";
+const valiaPiraObjectiveId = "disc-3.desert-palace.valia-pira";
 const outerContinentBlueMagicObjectiveId = "disc-2.outer-continent.blue-magic";
 const fossilRooBlueMagicObjectiveId = "disc-2.journey-to-outer-continent.blue-magic";
 const lostContinentBlueMagicObjectiveId = "disc-3.on-the-high-seas.blue-magic";
@@ -140,6 +143,9 @@ const lucidPlainsEnemySources = [...mountainPathEnemySources, "gamefaqs-monster-
 const friendlyYetiSources = ["gamefaqs-monster-list-20490", "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"];
 const pualeiPlainsEncounterSources = ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-conde-petie-mountain-path-71891", enemyListSourceId, "gamefaqs-monster-list-20490"];
 const pualeiFriendlyNymphSources = ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"];
+const desertPalaceEnemySources = ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-abilities-71891"];
+const desertPalaceBossSources = ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamefaqs-monster-list-20490"];
+const desertPalaceBossTableSources = ["gamefaqs-desert-palace-71891", "gamefaqs-monster-list-20490"];
 const pinnacleRocksEnemySources = [enemyListSourceId, "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "cavesofnarshe-pinnacle-rocks", "cavesofnarshe-enemies", "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks", "gamefaqs-abilities-71891", "rpgclassics-bestiary-n-s"];
 const fossilRooEnemySources = [enemyListSourceId, "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-abilities-71891"];
 const lostContinentFeatherSources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "rpgclassics-lost-continent"];
@@ -1558,6 +1564,197 @@ const pualeiPlainsEncounters: EnemyEncounter[] = [
   },
 ];
 
+const desertPalaceEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.desert-palace.random-pool",
+    title: "Desert Palace ordinary encounters",
+    chapterId: desertPalaceChapterId,
+    location: "Cid's dock area and the Desert Palace chambers",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.drakan", quantity: null },
+      { enemyId: "enemy.grimlock", quantity: null },
+      { enemyId: "enemy.ogre", quantity: null },
+      { enemyId: "enemy.torama", quantity: null },
+    ],
+    sourceIds: desertPalaceEnemySources,
+    objectiveIds: [desertPalaceBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs and Jegged list Drakan, Grimlock, Ogre, and Torama in the palace. The older PAL monster table lists 1 or 2 Drakan, 2 Grimlocks, 1 or 2 Ogres, and 1 or 2 Toramas; this record keeps the area roster together and does not infer encounter rates or chamber-specific availability. Valia Pira is modeled separately as the scripted boss."],
+  },
+  {
+    id: "encounter.desert-palace.valia-pira",
+    title: "Valia Pira — Desert Palace security system",
+    chapterId: desertPalaceChapterId,
+    location: "Upper Shadow Chamber after the final candle is lit",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.valia-pira", quantity: 1 }],
+    sourceIds: desertPalaceBossSources,
+    objectiveIds: [valiaPiraObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is the scripted boss battle after the palace candle puzzle, separate from the four ordinary enemy types."],
+  },
+];
+
+const desertPalaceEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.drakan",
+    name: "Drakan",
+    encounterIds: ["encounter.desert-palace.random-pool"],
+    stats: sourcedStats([["level", 30], ["HP", 3292], ["MP", 1018], ["EXP", 0], ["AP", 0], ["Gil", 0]], [enemyListSourceId]),
+    steals: [
+      sourcedLoot("common", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("uncommon", "game-item.antidote", [enemyListSourceId]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", null, [enemyListSourceId], "Sapphire"),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial and Demon", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Wind", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Mind Blast", [enemyListSourceId], "Deals damage and can inflict Confuse."),
+      sourcedFact("attack", "Bio, Freeze, Mustard Bomb, Reflect, and Vanish", [enemyListSourceId]),
+    ],
+    blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [desertPalaceBlueMagicObjectiveId] }],
+    strategies: [{ title: "Eat Drakan for Vanish", detail: "If Quina is in the selected Desert Palace party and still needs Vanish, use Eat before defeating Drakan. Mind Blast can damage and confuse one target; Wind is listed as a weakness and Earth is nullified.", sourceIds: desertPalaceEnemySources }],
+    routeObjectiveIds: [desertPalaceBlueMagicObjectiveId],
+    notes: ["The GameFAQs Enemy List reports no EXP, AP, or Gil for Drakan. Its card drop is Stroper, outside this bestiary's item-loot fields."],
+  }, desertPalaceChapterId, desertPalaceEnemySources),
+  chapterEnemy({
+    id: "enemy.grimlock",
+    name: "Grimlock",
+    encounterIds: ["encounter.desert-palace.random-pool"],
+    stats: sourcedStats([["level", 30], ["HP", 3292], ["MP", 1018], ["EXP", 6610], ["AP", 2], ["Gil", 1363]], [enemyListSourceId]),
+    steals: [
+      { ...sourcedLoot("common", "game-item.ore", [enemyListSourceId]), note: "Physical red-top form; the magical blue-top form lists Hi-Potion." },
+      { ...sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId]), note: "Physical red-top form; the magical blue-top form lists Nothing." },
+      { ...sourcedLoot("semi-rare", "game-item.ether", [enemyListSourceId]), note: "Physical red-top form; the magical blue-top form lists Nothing." },
+      { ...sourcedLoot("rare", null, [enemyListSourceId], "Nothing"), note: "Physical red-top form; the magical blue-top form lists Ether." },
+    ],
+    drops: [
+      { ...sourcedLoot("always", null, [enemyListSourceId], "Nothing"), note: "Physical red-top form; the magical blue-top form lists Topaz." },
+      { ...sourcedLoot("common", "game-item.phoenix-down", [enemyListSourceId]), note: "Physical red-top form; the magical blue-top form lists Nothing." },
+      { ...sourcedLoot("uncommon", "game-item.ether", [enemyListSourceId]), note: "Physical red-top form; the magical blue-top form lists Nothing." },
+      { ...sourcedLoot("rare", null, [enemyListSourceId], "Nothing"), note: "The source lists Nothing for both forms." },
+    ],
+    facts: [
+      sourcedFact("elemental-weakness", "Fire, Ice, and Lightning", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "The physical red-top form attacks physically and is vulnerable to magic; the magical blue-top form casts Silence, Sleep, Slow, and Stop and is vulnerable to physical attacks.", [enemyListSourceId]),
+    ],
+    blueMagic: [{ name: "Night", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [desertPalaceBlueMagicObjectiveId] }],
+    strategies: [{ title: "Match attacks to Grimlock's form", detail: "Use magic against the physical red-top form and physical attacks against the magical blue-top form. Quina can use Eat for Night; the source reports different steal and drop tables for the two forms.", sourceIds: desertPalaceEnemySources }],
+    routeObjectiveIds: [desertPalaceBlueMagicObjectiveId],
+    notes: ["Stats are shared by both forms. Loot rows above show the physical red-top form; each row's note records the corresponding magical blue-top result so the two variant tables are not merged."],
+  }, desertPalaceChapterId, desertPalaceEnemySources),
+  chapterEnemy({
+    id: "enemy.ogre",
+    name: "Ogre",
+    encounterIds: ["encounter.desert-palace.random-pool"],
+    stats: sourcedStats([["level", 29], ["HP", 3300], ["MP", 966], ["EXP", 5151], ["AP", 2], ["Gil", 1281]], [enemyListSourceId]),
+    steals: [
+      sourcedLoot("common", "game-item.annoyntment", [enemyListSourceId]),
+      sourcedLoot("uncommon", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("semi-rare", "game-item.phoenix-pinion", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Flame", [enemyListSourceId], "Fire-elemental damage to the whole party."),
+      sourcedFact("attack", "Knife and Trouble Knife", [enemyListSourceId], "Physical damage; Trouble Knife can inflict Trouble."),
+    ],
+    blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [desertPalaceBlueMagicObjectiveId] }],
+    strategies: [{ title: "Eat Ogre for Matra Magic", detail: "If Quina needs Matra Magic, use Eat before defeating Ogre. It is level 29, so the palace guide's LV5 Death advice for the other level-30 enemies does not apply to Ogre.", sourceIds: desertPalaceEnemySources }],
+    routeObjectiveIds: [desertPalaceBlueMagicObjectiveId],
+    notes: ["GameFAQs lists Ogre as especially common near the dock area; the encounter record does not infer a numerical rate."],
+  }, desertPalaceChapterId, desertPalaceEnemySources),
+  chapterEnemy({
+    id: "enemy.torama",
+    name: "Torama",
+    encounterIds: ["encounter.desert-palace.random-pool"],
+    stats: sourcedStats([["level", 30], ["HP", 3292], ["MP", 1018], ["EXP", 5675], ["AP", 2], ["Gil", 1118]], [enemyListSourceId]),
+    steals: [
+      sourcedLoot("common", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("uncommon", "game-item.antidote", [enemyListSourceId]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", "game-item.phoenix-pinion", [enemyListSourceId]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", null, [enemyListSourceId], "Amethyst"),
+      sourcedLoot("uncommon", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Beast and Demon", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Water", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "Lightning (absorbs)", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Blaster", [enemyListSourceId], "Can deal heavy damage and inflict Stop."),
+    ],
+    blueMagic: [{ name: "LV4 Holy", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [desertPalaceBlueMagicObjectiveId] }],
+    strategies: [{ title: "Silence Torama and Eat for LV4 Holy", detail: "Torama is a spellcaster with no physical attacks; Silence prevents its spells. Use Eat if Quina still needs LV4 Holy. Water is its listed weakness and it absorbs Lightning.", sourceIds: desertPalaceEnemySources }],
+    routeObjectiveIds: [desertPalaceBlueMagicObjectiveId],
+    notes: ["The GameFAQs Enemy List identifies Silence as an effective way to stop Torama's spellcasting."],
+  }, desertPalaceChapterId, desertPalaceEnemySources),
+  chapterBoss({
+    id: "enemy.valia-pira",
+    name: "Valia Pira",
+    encounterIds: ["encounter.desert-palace.valia-pira"],
+    stats: [
+      { field: "level", value: 36, sourceIds: desertPalaceBossTableSources, verification: "cross-checked" },
+      { field: "HP", value: 12120, sourceIds: [...desertPalaceBossTableSources, "jegged-returning-desert-palace"], verification: "disputed" },
+      { field: "MP", value: 9999, sourceIds: desertPalaceBossTableSources, verification: "cross-checked" },
+      { field: "EXP", value: 0, sourceIds: desertPalaceBossTableSources, verification: "cross-checked" },
+      { field: "AP", value: 11, sourceIds: desertPalaceBossTableSources, verification: "cross-checked" },
+      { field: "Gil", value: 4089, sourceIds: desertPalaceBossTableSources, verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", null, desertPalaceBossTableSources, "Nothing"),
+      sourcedLoot("uncommon", null, desertPalaceBossTableSources, "Nothing"),
+      sourcedLoot("semi-rare", null, desertPalaceBossTableSources, "Nothing"),
+      sourcedLoot("rare", null, desertPalaceBossTableSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.elixir", desertPalaceBossTableSources),
+      sourcedLoot("common", "game-item.ether", desertPalaceBossTableSources),
+      sourcedLoot("uncommon", "game-item.ether", desertPalaceBossTableSources),
+      sourcedLoot("rare", "game-item.ether", desertPalaceBossTableSources),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", desertPalaceBossTableSources),
+      sourcedFact("elemental-weakness", "Wind", desertPalaceBossTableSources, "GameFAQs and the older PAL Monster List agree that Wind is a weakness."),
+      sourcedFact("elemental-weakness", "Water (reported by GameFAQs)", ["gamefaqs-desert-palace-71891"], "The older PAL Monster List lists Water as normal; elemental weakness reporting is preserved source by source."),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", desertPalaceBossTableSources),
+      sourcedFact("elemental-resistance", "All elements (nullifies while the Resist Elements bloodstone effect is active)", ["gamefaqs-desert-palace-71891"]),
+      sourcedFact("status-vulnerability", "Darkness, Sleep, and Slow", desertPalaceBossTableSources),
+      sourcedFact("attack", "Firaga, Blizzaga, Thundaga, Holy, Flare, Mustard Bomb (Heat), Freeze, and Reflect", desertPalaceBossTableSources),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Complete the six bloodstones before the fight", detail: "Collect the six palace stones before lighting the final candle; they suppress Valia Pira's opening enhancements. Protect the party from Heat and Freeze, and use Reflect or Carbuncle against its magic-focused offense.", sourceIds: desertPalaceBossSources },
+      { title: "Optional MP-depletion win", detail: "The battle ends when Valia Pira's MP reaches zero. Quina can use Magic Hammer or Osmose if the party prefers this slower route.", sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace"] },
+    ],
+    routeObjectiveIds: [valiaPiraObjectiveId],
+    notes: ["GameFAQs and the older PAL Monster List report 12,120 HP; Jegged reports 12,119, so the stat is marked disputed. The GameFAQs walkthrough reports both Wind and Water weakness, while the older PAL Monster List reports Wind weakness and Water as normal. Steal rows are all Nothing; the boss has an Elixir always-drop slot and Ether in the three chance-based drop slots."],
+  }, desertPalaceChapterId, desertPalaceBossSources),
+];
+
 const pinnacleRocksEncounters: EnemyEncounter[] = [
   {
     id: "encounter.pinnacle-rocks.random-pool",
@@ -2293,7 +2490,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...trenoGriffinEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...forgottenContinentFieldEncounters, ...mountainPathEncounters, ...pualeiPlainsEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lanarMarshEncounters, ...blairsurpassMarshEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...trenoGriffinEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...forgottenContinentFieldEncounters, ...mountainPathEncounters, ...pualeiPlainsEncounters, ...desertPalaceEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lanarMarshEncounters, ...blairsurpassMarshEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -5637,6 +5834,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...forgottenContinentEnemyRecords,
   ...mountainPathEnemyRecords,
   ...pualeiPlainsFriendlyEnemyRecords,
+  ...desertPalaceEnemyRecords,
   ...pinnacleRocksEnemyRecords,
   ...fossilRooEnemyRecords,
   ...firstIifaTreeEnemyRecords,
@@ -5765,8 +5963,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, trenoChapterId, summitStationChapterId, garganRooChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, lanarMarshChapterId, forgottenContinentChapterId, mountainPathChapterId, pualeiPlainsChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", "enemy.ralvuimago", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...trenoGriffinEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...lanarMarshEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...forgottenContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pualeiPlainsFriendlyEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, trenoChapterId, summitStationChapterId, garganRooChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, lanarMarshChapterId, forgottenContinentChapterId, mountainPathChapterId, pualeiPlainsChapterId, desertPalaceChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", "enemy.ralvuimago", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...trenoGriffinEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...lanarMarshEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...forgottenContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pualeiPlainsFriendlyEnemyRecords.map((enemy) => enemy.id), ...desertPalaceEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Treno's Disc II Knight's House arena Griffin, Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Forgotten Continent field terrains, Conde Petie Mountain Path/Lucid Plains and the Pualei Plains return route, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle and Lanar Island/Blairsurpass Plains Anemone opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. The return Gargan Roo ride adds Ralvuimago as a separate boss profile and encounter linked to its existing three-steal warning, cutoff, and item recovery paths; HP, Oak Staff tier, and Ether-drop count differences remain source-marked. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad [A] pool; the later Outer Continent marsh has its own Sahagin/Gigan Toad [B] pool, while Lanar Island and Blairsurpass Plains each have a scoped Anemone Bad Breath opportunity; full pond rosters and Gigan Toad variant placements remain unresolved. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Forgotten Continent keeps Blairsurpass Plains and Seaways Canyon terrain pools separate, including overworld Adamantoise and Friendly Jabberwock, with the shorter GameFAQs/Jegged roster differences and ordinary Jabberwock EXP disagreement retained. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. The Pualei Plains return route has its own Blazer Beetle/Goblin Mage/Troll pool and a forest-only Friendly Nymph encounter for 3 Ore, 30 AP, and an Emerald; the friendly form remains separate from hostile Nymph. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Treno's Disc II Knight's House arena Griffin, Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Forgotten Continent field terrains, Conde Petie Mountain Path/Lucid Plains the Pualei Plains return route, Desert Palace, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle and Lanar Island/Blairsurpass Plains Anemone opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. The return Gargan Roo ride adds Ralvuimago as a separate boss profile and encounter linked to its existing three-steal warning, cutoff, and item recovery paths; HP, Oak Staff tier, and Ether-drop count differences remain source-marked. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad [A] pool; the later Outer Continent marsh has its own Sahagin/Gigan Toad [B] pool, while Lanar Island and Blairsurpass Plains each have a scoped Anemone Bad Breath opportunity; full pond rosters and Gigan Toad variant placements remain unresolved. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Forgotten Continent keeps Blairsurpass Plains and Seaways Canyon terrain pools separate, including overworld Adamantoise and Friendly Jabberwock, with the shorter GameFAQs/Jegged roster differences and ordinary Jabberwock EXP disagreement retained. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. The Pualei Plains return route has its own Blazer Beetle/Goblin Mage/Troll pool and a forest-only Friendly Nymph encounter for 3 Ore, 30 AP, and an Emerald; the friendly form remains separate from hostile Nymph. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

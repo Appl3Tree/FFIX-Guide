@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest local B04 update adds the Pualei Plains return-route encounter pool and a separate forest-only Friendly Nymph profile, with the 3-Ore, 30-AP, Emerald reward and hostile/battle distinction source-linked. The bestiary now has 124 records across 30 slices and 117 encounter groups; the catalog has 210 items and 906 paths. This content update needs no GitHub, Firebase, deployment, or sign-in work.
+No account-owner setup action changed. The latest local B04 update adds the Desert Palace ordinary enemy pool, four Blue Magic teacher links, and a separate Valia Pira boss profile. Grimlock’s two form-specific loot tables and Valia Pira’s stat/weakness conflicts remain source-marked. The bestiary now has 129 records across 31 slices and 119 encounter groups; the catalog has 210 items and 906 paths. This content update needs no GitHub, Firebase, deployment, or sign-in work.
 
 No account-owner setup action changed. The preceding local B04 update adds Gargan Roo’s Crawler/Dragonfly pool and a Ralvurahva boss profile linked to its existing steal warning, cutoff, and item recovery paths. Lint, typecheck, audit, build, and whitespace checks pass; the bestiary then had 113 records across 26 slices and 99 encounter groups. Browser, game, and release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for that content update.
 

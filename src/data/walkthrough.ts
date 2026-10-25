@@ -4692,7 +4692,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "desert-palace-shadow-chamber-and-blue-magic",
         title: "Shadow Chamber — Black Hood, Venetia Shield, and Quina skills",
         summary: "The two final bloodstones sit behind the gargoyle and winged statues. Quina can learn several Blue Magic spells from the local enemy set if assigned to this party.",
-        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "gamefaqs-abilities-71891"],
+        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "gamefaqs-abilities-71891", "gamefaqs-enemy-list-71891"],
         steps: [
           {
             id: "desert-palace-shadow-chamber-bloodstones",
@@ -4720,7 +4720,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "desert-palace-valia-pira-and-exit",
         title: "Valia Pira and the reunion — collect the card before leaving",
         summary: "The six bloodstones suppress the boss's opening enhancements. Afterward the game returns to Zidane, opens Kuja's quarters, and sends the story to the Lost Continent.",
-        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamerguides-desert-palace"],
+        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamerguides-desert-palace", "gamefaqs-monster-list-20490"],
         steps: [
           {
             id: "desert-palace-valia-pira-preparation",
@@ -4732,7 +4732,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "desert-palace-valia-pira-battle",
             kind: "combat",
             text: "Defeat Valia Pira. It uses spells and status attacks rather than physical attacks, and it has no useful steal target. With all six stones collected, use your strongest available attacks while keeping the party healed. If you have not activated all six stones, go back and finish the puzzle before lighting the final candle.",
-            detail: "GameFAQs reports Sleep and Slow as possible controls, while Reflect and Carbuncle can turn its magic back or protect the team. GameFAQs and Flactem list an Elixir from the fight; Flactem also mentions a possible Ether. This is a battle reward, separate from the Fairy Earrings chest. Sources disagree on the exact HP and whether Wind or Water is the primary elemental weakness, so those values are omitted here.",
+            detail: "GameFAQs and the older PAL Monster List show an Elixir in the guaranteed drop slot and Ether in the three chance-based slots; Flactem also mentions Ether. This is a battle reward, separate from the Fairy Earrings chest. Jegged reports 12,119 HP while both GameFAQs tables report 12,120, and the older table lists Water as normal while the walkthrough lists it as weak, so the route omits fixed HP and weakness claims.",
             objectiveIds: ["disc-3.desert-palace.valia-pira"],
           },
           {

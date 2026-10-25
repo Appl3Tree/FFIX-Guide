@@ -3508,6 +3508,47 @@ if (
 ) {
   errors.push("Pualei Plains needs a sourced Blazer Beetle/Goblin Mage/Troll pool and a separate Friendly Nymph record with its 3-Ore, 30-AP, Emerald quest reward.");
 }
+const desertPalacePool = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.random-pool");
+const desertPalaceBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.valia-pira");
+const desertPalaceTeachers = [
+  ["enemy.drakan", "Vanish"],
+  ["enemy.grimlock", "Night"],
+  ["enemy.ogre", "Matra Magic"],
+  ["enemy.torama", "LV4 Holy"],
+] as const;
+const desertPalaceEnemies = desertPalaceTeachers.map(([enemyId]) => enemyRecords.find((enemy) => enemy.id === enemyId));
+const valiaPira = enemyRecords.find((enemy) => enemy.id === "enemy.valia-pira");
+if (
+  !desertPalacePool
+  || desertPalacePool.kind !== "random-pool"
+  || desertPalacePool.chapterId !== "disc-3.desert-palace"
+  || desertPalacePool.formation.map((entry) => entry.enemyId).sort().join(",") !== "enemy.drakan,enemy.grimlock,enemy.ogre,enemy.torama"
+  || !desertPalacePool.sourceIds.includes("gamefaqs-desert-palace-71891")
+  || !desertPalacePool.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || !desertPalaceBossEncounter
+  || desertPalaceBossEncounter.kind !== "boss"
+  || desertPalaceBossEncounter.formation.length !== 1
+  || desertPalaceBossEncounter.formation[0]?.enemyId !== "enemy.valia-pira"
+  || !desertPalaceBossEncounter.objectiveIds.includes("disc-3.desert-palace.valia-pira")
+  || desertPalaceEnemies.some((enemy, index) => !enemy
+    || enemy.chapterId !== "disc-3.desert-palace"
+    || !enemy.encounterIds.includes("encounter.desert-palace.random-pool")
+    || !enemy.routeObjectiveIds.includes("disc-3.desert-palace.blue-magic")
+    || !enemy.blueMagic.some((skill) => skill.command === "Eat" && skill.name === desertPalaceTeachers[index]?.[1] && skill.objectiveIds.includes("disc-3.desert-palace.blue-magic")))
+  || !desertPalaceEnemies.every((enemy) => enemy?.sourceIds.includes("gamefaqs-enemy-list-71891"))
+  || !desertPalaceEnemies[1]?.notes.some((note) => note.includes("physical red-top form") && note.includes("magical blue-top"))
+  || !valiaPira
+  || valiaPira.kind !== "boss"
+  || !valiaPira.routeObjectiveIds.includes("disc-3.desert-palace.valia-pira")
+  || !valiaPira.stats.some((claim) => claim.field === "HP" && claim.value === 12120 && claim.verification === "disputed")
+  || !valiaPira.notes.some((note) => note.includes("12,119") && note.includes("12,120"))
+  || valiaPira.steals.length !== 4
+  || valiaPira.steals.some((slot) => slot.itemName !== "Nothing")
+  || valiaPira.drops[0]?.itemId !== "game-item.elixir"
+  || valiaPira.drops.slice(1).some((slot) => slot.itemId !== "game-item.ether")
+) {
+  errors.push("Desert Palace needs its four sourced ordinary enemies and Eat teachers, a separate Valia Pira boss, and source-marked boss stat and loot disagreements.");
+}
 const alexandriaCardPlayersObjectiveId = "disc-3.the-home-front.card-players";
 const alexandriaCardRosterObjectiveId = "disc-3.the-home-front.card-player-roster";
 const alexandriaCardPlayersWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.card-players");
