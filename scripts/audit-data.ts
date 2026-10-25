@@ -65,6 +65,8 @@ const achievementCatalogs = [
 
 const cleyraEvacuationWarning = missablesById.get("missable.disc-2.cleyra.out-of-harms-way");
 const cleyraEvacuationCutoff = cutoffsById.get("cutoff.cleyra-evacuation.choice-window");
+const cleyraFreyaCutoff = cutoffsById.get("cutoff.cleyra-freya.before-reunion");
+const cleyraTrunkReturnCutoff = cutoffsById.get("cutoff.cleyra-trunk-return.before-bridge");
 if (
   !cleyraEvacuationWarning?.action.includes("Choose Right, then Left, then Right") ||
   !cleyraEvacuationWarning.action.includes("Not Yet as the recommended route") ||
@@ -77,6 +79,19 @@ if (
   !cleyraEvacuationCutoff.sourceIds.includes("steam-cleyra-achievement-walkthrough")
 ) {
   errors.push("Cleyra's evacuation route must preserve Right/Left/Right, identify Not Yet as recommended rather than confirmed, and cite the fourth-choice conflict.");
+}
+if (
+  cleyraFreyaCutoff?.certainty !== "conservative" ||
+  !cleyraFreyaCutoff.trigger.includes("Freya's separate control segment") ||
+  !cleyraFreyaCutoff.trigger.includes("before returning to the settlement entrance") ||
+  !["missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"].every((missableId) => cleyraFreyaCutoff.missableIds.includes(missableId)) ||
+  !["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"].every((sourceId) => cleyraFreyaCutoff.sourceIds.includes(sourceId)) ||
+  cleyraTrunkReturnCutoff?.certainty !== "source-supported" ||
+  !cleyraTrunkReturnCutoff.trigger.includes("before crossing the bridge") ||
+  !cleyraTrunkReturnCutoff.missableIds.includes("missable.disc-2.cleyra.treasures") ||
+  !cleyraTrunkReturnCutoff.sourceIds.includes("gamefaqs-cleyra-71891")
+) {
+  errors.push("Cleyra's route map must separate the conservative Freya-phase Emerald/Stiltzkin checkpoint from the source-supported Trunk-chest return before the bridge.");
 }
 
 const lindblumTrolleyWarning = missablesById.get("missable.disc-1.lindblum.trolley-cutoff");

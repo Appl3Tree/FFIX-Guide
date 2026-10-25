@@ -559,7 +559,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.cleyra",
     toChapterId: "disc-2.return-to-alexandria",
     relationship: "required-story",
-    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game after Beatrix. Guides disagree on the exact last safe action for an overall sweep: complete the settlement sweep before leaving it to trigger Antlion, claim post-Antlion rewards before advancing, collect any missed Trunk chests on the required return before crossing the bridge, then collect evacuation rewards and attempt Beatrix's steals before departure. Jegged's broad Point of No Return callout precedes the forced Trunk return, while GameFAQs explicitly permits missed chests during it.",
+    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game after Beatrix. The route now marks Freya's post-Antlion Emerald/Stiltzkin window and the missed-Trunk-chest cleanup before the bridge separately from evacuation rewards and Beatrix's steals. Guides disagree on the broad last-safe-action label: Jegged's Point of No Return callout precedes the forced Trunk return, while GameFAQs explicitly permits missed chests during it.",
     sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-return-to-alexandria-71891", "jegged-cleyra", "jegged-return-to-alexandria-castle", "gamerguides-cleyra", "elitegrindlab-cleyra"],
   },
   {
@@ -1094,6 +1094,24 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "source-supported",
     trigger: "Attempt Antlion's three listed steals before defeating it. The encounter does not repeat; the warning keeps item recovery caveats in the missable record.",
     missableIds: ["missable.disc-2.cleyra.antlion-steals"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+  {
+    id: "cutoff.cleyra-freya.before-reunion",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Freya's post-Antlion Emerald and Stiltzkin window",
+    certainty: "conservative",
+    trigger: "During Freya's separate control segment after Antlion, collect the High Priest's Emerald and buy Stiltzkin's second bundle before returning to the settlement entrance. This is the safe checkpoint; sources differ on whether the bundle is restricted to Freya's phase or remains available farther into the attack route.",
+    missableIds: ["missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
+  },
+  {
+    id: "cutoff.cleyra-trunk-return.before-bridge",
+    edgeId: "story.cleyra-to-return-to-alexandria",
+    title: "Recover missed Cleyra Trunk chests before the bridge",
+    certainty: "source-supported",
+    trigger: "On the required return through Cleyra's Trunk after Freya rejoins the party, collect any chest copies missed on the first pass before crossing the bridge into the Settlement. GameFAQs explicitly directs this cleanup before continuing across the bridge.",
+    missableIds: ["missable.disc-2.cleyra.treasures"],
     sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"],
   },
   {
