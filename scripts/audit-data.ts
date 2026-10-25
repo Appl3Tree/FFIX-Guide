@@ -3237,6 +3237,35 @@ for (const claim of equipmentAbilityClaims) {
   }
 }
 const moonstoneId = "game-item.moonstone";
+const rubyId = "game-item.ruby";
+const rubyPaths = itemAcquisitionPaths.filter((path) => path.itemId === rubyId);
+if (!gameItems.some((item) => item.id === rubyId && item.name === "Ruby" && item.category === "equipment")) {
+  errors.push("Ruby must be present in the equipment catalog.");
+}
+if (rubyPaths.length !== 2) {
+  errors.push(`Ruby must map its Iifa Tree reward and Stiltzkin bundle; found ${rubyPaths.length} path(s).`);
+}
+const iifaTreeRubyPath = rubyPaths.find((path) => path.id === "item-path.disc-2.iifa-tree.ruby-seal-reward");
+if (iifaTreeRubyPath?.method !== "quest-reward" || iifaTreeRubyPath.chapterId !== "disc-2.iifa-tree" ||
+  iifaTreeRubyPath.availability !== "single-use" ||
+  !iifaTreeRubyPath.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.treasure-sweep") ||
+  !iifaTreeRubyPath.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.carbuncle-ruby") ||
+  !iifaTreeRubyPath.sourceIds.includes("gamefaqs-iifa-tree-71891")) {
+  errors.push("Ruby's Iifa Tree reward must link its story chapter, Ruby checklist objectives, and walkthrough source.");
+}
+const stiltzkinRubyPath = rubyPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.ruby-stiltzkin-eighth-bundle");
+if (stiltzkinRubyPath?.method !== "mogshop" || stiltzkinRubyPath.chapterId !== "disc-4.return-to-gaia" ||
+  stiltzkinRubyPath.cost?.amount !== 5555 || stiltzkinRubyPath.cost.bundleId !== "alexandria-stiltzkin-eighth-bundle" ||
+  stiltzkinRubyPath.shopId !== "stiltzkin-alexandria-eighth" ||
+  !stiltzkinRubyPath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.stiltzkin-eighth-bundle") ||
+  !stiltzkinRubyPath.sourceIds.includes("gamefaqs-stiltzkin-shopping-71891")) {
+  errors.push("Ruby's Disc IV Stiltzkin path must record the one-time Alexandria bundle, shared 5,555-Gil price, and source objective.");
+}
+const expectedRubyAbilities = new Set(["Carbuncle", "Reflect"]);
+const rubyAbilities = new Set(equipmentAbilityClaims.filter((claim) => claim.itemId === rubyId).map((claim) => claim.abilityName));
+if ([...expectedRubyAbilities].some((ability) => !rubyAbilities.has(ability)) || rubyAbilities.size !== expectedRubyAbilities.size) {
+  errors.push("Ruby must have exactly the Carbuncle and Reflect ability claims.");
+}
 const moonstonePaths = itemAcquisitionPaths.filter((path) => path.itemId === moonstoneId);
 const requiredMoonstonePaths = [
   { id: "item-path.disc-1.alexandria.moonstone-brahne", objectiveId: "disc-1.alexandria.swordfight.moonstone-1" },
