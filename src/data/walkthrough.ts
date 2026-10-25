@@ -175,7 +175,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "guardhouse-pickup-mognet",
             kind: "save",
-            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached at least 50 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; it is separate from the earlier Kupo-to-Monty delivery. Read it before advancing the escape. Jump Rope returns later, but the letter's later availability is unconfirmed.",
+            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached at least 50 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; it is separate from the earlier Kupo-to-Monty delivery. This is the first opportunity; if you miss it, Mosh offers the letter again on the Disc II Alexandria return.",
             objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {
@@ -1958,7 +1958,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "return-alexandria-mosh-save",
             kind: "save",
             text: "Speak with Mosh beside the altar, read any new Mognet letters, and save before carrying Dagger out of the room.",
-            detail: "The incoming letters include Jump-rope Champion Appears! and Rumor About Princess Garnet. Check Mosh again after the party-split sequence for the separate letter to Monty.",
+            detail: "This is the documented second opportunity for Kupo's Jump Rope letter if it was not read as Steiner in Disc I and the 50-jump threshold was met. Jegged lists 'Jump-rope Champion Appears!' among the new letters after Zorn and Thorn. Check Mosh again after the party-split sequence for the separate letter to Monty; sources do not confirm the Jump Rope letter's availability after this Disc II check.",
+            objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {
             id: "return-alexandria-beatrix-steals",

@@ -758,8 +758,12 @@ const jumpRopeLetterWarning = missables.find((missable) => missable.objectiveId 
 const jumpRopeLetterSteps = walkthroughChapters.flatMap((chapter) =>
   chapter.sections.flatMap((section) => section.steps.filter((step) => step.objectiveIds?.includes(jumpRopeLetterId)).map((step) => ({ chapterId: chapter.areaId, step }))),
 );
-if (jumpRopeLetterObjective?.category !== "side-content" || !jumpRopeLetterObjective.chapterIds?.includes("disc-1.alexandria")) {
-  errors.push("The Jump Rope Mognet letter must remain a Disc I Alexandria side-content objective.");
+if (
+  jumpRopeLetterObjective?.category !== "side-content" ||
+  !jumpRopeLetterObjective.chapterIds?.includes("disc-1.alexandria") ||
+  !jumpRopeLetterObjective.chapterIds?.includes("disc-2.return-to-alexandria")
+) {
+  errors.push("The Jump Rope Mognet letter must link its Disc I first chance and Disc II recovery chapter.");
 }
 if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
   errors.push("The Jump Rope Mognet letter objective must cite the 50-jump Disc I source.");
@@ -770,14 +774,43 @@ if (!jumpRopeLetterObjective?.sourceIds.includes("gamerguides-alexandria") || !j
 if (!jumpRopeLetterObjective?.sourceIds.includes("jegged-alexandria-castle") || !jumpRopeLetterWarning?.sourceIds.includes("jegged-alexandria-castle")) {
   errors.push("The Jump Rope Mognet letter objective and warning must retain Jegged's Mosh/Mognet route confirmation.");
 }
-if (!jumpRopeLetterWarning || !jumpRopeLetterWarning.classification.includes("conditional") || jumpRopeLetterWarning.classification.includes("permanently-missable")) {
-  errors.push("The Jump Rope Mognet letter warning must remain conditional without asserting permanent loss.");
+if (!jumpRopeLetterObjective?.sourceIds.includes("jegged-return-to-alexandria-castle") || !jumpRopeLetterWarning?.sourceIds.includes("jegged-return-to-alexandria-castle")) {
+  errors.push("The Jump Rope Mognet letter objective and warning must cite Jegged's Disc II recovery evidence.");
 }
-if (!jumpRopeLetterWarning?.consequence.includes("whether this Disc I letter remains readable during the Alexandria return is unresolved")) {
-  errors.push("The Jump Rope Mognet letter warning must preserve the unresolved Disc III recovery question.");
+if (
+  !jumpRopeLetterWarning ||
+  !jumpRopeLetterWarning.classification.includes("conditional") ||
+  !jumpRopeLetterWarning.classification.includes("recoverable-later") ||
+  jumpRopeLetterWarning.classification.includes("permanently-missable")
+) {
+  errors.push("The Jump Rope Mognet letter warning must be conditional and record its documented Disc II recovery.");
 }
-if (jumpRopeLetterSteps.length !== 1 || jumpRopeLetterSteps[0]?.chapterId !== "disc-1.alexandria" || jumpRopeLetterSteps[0]?.step.id !== "guardhouse-pickup-mognet") {
-  errors.push("The Jump Rope Mognet letter objective must point to Mosh's Disc I guardhouse step.");
+if (!jumpRopeLetterWarning?.consequence.includes("Whether the letter remains available after that Disc II check")) {
+  errors.push("The Jump Rope Mognet letter warning must preserve the unresolved post-Disc II recovery question.");
+}
+const discOneJumpRopeStep = jumpRopeLetterSteps.find(({ chapterId }) => chapterId === "disc-1.alexandria")?.step;
+const discTwoJumpRopeStep = jumpRopeLetterSteps.find(({ chapterId }) => chapterId === "disc-2.return-to-alexandria")?.step;
+if (
+  jumpRopeLetterSteps.length !== 2 ||
+  discOneJumpRopeStep?.id !== "guardhouse-pickup-mognet" ||
+  discTwoJumpRopeStep?.id !== "return-alexandria-mosh-save"
+) {
+  errors.push("The Jump Rope Mognet letter objective must point to the Disc I guardhouse step and Disc II Mosh recovery step.");
+}
+if (!discTwoJumpRopeStep?.detail?.includes("documented second opportunity") || !discTwoJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)) {
+  errors.push("The Disc II Mosh step must explain and link the second Jump Rope letter opportunity.");
+}
+const jumpRopeLetterCutoffs = gameRouteCutoffs.filter((cutoff) => cutoff.missableIds.includes(jumpRopeLetterWarning?.id ?? ""));
+const discOneJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.alexandria.jump-rope-mognet-letter");
+const discTwoJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.return-to-alexandria.jump-rope-letter-recovery");
+if (
+  jumpRopeLetterCutoffs.length !== 2 ||
+  discOneJumpRopeCutoff?.edgeId !== "story.alexandria-to-evil-forest" ||
+  discTwoJumpRopeCutoff?.edgeId !== "story.return-to-alexandria-to-pinnacle-rocks" ||
+  !discTwoJumpRopeCutoff?.sourceIds.includes("jegged-return-to-alexandria-castle") ||
+  !discTwoJumpRopeCutoff?.trigger.includes("Jump-rope Champion Appears!")
+) {
+  errors.push("The Jump Rope Mognet letter must have distinct sourced cutoff windows for Disc I and its Disc II recovery.");
 }
 const friendlyCreatureObjectiveIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
