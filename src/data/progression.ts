@@ -300,6 +300,35 @@ export const storyPartySequences: StoryPartySequence[] = [
     ],
   },
   {
+    id: "party-sequence.home-front-alexandria",
+    title: "Disc III Alexandria Vivi, Eiko, and Zidane handoff",
+    phases: [
+      {
+        party: "Vivi",
+        chapterIds: ["disc-3.the-home-front"],
+        location: "Alexandria, from the town streets through the mini-theater",
+        summary: "Complete Hippaul's races, Stiltzkin's fifth bundle, the local sweep, and the first four ATEs while Vivi has control. Ruby's play closes this free-roam phase and awards Opal, Topaz, and Amethyst.",
+      },
+      {
+        party: "Eiko",
+        chapterIds: ["disc-3.the-home-front"],
+        location: "Alexandria Castle",
+        summary: "Control briefly shifts to Eiko for a short castle passage between Ruby's play and the return to Zidane; this handoff is separate from Vivi's earlier town route.",
+      },
+      {
+        party: "Zidane and Vivi; Freya and Amarant join at the docks",
+        chapterIds: ["disc-3.the-home-front", "disc-3.card-tournament"],
+        location: "Alexandria city and docks, then the route to Treno",
+        summary: "After Eiko's passage, control returns to Zidane with Vivi. Complete the final two ATEs and the Nero Brothers challenge, then meet Freya and Amarant at the docks before proceeding to Treno.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-home-front-71891",
+      "jegged-home-front",
+      "gamerguides-home-front",
+    ],
+  },
+  {
     id: "party-sequence.cleyra-antlion",
     title: "Cleyra's post-Antlion party handoff",
     phases: [
@@ -634,7 +663,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.the-home-front",
     toChapterId: "disc-3.card-tournament",
     relationship: "required-story",
-    summary: "The Alexandria visit has two distinct free-roam phases: Vivi's Hippaul, Stiltzkin #5, and first four ATEs close when the party accepts Ruby's play; after the Eiko passage, Zidane's phase includes the Nero Brothers and final two ATEs. Complete the later city sweep before the story moves to Treno; sources differ on whether remaining optional activities close at city exit or at the chapter transition.",
+    summary: "The Alexandria visit runs as Vivi's free-roam phase, a brief castle passage with Eiko, then Zidane's later free-roam phase: Vivi's Hippaul, Stiltzkin #5, and first four ATEs close when the party accepts Ruby's play; Zidane's phase includes the Nero Brothers and final two ATEs. Complete the later city sweep before the story moves to Treno; sources differ on whether remaining optional activities close at city exit or at the chapter transition.",
     sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-card-tournament-71891", "jegged-home-front", "jegged-treno-tournament", "gamerguides-home-front", "elitegrindlab-home-front"],
   },
   {

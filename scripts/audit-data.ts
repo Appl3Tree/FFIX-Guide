@@ -431,6 +431,26 @@ if (!alexandriaPartySequence) {
     if (!alexandriaPartySequence.sourceIds.includes(sourceId)) errors.push(`The Disc II Alexandria sequence is missing corroborating source ${sourceId}.`);
   }
 }
+const homeFrontPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.home-front-alexandria");
+if (!homeFrontPartySequence) {
+  errors.push("The Disc III Alexandria Vivi/Eiko/Zidane party handoff sequence is missing.");
+} else {
+  if (homeFrontPartySequence.phases.length !== 3) errors.push("The Disc III Alexandria party sequence must retain its Vivi, Eiko, and Zidane phases.");
+  if (homeFrontPartySequence.phases[0]?.party !== "Vivi" || !homeFrontPartySequence.phases[0]?.summary.includes("first four ATEs")) {
+    errors.push("The Disc III Alexandria sequence must place the first four ATEs in Vivi's phase.");
+  }
+  if (homeFrontPartySequence.phases[1]?.party !== "Eiko" || homeFrontPartySequence.phases[1]?.chapterIds.join(",") !== "disc-3.the-home-front") {
+    errors.push("The Disc III Alexandria sequence must retain Eiko's brief castle passage between Vivi and Zidane.");
+  }
+  if (!homeFrontPartySequence.phases[2]?.party.startsWith("Zidane and Vivi") ||
+      homeFrontPartySequence.phases[2]?.chapterIds.join(",") !== "disc-3.the-home-front,disc-3.card-tournament" ||
+      !homeFrontPartySequence.phases[2]?.summary.includes("final two ATEs")) {
+    errors.push("The Disc III Alexandria sequence must place the remaining ATEs after Vivi rejoins Zidane and connect the route to Treno.");
+  }
+  for (const sourceId of ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front"]) {
+    if (!homeFrontPartySequence.sourceIds.includes(sourceId)) errors.push(`The Disc III Alexandria sequence is missing corroborating source ${sourceId}.`);
+  }
+}
 const cleyraPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.cleyra-antlion");
 if (!cleyraPartySequence) {
   errors.push("The post-Antlion Cleyra party handoff sequence is missing.");
