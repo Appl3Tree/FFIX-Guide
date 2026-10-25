@@ -8,6 +8,36 @@ This is a static playthrough simulation using the authored walkthrough data and 
 
 The static standard-route simulation covers all 44 chapters from Alexandria through the ending. The Excalibur II route has a source-based static trace from Alexandria through the pickup after Lich at 11:13:07; it has not been independently timed, and the target schedule below is not evidence of a validated speed route.
 
+## Movie Critic single-save route simulation
+
+The automated route check builds two versions of the eligible ATE plan: one selects **Home Sweet Home**, and the other selects **Hippo's Prize**. Each plan includes 79 of the 80 eligible ATEs, excludes the unchosen Treno branch, and maps to the Movie Critic entry in all three supported catalogs: Steam, PS4, and Xbox. It also checks that each modeled ATE prerequisite appears before its dependent scene and that the Wei and Kal prerequisite is placed in Burmecia before The Rally in Lindblum.
+
+This is a static feasibility check of the authored event order, dependency graph, and achievement pointers. It does not verify every scene trigger through gameplay or establish service parity for every release. Those checks remain open in B03.
+
+The Home Sweet Home variant distributes its 79 eligible scenes as follows:
+
+| Chapter | Scenes |
+| --- | ---: |
+| Evil Forest | 6 |
+| Village of Dali | 6 |
+| Lindblum | 5 |
+| Treno | 7 |
+| Cleyra | 4 |
+| Return to Alexandria | 1 |
+| Return to Lindblum | 3 |
+| Outer Continent | 5 |
+| Magdalene Forest | 6 |
+| Conde Petie Mountain Path | 1 |
+| Madain Sari | 5 |
+| The Home Front | 6 |
+| Card Tournament | 9 |
+| The Aftermath | 8 |
+| Lost Continent | 2 |
+| Portal to Another World | 5 |
+| **Total** | **79** |
+
+The alternative Hippo's Prize route replaces Home Sweet Home in Card Tournament; every other chapter count stays the same. Automated coverage lives in `test/ate-route.test.mjs` and checks both branch plans against all three achievement catalogs.
+
 ## Chapter coverage matrix
 
 | Disc | Chapter | Standard route simulation | Excalibur II route |
