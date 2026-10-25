@@ -1272,9 +1272,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.treno-to-journey-to-cleyra",
     title: "Treno first-six ATE safe route",
     certainty: "conservative",
-    trigger: "For the safe screen-order route, view Treno Tradition, Pursuit, Confusion, Ambition, Meeting Place, and Unexpected Visitor before the city pickup sweep and Doctor Tot's story sequence. GameFAQs says the Auction House closes unviewed scenes except Unexpected Visitor and Crime and Punishment; one reviewed route reports Unexpected Visitor may still appear on the tower return if it was missed. Treat this as a conservative route checkpoint, not a verified final trigger for Unexpected Visitor.",
+    trigger: "For the conservative screen-order route, view Treno Tradition, Pursuit, Confusion, Ambition, Meeting Place, and Unexpected Visitor before the city pickup sweep and Doctor Tot's story sequence. GameFAQs 71891 says the Auction House closes unviewed scenes except Unexpected Visitor and Crime and Punishment; GameFAQs 79143 says Unexpected Visitor is forced before reaching the north end of a screen if still unseen. EliteGrindLab also reports a tower-return trigger, but the latest fallback point is unverified.",
     missableIds: ["missable.disc-2.treno.ates"],
-    sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"],
+    sourceIds: ["gamefaqs-treno-71891", "gamefaqs-treno-79143", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"],
   },
   {
     id: "cutoff.treno.tower-exit-crime-and-punishment",

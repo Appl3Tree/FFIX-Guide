@@ -4,6 +4,8 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
+`npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Treno ATE fallback source update. The audit reports 0 errors and 181 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 353 sources; all warnings link to 96 cutoff windows. The build emits 1,944.99 kB JavaScript (475.06 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
+
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Disc III Alexandria party-sequence update. The audit reports 0 errors and 181 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 352 sources; all warnings link to 96 cutoff windows. The route graph remains at 70 links, and the party model now has nine source-linked sequences. The build emits 1,943.95 kB JavaScript (474.71 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
 
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Disc III Lindblum ATE prerequisite update. The audit reports 0 errors and 181 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 352 sources; all warnings link to 96 cutoff windows. The objective graph has 50 edges: 32 ATE-order, two objective-access, and 16 quest-prerequisite links. The build emits 1,942.74 kB JavaScript (474.39 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct game/release verification were not run.
@@ -11,6 +13,8 @@ Last updated: 2026-10-25
 `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check` pass for the Alexandria Inn source reconciliation. The audit reports 0 errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 351 sources; all warnings link to 93 cutoff windows. The route graph has 70 links (41 required story links, two optional detours, 14 optional returns, 13 rejoins). The catalog has 206 items, 813 paths across 42 slices, 38 recipes, 112 targets, and 196 ability claims. The bundle is 1,935.28 kB JavaScript (472.65 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite's chunk-size advisory remains. Tests were not run; direct game/release/browser verification remains open. TrueAchievements returned HTTP 402 during review, so its indexed endgame statement is secondary evidence.
 
 ## Latest change status
+
+The Treno warning now distinguishes the forced in-city fallback reported by GameFAQs from the possible tower-return trigger reported by EliteGrindLab. The conservative six-scene route remains the recommendation; the final trigger and modern-release behavior are still unknown.
 
 The Disc III Alexandria party model now separates Vivi's first four ATEs and pre-play checklist, Eiko's short castle passage, and Zidane and Vivi's final two ATEs/Nero Brothers phase before the dock reunion with Freya and Amarant. The audit enforces the phase order and three walkthrough sources. Static validation passes; direct browser, game, and release verification remain open.
 

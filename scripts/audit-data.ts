@@ -170,10 +170,10 @@ if (
   trenoFirstSixCutoff?.certainty !== "conservative" ||
   !trenoFirstSixCutoff.title.includes("first-six") ||
   !trenoFirstSixCutoff.trigger.includes("Unexpected Visitor") ||
-  !trenoFirstSixCutoff.trigger.includes("not a verified final trigger") ||
+  !trenoFirstSixCutoff.trigger.includes("latest fallback point is unverified") ||
   trenoFirstSixCutoff.missableIds.length !== 1 ||
   trenoFirstSixCutoff.missableIds[0] !== trenoAteWarning?.id ||
-  !["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"].every((sourceId) => trenoFirstSixCutoff.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-treno-71891", "gamefaqs-treno-79143", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"].every((sourceId) => trenoFirstSixCutoff.sourceIds.includes(sourceId)) ||
   trenoFinalAteCutoff?.certainty !== "source-supported" ||
   !trenoFinalAteCutoff.trigger.includes("After Doctor Tot opens") ||
   !trenoFinalAteCutoff.trigger.includes("before descending") ||
@@ -184,9 +184,11 @@ if (
   !trenoAteWarning.deadline.includes("After Doctor Tot opens") ||
   !trenoAteWarning.action.includes("Treno Tradition, Pursuit, Confusion, Ambition, Meeting Place, and Unexpected Visitor") ||
   !trenoAteWarning.action.includes("Crime and Punishment") ||
-  !trenoAteWarning.note?.includes("GameFAQs specifically exempts Unexpected Visitor and Crime and Punishment") ||
+  !trenoAteWarning.note?.includes("GameFAQs 71891 specifically exempts Unexpected Visitor and Crime and Punishment") ||
+  !trenoAteWarning.note.includes("GameFAQs 79143 says Unexpected Visitor is forced before proceeding north") ||
+  !trenoAteWarning.recovery.includes("forced before reaching the north end of a screen") ||
   !trenoAteWarning.note.includes("only Crime and Punishment's after-hatch, before-descent timing") ||
-  !trenoFirstSixStep?.detail.includes("last possible trigger remains unverified") ||
+  !trenoFirstSixStep?.detail.includes("latest fallback point is unverified") ||
   trenoCrimeStep?.kind !== "cutoff" ||
   !trenoCrimeStep.text.includes("After Doctor Tot opens the hatch") ||
   !trenoCrimeStep.detail.includes("before the party descends")

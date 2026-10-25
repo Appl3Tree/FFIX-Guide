@@ -1521,7 +1521,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-ate-route",
         title: "First visit — follow the ATE route before exploring",
         summary: "The first six ATEs follow a safe screen route. Avoid the Auction House screen and city item sweep until all six are checked.",
-        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-treno-79143", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"],
         steps: [
           {
             id: "treno-save-and-tradition",
@@ -1533,7 +1533,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-six-screen-ates",
             kind: "cutoff",
             text: "Follow Dagger's path in order: go west for Pursuit, descend the stairs for Confusion, head south for Ambition, return to the entrance and take the right-hand stairs for Meeting Place, then go north one screen for Unexpected Visitor. Do not enter the Auction House or stop for city pickups before the route reaches Unexpected Visitor.",
-            detail: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab agree on this screen route. GameFAQs says entering the Auction House closes unviewed ATEs except Unexpected Visitor and Crime and Punishment, so this route finishes all six before exploring. EliteGrindLab reports that one guide says Unexpected Visitor can still appear on the tower return if unseen; the last possible trigger remains unverified. A TrueAchievements checklist appears to place Unexpected Visitor before Ambition, so this walkthrough preserves the four-source order. Keep the outside-Treno save until all seven are checked.",
+            detail: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab agree on this screen route. GameFAQs 71891 says entering the Auction House closes unviewed ATEs except Unexpected Visitor and Crime and Punishment. A second GameFAQs route says Unexpected Visitor is forced before the player reaches the north end of a screen if it remains unseen; EliteGrindLab also reports a possible tower-return trigger, but the latest fallback point is unverified. A TrueAchievements checklist appears to place Unexpected Visitor before Ambition, so this walkthrough preserves the four-source order. Keep the outside-Treno save until all seven are checked.",
           },
           {
             id: "treno-power-belt-intercept",

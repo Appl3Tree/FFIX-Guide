@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest B01 follow-up adds GameFAQs' alternate Treno ATE fallback evidence and preserves the separate, unverified tower-return report. The source-linked route, lint, typecheck, data audit, build, and whitespace checks pass. Tests and direct browser, game, and release verification were not run.
+
 No account-owner setup action changed. The latest guide-content update adds the Disc III Alexandria Vivi/Eiko/Zidane handoff as a source-linked party sequence and protects its three phases with an audit invariant. Lint, typecheck, audit, production build, and whitespace checks pass; tests and direct browser, game, and release verification were not run.
 
 No account-owner setup action changed. The latest guide-content update encodes the Disc III Lindblum return chain Hallucination → Something Washed Ashore → No Free Lunch → Give Me My Money, including the fewer-than-50-Gil setup and Blue Narciss trigger. The audit reports 0 errors and 181 coverage warnings; lint, typecheck, build, and whitespace checks pass. Tests and direct game/release verification were not run.
