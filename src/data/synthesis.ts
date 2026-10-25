@@ -85,6 +85,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "GameFAQs lists Gold Choker + Peridot at Alexandria, Treno, Lindblum, and Daguerreo. RPGClassics gives the 4,000-Gil price and lists the recipe at the Disc III Alexandria and Treno synthesis shops; Daguerreo is the selected representative route.",
   },
   {
+    id: "synthesis-recipe.peridot",
+    resultItemId: "game-item.peridot",
+    ingredients: [
+      { itemId: "game-item.ore", quantity: 1 },
+      { itemId: "game-item.soft", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 100 },
+    sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "GameFAQs lists Peridot from Ore + Soft at Daguerreo, Black Mage Village (Disc IV), and Master Synthesist. RPGClassics gives the 100-Gil cost and also lists the recipe at Daguerreo, the Disc IV Black Cat shop, and Hades.",
+  },
+  {
     id: "synthesis-recipe.gold-choker",
     resultItemId: "game-item.gold-choker",
     ingredients: [

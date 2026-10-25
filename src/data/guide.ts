@@ -1335,7 +1335,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items",
     accessed: "2026-10-24",
-    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Battle Boots as a 45-frog reward and a Daguerreo recipe from Feather Boots + Wing Edge, alongside its Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It lists Anklet's Treno Auction and Gold Choker + Peridot recipe, Gold Choker from Linen Cuirass + Soft, Peridot's Ramuh, Chocograph, Alexandria and enemy routes, and Linen Cuirass's starting gear, Black Waltz 3 steal and shops. It also lists Grand Armor's Disc IV Black Mage Village recipe as Mythril Sword + Mythril Armor and records its Nova Dragon steal. Individual quantities and version-specific availability still need a full item audit.",
+    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Battle Boots as a 45-frog reward and a Daguerreo recipe from Feather Boots + Wing Edge, alongside its Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It lists Anklet's Treno Auction and Gold Choker + Peridot recipe, Gold Choker from Linen Cuirass + Soft, Peridot's Ramuh, Chocograph, Alexandria, enemy, and Ore + Soft synthesis sources, plus Ore extraction with Jewel and its Hot & Cold digging/redemption routes. It also covers Anklet, Gold Choker, Peridot, and Linen Cuirass abilities and lists Linen Cuirass's starting gear, Black Waltz 3 steal, and shops. Grand Armor's Disc IV Black Mage Village recipe is Mythril Sword + Mythril Armor and its Nova Dragon steal is recorded. Individual quantities and version-specific availability still need a full item audit.",
   },
   {
     id: "cavesofnarshe-ff9-claws",
@@ -2303,7 +2303,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml",
     accessed: "2026-10-24",
-    notes: "Independent original PlayStation synthesis table. Lists Anklet at Disc III Alexandria and Treno for 4,000 Gil from Gold Choker + Peridot, Gold Choker from Linen Cuirass + Soft for 1,300 Gil at Treno and other shops, Rebirth Ring at Daguerreo for 7,000 Gil from Diamond + Anklet, and Battle Boots at Daguerreo for 6,500 Gil from Feather Boots + Wing Edge. Cross-checks recipe prices and shop locations.",
+    notes: "Independent original PlayStation synthesis table. Lists Peridot from Ore + Soft for 100 Gil at Daguerreo, Disc IV Black Mage Village, and Hades; Anklet at Disc III Alexandria and Treno for 4,000 Gil from Gold Choker + Peridot; Gold Choker from Linen Cuirass + Soft for 1,300 Gil at Treno and other shops; Rebirth Ring at Daguerreo for 7,000 Gil from Diamond + Anklet; and Battle Boots at Daguerreo for 6,500 Gil from Feather Boots + Wing Edge. Cross-checks recipe prices and shop locations.",
   },
   {
     id: "jegged-synthesis",
@@ -2311,7 +2311,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Synthesis/",
     accessed: "2026-10-24",
-    notes: "Independent recipe reference listing Anklet from Gold Choker + Peridot, Gold Choker from Linen Cuirass + Soft, Rebirth Ring from Diamond + Anklet for 7,000 Gil at Daguerreo, Grand Armor from Mythril Sword + Mythril Armor at the Black Mage Village Disc IV synthesis shop, and Battle Boots from Feather Boots + Wing Edge at Daguerreo. Cross-checks recipe locations and costs against other synthesis and equipment references.",
+    notes: "Independent recipe reference listing Peridot from Ore + Soft, Anklet from Gold Choker + Peridot, Gold Choker from Linen Cuirass + Soft, Rebirth Ring from Diamond + Anklet for 7,000 Gil at Daguerreo, Grand Armor from Mythril Sword + Mythril Armor at the Black Mage Village Disc IV synthesis shop, and Battle Boots from Feather Boots + Wing Edge at Daguerreo. Cross-checks recipe locations and costs against other synthesis and equipment references.",
   },
   {
     id: "elitegrindlab-synthesis",

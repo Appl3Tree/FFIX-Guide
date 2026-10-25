@@ -134,6 +134,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   const ankletPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.anklet");
   const peridotPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot");
   const linenCuirassPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.linen-cuirass");
+  const orePaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.ore");
   const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.rebirth-ring");
 
   assert.ok(gameItems.some((item) => item.id === "game-item.rebirth-ring"));
@@ -142,6 +143,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(gameItems.some((item) => item.id === "game-item.gold-choker"));
   assert.ok(gameItems.some((item) => item.id === "game-item.peridot"));
   assert.ok(gameItems.some((item) => item.id === "game-item.linen-cuirass"));
+  assert.ok(gameItems.some((item) => item.id === "game-item.ore"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.card-tournament"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.aerial-exploration"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-4.the-final-battle"));
@@ -197,20 +199,39 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
     { itemId: "game-item.peridot", quantity: 1 },
   ]);
 
-  const peridotRecipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.gold-choker");
+  const goldChokerRecipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.gold-choker");
+  const oreSynthesisRecipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.peridot");
   const goldChokerPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.gold-choker-synthesis");
+  const peridotSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.peridot-daguerreo-synthesis");
+  const oreDigPath = orePaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.ore-hot-cold-dig");
+  const oreRedemptionPath = orePaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.ore-hot-cold-redemption");
+  const oreExtractionPath = orePaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.ore-jewel-extraction");
   const ramuhPeridot = peridotPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.ramuh-peridot");
   const chocographPeridots = peridotPaths.find((path) => path.id === "item-path.disc-2.outer-continent.peridot-abandoned-beach");
   const alexandriaPeridot = peridotPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.peridot-alexandria-harbor");
   const startingLinenCuirass = linenCuirassPaths.find((path) => path.method === "starting-equipment");
   assert.equal(goldChokerPath?.cost?.amount, 1300);
-  assert.equal(peridotRecipe?.cost.amount, 1300);
-  assert.deepEqual(peridotRecipe?.ingredients, [
+  assert.equal(goldChokerRecipe?.cost.amount, 1300);
+  assert.deepEqual(goldChokerRecipe?.ingredients, [
     { itemId: "game-item.linen-cuirass", quantity: 1 },
     { itemId: "game-item.soft", quantity: 1 },
   ]);
+  assert.equal(oreSynthesisRecipe?.cost.amount, 100);
+  assert.deepEqual(oreSynthesisRecipe?.ingredients, [
+    { itemId: "game-item.ore", quantity: 1 },
+    { itemId: "game-item.soft", quantity: 1 },
+  ]);
+  assert.equal(peridotSynthesisPath?.recipeId, "synthesis-recipe.peridot");
+  assert.equal(peridotSynthesisPath?.cost?.amount, 100);
+  assert.equal(oreDigPath?.availability, "repeatable");
+  assert.ok(oreDigPath?.conditions?.includes("two digging points"));
+  assert.ok(oreRedemptionPath?.conditions?.includes("250 Hot & Cold points"));
+  assert.equal(oreRedemptionPath?.method, "point-redemption");
+  assert.ok(oreExtractionPath?.conditions?.includes("Jewel"));
+  assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
-  assert.equal(peridotPaths.length, 4);
+  assert.equal(peridotPaths.length, 5);
+  assert.equal(orePaths.length, 3);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -233,7 +254,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
     ].sort(),
   );
 
-  for (const path of [...rebirthPaths, ...diamondPaths, ...ankletPaths, ...peridotPaths, ...linenCuirassPaths, ...(goldChokerPath ? [goldChokerPath] : [])]) {
+  for (const path of [...rebirthPaths, ...diamondPaths, ...ankletPaths, ...peridotPaths, ...linenCuirassPaths, ...orePaths, ...(goldChokerPath ? [goldChokerPath] : [])]) {
     for (const sourceId of path.sourceIds) {
       assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
     }

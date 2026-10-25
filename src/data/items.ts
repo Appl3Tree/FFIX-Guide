@@ -11,8 +11,10 @@ export type ItemAcquisitionMethod =
   | "mogshop"
   | "mognet-reward"
   | "quest-reward"
+  | "point-redemption"
   | "steal"
   | "drop"
+  | "ability-extract"
   | "chocograph"
   | "auction"
   | "starting-equipment"
@@ -102,7 +104,7 @@ export const itemCatalogCoverage = {
     "disc-4.memoria",
     "disc-4.the-final-battle",
   ],
-  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet and Rebirth Ring routes, Rebirth Ring recovery from Chocograph #24 and Trance Kuja plus its Diamond/Anklet synthesis path, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and five structured synthesis recipes. The Anklet chain now includes its variable-price Treno Auction source and Gold Choker + Peridot recipe, plus Gold Choker from Linen Cuirass + Soft. Peridot includes the Ramuh reward, two Chocographs, and Alexandria pickup; Linen Cuirass includes its starting equipment, Black Waltz 3 steal, and selected shop paths. These item records and acquisition sources remain partial; most recipes, shop cutoffs, recovery paths, and item-level completeness need independent review.",
+  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet and Rebirth Ring routes, Rebirth Ring recovery from Chocograph #24 and Trance Kuja plus its Diamond/Anklet synthesis path, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and six structured synthesis recipes. The Anklet chain includes its variable-price Treno Auction source and Gold Choker + Peridot recipe, plus Gold Choker from Linen Cuirass + Soft and Peridot from Ore + Soft. Ore includes repeatable Hot & Cold digging, point redemption, and Jewel spell extraction. Peridot includes the Ramuh reward, two Chocographs, and Alexandria pickup; Linen Cuirass includes its starting equipment, Black Waltz 3 steal, and selected shop paths. These item records and acquisition sources remain partial; most recipes, shop cutoffs, recovery paths, and item-level completeness need independent review.",
 };
 
 const burmeciaSources = [
@@ -146,6 +148,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.peridot", name: "Peridot", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-pinnacle-rocks", "gamefaqs-outer-continent-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.linen-cuirass", name: "Linen Cuirass", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship-bestiary", "elitegrindlab-cargo-ship"], verification: "partial" },
   { id: "game-item.gold-choker", name: "Gold Choker", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
+  { id: "game-item.ore", name: "Ore", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.anklet", name: "Anklet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-desert-palace-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-treno-auction-71891", "jegged-returning-desert-palace", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.rebirth-ring", name: "Rebirth Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "gamefaqs-card-tournament-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-the-final-battle-71891", "gamefaqs-missables-21725", "jegged-treno-tournament", "jegged-chocographs", "jegged-kuja-necron-final-showdown", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: burmeciaSources, verification: "partial" },
@@ -490,6 +493,40 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-pinnacle-rocks"],
   },
   {
+    id: "item-path.disc-1.exploring-lindblum-kingdom.ore-hot-cold-dig",
+    itemId: "game-item.ore",
+    chapterId: "disc-1.exploring-lindblum-kingdom",
+    method: "quest-reward",
+    quantity: 1,
+    availability: "repeatable",
+    conditions: "Play Hot & Cold after recruiting Choco. Ore can appear as a random buried item worth two digging points; this is separate from Mene's point-redemption shop.",
+    walkthroughObjectiveIds: ["disc-1.exploring-lindblum-kingdom.choco-recruit"],
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "gamefaqs-exploring-lindblum-71891"],
+  },
+  {
+    id: "item-path.disc-1.exploring-lindblum-kingdom.ore-hot-cold-redemption",
+    itemId: "game-item.ore",
+    chapterId: "disc-1.exploring-lindblum-kingdom",
+    method: "point-redemption",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "chocobo-hot-and-cold.mene-redemption",
+    shopName: "Mene's Hot & Cold Point Redemption",
+    conditions: "Redeem 250 Hot & Cold points for one Ore. GameFAQs lists unlimited quantities at the redemption counter.",
+    walkthroughObjectiveIds: ["disc-1.exploring-lindblum-kingdom.choco-recruit"],
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891"],
+  },
+  {
+    id: "item-path.disc-3.aerial-exploration.ore-jewel-extraction",
+    itemId: "game-item.ore",
+    chapterId: "disc-3.aerial-exploration",
+    method: "ability-extract",
+    quantity: 1,
+    availability: "repeatable",
+    conditions: "Once Eiko has learned Jewel, cast it on an enemy to extract one Ore. The item reference describes this as repeatable; the equipment route for learning Jewel is outside this catalog slice.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"],
+  },
+  {
     id: "item-path.disc-2.outer-continent.peridot-abandoned-beach",
     itemId: "game-item.peridot",
     chapterId: "disc-2.outer-continent",
@@ -584,6 +621,21 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     cost: { currency: "gil", amount: 4000 },
     walkthroughObjectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep"],
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "rpgclassics-synthesis", "jegged-synthesis"],
+  },
+  {
+    id: "item-path.disc-3.aerial-exploration.peridot-daguerreo-synthesis",
+    itemId: "game-item.peridot",
+    chapterId: "disc-3.aerial-exploration",
+    method: "synthesis",
+    recipeId: "synthesis-recipe.peridot",
+    quantity: 1,
+    availability: "conditional",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    conditions: "Requires one Ore, one Soft, and 100 Gil. The same recipe is listed at the Disc IV Black Mage Village and Hades synthesis shops.",
+    cost: { currency: "gil", amount: 100 },
+    walkthroughObjectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep"],
+    sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-synthesis"],
   },
   {
     id: "item-path.disc-2.treno.gold-choker-synthesis",
