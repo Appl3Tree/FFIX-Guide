@@ -598,7 +598,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "dali-wake-ate-choice",
             kind: "required",
             text: "When Zidane wakes in the inn, choose either Vivi, Confused or Dagger Tries. The other scene becomes available after you leave the bedroom; view it before continuing.",
-            detail: "These are a pair of scenes, not an exclusive outcome. GameFAQs and Gamer Guides list six total ATEs for Dali; Jegged's local checklist names five but its walkthrough also describes the sixth, Queen Brahne's Steiner.",
+            detail: "These are a pair of scenes, not an exclusive outcome: leave the bedroom to view the one you did not choose. GameFAQs and Gamer Guides list six total ATEs for Dali; Jegged's local checklist names five but its walkthrough also describes the sixth, Queen Brahne's Steiner.",
           },
           {
             id: "dali-inn-bedroom-items",
@@ -630,7 +630,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "village-road-and-windmill",
         title: "Village Road and Windmill — shop, hidden Gil, and Aries",
-        summary: "View the remaining town ATEs in order, prepare the party for the one-time factory route, and collect the Stellazzio before descending.",
+        summary: "View the remaining town ATEs without entering the Weapon Shop before Dagger Tries Harder appears; then prepare the party and collect the Stellazzio before descending.",
         sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali"],
         steps: [
           {
@@ -641,17 +641,17 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             objectiveIds: ["disc-1.village-of-dali.first-visit-pickups"],
           },
           {
-            id: "dali-equipment-prep",
-            kind: "optional",
-            text: "Use the Weapon Shop across from the inn and the medicine counter in the pub to cover current equipment and healing needs. Feather Hat is the notable new headgear; keep older equipment for its abilities and future synthesis, and check the Ability menu before replacing a learning source.",
-            detail: "Walkthroughs suggest different Wrist stockpiles for a later Cotton Robe Gil trick, from roughly 20–30 spares to buying up to the 99-item cap. This is optional and not required for Dali or story completion. Buy Tents and healing items if your inventory is low; the factory can surprise an underprepared party with an encounter.",
-          },
-          {
             id: "dali-town-ate-followup",
             kind: "required",
-            text: "After speaking with Vivi, change screens as needed until Cat's Eye 2 and Dagger Tries Harder appear; view both before entering the Weapon Shop. Speak with Dagger there, return to the inn, and talk to her to trigger the Queen Brahne's Steiner ATE and continue the story.",
-            detail: "Dagger Tries Harder requires Dagger Tries, while Queen Brahne's Steiner follows Dagger Tries Harder and Cat's Eye. The town ATE window ends on the first departure.",
+            text: "After speaking with Vivi, change screens as needed until Cat's Eye 2 and Dagger Tries Harder appear; view both before entering the Weapon Shop. Cat's Eye 2 requires Cat's Eye, and Dagger Tries Harder requires Dagger Tries. You can view these two prompts in either order. Then speak with Dagger in the shop, return to the inn, and talk to her for the automatic Queen Brahne's Steiner ATE.",
+            detail: "Gamer Guides recommends avoiding the Weapon Shop until Dagger Tries Harder appears. GameFAQs and Jegged place the Queen Brahne's Steiner trigger after Dagger Tries Harder and Cat's Eye, with Dagger's Weapon Shop and inn conversations. The town ATE window ends on the first departure.",
             objectiveIds: ["disc-1.village-of-dali.movie-critic-ates"],
+          },
+          {
+            id: "dali-equipment-prep",
+            kind: "optional",
+            text: "After the ATE route, use the Weapon Shop across from the inn and the medicine counter in the pub to cover current equipment and healing needs. Feather Hat is the notable new headgear; keep older equipment for its abilities and future synthesis, and check the Ability menu before replacing a learning source.",
+            detail: "Walkthroughs suggest different Wrist stockpiles for a later Cotton Robe Gil trick, from roughly 20–30 spares to buying up to the 99-item cap. This is optional and not required for Dali or story completion. Buy Tents and healing items if your inventory is low; the factory can surprise an underprepared party with an encounter.",
           },
           {
             id: "dali-aries-stellazzio",

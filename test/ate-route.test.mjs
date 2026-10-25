@@ -18,7 +18,7 @@ const branchEvents = movieCriticEligibleEvents.filter((event) => event.exclusive
 test("each supported Movie Critic catalog has an ordered 79-view single-save route", () => {
   assert.equal(movieCriticEligibleEvents.length, 80);
   assert.equal(branchEvents.length, 2);
-  assert.equal(objectiveDependencies.length, 28);
+  assert.equal(objectiveDependencies.length, 29);
 
   assert.deepEqual(
     movieCriticEligibleEvents
@@ -35,6 +35,31 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
     ],
     "Treno's Movie Critic route follows the four-source safe screen order",
   );
+
+  const daliEvents = movieCriticEligibleEvents.filter((event) => event.chapterId === "disc-1.village-of-dali");
+  assert.deepEqual(
+    daliEvents.map((event) => event.objectiveId),
+    [
+      "ate.dali-vivi-confused",
+      "ate.dali-dagger-tries",
+      "ate.dali-cats-eye",
+      "ate.dali-cats-eye-2",
+      "ate.dali-dagger-tries-harder",
+      "ate.dali-queen-brahnes-steiner",
+    ],
+    "Dali's Movie Critic route includes the opening choice, town prompts, and automatic final scene",
+  );
+  assert.deepEqual(eventByObjective.get("ate.dali-cats-eye-2")?.prerequisites, ["ate.dali-cats-eye"]);
+  assert.deepEqual(eventByObjective.get("ate.dali-dagger-tries-harder")?.prerequisites, ["ate.dali-dagger-tries"]);
+  assert.deepEqual(eventByObjective.get("ate.dali-queen-brahnes-steiner")?.prerequisites, [
+    "ate.dali-dagger-tries-harder",
+    "ate.dali-cats-eye",
+  ]);
+  for (const event of daliEvents) {
+    for (const sourceId of ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali"]) {
+      assert.ok(event.sourceIds.includes(sourceId), `${event.title} is missing Dali source ${sourceId}`);
+    }
+  }
 
   assert.deepEqual(
     movieCriticEligibleEvents
