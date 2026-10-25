@@ -50,6 +50,7 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 - **Next work:** Continue enemy coverage area by area. Reconcile source hierarchy and version scope; capture abilities, status/element interactions, drops/steals, and scripted behavior; link one-time windows to route cutoffs, missables, item recovery paths, and walkthrough context. Extend encounter/location filtering as coverage grows.
 - **Completion evidence:** Source-backed records for every enemy, encounter variant, and boss; version scope and disagreements are explicit; every one-time steal/drop window links to B02 and walkthrough context.
 - **Dependencies:** B01, B02, B05.
+- **Latest slice (2026-10-25):** Added catalog identities and one-time steal paths for Maliris, Tiamat, Lich, and Deathguise, plus the earlier Genji Armor, Blood Sword, Genji Gloves, and Black Robe recovery treasures. The Kraken body steal identities and wider enemy/item recovery matrix remain open.
 
 ### B05 — Build the item, equipment, shop, synthesis, and acquisition database
 
@@ -60,6 +61,7 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 - **Next work:** Continue growing the deduplicated inventory by disc and item class, adding remaining pickup, steal/drop, shop, synthesis, auction, minigame, quest, and replacement paths. Reconcile shop cutoffs and prices against direct game/version evidence; capture exact quantities, costs, earliest/latest access, ability sources, and version differences only when sourced. Expand recipe and ability coverage beyond the current source-backed slices, then add a reference UI after coverage is meaningful.
 - **Completion evidence:** Every obtainable item has sourced acquisition paths and availability/recovery status; one-copy and limited-quantity constraints are reconciled; shops/synthesis have time-aware stock and ingredient requirements; walkthrough and missable trackers share stable IDs.
 - **Dependencies:** B01, B02, B04, B06.
+- **Latest slice (2026-10-25):** B05 now has 129 partial item records and 463 acquisition paths. Memoria's Maliris, Tiamat, Lich, and Deathguise steal tables are connected to item identities; four Chocobo/Stellazzio replacement paths are recorded. Item completeness and other Memoria steals remain open.
 
 ### B06 — Complete platform achievements, abilities, and side-content mapping
 

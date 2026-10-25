@@ -248,6 +248,12 @@ The next priority is B01: continue auditing the gameplay route's optional branch
 - [ ] Review keyboard and screen-reader use; test mobile, tablet, and desktop layouts and performance.
 - [ ] Validate the production GitHub Pages deployment.
 
+## Latest verification update — 2026-10-25
+
+- Added eight item identities, eleven Memoria one-time steal paths, and four alternate acquisition paths for selected one-copy gear. The B04 enemy tables now use shared item IDs for Maliris, Tiamat, Lich, and Deathguise; Kraken's body steals remain open.
+- Current audited scope: 44 chapters, 133 missables, 608 objectives, 290 sources, 129 item records, 463 acquisition paths across 36 chapter slices, 15 recipes, 29 inventory targets, 73 ability claims, and 27 enemy records across 21 encounter groups.
+- `npm run lint`, `npm run audit:data` (0 errors, 175 coverage warnings), `npm run build` (including TypeScript), and `git diff --check` passed. The Vite chunk-size advisory remains. No tests or game/UI verification were run.
+
 ## Current blockers and limits
 
 - The local repository has history on `main`, including baseline commit `0cec689`; no remote or live deployment is configured. GitHub API lookup and a direct push attempt to `Appl3Tree/FFIX-Guide` returned 404, which does not distinguish a missing repository from an access issue. The owner-side repository creation/access task and follow-up are documented in `USER_SETUP_CHECKLIST.md`; no push or deployment is claimed.

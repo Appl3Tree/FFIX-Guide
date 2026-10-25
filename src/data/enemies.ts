@@ -888,9 +888,9 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       ...sourcedStats([["MP", 3381], ["EXP", 0], ["AP", 10], ["Gil", 8532]], ["gamefaqs-memoria-71891"]),
     ],
     steals: [
-      memoriaLoot("common", null, "Genji Armor"),
+      memoriaLoot("common", "game-item.genji-armor"),
       memoriaLoot("uncommon", "game-item.ultima-sword"),
-      memoriaLoot("semi-rare", null, "Masamune"),
+      memoriaLoot("semi-rare", "game-item.masamune"),
       memoriaLoot("rare", null, "Nothing"),
     ],
     drops: [
@@ -932,10 +932,10 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       ...sourcedStats([["MP", 3381], ["EXP", 0], ["AP", 10], ["Gil", 8532]], ["gamefaqs-memoria-71891"]),
     ],
     steals: [
-      memoriaLoot("common", null, "Blood Sword"),
+      memoriaLoot("common", "game-item.blood-sword"),
       memoriaLoot("uncommon", "game-item.feather-boots"),
       memoriaLoot("semi-rare", null, "Nothing"),
-      memoriaLoot("rare", null, "Grand Helm"),
+      memoriaLoot("rare", "game-item.grand-helm"),
     ],
     drops: [
       memoriaLoot("always", "game-item.wing-edge"),
@@ -1078,9 +1078,9 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       ...sourcedStats([["MP", 9999], ["EXP", 0], ["AP", 10], ["Gil", 8436]], ["gamefaqs-memoria-71891"]),
     ],
     steals: [
-      memoriaLoot("common", null, "Genji Gloves"),
+      memoriaLoot("common", "game-item.genji-gloves"),
       memoriaLoot("uncommon", "game-item.sirens-flute"),
-      memoriaLoot("semi-rare", null, "Black Robe"),
+      memoriaLoot("semi-rare", "game-item.black-robe"),
       memoriaLoot("rare", null, "Nothing"),
     ],
     drops: [
@@ -1123,9 +1123,9 @@ const memoriaEnemyRecords: EnemyRecord[] = [
     ],
     steals: [
       memoriaLoot("common", "game-item.elixir"),
-      memoriaLoot("uncommon", null, "Black Belt"),
+      memoriaLoot("uncommon", "game-item.black-belt"),
       memoriaLoot("semi-rare", null, "Nothing"),
-      memoriaLoot("rare", null, "Duel Claws"),
+      memoriaLoot("rare", "game-item.duel-claws"),
     ],
     drops: [
       memoriaLoot("always", "game-item.wing-edge"),

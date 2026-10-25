@@ -41,3 +41,7 @@ The map contains 44 headings transcribed as a navigation inventory from the Game
 - Version-specific behavior, progression gates, routes, and source provenance.
 
 These are expected classes, not completion claims. The data audit will grow to validate relationships and completeness rules as verified records are added.
+
+## Latest verified slice — 2026-10-25
+
+The partial catalog now contains 129 item records and 463 acquisition paths. Memoria one-time steals for Maliris, Tiamat, Lich, and Deathguise link to item identities and encounter objectives; alternative routes now record Genji Armor from Chocograph #21, Blood Sword from Queen Stella, and Genji Gloves/Black Robe from Dead Pepper Dive Spot #1. The Kraken main-body steals, other enemy loot routes, and item-level recovery audit remain incomplete. The source rarity disagreements for Masamune, Grand Helm, Black Robe, and Duel Claws remain explicit. Lint, TypeScript, data audit, production build, and whitespace checks passed; no game testing or UI review was done.
