@@ -1391,9 +1391,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.journey-to-treno-to-treno",
     title: "Black Waltz 3 train-car steal window",
     certainty: "source-supported",
-    trigger: "Have Marcus attempt the selected steals before defeating Black Waltz 3 in the train-car battle. Keep Dagger ready to heal and do not risk a wipe for an early copy; Lightning Staff recovery remains under review.",
+    trigger: "Have Marcus attempt all three steals before defeating Black Waltz 3 in the train-car battle if you want these encounter copies. Keep Dagger ready to heal and do not risk a wipe for optional steals. The encounter does not repeat, but documented shop routes recover all three item types: Steepled Hat at Summit Station before boarding and Atla on Disc IV, Flame Staff at Treno, and Lightning Staff at Treno, Lindblum, Conde Petie, Black Mage Village, and Alexandria.",
     missableIds: ["missable.disc-2.journey-to-treno.black-waltz-3-steals"],
-    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891"],
+    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891", "gamefaqs-shops-71891"],
   },
   {
     id: "cutoff.summit-station.equipment-stock",
