@@ -8,7 +8,9 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest local B04 update adds the source-linked Summit Station Black Waltz 3 rematch profile and connects its steals to existing item, missable, and cutoff records. Lint, typecheck, audit, build, and whitespace checks pass; browser/game/release verification remains open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
+No account-owner setup action changed. The latest local B04 update adds the Bentini Heights world-map pool and a distinct ordinary Trick Sparrow bestiary profile, preserving source differences and keeping the friendly Ghost and Festival variant separate. Lint, typecheck, audit, build, and whitespace checks pass with 0 audit errors and 182 coverage warnings; the bestiary has 111 records across 25 slices and 97 encounter groups. Browser, game, and release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
+
+No account-owner setup action changed. The preceding local B04 update adds the source-linked Summit Station Black Waltz 3 rematch profile and connects its steals to existing item, missable, and cutoff records. Lint, typecheck, audit, build, and whitespace checks pass; browser/game/release verification remains open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
 
 No account-owner setup action changed. The latest local B02/B05 update catalogs Cleyra's 18 newly added fixed pickups, its conditional evacuation item rewards, and all three Stiltzkin #2 bundle products. Lint, typecheck, audit, build, and whitespace checks pass; source coverage and Treasure Hunter rank impact remain partial. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
 

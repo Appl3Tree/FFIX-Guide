@@ -2249,6 +2249,23 @@ if (summitStationWaltzRecord?.stats.find((stat) => stat.field === "level")?.valu
   !summitStationWaltzRecord?.notes.some((note) => note.includes("semi-rare") && note.includes("rare"))) {
   errors.push("The Summit Station Black Waltz 3 profile must preserve its rematch stats, StrategyWiki HP discrepancy, Freeze facts, steal-slot disagreement, and version note.");
 }
+const bentiniHeightsPool = enemyEncounters.find((encounter) => encounter.id === "encounter.bentini-heights.world-map-pool");
+const bentiniTrickSparrow = enemyRecords.find((enemy) => enemy.id === "enemy.trick-sparrow");
+const bentiniExpectedEnemies = ["enemy.carve-spider", "enemy.mu", "enemy.ladybird", "enemy.mandragora", "enemy.trick-sparrow"];
+if (!bentiniHeightsPool || bentiniHeightsPool.kind !== "random-pool" ||
+  bentiniExpectedEnemies.some((enemyId) => !bentiniHeightsPool.formation.some((entry) => entry.enemyId === enemyId && entry.quantity === null)) ||
+  bentiniHeightsPool.formation.some((entry) => entry.enemyId === "enemy.ghost") ||
+  !bentiniHeightsPool.notes.some((note) => note.includes("GameFAQs lists Mu, Mandragora, and Trick Sparrow") && note.includes("friendly Ghost")) ||
+  !["gamefaqs-journey-to-treno-71891", "jegged-summit-station"].every((sourceId) => bentiniHeightsPool.sourceIds.includes(sourceId))) {
+  errors.push("Bentini Heights must retain the GameFAQs/Jegged regional pool difference and keep the friendly Ghost outside hostile encounters.");
+}
+if (bentiniTrickSparrow?.stats.find((stat) => stat.field === "HP")?.value !== 191 ||
+  bentiniTrickSparrow?.steals.find((slot) => slot.slot === "common")?.itemId !== "game-item.ore" ||
+  bentiniTrickSparrow?.drops.find((slot) => slot.slot === "uncommon")?.itemId !== "game-item.echo-screen" ||
+  !bentiniTrickSparrow?.blueMagic.some((magic) => magic.name === "Matra Magic") ||
+  !bentiniTrickSparrow?.notes.some((note) => note.includes("Festival version") && note.includes("ordinary enemy table"))) {
+  errors.push("Bentini Heights' ordinary Trick Sparrow profile must include its sourced stat/loot table and remain distinct from the Festival variant.");
+}
 const lindblumMountainPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.mountain-pool");
 const lindblumForestPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.forest-pool");
 if (!lindblumMountainPool || lindblumMountainPool.kind !== "random-pool" ||
