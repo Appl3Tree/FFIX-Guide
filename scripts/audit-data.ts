@@ -63,6 +63,22 @@ const achievementCatalogs = [
   { platform: "xbox" as const, records: xboxAchievements, expectedCount: achievementSourceCounts.xbox.count },
 ];
 
+const cleyraEvacuationWarning = missablesById.get("missable.disc-2.cleyra.out-of-harms-way");
+const cleyraEvacuationCutoff = cutoffsById.get("cutoff.cleyra-evacuation.choice-window");
+if (
+  !cleyraEvacuationWarning?.action.includes("Choose Right, then Left, then Right") ||
+  !cleyraEvacuationWarning.action.includes("Not Yet as the recommended route") ||
+  cleyraEvacuationWarning.classification.includes("version-dependent") ||
+  !cleyraEvacuationWarning.note.includes("fourth observatory choice does not dictate the outcome") ||
+  !cleyraEvacuationWarning.sourceIds.includes("steam-cleyra-achievement-walkthrough") ||
+  !cleyraEvacuationWarning.sourceIds.includes("jegged-cleyra") ||
+  !cleyraEvacuationWarning.sourceIds.includes("gamerguides-cleyra") ||
+  !cleyraEvacuationCutoff?.trigger.includes("do not present its necessity as confirmed") ||
+  !cleyraEvacuationCutoff.sourceIds.includes("steam-cleyra-achievement-walkthrough")
+) {
+  errors.push("Cleyra's evacuation route must preserve Right/Left/Right, identify Not Yet as recommended rather than confirmed, and cite the fourth-choice conflict.");
+}
+
 if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
 for (const chapterId of enemyCatalogCoverage.chapterIds) {
   if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);

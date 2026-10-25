@@ -1054,7 +1054,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.cleyra-to-return-to-alexandria",
     title: "Cleyra evacuation choices",
     certainty: "conservative",
-    trigger: "During the evacuation, choose Right, Left, Right, then the response meaning the residents are not safe yet before the cutscene continues. Jegged and Gamer Guides include that response in the achievement route, while a Steam walkthrough says the fourth observatory choice does not dictate the outcome; keep the not-safe-yet choice as the conservative route pending direct game/version verification.",
+    trigger: "The evacuation choices are available only during this attack sequence. Guides agree on Right, Left, Right. Jegged and Gamer Guides also include Not Yet at the observatory, while a Steam walkthrough says the fourth choice does not affect the outcome. Keep Not Yet as the published recommended route, but do not present its necessity as confirmed; direct game/version verification remains open.",
     missableIds: ["missable.disc-2.cleyra.out-of-harms-way"],
     sourceIds: ["jegged-cleyra", "jegged-achievements", "gamerguides-cleyra", "steam-cleyra-achievement-walkthrough", "playstation-trophies-cleyra", "trueachievements-cleyra"],
   },

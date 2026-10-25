@@ -1853,8 +1853,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-evacuation-choices",
             kind: "cutoff",
-            text: "During the evacuation, direct residents Right, then Left, then across the bridge to the Right. At the observatory, choose the response meaning the residents are not safe yet, then speak with every rescued resident in the Cathedral lobby to collect their rewards.",
-            detail: "Jegged and PlayStationTrophies label the final response Not Yet; Gamer Guides prints We're not safe yet. A Steam walkthrough says the fourth observatory choice does not dictate the outcome, but the guide keeps the not-safe-yet response as a conservative route pending direct game/version verification. Speak to every survivor: reward lists agree on Phoenix Down, Remedy, Nymph Card, Elixir, Zuu Card, and Ether; GameFAQs and a Steam walkthrough also list a Phoenix Pinion, so check every NPC until no reward remains.",
+            text: "During the evacuation, direct residents Right, then Left, then across the bridge to the Right. At the observatory, choose Not Yet to follow the published route, then speak with every rescued resident in the Cathedral lobby to collect their rewards. The fourth response's achievement effect is disputed.",
+            detail: "Jegged and Gamer Guides include the not-safe-yet response in their achievement routes; Jegged and PlayStationTrophies label it Not Yet, while Gamer Guides prints We're not safe yet. A Steam walkthrough says the fourth observatory choice does not dictate the outcome, so this guide does not present it as a confirmed requirement. Speak to every survivor: reward lists agree on Phoenix Down, Remedy, Nymph Card, Elixir, Zuu Card, and Ether; GameFAQs and a Steam walkthrough also list a Phoenix Pinion, so check every NPC until no reward remains.",
             objectiveIds: ["disc-2.cleyra.out-of-harms-way"],
           },
           {
