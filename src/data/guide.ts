@@ -1422,8 +1422,8 @@ export const sources = [
     title: "Mognet Central — Disc IV letter chain",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Mognet-Central.html",
-    accessed: "2026-10-23",
-    notes: "Confirms Disc IV access to Atla in the back of Burmecia and the return route required for the Mognet Central letter chain; this proves the Vault moogle is reachable later, not that every Disc I treasure room remains accessible.",
+    accessed: "2026-10-24",
+    notes: "Lists the Disc IV Mognet chain from Kupo in Alexandria's Steeple through Atla, Mogryo, Kumool, Mois (with Quina), Noggy, back to Kupo, and Ruby's Superslick; an Ocean-capable Chocobo and Dead Pepper reach Mognet Central. Atla's visit confirms Vault access only, not every Burmecia pickup room.",
   },
   {
     id: "gamefaqs-journey-to-treno-71891",

@@ -9,7 +9,7 @@ Project tracking: [task backlog](TASK_BACKLOG.md) · [coverage matrix](CONTENT_C
 ## Current state
 
 - React, TypeScript, and Vite application scaffolded for GitHub Pages.
-- Route Map shows the 44 source-ordered chapter headings and provides chapter navigation; its separate, source-linked game-route graph maps all 44 chapter headings and follows the main story through the final battle: 41 story gates, two optional detours, six optional returns, and seven rejoins. The graph remains partial because most side routes, cutoff conditions, and objective prerequisites are not modeled.
+- Route Map shows the 44 source-ordered chapter headings and provides chapter navigation; its separate, source-linked game-route graph maps all 44 chapter headings and follows the main story through the final battle: 41 story gates, two optional detours, seven optional returns, and seven rejoins. The graph remains partial because most side routes, cutoff conditions, and objective prerequisites are not modeled.
 - Individual ATE tracker catalogs 83 scenes, excludes the three tutorials from Movie Critic, counts 79 of 80 eligible choices for one save, and handles Vivi's mutually exclusive Treno outcomes.
 - A reusable prerequisite graph currently covers 17 documented ATE dependencies; the tracker shows linked objectives' marks per playthrough without guessing prompt availability.
 - Four-disc chapter inventory based on the table of contents of the GameFAQs PlayStation walkthrough.
