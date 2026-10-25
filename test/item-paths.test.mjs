@@ -403,7 +403,7 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 232);
+  assert.equal(itemAcquisitionPaths.length, 244);
   assert.equal(synthesisRecipes.length, 8);
 });
 
@@ -527,5 +527,74 @@ test("Feather Boots has sourced recovery routes for the Battle Boots ingredient 
   }
   for (const sourceId of featherBootsRecipe?.sourceIds ?? []) {
     assert.ok(sources.some((source) => source.id === sourceId), `Feather Boots recipe references unknown source ${sourceId}`);
+  }
+});
+
+test("Wing Edge has sourced item, minigame, treasure, boss, and steal routes", () => {
+  const wingEdge = gameItems.find((item) => item.id === "game-item.wing-edge");
+  const wingEdgePaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.wing-edge");
+  const pathsById = new Map(wingEdgePaths.map((path) => [path.id, path]));
+  const expectedPathIds = [
+    "item-path.disc-3.lost-continent.esto-gaza-wing-edge",
+    "item-path.disc-3.lost-continent.mount-gulug-wing-edge",
+    "item-path.disc-1.exploring-lindblum-kingdom.wing-edge-hot-cold-digging",
+    "item-path.disc-1.exploring-lindblum-kingdom.wing-edge-point-redemption",
+    "item-path.disc-3.on-the-high-seas.wing-edge-chocograph-3",
+    "item-path.disc-3.on-the-high-seas.wing-edge-chocograph-13",
+    "item-path.disc-3.portal-to-another-world.bran-bal-wing-edge-chest",
+    "item-path.disc-3.portal-to-another-world.silver-dragon-wing-edge-drop",
+    "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-wing-edge-drop",
+    "item-path.disc-4.memoria.tiamat-wing-edge-drop",
+    "item-path.disc-4.memoria.tiamat-crystal-wing-edge-steal",
+    "item-path.disc-4.memoria.kraken-right-tentacle-wing-edge-steal",
+    "item-path.disc-4.memoria.deathguise-wing-edge-drop",
+    "item-path.disc-4.memoria.hades-wing-edge-drop",
+  ];
+  const sourceIds = [
+    "gamefaqs-items-71891",
+    "gamefaqs-item-locations-54996",
+    "gamefaqs-chocobo-hot-cold-71891",
+    "gamefaqs-enemy-list-71891",
+    "gamefaqs-on-the-high-seas-71891",
+    "gamefaqs-portal-to-another-world-71891",
+    "gamefaqs-second-battle-iifa-tree-71891",
+    "gamefaqs-memoria-71891",
+    "gamefaqs-master-synthesist-71891",
+  ];
+
+  assert.ok(wingEdge);
+  assert.equal(wingEdgePaths.length, 14);
+  assert.ok(sourceIds.every((sourceId) => wingEdge?.sourceIds.includes(sourceId)));
+  assert.equal(pathsById.get(expectedPathIds[2])?.method, "quest-reward");
+  assert.equal(pathsById.get(expectedPathIds[2])?.availability, "repeatable");
+  assert.match(pathsById.get(expectedPathIds[2])?.conditions ?? "", /16-point/);
+  assert.equal(pathsById.get(expectedPathIds[3])?.method, "point-redemption");
+  assert.match(pathsById.get(expectedPathIds[3])?.conditions ?? "", /3,500/);
+  assert.equal(pathsById.get(expectedPathIds[4])?.quantity, 3);
+  assert.equal(pathsById.get(expectedPathIds[5])?.quantity, 10);
+  assert.ok(pathsById.get(expectedPathIds[4])?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.chocographs"));
+  assert.equal(pathsById.get(expectedPathIds[6])?.method, "chest");
+
+  for (const pathId of [expectedPathIds[7], expectedPathIds[8], expectedPathIds[9], expectedPathIds[12], expectedPathIds[13]]) {
+    const path = pathsById.get(pathId);
+    assert.equal(path?.method, "drop", `${pathId} should be a boss drop`);
+    assert.equal(path?.availability, "one-time-encounter", `${pathId} should be one-time`);
+  }
+  assert.equal(pathsById.get(expectedPathIds[10])?.method, "steal");
+  assert.equal(pathsById.get(expectedPathIds[10])?.availability, "repeatable");
+  assert.match(pathsById.get(expectedPathIds[10])?.notes ?? "", /conflict/);
+  assert.equal(pathsById.get(expectedPathIds[11])?.method, "steal");
+  assert.equal(pathsById.get(expectedPathIds[11])?.availability, "one-time-encounter");
+  assert.match(pathsById.get(expectedPathIds[11])?.notes ?? "", /disputed/);
+
+  for (const pathId of expectedPathIds) {
+    const path = pathsById.get(pathId);
+    assert.ok(path, `${pathId} is missing`);
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references unknown source ${sourceId}`);
+    }
+    for (const objectiveId of path?.walkthroughObjectiveIds ?? []) {
+      assert.ok(objectives.some((objective) => objective.id === objectiveId), `${pathId} references unknown objective ${objectiveId}`);
+    }
   }
 });

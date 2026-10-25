@@ -5812,7 +5812,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-pandemonium-silver-dragon",
             kind: "combat",
             text: "During Silver Dragon's fight, attempt to steal Elixir, Dragon Mail, and Kaiser Knuckles before defeating it. Wind resistance reduces its dangerous wind attacks; status skills can help create time for steals.",
-            detail: "The sources agree on the steal table but publish conflicting HP figures. No exact HP or fixed level is needed for this route.",
+            detail: "The sources agree on the steal table but publish conflicting HP figures. Silver Dragon also always drops Wing Edge after the battle. No exact HP or fixed level is needed for this route.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-boss-steals", "disc-3.portal-to-another-world.pandemonium-climax"],
           },
           {
@@ -6270,7 +6270,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-kraken-steals",
             kind: "combat",
             text: "Equip Water protection and Body Temp, bring Zidane, and steal Genji Helmet, Wizard Rod, and Glutton's Robe. Kraken is weak to Lightning and absorbs Water; Slow works.",
-            detail: "Kraken has two tentacles. Removing them can limit its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. Once the steals are complete, target Kraken with Lightning and heal through any non-Water physical attacks. Phoenix Pinion is the listed guaranteed drop.",
+            detail: "Kraken has two tentacles. Removing them can limit its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. Once the steals are complete, target Kraken with Lightning and heal through any non-Water physical attacks. Phoenix Pinion is the listed guaranteed drop. An older item-location table lists Wing Edge as the Right Tentacle's Very Common steal, but the Memoria walkthrough lists only a Common Elixir steal for a tentacle; treat Wing Edge there as disputed.",
             objectiveIds: ["disc-4.memoria.kraken-steals", "disc-4.memoria.kraken-achievement"],
           },
           {
@@ -6329,13 +6329,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-crystal-world-and-deathguise",
         title: "Crystal World — Deathguise and the final Memoria checkpoint",
         summary: "The returning guardian enemies offer Quina Blue Magic and repeatable AP. Save and prepare the final party before entering the Deathguise portal.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "elitegrindlab-memoria", "gamefaqs-final-preparations-71891", "gamefaqs-nero-brothers-71891"],
+        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "elitegrindlab-memoria", "gamefaqs-final-preparations-71891", "gamefaqs-nero-brothers-71891", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996"],
         steps: [
           {
             id: "memoria-crystal-world-checkpoint-17",
             kind: "optional",
             text: "After the 'beginning' scene, pass through Space into Crystal World. Register Nero Family checkpoint 17 if you still need it; at the Crystal World save point you can return to Memoria's entrance before the final fight sequence.",
-            detail: "The revived Maliris, Tiamat, Kraken, and Lich variants have reduced HP and are vulnerable to statuses. They do not use the original bosses' steal/drop tables. Quina can still Eat them for Blue Magic; learn Doom from Ash or Veteran, Angel's Snack from Behemoth, Frost from Chimera or Crystal Kraken, Auto-Life from Stilva, Mustard Bomb from Crystal Maliris, Twister from Crystal Tiamat, and LV5 Death from Crystal Lich.",
+            detail: "The revived Maliris, Tiamat, Kraken, and Lich variants have reduced HP and are vulnerable to statuses. Their random-encounter tables are separate from the story bosses' tables. GameFAQs' enemy table lists Wing Edge in the Semi-Rare and Rare Steal slots for Tiamat [B], although the Memoria prose says the revived guardians lack Steals and Drops; this item source is recorded as a repeatable but disputed route. Quina can still Eat them for Blue Magic; learn Doom from Ash or Veteran, Angel's Snack from Behemoth, Frost from Chimera or Crystal Kraken, Auto-Life from Stilva, Mustard Bomb from Crystal Maliris, Twister from Crystal Tiamat, and LV5 Death from Crystal Lich.",
             objectiveIds: ["disc-4.memoria.nero-checkpoint-17", "disc-4.memoria.quina-blue-magic"],
           },
           {

@@ -191,7 +191,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/memoria",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for Memoria's five hidden weapons, five Tetra Master phantoms, Nero Family checkpoints, four guardian bosses and steal tables, Hades detour, Crystal World, and Deathguise. It also confirms the post-Deathguise return path for the final-preparation window and Tiamat's Feather Boots steal.",
+    notes: "Original PlayStation route for Memoria's five hidden weapons, five Tetra Master phantoms, Nero Family checkpoints, four guardian bosses and steal tables, Hades detour, Crystal World, and Deathguise. It confirms the post-Deathguise return path for the final-preparation window and Tiamat's Feather Boots steal. Its Crystal World prose says the revived guardians lack Steals and Drops, while the item/enemy tables list Wing Edge as Tiamat [B]'s Semi-Rare and Rare steal. Its Kraken prose lists an Elixir steal for each tentacle; Xenomic's item-location table instead lists Wing Edge for the Right Tentacle, so that secondary source remains disputed.",
   },
   {
     id: "steam-achievements",
@@ -951,7 +951,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/enemy-list",
     accessed: "2026-10-24",
-    notes: "Enemy and boss reference data used across the guide. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
+    notes: "Enemy and boss reference data used across the guide. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
   },
   {
     id: "jegged-ice-cavern",
@@ -1247,7 +1247,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold",
     accessed: "2026-10-23",
-    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Its repeatable digging pool includes Anklet as a random 16-point item; its separate point-redemption prize list does not include Anklet. The route uses it for the first two reachable Chocograph treasures and defers the broader ability-gated sidequest map.",
+    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges. The route defers these mountain-ability sources until Disc III and records the separate repeatable point/digging routes from the minigame.",
   },
   {
     id: "jegged-chocographs",
@@ -1335,7 +1335,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items",
     accessed: "2026-10-24",
-    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Silk Shirt as Garnet/Blank/Eiko starting gear, a Black Waltz 1 steal, an 80–99-noble swordfighting reward, and Dali/Treno/Lindblum/Black Mage Village shop stock. It lists Silk Robe as a 9-frog reward, Cleyra Trunk chest, and Silk Shirt + Bandana synthesis, along with its sources at Treno, Lindblum after Cleyra, Black Mage Village, and Alexandria. It lists Bandana's hidden Dragon's Gate pickup and shop sources at Treno, Cleyra, Lindblum, Dragon's Gate, Fossil Roo, and Black Mage Village. Feather Boots has an Abandoned Lagoon Chocograph, Oeilvert chest, conditional Treno Auction source, Tiamat steal, and synthesis sources at Alexandria, Treno, Lindblum, and Daguerreo. It lists Battle Boots as a 45-frog reward and a Daguerreo recipe from Feather Boots + Wing Edge, alongside its Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It lists Anklet's Treno Auction and Gold Choker + Peridot recipe, Gold Choker from Linen Cuirass + Soft, Peridot's Ramuh, Chocograph, Alexandria, enemy, and Ore + Soft synthesis sources, plus Ore extraction with Jewel and its Hot & Cold digging/redemption routes. Soft is listed as a common shop item, and the dedicated shop reference gives its price and selected restock locations. It also covers Anklet, Gold Choker, Peridot, and Linen Cuirass abilities and lists Linen Cuirass's starting gear, Black Waltz 3 steal, and shops. Grand Armor's Disc IV Black Mage Village recipe is Mythril Sword + Mythril Armor and its Nova Dragon steal is recorded. Individual quantities and version-specific availability still need a full item audit.",
+    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Wing Edge from Esto Gaza, Mount Gulug, Bran Bal, Chocobo Hot & Cold, Chocograph rewards, Tiamat (random-encounter steal), and several late-game boss drops, alongside the Battle Boots recipe from Feather Boots + Wing Edge. It lists Silk Shirt as Garnet/Blank/Eiko starting gear, a Black Waltz 1 steal, an 80–99-noble swordfighting reward, and Dali/Treno/Lindblum/Black Mage Village shop stock. It lists Silk Robe as a 9-frog reward, Cleyra Trunk chest, and Silk Shirt + Bandana synthesis, along with its sources at Treno, Lindblum after Cleyra, Black Mage Village, and Alexandria. It lists Bandana's hidden Dragon's Gate pickup and shop sources at Treno, Cleyra, Lindblum, Dragon's Gate, Fossil Roo, and Black Mage Village. Feather Boots has an Abandoned Lagoon Chocograph, Oeilvert chest, conditional Treno Auction source, Tiamat steal, and synthesis sources at Alexandria, Treno, Lindblum, and Daguerreo. It lists Battle Boots as a 45-frog reward and its Daguerreo recipe, alongside Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It lists Anklet's Treno Auction and Gold Choker + Peridot recipe, Gold Choker from Linen Cuirass + Soft, Peridot's Ramuh, Chocograph, Alexandria, enemy, and Ore + Soft synthesis sources, plus Ore extraction with Jewel and its Hot & Cold digging/redemption routes. Soft is listed as a common shop item, and the dedicated shop reference gives its price and selected restock locations. It also covers Anklet, Gold Choker, Peridot, and Linen Cuirass abilities and lists Linen Cuirass's starting gear, Black Waltz 3 steal, and shops. Grand Armor's Disc IV Black Mage Village recipe is Mythril Sword + Mythril Armor and its Nova Dragon steal is recorded. Individual quantities and version-specific availability still need a full item audit.",
   },
   {
     id: "cavesofnarshe-ff9-claws",
@@ -2135,7 +2135,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/portal-to-another-world",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including the party splits, five Pandemonium pickups, timed puzzle, elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations.",
+    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including the party splits, five Pandemonium pickups, timed puzzle, elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations.",
   },
   {
     id: "jegged-bran-bal",
@@ -2286,8 +2286,8 @@ export const sources = [
     title: "FFIX Item Location Guide by Xenomic",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/54996",
-    accessed: "2026-10-23",
-    notes: "Original PlayStation item reference cross-check for Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition.",
+    accessed: "2026-10-24",
+    notes: "Original PlayStation item reference cross-check listing Wing Edge's three fixed pickup locations, late boss drop sources, Crystal World Tiamat and Kraken Right Tentacle steal sources, and item details used across the item catalog. Its Kraken Right Tentacle Wing Edge steal conflicts with GameFAQs' Memoria walkthrough, which lists Elixir as the tentacles' steal. It also supports Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition.",
   },
   {
     id: "rpgclassics-armor",
