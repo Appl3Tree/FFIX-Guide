@@ -1159,7 +1159,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://earth.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/lindblum",
     accessed: "2026-10-23",
-    notes: "Independent route cross-check for the first Lindblum visit, Festival timer, Zaghnol appearance, prize outcomes, and the Vivi achievement route.",
+    notes: "Independent route cross-check for the first Lindblum visit, Festival timer, Zaghnol appearance, prize outcomes, and the Vivi achievement route. Its Chocobo Forest directions give Mene's Gysahl Greens purchase price as 80 Gil.",
   },
   {
     id: "gamefaqs-hunt-minigame-71891",
@@ -1247,7 +1247,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold",
     accessed: "2026-10-23",
-    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges. The route defers these mountain-ability sources until Disc III and records the separate repeatable point/digging routes from the minigame.",
+    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges. The route defers these mountain-ability sources until Disc III and records the separate repeatable point/digging routes from the minigame.",
   },
   {
     id: "jegged-chocographs",
@@ -1319,7 +1319,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/kupo-nuts",
     accessed: "2026-10-24",
-    notes: "Documents Moguta's Kupo Nut rewards, including the first Disc I delivery's fixed Holy Bell prize, the Disc IV Aloha T-Shirt reward, random repeat rewards, and the one-nut-at-a-time inventory limit.",
+    notes: "Documents Moguta's Kupo Nut rewards: the first delivery on each disc has a fixed prize, while additional same-disc deliveries randomly yield a Tent, Phoenix Pinion, or Ether. It also records the one-nut-at-a-time inventory limit and the need to preserve the unique final Kupo Nut for a perfect item list.",
   },
   {
     id: "jegged-kupo-nuts",
@@ -1352,6 +1352,22 @@ export const sources = [
     url: "https://www.cavesofnarshe.com/ff9/w_item.php?item=Peridot",
     accessed: "2026-10-24",
     notes: "Independent Peridot win/steal list covering Griffin, Mistodon A/B, Stroper, Tonberry, Tiamat (Crystal), and the Quina/Vivi Epitaph mirrors. It does not list Grenade, which the GameFAQs enemy table lists for Mount Gulug; this source-coverage discrepancy is retained.",
+  },
+  {
+    id: "cavesofnarshe-ff9-items",
+    title: "Final Fantasy IX Items — item and acquisition reference",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/items.php?ff9spoilers=on%3Fprintpage%3Dtrue",
+    accessed: "2026-10-24",
+    notes: "Cross-check for Phoenix Pinion locations at Alexandria, Alexandria Castle, Dali, Cleyra, Disc II Lindblum, Conde Petie, Madain Sari, and Disc III Alexandria; Chocographs #5 and #17; Stiltzkin's Cleyra, Fossil Roo, and Alexandria bundles; and Hades synthesis for 300 Gil plus Phoenix Down and Gysahl Greens. It lists wins from Earth Guardian, Kraken, Lich, Maliris, and Soulcage, plus steals from various enemies, but does not state each drop chance or enumerate steals.",
+  },
+  {
+    id: "cavesofnarshe-ff9-chocobo-guide",
+    title: "Final Fantasy IX Chocobo Guide — Hot & Cold reference",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/chocobo-guide.php?ff9spoilers=on",
+    accessed: "2026-10-24",
+    notes: "Independent Hot & Cold digging and point-redemption tables. Its dig table lists Phoenix Pinion as worth two points, but its redemption table labels the 150-point reward Phoenix Down; the Caves item page, GameFAQs item reference, and GameFAQs Hot & Cold table identify that redemption as Phoenix Pinion.",
   },
   {
     id: "cavesofnarshe-ff9-disc-2-map",
@@ -1799,7 +1815,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/stiltzkin-shopping",
     accessed: "2026-10-23",
-    notes: "Lists the eight Stiltzkin bundles, prices, one-time appearances, Ribbon reward, and the original Japanese PSX version caveat. Used alongside the Disc III chapter sources to record Alexandria's 777 Gil fifth stop.",
+    notes: "Lists the eight Stiltzkin bundles, prices, one-time appearances, Ribbon reward, and the original Japanese PSX version caveat. Its Cleyra #2 bundle contains Hi-Potion, Ether, and Phoenix Pinion for 444 Gil; Fossil Roo #3 contains Phoenix Pinion, Ether, and Remedy for 555 Gil; Alexandria #5 contains Phoenix Pinion, Hi-Potion, and Elixir for 777 Gil.",
   },
   {
     id: "elitegrindlab-iifa-tree-revisited",
@@ -1911,7 +1927,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/side-quests/chocobo-hot-and-cold/",
     accessed: "2026-10-23",
-    notes: "Independent cross-check of the Forgotten Continent Dead Pepper crack locations and their reward sets; aligns with Jegged's location grouping rather than the reward numbering in GameFAQs's Forgotten Continent chapter.",
+    notes: "Independent cross-check of the Forgotten Continent Dead Pepper crack locations and their reward sets; aligns with Jegged's location grouping rather than the reward numbering in GameFAQs's Forgotten Continent chapter. Its Hot & Cold tables list Phoenix Pinion as a two-point digging prize and a 150-point Mene reward, and Gysahl Greens as a one-point prize and a 10-point reward.",
   },
   {
     id: "elitegrindlab-oeilvert",
@@ -2295,7 +2311,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/54996",
     accessed: "2026-10-24",
-    notes: "Original PlayStation item reference cross-check listing Wing Edge's three fixed pickup locations, late boss drop sources, Crystal World Tiamat and Kraken Right Tentacle steal sources, Magician Shoes synthesis from Germinas Boots + Bone Wrist for 1,500 Gil, and Bone Wrist's Ralvurahva/shop sources. Its Kraken Right Tentacle Wing Edge steal conflicts with GameFAQs' Memoria walkthrough, which lists Elixir as the tentacles' steal. It also supports Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition. It describes Magician Shoes as available at Lindblum after Disc I, a timing label that differs from GameFAQs' main item table saying after Cleyra.",
+    notes: "Original PlayStation item reference cross-check listing Phoenix Pinion's fixed pickups and Hades synthesis, but its Pinion entry has no win/steal sources, conflicting with the modern GameFAQs item reference and Caves of Narshe enemy list. It also lists Wing Edge's three fixed pickup locations, late boss drop sources, Crystal World Tiamat and Kraken Right Tentacle steal sources, Magician Shoes synthesis from Germinas Boots + Bone Wrist for 1,500 Gil, and Bone Wrist's Ralvurahva/shop sources. Its Kraken Right Tentacle Wing Edge steal conflicts with GameFAQs' Memoria walkthrough, which lists Elixir as the tentacles' steal. It also supports Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition. It describes Magician Shoes as available at Lindblum after Disc I, a timing label that differs from GameFAQs' main item table saying after Cleyra.",
   },
   {
     id: "rpgclassics-armor",

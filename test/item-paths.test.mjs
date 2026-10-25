@@ -403,8 +403,66 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 257);
-  assert.equal(synthesisRecipes.length, 9);
+  assert.equal(itemAcquisitionPaths.length, 286);
+  assert.equal(synthesisRecipes.length, 10);
+});
+
+test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe paths", () => {
+  const pinionPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.phoenix-pinion");
+  const pinionsById = new Map(pinionPaths.map((path) => [path.id, path]));
+  const greenPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.gysahl-greens");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.phoenix-pinion");
+  const synthesisPath = pinionsById.get("item-path.disc-4.memoria.phoenix-pinion-hades-synthesis");
+  const fixedCleyra = [
+    "item-path.disc-2.cleyra.first-staircase-phoenix-pinion",
+    "item-path.disc-2.cleyra.bridge-mushrooms-phoenix-pinion",
+    "item-path.disc-2.cleyra.harproom-phoenix-pinion",
+  ].map((id) => pinionsById.get(id));
+  const bossDrops = pinionPaths.filter((path) => path.method === "drop");
+  const redemption = pinionsById.get("item-path.disc-1.exploring-lindblum-kingdom.phoenix-pinion-mene-redemption");
+  const kuponut = pinionsById.get("item-path.disc-4.return-to-gaia.phoenix-pinion-kupo-nut");
+  const chocoFive = pinionsById.get("item-path.disc-2.outer-continent.phoenix-pinion-abandoned-beach");
+  const chocoSeventeen = pinionsById.get("item-path.disc-3.aerial-exploration.phoenix-pinion-sea-at-dusk");
+  const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
+  const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
+
+  assert.equal(pinionPaths.length, 28);
+  assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
+  assert.equal(fixedCleyra.length, 3);
+  assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
+  assert.equal(pinionsById.get("item-path.disc-2.cleyra.evacuation-cathedral-phoenix-pinion")?.availability, "conditional");
+  assert.equal(pinionsById.get("item-path.disc-2.cleyra.stiltzkin-2-phoenix-pinion")?.cost?.amount, 444);
+  assert.equal(pinionsById.get("item-path.disc-2.journey-to-outer-continent.stiltzkin-3-phoenix-pinion")?.cost?.amount, 555);
+  assert.equal(chocoFive?.quantity, 9);
+  assert.equal(chocoSeventeen?.quantity, 15);
+  assert.equal(redemption?.method, "point-redemption");
+  assert.match(redemption?.conditions ?? "", /150 Hot & Cold points/);
+  assert.match(redemption?.conditions ?? "", /Phoenix Down/);
+  assert.equal(kuponut?.availability, "conditional");
+  assert.equal(bossDrops.length, 5);
+  assert.ok(bossDrops.every((path) => path.availability === "one-time-encounter"));
+  assert.ok(synthesisPath);
+  assert.deepEqual(recipe?.ingredients, [
+    { itemId: "game-item.phoenix-down", quantity: 1 },
+    { itemId: "game-item.gysahl-greens", quantity: 1 },
+  ]);
+  assert.equal(recipe?.cost.amount, 300);
+  assert.ok(equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.phoenix-pinion" && claim.abilityName === "Phoenix"));
+
+  assert.equal(greenPaths.length, 5);
+  assert.equal(greenPaths.find((path) => path.method === "shop")?.cost?.amount, 80);
+  assert.match(greenPaths.find((path) => path.method === "point-redemption")?.conditions ?? "", /10 Hot & Cold points/);
+  assert.ok(cavesItems?.notes.includes("Earth Guardian, Kraken, Lich, Maliris, and Soulcage"));
+  assert.ok(cavesChocobo?.notes.includes("Phoenix Down"));
+
+  for (const path of [...pinionPaths, ...greenPaths]) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+  for (const sourceId of recipe?.sourceIds ?? []) {
+    assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
+  }
 });
 
 test("Magician Shoes and Bone Wrist have sourced acquisition and recovery paths", () => {

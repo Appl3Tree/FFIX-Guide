@@ -20,6 +20,20 @@ export type SynthesisRecipe = {
 // This is an initial, source-cross-checked recipe slice, not a complete list.
 export const synthesisRecipes: SynthesisRecipe[] = [
   {
+    id: "synthesis-recipe.phoenix-pinion",
+    resultItemId: "game-item.phoenix-pinion",
+    ingredients: [
+      { itemId: "game-item.phoenix-down", quantity: 1 },
+      { itemId: "game-item.gysahl-greens", quantity: 1 },
+    ],
+    chapterId: "disc-4.memoria",
+    shopId: "hades.master-synthesist",
+    shopName: "Hades's Master Synthesist Shop",
+    cost: { currency: "gil", amount: 300 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-master-synthesist-71891", "gamefaqs-item-locations-54996", "cavesofnarshe-ff9-items"],
+    notes: "GameFAQs and Caves of Narshe list Phoenix Down + Gysahl Greens for 300 Gil at Hades. The recipe supplies repeatable Pinions for the Feather Boots ingredient chain; Gysahl Greens has separate Mene purchase, Hot & Cold, and Cleyra pickup paths.",
+  },
+  {
     id: "synthesis-recipe.magician-shoes",
     resultItemId: "game-item.magician-shoes",
     ingredients: [
