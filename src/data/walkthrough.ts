@@ -5064,7 +5064,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-friendly-yan",
         title: "Vile Island — finish the Friendly Creatures chain",
         summary: "Befriend the last creature only after the other eight have accepted their requested gems.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-friendly-monsters", "gamerguides-side-questing-3"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters", "gamerguides-side-questing-3"],
         steps: [
           {
             id: "aerial-yan-prerequisite",

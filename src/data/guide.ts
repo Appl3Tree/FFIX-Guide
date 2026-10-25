@@ -2218,6 +2218,14 @@ export const sources = [
     notes: "Cross-check for Friendly Yan prerequisites and rewards, the final Chocograph treasure locations and rewards, Chocobo's Paradise, Ozma danger, and Ragtime Mouse's final reward. Chocobo Air Garden candidate count differs from other route references, so the walkthrough uses the moving shadow clue rather than a fixed count.",
   },
   {
+    id: "gamefaqs-friendly-creatures-71891",
+    title: "Friendly Creatures — sidequest guide",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/friendly160creatures",
+    accessed: "2026-10-25",
+    notes: "Original PlayStation Friendly Creatures route. It says the first eight can be completed in any order when the requested item is available, and Friendly Yan must be completed last after befriending the other eight.",
+  },
+  {
     id: "jegged-friendly-monsters",
     title: "Friendly Monsters — locations and rewards",
     publisher: "Jegged",
@@ -4763,7 +4771,7 @@ export const objectives: GameObjective[] = [
     id: "disc-3.aerial-exploration.friendly-yan",
     title: "Befriend Friendly Yan on Vile Island after the other eight creatures",
     category: "achievement",
-    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "jegged-friendly-monsters", "gamerguides-side-questing-3", "gamefaqs-return-to-gaia-71891"],
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters", "gamerguides-side-questing-3", "gamefaqs-return-to-gaia-71891"],
     chapterIds: ["disc-3.aerial-exploration", "disc-4.return-to-gaia"],
     achievementPlatforms: ["steam", "ps4", "xbox"],
     profileIds: ["comprehensive", "achievements", "custom", "perfect"],

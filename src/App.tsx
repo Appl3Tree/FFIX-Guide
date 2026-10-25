@@ -39,6 +39,7 @@ import {
   guideChapterSequence,
   guideSequenceEdges,
   objectiveAccessDependencies,
+  questPrerequisiteDependencies,
   storyPartySequences,
 } from "./data/progression";
 import {
@@ -1321,11 +1322,25 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
                       return <li className={`walkthrough-step step-${step.kind}`} key={step.id}>
                         <div className="walkthrough-step-top"><span className="step-kind">{walkthroughStepLabels[step.kind]}</span><p>{step.text}</p></div>
                         {step.detail && <p className="walkthrough-step-detail">{step.detail}</p>}
-                        {linkedObjectives.map((objective) => objective && <label className="chapter-objective" key={objective.id}>
-                          <input type="checkbox" checked={objectiveIsComplete(profile, objective.id)} onChange={() => onToggleObjective(objective.id)} />
-                          <span className="custom-check" aria-hidden="true"><Check size={13} /></span>
-                          <span>{objective.title}</span>
-                        </label>)}
+                        {linkedObjectives.map((objective) => {
+                          if (!objective) return null;
+                          const prerequisites = questPrerequisiteDependencies.filter((dependency) => dependency.dependentObjectiveId === objective.id);
+                          const objectiveControl = <label className="chapter-objective">
+                            <input type="checkbox" checked={objectiveIsComplete(profile, objective.id)} onChange={() => onToggleObjective(objective.id)} />
+                            <span className="custom-check" aria-hidden="true"><Check size={13} /></span>
+                            <span>{objective.title}</span>
+                          </label>;
+                          if (prerequisites.length === 0) return <div key={objective.id}>{objectiveControl}</div>;
+                          const unmetPrerequisites = unmetObjectivePrerequisites(objective.id, questPrerequisiteDependencies, (id) => objectiveIsComplete(profile, id));
+                          const markedCount = prerequisites.length - unmetPrerequisites.length;
+                          const remainingTitles = unmetPrerequisites.map((dependency) => objectives.find((item) => item.id === dependency.prerequisiteObjectiveId)?.title ?? dependency.prerequisiteObjectiveId);
+                          return <div className="chapter-objective-group" key={objective.id}>
+                            {objectiveControl}
+                            <small className="chapter-prerequisite-status" role="status">
+                              Yan prerequisites: {markedCount}/{prerequisites.length} marked{remainingTitles.length > 0 ? ` · Remaining: ${remainingTitles.join(", ")}` : " · all eight other creatures marked; verify you still have the Diamond"}
+                            </small>
+                          </div>;
+                        })}
                       </li>;
                     })}
                   </ol>

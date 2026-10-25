@@ -1,7 +1,7 @@
 import { activeTimeEvents } from "./ates.ts";
 
 export type ObjectiveDependency = {
-  kind: "ate-sequence" | "objective-access";
+  kind: "ate-sequence" | "objective-access" | "quest-prerequisite";
   prerequisiteObjectiveId: string;
   dependentObjectiveId: string;
   sourceIds: string[];
@@ -1623,7 +1623,29 @@ export const objectiveAccessDependencies: ObjectiveDependency[] = [
   },
 ];
 
+// The first eight Friendly Creatures can be completed in any order when the
+// requested item is available. Friendly Yan is the only hard ordering gate:
+// all eight other creatures must be completed before Yan can be befriended.
+const friendlyCreatureYanPrerequisiteIds = [
+  "disc-1.ice-cavern.mu-friendly-monster",
+  "disc-2.journey-to-treno.friendly-ghost",
+  "disc-2.outer-continent.friendly-ladybug",
+  "disc-2.conde-petie-mountain-path.friendly-yeti",
+  "disc-2.journey-to-iifa-tree.nymph",
+  "disc-3.forgotten-continent.jabberwock",
+  "disc-3.lost-continent.feather-circle",
+  "disc-3.aerial-exploration.garuda",
+];
+
+export const questPrerequisiteDependencies: ObjectiveDependency[] = friendlyCreatureYanPrerequisiteIds.map((prerequisiteObjectiveId) => ({
+  kind: "quest-prerequisite",
+  prerequisiteObjectiveId,
+  dependentObjectiveId: "disc-3.aerial-exploration.friendly-yan",
+  sourceIds: ["gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"],
+}));
+
 export const objectiveDependencies: ObjectiveDependency[] = [
   ...ateObjectiveDependencies,
   ...objectiveAccessDependencies,
+  ...questPrerequisiteDependencies,
 ];

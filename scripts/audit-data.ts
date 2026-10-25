@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, storyPartySequences } from "../src/data/progression.ts";
+import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, questPrerequisiteDependencies, storyPartySequences } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
@@ -341,13 +341,43 @@ const actualAteDependencyEdges = ateObjectiveDependencies.map((edge) => `${edge.
 if (expectedDependencyEdges.join("|") !== actualAteDependencyEdges.join("|")) {
   errors.push("ATE-order dependency graph does not include exactly the prerequisites declared by ATE records.");
 }
-const supportedObjectiveDependencyKinds = new Set(["ate-sequence", "objective-access"]);
+const supportedObjectiveDependencyKinds = new Set(["ate-sequence", "objective-access", "quest-prerequisite"]);
 for (const dependency of objectiveDependencies) {
   if (!supportedObjectiveDependencyKinds.has(dependency.kind)) errors.push(`Dependency has unsupported kind ${dependency.kind}.`);
   if (!objectiveIds.has(dependency.prerequisiteObjectiveId)) errors.push(`Dependency references unknown prerequisite objective ${dependency.prerequisiteObjectiveId}.`);
   if (!objectiveIds.has(dependency.dependentObjectiveId)) errors.push(`Dependency references unknown dependent objective ${dependency.dependentObjectiveId}.`);
   for (const sourceId of dependency.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`Dependency ${dependency.prerequisiteObjectiveId} -> ${dependency.dependentObjectiveId} references unknown source ${sourceId}.`);
+  }
+}
+const friendlyCreaturePrerequisiteIds = [
+  "disc-1.ice-cavern.mu-friendly-monster",
+  "disc-2.journey-to-treno.friendly-ghost",
+  "disc-2.outer-continent.friendly-ladybug",
+  "disc-2.conde-petie-mountain-path.friendly-yeti",
+  "disc-2.journey-to-iifa-tree.nymph",
+  "disc-3.forgotten-continent.jabberwock",
+  "disc-3.lost-continent.feather-circle",
+  "disc-3.aerial-exploration.garuda",
+];
+const friendlyYanObjectiveId = "disc-3.aerial-exploration.friendly-yan";
+const expectedFriendlyYanPrerequisites = friendlyCreaturePrerequisiteIds.map((id) => `${id}->${friendlyYanObjectiveId}`).sort();
+const actualFriendlyYanPrerequisites = questPrerequisiteDependencies
+  .filter((dependency) => dependency.dependentObjectiveId === friendlyYanObjectiveId)
+  .map((dependency) => `${dependency.prerequisiteObjectiveId}->${dependency.dependentObjectiveId}`)
+  .sort();
+if (expectedFriendlyYanPrerequisites.join("|") !== actualFriendlyYanPrerequisites.join("|")) {
+  errors.push("Friendly Yan must have exactly the eight other Friendly Creatures as quest prerequisites.");
+}
+const firstEightCreatureIds = new Set(friendlyCreaturePrerequisiteIds);
+if (questPrerequisiteDependencies.some((dependency) =>
+  firstEightCreatureIds.has(dependency.prerequisiteObjectiveId) && firstEightCreatureIds.has(dependency.dependentObjectiveId),
+)) {
+  errors.push("The first eight Friendly Creatures must not be ordered against one another.");
+}
+for (const dependency of questPrerequisiteDependencies) {
+  if (!dependency.sourceIds.includes("gamefaqs-friendly-creatures-71891") || !dependency.sourceIds.includes("jegged-friendly-monsters")) {
+    errors.push(`Friendly Creature prerequisite ${dependency.prerequisiteObjectiveId} -> ${dependency.dependentObjectiveId} must cite both direct prerequisite sources.`);
   }
 }
 for (const cycle of findObjectiveDependencyCycles(objectiveDependencies)) {
@@ -1027,8 +1057,11 @@ if (mappedCatalogAchievements < achievementRecordCount) {
 }
 if (guideAreas.some((area) => area.state === "verified")) warnings.push("A chapter is marked verified; ensure it has passed the manual walkthrough audit.");
 
+const objectiveAccessDependencyCount = objectiveDependencies.filter((dependency) => dependency.kind === "objective-access").length;
+const questPrerequisiteDependencyCount = objectiveDependencies.filter((dependency) => dependency.kind === "quest-prerequisite").length;
 console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} coverage warning(s).`);
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
+console.log(`Objective dependencies: ${objectiveDependencies.length} total (${ateObjectiveDependencies.length} ATE-order, ${objectiveAccessDependencyCount} objective-access, ${questPrerequisiteDependencyCount} quest-prerequisite).`);
 console.log(`Route cutoffs: ${gameRouteCutoffs.length} windows link ${linkedRouteMissableIds.size}/${missables.length} missable warnings; ${missables.filter((record) => record.severity === "high" || record.severity === "critical").length} high/critical records are included.`);
 console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
 console.log(`Cleyra shops: ${cleyraShopPaths.length} priced stock path(s) for ${cleyraProductIds.length} unique products; ${cleyraProductsWithLaterPaths.length} have a later acquisition path.`);

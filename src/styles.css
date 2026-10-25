@@ -419,6 +419,9 @@ h1, h2, p { margin-top: 0; }
 .walkthrough-step-top p { margin: 0; color: #3d4944; font-size: 13px; line-height: 1.65; }
 .walkthrough-step-detail { margin: 8px 0 0 111px; color: #737e77; font-size: 12px; line-height: 1.6; }
 .chapter-objective { display: flex; align-items: flex-start; gap: 8px; margin: 10px 0 0 111px; color: #537168; font-size: 11px; line-height: 1.5; cursor: pointer; }
+.chapter-objective-group { margin: 10px 0 0 111px; }
+.chapter-objective-group .chapter-objective { margin: 0; }
+.chapter-prerequisite-status { display: block; margin: 4px 0 0 25px; color: #737e77; font-size: 10px; line-height: 1.5; }
 .chapter-objective input { position: absolute; width: 1px; height: 1px; opacity: 0; }
 .chapter-objective .custom-check { width: 17px; height: 17px; flex: 0 0 auto; display: grid; place-items: center; margin-top: -1px; color: transparent; border: 1px solid #bcc7bd; border-radius: 2px; background: #fff; }
 .chapter-objective input:checked + .custom-check { color: #fff; border-color: #58796f; background: #58796f; }
@@ -722,7 +725,7 @@ h1, h2, p { margin-top: 0; }
   .walkthrough-section-heading h3 { font-size: 17px; }
   .walkthrough-step-top { grid-template-columns: 1fr; gap: 7px; }
   .walkthrough-step-top p { font-size: 12px; }
-  .walkthrough-step-detail, .chapter-objective, .walkthrough-sources { margin-left: 0; padding-left: 0; }
+  .walkthrough-step-detail, .chapter-objective, .chapter-objective-group, .walkthrough-sources { margin-left: 0; padding-left: 0; }
   .walkthrough-step-detail { font-size: 11px; }
   .walkthrough-sources { align-items: flex-start; flex-direction: column; gap: 6px; }
   .walkthrough-sources a { font-size: 10px; }
