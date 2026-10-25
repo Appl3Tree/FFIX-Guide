@@ -1,6 +1,7 @@
 import type { ItemCost } from "./items.ts";
 
 const disc4BlackCatRecipeSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"];
+const resolvedDisc4BlackCatRecipeSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-ability-10332", "ffwiki-synthesis"];
 
 export type SynthesisIngredient = {
   itemId: string;
@@ -460,5 +461,33 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     cost: { currency: "gil", amount: 20000 },
     sourceIds: disc4BlackCatRecipeSources,
     notes: "Magician Robe + Glass Armlet makes Light Robe for 20,000 Gil at Black Cat on Disc IV. GameFAQs and RPGClassics agree on the ingredients and price; the item also has a Chocograph reward and a Kuja steal.",
+  },
+  {
+    id: "synthesis-recipe.circlet",
+    resultItemId: "game-item.circlet",
+    ingredients: [
+      { itemId: "game-item.coronet", quantity: 1 },
+      { itemId: "game-item.rosetta-ring", quantity: 1 },
+    ],
+    chapterId: "disc-4.return-to-gaia",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 20000 },
+    sourceIds: resolvedDisc4BlackCatRecipeSources,
+    notes: "Coronet + Rosetta Ring makes Circlet for 20,000 Gil at Black Cat on Disc IV. GameFAQs and an independent item/ability FAQ identify the output as Circlet; RPGClassics labels this formula Gauntlets despite GameFAQs documenting a distinct 8,000-Gil Gauntlets recipe.",
+  },
+  {
+    id: "synthesis-recipe.golden-skullcap",
+    resultItemId: "game-item.golden-skullcap",
+    ingredients: [
+      { itemId: "game-item.gold-helm", quantity: 1 },
+      { itemId: "game-item.golden-hairpin", quantity: 1 },
+    ],
+    chapterId: "disc-4.return-to-gaia",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 15000 },
+    sourceIds: resolvedDisc4BlackCatRecipeSources,
+    notes: "Gold Helm + Golden Hairpin makes Golden Skullcap for 15,000 Gil at Black Cat on Disc IV. GameFAQs and independent item/ability and synthesis references corroborate the formula and price; RPGClassics omits the recipe.",
   },
 ];

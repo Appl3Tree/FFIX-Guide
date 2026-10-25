@@ -117,7 +117,7 @@ export const itemCatalogCoverage = {
     "disc-4.final-preparations",
     "disc-4.the-final-battle",
   ],
-  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet and Rebirth Ring routes, Rebirth Ring recovery from Chocograph #24 and Trance Kuja plus its Diamond/Anklet synthesis path, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and thirty-one structured synthesis recipes. The Anklet chain includes its variable-price Treno Auction source and Gold Choker + Peridot recipe, plus Gold Choker from Linen Cuirass + Soft and Peridot from Ore + Soft. Soft now includes repeatable purchase routes at Atla's Mogshop, Treno, Black Mage Village, and Alexandria; Black Mage Village remains a later-game restock route. Ore includes repeatable Hot & Cold digging, point redemption, and Jewel spell extraction. Peridot includes Ramuh, two Chocographs, Alexandria pickup, its Ore + Soft recipe, and enemy loot from Fossil Roo, the Iifa Tree, Mount Gulug, Ipsen's Castle, Oeilvert, the Disc IV overworld, and Memoria. The Disc II Mistodon A repeat-access window remains disputed. Silk Robe has a Cleyra chest, a nine-frog reward, and five source-listed synthesis shops using Silk Shirt + Bandana; source labels differ on when some shops are available. Silk Shirt has starting copies equipped to Garnet, Blank, and Eiko; Blank's copy has a limited removal window. Other modeled routes are the Black Waltz 1 steal, 80–99-noble swordfighting reward, and repeatable Dali, Treno, Lindblum, and Black Mage Village shop sources. Bandana has a hidden Dragon's Gate pickup and Disc II/III purchase routes at Treno, Cleyra, Lindblum, Dragon's Gate, Fossil Roo, and Black Mage Village; the Fossil Roo stock window remains unverified. Magician Shoes has two Cleyra chests and six synthesis-shop paths using Germinas Boots + Bone Wrist for 1,500 Gil; the Lindblum timing difference between the post-Cleyra guide and item-location guide is recorded. Germinas Boots now includes Amarant's equipped copy, two Streamside Chocograph copies, and seven Desert Boots + Fork synthesis-shop paths at 900 Gil; the Desert Boots and Fork ingredient routes are linked, with the early Lindblum Magician Shoes timing difference retained. Bone Wrist has one Ralvurahva steal and six shop sources, so missing the steal is an early-copy loss, not a permanent item loss. Mythril Fork now has both one-time steals and four later shop sources at Conde Petie, Black Mage Village, Lindblum, and Esto Gaza before the Desert Palace; the Ralvurahva and Hilgigars steals are not permanent item-type losses. Phoenix Pinion has 28 modeled routes: the starting copy, Disc I/II pickups, three fixed Cleyra pickups plus its conditional evacuation reward, Queen Stella, three Stiltzkin bundles, Chocographs #5 and #17, repeatable Hot & Cold digging and redemption, Kupo Nut random rewards, Hades synthesis, and five listed boss drops. Cleyra's evacuation Pinion is separate from the three fixed settlement locations. Mene's 150-point reward label differs between the GameFAQs item reference and Caves of Narshe's Hot & Cold page, and the older item-location guide omits steal/drop sources; enemy steals remain unenumerated. Gysahl Greens has a partial ingredient chain through Mene, Hot & Cold, and a Cleyra pickup. Feather Boots now includes its Oeilvert chest, Abandoned Lagoon Chocograph, conditional Disc III/IV Treno auction offers, Tiamat's one-time steal, and 4,000-Gil synthesis paths at Alexandria, Treno, Lindblum, and Daguerreo for the Battle Boots ingredient chain. Wing Edge now has 14 modeled routes across Hot & Cold, Chocographs #3 and #13, Esto Gaza, Mount Gulug, Bran Bal, Silver Dragon, Nova Dragon, Memoria Tiamat, Hades, Deathguise, and two steal sources; the Kraken Right Tentacle steal and Crystal World Tiamat table are documented with their source conflicts. Linen Cuirass includes its starting equipment, Black Waltz 3 steal, and selected shop paths. Chain Plate now covers its Beatrix/Gargan Roo sources plus Treno, Cleyra, Lindblum, Dragon's Gate, Fossil Roo, and Disc II–III Black Mage Village purchases. Leather Plate includes the Lindblum pickup, Black Waltz 2 steal, Lindblum/Treno/Black Mage Village shops; Mythril Vest includes the Cleyra Trunk and Pinnacle Rocks chests, Antlion steal, Cleyra/Dragon's Gate/Fossil Roo/Black Mage Village/Esto Gaza shops. The Disc III final-stock warning distinguishes these earlier acquisition paths from the last documented item sources. Air Racket now has Summit Station and Treno shop paths plus later Ipsen recovery; Treno is a purchase cutoff, not permanent item loss. Silver Gloves and Iron Helm include their earlier steals, pickups, and Lindblum stock before the optional Summit Station x4/x3 inventory targets. Chain Mail has Treno, Cleyra, and post-Cleyra Lindblum shop paths; Beatrix's locked equipped copy is explicitly excluded from the optional 15-piece Chain Mail/Power Belt target. Power Belt now has the Treno Tradition-gated direct reward and five synthesis-shop paths for 2,000 Gil; Glass Buckle has four 500-Gil paths using Glass Armlet + Leather Wrist, with sourced starting, chest, steal, and shop routes for both ingredients. The recipe chain and ability claims are modeled, while modern-release behavior and exact stock transitions remain unverified. Fossil Roo now records the post-Lani Elixir, Fairy Earrings, Ether chest, Lamia’s Tiara, Survival Vest pickup, Lani’s Ether steal, and Stiltzkin’s separate Ether/Remedy bundle; later Elixir, Fairy Earrings, Lamia’s Tiara, and Survival Vest routes are linked, while the Survival Vest room and Madain Sari timing remain uncertain. Mount Gulug now adds 20 enemy-table steal/drop acquisition paths for Grenade, Vepal (Red), Worm Hydra, and both Wraith forms, plus normalized Opal, Topaz, Antidote, and Echo Screen records; non-Always drop slots remain conditional rather than guaranteed. Final Preparations now links Ozma’s Elixir, Robe of Lords, Dark Matter, Pumice Piece, and guaranteed Pumice opportunities, plus Dark Matter’s one-time Treno auction route and source-specific inventory targets for Dark Matter and both Pumice add-ons; the conditional Dark Matter slots remain separate from the guaranteed Pumice reward. Steepled Hat now has nine Disc I–IV acquisition paths, a Protect ability claim, and its source-specific Need 7 target; its source-specific Need 7 and Buy 10 targets are recorded separately; the synthesis and final-inventory arithmetic behind those counts remains under reconciliation. Feather Hat now has its Marcus/Eiko starting copies and Dali/Black Mage Village purchases, plus its Bright Eyes/Add Status claims and Need 6 target. Yellow Scarf includes Beatrix guest equipment, the Cleyra Cathedral pickup, eight source-listed synthesis windows, its Need 9 target, and Bird Killer/Millionaire/Steal Gil claims. Wrist, Mythril Fork, Cotton Robe, and Glutton's Robe are now linked through four Wrist sources, six Mythril Fork paths, the two-copy Chocograph #2 Cotton Robe reward, Cotton Robe synthesis, and both Glutton's Robe steals plus its Daguerreo recipe. Source-specific Need targets are recorded for all four. GameFAQs' Items table price fields differ from its Shops table for Cotton Robe (2,000 vs. 1,000 Gil) and Glutton's Robe (8,000 vs. 6,000 Gil); independent RPGClassics synthesis tables support the 1,000/6,000-Gil costs. Glutton's Robe can also be stolen from optional boss Quale after catching 99 frogs. Magus Hat now links the Gizamaluke's Grotto chest and steal to six shop sources; Rubber Helm links Freya's guest equipment and the wrecked Prima Vista Cargo Room (under Evil Forest), plus Dali/Summit Station shops. Cachusha links random Hot & Cold digging, the Dali windmill chest, and five 1,000-Gil synthesis windows from Magus Hat + Rubber Helm, with a Disc II/III disagreement over the chest's earliest access and the digging guide's spelling variant “Cachusa.” Priest's Racket now links Air Racket + Cachusha synthesis at Black Mage Village on Disc IV for 11,000 Gil, with Silence and Might ability claims and a source-specific Need 3 target. Eleven additional Disc IV Black Cat recipes are modeled: Butterfly Sword, The Ogre, Exploda, Angel Bless, Sargatanas, Masamune, Duel Claws, Bracer, Grand Helm, Rubber Suit, and Light Robe; their formulas and prices match GameFAQs and RPGClassics. Rune Tooth (1,000 vs. 2,000 Gil), the 20,000-Gil Coronet + Rosetta Ring result (Circlet in GameFAQs, Gauntlets in RPGClassics), the 8,000-Gil Gauntlets recipe, Brave Suit (20,000 vs. 26,000 Gil), and Golden Skullcap (not listed by RPGClassics) remain outside the catalog pending reconciliation. These records add eleven source-specific Need targets and eighteen equipment-ability claims. These item records and acquisition sources remain partial; most recipes, shop cutoffs, recovery paths, enemy steals, and item-level completeness need independent review.",
+  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet and Rebirth Ring routes, Rebirth Ring recovery from Chocograph #24 and Trance Kuja plus its Diamond/Anklet synthesis path, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and thirty-three structured synthesis recipes. The Anklet chain includes its variable-price Treno Auction source and Gold Choker + Peridot recipe, plus Gold Choker from Linen Cuirass + Soft and Peridot from Ore + Soft. Soft now includes repeatable purchase routes at Atla's Mogshop, Treno, Black Mage Village, and Alexandria; Black Mage Village remains a later-game restock route. Ore includes repeatable Hot & Cold digging, point redemption, and Jewel spell extraction. Peridot includes Ramuh, two Chocographs, Alexandria pickup, its Ore + Soft recipe, and enemy loot from Fossil Roo, the Iifa Tree, Mount Gulug, Ipsen's Castle, Oeilvert, the Disc IV overworld, and Memoria. The Disc II Mistodon A repeat-access window remains disputed. Silk Robe has a Cleyra chest, a nine-frog reward, and five source-listed synthesis shops using Silk Shirt + Bandana; source labels differ on when some shops are available. Silk Shirt has starting copies equipped to Garnet, Blank, and Eiko; Blank's copy has a limited removal window. Other modeled routes are the Black Waltz 1 steal, 80–99-noble swordfighting reward, and repeatable Dali, Treno, Lindblum, and Black Mage Village shop sources. Bandana has a hidden Dragon's Gate pickup and Disc II/III purchase routes at Treno, Cleyra, Lindblum, Dragon's Gate, Fossil Roo, and Black Mage Village; the Fossil Roo stock window remains unverified. Magician Shoes has two Cleyra chests and six synthesis-shop paths using Germinas Boots + Bone Wrist for 1,500 Gil; the Lindblum timing difference between the post-Cleyra guide and item-location guide is recorded. Germinas Boots now includes Amarant's equipped copy, two Streamside Chocograph copies, and seven Desert Boots + Fork synthesis-shop paths at 900 Gil; the Desert Boots and Fork ingredient routes are linked, with the early Lindblum Magician Shoes timing difference retained. Bone Wrist has one Ralvurahva steal and six shop sources, so missing the steal is an early-copy loss, not a permanent item loss. Mythril Fork now has both one-time steals and four later shop sources at Conde Petie, Black Mage Village, Lindblum, and Esto Gaza before the Desert Palace; the Ralvurahva and Hilgigars steals are not permanent item-type losses. Phoenix Pinion has 28 modeled routes: the starting copy, Disc I/II pickups, three fixed Cleyra pickups plus its conditional evacuation reward, Queen Stella, three Stiltzkin bundles, Chocographs #5 and #17, repeatable Hot & Cold digging and redemption, Kupo Nut random rewards, Hades synthesis, and five listed boss drops. Cleyra's evacuation Pinion is separate from the three fixed settlement locations. Mene's 150-point reward label differs between the GameFAQs item reference and Caves of Narshe's Hot & Cold page, and the older item-location guide omits steal/drop sources; enemy steals remain unenumerated. Gysahl Greens has a partial ingredient chain through Mene, Hot & Cold, and a Cleyra pickup. Feather Boots now includes its Oeilvert chest, Abandoned Lagoon Chocograph, conditional Disc III/IV Treno auction offers, Tiamat's one-time steal, and 4,000-Gil synthesis paths at Alexandria, Treno, Lindblum, and Daguerreo for the Battle Boots ingredient chain. Wing Edge now has 14 modeled routes across Hot & Cold, Chocographs #3 and #13, Esto Gaza, Mount Gulug, Bran Bal, Silver Dragon, Nova Dragon, Memoria Tiamat, Hades, Deathguise, and two steal sources; the Kraken Right Tentacle steal and Crystal World Tiamat table are documented with their source conflicts. Linen Cuirass includes its starting equipment, Black Waltz 3 steal, and selected shop paths. Chain Plate now covers its Beatrix/Gargan Roo sources plus Treno, Cleyra, Lindblum, Dragon's Gate, Fossil Roo, and Disc II–III Black Mage Village purchases. Leather Plate includes the Lindblum pickup, Black Waltz 2 steal, Lindblum/Treno/Black Mage Village shops; Mythril Vest includes the Cleyra Trunk and Pinnacle Rocks chests, Antlion steal, Cleyra/Dragon's Gate/Fossil Roo/Black Mage Village/Esto Gaza shops. The Disc III final-stock warning distinguishes these earlier acquisition paths from the last documented item sources. Air Racket now has Summit Station and Treno shop paths plus later Ipsen recovery; Treno is a purchase cutoff, not permanent item loss. Silver Gloves and Iron Helm include their earlier steals, pickups, and Lindblum stock before the optional Summit Station x4/x3 inventory targets. Chain Mail has Treno, Cleyra, and post-Cleyra Lindblum shop paths; Beatrix's locked equipped copy is explicitly excluded from the optional 15-piece Chain Mail/Power Belt target. Power Belt now has the Treno Tradition-gated direct reward and five synthesis-shop paths for 2,000 Gil; Glass Buckle has four 500-Gil paths using Glass Armlet + Leather Wrist, with sourced starting, chest, steal, and shop routes for both ingredients. The recipe chain and ability claims are modeled, while modern-release behavior and exact stock transitions remain unverified. Fossil Roo now records the post-Lani Elixir, Fairy Earrings, Ether chest, Lamia’s Tiara, Survival Vest pickup, Lani’s Ether steal, and Stiltzkin’s separate Ether/Remedy bundle; later Elixir, Fairy Earrings, Lamia’s Tiara, and Survival Vest routes are linked, while the Survival Vest room and Madain Sari timing remain uncertain. Mount Gulug now adds 20 enemy-table steal/drop acquisition paths for Grenade, Vepal (Red), Worm Hydra, and both Wraith forms, plus normalized Opal, Topaz, Antidote, and Echo Screen records; non-Always drop slots remain conditional rather than guaranteed. Final Preparations now links Ozma’s Elixir, Robe of Lords, Dark Matter, Pumice Piece, and guaranteed Pumice opportunities, plus Dark Matter’s one-time Treno auction route and source-specific inventory targets for Dark Matter and both Pumice add-ons; the conditional Dark Matter slots remain separate from the guaranteed Pumice reward. Steepled Hat now has nine Disc I–IV acquisition paths, a Protect ability claim, and its source-specific Need 7 target; its source-specific Need 7 and Buy 10 targets are recorded separately; the synthesis and final-inventory arithmetic behind those counts remains under reconciliation. Feather Hat now has its Marcus/Eiko starting copies and Dali/Black Mage Village purchases, plus its Bright Eyes/Add Status claims and Need 6 target. Yellow Scarf includes Beatrix guest equipment, the Cleyra Cathedral pickup, eight source-listed synthesis windows, its Need 9 target, and Bird Killer/Millionaire/Steal Gil claims. Wrist, Mythril Fork, Cotton Robe, and Glutton's Robe are now linked through four Wrist sources, six Mythril Fork paths, the two-copy Chocograph #2 Cotton Robe reward, Cotton Robe synthesis, and both Glutton's Robe steals plus its Daguerreo recipe. Source-specific Need targets are recorded for all four. GameFAQs' Items table price fields differ from its Shops table for Cotton Robe (2,000 vs. 1,000 Gil) and Glutton's Robe (8,000 vs. 6,000 Gil); independent RPGClassics synthesis tables support the 1,000/6,000-Gil costs. Glutton's Robe can also be stolen from optional boss Quale after catching 99 frogs. Magus Hat now links the Gizamaluke's Grotto chest and steal to six shop sources; Rubber Helm links Freya's guest equipment and the wrecked Prima Vista Cargo Room (under Evil Forest), plus Dali/Summit Station shops. Cachusha links random Hot & Cold digging, the Dali windmill chest, and five 1,000-Gil synthesis windows from Magus Hat + Rubber Helm, with a Disc II/III disagreement over the chest's earliest access and the digging guide's spelling variant “Cachusa.” Priest's Racket now links Air Racket + Cachusha synthesis at Black Mage Village on Disc IV for 11,000 Gil, with Silence and Might ability claims and a source-specific Need 3 target. Thirteen Disc IV Black Cat recipes are now modeled: Butterfly Sword, The Ogre, Exploda, Angel Bless, Sargatanas, Masamune, Duel Claws, Bracer, Grand Helm, Rubber Suit, Light Robe, Circlet, and Golden Skullcap. The original eleven formulas and prices match GameFAQs and RPGClassics. Independent GameFAQs item/ability and Fandom synthesis references verify Circlet (Coronet + Rosetta Ring, 20,000 Gil, Need 7, end-inventory #7) and Golden Skullcap (Gold Helm + Golden Hairpin, 15,000 Gil, Need 7, end-inventory #7); Circlet also has Chocograph #22 and Treno Behemoth reward paths. RPGClassics labels the Circlet formula Gauntlets and omits Golden Skullcap. Rune Tooth (1,000 vs. 2,000 Gil) and Brave Suit (20,000 vs. 26,000 Gil) remain outside the catalog pending price resolution. These two additions contribute two source-specific Need targets and four equipment-ability claims (Circlet: Clear Headed/Jelly; Golden Skullcap: Locomotion/Power Up). These item records and acquisition sources remain partial; most recipes, shop cutoffs, recovery paths, enemy steals, and item-level completeness need independent review.",
 };
 
 const burmeciaSources = [
@@ -231,6 +231,12 @@ const disc4BlackCatRecipeSources = [
   "gamefaqs-items-71891",
   "gamefaqs-shops-71891",
   "rpgclassics-synthesis",
+];
+const resolvedDisc4BlackCatRecipeSources = [
+  "gamefaqs-items-71891",
+  "gamefaqs-shops-71891",
+  "gamefaqs-item-ability-10332",
+  "ffwiki-synthesis",
 ];
 
 const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891"];
@@ -1665,6 +1671,83 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     sourceIds: disc4BlackCatRecipeSources,
   },
   {
+    id: "item-path.disc-4.return-to-gaia.circlet-synthesis",
+    itemId: "game-item.circlet",
+    chapterId: "disc-4.return-to-gaia",
+    method: "synthesis",
+    recipeId: "synthesis-recipe.circlet",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 20000 },
+    conditions: "Synthesize Circlet from Coronet + Rosetta Ring for 20,000 Gil at Black Mage Village on Disc IV.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
+    sourceIds: resolvedDisc4BlackCatRecipeSources,
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.golden-skullcap-synthesis",
+    itemId: "game-item.golden-skullcap",
+    chapterId: "disc-4.return-to-gaia",
+    method: "synthesis",
+    recipeId: "synthesis-recipe.golden-skullcap",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 15000 },
+    conditions: "Synthesize Golden Skullcap from Gold Helm + Golden Hairpin for 15,000 Gil at Black Mage Village on Disc IV.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
+    sourceIds: resolvedDisc4BlackCatRecipeSources,
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.gold-helm-treno-shop",
+    itemId: "game-item.gold-helm",
+    chapterId: "disc-4.return-to-gaia",
+    method: "shop",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "treno.weapon-shop.disc-4",
+    shopName: "Treno Weapon & Armor Shop (Disc IV)",
+    cost: { currency: "gil", amount: 1800 },
+    conditions: "Buy Gold Helm in Treno for 1,800 Gil on Disc IV as an ingredient for Golden Skullcap synthesis.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-ability-10332"],
+  },
+  {
+    id: "item-path.disc-3.on-the-high-seas.rosetta-ring-mountain-crack-1",
+    itemId: "game-item.rosetta-ring",
+    chapterId: "disc-3.on-the-high-seas",
+    method: "quest-reward",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Use a Dead Pepper at Mountain Crack #1 to claim the Rosetta Ring, an ingredient in the Disc IV Circlet recipe.",
+    walkthroughObjectiveIds: ["disc-3.on-the-high-seas.mountain-crack"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"],
+  },
+  {
+    id: "item-path.disc-3.aerial-exploration.circlet-chocograph-22",
+    itemId: "game-item.circlet",
+    chapterId: "disc-3.aerial-exploration",
+    method: "chocograph",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Chocograph #22 rewards a Circlet as a second route to this headpiece.",
+    walkthroughObjectiveIds: ["disc-3.aerial-exploration.air-garden-treasures"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"],
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.circlet-behemoth-reward",
+    itemId: "game-item.circlet",
+    chapterId: "disc-4.return-to-gaia",
+    method: "quest-reward",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Defeat Treno's Disc IV Behemoth to receive a Circlet.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.behemoth"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-items-71891", "gamefaqs-item-ability-10332"],
+  },
+  {
     id: "item-path.disc-1.alexandria.dagger-zidane-starting-equipment",
     itemId: "game-item.dagger",
     chapterId: "disc-1.alexandria",
@@ -1936,6 +2019,10 @@ export const gameItems: GameItem[] = [
   { id: "game-item.venetia-shield", name: "Venetia Shield", category: "equipment", sourceIds: disc4BlackCatRecipeSources, verification: "partial" },
   { id: "game-item.cross-helm", name: "Cross Helm", category: "equipment", sourceIds: disc4BlackCatRecipeSources, verification: "partial" },
   { id: "game-item.magician-robe", name: "Magician Robe", category: "equipment", sourceIds: disc4BlackCatRecipeSources, verification: "partial" },
+  { id: "game-item.circlet", name: "Circlet", category: "equipment", sourceIds: resolvedDisc4BlackCatRecipeSources, verification: "partial" },
+  { id: "game-item.golden-skullcap", name: "Golden Skullcap", category: "equipment", sourceIds: resolvedDisc4BlackCatRecipeSources, verification: "partial" },
+  { id: "game-item.gold-helm", name: "Gold Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-ability-10332"], verification: "partial" },
+  { id: "game-item.rosetta-ring", name: "Rosetta Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"], verification: "partial" },
 ];
 
 const treasureSweepObjective = "disc-1.burmecia.treasure-sweep";
@@ -6967,7 +7054,7 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
   },
   ...([[
     "butterfly-sword", 2, 2,
-  ], ["the-ogre", 2, 1], ["exploda", 2, 1], ["angel-bless", 2, 2], ["sargatanas", 2, 4], ["masamune", 2, 1], ["duel-claws", 1, 0], ["bracer", 7, 7], ["grand-helm", 3, 2], ["rubber-suit", 4, 3], ["light-robe", 5, 3]] as const).map(([slug, need, endInventory]) => ({
+  ], ["the-ogre", 2, 1], ["exploda", 2, 1], ["angel-bless", 2, 2], ["sargatanas", 2, 4], ["masamune", 2, 1], ["duel-claws", 1, 0], ["bracer", 7, 7], ["grand-helm", 3, 2], ["rubber-suit", 4, 3], ["light-robe", 5, 3], ["circlet", 7, 7], ["golden-skullcap", 7, 7]] as const).map(([slug, need, endInventory]) => ({
     id: `item-target.disc-4.final-preparations.${slug}`,
     itemId: `game-item.${slug}`,
     chapterId: "disc-4.final-preparations",
@@ -7092,4 +7179,8 @@ export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.dark-matter.odin", itemId: "game-item.dark-matter", abilityName: "Odin", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.pumice-piece.boost", itemId: "game-item.pumice-piece", abilityName: "Boost", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.pumice.ark", itemId: "game-item.pumice", abilityName: "Ark", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
+  { id: "item-ability.circlet.clear-headed", itemId: "game-item.circlet", abilityName: "Clear Headed", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332"] },
+  { id: "item-ability.circlet.jelly", itemId: "game-item.circlet", abilityName: "Jelly", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332"] },
+  { id: "item-ability.golden-skullcap.locomotion", itemId: "game-item.golden-skullcap", abilityName: "Locomotion", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332"] },
+  { id: "item-ability.golden-skullcap.power-up", itemId: "game-item.golden-skullcap", abilityName: "Power Up", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332"] },
 ];
