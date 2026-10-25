@@ -2220,6 +2220,47 @@ if (
 ) {
   errors.push("The Iifa Tree LV5 Death teachers and unresolved Dracozombie/Zombie elemental reads must remain linked and source-marked.");
 }
+const battleIifaMistodonPair = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree-return.mistodon-upper-pair");
+const battleIifaMistodonSolo = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree-return.mistodon-after-dagger");
+const battleIifaMistodonDownhillPool = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree-return.mistodon-reported-downhill-pool");
+const battleIifaMistodon = enemyRecords.find((enemy) => enemy.id === "enemy.mistodon-a");
+const battleIifaMistodonWarning = missablesById.get("missable.disc-2.battle-of-iifa-tree.mistodon-steals");
+const battleIifaMistodonCutoff = cutoffsById.get("cutoff.iifa-tree-return.mistodon-steals");
+if (
+  battleIifaMistodonPair?.chapterId !== "disc-2.battle-of-iifa-tree" ||
+  battleIifaMistodonPair.kind !== "fixed" ||
+  battleIifaMistodonPair.formation[0]?.enemyId !== "enemy.mistodon-a" ||
+  battleIifaMistodonPair.formation[0]?.quantity !== 2 ||
+  battleIifaMistodonSolo?.kind !== "fixed" ||
+  battleIifaMistodonSolo.formation[0]?.enemyId !== "enemy.mistodon-a" ||
+  battleIifaMistodonSolo.formation[0]?.quantity !== 1 ||
+  battleIifaMistodonDownhillPool?.kind !== "random-pool" ||
+  battleIifaMistodonDownhillPool.formation[0]?.enemyId !== "enemy.mistodon-a" ||
+  battleIifaMistodonDownhillPool.formation[0]?.quantity !== null ||
+  !battleIifaMistodonDownhillPool.notes.some((note) => note.includes("story guides describe further Mistodon battles as waves"))
+) {
+  errors.push("The Disc II return must separate the fixed Mistodon pair/solo fight from the disputed downhill pool reports.");
+}
+if (
+  battleIifaMistodon?.name !== "Mistodon [A] (Disc II)" ||
+  !battleIifaMistodon.stats.some((claim) => claim.field === "HP" && claim.value === 1473 && claim.verification === "cross-checked") ||
+  !battleIifaMistodon.stats.some((claim) => claim.field === "level" && claim.value === 19 && claim.verification === "cross-checked") ||
+  !battleIifaMistodon.steals.some((slot) => slot.slot === "common" && slot.itemId === "game-item.ore") ||
+  !battleIifaMistodon.steals.some((slot) => slot.slot === "uncommon" && slot.itemId === "game-item.hi-potion") ||
+  !battleIifaMistodon.drops.some((slot) => slot.slot === "common" && slot.itemId === "game-item.peridot") ||
+  !battleIifaMistodon.drops.some((slot) => slot.slot === "uncommon" && slot.itemId === "game-item.ether") ||
+  !battleIifaMistodon.blueMagic.some((claim) => claim.name === "Angel's Snack" && claim.objectiveIds.includes("disc-2.battle-of-iifa-tree.angel-snack")) ||
+  !battleIifaMistodon.routeObjectiveIds.includes("disc-2.battle-of-iifa-tree.mistodon-steals")
+) {
+  errors.push("Mistodon [A] needs the cross-checked Disc II stats, its sourced steals/drops, and the Angel's Snack/steal checklist links.");
+}
+if (
+  !battleIifaMistodonWarning?.classification.includes("missable-opportunity") ||
+  battleIifaMistodonCutoff?.certainty !== "disputed" ||
+  !battleIifaMistodonCutoff.missableIds.includes(battleIifaMistodonWarning.id)
+) {
+  errors.push("The Mistodon [A] steal warning must preserve the disputed repeat-access cutoff without claiming permanent item loss.");
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

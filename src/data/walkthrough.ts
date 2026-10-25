@@ -3319,7 +3319,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "battle-iifa-return-route",
         title: "Return route — select the party and prepare for sleep",
         summary: "Use the north exit at Conde Petie Mountain Path and enter the Iifa Tree for the Disc II finale.",
-        sourceIds: ["gamefaqs-battle-iifa-tree-71891", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited"],
+        sourceIds: ["gamefaqs-battle-iifa-tree-71891", "gamefaqs-enemy-list-71891", "gamefaqs-abilities-71891", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited"],
         steps: [
           {
             id: "battle-iifa-return-to-tree",
@@ -3339,7 +3339,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "battle-iifa-mistodon-pair",
         title: "Upper roots — final party choice and Mistodon fight",
         summary: "The route takes control at the fourth screen and starts the first mandatory Mistodon battle.",
-        sourceIds: ["gamefaqs-battle-iifa-tree-71891", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited"],
+        sourceIds: ["gamefaqs-battle-iifa-tree-71891", "gamefaqs-enemy-list-71891", "gamefaqs-abilities-71891", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited"],
         steps: [
           {
             id: "battle-iifa-upper-perch-party",
@@ -3353,6 +3353,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Fight the Mistodons and, if you want their encounter steals, try for a Hi-Potion and Ore before defeating them. Mistodons are undead: Life defeats them outright, so complete any desired steals before using that shortcut.",
             detail: "The route has multiple scripted Mistodon battles. GameFAQs says they keep coming if you leave at the top and return; EliteGrindLab says the story waves cannot be refought or farmed. The repeat behavior and exact count remain unresolved, so do not rely on a later farming chance.",
             objectiveIds: ["disc-2.battle-of-iifa-tree.mistodon-steals"],
+          },
+          {
+            id: "battle-iifa-angel-snack-blue-magic",
+            kind: "optional",
+            text: "If Quina is active and Angel's Snack is still missing, weaken a Mistodon [A] and use Eat before finishing the battle with Life or Phoenix Down.",
+            detail: "GameFAQs lists Mistodon [A] as an Angel's Snack teacher. Treat this as an optional Blue Magic opportunity; the source disagreement about repeating the story waves is not a permanent-loss claim.",
+            objectiveIds: ["disc-2.battle-of-iifa-tree.angel-snack"],
           },
         ],
       },

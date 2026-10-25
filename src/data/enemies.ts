@@ -75,6 +75,7 @@ const gulugSources = ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "ga
 const mountGulugChapterId = "disc-3.lost-continent";
 const pandemoniumChapterId = "disc-3.portal-to-another-world";
 const firstIifaTreeChapterId = "disc-2.iifa-tree";
+const battleIifaTreeChapterId = "disc-2.battle-of-iifa-tree";
 const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
 const memoriaChapterId = "disc-4.memoria";
 const finalBattleChapterId = "disc-4.the-final-battle";
@@ -181,6 +182,11 @@ const firstIifaTreeStealsObjectiveId = "disc-2.iifa-tree.soulcage-steals";
 const firstIifaTreeStealsMissableId = "missable.disc-2.iifa-tree.soulcage-steals";
 const firstIifaTreeStealsCutoffId = "cutoff.iifa-tree.soulcage-steals";
 const firstIifaTreeLv5DeathObjectiveId = "disc-2.iifa-tree.lv5-death";
+const battleIifaTreeEnemySources = [enemyListSourceId, "gamefaqs-battle-iifa-tree-71891", "gamefaqs-wrapping-up-disc-2-79143", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited", "gamefaqs-abilities-71891"];
+const battleIifaTreeMistodonStealsObjectiveId = "disc-2.battle-of-iifa-tree.mistodon-steals";
+const battleIifaTreeMistodonStealsMissableId = "missable.disc-2.battle-of-iifa-tree.mistodon-steals";
+const battleIifaTreeMistodonStealsCutoffId = "cutoff.iifa-tree-return.mistodon-steals";
+const battleIifaTreeAngelSnackObjectiveId = "disc-2.battle-of-iifa-tree.angel-snack";
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
 const pandemoniumStealsObjectiveId = "disc-3.portal-to-another-world.pandemonium-boss-steals";
 const pandemoniumClimaxObjectiveId = "disc-3.portal-to-another-world.pandemonium-climax";
@@ -1664,6 +1670,48 @@ const firstIifaTreeEncounters: EnemyEncounter[] = [
   },
 ];
 
+const battleIifaTreeEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.iifa-tree-return.mistodon-upper-pair",
+    title: "Mistodon [A] — upper-perch pair",
+    chapterId: battleIifaTreeChapterId,
+    location: "Upper perch after the automatic ascent at the fourth screen",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.mistodon-a", quantity: 2 }],
+    sourceIds: battleIifaTreeEnemySources,
+    objectiveIds: [battleIifaTreeMistodonStealsObjectiveId, battleIifaTreeAngelSnackObjectiveId],
+    missableIds: [battleIifaTreeMistodonStealsMissableId],
+    cutoffIds: [battleIifaTreeMistodonStealsCutoffId],
+    notes: ["GameFAQs, Jegged, and Gamer Guides identify this as a scripted two-Mistodon fight. Complete any desired steals or Quina Eat attempt before using Life, Phoenix Down, or other undead-kill tactics."],
+  },
+  {
+    id: "encounter.iifa-tree-return.mistodon-after-dagger",
+    title: "Mistodon [A] — additional battle after Dagger leaves",
+    chapterId: battleIifaTreeChapterId,
+    location: "After Dagger leaves and before the party reaches Mocchi",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.mistodon-a", quantity: 1 }],
+    sourceIds: battleIifaTreeEnemySources,
+    objectiveIds: [battleIifaTreeMistodonStealsObjectiveId, battleIifaTreeAngelSnackObjectiveId],
+    missableIds: [battleIifaTreeMistodonStealsMissableId],
+    cutoffIds: [battleIifaTreeMistodonStealsCutoffId],
+    notes: ["Jegged describes one solo Mistodon battle after Dagger leaves. Other guides group the following waves differently, so this fixed encounter records only the separately described solo battle."],
+  },
+  {
+    id: "encounter.iifa-tree-return.mistodon-reported-downhill-pool",
+    title: "Mistodon [A] — reported downhill encounter pool",
+    chapterId: battleIifaTreeChapterId,
+    location: "Downhill route after Mocchi",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.mistodon-a", quantity: null }],
+    sourceIds: battleIifaTreeEnemySources,
+    objectiveIds: [battleIifaTreeMistodonStealsObjectiveId, battleIifaTreeAngelSnackObjectiveId],
+    missableIds: [battleIifaTreeMistodonStealsMissableId],
+    cutoffIds: [battleIifaTreeMistodonStealsCutoffId],
+    notes: ["GameFAQs' Excalibur II route calls one or two fights on the later descent random, while the story guides describe further Mistodon battles as waves. EliteGrindLab says the scripted story waves cannot be refought or farmed. This records the reported downhill encounter opportunity without claiming that it repeats the same steal table after leaving and re-entering."],
+  },
+];
+
 const iifaTreeEncounters: EnemyEncounter[] = [
   {
     id: "encounter.iifa-tree.nova-dragon",
@@ -1810,7 +1858,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -2280,6 +2328,45 @@ const firstIifaTreeEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [firstIifaTreeStealsObjectiveId],
     notes: ["GameFAQs, Jegged, and EliteGrindLab agree on level 26 and 9,765 HP. Published steal odds vary by rarity and rounding convention and are intentionally omitted. The Fire weakness is a tactical trap because Fire triggers the Fire Blades counter."],
   }, firstIifaTreeChapterId, firstIifaTreeEnemySources, [firstIifaTreeStealsMissableId], [firstIifaTreeStealsCutoffId]),
+];
+
+const battleIifaTreeEnemyRecords: EnemyRecord[] = [
+  {
+    ...chapterEnemy({
+      id: "enemy.mistodon-a",
+      name: "Mistodon [A] (Disc II)",
+      encounterIds: ["encounter.iifa-tree-return.mistodon-upper-pair", "encounter.iifa-tree-return.mistodon-after-dagger", "encounter.iifa-tree-return.mistodon-reported-downhill-pool"],
+      stats: [
+        ...crossCheckedStats([["level", 19], ["HP", 1473]], [enemyListSourceId, "jegged-iifa-tree-revisited"]),
+        ...sourcedStats([["MP", 602], ["EXP", 2548], ["AP", 2], ["Gil", 747]], [enemyListSourceId]),
+      ],
+      steals: [
+        enemyLoot("common", "game-item.ore"),
+        enemyLoot("uncommon", "game-item.hi-potion"),
+        enemyLoot("semi-rare", null, "Nothing"),
+        enemyLoot("rare", null, "Nothing"),
+      ],
+      drops: [
+        enemyLoot("always", null, "Nothing"),
+        enemyLoot("common", "game-item.peridot"),
+        enemyLoot("uncommon", "game-item.ether"),
+        enemyLoot("rare", "game-item.peridot"),
+      ],
+      facts: [
+        enemyFact("type", "Undead"),
+        enemyFact("elemental-weakness", "Fire and Holy"),
+        enemyFact("elemental-resistance", "Shadow damage halved"),
+        enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+        enemyFact("attack", "Mist", "Can inflict Sleep on the party."),
+      ],
+      blueMagic: [{ name: "Angel's Snack", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [battleIifaTreeAngelSnackObjectiveId] }],
+      strategies: [{ title: "Prepare for Sleep and exploit its undead nature", detail: "Mist can put the party to Sleep, so equip Insomniac where available. Life or Phoenix Down defeats Mistodon quickly; use those only after any desired Hi-Potion/Ore steals or Quina's Angel's Snack Eat attempt.", sourceIds: battleIifaTreeEnemySources }],
+      routeObjectiveIds: [battleIifaTreeMistodonStealsObjectiveId, battleIifaTreeAngelSnackObjectiveId],
+      notes: ["GameFAQs and Jegged agree on the Disc II variant's level and HP. GameFAQs distinguishes this level-19 Mistodon [A] from the stronger Disc IV Mistodon [B]. The return-route sources disagree about whether the scripted waves can be repeated by leaving and re-entering; the linked story cutoff remains disputed, not a conclusive permanent-loss claim."],
+    }, battleIifaTreeChapterId, battleIifaTreeEnemySources),
+    missableIds: [battleIifaTreeMistodonStealsMissableId],
+    cutoffIds: [battleIifaTreeMistodonStealsCutoffId],
+  },
 ];
 
 const iifaTreeEnemyRecords: EnemyRecord[] = [
@@ -4526,6 +4613,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...pinnacleRocksEnemyRecords,
   ...fossilRooEnemyRecords,
   ...firstIifaTreeEnemyRecords,
+  ...battleIifaTreeEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -4649,8 +4737,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, Disc II Iifa Tree roots and descent, scoped Lost Continent Feather Circle opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree slice includes the separate Tree Roots and Inner Roots pools, the fixed Zombie trio and Dracozombie descent battles, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, scoped Lost Continent Feather Circle opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. The return visit adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
