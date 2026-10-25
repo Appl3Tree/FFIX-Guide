@@ -818,8 +818,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.burmecia",
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
-    summary: "After Atla hands over Mogryo's letter, continue through Black Mage Village, Ipsen's Castle, Fossil Roo, and Daguerreo, then return to Kupo and collect Superslick from Ruby in Alexandria. Use an Ocean-capable Chocobo and a Dead Pepper to reach Mognet Central, repair its machine, and deliver the Superslick to Artemicion. The route requires Quina for Mois at Fossil Roo.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4"],
+    summary: "After Atla hands over Mogryo's letter, continue through Black Mage Village, Ipsen's Castle, Fossil Roo, and Daguerreo, then return to Kupo and collect Superslick from Ruby in Alexandria. Use an Ocean-capable Chocobo and a Dead Pepper to reach Mognet Central, repair its machine, and deliver the Superslick to Artemicion. The route requires Quina for Mois at Fossil Roo. Cour89 numbers these as deliveries 22–27, the six needed for repair; delivering all 27 is the separate maximum-count goal.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "cour89-mognet-letters"],
   },
   {
     id: "detour.return-to-gaia-gizamaluke-kupo-nut",

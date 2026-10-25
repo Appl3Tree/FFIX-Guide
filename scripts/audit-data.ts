@@ -777,6 +777,9 @@ if (!jumpRopeLetterObjective?.sourceIds.includes("jegged-alexandria-castle") || 
 if (!jumpRopeLetterObjective?.sourceIds.includes("jegged-return-to-alexandria-castle") || !jumpRopeLetterWarning?.sourceIds.includes("jegged-return-to-alexandria-castle")) {
   errors.push("The Jump Rope Mognet letter objective and warning must cite Jegged's Disc II recovery evidence.");
 }
+if (!jumpRopeLetterObjective?.sourceIds.includes("cour89-mognet-letters") || !jumpRopeLetterWarning?.sourceIds.includes("cour89-mognet-letters") || !jumpRopeLetterWarning?.consequence.includes("Cour89's optional-mail list") || !jumpRopeLetterWarning.nextAvailability?.includes("does not address the Disc II reread")) {
+  errors.push("The Jump Rope letter must record Cour89's Disc I listing without treating its omitted Disc II reread as evidence of unavailability.");
+}
 if (
   !jumpRopeLetterWarning ||
   !jumpRopeLetterWarning.classification.includes("conditional") ||
@@ -2652,6 +2655,26 @@ for (const warningId of earlierMognetLetterWarnings) {
   if (!warning?.sourceIds.includes("gamerguides-mognet-central") || !warning.note?.includes("Pre-Disc IV letters do not block the Disc IV Mognet Central repair chain")) {
     errors.push(`${warningId} must cite the Disc IV-only Mognet chain and keep earlier letters optional to that repair.`);
   }
+}
+const cour89MognetLetters = sources.find((source) => source.id === "cour89-mognet-letters");
+const mognetRepairObjective = objectivesById.get("disc-4.return-to-gaia.mognet-central");
+const mognetRepairRoute = gameRouteEdgesById.get("detour.return-to-gaia-burmecia-rejoin");
+const mognetRepairSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  ?.sections.find((section) => section.id === "gaia-return-mognet-central");
+const mognetRepairStep = mognetRepairSection?.steps.find((step) => step.id === "gaia-return-mognet-central-route");
+if (
+  !cour89MognetLetters?.notes.includes("27 Mognet deliveries")
+  || !cour89MognetLetters.notes.includes("22–27 alone suffice")
+  || !mognetRepairObjective?.sourceIds.includes("cour89-mognet-letters")
+  || !mognetRepairRoute?.sourceIds.includes("cour89-mognet-letters")
+  || !mognetRepairRoute.summary.includes("deliveries 22–27")
+  || !mognetRepairRoute.summary.includes("all 27")
+  || !mognetRepairSection?.sourceIds.includes("cour89-mognet-letters")
+  || !mognetRepairStep?.detail?.includes("deliveries 22–27")
+  || !mognetRepairStep.detail.includes("all 27 numbered deliveries")
+) {
+  errors.push("The Mognet repair route must distinguish Cour89's six required Disc IV deliveries (#22–27) from the optional full count of 27.");
 }
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
