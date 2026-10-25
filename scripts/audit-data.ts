@@ -1430,6 +1430,41 @@ const broadswordWarning = missablesById.get("missable.disc-1.evil-forest.prison-
 if (!broadswordWarning?.classification.includes("recoverable-later") || !broadswordWarning.recovery.includes("Dali") || !broadswordWarning.recovery.includes("Ipsen")) {
   errors.push("The Prison Cage steal warning must distinguish the one-time steal from Broadsword's Dali and Ipsen recovery routes.");
 }
+const iceCavernBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.ice-cavern.black-waltz-1-sealion");
+if (!iceCavernBossEncounter || iceCavernBossEncounter.kind !== "boss" ||
+  !iceCavernBossEncounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-1") ||
+  !iceCavernBossEncounter.formation.some((entry) => entry.enemyId === "enemy.sealion") ||
+  !iceCavernBossEncounter.objectiveIds.includes("disc-1.ice-cavern.boss-steals") ||
+  !iceCavernBossEncounter.missableIds.includes("missable.disc-1.ice-cavern.boss-steals") ||
+  !iceCavernBossEncounter.cutoffIds.includes("cutoff.ice-cavern.boss-steals")) {
+  errors.push("The Ice Cavern boss encounter must group Black Waltz 1 and Sealion and link the one-time steal objective, warning, and cutoff.");
+}
+const iceCavernBossSteals = [
+  { enemyId: "enemy.black-waltz-1", itemId: "game-item.remedy" },
+  { enemyId: "enemy.black-waltz-1", itemId: "game-item.silk-shirt" },
+  { enemyId: "enemy.sealion", itemId: "game-item.ether" },
+  { enemyId: "enemy.sealion", itemId: "game-item.mythril-dagger" },
+];
+for (const expected of iceCavernBossSteals) {
+  const enemy = enemyRecords.find((candidate) => candidate.id === expected.enemyId);
+  if (!enemy?.steals.some((slot) => slot.itemId === expected.itemId) ||
+    !enemy.routeObjectiveIds.includes("disc-1.ice-cavern.boss-steals") ||
+    !enemy.missableIds.includes("missable.disc-1.ice-cavern.boss-steals")) {
+    errors.push(`Ice Cavern boss dossier ${expected.enemyId} must connect its ${expected.itemId} steal to the shared one-time warning.`);
+  }
+  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === expected.itemId && candidate.chapterId === "disc-1.ice-cavern" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.ice-cavern.boss-steals"));
+  if (!path || path.availability !== "one-time-encounter") {
+    errors.push(`Ice Cavern boss steal ${expected.itemId} must have a one-time item acquisition path linked to the steal objective.`);
+  }
+}
+const iceCavernStealsWarning = missablesById.get("missable.disc-1.ice-cavern.boss-steals");
+if (!iceCavernStealsWarning?.classification.includes("recoverable-later") || !iceCavernStealsWarning.recovery.includes("Lindblum")) {
+  errors.push("Ice Cavern's boss-steal warning must distinguish the lost encounter copies from later item recovery.");
+}
+const mythrilDaggerLindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.mythril-dagger-shop");
+if (!mythrilDaggerLindblumPath || mythrilDaggerLindblumPath.itemId !== "game-item.mythril-dagger" || mythrilDaggerLindblumPath.cost?.currency !== "gil" || mythrilDaggerLindblumPath.cost.amount !== 950) {
+  errors.push("Mythril Dagger's early Lindblum recovery path must remain cataloged at 950 Gil.");
+}
 const iceBrandId = "game-item.ice-brand";
 const iceBrandPathIds = new Set(itemAcquisitionPaths.filter((path) => path.itemId === iceBrandId).map((path) => path.id));
 const requiredIceBrandPathIds = [

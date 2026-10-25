@@ -79,6 +79,7 @@ const memoriaChapterId = "disc-4.memoria";
 const finalBattleChapterId = "disc-4.the-final-battle";
 const finalPreparationsChapterId = "disc-4.final-preparations";
 const evilForestChapterId = "disc-1.evil-forest";
+const iceCavernChapterId = "disc-1.ice-cavern";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -91,6 +92,11 @@ const meltigeminiCutoffId = "cutoff.mount-gulug.meltigemini-steals";
 const enemyListSourceId = "gamefaqs-enemy-list-71891";
 const evilForestEnemySources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestBossSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
+const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"];
+const iceCavernStealsObjectiveId = "disc-1.ice-cavern.boss-steals";
+const iceCavernStealsMissableId = "missable.disc-1.ice-cavern.boss-steals";
+const iceCavernStealsCutoffId = "cutoff.ice-cavern.boss-steals";
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
 const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
@@ -283,6 +289,42 @@ const evilForestEncounters: EnemyEncounter[] = [
     missableIds: [],
     cutoffIds: [],
     notes: ["Jegged lists this as a mandatory battle against three Plant Spiders during the escape."],
+  },
+];
+
+const iceCavernEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.ice-cavern.mist-jet-pool",
+    title: "Ice Cavern mist-jet encounters",
+    chapterId: iceCavernChapterId,
+    location: "Mist vents throughout the Ice Cavern",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.cave-imp", quantity: null },
+      { enemyId: "enemy.flan-ice-cavern", quantity: null },
+      { enemyId: "enemy.wyerd", quantity: null },
+    ],
+    sourceIds: iceCavernEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route references list these three enemy types in the cavern; mist vents trigger battles on contact, but the sources do not give encounter frequencies or exact combinations."],
+  },
+  {
+    id: "encounter.ice-cavern.black-waltz-1-sealion",
+    title: "Black Waltz 1 and Sealion",
+    chapterId: iceCavernChapterId,
+    location: "Waterfall boss battle after the Mois fork",
+    kind: "boss",
+    formation: [
+      { enemyId: "enemy.black-waltz-1", quantity: 1 },
+      { enemyId: "enemy.sealion", quantity: 1 },
+    ],
+    sourceIds: iceCavernBossSources,
+    objectiveIds: [iceCavernStealsObjectiveId],
+    missableIds: [iceCavernStealsMissableId],
+    cutoffIds: [iceCavernStealsCutoffId],
+    notes: ["Black Waltz 1 summons Sealion at the start. Defeat Waltz first: it heals Sealion and can summon another if Sealion falls while Waltz remains."],
   },
 ];
 
@@ -647,7 +689,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1642,8 +1684,160 @@ const evilForestEnemyRecords: EnemyRecord[] = [
   }, evilForestChapterId, evilForestEnemySources),
 ];
 
+const iceCavernEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.cave-imp",
+    name: "Cave Imp",
+    encounterIds: ["encounter.ice-cavern.mist-jet-pool"],
+    stats: enemyStats([["level", 2], ["HP", 74], ["MP", 186], ["EXP", 35], ["AP", 1], ["Gil", 118]]),
+    steals: [
+      enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.phoenix-down"),
+      enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.ore"),
+      enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.tent"),
+    ],
+    facts: [
+      enemyFact("elemental-resistance", "Ice (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Sleeping Juice", ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891"], "Can inflict Sleep on one character."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Use physical attacks or Fire", detail: "Cave Imp is vulnerable to ordinary physical damage; Vivi's Fire is effective. Watch for Sleeping Juice against a solo or low-status-resistance party member.", sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["The Ice Cavern area list places Cave Imp among the mist-jet encounters; no encounter frequency or formation rate is inferred."],
+  }, iceCavernChapterId, iceCavernEnemySources),
+  chapterEnemy({
+    id: "enemy.flan-ice-cavern",
+    name: "Flan",
+    encounterIds: ["encounter.ice-cavern.mist-jet-pool"],
+    stats: enemyStats([["level", 2], ["HP", 75], ["MP", 183], ["EXP", 41], ["AP", 2], ["Gil", 110]]),
+    steals: [
+      enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.ore"),
+      enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"),
+      enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("elemental-weakness", "Fire"), enemyFact("elemental-resistance", "Ice (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Blizzard", ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891"], "Can deal ice-elemental damage to the party."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Exploit its Fire weakness", detail: "Vivi's Fire is effective against Flan and avoids spending attacks into its ice resistance. Keep Vivi's MP for the boss route and other ice cavern enemies.", sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["The Ice Cavern route lists Flan among mist-jet encounters; no encounter frequency or formation rate is inferred."],
+  }, iceCavernChapterId, iceCavernEnemySources),
+  chapterEnemy({
+    id: "enemy.wyerd",
+    name: "Wyerd",
+    encounterIds: ["encounter.ice-cavern.mist-jet-pool"],
+    stats: enemyStats([["level", 2], ["HP", 129], ["MP", 183], ["EXP", 45], ["AP", 1], ["Gil", 116]]),
+    steals: [
+      enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.tent"),
+      enemyLoot("semi-rare", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"),
+      enemyLoot("uncommon", "game-item.ether"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "Beast"), enemyFact("elemental-weakness", "Fire"), enemyFact("elemental-resistance", "Ice (half damage)"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Use Fire or physical attacks", detail: "GameFAQs describes Wyerd as a straightforward brawler and recommends Fire or a few physical hits.", sourceIds: ["gamefaqs-enemy-list-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["The Ice Cavern area list places Wyerd among the mist-jet encounters; no encounter frequency or formation rate is inferred."],
+  }, iceCavernChapterId, iceCavernEnemySources),
+  chapterBoss({
+    id: "enemy.black-waltz-1",
+    name: "Black Waltz 1",
+    encounterIds: ["encounter.ice-cavern.black-waltz-1-sealion"],
+    stats: [
+      { field: "level", value: 2, sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "cross-checked" },
+      { field: "HP", value: 229, sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "cross-checked" },
+      { field: "MP", value: 9999, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+      { field: "AP", value: 5, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+      { field: "Gil", value: 339, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.remedy", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"]),
+      sourcedLoot("uncommon", "game-item.silk-shirt", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"]),
+      sourcedLoot("semi-rare", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.hi-potion", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"]),
+      sourcedLoot("common", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+      sourcedLoot("uncommon", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Human", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("elemental-weakness", "Fire and Ice", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("status-vulnerability", "Freeze and Slow", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("attack", "Summon Sealion", ["gamefaqs-ice-cavern-71891", "rpgclassics-ice-cavern"], "Calls Sealion into the one-character boss battle."),
+      sourcedFact("attack", "Heal Sealion", ["gamefaqs-ice-cavern-71891"], "While Black Waltz 1 remains alive, it can heal Sealion; if Sealion is defeated first, Waltz can summon another."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Finish Waltz before Sealion", detail: "Black Waltz 1 supports and can resummon Sealion. Steal the selected items first, then defeat Waltz before attacking Sealion.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"] },
+      { title: "Keep Zidane healed during the solo fight", detail: "Only Zidane enters the waterfall battle. Heal before pushing Sealion into its later orb phases, which add stronger ice and water attacks.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"] },
+    ],
+    routeObjectiveIds: [iceCavernStealsObjectiveId],
+    notes: ["The regular battle guides agree on level 2 and 229 HP. The checked sources identify this as a solo Zidane fight; the original PlayStation data has not been compared against remastered releases."],
+  }, iceCavernChapterId, iceCavernBossSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
+  chapterBoss({
+    id: "enemy.sealion",
+    name: "Sealion",
+    encounterIds: ["encounter.ice-cavern.black-waltz-1-sealion"],
+    stats: [
+      { field: "level", value: 3, sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "cross-checked" },
+      { field: "HP", value: 472, sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "cross-checked" },
+      { field: "MP", value: 9999, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+      { field: "AP", value: 0, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+      { field: "Gil", value: 0, sourceIds: ["gamefaqs-ice-cavern-71891"], verification: "single-source" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.ether", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"]),
+      sourcedLoot("uncommon", "game-item.mythril-dagger", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"]),
+      sourcedLoot("semi-rare", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.phoenix-down", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"]),
+      sourcedLoot("common", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+      sourcedLoot("uncommon", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-ice-cavern-71891"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("elemental-weakness", "Fire", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("elemental-resistance", "Absorbs Ice; nullifies Water and Earth", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("status-vulnerability", "Slow", ["gamefaqs-ice-cavern-71891"]),
+      sourcedFact("attack", "Wing", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], "Physical damage used during the early orb phase."),
+      sourcedFact("attack", "Blizzard and Blizzara", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], "The guides differ on which spell appears in the blue and yellow orb phases; both describe stronger ice attacks as the orb changes."),
+      sourcedFact("attack", "Tsunami", ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], "A later orb phase adds a party-wide Water attack; Sealion is unaffected by its own Water damage."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal the Mythril Dagger early", detail: "The uncommon steal is an important Zidane weapon and teaches Bandit. The steal can be missed when the one-time boss battle ends; the dagger has later purchase paths.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"] },
+      { title: "Delay damage until ready to finish the boss", detail: "Sealion changes orb phases as it takes damage. Keep Zidane healed and use Tidal Flame after Trance if available; the guides agree that the late red phase adds Tsunami.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"] },
+    ],
+    routeObjectiveIds: [iceCavernStealsObjectiveId],
+    notes: ["Orb-color behavior differs between the two walkthroughs: GameFAQs lists Blizzard and then Blizzara across phases, while Jegged gives regular attacks in blue and Blizzard in yellow. The exact spell timing is left source-specific."],
+  }, iceCavernChapterId, iceCavernBossSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
+  ...iceCavernEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -1767,8 +1961,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for the Evil Forest, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for the Evil Forest, Ice Cavern, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. The encounter links its one-time steals to the existing cutoff, warning, and acquisition paths. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
