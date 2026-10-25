@@ -2754,8 +2754,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "mountain-path-oglop-capture",
             kind: "optional",
             text: "On the next screen, run up to an Oglop and press the Action button quickly to catch it if you want the Oglop Trading card reward. Carry it back to Bryan Rootrunner outside Conde Petie's Item Shop; he gives an Oglop Card.",
-            detail: "The card quest is optional and requires backtracking to town. If the Oglop escapes, continue; the route sources describe the reward as a Tetra Master card rather than a story or achievement requirement.",
-            objectiveIds: ["disc-2.conde-petie-mountain-path.oglop-card"],
+            detail: "This optional trade requires backtracking to town and tracks both the trade event and the card type. If the Oglop escapes, continue; the card itself has later card-player sources, but those do not repeat this trade event.",
+            objectiveIds: ["disc-2.conde-petie-mountain-path.oglop-card", "disc-2.conde-petie-mountain-path.oglop-card-type"],
           },
         ],
       },
@@ -3590,13 +3590,20 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "card-tournament-bracket",
         title: "Card Stadium — win two rounds and watch the post-match scenes",
         summary: "Register with the card seller to the left of the entrance. The first two rounds can be retried; you can save between games.",
-        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament"],
+        sourceIds: ["gamefaqs-card-tournament-71891", "gamefaqs-card-locations-24067", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament"],
         steps: [
           {
             id: "card-tournament-register",
             kind: "required",
             text: "Talk to the card seller at the left side of the Card Stadium entrance and register. Use your strongest cards, protect their exposed sides, and leave safe spaces when possible; the first two opponents do not end the story if you lose.",
             detail: "Two wins are required to reach the champion. The guide does not promise that a particular deck or move guarantees a win because Tetra Master outcomes also use card and battle randomness.",
+          },
+          {
+            id: "card-tournament-oglop-card-recovery",
+            kind: "optional",
+            text: "If the Oglop Card is still missing, win it from Sailor Erin during the Treno card tournament; the card-location FAQ lists her as a Disc III source.",
+            detail: "This recovers the card type only. It does not repeat Bryan Rootrunner's separate Mountain Path trade, and the source is scoped to the original PlayStation release.",
+            objectiveIds: ["disc-2.conde-petie-mountain-path.oglop-card-type"],
           },
           {
             id: "card-tournament-round-one-ates",
@@ -5519,8 +5526,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "preparing-leave-oglop-trading",
             kind: "optional",
             text: "If you still want the Oglop Card, catch an Oglop on Conde Petie Mountain Path and trade it to Bryan Rootrunner beside Conde Petie's Item Shop.",
-            detail: "The trade can be repeated while the path and town route remain open. Its card reward is optional and does not advance the story; no later trade location is documented.",
-            objectiveIds: ["disc-2.conde-petie-mountain-path.oglop-card"],
+            detail: "The trade can be repeated while the path and town route remain open; no later trade location is documented. The card type has separate later player sources, but those do not restore this optional event.",
+            objectiveIds: ["disc-2.conde-petie-mountain-path.oglop-card", "disc-2.conde-petie-mountain-path.oglop-card-type"],
           },
         ],
       },
@@ -5983,7 +5990,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-alexandria-and-treno",
         title: "Alexandria and Treno — Stiltzkin #8, Behemoth, and auctions",
         summary: "Stiltzkin has returned to Alexandria's steeple for his final bundle. Treno's Weapon Shop has advanced to Behemoth, and the auction adds late Disc IV items.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-card-locations-24067", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
         steps: [
           {
             id: "gaia-return-stiltzkin-eighth",
@@ -6005,6 +6012,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Check the Treno Auction House for the Disc IV Ribbon, and speak to the card players in the stadium for their new card pools.",
             detail: "The Ribbon is an expensive auction item. The Magical Fingertip appears only after its sidequest trigger and auction prerequisites are satisfied; use the dedicated step below rather than assuming it is in the first bid rotation.",
             objectiveIds: ["disc-3.on-the-high-seas.auction-house"],
+          },
+          {
+            id: "gaia-return-oglop-card-recovery",
+            kind: "optional",
+            text: "If the Oglop Card is still missing, win it from Oglop Master Bon or Malboro Master Joe in Treno's Card Stadium; the card-location FAQ lists both as Disc IV sources.",
+            detail: "This recovers the card type only. Bryan Rootrunner's Mountain Path exchange has closed, and this source is scoped to the original PlayStation release.",
+            objectiveIds: ["disc-2.conde-petie-mountain-path.oglop-card-type"],
           },
           {
             id: "gaia-return-grand-armor-material-check",

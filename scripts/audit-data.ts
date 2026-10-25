@@ -845,6 +845,43 @@ if (
 ) {
   errors.push("The Disc III Alexandria card-player checklist must name all four opponents, use the card-location/Tetra Master sources, and remain separate from permanent card-type loss.");
 }
+const oglopTradeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card";
+const oglopCardTypeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card-type";
+const oglopTradeWarning = missables.find((missable) => missable.id === "missable.disc-3.preparing-to-leave.oglop-trading");
+const oglopTradeStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-2.conde-petie-mountain-path")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.objectiveIds?.includes(oglopTradeObjectiveId));
+const oglopTournamentStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-3.card-tournament")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.objectiveIds?.includes(oglopCardTypeObjectiveId) && step.text.includes("Sailor Erin"));
+const oglopTournamentSection = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-3.card-tournament")
+  .flatMap((chapter) => chapter.sections)
+  .find((section) => section.steps.some((step) => step.id === "card-tournament-oglop-card-recovery"));
+const oglopDiscFourSection = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  .flatMap((chapter) => chapter.sections)
+  .find((section) => section.steps.some((step) => step.id === "gaia-return-oglop-card-recovery" && step.objectiveIds?.includes(oglopCardTypeObjectiveId) && step.text.includes("Oglop Master Bon") && step.text.includes("Malboro Master Joe")));
+const oglopCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.shimmering-island.disc-iii-departure");
+if (
+  !objectiveIds.has(oglopTradeObjectiveId)
+  || !objectiveIds.has(oglopCardTypeObjectiveId)
+  || !oglopTradeStep?.objectiveIds?.includes(oglopCardTypeObjectiveId)
+  || oglopTradeWarning?.objectiveId !== oglopTradeObjectiveId
+  || !oglopTradeWarning.sourceIds.includes("gamefaqs-card-locations-24067")
+  || oglopTradeWarning.classification.includes("permanently-missable")
+  || !oglopCutoff?.missableIds.includes(oglopTradeWarning.id)
+  || !oglopTournamentStep
+  || !oglopTournamentSection
+  || !oglopDiscFourSection
+  || !oglopTournamentSection.sourceIds.includes("gamefaqs-card-locations-24067")
+  || !oglopDiscFourSection.sourceIds.includes("gamefaqs-card-locations-24067")
+  || missables.some((missable) => missable.objectiveId === oglopCardTypeObjectiveId)
+) {
+  errors.push("The Oglop trade warning must remain attached to the trade event while the separate card-type objective has sourced Disc III and Disc IV recovery steps.");
+}
 const thirdJewelEvent = movieCriticEligibleEvents.find((event) => event.id === "ate-lindblum-third-jewel");
 const thirdJewelWarning = missables.find((missable) => missable.id === "missable.disc-2.return-to-lindblum.the-third-jewel");
 if (!thirdJewelEvent || thirdJewelEvent.exclusiveGroupId || thirdJewelEvent.chapterId !== "disc-2.return-to-lindblum") {
