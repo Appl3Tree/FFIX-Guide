@@ -810,8 +810,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.alexandria",
     toChapterId: "disc-1.burmecia",
     relationship: "optional-return",
-    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault, a side room near the back; deliver the letter for Mogryo. Atla's Mogshop remains open with Disc III stock, including Steepled Hat for 260 Gil, the documented Disc IV shop recovery for that item. Gamer Guides says to leave by the same route. This confirms access to Atla, but not whether all Suburb and Uptown pickup rooms reopen.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"],
+    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault, a side room near the back; deliver the letter for Mogryo. Atla's Mogshop remains open with Disc III stock, including Steepled Hat for 260 Gil, the documented Disc IV shop recovery for that item. The Japanese Disc IV overview independently lists Burmecia among areas still visitable. Gamer Guides says to leave by the same route. These sources confirm a city-level return and Atla's Vault, but do not enumerate every Suburb and Uptown pickup room.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4", "ff9-kouryaku-disc4"],
   },
   {
     id: "detour.return-to-gaia-burmecia-rejoin",
@@ -1202,7 +1202,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "conservative",
     trigger: "Before leaving Burmecia after Beatrix, finish the Disc I treasure sweep and buy Stiltzkin's first 333-Gil bundle. If the Mythril Spear was missed, FF9攻略情報サイト says it remains in the armory during the Disc II return until the mechanism inside Cleyra's Trunk is activated. Other Disc I pickup-room access remains unverified; the Disc I sweep is the safe full-sweep boundary.",
     missableIds: ["missable.disc-1.burmecia.treasures", "missable.disc-1.burmecia.stiltzkin-1"],
-    sourceIds: ["gamefaqs-burmecia-71891", "ff9-kouryaku-burmecia", "jegged-burmecia", "gamerguides-burmecia", "ffwiki-unrevisitable-locations", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
+    sourceIds: ["gamefaqs-burmecia-71891", "ff9-kouryaku-burmecia", "ff9-kouryaku-disc4", "jegged-burmecia", "gamerguides-burmecia", "ffwiki-unrevisitable-locations", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
   },
   {
     id: "cutoff.treno-first-visit.ates",

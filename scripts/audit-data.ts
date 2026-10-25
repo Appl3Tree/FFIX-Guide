@@ -837,8 +837,16 @@ if (!burmeciaTreasureWarning?.sourceIds.includes("ffwiki-unrevisitable-locations
 if (burmeciaTreasureCutoff?.certainty !== "conservative") {
   errors.push("The Burmecia first-visit treasure deadline must stay conservative while later chest-room access is unresolved.");
 }
-if (burmeciaTreasureWarning?.classification.includes("permanently-missable") || !burmeciaTreasureWarning?.note.includes("does not establish chest-room access")) {
-  errors.push("The Burmecia treasure warning must not claim permanent loss from incomplete later-access evidence.");
+if (burmeciaTreasureWarning?.classification.includes("permanently-missable") ||
+  !burmeciaTreasureWarning?.sourceIds.includes("ff9-kouryaku-disc4") ||
+  !burmeciaTreasureWarning?.note.includes("city-level access but not each old pickup room")) {
+  errors.push("The Burmecia treasure warning must preserve city-level Disc IV evidence without claiming old-room access.");
+}
+const burmeciaDisc4Return = gameRouteEdges.find((edge) => edge.id === "detour.alexandria-to-burmecia-mognet");
+if (!burmeciaDisc4Return?.sourceIds.includes("ff9-kouryaku-disc4") ||
+  !burmeciaDisc4Return.summary.includes("city-level return and Atla's Vault") ||
+  !burmeciaDisc4Return.summary.includes("do not enumerate every Suburb and Uptown pickup room")) {
+  errors.push("The Disc IV Burmecia return must cite the area list and preserve the room-access limit.");
 }
 const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
 const burmeciaDisc2SpearStep = walkthroughChapters

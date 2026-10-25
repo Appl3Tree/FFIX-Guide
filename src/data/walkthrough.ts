@@ -6047,13 +6047,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-mognet-central",
         title: "Repair Mognet Central — complete the late letter chain",
         summary: "Disc IV allows a fresh letter route even if some earlier optional Mognet deliveries were skipped. The final Superslick exchange repairs the machine and awards a Protect Ring.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamefaqs-kupo-nuts-71891"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamefaqs-kupo-nuts-71891", "ff9-kouryaku-disc4"],
         steps: [
           {
             id: "gaia-return-mognet-central-route",
             kind: "optional",
             text: "Start with Kupo in Alexandria's steeple and deliver the letter chain in order: Atla in Burmecia's back vault, Mogryo near the Chocobo hut in Black Mage Village, Kumool in Ipsen's Castle, Mois at the Qu's Marsh entrance to Fossil Roo, Noggy on Daguerreo's upper level, then Kupo again. Bring Quina for Mois's Mognet prompt. While at Atla, check his Mogshop for Steepled Hats if you need them.",
-            detail: "Atla's Mogshop remains open with its Disc III stock on Disc IV; Steepled Hat costs 260 Gil and Atla is the only documented Disc IV seller. This recovery confirms access to Atla, not the reopening of every Burmecia pickup room. Jegged's Disc IV sequence says the Mognet repair route can be completed regardless of how many earlier letters were delivered. After Kupo's final letter, speak to Ruby in Alexandria's Mini-Theater to obtain Superslick, then ride a Chocobo with the Ocean ability to the island north of the Outer Continent and use a Dead Pepper at the mountain crack to enter Mognet Central. Talk to Artemicion upstairs to repair the machine and receive a Protect Ring. Supported versions also award Well Lubricated for Ruby's Superslick and Back Online for the repair.",
+            detail: "Atla's Mogshop remains open with its Disc III stock on Disc IV; Steepled Hat costs 260 Gil and Atla is the only documented Disc IV seller. A Japanese Disc IV overview independently lists Burmecia as visitable. Together, it and the Mognet route confirm city-level access and Atla's Vault visit, not the reopening of every old pickup room. Jegged's Disc IV sequence says the Mognet repair route can be completed regardless of how many earlier letters were delivered. After Kupo's final letter, speak to Ruby in Alexandria's Mini-Theater to obtain Superslick, then ride a Chocobo with the Ocean ability to the island north of the Outer Continent and use a Dead Pepper at the mountain crack to enter Mognet Central. Talk to Artemicion upstairs to repair the machine and receive a Protect Ring. Supported versions also award Well Lubricated for Ruby's Superslick and Back Online for the repair.",
             objectiveIds: ["disc-4.return-to-gaia.mognet-central"],
           },
         ],
