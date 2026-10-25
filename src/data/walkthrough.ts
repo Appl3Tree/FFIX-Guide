@@ -1291,7 +1291,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   {
     areaId: "disc-1.burmecia",
     overview: "Explore the rain-soaked streets before the Beatrix story battle: collect Cancer and the hidden pickups, walk across the crumbling balcony for Germinas Boots, speak with Wei and Kal to unlock their later ATE, and collect the Uptown chests. At the square, claim Freya's Mythril Spear, open the Lightning Staff chest to reveal Stiltzkin, buy his 333-Gil bundle, and check Atla's Mognet and Mogshop before preparing for the palace.",
-    timedRouteNote: "The Excalibur II source targets 02:51:05 at the start of Disc II. Its D1-14 checklist names Ether, Lightning Staff, Mythril Spear, and Germinas Boots, then says to ignore other Burmecia items. Treat that as the timed route's item scope, not as a universal pickup rule: the Comprehensive Playthrough still sweeps the city, and selecting both goals requires either budgeting that sweep or verifying later access. The source documents a Disc IV return to Atla's Vault, but does not establish that every skipped pickup room reopens. Keep the full sweep as the safe exploration route; do not promise every skipped copy is recoverable or claim Excalibur II is incompatible with comprehensive completion. The source target is original PlayStation NTSC and untested. Beatrix's published level/HP data and the framing of the forced loss differ, so no required level is assumed.",
+    timedRouteNote: "The Excalibur II source targets 02:51:05 at the start of Disc II. Its D1-14 checklist names Ether, Lightning Staff, Mythril Spear, and Germinas Boots, then says to ignore other Burmecia items. Treat that as the timed route's item scope, not as a universal pickup rule: the Comprehensive Playthrough still sweeps the city, and selecting both goals requires either budgeting that sweep or verifying later access. Flactem documents a Disc II pre-Cleyra return to Atla's Mogshop, and Disc IV sources document another return to Atla; neither establishes that every skipped pickup room reopens. Keep the full sweep as the safe exploration route; do not promise every skipped copy is recoverable or claim Excalibur II is incompatible with comprehensive completion. The source target is original PlayStation NTSC and untested. Beatrix's published level/HP data and the framing of the forced loss differ, so no required level is assumed.",
     sections: [
       {
         id: "burmecia-lower-streets",
@@ -1376,7 +1376,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "burmecia-atla-vault-mognet",
             kind: "optional",
             text: "In the Vault, collect the Lightning Staff from the back chest before speaking with Atla. If you are carrying Mogki's letter from Lindblum, choose Mognet to deliver it; Atla gives you a Kupo Nut and a letter for Monev. Check Atla's Mogshop, save, and buy Stiltzkin's Soft, Hi-Potion, and Ether bundle for 333 Gil as soon as he appears at the room entrance.",
-            detail: "Opening the Lightning Staff chest is what triggers Stiltzkin's appearance. Buying this first bundle is required for the full eight-stop Stiltzkin chain and its later Ribbon/Driving the Hard Bargain reward. Atla's Vault is reachable again on Disc IV for Mognet Central, but sources disagree about access to the rest of the city; collect the Disc I chests now.",
+            detail: "Opening the Lightning Staff chest is what triggers Stiltzkin's appearance. Buying this first bundle is required for the full eight-stop Stiltzkin chain and its later Ribbon/Driving the Hard Bargain reward. Atla is reachable again on the Disc II pre-Cleyra route and Disc IV Mognet route, but sources do not establish access to every other pickup room; collect the Disc I chests now.",
             objectiveIds: ["disc-1.burmecia.treasure-sweep", "disc-1.burmecia.stiltzkin-1", "disc-1.burmecia.mognet-atla-monev"],
           },
           {
@@ -1619,7 +1619,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   },
   {
     areaId: "disc-2.journey-to-cleyra",
-    overview: "After the Treno scenes, follow Dagger, Steiner, and Marcus through Gargan Roo to Alexandria. The story then returns to Zidane's party in Burmecia; finish the optional Kupo Nut delivery and any return through Gizamaluke's Grotto to Qu's Marsh before heading west to Cleyra.",
+    overview: "After the Treno scenes, follow Dagger, Steiner, and Marcus through Gargan Roo to Alexandria. Control then returns to Zidane's party on the world map outside Burmecia's city gates. Before Cleyra, the party can re-enter Burmecia to visit Atla's Mogshop, deliver the optional Kupo Nut through Gizamaluke's Grotto, and return through the Grotto to Qu's Marsh.",
     timedRouteNote: "From Gargan Roo the source follows the Treno/Doctor Tot story route, clears the first Gargan Roo passage and Ralvurahva, then targets 03:29:03 at Cleyra's Trunk after the initial ascent and Atla letter handoff. The source carries a defined equipment/EXP plan into the forced fights; the broad optional Kupo Nut/frog route and full steal checklist are not budgeted. Its time and encounter target are for original-PlayStation NTSC and have not been tested.",
     sections: [
       {
@@ -1666,17 +1666,23 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "journey-cleyra-alexandria-capture",
             kind: "required",
-            text: "After the ride reaches Alexandria, continue through the story scenes until control returns to Zidane's party in Burmecia. Update the active party with useful equipment gained in Treno before setting out for Cleyra.",
-            detail: "The chapter follows the GameFAQs route boundary: Treno and Gargan Roo form the split-party sequence, then the journey to Cleyra resumes with Zidane, Freya, and Quina.",
+            text: "After the ride reaches Alexandria, continue through the story scenes until control returns to Zidane's party outside Burmecia's city gates. Update the active party with useful equipment gained in Treno before setting out for Cleyra.",
+            detail: "Jegged places the party on the world map just outside the gates. Flactem's Disc II route then confirms an optional re-entry to the city as far as Atla's Mogshop before Cleyra; it does not document the availability of every Disc I pickup room.",
           },
         ],
       },
       {
         id: "optional-cleyra-approach",
-        title: "Before Cleyra — Kupo Nut and Qu's Marsh",
+        title: "Before Cleyra — Burmecia, Kupo Nut, and Qu's Marsh",
         summary: "Use the available return routes before entering Cleyra's one-way story area.",
-        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891"],
+        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "flactem-disc-2-cleyra", "jegged-gargan-roo"],
         steps: [
+          {
+            id: "journey-cleyra-atla-mogshop-return",
+            kind: "optional",
+            text: "If you want Atla's Mogshop on Disc II, re-enter Burmecia and visit the shop near the back of town before heading back through Gizamaluke's Grotto. The shop lists Phoenix Down for 150 Gil and Steepled Hat for 260 Gil.",
+            detail: "Flactem documents the Disc II city visit and shop stop; the GameFAQs shop table supplies the listed stock and prices. This confirms access to Atla's Mogshop before Cleyra, not the accessibility of every Disc I chest room. Keep the Disc I sweep as the safe route for unverified pickups.",
+          },
           {
             id: "journey-cleyra-kupo-nut",
             kind: "optional",

@@ -241,7 +241,7 @@ const resolvedDisc4BlackCatRecipeSources = [
 
 const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891"];
 const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"];
-const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4"];
+const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const oeilvertSources = ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"];
 const mountGulugSources = ["gamefaqs-lost-continent-71891", "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
@@ -621,6 +621,19 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     cost: { currency: "gil", amount: 250 },
     conditions: "Atla sells Glass Armlet for 250 Gil; this is a repeat-purchase source while his Mogshop is available.",
     sourceIds: glassArmletReferenceSources,
+  },
+  {
+    id: "item-path.disc-2.journey-to-cleyra.glass-armlet-atla-mogshop",
+    itemId: "game-item.glass-armlet",
+    chapterId: "disc-2.journey-to-cleyra",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc II)",
+    cost: { currency: "gil", amount: 250 },
+    conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Glass Armlet for 250 Gil.",
+    sourceIds: [...glassArmletReferenceSources, "flactem-disc-2-cleyra"],
   },
   {
     id: "item-path.disc-1.lindblum.glass-armlet-shop",
@@ -1286,6 +1299,19 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     cost: { currency: "gil", amount: 400 },
     conditions: "Atla sells Magus Hat for 400 Gil during the Burmecia visit. Later Treno, Cleyra, Lindblum, and Black Mage Village shops provide more copies.",
     sourceIds: magusHatReferenceSources,
+  },
+  {
+    id: "item-path.disc-2.journey-to-cleyra.magus-hat-atla-shop",
+    itemId: "game-item.magus-hat",
+    chapterId: "disc-2.journey-to-cleyra",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc II)",
+    cost: { currency: "gil", amount: 400 },
+    conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Magus Hat for 400 Gil.",
+    sourceIds: [...magusHatReferenceSources, "flactem-disc-2-cleyra"],
   },
   {
     id: "item-path.disc-1.journey-to-burmecia.magus-hat-summit-station-shop",
@@ -6291,9 +6317,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     availability: "repeatable",
     shopId: "burmecia.atla-mogshop",
     shopName: "Atla's Mogshop (Burmecia)",
-    conditions: "Atla's Mogshop sells Soft for 100 Gil; this is a separate purchase from Stiltzkin's fixed-price bundle.",
+    conditions: "Atla's Mogshop sells Soft for 100 Gil; this is a separate purchase from Stiltzkin's fixed-price bundle. Flactem also documents a Disc II visit to Atla's shop before Cleyra.",
     cost: { currency: "gil", amount: 100 },
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-burmecia-71891"],
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-burmecia-71891", "flactem-disc-2-cleyra"],
   },
   {
     id: "item-path.disc-2.treno.soft-item-shop",
@@ -6401,6 +6427,19 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     conditions: "Uptown balcony room reached by crossing between balconies over the broken statue.",
     walkthroughObjectiveIds: [treasureSweepObjective],
     sourceIds: burmeciaSources,
+  },
+  {
+    id: "item-path.disc-2.journey-to-cleyra.phoenix-down-atla-mogshop",
+    itemId: "game-item.phoenix-down",
+    chapterId: "disc-2.journey-to-cleyra",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc II)",
+    conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Phoenix Down for 150 Gil.",
+    cost: { currency: "gil", amount: 150 },
+    sourceIds: ["gamefaqs-shops-71891", "flactem-disc-2-cleyra"],
   },
   {
     id: "item-path.burmecia.phoenix-down-beatrix",
@@ -7270,7 +7309,20 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "burmecia.atla-mogshop",
     shopName: "Atla's Mogshop (Burmecia)",
     cost: { currency: "gil", amount: 260 },
-    conditions: "Atla sells Steepled Hat for 260 Gil while his Mogshop is accessible; this Disc I path is also available again on Disc IV after reaching Atla through the Mognet route.",
+    conditions: "Atla sells Steepled Hat for 260 Gil while his Mogshop is accessible; the same shop is reached on the Disc II pre-Cleyra return and again on Disc IV through the Mognet route.",
+    sourceIds: steepledHatSources,
+  },
+  {
+    id: "item-path.disc-2.journey-to-cleyra.steepled-hat-atla-mogshop",
+    itemId: "game-item.steepled-hat",
+    chapterId: "disc-2.journey-to-cleyra",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc II)",
+    cost: { currency: "gil", amount: 260 },
+    conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Steepled Hat for 260 Gil. This confirms the shop route, not access to every Disc I Burmecia chest room.",
     sourceIds: steepledHatSources,
   },
   {

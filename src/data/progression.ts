@@ -208,8 +208,8 @@ export const storyPartySequences: StoryPartySequence[] = [
       {
         party: "Zidane's group",
         chapterIds: ["disc-2.journey-to-cleyra"],
-        location: "Burmecia, after Gargan Roo",
-        summary: "After the Treno sequence and Gargan Roo, control returns to Zidane's group in Burmecia; continue west toward Cleyra.",
+        location: "Outside Burmecia's city gates, on the world map",
+        summary: "After the Treno sequence and Gargan Roo, control returns to Zidane's group in Burmecia, just outside the city gates on the world map; the group can continue west toward Cleyra or make the sourced Disc II return to Atla's Mogshop first.",
       },
     ],
     sourceIds: [
@@ -223,6 +223,7 @@ export const storyPartySequences: StoryPartySequence[] = [
       "jegged-summit-station",
       "jegged-treno",
       "jegged-gargan-roo",
+      "flactem-disc-2-cleyra",
     ],
   },
   {
@@ -345,8 +346,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.treno",
     toChapterId: "disc-2.journey-to-cleyra",
     relationship: "required-story",
-    summary: "Treno's Supersoft sequence leads into Gargan Roo; after the Gargant encounter and story scenes, control returns to Zidane's party in Burmecia for the Cleyra approach.",
-    sourceIds: ["gamefaqs-treno-71891", "gamefaqs-journey-to-cleyra-71891", "jegged-treno", "jegged-gargan-roo"],
+    summary: "Treno's Supersoft sequence leads into Gargan Roo; after the Gargant encounter and story scenes, control returns to Zidane's party just outside Burmecia's city gates for the Cleyra approach. Flactem documents an optional Disc II city re-entry to Atla's Mogshop before continuing through Gizamaluke's Grotto.",
+    sourceIds: ["gamefaqs-treno-71891", "gamefaqs-journey-to-cleyra-71891", "jegged-treno", "jegged-gargan-roo", "flactem-disc-2-cleyra"],
   },
   {
     id: "story.journey-to-cleyra-to-cleyra",
@@ -753,8 +754,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.journey-to-cleyra",
     toChapterId: "disc-1.journey-to-burmecia",
     relationship: "optional-return",
-    summary: "Before entering Cleyra, the party can backtrack through Burmecia to Gizamaluke's Grotto and deliver the Kupo Nut Nazna supplied at Summit Station. The delivery is optional.",
-    sourceIds: ["gamefaqs-journey-to-treno-71891", "gamefaqs-journey-to-cleyra-71891", "jegged-gargan-roo", "jegged-kupo-nuts"],
+    summary: "Before entering Cleyra, the party can re-enter Burmecia to visit Atla's Mogshop, then continue through the city to Gizamaluke's Grotto and deliver the Kupo Nut Nazna supplied at Summit Station if still carrying it. Flactem confirms the Disc II Atla stop; this does not establish access to every Disc I chest room.",
+    sourceIds: ["gamefaqs-journey-to-treno-71891", "gamefaqs-journey-to-cleyra-71891", "jegged-gargan-roo", "jegged-kupo-nuts", "flactem-disc-2-cleyra"],
   },
   {
     id: "detour.journey-to-cleyra-rejoin",
@@ -1031,9 +1032,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.burmecia-to-journey-to-treno",
     title: "Burmecia first-visit departure",
     certainty: "source-supported",
-    trigger: "Before leaving Burmecia after Beatrix, finish the available treasure sweep and buy Stiltzkin's first 333-Gil bundle. The former city becomes a limited return route later, so this is the safe boundary for its first-visit rewards.",
+    trigger: "Before leaving Burmecia after Beatrix, finish the Disc I treasure sweep and buy Stiltzkin's first 333-Gil bundle. A Disc II pre-Cleyra route later reaches Atla's Mogshop, but the published route does not confirm that every Disc I pickup room reopens; this remains the safe full-sweep boundary.",
     missableIds: ["missable.disc-1.burmecia.treasures", "missable.disc-1.burmecia.stiltzkin-1"],
-    sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin"],
+    sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
   },
   {
     id: "cutoff.treno-first-visit.ates",
