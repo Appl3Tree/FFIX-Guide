@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The latest Disc II equipment tranche adds source-linked acquisition routes and two synthesis recipes for the Power Belt and Glass Buckle chain, including the Treno Tradition reward gate and Chain Mail stock recovery. Earlier Disc II records cover Air Racket, Silver Gloves, Iron Helm, and Chain Mail, alongside the Rebirth Ring model and recovery-route audits for Chain Plate, Leather Plate, Mythril Vest, Mythril Spear, and Lightning Staff. It introduces no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The latest route audit documents the Disc IV Mognet trip through Burmecia to Atla and back, while keeping access to the old Suburb and Uptown pickup rooms unresolved. No account-owner setup step changed. The Power Belt/Glass Buckle synthesis chain and the broader Disc II equipment routes remain in the catalog. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 

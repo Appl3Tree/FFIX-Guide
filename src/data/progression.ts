@@ -503,8 +503,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.alexandria",
     toChapterId: "disc-1.burmecia",
     relationship: "optional-return",
-    summary: "After collecting Kupo's letter, travel to Burmecia and deliver it to Atla in the Vault. This confirms the Vault visit only; it does not establish access to the Suburb or Uptown pickup rooms.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia"],
+    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault, a side room near the back; deliver the letter for Mogryo. Gamer Guides says to leave by the same route. This confirms access to Atla, but not whether all Suburb and Uptown pickup rooms reopen.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"],
   },
   {
     id: "detour.return-to-gaia-burmecia-rejoin",
@@ -512,7 +512,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After Atla hands over Mogryo's letter, continue through Black Mage Village, Ipsen's Castle, Fossil Roo, and Daguerreo, then return to Kupo and collect Superslick from Ruby in Alexandria. Use an Ocean-capable Chocobo and a Dead Pepper to reach Mognet Central, repair its machine, and deliver the Superslick to Artemicion. The route requires Quina for Mois at Fossil Roo.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4"],
   },
   {
     id: "detour.return-to-gaia-gizamaluke-kupo-nut",

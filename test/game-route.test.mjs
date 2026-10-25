@@ -196,10 +196,13 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   assert.equal(atlaVisit.relationship, "optional-return");
   assert.equal(atlaVisit.fromChapterId, "disc-1.alexandria");
   assert.equal(atlaVisit.toChapterId, "disc-1.burmecia");
-  assert.match(atlaVisit.summary, /deliver it to Atla in the Vault/);
-  assert.match(atlaVisit.summary, /does not establish access to the Suburb or Uptown pickup rooms/);
+  assert.match(atlaVisit.summary, /Atla in the Vault/);
+  assert.match(atlaVisit.summary, /deliver the letter for Mogryo/);
+  assert.match(atlaVisit.summary, /long, monster-occupied route through the former city/);
+  assert.match(atlaVisit.summary, /leave by the same route/);
+  assert.match(atlaVisit.summary, /not whether all Suburb and Uptown pickup rooms reopen/);
 
-  for (const sourceId of ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia"]) {
+  for (const sourceId of ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"]) {
     assert.ok(atlaVisit.sourceIds.includes(sourceId), `Burmecia return is missing ${sourceId}`);
     assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
   }
@@ -210,6 +213,7 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   assert.equal(rejoin.toChapterId, "disc-4.return-to-gaia");
   assert.equal(rejoin.relationship, "rejoin");
   assert.match(rejoin.summary, /Atla hands over Mogryo's letter/);
+  assert.ok(rejoin.sourceIds.includes("gamerguides-side-questing-4"));
 });
 
 test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () => {
