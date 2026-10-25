@@ -78,6 +78,23 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   assert.deepEqual(eventByObjective.get("ate.bmv-visitor-not-invader")?.prerequisites, ["ate.bmv-different-language"]);
   assert.deepEqual(eventByObjective.get("ate.bmv-life-cycle")?.prerequisites, ["ate.bmv-visitor-not-invader"]);
 
+  const cleyraEvents = movieCriticEligibleEvents.filter((event) => event.chapterId === "disc-2.cleyra");
+  assert.deepEqual(
+    cleyraEvents.map((event) => event.objectiveId),
+    [
+      "ate.cleyra-no-yummie-yummies",
+      "ate.cleyra-dont-hate-me",
+      "ate.cleyra-i-havent-hurt-anyone",
+      "ate.cleyra-there-a-mushroom",
+    ],
+    "Cleyra's tracker order follows the precise pond-entry/re-entry/observatory route",
+  );
+  for (const event of cleyraEvents) {
+    for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"]) {
+      assert.ok(event.sourceIds.includes(sourceId), `${event.title} is missing Cleyra source ${sourceId}`);
+    }
+  }
+
   for (const branchEvent of branchEvents) {
     const route = movieCriticEligibleEvents.filter((event) =>
       event.exclusiveGroupId !== movieCriticExclusiveGroupId || event.objectiveId === branchEvent.objectiveId,

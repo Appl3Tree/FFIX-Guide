@@ -1745,8 +1745,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-four-ates",
             kind: "cutoff",
-            text: "Follow the trigger route for all four Cleyra ATEs: enter the pond area for No Yummy-Yummies! and Don't Hate Me, leave and re-enter the pond area for I-I Haven't Hurt Anyone, then visit the observatory route for There a Mushroom!. Keep Quina in the party for the two gated scenes and view each prompt.",
-            detail: "This trigger route follows Jegged's area walkthrough; GameFAQs spells the last title as “There a Mushroom!”. Do not advance the attack sequence until all four scenes are checked for Movie Critic's 79-ATE goal.",
+            text: "With Quina in the party, follow Jegged's area route for all four Cleyra ATEs: enter the pond area for No Yummy-Yummies! and Don't Hate Me, leave and re-enter the pond for I-I Haven't Hurt Anyone, then visit the town observatory for There A Mushroom!. View all four before continuing toward Antlion.",
+            detail: "GameFAQs and Gamer Guides route No Yummy-Yummies! followed by There a Mushroom! before the Quina rubbish-pit detour, then say to view any remaining prompts on the return. Jegged gives the more specific pond-entry, pond-re-entry, and observatory triggers used here. No hard event prerequisites are established across these differing routes. GameFAQs' prose adds “There's” to the final title; its event list and the other guides use “There A Mushroom!”.",
             objectiveIds: ["disc-2.cleyra.movie-critic-ates"],
           },
           {
