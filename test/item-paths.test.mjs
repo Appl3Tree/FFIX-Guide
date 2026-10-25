@@ -257,7 +257,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(oreExtractionPath?.conditions?.includes("Jewel"));
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
-  assert.equal(peridotPaths.length, 5);
+  assert.equal(peridotPaths.length, 17);
   assert.equal(orePaths.length, 3);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
@@ -295,4 +295,63 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(objectives.some((objective) => objective.id === "disc-4.the-final-battle.trance-kuja-steals"));
   assert.ok(objectives.some((objective) => objective.id === "disc-3.desert-palace.bloodstones"));
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-4.the-final-battle"));
+});
+
+test("Peridot enemy routes record their source, repeatability, and conditional windows", () => {
+  const enemyPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot" && path.sourceIds.includes("gamefaqs-enemy-list-71891"));
+  const expectedIds = [
+    "item-path.disc-2.journey-to-outer-continent.griffin-peridot-drop",
+    "item-path.disc-2.battle-of-iifa-tree.mistodon-a-peridot-drop",
+    "item-path.disc-2.iifa-tree.stroper-peridot-drop",
+    "item-path.disc-2.iifa-tree.stroper-peridot-steal",
+    "item-path.disc-3.lost-continent.grenade-peridot-drop",
+    "item-path.disc-3.ipsens-castle.tonberry-peridot-drop",
+    "item-path.disc-4.return-to-gaia.mistodon-b-peridot-drop",
+    "item-path.disc-4.memoria.tiamat-crystal-peridot-drop",
+    "item-path.disc-3.forgotten-continent.epitaph-quina-mirror-peridot-drop",
+    "item-path.disc-3.forgotten-continent.epitaph-quina-mirror-peridot-steal",
+    "item-path.disc-3.forgotten-continent.epitaph-vivi-mirror-peridot-drop",
+    "item-path.disc-3.forgotten-continent.epitaph-vivi-mirror-peridot-steal",
+  ];
+  const byId = new Map(enemyPaths.map((path) => [path.id, path]));
+  const griffin = byId.get(expectedIds[0]);
+  const mistodonA = byId.get(expectedIds[1]);
+  const grenade = byId.get(expectedIds[4]);
+  const tiamat = byId.get(expectedIds[7]);
+  const mirrorPaths = expectedIds.slice(8).map((id) => byId.get(id));
+
+  assert.equal(enemyPaths.length, 12);
+  assert.deepEqual(expectedIds.filter((id) => !byId.has(id)), []);
+  assert.ok(griffin);
+  assert.equal(griffin.method, "drop");
+  assert.equal(griffin.availability, "repeatable");
+  assert.match(griffin.conditions ?? "", /always drops one Peridot/i);
+  assert.ok(mistodonA);
+  assert.equal(mistodonA.availability, "window-unverified");
+  assert.match(mistodonA.conditions ?? "", /disputed/i);
+  assert.ok(mistodonA.walkthroughObjectiveIds?.includes("disc-2.battle-of-iifa-tree.mistodon-steals"));
+  assert.ok(grenade);
+  assert.ok(!grenade.sourceIds.includes("cavesofnarshe-peridot"));
+  assert.match(grenade.conditions ?? "", /Caves of Narshe.*omits/i);
+  assert.ok(tiamat);
+  assert.equal(tiamat.availability, "one-time-encounter");
+  assert.match(tiamat.conditions ?? "", /not guaranteed/i);
+  assert.ok(mirrorPaths.every((path) => path?.availability === "conditional"));
+  assert.ok(mirrorPaths.every((path) => /Quina|Vivi/.test(path?.conditions ?? "")));
+  assert.deepEqual(
+    ["disc-2.iifa-tree", "disc-2.battle-of-iifa-tree", "disc-3.ipsens-castle"].filter((id) => !itemCatalogCoverage.chapterIds.includes(id)),
+    [],
+  );
+
+  for (const path of enemyPaths) {
+    assert.ok(path.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    assert.ok(sources.some((source) => source.id === "gamefaqs-enemy-list-71891"));
+    if (path !== grenade) assert.ok(path.sourceIds.includes("cavesofnarshe-peridot"), `${path.id} is missing the independent item reference`);
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+
+  assert.equal(itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot").length, 17);
+  assert.ok(objectives.some((objective) => objective.id === "disc-4.memoria.tiamat-achievement"));
 });

@@ -517,7 +517,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "black-waltz-one-and-sealion",
         title: "Waterfall — Black Waltz 1 and Sealion",
         summary: "This is a two-enemy boss battle fought by Zidane alone. Steal before finishing the fight, keep Zidane healed, and defeat Black Waltz 1 before Sealion.",
-        sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-ice-cavern-enemies-71891", "rpgclassics-ice-cavern"],
+        sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-enemy-list-71891", "rpgclassics-ice-cavern"],
         steps: [
           {
             id: "ice-boss-steals",
