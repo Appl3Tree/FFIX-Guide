@@ -3203,6 +3203,44 @@ if (
 ) {
   errors.push("Mogrich's optional New Champion letter must preserve Cour89's current-release level-20 tournament condition, the older PlayStation condition differences, a separate conservative pre-final-game cutoff, and independence from Mognet Central repair.");
 }
+const namingwayObjective = objectivesById.get("disc-3.card-tournament.namingway-card");
+const namingwayWarning = missablesById.get("missable.disc-3.card-tournament.namingway-card");
+const namingwayFinalCutoff = cutoffsById.get("cutoff.shimmering-island.disc-iii-departure");
+const namingwayReturnEdge = gameRouteEdgesById.get("detour.lost-continent-desert-palace-namingway-return");
+const namingwayDesertPalaceExitEdge = gameRouteEdgesById.get("story.desert-palace-to-lost-continent");
+const namingwayDesertPalaceStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.desert-palace")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "desert-palace-namingway-card");
+if (
+  !namingwayObjective?.chapterIds.includes("disc-3.card-tournament")
+  || !namingwayObjective.chapterIds.includes("disc-3.desert-palace")
+  || !namingwayObjective.sourceIds.includes("elitegrindlab-desert-palace")
+  || !namingwayWarning?.classification.includes("recoverable-later")
+  || !namingwayWarning.warningChapterIds.includes("disc-3.preparing-to-leave")
+  || !namingwayWarning.deadline.includes("through the end of Disc III")
+  || !namingwayWarning.deadline.includes("Shimmering Island portal")
+  || !namingwayWarning.recovery.includes("mountain hole near the sandpits")
+  || !namingwayWarning.sourceIds.includes("gamefaqs-preparing-to-leave-71891")
+  || namingwayFinalCutoff?.edgeId !== "story.preparing-to-leave-to-portal"
+  || !namingwayFinalCutoff.missableIds.includes(namingwayWarning.id)
+  || !namingwayFinalCutoff.trigger.includes("Namingway Card")
+  || !namingwayFinalCutoff.trigger.includes("through the end of Disc III")
+  || !namingwayFinalCutoff.trigger.includes("mountain hole near the sandpits")
+  || !namingwayFinalCutoff.sourceIds.includes("gamefaqs-desert-palace-71891")
+  || !namingwayFinalCutoff.sourceIds.includes("gamefaqs-preparing-to-leave-71891")
+  || namingwayReturnEdge?.relationship !== "optional-return"
+  || namingwayReturnEdge.fromChapterId !== "disc-3.lost-continent"
+  || namingwayReturnEdge.toChapterId !== "disc-3.desert-palace"
+  || !namingwayReturnEdge.sourceIds.includes("gamefaqs-desert-palace-71891")
+  || !namingwayReturnEdge.sourceIds.includes("elitegrindlab-desert-palace")
+  || namingwayDesertPalaceExitEdge?.relationship !== "required-story"
+  || !namingwayDesertPalaceStep?.objectiveIds?.includes(namingwayObjective.id)
+  || !namingwayDesertPalaceStep.detail?.includes("hole in the mountain near the sandpits")
+  || !namingwayDesertPalaceStep.detail.includes("Shimmering Island portal")
+) {
+  errors.push("Namingway's Treno and post-Oeilvert Desert Palace copies must share one objective, retain the Disc III re-entry route, and use Shimmering Island as the source-supported final cutoff.");
+}
 const mognetRepairObjective = objectivesById.get("disc-4.return-to-gaia.mognet-central");
 const mognetRepairRoute = gameRouteEdgesById.get("detour.return-to-gaia-burmecia-rejoin");
 const mognetRepairSection = walkthroughChapters

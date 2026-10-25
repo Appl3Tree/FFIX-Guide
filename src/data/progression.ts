@@ -739,6 +739,14 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "jegged-returning-desert-palace", "jegged-mount-gulug"],
   },
   {
+    id: "detour.lost-continent-desert-palace-namingway-return",
+    fromChapterId: "disc-3.lost-continent",
+    toChapterId: "disc-3.desert-palace",
+    relationship: "optional-return",
+    summary: "If the Namingway Card is still needed after the Oeilvert return, revisit Kuja's quarters in the Desert Palace from the Lost Continent through the mountain hole near the sandpits. GameFAQs says the card remains available through the end of Disc III; exit by the ladder to resume world-map travel. The existing Desert Palace-to-Lost Continent story link serves as the route back.",
+    sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "elitegrindlab-desert-palace"],
+  },
+  {
     id: "story.lost-continent-to-aerial-exploration",
     fromChapterId: "disc-3.lost-continent",
     toChapterId: "disc-3.aerial-exploration",
@@ -1209,9 +1217,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.preparing-to-leave-to-portal",
     title: "Disc III final open-world review",
     certainty: "source-supported",
-    trigger: "Before flying through the Shimmering Island portal, review the final documented acquisition sources for selected equipment-based abilities: Octagon Rod for Vivi's spells, Hamelin for Eiko's Jewel, and Black Hood for Vivi's Death if no copy is retained and the ability is unlearned. A retained Black Hood can still teach Death later. Also finish the Aerial Exploration Daguerreo stock review, Morrid's coffee delivery, the Treno Amdusias stage, the Conde Petie Diamond and Moonstone routes, Oglop Trading, and the other listed checks.",
-    missableIds: ["missable.disc-3.preparing-to-leave.final-stock-ability-review", "missable.disc-3.aerial-exploration.daguerreo-stock", "missable.disc-3.aerial-exploration.diamond-armor", "missable.disc-3.aerial-exploration.daguerreo-unique-abilities", "missable.disc-3.preparing-to-leave.conde-petie-diamond", "missable.disc-3.preparing-to-leave.morrid-coffees", "missable.disc-3.preparing-to-leave.amdasias-running-shoes", "missable.disc-3.preparing-to-leave.colored-stones-moonstone", "missable.disc-3.preparing-to-leave.oglop-trading", "missable.disc-3.lost-continent.octagon-rod", "missable.disc-3.lost-continent.hamelin-jewel", "missable.disc-3.desert-palace.black-hood-death"],
-    sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-daguerreo-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "gamefaqs-morrid-coffees-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-conde-petie-colored-stones-71891", "gamefaqs-mountain-path-return-29957", "gamefaqs-oglop-trading-71891", "gamefaqs-card-locations-24067", "jegged-rare-coffees", "playstationtrophies-my-little-airship", "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "jegged-daguerreo", "rpgclassics-abilities", "gamefaqs-desert-palace-71891"],
+    trigger: "Before flying through the Shimmering Island portal, review the final documented acquisition sources for selected equipment-based abilities: Octagon Rod for Vivi's spells, Hamelin for Eiko's Jewel, and Black Hood for Vivi's Death if no copy is retained and the ability is unlearned. A retained Black Hood can still teach Death later. Also finish the Aerial Exploration Daguerreo stock review, Morrid's coffee delivery, the Treno Amdusias stage, the Conde Petie Diamond and Moonstone routes, Oglop Trading, and any Namingway Card fallback still needed. If the Treno copy was missed, revisit Kuja's quarters in the Desert Palace via the mountain hole near the sandpits; GameFAQs says the card remains available through the end of Disc III.",
+    missableIds: ["missable.disc-3.preparing-to-leave.final-stock-ability-review", "missable.disc-3.aerial-exploration.daguerreo-stock", "missable.disc-3.aerial-exploration.diamond-armor", "missable.disc-3.aerial-exploration.daguerreo-unique-abilities", "missable.disc-3.preparing-to-leave.conde-petie-diamond", "missable.disc-3.preparing-to-leave.morrid-coffees", "missable.disc-3.preparing-to-leave.amdasias-running-shoes", "missable.disc-3.preparing-to-leave.colored-stones-moonstone", "missable.disc-3.preparing-to-leave.oglop-trading", "missable.disc-3.lost-continent.octagon-rod", "missable.disc-3.lost-continent.hamelin-jewel", "missable.disc-3.desert-palace.black-hood-death", "missable.disc-3.card-tournament.namingway-card"],
+    sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-daguerreo-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "gamefaqs-morrid-coffees-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-conde-petie-colored-stones-71891", "gamefaqs-mountain-path-return-29957", "gamefaqs-oglop-trading-71891", "gamefaqs-card-locations-24067", "jegged-rare-coffees", "playstationtrophies-my-little-airship", "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "jegged-daguerreo", "rpgclassics-abilities", "gamefaqs-desert-palace-71891", "elitegrindlab-desert-palace"],
   },
   {
     id: "cutoff.alexandria-opening-performance",
@@ -1743,15 +1751,6 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     trigger: "If Nazna's letter arrived, use Mognet with Mochos at the save point near the Gargan Roo entrance before boarding the Gargant for Alexandria.",
     missableIds: ["missable.disc-2.journey-to-cleyra.nazna-letter"],
     sourceIds: ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamefaqs-moogle-faq-23306"],
-  },
-  {
-    id: "cutoff.namingway.desert-palace-fallback",
-    edgeId: "story.desert-palace-to-lost-continent",
-    title: "Namingway Card's Desert Palace fallback",
-    certainty: "source-supported",
-    trigger: "If the tournament copy was missed, inspect the table in Kuja's quarters after returning from Oeilvert. Claim the Namingway Card before leaving the Desert Palace region; the tournament route remains an earlier alternative.",
-    missableIds: ["missable.disc-3.card-tournament.namingway-card"],
-    sourceIds: ["gamefaqs-card-tournament-71891", "gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "gamerguides-desert-palace", "elitegrindlab-desert-palace"],
   },
   {
     id: "cutoff.desert-palace.route-lock-in",

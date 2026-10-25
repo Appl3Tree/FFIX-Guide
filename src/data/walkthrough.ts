@@ -4726,7 +4726,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "desert-palace-namingway-card",
             kind: "pickup",
             text: "After the scenes and party-selection prompt, inspect the table in Kuja's quarters and collect the Namingway Card if your profile's shared Namingway objective is still unchecked.",
-            detail: "This is the fallback if the branch-dependent Treno tournament copy was unavailable or missed. GameFAQs says the card remains obtainable through the end of Disc III; collect it before leaving this story area so it cannot be overlooked during later exploration.",
+            detail: "This is the fallback if the branch-dependent Treno tournament copy was unavailable or missed. GameFAQs says the card remains obtainable through the end of Disc III and documents re-entry through a hole in the mountain near the sandpits. If you leave the Desert Palace before taking it, return for the table card before entering the Shimmering Island portal.",
             objectiveIds: ["disc-3.card-tournament.namingway-card"],
           },
           {
