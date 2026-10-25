@@ -1455,7 +1455,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-treno-black-waltz-3-steals",
             kind: "combat",
             text: "During the Black Waltz 3 rematch, use Marcus to attempt Steepled Hat, Lightning Staff, and Flame Staff before ending the battle. Dagger is not targeted by Black Waltz 3, so use her to heal Steiner and Marcus. If Freeze lands on a character, avoid hitting that character with a physical attack until the status clears.",
-            detail: "The encounter is a one-time steal window. Steepled Hat is sold at Summit Station and Flame Staff is available in Treno; a later Lightning Staff source is still under review. Published HP values are 1,292 in GameFAQs and Jegged, rounded to 1,300 in StrategyWiki. No fixed level or steal-attempt count is recommended.",
+            detail: "The encounter is a one-time steal window. Steepled Hat is sold at Summit Station and later by Atla; Flame Staff can be bought for 1,100 Gil at Treno after this battle, Cleyra, Lindblum (Disc II), Conde Petie, Black Mage Village (Discs II–III), and Alexandria. Lightning Staff also has later shop sources at Treno, Lindblum, Conde Petie, Black Mage Village, and Alexandria. Published HP values are 1,292 in GameFAQs and Jegged, rounded to 1,300 in StrategyWiki. No fixed level or steal-attempt count is recommended.",
             objectiveIds: ["disc-2.journey-to-treno.black-waltz-3-steals"],
           },
         ],

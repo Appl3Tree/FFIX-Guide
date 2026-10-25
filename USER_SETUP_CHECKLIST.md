@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest B02/B05 update adds Flame Staff's Black Waltz 3 steal, Cleyra Trunk chest, and six priced shop routes, plus Fira/Sleep ability links. The warning and walkthrough list the same recovery sources. Lint, typecheck, audit, build, and whitespace checks pass with 0 errors and 182 coverage warnings; the catalog has 209 items and 830 acquisition paths. The build has 1,959.90 kB JavaScript (478.73 kB gzip). No GitHub, Firebase, deployment, or live sign-in work is needed; direct game/release verification remains open.
+
 No account-owner setup action changed. The latest B05 slice adds Ruby to the equipment catalog with the Iifa Tree story reward and Stiltzkin #8 bundle, plus Carbuncle and Reflect ability claims. Lint, typecheck, audit, build, and whitespace checks pass with 0 errors and 182 coverage warnings; the catalog has 209 items and 824 acquisition paths. The build has 1,958.90 kB JavaScript (478.50 kB gzip). No GitHub, Firebase, deployment, or live sign-in work is needed; tests and direct game/release verification were not run.
 No account-owner setup action changed. The latest achievement audit fixes Over the Moon's four-objective mapping across Steam, PS4, and Xbox, removing Feather Circle as a false source because it consumes a Moonstone. Lint, typecheck, audit, build, and whitespace checks pass with 0 errors and 182 coverage warnings. The build has 1,958.37 kB JavaScript (478.40 kB gzip); no GitHub, Firebase, deployment, or live sign-in work is needed. Tests and direct game/release verification were not run.
 

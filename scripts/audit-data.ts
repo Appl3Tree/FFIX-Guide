@@ -3266,6 +3266,63 @@ const rubyAbilities = new Set(equipmentAbilityClaims.filter((claim) => claim.ite
 if ([...expectedRubyAbilities].some((ability) => !rubyAbilities.has(ability)) || rubyAbilities.size !== expectedRubyAbilities.size) {
   errors.push("Ruby must have exactly the Carbuncle and Reflect ability claims.");
 }
+const flameStaffId = "game-item.flame-staff";
+const flameStaffPaths = itemAcquisitionPaths.filter((path) => path.itemId === flameStaffId);
+const expectedFlameStaffPathIds = new Set([
+  "item-path.disc-2.journey-to-treno.flame-staff-black-waltz-3-steal",
+  "item-path.disc-2.cleyra.flame-staff-cleyra-trunk-chest",
+  "item-path.disc-2.treno.flame-staff-shop",
+  "item-path.disc-2.cleyra.flame-staff-shop",
+  "item-path.disc-2.return-to-lindblum.cleyra-recovery.flame-staff",
+  "item-path.disc-2.outer-continent.conde-petie-flame-staff-shop",
+  "item-path.disc-2.magdalene-forest.black-mage-village-flame-staff-shop",
+  "item-path.disc-3.the-home-front.alexandria-flame-staff-shop",
+]);
+const actualFlameStaffPathIds = new Set(flameStaffPaths.map((path) => path.id));
+if (!gameItems.some((item) => item.id === flameStaffId && item.name === "Flame Staff" && item.category === "equipment")) {
+  errors.push("Flame Staff must be present in the equipment catalog.");
+}
+if (flameStaffPaths.length !== expectedFlameStaffPathIds.size ||
+  [...expectedFlameStaffPathIds].some((pathId) => !actualFlameStaffPathIds.has(pathId))) {
+  errors.push(`Flame Staff must map its Black Waltz 3 steal, Cleyra Trunk chest, and six shops; found ${flameStaffPaths.length} path(s).`);
+}
+const flameStaffSteal = flameStaffPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.flame-staff-black-waltz-3-steal");
+if (flameStaffSteal?.method !== "steal" || flameStaffSteal.availability !== "one-time-encounter" ||
+  !flameStaffSteal.walkthroughObjectiveIds?.includes("disc-2.journey-to-treno.black-waltz-3-steals")) {
+  errors.push("Flame Staff's Black Waltz 3 route must remain a one-time steal linked to the battle objective.");
+}
+const flameStaffChest = flameStaffPaths.find((path) => path.id === "item-path.disc-2.cleyra.flame-staff-cleyra-trunk-chest");
+if (flameStaffChest?.method !== "chest" || flameStaffChest.chapterId !== "disc-2.cleyra" ||
+  !flameStaffChest.walkthroughObjectiveIds?.includes("disc-2.cleyra.treasure-sweep")) {
+  errors.push("Flame Staff's Cleyra Trunk chest must link the Disc II Cleyra treasure sweep.");
+}
+const expectedFlameStaffShops = new Set([
+  "treno.weapon-shop.disc-2",
+  "cleyra.burmecian-soldier-dan.weapon-shop",
+  "lindblum.weapon-shop.disc-2",
+  "conde-petie.weapon-shop",
+  "black-mage-village.weapon-shop.disc-2-3",
+  "alexandria.weapon-shop.disc-3-4",
+]);
+const flameStaffShops = flameStaffPaths.filter((path) => path.method === "shop");
+const actualFlameStaffShops = new Set(flameStaffShops.map((path) => path.shopId));
+if (flameStaffShops.length !== expectedFlameStaffShops.size ||
+  flameStaffShops.some((path) => path.cost?.amount !== 1100) ||
+  [...expectedFlameStaffShops].some((shopId) => !actualFlameStaffShops.has(shopId))) {
+  errors.push("Flame Staff must have six source-listed 1,100-Gil shops: Treno, Cleyra, Lindblum, Conde Petie, Black Mage Village, and Alexandria.");
+}
+const expectedFlameStaffAbilities = new Set(["Fira", "Sleep"]);
+const flameStaffAbilities = new Set(equipmentAbilityClaims.filter((claim) => claim.itemId === flameStaffId).map((claim) => claim.abilityName));
+if ([...expectedFlameStaffAbilities].some((ability) => !flameStaffAbilities.has(ability)) ||
+  flameStaffAbilities.size !== expectedFlameStaffAbilities.size) {
+  errors.push("Flame Staff must have exactly the Fira and Sleep ability claims.");
+}
+const blackWaltz3StealWarning = missables.find((missable) => missable.id === "missable.disc-2.journey-to-treno.black-waltz-3-steals");
+if (!blackWaltz3StealWarning ||
+  !["Treno", "Cleyra", "Lindblum", "Conde Petie", "Black Mage Village", "Alexandria"].every((shop) => blackWaltz3StealWarning.recovery.includes(shop)) ||
+  !blackWaltz3StealWarning.sourceIds.includes("gamefaqs-equipment-33383")) {
+  errors.push("The Black Waltz 3 missable warning must list all Flame Staff shop recoveries and their independent equipment source.");
+}
 const moonstonePaths = itemAcquisitionPaths.filter((path) => path.itemId === moonstoneId);
 const requiredMoonstonePaths = [
   { id: "item-path.disc-1.alexandria.moonstone-brahne", objectiveId: "disc-1.alexandria.swordfight.moonstone-1" },
