@@ -4850,7 +4850,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lost-continent-gulug-boss",
         title: "Broken wall — take Mog's story Ribbon and defeat Meltigemini",
         summary: "The scenes force Eiko into the active party, remove Vivi, and award Mog's Ribbon automatically. Prepare for Virus and Venom before the one-time boss fight.",
-        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"],
+        sourceIds: ["gamefaqs-lost-continent-71891", "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-portal-to-another-world-71891", "gamefaqs-return-to-gaia-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"],
         steps: [
           {
             id: "lost-continent-mog-ribbon-story",
@@ -4862,8 +4862,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lost-continent-meltigemini-steals",
             kind: "optional",
-            text: "During Meltigemini, Zidane can try to steal Vaccine, Golden Hairpin, and Demon's Vest before ending the fight. Skip repeated attempts if the party needs to focus on survival.",
-            detail: "Sources agree on the Vaccine and Golden Hairpin; one source labels the rare armor Demon's Mail while the others list Demon's Vest. The walkthrough uses the cross-checked Demon's Vest name and publishes no steal odds. A chest in this dungeon already guarantees Demon's Mail.",
+            text: "If you want extra copies, Zidane can try to steal Golden Hairpin and Demon's Vest during Meltigemini. Victory guarantees one Vaccine even if you skip its steal; avoid repeated attempts if the party needs to focus on survival.",
+            detail: "GameFAQs lists Vaccine in the Always drop slot and in all three chance-based drop slots, so one is guaranteed and up to three more may drop. Golden Hairpin is also in a Mount Gulug chest and the Disc IV Daguerreo shop. Demon's Vest is in the Terra chest after this fight, Moorock's Bran Bal Mogshop, and Disc IV Daguerreo. One steal reference labels the armor Demon's Mail; the cross-check favors Demon's Vest, separate from the earlier Mount Gulug Demon's Mail chest. No steal odds are published here.",
             objectiveIds: ["disc-3.lost-continent.meltigemini-steals"],
           },
           {
@@ -5655,8 +5655,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-bran-bal-shop-review",
             kind: "optional",
-            text: "Review Moorock's weapon and armor stock against your equipment and synthesis goals. Buy any gear you want available before the story's long sequence, and save at his Mognet point before leaving the room.",
-            detail: "The shop includes late gear such as Defender, Holy Lance, Bistro Fork, Adaman Hat, Platinum Helm, Platina Armor, and Zorlin Shape. Bran Bal is a useful early purchase window, but GameFAQs 71891 identifies Moorock's later Pandemonium Mogshop as the final chance to buy a Zorlin Shape; review that stock after the forced fights and before continuing through the dungeon.",
+            text: "Review Moorock's weapon and armor stock against your equipment and synthesis goals, including Demon's Vest (10,250 Gil). Buy any gear you want before continuing the story, and save at his Mognet point before leaving the room.",
+            detail: "The shop includes late gear such as Defender, Holy Lance, Bistro Fork, Adaman Hat, Platinum Helm, Platina Armor, and Zorlin Shape. Demon's Vest is also in the Terra chest before Bran Bal and returns to Daguerreo's Disc IV stock; the exact end of Moorock's Bran Bal shop window is unverified. Moorock's later Pandemonium Mogshop is the final documented chance to buy a Zorlin Shape, so review that stock after the forced fights and before continuing through the dungeon.",
             objectiveIds: ["disc-3.portal-to-another-world.moorock-shop-review"],
           },
           {

@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The latest B02 refinement places the Mythril Sword cutoff at Esto Gaza before the Desert Palace story sequence, records that the post-Desert-Palace shop list omits it, and separates the optional five-copy inventory target from standard completion. Both GameFAQs missable-item references that support the five-copy target and deadline are linked; Beatrix and Treno copies still held count toward the total. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The latest B02 refinements correct Meltigemini's Vaccine drop to one guaranteed copy plus up to three conditional copies and link later recovery for its steals; a new warning tracks Moorock's optional Bran Bal Demon's Vest purchase while noting that the exact post-Pandemonium shop window is unverified. The Mythril Sword cutoff remains before the Desert Palace story sequence, with the later Esto Gaza shop list omitting it and the optional five-copy target kept separate from standard completion. Both GameFAQs missable-item references supporting that target and deadline are linked; retained Beatrix and Treno copies count toward the total. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 
