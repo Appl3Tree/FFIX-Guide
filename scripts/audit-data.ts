@@ -764,6 +764,22 @@ const hippaulWarning = missables.find((missable) => missable.id === "missable.di
 if (!hippaulWarning?.sourceIds.includes("gamefaqs-tetra-master-71891") || !hippaulWarning.note?.includes("only Namingway is missable")) {
   errors.push("Hippaul's warning must distinguish the unique Athlete Queen cutoff from recoverable Tetra Master cards.");
 }
+const earlierMognetLetterWarnings = [
+  "missable.disc-1.village-of-dali.kumop-letter",
+  "missable.disc-1.journey-to-burmecia.grimo-letter",
+  "missable.disc-2.journey-to-cleyra.nazna-letter",
+  "missable.disc-2.pinnacle-rocks.stiltzkin-letter",
+  "missable.disc-3.card-tournament.mogrich-letter",
+  "missable.disc-3.lost-continent.mount-gulug-sweep",
+  "missable.disc-2.journey-to-outer-continent.kuppo-letter",
+  "missable.disc-2.magdalene-forest.mogryo-letter-to-mocchi",
+];
+for (const warningId of earlierMognetLetterWarnings) {
+  const warning = missables.find((missable) => missable.id === warningId);
+  if (!warning?.sourceIds.includes("gamerguides-mognet-central") || !warning.note?.includes("Pre-Disc IV letters do not block the Disc IV Mognet Central repair chain")) {
+    errors.push(`${warningId} must cite the Disc IV-only Mognet chain and keep earlier letters optional to that repair.`);
+  }
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
