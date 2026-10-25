@@ -978,8 +978,8 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.evil-forest-to-ice-cavern",
     title: "Evil Forest escape and campsite departure",
     certainty: "source-supported",
-    trigger: "Before defeating Plant Brain, attempt the selected steals if desired; afterward, remove Blank's equipped gear before his departure scene. Finish the crash-site/forest sweep and eligible ATE prompts before leaving the campsite for the world map.",
-    missableIds: ["missable.disc-1.evil-forest.treasures", "missable.disc-1.evil-forest.ates", "missable.disc-1.evil-forest.blank-equipment", "missable.disc-1.evil-forest.plant-brain-steals"],
+    trigger: "Before defeating the second Prison Cage or Plant Brain, attempt the selected steals if desired; afterward, remove Blank's equipped gear before his departure scene. Finish the crash-site/forest sweep and eligible ATE prompts before leaving the campsite for the world map.",
+    missableIds: ["missable.disc-1.evil-forest.treasures", "missable.disc-1.evil-forest.ates", "missable.disc-1.evil-forest.blank-equipment", "missable.disc-1.evil-forest.plant-brain-steals", "missable.disc-1.evil-forest.prison-cage-steals"],
     sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamerguides-evil-forest", "elitegrindlab-evil-forest"],
   },
   {

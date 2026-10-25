@@ -78,6 +78,7 @@ const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
 const memoriaChapterId = "disc-4.memoria";
 const finalBattleChapterId = "disc-4.the-final-battle";
 const finalPreparationsChapterId = "disc-4.final-preparations";
+const evilForestChapterId = "disc-1.evil-forest";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -88,6 +89,8 @@ const meltigeminiObjectiveId = "disc-3.lost-continent.meltigemini-steals";
 const meltigeminiMissableId = "missable.disc-3.lost-continent.meltigemini-steals";
 const meltigeminiCutoffId = "cutoff.mount-gulug.meltigemini-steals";
 const enemyListSourceId = "gamefaqs-enemy-list-71891";
+const evilForestEnemySources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
+const evilForestBossSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
 const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
@@ -202,6 +205,86 @@ function pandemoniumFact(category: EnemyFact["category"], label: string, detail?
 function quinaSkill(name: string): EnemyBlueMagic {
   return { name, command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [twisterObjectiveId] };
 }
+
+function evilForestLoot(slot: EnemyTableSlot, itemId: string | null, itemName?: string): EnemyLootSlot {
+  return sourcedLoot(slot, itemId, [enemyListSourceId], itemName);
+}
+
+function evilForestFact(category: EnemyFact["category"], label: string, detail?: string): EnemyFact {
+  return sourcedFact(category, label, [enemyListSourceId], detail);
+}
+
+const evilForestEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.evil-forest.random-pool",
+    title: "Evil Forest trail encounters",
+    chapterId: evilForestChapterId,
+    location: "Forest trails before the Plant Brain cave",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.dendrobium", quantity: null },
+      { enemyId: "enemy.fang-a", quantity: null },
+      { enemyId: "enemy.goblin", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The listed formation members are route-area enemies, not a claim about encounter frequency or exact combinations."],
+  },
+  {
+    id: "encounter.evil-forest.prison-cage-garnet",
+    title: "Prison Cage — Garnet rescue battle",
+    chapterId: evilForestChapterId,
+    location: "Crash-site trail after Zidane reaches Vivi and Steiner",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.prison-cage-garnet", quantity: 1 }],
+    sourceIds: evilForestBossSources,
+    objectiveIds: ["disc-1.evil-forest.getting-emotional"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Zidane enters Trance automatically; Garnet's KO causes a Game Over."],
+  },
+  {
+    id: "encounter.evil-forest.prison-cage-vivi",
+    title: "Prison Cage — Vivi rescue battle",
+    chapterId: evilForestChapterId,
+    location: "Immediately after the Garnet rescue battle",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.prison-cage-vivi", quantity: 1 }],
+    sourceIds: evilForestBossSources,
+    objectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
+    missableIds: ["missable.disc-1.evil-forest.prison-cage-steals"],
+    cutoffIds: ["cutoff.evil-forest.escape"],
+    notes: ["Vivi is the captive and automatically casts Fire. GameFAQs lists 533 HP for this second form; Jegged repeats the first form's 513 HP."],
+  },
+  {
+    id: "encounter.evil-forest.plant-brain",
+    title: "Plant Brain",
+    chapterId: evilForestChapterId,
+    location: "Boss cave after Monty's spring",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.plant-brain", quantity: 1 }],
+    sourceIds: evilForestBossSources,
+    objectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
+    missableIds: ["missable.disc-1.evil-forest.plant-brain-steals"],
+    cutoffIds: ["cutoff.evil-forest.escape"],
+    notes: ["Blank joins during the battle; exact join trigger wording differs between route references."],
+  },
+  {
+    id: "encounter.evil-forest.escape-plant-spiders",
+    title: "Plant Spider escape ambush",
+    chapterId: evilForestChapterId,
+    location: "Mandatory battle on the chase route after Plant Brain",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.plant-spider", quantity: 3 }],
+    sourceIds: ["jegged-evil-forest", "gamefaqs-evil-forest-71891"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Jegged lists this as a mandatory battle against three Plant Spiders during the escape."],
+  },
+];
 
 const mountGulugEncounters: EnemyEncounter[] = [
   {
@@ -564,7 +647,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1394,7 +1477,173 @@ const ozmaEnemyRecords: EnemyRecord[] = [
   }, finalPreparationsChapterId, ozmaEnemySources, ["missable.disc-4.final-preparations.ozma-steals"], ["cutoff.final-preparations.final-battle"]),
 ];
 
+const evilForestEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.prison-cage-garnet",
+    name: "Prison Cage (Garnet)",
+    encounterIds: ["encounter.evil-forest.prison-cage-garnet"],
+    stats: [
+      { field: "level", value: 2, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "HP", value: 513, sourceIds: evilForestBossSources, verification: "cross-checked" },
+      { field: "MP", value: 1083, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "AP", value: 0, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "Gil", value: 0, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+    ],
+    steals: [
+      evilForestLoot("common", null, "Nothing"), evilForestLoot("uncommon", null, "Nothing"),
+      evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      evilForestLoot("always", null, "Nothing"), evilForestLoot("common", null, "Nothing"),
+      evilForestLoot("uncommon", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("elemental-weakness", "Fire", evilForestBossSources),
+      sourcedFact("attack", "Absorb", evilForestBossSources, "Drains Garnet's HP; her KO causes a Game Over."),
+      sourcedFact("attack", "Tidal Flame", ["gamefaqs-evil-forest-71891"], "Can hit Garnet as well as the party; avoid using it in this rescue fight."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Keep Garnet alive", detail: "Absorb drains Garnet's HP. Heal her before a third successful drain can cause a Game Over, and use Zidane's automatic Trance on the cage rather than Tidal Flame.", sourceIds: evilForestBossSources },
+    ],
+    routeObjectiveIds: ["disc-1.evil-forest.getting-emotional"],
+    notes: ["The first scripted boss fight begins with Zidane in Trance and is the supported Steam Getting Emotional trigger."],
+  }, evilForestChapterId, [...evilForestBossSources, "steam-achievements"]),
+  chapterBoss({
+    id: "enemy.prison-cage-vivi",
+    name: "Prison Cage (Vivi)",
+    encounterIds: ["encounter.evil-forest.prison-cage-vivi"],
+    stats: [
+      { field: "level", value: 2, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "HP", value: 533, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "disputed" },
+      { field: "HP", value: 513, sourceIds: ["jegged-evil-forest"], verification: "disputed" },
+      { field: "MP", value: 1186, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "AP", value: 3, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "Gil", value: 436, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+    ],
+    steals: [
+      evilForestLoot("common", null, "Broadsword"), evilForestLoot("uncommon", "game-item.leather-wrist"),
+      evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      evilForestLoot("always", "game-item.eye-drops"), evilForestLoot("common", "game-item.phoenix-down"),
+      evilForestLoot("uncommon", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("elemental-weakness", "Fire", evilForestBossSources),
+      sourcedFact("attack", "Absorb", evilForestBossSources, "Drains the captive's HP; Vivi's KO causes a Game Over."),
+      sourcedFact("attack", "Vivi's automatic Fire", evilForestBossSources, "Vivi casts Fire on Prison Cage each turn while captive."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Take the Broadsword and Leather Wrist", detail: "The second battle is the first Prison Cage encounter with stealable equipment. Heal Vivi after repeated Absorb attacks and steal before finishing the boss.", sourceIds: evilForestBossSources },
+    ],
+    routeObjectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
+    notes: ["The two sources disagree on the second battle's HP: GameFAQs lists 533 and Jegged repeats 513. Both values are preserved without assuming cross-release parity."],
+  }, evilForestChapterId, evilForestBossSources, ["missable.disc-1.evil-forest.prison-cage-steals"], ["cutoff.evil-forest.escape"]),
+  chapterBoss({
+    id: "enemy.plant-brain",
+    name: "Plant Brain",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    stats: [
+      { field: "level", value: 7, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "HP", value: 916, sourceIds: evilForestBossSources, verification: "cross-checked" },
+      { field: "MP", value: 1431, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "AP", value: 5, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+      { field: "Gil", value: 468, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
+    ],
+    steals: [
+      evilForestLoot("common", "game-item.eye-drops"), evilForestLoot("uncommon", "game-item.iron-helm"),
+      evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      evilForestLoot("always", "game-item.phoenix-down"), evilForestLoot("common", "game-item.potion"),
+      evilForestLoot("uncommon", "game-item.potion"), evilForestLoot("rare", "game-item.potion"),
+    ],
+    facts: [
+      sourcedFact("elemental-weakness", "Fire", evilForestBossSources),
+      sourcedFact("status-vulnerability", "Berserk, Darkness, Silence, Sleep, and Slow", ["gamefaqs-evil-forest-71891"]),
+      sourcedFact("attack", "Thunder", ["gamefaqs-evil-forest-71891"], "Its main damage threat during the early boss fight."),
+      sourcedFact("attack", "Pollen", ["gamefaqs-evil-forest-71891"], "Deals damage and may inflict Darkness."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Use Fire and steal before defeating it", detail: "Vivi's Fire and Steiner's Fire Sword exploit Plant Brain's weakness. Steal Eye Drops and Iron Helm before the one-time battle ends; Blank joins during the fight if the party needs another thief.", sourceIds: evilForestBossSources },
+      { title: "Tent can disable its magic", detail: "GameFAQs describes a 50% chance for a thrown Tent to inflict Darkness and Silence, but the item also restores Plant Brain to full HP. This is an optional tactic, not a completion requirement.", sourceIds: ["gamefaqs-evil-forest-71891"] },
+    ],
+    routeObjectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
+    notes: ["GameFAQs and Jegged agree on 916 HP. The Hellplant/Plant Brain type is not assigned because the inspected boss table does not list a type."],
+  }, evilForestChapterId, evilForestBossSources, ["missable.disc-1.evil-forest.plant-brain-steals"], ["cutoff.evil-forest.escape"]),
+  chapterEnemy({
+    id: "enemy.dendrobium",
+    name: "Dendrobium",
+    encounterIds: ["encounter.evil-forest.random-pool"],
+    stats: enemyStats([["level", 2], ["HP", 174], ["MP", 186], ["EXP", 39], ["AP", 2], ["Gil", 99]]),
+    steals: [evilForestLoot("common", "game-item.eye-drops"), evilForestLoot("uncommon", "game-item.tent"), evilForestLoot("semi-rare", "game-item.ore"), evilForestLoot("rare", null, "Nothing")],
+    drops: [evilForestLoot("always", null, "Nothing"), evilForestLoot("common", "game-item.eye-drops"), evilForestLoot("uncommon", "game-item.potion"), evilForestLoot("rare", "game-item.phoenix-down")],
+    facts: [
+      evilForestFact("type", "Aerial"), evilForestFact("elemental-weakness", "Wind"), evilForestFact("elemental-resistance", "Earth nullified"),
+      evilForestFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      evilForestFact("attack", "Wind", "A stronger early-game magical attack."),
+    ],
+    blueMagic: [],
+    strategies: [],
+    routeObjectiveIds: [],
+    notes: [],
+  }, evilForestChapterId, evilForestEnemySources),
+  chapterEnemy({
+    id: "enemy.fang-a",
+    name: "Fang [A]",
+    encounterIds: ["encounter.evil-forest.random-pool"],
+    stats: enemyStats([["level", 1], ["HP", 68], ["MP", 170], ["EXP", 23], ["AP", 1], ["Gil", 90]]),
+    steals: [evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", "game-item.phoenix-down"), evilForestLoot("semi-rare", "game-item.hi-potion"), evilForestLoot("rare", "game-item.phoenix-pinion")],
+    drops: [evilForestLoot("always", null, "Nothing"), evilForestLoot("common", "game-item.eye-drops"), evilForestLoot("uncommon", "game-item.phoenix-down"), evilForestLoot("rare", null, "Nothing")],
+    facts: [
+      evilForestFact("type", "Beast"), evilForestFact("elemental-weakness", "Fire"),
+      evilForestFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      evilForestFact("attack", "Physical attacks", "Weak single-target physical damage."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Use Fire or Beast Killer", detail: "Fang has low HP and is vulnerable to Fire; Beast Killer is also effective.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["Fang [A] is kept separate from the later Festival of the Hunt variant Fang [B]."],
+  }, evilForestChapterId, evilForestEnemySources),
+  chapterEnemy({
+    id: "enemy.goblin",
+    name: "Goblin",
+    encounterIds: ["encounter.evil-forest.random-pool"],
+    stats: enemyStats([["level", 5], ["HP", 33], ["MP", 172], ["EXP", 23], ["AP", 1], ["Gil", 88]]),
+    steals: [evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", null, "Nothing"), evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing")],
+    drops: [evilForestLoot("always", null, "Nothing"), evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", "game-item.echo-screen"), evilForestLoot("rare", "game-item.phoenix-down")],
+    facts: [evilForestFact("elemental-weakness", "Fire")],
+    blueMagic: [{ name: "Goblin Punch", command: "Eat", sourceIds: [enemyListSourceId], objectiveIds: [] }],
+    strategies: [],
+    routeObjectiveIds: [],
+    notes: ["Goblin's Eat result is Goblin Punch. Quina is not yet available in the Evil Forest, so this is a bestiary source record rather than a local learning opportunity."],
+  }, evilForestChapterId, evilForestEnemySources),
+  chapterEnemy({
+    id: "enemy.plant-spider",
+    name: "Plant Spider",
+    encounterIds: ["encounter.evil-forest.escape-plant-spiders"],
+    stats: enemyStats([["level", 1], ["HP", 33], ["MP", 173], ["EXP", 22], ["AP", 1], ["Gil", 91]]),
+    steals: [evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", "game-item.ore"), evilForestLoot("semi-rare", "game-item.hi-potion"), evilForestLoot("rare", null, "Nothing")],
+    drops: [evilForestLoot("always", null, "Nothing"), evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", "game-item.eye-drops"), evilForestLoot("rare", "game-item.potion")],
+    facts: [
+      evilForestFact("type", "Bug"), evilForestFact("elemental-weakness", "Fire"),
+      evilForestFact("attack", "Thunder", "Uses weaker Thunder spells than Plant Brain during the escape route."),
+    ],
+    blueMagic: [],
+    strategies: [],
+    routeObjectiveIds: [],
+    notes: ["Jegged lists a mandatory escape battle against three Plant Spiders after Plant Brain."],
+  }, evilForestChapterId, evilForestEnemySources),
+];
+
 export const enemyRecords: EnemyRecord[] = [
+  ...evilForestEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -1518,8 +1767,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for the Evil Forest, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
