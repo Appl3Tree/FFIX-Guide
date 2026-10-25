@@ -403,7 +403,7 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 286);
+  assert.equal(itemAcquisitionPaths.length, 306);
   assert.equal(synthesisRecipes.length, 10);
 });
 
@@ -692,4 +692,91 @@ test("Wing Edge has sourced item, minigame, treasure, boss, and steal routes", (
       assert.ok(objectives.some((objective) => objective.id === objectiveId), `${pathId} references unknown objective ${objectiveId}`);
     }
   }
+});
+
+test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier routes and recovery notes", () => {
+  const expectedPathIds = [
+    "item-path.disc-2.journey-to-cleyra.gargan-roo-chain-plate",
+    "item-path.disc-2.treno.chain-plate-shop",
+    "item-path.disc-2.cleyra.chain-plate-shop",
+    "item-path.disc-2.return-to-lindblum.chain-plate-shop",
+    "item-path.disc-2.return-to-lindblum.dragon-gate-chain-plate-shop",
+    "item-path.disc-2.journey-to-outer-continent.fossil-roo-chain-plate-shop",
+    "item-path.disc-2.outer-continent.chain-plate-black-mage-village-shop",
+    "item-path.disc-1.lindblum.leather-plate-hidden-pickup",
+    "item-path.disc-1.village-of-dali.leather-plate-black-waltz-2-steal",
+    "item-path.disc-2.return-to-lindblum.leather-plate-shop",
+    "item-path.disc-2.treno.leather-plate-shop",
+    "item-path.disc-2.outer-continent.leather-plate-black-mage-village-shop",
+    "item-path.disc-2.cleyra.mythril-vest-trunk-chest",
+    "item-path.disc-2.pinnacle-rocks.mythril-vest-interior-chest",
+    "item-path.disc-2.cleyra.mythril-vest-antlion-steal",
+    "item-path.disc-2.cleyra.mythril-vest-shop",
+    "item-path.disc-2.return-to-lindblum.dragon-gate-mythril-vest-shop",
+    "item-path.disc-2.journey-to-outer-continent.fossil-roo-mythril-vest-shop",
+    "item-path.disc-2.outer-continent.mythril-vest-black-mage-village-shop",
+    "item-path.disc-3.lost-continent.esto-gaza-mythril-vest-shop",
+  ];
+  const newPaths = expectedPathIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id));
+  const pricedPaths = newPaths.filter((path) => path?.cost);
+  const finalStockMissable = missables.find((entry) => entry.id === "missable.disc-3.aerial-exploration.daguerreo-stock");
+  const garganMissable = missables.find((entry) => entry.id === "missable.disc-2.journey-to-cleyra.gargan-roo-chests");
+  const daliMissable = missables.find((entry) => entry.id === "missable.disc-1.village-of-dali.black-waltz-2-steals");
+  const antlionMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.antlion-steals");
+  const cleyraTreasureMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
+  const pinnacleMissable = missables.find((entry) => entry.id === "missable.disc-2.pinnacle-rocks.treasure-sweep");
+
+  assert.equal(itemAcquisitionPaths.length, 306);
+  assert.ok(newPaths.every(Boolean), "all 20 earlier/recovery paths should exist");
+  assert.deepEqual(
+    pricedPaths.map((path) => [path?.itemId, path?.cost?.amount]).sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),
+    [
+      ...Array.from({ length: 6 }, () => ["game-item.chain-plate", 810]),
+      ...Array.from({ length: 3 }, () => ["game-item.leather-plate", 530]),
+      ...Array.from({ length: 5 }, () => ["game-item.mythril-vest", 1180]),
+    ].sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),
+  );
+
+  assert.equal(newPaths[0]?.method, "chest");
+  assert.ok(newPaths[0]?.walkthroughObjectiveIds?.includes("disc-2.journey-to-cleyra.gargan-roo-chests"));
+  assert.equal(newPaths[1]?.availability, "window-unverified");
+  assert.equal(newPaths[2]?.availability, "limited-window");
+  assert.equal(newPaths[2]?.recommendedBeforeChapterId, "disc-2.cleyra");
+  assert.ok(newPaths[2]?.walkthroughObjectiveIds?.includes("disc-2.cleyra.shop-stock"));
+  assert.equal(newPaths[6]?.availability, "repeatable");
+
+  assert.equal(newPaths[7]?.method, "hidden-pickup");
+  assert.ok(newPaths[7]?.walkthroughObjectiveIds?.includes("disc-1.lindblum.first-visit-pickups"));
+  assert.equal(newPaths[8]?.method, "steal");
+  assert.ok(newPaths[8]?.walkthroughObjectiveIds?.includes("disc-1.village-of-dali.black-waltz-2-steals"));
+  assert.equal(newPaths[11]?.availability, "repeatable");
+
+  assert.equal(newPaths[12]?.method, "chest");
+  assert.ok(newPaths[12]?.sourceIds.includes("cavesofnarshe-cleyra-walkthrough"));
+  assert.equal(newPaths[13]?.method, "chest");
+  assert.ok(newPaths[13]?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.treasure-sweep"));
+  assert.equal(newPaths[14]?.method, "steal");
+  assert.ok(newPaths[14]?.walkthroughObjectiveIds?.includes("disc-2.cleyra.antlion-steals"));
+  assert.equal(newPaths[15]?.availability, "limited-window");
+  assert.ok(newPaths[15]?.walkthroughObjectiveIds?.includes("disc-2.cleyra.shop-stock"));
+  assert.equal(newPaths[18]?.availability, "repeatable");
+  assert.equal(newPaths[19]?.availability, "limited-window");
+  assert.equal(newPaths[19]?.recommendedBeforeChapterId, "disc-3.preparing-to-leave");
+  assert.ok(newPaths[19]?.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.daguerreo-stock"));
+
+  for (const path of newPaths) {
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path?.id} references unknown source ${sourceId}`);
+    }
+    for (const objectiveId of path?.walkthroughObjectiveIds ?? []) {
+      assert.ok(objectives.some((objective) => objective.id === objectiveId), `${path?.id} references unknown objective ${objectiveId}`);
+    }
+  }
+
+  assert.match(garganMissable?.recovery ?? "", /Chain Plate's later shops can replace the armor/);
+  assert.match(daliMissable?.recovery ?? "", /Leather Plate.*alternate routes/);
+  assert.match(cleyraTreasureMissable?.nextAvailability ?? "", /Mythril Vest.*Pinnacle Rocks/);
+  assert.match(antlionMissable?.recovery ?? "", /Mythril Vest is replaceable/);
+  assert.match(pinnacleMissable?.recovery ?? "", /Mythril Vest has later shop routes/);
+  assert.match(finalStockMissable?.recovery ?? "", /No post-transition replacement is listed/);
 });
