@@ -246,7 +246,7 @@ export const storyPartySequences: StoryPartySequence[] = [
         party: "Zidane's team; then the roster is re-formed",
         chapterIds: ["disc-3.desert-palace"],
         location: "Desert Palace exit route",
-        summary: "After Valia Pira, control returns to Zidane. Re-form the active party, collect any goal-relevant table item, and leave the palace for the Lost Continent.",
+        summary: "After Valia Pira, control returns to Zidane. Re-form the active party, collect the Namingway Card, and exit by the ladder to the world map; open travel resumes as the Blue Narciss reaches the Lost Continent, with optional activities available before Esto Gaza.",
       },
     ],
     sourceIds: [
@@ -690,7 +690,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.desert-palace",
     toChapterId: "disc-3.lost-continent",
     relationship: "required-story",
-    summary: "Escaping the Desert Palace reunites the parties and returns control to Zidane; the Blue Narciss lands near Esto Gaza on the Lost Continent.",
+    summary: "Escaping the Desert Palace reunites the parties and returns control to Zidane. Exit by the ladder to the world map; the Blue Narciss then lands near Esto Gaza on the Lost Continent, where free travel and optional activities resume before entering the next story area.",
     sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "jegged-returning-desert-palace", "jegged-mount-gulug"],
   },
   {
@@ -1632,9 +1632,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.picking-up-the-trail-to-forgotten-continent",
     title: "Desert Palace route lock-in",
     certainty: "conservative",
-    trigger: "Before choosing the eastern Outer Continent sinkhole, finish any optional world-map stops and confirm the planned party split. The exact point when free exploration resumes later is not established by the reviewed chapter sources.",
+    trigger: "Before choosing the eastern Outer Continent sinkhole, finish any optional world-map stops and confirm the planned party split. This temporarily restricts free movement through both assignments; after escaping the Desert Palace, exit by the ladder to the world map, where optional activities resume before Esto Gaza.",
     missableIds: ["missable.disc-3.picking-up-the-trail.story-lock-in"],
-    sourceIds: ["gamefaqs-picking-up-trail-71891", "jegged-desert-palace"],
+    sourceIds: ["gamefaqs-picking-up-trail-71891", "gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "jegged-desert-palace", "jegged-returning-desert-palace"],
   },
   {
     id: "cutoff.mount-gulug.twister",

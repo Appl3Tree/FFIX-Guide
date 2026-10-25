@@ -812,6 +812,34 @@ if (
 ) {
   errors.push("The Jump Rope Mognet letter must have distinct sourced cutoff windows for Disc I and its Disc II recovery.");
 }
+const desertPalaceLockinWarning = missablesById.get("missable.disc-3.picking-up-the-trail.story-lock-in");
+const desertPalaceLockinCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.desert-palace.route-lock-in");
+const desertPalaceExitEdge = gameRouteEdgesById.get("story.desert-palace-to-lost-continent");
+const desertPalacePartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.oeilvert-desert-palace");
+const desertPalaceReturnSourceIds = ["gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "jegged-returning-desert-palace"];
+if (
+  !desertPalaceLockinWarning?.nextAvailability?.includes("climb the exit ladder to the world map") ||
+  !desertPalaceLockinWarning.nextAvailability.includes("optional activities before Esto Gaza") ||
+  desertPalaceReturnSourceIds.some((sourceId) => !desertPalaceLockinWarning.sourceIds.includes(sourceId))
+) {
+  errors.push("The Desert Palace lock-in warning must identify the sourced world-map return and optional window before Esto Gaza.");
+}
+if (
+  desertPalaceLockinCutoff?.edgeId !== "story.picking-up-the-trail-to-forgotten-continent" ||
+  !desertPalaceLockinCutoff.trigger.includes("exit by the ladder to the world map") ||
+  !desertPalaceLockinCutoff.trigger.includes("before Esto Gaza") ||
+  desertPalaceReturnSourceIds.some((sourceId) => !desertPalaceLockinCutoff.sourceIds.includes(sourceId))
+) {
+  errors.push("The Desert Palace lock-in cutoff must retain the correct pre-sinkhole edge and sourced recovery boundary.");
+}
+if (
+  !desertPalaceExitEdge?.summary.includes("free travel and optional activities resume") ||
+  desertPalaceReturnSourceIds.some((sourceId) => !desertPalaceExitEdge.sourceIds.includes(sourceId)) ||
+  !desertPalacePartySequence?.phases[2]?.summary.includes("exit by the ladder to the world map") ||
+  !desertPalacePartySequence.phases[2].summary.includes("before Esto Gaza")
+) {
+  errors.push("The Desert Palace story edge and party sequence must show where open travel resumes after the split.");
+}
 const friendlyCreatureObjectiveIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
   "disc-2.journey-to-treno.friendly-ghost",
