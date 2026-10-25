@@ -3964,8 +3964,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "aftermath-deliver-potions",
             kind: "required",
-            text: "Return to the Royal Chamber with the Beautiful, Strange, and Unusual Potions. Watch Doctor Tot's scene with Cid, then leave the Royal Chamber and watch No Free Lunch if it is available.",
-            detail: "The potions are found at Alice's shop plaza, Michael's studio, and Cinna in the Tantalus Hideout. GameFAQs groups No Free Lunch with the earlier Something Washed Ashore ATE; if that prior Treno event was missed, treat the ATE availability as conditional rather than guaranteed.",
+            text: "Return to the Royal Chamber with the Beautiful, Strange, and Unusual Potions. Watch Doctor Tot's scene with Cid, then leave the Royal Chamber for No Free Lunch if Something Washed Ashore was viewed earlier.",
+            detail: "The potions are found at Alice's shop plaza, Michael's studio, and Cinna in the Tantalus Hideout. GameFAQs explicitly lists Something Washed Ashore as a condition for No Free Lunch. Something Washed Ashore itself requires Hallucination in Treno, so this is a two-step prior-scene gate; keep fewer than 50 Gil through the potion handoff.",
             objectiveIds: ["disc-3.the-aftermath.potions", "disc-3.the-aftermath.ates"],
           },
         ],

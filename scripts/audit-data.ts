@@ -194,6 +194,30 @@ if (
   errors.push("Treno's first-six ATE safe route and source-supported Crime and Punishment hatch window must remain separate, with the Unexpected Visitor fallback uncertainty preserved.");
 }
 
+const aftermathSomethingWashedAshore = activeTimeEvents.find((event) => event.objectiveId === "ate.lindblum-something-washed-ashore");
+const aftermathSelfReproach = activeTimeEvents.find((event) => event.objectiveId === "ate.lindblum-self-reproach");
+const aftermathDeepAnger = activeTimeEvents.find((event) => event.objectiveId === "ate.lindblum-deep-anger");
+const aftermathNoFreeLunch = activeTimeEvents.find((event) => event.objectiveId === "ate.lindblum-no-free-lunch");
+const aftermathGiveMeMyMoney = activeTimeEvents.find((event) => event.objectiveId === "ate.lindblum-give-me-my-money");
+const aftermathAteCutoff = cutoffsById.get("cutoff.aftermath.blue-narciss.ates");
+if (
+  !aftermathSomethingWashedAshore?.prerequisites?.includes("ate.treno-hallucination") ||
+  !["gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath"].every((sourceId) => aftermathSomethingWashedAshore.sourceIds.includes(sourceId)) ||
+  !aftermathSelfReproach?.trigger.includes("automatically during the conference") ||
+  !aftermathDeepAnger?.trigger.includes("automatically during the conference") ||
+  !["gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath"].every((sourceId) => aftermathDeepAnger.sourceIds.includes(sourceId)) ||
+  !aftermathNoFreeLunch?.prerequisites?.includes("ate.lindblum-something-washed-ashore") ||
+  !aftermathNoFreeLunch.trigger.includes("fewer than 50 Gil") ||
+  !aftermathGiveMeMyMoney?.prerequisites?.includes("ate.lindblum-no-free-lunch") ||
+  !aftermathGiveMeMyMoney.trigger.includes("board the Blue Narciss") ||
+  !aftermathAteCutoff?.sourceIds.includes("gamefaqs-the-aftermath-71891") ||
+  !aftermathAteCutoff?.trigger.includes("Give Me My Money") ||
+  !ateObjectiveDependencies.some((edge) => edge.prerequisiteObjectiveId === "ate.lindblum-something-washed-ashore" && edge.dependentObjectiveId === "ate.lindblum-no-free-lunch") ||
+  !ateObjectiveDependencies.some((edge) => edge.prerequisiteObjectiveId === "ate.lindblum-no-free-lunch" && edge.dependentObjectiveId === "ate.lindblum-give-me-my-money")
+) {
+  errors.push("Lindblum's Disc III ATE graph must preserve the Hallucination → Something Washed Ashore → No Free Lunch chain, automatic conference ATE order, and under-50-Gil ship trigger.");
+}
+
 if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
 for (const chapterId of enemyCatalogCoverage.chapterIds) {
   if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);

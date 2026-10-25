@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest route audit separates Treno's first-six safe ATE route from the source-supported Crime and Punishment tower-exit window after Doctor Tot opens the hatch and before descent. Unexpected Visitor's possible later fallback remains unverified. Repository checks pass; direct game/release verification remains open.
+No account-owner setup action changed. The latest guide-content update encodes the Disc III Lindblum return chain Hallucination → Something Washed Ashore → No Free Lunch → Give Me My Money, including the fewer-than-50-Gil setup and Blue Narciss trigger. The audit reports 0 errors and 181 coverage warnings; lint, typecheck, build, and whitespace checks pass. Tests and direct game/release verification were not run.
 
 No account-owner setup action changed. The latest guide-content milestone reconciles Cleyra's evacuation directions and removes an unsupported version-dependent label; repository lint, typecheck, audit, build, and whitespace checks pass. Direct game/release verification remains open.
 
