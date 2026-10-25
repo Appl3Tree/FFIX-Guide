@@ -158,7 +158,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.ice-cavern",
     toChapterId: "disc-1.village-of-dali",
     relationship: "required-story",
-    summary: "Defeating Black Waltz 1 and Sealion returns Zidane to the world map. Dali is the next destination; the nearby South Gate and friendly Mu are optional stops.",
+    summary: "Defeating Black Waltz 1 and Sealion returns Zidane to the world map. Dali is the next destination; the nearby South Gate and friendly Mu are optional stops. The party can return through this link after an optional Ice Cavern sweep during the Dali visit.",
     sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-dali-71891", "jegged-ice-cavern", "jegged-dali"],
   },
   {
@@ -168,6 +168,14 @@ export const gameRouteEdges: GameRouteEdge[] = [
     relationship: "required-story",
     summary: "After the Dali factory and Black Waltz 2, the party may rest and shop or depart immediately. Boarding the airship at the field prompt advances to the Cargo Ship sequence.",
     sourceIds: ["gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "jegged-dali", "jegged-cargo-ship"],
+  },
+  {
+    id: "return.dali-to-ice-cavern",
+    fromChapterId: "disc-1.village-of-dali",
+    toChapterId: "disc-1.ice-cavern",
+    relationship: "optional-return",
+    summary: "Before boarding the Cargo Ship, return from Dali to sweep any of the eight Ice Cavern chests you missed. One Steam missables guide says you can backtrack for a missed Mois letter after the boss, but a completionist review reports no other publisher confirms the recovery; take the letter on the first pass. Leaving Dali by ship closes the cavern; returning from this sweep rejoins the story at the existing Ice Cavern → Dali link.",
+    sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-ice-cavern-79143", "steam-missable-content-guide-2988011418", "gamefaqs-missables-71891", "gamefaqs-dali-71891", "jegged-ice-cavern", "jegged-dali", "elitegrindlab-ice-cavern"],
   },
   {
     id: "story.cargo-ship-to-lindblum",

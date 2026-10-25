@@ -502,7 +502,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "ice-mois-letter",
             kind: "optional",
             text: "Speak to Mois and choose Mognet to accept his letter for Gumo, who is in the Dali inn. Save with Mois before returning to the fork.",
-            detail: "The letter begins the next Mognet handoff. If you leave the cave without it, you can return from the world map after the boss while Dali is still open; the conservative route is to collect it now and deliver it when you reach the inn.",
+            detail: "The letter begins the next Mognet handoff. Collect it now. One Steam missables guide says to backtrack for a missed letter after the boss, but a completionist review says no other publisher confirms that recovery; if skipped, try returning before boarding without relying on it.",
             objectiveIds: ["disc-1.ice-cavern.mois-letter"],
           },
           {
@@ -549,8 +549,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "ice-cavern-final-return-window",
             kind: "cutoff",
-            text: "Before leaving Dali for the next story leg, return from the world map if any of the eight Ice Cavern chests remain unopened: Tent, Ether, two Potions, Mage Masher, Elixir, Phoenix Down, and Leather Wrist. Also make sure Mois's letter is accepted and delivered to Gumo at the Dali inn.",
-            detail: "The cave exit is not the point of no return. GameFAQs and the completionist area review place the cutoff at leaving Dali; this guide recommends sweeping the cavern on the first pass, then uses this as a recovery check.",
+            text: "Before leaving Dali for the next story leg, return from the world map if any of the eight Ice Cavern chests remain unopened: Tent, Ether, two Potions, Mage Masher, Elixir, Phoenix Down, and Leather Wrist. Mois's letter is safest to collect on the first pass; if missed, try to accept it on a return and deliver it to Gumo.",
+            detail: "The cave exit is not the point of no return for its chests. GameFAQs and the completionist area review place the cutoff at leaving Dali. One Steam guide recommends a post-boss letter return, but another publisher says it found no independent confirmation; treat this as a best-effort check, not a guaranteed recovery.",
             objectiveIds: ["disc-1.ice-cavern.treasure-sweep"],
           },
           {
@@ -577,7 +577,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "dali-letter-delivery",
             kind: "optional",
             text: "When you reach Dali, visit the inn and use Mognet with Gumo to deliver Mois's letter. Complete this before leaving Dali; the next chapter will cover the village route and its departure cutoff.",
-            objectiveIds: ["disc-1.village-of-dali.mois-letter-delivery"],
+            objectiveIds: ["disc-1.ice-cavern.mois-letter", "disc-1.village-of-dali.mois-letter-delivery"],
           },
         ],
       },
@@ -615,9 +615,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "dali-gumo-letter-and-save",
             kind: "save",
-            text: "Exit the bedroom and view the other opening ATE. Speak with Gumo, choose Mognet, and deliver Mois's letter from the Ice Cavern; save at Gumo before leaving the inn.",
-            detail: "If you did not accept Mois's letter, the Ice Cavern can still be reached from the world map before Dali's first departure. Return for it now, then bring it to Gumo; boarding the Cargo Ship closes that route.",
-            objectiveIds: ["disc-1.village-of-dali.mois-letter-delivery"],
+            text: "Exit the bedroom and view the other opening ATE. Speak with Gumo, choose Mognet, and deliver Mois's letter from the Ice Cavern if you accepted it; save at Gumo before leaving the inn.",
+            detail: "If you missed the letter, try returning to the Ice Cavern before Dali's first departure. One Steam missables guide says Mois can give it after the boss, but another completionist review says no other publisher confirms this; deliver it only if Mois offers it.",
+            objectiveIds: ["disc-1.ice-cavern.mois-letter", "disc-1.village-of-dali.mois-letter-delivery"],
           },
           {
             id: "dali-first-ate-check",
@@ -768,9 +768,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "dali-final-ice-cavern-check",
             kind: "cutoff",
-            text: "Before boarding, confirm the Ice Cavern's eight chests and the Mois-to-Gumo delivery are complete. If needed, walk back across the world map to the cave now; the Ice Cavern becomes inaccessible when you leave Dali by Cargo Ship.",
+            text: "Before boarding, confirm the Ice Cavern's eight chests and check the Mois-to-Gumo delivery. If any chests remain, walk back across the world map to the cave now; if Mois's letter was missed, make a best-effort return, since its post-boss recovery is disputed.",
             detail: "Dali itself reopens later, and the Aries Stellazzio may be recoverable on a return according to general Stellazzio references. The one-time underground factory has already sealed after its crate sequence; Dali's upper windmill rooms and Mayor's Key rewards are deferred to the later return route.",
-            objectiveIds: ["disc-1.ice-cavern.treasure-sweep", "disc-1.village-of-dali.mois-letter-delivery"],
+            objectiveIds: ["disc-1.ice-cavern.treasure-sweep", "disc-1.ice-cavern.mois-letter", "disc-1.village-of-dali.mois-letter-delivery"],
           },
           {
             id: "dali-board-cargo-ship",
