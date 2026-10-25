@@ -1549,6 +1549,65 @@ if (!grottoPool || grottoPool.kind !== "random-pool" || grottoRoster.some((enemy
   !cleyraIceStaffPath || cleyraIceStaffPath.method !== "chest" || cleyraIceStaffPath.chapterId !== "disc-2.cleyra") {
   errors.push("Gizamaluke's Grotto must keep its regional pool, two fixed Type A pairs, boss steal warning, and later Ice Staff recovery linked across the bestiary and item catalog.");
 }
+const burmeciaCityPool = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.city-random-pool");
+const burmeciaRegionPool = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia-region.world-map-pool");
+const burmeciaTypeAPair = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.type-a-pair");
+const burmeciaMimicEncounters = [
+  enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.suburb.mimic-chest-1"),
+  enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.suburb.mimic-chest-2"),
+  enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.uptown.mimic-chest"),
+];
+const burmeciaBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.beatrix");
+const burmeciaBoss = enemyRecords.find((enemy) => enemy.id === "enemy.beatrix-burmecia");
+const burmeciaCityRoster = ["enemy.basilisk", "enemy.ironite", "enemy.magic-vice"];
+const burmeciaRegionRoster = ["enemy.lizard-man", "enemy.nymph", "enemy.sand-scorpion", "enemy.skeleton", "enemy.yeti"];
+const burmeciaBossSteals = [
+  { itemId: "game-item.phoenix-down", pathId: "item-path.burmecia.phoenix-down-beatrix" },
+  { itemId: "game-item.chain-plate", pathId: "item-path.burmecia.beatrix-chain-plate" },
+  { itemId: "game-item.mythril-sword", pathId: "item-path.burmecia.beatrix-mythril-sword" },
+];
+if (!burmeciaCityPool || burmeciaCityPool.chapterId !== "disc-1.burmecia" || burmeciaCityPool.kind !== "random-pool" ||
+  burmeciaCityRoster.some((enemyId) => !burmeciaCityPool.formation.some((member) => member.enemyId === enemyId && member.quantity === null)) ||
+  burmeciaCityPool.formation.some((member) => member.enemyId === "enemy.mimic" || member.enemyId === "enemy.type-a") ||
+  !burmeciaRegionPool || burmeciaRegionPool.kind !== "random-pool" || burmeciaRegionPool.chapterId !== "disc-1.journey-to-burmecia" ||
+  burmeciaRegionRoster.some((enemyId) => !burmeciaRegionPool.formation.some((member) => member.enemyId === enemyId && member.quantity === null)) ||
+  !burmeciaTypeAPair || burmeciaTypeAPair.kind !== "fixed" || !burmeciaTypeAPair.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2) ||
+  burmeciaMimicEncounters.some((encounter) => !encounter || encounter.kind !== "fixed" || !encounter.formation.some((member) => member.enemyId === "enemy.mimic" && member.quantity === 1))) {
+  errors.push("Burmecia must keep its city pool, regional world-map pool, scripted Type A pair, and three optional Mimic chest battles separate.");
+}
+const burmeciaTypeARecord = enemyRecords.find((enemy) => enemy.id === "enemy.type-a");
+const burmeciaMagicVice = enemyRecords.find((enemy) => enemy.id === "enemy.magic-vice");
+const burmeciaNymph = enemyRecords.find((enemy) => enemy.id === "enemy.nymph");
+if (!burmeciaTypeARecord?.encounterIds.includes("encounter.burmecia.type-a-pair") ||
+  !burmeciaTypeARecord.notes.some((note) => note.includes("155 EXP") && note.includes("115 EXP")) ||
+  !burmeciaMagicVice?.notes.some((note) => note.includes("Echo Screen") && note.includes("Eye Drops")) ||
+  !burmeciaNymph?.blueMagic.some((skill) => skill.name === "Night" && skill.objectiveIds.includes("disc-1.journey-to-burmecia.blue-magic-night"))) {
+  errors.push("Burmecia's Type A table disagreement, Magic Vice steal-slot disagreement, and Nymph Night objective must remain source-linked.");
+}
+if (!burmeciaBossEncounter || burmeciaBossEncounter.kind !== "boss" ||
+  !burmeciaBossEncounter.formation.some((member) => member.enemyId === "enemy.beatrix-burmecia" && member.quantity === 1) ||
+  !burmeciaBossEncounter.objectiveIds.includes("disc-1.burmecia.beatrix-steals") ||
+  !burmeciaBossEncounter.missableIds.includes("missable.disc-1.burmecia.beatrix-steals") ||
+  !burmeciaBossEncounter.cutoffIds.includes("cutoff.burmecia.beatrix-steals") ||
+  !burmeciaBoss || burmeciaBoss.kind !== "boss" ||
+  !burmeciaBoss.stats.some((stat) => stat.field === "level" && stat.value === 14 && stat.verification === "disputed") ||
+  !burmeciaBoss.stats.some((stat) => stat.field === "level" && stat.value === 16 && stat.verification === "disputed") ||
+  !burmeciaBoss.stats.some((stat) => stat.field === "HP" && stat.value === 3630 && stat.verification === "disputed") ||
+  !burmeciaBoss.stats.some((stat) => stat.field === "HP" && stat.value === 3360 && stat.verification === "disputed") ||
+  !burmeciaBoss.stats.some((stat) => stat.field === "MP" && stat.value === 3467 && stat.verification === "disputed") ||
+  !burmeciaBoss.stats.some((stat) => stat.field === "MP" && stat.value === 3367 && stat.verification === "disputed")) {
+  errors.push("Beatrix's Burmecia boss dossier must link the one-time steal warning/cutoff and retain both published stat profiles as disputed claims.");
+}
+for (const expected of burmeciaBossSteals) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!burmeciaBoss?.steals.some((slot) => slot.itemId === expected.itemId) ||
+    !burmeciaBoss.routeObjectiveIds.includes("disc-1.burmecia.beatrix-steals") ||
+    !burmeciaBoss.missableIds.includes("missable.disc-1.burmecia.beatrix-steals") ||
+    !path || path.itemId !== expected.itemId || path.method !== "steal" || path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.burmecia.beatrix-steals")) {
+    errors.push(`Beatrix's ${expected.itemId} steal must connect the bestiary to its existing one-time objective and item path.`);
+  }
+}
 const qualeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.quale-99-frogs");
 const qualeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.quale");
 if (!qualeEncounter || qualeEncounter.kind !== "boss" ||

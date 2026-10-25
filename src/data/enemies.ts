@@ -84,6 +84,7 @@ const daliChapterId = "disc-1.village-of-dali";
 const lindblumChapterId = "disc-1.lindblum";
 const exploringLindblumChapterId = "disc-1.exploring-lindblum-kingdom";
 const journeyToBurmeciaChapterId = "disc-1.journey-to-burmecia";
+const burmeciaChapterId = "disc-1.burmecia";
 const returnToGaiaChapterId = "disc-4.return-to-gaia";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
@@ -116,6 +117,12 @@ const lindblumLowlandSources = [enemyListSourceId, "cavesofnarshe-enemies", "cav
 const qusMarshSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "elitegrindlab-qus-marsh", "gamefaqs-abilities-71891"];
 const qualeSources = ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh", "rpgclassics-bestiary-n-s"];
 const grottoEnemySources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke", "gamefaqs-abilities-71891"];
+const burmeciaEnemySources = [enemyListSourceId, "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia"];
+const burmeciaRegionSources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
+const burmeciaBossSources = ["gamefaqs-burmecia-71891", "jegged-burmecia", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
+const burmeciaStealsObjectiveId = "disc-1.burmecia.beatrix-steals";
+const burmeciaStealsMissableId = "missable.disc-1.burmecia.beatrix-steals";
+const burmeciaStealsCutoffId = "cutoff.burmecia.beatrix-steals";
 const gizamalukeBossSources = [...grottoEnemySources, "cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss"];
 const huntEnemySources = [enemyListSourceId, "gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
@@ -412,6 +419,110 @@ const grottoEncounters: EnemyEncounter[] = [
     missableIds: [gizamalukeStealsMissableId],
     cutoffIds: [gizamalukeStealsCutoffId],
     notes: ["The Elixir, Magus Hat, and Ice Staff steals are available only during this one-time fight; the item types have later sources."],
+  },
+];
+
+const burmeciaEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.burmecia.city-random-pool",
+    title: "Burmecia city random encounters",
+    chapterId: burmeciaChapterId,
+    location: "Burmecia streets, houses, and square",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.basilisk", quantity: null },
+      { enemyId: "enemy.ironite", quantity: null },
+      { enemyId: "enemy.magic-vice", quantity: null },
+    ],
+    sourceIds: burmeciaEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The city route lists Basilisk, Ironite, and Magic Vice as ordinary encounters. Type A is a separate scripted pair, while the three Mimics are chest-triggered optional fights; no exact random formations or rates are inferred."],
+  },
+  {
+    id: "encounter.burmecia-region.world-map-pool",
+    title: "Burmecia and Cleyra region world-map encounters",
+    chapterId: journeyToBurmeciaChapterId,
+    location: "World-map areas around Burmecia and Cleyra, including Daines-horse Basin",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.lizard-man", quantity: null },
+      { enemyId: "enemy.nymph", quantity: null },
+      { enemyId: "enemy.sand-scorpion", quantity: null },
+      { enemyId: "enemy.skeleton", quantity: null },
+      { enemyId: "enemy.yeti", quantity: null },
+    ],
+    sourceIds: burmeciaRegionSources,
+    objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs groups these as world-map enemies surrounding Burmecia and Cleyra and separately says Skeletons occur there. The Daines-horse Basin walkthrough identifies Nymph as a Night source; exact map-tile rates and formation combinations are not published."],
+  },
+  {
+    id: "encounter.burmecia.type-a-pair",
+    title: "Type A Black Mage pair",
+    chapterId: burmeciaChapterId,
+    location: "Street beyond the Burmecia entrance, after Zorn and Thorn's scene",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.type-a", quantity: 2 }],
+    sourceIds: burmeciaEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is a mandatory scripted pair. Walkthroughs call them Black Mages; the enemy table's record name is Type A."],
+  },
+  {
+    id: "encounter.burmecia.suburb.mimic-chest-1",
+    title: "Suburb Mimic chest — upper room",
+    chapterId: burmeciaChapterId,
+    location: "Optional chest on the upper balcony before the Germinas Boots walkway",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.mimic", quantity: 1 }],
+    sourceIds: burmeciaEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Opening this optional chest starts a Mimic battle; leaving it closed avoids the fight."],
+  },
+  {
+    id: "encounter.burmecia.suburb.mimic-chest-2",
+    title: "Suburb Mimic chest — collapsed-floor route",
+    chapterId: burmeciaChapterId,
+    location: "Optional upper-floor chest reached after dropping the crumbling balcony",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.mimic", quantity: 1 }],
+    sourceIds: burmeciaEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This optional chest is another Mimic and can be left unopened."],
+  },
+  {
+    id: "encounter.burmecia.uptown.mimic-chest",
+    title: "Uptown Mimic chest",
+    chapterId: burmeciaChapterId,
+    location: "Optional chest at the far end of the Uptown balcony after crossing the broken statue",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.mimic", quantity: 1 }],
+    sourceIds: burmeciaEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Opening this optional chest starts a Mimic battle; the chest can be left closed."],
+  },
+  {
+    id: "encounter.burmecia.beatrix",
+    title: "Beatrix — Burmecia Palace",
+    chapterId: burmeciaChapterId,
+    location: "Palace throne room, after the confrontation with Queen Brahne and Kuja",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.beatrix-burmecia", quantity: 1 }],
+    sourceIds: burmeciaBossSources,
+    objectiveIds: [burmeciaStealsObjectiveId],
+    missableIds: [burmeciaStealsMissableId],
+    cutoffIds: [burmeciaStealsCutoffId],
+    notes: ["This one-time battle has a short scripted ending, normally after Beatrix's tenth turn. Some sources also allow the fight to end if her HP reaches zero and differ on whether that counts as a win; the safe route prioritizes survival and selected steals."],
   },
 ];
 
@@ -962,7 +1073,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -2153,7 +2264,7 @@ const grottoEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.type-a",
     name: "Type A",
-    encounterIds: ["encounter.gizamaluke-grotto.random-pool", "encounter.gizamaluke-grotto.type-a-first-pair", "encounter.gizamaluke-grotto.type-a-second-pair"],
+    encounterIds: ["encounter.gizamaluke-grotto.random-pool", "encounter.gizamaluke-grotto.type-a-first-pair", "encounter.gizamaluke-grotto.type-a-second-pair", "encounter.burmecia.type-a-pair"],
     stats: enemyStats([["level", 8], ["HP", 398], ["MP", 293], ["EXP", 115], ["AP", 2], ["Gil", 199]]),
     steals: [enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
     drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether")],
@@ -2167,8 +2278,8 @@ const grottoEnemyRecords: EnemyRecord[] = [
     blueMagic: [],
     strategies: [{ title: "Silence the scripted pair if needed", detail: "Silence works against Type A. The mandatory pairs use spells and Strike, but the enemy table describes their attacks as modest compared with the Grotto's Lamia.", sourceIds: [enemyListSourceId, "gamefaqs-grotto-south-gate-79143"] }],
     routeObjectiveIds: [],
-    notes: ["Type A is the name used by the enemy list; the route walkthroughs call these Black Mages. The two scripted pairs are represented separately from the random-pool entry."],
-  }, journeyToBurmeciaChapterId, grottoEnemySources),
+    notes: ["Type A is the name used by the enemy list; the route walkthroughs call these Black Mages. The two Grotto pairs and Burmecia's separate scripted pair are tracked independently. EliteGrindLab notes that Game8 prints 155 EXP/two steal slots while Caves of Narshe prints 115 EXP/four slots; this record retains the GameFAQs enemy-table values and leaves the table discrepancy explicit."],
+  }, journeyToBurmeciaChapterId, [...grottoEnemySources, ...burmeciaEnemySources, "cavesofnarshe-enemies"]),
   chapterBoss({
     id: "enemy.gizamaluke",
     name: "Gizamaluke",
@@ -2198,6 +2309,178 @@ const grottoEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [gizamalukeStealsObjectiveId],
     notes: ["The boss drops a Tent. Route sources agree on the three named steals, but their printed steal rates differ; no probabilities or attempt counts are asserted."],
   }, journeyToBurmeciaChapterId, gizamalukeBossSources, [gizamalukeStealsMissableId], [gizamalukeStealsCutoffId]),
+];
+
+const burmeciaEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.basilisk",
+    name: "Basilisk",
+    encounterIds: ["encounter.burmecia.city-random-pool"],
+    stats: enemyStats([["level", 6], ["HP", 346], ["MP", 267], ["EXP", 167], ["AP", 1], ["Gil", 233]]),
+    steals: [enemyLoot("common", "game-item.soft"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.soft"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.soft")],
+    facts: [
+      enemyFact("type", "Beast"), enemyFact("elemental-weakness", "Ice"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Tongue", [enemyListSourceId], "Basic physical damage."),
+      sourcedFact("attack", "Slow and Gradual Petrify", [enemyListSourceId], "Gradual Petrify counts down to petrification; defeat the Basilisk before the timer expires or remove the effect with a Soft."),
+    ],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Ice and watch the petrification timer", detail: "Ice exploits its weakness. A Soft can remove Gradual Petrify, but ending the battle before the timer expires also prevents petrification.", sourceIds: [enemyListSourceId, "elitegrindlab-burmecia"] }],
+    routeObjectiveIds: [],
+    notes: ["Burmecia's enemy table reports Basilisk's Gradual Petrify attack; the guide keeps it as a combat hazard rather than treating ordinary Petrify vulnerability as the same status."],
+  }, burmeciaChapterId, [...burmeciaEnemySources, "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.magic-vice",
+    name: "Magic Vice",
+    encounterIds: ["encounter.burmecia.city-random-pool"],
+    stats: enemyStats([["level", 7], ["HP", 297], ["MP", 278], ["EXP", 212], ["AP", 1], ["Gil", 239]]),
+    steals: [
+      sourcedLoot("common", "game-item.echo-screen", [enemyListSourceId, "jegged-burmecia"]),
+      enemyLoot("uncommon", "game-item.ether"), enemyLoot("semi-rare", "game-item.ether"), enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.ether"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "None"), enemyFact("elemental-weakness", "None listed"), enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, and Venom"),
+      sourcedFact("attack", "Magic Hammer", [enemyListSourceId], "Drains a random amount of one character's MP."),
+      sourcedFact("attack", "Mug", [enemyListSourceId], "Deals minor damage, steals an item from the party, and may be followed by the enemy fleeing."),
+    ],
+    blueMagic: [{ name: "Magic Hammer", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.burmecia.blue-magic"] }],
+    strategies: [{ title: "Eat it promptly and protect inventory", detail: "Magic Vice has low HP and can flee after Mugging an item. Quina can learn Magic Hammer with Eat; use physical attacks to weaken it and check the inventory if it steals.", sourceIds: [enemyListSourceId, "gamefaqs-burmecia-71891"] }],
+    routeObjectiveIds: ["disc-1.burmecia.blue-magic"],
+    notes: ["GameFAQs and Jegged list Echo Screen as the first steal; EliteGrindLab records a publisher disagreement between Echo Screen and Eye Drops for that slot. This record follows the GameFAQs enemy table and leaves the alternate item unresolved. GameFAQs and Jegged also differ slightly on printed EXP/AP values; the selected table values remain source-specific."],
+  }, burmeciaChapterId, [...burmeciaEnemySources, "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.mimic",
+    name: "Mimic",
+    encounterIds: ["encounter.burmecia.suburb.mimic-chest-1", "encounter.burmecia.suburb.mimic-chest-2", "encounter.burmecia.uptown.mimic-chest"],
+    stats: enemyStats([["level", 8], ["HP", 346], ["MP", 295], ["EXP", 320], ["AP", 2], ["Gil", 777]]),
+    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", "game-item.ether"), enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "None"), enemyFact("elemental-weakness", "Holy"), enemyFact("elemental-resistance", "Shadow (half damage)"),
+      enemyFact("status-vulnerability", "Darkness, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Eat and Poison", [enemyListSourceId], "Eat deals weak physical damage; Poison can inflict the Poison status."),
+      sourcedFact("attack", "Call", [enemyListSourceId, "elitegrindlab-burmecia"], "Summons a Magic Vice that may Mug an item from the party."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Treat the chests as optional fights", detail: "Three Burmecia chests are Mimics. If opened, the Mimic can summon a Magic Vice; focus it promptly to reduce the chance of an item being stolen.", sourceIds: [enemyListSourceId, "gamefaqs-burmecia-71891", "elitegrindlab-burmecia"] }],
+    routeObjectiveIds: [],
+    notes: ["Burmecia's three chest-triggered Mimics are modeled as separate fixed optional encounters, not as members of its ordinary random pool."],
+  }, burmeciaChapterId, burmeciaEnemySources),
+  chapterEnemy({
+    id: "enemy.lizard-man",
+    name: "Lizard Man",
+    encounterIds: ["encounter.burmecia-region.world-map-pool"],
+    stats: enemyStats([["level", 10], ["HP", 589], ["MP", 359], ["EXP", 173], ["AP", 1], ["Gil", 218]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "None"), enemyFact("elemental-weakness", "Ice and Lightning"), enemyFact("elemental-resistance", "Water (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Protect", [enemyListSourceId], "May raise its own physical defense; switch to magic while the effect is active."),
+    ],
+    blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Ice or Lightning", detail: "Either listed element is effective. If Lizard Man casts Protect, use magic rather than relying on physical damage.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["GameFAQs places Lizard Man on the world map surrounding Burmecia and Cleyra; it is not part of the city's indoor random pool."],
+  }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.nymph",
+    name: "Nymph",
+    encounterIds: ["encounter.burmecia-region.world-map-pool"],
+    stats: enemyStats([["level", 9], ["HP", 458], ["MP", 345], ["EXP", 329], ["AP", 1], ["Gil", 303]]),
+    steals: [enemyLoot("common", "game-item.echo-screen"), enemyLoot("uncommon", "game-item.ore"), enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.annoyntment"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "None"), enemyFact("elemental-weakness", "Fire and Shadow"), enemyFact("elemental-resistance", "Holy (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Fira", [enemyListSourceId], "Powerful Fire-elemental spell."),
+    ],
+    blueMagic: [{ name: "Night", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "gamefaqs-journey-to-burmecia-71891"], objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"] }],
+    strategies: [{ title: "Use physical attacks and Fire or Shadow", detail: "Nymph is fairly resistant to magic overall but is weak to Fire and Shadow. Its Fira spell can be dangerous at this point; Quina can learn Night with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891"] }],
+    routeObjectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
+    notes: ["GameFAQs lists Nymph in the Burmecia/Cleyra world-map region and the route identifies it in Daines-horse Basin. One guide also labels Nymph as a Burmecia city enemy; that location claim is not merged into the indoor city pool."],
+  }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.sand-scorpion",
+    name: "Sand Scorpion",
+    encounterIds: ["encounter.burmecia-region.world-map-pool"],
+    stats: enemyStats([["level", 10], ["HP", 526], ["MP", 360], ["EXP", 400], ["AP", 1], ["Gil", 315]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.annoyntment"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.hi-potion")],
+    facts: [
+      enemyFact("type", "None"), enemyFact("elemental-weakness", "Ice"), enemyFact("elemental-resistance", "Water (absorbs)"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Fira", [enemyListSourceId], "Strong single-target Fire-elemental damage."),
+      sourcedFact("attack", "Poison Counter", [enemyListSourceId], "Non-fatal damage can trigger a counter that deals damage and inflicts Poison."),
+    ],
+    blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Ice and avoid Water", detail: "Ice exploits its weakness, while it absorbs Water. Be ready to cure Poison if a non-fatal hit triggers Poison Counter.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["Sand Scorpion is part of the world-map regional roster around Burmecia and Cleyra, not the indoor Burmecia pool."],
+  }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.yeti",
+    name: "Yeti",
+    encounterIds: ["encounter.burmecia-region.world-map-pool"],
+    stats: enemyStats([["level", 9], ["HP", 463], ["MP", 342], ["EXP", 133], ["AP", 1], ["Gil", 221]]),
+    steals: [enemyLoot("common", "game-item.eye-drops"), enemyLoot("uncommon", "game-item.ore"), enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.eye-drops"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Aerial"), enemyFact("elemental-weakness", "Wind and Shadow"), enemyFact("elemental-resistance", "Earth (nullified); Holy (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Bite, Blind Tail, and Blizzara", [enemyListSourceId], "Bite deals physical damage, Blind Tail can inflict Darkness, and Blizzara is a heavy Ice spell."),
+    ],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Wind or Shadow and watch for Blizzara", detail: "Wind and Shadow exploit its weaknesses. Its defense is low, but Blizzara can deal heavy damage; Quina can learn Pumpkin Head by eating it.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["Yeti is listed for the surrounding Burmecia/Cleyra world-map areas; no exact map-tile formation or encounter rate is published."],
+  }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891"]),
+  chapterBoss({
+    id: "enemy.beatrix-burmecia",
+    name: "Beatrix (Burmecia)",
+    encounterIds: ["encounter.burmecia.beatrix"],
+    stats: [
+      { field: "level", value: 14, sourceIds: ["cavesofnarshe-enemies", "jegged-burmecia", "elitegrindlab-burmecia"], verification: "disputed" },
+      { field: "level", value: 16, sourceIds: ["gamefaqs-burmecia-71891", "elitegrindlab-burmecia"], verification: "disputed" },
+      { field: "HP", value: 3630, sourceIds: ["cavesofnarshe-enemies", "jegged-burmecia", "elitegrindlab-burmecia"], verification: "disputed" },
+      { field: "HP", value: 3360, sourceIds: ["gamefaqs-burmecia-71891", "elitegrindlab-burmecia"], verification: "disputed" },
+      { field: "MP", value: 3467, sourceIds: ["cavesofnarshe-enemies", "elitegrindlab-burmecia"], verification: "disputed" },
+      { field: "MP", value: 3367, sourceIds: ["gamefaqs-burmecia-71891", "elitegrindlab-burmecia"], verification: "disputed" },
+      ...crossCheckedStats([["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-burmecia-71891", "cavesofnarshe-enemies"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.phoenix-down", burmeciaBossSources),
+      sourcedLoot("uncommon", "game-item.chain-plate", burmeciaBossSources),
+      sourcedLoot("semi-rare", null, burmeciaBossSources, "Nothing"),
+      sourcedLoot("rare", "game-item.mythril-sword", burmeciaBossSources),
+    ],
+    drops: [
+      sourcedLoot("always", null, burmeciaBossSources, "Nothing"),
+      sourcedLoot("common", null, burmeciaBossSources, "Nothing"),
+      sourcedLoot("uncommon", null, burmeciaBossSources, "Nothing"),
+      sourcedLoot("rare", null, burmeciaBossSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Human", burmeciaBossSources),
+      sourcedFact("elemental-weakness", "None listed", burmeciaBossSources),
+      sourcedFact("elemental-resistance", "None listed", burmeciaBossSources),
+      sourcedFact("status-vulnerability", "Slow", burmeciaBossSources),
+      sourcedFact("attack", "Attack", ["gamefaqs-burmecia-71891", "jegged-burmecia"], "Strong physical damage."),
+      sourcedFact("attack", "Thunder Slash", ["gamefaqs-burmecia-71891", "jegged-burmecia"], "Lightning-elemental attack; Coral Ring can absorb it and Silk Shirt reduces its damage."),
+      sourcedFact("attack", "Shock", ["gamefaqs-burmecia-71891"], "Can deal enough damage to knock out an early-game character."),
+      sourcedFact("attack", "Stock Break or Climhazzard", ["jegged-burmecia", "elitegrindlab-burmecia"], "Her scripted finisher leaves the party at 1 HP; publishers differ on which move appears."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Keep the party alive while Zidane steals", detail: "Use Slow if available, move vulnerable characters to the back row, heal through Thunder Slash and Shock, and attempt the selected steals before the scripted ending. Do not attack solely to force a faster finish while still stealing.", sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "elitegrindlab-burmecia"] },
+      { title: "Treat the Mythril Sword as an optional lottery", detail: "The Mythril Sword occupies the very rare fourth steal slot. The one-time turn window is short, and later sources provide the item type; prioritize Phoenix Down and Chain Plate if those copies matter to the chosen goal.", sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "elitegrindlab-burmecia"] },
+    ],
+    routeObjectiveIds: [burmeciaStealsObjectiveId],
+    notes: ["Published Beatrix stat tables disagree: most reviewed publishers give Level 14, 3,630 HP, and 3,467 MP, while GameFAQs prints Level 16, 3,360 HP, and 3,367 MP. The fight's end condition is also described differently: some call it unwinnable, while others say it can end at 0 HP; the finisher and 1-HP party outcome are consistently described. Steal rates are not modeled."],
+  }, burmeciaChapterId, burmeciaBossSources, [burmeciaStealsMissableId], [burmeciaStealsCutoffId]),
 ];
 
 const earlyDaliEnemyRecords: EnemyRecord[] = [
@@ -2324,7 +2607,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.skeleton",
     name: "Skeleton",
-    encounterIds: ["encounter.dali-underground.random-pool", "encounter.gizamaluke-grotto.random-pool"],
+    encounterIds: ["encounter.dali-underground.random-pool", "encounter.gizamaluke-grotto.random-pool", "encounter.burmecia-region.world-map-pool"],
     stats: enemyStats([["level", 8], ["HP", 400], ["MP", 293], ["EXP", 104], ["AP", 1], ["Gil", 209]]),
     steals: [
       enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"),
@@ -2344,8 +2627,8 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "rpgclassics-gizamaluke"], objectiveIds: [] }],
     strategies: [{ title: "Use Vivi's Fire and watch the HP spike", detail: "At 400 HP this is much tougher than nearby Disc I enemies. Fire and Holy exploit its weaknesses; Whirl Slash can deal heavy damage to front-row characters.", sourceIds: [enemyListSourceId, "elitegrindlab-dali"] }],
     routeObjectiveIds: [],
-    notes: ["The enemy table and RPGClassics list Skeleton in Gizamaluke's Grotto. Its separate Dali underground appearance is disputed: Jegged and EliteGrindLab include it; GameFAQs, Caves of Narshe, and Final Fantasy Wiki omit it. EliteGrindLab reports it only in Dali formations paired with Vice."],
-  }, daliChapterId, [...new Set([...daliEnemySources, ...grottoEnemySources])]),
+    notes: ["The enemy table and RPGClassics list Skeleton in Gizamaluke's Grotto, and GameFAQs separately includes Skeletons on the Burmecia/Cleyra surrounding world map. Its Dali underground appearance is a distinct dispute: Jegged and EliteGrindLab include it; GameFAQs, Caves of Narshe, and Final Fantasy Wiki omit it. EliteGrindLab reports it only in Dali formations paired with Vice."],
+  }, daliChapterId, [...new Set([...daliEnemySources, ...grottoEnemySources, ...burmeciaRegionSources])]),
   chapterBoss({
     id: "enemy.black-waltz-2",
     name: "Black Waltz 2",
@@ -2589,7 +2872,7 @@ const lindblumAreaEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.ironite",
     name: "Ironite",
-    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    encounterIds: ["encounter.lindblum-area.lowlands-pool", "encounter.burmecia.city-random-pool"],
     stats: enemyStats([["level", 11], ["HP", 889], ["MP", 374], ["EXP", 577], ["AP", 2], ["Gil", 269]]),
     steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.soft"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
     drops: [enemyLoot("always", "game-item.hi-potion"), enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.soft"), enemyLoot("rare", "game-item.ether")],
@@ -2601,8 +2884,8 @@ const lindblumAreaEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Angel's Snack", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
     strategies: [{ title: "Treat Ironite as the high-risk lowland encounter", detail: "Flame deals percentage-based Fire damage, while Wings and Thundara add pressure. Ice/Wind attacks, Dragon Killer, Bird Killer, and status effects are recommended by GameFAQs.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
-    notes: ["Ironite appears below Lindblum in the lowland pool. Its name is stable across the sources reviewed."],
-  }, exploringLindblumChapterId, lindblumLowlandSources),
+    notes: ["Ironite appears in both Lindblum's lowland pool and Burmecia's city pool; the same stat and battle table is used for both appearances."],
+  }, exploringLindblumChapterId, [...lindblumLowlandSources, ...burmeciaEnemySources]),
   chapterEnemy({
     id: "enemy.ladybird",
     name: "Ladybird (Ladybug in non-PAL versions)",
@@ -2726,6 +3009,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
   ...grottoEnemyRecords,
+  ...burmeciaEnemyRecords,
   ...earlyDaliEnemyRecords,
   ...lindblumEnemyRecords,
   ...lindblumAreaEnemyRecords,
@@ -2852,8 +3136,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

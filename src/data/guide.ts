@@ -1007,7 +1007,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/enemy-list",
     accessed: "2026-10-25",
-    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
+    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. The Burmecia tables cover its city enemies and the world-map roster surrounding Burmecia and Cleyra, including Skeletons; the guide keeps the city pool, Mimic chest fights, scripted Type A pair, and regional pool separate. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
   },
   {
     id: "gamefaqs-monster-list-20490",
@@ -1351,7 +1351,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/enemies.php?type=all",
     accessed: "2026-10-25",
-    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, and boss records. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
+    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, Burmecia, and boss records. It reports Beatrix's level-14, 3,630-HP, 3,467-MP Burmecia profile and her three steals. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
   },
   {
     id: "cavesofnarshe-gizamaluke",
@@ -1679,7 +1679,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/burmecia",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the Cancer coin, hidden pickups and floor trap, Wei and Kal dialogue prerequisite, Mognet and Kupo Nut, Stiltzkin, Atla's shop, Beatrix, and boss steals. Its Beatrix HP/MP/level figures differ from most other sources.",
+    notes: "Original PlayStation route for the Cancer coin, hidden pickups and floor trap, Wei and Kal dialogue prerequisite, Mognet and Kupo Nut, Stiltzkin, Atla's shop, the Basilisk/Ironite/Magic Vice/Mimic/Type A city roster, and Beatrix's boss table. Its Beatrix HP/MP/level figures differ from most other sources.",
   },
   {
     id: "ff9-kouryaku-burmecia",
@@ -1719,7 +1719,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://www.elitegrindlab.com/ff9/walkthrough/burmecia/",
     accessed: "2026-10-25",
-    notes: "Explicitly compares the conflicting city-access claims: Jegged's missables page says Disc I only, the Final Fantasy Wiki says only the palace is sealed, and Mognet guides require a Disc IV return to Atla. Its practical conclusion is that the moogle is reachable later, but no publisher says the Disc I chests are. Also covers Cancer recovery, Wei and Kal's later ATE prerequisite, Stiltzkin's permanent chain, all listed pickups, Mimic encounters, and Beatrix data/steals.",
+    notes: "Explicitly compares the conflicting city-access claims: Jegged's missables page says Disc I only, the Final Fantasy Wiki says only the palace is sealed, and Mognet guides require a Disc IV return to Atla. Its practical conclusion is that the moogle is reachable later, but no publisher says the Disc I chests are. Also covers Cancer recovery, Wei and Kal's later ATE prerequisite, Stiltzkin's permanent chain, all listed pickups, Mimic encounters, and Beatrix data/steals. Its table audit records the Type A 155-EXP/two-steal-slot disagreement and Magic Vice's Echo Screen/Eye Drops first-steal disagreement; Beatrix's stats are cross-checked separately.",
   },
   {
     id: "ffwiki-unrevisitable-locations",

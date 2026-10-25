@@ -1248,7 +1248,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-daines-horse-basin-detours",
         title: "Daines-horse Basin — optional Burmecian Arch, Chocograph, and Blue Magic",
         summary: "Before entering Burmecia, take the eastern arch pickups, Choco's newly reachable Reef treasure, and Quina's Night skill if you have Quina in the party.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-abilities-71891", "steam-missable-content-guide-2988011418"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-enemy-list-71891", "elitegrindlab-burmecia", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-abilities-71891", "steam-missable-content-guide-2988011418"],
         steps: [
           {
             id: "journey-burmecian-arch-pickups",
@@ -1267,7 +1267,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-quina-night",
             kind: "optional",
             text: "With Quina in the party, use Eat on a weakened Nymph in the basin to learn Night. Check Quina's Blue Magic list before leaving the area.",
-            detail: "Eat succeeds when the target is at or below 25% of its maximum HP. Nymph is one of the Daines-horse Basin encounters; do not climb the Grotto vine for White Wind on this route, because Popos Heights contains a dangerous Grand Dragon encounter.",
+            detail: "Eat succeeds when the target is at or below 25% of its maximum HP. Nymph is one of the Daines-horse Basin encounters. GameFAQs also groups Lizard Man, Nymph, Sand Scorpion, Skeleton, and Yeti in the surrounding Burmecia/Cleyra world-map region; this is separate from Burmecia's Basilisk/Ironite/Magic Vice city pool, and no encounter rates or exact formations are published. Do not climb the Grotto vine for White Wind on this route, because Popos Heights contains a dangerous Grand Dragon encounter.",
             objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
           },
         ],
@@ -1303,7 +1303,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "burmecia-cancer-blue-magic",
             kind: "pickup",
             text: "On the first street, search behind the overturned cart/wooden box for the Cancer Stellazzio. If Quina is in the party, use Eat on weakened Ironites for Angel's Snack. Weaken a Magic Vice to Eat range, then try Eat promptly for Magic Hammer; Magic Vices have low HP and may flee.",
-            detail: "Cancer can be recovered later through the Stellazzio quest, so this is a completion pickup rather than a permanent-loss warning. Sources place the cart on the first street using slightly different left/right descriptions; inspect behind the overturned object before leaving. Magic Vice has low HP and can flee, and some references disagree on its first steal slot; this guide does not publish enemy steal/drop data as verified.",
+            detail: "Cancer can be recovered later through the Stellazzio quest, so this is a completion pickup rather than a permanent-loss warning. Sources place the cart on the first street using slightly different left/right descriptions; inspect behind the overturned object before leaving. The city random pool is Basilisk, Ironite, and Magic Vice; Type A is the scripted pair on the next screen, and the three Mimics are optional chest fights. Magic Vice has low HP and can flee after Mugging an item; its first steal slot is disputed, so the bestiary follows the GameFAQs table and leaves the alternate claim visible.",
             objectiveIds: ["disc-1.burmecia.cancer-stellazzio", "disc-1.burmecia.blue-magic"],
           },
           {
