@@ -10,7 +10,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 The latest B05 slice audits Fossil Roo’s one-way item sweep and adds later recovery routes for Elixir, Fairy Earrings, Lamia’s Tiara, and Survival Vest, plus Lani’s Ether steal and Stiltzkin’s separate Ether/Remedy bundle. Treno’s repeatable Fairy Earrings auction is now correctly placed in Disc II after the party reunites. The Survival Vest room/Madain Sari timing remains uncertain, and GameFAQs lists conflicting Fairy Earrings synthesis prices (3,000 Gil in Items, 3,200 Gil in Shops; RPGClassics also lists 3,200). `npm run lint` and `npm run build` pass with 0 audit errors and 175 coverage warnings; current counts are 117 partial items, 426 acquisition paths, 15 recipes, 29 inventory targets, 73 ability claims, 285 sources, 133 missables, and 608 objectives. No account-owner setup action changed; repository, Pages, and Firebase statuses remain below.
 
-The newest B01 route slice links 54 cutoff windows to 89 missable warnings in the Route Map, including all 79 high/critical records. Lint, typecheck, the data audit, and production build pass with 0 audit errors and 175 coverage warnings; tests were not added or run. This work does not require a GitHub or Firebase account, so no owner-side step became ready or changed.
+The newest B01 route slice links all 133 missable warnings to 85 cutoff windows in the Route Map, including all 79 high/critical records. Lint, typecheck, the data audit, and production build pass with 0 audit errors and 175 coverage warnings; tests were not added or run. This work does not require a GitHub or Firebase account, so no owner-side step became ready or changed.
 
 ## Dependency order
 
