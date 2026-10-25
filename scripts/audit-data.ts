@@ -630,6 +630,63 @@ if (!equipmentAbilityClaims.some((claim) => claim.itemId === iceBrandId && claim
 if (!sourceInventoryTargets.some((target) => target.itemId === iceBrandId && target.targetQuantity === 2)) {
   errors.push("Ice Brand needs its source-listed Need 2 inventory target.");
 }
+const zornThornItemIds = [
+  "game-item.partisan",
+  "game-item.stardust-rod",
+  "game-item.mythril-armor",
+  "game-item.mythril-armlet",
+];
+for (const itemId of zornThornItemIds) {
+  if (!gameItemIds.has(itemId)) errors.push(`Zorn and Thorn recovery coverage needs catalog item ${itemId}.`);
+}
+const zornThornShopCounts = new Map([
+  ["game-item.partisan", 7],
+  ["game-item.stardust-rod", 7],
+  ["game-item.mythril-armor", 8],
+  ["game-item.mythril-armlet", 8],
+]);
+for (const [itemId, expectedCount] of zornThornShopCounts) {
+  const paths = itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.method === "shop");
+  if (paths.length !== expectedCount || paths.some((path) => path.cost?.currency !== "gil")) {
+    errors.push(`Zorn and Thorn recovery for ${itemId} needs ${expectedCount} Gil-priced shop paths; found ${paths.length}.`);
+  }
+}
+for (const itemId of zornThornItemIds) {
+  if (!itemAcquisitionPaths.some((path) => path.itemId === itemId && path.method === "steal" && path.chapterId === "disc-2.return-to-alexandria")) {
+    errors.push(`Zorn and Thorn recovery for ${itemId} needs its one-time boss steal path.`);
+  }
+  const targetQuantity = new Map([
+    ["game-item.partisan", 2],
+    ["game-item.stardust-rod", 2],
+    ["game-item.mythril-armor", 3],
+    ["game-item.mythril-armlet", 7],
+  ]).get(itemId);
+  if (!sourceInventoryTargets.some((target) => target.itemId === itemId && target.targetQuantity === targetQuantity)) {
+    errors.push(`Zorn and Thorn recovery for ${itemId} needs its source-listed Need ${targetQuantity} inventory target.`);
+  }
+}
+if (!itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.pinnacle-rocks.mythril-armlet-chest")) {
+  errors.push("Mythril Armlet needs its Pinnacle Rocks chest path in addition to Thorn's steal.");
+}
+const zornThornAbilityClaims = [
+  ["game-item.partisan", "High Tide"],
+  ["game-item.partisan", "Lancer"],
+  ["game-item.stardust-rod", "Ability Up"],
+  ["game-item.stardust-rod", "Reflect"],
+  ["game-item.stardust-rod", "Float"],
+  ["game-item.mythril-armor", "Cover"],
+  ["game-item.mythril-armor", "Jelly"],
+  ["game-item.mythril-armlet", "Bug Killer"],
+];
+for (const [itemId, abilityName] of zornThornAbilityClaims) {
+  if (!equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName)) {
+    errors.push(`Zorn and Thorn recovery for ${itemId} needs its ${abilityName} ability claim.`);
+  }
+}
+const mythrilArmorSteal = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-alexandria.thorn-mythril-armor");
+if (!mythrilArmorSteal?.notes?.includes("GameFAQs Items index") || !mythrilArmorSteal.notes.includes("Thorn")) {
+  errors.push("The Mythril Armor steal path must retain the Zorn/Thorn source conflict note.");
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
