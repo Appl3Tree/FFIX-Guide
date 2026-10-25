@@ -76,6 +76,7 @@ const mountGulugChapterId = "disc-3.lost-continent";
 const pandemoniumChapterId = "disc-3.portal-to-another-world";
 const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
 const memoriaChapterId = "disc-4.memoria";
+const finalBattleChapterId = "disc-4.the-final-battle";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -102,6 +103,8 @@ const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-drag
 const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
 const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
+const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
+const finalBattleStatsSources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"];
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
@@ -514,7 +517,36 @@ const memoriaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters];
+const finalBattleEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.final-battle.trance-kuja",
+    title: "Trance Kuja",
+    chapterId: finalBattleChapterId,
+    location: "Crystal World, after leaving the final save point",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.trance-kuja", quantity: 1 }],
+    sourceIds: finalBattleEnemySources,
+    objectiveIds: ["disc-4.the-final-battle.trance-kuja", "disc-4.the-final-battle.trance-kuja-steals"],
+    missableIds: ["missable.disc-4.the-final-battle.trance-kuja-steals"],
+    cutoffIds: ["cutoff.final-battle.trance-kuja-steals"],
+    notes: ["The first fight in the final sequence. A party menu appears afterward, but the sequence cannot return to the Crystal World save point."],
+  },
+  {
+    id: "encounter.final-battle.necron",
+    title: "Necron — final boss",
+    chapterId: finalBattleChapterId,
+    location: "Hill of Despair, immediately after the Trance Kuja sequence",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.necron", quantity: 1 }],
+    sourceIds: finalBattleEnemySources,
+    objectiveIds: ["disc-4.the-final-battle.necron-steals"],
+    missableIds: ["missable.disc-4.the-final-battle.necron-steals"],
+    cutoffIds: ["cutoff.final-battle.necron-steals"],
+    notes: ["Necron is the final fight in the sequence; victory leads directly to the ending."],
+  },
+];
+
+export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1214,6 +1246,89 @@ const memoriaEnemyRecords: EnemyRecord[] = [
   }, "missable.disc-4.memoria.deathguise-steals", "cutoff.memoria.deathguise-steals", deathguiseEnemySources),
 ];
 
+const finalBattleEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.trance-kuja",
+    name: "Trance Kuja",
+    encounterIds: ["encounter.final-battle.trance-kuja"],
+    stats: [
+      { field: "level", value: 76, sourceIds: finalBattleStatsSources, verification: "cross-checked" },
+      { field: "HP", value: 55536, sourceIds: ["gamefaqs-the-final-battle-71891"], verification: "disputed" },
+      { field: "HP", value: 55535, sourceIds: ["jegged-kuja-necron-final-showdown"], verification: "disputed" },
+      ...sourcedStats([["MP", 9999], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-the-final-battle-71891"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.ether", ["gamefaqs-the-final-battle-71891"]),
+      sourcedLoot("uncommon", "game-item.white-robe", ["gamefaqs-the-final-battle-71891"]),
+      sourcedLoot("semi-rare", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("rare", "game-item.rebirth-ring", ["gamefaqs-the-final-battle-71891"]),
+    ],
+    drops: [
+      sourcedLoot("always", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("common", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("uncommon", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Human", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("type", "Aerial", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("elemental-weakness", "None", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("elemental-resistance", "None", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("status-vulnerability", "Darkness and Slow", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("attack", "Flare, Holy, Ultima, and Reflect", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Mostly magical attacks; Kuja can cast Reflect on himself."),
+      sourcedFact("attack", "Curaga", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Kuja can heal himself."),
+      sourcedFact("attack", "Flare Star", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Party-wide damage equal to 35 times each character's level; may occur as a counter, especially at low HP."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Attempt selected steals before dealing damage", detail: "Trance Kuja's one-fight table includes Ether, White Robe, and Rebirth Ring. No return to the save point is possible after this encounter, so complete selected steals before finishing him.", sourceIds: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"] },
+      { title: "Keep the party healed near the end", detail: "Flare Star can punish the party near Kuja's defeat. Keep HP high and avoid Auto-Reflect, which the source warns can lead to dangerous counters.", sourceIds: ["gamefaqs-the-final-battle-71891"] },
+    ],
+    routeObjectiveIds: ["disc-4.the-final-battle.trance-kuja", "disc-4.the-final-battle.trance-kuja-steals"],
+    notes: ["HP reports differ by one point: GameFAQs lists 55,536 and Jegged lists 55,535. Both claims are retained pending direct game verification."],
+  }, finalBattleChapterId, finalBattleEnemySources, ["missable.disc-4.the-final-battle.trance-kuja-steals"], ["cutoff.final-battle.trance-kuja-steals"]),
+  chapterBoss({
+    id: "enemy.necron",
+    name: "Necron",
+    encounterIds: ["encounter.final-battle.necron"],
+    stats: [
+      { field: "level", value: 69, sourceIds: finalBattleEnemySources, verification: "cross-checked" },
+      { field: "HP", value: 54100, sourceIds: finalBattleStatsSources, verification: "cross-checked" },
+      ...sourcedStats([["MP", 9999], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-the-final-battle-71891"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-the-final-battle-71891"]),
+      sourcedLoot("uncommon", "game-item.elixir", ["gamefaqs-the-final-battle-71891"]),
+      sourcedLoot("semi-rare", "game-item.elixir", ["gamefaqs-the-final-battle-71891"]),
+      sourcedLoot("rare", "game-item.elixir", ["gamefaqs-the-final-battle-71891"]),
+    ],
+    drops: [
+      sourcedLoot("always", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("common", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("uncommon", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-the-final-battle-71891"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("elemental-weakness", "Wind and Holy", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("elemental-resistance", "Earth nullified", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("status-vulnerability", "Slow", ["gamefaqs-the-final-battle-71891"]),
+      sourcedFact("attack", "Firaga, Blizzaga, Thundaga, Flare, Holy, and Meteor", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Can use elemental spells against one target or the whole party; Meteor deals heavy party damage."),
+      sourcedFact("attack", "Blue Shockwave", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Reduces one character's HP to 1."),
+      sourcedFact("attack", "Neutron Ring", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Heavy physical damage to the party."),
+      sourcedFact("attack", "Grand Cross", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Can inflict a wide range of status effects on the party."),
+      sourcedFact("attack", "Curaga, Shell, and Protect", ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], "Necron can use these spells on itself."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Protect against status effects and major elements", detail: "Grand Cross can inflict many status effects. Prepare status defenses and protect against Fire, Ice, Lightning, and Holy before leaving the party menu after Kuja.", sourceIds: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"] },
+      { title: "Check the four Elixir steal tiers", detail: "GameFAQs lists Elixir in all four steal slots. Jegged lists a single Common Elixir slot with its own probability; the discrepancy is recorded rather than collapsed.", sourceIds: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"] },
+    ],
+    routeObjectiveIds: ["disc-4.the-final-battle.necron-steals"],
+    notes: ["The steal tables disagree: GameFAQs lists Elixir in Common, Uncommon, Semi-Rare, and Rare slots; Jegged lists one Common Elixir steal at 70%. Both source claims remain visible."],
+  }, finalBattleChapterId, finalBattleEnemySources, ["missable.disc-4.the-final-battle.necron-steals"], ["cutoff.final-battle.necron-steals"]),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   {
     id: "enemy.red-dragon",
@@ -1332,12 +1447,13 @@ export const enemyRecords: EnemyRecord[] = [
   ...pandemoniumEnemyRecords,
   ...iifaTreeEnemyRecords,
   ...memoriaEnemyRecords,
+  ...finalBattleEnemyRecords,
 ];
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId],
-  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId],
+  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, and Memoria. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, and the final battle. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
