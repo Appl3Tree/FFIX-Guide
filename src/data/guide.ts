@@ -670,7 +670,7 @@ export const sources = [
     title: "Weapon Shop Monsters — Treno arena guide",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/weapon-shop-monsters",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Identifies the Treno weapon-shop Amdusias stage after Mount Gulug, its Running Shoes reward, and the later Disc IV Behemoth stage. The Running Shoes item has other documented sources, so the missed Amdusias fight is tracked as a one-time reward opportunity rather than permanent loss of the item type.",
   },
   {
@@ -1630,7 +1630,7 @@ export const sources = [
     title: "Madain Sari — the Eidolon Wall — route and source audit",
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/madain-sari-eidolon-wall/",
-    accessed: "2026-10-23",
+    accessed: "2026-10-24",
     notes: "Completionist audit of the return-only room, exact return-visit item set, Memory Earring dialogue reward, boss-stat disagreement, steal opportunity, Amarant equipment learning, and party selection. It finds one Survival Vest, one Phoenix Down, Exploda, Elixir, Memory Earring, and a Tent boss drop across the inspected lists.",
   },
   {
