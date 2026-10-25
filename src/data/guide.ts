@@ -1310,8 +1310,8 @@ export const sources = [
     title: "Kupo Nuts — FFIX sidequest guide",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/kupo-nuts",
-    accessed: "2026-10-23",
-    notes: "Documents Moguta's Kupo Nut rewards, including the first Disc I delivery's fixed Holy Bell prize, later per-disc rewards, random repeat rewards, and the one-nut-at-a-time inventory limit.",
+    accessed: "2026-10-24",
+    notes: "Documents Moguta's Kupo Nut rewards, including the first Disc I delivery's fixed Holy Bell prize, the Disc IV Aloha T-Shirt reward, random repeat rewards, and the one-nut-at-a-time inventory limit.",
   },
   {
     id: "jegged-kupo-nuts",

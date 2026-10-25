@@ -506,6 +506,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central"],
   },
   {
+    id: "detour.return-to-gaia-gizamaluke-kupo-nut",
+    fromChapterId: "disc-4.return-to-gaia",
+    toChapterId: "disc-1.journey-to-burmecia",
+    relationship: "optional-return",
+    summary: "Return to Gizamaluke's Grotto with the Kupo Nut from Mozme in Pandemonium and deliver it to Moguta for the Disc IV fixed Aloha T-Shirt reward. This Grotto visit does not establish access to Burmecia's other pickup rooms.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-journey-to-burmecia-71891"],
+  },
+  {
+    id: "detour.gizamaluke-kupo-nut-rejoin-gaia",
+    fromChapterId: "disc-1.journey-to-burmecia",
+    toChapterId: "disc-4.return-to-gaia",
+    relationship: "rejoin",
+    summary: "After the optional Moguta exchange, return to the Invincible and resume other Disc IV exploration or continue the story to the Iifa Tree.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-kupo-nuts-71891"],
+  },
+  {
     id: "detour.journey-to-treno-dali-return",
     fromChapterId: "disc-2.journey-to-treno",
     toChapterId: "disc-1.village-of-dali",
