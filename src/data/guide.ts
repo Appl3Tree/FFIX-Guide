@@ -1527,7 +1527,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-cleyra",
     accessed: "2026-10-24",
-    notes: "Covers the return to Zidane's party, Treno equipment update, optional Kupo Nut delivery and Qu's Marsh frog stop, then the route west to Cleyra. Original PlayStation source.",
+    notes: "Covers the return to Zidane's party, Treno equipment update, optional Kupo Nut delivery, and a separate return to Lindblum Basin for the third Qu's Marsh Frog Catching visit before continuing west to Cleyra. Original PlayStation source.",
   },
   {
     id: "jegged-gargan-roo",

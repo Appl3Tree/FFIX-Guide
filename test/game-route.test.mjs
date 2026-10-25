@@ -2,6 +2,41 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { missables, sources } from "../src/data/guide.ts";
 import { gameRouteEdges } from "../src/data/progression.ts";
+import { walkthroughChapters } from "../src/data/walkthrough.ts";
+
+test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => {
+  const returnToMarsh = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-lindblum-basin-frogs");
+  assert.ok(returnToMarsh, "the pre-Cleyra return to Qu's Marsh is represented");
+  assert.equal(returnToMarsh.fromChapterId, "disc-2.journey-to-cleyra");
+  assert.equal(returnToMarsh.toChapterId, "disc-1.exploring-lindblum-kingdom");
+  assert.equal(returnToMarsh.relationship, "optional-return");
+  assert.match(returnToMarsh.summary, /third Frog Catching visit/);
+  assert.match(returnToMarsh.summary, /golden frog/);
+
+  for (const sourceId of [
+    "gamefaqs-journey-to-cleyra-71891",
+    "gamefaqs-frog-catching-71891",
+    "gamefaqs-exploring-lindblum-71891",
+  ]) {
+    assert.ok(returnToMarsh.sourceIds.includes(sourceId), `return edge is missing ${sourceId}`);
+  }
+  for (const sourceId of returnToMarsh.sourceIds) {
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
+  }
+
+  const rejoin = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-lindblum-basin-rejoin");
+  assert.ok(rejoin);
+  assert.equal(rejoin.fromChapterId, "disc-1.exploring-lindblum-kingdom");
+  assert.equal(rejoin.toChapterId, "disc-2.journey-to-cleyra");
+  assert.equal(rejoin.relationship, "rejoin");
+  assert.match(rejoin.summary, /Burmecian territory/);
+
+  const approach = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra");
+  const frogStop = approach?.sections.flatMap((section) => section.steps).find((step) => step.id === "journey-cleyra-frog-catching");
+  assert.ok(frogStop);
+  assert.match(frogStop.text, /through Gizamaluke's Grotto/);
+  assert.match(frogStop.text, /Qu's Marsh in Lindblum Basin/);
+});
 
 test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () => {
   const returnToCavern = gameRouteEdges.find((edge) => edge.id === "return.dali-to-ice-cavern");
@@ -50,6 +85,6 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
     result[edge.relationship] += 1;
     return result;
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
-  assert.equal(gameRouteEdges.length, 64);
-  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 11, rejoin: 10 });
+  assert.equal(gameRouteEdges.length, 66);
+  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 12, rejoin: 11 });
 });

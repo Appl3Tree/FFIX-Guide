@@ -1608,7 +1608,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   },
   {
     areaId: "disc-2.journey-to-cleyra",
-    overview: "After the Treno scenes, follow Dagger, Steiner, and Marcus through Gargan Roo to Alexandria. The story then returns to Zidane's party in Burmecia; finish the optional Kupo Nut and frog-catching detours before heading west to Cleyra.",
+    overview: "After the Treno scenes, follow Dagger, Steiner, and Marcus through Gargan Roo to Alexandria. The story then returns to Zidane's party in Burmecia; finish the optional Kupo Nut delivery and any return through Gizamaluke's Grotto to Qu's Marsh before heading west to Cleyra.",
     timedRouteNote: "From Gargan Roo the source follows the Treno/Doctor Tot story route, clears the first Gargan Roo passage and Ralvurahva, then targets 03:29:03 at Cleyra's Trunk after the initial ascent and Atla letter handoff. The source carries a defined equipment/EXP plan into the forced fights; the broad optional Kupo Nut/frog route and full steal checklist are not budgeted. Its time and encounter target are for original-PlayStation NTSC and have not been tested.",
     sections: [
       {
@@ -1664,7 +1664,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "optional-cleyra-approach",
         title: "Before Cleyra — Kupo Nut and Qu's Marsh",
         summary: "Use the available return routes before entering Cleyra's one-way story area.",
-        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891"],
+        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891"],
         steps: [
           {
             id: "journey-cleyra-kupo-nut",
@@ -1676,7 +1676,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "journey-cleyra-frog-catching",
             kind: "optional",
-            text: "If you want another Frog Catching visit, stop at Qu's Marsh on the way. Leave one adult male and one adult female frog, and preserve the golden frog if one is present.",
+            text: "If you want the third Frog Catching visit, backtrack through Gizamaluke's Grotto to Qu's Marsh in Lindblum Basin. Leave one adult male and one adult female frog, and preserve the golden frog if one is present.",
             detail: "Frog Catching is a recurring activity; this visit does not close the pond or require a target count for the story.",
           },
           {

@@ -614,7 +614,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.journey-to-cleyra",
     toChapterId: "disc-1.journey-to-burmecia",
     relationship: "optional-return",
-    summary: "Before entering Cleyra, the party can backtrack through Burmecia to Gizamaluke's Grotto and deliver the Kupo Nut Nazna supplied at Summit Station. The delivery is optional; the Disc II guide also identifies Lindblum's basin as a possible side excursion.",
+    summary: "Before entering Cleyra, the party can backtrack through Burmecia to Gizamaluke's Grotto and deliver the Kupo Nut Nazna supplied at Summit Station. The delivery is optional.",
     sourceIds: ["gamefaqs-journey-to-treno-71891", "gamefaqs-journey-to-cleyra-71891", "jegged-gargan-roo", "jegged-kupo-nuts"],
   },
   {
@@ -624,6 +624,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     relationship: "rejoin",
     summary: "After the optional Grotto delivery, return to the Burmecia basin and continue west to Cleyra.",
     sourceIds: ["gamefaqs-journey-to-cleyra-71891", "jegged-gargan-roo", "jegged-cleyra"],
+  },
+  {
+    id: "detour.journey-to-cleyra-lindblum-basin-frogs",
+    fromChapterId: "disc-2.journey-to-cleyra",
+    toChapterId: "disc-1.exploring-lindblum-kingdom",
+    relationship: "optional-return",
+    summary: "Before entering Cleyra, travel back through Gizamaluke's Grotto to Qu's Marsh in Lindblum Basin for the optional third Frog Catching visit. Preserve the adult male and female frogs and the golden frog if present.",
+    sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891"],
+  },
+  {
+    id: "detour.journey-to-cleyra-lindblum-basin-rejoin",
+    fromChapterId: "disc-1.exploring-lindblum-kingdom",
+    toChapterId: "disc-2.journey-to-cleyra",
+    relationship: "rejoin",
+    summary: "After the optional Qu's Marsh visit, return through Gizamaluke's Grotto to Burmecian territory and continue west to Cleyra.",
+    sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891"],
   },
   {
     id: "detour.return-to-lindblum-pinnacle-rocks-return",
