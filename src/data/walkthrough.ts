@@ -2427,7 +2427,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "outer-continent-world-map",
         title: "Outer Continent — world-map route and optional stops",
         summary: "Loop around the plateau to the bridge town. Stop at the new marsh, check Quina's available Blue Magic, and collect the Chocograph treasure if you already dug up its clue.",
-        sourceIds: ["gamefaqs-outer-continent-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-conde-petie", "flactem-friendly-monsters", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "rpgclassics-outer-continent", "jegged-world-map-cactuar", "jegged-world-map-goblin-mage", "jegged-world-map-griffin", "jegged-world-map-zaghnol"],
+        sourceIds: ["gamefaqs-outer-continent-71891", "gamefaqs-journey-to-outer-continent-71891", "flactem-disc-2-fossil-roo-outer-continent", "jegged-conde-petie", "flactem-friendly-monsters", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "rpgclassics-outer-continent", "jegged-world-map-cactuar", "jegged-world-map-goblin-mage", "jegged-world-map-griffin", "jegged-world-map-zaghnol"],
         steps: [
           {
             id: "outer-continent-loop-to-conde-petie",
@@ -2440,6 +2440,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Terrain determines which Outer Continent encounters can appear: dirt at Donna Plains, Dyshnose Shores, Gegalrich Shores, and Kognish Shores has Cactuar, Goblin Mage, Griffin, and Zaghnol; grass at Donna Plains and Gegalrich Shores, plus world-map forests, can also include Friendly Ladybird; beaches and Donna Plains marshes list Griffin and Zaghnol. If Quina is missing a spell, Eat a weakened Goblin Mage for Goblin Punch, Cactuar for 1,000 Needles, Griffin for White Wind, or Zaghnol for Matra Magic.",
             detail: "The terrain guide records possible formation rosters, not encounter odds or a claim that every listed enemy appears together. White Wind and Matra Magic are also available earlier from Zuu and Dragonfly in Cleyra's Trunk. Enemy references disagree on Cactuar's level (1 or 30) and AP, Goblin Mage AP (0 or 1/2), and Zaghnol's MP/AP; the bestiary keeps those claims separate. Ragtime Mouse may still appear in forests; its quiz sequence and reward checklist are not yet authored here.",
             objectiveIds: ["disc-2.outer-continent.blue-magic"],
+          },
+          {
+            id: "outer-continent-qu-marsh-blue-magic",
+            kind: "optional",
+            text: "At the second Qu's Marsh, use Eat on Sahagin for Aqua Breath or Gigan Toad [B] for Frog Drop if Quina still lacks either skill. This is a separate pool from the earlier Mist Continent marsh; the level-7 Gigan Toad [B] has its own battle table.",
+            detail: "The skills also have earlier teachers, so this is not a one-time window. Both marsh enemies are weak to Lightning and absorb Water; Sahagin's Water-Gun and shell stance deserve extra care on the first Outer Continent visit.",
+            objectiveIds: ["disc-2.journey-to-outer-continent.blue-magic"],
           },
           {
             id: "outer-continent-qu-marsh-frogs",

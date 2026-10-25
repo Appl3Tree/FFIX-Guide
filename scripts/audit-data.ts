@@ -2375,6 +2375,62 @@ if (!gunitasPool || gunitasPool.kind !== "random-pool" ||
   qusMarshPool.formation.some((entry) => entry.enemyId === "enemy.anemone" || entry.enemyId === "enemy.sahagin" || entry.enemyId === "enemy.gigan-toad-b")) {
   errors.push("Gunitas Basin, Lindblum lowlands, and the Disc I Qu's Marsh must retain their distinct source-listed enemy pools.");
 }
+const outerContinentQuMarshPool = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.outer-continent-disc-ii-pool");
+const sahaginRecord = enemyRecords.find((enemy) => enemy.id === "enemy.sahagin");
+const giganToadBRecord = enemyRecords.find((enemy) => enemy.id === "enemy.gigan-toad-b");
+const outerContinentMarshBlueMagicObjective = objectivesById.get("disc-2.journey-to-outer-continent.blue-magic");
+const outerContinentWalkthrough = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.outer-continent");
+if (!outerContinentQuMarshPool || outerContinentQuMarshPool.kind !== "random-pool" ||
+  outerContinentQuMarshPool.chapterId !== "disc-2.journey-to-outer-continent" ||
+  outerContinentQuMarshPool.formation.length !== 2 ||
+  !outerContinentQuMarshPool.formation.some((entry) => entry.enemyId === "enemy.sahagin" && entry.quantity === null) ||
+  !outerContinentQuMarshPool.formation.some((entry) => entry.enemyId === "enemy.gigan-toad-b" && entry.quantity === null) ||
+  outerContinentQuMarshPool.formation.some((entry) => entry.enemyId === "enemy.axolotl" || entry.enemyId === "enemy.gigan-toad-a" || entry.enemyId === "enemy.anemone") ||
+  !outerContinentQuMarshPool.objectiveIds.includes("disc-2.journey-to-outer-continent.quina-rejoin") ||
+  !outerContinentQuMarshPool.objectiveIds.includes("disc-2.journey-to-outer-continent.frog-catching") ||
+  !outerContinentQuMarshPool.objectiveIds.includes("disc-2.journey-to-outer-continent.blue-magic") ||
+  outerContinentQuMarshPool.missableIds.length !== 0 || outerContinentQuMarshPool.cutoffIds.length !== 0 ||
+  !sahaginRecord || sahaginRecord.chapterId !== "disc-2.journey-to-outer-continent" ||
+  !sahaginRecord.encounterIds.includes("encounter.qus-marsh.outer-continent-disc-ii-pool") ||
+  sahaginRecord.stats.find((stat) => stat.field === "HP")?.value !== 1375 ||
+  sahaginRecord.stats.find((stat) => stat.field === "HP")?.verification !== "cross-checked" ||
+  !sahaginRecord.steals.some((slot) => slot.slot === "rare" && slot.itemId === "game-item.ether") ||
+  !sahaginRecord.drops.some((slot) => slot.slot === "uncommon" && slot.itemId === "game-item.phoenix-down") ||
+  !sahaginRecord.blueMagic.some((skill) => skill.name === "Aqua Breath" && skill.objectiveIds.includes("disc-2.journey-to-outer-continent.blue-magic")) ||
+  !giganToadBRecord || giganToadBRecord.chapterId !== "disc-2.journey-to-outer-continent" ||
+  !giganToadBRecord.encounterIds.includes("encounter.qus-marsh.outer-continent-disc-ii-pool") ||
+  giganToadBRecord.stats.find((stat) => stat.field === "level")?.value !== 7 ||
+  giganToadBRecord.stats.find((stat) => stat.field === "HP")?.value !== 297 ||
+  !giganToadBRecord.steals.some((slot) => slot.slot === "common" && slot.itemId === "game-item.ore") ||
+  !giganToadBRecord.drops.some((slot) => slot.slot === "uncommon" && slot.itemId === "game-item.echo-screen") ||
+  !giganToadBRecord.blueMagic.some((skill) => skill.name === "Frog Drop" && skill.objectiveIds.includes("disc-2.journey-to-outer-continent.blue-magic")) ||
+  !outerContinentMarshBlueMagicObjective?.title.includes("Aqua Breath") ||
+  !outerContinentMarshBlueMagicObjective.title.includes("Frog Drop") ||
+  !outerContinentMarshBlueMagicObjective.sourceIds.includes("flactem-disc-2-fossil-roo-outer-continent") ||
+  !outerContinentWalkthrough?.sections.some((section) => section.id === "outer-continent-world-map" &&
+    section.steps.some((step) => step.id === "outer-continent-qu-marsh-blue-magic" && step.objectiveIds?.includes("disc-2.journey-to-outer-continent.blue-magic")))) {
+  errors.push("The Outer Continent Qu's Marsh must have its separate Sahagin/Gigan Toad [B] pool, sourced stats/loot/Blue Magic links, and walkthrough context without borrowing Disc I variants or adding a cutoff.");
+}
+const outerMarshLootPaths = [
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-sahagin-hi-potion-steal", "enemy.sahagin", "game-item.hi-potion", "steal", "common"],
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-sahagin-ether-steal", "enemy.sahagin", "game-item.ether", "steal", "rare"],
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-sahagin-phoenix-down-drop", "enemy.sahagin", "game-item.phoenix-down", "drop", "uncommon"],
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-sahagin-ether-drop", "enemy.sahagin", "game-item.ether", "drop", "rare"],
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-gigan-toad-b-ore-steal", "enemy.gigan-toad-b", "game-item.ore", "steal", "common"],
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-gigan-toad-b-potion-drop", "enemy.gigan-toad-b", "game-item.potion", "drop", "common"],
+  ["item-path.disc-2.journey-to-outer-continent.outer-marsh-gigan-toad-b-echo-screen-drop", "enemy.gigan-toad-b", "game-item.echo-screen", "drop", "uncommon"],
+] as const;
+for (const [pathId, enemyId, itemId, method, slot] of outerMarshLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const lootTable = method === "steal" ? enemy?.steals : enemy?.drops;
+  if (!path || path.itemId !== itemId || path.chapterId !== "disc-2.journey-to-outer-continent" ||
+    path.method !== method || path.availability !== "repeatable" ||
+    !path.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    !lootTable?.some((entry) => entry.itemId === itemId && entry.slot === slot)) {
+    errors.push(`Outer Continent Qu's Marsh item path ${pathId} must match its repeatable enemy-table loot slot.`);
+  }
+}
 const grottoPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.random-pool");
 const grottoTypeAFights = [
   enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.type-a-first-pair"),
@@ -2636,7 +2692,7 @@ const fossilSeekerBat = enemyRecords.find((enemy) => enemy.id === "enemy.seeker-
 const lostContinentFeatherTeacher = enemyEncounters.find((encounter) => encounter.id === "encounter.lost-continent.feather-circle-teacher");
 const friendlyFeatherEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.lost-continent.friendly-feather-circle");
 const friendlyFeather = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-feather-circle");
-if (fossilRooPools.length !== 1 || !fossilRooPool || fossilRooPool.kind !== "random-pool" ||
+if (fossilRooPools.length !== 2 || !fossilRooPool || fossilRooPool.kind !== "random-pool" ||
   !sameSortedValues(fossilRooPool.formation.map((member) => member.enemyId), ["enemy.abomination", "enemy.feather-circle", "enemy.griffin", "enemy.seeker-bat"]) ||
   fossilRooPool.formation.some((member) => member.quantity !== null) ||
   !["gamefaqs-enemy-list-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo"].every((sourceId) => fossilRooPool.sourceIds.includes(sourceId)) ||

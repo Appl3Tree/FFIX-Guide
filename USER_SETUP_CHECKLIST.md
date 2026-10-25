@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest local B04 update adds the Ralvuimago return-ride profile and encounter, linked to its existing steals, warning, cutoff, and item recovery paths. Lint, typecheck, audit, build, and whitespace checks pass; the bestiary has 114 records across 26 slices and 100 encounter groups. Browser, game, and release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
+No account-owner setup action changed. The latest local B04/B05 update adds the repeatable Disc II Outer Continent Qu’s Marsh Sahagin/Gigan Toad [B] pool, optional Blue Magic links, and seven catalog loot paths. The bestiary has 116 records across 26 slices and 101 encounter groups; the item catalog has 210 items and 896 paths. This content update requires no GitHub, Firebase, deployment, or sign-in work. Browser, game, and release verification remain open.
 
 No account-owner setup action changed. The preceding local B04 update adds Gargan Roo’s Crawler/Dragonfly pool and a Ralvurahva boss profile linked to its existing steal warning, cutoff, and item recovery paths. Lint, typecheck, audit, build, and whitespace checks pass; the bestiary then had 113 records across 26 slices and 99 encounter groups. Browser, game, and release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for that content update.
 
