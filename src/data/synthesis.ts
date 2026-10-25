@@ -76,6 +76,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "GameFAQs and Caves of Narshe list Germinas Boots + Bone Wrist for 1,500 Gil. GameFAQs' main item list puts the early Lindblum shop after Cleyra, while the older item-location guide says after Disc I; the data keeps that timing unresolved and also models the separately documented Disc III–IV Lindblum shop.",
   },
   {
+    id: "synthesis-recipe.fairy-earrings",
+    resultItemId: "game-item.fairy-earrings",
+    ingredients: [
+      { itemId: "game-item.magic-armlet", quantity: 1 },
+      { itemId: "game-item.soft", quantity: 1 },
+    ],
+    chapterId: "disc-2.outer-continent",
+    shopId: "black-mage-village.black-cat-synthesis.disc-2-3",
+    shopName: "Black Cat Synthesis Shop (Disc II–III)",
+    cost: { currency: "gil", amount: 3200 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    notes: "GameFAQs' Shops table and RPGClassics list Fairy Earrings from Magic Armlet + Soft for 3,200 Gil, while the GameFAQs Items table gives 3,000 Gil; retain the disagreement and use the two shop/synthesis tables for the modeled price. GameFAQs lists the recipe at Black Mage Village, Alexandria, Treno, Lindblum, and Daguerreo; the item also has a later Desert Palace chest and repeatable Treno Auction source first available in Disc II. Magic Armlet's shop routes and Soft's common restock paths are modeled separately.",
+  },
+  {
     id: "synthesis-recipe.feather-boots",
     resultItemId: "game-item.feather-boots",
     ingredients: [

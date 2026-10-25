@@ -1546,7 +1546,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "treno-city-pickups-and-mognet",
         title: "First-visit sweep — coins, cards, Mogrich, and hidden Gil",
-        summary: "Finish the collectible route before triggering the next story sequence. Treno's first Auction House visit is a story scene, not the later bidding itinerary.",
+        summary: "Finish the collectible route before triggering the next story sequence. The first Auction House scene is story-driven; bidding opens after the party reunites in Treno.",
         sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
@@ -1567,7 +1567,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-king-house-pickup-and-queen",
             kind: "pickup",
             text: "Search by the window around the King's House, which is also the Auction House, for the hidden 2,225 Gil. Follow the circular path past the Card Stadium and collect the Ether from the riverbank before going north to Queen Stella's house. Turn in the Stellazzio coins you have collected so far; if Cancer and Aries were collected earlier, the Treno coins advance the reward ladder through the Blood Sword.",
-            detail: "Walkthroughs describe the 2,225-Gil cache as left, right, or west of the Auction House window; sweep both sides of the building. Some item lists also report a second Ether in Queen Stella's house while others omit it, so search the room but do not count that disputed chest as confirmed in the current pickup objective. The Auction House visit later in the story is where bidding becomes available.",
+            detail: "Walkthroughs describe the 2,225-Gil cache as left, right, or west of the Auction House window; sweep both sides of the building. Some item lists also report a second Ether in Queen Stella's house while others omit it, so search the room but do not count that disputed chest as confirmed in the current pickup objective. The Auction House first hosts a story scene; after the party reunites in Treno, return for its Disc II bidding offers before leaving town.",
             objectiveIds: ["disc-2.treno.first-visit-pickups", "disc-2.treno.stellazzio-rewards"],
           },
           {
@@ -1583,13 +1583,20 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-supersoft-and-exit",
         title: "Doctor Tot's tower — Supersoft and the final ATE",
         summary: "Resolve the Treno story scenes, collect the west-walkway dagger, then see Crime and Punishment before descending to Gargan Roo.",
-        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "jegged-treno", "elitegrindlab-treno"],
         steps: [
           {
             id: "treno-story-scenes",
             kind: "required",
             text: "When the city sweep is done, go to the Auction House for the story scene with Dagger, then find Marcus at the Inn. Continue to the docks for the next scenes. The first visit here uses the Auction House as a story location; the later auction buying route is a separate stop.",
             detail: "These story beats advance access to Doctor Tot. Before moving on, confirm the current ATE route, the Power Belt, Mogrich's letter, and the optional Griffin challenge if they are part of this profile.",
+          },
+          {
+            id: "treno-fairy-earrings-auction",
+            kind: "optional",
+            text: "After the party reunites, return to the Auction House before leaving Treno and check its Disc II offers. Fairy Earrings are a repeatable option if you want an early copy; the Fossil Roo and later Desert Palace pickups remain available, too.",
+            detail: "GameFAQs lists Fairy Earrings as first available in the Disc II auction with no special inventory condition. Bids vary, so no fixed Gil price is recorded. If you skip this offer, the same auction item can appear again, and the item has separately documented chest and synthesis routes.",
+            objectiveIds: ["disc-2.treno.fairy-earrings-auction"],
           },
           {
             id: "treno-mythril-dagger-supersoft",
@@ -2264,6 +2271,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "fossil-roo-entrance-elixir",
             kind: "pickup",
             text: "After Lani retreats, backtrack through the axe corridor to the alcove where Armodullahan first appeared. Search the room for the Elixir, then return to Lani's arena and continue down the passage.",
+            detail: "This Fossil Roo chest is a one-time pickup. GameFAQs also lists a later Elixir in Stiltzkin's Oeilvert bundle and from Ark, so missing this particular copy does not establish permanent item loss.",
             objectiveIds: ["disc-2.journey-to-outer-continent.treasure-sweep"],
           },
           {
@@ -2276,7 +2284,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "fossil-roo-near-reaches",
         title: "Near Reaches — Stiltzkin, Mogki, and the first treasure loop",
-        summary: "Handle the one-time merchant and Mognet checks first, then route through both switch-controlled tracks for the Fairy Earrings and Ethers.",
+        summary: "Handle the one-time merchant and Mognet checks first, then route through both switch-controlled tracks for the Fairy Earrings and Ether chest; the bundle's second Ether is a separate purchase.",
         sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "playstationtrophies-fossil-roo"],
         steps: [
           {
@@ -2290,6 +2298,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "fossil-roo-fairy-earrings",
             kind: "pickup",
             text: "From Mogki, take the lower/southern path. Pick flowers at the marker and use them to board the Gargant; continue to the end of its route and open the Fairy Earrings chest. Pick another flower and ride back to Mogki.",
+            detail: "If this chest is missed, a second Fairy Earrings chest is listed in Desert Palace's Light Chamber, with repeatable Treno Auction and synthesis sources later in the game.",
             objectiveIds: ["disc-2.journey-to-outer-continent.treasure-sweep"],
           },
           {
@@ -2322,7 +2331,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "fossil-roo-lamia-tiara",
             kind: "pickup",
             text: "Use the Gargant path to the right of switch No. 4. Follow the branch to the Lamia's Tiara chest, then ride back to the switch and restore its prior position before continuing.",
-            detail: "The Tiara can teach Dagger Confuse and Float. Equip it if either ability is still being learned; the item is also included in the Fossil Roo treasure checklist.",
+            detail: "The Tiara can teach Clear Headed, Confuse, and Float. Equip it if any ability is still being learned; later shops also sell Lamia's Tiara if this Fossil Roo copy is missed.",
             objectiveIds: ["disc-2.journey-to-outer-continent.treasure-sweep"],
           },
           {
@@ -2355,7 +2364,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "fossil-roo-survival-vest",
             kind: "pickup",
-            text: "Leave the mining area through its southeast exit and search the wood pile near the rubble for the Survival Vest. Return to the vine chamber afterward.",
+            text: "Before taking the final Gargant, sweep the lower route around the Nest and mining rooms; check by the wood pile near the exit for the Survival Vest. Return to the vine chamber afterward.",
+            detail: "The item is confirmed, but guide maps disagree about its precise nearby room. Sweep the connected lower screens before leaving; later Madain Sari, Beatrix, and shop routes are also documented.",
             objectiveIds: ["disc-2.journey-to-outer-continent.treasure-sweep"],
           },
         ],
@@ -2369,7 +2379,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "fossil-roo-final-sweep",
             kind: "cutoff",
-            text: "Before leaving the vine chamber, verify the Elixir, Fairy Earrings, both Ether chests, Lamia's Tiara, and Survival Vest. Check the Stiltzkin purchase, both available Mognet letters, any selected Lani steals, and the mining objectives as well.",
+            text: "Before leaving the vine chamber, verify the Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest. The Stiltzkin bundle's second Ether is a separate purchase. Check both available Mognet letters, any selected Lani steals, and the mining objectives as well.",
             detail: "Once the party flips switch No. 3 in the upper-left of the vine room and rides the Gargant from the lower-right exit, Fossil Roo's earlier rooms and mining site cannot be revisited. This is the last safe checkpoint for the chapter's one-time goals.",
             objectiveIds: ["disc-2.journey-to-outer-continent.treasure-sweep", "disc-2.fossil-roo.stiltzkin-3", "disc-2.journey-to-outer-continent.mognet-letters", "disc-2.journey-to-outer-continent.peek-a-boo", "disc-2.journey-to-outer-continent.one-ring"],
           },
