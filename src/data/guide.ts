@@ -575,7 +575,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/magdalene-forest",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the Magdalene Forest and Dead Forest encounters, four-branch owl puzzle, six Black Mage Village ATEs, Mogryo's time-limited letter to Mocchi, village pickups, shops, and story exit. The page says the first three ATEs are safe before collecting the letter, then recommends collecting it before any further ATE or screen.",
+    notes: "Original PlayStation route for the Magdalene Forest and Dead Forest encounters, four-branch owl puzzle, six Black Mage Village ATEs, Mogryo's time-limited letter to Mocchi, village pickups, shops, and story exit. It gives Everyday Life → Life On The Run → Gourmand's Nose → Different Language → Visitor, Not Invader → Life Cycle; the first three are safe before collecting the letter, which it recommends accepting before any further ATE, conversation, or screen.",
   },
   {
     id: "jegged-black-mage-village",
@@ -583,7 +583,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/20-Black-Mage-Village.html",
     accessed: "2026-10-24",
-    notes: "Independent route for the forest approach, owl puzzle, six first-visit ATEs, Mogryo's letter, Ladybug, hidden village pickups, eavesdropping and the Black Belt, synthesis suggestions, Virgo, and the story route back toward Conde Petie.",
+    notes: "Independent route for the forest approach, owl puzzle, six first-visit ATEs, Mogryo's letter, Ladybug, hidden village pickups, eavesdropping and the Black Belt, synthesis suggestions, Virgo, and the story route back toward Conde Petie. It gives the same six ATEs in order as GameFAQs, but directs Different Language past a door after Gourmand's Nose and before the cemetery; trigger-screen directions remain inconsistent among guides.",
   },
   {
     id: "cavesofnarshe-black-mage-village",
@@ -735,7 +735,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://earth.gamerguides.com/final-fantasy-ix/guide/trophies-achievements/guide/movie-critic-guide",
     accessed: "2026-10-24",
-    notes: "Cross-checks first-visit ATE routes in Conde Petie, Black Mage Village, and Madain Sari; some town screens close earlier prompts. Three Madain Sari walkthroughs support Vivi → Dagger → Eiko, while Jegged gives a different order; live confirmation remains pending. It gives the Pandemonium Lift/Elevator trigger as Heading 0, try all three blocked ledges, Heading 2, repeat, return to the controls, then re-enter the lift room and view the event. It also specifies under 50 Gil before No Free Lunch; that ATE takes the remaining money, and Give Me My Money follows when boarding the Blue Narciss. The total is 79 of 80 eligible scenes; other global trigger conditions remain under review.",
+    notes: "Cross-checks first-visit ATE routes in Conde Petie, Black Mage Village, and Madain Sari; some town screens close earlier prompts. For Black Mage Village it gives Everyday Life → Life On The Run → Gourmand's Nose → Different Language → Visitor, Not Invader → Life Cycle; it sends Zidane back to the entrance for Different Language and to the far-left cemetery exit for Visitor. These screen directions differ from GameFAQs and Jegged. Three Madain Sari walkthroughs support Vivi → Dagger → Eiko, while Jegged gives a different order; live confirmation remains pending. It gives the Pandemonium Lift/Elevator trigger as Heading 0, try all three blocked ledges, Heading 2, repeat, return to the controls, then re-enter the lift room and view the event. It also specifies under 50 Gil before No Free Lunch; that ATE takes the remaining money, and Give Me My Money follows when boarding the Blue Narciss. The total is 79 of 80 eligible scenes; other global trigger conditions remain under review.",
   },
   {
     id: "jegged-fossil-roo",

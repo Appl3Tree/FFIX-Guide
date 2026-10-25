@@ -18,7 +18,7 @@ const branchEvents = movieCriticEligibleEvents.filter((event) => event.exclusive
 test("each supported Movie Critic catalog has an ordered 79-view single-save route", () => {
   assert.equal(movieCriticEligibleEvents.length, 80);
   assert.equal(branchEvents.length, 2);
-  assert.equal(objectiveDependencies.length, 23);
+  assert.equal(objectiveDependencies.length, 28);
 
   assert.deepEqual(
     movieCriticEligibleEvents
@@ -56,6 +56,27 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
     "ate.conde-petie-quina-cant-communicate",
     "ate.conde-petie-dagger-and-william",
   ]);
+
+  assert.deepEqual(
+    movieCriticEligibleEvents
+      .filter((event) => event.chapterId === "disc-2.magdalene-forest")
+      .map((event) => event.objectiveId),
+    [
+      "ate.bmv-everyday-life",
+      "ate.bmv-life-on-the-run",
+      "ate.bmv-gourmands-nose",
+      "ate.bmv-different-language",
+      "ate.bmv-visitor-not-invader",
+      "ate.bmv-life-cycle",
+    ],
+    "Black Mage Village's first-visit ATE route follows the three-source safe order",
+  );
+
+  assert.deepEqual(eventByObjective.get("ate.bmv-life-on-the-run")?.prerequisites, ["ate.bmv-everyday-life"]);
+  assert.deepEqual(eventByObjective.get("ate.bmv-gourmands-nose")?.prerequisites, ["ate.bmv-life-on-the-run"]);
+  assert.deepEqual(eventByObjective.get("ate.bmv-different-language")?.prerequisites, ["ate.bmv-gourmands-nose"]);
+  assert.deepEqual(eventByObjective.get("ate.bmv-visitor-not-invader")?.prerequisites, ["ate.bmv-different-language"]);
+  assert.deepEqual(eventByObjective.get("ate.bmv-life-cycle")?.prerequisites, ["ate.bmv-visitor-not-invader"]);
 
   for (const branchEvent of branchEvents) {
     const route = movieCriticEligibleEvents.filter((event) =>
