@@ -1715,9 +1715,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "window-unverified",
-    conditions: "The Disc II Mistodon A table lists Peridot in its Common and Rare drop slots. The item can drop during the scripted encounters; whether these Mistodons can be farmed after leaving and re-entering the tree is disputed.",
+    conditions: "The Disc II Mistodon A table lists Peridot in its Common and Rare drop slots. GameFAQs describes one or two Mistodon fights on the later descent as random and says more appear after leaving and returning; EliteGrindLab says the scripted story waves cannot be farmed. Whether re-entry repeats this exact drop table remains disputed.",
     walkthroughObjectiveIds: ["disc-2.battle-of-iifa-tree.mistodon-steals"],
-    sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-battle-iifa-tree-71891", "jegged-iifa-tree-revisited", "elitegrindlab-iifa-tree", "cavesofnarshe-peridot"],
+    sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-battle-iifa-tree-71891", "gamefaqs-wrapping-up-disc-2-79143", "jegged-iifa-tree-revisited", "elitegrindlab-iifa-tree", "cavesofnarshe-peridot"],
   },
   {
     id: "item-path.disc-2.iifa-tree.stroper-peridot-drop",

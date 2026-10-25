@@ -1508,9 +1508,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.battle-of-iifa-tree-to-home-front",
     title: "Mistodon sequence steal opportunity",
     certainty: "disputed",
-    trigger: "If desired, attempt the Hi-Potion and Ore steals during the scripted Mistodon battles before leaving the Iifa Tree. Sources disagree on whether the waves can be re-fought after exiting and returning, so this window does not claim confirmed permanent loss.",
+    trigger: "If desired, attempt the Hi-Potion and Ore steals during the Mistodon battles on the return visit before completing the Aquamarine sequence. GameFAQs 71891 says more Mistodons appear after leaving and returning, and its Excalibur II guide describes one or two fights on the later descent as random; EliteGrindLab says the scripted story waves cannot be refought or farmed. Repeat access to the exact steal table remains disputed, so this is not a confirmed permanent loss.",
     missableIds: ["missable.disc-2.battle-of-iifa-tree.mistodon-steals"],
-    sourceIds: ["gamefaqs-battle-iifa-tree-71891", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited"],
+    sourceIds: ["gamefaqs-battle-iifa-tree-71891", "gamefaqs-wrapping-up-disc-2-79143", "jegged-iifa-tree-revisited", "gamerguides-iifa-tree-2", "elitegrindlab-iifa-tree-revisited"],
   },
   {
     id: "cutoff.iifa-tree.soulcage-steals",
