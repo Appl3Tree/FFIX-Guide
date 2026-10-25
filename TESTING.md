@@ -4,7 +4,7 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint` passes. `npm run build` passes typecheck, data audit, and the production build with 0 audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 322 sources. All 136 missable records link to 88 cutoff windows, including all 79 high/critical records. The catalog has 200 items and 760 paths across 41 slices, 38 recipes, 75 targets, and 159 ability claims; the bestiary has 43 partial records across 8 slices and 32 encounter groups. Bundle: 1,705.44 kB JavaScript (420.10 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests, browser review of the new bestiary entries, and direct game/release verification were not run.
+`npm run lint` passes. `npm run build` passes typecheck, data audit, and the production build with 0 audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 325 sources. All 136 missable records link to 88 cutoff windows, including all 79 high/critical records. The catalog has 200 items and 760 paths across 41 slices, 38 recipes, 75 targets, and 159 ability claims; the bestiary has 50 partial records across 9 slices and 35 encounter groups. Bundle: 1,721.49 kB JavaScript (423.51 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests, browser review of the new bestiary entries, and direct game/release verification were not run.
 
 ## Latest change status
 
@@ -43,7 +43,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 322 sources, then completed the Vite production build. The JavaScript bundle is 1,705.44 kB (420.10 kB gzip), and CSS is 60.22 kB (12.77 kB gzip). Vite’s JavaScript chunk-size advisory remains. Tests and direct game/release/UI verification were not run.
+`npm run build` passed typecheck, reported 0 data-audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 325 sources, then completed the Vite production build. The JavaScript bundle is 1,721.49 kB (423.51 kB gzip), and CSS is 60.22 kB (12.77 kB gzip). Vite’s JavaScript chunk-size advisory remains. Tests and direct game/release/UI verification were not run.
 
 ## Browser checks completed in this phase
 

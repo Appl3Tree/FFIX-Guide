@@ -1465,6 +1465,40 @@ const mythrilDaggerLindblumPath = itemAcquisitionPaths.find((path) => path.id ==
 if (!mythrilDaggerLindblumPath || mythrilDaggerLindblumPath.itemId !== "game-item.mythril-dagger" || mythrilDaggerLindblumPath.cost?.currency !== "gil" || mythrilDaggerLindblumPath.cost.amount !== 950) {
   errors.push("Mythril Dagger's early Lindblum recovery path must remain cataloged at 950 Gil.");
 }
+const nolrichPool = enemyEncounters.find((encounter) => encounter.id === "encounter.nolrich-heights.world-map-pool");
+const nolrichEnemyIds = ["enemy.carve-spider", "enemy.mu", "enemy.python"];
+if (!nolrichPool || nolrichPool.kind !== "random-pool" || nolrichPool.chapterId !== "disc-1.ice-cavern" ||
+  nolrichEnemyIds.some((enemyId) => !nolrichPool.formation.some((entry) => entry.enemyId === enemyId))) {
+  errors.push("Nolrich Heights must remain a distinct world-map pool for Carve Spider, Mu, and Python.");
+}
+const daliUndergroundPool = enemyEncounters.find((encounter) => encounter.id === "encounter.dali-underground.random-pool");
+const daliUndergroundEnemyIds = ["enemy.ghost", "enemy.vice", "enemy.skeleton"];
+if (!daliUndergroundPool || daliUndergroundPool.kind !== "random-pool" || daliUndergroundPool.chapterId !== "disc-1.village-of-dali" ||
+  daliUndergroundEnemyIds.some((enemyId) => !daliUndergroundPool.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !daliUndergroundPool.notes.some((note) => note.includes("GameFAQs and Caves of Narshe list Ghost and Vice") && note.includes("Skeleton"))) {
+  errors.push("Dali's optional underground pool must retain Ghost, Vice, Skeleton, and the source disagreement about Skeleton.");
+}
+const blackWaltz2Encounter = enemyEncounters.find((encounter) => encounter.id === "encounter.dali.black-waltz-2");
+const blackWaltz2Record = enemyRecords.find((enemy) => enemy.id === "enemy.black-waltz-2");
+if (!blackWaltz2Encounter || blackWaltz2Encounter.kind !== "boss" ||
+  !blackWaltz2Encounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-2" && entry.quantity === 1) ||
+  !blackWaltz2Encounter.objectiveIds.includes("disc-1.village-of-dali.black-waltz-2-steals") ||
+  !blackWaltz2Encounter.missableIds.includes("missable.disc-1.village-of-dali.black-waltz-2-steals") ||
+  !blackWaltz2Encounter.cutoffIds.includes("cutoff.dali.black-waltz-2-steals") ||
+  !blackWaltz2Encounter.notes.some((note) => note.includes("Observatory Mountain") && note.includes("cargo-ship"))) {
+  errors.push("Black Waltz 2 must be a separate fixed boss encounter linked to its steal warning/cutoff and documented location conflict.");
+}
+for (const itemId of ["game-item.steepled-hat", "game-item.leather-plate"]) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-1.village-of-dali" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.village-of-dali.black-waltz-2-steals"));
+  if (!blackWaltz2Record?.steals.some((slot) => slot.itemId === itemId) || !blackWaltz2Record.routeObjectiveIds.includes("disc-1.village-of-dali.black-waltz-2-steals") || !path || path.availability !== "one-time-encounter") {
+    errors.push(`Black Waltz 2's ${itemId} steal must remain linked to the one-time objective and item path.`);
+  }
+}
+if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030 ||
+  blackWaltz2Record.drops.length !== 4 || blackWaltz2Record.drops.some((slot) => slot.itemId !== "game-item.ether") ||
+  !blackWaltz2Record.facts.some((fact) => fact.category === "status-vulnerability" && fact.label === "Mini" && fact.sourceIds.includes("ffwiki-black-waltz-2"))) {
+  errors.push("Black Waltz 2 must preserve its cross-checked HP, four Ether drop slots, and sourced Mini-status conflict.");
+}
 const iceBrandId = "game-item.ice-brand";
 const iceBrandPathIds = new Set(itemAcquisitionPaths.filter((path) => path.itemId === iceBrandId).map((path) => path.id));
 const requiredIceBrandPathIds = [

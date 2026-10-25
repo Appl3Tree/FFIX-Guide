@@ -80,6 +80,7 @@ const finalBattleChapterId = "disc-4.the-final-battle";
 const finalPreparationsChapterId = "disc-4.final-preparations";
 const evilForestChapterId = "disc-1.evil-forest";
 const iceCavernChapterId = "disc-1.ice-cavern";
+const daliChapterId = "disc-1.village-of-dali";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -97,6 +98,12 @@ const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", 
 const iceCavernStealsObjectiveId = "disc-1.ice-cavern.boss-steals";
 const iceCavernStealsMissableId = "missable.disc-1.ice-cavern.boss-steals";
 const iceCavernStealsCutoffId = "cutoff.ice-cavern.boss-steals";
+const blackWaltz2StealsObjectiveId = "disc-1.village-of-dali.black-waltz-2-steals";
+const blackWaltz2StealsMissableId = "missable.disc-1.village-of-dali.black-waltz-2-steals";
+const blackWaltz2StealsCutoffId = "cutoff.dali.black-waltz-2-steals";
+const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
+const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
+const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
 const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
@@ -325,6 +332,56 @@ const iceCavernEncounters: EnemyEncounter[] = [
     missableIds: [iceCavernStealsMissableId],
     cutoffIds: [iceCavernStealsCutoffId],
     notes: ["Black Waltz 1 summons Sealion at the start. Defeat Waltz first: it heals Sealion and can summon another if Sealion falls while Waltz remains."],
+  },
+];
+
+const earlyDaliEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.nolrich-heights.world-map-pool",
+    title: "Nolrich Heights world-map encounters",
+    chapterId: iceCavernChapterId,
+    location: "Mist Continent world map around Dali",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.carve-spider", quantity: null },
+      { enemyId: "enemy.mu", quantity: null },
+      { enemyId: "enemy.python", quantity: null },
+    ],
+    sourceIds: nolrichEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["These are the listed combat enemies for Nolrich Heights; the guides do not publish formation rates or exact combinations. Friendly Mu is a separate sidequest encounter, not part of the battle pool."],
+  },
+  {
+    id: "encounter.dali-underground.random-pool",
+    title: "Dali underground optional encounters",
+    chapterId: daliChapterId,
+    location: "Underground factory after opening the rear door",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.ghost", quantity: null },
+      { enemyId: "enemy.vice", quantity: null },
+      { enemyId: "enemy.skeleton", quantity: null },
+    ],
+    sourceIds: daliEnemySources,
+    objectiveIds: ["disc-1.village-of-dali.underground-treasure-sweep"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Opening the rear door enables optional random encounters; keeping it shut preserves an encounter-free route. GameFAQs and Caves of Narshe list Ghost and Vice, while Jegged and EliteGrindLab also include Skeleton. EliteGrindLab reports formations of Skeleton + Vice or Ghost alone; rates are not modeled."],
+  },
+  {
+    id: "encounter.dali.black-waltz-2",
+    title: "Black Waltz 2",
+    chapterId: daliChapterId,
+    location: "Dali story sequence; the reported field location is disputed",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.black-waltz-2", quantity: 1 }],
+    sourceIds: blackWaltz2Sources,
+    objectiveIds: [blackWaltz2StealsObjectiveId],
+    missableIds: [blackWaltz2StealsMissableId],
+    cutoffIds: [blackWaltz2StealsCutoffId],
+    notes: ["Several walkthroughs place the fight at Observatory Mountain; Final Fantasy Wiki and EliteGrindLab's field-script review place the encounter at the cargo-ship loading area. The dossier preserves that location conflict."],
   },
 ];
 
@@ -689,7 +746,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...earlyDaliEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1835,9 +1892,206 @@ const iceCavernEnemyRecords: EnemyRecord[] = [
   }, iceCavernChapterId, iceCavernBossSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
 ];
 
+const earlyDaliEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.carve-spider",
+    name: "Carve Spider",
+    encounterIds: ["encounter.nolrich-heights.world-map-pool"],
+    stats: enemyStats([["level", 3], ["HP", 129], ["MP", 199], ["EXP", 48], ["AP", 1], ["Gil", 124]]),
+    steals: [
+      enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.tent"),
+      enemyLoot("semi-rare", "game-item.ore"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.ore"),
+      enemyLoot("uncommon", "game-item.eye-drops"), enemyLoot("rare", "game-item.phoenix-down"),
+    ],
+    facts: [
+      enemyFact("type", "Bug"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Fire", [enemyListSourceId], "Can deal about 75 Fire damage."),
+      sourcedFact("attack", "Web", [enemyListSourceId], "Inflicts Slow."),
+    ],
+    blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Bug Killer and watch for Slow", detail: "Carve Spider is a sharp early difficulty spike if met before Dali; Bug Killer helps, while Web can inflict Slow. Quina can learn LV3 Def-less later by eating it.", sourceIds: [enemyListSourceId, "jegged-ice-cavern"] }],
+    routeObjectiveIds: [],
+    notes: ["The route sources list Carve Spider in the Nolrich Heights world-map pool; the record does not imply that every map tile uses the same encounter rate."],
+  }, iceCavernChapterId, nolrichEnemySources),
+  chapterEnemy({
+    id: "enemy.mu",
+    name: "Mu",
+    encounterIds: ["encounter.nolrich-heights.world-map-pool"],
+    stats: enemyStats([["level", 2], ["HP", 77], ["MP", 183], ["EXP", 34], ["AP", 1], ["Gil", 104]]),
+    steals: [
+      enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", "game-item.potion"),
+      enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"),
+      enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", "game-item.phoenix-down"),
+    ],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Stone", [enemyListSourceId], "The attack can deal about 40 damage."),
+    ],
+    blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Finish it with an ordinary attack", detail: "The regular Mu has little HP; its Stone attack is its main threat. The friendly Mu encounter that asks for Ore is a separate sidequest event and is not a battle.", sourceIds: [enemyListSourceId, "jegged-ice-cavern"] }],
+    routeObjectiveIds: [],
+    notes: ["The listed combat form is the standard Mu. Jegged separately describes the Friendly Monster Mu, which asks for Ore and rewards a Potion plus 10 AP."],
+  }, iceCavernChapterId, nolrichEnemySources),
+  chapterEnemy({
+    id: "enemy.python",
+    name: "Python",
+    encounterIds: ["encounter.nolrich-heights.world-map-pool"],
+    stats: enemyStats([["level", 2], ["HP", 75], ["MP", 184], ["EXP", 40], ["AP", 1], ["Gil", 106]]),
+    steals: [
+      enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.ore"),
+      enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"),
+      enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("elemental-weakness", "Ice"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Thunder", [enemyListSourceId], "Uses single-target Thunder."),
+    ],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Ice and avoid wasting turns", detail: "Python has low HP, is weak to Ice, and can use Thunder. Quina can learn Pumpkin Head by eating it later.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["The route sources list Python in the Nolrich Heights world-map pool; no frequency or formation rate is inferred."],
+  }, iceCavernChapterId, nolrichEnemySources),
+  chapterEnemy({
+    id: "enemy.ghost",
+    name: "Ghost",
+    encounterIds: ["encounter.dali-underground.random-pool"],
+    stats: enemyStats([["level", 4], ["HP", 118], ["MP", 9999], ["EXP", 48], ["AP", 1], ["Gil", 126]]),
+    steals: [
+      enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.ore"),
+      enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"),
+      enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "Undead and Aerial"),
+      sourcedFact("elemental-weakness", "Wind and Shadow", [enemyListSourceId, "ffwiki-ghost"], "The GameFAQs enemy table lists Shadow; Final Fantasy Wiki also lists Wind."),
+      sourcedFact("elemental-resistance", "Holy (half damage); Earth (nullified)", [enemyListSourceId, "ffwiki-ghost"]),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Osmose", [enemyListSourceId], "Drains MP."),
+      sourcedFact("attack", "Fire and Lightning", [enemyListSourceId], "Uses elemental spells against the party."),
+    ],
+    blueMagic: [{ name: "Roulette", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Cure or focus fire", detail: "GameFAQs recommends Cure against this undead enemy. Fire and Lightning are effective, and defeating it quickly limits its chance to drain MP with Osmose.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["Ghost is listed by the main Dali routes. Its rare Phoenix Pinion steal sits behind Potion, Ore, and Hi-Potion; the enemy table does not imply the steal is an efficient farm."],
+  }, daliChapterId, [...daliEnemySources, "ffwiki-ghost"]),
+  chapterEnemy({
+    id: "enemy.vice",
+    name: "Vice",
+    encounterIds: ["encounter.dali-underground.random-pool"],
+    stats: enemyStats([["level", 4], ["HP", 129], ["MP", 209], ["EXP", 48], ["AP", 1], ["Gil", 128]]),
+    steals: [
+      enemyLoot("common", "game-item.echo-screen"), enemyLoot("uncommon", "game-item.potion"),
+      enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"),
+      enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", "game-item.phoenix-down"),
+    ],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Fire", [enemyListSourceId], "Deals about 75 Fire damage."),
+      sourcedFact("attack", "Steal", [enemyListSourceId], "Can steal an item from a party member."),
+    ],
+    blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Take it out before it steals", detail: "Vice has no listed elemental weakness, but it is fragile. It can steal from the party and use Fire; ordinary attacks are sufficient.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["GameFAQs and Caves of Narshe list Vice in the optional underground pool. Opening the rear door is not required for the factory route or its mandatory pickups."],
+  }, daliChapterId, daliEnemySources),
+  chapterEnemy({
+    id: "enemy.skeleton",
+    name: "Skeleton",
+    encounterIds: ["encounter.dali-underground.random-pool"],
+    stats: enemyStats([["level", 8], ["HP", 400], ["MP", 293], ["EXP", 104], ["AP", 1], ["Gil", 209]]),
+    steals: [
+      enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"),
+      enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"),
+      enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "Undead"),
+      enemyFact("elemental-weakness", "Fire and Holy"),
+      enemyFact("elemental-resistance", "Shadow (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Whirl Slash", [enemyListSourceId], "Can hit front-row characters for about 100 damage."),
+    ],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "Use Vivi's Fire and watch the HP spike", detail: "At 400 HP this is much tougher than nearby Disc I enemies. Fire and Holy exploit its weaknesses; Whirl Slash can deal heavy damage to front-row characters.", sourceIds: [enemyListSourceId, "elitegrindlab-dali"] }],
+    routeObjectiveIds: [],
+    notes: ["Presence in the Dali underground is disputed: Jegged and EliteGrindLab include Skeleton; GameFAQs, Caves of Narshe, and Final Fantasy Wiki omit it. EliteGrindLab reports it only in formations paired with Vice."],
+  }, daliChapterId, daliEnemySources),
+  chapterBoss({
+    id: "enemy.black-waltz-2",
+    name: "Black Waltz 2",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    stats: [
+      { field: "level", value: 6, sourceIds: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"], verification: "cross-checked" },
+      { field: "HP", value: 1030, sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"], verification: "cross-checked" },
+      { field: "MP", value: 3017, sourceIds: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"], verification: "cross-checked" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"], verification: "cross-checked" },
+      { field: "AP", value: 5, sourceIds: ["gamefaqs-dali-71891"], verification: "single-source" },
+      { field: "Gil", value: 441, sourceIds: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"], verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.steepled-hat", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]),
+      sourcedLoot("uncommon", "game-item.leather-plate", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]),
+      sourcedLoot("semi-rare", null, ["gamefaqs-dali-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-dali-71891"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.ether", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]),
+      sourcedLoot("common", "game-item.ether", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]),
+      sourcedLoot("uncommon", "game-item.ether", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]),
+      sourcedLoot("rare", "game-item.ether", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]),
+    ],
+    facts: [
+      sourcedFact("type", "Human and Aerial", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"]),
+      sourcedFact("elemental-weakness", "Wind", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]),
+      sourcedFact("elemental-resistance", "Earth (nullified)", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"]),
+      sourcedFact("status-vulnerability", "Darkness and Slow", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"]),
+      sourcedFact("status-vulnerability", "Mini", ["gamefaqs-dali-71891", "ffwiki-black-waltz-2"], "GameFAQs lists Mini as a vulnerability; Final Fantasy Wiki lists it among the boss's immunities."),
+      sourcedFact("attack", "Teleport", ["gamefaqs-dali-71891"], "Basic physical attack against one of the male characters."),
+      sourcedFact("attack", "Fire, Blizzard, and Thunder", ["gamefaqs-dali-71891"], "Uses the basic elemental spells; casting a spell at Waltz can trigger an -ara counter."),
+      sourcedFact("attack", "Fira counter", ["gamefaqs-dali-71891", "jegged-dali"], "Uses party-target Fira as a counter when an attack takes it below half HP."),
+      sourcedFact("attack", "Hypnotize", ["gamefaqs-dali-71891", "jegged-dali"], "If Dagger is the only surviving party member, puts her to Sleep and ends the battle in a Game Over."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal before attacking", detail: "Try for the Steepled Hat and Leather Plate before ending this one-time encounter. Both item types have later purchase sources, but the boss copies cannot be reclaimed.", sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "elitegrindlab-dali"] },
+      { title: "Use physical attacks and keep the party up", detail: "Steiner's Bird Killer helps against the aerial boss. Vivi's spells can draw -ara counters, and crossing the half-HP threshold triggers Fira. Keep the other characters alive so Hypnotize cannot end the fight.", sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali"] },
+    ],
+    routeObjectiveIds: [blackWaltz2StealsObjectiveId],
+    notes: [
+      "Black Waltz 2's four drop slots all list Ether: one guaranteed slot plus up to three conditional additional copies. Caves of Narshe summarizes this as Ether ×4; several route summaries mention only one.",
+      "GameFAQs lists Mini as a vulnerability, while Final Fantasy Wiki lists Mini among immunities. The catalog keeps the disagreement rather than resolving it without a direct game check.",
+      "HP is listed as 1,030 by the cross-checked sources; StrategyWiki's 1,000 figure is an apparent rounding or transcription difference and is not selected as the record value.",
+      "Walkthroughs differ on the encounter's field location. The dossier uses the Dali story chapter and keeps Observatory Mountain versus cargo-ship loading-area claims explicit in its encounter note.",
+    ],
+  }, daliChapterId, blackWaltz2Sources, [blackWaltz2StealsMissableId], [blackWaltz2StealsCutoffId]),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
+  ...earlyDaliEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -1961,8 +2215,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, daliChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for the Evil Forest, Ice Cavern, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. The encounter links its one-time steals to the existing cutoff, warning, and acquisition paths. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Dali, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
