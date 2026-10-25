@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The latest B01 route update structures the Bohden Gate control handoff and Dagger and Steiner's Disc II Treno branch, including both returns to Zidane's group. The Disc IV Mognet trip through Burmecia to Atla remains documented while access to old Suburb and Uptown pickup rooms is unresolved. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The latest B02 refinement places the Mythril Sword cutoff at Esto Gaza before the Desert Palace story sequence, records that the post-Desert-Palace shop list omits it, and separates the optional five-copy inventory target from standard completion. Beatrix and Treno copies still held count toward the total. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 

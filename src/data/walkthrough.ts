@@ -4033,8 +4033,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-mythril-shop",
             kind: "cutoff",
-            text: "Before leaving this open-world window, visit the shop in Esto Gaza and buy any Mythril equipment you need. If following the advanced perfect-game inventory target, buy five Mythril Swords now; later story progression removes the documented shop opportunity.",
-            detail: "The five-copy target belongs to the cited perfect-game synthesis route and is not a universal requirement for the story or platform achievements. Other Mythril weapons, armor, and Vaccines are also stocked here; check the whole shop against your current ability-learning and gear goals.",
+            text: "During the initial Blue Narciss free-roam window, visit Esto Gaza and reach five total Mythril Swords if you are following the advanced inventory target. Count copies still held from Beatrix or Treno, then buy only the shortfall before advancing the plot toward the Desert Palace.",
+            detail: "GameFAQs labels this Esto Gaza stock the final Mythril Sword purchase opportunity and lists a separate post-Desert-Palace shop inventory that omits the sword. The exact stock-change flag is source-based and has not been directly checked across modern releases. Five total copies are an optional perfect-inventory target, not a standard story or platform-achievement requirement. Other Mythril equipment and Vaccines are also stocked here; review them against your own gear goals.",
             objectiveIds: ["disc-3.on-the-high-seas.mythril-swords"],
           },
           {
