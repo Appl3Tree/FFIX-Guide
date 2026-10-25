@@ -419,6 +419,18 @@ if (jumpRopeLetterSteps.length !== 1 || jumpRopeLetterSteps[0]?.chapterId !== "d
   errors.push("The Jump Rope Mognet letter objective must point to Mosh's Disc I guardhouse step.");
 }
 
+const burmeciaTreasureWarning = missables.find((missable) => missable.id === "missable.disc-1.burmecia.treasures");
+const burmeciaTreasureCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.burmecia.first-visit-departure");
+if (!burmeciaTreasureWarning?.sourceIds.includes("ffwiki-unrevisitable-locations") || !burmeciaTreasureCutoff?.sourceIds.includes("ffwiki-unrevisitable-locations")) {
+  errors.push("The Burmecia treasure warning and cutoff must retain the palace-only unrevisitable-location source.");
+}
+if (burmeciaTreasureCutoff?.certainty !== "conservative") {
+  errors.push("The Burmecia first-visit treasure deadline must stay conservative while later chest-room access is unresolved.");
+}
+if (burmeciaTreasureWarning?.classification.includes("permanently-missable") || !burmeciaTreasureWarning?.note.includes("does not establish chest-room access")) {
+  errors.push("The Burmecia treasure warning must not claim permanent loss from incomplete later-access evidence.");
+}
+
 for (const { platform, records, expectedCount } of achievementCatalogs) {
   if (records.length !== expectedCount) {
     errors.push(`${platform} achievement catalog has ${records.length} records, expected ${expectedCount}.`);

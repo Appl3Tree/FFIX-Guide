@@ -1031,10 +1031,10 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     id: "cutoff.burmecia.first-visit-departure",
     edgeId: "story.burmecia-to-journey-to-treno",
     title: "Burmecia first-visit departure",
-    certainty: "source-supported",
+    certainty: "conservative",
     trigger: "Before leaving Burmecia after Beatrix, finish the Disc I treasure sweep and buy Stiltzkin's first 333-Gil bundle. A Disc II pre-Cleyra route later reaches Atla's Mogshop, but the published route does not confirm that every Disc I pickup room reopens; this remains the safe full-sweep boundary.",
     missableIds: ["missable.disc-1.burmecia.treasures", "missable.disc-1.burmecia.stiltzkin-1"],
-    sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
+    sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "ffwiki-unrevisitable-locations", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
   },
   {
     id: "cutoff.treno-first-visit.ates",
