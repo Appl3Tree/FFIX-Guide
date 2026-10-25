@@ -2261,6 +2261,52 @@ if (
 ) {
   errors.push("The Mistodon [A] steal warning must preserve the disputed repeat-access cutoff without claiming permanent item loss.");
 }
+const scarletHair = enemyRecords.find((enemy) => enemy.id === "enemy.scarlet-hair");
+const scarletHairEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-madain-sari.scarlet-hair");
+const scarletHairWarning = missablesById.get("missable.disc-2.return-to-madain-sari.scarlet-hair-steals");
+const scarletHairCutoff = cutoffsById.get("cutoff.return-to-madain-sari.scarlet-hair-steals");
+const scarletHairHpClaims = scarletHair?.stats.filter((claim) => claim.field === "HP").map((claim) => claim.value).sort((a, b) => a - b) ?? [];
+if (
+  scarletHairEncounter?.chapterId !== "disc-2.return-to-madain-sari" ||
+  scarletHairEncounter.kind !== "boss" ||
+  scarletHairEncounter.formation[0]?.enemyId !== "enemy.scarlet-hair" ||
+  scarletHairEncounter.formation[0]?.quantity !== 1 ||
+  scarletHair?.kind !== "boss" ||
+  !scarletHair.encounterIds.includes(scarletHairEncounter.id) ||
+  !scarletHair.routeObjectiveIds.includes("disc-2.return-to-madain-sari.scarlet-hair-steals") ||
+  !scarletHair.steals.some((slot) => slot.slot === "common" && slot.itemId === "game-item.ether") ||
+  !scarletHair.steals.some((slot) => slot.slot === "uncommon" && slot.itemId === "game-item.poison-knuckles") ||
+  !scarletHair.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.tent") ||
+  scarletHairHpClaims.join(",") !== "6800,8985,8986,18985" ||
+  !scarletHair.stats.some((claim) => claim.field === "MP" && claim.value === 5865 && claim.verification === "disputed") ||
+  !scarletHair.stats.some((claim) => claim.field === "MP" && claim.value === 5685 && claim.verification === "disputed") ||
+  !scarletHair.notes.some((note) => note.includes("8,985, 8,986, 18,985, and 6,800")) ||
+  !scarletHairWarning?.classification.includes("missable-opportunity") ||
+  scarletHairCutoff?.certainty !== "source-supported" ||
+  !scarletHairCutoff.missableIds.includes(scarletHairWarning.id)
+) {
+  errors.push("Scarlet Hair must remain a solo Eidolon Wall boss with its HP/MP disputes, sourced loot, and existing one-fight steal warning/cutoff.");
+}
+const scarletHairItemPathIds = [
+  "item-path.disc-2.return-to-madain-sari.scarlet-hair-ether-steal",
+  "item-path.disc-2.return-to-madain-sari.scarlet-hair-poison-knuckles-steal",
+  "item-path.disc-2.return-to-madain-sari.scarlet-hair-tent-drop",
+  "item-path.disc-2.outer-continent.poison-knuckles-conde-petie-shop",
+  "item-path.disc-2.madain-sari.poison-knuckles-shop",
+  "item-path.disc-3.the-home-front.poison-knuckles-alexandria-shop",
+  "item-path.disc-3.card-tournament.poison-knuckles-treno-shop",
+  "item-path.disc-3.on-the-high-seas.poison-knuckles-lindblum-shop",
+  "item-path.disc-3.ipsens-castle.poison-knuckles-ipsen-mogshop",
+];
+if (
+  !gameItemIds.has("game-item.poison-knuckles") ||
+  scarletHairItemPathIds.some((pathId) => !itemAcquisitionPaths.some((path) => path.id === pathId)) ||
+  !sourceInventoryTargets.some((target) => target.itemId === "game-item.poison-knuckles" && target.targetQuantity === 2) ||
+  !equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.poison-knuckles" && claim.abilityName === "Spare Change") ||
+  !equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.poison-knuckles" && claim.abilityName === "Counter")
+) {
+  errors.push("Scarlet Hair's Ether/Poison Knuckles/Tent acquisition and recovery paths, Poison Knuckles target, and weapon abilities must remain linked in the item catalog.");
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

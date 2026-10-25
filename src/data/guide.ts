@@ -2023,7 +2023,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-madain-sari",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the Disc II return after Iifa Tree; it says to open the room by the fishing area after the scene for the Survival Vest/Phoenix Down chests, then records Eidolon Wall rewards/healing, Scarlet Hair, Memory Earring, Amarant recruitment, first party selection, and the return to Iifa Tree. Scarlet Hair's published HP conflicts with other references, so the chapter does not print it.",
+    notes: "Original PlayStation route for the Disc II return after Iifa Tree; it says to open the room by the fishing area after the scene for the Survival Vest/Phoenix Down chests, then records Eidolon Wall rewards/healing, Scarlet Hair, Memory Earring, Amarant recruitment, first party selection, and the return to Iifa Tree. Its Scarlet Hair table lists HP 8,986, MP 5,865, level 22, EXP 0, AP 9, Gil 4,790, a Common Ether steal, an Uncommon Poison Knuckles steal, and a guaranteed Tent drop. HP differs from other references.",
   },
   {
     id: "jegged-return-to-madain-sari",
@@ -2055,7 +2055,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/madain-sari-eidolon-wall/",
     accessed: "2026-10-24",
-    notes: "Completionist audit of the return-only room, exact return-visit item set, Memory Earring dialogue reward, boss-stat disagreement, steal opportunity, Amarant equipment learning, and party selection. It finds one Survival Vest, one Phoenix Down, Exploda, Elixir, Memory Earring, and a Tent boss drop across the inspected lists.",
+    notes: "Completionist audit of the return-only room, exact return-visit item set, Memory Earring dialogue reward, boss-stat disagreement, steal opportunity, Amarant equipment learning, and party selection. It finds one Survival Vest, one Phoenix Down, Exploda, Elixir, Memory Earring, and a Tent boss drop across the inspected lists. Its source comparison shows Scarlet Hair HP values of 8,985, 8,986, 18,985, and 6,800; the 8,985/8,986/18,985 camps also disagree on how many independent references they represent. It describes level 22, MP 5,865, EXP 0, AP 9, and Gil 4,790 as the otherwise matching profile, but RPGClassics prints MP 5,685.",
   },
   {
     id: "flactem-morrid-coffee",
@@ -2719,7 +2719,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/bestiary4.shtml",
     accessed: "2026-10-25",
-    notes: "Original PlayStation bestiary cross-check for Quale's stats, 99-frog trigger, elemental traits, steals, and Elixir drop table. The Qu's Marsh boss is optional and triggers from the shared frog-catching count.",
+    notes: "Original PlayStation bestiary cross-check for Scarlet Hair, Quale, and the N–S enemy roster. It prints Scarlet Hair at level 22, HP 8,985, MP 5,685, Gil 4,790, EXP 0, with Ether and Poison Knuckles steals and a Tent drop; its HP and MP figures differ from other references. It also lists Quale's stats, 99-frog trigger, elemental traits, steals, and Elixir drop table; the Qu's Marsh boss is optional and triggers from the shared frog-catching count.",
   },
   {
     id: "rpgclassics-bestiary-t-z",
