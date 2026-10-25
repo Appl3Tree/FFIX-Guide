@@ -4,11 +4,11 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint` and `npm run build` (including typecheck and the data audit) pass for the Cleyra boss-steal/recovery slice. The audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 614 objectives, and 311 sources; all missables link to 87 cutoff windows, including all 79 high/critical records. The item catalog has 194 records and 719 paths across 40 chapter slices. Bundle: 1,662.61 kB JavaScript (410.66 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests and in-game/release/UI verification were not run.
+`npm run lint` and `npm run build` (including typecheck and the data audit) pass for the Hilgigars steal/recovery slice. The audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 614 objectives, and 312 sources; all missables link to 87 cutoff windows, including all 79 high/critical records. The item catalog has 194 records and 721 paths across 40 chapter slices. Bundle: 1,664.91 kB JavaScript (411.05 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests and in-game/release/UI verification were not run.
 
 ## Latest change status
 
-The latest B02/B05 slice maps all six one-time Cleyra boss steals to item records and warning objectives, records Antlion’s separate guaranteed Annoyntment drop, and adds later Lindblum/Treno recovery paths. The completion-rank effect remains under review and source-reported steal rates conflict. Lint/build/data audit and whitespace checks pass; tests and direct game/release/UI verification were not run.
+The latest B02/B05 slice maps Hilgigars’ three one-time steals and the later recovery for all three item types. Fairy Flute has two sourced 4,500-Gil Disc III Mogshop paths; exact steal rates and release-specific stock behavior remain unverified. Lint/build and the data audit pass; `git diff --check` passes. Tests and direct game/release/UI verification were not run.
 
 The preceding B01 Cleyra route audit separates the cutoff into its sourced sequence: first-visit ATE and shop checks, Freya's post-Antlion Emerald and Stiltzkin segment, remaining Trunk chests on the required return, then evacuation rewards before departure. GameFAQs and Gamer Guides support this order; final closure wording remains disputed. Lint, data audit, and production build pass with 0 audit errors and 175 coverage warnings. JavaScript bundle: 1,470.41 kB (373.16 kB gzip); CSS: 59.99 kB (12.73 kB gzip). Tests were not added or run; live closure verification remains open.
 

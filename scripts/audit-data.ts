@@ -1172,6 +1172,51 @@ const cleyraGoldHelmRecovery = itemAcquisitionPaths.find((path) => path.id === "
 if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.cost?.amount !== 1800) {
   errors.push("Cleyra Gold Helm recovery needs the Disc III Treno shop path priced at 1,800 Gil.");
 }
+const hilgigarsChapterIndex = guideAreas.findIndex((area) => area.id === "disc-2.conde-petie-mountain-path");
+const hilgigarsSteals = [
+  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal", itemId: "game-item.phoenix-down" },
+  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-mythril-fork-steal", itemId: "game-item.mythril-fork" },
+  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal", itemId: "game-item.fairy-flute" },
+];
+for (const expected of hilgigarsSteals) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!path) {
+    errors.push(`Hilgigars steal coverage is missing ${expected.pathId}.`);
+    continue;
+  }
+  if (path.itemId !== expected.itemId || path.chapterId !== "disc-2.conde-petie-mountain-path" || path.method !== "steal" ||
+    path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.conde-petie-mountain-path.hilgigars-steals")) {
+    errors.push(`Hilgigars steal path ${expected.pathId} must match its item, one-time encounter, and warning objective.`);
+  }
+  for (const sourceId of ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-items-71891"]) {
+    if (!path.sourceIds.includes(sourceId)) errors.push(`Hilgigars steal path ${expected.pathId} is missing source ${sourceId}.`);
+  }
+  if (!itemAcquisitionPaths.some((candidate) => candidate.itemId === expected.itemId &&
+    guideAreas.findIndex((area) => area.id === candidate.chapterId) > hilgigarsChapterIndex)) {
+    errors.push(`Hilgigars steal item ${expected.itemId} needs a later item-type recovery path.`);
+  }
+}
+const hilgigarsFairyFlute = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal");
+if (!hilgigarsFairyFlute?.sourceIds.includes("cavesofnarshe-ff9-flutes")) {
+  errors.push("Hilgigars Fairy Flute steal needs the independent Caves of Narshe flute reference.");
+}
+for (const expected of [
+  { id: "item-path.disc-3-stock.mimoza-oeilvert.fairy-flute", shopId: "mimoza-oeilvert", chapterId: "disc-3.forgotten-continent" },
+  { id: "item-path.disc-3-stock.mojito-desert-palace.fairy-flute", shopId: "mojito-desert-palace", chapterId: "disc-3.desert-palace" },
+]) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.id);
+  if (!path || path.itemId !== "game-item.fairy-flute" || path.chapterId !== expected.chapterId || path.shopId !== expected.shopId ||
+    path.method !== "mogshop" || path.cost?.currency !== "gil" || path.cost.amount !== 4500 || path.availability !== "limited-window" ||
+    !path.sourceIds.includes("gamefaqs-shops-71891") || !path.sourceIds.includes("cavesofnarshe-ff9-flutes")) {
+    errors.push(`Fairy Flute recovery path ${expected.id} must be the sourced 4,500-Gil Disc III Mogshop listing.`);
+  }
+}
+const hilgigarsWarning = missablesById.get("missable.disc-2.conde-petie-mountain-path.hilgigars-steals");
+if (!hilgigarsWarning || /still need|still being mapped|under review/i.test(`${hilgigarsWarning.consequence} ${hilgigarsWarning.nextAvailability} ${hilgigarsWarning.recovery}`) ||
+  !hilgigarsWarning.recovery.includes("Phoenix Down") || !hilgigarsWarning.recovery.includes("Fairy Flute")) {
+  errors.push("Hilgigars' warning must distinguish its lost encounter copies from the mapped Phoenix Down and Fairy Flute recovery paths.");
+}
 const broadswordId = "game-item.broadsword";
 const broadswordPathIds = [
   "item-path.disc-1.alexandria.broadsword-steiner-starting-equipment",

@@ -160,6 +160,18 @@ const mythrilForkReferenceSources = [
   "jegged-forks",
   "jegged-conde-petie-mountain-path",
 ];
+const hilgigarsStealSources = [
+  "gamefaqs-conde-petie-mountain-path-71891",
+  "jegged-conde-petie-mountain-path",
+  "gamerguides-conde-petie-mountain-path",
+  "gamefaqs-items-71891",
+];
+const fairyFluteReferenceSources = [
+  ...hilgigarsStealSources,
+  "gamefaqs-preparing-to-leave-71891",
+  "gamefaqs-shops-71891",
+  "cavesofnarshe-ff9-flutes",
+];
 const wristReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-shops-71891",
@@ -877,6 +889,28 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     conditions: "Try to steal one Mythril Fork from Hilgigars before ending the Mountain Path boss encounter. Later shops replace the item type if this encounter copy is missed.",
     walkthroughObjectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
     sourceIds: mythrilForkReferenceSources,
+  },
+  {
+    id: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal",
+    itemId: "game-item.phoenix-down",
+    chapterId: "disc-2.conde-petie-mountain-path",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Try to steal one Phoenix Down from Hilgigars before ending the Mountain Path boss encounter. Phoenix Down remains available through later item shops if this encounter copy is missed.",
+    walkthroughObjectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
+    sourceIds: hilgigarsStealSources,
+  },
+  {
+    id: "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal",
+    itemId: "game-item.fairy-flute",
+    chapterId: "disc-2.conde-petie-mountain-path",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Try to steal one Fairy Flute from Hilgigars before ending the Mountain Path boss encounter. Later Disc III Mogshops at Oeilvert and Desert Palace sell the item type for 4,500 Gil before the Shimmering Island transition.",
+    walkthroughObjectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
+    sourceIds: fairyFluteReferenceSources,
   },
   {
     id: "item-path.disc-2.outer-continent.conde-petie-mythril-fork-shop",
@@ -2171,7 +2205,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.bandana", name: "Bandana", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "gamefaqs-return-to-lindblum-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo"], verification: "partial" },
   { id: "game-item.leather-plate", name: "Leather Plate", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "jegged-lindblum", "jegged-dali"], verification: "partial" },
   { id: "game-item.mythril-vest", name: "Mythril Vest", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "gamefaqs-pinnacle-rocks-71891", "gamefaqs-journey-to-outer-continent-71891", "gamefaqs-lost-continent-71891", "gamefaqs-outer-continent-71891", "jegged-pinnacle-rocks", "jegged-esto-gaza", "cavesofnarshe-cleyra-walkthrough"], verification: "partial" },
-  { id: "game-item.fairy-flute", name: "Fairy Flute", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
+  { id: "game-item.fairy-flute", name: "Fairy Flute", category: "equipment", sourceIds: fairyFluteReferenceSources, verification: "partial" },
   { id: "game-item.mythril-claws", name: "Mythril Claws", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.trident", name: "Trident", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-abilities-71891"], verification: "partial" },
   { id: "game-item.green-beret", name: "Green Beret", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
@@ -2349,7 +2383,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
   { id: "black-mage-village.leather-plate", itemId: "game-item.leather-plate", chapterId: "disc-3.picking-up-the-trail", shopId: "black-mage-village.weapon-shop", shopName: "Black Mage Village Weapon Shop", method: "shop", price: 530, availability: "limited-window", conditions: "Listed in the Disc III final-stock inventory. Black Mage Village's Disc IV shops have changed stock, so this exact item listing is only available through the pre-departure window." },
   { id: "black-mage-village.mythril-vest", itemId: "game-item.mythril-vest", chapterId: "disc-3.picking-up-the-trail", shopId: "black-mage-village.weapon-shop", shopName: "Black Mage Village Weapon Shop", method: "shop", price: 1180, availability: "limited-window", conditions: "Listed in the Disc III final-stock inventory. Black Mage Village's Disc IV shops have changed stock, so this exact item listing is only available through the pre-departure window." },
 
-  { id: "mimoza-oeilvert.fairy-flute", itemId: "game-item.fairy-flute", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 4500, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition." },
+  { id: "mimoza-oeilvert.fairy-flute", itemId: "game-item.fairy-flute", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 4500, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition.", additionalSourceIds: ["gamefaqs-items-71891", "cavesofnarshe-ff9-flutes"] },
   { id: "mimoza-oeilvert.mythril-claws", itemId: "game-item.mythril-claws", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 6500, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition." },
   { id: "mimoza-oeilvert.trident", itemId: "game-item.trident", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 3580, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition." },
   { id: "mimoza-oeilvert.green-beret", itemId: "game-item.green-beret", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 2180, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition." },
@@ -2358,7 +2392,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
   { id: "mimoza-oeilvert.diamond-gloves", itemId: "game-item.diamond-gloves", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 2000, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition." },
   { id: "mimoza-oeilvert.diamond-sword", itemId: "game-item.diamond-sword", chapterId: "disc-3.forgotten-continent", shopId: "mimoza-oeilvert", shopName: "Mimoza's Mogshop (Oeilvert)", method: "mogshop", price: 4700, availability: "limited-window", conditions: "Oeilvert becomes inaccessible after the Shimmering Island transition." },
 
-  { id: "mojito-desert-palace.fairy-flute", itemId: "game-item.fairy-flute", chapterId: "disc-3.desert-palace", shopId: "mojito-desert-palace", shopName: "Mojito's Mogshop (Desert Palace)", method: "mogshop", price: 4500, availability: "limited-window", conditions: "The Desert Palace becomes inaccessible after the Shimmering Island transition." },
+  { id: "mojito-desert-palace.fairy-flute", itemId: "game-item.fairy-flute", chapterId: "disc-3.desert-palace", shopId: "mojito-desert-palace", shopName: "Mojito's Mogshop (Desert Palace)", method: "mogshop", price: 4500, availability: "limited-window", conditions: "The Desert Palace becomes inaccessible after the Shimmering Island transition.", additionalSourceIds: ["gamefaqs-items-71891", "cavesofnarshe-ff9-flutes"] },
   { id: "mojito-desert-palace.mythril-claws", itemId: "game-item.mythril-claws", chapterId: "disc-3.desert-palace", shopId: "mojito-desert-palace", shopName: "Mojito's Mogshop (Desert Palace)", method: "mogshop", price: 6500, availability: "limited-window", conditions: "The Desert Palace becomes inaccessible after the Shimmering Island transition." },
   { id: "mojito-desert-palace.trident", itemId: "game-item.trident", chapterId: "disc-3.desert-palace", shopId: "mojito-desert-palace", shopName: "Mojito's Mogshop (Desert Palace)", method: "mogshop", price: 3580, availability: "limited-window", conditions: "The Desert Palace becomes inaccessible after the Shimmering Island transition." },
   { id: "mojito-desert-palace.green-beret", itemId: "game-item.green-beret", chapterId: "disc-3.desert-palace", shopId: "mojito-desert-palace", shopName: "Mojito's Mogshop (Desert Palace)", method: "mogshop", price: 2180, availability: "limited-window", conditions: "The Desert Palace becomes inaccessible after the Shimmering Island transition." },
