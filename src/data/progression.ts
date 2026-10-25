@@ -641,7 +641,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.alexandria",
     toChapterId: "disc-1.burmecia",
     relationship: "optional-return",
-    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault, a side room near the back; deliver the letter for Mogryo. Gamer Guides says to leave by the same route. This confirms access to Atla, but not whether all Suburb and Uptown pickup rooms reopen.",
+    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault, a side room near the back; deliver the letter for Mogryo. Atla's Mogshop remains open with Disc III stock, including Steepled Hat for 260 Gil, the documented Disc IV shop recovery for that item. Gamer Guides says to leave by the same route. This confirms access to Atla, but not whether all Suburb and Uptown pickup rooms reopen.",
     sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"],
   },
   {
