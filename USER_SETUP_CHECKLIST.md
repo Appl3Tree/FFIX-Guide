@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest B02 documentation pass reconciles the Treno Griffin and Tantarian one-time encounter rewards with their separate card/item recovery routes; modern-release parity remains unverified. `git diff --check` passes, and no GitHub, Firebase, deployment, or sign-in action is needed.
+No account-owner setup action changed. The latest B02 documentation pass separates the Treno Griffin and Tantarian one-time encounters from later card/item recovery, and confirms later Chain Plate/Phoenix Down item routes for the missed Gargan Roo chests. Modern-release parity remains unverified. `git diff --check` passes, and no GitHub, Firebase, deployment, or sign-in action is needed.
 
 No account-owner setup action changed. The latest B02 update corrects Namingway Card recovery: Desert Palace can be re-entered after Oeilvert, with the Shimmering Island portal as the final documented Disc III cutoff. The route has 71 links, and all 138 missable warnings map to 97 cutoff windows. Lint, typecheck, audit, build, and whitespace checks pass with 0 audit errors and 182 coverage warnings. No GitHub, Firebase, deployment, or sign-in work is needed; tests and direct browser, game, and release verification remain open.
 
