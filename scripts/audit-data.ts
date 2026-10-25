@@ -1608,6 +1608,121 @@ for (const expected of burmeciaBossSteals) {
     errors.push(`Beatrix's ${expected.itemId} steal must connect the bestiary to its existing one-time objective and item path.`);
   }
 }
+const cleyraChapterEncounters = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.cleyra");
+const cleyraPoolExpectations = [
+  { id: "encounter.cleyra-trunk.bottom-sand-base.random-pool", roster: ["enemy.dragonfly", "enemy.sand-golem", "enemy.zuu"] },
+  { id: "encounter.cleyra-trunk.sandfall.random-pool", roster: ["enemy.dragonfly", "enemy.sand-golem"] },
+  { id: "encounter.cleyra-trunk.path-to-cleyra.random-pool", roster: ["enemy.carrion-worm", "enemy.dragonfly"] },
+  { id: "encounter.cleyra-trunk.sand-fork.random-pool", roster: ["enemy.carrion-worm", "enemy.dragonfly", "enemy.sand-golem"] },
+  { id: "encounter.cleyra-trunk.quicksand.random-pool", roster: ["enemy.carrion-worm", "enemy.dragonfly", "enemy.sand-scorpion", "enemy.zuu"] },
+];
+const sameSortedValues = (left: string[], right: string[]) => [...left].sort().join("|") === [...right].sort().join("|");
+if (cleyraChapterEncounters.length !== 16 || cleyraPoolExpectations.some(({ id, roster }) => {
+  const pool = cleyraChapterEncounters.find((encounter) => encounter.id === id);
+  return !pool || pool.kind !== "random-pool" || !sameSortedValues(pool.formation.map((member) => member.enemyId), roster) || pool.formation.some((member) => member.quantity !== null);
+})) {
+  errors.push("Cleyra must keep its five room-specific random pools separate and avoid inventing formation rates or counts.");
+}
+const cleyraSandScorpion = enemyRecords.find((enemy) => enemy.id === "enemy.sand-scorpion");
+const cleyraPitFight = cleyraChapterEncounters.find((encounter) => encounter.id === "encounter.cleyra-trunk.quicksand-pit.sand-scorpion");
+if (!cleyraPitFight || cleyraPitFight.kind !== "fixed" || !cleyraPitFight.formation.some((member) => member.enemyId === "enemy.sand-scorpion" && member.quantity === 1) ||
+  !cleyraSandScorpion?.encounterIds.includes("encounter.cleyra-trunk.quicksand.random-pool") ||
+  !cleyraSandScorpion.encounterIds.includes("encounter.cleyra-trunk.quicksand-pit.sand-scorpion") ||
+  !cleyraSandScorpion.encounterIds.includes("encounter.burmecia-region.world-map-pool")) {
+  errors.push("Sand Scorpion must retain its shared regional and Cleyra random appearances plus the distinct forced pit-fall fight.");
+}
+const cleyraBlueMagicTeachers = [
+  { enemyId: "enemy.carrion-worm", skill: "Auto-Life" },
+  { enemyId: "enemy.dragonfly", skill: "Matra Magic" },
+  { enemyId: "enemy.zuu", skill: "White Wind" },
+];
+for (const teacher of cleyraBlueMagicTeachers) {
+  const record = enemyRecords.find((enemy) => enemy.id === teacher.enemyId);
+  if (!record?.blueMagic.some((skill) => skill.name === teacher.skill && skill.objectiveIds.includes("disc-2.cleyra.blue-magic")) ||
+    !record.routeObjectiveIds.includes("disc-2.cleyra.blue-magic")) {
+    errors.push(`Cleyra's ${teacher.skill} teacher must link to the existing Blue Magic objective.`);
+  }
+}
+const cleyraSoldier = enemyRecords.find((enemy) => enemy.id === "enemy.soldier-a");
+const cleyraReturnIds = [
+  "encounter.cleyra-trunk.return.whirlpool-soldiers",
+  "encounter.cleyra-trunk.return.sand-pit-soldiers",
+  "encounter.cleyra-trunk.return.bridge-cave-soldiers",
+];
+const cleyraReturnFights = cleyraReturnIds.map((id) => cleyraChapterEncounters.find((encounter) => encounter.id === id));
+if (!cleyraSoldier || !cleyraSoldier.stats.some((stat) => stat.field === "HP" && stat.value === 523) ||
+  !cleyraSoldier.notes.some((note) => note.includes("distinct from Soldier [B]")) ||
+  cleyraReturnFights.some((encounter) => !encounter || encounter.kind !== "fixed" || !encounter.formation.some((member) => member.enemyId === "enemy.soldier-a")) ||
+  cleyraReturnFights[0]?.formation.find((member) => member.enemyId === "enemy.soldier-a")?.quantity !== 2 ||
+  cleyraReturnFights.slice(1).some((encounter) => encounter?.formation.find((member) => member.enemyId === "enemy.soldier-a")?.quantity !== 2)) {
+  errors.push("Cleyra's post-Antlion Trunk return must use its Soldier [A] variant and preserve the source-reported pair formation with its quantity caveat.");
+}
+const cleyraAssaultExpectations = [
+  { id: "encounter.cleyra-assault.entrance-type-b", formation: ["enemy.type-b:1"] },
+  { id: "encounter.cleyra-assault.first-soldiers", formation: ["enemy.soldier-a:3"] },
+  { id: "encounter.cleyra-assault.first-type-b-pair", formation: ["enemy.type-b:2"] },
+  { id: "encounter.cleyra-assault.soldiers-and-type-b", formation: ["enemy.soldier-a:2", "enemy.type-b:1"] },
+  { id: "encounter.cleyra-assault.final-soldiers", formation: ["enemy.soldier-a:3"] },
+];
+for (const expected of cleyraAssaultExpectations) {
+  const encounter = cleyraChapterEncounters.find((candidate) => candidate.id === expected.id);
+  const formation = encounter?.formation.map((member) => `${member.enemyId}:${member.quantity}`).sort() ?? [];
+  if (!encounter || encounter.kind !== "fixed" || !sameSortedValues(formation, expected.formation)) {
+    errors.push(`Cleyra's fixed assault formation ${expected.id} must match its source-backed wave.`);
+  }
+}
+const cleyraBossChecks = [
+  {
+    encounterId: "encounter.cleyra.antlion",
+    enemyId: "enemy.antlion-cleyra",
+    objectiveId: "disc-2.cleyra.antlion-steals",
+    missableId: "missable.disc-2.cleyra.antlion-steals",
+    cutoffId: "cutoff.cleyra-antlion.boss-steals",
+    steals: [
+      { itemId: "game-item.annoyntment", pathId: "item-path.disc-2.cleyra.antlion-annoyntment-steal" },
+      { itemId: "game-item.mythril-vest", pathId: "item-path.disc-2.cleyra.mythril-vest-antlion-steal" },
+      { itemId: "game-item.gold-helm", pathId: "item-path.disc-2.cleyra.antlion-gold-helm-steal" },
+    ],
+  },
+  {
+    encounterId: "encounter.cleyra.beatrix",
+    enemyId: "enemy.beatrix-cleyra",
+    objectiveId: "disc-2.cleyra.beatrix-steals",
+    missableId: "missable.disc-2.cleyra.beatrix-steals",
+    cutoffId: "cutoff.cleyra-beatrix.boss-steals",
+    steals: [
+      { itemId: "game-item.phoenix-down", pathId: "item-path.disc-2.cleyra.beatrix-phoenix-down-steal" },
+      { itemId: "game-item.thunder-gloves", pathId: "item-path.disc-2.cleyra.beatrix-thunder-gloves-steal" },
+      { itemId: "game-item.ice-brand", pathId: "item-path.disc-2.cleyra.beatrix-ice-brand-steal" },
+    ],
+  },
+];
+for (const expected of cleyraBossChecks) {
+  const encounter = enemyEncounters.find((candidate) => candidate.id === expected.encounterId);
+  const boss = enemyRecords.find((candidate) => candidate.id === expected.enemyId);
+  if (!encounter || encounter.kind !== "boss" || encounter.chapterId !== "disc-2.cleyra" ||
+    !encounter.formation.some((member) => member.enemyId === expected.enemyId && member.quantity === 1) ||
+    !encounter.objectiveIds.includes(expected.objectiveId) || !encounter.missableIds.includes(expected.missableId) || !encounter.cutoffIds.includes(expected.cutoffId) ||
+    !boss || boss.kind !== "boss" || !boss.routeObjectiveIds.includes(expected.objectiveId) || !boss.missableIds.includes(expected.missableId) || !boss.cutoffIds.includes(expected.cutoffId)) {
+    errors.push(`${expected.enemyId} must connect its one-time encounter to the existing objective, missable warning, and cutoff.`);
+    continue;
+  }
+  for (const steal of expected.steals) {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === steal.pathId);
+    if (!boss.steals.some((slot) => slot.itemId === steal.itemId) || !path || path.itemId !== steal.itemId || path.method !== "steal" ||
+      path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
+      errors.push(`${expected.enemyId}'s ${steal.itemId} steal must connect to its existing one-time item path.`);
+    }
+  }
+}
+const cleyraAntlion = enemyRecords.find((enemy) => enemy.id === "enemy.antlion-cleyra");
+const cleyraBeatrix = enemyRecords.find((enemy) => enemy.id === "enemy.beatrix-cleyra");
+if (!cleyraAntlion?.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.annoyntment") ||
+  cleyraAntlion.drops.filter((slot) => slot.itemId === "game-item.ether").length !== 3 ||
+  !cleyraBeatrix?.stats.some((stat) => stat.field === "MP" && stat.value === 3964 && stat.verification === "disputed") ||
+  !cleyraBeatrix.stats.some((stat) => stat.field === "MP" && stat.value === 3694 && stat.verification === "disputed")) {
+  errors.push("Cleyra must separate Antlion's guaranteed and conditional drops and preserve Beatrix's published MP conflict.");
+}
 const qualeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.quale-99-frogs");
 const qualeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.quale");
 if (!qualeEncounter || qualeEncounter.kind !== "boss" ||

@@ -1722,7 +1722,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-trunk",
         title: "Cleyra's Trunk — sandfalls and hidden branches",
         summary: "Search each branch before activating the sandfall passage; it locks the entrance behind you.",
-        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "cleyra-trunk-save-and-chests",
@@ -1749,7 +1749,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-quicksand-and-blue-magic",
             kind: "optional",
             text: "Check the quicksand pits for 900 Gil and a Hi-Potion, then search behind the ladder for Gysahl Greens. If Quina's Blue Magic is part of your goal, use Eat on Carrion Worm for Auto-Life, Dragonfly for Matra Magic, and Zuu for White Wind while those enemies are available.",
-            detail: "Falling into a pit leads to a Sand Scorpion encounter and returns you to the previous area. Enemy Blue Magic is an opportunity here; the guide has not completed the later-source audit needed to call these skills permanently missable.",
+            detail: "Failing to jump out of a quicksand pit triggers the fixed Sand Scorpion battle and returns Zidane to a previous area. The bestiary keeps the Trunk's five room pools separate; against Sand Golem, select its Core and use Ice magic because striking the body can trigger counters. Quina's three Blue Magic opportunities are tracked in the shared objective; later-source coverage is not yet complete enough to call these skills permanently missable.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.blue-magic"],
           },
           {
@@ -1764,7 +1764,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-settlement-before-antlion",
         title: "Cleyra settlement — ATEs, Quina, and pickups",
         summary: "View every scene prompt, recover the two rubbish-pit chests, and sweep the town before the attack advances.",
-        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "jegged-cleyra", "jegged-missables", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "cavesofnarshe-enemies", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "jegged-cleyra", "jegged-missables", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
         steps: [
           {
             id: "cleyra-four-ates",
@@ -1819,7 +1819,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-antlion-steals",
             kind: "combat",
             text: "During the Antlion fight, try to steal the Annoyntment, Mythril Vest, and Gold Helm before defeating it. Keep the party healed and use Ice attacks if available.",
-            detail: "The fight does not repeat. Sleep and Slow are listed as useful if they land; an Annoyntment can remove Trouble. Avoid physical attacks against a sleeping Antlion because they can wake it and trigger a counter. Enemy statistics and steal percentages are omitted where sources disagree.",
+            detail: "The fight does not repeat. The bestiary cross-checks Antlion's level and HP and separates its guaranteed Annoyntment drop from the three steals. Sleep and Slow can buy time if they land; an Annoyntment cures Trouble. Avoid physical attacks against a sleeping Antlion because they can wake it and trigger a counter. Published steal percentages disagree, so no odds are promised.",
             objectiveIds: ["disc-2.cleyra.antlion-steals"],
           },
           {
@@ -1839,15 +1839,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-return-through-trunk",
             kind: "required",
-            text: "After the reunion, descend through Cleyra's Trunk for the forced soldier encounters. The sandpits are inactive on this return trip; cross the bridge to trigger the cutscene that returns the group automatically to town.",
-            detail: "This is the story transit back to the settlement, not a second full treasure route. If anything in the Trunk sweep is incomplete, collect it now while the route remains open, before advancing the town assault.",
+            text: "After the reunion, descend through Cleyra's Trunk for three forced Soldier [A] encounters. The sandpits are inactive on this return trip; cross the bridge to trigger the cutscene that returns the group automatically to town.",
+            detail: "The bestiary separates the whirlpool, sand-pit, and bridge-cave fights. Walkthroughs commonly describe pairs, though the first fight's count is not printed consistently. This is the story transit back to the settlement, not a second full treasure route; recover missed Trunk chests before crossing the bridge and advancing the assault.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep"],
           },
           {
             id: "cleyra-attack-mognet",
             kind: "pickup",
             text: "After the forced Type B battle at the settlement entrance, return to the sandpit area and speak with Mopli to collect the letter for Serino. Save, then return to the entrance to continue the attack sequence.",
-            detail: "GameFAQs, Jegged, and Flactem place this letter pickup with Mopli in Cleyra during the attack. Serino receives it in the following Red Rose chapter; keep the Mognet handoff objective open until that delivery is complete.",
+            detail: "GameFAQs, Jegged, and Flactem place this letter pickup with Mopli in Cleyra during the attack. The entrance Type B battle occurs first; after the letter and save, the fixed assault waves are three Soldiers, two Type Bs, two Soldiers with one Type B, then three Soldiers. Serino receives the letter in the following Red Rose chapter; keep the Mognet handoff objective open until that delivery is complete.",
             objectiveIds: ["disc-2.cleyra.mognet-mail", "disc-2.return-to-alexandria.mognet-handoff"],
           },
           {
@@ -1861,7 +1861,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-beatrix-steals",
             kind: "combat",
             text: "Before leaving the Cathedral, remove Quina's Add-on and any transferable gear you want available to the remaining party. Save, then exit to begin the one-time Beatrix battle and attempt to steal Phoenix Down, Thunder Gloves, and Ice Brand while keeping everyone alive.",
-            detail: "Quina leaves the active party after Cleyra; equipped items remain associated with Quina until the character rejoins, so remove any gear you want other characters to use in the meantime. Beatrix is a one-time scripted battle. Guides describe a ten-turn limit; GameFAQs also says reducing her HP to zero can end the fight, while Jegged says she cannot be defeated. After the battle, the story moves to the Red Rose and Cleyra is no longer accessible. Focus on survival and steals rather than trying to win.",
+            detail: "Quina leaves the active party after Cleyra; equipped items remain associated with Quina until the character rejoins, so remove any gear you want other characters to use in the meantime. The bestiary cross-checks Beatrix's level and HP and preserves the older boss guide's conflicting MP figure. GameFAQs says the battle ends after ten turns or at 0 HP, while Jegged describes her as undefeatable; Stock Break leaves the party at 1 HP either way. After the battle, the story moves to the Red Rose and Cleyra is no longer accessible. Focus on survival and steals.",
             objectiveIds: ["disc-2.cleyra.beatrix-steals"],
           },
           {

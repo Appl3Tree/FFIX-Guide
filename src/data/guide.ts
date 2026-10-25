@@ -346,6 +346,14 @@ export const sources = [
     notes: "Original PlayStation route for Cleyra's Trunk, hidden pickups, settlement ATEs and Quina pit, Antlion, Mognet, evacuation, and Beatrix. Its boss tables list Antlion's Annoyntment, Mythril Vest, and Gold Helm steals, a separate Always Annoyntment drop, and Beatrix's Phoenix Down, Thunder Gloves, and Ice Brand steals; steal-rate claims are not carried into the tracker. It explicitly switches control to Freya after Antlion and reunites her with Zidane, Vivi, and Quina at the settlement entrance. It recommends No Yummy-Yummies! followed by There a Mushroom! before the rubbish-pit detour, then viewing any remaining ATEs on return. The event list calls the second scene There a Mushroom!, while the route prose says There's a Mushroom! It records an Inn letter check before Antlion, another Inn check after Antlion, and Mopli's letter for Serino during the attack. Crucially, after the forced Trunk return it says to open chests missed on the first pass before continuing across the bridge; later it routes the evacuation rewards and Beatrix steals, then transfers the party to the Red Rose. The guide uses these explicit checkpoints to clarify broader point-of-no-return wording elsewhere.",
   },
   {
+    id: "gamefaqs-boss-guide-31490",
+    title: "Boss Guide — Blackestmage",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/31490",
+    accessed: "2026-10-25",
+    notes: "Original PlayStation boss guide used to cross-check selected encounter strategies. Its Disc II Cleyra Beatrix entry gives Level 17 and 4,736 HP but prints 3,694 MP, while GameFAQs' walkthrough, Caves of Narshe, and other bestiary references give 3,964 MP; the guide preserves the MP figures as a source conflict. It also describes the ten-turn scripted battle and Cleyra boss steals.",
+  },
+  {
     id: "gamerguides-cleyra",
     title: "Whirlwind City Cleyra — Disc II walkthrough",
     publisher: "Gamer Guides",
@@ -1007,7 +1015,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/enemy-list",
     accessed: "2026-10-25",
-    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. The Burmecia tables cover its city enemies and the world-map roster surrounding Burmecia and Cleyra, including Skeletons; the guide keeps the city pool, Mimic chest fights, scripted Type A pair, and regional pool separate. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
+    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. The Burmecia tables cover its city enemies and the world-map roster surrounding Burmecia and Cleyra, including Skeletons; the guide keeps the city pool, Mimic chest fights, scripted Type A pair, and regional pool separate. Cleyra's Trunk entries cover Carrion Worm, Sand Golem Core, Soldier [A], and Type B; its room pools and fixed battles are separated using the walkthrough, and Blue Magic teachers Dragonfly and Zuu are included without inferring formation rates. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
   },
   {
     id: "gamefaqs-monster-list-20490",
@@ -1351,7 +1359,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/enemies.php?type=all",
     accessed: "2026-10-25",
-    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, Burmecia, and boss records. It reports Beatrix's level-14, 3,630-HP, 3,467-MP Burmecia profile and her three steals. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
+    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, Burmecia, Cleyra, and boss records. It reports Beatrix's level-14, 3,630-HP, 3,467-MP Burmecia profile and her three steals, and cross-checks Cleyra Beatrix at Level 17, 4,736 HP, and 3,964 MP. It distinguishes the Cleyra Soldier (Level 10/523 HP) from the Alexandria Soldier variant and supports the Antlion, Trunk enemy, and Type B dossiers. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
   },
   {
     id: "cavesofnarshe-gizamaluke",

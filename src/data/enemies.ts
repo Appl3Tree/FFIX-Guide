@@ -85,6 +85,7 @@ const lindblumChapterId = "disc-1.lindblum";
 const exploringLindblumChapterId = "disc-1.exploring-lindblum-kingdom";
 const journeyToBurmeciaChapterId = "disc-1.journey-to-burmecia";
 const burmeciaChapterId = "disc-1.burmecia";
+const cleyraChapterId = "disc-2.cleyra";
 const returnToGaiaChapterId = "disc-4.return-to-gaia";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
@@ -120,6 +121,16 @@ const grottoEnemySources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-718
 const burmeciaEnemySources = [enemyListSourceId, "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia"];
 const burmeciaRegionSources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
 const burmeciaBossSources = ["gamefaqs-burmecia-71891", "jegged-burmecia", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
+const cleyraEnemySources = [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-abilities-71891"];
+const cleyraEncounterSources = ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-cleyra-walkthrough"];
+const cleyraBossSources = ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies"];
+const cleyraBlueMagicObjectiveId = "disc-2.cleyra.blue-magic";
+const cleyraAntlionStealsObjectiveId = "disc-2.cleyra.antlion-steals";
+const cleyraAntlionStealsMissableId = "missable.disc-2.cleyra.antlion-steals";
+const cleyraAntlionStealsCutoffId = "cutoff.cleyra-antlion.boss-steals";
+const cleyraBeatrixStealsObjectiveId = "disc-2.cleyra.beatrix-steals";
+const cleyraBeatrixStealsMissableId = "missable.disc-2.cleyra.beatrix-steals";
+const cleyraBeatrixStealsCutoffId = "cutoff.cleyra-beatrix.boss-steals";
 const burmeciaStealsObjectiveId = "disc-1.burmecia.beatrix-steals";
 const burmeciaStealsMissableId = "missable.disc-1.burmecia.beatrix-steals";
 const burmeciaStealsCutoffId = "cutoff.burmecia.beatrix-steals";
@@ -523,6 +534,239 @@ const burmeciaEncounters: EnemyEncounter[] = [
     missableIds: [burmeciaStealsMissableId],
     cutoffIds: [burmeciaStealsCutoffId],
     notes: ["This one-time battle has a short scripted ending, normally after Beatrix's tenth turn. Some sources also allow the fight to end if her HP reaches zero and differ on whether that counts as a win; the safe route prioritizes survival and selected steals."],
+  },
+];
+
+const cleyraEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.cleyra-trunk.bottom-sand-base.random-pool",
+    title: "Cleyra Trunk — bottom and sand base",
+    chapterId: cleyraChapterId,
+    location: "Lower trunk, sand base, and first rooms beyond the locked door",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.dragonfly", quantity: null },
+      { enemyId: "enemy.sand-golem", quantity: null },
+      { enemyId: "enemy.zuu", quantity: null },
+    ],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [cleyraBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The GameFAQs route gives this room group Dragonfly, Sand Golem, and Zuu. Exact formation combinations and encounter rates are not published; the Sand Golem record's listed stats belong to its Core."],
+  },
+  {
+    id: "encounter.cleyra-trunk.sandfall.random-pool",
+    title: "Cleyra Trunk — sandfall",
+    chapterId: cleyraChapterId,
+    location: "Sandfall room after opening the sand passage",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.dragonfly", quantity: null },
+      { enemyId: "enemy.sand-golem", quantity: null },
+    ],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [cleyraBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route lists Dragonfly and Sand Golem in this room group. Opening the sandfall blocks the entrance, but the enemies remain available on the route onward."],
+  },
+  {
+    id: "encounter.cleyra-trunk.path-to-cleyra.random-pool",
+    title: "Cleyra Trunk — path to Cleyra and bridge",
+    chapterId: cleyraChapterId,
+    location: "Upper path leading toward the bridge to Cleyra",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.carrion-worm", quantity: null },
+      { enemyId: "enemy.dragonfly", quantity: null },
+    ],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [cleyraBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route lists Carrion Worm and Dragonfly in this section; no formation odds are inferred."],
+  },
+  {
+    id: "encounter.cleyra-trunk.sand-fork.random-pool",
+    title: "Cleyra Trunk — sand fork and sand paths",
+    chapterId: cleyraChapterId,
+    location: "Cavern reached beyond the fork and bridge",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.carrion-worm", quantity: null },
+      { enemyId: "enemy.dragonfly", quantity: null },
+      { enemyId: "enemy.sand-golem", quantity: null },
+    ],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [cleyraBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route lists Carrion Worm, Dragonfly, and Sand Golem here. The Sand Golem Core can be targeted directly with Ice magic; striking its body can trigger counters."],
+  },
+  {
+    id: "encounter.cleyra-trunk.quicksand.random-pool",
+    title: "Cleyra Trunk — quicksand pits and upper outer climb",
+    chapterId: cleyraChapterId,
+    location: "Whirlpool room, quicksand pits, and upper outer climb",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.carrion-worm", quantity: null },
+      { enemyId: "enemy.dragonfly", quantity: null },
+      { enemyId: "enemy.sand-scorpion", quantity: null },
+      { enemyId: "enemy.zuu", quantity: null },
+    ],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [cleyraBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This room group includes Sand Scorpion in addition to the recurring Trunk enemies. Falling into a pit and failing to jump out triggers a separate forced Sand Scorpion battle, recorded below."],
+  },
+  {
+    id: "encounter.cleyra-trunk.quicksand-pit.sand-scorpion",
+    title: "Quicksand pit — forced Sand Scorpion",
+    chapterId: cleyraChapterId,
+    location: "A quicksand pit when Zidane fails to jump out",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.sand-scorpion", quantity: 1 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is a fixed recovery battle, not a random formation. Victory returns Zidane to a previous area; the pool may be avoided by jumping out of the pit."],
+  },
+  {
+    id: "encounter.cleyra-trunk.return.whirlpool-soldiers",
+    title: "Trunk return — whirlpool soldiers",
+    chapterId: cleyraChapterId,
+    location: "Dormant whirlpool room during the post-Antlion return",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.soldier-a", quantity: 2 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is a forced Alexandrian Soldier encounter. Some walkthroughs leave its count unspecified while others describe a pair; the recorded pair follows the latter reports and remains pending direct game verification. The roster uses the Cleyra Soldier (A) record."],
+  },
+  {
+    id: "encounter.cleyra-trunk.return.sand-pit-soldiers",
+    title: "Trunk return — soldiers near the sand pits",
+    chapterId: cleyraChapterId,
+    location: "Path beyond the dormant quicksand pits during the post-Antlion return",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.soldier-a", quantity: 2 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The return route identifies a fixed pair of Cleyra Soldiers. Some walkthroughs describe only another soldier battle without printing its count."],
+  },
+  {
+    id: "encounter.cleyra-trunk.return.bridge-cave-soldiers",
+    title: "Trunk return — bridge cave soldiers",
+    chapterId: cleyraChapterId,
+    location: "Cave immediately before the bridge scene during the post-Antlion return",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.soldier-a", quantity: 2 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The return route identifies a final fixed pair of Cleyra Soldiers before the bridge cutscene returns the party to town."],
+  },
+  {
+    id: "encounter.cleyra-assault.entrance-type-b",
+    title: "Cleyra assault — entrance Type B",
+    chapterId: cleyraChapterId,
+    location: "Settlement entrance, immediately after the party returns from the Trunk",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.type-b", quantity: 1 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This fixed Type B battle begins the settlement assault sequence and occurs before the Mognet letter check."],
+  },
+  {
+    id: "encounter.cleyra-assault.first-soldiers",
+    title: "Cleyra assault — first three Soldiers",
+    chapterId: cleyraChapterId,
+    location: "Settlement stairs after returning from Mopli's letter check",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.soldier-a", quantity: 3 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The assault walkthrough gives this fixed fight as three Cleyra Soldiers."],
+  },
+  {
+    id: "encounter.cleyra-assault.first-type-b-pair",
+    title: "Cleyra assault — first Type B pair",
+    chapterId: cleyraChapterId,
+    location: "Settlement stairs, immediately after the first three-Soldier fight",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.type-b", quantity: 2 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is a separate fixed battle against two Type B enemies."],
+  },
+  {
+    id: "encounter.cleyra-assault.soldiers-and-type-b",
+    title: "Cleyra assault — Soldiers and Type B",
+    chapterId: cleyraChapterId,
+    location: "Upper settlement route after the left evacuation choice",
+    kind: "fixed",
+    formation: [
+      { enemyId: "enemy.soldier-a", quantity: 2 },
+      { enemyId: "enemy.type-b", quantity: 1 },
+    ],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The fixed encounter has two Cleyra Soldiers and one Type B enemy."],
+  },
+  {
+    id: "encounter.cleyra-assault.final-soldiers",
+    title: "Cleyra assault — final three Soldiers",
+    chapterId: cleyraChapterId,
+    location: "Bridge route after directing residents to cross to the right",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.soldier-a", quantity: 3 }],
+    sourceIds: cleyraEncounterSources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This final fixed Soldier group precedes the Cathedral lawn and the survivor rewards."],
+  },
+  {
+    id: "encounter.cleyra.antlion",
+    title: "Antlion — Cleyra settlement boss",
+    chapterId: cleyraChapterId,
+    location: "Sandpit beside the settlement entrance after the Cathedral and Inn scenes",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.antlion-cleyra", quantity: 1 }],
+    sourceIds: cleyraBossSources,
+    objectiveIds: [cleyraAntlionStealsObjectiveId],
+    missableIds: [cleyraAntlionStealsMissableId],
+    cutoffIds: [cleyraAntlionStealsCutoffId],
+    notes: ["The one-time fight has three named steals and a separate Always Annoyntment drop. The steal objective, missable warning, cutoff, and existing item paths are linked on the boss record."],
+  },
+  {
+    id: "encounter.cleyra.beatrix",
+    title: "Beatrix — Cleyra settlement boss",
+    chapterId: cleyraChapterId,
+    location: "Outside the Cathedral after the evacuation and survivor rewards",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.beatrix-cleyra", quantity: 1 }],
+    sourceIds: cleyraBossSources,
+    objectiveIds: [cleyraBeatrixStealsObjectiveId],
+    missableIds: [cleyraBeatrixStealsMissableId],
+    cutoffIds: [cleyraBeatrixStealsCutoffId],
+    notes: ["This one-time battle ends after ten turns or when Beatrix reaches 0 HP; Stock Break reduces the party to 1 HP at the end. The safe route prioritizes survival and selected steals."],
   },
 ];
 
@@ -1073,7 +1317,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -2406,7 +2650,7 @@ const burmeciaEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.sand-scorpion",
     name: "Sand Scorpion",
-    encounterIds: ["encounter.burmecia-region.world-map-pool"],
+    encounterIds: ["encounter.burmecia-region.world-map-pool", "encounter.cleyra-trunk.quicksand.random-pool", "encounter.cleyra-trunk.quicksand-pit.sand-scorpion"],
     stats: enemyStats([["level", 10], ["HP", 526], ["MP", 360], ["EXP", 400], ["AP", 1], ["Gil", 315]]),
     steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
     drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.annoyntment"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.hi-potion")],
@@ -2419,8 +2663,8 @@ const burmeciaEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
     strategies: [{ title: "Use Ice and avoid Water", detail: "Ice exploits its weakness, while it absorbs Water. Be ready to cure Poison if a non-fatal hit triggers Poison Counter.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: [],
-    notes: ["Sand Scorpion is part of the world-map regional roster around Burmecia and Cleyra, not the indoor Burmecia pool."],
-  }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891"]),
+    notes: ["Sand Scorpion is part of the world-map regional roster around Burmecia and Cleyra, not the indoor Burmecia pool. Cleyra's Trunk also lists it in the quicksand-pit area and uses it for a separate forced pit-fall battle."],
+  }, journeyToBurmeciaChapterId, [...burmeciaRegionSources, "gamefaqs-abilities-71891", ...cleyraEncounterSources]),
   chapterEnemy({
     id: "enemy.yeti",
     name: "Yeti",
@@ -2481,6 +2725,224 @@ const burmeciaEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [burmeciaStealsObjectiveId],
     notes: ["Published Beatrix stat tables disagree: most reviewed publishers give Level 14, 3,630 HP, and 3,467 MP, while GameFAQs prints Level 16, 3,360 HP, and 3,367 MP. The fight's end condition is also described differently: some call it unwinnable, while others say it can end at 0 HP; the finisher and 1-HP party outcome are consistently described. Steal rates are not modeled."],
   }, burmeciaChapterId, burmeciaBossSources, [burmeciaStealsMissableId], [burmeciaStealsCutoffId]),
+];
+
+const cleyraEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.carrion-worm",
+    name: "Carrion Worm",
+    encounterIds: [
+      "encounter.cleyra-trunk.path-to-cleyra.random-pool",
+      "encounter.cleyra-trunk.sand-fork.random-pool",
+      "encounter.cleyra-trunk.quicksand.random-pool",
+    ],
+    stats: enemyStats([["level", 9], ["HP", 259], ["MP", 345], ["EXP", 329], ["AP", 2], ["Gil", 319]]),
+    steals: [enemyLoot("common", "game-item.annoyntment"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.eye-drops"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.phoenix-down")],
+    facts: [
+      enemyFact("type", "Bug"),
+      enemyFact("elemental-weakness", "Ice and Water"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Trouble Juice", [enemyListSourceId], "Inflicts Trouble; the status persists after battle unless cured."),
+    ],
+    blueMagic: [{ name: "Auto-Life", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [cleyraBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Ice or Water and learn Auto-Life", detail: "Carrion Worm is weak to Ice and Water. Quina can learn Auto-Life with Eat; cure Trouble with an Annoyntment because Trouble can remain after the fight.", sourceIds: [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
+    routeObjectiveIds: [cleyraBlueMagicObjectiveId],
+    notes: ["Carrion Worm's Cleyra data is taken from the GameFAQs enemy table; its Blue Magic and HP are also called out by the chapter walkthroughs. No encounter odds or formation counts are inferred."],
+  }, cleyraChapterId, cleyraEnemySources),
+  chapterEnemy({
+    id: "enemy.dragonfly",
+    name: "Dragonfly",
+    encounterIds: [
+      "encounter.cleyra-trunk.bottom-sand-base.random-pool",
+      "encounter.cleyra-trunk.sandfall.random-pool",
+      "encounter.cleyra-trunk.path-to-cleyra.random-pool",
+      "encounter.cleyra-trunk.sand-fork.random-pool",
+      "encounter.cleyra-trunk.quicksand.random-pool",
+    ],
+    stats: enemyStats([["level", 8], ["HP", 348], ["MP", 295], ["EXP", 249], ["AP", 1], ["Gil", 307]]),
+    steals: [enemyLoot("common", "game-item.eye-drops"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "Bug and Aerial"),
+      enemyFact("elemental-weakness", "Ice and Wind"),
+      enemyFact("elemental-resistance", "Earth (nullified)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Buzz", [enemyListSourceId], "Can inflict Berserk."),
+      sourcedFact("attack", "Fira and physical attacks", [enemyListSourceId], "Fira deals Fire-elemental magic damage; physical hits deal moderate damage."),
+    ],
+    blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [cleyraBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Ice or Wind and learn Matra Magic", detail: "Ice and Wind exploit Dragonfly's weaknesses. Quina can learn Matra Magic with Eat; watch for Buzz's Berserk and its Fira spell.", sourceIds: [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
+    routeObjectiveIds: [cleyraBlueMagicObjectiveId],
+    notes: ["Dragonfly appears in every listed Cleyra Trunk pool. GameFAQs lists it alongside Carrion Worm and Sand Scorpion in the wider Cleyra reference, while room-specific routes distinguish the Trunk pools."],
+  }, cleyraChapterId, cleyraEnemySources),
+  chapterEnemy({
+    id: "enemy.sand-golem",
+    name: "Sand Golem",
+    encounterIds: [
+      "encounter.cleyra-trunk.bottom-sand-base.random-pool",
+      "encounter.cleyra-trunk.sandfall.random-pool",
+      "encounter.cleyra-trunk.sand-fork.random-pool",
+    ],
+    stats: enemyStats([["level", 11], ["HP", 1091], ["MP", 377], ["EXP", 0], ["AP", 0], ["Gil", 0]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.hi-potion")],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("elemental-weakness", "Ice"),
+      enemyFact("elemental-resistance", "Water (absorbs)"),
+      enemyFact("status-vulnerability", "None listed"),
+      sourcedFact("attack", "Body counters", [enemyListSourceId], "Attacking the main body triggers counters; target the Core with Ice-elemental magic."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Target the Core with Ice magic", detail: "The published stats are for the Core, not the main body. Select the Core directly and use Ice magic; attacking the body can trigger counters. Defeating the Core ends the encounter and grants the body's listed EXP, AP, and Gil rewards.", sourceIds: [enemyListSourceId, "jegged-cleyra"] }],
+    routeObjectiveIds: [],
+    notes: ["GameFAQs explicitly labels 1,091 HP, 377 MP, Level 11, and zero individual rewards as Core statistics; defeating it also defeats the Sand Golem body and awards 677 EXP, 2 AP, and 589 Gil plus possible drops. The record preserves the component/table distinction in its strategy."],
+  }, cleyraChapterId, cleyraEnemySources),
+  chapterEnemy({
+    id: "enemy.zuu",
+    name: "Zuu",
+    encounterIds: [
+      "encounter.cleyra-trunk.bottom-sand-base.random-pool",
+      "encounter.cleyra-trunk.quicksand.random-pool",
+    ],
+    stats: enemyStats([["level", 8], ["HP", 1149], ["MP", 293], ["EXP", 320], ["AP", 2], ["Gil", 384]]),
+    steals: [enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.ore"), enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.ether"), enemyLoot("rare", "game-item.hi-potion")],
+    facts: [
+      enemyFact("type", "Aerial"),
+      enemyFact("elemental-weakness", "Ice, Wind, and Water"),
+      enemyFact("elemental-resistance", "Earth (nullified)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Aera and Swallow", [enemyListSourceId], "Aera deals heavy Wind-elemental damage; Swallow ejects a character from battle."),
+      sourcedFact("attack", "White Wind counter", [enemyListSourceId], "Zuu can counter damage with White Wind."),
+    ],
+    blueMagic: [{ name: "White Wind", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [cleyraBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Ice, Wind, or Water and learn White Wind", detail: "Zuu is weak to Ice, Wind, and Water but nullifies Earth. Quina can learn White Wind with Eat; beware Aera damage and Swallow's eject effect.", sourceIds: [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
+    routeObjectiveIds: [cleyraBlueMagicObjectiveId],
+    notes: ["Zuu is listed in the bottom/sand-base and quicksand/upper-climb Cleyra pools. The Cleyra walkthroughs identify it as Quina's White Wind teacher."],
+  }, cleyraChapterId, cleyraEnemySources),
+  chapterEnemy({
+    id: "enemy.soldier-a",
+    name: "Soldier [A]",
+    encounterIds: [
+      "encounter.cleyra-trunk.return.whirlpool-soldiers",
+      "encounter.cleyra-trunk.return.sand-pit-soldiers",
+      "encounter.cleyra-trunk.return.bridge-cave-soldiers",
+      "encounter.cleyra-assault.first-soldiers",
+      "encounter.cleyra-assault.soldiers-and-type-b",
+      "encounter.cleyra-assault.final-soldiers",
+    ],
+    stats: enemyStats([["level", 10], ["HP", 523], ["MP", 358], ["EXP", 400], ["AP", 1], ["Gil", 311]]),
+    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("semi-rare", "game-item.echo-screen"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Human"),
+      enemyFact("elemental-weakness", "None listed"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Use Man Eater or status control", detail: "The Cleyra Soldier is a Human-type enemy and appears in fixed groups during the Trunk return and settlement assault. Man Eater and status control help shorten these fights; conserve MP and healing for Antlion and Beatrix.", sourceIds: [enemyListSourceId, "gamefaqs-cleyra-71891", "cavesofnarshe-cleyra-walkthrough"] }],
+    routeObjectiveIds: [],
+    notes: ["This is the Level 10, 523-HP Cleyra variant (Soldier [A]), distinct from Soldier [B], the Level 9, 459-HP Alexandria variant. GameFAQs enemy list and independent tables place Soldier [A] in Cleyra; settlement fight guides often shorten its name to Soldier."],
+  }, cleyraChapterId, cleyraEnemySources),
+  chapterEnemy({
+    id: "enemy.type-b",
+    name: "Type B",
+    encounterIds: [
+      "encounter.cleyra-assault.entrance-type-b",
+      "encounter.cleyra-assault.first-type-b-pair",
+      "encounter.cleyra-assault.soldiers-and-type-b",
+    ],
+    stats: enemyStats([["level", 10], ["HP", 526], ["MP", 361], ["EXP", 373], ["AP", 1], ["Gil", 321]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", "game-item.ether"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.remedy"), enemyLoot("rare", "game-item.phoenix-down")],
+    facts: [
+      enemyFact("type", "Human"),
+      enemyFact("elemental-weakness", "None listed"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Finish the scripted waves efficiently", detail: "Type B is a Human-type Black Mage and cannot be eaten by Quina. The Cleyra assault uses it in three fixed groups; Man Eater and ordinary attacks are effective options.", sourceIds: [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra"] }],
+    routeObjectiveIds: [],
+    notes: ["The Type B record uses the Cleyra enemy table's stats and loot. Its appearances are modeled as fixed assault groups rather than a random settlement pool."],
+  }, cleyraChapterId, cleyraEnemySources),
+  chapterBoss({
+    id: "enemy.antlion-cleyra",
+    name: "Antlion (Cleyra)",
+    encounterIds: ["encounter.cleyra.antlion"],
+    stats: [
+      ...crossCheckedStats([["level", 16], ["HP", 3938], ["MP", 3950]], ["gamefaqs-cleyra-71891", "elitegrindlab-cleyra"]),
+      ...sourcedStats([["EXP", 0], ["AP", 5], ["Gil", 1616]], cleyraBossSources),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.annoyntment", cleyraBossSources),
+      sourcedLoot("uncommon", "game-item.mythril-vest", cleyraBossSources),
+      sourcedLoot("semi-rare", "game-item.gold-helm", cleyraBossSources),
+      sourcedLoot("rare", null, cleyraBossSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.annoyntment", cleyraBossSources),
+      sourcedLoot("common", "game-item.ether", cleyraBossSources),
+      sourcedLoot("uncommon", "game-item.ether", cleyraBossSources),
+      sourcedLoot("rare", "game-item.ether", cleyraBossSources),
+    ],
+    facts: [
+      sourcedFact("type", "None", cleyraBossSources),
+      sourcedFact("elemental-weakness", "Ice", cleyraBossSources),
+      sourcedFact("elemental-resistance", "Water (absorbs)", cleyraBossSources),
+      sourcedFact("status-vulnerability", "Darkness, Silence, Sleep, and Slow", cleyraBossSources),
+      sourcedFact("attack", "Sandstorm", cleyraBossSources, "Reduces the whole party to single-digit HP and inflicts Darkness."),
+      sourcedFact("attack", "Trouble Mucous, Fira, and Counter Horn", cleyraBossSources, "Trouble Mucous inflicts Trouble; Fira deals Fire damage; Counter Horn can retaliate against damage."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Slow or Sleep it while Zidane steals", detail: "Try to steal Annoyntment, Mythril Vest, and Gold Helm before ending this one-time fight. Slow or Sleep can buy time if they land; use Ice and avoid Water, cure Trouble with Annoyntment, and heal immediately after Sandstorm.", sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"] },
+      { title: "Keep its drop table separate from steals", detail: "Annoyntment is the Always drop, while the three conditional drop slots list Ether. This is separate from the Annoyntment, Mythril Vest, and Gold Helm steal table.", sourceIds: ["gamefaqs-cleyra-71891", "elitegrindlab-cleyra", "cavesofnarshe-enemies"] },
+    ],
+    routeObjectiveIds: [cleyraAntlionStealsObjectiveId],
+    notes: ["The boss table's three named steal targets remain linked to the existing one-time objective and recovery paths. GameFAQs and independent sources differ on steal probabilities; this record stores the item slots without publishing odds. Caves of Narshe reports Ether in all three conditional drop slots."],
+  }, cleyraChapterId, cleyraBossSources, [cleyraAntlionStealsMissableId], [cleyraAntlionStealsCutoffId]),
+  chapterBoss({
+    id: "enemy.beatrix-cleyra",
+    name: "Beatrix (Cleyra)",
+    encounterIds: ["encounter.cleyra.beatrix"],
+    stats: [
+      ...crossCheckedStats([["level", 17], ["HP", 4736], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-cleyra-71891", "cavesofnarshe-enemies"]),
+      { field: "MP", value: 3964, sourceIds: ["gamefaqs-cleyra-71891", "cavesofnarshe-enemies", "elitegrindlab-cleyra"], verification: "disputed" },
+      { field: "MP", value: 3694, sourceIds: ["gamefaqs-boss-guide-31490"], verification: "disputed" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.phoenix-down", cleyraBossSources),
+      sourcedLoot("uncommon", "game-item.thunder-gloves", cleyraBossSources),
+      sourcedLoot("semi-rare", "game-item.ice-brand", cleyraBossSources),
+      sourcedLoot("rare", null, cleyraBossSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, cleyraBossSources, "Nothing"),
+      sourcedLoot("common", null, cleyraBossSources, "Nothing"),
+      sourcedLoot("uncommon", null, cleyraBossSources, "Nothing"),
+      sourcedLoot("rare", null, cleyraBossSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Human", cleyraBossSources),
+      sourcedFact("elemental-weakness", "None listed", cleyraBossSources),
+      sourcedFact("elemental-resistance", "None listed", cleyraBossSources),
+      sourcedFact("status-vulnerability", "Slow", cleyraBossSources),
+      sourcedFact("attack", "Shock and Stock Break", cleyraBossSources, "Shock deals heavy single-target damage. At the end of the scripted battle, Stock Break reduces the party to 1 HP."),
+      sourcedFact("attack", "Cure", ["gamefaqs-cleyra-71891"], "Beatrix can heal herself during this encounter."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal during the scripted ten-turn window", detail: "Try for Phoenix Down, Thunder Gloves, and Ice Brand. Slow Beatrix, put vulnerable characters in the back row, and keep the party alive; the battle ends after ten turns or if her HP reaches zero, followed by Stock Break.", sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"] },
+      { title: "Treat Ice Brand as a meaningful one-time target", detail: "Ice Brand is in the Semi-Rare steal slot for this encounter. The window is still short, but the route sources consider it a reasonable target; the item remains obtainable later if missed.", sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-boss-guide-31490", "elitegrindlab-cleyra"] },
+    ],
+    routeObjectiveIds: [cleyraBeatrixStealsObjectiveId],
+    notes: ["Cleyra Beatrix is distinct from her Burmecia profile. GameFAQs and Caves of Narshe cross-check Level 17, 4,736 HP, and 3,964 MP; the older Blackestmage boss guide prints 3,694 MP, retained here as a disputed claim. Sources agree on the one-time steal list, but published steal rates are omitted."],
+  }, cleyraChapterId, [...cleyraBossSources, "gamefaqs-boss-guide-31490"], [cleyraBeatrixStealsMissableId], [cleyraBeatrixStealsCutoffId]),
 ];
 
 const earlyDaliEnemyRecords: EnemyRecord[] = [
@@ -3010,6 +3472,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...iceCavernEnemyRecords,
   ...grottoEnemyRecords,
   ...burmeciaEnemyRecords,
+  ...cleyraEnemyRecords,
   ...earlyDaliEnemyRecords,
   ...lindblumEnemyRecords,
   ...lindblumAreaEnemyRecords,
@@ -3136,8 +3599,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
