@@ -122,3 +122,42 @@ test("the Treno Chimera Armlet ATE path records its later item recovery sources"
   assert.ok(objectives.some((objective) => objective.id === "disc-3.card-tournament.chimera-armlet"));
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-3.the-aftermath"));
 });
+
+test("Rebirth Ring records the tournament, Chocograph, and final-battle sources", () => {
+  const rebirthPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rebirth-ring");
+  const tournament = rebirthPaths.find((path) => path.id === "item-path.disc-3.card-tournament.rebirth-ring-prize");
+  const chocograph = rebirthPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.rebirth-ring-forgotten-island");
+  const tranceKuja = rebirthPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.rebirth-ring-trance-kuja-steal");
+
+  assert.ok(gameItems.some((item) => item.id === "game-item.rebirth-ring"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.card-tournament"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.aerial-exploration"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-4.the-final-battle"));
+  assert.equal(rebirthPaths.length, 3);
+
+  assert.equal(tournament?.availability, "limited-window");
+  assert.equal(tournament?.recommendedBeforeChapterId, "disc-3.card-tournament");
+  assert.ok(tournament?.walkthroughObjectiveIds?.includes("disc-3.card-tournament.rebirth-ring"));
+
+  assert.equal(chocograph?.method, "chocograph");
+  assert.ok(chocograph?.conditions?.includes("Chocograph #24"));
+  assert.ok(chocograph?.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.air-garden-treasures"));
+
+  assert.equal(tranceKuja?.availability, "one-time-encounter");
+  assert.ok(tranceKuja?.conditions?.includes("point of no return"));
+  assert.ok(tranceKuja?.walkthroughObjectiveIds?.includes("disc-4.the-final-battle.trance-kuja-steals"));
+
+  for (const path of rebirthPaths) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+
+  assert.deepEqual(
+    equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.rebirth-ring").map((claim) => claim.abilityName).sort(),
+    ["Auto-Life", "Life", "Revive"],
+  );
+  assert.ok(objectives.some((objective) => objective.id === "disc-3.card-tournament.rebirth-ring"));
+  assert.ok(objectives.some((objective) => objective.id === "disc-4.the-final-battle.trance-kuja-steals"));
+  assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-4.the-final-battle"));
+});

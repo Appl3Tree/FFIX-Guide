@@ -95,8 +95,9 @@ export const itemCatalogCoverage = {
     "disc-4.return-to-gaia",
     "disc-4.second-battle-of-iifa-tree",
     "disc-4.memoria",
+    "disc-4.the-final-battle",
   ],
-  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet ATE and later recovery paths, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and two structured synthesis recipes. Most recipes, shop cutoffs, recovery paths, and item-level completeness still need independent review.",
+  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet and Rebirth Ring routes, Rebirth Ring recovery from Chocograph #24 and Trance Kuja, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and two structured synthesis recipes. Rebirth Ring's Daguerreo recipe is identified but its recipe and ingredient acquisition paths are not yet modeled; most other recipes, shop cutoffs, recovery paths, and item-level completeness also need independent review.",
 };
 
 const burmeciaSources = [
@@ -136,6 +137,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.lapis-lazuli", name: "Lapis Lazuli", category: "equipment", sourceIds: alexandriaSources, verification: "partial" },
   { id: "game-item.leo-stellazzio", name: "Leo Stellazzio", category: "key-item", sourceIds: [...alexandriaSources, "jegged-stellazzio"], verification: "partial" },
   { id: "game-item.chimera-armlet", name: "Chimera Armlet", category: "equipment", sourceIds: [...chimeraArmletSources, "gamefaqs-the-aftermath-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"], verification: "partial" },
+  { id: "game-item.rebirth-ring", name: "Rebirth Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-card-tournament-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-the-final-battle-71891", "gamefaqs-missables-21725", "jegged-treno-tournament", "jegged-chocographs", "jegged-kuja-necron-final-showdown"], verification: "partial" },
   { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: burmeciaSources, verification: "partial" },
   { id: "game-item.mythril-spear", name: "Mythril Spear", category: "equipment", sourceIds: burmeciaSources, verification: "partial" },
   { id: "game-item.lightning-staff", name: "Lightning Staff", category: "equipment", sourceIds: [...burmeciaSources, "gamefaqs-journey-to-treno-71891", "jegged-summit-station"], verification: "partial" },
@@ -380,6 +382,42 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     notes: "The final tournament match closes the Treno ATE window. Missing this pickup does not make the item type permanently unobtainable: the Serpent's Gate chest and later shop routes are modeled separately.",
     walkthroughObjectiveIds: ["disc-3.card-tournament.chimera-armlet", "disc-3.card-tournament.ates"],
     sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "gamefaqs-items-71891"],
+  },
+  {
+    id: "item-path.disc-3.card-tournament.rebirth-ring-prize",
+    itemId: "game-item.rebirth-ring",
+    chapterId: "disc-3.card-tournament",
+    method: "quest-reward",
+    quantity: 1,
+    availability: "limited-window",
+    recommendedBeforeChapterId: "disc-3.card-tournament",
+    conditions: "Win the third and final Tetra Master match against the tournament champion; losing does not block the story, but the match ends the local opportunity for this prize.",
+    notes: "This is the early tournament copy, not the only source for the item. Chocograph #24 and the Trance Kuja steal are separately listed; the Daguerreo synthesis recipe is known but not yet modeled.",
+    walkthroughObjectiveIds: ["disc-3.card-tournament.rebirth-ring"],
+    sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "gamefaqs-items-71891"],
+  },
+  {
+    id: "item-path.disc-3.aerial-exploration.rebirth-ring-forgotten-island",
+    itemId: "game-item.rebirth-ring",
+    chapterId: "disc-3.aerial-exploration",
+    method: "chocograph",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Dig Chocograph #24 in Chocobo's Air Garden, then use the Forgotten Island clue to dig up its world-map treasure. The treasure also contains a Ribbon, 13 Amethysts, and the Ark Card.",
+    walkthroughObjectiveIds: ["disc-3.aerial-exploration.air-garden-treasures"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-aerial-exploration-71891", "jegged-chocographs"],
+  },
+  {
+    id: "item-path.disc-4.the-final-battle.rebirth-ring-trance-kuja-steal",
+    itemId: "game-item.rebirth-ring",
+    chapterId: "disc-4.the-final-battle",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Rare steal from Trance Kuja in the final sequence, beyond the point of no return. Attempt it before reducing his HP to zero; defeating him ends the encounter and the story cannot return to this fight without reloading.",
+    notes: "This is the last and most constrained listed source. Earlier recovery through Chocograph #24 or Daguerreo synthesis remains available if the player has not passed those opportunities; the synthesis recipe is not yet modeled in this catalog.",
+    walkthroughObjectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"],
   },
   {
     id: "item-path.disc-3.the-aftermath.chimera-armlet-serpents-gate",
@@ -1346,6 +1384,9 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
 }));
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
+  { id: "item-ability.rebirth-ring.auto-life", itemId: "game-item.rebirth-ring", abilityName: "Auto-Life", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
+  { id: "item-ability.rebirth-ring.life", itemId: "game-item.rebirth-ring", abilityName: "Life", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
+  { id: "item-ability.rebirth-ring.revive", itemId: "game-item.rebirth-ring", abilityName: "Revive", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.chimera-armlet.add-status", itemId: "game-item.chimera-armlet", abilityName: "Add Status", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "jegged-arm-gear"] },
   { id: "item-ability.chimera-armlet.mug", itemId: "game-item.chimera-armlet", abilityName: "Mug", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "jegged-arm-gear"] },
   { id: "item-ability.silk-robe.ability-up", itemId: "game-item.silk-robe", abilityName: "Ability Up", verification: "partial", sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-abilities-71891"] },
