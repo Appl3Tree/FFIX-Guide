@@ -4,6 +4,8 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
+The Treno Griffin and Tantarian register corrections change documentation only. `git diff --check` passes; lint, typecheck, data audit, and production build were not rerun because application data and code did not change.
+
 The Namingway Card recovery update passes `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check`. The audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 358 sources; all warnings map to 97 cutoff windows. The route has 71 links, including a source-backed optional return to Desert Palace. The build emits 1,964.81 kB JavaScript (479.81 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
 
 The B01 route-graph integrity update passes `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check`. Audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 358 sources; all missables map to 98 cutoff windows. The route audit checks opening reachability, a required-story path to the final endpoint, and a return path from every covered chapter to that endpoint. The catalog has 209 items and 831 paths; the bestiary has 109 records and 95 encounter groups. The build emits 1,963.62 kB JavaScript (479.50 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.
