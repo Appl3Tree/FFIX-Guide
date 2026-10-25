@@ -1751,7 +1751,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-settlement-before-antlion",
         title: "Cleyra settlement — ATEs, Quina, and pickups",
         summary: "View every scene prompt, recover the two rubbish-pit chests, and sweep the town before the attack advances.",
-        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "jegged-missables", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "jegged-cleyra", "jegged-missables", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
         steps: [
           {
             id: "cleyra-four-ates",
@@ -1785,7 +1785,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-shop-stock",
             kind: "optional",
             text: "Before triggering Antlion, visit both Cleyra shops: Burmecian Soldier Dan's weapon shop by the Inn and Stair Maiden Nina's item shop near the Windmill. Buy needed equipment and stock Annoyntments for Trouble.",
-            detail: "The completionist route source describes both shop inventories as a one-visit window. GameFAQs specifically recommends extra Mythril Armlet and Mage's Hat for Dagger, Mythril Helm and Mythril Armor for Steiner, and a Multina Racket if Bohden Gate was missed. Burmecian Soldier Dan's weapon shop also lists Chain Mail for 1,200 Gil; Dragoos' post-Cleyra Lindblum shop is a later purchase source and the last documented chance before Dragon's Gate. The complete later-source audit remains open.",
+            detail: "GameFAQs and Caves of Narshe list the same 26 products and prices across both shops; the item catalog now records each Cleyra purchase. GameFAQs recommends extra Mythril Armlet and Mage's Hat for Dagger, Mythril Helm and Mythril Armor for Steiner, and a Multina Racket if Bohden Gate was missed. Later acquisition paths are currently modeled for 14 of the 26 item types, including the post-Cleyra Lindblum Chain Mail shop; the other 12 lack a later path in this partial catalog, which does not prove permanent loss. Exact stock-change points remain under review.",
             objectiveIds: ["disc-2.cleyra.shop-stock"],
           },
           {

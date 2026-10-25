@@ -1323,6 +1323,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Burmecian Soldier Dan's Weapon Shop",
     cost: { currency: "gil", amount: 400 },
     conditions: "Cleyra sells Magus Hat for 400 Gil before the settlement closes after the assault.",
+    walkthroughObjectiveIds: ["disc-2.cleyra.shop-stock"],
     sourceIds: magusHatReferenceSources,
   },
   {
@@ -2112,6 +2113,17 @@ export const gameItems: GameItem[] = [
   { id: "game-item.mythril-rod", name: "Mythril Rod", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-esto-gaza", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.gold-helm", name: "Gold Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-ability-10332"], verification: "partial" },
   { id: "game-item.rosetta-ring", name: "Rosetta Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"], verification: "partial" },
+  { id: "game-item.partisan", name: "Partisan", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.multina-racket", name: "Multina Racket", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.flame-staff", name: "Flame Staff", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.ice-staff", name: "Ice Staff", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.needle-fork", name: "Needle Fork", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.mythril-armlet", name: "Mythril Armlet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.thunder-gloves", name: "Thunder Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.mages-hat", name: "Mage's Hat", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.mythril-helm", name: "Mythril Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.annoyntment", name: "Annoyntment", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
 ];
 
 const treasureSweepObjective = "disc-1.burmecia.treasure-sweep";
@@ -2267,9 +2279,51 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
   sourceIds: disc4ShopSources,
 }));
 
+const cleyraShopStockInputs: Array<[slug: string, price: number, shopName: string]> = [
+  ["partisan", 1600, "Burmecian Soldier Dan's Weapon Shop"],
+  ["multina-racket", 750, "Burmecian Soldier Dan's Weapon Shop"],
+  ["mythril-rod", 560, "Burmecian Soldier Dan's Weapon Shop"],
+  ["flame-staff", 1100, "Burmecian Soldier Dan's Weapon Shop"],
+  ["ice-staff", 980, "Burmecian Soldier Dan's Weapon Shop"],
+  ["needle-fork", 3100, "Burmecian Soldier Dan's Weapon Shop"],
+  ["mythril-armlet", 500, "Burmecian Soldier Dan's Weapon Shop"],
+  ["mythril-gloves", 980, "Burmecian Soldier Dan's Weapon Shop"],
+  ["thunder-gloves", 1200, "Burmecian Soldier Dan's Weapon Shop"],
+  ["mages-hat", 600, "Burmecian Soldier Dan's Weapon Shop"],
+  ["mythril-helm", 1000, "Burmecian Soldier Dan's Weapon Shop"],
+  ["mythril-armor", 1830, "Burmecian Soldier Dan's Weapon Shop"],
+  ["potion", 50, "Stair Maiden Nina's Item Shop"],
+  ["phoenix-down", 150, "Stair Maiden Nina's Item Shop"],
+  ["echo-screen", 50, "Stair Maiden Nina's Item Shop"],
+  ["soft", 100, "Stair Maiden Nina's Item Shop"],
+  ["antidote", 50, "Stair Maiden Nina's Item Shop"],
+  ["eye-drops", 50, "Stair Maiden Nina's Item Shop"],
+  ["annoyntment", 150, "Stair Maiden Nina's Item Shop"],
+  ["tent", 800, "Stair Maiden Nina's Item Shop"],
+];
+
+const cleyraShopStockPaths: ItemAcquisitionPath[] = cleyraShopStockInputs.map(([slug, price, shopName]) => ({
+  id: `item-path.disc-2.cleyra.${slug}-shop`,
+  itemId: `game-item.${slug}`,
+  chapterId: "disc-2.cleyra",
+  method: "shop",
+  quantity: 1,
+  availability: "limited-window",
+  recommendedBeforeChapterId: "disc-2.cleyra",
+  shopId: shopName.startsWith("Burmecian")
+    ? "cleyra.burmecian-soldier-dan.weapon-shop"
+    : "cleyra.stair-maiden-nina.item-shop",
+  shopName: `${shopName} (Cleyra)`,
+  conditions: `Listed for ${price.toLocaleString("en-US")} Gil in Cleyra's one-visit shop stock; this local purchase source closes with the settlement after the attack.`,
+  cost: { currency: "gil", amount: price },
+  walkthroughObjectiveIds: ["disc-2.cleyra.shop-stock"],
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "cavesofnarshe-ff9-disc-2-map", "elitegrindlab-cleyra"],
+}));
+
 export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc3ShopPaths,
   ...disc4ShopPaths,
+  ...cleyraShopStockPaths,
   {
     id: "item-path.disc-2.journey-to-cleyra.gargan-roo-chain-plate",
     itemId: "game-item.chain-plate",
@@ -4390,8 +4444,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "limited-window",
     recommendedBeforeChapterId: "disc-2.cleyra",
-    shopId: "cleyra.weapon-shop",
-    shopName: "Cleyra Weapon Shop",
+    shopId: "cleyra.burmecian-soldier-dan.weapon-shop",
+    shopName: "Burmecian Soldier Dan's Weapon Shop (Cleyra)",
     conditions: "Cleyra's shop sells Bone Wrist for 330 Gil before the settlement's destruction closes this local shop route.",
     notes: "This is a shop replacement for the Ralvurahva steal, not a second one-time loss of the item type.",
     walkthroughObjectiveIds: ["disc-2.cleyra.shop-stock"],
