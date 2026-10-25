@@ -1526,6 +1526,29 @@ if (!gunitasPool || gunitasPool.kind !== "random-pool" ||
   qusMarshPool.formation.some((entry) => entry.enemyId === "enemy.anemone" || entry.enemyId === "enemy.sahagin" || entry.enemyId === "enemy.gigan-toad-b")) {
   errors.push("Gunitas Basin, Lindblum lowlands, and the Disc I Qu's Marsh must retain their distinct source-listed enemy pools.");
 }
+const grottoPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.random-pool");
+const grottoTypeAFights = [
+  enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.type-a-first-pair"),
+  enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.type-a-second-pair"),
+];
+const gizamalukeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.gizamaluke");
+const gizamalukeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.gizamaluke");
+const grottoRoster = ["enemy.hornet", "enemy.lamia", "enemy.skeleton", "enemy.type-a"];
+const gizamalukeElixirStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.journey-to-burmecia.elixir-gizamaluke-steal");
+const gizamalukeIceStaffStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.journey-to-burmecia.ice-staff-gizamaluke-steal");
+const cleyraIceStaffPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.ice-staff-trunk-chest");
+if (!grottoPool || grottoPool.kind !== "random-pool" || grottoRoster.some((enemyId) => !grottoPool.formation.some((member) => member.enemyId === enemyId && member.quantity === null)) ||
+  grottoTypeAFights.some((encounter) => !encounter || encounter.kind !== "fixed" || !encounter.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2)) ||
+  !gizamalukeEncounter || gizamalukeEncounter.kind !== "boss" || !gizamalukeEncounter.formation.some((member) => member.enemyId === "enemy.gizamaluke" && member.quantity === 1) ||
+  !gizamalukeRecord || gizamalukeRecord.kind !== "boss" || gizamalukeRecord.stats.find((stat) => stat.field === "HP")?.value !== 3175 ||
+  !gizamalukeRecord.steals.some((slot) => slot.itemId === "game-item.elixir") || !gizamalukeRecord.steals.some((slot) => slot.itemId === "game-item.magus-hat") ||
+  !gizamalukeRecord.steals.some((slot) => slot.itemId === "game-item.ice-staff") || !gizamalukeRecord.drops.some((slot) => slot.itemId === "game-item.tent") ||
+  !gizamalukeRecord.missableIds.includes("missable.disc-1.journey-to-burmecia.gizamaluke-steals") ||
+  !gizamalukeElixirStealPath || gizamalukeElixirStealPath.method !== "steal" || !gizamalukeElixirStealPath.walkthroughObjectiveIds?.includes("disc-1.journey-to-burmecia.gizamaluke-steals") ||
+  !gizamalukeIceStaffStealPath || gizamalukeIceStaffStealPath.method !== "steal" ||
+  !cleyraIceStaffPath || cleyraIceStaffPath.method !== "chest" || cleyraIceStaffPath.chapterId !== "disc-2.cleyra") {
+  errors.push("Gizamaluke's Grotto must keep its regional pool, two fixed Type A pairs, boss steal warning, and later Ice Staff recovery linked across the bestiary and item catalog.");
+}
 const qualeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.quale-99-frogs");
 const qualeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.quale");
 if (!qualeEncounter || qualeEncounter.kind !== "boss" ||

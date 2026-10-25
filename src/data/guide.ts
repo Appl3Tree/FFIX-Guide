@@ -1007,7 +1007,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/enemy-list",
     accessed: "2026-10-25",
-    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
+    notes: "Enemy and boss reference data used across the guide. It explains FFIX's Always/Common/Uncommon/Rare drop slots and gives their probabilities, noting that successful slots can award multiple items. The Grotto roster lists Hornet, Lamia, Skeleton, and Type A; the matching stats, drops, elemental traits, status vulnerabilities, and Blue Magic opportunities are modeled without inferring random formation rates. Meltigemini lists Vaccine in all four slots, so one copy is guaranteed and up to three more may drop. Its Peridot tables list Griffin, Mistodon A/B, Stroper, Grenade, Tonberry, Tiamat [B], and the Quina/Vivi Epitaph mirrors as drop or steal sources. The Tiamat [B] Crystal World table lists Wing Edge in both the Semi-Rare and Rare steal slots, separate from the story boss's guaranteed Wing Edge drop; GameFAQs' Memoria prose broadly says revived guardians lack Steals and Drops, so the specific table/prose conflict is retained. It lists Grenade in Mount Gulug, which the Caves of Narshe Peridot reference omits. Exact steal rates are omitted where route sources disagree.",
   },
   {
     id: "gamefaqs-monster-list-20490",
@@ -1351,7 +1351,23 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/enemies.php?type=all",
     accessed: "2026-10-25",
-    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, and Festival records. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
+    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, Festival, and boss records. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
+  },
+  {
+    id: "cavesofnarshe-gizamaluke",
+    title: "Gizamaluke — enemy and boss data",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/w_enemy.php?enemy=Gizamaluke",
+    accessed: "2026-10-25",
+    notes: "Direct boss record used to cross-check Gizamaluke's level, HP, MP, Gil, EXP, AP, attack, and Flying type.",
+  },
+  {
+    id: "ffonline-gizamaluke-boss",
+    title: "Gizamaluke — boss reference",
+    publisher: "Final Fantasy Online",
+    url: "https://ffonline.com/ff9/enemies/bosses",
+    accessed: "2026-10-25",
+    notes: "Independent boss-table and strategy cross-check for Gizamaluke's stats, Tent drop, elemental and status traits, and Crash/Water/Silent Voice attacks.",
   },
   {
     id: "cavesofnarshe-lindblum-walkthrough",
@@ -1456,6 +1472,14 @@ export const sources = [
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/09-Gizamalukes-Grotto.html",
     accessed: "2026-10-23",
     notes: "Independent cross-check for the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
+  },
+  {
+    id: "rpgclassics-gizamaluke",
+    title: "Gizamaluke's Grotto — area walkthrough",
+    publisher: "RPGClassics",
+    url: "https://shrines.rpgclassics.com/psx/ffix/grotto.shtml",
+    accessed: "2026-10-25",
+    notes: "Independent Grotto roster, bell-route walkthrough, two scripted Type A fights, Quina's Vanish/LV3 Def-less/Pumpkin Head opportunities, hidden pickups, and Gizamaluke steal order.",
   },
   {
     id: "gamefaqs-grotto-south-gate-79143",

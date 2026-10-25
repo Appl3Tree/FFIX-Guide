@@ -83,6 +83,7 @@ const iceCavernChapterId = "disc-1.ice-cavern";
 const daliChapterId = "disc-1.village-of-dali";
 const lindblumChapterId = "disc-1.lindblum";
 const exploringLindblumChapterId = "disc-1.exploring-lindblum-kingdom";
+const journeyToBurmeciaChapterId = "disc-1.journey-to-burmecia";
 const returnToGaiaChapterId = "disc-4.return-to-gaia";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
@@ -104,6 +105,9 @@ const iceCavernStealsCutoffId = "cutoff.ice-cavern.boss-steals";
 const blackWaltz2StealsObjectiveId = "disc-1.village-of-dali.black-waltz-2-steals";
 const blackWaltz2StealsMissableId = "missable.disc-1.village-of-dali.black-waltz-2-steals";
 const blackWaltz2StealsCutoffId = "cutoff.dali.black-waltz-2-steals";
+const gizamalukeStealsObjectiveId = "disc-1.journey-to-burmecia.gizamaluke-steals";
+const gizamalukeStealsMissableId = "missable.disc-1.journey-to-burmecia.gizamaluke-steals";
+const gizamalukeStealsCutoffId = "cutoff.gizamaluke.boss-steals";
 const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
@@ -111,6 +115,8 @@ const lindblumPlateauSources = [enemyListSourceId, "gamefaqs-exploring-lindblum-
 const lindblumLowlandSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891"];
 const qusMarshSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "elitegrindlab-qus-marsh", "gamefaqs-abilities-71891"];
 const qualeSources = ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh", "rpgclassics-bestiary-n-s"];
+const grottoEnemySources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke", "gamefaqs-abilities-71891"];
+const gizamalukeBossSources = [...grottoEnemySources, "cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss"];
 const huntEnemySources = [enemyListSourceId, "gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
 const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
@@ -346,6 +352,66 @@ const iceCavernEncounters: EnemyEncounter[] = [
     missableIds: [iceCavernStealsMissableId],
     cutoffIds: [iceCavernStealsCutoffId],
     notes: ["Black Waltz 1 summons Sealion at the start. Defeat Waltz first: it heals Sealion and can summon another if Sealion falls while Waltz remains."],
+  },
+];
+
+const grottoEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.gizamaluke-grotto.random-pool",
+    title: "Gizamaluke's Grotto random encounters",
+    chapterId: journeyToBurmeciaChapterId,
+    location: "Cavern rooms and paths before the Sacred Room",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.hornet", quantity: null },
+      { enemyId: "enemy.lamia", quantity: null },
+      { enemyId: "enemy.skeleton", quantity: null },
+      { enemyId: "enemy.type-a", quantity: null },
+    ],
+    sourceIds: grottoEnemySources,
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The regional roster is source-listed, but published route references do not provide complete formation rates for the Grotto. The two scripted Type A pairs are tracked separately."],
+  },
+  {
+    id: "encounter.gizamaluke-grotto.type-a-first-pair",
+    title: "First scripted Type A pair",
+    chapterId: journeyToBurmeciaChapterId,
+    location: "First bell-door chamber, after Zorn and Thorn leave two Black Mages",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.type-a", quantity: 2 }],
+    sourceIds: ["gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is the first of two mandatory two-mage fights in the bell route; defeat both Black Mages to continue."],
+  },
+  {
+    id: "encounter.gizamaluke-grotto.type-a-second-pair",
+    title: "Second scripted Type A pair",
+    chapterId: journeyToBurmeciaChapterId,
+    location: "First bell-door chamber, after the Zorn and Thorn scene",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.type-a", quantity: 2 }],
+    sourceIds: ["gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Defeating this second pair awards another Gizamaluke Bell, which continues the route through the cavern."],
+  },
+  {
+    id: "encounter.gizamaluke-grotto.gizamaluke",
+    title: "Gizamaluke — Sacred Room boss",
+    chapterId: journeyToBurmeciaChapterId,
+    location: "Sacred Room behind the great bell, after using the Holy Bell",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.gizamaluke", quantity: 1 }],
+    sourceIds: gizamalukeBossSources,
+    objectiveIds: [gizamalukeStealsObjectiveId],
+    missableIds: [gizamalukeStealsMissableId],
+    cutoffIds: [gizamalukeStealsCutoffId],
+    notes: ["The Elixir, Magus Hat, and Ice Staff steals are available only during this one-time fight; the item types have later sources."],
   },
 ];
 
@@ -896,7 +962,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -2042,6 +2108,98 @@ const iceCavernEnemyRecords: EnemyRecord[] = [
   }, iceCavernChapterId, iceCavernBossSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
 ];
 
+const grottoEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.hornet",
+    name: "Hornet",
+    encounterIds: ["encounter.gizamaluke-grotto.random-pool"],
+    stats: enemyStats([["level", 7], ["HP", 293], ["MP", 281], ["EXP", 89], ["AP", 1], ["Gil", 194]]),
+    steals: [enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Bug and Aerial"),
+      enemyFact("elemental-weakness", "Lightning and Wind"),
+      enemyFact("elemental-resistance", "Earth (nullified)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      sourcedFact("attack", "Buzz", [enemyListSourceId], "Can inflict Berserk."),
+      sourcedFact("attack", "Stinger", [enemyListSourceId], "Weak single-target physical damage."),
+    ],
+    blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "rpgclassics-gizamaluke"], objectiveIds: [] }],
+    strategies: [{ title: "Use Lightning or Wind", detail: "Hornet is weak to both elements. Watch for Buzz, which can Berserk a party member; Stinger is a comparatively weak physical attack.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: [],
+    notes: ["The Grotto enemy table lists Hornet as Bug and Aerial, with Vanish as Quina's Eat skill."],
+  }, journeyToBurmeciaChapterId, grottoEnemySources),
+  chapterEnemy({
+    id: "enemy.lamia",
+    name: "Lamia",
+    encounterIds: ["encounter.gizamaluke-grotto.random-pool"],
+    stats: enemyStats([["level", 10], ["HP", 994], ["MP", 358], ["EXP", 204], ["AP", 2], ["Gil", 494]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.ether"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "None"),
+      enemyFact("elemental-weakness", "Lightning"),
+      enemyFact("elemental-resistance", "Water (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Entice", "Can inflict Confuse."),
+      enemyFact("attack", "Might", "Raises its physical damage; multiple casts make Slash dangerous."),
+      enemyFact("attack", "Cure and Slash", "Cure restores Lamia's HP; Slash deals physical damage."),
+    ],
+    blueMagic: [{ name: "LV3 Def-less", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "rpgclassics-gizamaluke"], objectiveIds: [] }],
+    strategies: [{ title: "Take it down before Might stacks", detail: "Lamia is a local difficulty spike: it can Confuse a character with Entice, heal itself, and strengthen Slash with Might. Lightning exploits its weakness, and Quina can learn LV3 Def-less with Eat.", sourceIds: [enemyListSourceId, "rpgclassics-gizamaluke"] }],
+    routeObjectiveIds: [],
+    notes: ["GameFAQs calls Lamia the most dangerous ordinary enemy in the Grotto and specifically warns that repeated Might casts make Slash much stronger."],
+  }, journeyToBurmeciaChapterId, grottoEnemySources),
+  chapterEnemy({
+    id: "enemy.type-a",
+    name: "Type A",
+    encounterIds: ["encounter.gizamaluke-grotto.random-pool", "encounter.gizamaluke-grotto.type-a-first-pair", "encounter.gizamaluke-grotto.type-a-second-pair"],
+    stats: enemyStats([["level", 8], ["HP", 398], ["MP", 293], ["EXP", 115], ["AP", 2], ["Gil", 199]]),
+    steals: [enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Human"),
+      enemyFact("elemental-weakness", "None listed"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Fire, Blizzard, Thunder, and Strike", "Elemental spells deal modest single-target damage; Strike is physical."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Silence the scripted pair if needed", detail: "Silence works against Type A. The mandatory pairs use spells and Strike, but the enemy table describes their attacks as modest compared with the Grotto's Lamia.", sourceIds: [enemyListSourceId, "gamefaqs-grotto-south-gate-79143"] }],
+    routeObjectiveIds: [],
+    notes: ["Type A is the name used by the enemy list; the route walkthroughs call these Black Mages. The two scripted pairs are represented separately from the random-pool entry."],
+  }, journeyToBurmeciaChapterId, grottoEnemySources),
+  chapterBoss({
+    id: "enemy.gizamaluke",
+    name: "Gizamaluke",
+    encounterIds: ["encounter.gizamaluke-grotto.gizamaluke"],
+    stats: crossCheckedStats([["level", 16], ["HP", 3175], ["MP", 502], ["EXP", 0], ["AP", 5], ["Gil", 800]], ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss"]),
+    steals: [
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-grotto-south-gate-79143", "jegged-gizamaluke", "rpgclassics-gizamaluke"]),
+      sourcedLoot("uncommon", "game-item.magus-hat", ["gamefaqs-grotto-south-gate-79143", "jegged-gizamaluke", "rpgclassics-gizamaluke"]),
+      sourcedLoot("semi-rare", "game-item.ice-staff", ["gamefaqs-grotto-south-gate-79143", "jegged-gizamaluke", "rpgclassics-gizamaluke"]),
+      sourcedLoot("rare", null, ["gamefaqs-grotto-south-gate-79143"], "Nothing"),
+    ],
+    drops: [sourcedLoot("always", "game-item.tent", ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss"])],
+    facts: [
+      sourcedFact("type", "Flying", ["cavesofnarshe-gizamaluke"]),
+      sourcedFact("elemental-weakness", "Thunder and Wind", ["ffonline-gizamaluke-boss"]),
+      sourcedFact("elemental-resistance", "Water damage halved; Earth nullified", ["ffonline-gizamaluke-boss"]),
+      sourcedFact("status-vulnerability", "Darkness, Mini, Silence, Sleep, and Slow", ["ffonline-gizamaluke-boss"]),
+      sourcedFact("attack", "Crash", ["ffonline-gizamaluke-boss"], "Heavy single-target physical damage; it can also counter physical attacks."),
+      sourcedFact("attack", "Water", ["ffonline-gizamaluke-boss", "gamefaqs-grotto-south-gate-79143"], "Can target one character or the party."),
+      sourcedFact("attack", "Silent Voice", ["ffonline-gizamaluke-boss"], "Inflicts Silence on a character."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Protect the party while Zidane steals", detail: "Crash hits hard and Water can target the party, so keep a character ready to heal. Vivi's Thunder exploits the listed weakness; Freya can Jump to avoid attacks during her turn.", sourceIds: ["gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke"] },
+      { title: "Treat the Tent trick as a gamble", detail: "A Tent may inflict Darkness and Silence, but a failed Tent can fully heal the boss. Save first if trying this tactic, and avoid repeating it when you would rather preserve the boss's current HP.", sourceIds: ["gamefaqs-grotto-south-gate-79143", "jegged-gizamaluke"] },
+    ],
+    routeObjectiveIds: [gizamalukeStealsObjectiveId],
+    notes: ["The boss drops a Tent. Route sources agree on the three named steals, but their printed steal rates differ; no probabilities or attempt counts are asserted."],
+  }, journeyToBurmeciaChapterId, gizamalukeBossSources, [gizamalukeStealsMissableId], [gizamalukeStealsCutoffId]),
+];
+
 const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.carve-spider",
@@ -2166,7 +2324,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.skeleton",
     name: "Skeleton",
-    encounterIds: ["encounter.dali-underground.random-pool"],
+    encounterIds: ["encounter.dali-underground.random-pool", "encounter.gizamaluke-grotto.random-pool"],
     stats: enemyStats([["level", 8], ["HP", 400], ["MP", 293], ["EXP", 104], ["AP", 1], ["Gil", 209]]),
     steals: [
       enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"),
@@ -2183,11 +2341,11 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
       enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
       sourcedFact("attack", "Whirl Slash", [enemyListSourceId], "Can hit front-row characters for about 100 damage."),
     ],
-    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "rpgclassics-gizamaluke"], objectiveIds: [] }],
     strategies: [{ title: "Use Vivi's Fire and watch the HP spike", detail: "At 400 HP this is much tougher than nearby Disc I enemies. Fire and Holy exploit its weaknesses; Whirl Slash can deal heavy damage to front-row characters.", sourceIds: [enemyListSourceId, "elitegrindlab-dali"] }],
     routeObjectiveIds: [],
-    notes: ["Presence in the Dali underground is disputed: Jegged and EliteGrindLab include Skeleton; GameFAQs, Caves of Narshe, and Final Fantasy Wiki omit it. EliteGrindLab reports it only in formations paired with Vice."],
-  }, daliChapterId, daliEnemySources),
+    notes: ["The enemy table and RPGClassics list Skeleton in Gizamaluke's Grotto. Its separate Dali underground appearance is disputed: Jegged and EliteGrindLab include it; GameFAQs, Caves of Narshe, and Final Fantasy Wiki omit it. EliteGrindLab reports it only in Dali formations paired with Vice."],
+  }, daliChapterId, [...new Set([...daliEnemySources, ...grottoEnemySources])]),
   chapterBoss({
     id: "enemy.black-waltz-2",
     name: "Black Waltz 2",
@@ -2567,6 +2725,7 @@ const lindblumAreaEnemyRecords: EnemyRecord[] = [
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
+  ...grottoEnemyRecords,
   ...earlyDaliEnemyRecords,
   ...lindblumEnemyRecords,
   ...lindblumAreaEnemyRecords,
@@ -2693,8 +2852,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
