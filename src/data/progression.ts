@@ -328,6 +328,41 @@ export const storyPartySequences: StoryPartySequence[] = [
       "gamerguides-cleyra",
     ],
   },
+  {
+    id: "party-sequence.pandemonium-fixed-fights",
+    title: "Pandemonium's three fixed party-split fights",
+    phases: [
+      {
+        party: "Zidane alone; Freya and Amarant join",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Pandemonium gate — Amdusias",
+        summary: "Keep Zidane alive during the opening Amdusias fight until Freya and Amarant arrive. The Abadon battle begins immediately afterward.",
+      },
+      {
+        party: "Steiner and Quina; Zidane joins",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Pandemonium — Abadon",
+        summary: "Steiner and Quina start the fixed Abadon encounter; Zidane joins later. Keep the opening pair alive and use Quina's healing Blue Magic if learned.",
+      },
+      {
+        party: "Zidane alone; Dagger joins",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Pandemonium — Shell Dragon",
+        summary: "Defend while Zidane faces Shell Dragon alone, then use Dagger's healing and Float support when she arrives. After victory, the party returns to its full roster.",
+      },
+      {
+        party: "Zidane, Dagger, Steiner, and Quina; then player-selected party",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Moorock's room, then Pandemonium throne room",
+        summary: "After Shell Dragon, Zidane, Dagger, Steiner, and Quina rejoin the full party. Speak to Moorock to save, use a Tent, shop, or change party members; then return to the throne room to collect the Holy Miter before continuing to the late puzzle and boss route.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-portal-to-another-world-71891",
+      "jegged-pandemonium",
+      "flactem-pandemonium",
+    ],
+  },
 ];
 
 export const gameRouteEdges: GameRouteEdge[] = [

@@ -2311,7 +2311,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/portal-to-another-world",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including the party splits, seven Terra chests, five Pandemonium pickups, timed puzzle, elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It places Demon's Vest in the Terra chest sweep and identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations. After Kuja, the route returns through Bran Bal on a linear evacuation path, but the guide does not document reopening Moorock's shop during that passage.",
+    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including the fixed Amdusias, Abadon, and Shell Dragon roster changes, the regroup and party selection at Moorock, seven Terra chests, five Pandemonium pickups, timed puzzle, elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It places Demon's Vest in the Terra chest sweep and identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations. After Kuja, the route returns through Bran Bal on a linear evacuation path, but the guide does not document reopening Moorock's shop during that passage.",
   },
   {
     id: "jegged-bran-bal",
@@ -2327,7 +2327,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/40-Pandemonium.html",
     accessed: "2026-10-25",
-    notes: "Route cross-check for Pandemonium's three forced party-split battles, Moorock and Holy Miter, timed orb room, elevator ATE and treasure headings, maze pickups, Mozme's conditional Kupo Nut, and Silver Dragon/Garland/Kuja sequence. Boss HP figures are excluded because references conflict; the post-boss route through Bran Bal is linear and does not establish free recovery or reopening Moorock's shop.",
+    notes: "Route cross-check for Pandemonium's fixed Amdusias (Zidane, then Freya and Amarant), Abadon (Steiner and Quina, then Zidane), and Shell Dragon (Zidane, then Dagger) fights, followed by the regroup and party change at Moorock. It also covers Holy Miter, the timed orb room, elevator ATE and treasure headings, maze pickups, Mozme's conditional Kupo Nut, and the Silver Dragon/Garland/Kuja sequence. Boss HP figures are excluded because references conflict; the post-boss route through Bran Bal is linear and does not establish free recovery or reopening Moorock's shop.",
   },
   {
     id: "flactem-pandemonium",
@@ -2335,7 +2335,7 @@ export const sources = [
     publisher: "Flactem Guides",
     url: "https://guides.flactem.com/final-fantasy-ix/disc-3/pandemonium/",
     accessed: "2026-10-25",
-    notes: "Independent cross-check for Pandemonium's enemy roster, scripted party-split battles, and Quina's Blue Magic opportunities. It distinguishes the repeatable Abadon and Shell Dragon learning opportunities from the scripted Abadon fight; Earth Shake availability during the scripted Shell Dragon battle remains unresolved across guides.",
+    notes: "Independent cross-check for Pandemonium's enemy roster and scripted party-split battles, including the fixed-fight roster changes, and Quina's Blue Magic opportunities. It distinguishes the repeatable Abadon and Shell Dragon learning opportunities from the scripted Abadon fight; Earth Shake availability during the scripted Shell Dragon battle remains unresolved across guides.",
   },
   {
     id: "elitegrindlab-pandemonium",

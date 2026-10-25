@@ -288,6 +288,33 @@ if (!cleyraPartySequence) {
     if (!cleyraPartySequence.sourceIds.includes(sourceId)) errors.push(`The post-Antlion Cleyra sequence is missing corroborating source ${sourceId}.`);
   }
 }
+const pandemoniumPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.pandemonium-fixed-fights");
+if (!pandemoniumPartySequence) {
+  errors.push("The Pandemonium fixed party-split sequence is missing.");
+} else {
+  if (pandemoniumPartySequence.phases.length !== 4) errors.push("The Pandemonium sequence must retain its three fights and post-split regroup phase.");
+  if (pandemoniumPartySequence.phases[0]?.party !== "Zidane alone; Freya and Amarant join") {
+    errors.push("The Pandemonium sequence must open with Zidane alone before Freya and Amarant join.");
+  }
+  if (pandemoniumPartySequence.phases[1]?.party !== "Steiner and Quina; Zidane joins") errors.push("The Pandemonium Abadon fight must begin with Steiner and Quina.");
+  if (pandemoniumPartySequence.phases[2]?.party !== "Zidane alone; Dagger joins") errors.push("The Pandemonium Shell Dragon fight must begin with Zidane alone before Dagger joins.");
+  const pandemoniumRegroup = pandemoniumPartySequence.phases[3];
+  if (pandemoniumRegroup?.party !== "Zidane, Dagger, Steiner, and Quina; then player-selected party") {
+    errors.push("The Pandemonium sequence must retain the four-character regroup before party selection.");
+  }
+  if (!pandemoniumRegroup?.location.includes("Moorock") || !pandemoniumRegroup.location.includes("throne room")) {
+    errors.push("The Pandemonium sequence must retain Moorock and the return to the throne room.");
+  }
+  const moorockIndex = pandemoniumRegroup?.summary.indexOf("Speak to Moorock") ?? -1;
+  const throneIndex = pandemoniumRegroup?.summary.indexOf("return to the throne room") ?? -1;
+  const holyMiterIndex = pandemoniumRegroup?.summary.indexOf("Holy Miter") ?? -1;
+  if (moorockIndex < 0 || throneIndex <= moorockIndex || holyMiterIndex <= throneIndex) {
+    errors.push("The Pandemonium sequence must place the Moorock stop before the throne-room Holy Miter pickup.");
+  }
+  for (const sourceId of ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "flactem-pandemonium"]) {
+    if (!pandemoniumPartySequence.sourceIds.includes(sourceId)) errors.push(`The Pandemonium sequence is missing corroborating source ${sourceId}.`);
+  }
+}
 for (const edge of gameRouteEdges) {
   if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
     errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);
