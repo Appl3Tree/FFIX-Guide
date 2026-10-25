@@ -3482,7 +3482,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "home-front-zidane-and-shops",
         title: "Zidane rejoins — ATEs, shops, and the Nero Brothers",
         summary: "Use the later Alexandria free-roam window to prepare the party, finish the second ATE phase, and win the Nero Brothers challenge.",
-        sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "xboxachievements-final-fantasy-ix", "steam-achievements", "gamefaqs-shops-71891", "gamefaqs-card-locations-24067"],
+        sourceIds: ["gamefaqs-home-front-71891", "gamefaqs-double-or-nothing-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "xboxachievements-final-fantasy-ix", "steam-achievements", "gamefaqs-shops-71891", "gamefaqs-card-locations-24067", "cour89-card-players"],
         steps: [
           {
             id: "home-front-zidane-ate-and-theater-gil",
@@ -3512,9 +3512,16 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "home-front-card-players",
             kind: "optional",
-            text: "If your checklist includes every documented card-player interaction, challenge Michelle and Old Lady on Main Street and Benero and Zenero in the Weapon Shop before leaving Alexandria.",
-            detail: "GameFAQs' PlayStation card-location FAQ lists these four opponents during Disc III; some Alexandria card entries also name opponents through Disc IV, so the exact later rematch availability is unresolved. This is an optional match checkpoint, not a claim that the card types are exclusive to these opponents.",
+            text: "Challenge Michelle and Old Lady on Main Street, then Benero and Zenero in the Weapon Shop before leaving for Treno.",
+            detail: "Choose the Tetra Master match; the Nero Brothers' shuffle is separate. This keeps the original four-opponent checklist scope. Card sources and later rematches vary by opponent, so use the separate broader roster checklist if you want to challenge everyone listed for Disc III Alexandria.",
             objectiveIds: ["disc-3.the-home-front.card-players"],
+          },
+          {
+            id: "home-front-card-player-roster",
+            kind: "optional",
+            text: "For the broader Disc III Alexandria card sweep, use Cour89's coronation table and challenge the remaining listed card players before leaving for Treno.",
+            detail: "By area: Main Street — Fishman, Nikolai, Man, Hippaul, Hippolady, Guide, Old Man, Ryan, Mick; pub — Signwriter Dante and Maggie; Item Shop — Doug; square — Nobleman, Noblewoman, Tom's Mother, Flower Girl; Weapon Shop — the shopkeeper and Genero; Synthesis Shop — the shopkeeper; steeple — Onion Master, Tom, Boatman, Retired Boatman; residence — Iila. Cour89 also lists Hippaul and Hippolady at the Inn as well as Main Street; these repeated location entries are not counted as extra unique players here. The full roster is a source-based checklist, not an achievement or card-type lock, and some opponents appear again after Alexandria is destroyed.",
+            objectiveIds: ["disc-3.the-home-front.card-player-roster"],
           },
           {
             id: "home-front-clowns-ate",

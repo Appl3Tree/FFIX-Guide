@@ -1535,22 +1535,36 @@ if (!objectiveIds.has(tonberryCardObjectiveId) || tonberryCardSteps.length === 0
   errors.push("The Tonberry Card objective needs both its Treno reward step and a later Black Mage Village recovery step.");
 }
 const alexandriaCardPlayersObjectiveId = "disc-3.the-home-front.card-players";
+const alexandriaCardRosterObjectiveId = "disc-3.the-home-front.card-player-roster";
 const alexandriaCardPlayersWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.card-players");
 const alexandriaCardPlayersCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.alexandria-zidane.before-treno");
-const alexandriaCardPlayersStep = walkthroughChapters
+const alexandriaCardPlayersSteps = walkthroughChapters
   .filter((chapter) => chapter.areaId === "disc-3.the-home-front")
-  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
-  .find((step) => step.objectiveIds?.includes(alexandriaCardPlayersObjectiveId));
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+const alexandriaCardPlayersStep = alexandriaCardPlayersSteps.find((step) => step.objectiveIds?.includes(alexandriaCardPlayersObjectiveId));
+const alexandriaCardRosterStep = alexandriaCardPlayersSteps.find((step) => step.objectiveIds?.includes(alexandriaCardRosterObjectiveId));
+const alexandriaCardRosterObjective = objectives.find((objective) => objective.id === alexandriaCardRosterObjectiveId);
 if (
   !objectiveIds.has(alexandriaCardPlayersObjectiveId)
   || !alexandriaCardPlayersStep
   || !alexandriaCardPlayersWarning?.sourceIds.includes("gamefaqs-card-locations-24067")
   || !alexandriaCardPlayersWarning.sourceIds.includes("gamefaqs-tetra-master-71891")
+  || !alexandriaCardPlayersWarning.sourceIds.includes("elitegrindlab-home-front")
+  || !alexandriaCardPlayersWarning.sourceIds.includes("cour89-card-players")
   || alexandriaCardPlayersWarning.classification.includes("permanently-missable")
   || !alexandriaCardPlayersCutoff?.missableIds.includes(alexandriaCardPlayersWarning.id)
   || !["Michelle", "Old Lady", "Benero", "Zenero"].every((name) => alexandriaCardPlayersStep.text.includes(name))
+  || !alexandriaCardPlayersCutoff.sourceIds.includes("cour89-card-players")
+  || !objectiveIds.has(alexandriaCardRosterObjectiveId)
+  || !alexandriaCardRosterObjective?.sourceIds.includes("cour89-card-players")
+  || !alexandriaCardRosterStep
+  || ![
+    "Fishman", "Nikolai", "Man", "Hippaul", "Hippolady", "Guide", "Old Man", "Ryan", "Mick",
+    "Signwriter Dante", "Maggie", "Doug", "Nobleman", "Noblewoman", "Tom's Mother", "Flower Girl",
+    "shopkeeper", "Genero", "Synthesis Shop", "Onion Master", "Tom", "Boatman", "Retired Boatman", "Iila",
+  ].every((name) => alexandriaCardRosterStep.detail?.includes(name))
 ) {
-  errors.push("The Disc III Alexandria card-player checklist must name all four opponents, use the card-location/Tetra Master sources, and remain separate from permanent card-type loss.");
+  errors.push("The Disc III Alexandria card checklist must preserve the original four-opponent objective, add the separately tracked Cour89 roster entries, cite the modern-release roster source, and remain separate from permanent card-type loss.");
 }
 const oglopTradeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card";
 const oglopCardTypeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card-type";
