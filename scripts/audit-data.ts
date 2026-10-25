@@ -991,6 +991,24 @@ if (
   errors.push("The Knights of Pluto route must source Laudo's leave/reenter bookshelf interaction and identify Mullenkedheim's room-label variants.");
 }
 
+const leoStellazzio = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.home-front.leo-stellazzio");
+const leoStellazzioItem = gameItems.find((item) => item.id === "game-item.leo-stellazzio");
+const alexandriaPickupObjective = objectivesById.get("disc-3.the-home-front.alexandria-pickups");
+if (
+  !leoStellazzio
+  || !leoStellazzioItem?.sourceIds.includes("ffuniverse-ff9-guide")
+  || leoStellazzio.itemId !== "game-item.leo-stellazzio"
+  || leoStellazzio.chapterId !== "disc-3.the-home-front"
+  || !leoStellazzio.conditions?.includes("does not open until Disc III")
+  || !leoStellazzio.conditions.includes("upper-right corner")
+  || !leoStellazzio.conditions.includes("Neptune statue")
+  || !leoStellazzio.sourceIds.includes("ffuniverse-ff9-guide")
+  || !leoStellazzio.walkthroughObjectiveIds.includes("disc-3.the-home-front.alexandria-pickups")
+  || !alexandriaPickupObjective?.sourceIds.includes("ffuniverse-ff9-guide")
+) {
+  errors.push("Leo Stellazzio must retain FFUniverse's Disc III door opening and Neptune-statue room as a specific Alexandria pickup route.");
+}
+
 const burmeciaTreasureWarning = missables.find((missable) => missable.id === "missable.disc-1.burmecia.treasures");
 const burmeciaTreasureCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.burmecia.first-visit-departure");
 if (!burmeciaTreasureWarning?.sourceIds.includes("ffwiki-unrevisitable-locations") || !burmeciaTreasureCutoff?.sourceIds.includes("ffwiki-unrevisitable-locations")) {

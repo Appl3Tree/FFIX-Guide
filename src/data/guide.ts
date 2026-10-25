@@ -1615,7 +1615,7 @@ export const sources = [
     publisher: "FFUniverse",
     url: "https://guide.ffuniverse.nu/images/ff9/ffuniverse-nu-ff9-guiden.pdf",
     accessed: "2026-10-25",
-    notes: "Independent synthesis-table cross-check listing Rune Tooth at 2,000 Gil from two Mythril Daggers, Brave Suit at 26,000 Gil from Mythril Vest + Mythril Rod, and Gauntlets at 8,000 Gil from Mythril Gloves + Dragon Wrist. Supports the selected Rune Tooth and Brave Suit prices against lower GameFAQs Shops entries.",
+    notes: "Independent synthesis-table cross-check listing Rune Tooth at 2,000 Gil from two Mythril Daggers, Brave Suit at 26,000 Gil from Mythril Vest + Mythril Rod, and Gauntlets at 8,000 Gil from Mythril Gloves + Dragon Wrist. Supports the selected Rune Tooth and Brave Suit prices against lower GameFAQs Shops entries. Its Disc III Stellazzio list places Leo in Alexandria Castle's harbor-side Neptune statue room: enter from the left and search the upper-right corner; the left-hand door does not open until Disc III. This supports that specific room and pickup, not general access to every previously visited castle room.",
   },
   {
     id: "cavesofnarshe-ff9-claws",
@@ -4521,7 +4521,7 @@ export const objectives: GameObjective[] = [
     id: "disc-3.the-home-front.alexandria-pickups",
     title: "Sweep the Disc III Alexandria docks, theater, and castle grounds",
     category: "exploration",
-    sourceIds: ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"],
+    sourceIds: ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front", "ffuniverse-ff9-guide"],
     chapterIds: ["disc-3.the-home-front"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
