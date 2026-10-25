@@ -2311,15 +2311,15 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/portal-to-another-world",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including the fixed Amdusias, Abadon, and Shell Dragon roster changes, the regroup and party selection at Moorock, seven Terra chests, five Pandemonium pickups, timed puzzle, elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It places Demon's Vest in the Terra chest sweep and identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations. After Kuja, the route returns through Bran Bal on a linear evacuation path, but the guide does not document reopening Moorock's shop during that passage.",
+    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including Bran Bal's temporary Dagger/Steiner restriction, Eiko control handoff and party reformation, the fixed Amdusias, Abadon, and Shell Dragon roster changes, and the regroup and party selection at Moorock. It also covers seven Terra chests, five Pandemonium pickups, the timed puzzle, Elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It places Demon's Vest in the Terra chest sweep and identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. The guide identifies Moorock's Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations. After Kuja, the route returns through Bran Bal on a linear evacuation path, but the guide does not document reopening Moorock's shop during that passage.",
   },
   {
     id: "jegged-bran-bal",
     title: "Bran Bal — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/39-Bran-Bal.html",
-    accessed: "2026-10-23",
-    notes: "Independent route for the temporary party restriction, hidden Flash Hat, Inn and laboratory Elixirs, Wing Edge, Moorock's Mogshop and letter, Stiltzkin's seventh 2,222-Gil bundle, Angel Earrings, four ATEs, party regroup, and Pandemonium gate.",
+    accessed: "2026-10-25",
+    notes: "Independent route for Dagger and Steiner's temporary restriction, Dagger's Inn scene, the Eiko control handoff, four ATEs, party reformation and return to Zidane at Pandemonium's gate. It also covers the hidden Flash Hat, Inn and laboratory Elixirs, Wing Edge, Moorock's Mogshop and letter, Stiltzkin's seventh 2,222-Gil bundle, and Angel Earrings.",
   },
   {
     id: "jegged-pandemonium",

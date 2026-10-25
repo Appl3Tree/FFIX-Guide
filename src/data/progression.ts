@@ -364,6 +364,34 @@ export const storyPartySequences: StoryPartySequence[] = [
     ],
   },
   {
+    id: "party-sequence.bran-bal-eiko-handoff",
+    title: "Bran Bal party restriction and Eiko handoff",
+    phases: [
+      {
+        party: "Zidane's group; Dagger and Steiner unavailable",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Bran Bal arrival and Inn",
+        summary: "Complete the initial Zidane-led town and Inn scenes. Dagger rests at the Inn and Steiner remains unavailable; replace them if either was selected in the active party.",
+      },
+      {
+        party: "Eiko; reunite with the party",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Bran Bal town and Meeting Hall",
+        summary: "After the laboratory scenes, control switches to Eiko. View the four ATEs in their route order, find Quina, Vivi, and Amarant, and speak with the returning party members to rebuild the four-character party.",
+      },
+      {
+        party: "Re-formed party; control returns to Zidane",
+        chapterIds: ["disc-3.portal-to-another-world"],
+        location: "Bran Bal green gate to Pandemonium",
+        summary: "Choose the active team and finish the village checks, then follow Mikoto through the green gate and bridge. The perspective returns to Zidane at the Pandemonium gate, ending Bran Bal's free exploration route.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-portal-to-another-world-71891",
+      "jegged-bran-bal",
+    ],
+  },
+  {
     id: "party-sequence.pandemonium-fixed-fights",
     title: "Pandemonium's three fixed party-split fights",
     phases: [

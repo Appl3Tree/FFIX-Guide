@@ -344,6 +344,27 @@ if (!fourShrinesPartySequence) {
     if (!fourShrinesPartySequence.sourceIds.includes(sourceId)) errors.push(`The Four Shrines sequence is missing corroborating source ${sourceId}.`);
   }
 }
+const branBalPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.bran-bal-eiko-handoff");
+if (!branBalPartySequence) {
+  errors.push("The Bran Bal party restriction and Eiko handoff sequence is missing.");
+} else {
+  if (branBalPartySequence.phases.length !== 3) errors.push("The Bran Bal sequence must retain the restriction, Eiko control, and party rejoin phases.");
+  if (branBalPartySequence.phases[0]?.party !== "Zidane's group; Dagger and Steiner unavailable") {
+    errors.push("The Bran Bal sequence must show Dagger and Steiner unavailable during the initial Zidane-led route.");
+  }
+  if (branBalPartySequence.phases[1]?.party !== "Eiko; reunite with the party") {
+    errors.push("The Bran Bal sequence must show Eiko's control handoff and party reformation.");
+  }
+  if (branBalPartySequence.phases[2]?.party !== "Re-formed party; control returns to Zidane" || !branBalPartySequence.phases[2]?.location.includes("Pandemonium")) {
+    errors.push("The Bran Bal sequence must end with the party re-formed at the Pandemonium gate.");
+  }
+  if (!branBalPartySequence.phases[1]?.summary.includes("four ATEs") || !branBalPartySequence.phases[1]?.summary.includes("rebuild")) {
+    errors.push("The Bran Bal Eiko phase must retain its ATE route and party reformation instructions.");
+  }
+  for (const sourceId of ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal"]) {
+    if (!branBalPartySequence.sourceIds.includes(sourceId)) errors.push(`The Bran Bal sequence is missing corroborating source ${sourceId}.`);
+  }
+}
 for (const edge of gameRouteEdges) {
   if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
     errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);
