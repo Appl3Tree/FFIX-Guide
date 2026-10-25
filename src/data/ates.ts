@@ -82,7 +82,7 @@ const events: ActiveTimeEvent[] = [
 
   scene("alexandria-friendship", "Friendship", "disc-2.return-to-alexandria", "disc-2.return-to-alexandria.friendship-ate", "Alexandria Castle — chapel", "View during the rescue sequence before the countdown ends."),
 
-  scene("lindblum-third-jewel", "The Third Jewel", "disc-2.return-to-lindblum", "disc-2.return-to-lindblum.ates", "Lindblum — Business District", "Explore the city after meeting Cid."),
+  scene("lindblum-third-jewel", "The Third Jewel", "disc-2.return-to-lindblum", "disc-2.return-to-lindblum.ates", "Lindblum — Business District", "Explore the city after meeting Cid.", { note: "This counted ATE is not in the mutually exclusive Treno branch pair. Since Movie Critic's 79-view target equals the single-save maximum after choosing one Treno scene, The Third Jewel must be viewed for that target." }),
   scene("lindblum-brahnes-fleet", "Brahne's Fleet Arrives", "disc-2.return-to-lindblum", "disc-2.return-to-lindblum.ates", "Lindblum — Business District square", "Talk to the waiting man in the square."),
   scene("lindblum-how-infuriating", "(Gwok-gwok!) How Infuriating!", "disc-2.return-to-lindblum", "disc-2.return-to-lindblum.ates", "Lindblum — Base Level / Serpent's Gate", "Check the soldiers at Serpent's Gate."),
 

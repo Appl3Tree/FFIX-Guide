@@ -764,6 +764,14 @@ const hippaulWarning = missables.find((missable) => missable.id === "missable.di
 if (!hippaulWarning?.sourceIds.includes("gamefaqs-tetra-master-71891") || !hippaulWarning.note?.includes("only Namingway is missable")) {
   errors.push("Hippaul's warning must distinguish the unique Athlete Queen cutoff from recoverable Tetra Master cards.");
 }
+const thirdJewelEvent = movieCriticEligibleEvents.find((event) => event.id === "ate-lindblum-third-jewel");
+const thirdJewelWarning = missables.find((missable) => missable.id === "missable.disc-2.return-to-lindblum.the-third-jewel");
+if (!thirdJewelEvent || thirdJewelEvent.exclusiveGroupId || thirdJewelEvent.chapterId !== "disc-2.return-to-lindblum") {
+  errors.push("The Third Jewel must remain a counted, non-exclusive Movie Critic event in Return to Lindblum.");
+}
+if (!thirdJewelWarning || !thirdJewelWarning.classification.includes("permanently-missable") || !thirdJewelWarning.sourceIds.includes("gamerguides-movie-critic-guide") || !thirdJewelWarning.note?.includes("count-based conclusion")) {
+  errors.push("The Third Jewel warning must explain its 79-view Movie Critic cutoff with its source and event-count inference.");
+}
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
   "missable.disc-1.journey-to-burmecia.grimo-letter",
