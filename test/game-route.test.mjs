@@ -80,6 +80,28 @@ test("Cleyra's story departure records its closure and disputed local cutoff", (
   assert.match(treasureWindow.deadline, /exact final cutoff is described differently across guides/);
 });
 
+test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
+  const atlaVisit = gameRouteEdges.find((edge) => edge.id === "detour.alexandria-to-burmecia-mognet");
+  assert.ok(atlaVisit);
+  assert.equal(atlaVisit.relationship, "optional-return");
+  assert.equal(atlaVisit.fromChapterId, "disc-1.alexandria");
+  assert.equal(atlaVisit.toChapterId, "disc-1.burmecia");
+  assert.match(atlaVisit.summary, /deliver it to Atla in the Vault/);
+  assert.match(atlaVisit.summary, /does not establish access to the Suburb or Uptown pickup rooms/);
+
+  for (const sourceId of ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia"]) {
+    assert.ok(atlaVisit.sourceIds.includes(sourceId), `Burmecia return is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
+  }
+
+  const rejoin = gameRouteEdges.find((edge) => edge.id === "detour.return-to-gaia-burmecia-rejoin");
+  assert.ok(rejoin);
+  assert.equal(rejoin.fromChapterId, "disc-1.burmecia");
+  assert.equal(rejoin.toChapterId, "disc-4.return-to-gaia");
+  assert.equal(rejoin.relationship, "rejoin");
+  assert.match(rejoin.summary, /Atla hands over Mogryo's letter/);
+});
+
 test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () => {
   const returnToCavern = gameRouteEdges.find((edge) => edge.id === "return.dali-to-ice-cavern");
   assert.ok(returnToCavern, "Dali's optional Ice Cavern return is represented");

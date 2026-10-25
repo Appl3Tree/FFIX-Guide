@@ -504,7 +504,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-1.burmecia",
     relationship: "optional-return",
     summary: "After collecting Kupo's letter, travel to Burmecia and deliver it to Atla in the Vault. This confirms the Vault visit only; it does not establish access to the Suburb or Uptown pickup rooms.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia"],
   },
   {
     id: "detour.return-to-gaia-burmecia-rejoin",
