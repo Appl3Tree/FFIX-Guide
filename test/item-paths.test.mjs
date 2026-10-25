@@ -403,8 +403,8 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 362);
-  assert.equal(synthesisRecipes.length, 12);
+  assert.equal(itemAcquisitionPaths.length, 388);
+  assert.equal(synthesisRecipes.length, 14);
 });
 
 test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe paths", () => {
@@ -694,6 +694,63 @@ test("Wing Edge has sourced item, minigame, treasure, boss, and steal routes", (
   }
 });
 
+test("Germinas Boots recovery routes and both synthesis ingredients are source-linked", () => {
+  const germinas = gameItems.find((item) => item.id === "game-item.germinas-boots");
+  const desertBoots = gameItems.find((item) => item.id === "game-item.desert-boots");
+  const fork = gameItems.find((item) => item.id === "game-item.fork");
+  const germinasPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.germinas-boots");
+  const desertBootsPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.desert-boots");
+  const germinasRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.germinas-boots");
+  const desertBootsRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.desert-boots");
+  const missable = missables.find((entry) => entry.id === "missable.disc-1.burmecia.germinas-boots");
+  const expectedSynthesisShops = [
+    "item-path.disc-2.treno.germinas-boots-synthesis",
+    "item-path.disc-2.return-to-lindblum.germinas-boots-synthesis",
+    "item-path.disc-2.outer-continent.germinas-boots-synthesis",
+    "item-path.disc-3.the-home-front.germinas-boots-synthesis",
+    "item-path.disc-3.card-tournament.germinas-boots-treno-synthesis",
+    "item-path.disc-3.on-the-high-seas.germinas-boots-lindblum-synthesis",
+    "item-path.disc-4.return-to-gaia.germinas-boots-synthesis",
+  ];
+
+  assert.ok(germinas);
+  assert.ok(desertBoots);
+  assert.ok(fork);
+  assert.equal(germinasPaths.length, 10);
+  assert.equal(desertBootsPaths.length, 9);
+  assert.ok(germinasPaths.some((path) => path.id === "item-path.disc-2.madain-sari.amarant-starting-germinas-boots"));
+  assert.ok(germinasPaths.some((path) => path.id === "item-path.lindblum.streamside-germinas-boots" && path.quantity === 2));
+  assert.ok(expectedSynthesisShops.every((id) => germinasPaths.some((path) => path.id === id)));
+  assert.deepEqual(germinasRecipe?.ingredients, [
+    { itemId: "game-item.desert-boots", quantity: 1 },
+    { itemId: "game-item.fork", quantity: 1 },
+  ]);
+  assert.equal(germinasRecipe?.cost.amount, 900);
+  assert.deepEqual(desertBootsRecipe?.ingredients, [
+    { itemId: "game-item.leather-hat", quantity: 1 },
+    { itemId: "game-item.leather-shirt", quantity: 1 },
+  ]);
+  assert.equal(desertBootsRecipe?.cost.amount, 300);
+  assert.equal(itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.ipsens-castle.fork-chest")?.method, "chest");
+  assert.ok(missable?.classification.includes("recoverable-later"));
+  assert.doesNotMatch(missable?.classification.join(" ") ?? "", /permanently-missable/);
+  assert.match(missable?.recovery ?? "", /Chocograph #1/);
+  assert.match(missable?.recovery ?? "", /Amarant/);
+  assert.ok(["Flee-Gil", "Protect", "Scan"].every((abilityName) => equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.desert-boots" && claim.abilityName === abilityName)));
+  assert.ok(["Alert", "Flee", "HP+10%"].every((abilityName) => equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.germinas-boots" && claim.abilityName === abilityName)));
+
+  for (const path of [...germinasPaths, ...desertBootsPaths, ...itemAcquisitionPaths.filter((entry) => entry.itemId === "game-item.fork" || entry.itemId === "game-item.leather-hat" || entry.itemId === "game-item.leather-shirt")]) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+  for (const recipe of [germinasRecipe, desertBootsRecipe]) {
+    for (const sourceId of recipe?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${recipe?.id} references unknown source ${sourceId}`);
+    }
+  }
+});
+
 test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier routes and recovery notes", () => {
   const expectedPathIds = [
     "item-path.disc-2.journey-to-cleyra.gargan-roo-chain-plate",
@@ -726,7 +783,7 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   const cleyraTreasureMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
   const pinnacleMissable = missables.find((entry) => entry.id === "missable.disc-2.pinnacle-rocks.treasure-sweep");
 
-  assert.equal(itemAcquisitionPaths.length, 362);
+  assert.equal(itemAcquisitionPaths.length, 388);
   assert.ok(newPaths.every(Boolean), "all 20 earlier/recovery paths should exist");
   assert.deepEqual(
     pricedPaths.map((path) => [path?.itemId, path?.cost?.amount]).sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),
@@ -827,7 +884,7 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
   const cleyraShopStep = cleyraChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "cleyra-shop-stock");
   const chainMailStep = lindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-perfect-chain-mail-stock");
 
-  assert.equal(itemAcquisitionPaths.length, 362);
+  assert.equal(itemAcquisitionPaths.length, 388);
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.return-to-lindblum"));
   assert.deepEqual(equipment.map(([itemId]) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), equipment.map(([, count]) => count));
   assert.deepEqual(routeIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id)?.id), routeIds);
@@ -896,10 +953,10 @@ test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ing
 
   assert.deepEqual(gameItems.filter((item) => itemIds.includes(item.id)).map((item) => item.id).sort(), [...itemIds].sort());
   assert.deepEqual(itemIds.map((itemId) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), pathCounts);
-  assert.equal(gameItems.length, 112);
-  assert.equal(itemAcquisitionPaths.length, 362);
-  assert.equal(synthesisRecipes.length, 12);
-  assert.equal(equipmentAbilityClaims.length, 58);
+  assert.equal(gameItems.length, 115);
+  assert.equal(itemAcquisitionPaths.length, 388);
+  assert.equal(synthesisRecipes.length, 14);
+  assert.equal(equipmentAbilityClaims.length, 64);
 
   assert.deepEqual(powerBelt?.ingredients, [
     { itemId: "game-item.glass-buckle", quantity: 1 },

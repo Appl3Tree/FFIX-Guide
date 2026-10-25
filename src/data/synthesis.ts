@@ -20,6 +20,34 @@ export type SynthesisRecipe = {
 // This is an initial, source-cross-checked recipe slice, not a complete list.
 export const synthesisRecipes: SynthesisRecipe[] = [
   {
+    id: "synthesis-recipe.desert-boots",
+    resultItemId: "game-item.desert-boots",
+    ingredients: [
+      { itemId: "game-item.leather-hat", quantity: 1 },
+      { itemId: "game-item.leather-shirt", quantity: 1 },
+    ],
+    chapterId: "disc-1.lindblum",
+    shopId: "lindblum.synthesis-shop.disc-1",
+    shopName: "Torres' Synthesis Shop (Lindblum, Disc I)",
+    cost: { currency: "gil", amount: 300 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "rpgclassics-synthesis", "cavesofnarshe-ff9-disc-2-map"],
+    notes: "Leather Hat + Leather Shirt synthesizes Desert Boots for 300 Gil. Sources list the recipe at Lindblum, Treno, Black Mage Village, and Alexandria; the item paths capture the Disc I–IV shop windows and the separate Cleyra Trunk chest.",
+  },
+  {
+    id: "synthesis-recipe.germinas-boots",
+    resultItemId: "game-item.germinas-boots",
+    ingredients: [
+      { itemId: "game-item.desert-boots", quantity: 1 },
+      { itemId: "game-item.fork", quantity: 1 },
+    ],
+    chapterId: "disc-2.treno",
+    shopId: "treno.synthesis-shop.disc-2",
+    shopName: "Treno Synthesis Shop (Disc II)",
+    cost: { currency: "gil", amount: 900 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-locations-54996", "rpgclassics-synthesis", "cavesofnarshe-ff9-disc-2-map"],
+    notes: "Desert Boots + Fork synthesizes Germinas Boots for 900 Gil. The recipe has seven modeled synthesis-shop windows from Treno and Lindblum through Black Mage Village and Alexandria. Desert Boots can be picked up in Cleyra Trunk or synthesized from Leather Hat + Leather Shirt; Fork has Quina's equipped copy, shops, and an Ipsen's Castle chest.",
+  },
+  {
     id: "synthesis-recipe.phoenix-pinion",
     resultItemId: "game-item.phoenix-pinion",
     ingredients: [
