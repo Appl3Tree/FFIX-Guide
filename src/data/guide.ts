@@ -1438,8 +1438,8 @@ export const sources = [
     title: "Final Fantasy IX Disc II Map and Shops",
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/map.php?disc=2",
-    accessed: "2026-10-24",
-    notes: "Independent Disc II route and shop cross-check. It lists the Magician Shoes recipe for 1,500 Gil from Germinas Boots + Bone Wrist in Black Mage Village, Glass Buckle from Glass Armlet + Leather Wrist for 500 Gil, and Power Belt from Glass Buckle + Chain Mail for 2,000 Gil; it also lists Bone Wrist and Glass Armlet prices in Disc II shop stock. It does not establish the disputed early Lindblum Magician Shoes synthesis window. Its Disc II shop map lists Germinas Boots from Desert Boots + Fork for 900 Gil.",
+    accessed: "2026-10-25",
+    notes: "Independent Disc II route and shop cross-check. Its Burmecia list gives Atla's 16-product Disc II stock, including Phoenix Down (150 Gil), Glass Armlet (250), Steepled Hat (260), and Magus Hat (400); Flactem independently routes the party back to that Mogshop before Cleyra. It also lists the Magician Shoes recipe for 1,500 Gil from Germinas Boots + Bone Wrist in Black Mage Village, Glass Buckle from Glass Armlet + Leather Wrist for 500 Gil, and Power Belt from Glass Buckle + Chain Mail for 2,000 Gil; it does not establish the disputed early Lindblum Magician Shoes synthesis window. Its Disc II shop map lists Germinas Boots from Desert Boots + Fork for 900 Gil.",
   },
   {
     id: "cavesofnarshe-cleyra-walkthrough",
