@@ -650,8 +650,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.trouble-on-the-home-front",
     toChapterId: "disc-3.the-aftermath",
     relationship: "required-story",
-    summary: "After the Alexandria defense and castle sequence, control returns to Lindblum for the aftermath and Cid's potion task.",
-    sourceIds: ["gamefaqs-trouble-on-home-front-71891", "gamefaqs-the-aftermath-71891", "jegged-trouble-on-home-front", "jegged-the-aftermath"],
+    summary: "After the Alexandria defense, control returns to Zidane in the castle. Save with Mosh in the Knights of Pluto dressing room and, if the 50-jump letter is still unread, try a best-effort Mognet check; Disc III sources establish Mosh's visit but do not confirm this letter remains available. Then follow Dagger to the altar; the story returns to Lindblum for the aftermath and Cid's potion task.",
+    sourceIds: ["gamefaqs-trouble-on-home-front-71891", "gamefaqs-the-aftermath-71891", "jegged-trouble-on-home-front", "jegged-the-aftermath", "flactem-disc-3-treno"],
   },
   {
     id: "story.aftermath-to-on-the-high-seas",
@@ -1518,6 +1518,15 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     trigger: "If the Disc I letter was unlocked at 50 jumps but not read as Steiner, use Mognet with Mosh after defeating Zorn and Thorn on the Disc II Alexandria return; Jegged lists 'Jump-rope Champion Appears!' among his new letters. If it is skipped at that first check, Mosh is documented as reachable again after the party split for a separate Monty letter, but sources do not establish whether the Jump Rope letter remains available then. Treat leaving Alexandria for Pinnacle Rocks as the conservative last check; later availability is unverified.",
     missableIds: ["missable.disc-1.alexandria.jump-rope-mognet-letter"],
     sourceIds: ["gamefaqs-jump-rope-71891", "gamefaqs-perfect-game-41181", "jegged-return-to-alexandria-castle"],
+  },
+  {
+    id: "cutoff.disc-3.alexandria.jump-rope-letter-best-effort",
+    edgeId: "story.trouble-on-home-front-to-aftermath",
+    title: "Disc III Alexandria Mosh letter check (availability unverified)",
+    certainty: "conservative",
+    trigger: "If Kupo's 50-jump letter remains unread after the Disc II check, visit Mosh in the Knights of Pluto dressing room during the Disc III Alexandria return and try Mognet before following Dagger to the altar and leaving for Lindblum. Flactem confirms Mosh is available there but does not list the Jump Rope letter; Cour89 lists it as Disc I optional mail and does not discuss rereads. Treat this only as a best-effort check, not a confirmed recovery window.",
+    missableIds: ["missable.disc-1.alexandria.jump-rope-mognet-letter"],
+    sourceIds: ["flactem-disc-3-treno", "cour89-mognet-letters", "elitegrindlab-prima-vista", "gamefaqs-perfect-game-41181"],
   },
   {
     id: "cutoff.ice-cavern.boss-steals",

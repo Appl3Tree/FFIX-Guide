@@ -3818,13 +3818,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "trouble-library-tantarian",
         title: "Alexandria Castle — save with Mosh and decide on Tantarian",
         summary: "This is the final opportunity to fight Tantarian. It is optional for story progress, but the boss's Running Shoes and Ramuh Card rewards are valuable.",
-        sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "elitegrindlab-alexandria-bahamut", "gamefaqs-return-to-alexandria-71891"],
+        sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "elitegrindlab-alexandria-bahamut", "gamefaqs-return-to-alexandria-71891", "flactem-disc-3-treno"],
         steps: [
           {
             id: "trouble-save-before-library",
             kind: "save",
-            text: "In the main hall, check the recovered party's equipment and abilities. Go upstairs to the second floor and enter the right-side Guardhouse to save with the moogle called Mosh in GameFAQs and Jegged; some sources call this same save-point moogle Mogki.",
-            detail: "The guest-room save point is the chapter's only documented save opportunity before Tantarian. The moogle-name disagreement does not change the location.",
+            text: "In the main hall, check the recovered party's equipment and abilities. Go upstairs to the second floor and enter the right-side Guardhouse to save with Mosh; if Kupo's 50-jump letter is still unread, try Mognet here as a best-effort Disc III check.",
+            detail: "Flactem locates Mosh in the Knights of Pluto dressing room during this return, and the guest-room save point is the chapter's only documented save opportunity before Tantarian. Some sources call this same save-point moogle Mogki. No reviewed source confirms the Jump Rope letter remains available after the Disc II check, so treat this as a best-effort check, not a promised recovery.",
+            objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {
             id: "trouble-tantarian-final-chance",

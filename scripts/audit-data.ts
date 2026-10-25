@@ -761,9 +761,11 @@ const jumpRopeLetterSteps = walkthroughChapters.flatMap((chapter) =>
 if (
   jumpRopeLetterObjective?.category !== "side-content" ||
   !jumpRopeLetterObjective.chapterIds?.includes("disc-1.alexandria") ||
-  !jumpRopeLetterObjective.chapterIds?.includes("disc-2.return-to-alexandria")
+  !jumpRopeLetterObjective.chapterIds?.includes("disc-2.return-to-alexandria") ||
+  !jumpRopeLetterObjective.chapterIds?.includes("disc-3.trouble-on-the-home-front") ||
+  !jumpRopeLetterWarning?.warningChapterIds.includes("disc-3.trouble-on-the-home-front")
 ) {
-  errors.push("The Jump Rope Mognet letter must link its Disc I first chance and Disc II recovery chapter.");
+  errors.push("The Jump Rope Mognet letter must link its Disc I chance, Disc II recovery, and Disc III best-effort check.");
 }
 if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
   errors.push("The Jump Rope Mognet letter objective must cite the 50-jump Disc I source.");
@@ -788,32 +790,42 @@ if (
 ) {
   errors.push("The Jump Rope Mognet letter warning must be conditional and record its documented Disc II recovery.");
 }
-if (!jumpRopeLetterWarning?.consequence.includes("Whether the letter remains available after that Disc II check")) {
-  errors.push("The Jump Rope Mognet letter warning must preserve the unresolved post-Disc II recovery question.");
+if (!jumpRopeLetterObjective?.sourceIds.includes("flactem-disc-3-treno") || !jumpRopeLetterWarning?.sourceIds.includes("flactem-disc-3-treno") || !jumpRopeLetterWarning.consequence.includes("best-effort place to check") || !jumpRopeLetterWarning.nextAvailability?.includes("does not confirm the Jump Rope letter is still available")) {
+  errors.push("The Jump Rope warning must use Flactem only as evidence for the Disc III Mosh visit, not letter availability.");
 }
 const discOneJumpRopeStep = jumpRopeLetterSteps.find(({ chapterId }) => chapterId === "disc-1.alexandria")?.step;
 const discTwoJumpRopeStep = jumpRopeLetterSteps.find(({ chapterId }) => chapterId === "disc-2.return-to-alexandria")?.step;
+const discThreeJumpRopeStep = jumpRopeLetterSteps.find(({ chapterId }) => chapterId === "disc-3.trouble-on-the-home-front")?.step;
 if (
-  jumpRopeLetterSteps.length !== 2 ||
+  jumpRopeLetterSteps.length !== 3 ||
   discOneJumpRopeStep?.id !== "guardhouse-pickup-mognet" ||
-  discTwoJumpRopeStep?.id !== "return-alexandria-mosh-save"
+  discTwoJumpRopeStep?.id !== "return-alexandria-mosh-save" ||
+  discThreeJumpRopeStep?.id !== "trouble-save-before-library"
 ) {
-  errors.push("The Jump Rope Mognet letter objective must point to the Disc I guardhouse step and Disc II Mosh recovery step.");
+  errors.push("The Jump Rope Mognet letter objective must point to the Disc I, Disc II, and Disc III Mosh checks.");
 }
 if (!discTwoJumpRopeStep?.detail?.includes("documented second opportunity") || !discTwoJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)) {
   errors.push("The Disc II Mosh step must explain and link the second Jump Rope letter opportunity.");
 }
+if (!discThreeJumpRopeStep?.detail?.includes("best-effort") || !discThreeJumpRopeStep.detail.includes("not a promised recovery") || !discThreeJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)) {
+  errors.push("The Disc III Mosh step must label the check as best effort and avoid claiming confirmed recovery.");
+}
 const jumpRopeLetterCutoffs = gameRouteCutoffs.filter((cutoff) => cutoff.missableIds.includes(jumpRopeLetterWarning?.id ?? ""));
 const discOneJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.alexandria.jump-rope-mognet-letter");
 const discTwoJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.return-to-alexandria.jump-rope-letter-recovery");
+const discThreeJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.disc-3.alexandria.jump-rope-letter-best-effort");
 if (
-  jumpRopeLetterCutoffs.length !== 2 ||
+  jumpRopeLetterCutoffs.length !== 3 ||
   discOneJumpRopeCutoff?.edgeId !== "story.alexandria-to-evil-forest" ||
   discTwoJumpRopeCutoff?.edgeId !== "story.return-to-alexandria-to-pinnacle-rocks" ||
   !discTwoJumpRopeCutoff?.sourceIds.includes("jegged-return-to-alexandria-castle") ||
-  !discTwoJumpRopeCutoff?.trigger.includes("Jump-rope Champion Appears!")
+  !discTwoJumpRopeCutoff?.trigger.includes("Jump-rope Champion Appears!") ||
+  discThreeJumpRopeCutoff?.edgeId !== "story.trouble-on-home-front-to-aftermath" ||
+  discThreeJumpRopeCutoff.certainty !== "conservative" ||
+  !discThreeJumpRopeCutoff.trigger.includes("best-effort check, not a confirmed recovery window") ||
+  !discThreeJumpRopeCutoff.sourceIds.includes("flactem-disc-3-treno")
 ) {
-  errors.push("The Jump Rope Mognet letter must have distinct sourced cutoff windows for Disc I and its Disc II recovery.");
+  errors.push("The Jump Rope Mognet letter must have distinct Disc I, Disc II, and conservative Disc III check windows with accurate source scope.");
 }
 const desertPalaceLockinWarning = missablesById.get("missable.disc-3.picking-up-the-trail.story-lock-in");
 const desertPalaceLockinCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.desert-palace.route-lock-in");
