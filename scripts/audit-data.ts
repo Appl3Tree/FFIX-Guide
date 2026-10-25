@@ -616,6 +616,36 @@ for (const expected of expectedFossilRooTreasurePaths) {
     errors.push(`Fossil Roo's treasure-sweep objective must link ${expected.itemId} to ${expected.id}.`);
   }
 }
+const expectedFossilRooShopPathIds = [
+  "item-path.disc-2.journey-to-outer-continent.zorn-thorn.partisan-fossil-roo-shop",
+  "item-path.disc-2.journey-to-outer-continent.zorn-thorn.stardust-rod-fossil-roo-shop",
+  "item-path.disc-2.journey-to-outer-continent.zorn-thorn.mythril-armor-fossil-roo-shop",
+  "item-path.disc-2.journey-to-outer-continent.zorn-thorn.mythril-armlet-fossil-roo-shop",
+  "item-path.disc-2.journey-to-outer-continent.fossil-roo-ice-brand-shop",
+  "item-path.disc-2.journey-to-outer-continent.fossil-roo-chain-plate-shop",
+  "item-path.disc-2.journey-to-outer-continent.fossil-roo-mythril-vest-shop",
+  "item-path.disc-2.journey-to-outer-continent.fossil-roo-bandana-shop",
+  "item-path.disc-2.journey-to-outer-continent.adaman-vest-fossil-roo-shop",
+];
+for (const pathId of expectedFossilRooShopPathIds) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  if (
+    !path ||
+    path.chapterId !== "disc-2.journey-to-outer-continent" ||
+    path.shopId !== "fossil-roo.treasure-hunter-shop" ||
+    path.availability !== "window-unverified" ||
+    !path.walkthroughObjectiveIds?.includes(fossilRooTreasureObjectiveId) ||
+    !path.sourceIds.includes("jegged-missables") ||
+    !path.sourceIds.includes("ffwiki-unrevisitable-locations") ||
+    !path.conditions.includes("Buy during the Fossil Roo visit to be safe")
+  ) {
+    errors.push(`Fossil Roo's disputed Treasure Hunter shop window must link ${pathId} to its safe pre-exit checklist action and access sources.`);
+  }
+}
+const fossilRooTreasureObjective = objectives.find((objective) => objective.id === fossilRooTreasureObjectiveId);
+if (!fossilRooTreasureObjective?.title.includes("Treasure Hunter's shop")) {
+  errors.push("Fossil Roo's treasure checklist must include the Treasure Hunter's shop access check.");
+}
 const expectedFossilRooRecoveryPaths = [
   { id: "item-path.disc-3.forgotten-continent.stiltzkin-elixir", itemId: "game-item.elixir" },
   { id: "item-path.disc-3.forgotten-continent.ark-elixir-steal", itemId: "game-item.elixir" },
@@ -658,9 +688,28 @@ if (
   !fossilRooTreasureWarning.consequence.includes("later replacements") ||
   !fossilRooTreasureWarning.recovery.includes("location-specific") ||
   !fossilRooTreasureWarning.sourceIds.includes("gamefaqs-items-71891") ||
-  !fossilRooTreasureWarning.sourceIds.includes("rpgclassics-synthesis")
+  !fossilRooTreasureWarning.sourceIds.includes("rpgclassics-synthesis") ||
+  !fossilRooTreasureWarning.sourceIds.includes("jegged-missables") ||
+  !fossilRooTreasureWarning.sourceIds.includes("ffwiki-unrevisitable-locations") ||
+  !fossilRooTreasureWarning.note.includes("the guide uses the pre-exit deadline as the safe route") ||
+  !fossilRooTreasureWarning.action.includes("Check the Treasure Hunter's shop")
 ) {
-  errors.push("Fossil Roo's warning must distinguish unrecoverable location copies from documented item-type recovery.");
+  errors.push("Fossil Roo's warning must preserve the re-entry conflict, safe shop cutoff, and distinction between location copies and recoverable item types.");
+}
+for (const warningId of [
+  "missable.disc-2.journey-to-outer-continent.kuppo-letter",
+  "missable.disc-2.journey-to-outer-continent.one-ring",
+  "missable.disc-2.journey-to-outer-continent.peek-a-boo",
+]) {
+  const warning = missables.find((record) => record.id === warningId);
+  if (
+    !warning?.sourceIds.includes("jegged-missables") ||
+    !warning.sourceIds.includes("ffwiki-unrevisitable-locations") ||
+    !warning.note?.includes("Jegged") ||
+    !warning.note.toLowerCase().includes("mining")
+  ) {
+    errors.push(`${warningId} must preserve the source-qualified Fossil Roo mining-room access caveat.`);
+  }
 }
 for (const cycle of findObjectiveDependencyCycles(objectiveDependencies)) {
   errors.push(`Objective dependency cycle: ${cycle.join(" -> ")}.`);
