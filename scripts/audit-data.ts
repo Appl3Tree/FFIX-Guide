@@ -687,6 +687,54 @@ const mythrilArmorSteal = itemAcquisitionPaths.find((path) => path.id === "item-
 if (!mythrilArmorSteal?.notes?.includes("GameFAQs Items index") || !mythrilArmorSteal.notes.includes("Thorn")) {
   errors.push("The Mythril Armor steal path must retain the Zorn/Thorn source conflict note.");
 }
+const ralvuimagoItemIds = ["game-item.phoenix-down", "game-item.adaman-vest", "game-item.oak-staff"];
+for (const itemId of ralvuimagoItemIds) {
+  if (!gameItemIds.has(itemId)) errors.push(`Ralvuimago recovery coverage needs catalog item ${itemId}.`);
+  if (!itemAcquisitionPaths.some((path) => path.itemId === itemId && path.chapterId === "disc-2.return-to-alexandria" && path.method === "steal")) {
+    errors.push(`Ralvuimago recovery coverage needs the one-time steal path for ${itemId}.`);
+  }
+}
+if (!itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.return-to-alexandria.ralvuimago-phoenix-down-steal")) {
+  errors.push("Ralvuimago recovery coverage needs the Phoenix Down steal path.");
+}
+if (!itemAcquisitionPaths.some((path) => path.itemId === "game-item.phoenix-down" && path.method === "shop" && path.chapterId === "disc-2.cleyra")) {
+  errors.push("Phoenix Down must retain a later Cleyra shop replacement after the Ralvuimago fight.");
+}
+const ralvuimagoShopCounts = new Map([
+  ["game-item.adaman-vest", { count: 5, price: 1600 }],
+  ["game-item.oak-staff", { count: 5, price: 2400 }],
+]);
+for (const [itemId, expected] of ralvuimagoShopCounts) {
+  const shopPaths = itemAcquisitionPaths.filter((path) => path.itemId === itemId && (path.method === "shop" || path.method === "mogshop"));
+  if (shopPaths.length !== expected.count || shopPaths.some((path) => path.cost?.currency !== "gil" || path.cost.amount !== expected.price)) {
+    errors.push(`Ralvuimago recovery for ${itemId} needs ${expected.count} shop paths priced at ${expected.price} Gil; found ${shopPaths.length}.`);
+  }
+}
+const requiredRalvuimagoRecoveryPaths = [
+  "item-path.disc-2.madain-sari.adaman-vest-amarant-starting-equipment",
+  "item-path.disc-2.iifa-tree.soulcage-oak-staff-steal",
+  "item-path.disc-3.on-the-high-seas.oak-staff-chocograph-11",
+];
+for (const pathId of requiredRalvuimagoRecoveryPaths) {
+  if (!itemAcquisitionPaths.some((path) => path.id === pathId)) errors.push(`Ralvuimago recovery coverage is missing later route ${pathId}.`);
+}
+for (const [itemId, targetQuantity] of [["game-item.adaman-vest", 7], ["game-item.oak-staff", 2]] as const) {
+  if (!sourceInventoryTargets.some((target) => target.itemId === itemId && target.targetQuantity === targetQuantity)) {
+    errors.push(`Ralvuimago recovery for ${itemId} needs its source-listed Need ${targetQuantity} inventory target.`);
+  }
+}
+const ralvuimagoAbilityClaims = [
+  ["game-item.adaman-vest", "Bird Killer"],
+  ["game-item.adaman-vest", "Stone Killer"],
+  ["game-item.oak-staff", "Stop"],
+  ["game-item.oak-staff", "Bio"],
+  ["game-item.oak-staff", "Drain"],
+];
+for (const [itemId, abilityName] of ralvuimagoAbilityClaims) {
+  if (!equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName)) {
+    errors.push(`Ralvuimago recovery for ${itemId} needs its ${abilityName} ability claim.`);
+  }
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
