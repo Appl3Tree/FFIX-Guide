@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The Disc III Alexandria item-catalog expansion is complete and introduces no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The Disc III Alexandria and Treno item-catalog expansions are complete and introduce no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 

@@ -2282,6 +2282,22 @@ export const sources = [
     notes: "Independent original PlayStation equipment reference listing Grand Armor as obtainable from Nova Dragon or synthesis, used as a second check on the acquisition routes. Its armor table lists Diamond Armor as obtainable from Daguerreo, matching GameFAQs' Disc III-only listing.",
   },
   {
+    id: "rpgclassics-shops",
+    title: "Final Fantasy IX Shop Reference",
+    publisher: "RPGClassics",
+    url: "https://shrines.rpgclassics.com/psx/ffix/shops.shtml",
+    accessed: "2026-10-24",
+    notes: "Independent PlayStation shop tables for city shops and Mogshops, including the 1,200-Gil Chimera Armlet price at Lindblum, Oeilvert, Desert Palace, and Daguerreo. Its Tiger Fangs price conflicts with GameFAQs' shop table, so that discrepancy remains recorded separately.",
+  },
+  {
+    id: "jegged-arm-gear",
+    title: "Arm Gear — Final Fantasy IX equipment list",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Equipment/Arm-Gear.html",
+    accessed: "2026-10-24",
+    notes: "Independent arm-gear reference for Chimera Armlet's Add Status and Mug abilities, Treno ATE and Lindblum treasure routes, and its Lindblum, Oeilvert, Desert Palace, and Disc III Daguerreo shop sources.",
+  },
+  {
     id: "rpgclassics-synthesis",
     title: "Final Fantasy IX Synthesis Shop Reference",
     publisher: "RPGClassics",

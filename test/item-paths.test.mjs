@@ -83,3 +83,42 @@ test("Alexandria's Disc III pickups and Stiltzkin bundle have item-level paths",
   assert.ok(objectives.some((objective) => objective.id === "disc-3.the-home-front.stiltzkin-5"));
   assert.ok(objectives.some((objective) => objective.id === "disc-3.the-home-front.alexandria-pickups"));
 });
+
+test("the Treno Chimera Armlet ATE path records its later item recovery sources", () => {
+  const armletPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.chimera-armlet");
+  const expectedPaths = [
+    "item-path.disc-3.card-tournament.chimera-armlet-city-people",
+    "item-path.disc-3.the-aftermath.chimera-armlet-serpents-gate",
+    "item-path.disc-3.on-the-high-seas.chimera-armlet-lindblum-shop",
+    "item-path.disc-3.forgotten-continent.chimera-armlet-oeilvert-mogshop",
+    "item-path.disc-3.desert-palace.chimera-armlet-mogshop",
+    "item-path.disc-3.aerial-exploration.chimera-armlet-daguerreo-shop",
+  ];
+  const trenoAtePath = armletPaths.find((path) => path.id === expectedPaths[0]);
+  const daguerreoPath = armletPaths.find((path) => path.id === expectedPaths[5]);
+
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.card-tournament"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.the-aftermath"));
+  assert.deepEqual(expectedPaths.map((id) => armletPaths.find((path) => path.id === id)?.id), expectedPaths);
+  assert.ok(gameItems.some((item) => item.id === "game-item.chimera-armlet"));
+  assert.equal(trenoAtePath?.availability, "limited-window");
+  assert.equal(trenoAtePath?.recommendedBeforeChapterId, "disc-3.card-tournament");
+  assert.ok(trenoAtePath?.walkthroughObjectiveIds?.includes("disc-3.card-tournament.chimera-armlet"));
+  assert.ok(trenoAtePath?.walkthroughObjectiveIds?.includes("disc-3.card-tournament.ates"));
+  assert.match(trenoAtePath?.notes ?? "", /does not make the item type permanently unobtainable/);
+  assert.equal(daguerreoPath?.availability, "limited-window");
+  assert.equal(daguerreoPath?.cost?.amount, 1200);
+  assert.ok(daguerreoPath?.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.daguerreo-stock"));
+
+  for (const path of armletPaths) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+
+  for (const abilityName of ["Add Status", "Mug"]) {
+    assert.ok(equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.chimera-armlet" && claim.abilityName === abilityName));
+  }
+  assert.ok(objectives.some((objective) => objective.id === "disc-3.card-tournament.chimera-armlet"));
+  assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-3.the-aftermath"));
+});

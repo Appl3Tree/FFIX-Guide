@@ -82,6 +82,8 @@ export const itemCatalogCoverage = {
     "disc-2.journey-to-outer-continent",
     "disc-2.outer-continent",
     "disc-3.the-home-front",
+    "disc-3.card-tournament",
+    "disc-3.the-aftermath",
     "disc-3.picking-up-the-trail",
     "disc-3.forgotten-continent",
     "disc-3.desert-palace",
@@ -94,7 +96,7 @@ export const itemCatalogCoverage = {
     "disc-4.second-battle-of-iifa-tree",
     "disc-4.memoria",
   ],
-  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and two structured synthesis recipes. Most recipes, shop cutoffs, recovery paths, and item-level completeness still need independent review.",
+  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Disc III Alexandria pickups and Stiltzkin #5, Treno's Chimera Armlet ATE and later recovery paths, Oeilvert and Mount Gulug routes, Mognet rewards, other Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and two structured synthesis recipes. Most recipes, shop cutoffs, recovery paths, and item-level completeness still need independent review.",
 };
 
 const burmeciaSources = [
@@ -110,6 +112,7 @@ const oeilvertSources = ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-7
 const mountGulugSources = ["gamefaqs-lost-continent-71891", "gamefaqs-items-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
 const cleyraSources = ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"];
 const alexandriaSources = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];
+const chimeraArmletSources = ["gamefaqs-items-71891", "gamefaqs-card-tournament-71891", "gamefaqs-shops-71891", "jegged-arm-gear", "rpgclassics-shops"];
 const grandArmorSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon", "rpgclassics-armor", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"];
 
 export const gameItems: GameItem[] = [
@@ -132,6 +135,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.phoenix-pinion", name: "Phoenix Pinion", category: "consumable", sourceIds: alexandriaSources, verification: "partial" },
   { id: "game-item.lapis-lazuli", name: "Lapis Lazuli", category: "equipment", sourceIds: alexandriaSources, verification: "partial" },
   { id: "game-item.leo-stellazzio", name: "Leo Stellazzio", category: "key-item", sourceIds: [...alexandriaSources, "jegged-stellazzio"], verification: "partial" },
+  { id: "game-item.chimera-armlet", name: "Chimera Armlet", category: "equipment", sourceIds: [...chimeraArmletSources, "gamefaqs-the-aftermath-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"], verification: "partial" },
   { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: burmeciaSources, verification: "partial" },
   { id: "game-item.mythril-spear", name: "Mythril Spear", category: "equipment", sourceIds: burmeciaSources, verification: "partial" },
   { id: "game-item.lightning-staff", name: "Lightning Staff", category: "equipment", sourceIds: [...burmeciaSources, "gamefaqs-journey-to-treno-71891", "jegged-summit-station"], verification: "partial" },
@@ -364,6 +368,84 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
 export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc3ShopPaths,
   ...disc4ShopPaths,
+  {
+    id: "item-path.disc-3.card-tournament.chimera-armlet-city-people",
+    itemId: "game-item.chimera-armlet",
+    chapterId: "disc-3.card-tournament",
+    method: "fixed-pickup",
+    quantity: 1,
+    availability: "limited-window",
+    recommendedBeforeChapterId: "disc-3.card-tournament",
+    conditions: "View Memories By The Water, then City People near the Card Stadium. The Four-Armed Man drops this pickup during the ATE; collect it from the ground before advancing the tournament story.",
+    notes: "The final tournament match closes the Treno ATE window. Missing this pickup does not make the item type permanently unobtainable: the Serpent's Gate chest and later shop routes are modeled separately.",
+    walkthroughObjectiveIds: ["disc-3.card-tournament.chimera-armlet", "disc-3.card-tournament.ates"],
+    sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "gamefaqs-items-71891"],
+  },
+  {
+    id: "item-path.disc-3.the-aftermath.chimera-armlet-serpents-gate",
+    itemId: "game-item.chimera-armlet",
+    chapterId: "disc-3.the-aftermath",
+    method: "chest",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "During the post-attack Lindblum visit, search near the low wall at the back of the Serpent's Gate platform before boarding the Blue Narciss.",
+    walkthroughObjectiveIds: ["disc-3.the-aftermath.pickups"],
+    sourceIds: ["gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath", "gamefaqs-items-71891", "jegged-arm-gear"],
+  },
+  {
+    id: "item-path.disc-3.on-the-high-seas.chimera-armlet-lindblum-shop",
+    itemId: "game-item.chimera-armlet",
+    chapterId: "disc-3.on-the-high-seas",
+    method: "shop",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "lindblum.weapon-shop",
+    shopName: "Lindblum Weapon Shop (Disc III)",
+    conditions: "Available when the party revisits Lindblum by Blue Narciss after the Alexandria attack; the inventory lists Chimera Armlet as the first shop source for this route.",
+    cost: { currency: "gil", amount: 1200 },
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "jegged-arm-gear", "rpgclassics-shops"],
+  },
+  {
+    id: "item-path.disc-3.forgotten-continent.chimera-armlet-oeilvert-mogshop",
+    itemId: "game-item.chimera-armlet",
+    chapterId: "disc-3.forgotten-continent",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "mimoza-oeilvert",
+    shopName: "Mimoza's Mogshop (Oeilvert)",
+    conditions: "Buy during the Oeilvert story visit; its removal after the Shimmering Island transition closes this particular shop source, while the Desert Palace, Daguerreo, and Lindblum routes remain.",
+    cost: { currency: "gil", amount: 1200 },
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-forgotten-continent-71891", "jegged-arm-gear", "rpgclassics-shops"],
+  },
+  {
+    id: "item-path.disc-3.desert-palace.chimera-armlet-mogshop",
+    itemId: "game-item.chimera-armlet",
+    chapterId: "disc-3.desert-palace",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "mojito-desert-palace",
+    shopName: "Mojito's Mogshop (Desert Palace)",
+    conditions: "Buy from Mojito during the Desert Palace sequence; the item remains available through the later Daguerreo or Lindblum shop routes.",
+    cost: { currency: "gil", amount: 1200 },
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-desert-palace-71891", "jegged-arm-gear", "rpgclassics-shops"],
+  },
+  {
+    id: "item-path.disc-3.aerial-exploration.chimera-armlet-daguerreo-shop",
+    itemId: "game-item.chimera-armlet",
+    chapterId: "disc-3.aerial-exploration",
+    method: "shop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "daguerreo.weapon-shop",
+    shopName: "Daguerreo Weapon Shop (Disc III)",
+    recommendedBeforeChapterId: "disc-3.preparing-to-leave",
+    conditions: "The Disc III Daguerreo weapon stock lists Chimera Armlet at 1,200 Gil; the Disc IV stock list replaces that inventory. Other acquisition routes remain available if this shop copy is skipped.",
+    cost: { currency: "gil", amount: 1200 },
+    walkthroughObjectiveIds: ["disc-3.aerial-exploration.daguerreo-stock"],
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "jegged-arm-gear", "rpgclassics-shops"],
+  },
   {
     id: "item-path.disc-3.home-front.vivi-dock-phoenix-pinion",
     itemId: "game-item.phoenix-pinion",
@@ -1264,6 +1346,8 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
 }));
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
+  { id: "item-ability.chimera-armlet.add-status", itemId: "game-item.chimera-armlet", abilityName: "Add Status", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "jegged-arm-gear"] },
+  { id: "item-ability.chimera-armlet.mug", itemId: "game-item.chimera-armlet", abilityName: "Mug", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "jegged-arm-gear"] },
   { id: "item-ability.silk-robe.ability-up", itemId: "game-item.silk-robe", abilityName: "Ability Up", verification: "partial", sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.trident.luna", itemId: "game-item.trident", abilityName: "Luna", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.battle-boots.initiative", itemId: "game-item.battle-boots", abilityName: "Initiative", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
