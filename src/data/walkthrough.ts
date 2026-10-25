@@ -1552,7 +1552,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-city-pickups-and-mognet",
         title: "First-visit sweep — coins, cards, Mogrich, and hidden Gil",
         summary: "Finish the collectible route before triggering the next story sequence. The first Auction House scene is story-driven; bidding opens after the party reunites in Treno.",
-        sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "elitegrindlab-treno", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-weapon-shop-monsters-71891", "jegged-treno", "elitegrindlab-treno", "rpgclassics-treno-monsters", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "treno-gemini-and-slums",
@@ -1578,8 +1578,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "treno-griffin-arena",
             kind: "combat",
-            text: "Before leaving Treno, consider the first Knight's House Monster Challenge. Speak with the Weapon Shop owner and ask about the monster below to fight the Griffin solo as Steiner. If you have Queen Stella's Blood Sword or Bird Killer available, equip them; winning awards a Tonberry Card.",
-            detail: "This is the Disc II stage of a multi-visit arena ladder. Later visits offer different monsters, and sources say the Griffin stage cannot be restarted once skipped. No fixed level is required here; this is an optional battle with a one-time reward window.",
+            text: "Before leaving Treno, consider the first Knight's House Monster Challenge. Speak with the Weapon Shop owner and choose one active fighter; Steiner is a strong pick. Jegged recommends Blood Sword, Gold Choker, and Bird Killer. Win the solo Griffin fight to receive a Tonberry Card.",
+            detail: "This is the Disc II stage of a multi-visit arena ladder. The arena Griffin is a modified version with its own reward rules: GameFAQs says arena monsters give no EXP, AP, Gil, or item drops beyond the fixed victory prize. The fight is lost after leaving Treno as the sequence advances. The Tonberry Card itself has separate later sources, tracked by its own objective. No fixed level is required.",
             objectiveIds: ["disc-2.treno.griffin-challenge", "disc-2.tonberry-card"],
           },
         ],

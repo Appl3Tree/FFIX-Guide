@@ -743,7 +743,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/weapon-shop-monsters",
     accessed: "2026-10-24",
-    notes: "Identifies the Treno weapon-shop Amdusias stage after Mount Gulug, its Running Shoes reward, and the later Disc IV Behemoth stage. The Running Shoes item has other documented sources, so the missed Amdusias fight is tracked as a one-time reward opportunity rather than permanent loss of the item type.",
+    notes: "Lists the Disc II Griffin and Tonberry Card reward, then the later Catoblepas, Amdusias, and Behemoth stages. The arena monsters yield no EXP, AP, Gil, or item drops beyond their fixed victory prizes; this is kept separate from their ordinary field loot tables. The Running Shoes item has other documented sources, so the missed Amdusias fight is tracked as a one-time reward opportunity rather than permanent loss of the item type.",
   },
   {
     id: "gamefaqs-conde-petie-colored-stones-71891",
@@ -2015,7 +2015,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://www.elitegrindlab.com/ff9/walkthrough/treno/",
     accessed: "2026-10-24",
-    notes: "Cross-checks the seven ATE route as entrance, west, stairs, south, right-hand stairs, north, then the tower return. Also covers the Stellazzio ladder, arena Griffin, first-visit pickups, auction availability, and a lone-source weapon-shop stock cutoff; the guide preserves its disagreements instead of adopting the isolated cutoff claim.",
+    notes: "Cross-checks the seven ATE route as entrance, west, stairs, south, right-hand stairs, north, then the tower return. Also covers the Stellazzio ladder, arena Griffin, first-visit pickups, auction availability, and a lone-source weapon-shop stock cutoff; its arena table gives Griffin Level 16 and 1,470 HP and says the Tonberry Card fight is lost after leaving Treno. The guide preserves its disagreements instead of adopting the isolated shop-cutoff claim.",
   },
   {
     id: "trueachievements-treno-ate-walkthrough",

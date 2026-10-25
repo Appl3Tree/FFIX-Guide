@@ -3447,6 +3447,37 @@ if (
 if (!objectiveIds.has(tonberryCardObjectiveId) || tonberryCardSteps.length === 0 || !griffinCardStep) {
   errors.push("The Tonberry Card objective needs both its Treno reward step and a later Black Mage Village recovery step.");
 }
+const trenoGriffinArena = enemyRecords.find((enemy) => enemy.id === "enemy.griffin-treno-arena");
+const trenoGriffinEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.treno.griffin-challenge");
+const trenoGriffinCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.treno-griffin.stage");
+const ordinaryGriffin = enemyRecords.find((enemy) => enemy.id === "enemy.griffin");
+if (
+  !trenoGriffinArena
+  || trenoGriffinArena.kind !== "boss"
+  || trenoGriffinArena.chapterId !== "disc-2.treno"
+  || !trenoGriffinArena.stats.some((claim) => claim.field === "level" && claim.value === 16)
+  || !trenoGriffinArena.stats.some((claim) => claim.field === "HP" && claim.value === 1470)
+  || !["EXP", "AP", "Gil"].every((field) => trenoGriffinArena.stats.some((claim) => claim.field === field && claim.value === 0))
+  || trenoGriffinArena.steals.length !== 0
+  || trenoGriffinArena.drops.length !== 0
+  || !trenoGriffinArena.routeObjectiveIds.includes("disc-2.treno.griffin-challenge")
+  || !trenoGriffinArena.missableIds.includes("missable.disc-2.treno.griffin-challenge")
+  || !trenoGriffinArena.cutoffIds.includes("cutoff.treno-griffin.stage")
+  || !trenoGriffinArena.sourceIds.includes("gamefaqs-weapon-shop-monsters-71891")
+  || !trenoGriffinArena.sourceIds.includes("elitegrindlab-treno")
+  || !trenoGriffinEncounter
+  || trenoGriffinEncounter.kind !== "boss"
+  || trenoGriffinEncounter.chapterId !== "disc-2.treno"
+  || trenoGriffinEncounter.formation.length !== 1
+  || trenoGriffinEncounter.formation[0]?.enemyId !== "enemy.griffin-treno-arena"
+  || trenoGriffinEncounter.formation[0]?.quantity !== 1
+  || !trenoGriffinEncounter.objectiveIds.includes("disc-2.tonberry-card")
+  || !trenoGriffinEncounter.cutoffIds.includes("cutoff.treno-griffin.stage")
+  || !trenoGriffinCutoff?.missableIds.includes("missable.disc-2.treno.griffin-challenge")
+  || ordinaryGriffin?.drops.length !== 4
+) {
+  errors.push("The Treno arena Griffin needs a separate single-enemy profile, fixed-card objective, one-time cutoff, no copied field loot, and sourced arena battle-result data.");
+}
 const alexandriaCardPlayersObjectiveId = "disc-3.the-home-front.card-players";
 const alexandriaCardRosterObjectiveId = "disc-3.the-home-front.card-player-roster";
 const alexandriaCardPlayersWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.card-players");
