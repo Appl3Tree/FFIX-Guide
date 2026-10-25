@@ -604,6 +604,32 @@ for (const itemId of cleyraProductIds) {
     errors.push(`Cleyra shop product ${itemId} has no modeled acquisition path after Cleyra.`);
   }
 }
+const iceBrandId = "game-item.ice-brand";
+const iceBrandPathIds = new Set(itemAcquisitionPaths.filter((path) => path.itemId === iceBrandId).map((path) => path.id));
+const requiredIceBrandPathIds = [
+  "item-path.disc-2.cleyra.beatrix-ice-brand-steal",
+  "item-path.disc-2.return-to-alexandria.queen-room-ice-brand-chest",
+  "item-path.disc-2.return-to-alexandria.beatrix-ice-brand-steal",
+  "item-path.disc-2.return-to-lindblum.ice-brand-shop",
+  "item-path.disc-2.return-to-lindblum.dragon-gate-ice-brand-shop",
+  "item-path.disc-2.journey-to-outer-continent.fossil-roo-ice-brand-shop",
+  "item-path.disc-3.the-home-front.alexandria-ice-brand-shop",
+  "item-path.disc-3.card-tournament.treno-ice-brand-shop",
+];
+if (!gameItemIds.has(iceBrandId)) errors.push("Ice Brand needs a catalog item record.");
+for (const pathId of requiredIceBrandPathIds) {
+  if (!iceBrandPathIds.has(pathId)) errors.push(`Ice Brand recovery coverage is missing path ${pathId}.`);
+}
+const iceBrandShopPaths = itemAcquisitionPaths.filter((path) => path.itemId === iceBrandId && path.method === "shop");
+if (iceBrandShopPaths.length !== 5 || iceBrandShopPaths.some((path) => path.cost?.currency !== "gil" || path.cost.amount !== 3780)) {
+  errors.push("Ice Brand must keep its five documented shop paths at 3,780 Gil each.");
+}
+if (!equipmentAbilityClaims.some((claim) => claim.itemId === iceBrandId && claim.abilityName === "Mental Break")) {
+  errors.push("Ice Brand needs its source-listed Mental Break ability claim.");
+}
+if (!sourceInventoryTargets.some((target) => target.itemId === iceBrandId && target.targetQuantity === 2)) {
+  errors.push("Ice Brand needs its source-listed Need 2 inventory target.");
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
