@@ -2008,6 +2008,68 @@ if (
 ) {
   errors.push("Dali Underground must model all nine one-time item pickups, their shared sweep objective, later item-type recovery routes, and unresolved treasure-rank impact.");
 }
+const evilForestTreasureObjectiveId = "disc-1.evil-forest.treasure-sweep";
+const evilForestTreasureWarning = missablesById.get("missable.disc-1.evil-forest.treasures");
+const evilForestPickupPaths = [
+  { pathId: "item-path.disc-1.evil-forest.crash-site-phoenix-down", itemId: "game-item.phoenix-down", method: "fixed-pickup" },
+  { pathId: "item-path.disc-1.evil-forest.prima-vista-bridge-bronze-gloves", itemId: "game-item.bronze-gloves", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.vivis-cabin-ether", itemId: "game-item.ether", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.aft-cabin-ether", itemId: "game-item.ether", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.steiner-room-ether", itemId: "game-item.ether", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.prima-vista-wrist-chest", itemId: "game-item.wrist", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.rubber-helm-cargo-room-chest", itemId: "game-item.rubber-helm", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.south-room-leather-hat", itemId: "game-item.leather-hat", method: "chest" },
+  { pathId: "item-path.disc-1.evil-forest.baku-room-potion", itemId: "game-item.potion", method: "chest" },
+];
+const evilForestLaterRecoveryPaths = [
+  ["item-path.disc-1.village-of-dali.bronze-gloves-shop", "game-item.bronze-gloves"],
+  ["item-path.disc-2.journey-to-outer-continent.stiltzkin-3-ether", "game-item.ether"],
+  ["item-path.disc-1.village-of-dali.leather-hat-shop", "game-item.leather-hat"],
+  ["item-path.disc-1.village-of-dali.potion-shop", "game-item.potion"],
+  ["item-path.disc-1.village-of-dali.phoenix-down-shop", "game-item.phoenix-down"],
+  ["item-path.disc-1.village-of-dali.wrist-shop", "game-item.wrist"],
+  ["item-path.disc-1.village-of-dali.rubber-helm-shop", "game-item.rubber-helm"],
+];
+const primaVistaCinnaShopProducts = [
+  { itemId: "game-item.potion", price: 50 },
+  { itemId: "game-item.phoenix-down", price: 150 },
+  { itemId: "game-item.antidote", price: 50 },
+  { itemId: "game-item.eye-drops", price: 50 },
+  { itemId: "game-item.tent", price: 800 },
+];
+const bronzeGlovesNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.bronze-gloves-need-three");
+const bronzeGlovesEndTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.bronze-gloves-end-inventory-one");
+if (
+  !evilForestTreasureWarning?.classification.includes("recoverable-later") ||
+  !evilForestTreasureWarning.consequence.includes("nine location-specific item copies") ||
+  !evilForestTreasureWarning.consequence.includes("116 Gil") ||
+  !evilForestTreasureWarning.recovery.includes("Treasure Hunter rank effect") ||
+  !evilForestTreasureWarning.action.includes("Cinna's shop stock") ||
+  evilForestPickupPaths.some(({ pathId, itemId, method }) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+    const item = gameItems.find((candidate) => candidate.id === itemId);
+    return !path || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" || path.method !== method ||
+      path.quantity !== 1 || path.availability !== "single-use" ||
+      !path.walkthroughObjectiveIds?.includes(evilForestTreasureObjectiveId) ||
+      !["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+      !["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"].every((sourceId) => item?.sourceIds.includes(sourceId));
+  }) ||
+  evilForestLaterRecoveryPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === itemId)) ||
+  primaVistaCinnaShopProducts.some(({ itemId, price }) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-1.evil-forest.cinna-item-shop.${itemId.replace("game-item.", "")}`);
+    return !path || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" || path.method !== "shop" ||
+      path.shopId !== "prima-vista.cinna-item-shop" || path.shopName !== "Cinna's Item Shop (Prima Vista)" ||
+      path.cost?.currency !== "gil" || path.cost.amount !== price || path.availability !== "limited-window" ||
+      path.recommendedBeforeChapterId !== "disc-1.evil-forest" ||
+      !path.walkthroughObjectiveIds?.includes(evilForestTreasureObjectiveId) ||
+      !["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamefaqs-shops-71891"].every((sourceId) => path.sourceIds.includes(sourceId));
+  }) ||
+  bronzeGlovesNeedTarget?.itemId !== "game-item.bronze-gloves" || bronzeGlovesNeedTarget.targetQuantity !== 3 ||
+  bronzeGlovesEndTarget?.itemId !== "game-item.bronze-gloves" || bronzeGlovesEndTarget.targetQuantity !== 1 ||
+  !equipmentAbilityClaims.some((claim) => claim.id === "item-ability.bronze-gloves.antibody" && claim.abilityName === "Antibody")
+) {
+  errors.push("Crash Site and Prima Vista must catalog all nine one-time item pickups, Cinna's five priced products, later sources for the pickup item types, Bronze Gloves' item targets and ability, and the unresolved treasure-rank effect.");
+}
 const iceCavernTreasureObjectiveId = "disc-1.ice-cavern.treasure-sweep";
 const iceCavernTreasureWarning = missablesById.get("missable.disc-1.ice-cavern.treasures");
 const iceCavernChestPaths = [

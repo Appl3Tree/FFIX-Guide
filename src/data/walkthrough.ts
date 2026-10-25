@@ -244,6 +244,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "Before exiting south from the crash site, check the salvaged cargo beside the fallen Conductor and Trumpeter for a Phoenix Down.",
             detail: "This copy is easy to overlook, but Phoenix Downs can be bought from Cinna and later shops. Missing this field pickup is not a permanent loss of the item type.",
+            objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
           {
             id: "prison-cage-garnet",
@@ -277,6 +278,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "bridge-and-cabin-pickups",
             kind: "pickup",
             text: "On the bridge, open the chest to the right of Baku for Bronze Gloves. Go downstairs for the Wrist chest. In Vivi's cabin take the Ether from the back-wall chest and 116 Gil from the top bunk; in the next room collect its lower Ether chest.",
+            objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
           {
             id: "cargo-and-side-room-pickups",
@@ -295,6 +297,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "After Baku's battle, find Steiner and recruit him. Return to the room where he was held; its chest is now accessible and contains another Ether. Then continue to Vivi's cabin and bring Vivi into the party.",
             detail: "The post-Baku Ether is easy to miss because this is a room you already searched while it was locked.",
+            objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
         ],
       },
@@ -314,7 +317,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "blank-medicine-and-cinna-shop",
             kind: "pickup",
             text: "Before exiting the wreck, speak with Blank to receive Blank's Medicine. Speak to Cinna and buy supplies if needed: Potions, Phoenix Downs, Antidotes, Eye Drops, and Tents. Cinna's Phoenix Downs are an immediate replacement for the fixed crash-site pickup.",
-            detail: "Cinna's available stock and the items' later sources have not yet been audited as a full shop database.",
+            detail: "Cinna's five stock items and prices (50, 150, 50, 50, and 800 Gil) are modeled separately from the one-time pickups. Later Dali and other routes preserve the item types after Prima Vista closes; the Treasure Hunter rank effect for missed location copies remains unverified.",
+            objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
           {
             id: "mosco-letter-ruby",

@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest local B02/B05 update completes the nine listed Crash Site/Prima Vista item paths, catalogs Cinna's five priced products, and adds later recovery routes for the item types. Lint, typecheck, audit, build, and whitespace checks pass; the Treasure Hunter rank effect and direct game/release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
+
 No account-owner setup action changed. The latest local B02 update catalogs all eight Ice Cavern chest copies, their later item-type sources, and the unresolved Treasure Hunter rank effect. Lint, typecheck, audit, build, and whitespace checks pass; no GitHub, Firebase, deployment, or sign-in work is needed. Tests and direct browser, game, and release verification remain open.
 
 No account-owner setup action changed. The latest local B02 update clarifies the later recovery routes for Beatrix's one-time Burmecia steals, including the final documented Mythril Sword purchase window at Esto Gaza. Lint, typecheck, audit, build, and whitespace checks pass; no GitHub, Firebase, deployment, or sign-in work is needed. Tests and direct browser, game, and release verification remain open.
