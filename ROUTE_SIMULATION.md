@@ -111,7 +111,7 @@ This checkpoint schedule is transcribed from the original PlayStation Excalibur 
 
 The source guide says the route is intended to preserve the perfect-save objectives while collecting Excalibur II; it is not a minimalist weapon-only run. Its route branches by stat plan: the baseline paths have 46:53 of target-time buffer, Path C adds 14:45 of detours and leaves 32:08, while the Combined path adds 39:45 and leaves 7:08. Those margins are source-reported, not independently tested here. The guide says the stat path should be chosen before starting, although it can be deferred to Treno; the Combined and Path C options are especially sensitive to early delays.
 
-Route constraints identified so far: make a fresh save and choose the selected stat path first; skip dialogue and most ATEs/FMVs where the chosen release permits; minimize random encounters and flee unless the route explicitly needs a battle; pause when planning because the source guide says the in-game clock stops while paused; and use multiple rotating saves so a mistaken route choice does not overwrite the run. The source notes that 12-hour timing is particularly tight on PAL because the game runs at 50 Hz while the clock continues at real time. Do not apply NTSC target times to PAL or assume modern booster behavior without version-specific verification. The source-based static trace now covers Alexandria through the Excalibur II pickup after Lich at 11:13:07. The remaining route gaps include the earlier Burmecia pickup conflict, full achievement/optional-content budgeting, and version-specific timer verification.
+Route constraints identified so far: make a fresh save and choose the selected stat path first; skip dialogue and most ATEs/FMVs where the chosen release permits; minimize random encounters and flee unless the route explicitly needs a battle; pause when planning because the source guide says the in-game clock stops while paused; and use multiple rotating saves so a mistaken route choice does not overwrite the run. The source notes that 12-hour timing is particularly tight on PAL because the game runs at 50 Hz while the clock continues at real time. Do not apply NTSC target times to PAL or assume modern booster behavior without version-specific verification. The source-based static trace now covers Alexandria through the Excalibur II pickup after Lich at 11:13:07. Remaining route gaps include the full-pickup budget for the Excalibur II branch, full achievement/optional-content budgeting, and version-specific timer verification.
 
 ## Excalibur II route static run 1 — Alexandria through Ice Cavern
 
@@ -151,17 +151,17 @@ The opening route has source checkpoints mapped to the existing Alexandria, Evil
 5. **Dragon's Gate to Eunorus Plains — target 02:24:30:** Take the Dragon's Gate Tent, recruit Quina and catch one frog, then follow the source's shortened route that skips the Frog Catching minigame. Enter Gizamaluke's Grotto for the first bell and the forced Type A encounter, then use the early Chocobo/Hot & Cold route to obtain the required Chocographs. The source marks intermediate checks at 02:12:37 (first bell), 02:15:28 (after the forced encounter), and 02:22:55 (after Chocobo digging); learn Limit Glove from Mandragora and return to the Grotto. Full Frog Catching, Blue Magic, and platform achievement goals need additional budgeting.
 6. **Gizamaluke and South Gate — target 02:33:43 at Daines-Horse Basin:** Re-enter the Grotto, collect the remaining bells, use Quina's Limit Glove for Gizamaluke, and follow the Steiner/Dagger South Gate sequence. Take the listed Multina Racket and Potion, carry Grimo's letter to Nazna, ride the cable car, then save on the route toward Cleyra. These are fixed route objectives; any randomized steal or enemy skill result is not established by a target split.
 7. **Oak Staff detour — target 02:39:43:** Spend the source's additional six minutes on the Reef transformation and Chocograph route, returning to equip Vivi with Oak Staff. This is a scheduled perfect-save detour rather than spare time for unrelated sidequests.
-8. **Start of Disc II — target 02:51:05:** Continue through the Grotto and Burmecia to the disc transition. At D1-14 the source explicitly says to ignore Burmecia items except those it names. That instruction conflicts with this guide's conservative full Burmecia sweep and remains a blocker for calling the EII branch completion-safe; reconcile the exact selected 100% objectives and recoverability before adopting it.
+8. **Start of Disc II — target 02:51:05:** Continue through the Grotto and Burmecia to the disc transition. At D1-14 the source names Ether, Lightning Staff, Mythril Spear, and Germinas Boots, then says to ignore other Burmecia items. That is the timed route's item scope; the Comprehensive Playthrough still sweeps the full city. If both Excalibur II and full exploration are selected, the guide must budget the extra sweep or verify later pickup-room access. The source's Disc IV return to Atla's Vault does not establish access to every skipped pickup, so do not promise those copies are recoverable. This leaves compatibility unverified, not categorically impossible.
 
 ### Result and unresolved checks
 
-The source-based static trace now reaches the start of Disc II with all first-disc source splits mapped into the corresponding chapters. It does not show that the time targets are reproducible, that random encounters will remain at zero, or that the listed combat RNG will cooperate. The source's item/EXP goals differ from modern-platform achievement criteria, and its instruction to skip Burmecia pickups is not yet compatible with this guide's conservative route.
+The source-based static trace now reaches the start of Disc II with all first-disc source splits mapped into the corresponding chapters. It does not show that the time targets are reproducible, that random encounters will remain at zero, or that the listed combat RNG will cooperate. The source's item/EXP goals differ from modern-platform achievement criteria. Its four named Burmecia targets and skip direction define the timed route's scope; whether the full exploration sweep also fits or can be completed after the deadline remains unverified.
 
 ## Excalibur II route static run 3 — Bentini Heights through Alexandria Rescue
 
 ### Starting state
 
-- Continue from the 02:51:05 Disc II split after the route reaches the source's D1-14 state. Its earlier instruction to skip most Burmecia pickups is still unresolved against this guide's full-sweep branch.
+- Continue from the 02:51:05 Disc II split after the route reaches the source's D1-14 state. The source collects four named Burmecia items and skips the rest on its timed route; compatibility with the separate full-exploration objective remains unverified.
 - The following are source-reported original-PlayStation NTSC checkpoints and route choices. No live timer or battle RNG was tested.
 
 ### Trace and checks
@@ -183,7 +183,7 @@ The static source trace now reaches 04:24:34 at Alexandria Rescue. It records th
 
 ### Starting state
 
-- Continue from Alexandria Rescue at 04:24:34 on the source's original-PlayStation NTSC route. The earlier D1-14 instruction to skip most Burmecia pickups still conflicts with this guide's conservative collection route.
+- Continue from Alexandria Rescue at 04:24:34 on the source's original-PlayStation NTSC route. The D1-14 skip remains a route-scope difference; the guide has not verified a full Burmecia sweep against the source time budget or proven access to all omitted pickups later.
 - These are source-reported cumulative checkpoints, not a live timer run. The route follows a baseline stat path; Path C and Combined have separate detours.
 
 ### Trace and checks
@@ -200,7 +200,7 @@ The static source trace now reaches 04:24:34 at Alexandria Rescue. It records th
 
 ### Result and unresolved checks
 
-The source trace now covers every Disc II checkpoint through the start of Disc III, leaving 05:42:29 before the 12-hour cutoff at that split. The source target for Excalibur II remains 11:13:07 with 46:53 to the cutoff. This is a static comparison, not proof that the time targets or encounter counts are reproducible. The full ATE/achievement branch, Friendly Creature and Quina Blue Magic detours, platform-specific timer behavior, and the Burmecia pickup conflict remain unresolved. Continue with D3-01 Bentini Heights at 06:57:02.
+The source trace now covers every Disc II checkpoint through the start of Disc III, leaving 05:42:29 before the 12-hour cutoff at that split. The source target for Excalibur II remains 11:13:07 with 46:53 to the cutoff. This is a static comparison, not proof that the time targets or encounter counts are reproducible. The full ATE/achievement branch, Friendly Creature and Quina Blue Magic detours, platform-specific timer behavior, and compatibility of the full Burmecia pickup sweep with this timed route remain unresolved. Continue with D3-01 Bentini Heights at 06:57:02.
 
 ## Excalibur II route static run 5 — Disc III opening through Desert Palace
 
@@ -220,7 +220,7 @@ The source trace now covers every Disc II checkpoint through the start of Disc I
 
 ### Result and unresolved checks
 
-The source trace reaches the Desert Palace Rack at 08:36:57, with 03:23:03 before the 12-hour cutoff. Its baseline Excalibur II target remains 11:13:07; the optional tenth Promist Ring branch adds 21 minutes, leaving a source-derived 25:53 before that cutoff. These are arithmetic comparisons against source targets, not proof of timing. Full Movie Critic and platform achievement coverage, the optional-stat branches' complete cost arithmetic, the remaining Disc III/IV route, timer/version behavior, and the earlier Burmecia pickup conflict remain open. Continue with D3-07 Gulug Mountains at 08:52:28.
+The source trace reaches the Desert Palace Rack at 08:36:57, with 03:23:03 before the 12-hour cutoff. Its baseline Excalibur II target remains 11:13:07; the optional tenth Promist Ring branch adds 21 minutes, leaving a source-derived 25:53 before that cutoff. These are arithmetic comparisons against source targets, not proof of timing. Full Movie Critic and platform achievement coverage, the optional-stat branches' complete cost arithmetic, the remaining Disc III/IV route, timer/version behavior, and the full-pickup route budget remain open. Continue with D3-07 Gulug Mountains at 08:52:28.
 
 ## Excalibur II route static run 6 — Desert Palace through the Disc IV transition
 
@@ -241,7 +241,7 @@ The source trace reaches the Desert Palace Rack at 08:36:57, with 03:23:03 befor
 
 ### Result and unresolved checks
 
-At the Disc IV transition the source schedule leaves 01:31:35 before the 12-hour cutoff; its baseline Excalibur II pickup target is 11:13:07, leaving 46:53. Adding only the optional tenth Promist Ring branch projects 11:34:07 with 25:53 remaining. The source's cumulative stat-path budgets are Path C +14:45 (32:08 remaining) and Combined +39:45 (7:08 remaining); these totals are source-reported arithmetic, not verified playthroughs. Continue with Disc IV checkpoint/source verification, full achievement and optional-content budgeting, timer/version verification, and resolution of the earlier Burmecia pickup conflict.
+At the Disc IV transition the source schedule leaves 01:31:35 before the 12-hour cutoff; its baseline Excalibur II pickup target is 11:13:07, leaving 46:53. Adding only the optional tenth Promist Ring branch projects 11:34:07 with 25:53 remaining. The source's cumulative stat-path budgets are Path C +14:45 (32:08 remaining) and Combined +39:45 (7:08 remaining); these totals are source-reported arithmetic, not verified playthroughs. Continue with Disc IV checkpoint/source verification, full achievement and optional-content budgeting, timer/version verification, and verification of later Burmecia pickup access.
 
 ## Excalibur II route static run 7 — Memoria entrance through Excalibur II
 
@@ -260,7 +260,7 @@ At the Disc IV transition the source schedule leaves 01:31:35 before the 12-hour
 
 ### Result and unresolved checks
 
-This completes the source checkpoint trace through the Excalibur II pickup. The guide source explicitly leaves substantial Disc IV content for after the deadline; its “Leftovers” section includes further Chocobo, Gil, and stat/EXP work, which still needs route integration against this project's selected completion goals. The trace remains static and NTSC-specific. A manually entered save clock and source-checkpoint comparison are now part of the profile; live in-game timing, platform/booster behavior, alternative stat-path checkpoint budgets, and the earlier Burmecia pickup conflict remain unresolved.
+This completes the source checkpoint trace through the Excalibur II pickup. The guide source explicitly leaves substantial Disc IV content for after the deadline; its “Leftovers” section includes further Chocobo, Gil, and stat/EXP work, which still needs route integration against this project's selected completion goals. The trace remains static and NTSC-specific. A manually entered save clock and source-checkpoint comparison are now part of the profile; live in-game timing, platform/booster behavior, alternative stat-path checkpoint budgets, and compatibility with the full Burmecia pickup objective remain unresolved.
 
 ## Standard route run 1 — Alexandria through Ice Cavern
 
