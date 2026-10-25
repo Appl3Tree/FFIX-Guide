@@ -1030,18 +1030,53 @@ if (!burmeciaTreasureWarning?.sourceIds.includes("ffwiki-unrevisitable-locations
   errors.push("The Burmecia treasure warning and cutoff must retain the palace-only unrevisitable-location source.");
 }
 if (burmeciaTreasureCutoff?.certainty !== "conservative") {
-  errors.push("The Burmecia first-visit treasure deadline must stay conservative while later chest-room access is unresolved.");
+  errors.push("The Burmecia first-visit sweep must remain the conservative checkpoint while later pickup recovery is only partially verified.");
 }
 if (burmeciaTreasureWarning?.classification.includes("permanently-missable") ||
   !burmeciaTreasureWarning?.sourceIds.includes("ff9-kouryaku-disc4") ||
-  !burmeciaTreasureWarning?.note.includes("city-level access but not each old pickup room")) {
-  errors.push("The Burmecia treasure warning must preserve city-level Disc IV evidence without claiming old-room access.");
+  !burmeciaTreasureWarning?.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery") ||
+  !burmeciaTreasureWarning?.note.includes("several specific Suburb/Uptown pickups") ||
+  !burmeciaTreasureWarning?.note.includes("does not inventory every old chest")) {
+  errors.push("The Burmecia treasure warning must scope the Disc IV evidence to demonstrated pickups and avoid permanent-loss claims.");
 }
 const burmeciaDisc4Return = gameRouteEdges.find((edge) => edge.id === "detour.alexandria-to-burmecia-mognet");
 if (!burmeciaDisc4Return?.sourceIds.includes("ff9-kouryaku-disc4") ||
-  !burmeciaDisc4Return.summary.includes("city-level return and Atla's Vault") ||
-  !burmeciaDisc4Return.summary.includes("do not enumerate every Suburb and Uptown pickup room")) {
-  errors.push("The Disc IV Burmecia return must cite the area list and preserve the room-access limit.");
+  !burmeciaDisc4Return.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery") ||
+  !burmeciaDisc4Return.summary.includes("two Gold Needles, Ether, Phoenix Down, and Tent") ||
+  !burmeciaDisc4Return.summary.includes("does not establish the availability of every old chest or release parity")) {
+  errors.push("The Disc IV Burmecia return must link the documented pickup sweep and preserve its limited build scope.");
+}
+const burmeciaDisc4PickupObjective = objectivesById.get("disc-4.return-to-gaia.burmecia-pickup-sweep");
+const burmeciaDisc4PickupSteps = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  ?.sections.flatMap((section) => section.steps)
+  .filter((step) => step.objectiveIds?.includes("disc-4.return-to-gaia.burmecia-pickup-sweep")) ?? [];
+const burmeciaDisc4PickupPathIds = [
+  "item-path.disc-4.return-to-gaia.burmecia-cancer-stellazzio",
+  "item-path.disc-4.return-to-gaia.burmecia-gold-needle-suburb-room",
+  "item-path.disc-4.return-to-gaia.burmecia-gold-needle-stairwell",
+  "item-path.disc-4.return-to-gaia.burmecia-ether-bedroom",
+  "item-path.disc-4.return-to-gaia.burmecia-phoenix-down-uptown",
+  "item-path.disc-4.return-to-gaia.burmecia-tent-uptown",
+];
+const burmeciaDisc4PickupPaths = burmeciaDisc4PickupPathIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id));
+const burmeciaDisc4RecoverySource = sources.find((source) => source.id === "megane-kangaroo-disc4-burmecia-recovery");
+if (
+  !burmeciaDisc4RecoverySource?.notes.includes("two Gold Needles")
+  || !burmeciaDisc4RecoverySource.notes.includes("does not name the platform or build")
+  || !burmeciaDisc4PickupObjective?.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery")
+  || !burmeciaDisc4PickupObjective.chapterIds?.includes("disc-4.return-to-gaia")
+  || burmeciaDisc4PickupSteps.length !== 1
+  || !burmeciaDisc4PickupSteps[0].text.includes("Cancer, two Gold Needles, Ether, Phoenix Down, and Tent")
+  || burmeciaDisc4PickupPaths.some((path) =>
+    !path
+    || path.chapterId !== "disc-4.return-to-gaia"
+    || !path.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.burmecia-pickup-sweep")
+    || !path.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery")
+  )
+  || !gameItems.some((item) => item.id === "game-item.gold-needle")
+) {
+  errors.push("The Disc IV Burmecia sweep must connect its six item-copy paths to the scoped source, item records, objective, and walkthrough reminder.");
 }
 const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
 const burmeciaDisc2SpearStep = walkthroughChapters
