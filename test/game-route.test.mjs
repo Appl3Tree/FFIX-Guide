@@ -1,8 +1,56 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { missables, sources } from "../src/data/guide.ts";
-import { gameRouteEdges } from "../src/data/progression.ts";
+import { gameRouteCoverage, gameRouteEdges } from "../src/data/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
+
+test("the researched story route simulates through the ending and all optional paths rejoin", () => {
+  const mainPath = [gameRouteCoverage.chapterIds[0]];
+  const visited = new Set(mainPath);
+  while (mainPath.at(-1) !== gameRouteCoverage.throughChapterId) {
+    const currentChapterId = mainPath.at(-1);
+    const nextEdges = gameRouteEdges.filter((edge) => edge.relationship === "required-story" && edge.fromChapterId === currentChapterId);
+    assert.equal(nextEdges.length, 1, `${currentChapterId} should have exactly one next story gate`);
+    const nextChapterId = nextEdges[0].toChapterId;
+    assert.ok(!visited.has(nextChapterId), `the required story path loops back to ${nextChapterId}`);
+    visited.add(nextChapterId);
+    mainPath.push(nextChapterId);
+  }
+
+  assert.equal(mainPath[0], "disc-1.alexandria");
+  assert.equal(mainPath.at(-1), "disc-4.the-final-battle");
+  const mainPathIds = new Set(mainPath);
+  const detours = gameRouteEdges.filter((edge) => edge.relationship === "optional-detour");
+  const offPathChapterIds = gameRouteCoverage.chapterIds.filter((chapterId) => !mainPathIds.has(chapterId));
+  assert.deepEqual(offPathChapterIds.sort(), detours.map((edge) => edge.toChapterId).sort());
+
+  for (const detour of detours) {
+    assert.ok(mainPathIds.has(detour.fromChapterId), `${detour.id} does not start on the story path`);
+    const rejoin = gameRouteEdges.find((edge) => edge.relationship === "rejoin" && edge.fromChapterId === detour.toChapterId);
+    assert.ok(rejoin, `${detour.id} has no explicit rejoin`);
+    assert.ok(mainPathIds.has(rejoin.toChapterId), `${detour.id} rejoins outside the story path`);
+  }
+
+  const canReach = (startChapterId, targetChapterId) => {
+    const pending = [startChapterId];
+    const reached = new Set();
+    while (pending.length > 0) {
+      const currentChapterId = pending.shift();
+      if (!currentChapterId || reached.has(currentChapterId)) continue;
+      if (currentChapterId === targetChapterId) return true;
+      reached.add(currentChapterId);
+      for (const edge of gameRouteEdges) {
+        if (edge.fromChapterId === currentChapterId && !reached.has(edge.toChapterId)) pending.push(edge.toChapterId);
+      }
+    }
+    return false;
+  };
+
+  for (const optionalReturn of gameRouteEdges.filter((edge) => edge.relationship === "optional-return")) {
+    assert.ok(mainPathIds.has(optionalReturn.fromChapterId), `${optionalReturn.id} starts outside the main story path`);
+    assert.ok(canReach(optionalReturn.toChapterId, optionalReturn.fromChapterId), `${optionalReturn.id} has no route back to its departure point`);
+  }
+});
 
 test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => {
   const returnToMarsh = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-lindblum-basin-frogs");
