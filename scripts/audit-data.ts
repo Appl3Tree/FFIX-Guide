@@ -840,6 +840,34 @@ if (
 ) {
   errors.push("The Desert Palace story edge and party sequence must show where open travel resumes after the split.");
 }
+const moisLetterWarning = missablesById.get("missable.disc-1.ice-cavern.mois-letter");
+const moisLetterCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.dali-cargo-ship.mois-letter");
+const moisLetterReturnEdge = gameRouteEdgesById.get("return.dali-to-ice-cavern");
+const moisLetterRecoverySources = ["cour89-ice-cavern", "game8-mognet-letter-list", "jinsoku-mognet-letter-list"];
+if (
+  !moisLetterWarning?.deadline?.includes("before boarding the Cargo Ship from Dali") ||
+  !moisLetterWarning.recovery?.includes("Cour89 independently says") ||
+  !moisLetterWarning.recovery.includes("Game8 and Jinsoku") ||
+  moisLetterRecoverySources.some((sourceId) => !moisLetterWarning.sourceIds.includes(sourceId))
+) {
+  errors.push("Mois's letter warning must preserve the post-boss return, Disc I cutoff, and exact-timing source disagreement.");
+}
+if (
+  moisLetterCutoff?.edgeId !== "story.dali-to-cargo-ship" ||
+  moisLetterCutoff.certainty !== "disputed" ||
+  !moisLetterCutoff.trigger.includes("post-boss") ||
+  !moisLetterCutoff.trigger.includes("conservative cutoff") ||
+  moisLetterRecoverySources.some((sourceId) => !moisLetterCutoff.sourceIds.includes(sourceId))
+) {
+  errors.push("Mois's letter cutoff must retain the Dali departure boundary and source-specific timing disagreement.");
+}
+if (
+  !moisLetterReturnEdge?.summary.includes("post-boss letter return") ||
+  !moisLetterReturnEdge.summary.includes("treat the Cargo Ship as the safe cutoff") ||
+  moisLetterRecoverySources.some((sourceId) => !moisLetterReturnEdge.sourceIds.includes(sourceId))
+) {
+  errors.push("The Dali return route must distinguish Mois's post-boss letter window from later entrance visits.");
+}
 const friendlyCreatureObjectiveIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
   "disc-2.journey-to-treno.friendly-ghost",
