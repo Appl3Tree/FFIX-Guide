@@ -3319,9 +3319,10 @@ if ([...expectedFlameStaffAbilities].some((ability) => !flameStaffAbilities.has(
 }
 const blackWaltz3StealWarning = missables.find((missable) => missable.id === "missable.disc-2.journey-to-treno.black-waltz-3-steals");
 if (!blackWaltz3StealWarning ||
+  !blackWaltz3StealWarning.classification.includes("recoverable-later") ||
   !["Treno", "Cleyra", "Lindblum", "Conde Petie", "Black Mage Village", "Alexandria"].every((shop) => blackWaltz3StealWarning.recovery.includes(shop)) ||
   !blackWaltz3StealWarning.sourceIds.includes("gamefaqs-equipment-33383")) {
-  errors.push("The Black Waltz 3 missable warning must list all Flame Staff shop recoveries and their independent equipment source.");
+  errors.push("The Black Waltz 3 missable warning must classify the item types as recoverable later and list Flame Staff shop recoveries with their independent equipment source.");
 }
 const steepledHatId = "game-item.steepled-hat";
 const steepledHatBmvPath = itemAcquisitionPaths.find((path) => path.itemId === steepledHatId && path.id === "item-path.disc-2.outer-continent.steepled-hat-black-mage-village-shop");

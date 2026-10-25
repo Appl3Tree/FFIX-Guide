@@ -6672,7 +6672,7 @@ export const missables: MissableRecord[] = [
     id: "missable.disc-2.journey-to-treno.black-waltz-3-steals",
     objectiveId: "disc-2.journey-to-treno.black-waltz-3-steals",
     title: "Black Waltz 3's second battle steals",
-    classification: ["missable-opportunity", "recommended-now"],
+    classification: ["missable-opportunity", "recoverable-later", "recommended-now"],
     warningChapterIds: ["disc-2.journey-to-treno"],
     consequence: "The one-time encounter ends the Steepled Hat, Lightning Staff, and Flame Staff steal opportunities. Missing these encounter copies does not permanently remove the item types: all three have documented shop recovery, but only Flame Staff and Lightning Staff are listed at Treno immediately after this rematch.",
     deadline: "Before defeating Black Waltz 3 in the train-car battle.",
