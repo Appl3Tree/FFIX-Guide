@@ -52,6 +52,33 @@ test("the researched story route simulates through the ending and all optional p
   }
 });
 
+test("the Oeilvert and Desert Palace route preserves the sourced party split order", () => {
+  const splitGate = gameRouteEdges.find((edge) => edge.id === "story.picking-up-the-trail-to-forgotten-continent");
+  assert.ok(splitGate);
+  assert.match(splitGate.summary, /locks the party into the Oeilvert\/Desert Palace split/);
+
+  const toDesertPalace = gameRouteEdges.find((edge) => edge.id === "story.forgotten-continent-to-desert-palace");
+  assert.ok(toDesertPalace);
+  assert.match(toDesertPalace.summary, /completes Oeilvert and retrieves the Gulug Stone before control switches to Cid's team/);
+  for (const sourceId of ["gamefaqs-forgotten-continent-71891", "gamefaqs-desert-palace-71891", "jegged-returning-desert-palace"]) {
+    assert.ok(toDesertPalace.sourceIds.includes(sourceId), `party-split edge is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
+  }
+
+  const oeilvert = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.forgotten-continent");
+  const gulugStone = oeilvert?.sections.flatMap((section) => section.steps).find((step) => step.id === "oeilvert-take-gulug-stone");
+  const desertPalace = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.desert-palace");
+  const cidEscape = desertPalace?.sections.flatMap((section) => section.steps).find((step) => step.id === "desert-palace-cid-hourglass-key");
+  assert.ok(gulugStone);
+  assert.ok(cidEscape);
+  assert.match(gulugStone.text, /changes focus to the other party at the Desert Palace/);
+  assert.match(cidEscape.text, /After the scenes.*Cid's Hourglass Key minigame/);
+
+  const rejoin = gameRouteEdges.find((edge) => edge.id === "story.desert-palace-to-lost-continent");
+  assert.ok(rejoin);
+  assert.match(rejoin.summary, /reunites the parties/);
+});
+
 test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => {
   const returnToMarsh = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-lindblum-basin-frogs");
   assert.ok(returnToMarsh, "the pre-Cleyra return to Qu's Marsh is represented");
