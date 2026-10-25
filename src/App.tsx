@@ -149,7 +149,11 @@ function walkthroughSearchText(areaId: string) {
 
 function objectiveAppliesToProfile(objective: (typeof objectives)[number], profile: PlaythroughProfile) {
   const goalApplies = !objective.profileIds || objective.profileIds.includes(profile.goal);
-  const platformApplies = !objective.achievementPlatforms || objective.achievementPlatforms.includes(profile.platform);
+  // Achievement platform tags constrain the achievement goal; they do not
+  // remove otherwise valid game objectives from comprehensive/custom goals.
+  const platformApplies = profile.goal !== "achievements"
+    || !objective.achievementPlatforms
+    || objective.achievementPlatforms.includes(profile.platform);
   return goalApplies && platformApplies;
 }
 

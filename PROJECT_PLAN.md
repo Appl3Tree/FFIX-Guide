@@ -214,6 +214,7 @@ The next priority is B01: continue auditing the gameplay route's optional branch
 - [ ] Complete the in-game route and objective prerequisite graph. The source-ordered 44-chapter Route Map and 43 guide-order edges are implemented; the separate gameplay route reaches the final battle with 41 required story transitions, two optional detours, thirteen optional returns, and twelve explicit rejoin links. The Memoria entrance exit and one-way Crystal World warp are modeled, but other optional routes, cutoffs, and wider prerequisites remain incomplete. The reusable objective graph covers 31 documented ATE-order links and two objective-access links. Missables expose actionable, available-later, missed, recoverable, complete, unplaced, and excluded states.
 - [x] Central warning acknowledgement and one-way gate flow for mapped high/critical cutoff windows.
 - [x] ATE scene and Movie Critic objective mapping, including the 79-of-80 mutually exclusive single-save target; route-trigger and version verification remain in progress.
+- [x] Map every Friendly Creature objective to Mister Nice Guy on Steam, PS4, and Xbox, including Garuda; preserve the any-order rule for the first eight and the all-eight gate for Yan, while keeping the sidequest visible in non-achievement goals across game versions.
 - [ ] Complete Excalibur II and advanced perfect-game itineraries, checkpoints, timer behavior, and version constraints.
 - [ ] Source and integrate level/preparation guidance.
 

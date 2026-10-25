@@ -418,6 +418,36 @@ if (!jumpRopeLetterWarning?.consequence.includes("whether this Disc I letter rem
 if (jumpRopeLetterSteps.length !== 1 || jumpRopeLetterSteps[0]?.chapterId !== "disc-1.alexandria" || jumpRopeLetterSteps[0]?.step.id !== "guardhouse-pickup-mognet") {
   errors.push("The Jump Rope Mognet letter objective must point to Mosh's Disc I guardhouse step.");
 }
+const friendlyCreatureObjectiveIds = [
+  "disc-1.ice-cavern.mu-friendly-monster",
+  "disc-2.journey-to-treno.friendly-ghost",
+  "disc-2.outer-continent.friendly-ladybug",
+  "disc-2.conde-petie-mountain-path.friendly-yeti",
+  "disc-2.journey-to-iifa-tree.nymph",
+  "disc-3.forgotten-continent.jabberwock",
+  "disc-3.lost-continent.feather-circle",
+  "disc-3.aerial-exploration.garuda",
+  "disc-3.aerial-exploration.friendly-yan",
+].sort();
+const friendlyCreatureAchievementPlatforms = ["steam", "ps4", "xbox"] as const;
+for (const objectiveId of friendlyCreatureObjectiveIds) {
+  const objective = objectivesById.get(objectiveId);
+  if (!objective?.profileIds?.includes("achievements")) {
+    errors.push(`Friendly creature objective ${objectiveId} must be included in the achievement goal.`);
+  }
+  if (friendlyCreatureAchievementPlatforms.some((platform) => !objective?.achievementPlatforms?.includes(platform))) {
+    errors.push(`Friendly creature objective ${objectiveId} must be platform-scoped to Steam, PS4, and Xbox achievements.`);
+  }
+}
+for (const { platform, records } of achievementCatalogs) {
+  const misterNiceGuy = records.find((achievement) =>
+    ("parityId" in achievement ? achievement.parityId : achievement.id) === "mister-nice-guy",
+  );
+  const mappedFriendlyObjectives = [...(misterNiceGuy?.guideObjectiveIds ?? [])].sort();
+  if (mappedFriendlyObjectives.length !== friendlyCreatureObjectiveIds.length || mappedFriendlyObjectives.join("|") !== friendlyCreatureObjectiveIds.join("|")) {
+    errors.push(`${platform} Mister Nice Guy must link all nine Friendly Creatures objectives, including Garuda.`);
+  }
+}
 const plutoKnightsId = "disc-1.alexandria.pluto-knights-elixir";
 const plutoKnightsObjective = objectivesById.get(plutoKnightsId);
 const plutoKnightsSection = walkthroughChapters

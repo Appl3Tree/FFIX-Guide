@@ -4,7 +4,9 @@ Last updated: 2026-10-25
 
 Coverage distinguishes inventory, implementation, and verification. A heading in an inventory does not imply that its walkthrough text or tracker is finished.
 
-Latest B01 route slice refines the Disc I Alexandria Knights of Pluto instructions with sourced details for Laudo's second bookshelf encounter and Mullenkedheim's room. The card recovery work remains separate: the Oglop trade can be repeated while Conde Petie is available, while later opponents recover only the card type. Current audit scope: 44 chapters, 135 missables, 613 objectives, and 307 sources; lint, typecheck, audit, and production build pass with 0 errors and 177 coverage warnings. Direct game, release, and browser verification were not run.
+Latest B06 achievement slice fixes Mister Nice Guy's route mapping: all nine Friendly Creatures, including Garuda, are linked and appear in Steam, PS4, and Xbox achievement goals. Platform-only achievement limits do not hide the underlying sidequest from comprehensive/custom profiles on other releases. GameFAQs, Jegged, and Gamer Guides support the any-order rule for the first eight and the all-eight prerequisite for Yan. Current audit scope: 44 chapters, 135 missables, 613 objectives, and 307 sources; lint, typecheck, audit, and production build pass with 0 errors and 177 coverage warnings. Direct unlock, game, release, and browser verification remain open.
+
+The previous B01 route slice refined the Disc I Alexandria Knights of Pluto instructions with sourced details for Laudo's second bookshelf encounter and Mullenkedheim's room. Card recovery remains separate: the Oglop trade can be repeated while Conde Petie is available, while later opponents recover only the card type. Direct game and release verification were not run.
 
 | Subsystem | Inventory identified | Implemented | Verified | Current state |
 | --- | --- | --- | --- | --- |
