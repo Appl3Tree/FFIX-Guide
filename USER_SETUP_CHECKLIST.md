@@ -1,6 +1,6 @@
 # User setup checklist
 
-Last updated: 2026-10-24
+Last updated: 2026-10-25
 
 This is the consolidated list of actions that need the project owner's GitHub or Firebase account, a real sign-in, or a second device. The app currently stores progress in this browser only. Codex will complete and test the implementation that does not require your account before moving the Firebase steps to **Ready for User**.
 
@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The latest B02 refinement places the Mythril Sword cutoff at Esto Gaza before the Desert Palace story sequence, records that the post-Desert-Palace shop list omits it, and separates the optional five-copy inventory target from standard completion. Beatrix and Treno copies still held count toward the total. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The latest B02 refinement places the Mythril Sword cutoff at Esto Gaza before the Desert Palace story sequence, records that the post-Desert-Palace shop list omits it, and separates the optional five-copy inventory target from standard completion. Both GameFAQs missable-item references that support the five-copy target and deadline are linked; Beatrix and Treno copies still held count toward the total. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 
