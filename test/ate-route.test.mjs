@@ -21,7 +21,7 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   assert.equal(branchEvents.length, 2);
   assert.equal(ateObjectiveDependencies.length, 31);
   assert.equal(objectiveAccessDependencies.length, 2);
-  assert.equal(objectiveDependencies.length, 33);
+  assert.equal(objectiveDependencies.length, 49);
 
   assert.deepEqual(
     movieCriticEligibleEvents

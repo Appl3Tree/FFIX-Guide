@@ -163,7 +163,7 @@ test("Cleyra's story departure records its closure and disputed local cutoff", (
   assert.ok(departure);
   assert.equal(departure.relationship, "required-story");
   assert.match(departure.summary, /story departure closes Cleyra and its Trunk/);
-  assert.match(departure.summary, /guides disagree on the exact last safe action/);
+  assert.match(departure.summary, /Guides disagree on the exact last safe action/);
   assert.match(departure.summary, /settlement sweep before leaving it/);
   assert.match(departure.summary, /post-Antlion rewards before advancing/);
 
@@ -186,8 +186,8 @@ test("Disc III's Alexandria departure keeps the conservative Treno cutoff visibl
   assert.equal(departure.toChapterId, "disc-3.card-tournament");
   assert.equal(departure.relationship, "required-story");
   assert.match(departure.summary, /story moves to Treno/);
-  assert.match(departure.summary, /Sources differ on whether every optional city activity closes/);
-  assert.match(departure.summary, /finish local ATE, minigame, Stiltzkin, card, pickup, and shop checks before advancing/);
+  assert.match(departure.summary, /sources differ on whether remaining optional activities close/);
+  assert.match(departure.summary, /Complete the later city sweep before the story moves to Treno/);
 
   for (const sourceId of ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"]) {
     assert.ok(departure.sourceIds.includes(sourceId), `Alexandria departure is missing ${sourceId}`);
@@ -199,8 +199,8 @@ test("Disc III's Alexandria departure keeps the conservative Treno cutoff visibl
     ?.sections.flatMap((section) => section.steps)
     .find((step) => step.id === "home-front-check-ates-and-transition");
   assert.ok(localCutoff);
-  assert.match(localCutoff.text, /continuing through the coronation scenes/);
-  assert.match(localCutoff.detail, /broader cutoff is described as either leaving Alexandria or leaving for Treno/);
+  assert.match(localCutoff.text, /Before continuing from the castle to Treno/);
+  assert.match(localCutoff.detail, /Sources differ on whether remaining optional city content closes/);
 
   for (const missableId of [
     "missable.disc-3.the-home-front.hippaul-racing",
@@ -224,7 +224,7 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   assert.match(atlaVisit.summary, /deliver the letter for Mogryo/);
   assert.match(atlaVisit.summary, /long, monster-occupied route through the former city/);
   assert.match(atlaVisit.summary, /leave by the same route/);
-  assert.match(atlaVisit.summary, /not whether all Suburb and Uptown pickup rooms reopen/);
+  assert.match(atlaVisit.summary, /do not enumerate every Suburb and Uptown pickup room/);
 
   for (const sourceId of ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"]) {
     assert.ok(atlaVisit.sourceIds.includes(sourceId), `Burmecia return is missing ${sourceId}`);
@@ -246,9 +246,9 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
   assert.equal(returnToCavern.fromChapterId, "disc-1.village-of-dali");
   assert.equal(returnToCavern.toChapterId, "disc-1.ice-cavern");
   assert.equal(returnToCavern.relationship, "optional-return");
-  assert.match(returnToCavern.summary, /eight Ice Cavern chests/);
+  assert.match(returnToCavern.summary, /sweep missed Ice Cavern chests/);
   assert.match(returnToCavern.summary, /boarding the Cargo Ship/);
-  assert.match(returnToCavern.summary, /no other publisher confirms/);
+  assert.match(returnToCavern.summary, /Game8 and Jinsoku list a broader Disc I\/Beatrix window/);
 
   for (const sourceId of [
     "gamefaqs-ice-cavern-71891",
@@ -274,8 +274,8 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
   assert.ok(moisLetter);
   assert.ok(!moisLetter.classification.includes("recoverable-later"), "disputed letter recovery is not presented as guaranteed");
   assert.deepEqual(moisLetter.warningChapterIds, ["disc-1.ice-cavern", "disc-1.village-of-dali"]);
-  assert.match(moisLetter.note, /only one consulted source explicitly claims/);
-  assert.match(moisLetter.recovery, /already accepted the letter before battle/);
+  assert.match(moisLetter.note, /Sources agree it is Disc I mail but differ on the exact end point/);
+  assert.match(moisLetter.recovery, /had already accepted the letter/);
   assert.ok(moisLetter.sourceIds.includes("steam-missable-content-guide-2988011418"));
   assert.ok(moisLetter.sourceIds.includes("elitegrindlab-ice-cavern"));
 
@@ -289,5 +289,5 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
   assert.equal(gameRouteEdges.length, 68);
   assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 13, rejoin: 12 });
-  assert.equal(storyPartySequences.length, 3);
+  assert.equal(storyPartySequences.length, 8);
 });

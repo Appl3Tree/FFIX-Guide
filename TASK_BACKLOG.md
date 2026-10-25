@@ -44,6 +44,8 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 
 ### B02 — Complete missable inventory, recovery paths, and cutoff review
 
+- **Latest milestone (2026-10-25):** Refined Black Hood / Vivi's Death as an acquisition cutoff: the Desert Palace and Esto Gaza sources end at Shimmering Island, but a retained copy can still teach Death afterward. The warning now checks ability status and held inventory, keeps GameFAQs' six-copy figure optional, records the RPGClassics Desert Palace location omission as a coverage difference, and cites the GameFAQs Switch item/ability table. The audit protects this distinction. Lint, tests (36/36), data audit, production build, and whitespace checks pass; audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 616 objectives, and 343 sources. Catalog: 201 items, 776 paths across 42 slices, 38 recipes, 76 targets, and 161 ability claims. Bundle: 1,893.99 kB JavaScript (461.15 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite's chunk-size advisory remains. Cross-release and direct game verification remain open.
+
 - **Priority:** Critical
 - **Status:** In progress
 - **Owner:** Codex

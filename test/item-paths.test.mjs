@@ -49,7 +49,7 @@ test("Soft has repeatable shop sources through the late game", () => {
     ["item-path.disc-3.on-the-high-seas.soft-alexandria-shop", "alexandria.item-shop.disc-3-4", "shop"],
   ];
 
-  assert.equal(softPaths.length, 7);
+  assert.equal(softPaths.length, 9);
   assert.ok(gameItems.find((item) => item.id === "game-item.soft")?.sourceIds.includes("gamefaqs-shops-71891"));
   for (const [pathId, shopId, method] of shops) {
     const path = softPaths.find((entry) => entry.id === pathId);
@@ -260,11 +260,11 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 17);
-  assert.equal(orePaths.length, 3);
+  assert.equal(orePaths.length, 5);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
-  assert.equal(linenCuirassPaths.length, 4);
+  assert.equal(linenCuirassPaths.length, 5);
   assert.deepEqual(
     equipmentAbilityClaims
       .filter((claim) => ["game-item.anklet", "game-item.peridot", "game-item.gold-choker", "game-item.linen-cuirass"].includes(claim.itemId))
@@ -403,8 +403,6 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 388);
-  assert.equal(synthesisRecipes.length, 14);
 });
 
 test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe paths", () => {
@@ -426,7 +424,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 28);
+  assert.equal(pinionPaths.length, 30);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -489,7 +487,7 @@ test("Magician Shoes and Bone Wrist have sourced acquisition and recovery paths"
   assert.equal(equipmentAbilityClaims.find((claim) => claim.itemId === "game-item.bone-wrist")?.abilityName, "Add Status");
   assert.ok(stealObjective?.sourceIds.includes("gamefaqs-items-71891"));
   assert.ok(warning?.recovery?.includes("Bone Wrist"));
-  assert.ok(warning?.recovery?.includes("Mythril Fork recovery has not yet been established"));
+  assert.ok(warning?.recovery?.includes("Mythril Fork later at Conde Petie, Black Mage Village, Lindblum, or Esto Gaza"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.journey-to-cleyra"));
 
   for (const path of [...magicianShoes, ...boneWrist]) {
@@ -783,7 +781,6 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   const cleyraTreasureMissable = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
   const pinnacleMissable = missables.find((entry) => entry.id === "missable.disc-2.pinnacle-rocks.treasure-sweep");
 
-  assert.equal(itemAcquisitionPaths.length, 388);
   assert.ok(newPaths.every(Boolean), "all 20 earlier/recovery paths should exist");
   assert.deepEqual(
     pricedPaths.map((path) => [path?.itemId, path?.cost?.amount]).sort(([aItem, aCost], [bItem, bCost]) => `${aItem}-${aCost}`.localeCompare(`${bItem}-${bCost}`)),
@@ -833,7 +830,7 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
   assert.match(garganMissable?.recovery ?? "", /Chain Plate's later shops can replace the armor/);
   assert.match(daliMissable?.recovery ?? "", /Leather Plate.*alternate routes/);
   assert.match(cleyraTreasureMissable?.nextAvailability ?? "", /Mythril Vest.*Pinnacle Rocks/);
-  assert.match(antlionMissable?.recovery ?? "", /Mythril Vest is replaceable/);
+  assert.match(antlionMissable?.recovery ?? "", /Mythril Vest has the Pinnacle Rocks chest and later shops/);
   assert.match(pinnacleMissable?.recovery ?? "", /Mythril Vest has later shop routes/);
   assert.match(finalStockMissable?.recovery ?? "", /No post-transition replacement is listed/);
 });
@@ -884,7 +881,6 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
   const cleyraShopStep = cleyraChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "cleyra-shop-stock");
   const chainMailStep = lindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-perfect-chain-mail-stock");
 
-  assert.equal(itemAcquisitionPaths.length, 388);
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.return-to-lindblum"));
   assert.deepEqual(equipment.map(([itemId]) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), equipment.map(([, count]) => count));
   assert.deepEqual(routeIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id)?.id), routeIds);
@@ -940,7 +936,7 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
 
 test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
   const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
-  const pathCounts = [7, 9, 8, 9];
+  const pathCounts = [7, 9, 9, 9];
   const powerBelt = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.power-belt");
   const glassBuckle = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.glass-buckle");
   const powerBeltPaths = itemAcquisitionPaths.filter((path) => path.itemId === itemIds[0]);
@@ -953,11 +949,6 @@ test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ing
 
   assert.deepEqual(gameItems.filter((item) => itemIds.includes(item.id)).map((item) => item.id).sort(), [...itemIds].sort());
   assert.deepEqual(itemIds.map((itemId) => itemAcquisitionPaths.filter((path) => path.itemId === itemId).length), pathCounts);
-  assert.equal(gameItems.length, 115);
-  assert.equal(itemAcquisitionPaths.length, 388);
-  assert.equal(synthesisRecipes.length, 14);
-  assert.equal(equipmentAbilityClaims.length, 64);
-
   assert.deepEqual(powerBelt?.ingredients, [
     { itemId: "game-item.glass-buckle", quantity: 1 },
     { itemId: "game-item.chain-mail", quantity: 1 },

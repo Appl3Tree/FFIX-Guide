@@ -2436,6 +2436,41 @@ if (!thirdJewelEvent || thirdJewelEvent.exclusiveGroupId || thirdJewelEvent.chap
 if (!thirdJewelWarning || !thirdJewelWarning.classification.includes("permanently-missable") || !thirdJewelWarning.sourceIds.includes("gamerguides-movie-critic-guide") || !thirdJewelWarning.note?.includes("count-based conclusion")) {
   errors.push("The Third Jewel warning must explain its 79-view Movie Critic cutoff with its source and event-count inference.");
 }
+const blackHoodDeathWarning = missables.find((missable) => missable.id === "missable.disc-3.desert-palace.black-hood-death");
+const blackHoodDeathClaim = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.black-hood.death");
+const blackHoodItem = gameItems.find((item) => item.id === "game-item.black-hood");
+const blackHoodPickupPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.desert-palace-black-hood");
+const blackHoodShopPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.esto-gaza.black-hood");
+const blackHoodSourceTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-3.preparing-to-leave.black-hood");
+const blackHoodCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.shimmering-island.disc-iii-departure");
+if (
+  !blackHoodDeathWarning
+  || blackHoodDeathWarning.classification.includes("permanently-missable")
+  || !blackHoodDeathWarning.action.includes("no Black Hood is held")
+  || !blackHoodDeathWarning.action.includes("six-copy target is optional")
+  || !blackHoodDeathWarning.recovery.includes("retained Black Hood")
+  || !blackHoodDeathWarning.recovery.includes("continue earning AP")
+  || !blackHoodDeathWarning.sourceIds.includes("gamefaqs-missables-21725")
+  || !blackHoodDeathWarning.sourceIds.includes("gamefaqs-item-ability-10332")
+  || !blackHoodDeathWarning.sourceIds.includes("rpgclassics-abilities")
+  || !blackHoodDeathWarning.sourceIds.includes("rpgclassics-armor")
+  || !blackHoodDeathClaim?.sourceIds.includes("gamefaqs-item-ability-10332")
+  || !blackHoodDeathClaim.sourceIds.includes("rpgclassics-abilities")
+  || !blackHoodDeathClaim.sourceIds.includes("rpgclassics-armor")
+  || !blackHoodItem?.sourceIds.includes("gamefaqs-item-ability-10332")
+  || !blackHoodPickupPath?.walkthroughObjectiveIds.includes("disc-3.desert-palace.black-hood-death")
+  || !blackHoodPickupPath.sourceIds.includes("rpgclassics-armor")
+  || !blackHoodShopPath
+  || blackHoodShopPath.cost?.amount !== 2550
+  || blackHoodShopPath.availability !== "limited-window"
+  || !blackHoodShopPath.conditions.includes("retained Black Hood can still teach Death")
+  || !blackHoodSourceTarget
+  || blackHoodSourceTarget.targetQuantity !== 6
+  || !blackHoodSourceTarget.interpretation.includes("not a universal minimum")
+  || !blackHoodCutoff?.missableIds.includes("missable.disc-3.desert-palace.black-hood-death")
+) {
+  errors.push("Black Hood's Shimmering Island warning must distinguish final item acquisition from later Death learning with a retained copy, link its two item routes and provenance, and keep the six-copy target optional.");
+}
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
   "missable.disc-1.journey-to-burmecia.grimo-letter",
