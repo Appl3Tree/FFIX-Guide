@@ -1910,6 +1910,37 @@ const mythrilDaggerLindblumPath = itemAcquisitionPaths.find((path) => path.id ==
 if (!mythrilDaggerLindblumPath || mythrilDaggerLindblumPath.itemId !== "game-item.mythril-dagger" || mythrilDaggerLindblumPath.cost?.currency !== "gil" || mythrilDaggerLindblumPath.cost.amount !== 950) {
   errors.push("Mythril Dagger's early Lindblum recovery path must remain cataloged at 950 Gil.");
 }
+const daliFirstVisitObjectiveId = "disc-1.village-of-dali.first-visit-pickups";
+const daliFirstVisitWarning = missablesById.get("missable.disc-1.village-of-dali.first-visit-pickups");
+const daliFirstVisitChestPaths = [
+  ["item-path.disc-1.village-of-dali.inn-potion-chest", "game-item.potion"],
+  ["item-path.disc-1.village-of-dali.inn-antidote-chest", "game-item.antidote"],
+];
+const daliFirstVisitLaterPaths = [
+  ["item-path.disc-2.cleyra.potion-shop", "game-item.potion"],
+  ["item-path.disc-2.cleyra.antidote-shop", "game-item.antidote"],
+];
+if (
+  !daliFirstVisitWarning?.classification.includes("recoverable-later") ||
+  !daliFirstVisitWarning.action.includes("120 Gil") ||
+  !daliFirstVisitWarning.action.includes("lower-right chest") ||
+  !daliFirstVisitWarning.recovery.includes("Cleyra's later item shop") ||
+  !daliFirstVisitWarning.recovery.includes("50 Gil each") ||
+  !daliFirstVisitWarning.consequence.includes("Treasure Hunter rank effect") ||
+  !daliFirstVisitWarning.sourceIds.includes("gamefaqs-shops-71891") ||
+  !daliFirstVisitWarning.sourceIds.includes("gamefaqs-cleyra-71891") ||
+  daliFirstVisitChestPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) =>
+    path.id === pathId && path.itemId === itemId && path.chapterId === "disc-1.village-of-dali" &&
+    path.method === "chest" && path.quantity === 1 && path.availability === "single-use" &&
+    path.walkthroughObjectiveIds?.includes(daliFirstVisitObjectiveId) &&
+    ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali"].every((sourceId) => path.sourceIds.includes(sourceId))) ||
+    !gameItems.some((item) => item.id === itemId && item.category === "consumable" && item.sourceIds.includes("gamefaqs-dali-71891"))) ||
+  daliFirstVisitLaterPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) =>
+    path.id === pathId && path.itemId === itemId && path.chapterId === "disc-2.cleyra" &&
+    path.method === "shop" && path.cost?.currency === "gil" && path.cost.amount === 50))
+) {
+  errors.push("Dali's one-time inn consumables must link to the first-visit objective, later 50-Gil Cleyra stock, and a warning that keeps the rank effect unresolved.");
+}
 const iceCavernTreasureObjectiveId = "disc-1.ice-cavern.treasure-sweep";
 const iceCavernTreasureWarning = missablesById.get("missable.disc-1.ice-cavern.treasures");
 const iceCavernChestPaths = [

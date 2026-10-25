@@ -130,6 +130,12 @@ const burmeciaSources = [
   "gamerguides-burmecia",
   "elitegrindlab-burmecia",
 ];
+const daliFirstVisitPickupSources = [
+  "gamefaqs-dali-71891",
+  "jegged-dali",
+  "gamerguides-dali",
+  "elitegrindlab-dali",
+];
 
 const germinasBootsReferenceSources = [
   "gamefaqs-items-71891",
@@ -2260,8 +2266,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
 
 export const gameItems: GameItem[] = [
   { id: "game-item.cancer-stellazzio", name: "Cancer Stellazzio", category: "key-item", sourceIds: [...burmeciaSources, "jegged-stellazzio", "megane-kangaroo-disc4-burmecia-recovery"], verification: "partial" },
-  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, ...daliFirstVisitPickupSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: [...daliFirstVisitPickupSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...new Set([...fossilRooSources, ...oeilvertSources, ...iifaTreeSources, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.elixir", name: "Elixir", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources, ...mountGulugSources, ...tantarianSources, ...iifaTreeSources, "gamefaqs-journey-to-burmecia-71891", "gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "jegged-crystal-world", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], verification: "partial" },
@@ -3015,6 +3021,31 @@ const iifaTreeMagicianCloakStealPath: ItemAcquisitionPath = {
   sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "ffwiki-magician-cloak"],
 };
 
+const daliFirstVisitChestPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.village-of-dali.inn-potion-chest",
+    itemId: "game-item.potion",
+    chapterId: "disc-1.village-of-dali",
+    method: "chest",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Open the chest beside the plant on the left side of the Dali Inn bedroom during the first visit.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.first-visit-pickups"],
+    sourceIds: daliFirstVisitPickupSources,
+  },
+  {
+    id: "item-path.disc-1.village-of-dali.inn-antidote-chest",
+    itemId: "game-item.antidote",
+    chapterId: "disc-1.village-of-dali",
+    method: "chest",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Open the lower-right chest in the Dali Inn bedroom during the first visit.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.first-visit-pickups"],
+    sourceIds: daliFirstVisitPickupSources,
+  },
+];
+
 const iceCavernChestPaths: ItemAcquisitionPath[] = [
   {
     id: "item-path.disc-1.ice-cavern.tent-chest",
@@ -3089,6 +3120,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc4ShopPaths,
   ...cleyraShopStockPaths,
   ...cleyraLaterRecoveryPaths,
+  ...daliFirstVisitChestPaths,
   ...iceCavernChestPaths,
   {
     id: "item-path.disc-2.journey-to-treno.flame-staff-black-waltz-3-steal",
