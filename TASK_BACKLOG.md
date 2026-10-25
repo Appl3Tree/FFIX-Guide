@@ -40,9 +40,10 @@ This backlog tracks the full guide objective. A working feature or an inventory 
 ### B04 — Build the enemy, encounter, and boss reference
 
 - **Priority:** Required
-- **Status:** Not started
+- **Status:** In progress
 - **Owner:** Codex
-- **Next work:** Establish complete enemy/variant inventory and source hierarchy; capture location, encounter group, stats by version where relevant, steals, drops, Blue Magic, status/element interactions, fixed/scripted behavior, and boss strategies. Cross-link every record to route windows and missables.
+- **Current evidence:** `src/data/enemies.ts` starts the Mount Gulug bestiary with Red Dragon and Meltigemini records and four fixed/boss encounter groups. The Reference screen exposes searchable, filterable entries with stats, steal/drop slots, combat traits, Blue Magic, strategy notes, source links, walkthrough navigation, and existing shared objective checkboxes. Red Dragon EXP and encounter grouping disagreements remain explicit; Meltigemini's Vaccine table distinguishes its guaranteed copy from up to three conditional additional copies. The data audit checks source, item, chapter, encounter, objective, missable, cutoff, and walkthrough-checklist links. Cross-release parity is unverified, and the rest of the bestiary remains unmodeled.
+- **Next work:** Complete the Mount Gulug enemy roster and variants, then work through every area and boss. Reconcile source hierarchy and version scope; capture enemy abilities, status/element interactions, drops/steals, and scripted behavior; link every one-time window to route cutoffs, missables, item recovery paths, and walkthrough context. Add meaningful location and encounter filters as coverage expands.
 - **Completion evidence:** Source-backed records for every enemy, encounter variant, and boss; version scope and disagreements are explicit; every one-time steal/drop window links to B02 and walkthrough context.
 - **Dependencies:** B01, B02, B05.
 

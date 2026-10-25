@@ -29,6 +29,8 @@ import {
   parseClock,
 } from "./data/excalibur2";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticTarget } from "./data/ates";
+import { enemyCatalogCoverage, enemyEncounters, enemyRecords, type EnemyFact, type EnemyRecord } from "./data/enemies";
+import { gameItems } from "./data/items";
 import {
   ateObjectiveDependencies,
   gameRouteCoverage,
@@ -567,10 +569,14 @@ function App() {
           {view === "missables" && <Missables profile={activeProfile} onToggle={toggleObjective} onAcknowledgeWarning={acknowledgeWarning} />}
           {view === "achievements" && <Achievements profile={activeProfile} platform={activeProfile.platform} onPlatformChange={(platform) => updateProfile({ platform })} onToggle={toggleObjective} onOpenChapter={openChapter} onOpenAteTracker={() => navigate("ates")} />}
           {view === "reference" && <Reference
+            profile={activeProfile}
             profileCount={library.profiles.length}
             profileMessage={profileMessage}
             onExport={exportProgress}
             onImport={() => importInput.current?.click()}
+            onToggleObjective={toggleObjective}
+            onOpenChapter={openChapter}
+            onNavigate={navigate}
           />}
         </main>
       </div>
@@ -1447,12 +1453,179 @@ function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenCha
   );
 }
 
-function Reference({ profileCount, profileMessage, onExport, onImport }: { profileCount: number; profileMessage: string; onExport: () => void; onImport: () => void }) {
+const enemyFieldLabels = {
+  level: "Level",
+  HP: "HP",
+  MP: "MP",
+  EXP: "EXP",
+  AP: "AP",
+  Gil: "Gil",
+} as const;
+
+const enemyFactLabels: Record<EnemyFact["category"], string> = {
+  type: "Type",
+  "elemental-weakness": "Weak to",
+  "elemental-resistance": "Resists",
+  "status-vulnerability": "Status weaknesses",
+  attack: "Attack",
+};
+
+const partialReferenceSections = new Set([
+  "Enemies and variants",
+  "Bosses",
+  "Items and equipment",
+  "Abilities and equipment sources",
+  "Synthesis",
+  "Treasures and field pickups",
+  "ATEs",
+  "Achievements",
+  "Locations and encounters",
+]);
+
+function Reference({ profile, profileCount, profileMessage, onExport, onImport, onToggleObjective, onOpenChapter, onNavigate }: {
+  profile: PlaythroughProfile;
+  profileCount: number;
+  profileMessage: string;
+  onExport: () => void;
+  onImport: () => void;
+  onToggleObjective: (id: string) => void;
+  onOpenChapter: (id: string) => void;
+  onNavigate: (view: View) => void;
+}) {
+  const [enemyQuery, setEnemyQuery] = useState("");
+  const [enemyKindFilter, setEnemyKindFilter] = useState<"all" | EnemyRecord["kind"]>("all");
+  const filteredEnemies = enemyRecords.filter((enemy) => {
+    if (enemyKindFilter !== "all" && enemy.kind !== enemyKindFilter) return false;
+    const query = enemyQuery.trim().toLowerCase();
+    if (!query) return true;
+    const relatedText = [
+      enemy.name,
+      ...enemy.facts.flatMap((fact) => [fact.label, fact.detail ?? ""]),
+      ...enemy.strategies.flatMap((strategy) => [strategy.title, strategy.detail]),
+      ...enemy.steals.map((entry) => lootItemName(entry.itemId, entry.itemName)),
+      ...enemy.drops.map((entry) => lootItemName(entry.itemId, entry.itemName)),
+    ].join(" ").toLowerCase();
+    return relatedText.includes(query);
+  });
+
   return (
     <>
-      <PageHeading eyebrow="SYSTEMS & DATA" title="Reference" lead="The reference database will connect each item, enemy, ability, and sidequest to its acquisition window and walkthrough context." />
+      <PageHeading eyebrow="SYSTEMS & DATA" title="Reference" lead="Browse the source-linked combat and collection records now available." />
+      <section className="enemy-reference" aria-labelledby="enemy-reference-heading">
+        <div className="enemy-reference-heading">
+          <div>
+            <div className="eyebrow">BESTIARY · PARTIAL COVERAGE</div>
+            <h2 id="enemy-reference-heading">Mount Gulug encounters</h2>
+            <p>{enemyRecords.length} enemy records · {enemyEncounters.length} fixed or boss encounters · {enemyCatalogCoverage.note}</p>
+          </div>
+          <button className="secondary-button" type="button" onClick={() => onOpenChapter("disc-3.lost-continent")}>Open walkthrough <span aria-hidden="true">→</span></button>
+        </div>
+        <div className="enemy-reference-toolbar">
+          <label className="enemy-search-label">
+            <Search size={15} aria-hidden="true" />
+            <span className="sr-only">Search enemy records</span>
+            <input type="search" value={enemyQuery} onChange={(event) => setEnemyQuery(event.target.value)} placeholder="Search names, items, attacks, or weaknesses" />
+          </label>
+          <label className="enemy-filter-label">
+            <span>Record type</span>
+            <select value={enemyKindFilter} onChange={(event) => setEnemyKindFilter(event.target.value as typeof enemyKindFilter)}>
+              <option value="all">All records</option>
+              <option value="ordinary">Ordinary enemy</option>
+              <option value="boss">Boss</option>
+            </select>
+          </label>
+        </div>
+        <div className="enemy-reference-list">
+          {filteredEnemies.map((enemy, index) => {
+            const statsByField = enemy.stats.reduce<Partial<Record<keyof typeof enemyFieldLabels, EnemyRecord["stats"]>>>(
+              (groups, claim) => ({ ...groups, [claim.field]: [...(groups[claim.field] ?? []), claim] }),
+              {},
+            );
+            const encounterTitles = enemy.encounterIds
+              .map((encounterId) => enemyEncounters.find((encounter) => encounter.id === encounterId)?.title)
+              .filter((title): title is string => Boolean(title));
+            const relatedMissables = enemy.missableIds
+              .map((missableId) => missables.find((record) => record.id === missableId))
+              .filter((record): record is MissableRecord => Boolean(record));
+            const linkedObjectives = [...new Set([...enemy.routeObjectiveIds, ...enemy.blueMagic.flatMap((entry) => entry.objectiveIds)])]
+              .map((objectiveId) => objectives.find((objective) => objective.id === objectiveId))
+              .filter((objective): objective is (typeof objectives)[number] => Boolean(objective));
+
+            return <details className="enemy-record" key={enemy.id}>
+              <summary className="enemy-record-summary">
+                <span className="reference-index">{String(index + 1).padStart(2, "0")}</span>
+                <span className="enemy-record-name"><strong>{enemy.name}</strong><small>{enemy.kind === "boss" ? "Story boss" : "Fixed encounter enemy"} · {encounterTitles.length} linked {encounterTitles.length === 1 ? "encounter" : "encounters"}</small></span>
+                <span className="enemy-record-scope">Disc III · Mount Gulug</span>
+                <ChevronDown className="enemy-record-chevron" size={16} aria-hidden="true" />
+              </summary>
+              <div className="enemy-record-body">
+                <p className="enemy-version-note">{enemy.versionScope}</p>
+                <div className="enemy-detail-grid">
+                  <section className="enemy-detail-section" aria-label={`${enemy.name} statistics`}>
+                    <h3>Statistics</h3>
+                    <dl className="enemy-stat-list">
+                      {Object.entries(enemyFieldLabels).map(([field, label]) => {
+                        const claims = statsByField[field as keyof typeof enemyFieldLabels] ?? [];
+                        if (claims.length === 0) return null;
+                        return <div key={field}><dt>{label}</dt><dd>{claims.map((claim) => <span className={claim.verification === "disputed" ? "enemy-stat-disputed" : ""} key={`${field}-${claim.value}`}>{claim.value.toLocaleString()}{claim.verification === "disputed" ? " · source difference" : ""}</span>)}</dd></div>;
+                      })}
+                    </dl>
+                  </section>
+                  <section className="enemy-detail-section" aria-label={`${enemy.name} steals and drops`}>
+                    <h3>Steal and drop tables</h3>
+                    <div className="enemy-loot-tables">
+                      {(["steals", "drops"] as const).map((tableName) => <div key={tableName}>
+                        <h4>{tableName === "steals" ? "Steals" : "Drops"}</h4>
+                        <dl>{enemy[tableName].map((entry) => <div key={`${tableName}-${entry.slot}`}>
+                          <dt>{entry.slot}</dt>
+                          <dd>{lootItemName(entry.itemId, entry.itemName)}{entry.note && <small>{entry.note}</small>}</dd>
+                        </div>)}</dl>
+                      </div>)}
+                    </div>
+                  </section>
+                  <section className="enemy-detail-section enemy-combat-facts" aria-label={`${enemy.name} combat details`}>
+                    <h3>Combat details</h3>
+                    <dl>{enemy.facts.map((fact, factIndex) => <div key={`${fact.category}-${factIndex}`}>
+                      <dt>{enemyFactLabels[fact.category]}</dt>
+                      <dd><strong>{fact.label}</strong>{fact.detail && <small>{fact.detail}</small>}</dd>
+                    </div>)}</dl>
+                    {enemy.blueMagic.length > 0 && <div className="enemy-blue-magic">
+                      <h4>Blue Magic</h4>
+                      {enemy.blueMagic.map((entry) => <p key={entry.name}><strong>{entry.name}</strong> — Quina learns it with {entry.command}.</p>)}
+                    </div>}
+                  </section>
+                  <section className="enemy-detail-section" aria-label={`${enemy.name} route notes`}>
+                    <h3>Route notes</h3>
+                    <ul className="enemy-strategies">{enemy.strategies.map((strategy) => <li key={strategy.title}><strong>{strategy.title}</strong><span>{strategy.detail}</span></li>)}</ul>
+                    {enemy.notes.map((note) => <p className="enemy-conflict-note" key={note}>{note}</p>)}
+                    {relatedMissables.length > 0 && <div className="enemy-cutoff-links">
+                      {relatedMissables.map((record) => <p key={record.id}><strong>One-time window:</strong> {record.deadline} <button type="button" className="inline-link" onClick={() => onNavigate("missables")}>Review missable</button></p>)}
+                    </div>}
+                    {linkedObjectives.length > 0 && <div className="enemy-objectives">
+                      {linkedObjectives.map((objective) => <label className="chapter-objective enemy-objective" key={objective.id}>
+                        <input type="checkbox" checked={objectiveIsComplete(profile, objective.id)} onChange={() => onToggleObjective(objective.id)} />
+                        <span className="custom-check"><Check size={12} /></span>
+                        <span>{objective.title}</span>
+                      </label>)}
+                    </div>}
+                  </section>
+                </div>
+                <div className="enemy-source-list"><span>Sources</span>{enemy.sourceIds.map((sourceId) => {
+                  const source = sources.find((item) => item.id === sourceId);
+                  return source ? <a key={sourceId} href={source.url} target="_blank" rel="noreferrer">{source.title}<ExternalLink size={11} aria-hidden="true" /></a> : null;
+                })}</div>
+              </div>
+            </details>;
+          })}
+          {filteredEnemies.length === 0 && <p className="empty-state">No enemy records match those filters.</p>}
+        </div>
+        <p className="enemy-coverage-footnote">The remaining Mount Gulug enemies, all other areas, and release-by-release parity are not yet catalogued. Unverified source differences stay visible in each record.</p>
+      </section>
       <section className="reference-coverage" aria-label="Reference database inventory">
-        {referenceInventory.map((item, index) => <div key={item} className="reference-row"><span className="reference-index">{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong><span className="status-label"><span className="state-dot planned" /> Planned</span></div>)}
+        {referenceInventory.map((item, index) => {
+          const partial = partialReferenceSections.has(item);
+          return <div key={item} className="reference-row"><span className="reference-index">{String(index + 1).padStart(2, "0")}</span><strong>{item}</strong><span className="status-label"><span className={`state-dot ${partial ? "partial" : "planned"}`} />{partial ? "Partial" : "Planned"}</span></div>;
+        })}
       </section>
       <section className="data-principles">
         <div><div className="eyebrow">CONTENT RELATIONSHIPS</div><h2>One objective, one progress ID.</h2><p>Walkthrough checklists and global reference trackers will point to the same stable objective IDs. Updating chapter text will not reset saved progress.</p></div>
@@ -1461,6 +1634,11 @@ function Reference({ profileCount, profileMessage, onExport, onImport }: { profi
       <div className="inventory-strip"><strong>Side-content inventory seed</strong><span>{sideContentInventory.length} activity headings identified for later verification.</span></div>
     </>
   );
+}
+
+function lootItemName(itemId: string | null, itemName?: string) {
+  if (itemId) return gameItems.find((item) => item.id === itemId)?.name ?? itemId;
+  return itemName ?? "Unrecorded";
 }
 
 function PageHeading({ eyebrow, title, lead }: { eyebrow: string; title: string; lead: string }) {

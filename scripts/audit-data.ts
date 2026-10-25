@@ -7,6 +7,7 @@ import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
+import { enemyCatalogCoverage, enemyEncounters, enemyRecords } from "../src/data/enemies.ts";
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -43,6 +44,8 @@ checkUnique("game route edge", gameRouteEdges.map((edge) => edge.id));
 checkUnique("game route link", gameRouteEdges.map((edge) => `${edge.fromChapterId}->${edge.toChapterId}`));
 checkUnique("game route cutoff", gameRouteCutoffs.map((cutoff) => cutoff.id));
 checkUnique("story party sequence", storyPartySequences.map((sequence) => sequence.id));
+checkUnique("enemy", enemyRecords.map((enemy) => enemy.id));
+checkUnique("enemy encounter", enemyEncounters.map((encounter) => encounter.id));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
@@ -52,11 +55,149 @@ const areaIds = new Set(guideAreas.map((area) => area.id));
 const walkthroughChapterIds = new Set(walkthroughChapters.map((chapter) => chapter.areaId));
 const gameRouteEdgesById = new Map(gameRouteEdges.map((edge) => [edge.id, edge]));
 const missablesById = new Map(missables.map((missable) => [missable.id, missable]));
+const objectivesById = new Map(objectives.map((objective) => [objective.id, objective]));
+const cutoffsById = new Map(gameRouteCutoffs.map((cutoff) => [cutoff.id, cutoff]));
 const achievementCatalogs = [
   { platform: "steam" as const, records: steamAchievements, expectedCount: achievementSourceCounts.steam.count },
   { platform: "ps4" as const, records: ps4Trophies, expectedCount: achievementSourceCounts.ps4.count },
   { platform: "xbox" as const, records: xboxAchievements, expectedCount: achievementSourceCounts.xbox.count },
 ];
+
+if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
+for (const chapterId of enemyCatalogCoverage.chapterIds) {
+  if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);
+  if (!walkthroughChapterIds.has(chapterId)) errors.push(`Enemy reference chapter ${chapterId} has no authored walkthrough.`);
+}
+if (new Set(enemyCatalogCoverage.enemyIds).size !== enemyCatalogCoverage.enemyIds.length) errors.push("Enemy coverage repeats an enemy ID.");
+if (new Set(enemyCatalogCoverage.encounterIds).size !== enemyCatalogCoverage.encounterIds.length) errors.push("Enemy coverage repeats an encounter ID.");
+if (enemyCatalogCoverage.enemyIds.length !== enemyRecords.length || enemyCatalogCoverage.enemyIds.some((id) => !enemyRecords.some((enemy) => enemy.id === id))) {
+  errors.push("Enemy coverage inventory does not match the authored enemy records.");
+}
+if (enemyCatalogCoverage.encounterIds.length !== enemyEncounters.length || enemyCatalogCoverage.encounterIds.some((id) => !enemyEncounters.some((encounter) => encounter.id === id))) {
+  errors.push("Enemy coverage inventory does not match the authored encounter groups.");
+}
+if (!enemyCatalogCoverage.note.trim()) errors.push("Enemy reference coverage has no scope note.");
+
+const supportedEnemyStatFields = new Set(["level", "HP", "MP", "EXP", "AP", "Gil"]);
+const supportedEnemyVerifications = new Set(["cross-checked", "single-source", "disputed"]);
+const supportedEnemyFactCategories = new Set(["type", "elemental-weakness", "elemental-resistance", "status-vulnerability", "attack"]);
+const supportedEnemyLootSlots = new Set(["always", "common", "uncommon", "semi-rare", "rare"]);
+function validateEnemyReferences(label: string, linkedObjectiveIds: string[], linkedMissableIds: string[], linkedCutoffIds: string[], chapterId: string) {
+  for (const objectiveId of linkedObjectiveIds) {
+    const objective = objectivesById.get(objectiveId);
+    if (!objective) {
+      errors.push(`${label} references unknown objective ${objectiveId}.`);
+      continue;
+    }
+    if (objective.chapterIds?.length && !objective.chapterIds.includes(chapterId)) {
+      errors.push(`${label} links objective ${objectiveId}, which is not assigned to ${chapterId}.`);
+    }
+    const linkedSteps = walkthroughChapters
+      .filter((chapter) => chapter.areaId === chapterId)
+      .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps.filter((step) => step.objectiveIds?.includes(objectiveId))));
+    if (linkedSteps.length === 0) errors.push(`${label} objective ${objectiveId} has no checklist pointer in ${chapterId}.`);
+  }
+  for (const missableId of linkedMissableIds) {
+    if (!missablesById.has(missableId)) errors.push(`${label} references unknown missable ${missableId}.`);
+    const hasCutoffLink = linkedCutoffIds.some((cutoffId) => cutoffsById.get(cutoffId)?.missableIds.includes(missableId));
+    if (!hasCutoffLink) errors.push(`${label} links missable ${missableId} without a matching route cutoff.`);
+  }
+  for (const cutoffId of linkedCutoffIds) {
+    const cutoff = cutoffsById.get(cutoffId);
+    if (!cutoff) errors.push(`${label} references unknown route cutoff ${cutoffId}.`);
+    else if (!cutoff.missableIds.some((missableId) => linkedMissableIds.includes(missableId))) {
+      errors.push(`${label} cutoff ${cutoffId} is not linked to one of its missable warnings.`);
+    }
+  }
+}
+
+for (const enemy of enemyRecords) {
+  if (enemy.coverage !== "partial") errors.push(`Enemy ${enemy.id} must remain partial until its source and version audit is complete.`);
+  if (!enemy.name.trim() || !enemy.versionScope.trim()) errors.push(`Enemy ${enemy.id} has no name or version scope.`);
+  if (!areaIds.has(enemy.chapterId) || !walkthroughChapterIds.has(enemy.chapterId)) errors.push(`Enemy ${enemy.id} references a missing walkthrough chapter ${enemy.chapterId}.`);
+  if (enemy.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} has no source provenance.`);
+  for (const sourceId of enemy.sourceIds) if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} references unknown source ${sourceId}.`);
+  for (const encounterId of enemy.encounterIds) {
+    const encounter = enemyEncounters.find((candidate) => candidate.id === encounterId);
+    if (!encounter) errors.push(`Enemy ${enemy.id} references unknown encounter ${encounterId}.`);
+    else if (!encounter.formation.some((entry) => entry.enemyId === enemy.id)) errors.push(`Enemy ${enemy.id} is absent from linked encounter ${encounterId}.`);
+  }
+  const claimsByField = new Map<string, typeof enemy.stats>();
+  for (const claim of enemy.stats) {
+    if (!supportedEnemyStatFields.has(claim.field)) errors.push(`Enemy ${enemy.id} has unsupported stat field ${claim.field}.`);
+    if (!Number.isFinite(claim.value) || claim.value < 0) errors.push(`Enemy ${enemy.id} has an invalid ${claim.field} value.`);
+    if (!supportedEnemyVerifications.has(claim.verification)) errors.push(`Enemy ${enemy.id} has unsupported stat verification ${claim.verification}.`);
+    if (claim.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} ${claim.field} claim has no source provenance.`);
+    for (const sourceId of claim.sourceIds) {
+      if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} ${claim.field} claim references unknown source ${sourceId}.`);
+      else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits ${sourceId} from its record source list.`);
+    }
+    claimsByField.set(claim.field, [...(claimsByField.get(claim.field) ?? []), claim]);
+  }
+  for (const [field, claims] of claimsByField) {
+    if (claims.length > 1 && claims.some((claim) => claim.verification !== "disputed")) {
+      errors.push(`Enemy ${enemy.id} has conflicting ${field} claims without marking every claim disputed.`);
+    }
+  }
+  for (const tableName of ["steals", "drops"] as const) {
+    const seenSlots = new Set<string>();
+    for (const entry of enemy[tableName]) {
+      if (!supportedEnemyLootSlots.has(entry.slot)) errors.push(`Enemy ${enemy.id} has unsupported ${tableName} slot ${entry.slot}.`);
+      if (seenSlots.has(entry.slot)) errors.push(`Enemy ${enemy.id} repeats ${tableName} slot ${entry.slot}.`);
+      seenSlots.add(entry.slot);
+      if (entry.itemId && !gameItemIds.has(entry.itemId)) errors.push(`Enemy ${enemy.id} ${tableName} slot ${entry.slot} references unknown item ${entry.itemId}.`);
+      if (!entry.itemId && !entry.itemName?.trim()) errors.push(`Enemy ${enemy.id} ${tableName} slot ${entry.slot} has no item result.`);
+      if (entry.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} ${tableName} slot ${entry.slot} has no source provenance.`);
+      for (const sourceId of entry.sourceIds) {
+        if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} ${tableName} slot ${entry.slot} references unknown source ${sourceId}.`);
+        else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits ${sourceId} from its record source list.`);
+      }
+    }
+  }
+  for (const fact of enemy.facts) {
+    if (!supportedEnemyFactCategories.has(fact.category)) errors.push(`Enemy ${enemy.id} has unsupported combat fact ${fact.category}.`);
+    if (!fact.label.trim()) errors.push(`Enemy ${enemy.id} has a blank combat fact.`);
+    if (fact.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} combat fact ${fact.label} has no source provenance.`);
+    for (const sourceId of fact.sourceIds) {
+      if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} combat fact references unknown source ${sourceId}.`);
+      else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits ${sourceId} from its record source list.`);
+    }
+  }
+  for (const skill of enemy.blueMagic) {
+    if (!skill.name.trim() || !skill.command.trim()) errors.push(`Enemy ${enemy.id} has an incomplete Blue Magic record.`);
+    validateEnemyReferences(`Enemy ${enemy.id} Blue Magic ${skill.name}`, skill.objectiveIds, [], [], enemy.chapterId);
+    for (const sourceId of skill.sourceIds) {
+      if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} Blue Magic ${skill.name} references unknown source ${sourceId}.`);
+      else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits ${sourceId} from its record source list.`);
+    }
+  }
+  for (const strategy of enemy.strategies) {
+    if (!strategy.title.trim() || !strategy.detail.trim()) errors.push(`Enemy ${enemy.id} has an incomplete battle strategy.`);
+    if (strategy.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} strategy ${strategy.title} has no source provenance.`);
+    for (const sourceId of strategy.sourceIds) {
+      if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} strategy references unknown source ${sourceId}.`);
+      else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits ${sourceId} from its record source list.`);
+    }
+  }
+  validateEnemyReferences(`Enemy ${enemy.id}`, enemy.routeObjectiveIds, enemy.missableIds, enemy.cutoffIds, enemy.chapterId);
+  for (const encounterId of enemy.encounterIds) if (!enemyCatalogCoverage.encounterIds.includes(encounterId)) errors.push(`Enemy ${enemy.id} encounter ${encounterId} is missing from coverage inventory.`);
+}
+
+for (const encounter of enemyEncounters) {
+  if (!enemyCatalogCoverage.chapterIds.includes(encounter.chapterId)) errors.push(`Enemy encounter ${encounter.id} is outside the declared coverage chapter scope.`);
+  if (!areaIds.has(encounter.chapterId) || !walkthroughChapterIds.has(encounter.chapterId)) errors.push(`Enemy encounter ${encounter.id} references a missing walkthrough chapter ${encounter.chapterId}.`);
+  if (!encounter.title.trim() || !encounter.location.trim() || encounter.notes.length === 0) errors.push(`Enemy encounter ${encounter.id} is missing route context.`);
+  if (encounter.sourceIds.length === 0) errors.push(`Enemy encounter ${encounter.id} has no source provenance.`);
+  for (const sourceId of encounter.sourceIds) if (!sourceIds.has(sourceId)) errors.push(`Enemy encounter ${encounter.id} references unknown source ${sourceId}.`);
+  if (encounter.formation.length === 0) errors.push(`Enemy encounter ${encounter.id} has an empty formation.`);
+  for (const member of encounter.formation) {
+    const enemy = enemyRecords.find((record) => record.id === member.enemyId);
+    if (!enemy) errors.push(`Enemy encounter ${encounter.id} references unknown enemy ${member.enemyId}.`);
+    else if (!enemy.encounterIds.includes(encounter.id)) errors.push(`Enemy encounter ${encounter.id} is missing from ${member.enemyId}'s encounter links.`);
+    if (!Number.isInteger(member.quantity) || member.quantity < 1) errors.push(`Enemy encounter ${encounter.id} has an invalid quantity for ${member.enemyId}.`);
+  }
+  validateEnemyReferences(`Enemy encounter ${encounter.id}`, encounter.objectiveIds, encounter.missableIds, encounter.cutoffIds, encounter.chapterId);
+}
 
 if (activeTimeEvents.length !== 83) errors.push(`ATE index has ${activeTimeEvents.length} events; expected 83.`);
 if (movieCriticEligibleEvents.length !== 80) errors.push(`Movie Critic candidate list has ${movieCriticEligibleEvents.length} eligible ATE choices; expected 80.`);
@@ -503,6 +644,7 @@ console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} cove
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
 console.log(`Route cutoffs: ${gameRouteCutoffs.length} windows link ${linkedRouteMissableIds.size}/${missables.length} missable warnings; ${missables.filter((record) => record.severity === "high" || record.severity === "critical").length} high/critical records are included.`);
 console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
+console.log(`Enemy reference: ${enemyRecords.length} partial record(s) across ${enemyCatalogCoverage.chapterIds.length} chapter slice(s), with ${enemyEncounters.length} fixed/boss encounter group(s).`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);
 if (errors.length > 0) process.exitCode = 1;

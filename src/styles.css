@@ -536,6 +536,64 @@ h1, h2, p { margin-top: 0; }
 .achievement-missable-list { color: #9a6737; }
 .achievement-missable-list summary { width: fit-content; display: flex; align-items: flex-start; gap: 4px; cursor: pointer; }
 .achievement-missable-list ul { display: grid; gap: 4px; margin: 5px 0 0; padding-left: 17px; }
+.enemy-reference { margin: 4px 0 34px; padding-top: 18px; border-top: 1px solid var(--hairline); }
+.enemy-reference-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 18px; }
+.enemy-reference-heading h2 { margin: 6px 0 5px; color: #36433e; font: 500 23px var(--serif); }
+.enemy-reference-heading p { max-width: 760px; margin: 0; color: #7b857e; font-size: 10px; line-height: 1.65; }
+.enemy-reference-heading > button { min-height: 37px; flex: 0 0 auto; }
+.enemy-reference-toolbar { display: grid; grid-template-columns: minmax(0, 1fr) 210px; gap: 12px; margin: 17px 0 8px; }
+.enemy-search-label { min-height: 42px; display: flex; align-items: center; gap: 9px; padding: 0 11px; color: #75847a; border: 1px solid #dedfd6; background: #fbfaf6; }
+.enemy-search-label:focus-within { border-color: #97aa9d; outline: 2px solid #e2e9df; }
+.enemy-search-label input { width: 100%; min-width: 0; height: 40px; color: #394740; border: 0; outline: 0; background: transparent; font: inherit; font-size: 11px; }
+.enemy-search-label input::placeholder { color: #a3a79f; }
+.enemy-filter-label { display: grid; gap: 4px; color: #818a83; font-size: 9px; }
+.enemy-filter-label select { min-height: 42px; padding: 0 10px; color: #46534d; border: 1px solid #dedfd6; border-radius: 0; background: #fbfaf6; font: inherit; font-size: 11px; }
+.enemy-reference-list { border-top: 1px solid var(--hairline); }
+.enemy-record { border-bottom: 1px solid var(--hairline); }
+.enemy-record-summary { min-height: 62px; display: grid; grid-template-columns: 36px minmax(0, 1fr) minmax(130px, auto) 20px; align-items: center; gap: 10px; padding: 8px 5px; list-style: none; cursor: pointer; }
+.enemy-record-summary::-webkit-details-marker { display: none; }
+.enemy-record-summary::marker { content: ""; }
+.enemy-record-summary:hover .enemy-record-name strong { color: #52756f; }
+.enemy-record-summary:focus-visible { outline: 2px solid #a17f3d; outline-offset: 2px; }
+.enemy-record-name { min-width: 0; display: grid; gap: 4px; }
+.enemy-record-name strong { color: #394741; font: 500 17px var(--serif); }
+.enemy-record-name small { color: #89918a; font-size: 9px; }
+.enemy-record-scope { color: #8c958e; font: 8px var(--mono); text-align: right; }
+.enemy-record-chevron { color: #839087; transition: transform .16s ease; }
+.enemy-record[open] .enemy-record-chevron { transform: rotate(180deg); }
+.enemy-record-body { padding: 4px 2px 18px 41px; }
+.enemy-version-note { margin: 0 0 12px; color: #8a9089; font-size: 9px; }
+.enemy-detail-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 24px; row-gap: 18px; }
+.enemy-detail-section { min-width: 0; padding-top: 10px; border-top: 1px solid #eae8df; }
+.enemy-detail-section h3 { margin: 0 0 9px; color: #48574f; font: 600 10px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.enemy-stat-list, .enemy-loot-tables dl, .enemy-combat-facts > dl { display: grid; gap: 6px; margin: 0; }
+.enemy-stat-list > div, .enemy-loot-tables dl > div, .enemy-combat-facts > dl > div { min-width: 0; display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 9px; }
+.enemy-stat-list dt, .enemy-loot-tables dt, .enemy-combat-facts dt { color: #869087; font-size: 9px; }
+.enemy-stat-list dd, .enemy-loot-tables dd, .enemy-combat-facts dd { display: grid; gap: 3px; margin: 0; color: #53615a; font-size: 10px; line-height: 1.55; }
+.enemy-stat-list dd span { display: block; }
+.enemy-stat-list .enemy-stat-disputed { color: #8b6641; }
+.enemy-loot-tables { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.enemy-loot-tables h4, .enemy-blue-magic h4 { margin: 0 0 6px; color: #63766d; font-size: 9px; font-weight: 600; }
+.enemy-loot-tables dl > div { grid-template-columns: 65px minmax(0, 1fr); gap: 6px; }
+.enemy-loot-tables dd small, .enemy-combat-facts dd small { color: #858e87; font-size: 9px; line-height: 1.5; }
+.enemy-blue-magic { margin-top: 11px; padding-top: 10px; border-top: 1px solid #edebe4; }
+.enemy-blue-magic p { margin: 0; color: #56645d; font-size: 10px; line-height: 1.55; }
+.enemy-blue-magic strong { color: #476b5f; }
+.enemy-strategies { display: grid; gap: 9px; margin: 0; padding: 0; list-style: none; }
+.enemy-strategies li { display: grid; gap: 3px; color: #56645d; font-size: 10px; line-height: 1.55; }
+.enemy-strategies li strong { color: #4b6258; font-weight: 600; }
+.enemy-conflict-note { margin: 10px 0 0; padding-left: 9px; color: #846b48; border-left: 2px solid #c5ac74; font-size: 9px; line-height: 1.55; }
+.enemy-cutoff-links { display: grid; gap: 5px; margin-top: 11px; }
+.enemy-cutoff-links p { margin: 0; color: #866443; font-size: 9px; line-height: 1.55; }
+.enemy-cutoff-links .inline-link { margin-left: 4px; color: #58756b; font-size: 9px; }
+.enemy-objectives { display: grid; gap: 3px; margin-top: 11px; padding-top: 8px; border-top: 1px solid #edebe4; }
+.enemy-objective { margin: 0; padding: 5px 0; color: #536b61; font-size: 10px; }
+.enemy-objective .custom-check { width: 18px; height: 18px; }
+.enemy-source-list { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 13px; margin-top: 14px; padding-top: 10px; border-top: 1px solid #eae8df; }
+.enemy-source-list > span { color: #929991; font: 8px var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+.enemy-source-list a { display: inline-flex; align-items: center; gap: 4px; color: #5a786c; font-size: 9px; text-decoration: none; }
+.enemy-source-list a:hover { text-decoration: underline; }
+.enemy-coverage-footnote { margin: 12px 0 0; color: #8e958e; font-size: 9px; line-height: 1.6; }
 .reference-coverage { border-top: 1px solid var(--hairline); }
 .reference-row { min-height: 47px; display: grid; grid-template-columns: 38px 1fr 110px; align-items: center; gap: 11px; padding: 7px 5px; border-bottom: 1px solid var(--hairline); }
 .reference-index { color: #b0a17e; font: 9px var(--mono); }
@@ -681,6 +739,17 @@ h1, h2, p { margin-top: 0; }
   .achievement-entry-state { display: none; }
   .achievement-source-row .status-label { grid-column: 2; }
   .achievement-source-row > a { grid-column: 3; grid-row: 1; }
+  .enemy-reference-heading { align-items: flex-start; flex-direction: column; gap: 10px; }
+  .enemy-reference-heading > button { min-height: 40px; }
+  .enemy-reference-toolbar { grid-template-columns: minmax(0, 1fr); }
+  .enemy-record-summary { grid-template-columns: 26px minmax(0, 1fr) 18px; gap: 7px; }
+  .enemy-record-scope { display: none; }
+  .enemy-record-name strong { font-size: 16px; }
+  .enemy-record-body { padding-left: 0; }
+  .enemy-detail-grid { grid-template-columns: minmax(0, 1fr); gap: 14px; }
+  .enemy-stat-list > div, .enemy-loot-tables dl > div, .enemy-combat-facts > dl > div { grid-template-columns: 78px minmax(0, 1fr); }
+  .enemy-loot-tables { grid-template-columns: 1fr; gap: 11px; }
+  .enemy-source-list { align-items: flex-start; flex-direction: column; gap: 6px; }
   .reference-row { grid-template-columns: 27px minmax(0, 1fr) auto; gap: 6px; }
   .reference-row .status-label { font-size: 8px; }
   .data-principles { grid-template-columns: 1fr; }
