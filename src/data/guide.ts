@@ -5726,7 +5726,7 @@ export const objectives: GameObjective[] = [
   },
   {
     id: "disc-4.return-to-gaia.island-blue-magic",
-    title: "Check Disc IV island encounters for any missing Earth Shake or LV5 Death",
+    title: "Check Disc IV island encounters for any missing Auto-Life, Earth Shake, or LV5 Death",
     category: "collection",
     sourceIds: ["gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
     chapterIds: ["disc-4.return-to-gaia"],

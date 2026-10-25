@@ -3622,7 +3622,7 @@ if (
   || !returnToGaiaWorldMap?.sourceIds.includes("rpgclassics-bestiary-c-g")
   || !disc4IslandStep?.text.includes("Adamantoise")
   || !disc4IslandStep.text.includes("Dracozombie")
-  || !disc4IslandStep.detail.includes("exact encounter tiles")
+  || !disc4IslandStep.detail.toLowerCase().includes("exact encounter tiles")
   || !disc4IslandPool.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
   || !disc4IslandStep.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
   || !objectivesById.get("disc-4.return-to-gaia.island-blue-magic")?.chapterIds?.includes("disc-4.return-to-gaia")
@@ -3630,6 +3630,67 @@ if (
   || !sources.some((source) => source.id === "rpgclassics-bestiary-c-g")
 ) {
   errors.push("The Disc IV island enemy group must connect Adamantoise and Dracozombie to both bestiary sources, Blue Magic recovery, and explicit partial-location limits.");
+}
+const highSeasGimmeCatPool = enemyEncounters.find((encounter) => encounter.id === "encounter.on-the-high-seas.gimme-cat-island-grass");
+const disc4GimmeCatPool = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-gaia.sacrobless-gimme-cat");
+const gimmeCat = enemyRecords.find((enemy) => enemy.id === "enemy.gimme-cat");
+const highSeasLanarSection = highSeasWalkthrough?.sections.find((section) => section.id === "high-seas-lanar-island");
+const highSeasGimmeCatStep = highSeasLanarSection?.steps.find((step) => step.id === "high-seas-lanar-blue-magic");
+const disc4GimmeCatStep = returnToGaiaWorldMap?.steps.find((step) => step.id === "gaia-return-island-enemy-check");
+const disc4GimmeCatObjective = objectivesById.get("disc-4.return-to-gaia.island-blue-magic");
+if (
+  !highSeasGimmeCatPool
+  || highSeasGimmeCatPool.kind !== "random-pool"
+  || highSeasGimmeCatPool.chapterId !== "disc-3.on-the-high-seas"
+  || highSeasGimmeCatPool.formation.length !== 1
+  || highSeasGimmeCatPool.formation[0]?.enemyId !== "enemy.gimme-cat"
+  || highSeasGimmeCatPool.formation[0]?.quantity !== null
+  || !highSeasGimmeCatPool.location.includes("Grassland")
+  || !highSeasGimmeCatPool.notes.some((note) => note.includes("exact tiles") && note.includes("complete local roster"))
+  || !highSeasGimmeCatPool.objectiveIds.includes("disc-3.on-the-high-seas.blue-magic")
+  || !disc4GimmeCatPool
+  || disc4GimmeCatPool.kind !== "random-pool"
+  || disc4GimmeCatPool.chapterId !== "disc-4.return-to-gaia"
+  || disc4GimmeCatPool.formation.length !== 1
+  || disc4GimmeCatPool.formation[0]?.enemyId !== "enemy.gimme-cat"
+  || disc4GimmeCatPool.formation[0]?.quantity !== null
+  || !disc4GimmeCatPool.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || !disc4GimmeCatPool.sourceIds.includes("rpgclassics-bestiary-c-g")
+  || !disc4GimmeCatPool.notes.some((note) => note.includes("not a complete island roster") && note.includes("Friendly Creature"))
+  || !disc4GimmeCatPool.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
+  || !gimmeCat
+  || gimmeCat.kind !== "ordinary"
+  || gimmeCat.chapterId !== "disc-3.on-the-high-seas"
+  || !gimmeCat.encounterIds.includes(highSeasGimmeCatPool?.id ?? "")
+  || !gimmeCat.encounterIds.includes(disc4GimmeCatPool?.id ?? "")
+  || !enemyCatalogCoverage.enemyIds.includes("enemy.gimme-cat")
+  || !gimmeCat.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || !gimmeCat.sourceIds.includes("rpgclassics-bestiary-c-g")
+  || !gimmeCat.stats.some((stat) => stat.field === "level" && stat.value === 36)
+  || !gimmeCat.stats.some((stat) => stat.field === "HP" && stat.value === 4683)
+  || !gimmeCat.stats.some((stat) => stat.field === "MP" && stat.value === 1240)
+  || !gimmeCat.stats.some((stat) => stat.field === "Gil" && stat.value === 5000)
+  || !gimmeCat.steals.some((slot) => slot.itemId === "game-item.echo-screen")
+  || !gimmeCat.steals.some((slot) => slot.itemId === "game-item.tent")
+  || !gimmeCat.steals.some((slot) => slot.itemId === "game-item.ether")
+  || !gimmeCat.drops.some((slot) => slot.itemId === "game-item.phoenix-down")
+  || !gimmeCat.facts.some((fact) => fact.category === "elemental-resistance" && fact.label === "All elements absorbed")
+  || !gimmeCat.blueMagic.some((skill) => skill.name === "Auto-Life" && skill.command === "Eat" && skill.objectiveIds.includes("disc-3.on-the-high-seas.blue-magic"))
+  || !gimmeCat.strategies.some((strategy) => strategy.title.includes("Diamond") && strategy.detail.includes("not a Friendly Creature"))
+  || !gimmeCat.strategies.some((strategy) => strategy.title.includes("non-elemental"))
+  || !highSeasGimmeCatStep?.text.includes("Gimme Cat")
+  || !highSeasGimmeCatStep.text.includes("Keep your Diamond")
+  || !highSeasGimmeCatStep.objectiveIds?.includes("disc-3.on-the-high-seas.blue-magic")
+  || !highSeasLanarSection?.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || !highSeasLanarSection?.sourceIds.includes("rpgclassics-bestiary-c-g")
+  || !disc4GimmeCatStep?.text.includes("Gimme Cat")
+  || !disc4GimmeCatStep.detail.includes("Keep your Diamond")
+  || !disc4GimmeCatStep.objectiveIds?.includes("disc-4.return-to-gaia.island-blue-magic")
+  || !disc4GimmeCatObjective?.title.includes("Auto-Life")
+  || !disc4GimmeCatObjective?.chapterIds?.includes("disc-4.return-to-gaia")
+  || !disc4GimmeCatObjective.sourceIds.includes("rpgclassics-bestiary-c-g")
+) {
+  errors.push("Gimme Cat's Disc III and Disc IV opportunities must link the ordinary enemy profile, sourced Auto-Life and Diamond guidance, walkthrough objectives, and location limitations without implying a Friendly Creature exchange.");
 }
 const desertPalacePool = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.random-pool");
 const desertPalaceBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.valia-pira");

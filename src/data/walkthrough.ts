@@ -4056,7 +4056,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "high-seas-lanar-island",
         title: "Lanar Island — Qu's Marsh and the third frog pond",
         summary: "This southwestern island has a Qu's Marsh with a new frog pond and nearby encounters for Quina.",
-        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "gamerguides-side-questing-2", "gamefaqs-frog-catching-71891"],
+        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "gamerguides-side-questing-2", "gamefaqs-frog-catching-71891", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
         steps: [
           {
             id: "high-seas-lanar-frog-pond",
@@ -4068,8 +4068,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-lanar-blue-magic",
             kind: "optional",
-            text: "Use Quina's Eat command to learn any missing skills from this region: Earth Shake from Adamantoise in the marshland outside the pond, Bad Breath from Anemone inside Qu's Marsh, and Auto-Life from Gimme Cat in the nearby southwestern grasslands if Quina does not know it already.",
-            detail: "Gimme Cat is reported around Lanar Island and the Salvage Archipelago; it is in the grass rather than the marsh. Avoid attacking until it shifts into its attack stance because an early attack may draw a Comet counter. No enemy statistics or fixed Eat threshold are required by this route.",
+            text: "Use Quina's Eat command to learn any missing skills from this region: Earth Shake from Adamantoise in the marshland outside the pond, Bad Breath from Anemone inside Qu's Marsh, and Auto-Life from Gimme Cat in the nearby southwestern grasslands. Keep your Diamond; Gimme Cat is a hostile enemy, not a Friendly Creature exchange.",
+            detail: "Gimme Cat is reported around Lanar Island and the Salvage Archipelago; it is in the grass rather than the marsh. Avoid attacking until it shifts into its attack stance because an early attack may draw a Comet counter. It absorbs all elements, so use non-elemental damage. No fixed Eat threshold is established.",
             objectiveIds: ["disc-3.on-the-high-seas.blue-magic"],
           },
         ],
@@ -6016,8 +6016,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gaia-return-island-enemy-check",
             kind: "optional",
-            text: "If the enemy catalog or Quina's remaining Blue Magic is part of your goal, check the Disc IV field areas for Adamantoise and Dracozombie. RPGClassics names Lachenta Wetlands and Donna Plains for Adamantoise; Dracozombie is reported in multiple Disc IV locations.",
-            detail: "GameFAQs groups Adamantoise and Dracozombie under its Islands enemy heading. The bestiary sources do not give exact encounter tiles, a complete Disc IV roster, formations, or rates. If Quina is in the party and still needs Earth Shake or LV5 Death, use Eat on a weakened enemy.",
+            text: "If the enemy catalog or Quina's remaining Blue Magic is part of your goal, check Sacrobless Island/Daguerreo for Gimme Cat, Lachenta Wetlands or Donna Plains for Adamantoise, and the other Disc IV field areas for Dracozombie.",
+            detail: "GameFAQs groups Adamantoise and Dracozombie under its Islands enemy heading and lists Gimme Cat in the Daguerreo area; RPGClassics names Sacrobless Island for Gimme Cat and gives Disc IV locations for Adamantoise and broad Disc IV locations for Dracozombie. Exact encounter tiles, a complete Disc IV roster, formations, and rates are not established. Keep your Diamond, and use Eat on a weakened enemy for Auto-Life, Earth Shake, or LV5 Death if Quina still needs it.",
             objectiveIds: ["disc-4.return-to-gaia.island-blue-magic"],
           },
           {
