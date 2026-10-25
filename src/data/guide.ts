@@ -919,7 +919,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/the-evil-forest/",
     accessed: "2026-10-23",
-    notes: "Cross-check for ATE availability and conditions, Prison Cage survival, the crash-site Phoenix Down, the one-way forest route, and Movie Critic counting. Its 80 eligible/79 required wording is reconciled by three excluded tutorials and one mutually exclusive event.",
+    notes: "Cross-check for ATE availability and conditions, Prison Cage survival, the crash-site Phoenix Down, the one-way forest route, and Movie Critic counting. It states that 80 ATEs count, 79 must be viewed, and one is lost to a later choice; the tracker maps that maximum to 80 eligible entries with the mutually exclusive Treno branch pair. Direct game/release verification remains open.",
   },
   {
     id: "elitegrindlab-evil-forest",
