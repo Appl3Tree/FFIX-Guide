@@ -2161,6 +2161,65 @@ if (!soulcageStealWarning || !soulcageStealWarning.recovery.includes("Morrison's
     !soulcageStealWarning.sourceIds.includes("ffwiki-magician-cloak")) {
   errors.push("Soulcage's warning must distinguish lost steal copies from later Magician Cloak recovery and link its source.");
 }
+const firstIifaTreeRootPool = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.tree-roots-pool");
+const firstIifaTreeInnerPool = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.inner-roots-pool");
+const firstIifaTreeZombieTrio = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.fixed-zombie-trio");
+const firstIifaTreeFixedDracozombie = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.fixed-dracozombie");
+const firstIifaTreeSoulcageEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.soulcage");
+const firstIifaTreeSoulcage = enemyRecords.find((enemy) => enemy.id === "enemy.soulcage");
+const firstIifaTreeDracozombie = enemyRecords.find((enemy) => enemy.id === "enemy.dracozombie");
+const firstIifaTreeStroper = enemyRecords.find((enemy) => enemy.id === "enemy.stroper");
+const firstIifaTreeZombie = enemyRecords.find((enemy) => enemy.id === "enemy.zombie");
+const iifaTreeMyconid = enemyRecords.find((enemy) => enemy.id === "enemy.myconid");
+const firstIifaTreeExpectedRootRoster = new Set(["enemy.dracozombie", "enemy.myconid", "enemy.stroper", "enemy.zombie"]);
+const firstIifaTreeExpectedInnerRoster = new Set(["enemy.dracozombie", "enemy.stroper", "enemy.zombie"]);
+if (
+  firstIifaTreeRootPool?.chapterId !== "disc-2.iifa-tree" ||
+  firstIifaTreeRootPool.kind !== "random-pool" ||
+  firstIifaTreeRootPool.formation.length !== firstIifaTreeExpectedRootRoster.size ||
+  firstIifaTreeRootPool.formation.some(({ enemyId }) => !firstIifaTreeExpectedRootRoster.has(enemyId)) ||
+  !iifaTreeMyconid?.encounterIds.includes("encounter.iifa-tree.tree-roots-pool")
+) {
+  errors.push("The Disc II Iifa Tree Tree Roots pool must include Dracozombie, Myconid, Stroper, and Zombie with the shared Myconid record linked.");
+}
+if (
+  firstIifaTreeInnerPool?.chapterId !== "disc-2.iifa-tree" ||
+  firstIifaTreeInnerPool.kind !== "random-pool" ||
+  firstIifaTreeInnerPool.formation.length !== firstIifaTreeExpectedInnerRoster.size ||
+  firstIifaTreeInnerPool.formation.some(({ enemyId }) => !firstIifaTreeExpectedInnerRoster.has(enemyId)) ||
+  !firstIifaTreeInnerPool.objectiveIds.includes("disc-2.iifa-tree.lv5-death")
+) {
+  errors.push("The Disc II Iifa Tree Inner Roots pool must stay separate and link the later LV5 Death opportunity.");
+}
+if (
+  firstIifaTreeZombieTrio?.kind !== "fixed" ||
+  firstIifaTreeZombieTrio.formation[0]?.enemyId !== "enemy.zombie" ||
+  firstIifaTreeZombieTrio.formation[0]?.quantity !== 3 ||
+  firstIifaTreeFixedDracozombie?.kind !== "fixed" ||
+  firstIifaTreeFixedDracozombie.formation[0]?.enemyId !== "enemy.dracozombie" ||
+  firstIifaTreeFixedDracozombie.formation[0]?.quantity !== 1
+) {
+  errors.push("The Iifa Tree's fixed descent sequence must preserve its three-Zombie battle followed by one Dracozombie.");
+}
+if (
+  firstIifaTreeSoulcageEncounter?.kind !== "boss" ||
+  firstIifaTreeSoulcageEncounter.formation[0]?.enemyId !== "enemy.soulcage" ||
+  !firstIifaTreeSoulcageEncounter.objectiveIds.includes("disc-2.iifa-tree.soulcage-steals") ||
+  !firstIifaTreeSoulcageEncounter.missableIds.includes("missable.disc-2.iifa-tree.soulcage-steals") ||
+  firstIifaTreeSoulcage?.kind !== "boss" ||
+  !firstIifaTreeSoulcage.stats.some((claim) => claim.field === "HP" && claim.value === 9765 && claim.verification === "cross-checked") ||
+  !firstIifaTreeSoulcage.routeObjectiveIds.includes("disc-2.iifa-tree.soulcage-steals")
+) {
+  errors.push("Soulcage's Disc II boss record must preserve its cross-checked HP and connect the one-time steal warning.");
+}
+if (
+  !firstIifaTreeDracozombie?.blueMagic.some((claim) => claim.name === "LV5 Death" && claim.objectiveIds.includes("disc-2.iifa-tree.lv5-death")) ||
+  !firstIifaTreeStroper?.blueMagic.some((claim) => claim.name === "LV5 Death" && claim.objectiveIds.includes("disc-2.iifa-tree.lv5-death")) ||
+  !firstIifaTreeDracozombie.notes.some((note) => note.includes("Caves of Narshe") && note.includes("disagreement")) ||
+  !firstIifaTreeZombie?.notes.some((note) => note.includes("Caves of Narshe") && note.includes("disagreement"))
+) {
+  errors.push("The Iifa Tree LV5 Death teachers and unresolved Dracozombie/Zombie elemental reads must remain linked and source-marked.");
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

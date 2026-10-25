@@ -74,6 +74,7 @@ export type EnemyEncounter = {
 const gulugSources = ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
 const mountGulugChapterId = "disc-3.lost-continent";
 const pandemoniumChapterId = "disc-3.portal-to-another-world";
+const firstIifaTreeChapterId = "disc-2.iifa-tree";
 const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
 const memoriaChapterId = "disc-4.memoria";
 const finalBattleChapterId = "disc-4.the-final-battle";
@@ -175,6 +176,11 @@ const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
 const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
 const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+const firstIifaTreeEnemySources = [enemyListSourceId, "gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "elitegrindlab-iifa-tree"];
+const firstIifaTreeStealsObjectiveId = "disc-2.iifa-tree.soulcage-steals";
+const firstIifaTreeStealsMissableId = "missable.disc-2.iifa-tree.soulcage-steals";
+const firstIifaTreeStealsCutoffId = "cutoff.iifa-tree.soulcage-steals";
+const firstIifaTreeLv5DeathObjectiveId = "disc-2.iifa-tree.lv5-death";
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
 const pandemoniumStealsObjectiveId = "disc-3.portal-to-another-world.pandemonium-boss-steals";
 const pandemoniumClimaxObjectiveId = "disc-3.portal-to-another-world.pandemonium-climax";
@@ -1581,6 +1587,83 @@ const pandemoniumEncounters: EnemyEncounter[] = [
   },
 ];
 
+const firstIifaTreeEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.iifa-tree.tree-roots-pool",
+    title: "Tree Roots random encounters",
+    chapterId: firstIifaTreeChapterId,
+    location: "Outer roots before the elevator",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.dracozombie", quantity: null },
+      { enemyId: "enemy.myconid", quantity: null },
+      { enemyId: "enemy.stroper", quantity: null },
+      { enemyId: "enemy.zombie", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", enemyListSourceId],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route sources list these four enemy types in the Tree Roots. The roster does not imply exact mixed formations or encounter rates."],
+  },
+  {
+    id: "encounter.iifa-tree.inner-roots-pool",
+    title: "Inner Roots random encounters",
+    chapterId: firstIifaTreeChapterId,
+    location: "Inner roots beyond the elevator",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.dracozombie", quantity: null },
+      { enemyId: "enemy.stroper", quantity: null },
+      { enemyId: "enemy.zombie", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", enemyListSourceId],
+    objectiveIds: [firstIifaTreeLv5DeathObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Dracozombie and Stroper can teach Quina LV5 Death if Quina is available. EliteGrindLab reports that the lower-root encounter screens remain reachable after the one-time chest route closes."],
+  },
+  {
+    id: "encounter.iifa-tree.fixed-zombie-trio",
+    title: "Three Zombies — fixed descent battle",
+    chapterId: firstIifaTreeChapterId,
+    location: "Immediately after riding the platform down",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.zombie", quantity: 3 }],
+    sourceIds: ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This scripted battle precedes the Dracozombie fight after the party speaks with Vivi."],
+  },
+  {
+    id: "encounter.iifa-tree.fixed-dracozombie",
+    title: "Dracozombie — fixed descent battle",
+    chapterId: firstIifaTreeChapterId,
+    location: "After the Zombie trio and the prompt to speak with Vivi",
+    kind: "fixed",
+    formation: [{ enemyId: "enemy.dracozombie", quantity: 1 }],
+    sourceIds: ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This is a separate scripted battle, not a random formation."],
+  },
+  {
+    id: "encounter.iifa-tree.soulcage",
+    title: "Soulcage — Disc II boss",
+    chapterId: firstIifaTreeChapterId,
+    location: "Lower level, after examining the far-left field icon and speaking with Dagger",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.soulcage", quantity: 1 }],
+    sourceIds: firstIifaTreeEnemySources,
+    objectiveIds: [firstIifaTreeStealsObjectiveId],
+    missableIds: [firstIifaTreeStealsMissableId],
+    cutoffIds: [firstIifaTreeStealsCutoffId],
+    notes: ["This one-time boss encounter ends the Soulcage steal opportunity; Life defeats the undead boss immediately, so steal first if pursuing all three items."],
+  },
+];
+
 const iifaTreeEncounters: EnemyEncounter[] = [
   {
     id: "encounter.iifa-tree.nova-dragon",
@@ -1727,7 +1810,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...mountainPathEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -2054,6 +2137,149 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [pandemoniumStealsObjectiveId, pandemoniumClimaxObjectiveId],
     notes: ["HP claims are disputed: GameFAQs lists 42,383, Jegged 42,382, and EliteGrindLab 52,382. Ultima is part of the scripted ending rather than a continuing attack pattern. Light Robe remains source text because the current item catalog has not normalized it."],
   }, [pandemoniumStealsMissableId], [pandemoniumCutoffId]),
+];
+
+const firstIifaTreeEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.dracozombie",
+    name: "Dracozombie",
+    encounterIds: [
+      "encounter.iifa-tree.tree-roots-pool",
+      "encounter.iifa-tree.inner-roots-pool",
+      "encounter.iifa-tree.fixed-dracozombie",
+    ],
+    stats: enemyStats([["level", 24], ["HP", 2179], ["MP", 760], ["EXP", 3229], ["AP", 3], ["Gil", 941]]),
+    steals: [
+      enemyLoot("common", "game-item.magic-tag"),
+      enemyLoot("uncommon", "game-item.hi-potion"),
+      enemyLoot("semi-rare", null, "Nothing"),
+      enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"),
+      enemyLoot("common", "game-item.hi-potion"),
+      enemyLoot("uncommon", "game-item.phoenix-down"),
+      enemyLoot("rare", "game-item.ether"),
+    ],
+    facts: [
+      enemyFact("type", "Dragon and Undead"),
+      enemyFact("elemental-weakness", "Fire, Ice, and Holy"),
+      enemyFact("elemental-resistance", "Shadow damage halved"),
+      enemyFact("status-vulnerability", "Berserk, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Zombie Breath", "Can inflict Zombie on one character."),
+      enemyFact("attack", "LV5 Death", "KOs characters whose levels are multiples of five."),
+    ],
+    blueMagic: [{ name: "LV5 Death", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [firstIifaTreeLv5DeathObjectiveId] }],
+    strategies: [
+      { title: "Use undead damage while watching for two status attacks", detail: "Life defeats Dracozombie outright, and curative magic or items damage it. Zombie Breath can inflict Zombie; LV5 Death targets party members whose levels are multiples of five. Quina can use Eat to learn LV5 Death if the skill is still needed.", sourceIds: firstIifaTreeEnemySources },
+    ],
+    routeObjectiveIds: [firstIifaTreeLv5DeathObjectiveId],
+    notes: ["GameFAQs lists Fire, Ice, and Holy as weaknesses. EliteGrindLab reports its field-data read as Fire, Thunder, and Holy, while its Caves of Narshe cross-check reports Fire and Ice; retain the disagreement pending direct verification."],
+  }, firstIifaTreeChapterId, [...firstIifaTreeEnemySources, "cavesofnarshe-enemies", "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.stroper",
+    name: "Stroper",
+    encounterIds: ["encounter.iifa-tree.tree-roots-pool", "encounter.iifa-tree.inner-roots-pool"],
+    stats: enemyStats([["level", 21], ["HP", 1840], ["MP", 697], ["EXP", 2346], ["AP", 2], ["Gil", 915]]),
+    steals: [
+      enemyLoot("common", "game-item.soft"),
+      enemyLoot("uncommon", "game-item.peridot"),
+      enemyLoot("semi-rare", "game-item.phoenix-down"),
+      enemyLoot("rare", "game-item.peridot"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"),
+      enemyLoot("common", "game-item.peridot"),
+      enemyLoot("uncommon", "game-item.phoenix-down"),
+      enemyLoot("rare", "game-item.peridot"),
+    ],
+    facts: [
+      enemyFact("type", "Stone"),
+      enemyFact("elemental-weakness", "Fire"),
+      enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Silence", "Can silence the party."),
+      enemyFact("attack", "Gradual Petrify"),
+      enemyFact("attack", "Slap and Sweep", "Physical attacks against one or all characters."),
+    ],
+    blueMagic: [{ name: "LV5 Death", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [firstIifaTreeLv5DeathObjectiveId] }],
+    strategies: [{ title: "Use Soft; Stona does not work", detail: "A Soft instantly defeats Stroper. Its other notable threats are Silence and Gradual Petrify. Quina can use Eat to learn LV5 Death if the skill is still needed.", sourceIds: firstIifaTreeEnemySources }],
+    routeObjectiveIds: [firstIifaTreeLv5DeathObjectiveId],
+    notes: ["GameFAQs lists Stroper in both the Tree Roots and Inner Roots; the lower-root screen remains a later LV5 Death learning opportunity when Quina is available."],
+  }, firstIifaTreeChapterId, [...firstIifaTreeEnemySources, "gamefaqs-abilities-71891"]),
+  chapterEnemy({
+    id: "enemy.zombie",
+    name: "Zombie",
+    encounterIds: [
+      "encounter.iifa-tree.tree-roots-pool",
+      "encounter.iifa-tree.inner-roots-pool",
+      "encounter.iifa-tree.fixed-zombie-trio",
+    ],
+    stats: enemyStats([["level", 19], ["HP", 973], ["MP", 603], ["EXP", 1445], ["AP", 2], ["Gil", 708]]),
+    steals: [
+      enemyLoot("common", "game-item.magic-tag"),
+      enemyLoot("uncommon", "game-item.tent"),
+      enemyLoot("semi-rare", null, "Nothing"),
+      enemyLoot("rare", "game-item.ether"),
+    ],
+    drops: [
+      enemyLoot("always", null, "Nothing"),
+      enemyLoot("common", "game-item.magic-tag"),
+      enemyLoot("uncommon", "game-item.soft"),
+      enemyLoot("rare", null, "Nothing"),
+    ],
+    facts: [
+      enemyFact("type", "Undead"),
+      enemyFact("elemental-weakness", "Fire and Holy"),
+      enemyFact("elemental-resistance", "Shadow damage halved"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Roulette", "Can KO one random unit; Quina can learn this Blue Magic with Eat."),
+      enemyFact("attack", "Melt", "Kills the Zombie and deals its remaining HP as damage to one target."),
+    ],
+    blueMagic: [{ name: "Roulette", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
+    strategies: [{ title: "End the fight quickly with undead damage", detail: "Life defeats Zombie outright, and curative magic or items damage it. Roulette can KO a random unit, while Melt can deal the Zombie's remaining HP as damage to a target.", sourceIds: firstIifaTreeEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["The GameFAQs enemy table lists Fire and Holy weaknesses. EliteGrindLab reports the same Fire/Holy read from its field data but says Caves of Narshe lists Holy alone; retain the disagreement pending direct verification."],
+  }, firstIifaTreeChapterId, [...firstIifaTreeEnemySources, "cavesofnarshe-enemies", "gamefaqs-abilities-71891"]),
+  chapterBoss({
+    id: "enemy.soulcage",
+    name: "Soulcage",
+    encounterIds: ["encounter.iifa-tree.soulcage"],
+    stats: [
+      ...crossCheckedStats([["level", 26], ["HP", 9765]], ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "elitegrindlab-iifa-tree"]),
+      ...sourcedStats([["MP", 862], ["EXP", 0], ["AP", 9], ["Gil", 3800]], ["gamefaqs-iifa-tree-71891"]),
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.oak-staff", firstIifaTreeEnemySources),
+      sourcedLoot("uncommon", "game-item.magician-cloak", firstIifaTreeEnemySources),
+      sourcedLoot("semi-rare", "game-item.brigandine", firstIifaTreeEnemySources),
+      sourcedLoot("rare", null, firstIifaTreeEnemySources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.phoenix-pinion", firstIifaTreeEnemySources),
+      sourcedLoot("common", "game-item.elixir", firstIifaTreeEnemySources),
+      sourcedLoot("uncommon", "game-item.elixir", firstIifaTreeEnemySources),
+      sourcedLoot("rare", "game-item.elixir", firstIifaTreeEnemySources),
+    ],
+    facts: [
+      sourcedFact("type", "Undead", firstIifaTreeEnemySources),
+      sourcedFact("elemental-weakness", "Fire and Holy", firstIifaTreeEnemySources),
+      sourcedFact("elemental-resistance", "Shadow damage halved", firstIifaTreeEnemySources),
+      sourcedFact("status-vulnerability", "Darkness, Sleep, and Slow", firstIifaTreeEnemySources),
+      sourcedFact("attack", "LV5 Death", firstIifaTreeEnemySources, "KOs characters whose levels are multiples of five."),
+      sourcedFact("attack", "Mustard Bomb", firstIifaTreeEnemySources, "Inflicts Heat; a character who acts while heated is KO'd. Body Temp prevents Heat."),
+      sourcedFact("attack", "Shockwave and Leaf Swirl", firstIifaTreeEnemySources, "Party-wide damage."),
+      sourcedFact("attack", "Fira", firstIifaTreeEnemySources, "Single-target Fire damage."),
+      sourcedFact("attack", "Fire Blades counter", firstIifaTreeEnemySources, "Fire damage or a reflected Fira can trigger an accelerated phase that uses this powerful party-wide attack; Ice damage returns Soulcage to normal."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal before using Life", detail: "Attempt Oak Staff, Magician Cloak, and Brigandine before ending the one-time fight. Life defeats Soulcage immediately, so it closes the steal window; the nearby Brigandine chest remains a guaranteed copy.", sourceIds: firstIifaTreeEnemySources },
+      { title: "Avoid Fire despite the listed weakness", detail: "Fire damage, including Soulcage's reflected Fira, triggers the Fire Blades counter. Use non-Fire damage or its Sleep, Slow, and Darkness vulnerabilities while Zidane steals; Life is a fast finish after stealing is complete.", sourceIds: firstIifaTreeEnemySources },
+    ],
+    routeObjectiveIds: [firstIifaTreeStealsObjectiveId],
+    notes: ["GameFAQs, Jegged, and EliteGrindLab agree on level 26 and 9,765 HP. Published steal odds vary by rarity and rounding convention and are intentionally omitted. The Fire weakness is a tactical trap because Fire triggers the Fire Blades counter."],
+  }, firstIifaTreeChapterId, firstIifaTreeEnemySources, [firstIifaTreeStealsMissableId], [firstIifaTreeStealsCutoffId]),
 ];
 
 const iifaTreeEnemyRecords: EnemyRecord[] = [
@@ -3994,7 +4220,7 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.myconid",
     name: "Myconid",
-    encounterIds: ["encounter.magdalene-forest.dead-forest-pool"],
+    encounterIds: ["encounter.magdalene-forest.dead-forest-pool", "encounter.iifa-tree.tree-roots-pool"],
     stats: sourcedStats([["level", 20], ["HP", 1372], ["MP", 584], ["EXP", 1368], ["AP", 1], ["Gil", 726]], [enemyListSourceId]),
     steals: [
       sourcedLoot("common", "game-item.eye-drops", [enemyListSourceId]),
@@ -4020,8 +4246,8 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Mighty Guard", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [outerContinentBlueMagicObjectiveId] }],
     strategies: [{ title: "Use Fire and eat one for Mighty Guard", detail: "Myconid is weak to Fire and Wind, nullifies Earth, and Quina can learn Mighty Guard with Eat. Spore can inflict Darkness on the party.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
     routeObjectiveIds: [outerContinentBlueMagicObjectiveId],
-    notes: ["The Enemy List's Dead Forest table lists Eye Drops and Tent steals, Echo Screen and Ether drop slots, and Mighty Guard as its Eat result. Its roster section explicitly distinguishes this field area from the world-map forest."],
-  }, magdaleneForestChapterId, deadForestEnemySources),
+    notes: ["The Enemy List's Dead Forest table lists Eye Drops and Tent steals, Echo Screen and Ether drop slots, and Mighty Guard as its Eat result. The Iifa Tree walkthrough also lists Myconid in its Tree Roots pool; this reuses the same enemy record rather than creating a duplicate."],
+  }, magdaleneForestChapterId, [...deadForestEnemySources, "gamefaqs-iifa-tree-71891", "jegged-iifa-tree"]),
   chapterEnemy({
     id: "enemy.zemzelett",
     name: "Zemzelett",
@@ -4299,6 +4525,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...mountainPathEnemyRecords,
   ...pinnacleRocksEnemyRecords,
   ...fossilRooEnemyRecords,
+  ...firstIifaTreeEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -4422,8 +4649,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, mountainPathChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, scoped Lost Continent Feather Circle opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Conde Petie Mountain Path/Lucid Plains, Pinnacle Rocks, Fossil Roo, Disc II Iifa Tree roots and descent, scoped Lost Continent Feather Circle opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree slice includes the separate Tree Roots and Inner Roots pools, the fixed Zombie trio and Dracozombie descent battles, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
