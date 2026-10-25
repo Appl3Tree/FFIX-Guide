@@ -175,7 +175,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "guardhouse-pickup-mognet",
             kind: "save",
-            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached at least 50 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; it is separate from the earlier Kupo-to-Monty delivery. Read it before advancing the escape. A later Alexandria recovery is not confirmed.",
+            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached at least 50 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; it is separate from the earlier Kupo-to-Monty delivery. Read it before advancing the escape. Jump Rope returns later, but the letter's later availability is unconfirmed.",
             objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {

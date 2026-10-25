@@ -406,7 +406,7 @@ if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
 if (!jumpRopeLetterWarning || !jumpRopeLetterWarning.classification.includes("conditional") || jumpRopeLetterWarning.classification.includes("permanently-missable")) {
   errors.push("The Jump Rope Mognet letter warning must remain conditional without asserting permanent loss.");
 }
-if (!jumpRopeLetterWarning?.consequence.includes("whether the special letter remains readable during the later Alexandria return is unresolved")) {
+if (!jumpRopeLetterWarning?.consequence.includes("whether this Disc I letter remains readable during the Alexandria return is unresolved")) {
   errors.push("The Jump Rope Mognet letter warning must preserve the unresolved Disc III recovery question.");
 }
 if (jumpRopeLetterSteps.length !== 1 || jumpRopeLetterSteps[0]?.chapterId !== "disc-1.alexandria" || jumpRopeLetterSteps[0]?.step.id !== "guardhouse-pickup-mognet") {
