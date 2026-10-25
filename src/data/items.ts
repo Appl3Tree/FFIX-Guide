@@ -262,6 +262,7 @@ const oeilvertSources = ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-7
 const mountGulugSources = ["gamefaqs-lost-continent-71891", "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
 const tantarianSources = ["gamefaqs-return-to-alexandria-71891", "gamefaqs-trouble-on-home-front-71891", "gamefaqs-items-71891", "rpgclassics-bestiary-t-z", "jegged-return-to-alexandria-castle", "jegged-trouble-on-home-front", "gamerguides-alexandria-castle-2"];
 const cleyraSources = ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"];
+const iifaTreeSources = ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "elitegrindlab-iifa-tree", "rpgclassics-iifa-tree"];
 const alexandriaSources = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];
 const phoenixPinionSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "cavesofnarshe-ff9-items"];
 const gysahlGreensSources = ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "gamerguides-chocobo-hot-cold", "gamefaqs-cleyra-71891", "cavesofnarshe-ff9-items"];
@@ -2133,8 +2134,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources], verification: "partial" },
-  { id: "game-item.elixir", name: "Elixir", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources, ...mountGulugSources, ...tantarianSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "jegged-crystal-world", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], verification: "partial" },
+  { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources, ...iifaTreeSources], verification: "partial" },
+  { id: "game-item.elixir", name: "Elixir", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources, ...mountGulugSources, ...tantarianSources, ...iifaTreeSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "jegged-crystal-world", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], verification: "partial" },
   { id: "game-item.emerald", name: "Emerald", category: "consumable", sourceIds: oeilvertSources, verification: "partial" },
   { id: "game-item.echo-screen", name: "Echo Screen", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.red-hat", name: "Red Hat", category: "equipment", sourceIds: mountGulugSources, verification: "partial" },
@@ -2154,8 +2155,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.germinas-boots", name: "Germinas Boots", category: "equipment", sourceIds: [...burmeciaSources, ...germinasBootsReferenceSources], verification: "partial" },
   { id: "game-item.desert-boots", name: "Desert Boots", category: "equipment", sourceIds: [...desertBootsReferenceSources, ...burmeciaSources], verification: "partial" },
   { id: "game-item.protection-bell", name: "Protection Bell", category: "key-item", sourceIds: burmeciaSources, verification: "partial" },
-  { id: "game-item.ether", name: "Ether", category: "consumable", sourceIds: [...burmeciaSources, ...fossilRooSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", ...mountGulugSources, ...tantarianSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], verification: "partial" },
-  { id: "game-item.phoenix-down", name: "Phoenix Down", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-return-to-alexandria-71891", "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
+  { id: "game-item.ether", name: "Ether", category: "consumable", sourceIds: [...burmeciaSources, ...fossilRooSources, ...iifaTreeSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", ...mountGulugSources, ...tantarianSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"], verification: "partial" },
+  { id: "game-item.phoenix-down", name: "Phoenix Down", category: "consumable", sourceIds: [...burmeciaSources, ...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-return-to-alexandria-71891", "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
   { id: "game-item.gysahl-greens", name: "Gysahl Greens", category: "consumable", sourceIds: gysahlGreensSources, verification: "partial" },
   { id: "game-item.phoenix-pinion", name: "Phoenix Pinion", category: "consumable", sourceIds: [...alexandriaSources, ...phoenixPinionSources, "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-cleyra-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "gamefaqs-madain-sari-71891", "jegged-chocographs"], verification: "partial" },
   { id: "game-item.lapis-lazuli", name: "Lapis Lazuli", category: "equipment", sourceIds: alexandriaSources, verification: "partial" },
@@ -2187,7 +2188,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.glass-armlet", name: "Glass Armlet", category: "equipment", sourceIds: glassArmletReferenceSources, verification: "partial" },
   { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: leatherWristReferenceSources, verification: "partial" },
   { id: "game-item.kupo-nut", name: "Kupo Nut", category: "key-item", sourceIds: [...burmeciaSources, "gamefaqs-kupo-nuts-71891", "gamefaqs-moogle-faq-23306", ...mountGulugSources], verification: "partial" },
-  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...burmeciaSources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891"], verification: "partial" },
+  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...burmeciaSources, ...iifaTreeSources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891"], verification: "partial" },
   { id: "game-item.shield-armor", name: "Shield Armor", category: "equipment", sourceIds: oeilvertSources, verification: "partial" },
   { id: "game-item.power-vest", name: "Power Vest", category: "equipment", sourceIds: oeilvertSources, verification: "partial" },
   { id: "game-item.feather-boots", name: "Feather Boots", category: "equipment", sourceIds: [...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-on-the-high-seas-71891", "gamefaqs-treno-auction-71891", "gamefaqs-memoria-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
@@ -2206,6 +2207,10 @@ export const gameItems: GameItem[] = [
   { id: "game-item.leather-plate", name: "Leather Plate", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "jegged-lindblum", "jegged-dali"], verification: "partial" },
   { id: "game-item.mythril-vest", name: "Mythril Vest", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "gamefaqs-pinnacle-rocks-71891", "gamefaqs-journey-to-outer-continent-71891", "gamefaqs-lost-continent-71891", "gamefaqs-outer-continent-71891", "jegged-pinnacle-rocks", "jegged-esto-gaza", "cavesofnarshe-cleyra-walkthrough"], verification: "partial" },
   { id: "game-item.fairy-flute", name: "Fairy Flute", category: "equipment", sourceIds: fairyFluteReferenceSources, verification: "partial" },
+  { id: "game-item.healing-rod", name: "Healing Rod", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods", "rpgclassics-weapons", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.lamias-flute", name: "Lamia's Flute", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-flutes", "rpgclassics-weapons", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.brigandine", name: "Brigandine", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-brigandine", "rpgclassics-armor", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.magician-cloak", name: "Magician Cloak", category: "equipment", sourceIds: ["gamefaqs-iifa-tree-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-magician-cloak"], verification: "partial" },
   { id: "game-item.mythril-claws", name: "Mythril Claws", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.trident", name: "Trident", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-abilities-71891"], verification: "partial" },
   { id: "game-item.green-beret", name: "Green Beret", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
@@ -2723,6 +2728,84 @@ const zornThornStealPaths: ItemAcquisitionPath[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-armor"],
   },
 ];
+
+const iifaTreePickupPaths: ItemAcquisitionPath[] = ([
+  ["phoenix-down", "game-item.phoenix-down", "Backtrack after revealing the branch chest; the Phoenix Down is on the inner-root route."],
+  ["healing-rod", "game-item.healing-rod", "Push the hidden branch switch, return to the previous screen, and open the newly revealed Healing Rod chest."],
+  ["hi-potion", "game-item.hi-potion", "Search the edge of the winding inner-root descent for the Hi-Potion chest."],
+  ["ether-hidden", "game-item.ether", "Open the hidden chest in the right-side alcove on the descent. GameFAQs, EliteGrindLab, and RPGClassics list it; Jegged and Gamer Guides omit it."],
+  ["lamias-flute", "game-item.lamias-flute", "Take the branch chest containing Lamia's Flute on the inner-root descent."],
+  ["remedy", "game-item.remedy", "Take the Remedy chest on the lower inner-root side path before riding the platform down."],
+  ["elixir", "game-item.elixir", "At the bottom, open the chest near the foot of the stairs for the Elixir."],
+  ["brigandine", "game-item.brigandine", "At the bottom, check behind the central pillar for the hidden Brigandine chest before the Soulcage fight."],
+] as const).map(([slug, itemId, conditions]) => ({
+  id: `item-path.disc-2.iifa-tree.${slug}-chest`,
+  itemId,
+  chapterId: "disc-2.iifa-tree",
+  method: "chest",
+  quantity: 1,
+  availability: "single-use",
+  conditions,
+  walkthroughObjectiveIds: ["disc-2.iifa-tree.treasure-sweep"],
+  sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996"],
+}));
+
+const iifaTreeShopRecoveryInputs = ([
+  ["item-path.disc-3.forgotten-continent.healing-rod-oeilvert-mogshop", "game-item.healing-rod", "disc-3.forgotten-continent", "mogshop", "mimoza-oeilvert", "Mimoza's Mogshop (Oeilvert)", 1770, "limited-window", "Buy Healing Rod before Oeilvert closes after the Shimmering Island transition.", "cavesofnarshe-ff9-rods"],
+  ["item-path.disc-3.desert-palace.healing-rod-mogshop", "game-item.healing-rod", "disc-3.desert-palace", "mogshop", "mojito-desert-palace", "Mojito's Mogshop (Desert Palace)", 1770, "limited-window", "Buy Healing Rod before the Desert Palace closes after the Shimmering Island transition.", "cavesofnarshe-ff9-rods"],
+  ["item-path.disc-3.the-home-front.healing-rod-alexandria-shop", "game-item.healing-rod", "disc-3.the-home-front", "shop", "alexandria.weapon-shop.disc-3-4", "Alexandria Weapon Shop (Discs III–IV)", 1770, "repeatable", "Alexandria's later shop stock is a repeatable Healing Rod source.", "cavesofnarshe-ff9-rods"],
+  ["item-path.disc-3.card-tournament.healing-rod-treno-shop", "game-item.healing-rod", "disc-3.card-tournament", "shop", "treno.weapon-shop.disc-3-4", "Treno Weapon Shop (Discs III–IV)", 1770, "repeatable", "Treno's later shop stock is a repeatable Healing Rod source.", "cavesofnarshe-ff9-rods"],
+  ["item-path.disc-3.aerial-exploration.healing-rod-lindblum-shop", "game-item.healing-rod", "disc-3.aerial-exploration", "shop", "lindblum.weapon-shop.disc-3-4", "Lindblum Weapon/Item Shop (Discs III–IV)", 1770, "repeatable", "Lindblum's later shop stock is a repeatable Healing Rod source.", "cavesofnarshe-ff9-rods"],
+  ["item-path.disc-3.the-home-front.lamias-flute-alexandria-shop", "game-item.lamias-flute", "disc-3.the-home-front", "shop", "alexandria.weapon-shop.disc-3-4", "Alexandria Weapon Shop (Discs III–IV)", 3800, "repeatable", "Alexandria's later shop stock is a repeatable Lamia's Flute source.", "cavesofnarshe-ff9-flutes"],
+  ["item-path.disc-3.card-tournament.lamias-flute-treno-shop", "game-item.lamias-flute", "disc-3.card-tournament", "shop", "treno.weapon-shop.disc-3-4", "Treno Weapon Shop (Discs III–IV)", 3800, "repeatable", "Treno lists Lamia's Flute in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-flutes"],
+  ["item-path.disc-3.aerial-exploration.lamias-flute-lindblum-shop", "game-item.lamias-flute", "disc-3.aerial-exploration", "shop", "lindblum.weapon-shop.disc-3-4", "Lindblum Weapon/Item Shop (Discs III–IV)", 3800, "repeatable", "Lindblum lists Lamia's Flute in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-flutes"],
+  ["item-path.disc-3.ipsens-castle.lamias-flute-mogshop", "game-item.lamias-flute", "disc-3.ipsens-castle", "mogshop", "ipsens-castle.kumool-mogshop", "Kumool's Mogshop (Ipsen's Castle)", 3800, "window-unverified", "GameFAQs lists Lamia's Flute at Ipsen's Castle; exact shop access after the story visit is not independently verified.", "cavesofnarshe-ff9-flutes"],
+  ["item-path.disc-3.the-home-front.brigandine-alexandria-shop", "game-item.brigandine", "disc-3.the-home-front", "shop", "alexandria.weapon-shop.disc-3-4", "Alexandria Weapon Shop (Discs III–IV)", 4300, "repeatable", "Alexandria's later shop stock is a repeatable Brigandine source.", "cavesofnarshe-ff9-brigandine"],
+  ["item-path.disc-3.card-tournament.brigandine-treno-shop", "game-item.brigandine", "disc-3.card-tournament", "shop", "treno.weapon-shop.disc-3-4", "Treno Weapon Shop (Discs III–IV)", 4300, "repeatable", "Treno lists Brigandine in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-brigandine"],
+  ["item-path.disc-3.aerial-exploration.brigandine-lindblum-shop", "game-item.brigandine", "disc-3.aerial-exploration", "shop", "lindblum.weapon-shop.disc-3-4", "Lindblum Weapon/Item Shop (Discs III–IV)", 4300, "repeatable", "Lindblum lists Brigandine in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-brigandine"],
+  ["item-path.disc-3.forgotten-continent.brigandine-oeilvert-mogshop", "game-item.brigandine", "disc-3.forgotten-continent", "mogshop", "mimoza-oeilvert", "Mimoza's Mogshop (Oeilvert)", 4300, "limited-window", "Buy Brigandine before Oeilvert closes after the Shimmering Island transition.", "cavesofnarshe-ff9-brigandine"],
+  ["item-path.disc-3.desert-palace.brigandine-mogshop", "game-item.brigandine", "disc-3.desert-palace", "mogshop", "mojito-desert-palace", "Mojito's Mogshop (Desert Palace)", 4300, "limited-window", "Buy Brigandine before the Desert Palace closes after the Shimmering Island transition.", "cavesofnarshe-ff9-brigandine"],
+  ["item-path.disc-2.return-to-madain-sari.magician-cloak-morrison-mogshop", "game-item.magician-cloak", "disc-2.return-to-madain-sari", "mogshop", "madain-sari.morrison.weapon-shop", "Morrison's Mogshop (Madain Sari)", 1850, "repeatable", "GameFAQs lists Magician Cloak as a Madain Sari purchase after the Iifa Tree visit.", "ffwiki-magician-cloak"],
+  ["item-path.disc-3.the-home-front.magician-cloak-alexandria-shop", "game-item.magician-cloak", "disc-3.the-home-front", "shop", "alexandria.weapon-shop.disc-3-4", "Alexandria Weapon Shop (Discs III–IV)", 1850, "repeatable", "Alexandria's later weapon stock sells Magician Cloak for 1,850 Gil.", "ffwiki-magician-cloak"],
+  ["item-path.disc-3.card-tournament.magician-cloak-treno-shop", "game-item.magician-cloak", "disc-3.card-tournament", "shop", "treno.weapon-shop.disc-3-4", "Treno Weapon Shop (Discs III–IV)", 1850, "repeatable", "Treno's later weapon stock sells Magician Cloak for 1,850 Gil.", "ffwiki-magician-cloak"],
+  ["item-path.disc-3.aerial-exploration.magician-cloak-lindblum-shop", "game-item.magician-cloak", "disc-3.aerial-exploration", "shop", "lindblum.weapon-shop.disc-3-4", "Lindblum Weapon/Item Shop (Discs III–IV)", 1850, "repeatable", "Lindblum's later weapon stock sells Magician Cloak for 1,850 Gil.", "ffwiki-magician-cloak"],
+] as const).map(([id, itemId, chapterId, method, shopId, shopName, amount, availability, conditions, itemSource]) => ({
+  id,
+  itemId,
+  chapterId,
+  method,
+  quantity: 1,
+  availability,
+  shopId,
+  shopName,
+  conditions,
+  cost: { currency: "gil" as const, amount },
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-locations-54996", itemSource, "rpgclassics-shops"],
+}));
+
+const iifaTreeBrigandineStealPath: ItemAcquisitionPath = {
+  id: "item-path.disc-2.iifa-tree.soulcage-brigandine-steal",
+  itemId: "game-item.brigandine",
+  chapterId: "disc-2.iifa-tree",
+  method: "steal",
+  quantity: 1,
+  availability: "one-time-encounter",
+  conditions: "Try to steal Soulcage's rare Brigandine before defeating the boss; the guaranteed chest copy is immediately before the fight.",
+  walkthroughObjectiveIds: ["disc-2.iifa-tree.soulcage-steals"],
+  sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "cavesofnarshe-ff9-brigandine"],
+};
+
+const iifaTreeMagicianCloakStealPath: ItemAcquisitionPath = {
+  id: "item-path.disc-2.iifa-tree.soulcage-magician-cloak-steal",
+  itemId: "game-item.magician-cloak",
+  chapterId: "disc-2.iifa-tree",
+  method: "steal",
+  quantity: 1,
+  availability: "one-time-encounter",
+  conditions: "Try to steal Magician Cloak before defeating Soulcage; later purchase routes are available if this encounter copy is missed.",
+  walkthroughObjectiveIds: ["disc-2.iifa-tree.soulcage-steals"],
+  sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "ffwiki-magician-cloak"],
+};
 
 export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc3ShopPaths,
@@ -7955,6 +8038,10 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     conditions: "GameFAQs and RPGClassics list Oak Staff for 2,400 Gil at Kumool's Ipsen's Castle Mogshop; exact access after the story visit is not independently verified.",
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-weapons", "rpgclassics-shops"],
   },
+  ...iifaTreePickupPaths,
+  ...iifaTreeShopRecoveryInputs,
+  iifaTreeBrigandineStealPath,
+  iifaTreeMagicianCloakStealPath,
 ];
 
 const finalStockTargetInterpretation = "Source-specific total acquisition target from GameFAQs' Disc III pre-departure list. Count copies already owned and copies consumed in synthesis; this is not a universal minimum for every completion route.";
@@ -8256,6 +8343,22 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
     interpretation: "GameFAQs lists Need 2 and end-inventory #0 for Broadsword. This optional source-specific target tracks the copies needed across the route separately from the final inventory; the item need not be retained after its listed use.",
     sourceIds: ["gamefaqs-items-71891"],
   },
+  {
+    id: "item-target.disc-4.final-preparations.magician-cloak",
+    itemId: "game-item.magician-cloak",
+    chapterId: "disc-4.final-preparations",
+    targetQuantity: 5,
+    interpretation: "GameFAQs lists Need 5 and end-inventory #4 for Magician Cloak. This optional source-specific target records the Need count separately from the final-inventory count; it is not a universal minimum.",
+    sourceIds: ["gamefaqs-items-71891"],
+  },
+  ...([ ["healing-rod", 2], ["lamias-flute", 2], ["brigandine", 3] ] as const).map(([slug, targetQuantity]) => ({
+    id: `item-target.disc-4.final-preparations.${slug}`,
+    itemId: `game-item.${slug}`,
+    chapterId: "disc-4.final-preparations",
+    targetQuantity,
+    interpretation: `GameFAQs lists Need ${targetQuantity} for this equipment. This optional source-specific target records its item-list target; it is not a universal story requirement or proof that the equipment copy is permanently missable.`,
+    sourceIds: ["gamefaqs-items-71891"],
+  })),
 ];
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
@@ -8402,4 +8505,14 @@ export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.gladius.annoy", itemId: "game-item.gladius", abilityName: "Annoy", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-equipment-33383", "rpgclassics-weapons", "rpgclassics-abilities", "cavesofnarshe-ff9-daggers"] },
   { id: "item-ability.gladius.lucky-seven", itemId: "game-item.gladius", abilityName: "Lucky Seven", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-equipment-33383", "rpgclassics-weapons", "rpgclassics-abilities", "cavesofnarshe-ff9-daggers"] },
   { id: "item-ability.coral-sword.charge", itemId: "game-item.coral-sword", abilityName: "Charge!", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-equipment-33383", "rpgclassics-weapons", "rpgclassics-abilities", "cavesofnarshe-ff9-swords"] },
+  { id: "item-ability.healing-rod.healer", itemId: "game-item.healing-rod", abilityName: "Healer", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-rods"] },
+  { id: "item-ability.healing-rod.cura", itemId: "game-item.healing-rod", abilityName: "Cura", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-rods"] },
+  { id: "item-ability.healing-rod.life", itemId: "game-item.healing-rod", abilityName: "Life", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-rods"] },
+  { id: "item-ability.lamias-flute.float", itemId: "game-item.lamias-flute", abilityName: "Float", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-flutes"] },
+  { id: "item-ability.lamias-flute.stona", itemId: "game-item.lamias-flute", abilityName: "Stona", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-flutes"] },
+  { id: "item-ability.lamias-flute.silence", itemId: "game-item.lamias-flute", abilityName: "Silence", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-flutes"] },
+  { id: "item-ability.brigandine.ability-up", itemId: "game-item.brigandine", abilityName: "Ability Up", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-brigandine"] },
+  { id: "item-ability.brigandine.return-magic", itemId: "game-item.brigandine", abilityName: "Return Magic", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "cavesofnarshe-ff9-brigandine"] },
+  { id: "item-ability.magician-cloak.insomniac", itemId: "game-item.magician-cloak", abilityName: "Insomniac", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-equipment-33383", "ffwiki-magician-cloak"] },
+  { id: "item-ability.magician-cloak.mp-plus-10", itemId: "game-item.magician-cloak", abilityName: "MP+10%", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-equipment-33383", "ffwiki-magician-cloak"] },
 ];

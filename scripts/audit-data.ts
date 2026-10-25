@@ -1405,6 +1405,83 @@ for (const [itemId, abilityName] of ralvuimagoAbilityClaims) {
     errors.push(`Ralvuimago recovery for ${itemId} needs its ${abilityName} ability claim.`);
   }
 }
+const iifaTreePickupItems = [
+  ["item-path.disc-2.iifa-tree.phoenix-down-chest", "game-item.phoenix-down"],
+  ["item-path.disc-2.iifa-tree.healing-rod-chest", "game-item.healing-rod"],
+  ["item-path.disc-2.iifa-tree.hi-potion-chest", "game-item.hi-potion"],
+  ["item-path.disc-2.iifa-tree.ether-hidden-chest", "game-item.ether"],
+  ["item-path.disc-2.iifa-tree.lamias-flute-chest", "game-item.lamias-flute"],
+  ["item-path.disc-2.iifa-tree.remedy-chest", "game-item.remedy"],
+  ["item-path.disc-2.iifa-tree.elixir-chest", "game-item.elixir"],
+  ["item-path.disc-2.iifa-tree.brigandine-chest", "game-item.brigandine"],
+] as const;
+for (const [pathId, itemId] of iifaTreePickupItems) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+  if (!gameItemIds.has(itemId) || !path || path.itemId !== itemId || path.chapterId !== "disc-2.iifa-tree" || path.method !== "chest" ||
+      path.availability !== "single-use" || !path.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.treasure-sweep") ||
+      !path.sourceIds.includes("gamefaqs-iifa-tree-71891") || !path.sourceIds.includes("rpgclassics-iifa-tree")) {
+    errors.push(`Iifa Tree's eight-pickup audit is missing a source-linked chest path for ${itemId}.`);
+  }
+  if (!gameItems.find((item) => item.id === itemId)?.sourceIds.includes("rpgclassics-iifa-tree")) {
+    errors.push(`Iifa Tree item ${itemId} needs the registered RPGClassics area cross-check.`);
+  }
+  if (!itemAcquisitionPaths.some((candidate) => candidate.itemId === itemId && (candidate.chapterId.startsWith("disc-3.") || candidate.chapterId.startsWith("disc-4.")))) {
+    errors.push(`Iifa Tree item type ${itemId} needs a later Disc III or Disc IV acquisition route.`);
+  }
+}
+const iifaTreeWarning = missables.find((warning) => warning.id === "missable.disc-2.iifa-tree.treasure-sweep");
+if (!iifaTreeWarning || !iifaTreeWarning.recovery.toLowerCase().includes("all eight item types") || !iifaTreeWarning.sourceIds.includes("rpgclassics-iifa-tree")) {
+  errors.push("The Iifa Tree warning must separate the closed chest copies from the later-recoverable item types and preserve RPGClassics provenance.");
+}
+const iifaTreeShopExpectations = new Map([
+  ["game-item.healing-rod", { count: 5, price: 1770 }],
+  ["game-item.lamias-flute", { count: 4, price: 3800 }],
+  ["game-item.brigandine", { count: 5, price: 4300 }],
+]);
+for (const [itemId, expected] of iifaTreeShopExpectations) {
+  const shopPaths = itemAcquisitionPaths.filter((path) => path.itemId === itemId && (path.method === "shop" || path.method === "mogshop"));
+  if (shopPaths.length !== expected.count || shopPaths.some((path) => path.cost?.currency !== "gil" || path.cost.amount !== expected.price)) {
+    errors.push(`Iifa Tree recovery for ${itemId} needs ${expected.count} shop paths priced at ${expected.price} Gil; found ${shopPaths.length}.`);
+  }
+}
+if (!itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.iifa-tree.soulcage-brigandine-steal" &&
+    path.itemId === "game-item.brigandine" && path.method === "steal" && path.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.soulcage-steals"))) {
+  errors.push("Brigandine recovery coverage needs the linked one-time Soulcage steal path.");
+}
+for (const [itemId, targetQuantity] of [["game-item.healing-rod", 2], ["game-item.lamias-flute", 2], ["game-item.brigandine", 3]] as const) {
+  if (!sourceInventoryTargets.some((target) => target.itemId === itemId && target.targetQuantity === targetQuantity)) {
+    errors.push(`Iifa Tree equipment ${itemId} needs its source-listed Need ${targetQuantity} inventory target.`);
+  }
+}
+for (const [itemId, abilityName] of [
+  ["game-item.healing-rod", "Healer"], ["game-item.healing-rod", "Cura"], ["game-item.healing-rod", "Life"],
+  ["game-item.lamias-flute", "Float"], ["game-item.lamias-flute", "Stona"], ["game-item.lamias-flute", "Silence"],
+  ["game-item.brigandine", "Ability Up"], ["game-item.brigandine", "Return Magic"],
+] as const) {
+  if (!equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName)) {
+    errors.push(`Iifa Tree equipment ${itemId} needs its ${abilityName} ability claim.`);
+  }
+}
+const magicianCloakSteal = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.iifa-tree.soulcage-magician-cloak-steal");
+const soulcageStealWarning = missables.find((warning) => warning.id === "missable.disc-2.iifa-tree.soulcage-steals");
+if (!gameItemIds.has("game-item.magician-cloak") || !magicianCloakSteal || magicianCloakSteal.itemId !== "game-item.magician-cloak" ||
+    magicianCloakSteal.method !== "steal" || !magicianCloakSteal.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.soulcage-steals") ||
+    !gameItems.find((item) => item.id === "game-item.magician-cloak")?.sourceIds.includes("ffwiki-magician-cloak")) {
+  errors.push("Soulcage's Magician Cloak steal needs a catalog item, linked steal path, and registered equipment provenance.");
+}
+const magicianCloakShopPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.magician-cloak" && (path.method === "shop" || path.method === "mogshop"));
+if (magicianCloakShopPaths.length !== 4 || magicianCloakShopPaths.some((path) => path.cost?.currency !== "gil" || path.cost.amount !== 1850)) {
+  errors.push(`Magician Cloak recovery needs four later shop paths priced at 1,850 Gil; found ${magicianCloakShopPaths.length}.`);
+}
+if (!sourceInventoryTargets.some((target) => target.itemId === "game-item.magician-cloak" && target.targetQuantity === 5) ||
+    !equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.magician-cloak" && claim.abilityName === "Insomniac") ||
+    !equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.magician-cloak" && claim.abilityName === "MP+10%")) {
+  errors.push("Magician Cloak needs the source-listed Need 5 target and both equipment ability claims.");
+}
+if (!soulcageStealWarning || !soulcageStealWarning.recovery.includes("Morrison's Madain Sari Mogshop") ||
+    !soulcageStealWarning.sourceIds.includes("ffwiki-magician-cloak")) {
+  errors.push("Soulcage's warning must distinguish lost steal copies from later Magician Cloak recovery and link its source.");
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);
