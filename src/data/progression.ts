@@ -361,7 +361,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.cleyra",
     toChapterId: "disc-2.return-to-alexandria",
     relationship: "required-story",
-    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game; guides disagree on the exact last safe action for individual pickups, so complete the settlement sweep before leaving it and collect the post-Antlion rewards before advancing.",
+    summary: "Cleyra's evacuation and Beatrix encounter lead to the party's capture and the next story sequence aboard the Red Rose and in Alexandria Castle. The story departure closes Cleyra and its Trunk for the rest of the game. Follow each local window in order: finish first-visit ATEs and shops before Antlion, claim the Emerald and Stiltzkin #2 during Freya's post-battle segment, collect any remaining Trunk chests on the required return before its bridge scene, then take evacuation rewards before leaving.",
     sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-return-to-alexandria-71891", "jegged-cleyra", "jegged-return-to-alexandria-castle", "gamerguides-cleyra", "elitegrindlab-cleyra"],
   },
   {
@@ -887,7 +887,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.cleyra-to-return-to-alexandria",
     title: "Cleyra final sweep and departure",
     certainty: "disputed",
-    trigger: "Guides describe the final pickup cutoff differently. The conservative route is to finish the settlement sweep before leaving it for the return through the Trunk, then collect the post-Antlion Emerald and Stiltzkin bundle before advancing out of Cleyra.",
+    trigger: "The aggregate treasure warning spans separate windows: first-visit pickups; Freya's Emerald and Stiltzkin #2 before rejoining the party; remaining Trunk chests on the required return before the bridge scene; and evacuation rewards before final departure. ATEs, shops, and one-time fights have their own cutoff entries. Sources differ in how they label the area's final closure, so finish each pickup at its documented checkpoint.",
     missableIds: ["missable.disc-2.cleyra.treasures", "missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
     sourceIds: ["gamefaqs-missables-71891", "jegged-missables", "jegged-cleyra", "gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
   },

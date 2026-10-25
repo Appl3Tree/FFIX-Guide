@@ -1702,7 +1702,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   {
     areaId: "disc-2.cleyra",
     overview: "Enter the sandstorm and climb Cleyra's Trunk to the settlement. Sweep the one-visit area, view all four ATEs, complete the Antlion sequence, claim the High Priest's Emerald and Stiltzkin bundle, follow the return through the Trunk, guide the residents, and attempt the one-time Beatrix steals before Cleyra falls.",
-    timedRouteNote: "The source targets 03:39:57 at the Cleyra Inn after Antlion, the post-battle Emerald and Stiltzkin visit, then 03:46:07 at the Sandpit and 04:00:48 at the Red Rose Cabin after the evacuation/Beatrix sequence. It returns for the deferred trunk chests, uses Quina's Limit Glove at Antlion, and follows a tightly planned chain of fixed EXP battles and resident rewards. The source timings do not verify this guide's complete ATE/achievement coverage; treat the Trunk and settlement as one visit and finish its local checklist before triggering Antlion.",
+    timedRouteNote: "The source targets 03:39:57 at the Cleyra Inn after Antlion, Emerald, and Stiltzkin, then 03:46:07 at the Sandpit and 04:00:48 at the Red Rose Cabin after the evacuation/Beatrix sequence. Its route returns for deferred Trunk chests, uses Quina's Limit Glove at Antlion, and follows a tightly planned chain of fixed EXP battles and resident rewards. The source timings do not verify this guide's complete ATE/achievement coverage. Follow the separate windows: first-visit ATEs and shops before Antlion; Emerald and Stiltzkin during Freya's segment; remaining Trunk chests on the required return; evacuation rewards before the final departure.",
     sections: [
       {
         id: "cleyra-trunk",
@@ -1854,7 +1854,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-final-sweep-cutoff",
             kind: "cutoff",
             text: "Before the final Beatrix transition, check the Trunk and settlement treasure, all four ATEs, Mopli's three Mognet checks and Serino handoff, Atla's letter, both shops, the Emerald, Stiltzkin's bundle, the evacuation rewards, and both steal opportunities for your selected profile.",
-            detail: "Sources differ on the exact final closure point. The conservative route finishes the town sweep before the attack and completes all post-Antlion pickups and one-time opportunities before leaving Cleyra. The city and Trunk cannot be revisited afterward.",
+            detail: "The windows occur in sequence: first-visit ATEs and shop stock before Antlion; Freya's Emerald, Cathedral pickups, Stiltzkin bundle, and Mognet check before rejoining the party; any remaining Trunk chests on the required return before the bridge scene; then the evacuation rewards and Beatrix steals before the story leaves Cleyra. Guides vary in how they label the final closure, so complete each opportunity at its own checkpoint. The city and Trunk cannot be revisited afterward.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.movie-critic-ates", "disc-2.cleyra.atla-letter", "disc-2.cleyra.shop-stock", "disc-2.cleyra.mognet-mail", "disc-2.cleyra.emerald", "disc-2.cleyra.stiltzkin-2", "disc-2.cleyra.out-of-harms-way", "disc-2.cleyra.antlion-steals", "disc-2.cleyra.beatrix-steals"],
           },
         ],
