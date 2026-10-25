@@ -258,6 +258,47 @@ export const storyPartySequences: StoryPartySequence[] = [
       "jegged-returning-desert-palace",
     ],
   },
+  {
+    id: "party-sequence.return-to-alexandria",
+    title: "Return to Alexandria party handoffs",
+    phases: [
+      {
+        party: "Zidane, Vivi, and Freya",
+        chapterIds: ["disc-2.return-to-alexandria"],
+        location: "Red Rose",
+        summary: "Deliver Mopli's letter to Serino, accept Serino's letter for Mooden, and save before the story switches to Steiner and Marcus.",
+      },
+      {
+        party: "Steiner and Marcus",
+        chapterIds: ["disc-2.return-to-alexandria"],
+        location: "Alexandria Castle, hanging cage and East Tower",
+        summary: "Escape the cage and remove Marcus's transferable gear before he leaves. Steiner then joins Zidane, Vivi, and Freya for the rescue route.",
+      },
+      {
+        party: "Zidane's group with Steiner; Dagger is rescued",
+        chapterIds: ["disc-2.return-to-alexandria"],
+        location: "Alexandria Castle, East Tower to the altar",
+        summary: "The 30-minute rescue timer continues through Zorn and Thorn. After rescuing Dagger, the mandatory Friendship ATE briefly shifts to Marcus in the Evil Forest, then control returns to the rescue party.",
+      },
+      {
+        party: "Zidane's party and Freya/Beatrix's team",
+        chapterIds: ["disc-2.return-to-alexandria"],
+        location: "Alexandria Castle descent",
+        summary: "After Beatrix's third battle, control alternates between Zidane's descending party and Freya with Beatrix; Steiner leaves Zidane's party and joins Freya's group for its later fights. When control returns to Zidane, revisit Mosh for the letter to Monty.",
+      },
+      {
+        party: "The story party, reunited on the Gargant route",
+        chapterIds: ["disc-2.return-to-alexandria", "disc-2.pinnacle-rocks"],
+        location: "Gargan Roo to Pinnacle Rocks",
+        summary: "Continue through Gargan Roo after the final Alexandria party split. Marcus and Blank intervene during the escape, and the story proceeds to Pinnacle Rocks.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-return-to-alexandria-71891",
+      "jegged-return-to-alexandria-castle",
+      "gamerguides-alexandria-castle-2",
+    ],
+  },
 ];
 
 export const gameRouteEdges: GameRouteEdge[] = [

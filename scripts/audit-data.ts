@@ -259,6 +259,23 @@ for (const sequence of storyPartySequences) {
     if (!sourceIds.has(sourceId)) errors.push(`Story party sequence ${sequence.id} references unknown source ${sourceId}.`);
   }
 }
+const alexandriaPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.return-to-alexandria");
+if (!alexandriaPartySequence) {
+  errors.push("The Disc II Alexandria party handoff sequence is missing.");
+} else {
+  if (alexandriaPartySequence.phases.length !== 5) errors.push("The Disc II Alexandria sequence must retain its five sourced party phases.");
+  if (alexandriaPartySequence.phases[0]?.party !== "Zidane, Vivi, and Freya") errors.push("The Disc II Alexandria sequence must begin aboard the Red Rose with Zidane, Vivi, and Freya.");
+  if (!alexandriaPartySequence.phases.some((phase) => phase.party === "Steiner and Marcus")) errors.push("The Disc II Alexandria sequence must include Steiner and Marcus's cage escape.");
+  if (!alexandriaPartySequence.phases.some((phase) => phase.location === "Alexandria Castle descent" && phase.summary.includes("alternates"))) {
+    errors.push("The Disc II Alexandria sequence must record the alternating descent parties.");
+  }
+  if (alexandriaPartySequence.phases.at(-1)?.chapterIds.join(",") !== "disc-2.return-to-alexandria,disc-2.pinnacle-rocks") {
+    errors.push("The Disc II Alexandria sequence must connect the Gargan Roo escape to Pinnacle Rocks.");
+  }
+  for (const sourceId of ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2"]) {
+    if (!alexandriaPartySequence.sourceIds.includes(sourceId)) errors.push(`The Disc II Alexandria sequence is missing corroborating source ${sourceId}.`);
+  }
+}
 for (const edge of gameRouteEdges) {
   if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
     errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);
