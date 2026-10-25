@@ -403,8 +403,8 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 224);
-  assert.equal(synthesisRecipes.length, 7);
+  assert.equal(itemAcquisitionPaths.length, 232);
+  assert.equal(synthesisRecipes.length, 8);
 });
 
 test("Silk Shirt has source-backed starting, encounter, reward, and shop routes", () => {
@@ -477,5 +477,55 @@ test("Bandana has a hidden pickup and source-backed Disc II/III shop routes", ()
     for (const sourceId of path.sourceIds) {
       assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
     }
+  }
+});
+
+test("Feather Boots has sourced recovery routes for the Battle Boots ingredient chain", () => {
+  const featherBootsPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.feather-boots");
+  const pathsById = new Map(featherBootsPaths.map((path) => [path.id, path]));
+  const chocograph = pathsById.get("item-path.disc-3.on-the-high-seas.feather-boots-abandoned-lagoon");
+  const disc3Auction = pathsById.get("item-path.disc-3.on-the-high-seas.feather-boots-treno-auction");
+  const disc4Auction = pathsById.get("item-path.disc-4.return-to-gaia.feather-boots-treno-auction");
+  const tiamatSteal = pathsById.get("item-path.disc-4.memoria.tiamat-feather-boots-steal");
+  const synthesisPaths = [
+    "item-path.disc-3.the-home-front.feather-boots-alexandria-synthesis",
+    "item-path.disc-3.on-the-high-seas.feather-boots-treno-synthesis",
+    "item-path.disc-3.on-the-high-seas.feather-boots-lindblum-synthesis",
+    "item-path.disc-3.aerial-exploration.feather-boots-daguerreo-synthesis",
+  ].map((id) => pathsById.get(id));
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.battle-boots");
+  const featherBootsRecipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.feather-boots");
+
+  assert.equal(featherBootsPaths.length, 9);
+  assert.equal(chocograph?.method, "chocograph");
+  assert.equal(chocograph?.availability, "conditional");
+  assert.ok(chocograph?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.chocographs"));
+  assert.equal(disc3Auction?.availability, "conditional");
+  assert.equal(disc4Auction?.availability, "conditional");
+  assert.equal(disc3Auction?.cost, undefined);
+  assert.ok(disc3Auction?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.auction-house"));
+  assert.equal(tiamatSteal?.availability, "one-time-encounter");
+  assert.ok(tiamatSteal?.walkthroughObjectiveIds?.includes("disc-4.memoria.tiamat-steals"));
+  assert.ok(synthesisPaths.every((path) => path?.method === "synthesis" && path.availability === "repeatable"));
+  assert.ok(synthesisPaths.every((path) => path?.recipeId === "synthesis-recipe.feather-boots"));
+  assert.ok(synthesisPaths.every((path) => path?.cost?.amount === 4000));
+  assert.deepEqual(featherBootsRecipe?.ingredients, [
+    { itemId: "game-item.magician-shoes", quantity: 1 },
+    { itemId: "game-item.phoenix-pinion", quantity: 1 },
+  ]);
+  assert.equal(featherBootsRecipe?.cost.amount, 4000);
+  assert.deepEqual(recipe?.ingredients, [
+    { itemId: "game-item.feather-boots", quantity: 1 },
+    { itemId: "game-item.wing-edge", quantity: 1 },
+  ]);
+  assert.equal(recipe?.cost.amount, 6500);
+
+  for (const path of featherBootsPaths) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+  for (const sourceId of featherBootsRecipe?.sourceIds ?? []) {
+    assert.ok(sources.some((source) => source.id === sourceId), `Feather Boots recipe references unknown source ${sourceId}`);
   }
 });

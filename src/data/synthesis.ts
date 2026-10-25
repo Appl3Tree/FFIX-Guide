@@ -20,6 +20,20 @@ export type SynthesisRecipe = {
 // This is an initial, source-cross-checked recipe slice, not a complete list.
 export const synthesisRecipes: SynthesisRecipe[] = [
   {
+    id: "synthesis-recipe.feather-boots",
+    resultItemId: "game-item.feather-boots",
+    ingredients: [
+      { itemId: "game-item.magician-shoes", quantity: 1 },
+      { itemId: "game-item.phoenix-pinion", quantity: 1 },
+    ],
+    chapterId: "disc-3.the-home-front",
+    shopId: "alexandria.synthesis-shop.disc-3",
+    shopName: "Alexandria Synthesis Shop",
+    cost: { currency: "gil", amount: 4000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "GameFAQs lists Magician Shoes + Phoenix Pinion for 4,000 Gil at Alexandria, Treno (Disc III–IV), Lindblum (Disc III–IV), and Daguerreo. Separate item paths record the other three shop windows; Oeilvert, Chocograph #9, the Treno auction, and Tiamat are alternate Feather Boots sources.",
+  },
+  {
     id: "synthesis-recipe.grand-armor",
     resultItemId: "game-item.grand-armor",
     ingredients: [
@@ -54,7 +68,7 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopName: "Synthesis Expert's Shop (Daguerreo)",
     cost: { currency: "gil", amount: 6500 },
     sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-synthesis", "elitegrindlab-synthesis"],
-    notes: "GameFAQs, RPGClassics, Jegged, and EliteGrindLab agree on the Feather Boots + Wing Edge recipe at Daguerreo. RPGClassics and EliteGrindLab give the 6,500-Gil price; GameFAQs notes the separate 45-frog reward and other acquisition paths.",
+    notes: "GameFAQs, RPGClassics, Jegged, and EliteGrindLab agree on the Feather Boots + Wing Edge recipe at Daguerreo. RPGClassics and EliteGrindLab give the 6,500-Gil price; GameFAQs notes the separate 45-frog reward and other acquisition paths. Feather Boots can also be synthesized from Magician Shoes + Phoenix Pinion or recovered from Oeilvert, Abandoned Lagoon, Treno's auction, and Tiamat.",
   },
   {
     id: "synthesis-recipe.rebirth-ring",
