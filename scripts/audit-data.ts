@@ -1511,6 +1511,32 @@ if (!lindblumMountainPool || lindblumMountainPool.kind !== "random-pool" ||
   !lindblumForestPool.formation.some((entry) => entry.enemyId === "enemy.bomb")) {
   errors.push("Lindblum Plateau must separate its mountain Carve Spider/Axe Beak pool from the forest pool that also contains Bomb.");
 }
+const gunitasPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gunitas-basin.world-map-pool");
+const lindblumLowlandsPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-area.lowlands-pool");
+const qusMarshPool = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.disc-1-interior-pool");
+if (!gunitasPool || gunitasPool.kind !== "random-pool" ||
+  ["enemy.goblin", "enemy.mu", "enemy.python"].some((enemyId) => !gunitasPool.formation.some((entry) => entry.enemyId === enemyId)) ||
+  gunitasPool.formation.some((entry) => entry.enemyId === "enemy.carve-spider") ||
+  !lindblumLowlandsPool || lindblumLowlandsPool.kind !== "random-pool" ||
+  ["enemy.clipper", "enemy.hedgehog-pie", "enemy.ironite", "enemy.ladybird", "enemy.mandragora", "enemy.serpion", "enemy.vice"].some((enemyId) => !lindblumLowlandsPool.formation.some((entry) => entry.enemyId === enemyId)) ||
+  lindblumLowlandsPool.formation.some((entry) => entry.enemyId === "enemy.bomb" || entry.enemyId === "enemy.axe-beak") ||
+  !qusMarshPool || qusMarshPool.kind !== "random-pool" ||
+  !qusMarshPool.formation.some((entry) => entry.enemyId === "enemy.axolotl") ||
+  !qusMarshPool.formation.some((entry) => entry.enemyId === "enemy.gigan-toad-a") ||
+  qusMarshPool.formation.some((entry) => entry.enemyId === "enemy.anemone" || entry.enemyId === "enemy.sahagin" || entry.enemyId === "enemy.gigan-toad-b")) {
+  errors.push("Gunitas Basin, Lindblum lowlands, and the Disc I Qu's Marsh must retain their distinct source-listed enemy pools.");
+}
+const qualeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.quale-99-frogs");
+const qualeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.quale");
+if (!qualeEncounter || qualeEncounter.kind !== "boss" ||
+  !qualeEncounter.formation.some((entry) => entry.enemyId === "enemy.quale" && entry.quantity === 1) ||
+  !qualeEncounter.objectiveIds.includes("disc-4.return-to-gaia.frog-catching") ||
+  !qualeRecord || qualeRecord.kind !== "boss" || qualeRecord.chapterId !== "disc-4.return-to-gaia" || qualeRecord.routeObjectiveIds.length !== 1 ||
+  !qualeRecord.steals.some((slot) => slot.itemId === "game-item.gluttons-robe") ||
+  qualeRecord.drops.filter((slot) => slot.itemId === "game-item.elixir").length !== 4 ||
+  !qualeRecord.notes.some((note) => note.includes("Gastro Fork"))) {
+  errors.push("Quale must link the optional 99-frog boss encounter, its four Elixir drops, Glutton's Robe steal, and frog-catching objective.");
+}
 const huntPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum.festival-random-pool");
 const huntEnemyIds = ["enemy.fang-b", "enemy.mu-b", "enemy.trick-sparrow-hunt"];
 if (!huntPool || huntPool.kind !== "random-pool" || huntPool.chapterId !== "disc-1.lindblum" ||

@@ -1346,6 +1346,14 @@ export const sources = [
     notes: "Optional route through Qu's Marsh, Lindblum Plateau, Pinnacle Rocks, Chocobo's Forest, and Bohden Arch. Lists Quina recruitment, regional Blue Magic, available Chocographs and rewards, Moccha Coffee, and the Ether pickup. Its chapter inventory groups items from several distinct areas, so the guide names each pickup's actual location.",
   },
   {
+    id: "cavesofnarshe-enemies",
+    title: "Final Fantasy IX All Enemies and Bosses",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/enemies.php?type=all",
+    accessed: "2026-10-25",
+    notes: "Independent enemy table used to cross-check selected Qu's Marsh, lowland, and Festival records. Like other enemy tables, it aggregates version and location variants; record notes identify where the model splits Disc I forms or preserves conflicts.",
+  },
+  {
     id: "cavesofnarshe-lindblum-walkthrough",
     title: "Back on the World Map — Lindblum Plateau walkthrough",
     publisher: "Caves of Narshe",
@@ -1431,7 +1439,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/qus-marsh/",
     accessed: "2026-10-23",
-    notes: "Completionist review distinguishes the frog pond from nearby pickup locations, inventories frog prizes and respawn behavior, and flags inconsistent area labels that can send players searching the marsh for items located elsewhere.",
+    notes: "Completionist review distinguishes the frog pond from nearby pickup locations and separates the first-marsh Axolotl and Gigan Toad [A] from later Sahagin/Anemone and Gigan Toad [B] variants. It cross-checks Quale's 99-frog trigger, 65,535 HP, steals, and four Elixir drop slots, while noting that the displayed HP equals the 16-bit maximum. It also inventories frog prizes/respawn behavior and flags inconsistent area labels.",
   },
   {
     id: "gamefaqs-journey-to-burmecia-71891",
@@ -2608,6 +2616,14 @@ export const sources = [
     url: "https://shrines.rpgclassics.com/psx/ffix/bestiary3.shtml",
     accessed: "2026-10-25",
     notes: "Original PlayStation bestiary with separate Kraken tentacle entries. It lists 18,169/18,168 HP for the left/right components, Elixir/Wing Edge steals, and Lightning weakness. The higher HP values conflict with GameFAQs' 10,001-HP reports; the right-side Wing Edge also conflicts with the newer GameFAQs walkthrough's Elixir-per-tentacle description.",
+  },
+  {
+    id: "rpgclassics-bestiary-n-s",
+    title: "Final Fantasy IX Bestiary N–S",
+    publisher: "RPGClassics",
+    url: "https://shrines.rpgclassics.com/psx/ffix/bestiary4.shtml",
+    accessed: "2026-10-25",
+    notes: "Original PlayStation bestiary cross-check for Quale's stats, 99-frog trigger, elemental traits, steals, and Elixir drop table. The Qu's Marsh boss is optional and triggers from the shared frog-catching count.",
   },
   {
     id: "rpgclassics-bestiary-t-z",

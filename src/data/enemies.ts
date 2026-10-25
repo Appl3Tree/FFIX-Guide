@@ -83,6 +83,7 @@ const iceCavernChapterId = "disc-1.ice-cavern";
 const daliChapterId = "disc-1.village-of-dali";
 const lindblumChapterId = "disc-1.lindblum";
 const exploringLindblumChapterId = "disc-1.exploring-lindblum-kingdom";
+const returnToGaiaChapterId = "disc-4.return-to-gaia";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -107,6 +108,9 @@ const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "je
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
 const lindblumPlateauSources = [enemyListSourceId, "gamefaqs-exploring-lindblum-71891", "cavesofnarshe-lindblum-walkthrough", "ffwiki-lindblum"];
+const lindblumLowlandSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891"];
+const qusMarshSources = [enemyListSourceId, "cavesofnarshe-enemies", "cavesofnarshe-lindblum-walkthrough", "gamefaqs-exploring-lindblum-71891", "elitegrindlab-qus-marsh", "gamefaqs-abilities-71891"];
+const qualeSources = ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh", "rpgclassics-bestiary-n-s"];
 const huntEnemySources = [enemyListSourceId, "gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
 const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
@@ -458,6 +462,76 @@ const lindblumEncounters: EnemyEncounter[] = [
     missableIds: ["missable.disc-1.lindblum.zaghnol-steals", "missable.disc-1.lindblum.festival-vivi"],
     cutoffIds: ["cutoff.lindblum-festival.vivi-outcome"],
     notes: ["Freya joins Zidane for this one-time battle. If the plaza is already loaded when the timer reaches the trigger, the route sources say to leave and re-enter. GameFAQs lists Mythril Gloves and Needle Fork as steals; Caves of Narshe's Hunt table says no stolen items, so the conflict remains visible on the boss record."],
+  },
+];
+
+const lindblumRegionalEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.gunitas-basin.world-map-pool",
+    title: "Gunitas Basin world-map encounters",
+    chapterId: daliChapterId,
+    location: "Gunitas Basin around the route between Dali and Lindblum",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.goblin", quantity: null },
+      { enemyId: "enemy.mu", quantity: null },
+      { enemyId: "enemy.python", quantity: null },
+    ],
+    sourceIds: [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs lists Goblin in addition to Mu and Python in Gunitas Basin. This is separate from the Nolrich Heights pool, which also includes Carve Spider; no formation rates or combinations are inferred."],
+  },
+  {
+    id: "encounter.lindblum-area.lowlands-pool",
+    title: "Lindblum lowland world-map encounters",
+    chapterId: exploringLindblumChapterId,
+    location: "Plains around Dragon's Gate and Chocobo Forest below Lindblum",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.clipper", quantity: null },
+      { enemyId: "enemy.hedgehog-pie", quantity: null },
+      { enemyId: "enemy.ironite", quantity: null },
+      { enemyId: "enemy.ladybird", quantity: null },
+      { enemyId: "enemy.mandragora", quantity: null },
+      { enemyId: "enemy.serpion", quantity: null },
+      { enemyId: "enemy.vice", quantity: null },
+    ],
+    sourceIds: lindblumLowlandSources,
+    objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs groups Clipper, Hedgehog Pie, Ironite, Ladybird, Mandragora, and Serpion with the lowland area around Dragon's Gate/Chocobo Forest and separately notes Vice on the plains below Lindblum. Plateau-only Axe Beak and Bomb remain in their terrain pools; the model does not infer formation rates."],
+  },
+  {
+    id: "encounter.qus-marsh.disc-1-interior-pool",
+    title: "Qu's Marsh — Disc I interior encounters",
+    chapterId: exploringLindblumChapterId,
+    location: "Water and reeds inside the Mist Continent Qu's Marsh",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.axolotl", quantity: null },
+      { enemyId: "enemy.gigan-toad-a", quantity: null },
+    ],
+    sourceIds: qusMarshSources,
+    objectiveIds: ["disc-1.exploring-lindblum-kingdom.quina-recruit", "disc-1.exploring-lindblum-kingdom.blue-magic"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The first Qu's Marsh has Axolotl and Gigan Toad [A]. Anemone and Sahagin belong to later marshes, and the stronger Gigan Toad [B] is a separate later-area version; the encounter pool is restricted to the Disc I state."],
+  },
+  {
+    id: "encounter.qus-marsh.quale-99-frogs",
+    title: "Quale — 99-frog challenge",
+    chapterId: returnToGaiaChapterId,
+    location: "Quale's house at Qu's Marsh after the shared frog count reaches 99",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.quale", quantity: 1 }],
+    sourceIds: qualeSources,
+    objectiveIds: ["disc-4.return-to-gaia.frog-catching"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Quale challenges the party when the 99-frog milestone is reached and gives Quina the Gastro Fork after victory. The battle is optional; the frog count is shared across the marshes and Frog Drop's damage can continue scaling beyond the boss trigger."],
   },
 ];
 
@@ -822,7 +896,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1789,7 +1863,7 @@ const evilForestEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.goblin",
     name: "Goblin",
-    encounterIds: ["encounter.evil-forest.random-pool"],
+    encounterIds: ["encounter.evil-forest.random-pool", "encounter.gunitas-basin.world-map-pool"],
     stats: enemyStats([["level", 5], ["HP", 33], ["MP", 172], ["EXP", 23], ["AP", 1], ["Gil", 88]]),
     steals: [evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", null, "Nothing"), evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing")],
     drops: [evilForestLoot("always", null, "Nothing"), evilForestLoot("common", "game-item.potion"), evilForestLoot("uncommon", "game-item.echo-screen"), evilForestLoot("rare", "game-item.phoenix-down")],
@@ -1797,7 +1871,7 @@ const evilForestEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Goblin Punch", command: "Eat", sourceIds: [enemyListSourceId], objectiveIds: [] }],
     strategies: [],
     routeObjectiveIds: [],
-    notes: ["Goblin's Eat result is Goblin Punch. Quina is not yet available in the Evil Forest, so this is a bestiary source record rather than a local learning opportunity."],
+    notes: ["Goblin's Eat result is Goblin Punch. Quina is not yet available in the Evil Forest, so the early record is a bestiary source; GameFAQs also lists Goblin in Gunitas Basin."],
   }, evilForestChapterId, evilForestEnemySources),
   chapterEnemy({
     id: "enemy.plant-spider",
@@ -1996,7 +2070,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.mu",
     name: "Mu",
-    encounterIds: ["encounter.nolrich-heights.world-map-pool"],
+    encounterIds: ["encounter.nolrich-heights.world-map-pool", "encounter.gunitas-basin.world-map-pool"],
     stats: enemyStats([["level", 2], ["HP", 77], ["MP", 183], ["EXP", 34], ["AP", 1], ["Gil", 104]]),
     steals: [
       enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", "game-item.potion"),
@@ -2019,7 +2093,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.python",
     name: "Python",
-    encounterIds: ["encounter.nolrich-heights.world-map-pool"],
+    encounterIds: ["encounter.nolrich-heights.world-map-pool", "encounter.gunitas-basin.world-map-pool"],
     stats: enemyStats([["level", 2], ["HP", 75], ["MP", 184], ["EXP", 40], ["AP", 1], ["Gil", 106]]),
     steals: [
       enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.ore"),
@@ -2068,7 +2142,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.vice",
     name: "Vice",
-    encounterIds: ["encounter.dali-underground.random-pool"],
+    encounterIds: ["encounter.dali-underground.random-pool", "encounter.lindblum-area.lowlands-pool"],
     stats: enemyStats([["level", 4], ["HP", 129], ["MP", 209], ["EXP", 48], ["AP", 1], ["Gil", 128]]),
     steals: [
       enemyLoot("common", "game-item.echo-screen"), enemyLoot("uncommon", "game-item.potion"),
@@ -2087,7 +2161,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
     strategies: [{ title: "Take it out before it steals", detail: "Vice has no listed elemental weakness, but it is fragile. It can steal from the party and use Fire; ordinary attacks are sufficient.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: [],
-    notes: ["GameFAQs and Caves of Narshe list Vice in the optional underground pool. Opening the rear door is not required for the factory route or its mandatory pickups."],
+    notes: ["GameFAQs and Caves of Narshe list Vice in Dali's optional underground pool and on the plains below Lindblum. Opening the factory rear door is not required for its route or mandatory pickups."],
   }, daliChapterId, daliEnemySources),
   chapterEnemy({
     id: "enemy.skeleton",
@@ -2319,11 +2393,183 @@ const lindblumEnemyRecords: EnemyRecord[] = [
   }, lindblumChapterId, zaghnolHuntSources, ["missable.disc-1.lindblum.zaghnol-steals", "missable.disc-1.lindblum.festival-vivi"], ["cutoff.lindblum-festival.vivi-outcome"]),
 ];
 
+const lindblumAreaEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.clipper",
+    name: "Clipper",
+    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    stats: enemyStats([["level", 7], ["HP", 294], ["MP", 278], ["EXP", 80], ["AP", 1], ["Gil", 190]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("elemental-weakness", "Lightning"), enemyFact("elemental-resistance", "Water (half damage)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Bubbles, Crush, and Water", "Bubbles hits the party; Crush deals physical damage to one character; Water is its elemental spell."),
+    ],
+    blueMagic: [{ name: "Aqua Breath", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Use Lightning", detail: "Clipper is weak to Lightning and only partly resists Water; its modest HP and Bubbles/Crush/Water moves make it less threatening than Ironite.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["Clipper is listed in the Lindblum lowlands and around Qu's Marsh; its regional appearances share this battle table."],
+  }, exploringLindblumChapterId, lindblumLowlandSources),
+  chapterEnemy({
+    id: "enemy.hedgehog-pie",
+    name: "Hedgehog Pie",
+    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    stats: enemyStats([["level", 7], ["HP", 295], ["MP", 281], ["EXP", 119], ["AP", 1], ["Gil", 187]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "None"), enemyFact("elemental-weakness", "None listed"), enemyFact("elemental-resistance", "None listed"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Fat Press", "Moderate single-target physical damage."),
+    ],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Finish it before Fat Press adds pressure", detail: "Hedgehog Pie has no listed elemental defense; ordinary attacks are sufficient, and Quina can learn Pumpkin Head by eating it.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["GameFAQs lists Hedgehog Pie around the Lindblum lowlands and in forests near Qu's Marsh."],
+  }, exploringLindblumChapterId, lindblumLowlandSources),
+  chapterEnemy({
+    id: "enemy.ironite",
+    name: "Ironite",
+    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    stats: enemyStats([["level", 11], ["HP", 889], ["MP", 374], ["EXP", 577], ["AP", 2], ["Gil", 269]]),
+    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.soft"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", "game-item.hi-potion"), enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.soft"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Aerial and Dragon"), enemyFact("elemental-weakness", "Ice and Wind"), enemyFact("elemental-resistance", "Earth (nullified)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Wings, Flame, and Thundara", "Flame deals a large fraction of max HP as Fire damage; Wings is physical."),
+    ],
+    blueMagic: [{ name: "Angel's Snack", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Treat Ironite as the high-risk lowland encounter", detail: "Flame deals percentage-based Fire damage, while Wings and Thundara add pressure. Ice/Wind attacks, Dragon Killer, Bird Killer, and status effects are recommended by GameFAQs.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["Ironite appears below Lindblum in the lowland pool. Its name is stable across the sources reviewed."],
+  }, exploringLindblumChapterId, lindblumLowlandSources),
+  chapterEnemy({
+    id: "enemy.ladybird",
+    name: "Ladybird (Ladybug in non-PAL versions)",
+    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    stats: enemyStats([["level", 6], ["HP", 244], ["MP", 266], ["EXP", 89], ["AP", 1], ["Gil", 193]]),
+    steals: [enemyLoot("common", "game-item.eye-drops"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Aerial and Bug"), enemyFact("elemental-weakness", "Wind"), enemyFact("elemental-resistance", "Earth (nullified)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Spear and Fire", "Spear deals modest physical damage."),
+    ],
+    blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Exploit Wind and killer abilities", detail: "Wind is effective; Bird Killer and Bug Killer both apply. The enemy is otherwise a low-threat encounter in this area.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["GameFAQs calls the enemy Ladybird and notes that it is called Ladybug in non-PAL versions; the display name preserves both forms."],
+  }, exploringLindblumChapterId, lindblumLowlandSources),
+  chapterEnemy({
+    id: "enemy.mandragora",
+    name: "Mandragora",
+    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    stats: enemyStats([["level", 9], ["HP", 662], ["MP", 342], ["EXP", 307], ["AP", 1], ["Gil", 595]]),
+    steals: [enemyLoot("common", "game-item.echo-screen"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("elemental-weakness", "Fire"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Blizzara and Shriek", "Blizzara deals Ice damage; Shriek can inflict Silence."),
+      enemyFact("attack", "Chestnut", "Deals damage based on the HP Mandragora has lost."),
+    ],
+    blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Use Fire and protect spellcasters from Silence", detail: "Fire is effective. Shriek can silence Vivi or Dagger, and Chestnut's damage increases with the HP Mandragora has lost.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["GameFAQs lists Mandragora among the lowland enemies below Lindblum; it is distinct from plant-family enemies in the Evil Forest."],
+  }, exploringLindblumChapterId, lindblumLowlandSources),
+  chapterEnemy({
+    id: "enemy.serpion",
+    name: "Serpion",
+    encounterIds: ["encounter.lindblum-area.lowlands-pool"],
+    stats: enemyStats([["level", 8], ["HP", 397], ["MP", 295], ["EXP", 139], ["AP", 1], ["Gil", 184]]),
+    steals: [enemyLoot("common", "game-item.antidote"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.eye-drops"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Dragon"), enemyFact("elemental-weakness", "Ice"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Stab, Blizzard, and Cure", "Stab is its main physical move; it may also cast Blizzard or Cure."),
+      enemyFact("attack", "Poison Stab", "A counter used in its Attacking Stance that can inflict Poison."),
+    ],
+    blueMagic: [{ name: "Mighty Guard", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Eat one for Mighty Guard", detail: "Quina can learn Mighty Guard from Serpion. Ice attacks exploit its weakness; watch for Poison Stab counters while it is in Attacking Stance.", sourceIds: [enemyListSourceId] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["Serpion appears in the Lindblum lowlands and around Qu's Marsh; its battle table is shared across those areas."],
+  }, exploringLindblumChapterId, lindblumLowlandSources),
+  chapterEnemy({
+    id: "enemy.axolotl",
+    name: "Axolotl",
+    encounterIds: ["encounter.qus-marsh.disc-1-interior-pool"],
+    stats: enemyStats([["level", 6], ["HP", 211], ["MP", 266], ["EXP", 106], ["AP", 1], ["Gil", 236]]),
+    steals: [enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("elemental-weakness", "Lightning"), enemyFact("elemental-resistance", "Water (nullified)"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Water", "Uses Water against the party."),
+      enemyFact("attack", "Aqua Breath", "Deals a fraction of each target's max HP and can be more dangerous than its Water spell."),
+    ],
+    blueMagic: [{ name: "Aqua Breath", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Learn Aqua Breath and exploit Lightning", detail: "Axolotl is the early Qu's Marsh source for Aqua Breath. It nullifies Water and is weak to Lightning; Aqua Breath itself deals percentage-based damage if it connects.", sourceIds: [enemyListSourceId, "elitegrindlab-qus-marsh"] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["Axolotl appears only in the first, Mist Continent Qu's Marsh. Later marshes contain other enemy forms, so this record is scoped to the Disc I pool."],
+  }, exploringLindblumChapterId, qusMarshSources),
+  chapterEnemy({
+    id: "enemy.gigan-toad-a",
+    name: "Gigan Toad [A]",
+    encounterIds: ["encounter.qus-marsh.disc-1-interior-pool"],
+    stats: enemyStats([["level", 6], ["HP", 242], ["MP", 264], ["EXP", 139], ["AP", 1], ["Gil", 292]]),
+    steals: [enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", "game-item.hi-potion"), enemyLoot("rare", "game-item.phoenix-pinion")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.ore"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("elemental-weakness", "Lightning"), enemyFact("elemental-resistance", "Water (absorbs)"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Glowing Eyes", "Can inflict Sleep."),
+      enemyFact("attack", "Water and Blizzara", "Both are less damaging than expected against this Water-absorbing enemy."),
+    ],
+    blueMagic: [{ name: "Frog Drop", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Learn Frog Drop and use Lightning", detail: "Quina learns Frog Drop by eating Gigan Toad [A]. Lightning exploits its weakness; leave Water-absorbing equipment off the enemy-facing action plan.", sourceIds: [enemyListSourceId, "elitegrindlab-qus-marsh"] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["GameFAQs distinguishes this 242-HP Disc I form from a later level-7 Gigan Toad [B] with 297 HP and a different steal/drop table. Other guides conflate the forms; this bestiary keeps the first-marsh variant separate."],
+  }, exploringLindblumChapterId, qusMarshSources),
+  chapterBoss({
+    id: "enemy.quale",
+    name: "Quale",
+    encounterIds: ["encounter.qus-marsh.quale-99-frogs"],
+    stats: crossCheckedStats([["level", 76], ["HP", 65535], ["MP", 3680], ["EXP", 65535], ["AP", 10], ["Gil", 10800]], qualeSources),
+    steals: [
+      sourcedLoot("common", "game-item.elixir", qualeSources), sourcedLoot("uncommon", "game-item.ninja-gear", qualeSources),
+      sourcedLoot("semi-rare", "game-item.gluttons-robe", qualeSources), sourcedLoot("rare", "game-item.robe-of-lords", qualeSources),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.elixir", qualeSources), sourcedLoot("common", "game-item.elixir", qualeSources),
+      sourcedLoot("uncommon", "game-item.elixir", qualeSources), sourcedLoot("rare", "game-item.elixir", qualeSources),
+    ],
+    facts: [
+      sourcedFact("type", "Human", qualeSources), sourcedFact("elemental-weakness", "Lightning", qualeSources),
+      sourcedFact("elemental-resistance", "Water (absorbs)", qualeSources), sourcedFact("status-vulnerability", "Slow", qualeSources),
+      sourcedFact("attack", "Rolling Attack", ["gamefaqs-frog-catching-71891"], "Heavy single-target physical damage."),
+      sourcedFact("attack", "Water and Aqua Breath", ["gamefaqs-frog-catching-71891"], "Water damage can be dangerous without protection; Aqua Breath deals percentage-based damage."),
+      sourcedFact("attack", "Blind, Confuse, Mini, Poison, and Silence", ["gamefaqs-frog-catching-71891"], "Status spells can disable characters without suitable support abilities."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal the four slots before finishing", detail: "The optional boss has Elixir, Ninja Gear, Glutton's Robe, and Robe of Lords in its steal table. Glutton's Robe has a later synthesis route; the other item routes are tracked in the item catalog.", sourceIds: qualeSources },
+      { title: "Save before frog 99 and protect against Water and status", detail: "The 99th frog triggers the fight. GameFAQs recommends saving at 98 frogs and preparing water resistance and status protection before returning to the pond.", sourceIds: ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh"] },
+    ],
+    routeObjectiveIds: ["disc-4.return-to-gaia.frog-catching"],
+    notes: ["The optional battle triggers on the shared 99-frog count. All four drop slots list Elixir; victory also awards Gastro Fork, a quest reward rather than a battle-table drop. The printed 65,535 HP is shared by the reviewed references, though EliteGrindLab notes that this equals the 16-bit maximum and does not resolve the game's stored-value behavior."],
+  }, returnToGaiaChapterId, qualeSources),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
   ...earlyDaliEnemyRecords,
   ...lindblumEnemyRecords,
+  ...lindblumAreaEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -2447,8 +2693,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Dali, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum Plateau separates mountain and forest pools, including forest-only Bomb; the Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Dali, Lindblum Plateau and lowlands, Qu's Marsh, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad pool; later marsh enemy variants are excluded. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
