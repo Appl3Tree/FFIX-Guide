@@ -1941,7 +1941,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
 
 export const gameItems: GameItem[] = [
   { id: "game-item.cancer-stellazzio", name: "Cancer Stellazzio", category: "key-item", sourceIds: [...burmeciaSources, "jegged-stellazzio"], verification: "partial" },
-  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: burmeciaSources, verification: "partial" },
+  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-items-71891", "gamefaqs-shops-71891"], verification: "partial" },
   { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891"], verification: "partial" },
   { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891"], verification: "partial" },
   { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...fossilRooSources, ...oeilvertSources], verification: "partial" },
@@ -2320,10 +2320,54 @@ const cleyraShopStockPaths: ItemAcquisitionPath[] = cleyraShopStockInputs.map(([
   sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "cavesofnarshe-ff9-disc-2-map", "elitegrindlab-cleyra"],
 }));
 
+const cleyraLaterLindblumRecoveryInputs = [
+  ["partisan", "Partisan", 1600, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["multina-racket", "Multina Racket", 750, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["flame-staff", "Flame Staff", 1100, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["ice-staff", "Ice Staff", 980, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["mythril-armlet", "Mythril Armlet", 500, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["thunder-gloves", "Thunder Gloves", 1200, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["mages-hat", "Mage's Hat", 600, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["mythril-helm", "Mythril Helm", 1000, "lindblum.weapon-shop.disc-2", "Dragoos' Weapon Shop (Disc II)"],
+  ["potion", "Potion", 50, "lindblum.alice-item-shop.disc-2", "Alice's Item Shop (Disc II)"],
+  ["eye-drops", "Eye Drops", 50, "lindblum.alice-item-shop.disc-2", "Alice's Item Shop (Disc II)"],
+  ["annoyntment", "Annoyntment", 150, "lindblum.alice-item-shop.disc-2", "Alice's Item Shop (Disc II)"],
+] as const;
+
+const cleyraLaterRecoveryPaths: ItemAcquisitionPath[] = [
+  ...cleyraLaterLindblumRecoveryInputs.map(([slug, itemName, price, shopId, shopName]) => ({
+    id: `item-path.disc-2.return-to-lindblum.cleyra-recovery.${slug}`,
+    itemId: `game-item.${slug}`,
+    chapterId: "disc-2.return-to-lindblum",
+    method: "shop" as const,
+    quantity: 1,
+    availability: "window-unverified" as const,
+    shopId,
+    shopName,
+    cost: { currency: "gil" as const, amount: price },
+    conditions: `GameFAQs lists ${itemName} for ${price.toLocaleString("en-US")} Gil in Lindblum's Disc II shop stock after Cleyra. This is a later source for the item type; exact stock behavior across releases is not independently verified.`,
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891"],
+  })),
+  {
+    id: "item-path.disc-3.ipsens-castle.cleyra-recovery.needle-fork-mogshop",
+    itemId: "game-item.needle-fork",
+    chapterId: "disc-3.ipsens-castle",
+    method: "mogshop" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    shopId: "ipsens-castle.kumool-mogshop",
+    shopName: "Kumool's Mogshop (Ipsen's Castle)",
+    cost: { currency: "gil" as const, amount: 3100 },
+    conditions: "GameFAQs lists Needle Fork for 3,100 Gil at Kumool's Ipsen's Castle Mogshop, providing a later purchase source after Cleyra.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891"],
+  },
+];
+
 export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc3ShopPaths,
   ...disc4ShopPaths,
   ...cleyraShopStockPaths,
+  ...cleyraLaterRecoveryPaths,
   {
     id: "item-path.disc-2.journey-to-cleyra.gargan-roo-chain-plate",
     itemId: "game-item.chain-plate",

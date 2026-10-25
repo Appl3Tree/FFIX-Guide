@@ -1785,7 +1785,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-shop-stock",
             kind: "optional",
             text: "Before triggering Antlion, visit both Cleyra shops: Burmecian Soldier Dan's weapon shop by the Inn and Stair Maiden Nina's item shop near the Windmill. Buy needed equipment and stock Annoyntments for Trouble.",
-            detail: "GameFAQs and Caves of Narshe list the same 26 products and prices across both shops; the item catalog now records each Cleyra purchase. GameFAQs recommends extra Mythril Armlet and Mage's Hat for Dagger, Mythril Helm and Mythril Armor for Steiner, and a Multina Racket if Bohden Gate was missed. Later acquisition paths are currently modeled for 14 of the 26 item types, including the post-Cleyra Lindblum Chain Mail shop; the other 12 lack a later path in this partial catalog, which does not prove permanent loss. Exact stock-change points remain under review.",
+            detail: "GameFAQs and Caves of Narshe list the same 26 products and prices across both shops; the item catalog records each Cleyra purchase and at least one later source for every product type. GameFAQs recommends extra Mythril Armlet and Mage's Hat for Dagger, Mythril Helm and Mythril Armor for Steiner, and a Multina Racket if Bohden Gate was missed. Later sources include the Disc II Lindblum return stock and Needle Fork at Ipsen's Castle. Exact stock behavior across releases is not independently verified.",
             objectiveIds: ["disc-2.cleyra.shop-stock"],
           },
           {
