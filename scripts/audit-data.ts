@@ -1312,6 +1312,32 @@ for (const itemId of zornThornItemIds) {
 if (!itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.pinnacle-rocks.mythril-armlet-chest")) {
   errors.push("Mythril Armlet needs its Pinnacle Rocks chest path in addition to Thorn's steal.");
 }
+const pinnacleOgreChest = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.the-ogre-chest");
+if (!pinnacleOgreChest || pinnacleOgreChest.itemId !== "game-item.the-ogre" || pinnacleOgreChest.chapterId !== "disc-2.pinnacle-rocks" ||
+  pinnacleOgreChest.method !== "chest" || pinnacleOgreChest.quantity !== 1 || pinnacleOgreChest.availability !== "single-use" ||
+  !pinnacleOgreChest.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.treasure-sweep")) {
+  errors.push("Pinnacle Rocks The Ogre chest needs a single-use acquisition path linked to its treasure-sweep objective.");
+}
+for (const sourceId of ["gamefaqs-items-71891", "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-pinnacle-rocks"]) {
+  if (!pinnacleOgreChest?.sourceIds.includes(sourceId)) errors.push(`Pinnacle Rocks The Ogre chest is missing source ${sourceId}.`);
+}
+const theOgreRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.the-ogre-synthesis");
+if (!theOgreRecovery || theOgreRecovery.itemId !== "game-item.the-ogre" || theOgreRecovery.method !== "synthesis" ||
+  theOgreRecovery.chapterId !== "disc-4.return-to-gaia" || theOgreRecovery.recipeId !== "synthesis-recipe.the-ogre" ||
+  theOgreRecovery.cost?.currency !== "gil" || theOgreRecovery.cost.amount !== 700 ||
+  !theOgreRecovery.sourceIds.includes("gamefaqs-shops-71891")) {
+  errors.push("The Ogre needs its source-linked 700-Gil Disc IV synthesis recovery path.");
+}
+const mythrilArmletLateRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.zorn-thorn.mythril-armlet-alexandria-shop");
+if (!mythrilArmletLateRecovery || mythrilArmletLateRecovery.itemId !== "game-item.mythril-armlet" || mythrilArmletLateRecovery.chapterId !== "disc-3.the-home-front") {
+  errors.push("Mythril Armlet needs a later shop path in addition to its Pinnacle Rocks chest.");
+}
+const pinnacleWarning = missablesById.get("missable.disc-2.pinnacle-rocks.treasure-sweep");
+if (!pinnacleWarning?.classification.includes("recoverable-later") ||
+  /replacement paths for The Ogre and Mythril Armlet.*need review/i.test(pinnacleWarning.recovery) ||
+  !pinnacleWarning.recovery.includes("The Ogre") || !pinnacleWarning.recovery.includes("Mythril Armlet")) {
+  errors.push("Pinnacle Rocks' warning must separate lost chest copies from the later The Ogre and Mythril Armlet item routes.");
+}
 const zornThornAbilityClaims = [
   ["game-item.partisan", "High Tide"],
   ["game-item.partisan", "Lancer"],

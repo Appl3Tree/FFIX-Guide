@@ -4,11 +4,11 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint` and `npm run build` (including typecheck and the data audit) pass for the Hilgigars steal/recovery slice. The audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 614 objectives, and 312 sources; all missables link to 87 cutoff windows, including all 79 high/critical records. The item catalog has 194 records and 721 paths across 40 chapter slices. Bundle: 1,664.91 kB JavaScript (411.05 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests and in-game/release/UI verification were not run.
+`npm run lint` and `npm run build` (including typecheck and the data audit) pass for the Pinnacle Rocks chest/recovery slice. The audit reports 0 errors and 178 coverage warnings across 44 chapters, 136 missables, 614 objectives, and 312 sources; all missables link to 87 cutoff windows, including all 79 high/critical records. The item catalog has 194 records and 722 paths across 40 chapter slices. Bundle: 1,665.33 kB JavaScript (411.13 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests and in-game/release/UI verification were not run.
 
 ## Latest change status
 
-The latest B02/B05 slice maps Hilgigars’ three one-time steals and the later recovery for all three item types. Fairy Flute has two sourced 4,500-Gil Disc III Mogshop paths; exact steal rates and release-specific stock behavior remain unverified. Lint/build and the data audit pass; `git diff --check` passes. Tests and direct game/release/UI verification were not run.
+The latest B02/B05 slice maps The Ogre’s Pinnacle Rocks chest to its later 700-Gil Black Cat synthesis route and updates the warning with replacement paths for all three chest item types. Treasure-rank effects remain unverified. Lint/build and the data audit pass; `git diff --check` passes. Tests and direct game/release/UI verification were not run.
 
 The preceding B01 Cleyra route audit separates the cutoff into its sourced sequence: first-visit ATE and shop checks, Freya's post-Antlion Emerald and Stiltzkin segment, remaining Trunk chests on the required return, then evacuation rewards before departure. GameFAQs and Gamer Guides support this order; final closure wording remains disputed. Lint, data audit, and production build pass with 0 audit errors and 175 coverage warnings. JavaScript bundle: 1,470.41 kB (373.16 kB gzip); CSS: 59.99 kB (12.73 kB gzip). Tests were not added or run; live closure verification remains open.
 
