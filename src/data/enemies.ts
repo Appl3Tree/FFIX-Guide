@@ -77,6 +77,7 @@ const pandemoniumChapterId = "disc-3.portal-to-another-world";
 const iifaTreeChapterId = "disc-4.second-battle-of-iifa-tree";
 const memoriaChapterId = "disc-4.memoria";
 const finalBattleChapterId = "disc-4.the-final-battle";
+const finalPreparationsChapterId = "disc-4.final-preparations";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -105,6 +106,7 @@ const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"
 const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
 const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
 const finalBattleStatsSources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"];
+const ozmaEnemySources = ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891", "gamefaqs-final-preparations-71891"];
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
@@ -546,7 +548,23 @@ const finalBattleEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...finalBattleEncounters];
+const ozmaEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.final-preparations.ozma",
+    title: "Ozma — optional super-boss",
+    chapterId: finalPreparationsChapterId,
+    location: "Chocobo's Air Garden, rear platform, at the stone structure",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.ozma", quantity: 1 }],
+    sourceIds: ozmaEnemySources,
+    objectiveIds: ["disc-4.final-preparations.ozma-steals", "disc-4.final-preparations.ozma-defeated", "disc-4.final-preparations.ozma-rewards", "disc-4.final-preparations.ozma-achievement"],
+    missableIds: ["missable.disc-4.final-preparations.ozma-steals"],
+    cutoffIds: ["cutoff.final-preparations.final-battle"],
+    notes: ["Reach the Air Garden with a Sky Chocobo and examine the stone structure on the rear platform. The Friendly Creatures quest changes Ozma's physical reach and Shadow affinity, but is not required to reach the arena."],
+  },
+];
+
+export const enemyEncounters: EnemyEncounter[] = [...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1329,6 +1347,53 @@ const finalBattleEnemyRecords: EnemyRecord[] = [
   }, finalBattleChapterId, finalBattleEnemySources, ["missable.disc-4.the-final-battle.necron-steals"], ["cutoff.final-battle.necron-steals"]),
 ];
 
+const ozmaEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.ozma",
+    name: "Ozma",
+    encounterIds: ["encounter.final-preparations.ozma"],
+    stats: sourcedStats([["level", 99], ["HP", 55535], ["MP", 9999], ["EXP", 65535], ["AP", 100], ["Gil", 18312]], ["gamefaqs-ultimate-monster-71891"]),
+    steals: [
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+      sourcedLoot("uncommon", "game-item.robe-of-lords", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+      sourcedLoot("semi-rare", "game-item.dark-matter", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+      sourcedLoot("rare", "game-item.pumice-piece", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.pumice", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+      sourcedLoot("common", "game-item.dark-matter", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+      sourcedLoot("uncommon", "game-item.dark-matter", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+      sourcedLoot("rare", "game-item.dark-matter", ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891"]),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", ["gamefaqs-ultimate-monster-71891"]),
+      sourcedFact("elemental-weakness", "Wind and Holy; Shadow after Friendly Creatures", ["gamefaqs-ultimate-monster-71891"], "Completing the Friendly Creatures quest changes Ozma's Shadow affinity from absorption to weakness."),
+      sourcedFact("elemental-resistance", "Earth nullified; Shadow absorbed if Friendly Creatures is incomplete", ["gamefaqs-ultimate-monster-71891"]),
+      sourcedFact("status-vulnerability", "Darkness and Slow", ["gamefaqs-ultimate-monster-71891"]),
+      sourcedFact("attack", "Doomsday", ["gamefaqs-ultimate-monster-71891"], "Heavy party-wide Shadow damage. After Friendly Creatures, Ozma becomes weak to Shadow but still casts Doomsday, which can damage it."),
+      sourcedFact("attack", "Flare, Holy, and LV4 Holy", ["gamefaqs-ultimate-monster-71891"], "Powerful elemental or non-elemental magic; LV4 Holy checks character levels divisible by four."),
+      sourcedFact("attack", "Absorb MP", ["gamefaqs-ultimate-monster-71891"], "Drains a character's MP."),
+      sourcedFact("attack", "Mini, Death, and LV5 Death", ["gamefaqs-ultimate-monster-71891"], "Mini targets the party; Death can KO one character; LV5 Death targets characters at levels divisible by five."),
+      sourcedFact("attack", "Esuna", ["gamefaqs-ultimate-monster-71891"], "Removes status ailments from Ozma."),
+      sourcedFact("attack", "Curse", ["gamefaqs-ultimate-monster-71891"], "Heavy party damage and Darkness, Confuse, Mini, Poison, and Slow."),
+      sourcedFact("attack", "Flare Star", ["gamefaqs-ultimate-monster-71891"], "Damage equal to 50 times the target's level; can miss."),
+      sourcedFact("attack", "Meteor", ["gamefaqs-ultimate-monster-71891"], "Unblockable party-wide damage with a wide random range."),
+      sourcedFact("attack", "Curaga and Berserk counters", ["gamefaqs-ultimate-monster-71891"], "Ozma can counter damage by healing itself with Curaga or inflicting Berserk on the attacker."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Complete Friendly Creatures before the fight", detail: "Finishing the creature quest makes Ozma physically reachable and changes its Shadow affinity from absorbing Shadow to being weak to it. The sidequest makes the fight easier but is not required to reach the Air Garden.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
+      { title: "Prepare for Shadow, Holy, and status attacks", detail: "Nullify Shadow and Holy damage and equip status defenses for Curse and other ailments. Levels divisible by four can draw LV4 Holy; avoid multiples of five if LV5 Death is a concern.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
+      { title: "Finish the selected steals before attacking", detail: "Ozma can fill its ATB and act before a command when it is idle. Delay attacks until Zidane completes the selected steals; Dark Matter and Pumice Piece occupy its rare slots.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
+    ],
+    routeObjectiveIds: ["disc-4.final-preparations.ozma-steals", "disc-4.final-preparations.ozma-defeated", "disc-4.final-preparations.ozma-rewards"],
+    notes: [
+      "The GameFAQs table lists Dark Matter in all three conditional drop slots in addition to a Semi-Rare steal and the one-time Treno auction. The separate drop paths preserve the slots without treating any conditional drop as guaranteed.",
+      "Friendly Creatures changes physical reach and Shadow affinity. Exact character level is not required by the route; level-multiple warnings describe Ozma's LV4 Holy and LV5 Death targeting rules.",
+    ],
+  }, finalPreparationsChapterId, ozmaEnemySources, ["missable.disc-4.final-preparations.ozma-steals"], ["cutoff.final-preparations.final-battle"]),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   {
     id: "enemy.red-dragon",
@@ -1448,12 +1513,13 @@ export const enemyRecords: EnemyRecord[] = [
   ...iifaTreeEnemyRecords,
   ...memoriaEnemyRecords,
   ...finalBattleEnemyRecords,
+  ...ozmaEnemyRecords,
 ];
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId],
-  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, and the final battle. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };
