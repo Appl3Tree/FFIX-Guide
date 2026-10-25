@@ -124,6 +124,7 @@ for (const edge of gameRouteEdges) {
   }
 }
 const supportedGameRouteCutoffCertainties = new Set(["source-supported", "conservative", "disputed"]);
+const linkedRouteMissableIds = new Set<string>();
 for (const cutoff of gameRouteCutoffs) {
   const edge = gameRouteEdgesById.get(cutoff.edgeId);
   if (!edge) errors.push(`Game route cutoff ${cutoff.id} references unknown edge ${cutoff.edgeId}.`);
@@ -138,6 +139,7 @@ for (const cutoff of gameRouteCutoffs) {
       errors.push(`Game route cutoff ${cutoff.id} references unknown missable ${missableId}.`);
       return [];
     }
+    linkedRouteMissableIds.add(missableId);
     if (!edge) return [missable];
     if (!missable.warningChapterIds?.some((chapterId) => chapterId === edge.fromChapterId || chapterId === edge.toChapterId)) {
       errors.push(`Game route cutoff ${cutoff.id} links missable ${missableId}, whose warning chapter is not on edge ${edge.id}.`);
@@ -150,6 +152,9 @@ for (const cutoff of gameRouteCutoffs) {
     if (!sourceIds.has(sourceId)) errors.push(`Game route cutoff ${cutoff.id} references unknown source ${sourceId}.`);
     else if (!relatedSourceIds.has(sourceId)) errors.push(`Game route cutoff ${cutoff.id} source ${sourceId} is not cited by its route edge or linked warnings.`);
   }
+}
+for (const missable of missables.filter((record) => record.severity === "high" || record.severity === "critical")) {
+  if (!linkedRouteMissableIds.has(missable.id)) errors.push(`High/critical missable ${missable.id} has no game route cutoff link.`);
 }
 const reachableGameRouteChapters = new Set<string>();
 const pendingGameRouteChapters = gameRouteCoverage.chapterIds.slice(0, 1);
@@ -496,6 +501,7 @@ if (guideAreas.some((area) => area.state === "verified")) warnings.push("A chapt
 
 console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} coverage warning(s).`);
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
+console.log(`Route cutoffs: ${gameRouteCutoffs.length} windows link ${linkedRouteMissableIds.size} missable warnings; ${missables.filter((record) => record.severity === "high" || record.severity === "critical").length} high/critical records have cutoff links.`);
 console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);

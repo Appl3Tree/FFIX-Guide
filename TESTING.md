@@ -4,7 +4,7 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-For the route-cutoff milestone, `npm run lint` passed and `npm run build` passed typecheck, the data audit, and the production build. The audit reports 0 errors and 175 coverage warnings across 44 chapters, 133 missables, 608 objectives, and 285 sources; it now validates 16 cutoff windows and their 34 linked warnings against route edges, endpoint chapters, certainty labels, and registered sources. The production bundle is 1,298.29 kB JavaScript (340.16 kB gzip) and 53.71 kB CSS (11.59 kB gzip); Vite's chunk-size notice remains advisory. Tests were not added or run for this slice. The new Route Map cutoff panel has not received browser or responsive review.
+For the route-cutoff milestone, `npm run lint` passed and `npm run build` passed typecheck, the data audit, and the production build. The audit reports 0 errors and 175 coverage warnings across 44 chapters, 133 missables, 608 objectives, and 285 sources; it validates 54 cutoff windows and their 89 linked warnings against route edges, endpoint chapters, certainty labels, and registered sources, and requires all 79 high/critical missables to be linked. The production bundle is 1,319.66 kB JavaScript (344.69 kB gzip) and 53.71 kB CSS (11.59 kB gzip); Vite's chunk-size notice remains advisory. Tests were not added or run for this slice. The cutoff data expansion has not received browser or responsive review.
 
 ## Latest change status
 
@@ -24,7 +24,7 @@ The repository defines:
 - `npm run lint` — ESLint on the project.
 - `npm run typecheck` — TypeScript project checks.
 - `npm test` — profile/progress tests plus both-branch, three-platform Movie Critic route simulation.
-- `npm run audit:data` — duplicate IDs, source/objective/item references, missable fields, warning-to-checklist chapter links, limited-window item path-to-cutoff warning links, route-cutoff edge/warning/certainty/source links, item-shop metadata, source inventory targets, ability-claim provenance, and coverage-state warnings.
+- `npm run audit:data` — duplicate IDs, source/objective/item references, missable fields, warning-to-checklist chapter links, limited-window item path-to-cutoff warning links, route-cutoff edge/warning/certainty/source links, high/critical missable cutoff coverage, item-shop metadata, source inventory targets, ability-claim provenance, and coverage-state warnings.
 - `npm run build` — typecheck, data audit, and Vite production build.
 
 The test `test/ate-route.test.mjs` statically checks both mutually exclusive Treno choices, the 79-scene route length, Dali's six-scene list and source links, its Cat's Eye/Cat's Eye 2, Dagger Tries/Dagger Tries Harder, and Queen Brahne's Steiner prerequisites, the four-source Treno ATE order, ATE prerequisite ordering, the earlier Wei/Kal prerequisite, and event pointers in Steam, PS4, and Xbox. `test/game-route.test.mjs` checks the sourced Dali-to-Ice-Cavern return, the eight registered edge sources, the Cargo Ship cutoff, the Lindblum Basin return/rejoin and sources, graph relationship totals, the active Dali warning window, and conservative handling of the disputed Mois letter recovery. These tests do not verify live prompts or release-specific trigger behavior.

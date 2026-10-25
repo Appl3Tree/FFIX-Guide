@@ -252,7 +252,7 @@ The implementation remains incomplete. All 44 chapters are partially authored an
 
 ## Route cutoff cross-check
 
-The route graph now links 16 selected cutoff windows to 34 missable records. The labels separate deadlines directly supported by the reviewed sources from conservative safe points and source disagreements. Encounter windows such as Antlion, Lani, Ark, and Beatrix remain distinct from the later area-exit checks. The Route Map links each warning to its walkthrough chapter; the data audit verifies its edge, chapter, and citation references. This partial registry does not establish full route coverage or cross-release behavior.
+The route graph now links 54 cutoff windows to 89 missable records, including all 79 high/critical warnings. The labels separate deadlines directly supported by the reviewed sources from conservative safe points and source disagreements. Encounter windows such as Antlion, Lani, Ark, and Beatrix remain distinct from the later area-exit checks. The Route Map links each warning to its walkthrough chapter; the data audit verifies its edge, chapter, citation references, and high/critical coverage. The remaining 44 lower-severity records, full route coverage, and cross-release behavior are still under review.
 
 | Route window | Reviewed sources | Evidence recorded |
 | --- | --- | --- |
