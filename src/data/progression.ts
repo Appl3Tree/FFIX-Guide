@@ -1027,9 +1027,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.lindblum-to-journey-to-burmecia",
     title: "Lindblum ATEs and Javelin departure check",
     certainty: "conservative",
-    trigger: "Before leaving Lindblum for the world map, finish the first-visit ATE set and buy the Javelin if desired. This is a conservative wrap-up checkpoint; the Autograph and Moogle Suit have an earlier, source-supported cutoff at Tantalus Hideout entry.",
+    trigger: "Before leaving Lindblum for the world map, finish the first-visit ATE set and buy the Javelin if desired. This conservative check protects a dependable first-visit purchase: GameFAQs sources differ on the later shop window, and no reviewed route confirms a return to the weapon shop after entering Gizamaluke's Grotto. The Autograph and Moogle Suit have an earlier, source-supported cutoff at Tantalus Hideout entry.",
     missableIds: ["missable.disc-1.lindblum.ates", "missable.disc-1.lindblum.javelin-shop"],
-    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum"],
+    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-lindblum-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-lindblum", "gamerguides-lindblum"],
   },
   {
     id: "cutoff.lindblum-grotto-entry.trolley-lockout",

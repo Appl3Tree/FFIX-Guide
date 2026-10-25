@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest route audit adds a separate source-supported Lindblum cutoff for the Autograph and Moogle Suit at Tantalus Hideout entry; the ATE/Javelin departure check and the Grotto-entry trolley cutoff remain distinct. Repository checks pass, while direct game/release verification and later full city/trolley reopening remain open.
+No account-owner setup action changed. The latest route audit retains the source-supported Autograph/Moogle Suit cutoff at Tantalus Hideout entry and the conservative Lindblum departure check. Javelin shop timing now records the conflicting sources and the first-visit safe purchase. Repository checks pass; direct game/release verification and post-Grotto shop/city access remain open.
 
 No account-owner setup action changed. The latest guide-content milestone reconciles Cleyra's evacuation directions and removes an unsupported version-dependent label; repository lint, typecheck, audit, build, and whitespace checks pass. Direct game/release verification remains open.
 

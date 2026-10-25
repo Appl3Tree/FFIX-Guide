@@ -117,6 +117,21 @@ if (
   errors.push("Lindblum's Autograph and Moogle Suit cutoff must be source-supported at Tantalus Hideout entry and stay separate from the broader ATE/Javelin departure checklist.");
 }
 
+const lindblumJavelinWarning = missablesById.get("missable.disc-1.lindblum.javelin-shop");
+if (
+  lindblumJavelinWarning?.verification !== "partial" ||
+  !lindblumJavelinWarning.deadline.includes("during the first Lindblum visit") ||
+  !lindblumJavelinWarning.note?.includes("GameFAQs sources differ") ||
+  !lindblumJavelinWarning.note.includes("no reviewed route confirms that the player can reach this shop again") ||
+  !lindblumJavelinWarning.recovery.includes("Freya's starting Javelin") ||
+  !lindblumJavelinWarning.recovery.includes("Ipsen's Castle copy") ||
+  !lindblumDepartureCutoff?.missableIds.includes("missable.disc-1.lindblum.javelin-shop") ||
+  !["gamefaqs-lindblum-71891", "gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-items-71891", "gamefaqs-shops-71891"].every((sourceId) => lindblumJavelinWarning.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891"].every((sourceId) => lindblumDepartureCutoff.sourceIds.includes(sourceId))
+) {
+  errors.push("Lindblum's Javelin purchase must retain its conservative first-visit recommendation, partial timing status, later-copy recovery, and conflicting GameFAQs shop boundaries.");
+}
+
 if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
 for (const chapterId of enemyCatalogCoverage.chapterIds) {
   if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);
