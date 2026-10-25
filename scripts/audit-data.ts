@@ -2657,6 +2657,44 @@ for (const warningId of earlierMognetLetterWarnings) {
   }
 }
 const cour89MognetLetters = sources.find((source) => source.id === "cour89-mognet-letters");
+const gamefaqsMoogleFaq = sources.find((source) => source.id === "gamefaqs-moogle-faq-23306");
+const gamefaqsCardTournament = sources.find((source) => source.id === "gamefaqs-card-tournament-71891");
+const mogrichLetterObjective = objectivesById.get("disc-3.card-tournament.mogrich-letter");
+const mogrichLetterWarning = missablesById.get("missable.disc-3.card-tournament.mogrich-letter");
+const mogrichLetterCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.card-tournament.mogrich-letter");
+const cardTournamentActivityCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.card-tournament.third-match");
+const mogrichTournamentSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.card-tournament")
+  ?.sections.find((section) => section.id === "card-tournament-treno-sweep");
+const mogrichTournamentStep = mogrichTournamentSection?.steps.find((step) => step.id === "card-tournament-mogrich-letter");
+if (
+  !cour89MognetLetters?.notes.includes("New Champion letter")
+  || !cour89MognetLetters.notes.includes("level 20 while the Treno Card Tournament is underway")
+  || !cour89MognetLetters.notes.includes("level 60 or above")
+  || !gamefaqsMoogleFaq?.notes.includes("if Hippaul has been raced")
+  || !gamefaqsCardTournament?.notes.includes("if Athlete Queen was won")
+  || !mogrichLetterObjective?.title.includes("New Champion")
+  || !mogrichLetterObjective.sourceIds.includes("cour89-mognet-letters")
+  || !mogrichLetterWarning?.classification.includes("conditional")
+  || !mogrichLetterWarning.consequence.includes("do not establish the earliest unlock")
+  || !mogrichLetterWarning.consequence.includes("does not block the separate Disc IV Mognet Central repair chain")
+  || !mogrichLetterWarning.recovery.includes("later Treno visit remains unverified")
+  || !mogrichLetterWarning.sourceIds.includes("gamerguides-mognet-central")
+  || mogrichLetterCutoff?.certainty !== "conservative"
+  || mogrichLetterCutoff.edgeId !== cardTournamentActivityCutoff?.edgeId
+  || mogrichLetterCutoff.missableIds.length !== 1
+  || !mogrichLetterCutoff.missableIds.includes(mogrichLetterWarning.id)
+  || !mogrichLetterCutoff.trigger.includes("level 20")
+  || !mogrichLetterCutoff.trigger.includes("before starting the third game")
+  || cardTournamentActivityCutoff?.missableIds.includes(mogrichLetterWarning.id)
+  || !mogrichTournamentSection?.sourceIds.includes("cour89-mognet-letters")
+  || !mogrichTournamentStep?.objectiveIds.includes(mogrichLetterObjective.id)
+  || !mogrichTournamentStep.text.includes("level 20")
+  || !mogrichTournamentStep.detail?.includes("Athlete Queen")
+  || !mogrichTournamentStep.detail.includes("later Treno availability is unverified")
+) {
+  errors.push("Mogrich's optional New Champion letter must preserve Cour89's current-release level-20 tournament condition, the older PlayStation condition differences, a separate conservative pre-final-game cutoff, and independence from Mognet Central repair.");
+}
 const mognetRepairObjective = objectivesById.get("disc-4.return-to-gaia.mognet-central");
 const mognetRepairRoute = gameRouteEdgesById.get("detour.return-to-gaia-burmecia-rejoin");
 const mognetRepairSection = walkthroughChapters

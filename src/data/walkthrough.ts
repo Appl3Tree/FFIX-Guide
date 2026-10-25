@@ -3688,13 +3688,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "card-tournament-treno-sweep",
         title: "Treno side stops — mail, Catoblepas, Stellazzio, and auction",
         summary: "Return to Treno and complete the optional errands before entering the third match.",
-        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "gamefaqs-treno-auction-71891", "jegged-stellazzio"],
+        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "jegged-stellazzio"],
         steps: [
           {
             id: "card-tournament-mogrich-letter",
             kind: "save",
-            text: "Visit Mogrich in the Knight's House, check Mognet, and save. If Athlete Queen is in your inventory, Mogrich may have a new letter; read any available mail before leaving Treno.",
-            detail: "The sources do not establish whether skipping this letter permanently blocks Mognet Central. Treat this as the safe first opportunity and preserve the letter chain when available.",
+            text: "Visit Mogrich in the Knight's House and choose Mognet. Cour89 lists Kupo's New Champion letter after Hippaul reaches level 20 while the Card Tournament is in progress; read it before starting the third game.",
+            detail: "The older PlayStation tournament guide notes the letter if Athlete Queen was won but does not establish that as the earliest unlock; the Moogle FAQ says Hippaul must have been raced. If it is absent at level 20, race Hippaul further and check again before the final match. Cour89 says the letter names Hippaul at levels 20–59 and Vivi at level 60 or above; later Treno availability is unverified. This optional Disc III entry does not gate the separate Disc IV Mognet Central repair quest.",
             objectiveIds: ["disc-3.card-tournament.mogrich-letter"],
           },
           {
