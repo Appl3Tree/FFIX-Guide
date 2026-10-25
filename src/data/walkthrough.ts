@@ -5643,7 +5643,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-bran-bal-moorock",
         title: "Storage room — free Moorock, read Mognet, shop, and save",
         summary: "The eastern Storage room contains the Wing Edge, Moorock, the seventh Stiltzkin bundle, the local save point, and a stock check.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-moogle-faq-23306", "elitegrindlab-bran-bal", "game8-zorlin-shape"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "jegged-pandemonium", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-moogle-faq-23306", "elitegrindlab-bran-bal", "game8-zorlin-shape"],
         steps: [
           {
             id: "portal-bran-bal-wing-edge-moorock",
@@ -5656,7 +5656,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-bran-bal-shop-review",
             kind: "optional",
             text: "Review Moorock's weapon and armor stock against your equipment and synthesis goals, including Demon's Vest (10,250 Gil). Buy any gear you want before continuing the story, and save at his Mognet point before leaving the room.",
-            detail: "The shop includes late gear such as Defender, Holy Lance, Bistro Fork, Adaman Hat, Platinum Helm, Platina Armor, and Zorlin Shape. Demon's Vest is also in the Terra chest before Bran Bal and returns to Daguerreo's Disc IV stock; the exact end of Moorock's Bran Bal shop window is unverified. Moorock's later Pandemonium Mogshop is the final documented chance to buy a Zorlin Shape, so review that stock after the forced fights and before continuing through the dungeon.",
+            detail: "The shop includes late gear such as Defender, Holy Lance, Bistro Fork, Adaman Hat, Platinum Helm, Platina Armor, and Zorlin Shape. Demon's Vest is also in the Terra chest before Bran Bal and returns to Daguerreo's Disc IV stock. Review Moorock's Bran Bal stock before following Mikoto through the green gate to Pandemonium: the post-Kuja route returns through Bran Bal linearly, but the reviewed sources do not document reopening the shop on that evacuation path. Moorock's Pandemonium Mogshop is the final documented chance to buy a Zorlin Shape, so review that stock after the forced fights and before continuing through the dungeon.",
             objectiveIds: ["disc-3.portal-to-another-world.moorock-shop-review"],
           },
           {
