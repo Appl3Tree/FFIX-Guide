@@ -1946,6 +1946,14 @@ export const sources = [
     notes: "Independent broad cross-check for the station sequence, Phoenix Down, train, and second Black Waltz 3 encounter; enemy HP is reported as a rounded 1,300 rather than the 1,292 shown by other guides.",
   },
   {
+    id: "elitegrindlab-south-gate",
+    title: "The South Gate — completionist walkthrough",
+    publisher: "EliteGrindLab",
+    url: "https://elitegrindlab.com/ff9/walkthrough/south-gate/",
+    accessed: "2026-10-25",
+    notes: "Independent comparison of the Summit Station rematch, including Level 9, 1,292 HP, 864 Gil, 5 AP, the three steal items, and the lack of an elemental weakness. It identifies source records that appear to copy the Cargo Ship version into the rematch entry.",
+  },
+  {
     id: "flactem-disc-2-south-gate-treno",
     title: "Disc II: South Gate, Treno, and Gargan Roo",
     publisher: "Flactem Guides",

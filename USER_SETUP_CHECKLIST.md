@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest local B04 update adds the source-linked Summit Station Black Waltz 3 rematch profile and connects its steals to existing item, missable, and cutoff records. Lint, typecheck, audit, build, and whitespace checks pass; browser/game/release verification remains open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
+
 No account-owner setup action changed. The latest local B02/B05 update catalogs Cleyra's 18 newly added fixed pickups, its conditional evacuation item rewards, and all three Stiltzkin #2 bundle products. Lint, typecheck, audit, build, and whitespace checks pass; source coverage and Treasure Hunter rank impact remain partial. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.
 
 No account-owner setup action changed. The latest local B02/B05 update completes the nine listed Crash Site/Prima Vista item paths, catalogs Cinna's five priced products, and adds later recovery routes for the item types. Lint, typecheck, audit, build, and whitespace checks pass; the Treasure Hunter rank effect and direct game/release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for this content update.

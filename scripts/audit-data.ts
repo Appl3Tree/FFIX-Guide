@@ -2216,6 +2216,39 @@ if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030
   !blackWaltz2Record.facts.some((fact) => fact.category === "status-vulnerability" && fact.label === "Mini" && fact.sourceIds.includes("ffwiki-black-waltz-2"))) {
   errors.push("Black Waltz 2 must preserve its cross-checked HP, four Ether drop slots, and sourced Mini-status conflict.");
 }
+const summitStationWaltzEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.summit-station.black-waltz-3-rematch");
+const summitStationWaltzRecord = enemyRecords.find((enemy) => enemy.id === "enemy.black-waltz-3-rematch");
+const summitStationWaltzSteals = [
+  ["game-item.steepled-hat", "common"],
+  ["game-item.lightning-staff", "uncommon"],
+  ["game-item.flame-staff", "semi-rare"],
+] as const;
+if (!summitStationWaltzEncounter || summitStationWaltzEncounter.kind !== "boss" ||
+  summitStationWaltzEncounter.chapterId !== "disc-2.journey-to-treno" ||
+  !summitStationWaltzEncounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-3-rematch" && entry.quantity === 1) ||
+  !summitStationWaltzEncounter.objectiveIds.includes("disc-2.journey-to-treno.black-waltz-3-steals") ||
+  !summitStationWaltzEncounter.missableIds.includes("missable.disc-2.journey-to-treno.black-waltz-3-steals") ||
+  !summitStationWaltzEncounter.cutoffIds.includes("cutoff.journey-to-treno.black-waltz-3-steals") ||
+  !["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station"].every((sourceId) => summitStationWaltzEncounter.sourceIds.includes(sourceId))) {
+  errors.push("The Summit Station Black Waltz 3 rematch must have its own source-linked boss encounter tied to the existing steal objective, missable, and cutoff.");
+}
+for (const [itemId, slot] of summitStationWaltzSteals) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-2.journey-to-treno" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-2.journey-to-treno.black-waltz-3-steals"));
+  if (!summitStationWaltzRecord?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) ||
+    !summitStationWaltzRecord.routeObjectiveIds.includes("disc-2.journey-to-treno.black-waltz-3-steals") ||
+    !path || path.availability !== "one-time-encounter") {
+    errors.push(`The Summit Station Black Waltz 3 ${itemId} steal must link the profile, encounter objective, and one-time item path.`);
+  }
+}
+const summitWaltzHpClaims = summitStationWaltzRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
+if (summitStationWaltzRecord?.stats.find((stat) => stat.field === "level")?.value !== 9 ||
+  !summitWaltzHpClaims.some((stat) => stat.value === 1292 && stat.verification === "disputed") ||
+  !summitWaltzHpClaims.some((stat) => stat.value === 1300 && stat.verification === "disputed" && stat.sourceIds.includes("strategywiki-summit-station")) ||
+  !summitStationWaltzRecord?.facts.some((fact) => fact.category === "attack" && fact.label === "Freeze") ||
+  !summitStationWaltzRecord?.facts.some((fact) => fact.category === "status-vulnerability" && fact.label.includes("Darkness") && fact.label.includes("Slow")) ||
+  !summitStationWaltzRecord?.notes.some((note) => note.includes("semi-rare") && note.includes("rare"))) {
+  errors.push("The Summit Station Black Waltz 3 profile must preserve its rematch stats, StrategyWiki HP discrepancy, Freeze facts, steal-slot disagreement, and version note.");
+}
 const lindblumMountainPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.mountain-pool");
 const lindblumForestPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.forest-pool");
 if (!lindblumMountainPool || lindblumMountainPool.kind !== "random-pool" ||
