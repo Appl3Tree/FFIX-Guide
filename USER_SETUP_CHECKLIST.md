@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest local B04/B05 update adds Anemone’s repeatable Lanar Island Qu’s Marsh encounter, Bad Breath checklist link, and five source-linked loot paths. The bestiary has 117 records across 27 slices and 102 encounter groups; the catalog has 210 items and 901 paths. This content update needs no GitHub, Firebase, deployment, or sign-in work.
+No account-owner setup action changed. The latest local B04/B05 update adds Anemone’s repeatable Blairsurpass Plains Qu’s Marsh opportunity, Bad Breath/frog checklist links, and five source-linked loot paths. The bestiary has 117 records across 28 slices and 103 encounter groups; the catalog has 210 items and 906 paths. This content update needs no GitHub, Firebase, deployment, or sign-in work.
 
 No account-owner setup action changed. The preceding local B04 update adds Gargan Roo’s Crawler/Dragonfly pool and a Ralvurahva boss profile linked to its existing steal warning, cutoff, and item recovery paths. Lint, typecheck, audit, build, and whitespace checks pass; the bestiary then had 113 records across 26 slices and 99 encounter groups. Browser, game, and release verification remain open. No GitHub, Firebase, deployment, or sign-in work is needed for that content update.
 

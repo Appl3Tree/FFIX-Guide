@@ -2432,8 +2432,10 @@ for (const [pathId, enemyId, itemId, method, slot] of outerMarshLootPaths) {
   }
 }
 const lanarMarshPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lanar-island.qus-marsh.anemone-opportunity");
+const blairsurpassMarshPool = enemyEncounters.find((encounter) => encounter.id === "encounter.blairsurpass.qus-marsh.anemone-opportunity");
 const anemoneRecord = enemyRecords.find((enemy) => enemy.id === "enemy.anemone");
 const highSeasWalkthrough = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.on-the-high-seas");
+const forgottenContinentWalkthrough = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.forgotten-continent");
 if (!lanarMarshPool || lanarMarshPool.kind !== "random-pool" ||
   lanarMarshPool.chapterId !== "disc-3.on-the-high-seas" ||
   lanarMarshPool.formation.length !== 1 ||
@@ -2467,6 +2469,42 @@ for (const [pathId, itemId, method, slot] of lanarAnemoneLootPaths) {
     !path.sourceIds.includes("gamefaqs-item-locations-54996") ||
     !lootTable?.some((entry) => entry.itemId === itemId && entry.slot === slot)) {
     errors.push(`Lanar Island Anemone item path ${pathId} must match its repeatable enemy-table loot slot.`);
+  }
+}
+const blairsurpassAnemoneLootPaths = [
+  ["item-path.disc-3.forgotten-continent.blairsurpass-anemone-ore-steal", "game-item.ore", "steal", "common"],
+  ["item-path.disc-3.forgotten-continent.blairsurpass-anemone-tent-steal", "game-item.tent", "steal", "uncommon"],
+  ["item-path.disc-3.forgotten-continent.blairsurpass-anemone-hi-potion-drop", "game-item.hi-potion", "drop", "common"],
+  ["item-path.disc-3.forgotten-continent.blairsurpass-anemone-eye-drops-drop", "game-item.eye-drops", "drop", "uncommon"],
+  ["item-path.disc-3.forgotten-continent.blairsurpass-anemone-ether-drop", "game-item.ether", "drop", "rare"],
+] as const;
+const forgottenMarshFrogObjective = objectivesById.get("disc-3.forgotten-continent.qus-marsh-frogs");
+const regionalBlueMagicObjective = objectivesById.get("disc-3.on-the-high-seas.blue-magic");
+if (!blairsurpassMarshPool || blairsurpassMarshPool.kind !== "random-pool" ||
+  blairsurpassMarshPool.chapterId !== "disc-3.forgotten-continent" ||
+  blairsurpassMarshPool.formation.length !== 1 ||
+  blairsurpassMarshPool.formation[0]?.enemyId !== "enemy.anemone" ||
+  !blairsurpassMarshPool.objectiveIds.includes("disc-3.on-the-high-seas.blue-magic") ||
+  !blairsurpassMarshPool.objectiveIds.includes("disc-3.forgotten-continent.qus-marsh-frogs") ||
+  blairsurpassMarshPool.missableIds.length !== 0 || blairsurpassMarshPool.cutoffIds.length !== 0 ||
+  !blairsurpassMarshPool.sourceIds.includes("gamefaqs-qus-marsh-60521") ||
+  !anemoneRecord?.encounterIds.includes("encounter.blairsurpass.qus-marsh.anemone-opportunity") ||
+  !forgottenContinentWalkthrough?.sections.some((section) => section.id === "forgotten-continent-landing" &&
+    section.steps.some((step) => step.id === "forgotten-continent-anemone-bad-breath" &&
+      step.objectiveIds?.includes("disc-3.on-the-high-seas.blue-magic") &&
+      step.objectiveIds.includes("disc-3.forgotten-continent.qus-marsh-frogs"))) ||
+  !forgottenMarshFrogObjective?.sourceIds.includes("gamefaqs-qus-marsh-60521") ||
+  !regionalBlueMagicObjective?.chapterIds.includes("disc-3.forgotten-continent")) {
+  errors.push("Blairsurpass Plains Qu's Marsh must keep its scoped repeatable Anemone opportunity linked to Bad Breath, the frog objective, sources, and Disc III walkthrough without claiming a cutoff or complete pond roster.");
+}
+for (const [pathId, itemId, method, slot] of blairsurpassAnemoneLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const lootTable = method === "steal" ? anemoneRecord?.steals : anemoneRecord?.drops;
+  if (!path || path.itemId !== itemId || path.chapterId !== "disc-3.forgotten-continent" ||
+    path.method !== method || path.availability !== "repeatable" ||
+    !path.sourceIds.includes("gamefaqs-item-locations-54996") ||
+    !lootTable?.some((entry) => entry.itemId === itemId && entry.slot === slot)) {
+    errors.push(`Blairsurpass Plains Anemone item path ${pathId} must match its repeatable enemy-table loot slot.`);
   }
 }
 const grottoPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.random-pool");

@@ -4360,7 +4360,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "forgotten-continent-landing",
         title: "Blairsurpass Plains — land and choose a route",
         summary: "The Hilda Garde can serve as a basic item shop. The northern side of the landing area leads to Qu's Marsh and Chocobo tracks; Oeilvert is south across the continent.",
-        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-desert-palace"],
+        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-desert-palace", "gamefaqs-frog-catching-71891", "gamefaqs-qus-marsh-60521", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "rpgclassics-disc-3-walkthrough"],
         steps: [
           {
             id: "forgotten-continent-hilda-garde-shop",
@@ -4387,6 +4387,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "If Quina is in Zidane's four-person party, visit the Qu's Marsh north of the landing and check the frog pond. Catch frogs only if you want to advance Frog Catching, and leave a male, a female, and any golden frog behind.",
             detail: "GameFAQs recommends clearing the pond, but its dedicated Frog Catching reference recommends preserving a breeding pair and golden frog. This guide follows the latter to protect future pond growth.",
             objectiveIds: ["disc-3.forgotten-continent.qus-marsh-frogs"],
+          },
+          {
+            id: "forgotten-continent-anemone-bad-breath",
+            kind: "optional",
+            text: "If Quina still needs Bad Breath, use Eat on Anemone inside the Blairsurpass Plains Qu's Marsh.",
+            detail: "Anemone is a repeatable teacher at both Forgotten Continent and Lanar Island ponds. Each pond has its own frog-growth timer; no one-time cutoff is documented.",
+            objectiveIds: ["disc-3.on-the-high-seas.blue-magic", "disc-3.forgotten-continent.qus-marsh-frogs"],
           },
         ],
       },
