@@ -56,4 +56,18 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-synthesis", "elitegrindlab-synthesis"],
     notes: "GameFAQs, RPGClassics, Jegged, and EliteGrindLab agree on the Feather Boots + Wing Edge recipe at Daguerreo. RPGClassics and EliteGrindLab give the 6,500-Gil price; GameFAQs notes the separate 45-frog reward and other acquisition paths.",
   },
+  {
+    id: "synthesis-recipe.rebirth-ring",
+    resultItemId: "game-item.rebirth-ring",
+    ingredients: [
+      { itemId: "game-item.diamond", quantity: 1 },
+      { itemId: "game-item.anklet", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 7000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "GameFAQs identifies Diamond + Anklet at Daguerreo; RPGClassics and Jegged independently list the 7,000-Gil price. Ingredient paths in this catalog are partial and do not include every Anklet source.",
+  },
 ];

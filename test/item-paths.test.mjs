@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { objectives, sources } from "../src/data/guide.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage } from "../src/data/items.ts";
+import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 test("Cleyra's Magician Shoes and rubbish-pit chests have separate item paths", () => {
@@ -123,17 +124,23 @@ test("the Treno Chimera Armlet ATE path records its later item recovery sources"
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-3.the-aftermath"));
 });
 
-test("Rebirth Ring records the tournament, Chocograph, and final-battle sources", () => {
+test("Rebirth Ring records its acquisition sources and synthesis ingredients", () => {
   const rebirthPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rebirth-ring");
   const tournament = rebirthPaths.find((path) => path.id === "item-path.disc-3.card-tournament.rebirth-ring-prize");
   const chocograph = rebirthPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.rebirth-ring-forgotten-island");
   const tranceKuja = rebirthPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.rebirth-ring-trance-kuja-steal");
+  const synthesis = rebirthPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.daguerreo-rebirth-ring-synthesis");
+  const diamondPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.diamond");
+  const ankletPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.anklet");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.rebirth-ring");
 
   assert.ok(gameItems.some((item) => item.id === "game-item.rebirth-ring"));
+  assert.ok(gameItems.some((item) => item.id === "game-item.diamond"));
+  assert.ok(gameItems.some((item) => item.id === "game-item.anklet"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.card-tournament"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.aerial-exploration"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-4.the-final-battle"));
-  assert.equal(rebirthPaths.length, 3);
+  assert.equal(rebirthPaths.length, 4);
 
   assert.equal(tournament?.availability, "limited-window");
   assert.equal(tournament?.recommendedBeforeChapterId, "disc-3.card-tournament");
@@ -147,7 +154,24 @@ test("Rebirth Ring records the tournament, Chocograph, and final-battle sources"
   assert.ok(tranceKuja?.conditions?.includes("point of no return"));
   assert.ok(tranceKuja?.walkthroughObjectiveIds?.includes("disc-4.the-final-battle.trance-kuja-steals"));
 
-  for (const path of rebirthPaths) {
+  assert.equal(synthesis?.cost?.amount, 7000);
+  assert.equal(synthesis?.recipeId, "synthesis-recipe.rebirth-ring");
+  assert.ok(synthesis?.conditions?.includes("one Diamond, one Anklet"));
+  assert.equal(recipe?.cost.amount, 7000);
+  assert.equal(recipe?.shopId, "daguerreo.synthesis-expert");
+  assert.deepEqual(recipe?.ingredients, [
+    { itemId: "game-item.diamond", quantity: 1 },
+    { itemId: "game-item.anklet", quantity: 1 },
+  ]);
+  assert.equal(diamondPaths.length, 4);
+  assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-2.outer-continent.conde-petie-diamond"));
+  assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.aerial-exploration.diamond-sea-at-dusk"));
+  assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.aerial-exploration.diamond-friendly-garuda"));
+  assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.portal-to-another-world.stiltzkin-diamond"));
+  assert.equal(ankletPaths.length, 1);
+  assert.equal(ankletPaths[0]?.id, "item-path.disc-3.desert-palace.anklet-fire-chamber");
+
+  for (const path of [...rebirthPaths, ...diamondPaths, ...ankletPaths]) {
     for (const sourceId of path.sourceIds) {
       assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
     }
@@ -159,5 +183,6 @@ test("Rebirth Ring records the tournament, Chocograph, and final-battle sources"
   );
   assert.ok(objectives.some((objective) => objective.id === "disc-3.card-tournament.rebirth-ring"));
   assert.ok(objectives.some((objective) => objective.id === "disc-4.the-final-battle.trance-kuja-steals"));
+  assert.ok(objectives.some((objective) => objective.id === "disc-3.desert-palace.bloodstones"));
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-4.the-final-battle"));
 });

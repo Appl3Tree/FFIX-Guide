@@ -2271,7 +2271,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/54996",
     accessed: "2026-10-23",
-    notes: "Original PlayStation item reference cross-check for Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key synthesis condition.",
+    notes: "Original PlayStation item reference cross-check for Grand Armor's Nova Dragon steal and Mythril Sword/Mythril Armor acquisition routes, plus Diamond and Anklet ingredient paths for Rebirth Ring. The Mythril Sword can be bought in Treno on Disc II or Esto Gaza before Desert Palace; Mythril Armor remains available later, so the retained sword is the key Grand Armor synthesis condition.",
   },
   {
     id: "rpgclassics-armor",
@@ -2303,7 +2303,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml",
     accessed: "2026-10-24",
-    notes: "Independent original PlayStation synthesis table. Lists Battle Boots at Daguerreo for 6,500 Gil from Feather Boots + Wing Edge, and cross-checks other synthesis recipes and shop locations.",
+    notes: "Independent original PlayStation synthesis table. Lists Rebirth Ring at Daguerreo for 7,000 Gil from Diamond + Anklet, Battle Boots at Daguerreo for 6,500 Gil from Feather Boots + Wing Edge, and cross-checks other synthesis recipes and shop locations.",
   },
   {
     id: "jegged-synthesis",
@@ -2311,7 +2311,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Synthesis/",
     accessed: "2026-10-24",
-    notes: "Independent recipe reference listing Grand Armor from Mythril Sword + Mythril Armor at the Black Mage Village Disc IV synthesis shop, and Battle Boots from Feather Boots + Wing Edge at Daguerreo. Cross-checks the recipe prices against EliteGrindLab and GameFAQs equipment data.",
+    notes: "Independent recipe reference listing Rebirth Ring from Diamond + Anklet for 7,000 Gil at Daguerreo, Grand Armor from Mythril Sword + Mythril Armor at the Black Mage Village Disc IV synthesis shop, and Battle Boots from Feather Boots + Wing Edge at Daguerreo. Cross-checks recipe prices against other synthesis and equipment references.",
   },
   {
     id: "elitegrindlab-synthesis",

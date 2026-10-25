@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The Disc III Alexandria and Treno item-catalog expansions and the Rebirth Ring acquisition slice are complete and introduce no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The Disc III Alexandria and Treno item-catalog expansions and the Rebirth Ring acquisition and synthesis model are complete and introduce no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 
