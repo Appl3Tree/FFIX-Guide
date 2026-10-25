@@ -2503,6 +2503,92 @@ if (
 ) {
   errors.push("Mythril Rod must retain all five 560-Gil source-backed shops, including the later Ipsen Mogshop source, the separate optional Need/end-inventory targets, and its Life/Silence/Shell claims.");
 }
+const ipsensEquipmentStock = [
+  ["mage-masher", 500], ["iron-sword", 660], ["mythril-spear", 1100], ["poison-knuckles", 7000],
+  ["multina-racket", 750], ["mythril-rod", 560], ["lamias-flute", 3800], ["oak-staff", 2400],
+  ["needle-fork", 3100], ["rising-sun", 500], ["n-kai-armlet", 3000], ["jade-armlet", 3400],
+  ["venetia-shield", 2800], ["red-hat", 3000], ["golden-hairpin", 3700], ["coronet", 4400],
+  ["cross-helm", 2200], ["diamond-helm", 3000], ["power-vest", 7200], ["gaia-gear", 8700],
+  ["shield-armor", 4300], ["demons-mail", 5900],
+] as const;
+const ipsensEquipmentPaths = ipsensEquipmentStock.map(([slug]) => {
+  const itemId = `game-item.${slug}`;
+  return {
+    slug,
+    item: gameItems.find((item) => item.id === itemId),
+    paths: itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.shopId === "ipsens-castle.kumool-mogshop"),
+  };
+});
+const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths }, index) => {
+  const [expectedSlug, expectedPrice] = ipsensEquipmentStock[index];
+  const path = paths[0];
+  if (
+    slug !== expectedSlug
+    || !item
+    || paths.length !== 1
+    || path?.chapterId !== "disc-3.ipsens-castle"
+    || path?.method !== "mogshop"
+    || path?.cost?.amount !== expectedPrice
+    || !path?.sourceIds.includes("gamefaqs-items-71891")
+    || !path?.sourceIds.includes("gamefaqs-shops-71891")
+    || !path?.sourceIds.includes("rpgclassics-shops")
+    || !item.sourceIds.includes("gamefaqs-items-71891")
+    || !item.sourceIds.includes("rpgclassics-shops")
+  ) return true;
+  if (slug === "poison-knuckles") {
+    return !path.conditions.includes("7,000 Gil") || !path.conditions.includes("5,000 Gil");
+  }
+  if (slug === "needle-fork") {
+    return !path.conditions.includes("GameFAQs Shops omits");
+  }
+  if (slug === "coronet") {
+    return !path.conditions.includes("does not list Ipsen") || !path.conditions.includes("RPGClassics omits");
+  }
+  return false;
+});
+const ipsensInventoryTargets = [
+  ["mage-masher", 4, 2], ["iron-sword", 2, 0], ["mythril-spear", 2, 1], ["poison-knuckles", 2, 1],
+  ["multina-racket", 3, 5], ["mythril-rod", 2, 5], ["lamias-flute", 2, 1], ["oak-staff", 2, 0],
+  ["needle-fork", 2, 5], ["n-kai-armlet", 7, 9], ["jade-armlet", 7, 9], ["venetia-shield", 3, 9],
+  ["red-hat", 7, 6], ["golden-hairpin", 7, 12], ["coronet", 7, 13], ["cross-helm", 3, 4],
+  ["diamond-helm", 3, 3], ["power-vest", 7, 5], ["gaia-gear", 7, 10], ["shield-armor", 3, 0],
+  ["demons-mail", 3, 1],
+] as const;
+const ipsensTargetMismatch = ipsensInventoryTargets.some(([slug, need, endInventory]) => {
+  const itemId = `game-item.${slug}`;
+  const targets = sourceInventoryTargets.filter((target) => target.itemId === itemId && target.chapterId === "disc-4.final-preparations");
+  const needTarget = targets.find((target) => target.targetQuantity === need && !target.id.includes("end-inventory"));
+  const endTarget = targets.find((target) => target.targetQuantity === endInventory && target.id.includes("end-inventory"));
+  return targets.length !== (endInventory === 0 ? 1 : 2)
+    || needTarget?.sourceIds.includes("gamefaqs-items-71891") !== true
+    || !needTarget.interpretation.includes("optional source-specific")
+    || !needTarget.interpretation.includes(`end-inventory #${endInventory}`)
+    || (endInventory > 0 && endTarget?.sourceIds.includes("gamefaqs-items-71891") !== true)
+    || (endInventory > 0 && !endTarget?.interpretation.includes(`end-inventory #${endInventory}`))
+    || (endInventory > 0 && !endTarget?.interpretation.includes("optional source-specific"));
+});
+const ipsensAbilityClaims = [
+  ["mage-masher", "Flee"], ["mage-masher", "Detect"], ["iron-sword", "Minus Strike"],
+  ["multina-racket", "Blind"], ["multina-racket", "Stona"], ["multina-racket", "Shell"],
+  ["needle-fork", "High Tide"], ["n-kai-armlet", "Bandit"], ["n-kai-armlet", "Undead Killer"],
+  ["n-kai-armlet", "Water"], ["jade-armlet", "Body Temp"], ["jade-armlet", "High Tide"],
+  ["venetia-shield", "Auto-Float"], ["venetia-shield", "Counter"], ["red-hat", "Cover"],
+  ["red-hat", "MP Attack"], ["golden-hairpin", "Auto-Regen"], ["golden-hairpin", "Loudmouth"],
+  ["coronet", "Man Eater"], ["coronet", "Return Magic"], ["cross-helm", "Devil Killer"],
+  ["cross-helm", "MP Attack"], ["diamond-helm", "Accuracy+"], ["diamond-helm", "Insomniac"],
+  ["power-vest", "Counter"], ["power-vest", "Gamble Defense"], ["power-vest", "Stone Killer"],
+  ["gaia-gear", "High Tide"], ["gaia-gear", "Insomniac"], ["gaia-gear", "Osmose"],
+  ["shield-armor", "Distract"], ["demons-mail", "High Tide"],
+] as const;
+const ipsensAbilityMismatch = ipsensAbilityClaims.some(([slug, abilityName]) => !equipmentAbilityClaims.some((claim) =>
+  claim.itemId === `game-item.${slug}`
+  && claim.abilityName === abilityName
+  && claim.sourceIds.includes("gamefaqs-items-71891")
+  && claim.sourceIds.includes("gamefaqs-abilities-71891")
+));
+if (ipsensEquipmentStock.length !== 22 || ipsensEquipmentPaths.length !== 22 || ipsensStockRouteMismatch || ipsensTargetMismatch || ipsensAbilityMismatch) {
+  errors.push("Ipsen's Castle equipment stock must retain 22 source-linked Mogshop routes, the GameFAQs/RPGClassics Poison Knuckles and stock-table differences, each Need count and positive end-inventory target except Rising Sun, zero-count end-inventory source notes, and the listed equipment abilities.");
+}
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
   "missable.disc-1.journey-to-burmecia.grimo-letter",

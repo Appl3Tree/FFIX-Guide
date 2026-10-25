@@ -6,7 +6,7 @@ Last updated: 2026-10-25
 
 The project records the claim, source, relevant section, version/platform, access date, verification state, and known conflict for each fact. Walkthroughs are used for scope discovery and fact checking, not copied prose. Critical deadlines and missable consequences require corroboration. Where references disagree, the conflict stays open until evidence resolves it.
 
-The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 340-source register and walkthrough do not establish that the game's content has been comprehensively researched.
+The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 343-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
 ## FFIX references inspected
 
@@ -320,6 +320,8 @@ The implementation remains incomplete. All 44 chapters are partially authored an
 | [EliteGrindLab Memoria](https://elitegrindlab.com/ff9/walkthrough/memoria/) | Memoria combat and Quina Blue Magic cross-check | Used for guardian and Crystal World details, including enemy variants and Blue Magic opportunities; item-level recovery remains partial. |
 
 Angel Earrings and Barette source check (2026-10-25): [GameFAQs' Items reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists the Bran Bal pickup, Knights of Pluto reward, Daguerreo synthesis, Barette's Ipsen's Castle and Hot & Cold sources, and both items' equipment abilities. [Jegged's Add-Ons reference](https://jegged.com/Games/Final-Fantasy-IX/Equipment/Add-Ons.html) and [RPGClassics' Add-On reference](https://shrines.rpgclassics.com/psx/ffix/addons.shtml) cross-check their abilities and acquisition sources. The [GameFAQs Shops table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops), [RPGClassics synthesis list](https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml), [Jegged synthesis list](https://jegged.com/Games/Final-Fantasy-IX/Synthesis/), and [EliteGrindLab synthesis list](https://elitegrindlab.com/ff9/synthesis/) support the 8,000-Gil Fairy Earrings + Barette recipe; the Barette recipe uses Needle Fork + Barbut for 1,800 Gil. The intermediate Knight reward ladder remains source-reported rather than directly tested.
+
+Ipsen Mogshop stock cross-check (2026-10-25): [GameFAQs Shops](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists 21 equipment entries, including Coronet for 4,400 Gil, but omits Needle Fork. [GameFAQs Items](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) and [RPGClassics Shops](https://shrines.rpgclassics.com/psx/ffix/shops.shtml) list Needle Fork for 3,100 Gil; RPGClassics omits Coronet. GameFAQs Shops gives Poison Knuckles as 7,000 Gil at Ipsen while RPGClassics lists 5,000, matching its other shop listings. The catalog preserves each difference, records all 22 documented equipment routes, and treats the later Mogshop window as unverified pending direct game/release checks.
 
 ## Route cutoff cross-check
 
