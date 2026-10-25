@@ -4,6 +4,8 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
+The Burmecia Beatrix recovery update passes `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check`. Audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 358 sources; all warnings map to 97 cutoff windows. The new invariant links Beatrix's warning to six Chain Plate shop paths and two Mythril Sword shop paths, and checks the Phoenix Down shop record. Tests and direct browser, gameplay, and release verification were not run.
+
 The Blank equipment recovery update passes `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check`. Audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 358 sources; all warnings map to 97 cutoff windows. The item catalog has 209 records and 831 paths. The build emits 1,965.26 kB JavaScript (479.91 kB gzip) and 60.22 kB CSS (12.77 kB gzip); Vite's existing chunk-size advisory remains. Tests and direct browser, gameplay, and release verification were not run.
 
 The Treno Griffin, Tantarian, Gargan Roo, and Autograph/Moogle Suit register corrections change documentation only. `git diff --check` passes; lint, typecheck, data audit, and production build were not rerun because application data and code did not change.

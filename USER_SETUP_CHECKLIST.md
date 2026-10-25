@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest local B02 update clarifies the later recovery routes for Beatrix's one-time Burmecia steals, including the final documented Mythril Sword purchase window at Esto Gaza. Lint, typecheck, audit, build, and whitespace checks pass; no GitHub, Firebase, deployment, or sign-in work is needed. Tests and direct browser, game, and release verification remain open.
+
 No account-owner setup action changed. The latest local B02 update clarifies that Blank's exact equipped Silk Shirt copy is lost when he leaves but the item type has six modeled alternatives. Lint, typecheck, audit, build, and whitespace checks pass; no GitHub, Firebase, deployment, or sign-in work is needed. Tests and direct browser, game, and release verification remain open.
 
 No account-owner setup action changed. The latest register updates reflect the hideout-entry cutoff for the Autograph/Moogle Suit, distinguish one-time Griffin/Tantarian encounters from later card/item recovery, and confirm later Chain Plate/Phoenix Down sources for missed Gargan Roo chests. Direct game/release verification remains open. `git diff --check` passes; no GitHub, Firebase, deployment, or sign-in action is needed.

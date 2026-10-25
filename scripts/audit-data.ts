@@ -2053,6 +2053,31 @@ for (const expected of burmeciaBossSteals) {
     errors.push(`Beatrix's ${expected.itemId} steal must connect the bestiary to its existing one-time objective and item path.`);
   }
 }
+const burmeciaBeatrixWarning = missablesById.get("missable.disc-1.burmecia.beatrix-steals");
+const burmeciaBeatrixRecoveryPathIds = [
+  ["item-path.disc-2.treno.chain-plate-shop", "game-item.chain-plate"],
+  ["item-path.disc-2.cleyra.chain-plate-shop", "game-item.chain-plate"],
+  ["item-path.disc-2.return-to-lindblum.chain-plate-shop", "game-item.chain-plate"],
+  ["item-path.disc-2.return-to-lindblum.dragon-gate-chain-plate-shop", "game-item.chain-plate"],
+  ["item-path.disc-2.journey-to-outer-continent.fossil-roo-chain-plate-shop", "game-item.chain-plate"],
+  ["item-path.disc-2.outer-continent.chain-plate-black-mage-village-shop", "game-item.chain-plate"],
+  ["item-path.disc-2.treno.mythril-sword-shop", "game-item.mythril-sword"],
+  ["item-path.disc-3.on-the-high-seas.esto-gaza-mythril-sword", "game-item.mythril-sword"],
+];
+if (
+  !burmeciaBeatrixWarning?.sourceIds.includes("gamefaqs-shops-71891") ||
+  !burmeciaBeatrixWarning.sourceIds.includes("gamefaqs-on-the-high-seas-71891") ||
+  !burmeciaBeatrixWarning.sourceIds.includes("gamefaqs-missables-71891") ||
+  !burmeciaBeatrixWarning.recovery.includes("Phoenix Down is ordinary shop stock") ||
+  !burmeciaBeatrixWarning.recovery.includes("Black Mage Village (Discs II–III)") ||
+  !burmeciaBeatrixWarning.recovery.includes("Esto Gaza's initial Disc III shop before Desert Palace") ||
+  !burmeciaBeatrixWarning.recovery.includes("five-copy target") ||
+  !burmeciaBeatrixWarning.recovery.includes("not the missed Beatrix encounter copies") ||
+  burmeciaBeatrixRecoveryPathIds.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === itemId)) ||
+  !itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.return-to-lindblum.cleyra-recovery.phoenix-down" && path.itemId === "game-item.phoenix-down" && path.method === "shop")
+) {
+  errors.push("Beatrix's Burmecia warning must distinguish the one-time steal copies from the sourced Phoenix Down, Chain Plate, and Mythril Sword recovery routes.");
+}
 const cleyraChapterEncounters = enemyEncounters.filter((encounter) => encounter.chapterId === "disc-2.cleyra");
 const cleyraPoolExpectations = [
   { id: "encounter.cleyra-trunk.bottom-sand-base.random-pool", roster: ["enemy.dragonfly", "enemy.sand-golem", "enemy.zuu"] },
