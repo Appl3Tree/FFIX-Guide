@@ -2431,6 +2431,44 @@ for (const [pathId, enemyId, itemId, method, slot] of outerMarshLootPaths) {
     errors.push(`Outer Continent Qu's Marsh item path ${pathId} must match its repeatable enemy-table loot slot.`);
   }
 }
+const lanarMarshPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lanar-island.qus-marsh.anemone-opportunity");
+const anemoneRecord = enemyRecords.find((enemy) => enemy.id === "enemy.anemone");
+const highSeasWalkthrough = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.on-the-high-seas");
+if (!lanarMarshPool || lanarMarshPool.kind !== "random-pool" ||
+  lanarMarshPool.chapterId !== "disc-3.on-the-high-seas" ||
+  lanarMarshPool.formation.length !== 1 ||
+  lanarMarshPool.formation[0]?.enemyId !== "enemy.anemone" ||
+  !lanarMarshPool.objectiveIds.includes("disc-3.on-the-high-seas.blue-magic") ||
+  !lanarMarshPool.objectiveIds.includes("disc-3.on-the-high-seas.lanar-frogs") ||
+  lanarMarshPool.missableIds.length !== 0 || lanarMarshPool.cutoffIds.length !== 0 ||
+  !anemoneRecord || anemoneRecord.chapterId !== "disc-3.on-the-high-seas" ||
+  !anemoneRecord.encounterIds.includes("encounter.lanar-island.qus-marsh.anemone-opportunity") ||
+  anemoneRecord.stats.find((stat) => stat.field === "HP")?.value !== 3586 ||
+  anemoneRecord.stats.find((stat) => stat.field === "HP")?.verification !== "cross-checked" ||
+  !anemoneRecord.stats.some((stat) => stat.field === "AP" && stat.value === 2 && stat.verification === "disputed") ||
+  !anemoneRecord.stats.some((stat) => stat.field === "AP" && stat.value === 3 && stat.verification === "disputed") ||
+  !anemoneRecord.blueMagic.some((skill) => skill.name === "Bad Breath" && skill.objectiveIds.includes("disc-3.on-the-high-seas.blue-magic")) ||
+  !highSeasWalkthrough?.sections.some((section) => section.id === "high-seas-lanar-island" &&
+    section.steps.some((step) => step.id === "high-seas-lanar-blue-magic" && step.objectiveIds?.includes("disc-3.on-the-high-seas.blue-magic")))) {
+  errors.push("The Lanar Island Qu's Marsh opportunity must link Anemone's repeatable Bad Breath lesson to the Disc III walkthrough without claiming a cutoff or complete pond roster.");
+}
+const lanarAnemoneLootPaths = [
+  ["item-path.disc-3.on-the-high-seas.lanar-anemone-ore-steal", "game-item.ore", "steal", "common"],
+  ["item-path.disc-3.on-the-high-seas.lanar-anemone-tent-steal", "game-item.tent", "steal", "uncommon"],
+  ["item-path.disc-3.on-the-high-seas.lanar-anemone-hi-potion-drop", "game-item.hi-potion", "drop", "common"],
+  ["item-path.disc-3.on-the-high-seas.lanar-anemone-eye-drops-drop", "game-item.eye-drops", "drop", "uncommon"],
+  ["item-path.disc-3.on-the-high-seas.lanar-anemone-ether-drop", "game-item.ether", "drop", "rare"],
+] as const;
+for (const [pathId, itemId, method, slot] of lanarAnemoneLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const lootTable = method === "steal" ? anemoneRecord?.steals : anemoneRecord?.drops;
+  if (!path || path.itemId !== itemId || path.chapterId !== "disc-3.on-the-high-seas" ||
+    path.method !== method || path.availability !== "repeatable" ||
+    !path.sourceIds.includes("gamefaqs-item-locations-54996") ||
+    !lootTable?.some((entry) => entry.itemId === itemId && entry.slot === slot)) {
+    errors.push(`Lanar Island Anemone item path ${pathId} must match its repeatable enemy-table loot slot.`);
+  }
+}
 const grottoPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.random-pool");
 const grottoTypeAFights = [
   enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.type-a-first-pair"),
