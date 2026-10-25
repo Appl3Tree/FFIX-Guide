@@ -118,6 +118,13 @@ const pualeiPlainsChapterId = "disc-2.journey-to-iifa-tree";
 const desertPalaceChapterId = "disc-3.desert-palace";
 const desertPalaceBlueMagicObjectiveId = "disc-3.desert-palace.blue-magic";
 const valiaPiraObjectiveId = "disc-3.desert-palace.valia-pira";
+const ipsensCastleChapterId = "disc-3.ipsens-castle";
+const ipsensCastleBlueMagicObjectiveId = "disc-3.ipsens-castle.blue-magic";
+const ipsensCastleMirrorsObjectiveId = "disc-3.ipsens-castle.mirrors";
+const ipsensTaharkaStealsObjectiveId = "disc-3.ipsens-castle.taharka-steals";
+const ipsensTaharkaRamuhCardObjectiveId = "disc-3.ipsens-castle.taharka-ramuh-card";
+const ipsensTaharkaStealsMissableId = "missable.disc-3.ipsens-castle.taharka-steals";
+const ipsensTaharkaStealsCutoffId = "cutoff.ipsens-castle.taharka-steals";
 const outerContinentBlueMagicObjectiveId = "disc-2.outer-continent.blue-magic";
 const fossilRooBlueMagicObjectiveId = "disc-2.journey-to-outer-continent.blue-magic";
 const lostContinentBlueMagicObjectiveId = "disc-3.on-the-high-seas.blue-magic";
@@ -146,6 +153,9 @@ const pualeiFriendlyNymphSources = ["gamefaqs-journey-to-iifa-tree-71891", "game
 const desertPalaceEnemySources = ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-abilities-71891"];
 const desertPalaceBossSources = ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamefaqs-monster-list-20490"];
 const desertPalaceBossTableSources = ["gamefaqs-desert-palace-71891", "gamefaqs-monster-list-20490"];
+const ipsensCastleEnemySources = [enemyListSourceId, "gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "elitegrindlab-ipsens-castle", "gamefaqs-abilities-71891", "rpgclassics-bestiary-t-z"];
+const ipsensCastleEncounterSources = [enemyListSourceId, "gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle"];
+const ipsensTaharkaTableSources = ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"];
 const pinnacleRocksEnemySources = [enemyListSourceId, "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "cavesofnarshe-pinnacle-rocks", "cavesofnarshe-enemies", "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks", "gamefaqs-abilities-71891", "rpgclassics-bestiary-n-s"];
 const fossilRooEnemySources = [enemyListSourceId, "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-abilities-71891"];
 const lostContinentFeatherSources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "rpgclassics-lost-continent"];
@@ -1755,6 +1765,302 @@ const desertPalaceEnemyRecords: EnemyRecord[] = [
   }, desertPalaceChapterId, desertPalaceBossSources),
 ];
 
+const ipsensCastleEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.ipsens-castle.initial-area-pool",
+    title: "Ipsen's Castle initial-area encounters",
+    chapterId: ipsensCastleChapterId,
+    location: "Castle entrance and Kumool's room",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.agares", quantity: null },
+      { enemyId: "enemy.cerberus", quantity: null },
+      { enemyId: "enemy.gargoyle", quantity: null },
+      { enemyId: "enemy.veteran", quantity: null },
+    ],
+    sourceIds: ipsensCastleEncounterSources,
+    objectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs lists Agares, Cerberus, Gargoyle, and Veteran in the initial areas. This is a room-group roster; encounter odds and unlisted formations are not inferred."],
+  },
+  {
+    id: "encounter.ipsens-castle.stairwell-lift-pool",
+    title: "Ipsen's Castle stairwell and lift encounters",
+    chapterId: ipsensCastleChapterId,
+    location: "Ladder routes, fresco room, and lift approach",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.agares", quantity: null },
+      { enemyId: "enemy.cerberus", quantity: null },
+      { enemyId: "enemy.gargoyle", quantity: null },
+      { enemyId: "enemy.tonberry", quantity: null },
+      { enemyId: "enemy.veteran", quantity: null },
+    ],
+    sourceIds: ipsensCastleEncounterSources,
+    objectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["The route's Stairwell & Lift roster adds Tonberry. GameFAQs also names Taharka under this section, but its room text places the fixed boss after taking the mirrors in the mural room; the boss is modeled separately."],
+  },
+  {
+    id: "encounter.ipsens-castle.mural-room-pool",
+    title: "Ipsen's Castle mural-room encounters",
+    chapterId: ipsensCastleChapterId,
+    location: "Mural room before and after the Taharka fight",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.agares", quantity: null },
+      { enemyId: "enemy.gargoyle", quantity: null },
+      { enemyId: "enemy.tonberry", quantity: null },
+      { enemyId: "enemy.veteran", quantity: null },
+    ],
+    sourceIds: ipsensCastleEncounterSources,
+    objectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs lists Agares, Gargoyle, Tonberry, and Veteran in the Mural Room; Cerberus is not in this room's listed roster. Taharka is a separate fixed boss encounter."],
+  },
+  {
+    id: "encounter.ipsens-castle.treasure-hunting-pool",
+    title: "Ipsen's Castle treasure-route encounters",
+    chapterId: ipsensCastleChapterId,
+    location: "Trapdoor, upper lift, and chandelier treasure rooms",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.agares", quantity: null },
+      { enemyId: "enemy.cerberus", quantity: null },
+      { enemyId: "enemy.gargoyle", quantity: null },
+      { enemyId: "enemy.tonberry", quantity: null },
+      { enemyId: "enemy.veteran", quantity: null },
+    ],
+    sourceIds: ipsensCastleEncounterSources,
+    objectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["GameFAQs lists the same five-enemy roster during treasure hunting. The records preserve the route's separate room group without asserting formation sizes or encounter rates."],
+  },
+  {
+    id: "encounter.ipsens-castle.taharka",
+    title: "Taharka — Ipsen's Castle mural guardian",
+    chapterId: ipsensCastleChapterId,
+    location: "Mural room when attempting to leave after collecting the four mirrors",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.taharka", quantity: 1 }],
+    sourceIds: ipsensCastleEnemySources,
+    objectiveIds: [ipsensCastleMirrorsObjectiveId, ipsensTaharkaStealsObjectiveId, ipsensTaharkaRamuhCardObjectiveId],
+    missableIds: [ipsensTaharkaStealsMissableId],
+    cutoffIds: [ipsensTaharkaStealsCutoffId],
+    notes: ["This one-time scripted fight begins after the four-mirror mural interaction; ordinary random encounters in the room are tracked separately."],
+  },
+];
+
+const ipsensCastleEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.agares",
+    name: "Agares",
+    encounterIds: ["encounter.ipsens-castle.initial-area-pool", "encounter.ipsens-castle.stairwell-lift-pool", "encounter.ipsens-castle.mural-room-pool", "encounter.ipsens-castle.treasure-hunting-pool"],
+    stats: sourcedStats([["level", 43], ["HP", 6775], ["MP", 1596], ["EXP", 14279], ["AP", 3], ["Gil", 1945]], [enemyListSourceId]),
+    steals: [
+      sourcedLoot("common", "game-item.tent", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.soft", [enemyListSourceId]),
+      sourcedLoot("semi-rare", "game-item.ore", [enemyListSourceId]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", null, [enemyListSourceId], "Amethyst"),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    facts: [
+      sourcedFact("type", "Demon", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "None listed", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "None listed", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "-ra level magic, Freeze, Osmose, and Paper Storm", [enemyListSourceId], "GameFAQs describes these attacks after Agares revives an accompanying Gargoyle with Arise."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Stop Agares from reviving a Gargoyle", detail: "If an Agares and Gargoyle appear together, prioritize Agares before the Gargoyle can be revived; the Enemy List warns that Agares then adds -ra magic, Freeze, Osmose, and Paper Storm. Quina's Eat reports that Agares tastes bad.", sourceIds: ipsensCastleEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["GameFAQs reports that Agares tastes bad to Quina and has a Ragtime Mouse card drop; neither is an item-loot row in this bestiary."],
+  }, ipsensCastleChapterId, ipsensCastleEnemySources),
+  chapterEnemy({
+    id: "enemy.cerberus",
+    name: "Cerberus",
+    encounterIds: ["encounter.ipsens-castle.initial-area-pool", "encounter.ipsens-castle.stairwell-lift-pool", "encounter.ipsens-castle.treasure-hunting-pool"],
+    stats: sourcedStats([["level", 44], ["HP", 6977], ["MP", 1623], ["EXP", 15181], ["AP", 3], ["Gil", 1984]], [enemyListSourceId]),
+    steals: [
+      sourcedLoot("common", "game-item.ore", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId]),
+      sourcedLoot("semi-rare", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.opal", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.ether", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.opal", [enemyListSourceId]),
+    ],
+    facts: [
+      sourcedFact("type", "Beast", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "None listed", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "None listed", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Flame", [enemyListSourceId], "Fire-elemental attack that removes 30% of the target's maximum HP."),
+      sourcedFact("attack", "Firaga and Strike", [enemyListSourceId]),
+    ],
+    blueMagic: [{ name: "Auto-Life", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-ipsens-castle"], objectiveIds: [ipsensCastleBlueMagicObjectiveId] }],
+    strategies: [{ title: "Learn Auto-Life if Quina still needs it", detail: "Use Eat on Cerberus before defeating it if Auto-Life is missing. Flame removes 30% of a target's maximum HP, so heal through that fixed damage alongside Firaga and Strike.", sourceIds: ipsensCastleEnemySources }],
+    routeObjectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    notes: ["GameFAQs records Cerberus's card as Cerberus. Item drop slots follow the enemy table; no acquisition odds are inferred here."],
+  }, ipsensCastleChapterId, ipsensCastleEnemySources),
+  chapterEnemy({
+    id: "enemy.gargoyle",
+    name: "Gargoyle",
+    encounterIds: ["encounter.ipsens-castle.initial-area-pool", "encounter.ipsens-castle.stairwell-lift-pool", "encounter.ipsens-castle.mural-room-pool", "encounter.ipsens-castle.treasure-hunting-pool"],
+    stats: sourcedStats([["level", 44], ["HP", 6977], ["MP", 1628], ["EXP", 15181], ["AP", 3], ["Gil", 1958]], [enemyListSourceId]),
+    steals: [
+      sourcedLoot("common", "game-item.hi-potion", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.tent", [enemyListSourceId]),
+      sourcedLoot("semi-rare", "game-item.phoenix-pinion", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", null, [enemyListSourceId], "Sapphire"),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Stone and Aerial", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Wind", [enemyListSourceId]),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Darkness, KO, Silence, Sleep, and Slow", [enemyListSourceId]),
+      sourcedFact("attack", "Break and Gradual Petrify", [enemyListSourceId]),
+      sourcedFact("attack", "Charge and Aerial Slash", [enemyListSourceId]),
+    ],
+    blueMagic: [{ name: "Mighty Guard", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-ipsens-castle"], objectiveIds: [ipsensCastleBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Soft before it wakes", detail: "GameFAQs recommends Soft on a sleeping Gargoyle for an easy defeat. It can also use Break or Gradual Petrify; if Quina needs Mighty Guard, use Eat before finishing the enemy.", sourceIds: ipsensCastleEnemySources }],
+    routeObjectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    notes: ["GameFAQs lists Gargoyle's card as Gargoyle."],
+  }, ipsensCastleChapterId, ipsensCastleEnemySources),
+  chapterEnemy({
+    id: "enemy.tonberry",
+    name: "Tonberry",
+    encounterIds: ["encounter.ipsens-castle.stairwell-lift-pool", "encounter.ipsens-castle.mural-room-pool", "encounter.ipsens-castle.treasure-hunting-pool"],
+    stats: [
+      { field: "level", value: 46, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+      { field: "HP", value: 7887, sourceIds: [enemyListSourceId], verification: "disputed" },
+      { field: "HP", value: 7886, sourceIds: ["rpgclassics-bestiary-t-z"], verification: "disputed" },
+      { field: "MP", value: 1779, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+      { field: "EXP", value: 13297, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+      { field: "AP", value: 4, sourceIds: [enemyListSourceId], verification: "single-source" },
+      { field: "Gil", value: 1513, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.hi-potion", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("semi-rare", "game-item.phoenix-pinion", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+    ],
+    drops: [
+      sourcedLoot("always", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("common", "game-item.peridot", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("uncommon", null, [enemyListSourceId], "Nothing"),
+      sourcedLoot("rare", "game-item.ether", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+    ],
+    facts: [
+      sourcedFact("elemental-weakness", "None (GameFAQs listing)", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Ice (RPGClassics listing)", ["rpgclassics-bestiary-t-z"]),
+      sourcedFact("elemental-resistance", "None listed", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "None listed", [enemyListSourceId]),
+      sourcedFact("attack", "Knife and Everyone's Grudge", [enemyListSourceId], "Knife can deal 9,999 damage when the Tonberry reaches a character; Everyone's Grudge deals damage based on previously defeated Tonberries."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Defeat Tonberry before it reaches the party", detail: "Use strong attacks against Tonberry while it advances. If it reaches a character, Knife can deal 9,999 damage or Everyone's Grudge can scale with the number of Tonberries defeated. The sources disagree on HP by 1 and on whether Ice is a weakness.", sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z", "elitegrindlab-ipsens-castle"] }],
+    routeObjectiveIds: [],
+    notes: ["GameFAQs reports 7,887 HP and no elemental weakness; RPGClassics reports 7,886 HP and Ice weakness. Both source readings are retained. GameFAQs and RPGClassics list a Tonberry card drop; RPGClassics also lists Tonberry in Memoria, while this profile is scoped to its Ipsen encounter."],
+  }, ipsensCastleChapterId, ipsensCastleEnemySources),
+  chapterEnemy({
+    id: "enemy.veteran",
+    name: "Veteran",
+    encounterIds: ["encounter.ipsens-castle.initial-area-pool", "encounter.ipsens-castle.stairwell-lift-pool", "encounter.ipsens-castle.mural-room-pool", "encounter.ipsens-castle.treasure-hunting-pool"],
+    stats: [
+      { field: "level", value: 44, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+      { field: "HP", value: 6972, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+      { field: "MP", value: 1672, sourceIds: [enemyListSourceId], verification: "disputed" },
+      { field: "MP", value: 1627, sourceIds: ["rpgclassics-bestiary-t-z"], verification: "disputed" },
+      { field: "EXP", value: 15181, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+      { field: "AP", value: 3, sourceIds: [enemyListSourceId], verification: "single-source" },
+      { field: "Gil", value: 1971, sourceIds: [enemyListSourceId, "rpgclassics-bestiary-t-z"], verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.hi-potion", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("uncommon", "game-item.ether", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("semi-rare", "game-item.phoenix-pinion", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.topaz", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("common", "game-item.phoenix-down", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("uncommon", "game-item.ether", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("rare", null, [enemyListSourceId], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial and Demon", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Wind, Water, and Holy", [enemyListSourceId, "rpgclassics-bestiary-t-z"]),
+      sourcedFact("elemental-resistance", "Earth (nullifies); Lightning and Shadow damage halved", [enemyListSourceId]),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Claw, Blaster, Doom, and Roulette", [enemyListSourceId]),
+    ],
+    blueMagic: [{ name: "Doom", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "jegged-ipsens-castle"], objectiveIds: [ipsensCastleBlueMagicObjectiveId] }],
+    strategies: [{ title: "Use Eat for Doom and protect against status attacks", detail: "If Quina still needs Doom, use Eat on Veteran before finishing it. Its attacks include Blaster, Doom, and Roulette; Wind, Water, and Holy are listed weaknesses, while Earth is nullified and Lightning and Shadow are halved.", sourceIds: ipsensCastleEnemySources }],
+    routeObjectiveIds: [ipsensCastleBlueMagicObjectiveId],
+    notes: ["GameFAQs reports 1,672 MP; RPGClassics reports 1,627 MP. Other shared listed stats agree, and both list Veteran as its card. RPGClassics also lists Veteran in Memoria; this record covers the Ipsen opportunity."],
+  }, ipsensCastleChapterId, ipsensCastleEnemySources),
+  chapterBoss({
+    id: "enemy.taharka",
+    name: "Taharka",
+    encounterIds: ["encounter.ipsens-castle.taharka"],
+    stats: [
+      { field: "level", value: 46, sourceIds: ipsensTaharkaTableSources, verification: "cross-checked" },
+      { field: "HP", value: 29186, sourceIds: ipsensTaharkaTableSources, verification: "cross-checked" },
+      { field: "MP", value: 1776, sourceIds: ipsensTaharkaTableSources, verification: "cross-checked" },
+      { field: "EXP", value: 0, sourceIds: ipsensTaharkaTableSources, verification: "cross-checked" },
+      { field: "AP", value: 11, sourceIds: ["gamefaqs-ipsens-castle-71891"], verification: "single-source" },
+      { field: "Gil", value: 8092, sourceIds: ipsensTaharkaTableSources, verification: "cross-checked" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.elixir", ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("uncommon", "game-item.mythril-claws", ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("semi-rare", "game-item.orichalcon", ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"]),
+      sourcedLoot("rare", null, ["gamefaqs-ipsens-castle-71891"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, ["gamefaqs-ipsens-castle-71891"], "Nothing"),
+      sourcedLoot("common", null, ["gamefaqs-ipsens-castle-71891"], "Nothing"),
+      sourcedLoot("uncommon", null, ["gamefaqs-ipsens-castle-71891"], "Nothing"),
+      sourcedLoot("rare", null, ["gamefaqs-ipsens-castle-71891"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"]),
+      sourcedFact("elemental-weakness", "Fire and Wind", ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"]),
+      sourcedFact("elemental-resistance", "Earth (nullifies); Ice damage halved", ["gamefaqs-ipsens-castle-71891"]),
+      sourcedFact("status-vulnerability", "Heat, Poison, Silence, Sleep, and Slow", ["gamefaqs-ipsens-castle-71891"]),
+      sourcedFact("attack", "Blizzaga and Chop while open", ["gamefaqs-ipsens-castle-71891"]),
+      sourcedFact("attack", "Ram while closed", ["gamefaqs-ipsens-castle-71891"], "Defense rises sharply while Taharka is closed."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal during the one-time fight, if safe", detail: "Zidane can attempt Elixir, Mythril Claws, and Orichalcon before the fight ends. The source labels Orichalcon semi-rare; the item types have later sources, so do not risk a wipe for extra copies.", sourceIds: ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z", "elitegrindlab-ipsens-castle"] },
+      { title: "Exploit status and the open/closed states", detail: "Silence or Sleep can limit Taharka's attacks; Poison and Slow are also listed. Mustard Bomb or Add Status can inflict Heat. When open it uses Blizzaga and Chop; when closed, its defense rises and it uses Ram. The castle's inverted weapon-power rule remains active.", sourceIds: ["gamefaqs-ipsens-castle-71891", "flactem-ipsens-castle", "elitegrindlab-ipsens-castle"] },
+    ],
+    routeObjectiveIds: [ipsensCastleMirrorsObjectiveId, ipsensTaharkaStealsObjectiveId, ipsensTaharkaRamuhCardObjectiveId],
+    notes: ["GameFAQs and RPGClassics agree on Level 46, 29,186 HP, 1,776 MP, 0 EXP, and 8,092 Gil; GameFAQs also lists 11 AP. GameFAQs names a Ramuh Card drop while RPGClassics records Ramuh in its card field. Published references inspected here do not support the generic HP-variance note previously attached to the Taharka steal warning."],
+  }, ipsensCastleChapterId, ipsensCastleEnemySources, [ipsensTaharkaStealsMissableId], [ipsensTaharkaStealsCutoffId]),
+];
+
 const pinnacleRocksEncounters: EnemyEncounter[] = [
   {
     id: "encounter.pinnacle-rocks.random-pool",
@@ -2490,7 +2796,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...trenoGriffinEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...forgottenContinentFieldEncounters, ...mountainPathEncounters, ...pualeiPlainsEncounters, ...desertPalaceEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lanarMarshEncounters, ...blairsurpassMarshEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...grottoEncounters, ...burmeciaEncounters, ...cleyraEncounters, ...returnToAlexandriaEncounters, ...earlyDaliEncounters, ...trenoGriffinEncounters, ...summitStationEncounters, ...bentiniHeightsEncounters, ...garganRooEncounters, ...lindblumEncounters, ...lindblumRegionalEncounters, ...outerContinentEncounters, ...forgottenContinentFieldEncounters, ...mountainPathEncounters, ...pualeiPlainsEncounters, ...desertPalaceEncounters, ...ipsensCastleEncounters, ...pinnacleRocksEncounters, ...fossilRooEncounters, ...lanarMarshEncounters, ...blairsurpassMarshEncounters, ...lostContinentFeatherEncounters, ...deadForestEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...firstIifaTreeEncounters, ...returnMadainSariEncounters, ...battleIifaTreeEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -5835,6 +6141,7 @@ export const enemyRecords: EnemyRecord[] = [
   ...mountainPathEnemyRecords,
   ...pualeiPlainsFriendlyEnemyRecords,
   ...desertPalaceEnemyRecords,
+  ...ipsensCastleEnemyRecords,
   ...pinnacleRocksEnemyRecords,
   ...fossilRooEnemyRecords,
   ...firstIifaTreeEnemyRecords,
@@ -5963,8 +6270,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, trenoChapterId, summitStationChapterId, garganRooChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, lanarMarshChapterId, forgottenContinentChapterId, mountainPathChapterId, pualeiPlainsChapterId, desertPalaceChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", "enemy.ralvuimago", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...trenoGriffinEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...lanarMarshEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...forgottenContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pualeiPlainsFriendlyEnemyRecords.map((enemy) => enemy.id), ...desertPalaceEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, journeyToBurmeciaChapterId, burmeciaChapterId, cleyraChapterId, returnToAlexandriaChapterId, daliChapterId, trenoChapterId, summitStationChapterId, garganRooChapterId, lindblumChapterId, exploringLindblumChapterId, outerContinentChapterId, magdaleneForestChapterId, lanarMarshChapterId, forgottenContinentChapterId, mountainPathChapterId, pualeiPlainsChapterId, desertPalaceChapterId, ipsensCastleChapterId, pinnacleRocksChapterId, fossilRooChapterId, firstIifaTreeChapterId, returnMadainSariChapterId, battleIifaTreeChapterId, returnToGaiaChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...grottoEnemyRecords.map((enemy) => enemy.id), ...burmeciaEnemyRecords.map((enemy) => enemy.id), ...cleyraEnemyRecords.map((enemy) => enemy.id), ...garganRooEnemyRecords.map((enemy) => enemy.id), "enemy.beatrix-alexandria", "enemy.ralvuimago", ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...trenoGriffinEnemyRecords.map((enemy) => enemy.id), ...summitStationEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), ...lindblumAreaEnemyRecords.map((enemy) => enemy.id), ...lanarMarshEnemyRecords.map((enemy) => enemy.id), ...outerContinentEnemyRecords.map((enemy) => enemy.id), ...forgottenContinentEnemyRecords.map((enemy) => enemy.id), ...mountainPathEnemyRecords.map((enemy) => enemy.id), ...pualeiPlainsFriendlyEnemyRecords.map((enemy) => enemy.id), ...desertPalaceEnemyRecords.map((enemy) => enemy.id), ...ipsensCastleEnemyRecords.map((enemy) => enemy.id), ...pinnacleRocksEnemyRecords.map((enemy) => enemy.id), ...fossilRooEnemyRecords.map((enemy) => enemy.id), ...firstIifaTreeEnemyRecords.map((enemy) => enemy.id), ...returnMadainSariEnemyRecords.map((enemy) => enemy.id), ...battleIifaTreeEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Treno's Disc II Knight's House arena Griffin, Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Forgotten Continent field terrains, Conde Petie Mountain Path/Lucid Plains the Pualei Plains return route, Desert Palace, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle and Lanar Island/Blairsurpass Plains Anemone opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. The return Gargan Roo ride adds Ralvuimago as a separate boss profile and encounter linked to its existing three-steal warning, cutoff, and item recovery paths; HP, Oak Staff tier, and Ether-drop count differences remain source-marked. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad [A] pool; the later Outer Continent marsh has its own Sahagin/Gigan Toad [B] pool, while Lanar Island and Blairsurpass Plains each have a scoped Anemone Bad Breath opportunity; full pond rosters and Gigan Toad variant placements remain unresolved. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Forgotten Continent keeps Blairsurpass Plains and Seaways Canyon terrain pools separate, including overworld Adamantoise and Friendly Jabberwock, with the shorter GameFAQs/Jegged roster differences and ordinary Jabberwock EXP disagreement retained. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. The Pualei Plains return route has its own Blazer Beetle/Goblin Mage/Troll pool and a forest-only Friendly Nymph encounter for 3 Ore, 30 AP, and an Emerald; the friendly form remains separate from hostile Nymph. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Treno's Disc II Knight's House arena Griffin, Evil Forest, Ice Cavern/Nolrich Heights, Gizamaluke's Grotto, Burmecia and its surrounding world-map region, Cleyra, the Alexandria rescue, Dali, Summit Station, Lindblum Plateau and lowlands, Qu's Marsh, Outer Continent and Magdalene Forest, Forgotten Continent field terrains, Conde Petie Mountain Path/Lucid Plains the Pualei Plains return route, Desert Palace, Ipsen's Castle, Pinnacle Rocks, Fossil Roo, both Disc II Iifa Tree visits, the return to Madain Sari, scoped Lost Continent Feather Circle and Lanar Island/Blairsurpass Plains Anemone opportunities, Return to Gaia (Quale), Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Gizamaluke's Grotto covers Hornet, Lamia, Skeleton, Type A, two scripted Type A pairs, and Gizamaluke; the Dali Skeleton listing remains separately disputed, and the boss's three one-time steals link to the existing warning and later item recovery. Burmecia separates its Basilisk/Ironite/Magic Vice random pool, the three optional Mimic chest fights, the fixed Type A pair, Beatrix's one-time boss steals, and the wider Burmecia/Cleyra regional pool. Beatrix's level/HP/MP and scripted end condition remain disputed; Magic Vice's first steal slot and Type A's EXP/steal-table printings retain source conflicts. The regional pool includes the Daines-horse Basin Night opportunity and its separately listed Skeleton appearance without implying encounter rates. Cleyra adds five room-specific Trunk pools, a forced Sand Scorpion pit battle, three forced Soldier return fights, five fixed assault waves, Antlion, and Beatrix. Carrion Worm, Dragonfly, and Zuu link to Quina's existing Blue Magic objective; the Sand Golem table is explicitly for its Core, Soldier [A] is distinct from Alexandria's Soldier [B], and Beatrix's Cleyra MP disagreement remains source-marked. Both bosses connect their one-time steals to existing warnings, cutoffs, and item paths. The Alexandria rescue adds Beatrix's third boss battle with its source-listed Phoenix Down, Ice Brand, and Survival Vest steals and links the encounter to its existing cutoff. The return Gargan Roo ride adds Ralvuimago as a separate boss profile and encounter linked to its existing three-steal warning, cutoff, and item recovery paths; HP, Oak Staff tier, and Ether-drop count differences remain source-marked. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; the adjacent Gunitas Basin pool additionally includes Goblin. Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Summit Station adds the Disc II Black Waltz 3 rematch as a distinct boss record and encounter, linked to its existing three-steal objective, warning, and cutoff. GameFAQs and Jegged cross-check Level 9 and 1,292 HP; StrategyWiki reports 1,300, while GameFAQs and Jegged differ on the Flame Staff steal-slot label. Freeze behavior and Dagger’s protected role are recorded; Cargo Ship data is not reused and remastered parity remains unverified. Bentini Heights now has a world-map encounter pool using the existing Carve Spider, Mu, Ladybird, and Mandragora records plus ordinary Trick Sparrow. GameFAQs lists Mu, Mandragora, and Trick Sparrow; Jegged's wider regional enemy list also names Carve Spider and Ladybird, and the friendly Ghost is kept separate from hostile encounters. Trick Sparrow's ordinary stats, loot, Wind weakness, Earth nullification, and Matra Magic teacher entry are modeled separately from the Festival variant; Quina is not in the immediate Summit Station party. Gargan Roo now separates its Crawler/Dragonfly random pool from the outbound Ralvurahva boss and connects the two steals to the existing warning, cutoff, and item recovery paths. The boss HP alternatives and steal-rate disagreement remain explicit, and the temporary party's Quina limitation is recorded. Lindblum separates Plateau mountain/forest pools, lowland enemies around Dragon's Gate and Chocobo Forest, and the first Qu's Marsh Axolotl/Gigan Toad [A] pool; the later Outer Continent marsh has its own Sahagin/Gigan Toad [B] pool, while Lanar Island and Blairsurpass Plains each have a scoped Anemone Bad Breath opportunity; full pond rosters and Gigan Toad variant placements remain unresolved. Outer Continent models dirt, grass, marsh, forest, and beach rosters across Donna Plains, Dyshnose Shores, Gegalrich Shores, Kognish Shores, and a separate Magdalene Forest world-map pool. Forgotten Continent keeps Blairsurpass Plains and Seaways Canyon terrain pools separate, including overworld Adamantoise and Friendly Jabberwock, with the shorter GameFAQs/Jegged roster differences and ordinary Jabberwock EXP disagreement retained. Friendly Ladybird is distinct from ordinary Ladybird; Cactuar level/AP, Goblin Mage AP, and Zaghnol MP/AP differences remain explicit. The Outer Continent world-map teachers and Dead Forest Myconid/Zemzelett teachers link to the shared Blue Magic objective; White Wind and Matra Magic remain available if missed in Cleyra. The Dead Forest field area is modeled separately, with Griffin, Myconid, and Zemzelett in its own pool; Myconid and Zemzelett link to the shared Mighty Guard and White Wind checklist. Conde Petie Mountain Path and Lucid Plains have separate random rosters, Hilgigars is linked to its existing one-fight steal warning and item routes, and the Lucid Plains Friendly Yeti remains distinct from the ordinary Yeti. The Pualei Plains return route has its own Blazer Beetle/Goblin Mage/Troll pool and a forest-only Friendly Nymph encounter for 3 Ore, 30 AP, and an Emerald; the friendly form remains separate from hostile Nymph. Quina leaves when the Mountain Path begins, so the local Eat entries are not available on that first traversal; alternate earlier teachers and uncertain re-entry are documented. Hilgigars' GameFAQs drop slots and Jegged's prose list remain in conflict. Pinnacle Rocks has a separate Sand Scorpion/Seeker Bat/Zaghnol [B] pool; the standard Zaghnol record is shared with the Outer Continent areas and distinct from the Festival opponent. Seeker Bat's Night Eat result is recorded, and the reported Caves of Narshe steal/drop transposition remains explicit. Fossil Roo adds Abomination, Feather Circle, and a shared Griffin/Seeker Bat area pool; Night and LV4 Holy/White Wind opportunities link to their existing checklists. The hostile Feather Circle's Water resistance conflict remains source-marked, and its ordinary form stays separate from Friendly Feather Circle. Lost Continent Feather Circle entries are scoped Blue Magic and friendly-creature opportunities, not a complete regional roster. The Disc II Iifa Tree first visit has separate Tree Roots and Inner Roots pools, fixed Zombie/Dracozombie descent fights, and Soulcage's one-time steals; Dracozombie and Zombie retain unresolved elemental-read conflicts, while Stroper and Dracozombie link to the existing LV5 Death objective. Return to Madain Sari adds Scarlet Hair's Zidane-only boss duel with HP/MP source conflicts and one-time Ether/Poison Knuckles steals. The next Iifa Tree return adds Mistodon [A] with a fixed upper-perch pair, Jegged's separately reported solo after Dagger leaves, and a downhill encounter pool whose random/story-wave status and repeat access remain disputed. Its sourced profile, steal/drop table, Sleep attack, and optional Angel's Snack Eat opportunity link to the return route and cutoff. Quale is a separate optional boss tied to the shared 99-frog objective, with its four Elixir drop slots, steals, and Gastro Fork quest reward recorded. The Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Ipsen's Castle separates the initial, stairwell/lift, mural-room, and treasure-route pools from fixed Taharka. Cerberus, Gargoyle, and Veteran link Auto-Life, Mighty Guard, and Doom to Quina's checklist. Tonberry HP and Ice weakness, Veteran MP, and Taharka's stats/card/steal data retain source-level distinctions; the inspected GameFAQs and RPGClassics references agree on Taharka's 29,186 HP. Other areas and release-by-release parity remain to be researched.",
 };

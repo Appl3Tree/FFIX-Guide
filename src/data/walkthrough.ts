@@ -5309,7 +5309,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "ipsens-enemies-and-blue-magic",
         title: "Castle encounters — optional Blue Magic and enemy hazards",
         summary: "If Quina is in the party, use Eat on any missing skills while exploring; all three opportunities remain available when you return.",
-        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-abilities-71891"],
+        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-abilities-71891", "gamefaqs-enemy-list-71891"],
         steps: [
           {
             id: "ipsens-blue-magic",

@@ -3420,6 +3420,79 @@ const taharkaRamuhCardStep = walkthroughChapters
   .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
   .find((step) => step.objectiveIds?.includes(taharkaRamuhCardId));
 if (!taharkaRamuhCardStep) errors.push("Taharka's Ramuh Card fallback objective needs a checklist pointer in Ipsen's Castle.");
+const ipsensEnemyById = new Map(enemyRecords.filter((enemy) => enemy.chapterId === "disc-3.ipsens-castle").map((enemy) => [enemy.id, enemy]));
+const ipsensEncounterById = new Map(enemyEncounters.filter((encounter) => encounter.chapterId === "disc-3.ipsens-castle").map((encounter) => [encounter.id, encounter]));
+const expectedIpsensPools: Record<string, string[]> = {
+  "encounter.ipsens-castle.initial-area-pool": ["enemy.agares", "enemy.cerberus", "enemy.gargoyle", "enemy.veteran"],
+  "encounter.ipsens-castle.stairwell-lift-pool": ["enemy.agares", "enemy.cerberus", "enemy.gargoyle", "enemy.tonberry", "enemy.veteran"],
+  "encounter.ipsens-castle.mural-room-pool": ["enemy.agares", "enemy.gargoyle", "enemy.tonberry", "enemy.veteran"],
+  "encounter.ipsens-castle.treasure-hunting-pool": ["enemy.agares", "enemy.cerberus", "enemy.gargoyle", "enemy.tonberry", "enemy.veteran"],
+};
+const ipsensPoolsMismatch = Object.entries(expectedIpsensPools).some(([encounterId, enemyIds]) => {
+  const encounter = ipsensEncounterById.get(encounterId);
+  return encounter?.kind !== "random-pool"
+    || enemyIds.some((enemyId) => !encounter.formation.some((member) => member.enemyId === enemyId))
+    || encounter.formation.length !== enemyIds.length
+    || !encounter.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+    || !encounter.sourceIds.includes("gamefaqs-enemy-list-71891");
+});
+const ipsensBlueMagicExpected = [
+  ["enemy.cerberus", "Auto-Life"],
+  ["enemy.gargoyle", "Mighty Guard"],
+  ["enemy.veteran", "Doom"],
+];
+const ipsensBlueMagicMismatch = ipsensBlueMagicExpected.some(([enemyId, name]) => {
+  const enemy = ipsensEnemyById.get(enemyId);
+  return !enemy?.blueMagic.some((skill) => skill.name === name && skill.command === "Eat" && skill.objectiveIds.includes("disc-3.ipsens-castle.blue-magic"));
+});
+const ipsensTaharka = ipsensEnemyById.get("enemy.taharka");
+const ipsensTaharkaEncounter = ipsensEncounterById.get("encounter.ipsens-castle.taharka");
+const ipsensTaharkaWarning = missablesById.get("missable.disc-3.ipsens-castle.taharka-steals");
+const ipsensTaharkaCutoff = cutoffsById.get("cutoff.ipsens-castle.taharka-steals");
+const ipsensTaharkaStealPaths = [
+  ["item-path.disc-3.ipsens-castle.taharka-elixir-steal", "game-item.elixir"],
+  ["item-path.disc-3.ipsens-castle.taharka-mythril-claws-steal", "game-item.mythril-claws"],
+  ["item-path.disc-3.ipsens-castle.taharka-orichalcon-steal", "game-item.orichalcon"],
+] as const;
+const ipsensTaharkaPathMismatch = ipsensTaharkaStealPaths.some(([pathId, itemId]) => {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+  return path?.itemId !== itemId
+    || path.chapterId !== "disc-3.ipsens-castle"
+    || path.method !== "steal"
+    || path.availability !== "one-time-encounter"
+    || !path.walkthroughObjectiveIds?.includes("disc-3.ipsens-castle.taharka-steals");
+});
+if (
+  ipsensPoolsMismatch || ipsensBlueMagicMismatch ||
+  ipsensTaharka?.kind !== "boss" ||
+  ipsensTaharka.stats.find((claim) => claim.field === "HP" && claim.verification === "cross-checked")?.value !== 29186 ||
+  !ipsensTaharka.routeObjectiveIds.includes("disc-3.ipsens-castle.taharka-steals") ||
+  !ipsensTaharka.routeObjectiveIds.includes(taharkaRamuhCardId) ||
+  !ipsensTaharka.missableIds.includes("missable.disc-3.ipsens-castle.taharka-steals") ||
+  !ipsensTaharka.cutoffIds.includes("cutoff.ipsens-castle.taharka-steals") ||
+  ipsensTaharkaEncounter?.kind !== "boss" ||
+  !ipsensTaharkaEncounter.objectiveIds.includes("disc-3.ipsens-castle.mirrors") ||
+  ipsensTaharkaStealPaths.some(([pathId]) => !itemAcquisitionPaths.some((path) => path.id === pathId)) ||
+  ipsensTaharkaPathMismatch ||
+  !ipsensTaharkaWarning?.sourceIds.includes("rpgclassics-bestiary-t-z") ||
+  ipsensTaharkaWarning.note?.includes("HP values vary") ||
+  !ipsensTaharkaCutoff?.sourceIds.includes("rpgclassics-bestiary-t-z")
+) {
+  errors.push("Ipsen's Castle must preserve its four source-listed random pools, three linked Blue Magic teachers, fixed Taharka encounter, Ramuh Card objective, sourced HP consensus, and three one-time steal paths without the unsupported HP-variance claim.");
+}
+const ipsensTonberry = ipsensEnemyById.get("enemy.tonberry");
+const ipsensVeteran = ipsensEnemyById.get("enemy.veteran");
+if (
+  !ipsensTonberry?.stats.some((claim) => claim.field === "HP" && claim.value === 7887 && claim.verification === "disputed") ||
+  !ipsensTonberry.stats.some((claim) => claim.field === "HP" && claim.value === 7886 && claim.verification === "disputed") ||
+  !ipsensTonberry.facts.some((fact) => fact.label.includes("Ice") && fact.sourceIds.includes("rpgclassics-bestiary-t-z")) ||
+  !ipsensTonberry.notes.some((note) => note.includes("Tonberry card drop")) ||
+  !ipsensVeteran?.stats.some((claim) => claim.field === "MP" && claim.value === 1672 && claim.verification === "disputed") ||
+  !ipsensVeteran.stats.some((claim) => claim.field === "MP" && claim.value === 1627 && claim.verification === "disputed") ||
+  !ipsensVeteran.notes.some((note) => note.includes("both list Veteran as its card"))
+) {
+  errors.push("Ipsen's Castle must retain the RPGClassics/GameFAQs Tonberry HP and Ice-weakness differences and Veteran MP disagreement.");
+}
 const hippaulWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.hippaul-racing");
 if (!hippaulWarning?.sourceIds.includes("gamefaqs-tetra-master-71891") || !hippaulWarning.note?.includes("only Namingway is missable")) {
   errors.push("Hippaul's warning must distinguish the unique Athlete Queen cutoff from recoverable Tetra Master cards.");

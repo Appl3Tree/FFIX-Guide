@@ -1786,7 +1786,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "source-supported",
     trigger: "Attempt Taharka's selected steals during the Ipsen's Castle fight before defeating the boss. Later shops sell Mythril Claws and Orichalcon; stop if stealing puts the party at risk.",
     missableIds: ["missable.disc-3.ipsens-castle.taharka-steals"],
-    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "flactem-ipsens-castle"],
+    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "flactem-ipsens-castle", "rpgclassics-bestiary-t-z"],
   },
   {
     id: "cutoff.earth-guardian.steals",
