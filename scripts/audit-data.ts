@@ -335,6 +335,12 @@ for (const path of itemAcquisitionPaths) {
     if (!path.shopId?.trim() || !path.shopName?.trim()) errors.push(`Shop acquisition path ${path.id} needs a shop ID and name.`);
     if (path.cost?.currency !== "gil") errors.push(`Shop acquisition path ${path.id} needs a Gil price.`);
   }
+  if (path.method === "auction" && (!path.shopId?.trim() || !path.shopName?.trim())) {
+    errors.push(`Auction acquisition path ${path.id} needs an auction ID and name.`);
+  }
+  if (path.method === "auction" && path.cost) {
+    errors.push(`Auction acquisition path ${path.id} must not store a fixed bid price.`);
+  }
   if (path.method === "synthesis") {
     if (!path.recipeId || !synthesisRecipeIds.has(path.recipeId)) {
       errors.push(`Synthesis acquisition path ${path.id} needs a known recipe ID.`);

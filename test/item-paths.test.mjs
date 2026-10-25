@@ -132,14 +132,21 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   const synthesis = rebirthPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.daguerreo-rebirth-ring-synthesis");
   const diamondPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.diamond");
   const ankletPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.anklet");
+  const peridotPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot");
+  const linenCuirassPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.linen-cuirass");
   const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.rebirth-ring");
 
   assert.ok(gameItems.some((item) => item.id === "game-item.rebirth-ring"));
   assert.ok(gameItems.some((item) => item.id === "game-item.diamond"));
   assert.ok(gameItems.some((item) => item.id === "game-item.anklet"));
+  assert.ok(gameItems.some((item) => item.id === "game-item.gold-choker"));
+  assert.ok(gameItems.some((item) => item.id === "game-item.peridot"));
+  assert.ok(gameItems.some((item) => item.id === "game-item.linen-cuirass"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.card-tournament"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.aerial-exploration"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-4.the-final-battle"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.pinnacle-rocks"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.cargo-ship"));
   assert.equal(rebirthPaths.length, 4);
 
   assert.equal(tournament?.availability, "limited-window");
@@ -168,7 +175,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.aerial-exploration.diamond-sea-at-dusk"));
   assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.aerial-exploration.diamond-friendly-garuda"));
   assert.ok(diamondPaths.some((path) => path.id === "item-path.disc-3.portal-to-another-world.stiltzkin-diamond"));
-  assert.equal(ankletPaths.length, 2);
+  assert.equal(ankletPaths.length, 5);
   assert.ok(ankletPaths.some((path) => path.id === "item-path.disc-3.desert-palace.anklet-fire-chamber"));
   const hotAndColdAnklet = ankletPaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.anklet-hot-cold");
   assert.equal(hotAndColdAnklet?.availability, "repeatable");
@@ -176,7 +183,57 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(hotAndColdAnklet?.conditions?.includes("not a Mene point-redemption prize"));
   assert.ok(hotAndColdAnklet?.walkthroughObjectiveIds?.includes("disc-1.exploring-lindblum-kingdom.choco-recruit"));
 
-  for (const path of [...rebirthPaths, ...diamondPaths, ...ankletPaths]) {
+  const ankletAuction = ankletPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.anklet-treno-auction");
+  const ankletAuctionDisc4 = ankletPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.anklet-treno-auction");
+  const ankletSynthesis = ankletPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.anklet-daguerreo-synthesis");
+  const ankletRecipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.anklet");
+  assert.equal(ankletAuction?.method, "auction");
+  assert.equal(ankletAuction?.cost, undefined);
+  assert.ok(ankletAuction?.conditions?.includes("no Anklet is in the inventory"));
+  assert.equal(ankletAuctionDisc4?.chapterId, "disc-4.return-to-gaia");
+  assert.equal(ankletSynthesis?.cost?.amount, 4000);
+  assert.deepEqual(ankletRecipe?.ingredients, [
+    { itemId: "game-item.gold-choker", quantity: 1 },
+    { itemId: "game-item.peridot", quantity: 1 },
+  ]);
+
+  const peridotRecipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.gold-choker");
+  const goldChokerPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.gold-choker-synthesis");
+  const ramuhPeridot = peridotPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.ramuh-peridot");
+  const chocographPeridots = peridotPaths.find((path) => path.id === "item-path.disc-2.outer-continent.peridot-abandoned-beach");
+  const alexandriaPeridot = peridotPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.peridot-alexandria-harbor");
+  const startingLinenCuirass = linenCuirassPaths.find((path) => path.method === "starting-equipment");
+  assert.equal(goldChokerPath?.cost?.amount, 1300);
+  assert.equal(peridotRecipe?.cost.amount, 1300);
+  assert.deepEqual(peridotRecipe?.ingredients, [
+    { itemId: "game-item.linen-cuirass", quantity: 1 },
+    { itemId: "game-item.soft", quantity: 1 },
+  ]);
+  assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
+  assert.equal(peridotPaths.length, 4);
+  assert.equal(chocographPeridots?.quantity, 12);
+  assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
+  assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
+  assert.equal(linenCuirassPaths.length, 4);
+  assert.deepEqual(
+    equipmentAbilityClaims
+      .filter((claim) => ["game-item.anklet", "game-item.peridot", "game-item.gold-choker", "game-item.linen-cuirass"].includes(claim.itemId))
+      .map((claim) => `${claim.itemId}:${claim.abilityName}`)
+      .sort(),
+    [
+      "game-item.anklet:Counter",
+      "game-item.anklet:Healer",
+      "game-item.anklet:Locomotion",
+      "game-item.gold-choker:Auto-Potion",
+      "game-item.gold-choker:Flee-Gil",
+      "game-item.gold-choker:Shell",
+      "game-item.linen-cuirass:Cover",
+      "game-item.peridot:Ramuh",
+      "game-item.peridot:Thundara",
+    ].sort(),
+  );
+
+  for (const path of [...rebirthPaths, ...diamondPaths, ...ankletPaths, ...peridotPaths, ...linenCuirassPaths, ...(goldChokerPath ? [goldChokerPath] : [])]) {
     for (const sourceId of path.sourceIds) {
       assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
     }
