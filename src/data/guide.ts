@@ -2623,7 +2623,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/friendly160creatures",
     accessed: "2026-10-25",
-    notes: "Original PlayStation Friendly Creatures route. It says the first eight can be completed in any order when the requested item is available, and Friendly Yan must be completed last after befriending the other eight. Friendly Jabberwock accepts an Emerald and awards 40 AP plus a Moonstone; this non-hostile quest encounter is distinct from the ordinary Jabberwock enemy. Friendly Feather Circle is located on the Lost Continent and requests a Moonstone for its Lapis Lazuli and 30 AP reward.",
+    notes: "Original PlayStation Friendly Creatures route. It says the first eight can be completed in any order when the requested item is available, including Friendly Nymph's 3-Ore request for 30 AP and an Emerald, and Friendly Yan must be completed last after befriending the other eight. Friendly Jabberwock accepts an Emerald and awards 40 AP plus a Moonstone; this non-hostile quest encounter is distinct from the ordinary Jabberwock enemy. Friendly Feather Circle is located on the Lost Continent and requests a Moonstone for its Lapis Lazuli and 30 AP reward.",
   },
   {
     id: "jegged-friendly-monsters",
@@ -2631,7 +2631,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Friendly-Monsters.html",
     accessed: "2026-10-23",
-    notes: "Confirms Friendly Yan is available after the other eight creatures, requests a Diamond, rewards a Rosetta Ring and AP, and changes Ozma's physical reachability and Shadow affinity. It lists Friendly Jabberwock's Emerald exchange for 40 AP and a Moonstone, separate from the hostile Jabberwock battle. It places Friendly Feather Circle in Mitmakis Ice Field near Esto Gaza and lists its Moonstone request, Lapis Lazuli reward, and 30 AP. The project treats Diamond as the earned Garuda reward and preserves it for Yan.",
+    notes: "Confirms Friendly Nymph's 3-Ore request for 30 AP and an Emerald; Friendly Yan is available after the other eight creatures, requests a Diamond, rewards a Rosetta Ring and AP, and changes Ozma's physical reachability and Shadow affinity. It lists Friendly Jabberwock's Emerald exchange for 40 AP and a Moonstone, separate from the hostile Jabberwock battle. It places Friendly Feather Circle in Mitmakis Ice Field near Esto Gaza and lists its Moonstone request, Lapis Lazuli reward, and 30 AP. The project treats Diamond as the earned Garuda reward and preserves it for Yan.",
   },
   {
     id: "gamefaqs-ragtime-mouse-71891",

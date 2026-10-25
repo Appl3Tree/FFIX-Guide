@@ -3027,13 +3027,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-iifa-mountain-path-return",
         title: "Return through Mountain Path — take the north fork",
         summary: "Retrace the Mountain Path from Madain Sari and take the north exit at the Hilgigars fork to reach Pualei Plains.",
-        sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-mountain-path-return-29957", "jegged-iifa-tree", "gamerguides-iifa-tree-1"],
+        sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-mountain-path-return-29957", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490"],
         steps: [
           {
             id: "journey-iifa-retrace-path",
             kind: "required",
             text: "Leave Madain Sari for Lucid Plains and re-enter Conde Petie Mountain Path. If you have not claimed the four-stone Moonstone, retrace the roots to the monument near Suzuna and use the colored stones. Return to the Madain Sari-facing exit, then re-enter and take the north/Iifa Tree exit to the world map.",
-            detail: "GameFAQs' Disc II return route explicitly tells players to collect the Moonstone here if it was missed earlier, then pass back through the Madain Sari-facing exit and continue through the Iifa Tree exit. Random encounters on the Mountain Path/Pualei Plains route include Blazer Beetle, Gnoll, Goblin Mage, Ochu, and Troll; exact encounter tables can vary by map screen.",
+            detail: "GameFAQs' Disc II return route explicitly tells players to collect the Moonstone here if it was missed earlier, then pass back through the Madain Sari-facing exit and continue through the Iifa Tree exit. Its combined enemy list spans two areas: Gnoll, Ochu, and Troll are listed for Mountain Path; Blazer Beetle, Goblin Mage, and Troll are listed for Pualei Plains. Exact formations and encounter rates are not established.",
             objectiveIds: ["disc-2.conde-petie-mountain-path.moonstone"],
           },
           {

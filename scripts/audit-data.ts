@@ -3478,6 +3478,36 @@ if (
 ) {
   errors.push("The Treno arena Griffin needs a separate single-enemy profile, fixed-card objective, one-time cutoff, no copied field loot, and sourced arena battle-result data.");
 }
+const pualeiPlainsPool = enemyEncounters.find((encounter) => encounter.id === "encounter.journey-to-iifa-tree.pualei-plains-pool");
+const pualeiFriendlyNymphEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.journey-to-iifa-tree.friendly-nymph");
+const pualeiFriendlyNymph = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-nymph");
+const hostileNymph = enemyRecords.find((enemy) => enemy.id === "enemy.nymph");
+if (
+  !pualeiPlainsPool
+  || pualeiPlainsPool.kind !== "random-pool"
+  || pualeiPlainsPool.chapterId !== "disc-2.journey-to-iifa-tree"
+  || pualeiPlainsPool.formation.map((entry) => entry.enemyId).filter(Boolean).sort().join(",") !== "enemy.blazer-beetle,enemy.goblin-mage,enemy.troll"
+  || !pualeiPlainsPool.sourceIds.includes("gamefaqs-journey-to-iifa-tree-71891")
+  || !pualeiPlainsPool.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || pualeiPlainsPool.formation.some((entry) => entry.enemyId === "enemy.nymph")
+  || !pualeiFriendlyNymphEncounter
+  || pualeiFriendlyNymphEncounter.kind !== "random-pool"
+  || pualeiFriendlyNymphEncounter.formation.length !== 1
+  || pualeiFriendlyNymphEncounter.formation[0]?.enemyId !== "enemy.friendly-nymph"
+  || !pualeiFriendlyNymphEncounter.objectiveIds.includes("disc-2.journey-to-iifa-tree.nymph")
+  || !pualeiFriendlyNymph
+  || pualeiFriendlyNymph.kind !== "friendly"
+  || pualeiFriendlyNymph.chapterId !== "disc-2.journey-to-iifa-tree"
+  || pualeiFriendlyNymph.steals.length !== 0
+  || pualeiFriendlyNymph.drops.length !== 0
+  || !pualeiFriendlyNymph.stats.some((claim) => claim.field === "AP" && claim.value === 30)
+  || !pualeiFriendlyNymph.strategies.some((strategy) => strategy.title.includes("3 Ore") && strategy.detail.includes("Emerald"))
+  || !pualeiFriendlyNymph.routeObjectiveIds.includes("disc-2.journey-to-iifa-tree.nymph")
+  || !hostileNymph
+  || hostileNymph.kind === "friendly"
+) {
+  errors.push("Pualei Plains needs a sourced Blazer Beetle/Goblin Mage/Troll pool and a separate Friendly Nymph record with its 3-Ore, 30-AP, Emerald quest reward.");
+}
 const alexandriaCardPlayersObjectiveId = "disc-3.the-home-front.card-players";
 const alexandriaCardRosterObjectiveId = "disc-3.the-home-front.card-player-roster";
 const alexandriaCardPlayersWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.card-players");
