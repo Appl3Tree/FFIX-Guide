@@ -81,6 +81,8 @@ const finalPreparationsChapterId = "disc-4.final-preparations";
 const evilForestChapterId = "disc-1.evil-forest";
 const iceCavernChapterId = "disc-1.ice-cavern";
 const daliChapterId = "disc-1.village-of-dali";
+const lindblumChapterId = "disc-1.lindblum";
+const exploringLindblumChapterId = "disc-1.exploring-lindblum-kingdom";
 const twisterObjectiveId = "disc-3.lost-continent.mount-gulug-blue-magic";
 const twisterMissableId = "missable.disc-3.lost-continent.twister";
 const twisterCutoffId = "cutoff.mount-gulug.twister";
@@ -104,6 +106,10 @@ const blackWaltz2StealsCutoffId = "cutoff.dali.black-waltz-2-steals";
 const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
+const lindblumPlateauSources = [enemyListSourceId, "gamefaqs-exploring-lindblum-71891", "cavesofnarshe-lindblum-walkthrough", "ffwiki-lindblum"];
+const huntEnemySources = [enemyListSourceId, "gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
+const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
+const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
 const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
@@ -197,6 +203,10 @@ function enemyFact(category: EnemyFact["category"], label: string, detail?: stri
 
 function sourcedStats(entries: [EnemyStatField, number][], sourceIds: string[]): EnemyStatClaim[] {
   return entries.map(([field, value]) => ({ field, value, sourceIds, verification: "single-source" }));
+}
+
+function crossCheckedStats(entries: [EnemyStatField, number][], sourceIds: string[]): EnemyStatClaim[] {
+  return entries.map(([field, value]) => ({ field, value, sourceIds, verification: "cross-checked" }));
 }
 
 function enemyStats(entries: [EnemyStatField, number][]): EnemyStatClaim[] {
@@ -382,6 +392,72 @@ const earlyDaliEncounters: EnemyEncounter[] = [
     missableIds: [blackWaltz2StealsMissableId],
     cutoffIds: [blackWaltz2StealsCutoffId],
     notes: ["Several walkthroughs place the fight at Observatory Mountain; Final Fantasy Wiki and EliteGrindLab's field-script review place the encounter at the cargo-ship loading area. The dossier preserves that location conflict."],
+  },
+];
+
+const lindblumEncounters: EnemyEncounter[] = [
+  {
+    id: "encounter.lindblum-plateau.mountain-pool",
+    title: "Lindblum Plateau mountain encounters",
+    chapterId: exploringLindblumChapterId,
+    location: "Mountain terrain on Lindblum Plateau",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.carve-spider", quantity: null },
+      { enemyId: "enemy.axe-beak", quantity: null },
+    ],
+    sourceIds: lindblumPlateauSources,
+    objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Disc I–III sources list Carve Spider and Axe Beak on the plateau. Final Fantasy Wiki publishes separate two-enemy formations and rates; this pool records the regional roster without encoding those rates or quantities."],
+  },
+  {
+    id: "encounter.lindblum-plateau.forest-pool",
+    title: "Lindblum Plateau forest encounters",
+    chapterId: exploringLindblumChapterId,
+    location: "Forests on Lindblum Plateau",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.carve-spider", quantity: null },
+      { enemyId: "enemy.axe-beak", quantity: null },
+      { enemyId: "enemy.bomb", quantity: null },
+    ],
+    sourceIds: lindblumPlateauSources,
+    objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Bomb is restricted to forest terrain; Caves of Narshe and GameFAQs specifically identify it as Quina's Mustard Bomb source here. The model does not infer encounter frequency or exact combinations."],
+  },
+  {
+    id: "encounter.lindblum.festival-random-pool",
+    title: "Festival of the Hunt district battles",
+    chapterId: lindblumChapterId,
+    location: "Business, Theater, and Industrial Districts during the 12-minute Festival",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.fang-b", quantity: null },
+      { enemyId: "enemy.mu-b", quantity: null },
+      { enemyId: "enemy.trick-sparrow-hunt", quantity: null },
+    ],
+    sourceIds: huntEnemySources,
+    objectiveIds: ["disc-1.lindblum.master-hunter", "disc-1.lindblum.festival-vivi-win", "disc-1.lindblum.festival-freya-win"],
+    missableIds: ["missable.disc-1.lindblum.festival-vivi"],
+    cutoffIds: ["cutoff.lindblum-festival.vivi-outcome"],
+    notes: ["Fang and Mu use Hunt-only variants. Trick Sparrow keeps its standard HP/MP/level profile, but sources disagree on Hunt steals and reward values; its event battle is not treated as a source of ordinary battle rewards. The district roster is recorded without asserting exact formations, point values, or spawn rates."],
+  },
+  {
+    id: "encounter.lindblum.festival-zaghnol",
+    title: "Zaghnol — Festival boss battle",
+    chapterId: lindblumChapterId,
+    location: "Business District shop plaza when about 4:30 remains on the Festival timer",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.zaghnol-hunt", quantity: 1 }],
+    sourceIds: zaghnolHuntSources,
+    objectiveIds: ["disc-1.lindblum.zaghnol-steals", "disc-1.lindblum.master-hunter", "disc-1.lindblum.festival-freya-win", "disc-1.lindblum.festival-vivi-win"],
+    missableIds: ["missable.disc-1.lindblum.zaghnol-steals", "missable.disc-1.lindblum.festival-vivi"],
+    cutoffIds: ["cutoff.lindblum-festival.vivi-outcome"],
+    notes: ["Freya joins Zidane for this one-time battle. If the plaza is already loaded when the timer reaches the trigger, the route sources say to leave and re-enter. GameFAQs lists Mythril Gloves and Needle Fork as steals; Caves of Narshe's Hunt table says no stolen items, so the conflict remains visible on the boss record."],
   },
 ];
 
@@ -746,7 +822,7 @@ const ozmaEncounters: EnemyEncounter[] = [
   },
 ];
 
-export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...earlyDaliEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
+export const enemyEncounters: EnemyEncounter[] = [...evilForestEncounters, ...iceCavernEncounters, ...earlyDaliEncounters, ...lindblumEncounters, ...mountGulugEncounters, ...pandemoniumEncounters, ...iifaTreeEncounters, ...memoriaEncounters, ...ozmaEncounters, ...finalBattleEncounters];
 
 const localEnemyRecords: EnemyRecord[] = [
   localEnemy({
@@ -1896,7 +1972,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.carve-spider",
     name: "Carve Spider",
-    encounterIds: ["encounter.nolrich-heights.world-map-pool"],
+    encounterIds: ["encounter.nolrich-heights.world-map-pool", "encounter.lindblum-plateau.mountain-pool", "encounter.lindblum-plateau.forest-pool"],
     stats: enemyStats([["level", 3], ["HP", 129], ["MP", 199], ["EXP", 48], ["AP", 1], ["Gil", 124]]),
     steals: [
       enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.tent"),
@@ -2088,10 +2164,166 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
   }, daliChapterId, blackWaltz2Sources, [blackWaltz2StealsMissableId], [blackWaltz2StealsCutoffId]),
 ];
 
+const lindblumEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.axe-beak",
+    name: "Axe Beak",
+    encounterIds: ["encounter.lindblum-plateau.mountain-pool", "encounter.lindblum-plateau.forest-pool"],
+    stats: enemyStats([["level", 6], ["HP", 241], ["MP", 267], ["EXP", 123], ["AP", 1], ["Gil", 224]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", "game-item.ether"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.echo-screen"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "Beast"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Beak", "Weak physical damage."),
+      enemyFact("attack", "Thundara", "A stronger Lightning spell than its physical attack."),
+      enemyFact("attack", "Glowing Eyes", "Can inflict Sleep."),
+    ],
+    blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Watch for Sleep and Thundara", detail: "Beast Killer helps against Axe Beak. Glowing Eyes can put a character to Sleep; Quina can learn Limit Glove by eating it after it is weakened.", sourceIds: [enemyListSourceId, "cavesofnarshe-lindblum-walkthrough"] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["Axe Beak appears on both mountain and forest terrain on the plateau; it shares the same table as the later Treno-area enemy entry."],
+  }, exploringLindblumChapterId, lindblumPlateauSources),
+  chapterEnemy({
+    id: "enemy.bomb",
+    name: "Bomb",
+    encounterIds: ["encounter.lindblum-plateau.forest-pool"],
+    stats: enemyStats([["level", 10], ["HP", 526], ["MP", 359], ["EXP", 178], ["AP", 1], ["Gil", 235]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    drops: [enemyLoot("always", "game-item.potion"), enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "Aerial"),
+      enemyFact("elemental-weakness", "Ice, Water, and Wind"),
+      enemyFact("elemental-resistance", "Fire (absorbs); Earth (nullifies)"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Grow and Blow Up", "After growing several times, Bomb can use Blow Up for damage based on its remaining HP."),
+      enemyFact("attack", "Charge and Fire", "Both attacks can deal heavy damage at this early point in the game."),
+    ],
+    blueMagic: [{ name: "Mustard Bomb", command: "Eat", sourceIds: [enemyListSourceId], objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"] }],
+    strategies: [{ title: "Use Ice, Water, or Wind and finish quickly", detail: "Bomb absorbs Fire and nullifies Earth. Its Grow sequence can lead into Blow Up for damage based on its remaining HP; Quina can learn Mustard Bomb by eating it in the plateau forests.", sourceIds: [enemyListSourceId, "cavesofnarshe-lindblum-walkthrough"] }],
+    routeObjectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+    notes: ["Bomb is limited to forest terrain on Lindblum Plateau; it is not part of the plateau mountain pool."],
+  }, exploringLindblumChapterId, lindblumPlateauSources),
+  chapterEnemy({
+    id: "enemy.fang-b",
+    name: "Fang [B] (Festival of the Hunt)",
+    encounterIds: ["encounter.lindblum.festival-random-pool"],
+    stats: crossCheckedStats([["level", 5], ["HP", 216], ["MP", 253], ["EXP", 0], ["AP", 0], ["Gil", 0]], huntLootSources),
+    steals: [
+      sourcedLoot("common", null, huntLootSources, "Nothing"), sourcedLoot("uncommon", null, huntLootSources, "Nothing"),
+      sourcedLoot("semi-rare", null, huntLootSources, "Nothing"), sourcedLoot("rare", null, huntLootSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, huntLootSources, "Nothing"), sourcedLoot("common", null, huntLootSources, "Nothing"),
+      sourcedLoot("uncommon", null, huntLootSources, "Nothing"), sourcedLoot("rare", null, huntLootSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Beast", huntLootSources),
+      sourcedFact("elemental-weakness", "Fire", huntLootSources),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Physical attacks", [enemyListSourceId], "The Hunt variant is described as the strongest of the regular Festival animals."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Prioritize Fang for points", detail: "GameFAQs describes Fangs as the highest-value regular Festival animals. The Hunt variant is stronger than Fang [A], but its table lists no steals or drops.", sourceIds: ["gamefaqs-hunt-minigame-71891", enemyListSourceId, "cavesofnarshe-hunt-enemies"] }],
+    routeObjectiveIds: [],
+    notes: ["This level-5, 216-HP Hunt-only form is distinct from the level-1 Fang [A] in the Evil Forest. The Hunt version awards no EXP, AP, or Gil and has no item drops in the inspected tables."],
+  }, lindblumChapterId, huntEnemySources),
+  chapterEnemy({
+    id: "enemy.mu-b",
+    name: "Mu [B] (Festival of the Hunt)",
+    encounterIds: ["encounter.lindblum.festival-random-pool"],
+    stats: crossCheckedStats([["level", 5], ["HP", 201], ["MP", 253], ["EXP", 0], ["AP", 0], ["Gil", 0]], huntLootSources),
+    steals: [
+      sourcedLoot("common", null, huntLootSources, "Nothing"), sourcedLoot("uncommon", null, huntLootSources, "Nothing"),
+      sourcedLoot("semi-rare", null, huntLootSources, "Nothing"), sourcedLoot("rare", null, huntLootSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, huntLootSources, "Nothing"), sourcedLoot("common", null, huntLootSources, "Nothing"),
+      sourcedLoot("uncommon", null, huntLootSources, "Nothing"), sourcedLoot("rare", null, huntLootSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "None", huntLootSources),
+      sourcedFact("elemental-weakness", "None listed", [enemyListSourceId]),
+      sourcedFact("elemental-weakness", "Shadow", ["cavesofnarshe-hunt-enemies"], "Caves of Narshe lists Shadow as a weakness for Mu (Hunt), while GameFAQs lists no weakness."),
+      sourcedFact("elemental-resistance", "Holy", ["cavesofnarshe-hunt-enemies"], "Caves of Narshe lists Holy as a resistance; GameFAQs lists no resistance."),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Stone", [enemyListSourceId], "The standard Mu attack is also described for the Hunt form."),
+    ],
+    blueMagic: [],
+    strategies: [{ title: "Treat the hunt form as a separate opponent", detail: "Mu [B] has 201 HP, compared with standard Mu's 77 HP, and yields Festival points instead of ordinary battle rewards. Sources disagree on whether this Hunt form resists Holy and is weak to Shadow.", sourceIds: huntEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["The Festival version is level 5 with 201 HP and no ordinary rewards. Caves of Narshe lists Holy resistance and Shadow weakness; GameFAQs lists neither, so both claims are retained."],
+  }, lindblumChapterId, huntEnemySources),
+  chapterEnemy({
+    id: "enemy.trick-sparrow-hunt",
+    name: "Trick Sparrow (Festival of the Hunt)",
+    encounterIds: ["encounter.lindblum.festival-random-pool"],
+    stats: [
+      ...crossCheckedStats([["level", 5], ["HP", 191], ["MP", 250]], huntLootSources),
+      { field: "EXP", value: 65, sourceIds: [enemyListSourceId, "cavesofnarshe-hunt-enemies"], verification: "disputed" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-hunt-minigame-71891"], verification: "disputed" },
+      { field: "AP", value: 1, sourceIds: [enemyListSourceId, "cavesofnarshe-hunt-enemies"], verification: "disputed" },
+      { field: "AP", value: 0, sourceIds: ["gamefaqs-hunt-minigame-71891"], verification: "disputed" },
+      { field: "Gil", value: 198, sourceIds: [enemyListSourceId, "cavesofnarshe-hunt-enemies"], verification: "disputed" },
+      { field: "Gil", value: 0, sourceIds: ["gamefaqs-hunt-minigame-71891"], verification: "disputed" },
+    ],
+    steals: [
+      { slot: "common", itemId: "game-item.ore", sourceIds: [enemyListSourceId], note: "GameFAQs says the Festival version is the same as the ordinary Trick Sparrow apart from drops; Caves of Narshe's Hunt entry lists no stolen items." },
+      sourcedLoot("uncommon", null, huntLootSources, "Nothing"), sourcedLoot("semi-rare", null, huntLootSources, "Nothing"), sourcedLoot("rare", null, huntLootSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, huntLootSources, "Nothing"), sourcedLoot("common", null, huntLootSources, "Nothing"),
+      sourcedLoot("uncommon", null, huntLootSources, "Nothing"), sourcedLoot("rare", null, huntLootSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", huntLootSources),
+      sourcedFact("elemental-weakness", "Wind", huntLootSources),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", huntLootSources),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom", [enemyListSourceId]),
+      sourcedFact("attack", "Drain", [enemyListSourceId], "Can drain roughly 50 HP from Zidane during the Festival."),
+    ],
+    blueMagic: [{ name: "Matra Magic", command: "Eat", sourceIds: [enemyListSourceId], objectiveIds: [] }],
+    strategies: [{ title: "Keep its points in context", detail: "Trick Sparrow is a weaker point source than Fang. GameFAQs says the Hunt version retains its ordinary stats but drops nothing; the Hunt guide and Caves of Narshe disagree over ordinary EXP/AP/Gil and whether its Ore steal remains available.", sourceIds: huntEnemySources }],
+    routeObjectiveIds: [],
+    notes: ["The normal Trick Sparrow table lists an Ore steal, 65 EXP, 1 AP, and 198 Gil. The Festival minigame reference says Hunt enemies award no EXP/AP/Gil/items, while Caves of Narshe's Hunt row repeats the normal EXP/AP/Gil but lists no steals or drops. This event-only record preserves the conflict instead of treating the base loot table as certain Hunt behavior."],
+  }, lindblumChapterId, huntEnemySources),
+  chapterBoss({
+    id: "enemy.zaghnol-hunt",
+    name: "Zaghnol (Festival of the Hunt)",
+    encounterIds: ["encounter.lindblum.festival-zaghnol"],
+    stats: crossCheckedStats([["level", 9], ["HP", 1574], ["MP", 2342], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"]),
+    steals: [
+      sourcedLoot("common", "game-item.mythril-gloves", ["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum"]),
+      sourcedLoot("uncommon", "game-item.needle-fork", ["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum"]),
+      sourcedLoot("semi-rare", null, ["gamefaqs-hunt-minigame-71891"], "Nothing"), sourcedLoot("rare", null, ["gamefaqs-hunt-minigame-71891"], "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"], "Nothing"), sourcedLoot("common", null, ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"], "Nothing"),
+      sourcedLoot("uncommon", null, ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"], "Nothing"), sourcedLoot("rare", null, ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"], "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Beast", ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"]),
+      sourcedFact("elemental-weakness", "Water", ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"]),
+      sourcedFact("elemental-resistance", "Lightning (half damage)", ["gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies"]),
+      sourcedFact("status-vulnerability", "Berserk, Confuse, Darkness, Mini, Silence, Sleep, and Slow", ["gamefaqs-hunt-minigame-71891"]),
+      sourcedFact("attack", "Heave", ["gamefaqs-hunt-minigame-71891"], "Strong single-target physical attack."),
+      sourcedFact("attack", "Electrocute and Thunder", ["gamefaqs-hunt-minigame-71891"], "Electrocute enables single-target or multi-target Thunder."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Steal both items before choosing the winner", detail: "The one-time battle is the early source for Mythril Gloves and Needle Fork. GameFAQs and route walkthroughs list both steals; Caves of Narshe's Hunt table says no stolen items, so the route retains the practical steal check while flagging that source conflict.", sourceIds: ["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies"] },
+      { title: "Use Freya to control the finish", detail: "Freya joins Zidane for the battle. The winner depends on who defeats Zaghnol; the exact Freya-finishing behavior is version-sensitive, so follow the selected outcome route and its warning rather than assuming a universal score threshold.", sourceIds: ["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-walkthrough"] },
+    ],
+    routeObjectiveIds: ["disc-1.lindblum.zaghnol-steals"],
+    notes: ["The Hunt-specific form is Level 9 with 1,574 HP, 2,342 MP, and no EXP/AP/Gil. GameFAQs lists Mythril Gloves and Needle Fork in its steal table and multiple route guides tell the player to steal both; Caves of Narshe's event table lists no stolen items. The ordinary world-map Zaghnol has different stats and loot and is not represented by this event record.", "GameFAQs lists Water weakness, half Lightning resistance, and Berserk/Confuse/Darkness/Mini/Silence/Sleep/Slow vulnerabilities for the Festival form. Caves of Narshe's Hunt table lists additional status immunities; no exhaustive immunity model is available in the current data type."],
+  }, lindblumChapterId, zaghnolHuntSources, ["missable.disc-1.lindblum.zaghnol-steals", "missable.disc-1.lindblum.festival-vivi"], ["cutoff.lindblum-festival.vivi-outcome"]),
+];
+
 export const enemyRecords: EnemyRecord[] = [
   ...evilForestEnemyRecords,
   ...iceCavernEnemyRecords,
   ...earlyDaliEnemyRecords,
+  ...lindblumEnemyRecords,
   {
     id: "enemy.red-dragon",
     name: "Red Dragon",
@@ -2215,8 +2447,8 @@ export const enemyRecords: EnemyRecord[] = [
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
-  chapterIds: [evilForestChapterId, iceCavernChapterId, daliChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
-  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
+  chapterIds: [evilForestChapterId, iceCavernChapterId, daliChapterId, lindblumChapterId, exploringLindblumChapterId, mountGulugChapterId, pandemoniumChapterId, iifaTreeChapterId, memoriaChapterId, finalBattleChapterId, finalPreparationsChapterId],
+  enemyIds: [...evilForestEnemyRecords.map((enemy) => enemy.id), ...iceCavernEnemyRecords.map((enemy) => enemy.id), ...earlyDaliEnemyRecords.map((enemy) => enemy.id), ...lindblumEnemyRecords.map((enemy) => enemy.id), "enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id), ...pandemoniumEnemyRecords.map((enemy) => enemy.id), ...iifaTreeEnemyRecords.map((enemy) => enemy.id), ...memoriaEnemyRecords.map((enemy) => enemy.id), ...finalBattleEnemyRecords.map((enemy) => enemy.id), ...ozmaEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [...enemyEncounters.map((encounter) => encounter.id)],
-  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Dali, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
+  note: "Partial enemy reference for Evil Forest, Ice Cavern/Nolrich Heights, Dali, Mount Gulug, Pandemonium, the Disc IV Iifa Tree battle, Memoria, Final Preparations, and the final battle. Evil Forest covers its source-listed trail pool, both Prison Cage rescue fights, Plant Brain, and the three-Plant-Spider escape battle; the second Prison Cage HP disagreement remains explicit. Ice Cavern covers the three mist-jet enemy types and the combined Black Waltz 1/Sealion battle; the boss HP and levels are cross-checked, and the Sealion orb-phase spell disagreement is kept source-specific. Nolrich Heights is a separate world-map pool for Carve Spider, Mu, and Python; Mu's Friendly Monster appearance remains separate from its combat data. Dali's optional underground pool distinguishes the door-triggered Ghost/Vice encounters from the disputed Skeleton listing and records the reported Skeleton + Vice/Ghost-only formations. Black Waltz 2 is a separate one-time boss encounter linked to its steal objective, cutoff, and recovery warning; its field location, Mini vulnerability, and four-Ether drop table preserve source-specific differences. Lindblum Plateau separates mountain and forest pools, including forest-only Bomb; the Festival uses Hunt-only Fang and Mu variants and a separate Zaghnol boss. Trick Sparrow reward/steal claims, Mu's elemental traits, and Zaghnol's event steals preserve their source conflicts. Mount Gulug covers its source-listed random enemy families, three fixed Red Dragon groups, and Meltigemini. Pandemonium distinguishes its random variants, Mover trio, three scripted party-split fights, and Silver Dragon/Garland/Kuja sequence. Nova Dragon's one-time fight includes the conditional Grand Armor steal. Memoria adds Hades, the four revived guardians, Deathguise, and Kraken's two tentacle components; their disputed HP, Hades shop trigger, right-tentacle steal, and move-side assignments remain explicit. Final Preparations adds Ozma with its Friendly Creatures-dependent reach and Shadow affinity. Trance Kuja's HP and Necron's steal tiers preserve source differences. Other areas and release-by-release parity remain to be researched.",
 };

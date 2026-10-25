@@ -1499,6 +1499,62 @@ if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030
   !blackWaltz2Record.facts.some((fact) => fact.category === "status-vulnerability" && fact.label === "Mini" && fact.sourceIds.includes("ffwiki-black-waltz-2"))) {
   errors.push("Black Waltz 2 must preserve its cross-checked HP, four Ether drop slots, and sourced Mini-status conflict.");
 }
+const lindblumMountainPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.mountain-pool");
+const lindblumForestPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.forest-pool");
+if (!lindblumMountainPool || lindblumMountainPool.kind !== "random-pool" ||
+  !lindblumMountainPool.formation.some((entry) => entry.enemyId === "enemy.carve-spider") ||
+  !lindblumMountainPool.formation.some((entry) => entry.enemyId === "enemy.axe-beak") ||
+  lindblumMountainPool.formation.some((entry) => entry.enemyId === "enemy.bomb") ||
+  !lindblumForestPool || lindblumForestPool.kind !== "random-pool" ||
+  !lindblumForestPool.formation.some((entry) => entry.enemyId === "enemy.carve-spider") ||
+  !lindblumForestPool.formation.some((entry) => entry.enemyId === "enemy.axe-beak") ||
+  !lindblumForestPool.formation.some((entry) => entry.enemyId === "enemy.bomb")) {
+  errors.push("Lindblum Plateau must separate its mountain Carve Spider/Axe Beak pool from the forest pool that also contains Bomb.");
+}
+const huntPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum.festival-random-pool");
+const huntEnemyIds = ["enemy.fang-b", "enemy.mu-b", "enemy.trick-sparrow-hunt"];
+if (!huntPool || huntPool.kind !== "random-pool" || huntPool.chapterId !== "disc-1.lindblum" ||
+  huntEnemyIds.some((enemyId) => !huntPool.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !huntPool.cutoffIds.includes("cutoff.lindblum-festival.vivi-outcome") ||
+  !huntPool.missableIds.includes("missable.disc-1.lindblum.festival-vivi")) {
+  errors.push("Festival random battles must use the three distinct Hunt entries and link the one-time outcome cutoff.");
+}
+const huntFang = enemyRecords.find((enemy) => enemy.id === "enemy.fang-b");
+const huntMu = enemyRecords.find((enemy) => enemy.id === "enemy.mu-b");
+const huntTrickSparrow = enemyRecords.find((enemy) => enemy.id === "enemy.trick-sparrow-hunt");
+if (huntFang?.stats.find((stat) => stat.field === "HP")?.value !== 216 || huntFang.stats.find((stat) => stat.field === "level")?.value !== 5 ||
+  huntMu?.stats.find((stat) => stat.field === "HP")?.value !== 201 || huntMu.stats.find((stat) => stat.field === "level")?.value !== 5 ||
+  !huntMu?.notes.some((note) => note.includes("Holy resistance and Shadow weakness") && note.includes("GameFAQs lists neither")) ||
+  !huntTrickSparrow?.stats.some((stat) => stat.field === "EXP" && stat.value === 65 && stat.verification === "disputed") ||
+  !huntTrickSparrow?.stats.some((stat) => stat.field === "EXP" && stat.value === 0 && stat.verification === "disputed") ||
+  !huntTrickSparrow?.notes.some((note) => note.includes("Caves of Narshe's Hunt row") && note.includes("no steals or drops"))) {
+  errors.push("Hunt-only Fang/Mu stats and the Mu/Trick Sparrow source conflicts must remain represented as separate partial records.");
+}
+const zaghnolHuntEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum.festival-zaghnol");
+const zaghnolHunt = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
+if (!zaghnolHuntEncounter || zaghnolHuntEncounter.kind !== "boss" ||
+  !zaghnolHuntEncounter.formation.some((entry) => entry.enemyId === "enemy.zaghnol-hunt" && entry.quantity === 1) ||
+  !zaghnolHuntEncounter.objectiveIds.includes("disc-1.lindblum.zaghnol-steals") ||
+  !zaghnolHuntEncounter.missableIds.includes("missable.disc-1.lindblum.zaghnol-steals") ||
+  !zaghnolHuntEncounter.cutoffIds.includes("cutoff.lindblum-festival.vivi-outcome") ||
+  zaghnolHunt?.stats.find((stat) => stat.field === "HP")?.value !== 1574 ||
+  !zaghnolHunt?.notes.some((note) => note.includes("Caves of Narshe's event table lists no stolen items"))) {
+  errors.push("The Festival Zaghnol battle must stay separate from the regular form and preserve its sourced steal disagreement and cutoff links.");
+}
+for (const [itemId, pathId] of [
+  ["game-item.mythril-gloves", "item-path.disc-1.lindblum.zaghnol-mythril-gloves-steal"],
+  ["game-item.needle-fork", "item-path.disc-1.lindblum.zaghnol-needle-fork-steal"],
+] as const) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+  if (!zaghnolHunt?.steals.some((slot) => slot.itemId === itemId) || !zaghnolHunt.routeObjectiveIds.includes("disc-1.lindblum.zaghnol-steals") ||
+    path?.itemId !== itemId || path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes("disc-1.lindblum.zaghnol-steals")) {
+    errors.push(`Zaghnol's ${itemId} steal must link the boss table, checklist objective, one-time item path, and cutoff warning.`);
+  }
+  const recoveryPath = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.return-to-lindblum.cleyra-recovery.${itemId.replace("game-item.", "")}`);
+  if (recoveryPath?.itemId !== itemId || recoveryPath.availability !== "window-unverified") {
+    errors.push(`Zaghnol's ${itemId} steal warning must have a later Lindblum item-type recovery route.`);
+  }
+}
 const iceBrandId = "game-item.ice-brand";
 const iceBrandPathIds = new Set(itemAcquisitionPaths.filter((path) => path.itemId === iceBrandId).map((path) => path.id));
 const requiredIceBrandPathIds = [

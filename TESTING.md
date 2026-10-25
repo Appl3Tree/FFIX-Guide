@@ -4,11 +4,11 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
-`npm run lint` passes. `npm run build` passes typecheck, data audit, and the production build with 0 audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 325 sources. All 136 missable records link to 88 cutoff windows, including all 79 high/critical records. The catalog has 200 items and 760 paths across 41 slices, 38 recipes, 75 targets, and 159 ability claims; the bestiary has 50 partial records across 9 slices and 35 encounter groups. Bundle: 1,721.49 kB JavaScript (423.51 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. `git diff --check` passes. Tests, browser review of the new bestiary entries, and direct game/release verification were not run.
+`npm run lint` and `git diff --check` pass. `npm run build` passes typecheck, data audit, and the production build with 0 audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 329 sources. All 136 missable records link to 88 cutoff windows, including all 79 high/critical records. The catalog has 200 items and 764 paths across 41 slices, 38 recipes, 75 targets, and 159 ability claims; the bestiary has 56 partial records across 11 slices and 39 encounter groups. Bundle: 1,740.36 kB JavaScript (427.52 kB gzip), 60.22 kB CSS (12.77 kB gzip); Vite’s chunk-size advisory remains. Tests, browser review of the new bestiary entries, and direct game/release verification were not run.
 
 ## Latest change status
 
-The latest B02/B05 slice adds the Angel Earrings and Barette acquisition and synthesis chain, their equipment abilities, and the revised Knights of Pluto recovery warning. Source evidence is cross-checked; the reward ladder and modern-release behavior remain untested in-game.
+The latest B04/B05 slice adds Plateau and Hunt encounter variants, the one-time Zaghnol dossier, and recovery links for its Mythril Gloves and Needle Fork steals. Hunt reward/steal differences remain source-marked; in-game, release, and browser verification remain open.
 
 The latest B01/B02 slice records the linear post-Kuja passage back through Bran Bal and keeps the earlier treasure-room sweep cutoff conservative because the route sources do not verify free chest access. The preceding B02 slice supports a post-boss Mois-letter return before Cargo Ship departure while retaining the Game8/Jinsoku timing disagreement; the Desert Palace slice identifies where world-map travel resumes after the sinkhole lock-in. Lint, typecheck, audit, production build, and `git diff --check` pass. Tests and direct game/release/UI verification were not run.
 
@@ -43,7 +43,7 @@ The data audit also requires each of the three Teach Me, Mogster! tutorial objec
 
 ## Production build
 
-`npm run build` passed typecheck, reported 0 data-audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 325 sources, then completed the Vite production build. The JavaScript bundle is 1,721.49 kB (423.51 kB gzip), and CSS is 60.22 kB (12.77 kB gzip). Vite’s JavaScript chunk-size advisory remains. Tests and direct game/release/UI verification were not run.
+`npm run build` passed typecheck, reported 0 data-audit errors and 178 coverage warnings across 44 chapters, 136 missables, 615 objectives, and 329 sources, then completed the Vite production build. The JavaScript bundle is 1,740.36 kB (427.52 kB gzip), and CSS is 60.22 kB (12.77 kB gzip). Vite’s JavaScript chunk-size advisory remains. Tests and direct game/release/UI verification were not run.
 
 ## Browser checks completed in this phase
 
