@@ -840,6 +840,18 @@ if (burmeciaTreasureCutoff?.certainty !== "conservative") {
 if (burmeciaTreasureWarning?.classification.includes("permanently-missable") || !burmeciaTreasureWarning?.note.includes("does not establish chest-room access")) {
   errors.push("The Burmecia treasure warning must not claim permanent loss from incomplete later-access evidence.");
 }
+const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
+const burmeciaDisc2SpearStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-cleyra-burmecia-mythril-spear");
+if (!burmeciaMythrilSpear || burmeciaMythrilSpear.availability !== "limited-window" ||
+  !burmeciaMythrilSpear.sourceIds.includes("ff9-kouryaku-burmecia") ||
+  !burmeciaMythrilSpear.conditions?.includes("until the mechanism inside Cleyra's Trunk is activated") ||
+  !burmeciaDisc2SpearStep?.objectiveIds?.includes("disc-1.burmecia.treasure-sweep") ||
+  !burmeciaDisc2SpearStep.text.includes("left-hand armory")) {
+  errors.push("The Burmecia Mythril Spear path must retain its Disc II recovery deadline and connect it to the walkthrough sweep.");
+}
 
 for (const { platform, records, expectedCount } of achievementCatalogs) {
   if (records.length !== expectedCount) {

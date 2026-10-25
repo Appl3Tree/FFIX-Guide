@@ -1363,13 +1363,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "burmecia-fountain-square-vault",
         title: "Fountain Square — Mythril Spear, Atla, Stiltzkin, and Mognet",
         summary: "Take the left armory reward, then search the back of the right-hand Vault for the Lightning Staff. Opening that chest brings Stiltzkin into the room.",
-        sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "jegged-stiltzkin", "jegged-mognet-central", "gamefaqs-moogle-faq-23306"],
+        sourceIds: ["gamefaqs-burmecia-71891", "ff9-kouryaku-burmecia", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "jegged-stiltzkin", "jegged-mognet-central", "gamefaqs-moogle-faq-23306"],
         steps: [
           {
             id: "burmecia-mythril-spear",
             kind: "pickup",
             text: "In the square, enter the left-hand armory and take the Mythril Spear for Freya. Equip it if useful; it teaches Reis's Wind. Return to the square and enter the right-hand Vault.",
-            detail: "Walkthroughs describe the Mythril Spear's acquisition as either a scene or a pickup from the statue. The objective is the weapon in the left-hand room; its exact interaction has not been directly verified in the current game build.",
+            detail: "Walkthroughs describe the Mythril Spear's acquisition as either a scene or a pickup from the statue. FF9攻略情報サイト says the armory pickup remains available during the Disc II return until the mechanism inside Cleyra's Trunk is activated; later shops also recover the item type. Its exact interaction has not been directly verified in the current game build.",
             objectiveIds: ["disc-1.burmecia.treasure-sweep"],
           },
           {
@@ -1675,8 +1675,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "optional-cleyra-approach",
         title: "Before Cleyra — Burmecia, Kupo Nut, and Qu's Marsh",
         summary: "Use the available return routes before entering Cleyra's one-way story area.",
-        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "flactem-disc-2-cleyra", "jegged-gargan-roo"],
+        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "flactem-disc-2-cleyra", "ff9-kouryaku-burmecia", "jegged-gargan-roo"],
         steps: [
+          {
+            id: "journey-cleyra-burmecia-mythril-spear",
+            kind: "pickup",
+            text: "If you missed the Mythril Spear on Disc I, re-enter Burmecia during this return and collect it from the left-hand armory in Fountain Square before leaving for Cleyra.",
+            detail: "FF9攻略情報サイト says the armory pickup remains available until the mechanism inside Cleyra's Trunk is activated. This is a confirmed item-specific recovery window; it does not establish that the other old pickup rooms reopen.",
+            objectiveIds: ["disc-1.burmecia.treasure-sweep"],
+          },
           {
             id: "journey-cleyra-atla-mogshop-return",
             kind: "optional",

@@ -1200,9 +1200,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.burmecia-to-journey-to-treno",
     title: "Burmecia first-visit departure",
     certainty: "conservative",
-    trigger: "Before leaving Burmecia after Beatrix, finish the Disc I treasure sweep and buy Stiltzkin's first 333-Gil bundle. A Disc II pre-Cleyra route later reaches Atla's Mogshop, but the published route does not confirm that every Disc I pickup room reopens; this remains the safe full-sweep boundary.",
+    trigger: "Before leaving Burmecia after Beatrix, finish the Disc I treasure sweep and buy Stiltzkin's first 333-Gil bundle. If the Mythril Spear was missed, FF9攻略情報サイト says it remains in the armory during the Disc II return until the mechanism inside Cleyra's Trunk is activated. Other Disc I pickup-room access remains unverified; the Disc I sweep is the safe full-sweep boundary.",
     missableIds: ["missable.disc-1.burmecia.treasures", "missable.disc-1.burmecia.stiltzkin-1"],
-    sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "ffwiki-unrevisitable-locations", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
+    sourceIds: ["gamefaqs-burmecia-71891", "ff9-kouryaku-burmecia", "jegged-burmecia", "gamerguides-burmecia", "ffwiki-unrevisitable-locations", "gamefaqs-missables-71891", "jegged-missables", "jegged-stiltzkin", "flactem-disc-2-cleyra"],
   },
   {
     id: "cutoff.treno-first-visit.ates",

@@ -270,6 +270,7 @@ const chimeraArmletSources = ["gamefaqs-items-71891", "gamefaqs-card-tournament-
 const grandArmorSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon", "rpgclassics-armor", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"];
 const wingEdgeReferenceSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-enemy-list-71891"];
 const mythrilSpearReferenceSources = [
+  "ff9-kouryaku-burmecia",
   "gamefaqs-items-71891",
   "gamefaqs-item-locations-54996",
   "gamefaqs-shops-71891",
@@ -6945,10 +6946,10 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     chapterId: "disc-1.burmecia",
     method: "fixed-pickup",
     quantity: 1,
-    availability: "single-use",
-    conditions: "Collect the spear from the armory in Fountain Square.",
+    availability: "limited-window",
+    conditions: "Collect the spear from the armory in Fountain Square. If missed on Disc I, the Japanese route says it remains available on the optional Disc II return until the mechanism inside Cleyra's Trunk is activated; later shop sources still recover the item type.",
     walkthroughObjectiveIds: [treasureSweepObjective],
-    sourceIds: burmeciaSources,
+    sourceIds: [...burmeciaSources, "ff9-kouryaku-burmecia"],
   },
   {
     id: "item-path.disc-2.treno.mythril-spear-shop",
