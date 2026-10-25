@@ -112,4 +112,18 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-synthesis"],
     notes: "GameFAQs and Jegged list the Linen Cuirass + Soft recipe at Treno and other synthesis shops. RPGClassics lists it for 1,300 Gil at Treno in Disc II, Lindblum after the Cleyra attack, Black Mage Village, Alexandria, and Lindblum's later shop.",
   },
+  {
+    id: "synthesis-recipe.silk-robe",
+    resultItemId: "game-item.silk-robe",
+    ingredients: [
+      { itemId: "game-item.silk-shirt", quantity: 1 },
+      { itemId: "game-item.bandana", quantity: 1 },
+    ],
+    chapterId: "disc-3.card-tournament",
+    shopId: "treno.synthesis-shop.disc-3",
+    shopName: "Treno Synthesis Shop (Disc III)",
+    cost: { currency: "gil", amount: 2000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-robes", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "Silk Robe is also a nine-frog reward and a Cleyra Trunk chest. GameFAQs lists synthesis at Treno, Lindblum after Cleyra, Black Mage Village (Disc II-III), and Alexandria; Caves of Narshe lists Treno (Disc III), Lindblum (Disc III), Alexandria (Disc III), and Daguerreo (Disc III-IV). The available shop windows are represented separately, and Lindblum's post-Cleyra timing is retained with the sources' differing disc labels.",
+  },
 ];

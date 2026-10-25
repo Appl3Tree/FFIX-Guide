@@ -1335,7 +1335,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items",
     accessed: "2026-10-24",
-    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Battle Boots as a 45-frog reward and a Daguerreo recipe from Feather Boots + Wing Edge, alongside its Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It lists Anklet's Treno Auction and Gold Choker + Peridot recipe, Gold Choker from Linen Cuirass + Soft, Peridot's Ramuh, Chocograph, Alexandria, enemy, and Ore + Soft synthesis sources, plus Ore extraction with Jewel and its Hot & Cold digging/redemption routes. Soft is listed as a common shop item, and the dedicated shop reference gives its price and selected restock locations. It also covers Anklet, Gold Choker, Peridot, and Linen Cuirass abilities and lists Linen Cuirass's starting gear, Black Waltz 3 steal, and shops. Grand Armor's Disc IV Black Mage Village recipe is Mythril Sword + Mythril Armor and its Nova Dragon steal is recorded. Individual quantities and version-specific availability still need a full item audit.",
+    notes: "Item acquisition reference used to confirm replacement routes for Gizamaluke's Ice Staff and Magus Hat steals, later Elixir sources, and the Hammer tradeoff: keep it for an extra ending scene or synthesize Tin Armor. It lists Silk Shirt as Garnet/Blank/Eiko starting gear, a Black Waltz 1 steal, an 80–99-noble swordfighting reward, and Dali/Treno/Lindblum/Black Mage Village shop stock. It lists Silk Robe as a 9-frog reward, Cleyra Trunk chest, and Silk Shirt + Bandana synthesis, along with its sources at Treno, Lindblum after Cleyra, Black Mage Village, and Alexandria. It lists Battle Boots as a 45-frog reward and a Daguerreo recipe from Feather Boots + Wing Edge, alongside its Initiative, MP Attack, and HP+20% abilities. It confirms Silver Fork at 23 frogs and Bistro Fork at 33, lists Diamond Armor as a Disc III Daguerreo purchase, lists Rune Blade and Obelisk with their abilities at Daguerreo (Disc 3), and lists Tiger Fangs at 13,500 Gil, conflicting with the separate GameFAQs shops table's 8,000-Gil entry. It lists Anklet's Treno Auction and Gold Choker + Peridot recipe, Gold Choker from Linen Cuirass + Soft, Peridot's Ramuh, Chocograph, Alexandria, enemy, and Ore + Soft synthesis sources, plus Ore extraction with Jewel and its Hot & Cold digging/redemption routes. Soft is listed as a common shop item, and the dedicated shop reference gives its price and selected restock locations. It also covers Anklet, Gold Choker, Peridot, and Linen Cuirass abilities and lists Linen Cuirass's starting gear, Black Waltz 3 steal, and shops. Grand Armor's Disc IV Black Mage Village recipe is Mythril Sword + Mythril Armor and its Nova Dragon steal is recorded. Individual quantities and version-specific availability still need a full item audit.",
   },
   {
     id: "cavesofnarshe-ff9-claws",
@@ -1352,6 +1352,14 @@ export const sources = [
     url: "https://www.cavesofnarshe.com/ff9/w_item.php?item=Peridot",
     accessed: "2026-10-24",
     notes: "Independent Peridot win/steal list covering Griffin, Mistodon A/B, Stroper, Tonberry, Tiamat (Crystal), and the Quina/Vivi Epitaph mirrors. It does not list Grenade, which the GameFAQs enemy table lists for Mount Gulug; this source-coverage discrepancy is retained.",
+  },
+  {
+    id: "cavesofnarshe-ff9-robes",
+    title: "Final Fantasy IX Robes",
+    publisher: "Caves of Narshe",
+    url: "https://www.cavesofnarshe.com/ff9/armor.php?type=robe",
+    accessed: "2026-10-24",
+    notes: "Independent Silk Robe reference confirming Ability Up/Loudmouth, the nine-frog reward, Cleyra chest, Silk Shirt + Bandana recipe, and 2,000-Gil synthesis. It labels Treno/Lindblum/Alexandria synthesis as Disc III and also lists Daguerreo, while GameFAQs describes Lindblum as available after Cleyra and includes Black Mage Village; the route data preserves these source differences.",
   },
   {
     id: "game8-frog-catching",

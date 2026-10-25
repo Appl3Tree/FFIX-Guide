@@ -33,6 +33,8 @@ test("Cleyra's Magician Shoes and rubbish-pit chests have separate item paths", 
   const abilityUp = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.silk-robe.ability-up");
   assert.equal(abilityUp?.itemId, "game-item.silk-robe");
   assert.equal(abilityUp?.abilityName, "Ability Up");
+  assert.match(silkRobe?.notes ?? "", /nine-frog reward and Silk Shirt \+ Bandana synthesis/);
+  assert.ok(abilityUp?.sourceIds.includes("cavesofnarshe-ff9-robes"));
   assert.ok(objectives.some((objective) => objective.id === "disc-2.cleyra.rubbish-pit-chests"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.cleyra"));
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-2.cleyra"));
@@ -354,4 +356,91 @@ test("Peridot enemy routes record their source, repeatability, and conditional w
 
   assert.equal(itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot").length, 17);
   assert.ok(objectives.some((objective) => objective.id === "disc-4.memoria.tiamat-achievement"));
+});
+
+test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients", () => {
+  const silkRobePaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.silk-robe");
+  const expectedSynthesisIds = [
+    "item-path.disc-3.card-tournament.silk-robe-treno-synthesis",
+    "item-path.disc-2.return-to-lindblum.silk-robe-synthesis",
+    "item-path.disc-2.outer-continent.silk-robe-black-mage-village-synthesis",
+    "item-path.disc-3.the-home-front.silk-robe-alexandria-synthesis",
+    "item-path.disc-3.aerial-exploration.silk-robe-daguerreo-synthesis",
+  ];
+  const frogReward = silkRobePaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.silk-robe-nine-frogs");
+  const synthesisPaths = expectedSynthesisIds.map((id) => silkRobePaths.find((path) => path.id === id));
+  const silkShirt = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.silk-shirt-shop");
+  const bandana = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.bandana-shop");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.silk-robe");
+
+  assert.equal(gameItems.find((item) => item.id === "game-item.silk-shirt")?.name, "Silk Shirt");
+  assert.equal(silkRobePaths.length, 7);
+  assert.equal(frogReward?.method, "quest-reward");
+  assert.equal(frogReward?.availability, "single-use");
+  assert.match(frogReward?.conditions ?? "", /nine frogs/i);
+  assert.ok(frogReward?.walkthroughObjectiveIds?.includes("disc-1.exploring-lindblum-kingdom.frog-catching"));
+  assert.ok(synthesisPaths.every((path) => path?.method === "synthesis" && path.recipeId === "synthesis-recipe.silk-robe"));
+  assert.ok(synthesisPaths.every((path) => path?.availability === "repeatable" && path.cost?.amount === 2000));
+  assert.match(silkRobePaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.silk-robe-synthesis")?.conditions ?? "", /disc number/i);
+  assert.deepEqual(recipe?.ingredients, [
+    { itemId: "game-item.silk-shirt", quantity: 1 },
+    { itemId: "game-item.bandana", quantity: 1 },
+  ]);
+  assert.equal(recipe?.cost.amount, 2000);
+  assert.ok(silkShirt);
+  assert.equal(silkShirt.cost?.amount, 400);
+  assert.ok(bandana);
+  assert.equal(bandana.cost?.amount, 500);
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.village-of-dali"));
+  assert.ok(sources.some((source) => source.id === "cavesofnarshe-ff9-robes"));
+
+  for (const path of [...silkRobePaths, ...(silkShirt ? [silkShirt] : []), ...(bandana ? [bandana] : [])]) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+  for (const sourceId of recipe?.sourceIds ?? []) {
+    assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
+  }
+
+  assert.equal(itemAcquisitionPaths.length, 218);
+  assert.equal(synthesisRecipes.length, 7);
+});
+
+test("Silk Shirt has source-backed starting, encounter, reward, and shop routes", () => {
+  const silkShirtPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.silk-shirt");
+  const pathsById = new Map(silkShirtPaths.map((path) => [path.id, path]));
+  const blankCopy = pathsById.get("item-path.disc-1.evil-forest.blank-silk-shirt");
+  const blackWaltzSteal = pathsById.get("item-path.disc-1.ice-cavern.black-waltz-1-silk-shirt-steal");
+  const swordfightReward = pathsById.get("item-path.disc-1.alexandria.swordfight-silk-shirt-reward");
+  const shopPaths = [
+    "item-path.disc-1.village-of-dali.silk-shirt-shop",
+    "item-path.disc-2.treno.silk-shirt-shop",
+    "item-path.disc-2.return-to-lindblum.silk-shirt-shop",
+    "item-path.disc-2.outer-continent.silk-shirt-black-mage-village-shop",
+  ].map((id) => pathsById.get(id));
+
+  assert.equal(silkShirtPaths.length, 9);
+  assert.equal(pathsById.get("item-path.disc-1.ice-cavern.garnet-starting-silk-shirt")?.method, "starting-equipment");
+  assert.equal(pathsById.get("item-path.disc-2.madain-sari.eiko-starting-silk-shirt")?.method, "starting-equipment");
+  assert.equal(blankCopy?.availability, "limited-window");
+  assert.equal(blankCopy?.recommendedBeforeChapterId, "disc-1.evil-forest");
+  assert.ok(blankCopy?.walkthroughObjectiveIds?.includes("disc-1.evil-forest.blank-equipment"));
+  assert.equal(blackWaltzSteal?.availability, "one-time-encounter");
+  assert.ok(blackWaltzSteal?.walkthroughObjectiveIds?.includes("disc-1.ice-cavern.boss-steals"));
+  assert.equal(swordfightReward?.availability, "conditional");
+  assert.match(swordfightReward?.conditions ?? "", /80–99 nobles/);
+  assert.match(swordfightReward?.conditions ?? "", /100 nobles.*Moonstone #1/);
+  assert.ok(shopPaths.every((path) => path?.method === "shop" && path.availability === "repeatable"));
+  assert.ok(shopPaths.every((path) => path?.cost?.amount === 400));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.alexandria"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.evil-forest"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.ice-cavern"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.madain-sari"));
+
+  for (const path of silkShirtPaths) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
 });
