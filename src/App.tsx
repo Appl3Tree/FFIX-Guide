@@ -36,6 +36,7 @@ import {
   guideChapterSequence,
   guideSequenceEdges,
   objectiveAccessDependencies,
+  storyPartySequences,
 } from "./data/progression";
 import {
   achievementSourceCounts,
@@ -1148,9 +1149,30 @@ function RouteMap({ profile, onOpenChapter, onSetCurrentArea }: {
         <div><span className="eyebrow">IN-GAME PROGRESSION · PARTIAL</span><h2 id="game-route-heading">Verified story route</h2></div>
         <span className="game-route-scope">Through {chapterTitle(gameRouteCoverage.throughChapterId)}</span>
       </div>
-      <p className="game-route-intro">These source-checked links follow the main story through the final battle, including the forced Oeilvert/Desert Palace party split and the optional return to Gaia after Deathguise. They also record the Dagger-and-Steiner Treno branch and twelve optional area returns, including the pre-Cargo-Ship Dali return to Ice Cavern, the pre-Cleyra Lindblum Basin return, and the Disc IV Mognet, Kupo Nut, Treno, and Madain Sari routes. Many side routes, cutoff conditions, and objective prerequisites remain outside this partial graph.</p>
+      <p className="game-route-intro">These source-checked links follow the main story through the final battle, including the forced Oeilvert/Desert Palace party split and the optional return to Gaia after Deathguise. They also record the Dagger-and-Steiner Treno branch and twelve optional area returns, including the pre-Cargo-Ship Dali return to Ice Cavern, the pre-Cleyra Lindblum Basin return, and the Disc IV Mognet, Kupo Nut, Treno, and Madain Sari routes. Party control handoffs are mapped separately below. Many side routes, cutoff conditions, and objective prerequisites remain outside this partial graph.</p>
       <div className="game-route-counts" aria-label="Route relationship counts">
         <span>{gameRouteCounts["required-story"]} story gates</span><span>{gameRouteCounts["optional-detour"]} optional detour{gameRouteCounts["optional-detour"] === 1 ? "" : "s"}</span><span>{gameRouteCounts["optional-return"]} optional return{gameRouteCounts["optional-return"] === 1 ? "" : "s"}</span><span>{gameRouteCounts.rejoin} rejoin{gameRouteCounts.rejoin === 1 ? "" : "s"}</span>
+      </div>
+      <div className="party-sequence-section">
+        <h3>Party control handoffs</h3>
+        <ol className="party-sequence-list">
+          {storyPartySequences.map((sequence) => {
+            const sequenceSources = sequence.sourceIds
+              .map((sourceId) => sources.find((source) => source.id === sourceId))
+              .filter((source): source is (typeof sources)[number] => Boolean(source));
+            return <li className="party-sequence-entry" key={sequence.id}>
+              <h4>{sequence.title}</h4>
+              <ol className="party-sequence-phases">
+                {sequence.phases.map((phase, index) => <li className="party-sequence-phase" key={`${sequence.id}-${index}`}>
+                  <div className="party-sequence-phase-heading"><strong>{phase.party}</strong><span>{phase.location}</span></div>
+                  <p>{phase.summary}</p>
+                  <small>{[...new Set(phase.chapterIds)].map(chapterTitle).join(" · ")}</small>
+                </li>)}
+              </ol>
+              <details className="game-route-sources"><summary>Sources ({sequenceSources.length})</summary><div>{sequenceSources.map((source) => <a href={source.url} target="_blank" rel="noreferrer" key={source.id}>{source.publisher}: {source.title} <ExternalLink size={11} aria-hidden="true" /></a>)}</div></details>
+            </li>;
+          })}
+        </ol>
       </div>
       <ol className="game-route-list">
         {gameRouteEdges.map((edge) => {

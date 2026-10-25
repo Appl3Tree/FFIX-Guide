@@ -334,6 +334,19 @@ h1, h2, p { margin-top: 0; }
 .game-route-sources > div { display: flex; flex-wrap: wrap; gap: 5px 12px; margin: 6px 0 0 12px; }
 .game-route-sources a { display: inline-flex; align-items: center; gap: 4px; color: #5c766c; text-decoration: none; }
 .game-route-sources a:hover { text-decoration: underline; }
+.party-sequence-section { margin-top: 16px; }
+.party-sequence-section > h3 { margin: 0 0 6px; color: #4c6257; font: 500 15px var(--serif); }
+.party-sequence-list { margin: 0; padding: 0; list-style: none; border-bottom: 1px solid var(--hairline); }
+.party-sequence-entry { padding: 10px 2px 12px; border-top: 1px solid #e9e7df; }
+.party-sequence-entry > h4 { margin: 0 0 7px; color: #3c4c44; font: 500 12px var(--serif); }
+.party-sequence-phases { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7px; margin: 0; padding: 0; list-style: none; counter-reset: party-phase; }
+.party-sequence-phase { min-width: 0; padding: 8px 9px; border: 1px solid #e1e3dc; background: #fffefa; counter-increment: party-phase; }
+.party-sequence-phase-heading { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 7px; color: #536b5d; font: 8px var(--mono); }
+.party-sequence-phase-heading::before { content: counter(party-phase, decimal-leading-zero); color: #a38d5c; }
+.party-sequence-phase-heading strong { color: #354840; font-weight: 600; }
+.party-sequence-phase-heading span { color: #748078; }
+.party-sequence-phase p { margin: 5px 0 4px; color: #78827a; font-size: 9px; line-height: 1.5; }
+.party-sequence-phase small { color: #a18b5d; font: 7px var(--mono); }
 .game-route-caveat { margin: 12px 0 0; }
 .chapter-list { border-bottom: 1px solid var(--hairline); }
 .chapter-entry { border-top: 1px solid var(--hairline); }
@@ -573,6 +586,7 @@ h1, h2, p { margin-top: 0; }
   .game-route-edge-topline { align-items: flex-start; flex-direction: column; gap: 6px; }
   .game-route-edge-endpoints { gap: 6px; }
   .game-route-edge-endpoints strong { font-size: 12px; }
+  .party-sequence-phases { grid-template-columns: 1fr; }
   .guide-route-entry { grid-template-columns: 29px minmax(0, 1fr); align-items: start; gap: 6px 8px; }
   .guide-route-copy strong { font-size: 13px; }
   .guide-route-actions { grid-column: 2; justify-content: start; }

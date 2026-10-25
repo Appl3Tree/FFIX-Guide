@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { missables, sources } from "../src/data/guide.ts";
-import { gameRouteCoverage, gameRouteEdges } from "../src/data/progression.ts";
+import { gameRouteCoverage, gameRouteEdges, storyPartySequences } from "../src/data/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 test("the researched story route simulates through the ending and all optional paths rejoin", () => {
@@ -77,6 +77,30 @@ test("the Oeilvert and Desert Palace route preserves the sourced party split ord
   const rejoin = gameRouteEdges.find((edge) => edge.id === "story.desert-palace-to-lost-continent");
   assert.ok(rejoin);
   assert.match(rejoin.summary, /reunites the parties/);
+});
+
+test("early party handoffs record Bohden Gate and the Dagger-Steiner Treno branch", () => {
+  const bohden = storyPartySequences.find((sequence) => sequence.id === "party-sequence.bohden-gate");
+  assert.ok(bohden);
+  assert.deepEqual(bohden.phases.map(({ party, location }) => [party, location]), [
+    ["Zidane's group", "Gizamaluke's Grotto"],
+    ["Dagger and Steiner", "Bohden Gate and Station"],
+    ["Zidane's group", "Daines-horse Basin"],
+  ]);
+  assert.ok(bohden.sourceIds.includes("gamefaqs-journey-to-burmecia-71891"));
+
+  const treno = storyPartySequences.find((sequence) => sequence.id === "party-sequence.dagger-steiner-treno");
+  assert.ok(treno);
+  assert.deepEqual(treno.phases.map(({ party }) => party), ["Zidane's group", "Dagger and Steiner", "Zidane's group"]);
+  assert.ok(treno.phases[1].chapterIds.includes("disc-2.treno"));
+  assert.ok(treno.phases[2].chapterIds.includes("disc-2.journey-to-cleyra"));
+  assert.match(treno.phases[2].summary, /returns to Zidane's group in Burmecia/);
+
+  for (const sequence of [bohden, treno]) {
+    for (const sourceId of sequence.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${sequence.id} references unknown source ${sourceId}`);
+    }
+  }
 });
 
 test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => {
@@ -265,4 +289,5 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
   assert.equal(gameRouteEdges.length, 66);
   assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 12, rejoin: 11 });
+  assert.equal(storyPartySequences.length, 2);
 });

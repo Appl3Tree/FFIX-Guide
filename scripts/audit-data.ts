@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { ateObjectiveDependencies, gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies } from "../src/data/progression.ts";
+import { ateObjectiveDependencies, gameRouteCoverage, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, storyPartySequences } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
@@ -41,6 +41,7 @@ checkUnique("guide sequence edge", guideSequenceEdges.map((edge) => `${edge.from
 checkUnique("game route covered chapter", [...gameRouteCoverage.chapterIds]);
 checkUnique("game route edge", gameRouteEdges.map((edge) => edge.id));
 checkUnique("game route link", gameRouteEdges.map((edge) => `${edge.fromChapterId}->${edge.toChapterId}`));
+checkUnique("story party sequence", storyPartySequences.map((sequence) => sequence.id));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
@@ -87,6 +88,24 @@ for (const [index, chapterId] of gameRouteCoverage.chapterIds.entries()) {
 }
 const gameRouteCoverageIds = new Set<string>(gameRouteCoverage.chapterIds);
 const supportedGameRouteRelationships = new Set(["required-story", "optional-detour", "optional-return", "rejoin"]);
+for (const sequence of storyPartySequences) {
+  if (!sequence.title.trim()) errors.push(`Story party sequence ${sequence.id} has no title.`);
+  if (sequence.phases.length < 2) errors.push(`Story party sequence ${sequence.id} must show at least one handoff.`);
+  if (sequence.sourceIds.length === 0) errors.push(`Story party sequence ${sequence.id} has no source provenance.`);
+  for (const phase of sequence.phases) {
+    if (!phase.party.trim() || !phase.location.trim() || !phase.summary.trim()) {
+      errors.push(`Story party sequence ${sequence.id} has an incomplete phase.`);
+    }
+    if (phase.chapterIds.length === 0) errors.push(`Story party sequence ${sequence.id} has a phase with no chapter link.`);
+    for (const chapterId of phase.chapterIds) {
+      if (!areaIds.has(chapterId)) errors.push(`Story party sequence ${sequence.id} references unknown chapter ${chapterId}.`);
+      if (!gameRouteCoverageIds.has(chapterId)) errors.push(`Story party sequence ${sequence.id} extends beyond the researched game-route scope.`);
+    }
+  }
+  for (const sourceId of sequence.sourceIds) {
+    if (!sourceIds.has(sourceId)) errors.push(`Story party sequence ${sequence.id} references unknown source ${sourceId}.`);
+  }
+}
 for (const edge of gameRouteEdges) {
   if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
     errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);

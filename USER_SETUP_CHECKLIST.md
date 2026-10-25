@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-The latest route audit documents the Disc IV Mognet trip through Burmecia to Atla and back, while keeping access to the old Suburb and Uptown pickup rooms unresolved. No account-owner setup step changed. The Power Belt/Glass Buckle synthesis chain and the broader Disc II equipment routes remain in the catalog. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+The latest B01 route update structures the Bohden Gate control handoff and Dagger and Steiner's Disc II Treno branch, including both returns to Zidane's group. The Disc IV Mognet trip through Burmecia to Atla remains documented while access to old Suburb and Uptown pickup rooms is unresolved. No account-owner setup step changed; repository, Pages, and Firebase actions retain the statuses below. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
 
 ## Dependency order
 

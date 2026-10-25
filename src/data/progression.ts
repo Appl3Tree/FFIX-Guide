@@ -23,6 +23,20 @@ export type GameRouteEdge = {
   sourceIds: string[];
 };
 
+export type StoryPartyPhase = {
+  party: string;
+  chapterIds: string[];
+  location: string;
+  summary: string;
+};
+
+export type StoryPartySequence = {
+  id: string;
+  title: string;
+  phases: StoryPartyPhase[];
+  sourceIds: string[];
+};
+
 // Stable chapter IDs in the source guide's table-of-contents order. This is
 // the guide's navigation sequence, not a claim that each chapter is a hard
 // in-game prerequisite for the next one.
@@ -137,6 +151,72 @@ export const gameRouteCoverage = {
   chapterIds: verifiedGameRouteChapterIds,
 };
 
+// The chapter graph follows guide-sized story gates. These records preserve
+// the party-control changes that occur inside or across those chapter gates.
+export const storyPartySequences: StoryPartySequence[] = [
+  {
+    id: "party-sequence.bohden-gate",
+    title: "Bohden Gate party handoff",
+    phases: [
+      {
+        party: "Zidane's group",
+        chapterIds: ["disc-1.journey-to-burmecia"],
+        location: "Gizamaluke's Grotto",
+        summary: "Continue through the Grotto and defeat Gizamaluke. The following scene transfers control to the other party.",
+      },
+      {
+        party: "Dagger and Steiner",
+        chapterIds: ["disc-1.journey-to-burmecia"],
+        location: "Bohden Gate and Station",
+        summary: "Advance the gate scene to obtain the Gate Pass, collect the Multina Racket and Potion, accept Grimo's Mognet letter for Nazna, and board the cable car.",
+      },
+      {
+        party: "Zidane's group",
+        chapterIds: ["disc-1.journey-to-burmecia"],
+        location: "Daines-horse Basin",
+        summary: "The cable car returns control to Zidane's group, which can then continue north to Burmecia.",
+      },
+    ],
+    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"],
+  },
+  {
+    id: "party-sequence.dagger-steiner-treno",
+    title: "Dagger and Steiner's route to Treno",
+    phases: [
+      {
+        party: "Zidane's group",
+        chapterIds: ["disc-1.lindblum", "disc-1.journey-to-burmecia", "disc-1.burmecia"],
+        location: "Lindblum to Burmecia",
+        summary: "After the Festival of the Hunt, Dagger and Steiner leave the active party. Zidane's group proceeds through Gizamaluke's Grotto and Burmecia.",
+      },
+      {
+        party: "Dagger and Steiner",
+        chapterIds: ["disc-2.journey-to-treno", "disc-2.treno"],
+        location: "Summit Station, South Gate, and Treno",
+        summary: "At the start of Disc II, control shifts to the pair at Summit Station. Continue through the Black Waltz 3 rematch and Treno's Supersoft sequence.",
+      },
+      {
+        party: "Zidane's group",
+        chapterIds: ["disc-2.journey-to-cleyra"],
+        location: "Burmecia, after Gargan Roo",
+        summary: "After the Treno sequence and Gargan Roo, control returns to Zidane's group in Burmecia; continue west toward Cleyra.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-lindblum-71891",
+      "gamefaqs-journey-to-burmecia-71891",
+      "gamefaqs-burmecia-71891",
+      "gamefaqs-journey-to-treno-71891",
+      "gamefaqs-treno-71891",
+      "gamefaqs-journey-to-cleyra-71891",
+      "jegged-lindblum",
+      "jegged-summit-station",
+      "jegged-treno",
+      "jegged-gargan-roo",
+    ],
+  },
+];
+
 export const gameRouteEdges: GameRouteEdge[] = [
   {
     id: "story.alexandria-to-evil-forest",
@@ -199,7 +279,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.journey-to-burmecia",
     toChapterId: "disc-1.burmecia",
     relationship: "required-story",
-    summary: "The route through Gizamaluke's Grotto includes a parallel Dagger/Steiner sequence at Bohden Gate. The party reunites at Daines-horse Basin, from which Burmecia is north of the Grotto exit.",
+    summary: "After Gizamaluke is defeated, control switches to Dagger and Steiner at Bohden Gate. Boarding the cable car returns control to Zidane's group at Daines-horse Basin, from which Burmecia is north of the Grotto exit.",
     sourceIds: ["gamefaqs-journey-to-burmecia-71891", "gamefaqs-burmecia-71891", "jegged-gizamaluke"],
   },
   {
