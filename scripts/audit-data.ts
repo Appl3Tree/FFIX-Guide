@@ -315,6 +315,35 @@ if (!pandemoniumPartySequence) {
     if (!pandemoniumPartySequence.sourceIds.includes(sourceId)) errors.push(`The Pandemonium sequence is missing corroborating source ${sourceId}.`);
   }
 }
+const fourShrinesPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.four-shrines-fixed-pairs");
+if (!fourShrinesPartySequence) {
+  errors.push("The Four Shrines fixed party-pair sequence is missing.");
+} else {
+  if (fourShrinesPartySequence.phases.length !== 4) errors.push("The Four Shrines sequence must retain its three fixed pairs and Earth Shrine phase.");
+  const expectedParties = [
+    "Dagger and Eiko dropped at the shrine",
+    "Freya and Amarant dropped; Zidane, Vivi, Steiner, and Quina remain",
+    "Vivi and Steiner dropped; Zidane and Quina remain",
+    "Zidane and Quina at Earth; then player-selected party",
+  ];
+  for (const [index, expectedParty] of expectedParties.entries()) {
+    if (fourShrinesPartySequence.phases[index]?.party !== expectedParty) {
+      errors.push(`The Four Shrines sequence has an incorrect fixed party assignment in phase ${index + 1}.`);
+    }
+  }
+  const expectedLocations = ["Water Shrine", "Fire Shrine", "Wind Shrine", "Earth Shrine"];
+  for (const [index, expectedLocation] of expectedLocations.entries()) {
+    if (!fourShrinesPartySequence.phases[index]?.location.includes(expectedLocation)) {
+      errors.push(`The Four Shrines sequence must visit ${expectedLocation} in the documented route order.`);
+    }
+  }
+  if (!fourShrinesPartySequence.phases[3]?.location.includes("Hilda Garde 3")) {
+    errors.push("The Four Shrines sequence must end with the party regroup on the Hilda Garde 3.");
+  }
+  for (const sourceId of ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough"]) {
+    if (!fourShrinesPartySequence.sourceIds.includes(sourceId)) errors.push(`The Four Shrines sequence is missing corroborating source ${sourceId}.`);
+  }
+}
 for (const edge of gameRouteEdges) {
   if (!gameRouteCoverageIds.has(edge.fromChapterId) || !gameRouteCoverageIds.has(edge.toChapterId)) {
     errors.push(`Game route edge ${edge.id} extends beyond the declared researched chapter scope.`);

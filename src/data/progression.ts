@@ -329,6 +329,41 @@ export const storyPartySequences: StoryPartySequence[] = [
     ],
   },
   {
+    id: "party-sequence.four-shrines-fixed-pairs",
+    title: "Four Shrines fixed party assignments",
+    phases: [
+      {
+        party: "Dagger and Eiko dropped at the shrine",
+        chapterIds: ["disc-3.breaking-the-seal"],
+        location: "Water Shrine",
+        summary: "Restore the normal weapons used before Ipsen's Castle, and finish any desired full-party optional activity before the first drop. Leave Dagger and Eiko at the Water Shrine; they leave the active party for the shrine sequence.",
+      },
+      {
+        party: "Freya and Amarant dropped; Zidane, Vivi, Steiner, and Quina remain",
+        chapterIds: ["disc-3.breaking-the-seal"],
+        location: "Fire Shrine",
+        summary: "Take Freya and Amarant to the Fire Shrine. After they leave the active party, Zidane, Vivi, Steiner, and Quina remain for the next stop.",
+      },
+      {
+        party: "Vivi and Steiner dropped; Zidane and Quina remain",
+        chapterIds: ["disc-3.breaking-the-seal"],
+        location: "Wind Shrine",
+        summary: "Drop Vivi and Steiner at the Wind Shrine. This leaves Zidane and Quina together for the Earth Shrine and its Guardian battle.",
+      },
+      {
+        party: "Zidane and Quina at Earth; then player-selected party",
+        chapterIds: ["disc-3.breaking-the-seal", "disc-3.preparing-to-leave"],
+        location: "Earth Shrine, then Hilda Garde 3",
+        summary: "Prepare Zidane and Quina for the Earth Shrine, place the mirror, and defeat Earth Guardian. The cutscenes show all four teams completing their shrines; control returns automatically to the Hilda Garde 3, where the full party reunites and you choose the team for the final open-world preparation route.",
+      },
+    ],
+    sourceIds: [
+      "gamefaqs-breaking-the-seal-71891",
+      "jegged-four-shrines-terra",
+      "rpgclassics-disc-3-walkthrough",
+    ],
+  },
+  {
     id: "party-sequence.pandemonium-fixed-fights",
     title: "Pandemonium's three fixed party-split fights",
     phases: [
