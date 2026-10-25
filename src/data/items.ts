@@ -5108,6 +5108,17 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-return-to-alexandria-71891", "rpgclassics-armor"],
   },
   {
+    id: "item-path.disc-2.return-to-alexandria.beatrix-phoenix-down-steal",
+    itemId: "game-item.phoenix-down",
+    chapterId: "disc-2.return-to-alexandria",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Attempt to steal Phoenix Down from Beatrix during her third Alexandria Castle battle; this encounter does not repeat.",
+    walkthroughObjectiveIds: ["disc-2.return-to-alexandria.beatrix-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2"],
+  },
+  {
     id: "item-path.disc-2.outer-continent.survival-vest-black-mage-village-shop",
     itemId: "game-item.survival-vest",
     chapterId: "disc-2.outer-continent",

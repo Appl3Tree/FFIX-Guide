@@ -1680,6 +1680,99 @@ if (!hilgigarsWarning || /still need|still being mapped|under review/i.test(`${h
   !hilgigarsWarning.recovery.includes("Phoenix Down") || !hilgigarsWarning.recovery.includes("Fairy Flute")) {
   errors.push("Hilgigars' warning must distinguish its lost encounter copies from the mapped Phoenix Down and Fairy Flute recovery paths.");
 }
+const recoverableDiscTwoBossStealWarnings = [
+  {
+    missableId: "missable.disc-2.journey-to-cleyra.ralvurahva-steals",
+    objectiveId: "disc-2.journey-to-cleyra.ralvurahva-steals",
+    items: [
+      { itemId: "game-item.bone-wrist", pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-bone-wrist-steal", name: "Bone Wrist" },
+      { itemId: "game-item.mythril-fork", pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-mythril-fork-steal", name: "Mythril Fork" },
+    ],
+  },
+  {
+    missableId: "missable.disc-2.cleyra.antlion-steals",
+    objectiveId: "disc-2.cleyra.antlion-steals",
+    items: [
+      { itemId: "game-item.annoyntment", pathId: "item-path.disc-2.cleyra.antlion-annoyntment-steal", name: "Annoyntment" },
+      { itemId: "game-item.mythril-vest", pathId: "item-path.disc-2.cleyra.mythril-vest-antlion-steal", name: "Mythril Vest" },
+      { itemId: "game-item.gold-helm", pathId: "item-path.disc-2.cleyra.antlion-gold-helm-steal", name: "Gold Helm" },
+    ],
+  },
+  {
+    missableId: "missable.disc-2.cleyra.beatrix-steals",
+    objectiveId: "disc-2.cleyra.beatrix-steals",
+    items: [
+      { itemId: "game-item.phoenix-down", pathId: "item-path.disc-2.cleyra.beatrix-phoenix-down-steal", name: "Phoenix Down" },
+      { itemId: "game-item.thunder-gloves", pathId: "item-path.disc-2.cleyra.beatrix-thunder-gloves-steal", name: "Thunder Gloves" },
+      { itemId: "game-item.ice-brand", pathId: "item-path.disc-2.cleyra.beatrix-ice-brand-steal", name: "Ice Brand" },
+    ],
+  },
+  {
+    missableId: "missable.disc-2.return-to-alexandria.zorn-thorn-steals",
+    objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals",
+    items: [
+      { itemId: "game-item.partisan", pathId: "item-path.disc-2.return-to-alexandria.zorn-partisan-steal", name: "Partisan" },
+      { itemId: "game-item.stardust-rod", pathId: "item-path.disc-2.return-to-alexandria.zorn-stardust-rod-steal", name: "Stardust Rod" },
+      { itemId: "game-item.mythril-armor", pathId: "item-path.disc-2.return-to-alexandria.thorn-mythril-armor", name: "Mythril Armor" },
+      { itemId: "game-item.mythril-armlet", pathId: "item-path.disc-2.return-to-alexandria.thorn-mythril-armlet-steal", name: "Mythril Armlet" },
+    ],
+  },
+  {
+    missableId: "missable.disc-2.return-to-alexandria.beatrix-steals",
+    objectiveId: "disc-2.return-to-alexandria.beatrix-steals",
+    items: [
+      { itemId: "game-item.phoenix-down", pathId: "item-path.disc-2.return-to-alexandria.beatrix-phoenix-down-steal", name: "Phoenix Down" },
+      { itemId: "game-item.ice-brand", pathId: "item-path.disc-2.return-to-alexandria.beatrix-ice-brand-steal", name: "Ice Brand" },
+      { itemId: "game-item.survival-vest", pathId: "item-path.disc-2.return-to-alexandria.survival-vest-beatrix-steal", name: "Survival Vest" },
+    ],
+  },
+  {
+    missableId: "missable.disc-2.return-to-alexandria.ralvuimago-steals",
+    objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals",
+    items: [
+      { itemId: "game-item.phoenix-down", pathId: "item-path.disc-2.return-to-alexandria.ralvuimago-phoenix-down-steal", name: "Phoenix Down" },
+      { itemId: "game-item.adaman-vest", pathId: "item-path.disc-2.return-to-alexandria.ralvuimago-adaman-vest-steal", name: "Adaman Vest" },
+      { itemId: "game-item.oak-staff", pathId: "item-path.disc-2.return-to-alexandria.ralvuimago-oak-staff-steal", name: "Oak Staff" },
+    ],
+  },
+  {
+    missableId: "missable.disc-2.conde-petie-mountain-path.hilgigars-steals",
+    objectiveId: "disc-2.conde-petie-mountain-path.hilgigars-steals",
+    items: [
+      { itemId: "game-item.phoenix-down", pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal", name: "Phoenix Down" },
+      { itemId: "game-item.mythril-fork", pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-mythril-fork-steal", name: "Mythril Fork" },
+      { itemId: "game-item.fairy-flute", pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal", name: "Fairy Flute" },
+    ],
+  },
+];
+for (const expected of recoverableDiscTwoBossStealWarnings) {
+  const warning = missablesById.get(expected.missableId);
+  if (!warning || !warning.classification.includes("recoverable-later") || !warning.nextAvailability || !warning.recovery) {
+    errors.push(`${expected.missableId} must be classified recoverable later and include both availability and recovery guidance.`);
+    continue;
+  }
+  const encounterSteals = itemAcquisitionPaths.filter((path) => path.walkthroughObjectiveIds?.includes(expected.objectiveId) && path.method === "steal");
+  if (encounterSteals.length !== expected.items.length) {
+    errors.push(`${expected.missableId} must model exactly ${expected.items.length} one-time steal paths; found ${encounterSteals.length}.`);
+  }
+  const chapterIndex = guideAreas.findIndex((area) => area.id === warning.warningChapterIds[0]);
+  for (const item of expected.items) {
+    const stealPath = itemAcquisitionPaths.find((path) => path.id === item.pathId);
+    if (!stealPath || stealPath.itemId !== item.itemId || stealPath.method !== "steal" || stealPath.availability !== "one-time-encounter" ||
+      !stealPath.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
+      errors.push(`${expected.missableId} is missing the linked one-time ${item.name} steal path.`);
+    }
+    if (!itemAcquisitionPaths.some((path) => path.itemId === item.itemId && guideAreas.findIndex((area) => area.id === path.chapterId) > chapterIndex)) {
+      errors.push(`${expected.missableId} needs a later item-type source for ${item.name}.`);
+    }
+    if (!warning.nextAvailability.toLowerCase().includes(item.name.toLowerCase()) || !warning.recovery.toLowerCase().includes(item.name.toLowerCase())) {
+      errors.push(`${expected.missableId} must name ${item.name} in both its next-availability and recovery guidance.`);
+    }
+  }
+  if (!gameRouteCutoffs.some((cutoff) => cutoff.missableIds.includes(expected.missableId))) {
+    errors.push(`${expected.missableId} must remain linked to a modeled route cutoff.`);
+  }
+}
 const broadswordId = "game-item.broadsword";
 const broadswordPathIds = [
   "item-path.disc-1.alexandria.broadsword-steiner-starting-equipment",
@@ -2143,6 +2236,35 @@ for (const expected of cleyraBossChecks) {
       path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
       errors.push(`${expected.enemyId}'s ${steal.itemId} steal must connect to its existing one-time item path.`);
     }
+  }
+}
+const alexandriaBeatrixEncounter = enemyEncounters.find((candidate) => candidate.id === "encounter.return-to-alexandria.beatrix");
+const alexandriaBeatrix = enemyRecords.find((candidate) => candidate.id === "enemy.beatrix-alexandria");
+const alexandriaBeatrixSteals = [
+  { itemId: "game-item.phoenix-down", pathId: "item-path.disc-2.return-to-alexandria.beatrix-phoenix-down-steal" },
+  { itemId: "game-item.ice-brand", pathId: "item-path.disc-2.return-to-alexandria.beatrix-ice-brand-steal" },
+  { itemId: "game-item.survival-vest", pathId: "item-path.disc-2.return-to-alexandria.survival-vest-beatrix-steal" },
+];
+if (!alexandriaBeatrixEncounter || alexandriaBeatrixEncounter.kind !== "boss" ||
+  alexandriaBeatrixEncounter.chapterId !== "disc-2.return-to-alexandria" ||
+  !alexandriaBeatrixEncounter.formation.some((member) => member.enemyId === "enemy.beatrix-alexandria" && member.quantity === 1) ||
+  !alexandriaBeatrixEncounter.objectiveIds.includes("disc-2.return-to-alexandria.beatrix-steals") ||
+  !alexandriaBeatrixEncounter.missableIds.includes("missable.disc-2.return-to-alexandria.beatrix-steals") ||
+  !alexandriaBeatrixEncounter.cutoffIds.includes("cutoff.alexandria-rescue.beatrix-steals") ||
+  !alexandriaBeatrix || alexandriaBeatrix.kind !== "boss" ||
+  !alexandriaBeatrix.routeObjectiveIds.includes("disc-2.return-to-alexandria.beatrix-steals") ||
+  !alexandriaBeatrix.missableIds.includes("missable.disc-2.return-to-alexandria.beatrix-steals") ||
+  !alexandriaBeatrix.cutoffIds.includes("cutoff.alexandria-rescue.beatrix-steals") ||
+  !alexandriaBeatrix.stats.some((stat) => stat.field === "HP" && stat.value === 3352 && stat.sourceIds.includes("gamefaqs-return-to-alexandria-71891"))) {
+  errors.push("Alexandria's third Beatrix battle must connect its source-backed boss record, encounter, checklist, warning, and cutoff.");
+}
+for (const expected of alexandriaBeatrixSteals) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!alexandriaBeatrix?.steals.some((slot) => slot.itemId === expected.itemId) || !path || path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-2.return-to-alexandria" || path.method !== "steal" || path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.return-to-alexandria.beatrix-steals") ||
+    !path.sourceIds.includes("gamefaqs-return-to-alexandria-71891")) {
+    errors.push(`Alexandria Beatrix's ${expected.itemId} steal must link the enemy table, one-time item path, and warning objective.`);
   }
 }
 const cleyraAntlion = enemyRecords.find((enemy) => enemy.id === "enemy.antlion-cleyra");
