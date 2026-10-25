@@ -723,6 +723,37 @@ for (const itemId of cleyraProductIds) {
     errors.push(`Cleyra shop product ${itemId} has no modeled acquisition path after Cleyra.`);
   }
 }
+const broadswordId = "game-item.broadsword";
+const broadswordPathIds = [
+  "item-path.disc-1.alexandria.broadsword-steiner-starting-equipment",
+  "item-path.disc-1.evil-forest.prison-cage-broadsword-steal",
+  "item-path.disc-1.village-of-dali.broadsword-shop",
+  "item-path.disc-3.ipsens-castle.broadsword-chest",
+];
+if (!gameItemIds.has(broadswordId)) errors.push("Broadsword recovery needs a catalog item record.");
+for (const pathId of broadswordPathIds) {
+  if (!itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === broadswordId)) {
+    errors.push(`Broadsword recovery is missing acquisition path ${pathId}.`);
+  }
+}
+const broadswordDaliShop = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.broadsword-shop");
+if (broadswordDaliShop?.cost?.currency !== "gil" || broadswordDaliShop.cost.amount !== 330) {
+  errors.push("Broadsword's Dali recovery path must remain priced at 330 Gil.");
+}
+if (!sourceInventoryTargets.some((target) => target.itemId === broadswordId && target.targetQuantity === 2 && target.chapterId === "disc-4.final-preparations")) {
+  errors.push("Broadsword needs its source-listed Need 2 inventory target.");
+}
+if (!equipmentAbilityClaims.some((claim) => claim.itemId === broadswordId && claim.abilityName === "Beast Killer")) {
+  errors.push("Broadsword needs its source-listed Beast Killer ability claim.");
+}
+const broadswordEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.prison-cage-vivi");
+if (!broadswordEnemy?.steals.some((slot) => slot.itemId === broadswordId)) {
+  errors.push("The second Prison Cage enemy record must link its Broadsword steal to the catalog item.");
+}
+const broadswordWarning = missablesById.get("missable.disc-1.evil-forest.prison-cage-steals");
+if (!broadswordWarning?.classification.includes("recoverable-later") || !broadswordWarning.recovery.includes("Dali") || !broadswordWarning.recovery.includes("Ipsen")) {
+  errors.push("The Prison Cage steal warning must distinguish the one-time steal from Broadsword's Dali and Ipsen recovery routes.");
+}
 const iceBrandId = "game-item.ice-brand";
 const iceBrandPathIds = new Set(itemAcquisitionPaths.filter((path) => path.itemId === iceBrandId).map((path) => path.id));
 const requiredIceBrandPathIds = [

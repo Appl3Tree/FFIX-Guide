@@ -256,7 +256,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "prison-cage-vivi",
             kind: "combat",
             text: "The second Prison Cage immediately captures Vivi. Steal its Broadsword and Leather Wrist with Zidane, then focus attacks on the cage; Vivi will cast Fire automatically. Heal Vivi if repeated Absorb attacks leave him in danger, and avoid targeting him with attacks.",
-            detail: "The cage drops Eye Drops and may drop a Phoenix Down or Goblin Card in some lists. These are enemy rewards, separate from the fixed crash-site pickup. The item names agree across guides; drop details are not used as a 100% requirement here.",
+            detail: "The cage drops Eye Drops and may drop a Phoenix Down or Goblin Card in some lists. These are enemy rewards, separate from the fixed crash-site pickup. If the Broadsword steal is missed, buy one in Dali for 330 Gil or collect the later Ipsen's Castle stairwell chest; the steal window is one-time, but the item is recoverable.",
             objectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
           },
         ],

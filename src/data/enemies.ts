@@ -1524,7 +1524,7 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       { field: "Gil", value: 436, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
     ],
     steals: [
-      evilForestLoot("common", null, "Broadsword"), evilForestLoot("uncommon", "game-item.leather-wrist"),
+      evilForestLoot("common", "game-item.broadsword"), evilForestLoot("uncommon", "game-item.leather-wrist"),
       evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
     ],
     drops: [
