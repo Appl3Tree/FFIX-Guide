@@ -482,6 +482,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-final-preparations-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"],
   },
   {
+    id: "detour.return-to-gaia-burmecia-mognet",
+    fromChapterId: "disc-4.return-to-gaia",
+    toChapterId: "disc-1.burmecia",
+    relationship: "optional-return",
+    summary: "For the Disc IV Mognet Central chain, start with Kupo in Alexandria, then travel to Burmecia and deliver her letter to Atla in the Vault. This confirms the Vault visit only; it does not establish access to the Suburb or Uptown pickup rooms.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central"],
+  },
+  {
+    id: "detour.return-to-gaia-burmecia-rejoin",
+    fromChapterId: "disc-1.burmecia",
+    toChapterId: "disc-4.return-to-gaia",
+    relationship: "rejoin",
+    summary: "After Atla hands over Mogryo's letter, continue the Disc IV chain at Black Mage Village, then proceed with the other Return to Gaia activities before taking the story route to the Iifa Tree.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central"],
+  },
+  {
     id: "detour.journey-to-treno-dali-return",
     fromChapterId: "disc-2.journey-to-treno",
     toChapterId: "disc-1.village-of-dali",
