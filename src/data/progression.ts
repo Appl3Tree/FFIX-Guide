@@ -1792,8 +1792,7 @@ export const objectiveAccessDependencies: ObjectiveDependency[] = [
 ];
 
 // The first eight Friendly Creatures can be completed in any order when the
-// requested item is available. Friendly Yan is the only hard ordering gate:
-// all eight other creatures must be completed before Yan can be befriended.
+// requested item is available. Friendly Yan checks for those eight first.
 const friendlyCreatureYanPrerequisiteIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
   "disc-2.journey-to-treno.friendly-ghost",
@@ -1805,12 +1804,35 @@ const friendlyCreatureYanPrerequisiteIds = [
   "disc-3.aerial-exploration.garuda",
 ];
 
-export const questPrerequisiteDependencies: ObjectiveDependency[] = friendlyCreatureYanPrerequisiteIds.map((prerequisiteObjectiveId) => ({
+const stiltzkinBundlePurchaseObjectiveIds = [
+  "disc-1.burmecia.stiltzkin-1",
+  "disc-2.cleyra.stiltzkin-2",
+  "disc-2.fossil-roo.stiltzkin-3",
+  "disc-2.conde-petie-mountain-path.stiltzkin-4",
+  "disc-3.the-home-front.stiltzkin-5",
+  "disc-3.forgotten-continent.stiltzkin-6",
+  "disc-3.portal-to-another-world.stiltzkin-7",
+  "disc-4.return-to-gaia.stiltzkin-eighth-bundle",
+];
+
+const friendlyYanPrerequisiteDependencies: ObjectiveDependency[] = friendlyCreatureYanPrerequisiteIds.map((prerequisiteObjectiveId) => ({
   kind: "quest-prerequisite",
   prerequisiteObjectiveId,
   dependentObjectiveId: "disc-3.aerial-exploration.friendly-yan",
   sourceIds: ["gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"],
 }));
+
+const stiltzkinRibbonPrerequisiteDependencies: ObjectiveDependency[] = stiltzkinBundlePurchaseObjectiveIds.map((prerequisiteObjectiveId) => ({
+  kind: "quest-prerequisite",
+  prerequisiteObjectiveId,
+  dependentObjectiveId: "disc-4.return-to-gaia.stiltzkin-ribbon",
+  sourceIds: ["gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin"],
+}));
+
+export const questPrerequisiteDependencies: ObjectiveDependency[] = [
+  ...friendlyYanPrerequisiteDependencies,
+  ...stiltzkinRibbonPrerequisiteDependencies,
+];
 
 export const objectiveDependencies: ObjectiveDependency[] = [
   ...ateObjectiveDependencies,

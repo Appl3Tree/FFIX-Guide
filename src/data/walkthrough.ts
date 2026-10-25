@@ -5995,9 +5995,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gaia-return-stiltzkin-eighth",
             kind: "optional",
-            text: "In Alexandria, visit the steeple and buy Stiltzkin's Moonstone, Ruby, and Elixir bundle for 5,555 Gil. If all seven earlier bundles were purchased, talk to him again to receive the Ribbon.",
-            detail: "This is Stiltzkin's eighth and final shop. The Disc IV source explicitly says the visit itself is not missable; the Ribbon remains conditional on the earlier purchase chain. On the original Japanese PlayStation release, the final Ribbon reward differs.",
-            objectiveIds: ["disc-4.return-to-gaia.stiltzkin-eighth-bundle"],
+            text: "In Alexandria, visit the steeple and buy Stiltzkin's Moonstone, Ruby, and Elixir bundle for 5,555 Gil. If all seven earlier bundles were purchased, speak to him again to claim the conditional Ribbon.",
+            detail: "The eighth bundle remains purchasable even if an earlier stop was missed; only the separate Ribbon reward requires all eight purchases. Mark the reward after speaking to Stiltzkin again. The original Japanese PlayStation release does not award this Ribbon.",
+            objectiveIds: ["disc-4.return-to-gaia.stiltzkin-eighth-bundle", "disc-4.return-to-gaia.stiltzkin-ribbon"],
           },
           {
             id: "gaia-return-behemoth",

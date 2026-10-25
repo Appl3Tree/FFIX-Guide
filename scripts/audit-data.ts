@@ -482,9 +482,75 @@ if (questPrerequisiteDependencies.some((dependency) =>
   errors.push("The first eight Friendly Creatures must not be ordered against one another.");
 }
 for (const dependency of questPrerequisiteDependencies) {
-  if (!dependency.sourceIds.includes("gamefaqs-friendly-creatures-71891") || !dependency.sourceIds.includes("jegged-friendly-monsters")) {
+  if (dependency.dependentObjectiveId === friendlyYanObjectiveId && (!dependency.sourceIds.includes("gamefaqs-friendly-creatures-71891") || !dependency.sourceIds.includes("jegged-friendly-monsters"))) {
     errors.push(`Friendly Creature prerequisite ${dependency.prerequisiteObjectiveId} -> ${dependency.dependentObjectiveId} must cite both direct prerequisite sources.`);
   }
+}
+const stiltzkinPurchaseObjectiveIds = [
+  "disc-1.burmecia.stiltzkin-1",
+  "disc-2.cleyra.stiltzkin-2",
+  "disc-2.fossil-roo.stiltzkin-3",
+  "disc-2.conde-petie-mountain-path.stiltzkin-4",
+  "disc-3.the-home-front.stiltzkin-5",
+  "disc-3.forgotten-continent.stiltzkin-6",
+  "disc-3.portal-to-another-world.stiltzkin-7",
+  "disc-4.return-to-gaia.stiltzkin-eighth-bundle",
+];
+const stiltzkinRibbonObjectiveId = "disc-4.return-to-gaia.stiltzkin-ribbon";
+const expectedStiltzkinRibbonPrerequisites = stiltzkinPurchaseObjectiveIds.map((id) => `${id}->${stiltzkinRibbonObjectiveId}`).sort();
+const actualStiltzkinRibbonPrerequisites = questPrerequisiteDependencies
+  .filter((dependency) => dependency.dependentObjectiveId === stiltzkinRibbonObjectiveId)
+  .map((dependency) => `${dependency.prerequisiteObjectiveId}->${dependency.dependentObjectiveId}`)
+  .sort();
+if (expectedStiltzkinRibbonPrerequisites.join("|") !== actualStiltzkinRibbonPrerequisites.join("|")) {
+  errors.push("Stiltzkin's conditional Ribbon must have exactly the eight bundle purchases as prerequisites.");
+}
+for (const dependency of questPrerequisiteDependencies.filter((item) => item.dependentObjectiveId === stiltzkinRibbonObjectiveId)) {
+  if (!dependency.sourceIds.includes("gamefaqs-stiltzkin-shopping-71891") || !dependency.sourceIds.includes("jegged-stiltzkin")) {
+    errors.push(`Stiltzkin Ribbon prerequisite ${dependency.prerequisiteObjectiveId} must cite both direct quest sources.`);
+  }
+}
+if (questPrerequisiteDependencies.some((dependency) => dependency.dependentObjectiveId === "disc-4.return-to-gaia.stiltzkin-eighth-bundle")) {
+  errors.push("Stiltzkin's eighth bundle purchase must remain available independently of the earlier bundle chain.");
+}
+const expectedDrivingHardBargainObjectives = [...stiltzkinPurchaseObjectiveIds].sort();
+for (const { platform, records } of achievementCatalogs) {
+  const achievement = records.find((record) => ("parityId" in record ? record.parityId : record.id) === "driving-the-hard-bargain");
+  const mappedObjectives = [...(achievement?.guideObjectiveIds ?? [])].sort();
+  if (mappedObjectives.join("|") !== expectedDrivingHardBargainObjectives.join("|")) {
+    errors.push(`${platform} Driving the Hard Bargain must map exactly the eight Stiltzkin bundle-purchase objectives, not the Ribbon reward.`);
+  }
+}
+const stiltzkinFinalStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.id === "gaia-return-stiltzkin-eighth");
+const stiltzkinFinalStepObjectiveIds = stiltzkinFinalStep?.objectiveIds ?? [];
+if (!stiltzkinFinalStepObjectiveIds.includes("disc-4.return-to-gaia.stiltzkin-eighth-bundle") || !stiltzkinFinalStepObjectiveIds.includes(stiltzkinRibbonObjectiveId)) {
+  errors.push("The Disc IV Stiltzkin step must keep the final purchase and conditional Ribbon as separate linked objectives.");
+}
+const ribbonItemId = "game-item.ribbon";
+const expectedRibbonPaths = [
+  "item-path.disc-3.lost-continent.ribbon-mog-story",
+  "item-path.disc-3.aerial-exploration.ribbon-forgotten-island",
+  "item-path.disc-4.return-to-gaia.ribbon-treno-auction",
+  "item-path.disc-4.return-to-gaia.ribbon-stiltzkin-reward",
+];
+if (!gameItems.some((item) => item.id === ribbonItemId && item.name === "Ribbon" && item.category === "equipment")) {
+  errors.push("Ribbon needs a partial equipment record in the item catalog.");
+}
+for (const pathId of expectedRibbonPaths) {
+  if (!itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === ribbonItemId)) {
+    errors.push(`Ribbon acquisition coverage is missing ${pathId}.`);
+  }
+}
+for (const abilityName of ["Ability Up", "Concentrate", "Madeen"]) {
+  if (!equipmentAbilityClaims.some((claim) => claim.itemId === ribbonItemId && claim.abilityName === abilityName)) {
+    errors.push(`Ribbon needs its ${abilityName} ability claim.`);
+  }
+}
+if (!sourceInventoryTargets.some((target) => target.itemId === ribbonItemId && target.targetQuantity === 4)) {
+  errors.push("Ribbon needs the source-listed Need 4 inventory target with its version caveat.");
 }
 for (const cycle of findObjectiveDependencyCycles(objectiveDependencies)) {
   errors.push(`Objective dependency cycle: ${cycle.join(" -> ")}.`);

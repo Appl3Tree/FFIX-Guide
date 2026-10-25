@@ -1334,10 +1334,18 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
                           const unmetPrerequisites = unmetObjectivePrerequisites(objective.id, questPrerequisiteDependencies, (id) => objectiveIsComplete(profile, id));
                           const markedCount = prerequisites.length - unmetPrerequisites.length;
                           const remainingTitles = unmetPrerequisites.map((dependency) => objectives.find((item) => item.id === dependency.prerequisiteObjectiveId)?.title ?? dependency.prerequisiteObjectiveId);
+                          const isFriendlyYan = objective.id === "disc-3.aerial-exploration.friendly-yan";
+                          const isStiltzkinRibbon = objective.id === "disc-4.return-to-gaia.stiltzkin-ribbon";
+                          const prerequisiteLabel = isFriendlyYan ? "Yan prerequisites" : isStiltzkinRibbon ? "Stiltzkin purchases" : "Quest prerequisites";
+                          const completedPrerequisiteNote = isFriendlyYan
+                            ? "all eight other creatures marked; confirm you still have the Diamond"
+                            : isStiltzkinRibbon
+                              ? "all eight purchases marked; speak to Stiltzkin again and claim the Ribbon"
+                              : "all prerequisites marked";
                           return <div className="chapter-objective-group" key={objective.id}>
                             {objectiveControl}
                             <small className="chapter-prerequisite-status" role="status">
-                              Yan prerequisites: {markedCount}/{prerequisites.length} marked{remainingTitles.length > 0 ? ` · Remaining: ${remainingTitles.join(", ")}` : " · all eight other creatures marked; verify you still have the Diamond"}
+                              {prerequisiteLabel}: {markedCount}/{prerequisites.length} marked{remainingTitles.length > 0 ? ` · Remaining: ${remainingTitles.join(", ")}` : ` · ${completedPrerequisiteNote}`}
                             </small>
                           </div>;
                         })}

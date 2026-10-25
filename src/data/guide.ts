@@ -1310,8 +1310,8 @@ export const sources = [
     title: "Chocographs — locations and rewards",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocographs.html",
-    accessed: "2026-10-23",
-    notes: "Independent location/reward map for all 24 Chocographs, including the Mist Ocean Sky ability, the Air Garden treasures, and each world-map chest. It supports distinguishing the clue-digging location from the treasure destination.",
+    accessed: "2026-10-25",
+    notes: "Independent location/reward map for all 24 Chocographs, including the Mist Ocean Sky ability, the Air Garden treasures, and each world-map chest. It confirms Forgotten Island's Ribbon and Rebirth Ring and distinguishes the clue-digging location from the treasure destination.",
   },
   {
     id: "gamefaqs-abilities-71891",
@@ -1558,8 +1558,16 @@ export const sources = [
     title: "Stiltzkin — locations, bundles, and rewards",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Stiltzkin.html",
-    accessed: "2026-10-23",
-    notes: "Confirms the Burmecia bundle (Soft, Hi-Potion, Ether) costs 333 Gil and that every purchase is required for the final Ribbon and Driving the Hard Bargain achievement/trophy.",
+    accessed: "2026-10-25",
+    notes: "Lists all eight Stiltzkin locations and bundles, confirms the final Ribbon is conditional on buying every set, and says all available purchases are required for Driving the Hard Bargain. It distinguishes the repeatable final Disc IV purchase opportunity from the earlier one-time stops.",
+  },
+  {
+    id: "jegged-add-ons",
+    title: "Add-Ons — equipment reference",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Equipment/Add-Ons.html",
+    accessed: "2026-10-25",
+    notes: "Ribbon equipment entry cross-checks its stats, Ability Up/Concentrate/Madeen skills, and the four listed sources: Meltigemini's Mount Gulug story reward, Chocograph, Treno Auction House, and Stiltzkin.",
   },
   {
     id: "jegged-stellazzio",
@@ -1950,7 +1958,7 @@ export const sources = [
     title: "Stiltzkin Shopping — quest reference",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/stiltzkin-shopping",
-    accessed: "2026-10-23",
+    accessed: "2026-10-25",
     notes: "Lists the eight Stiltzkin bundles, prices, one-time appearances, Ribbon reward, and the original Japanese PSX version caveat. Its Cleyra #2 bundle contains Hi-Potion, Ether, and Phoenix Pinion for 444 Gil; Fossil Roo #3 contains Phoenix Pinion, Ether, and Remedy for 555 Gil; Alexandria #5 contains Phoenix Pinion, Hi-Potion, and Elixir for 777 Gil.",
   },
   {
@@ -1983,7 +1991,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/treno-auction-house",
     accessed: "2026-10-25",
-    notes: "Item-pool cross-check for Treno's auction, including Fairy Earrings (first available Disc II, repeatable, no special condition) and Dark Matter's Odin summon. Auction prices vary by bidding, so the walkthrough does not set a fixed Gil cost.",
+    notes: "Item-pool cross-check for Treno's auction, including Fairy Earrings (first available Disc II, repeatable, no special condition), the once-only Disc IV Ribbon offer, and Dark Matter's Odin summon. Auction prices vary by bidding, so the walkthrough does not set a fixed Gil cost.",
   },
   {
     id: "jegged-treno-tournament",
@@ -2150,7 +2158,7 @@ export const sources = [
     title: "Mount Gulug — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/35-Mount-Gulug.html",
-    accessed: "2026-10-24",
+    accessed: "2026-10-25",
     notes: "Independent screen route and cross-check for Mount Gulug's hidden pickups, Moolan/Mogtaka letters, fixed Red Dragon fights, the solo-dragon Elixir chest, Eiko's story Ribbon, Meltigemini's steals and status effects, and Lindblum return.",
   },
   {
@@ -5252,11 +5260,20 @@ export const objectives: GameObjective[] = [
   },
   {
     id: "disc-4.return-to-gaia.stiltzkin-eighth-bundle",
-    title: "Buy Stiltzkin's eighth bundle and claim the conditional Ribbon",
+    title: "Buy Stiltzkin's eighth and final bundle",
     category: "collection",
     sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891"],
     chapterIds: ["disc-4.return-to-gaia"],
     profileIds: ["comprehensive", "achievements", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-4.return-to-gaia.stiltzkin-ribbon",
+    title: "Claim Stiltzkin's conditional Ribbon after all eight purchases",
+    category: "collection",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "jegged-add-ons"],
+    chapterIds: ["disc-4.return-to-gaia"],
+    profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
   },
   {
