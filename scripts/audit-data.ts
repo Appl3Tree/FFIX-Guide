@@ -2785,6 +2785,67 @@ for (const target of sourceInventoryTargets) {
     if (!sourceIds.has(sourceId)) errors.push(`Inventory target ${target.id} references unknown source ${sourceId}.`);
   }
 }
+const finalStockItemLocationSourceId = "gamefaqs-item-locations-54996";
+const finalStockItemSpecs = [
+  { itemId: "game-item.chain-plate", slug: "chain-plate", quantity: 3, price: 810 },
+  { itemId: "game-item.leather-plate", slug: "leather-plate", quantity: 3, price: 530 },
+  { itemId: "game-item.mythril-vest", slug: "mythril-vest", quantity: 10, price: 1180 },
+];
+const finalStockItemLocationSource = sources.find((source) => source.id === finalStockItemLocationSourceId);
+const finalStockItemLocationWarning = missables.find((missable) => missable.id === "missable.disc-3.aerial-exploration.daguerreo-stock");
+const finalStockItemLocationObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.daguerreo-stock");
+const requiredFinalStockItemLocationEvidence = [
+  "Chain Plate", "Leather Plate", "Mythril Vest", "Church of Lindblum", "Black Waltz 2", "Beatrix steal",
+  "Gargan Roo", "Cleyra's Trunk", "Pinnacle Rocks", "Antlion steal", "Fossil Roo", "Esto Gaza", "Disc IV",
+];
+if (!finalStockItemLocationSource || requiredFinalStockItemLocationEvidence.some((claim) => !finalStockItemLocationSource.notes.includes(claim))) {
+  errors.push("The original PlayStation item-location source note must identify all three final-stock items, their listed pickups/steals/shops, and the reviewed Disc IV scope.");
+}
+if (!finalStockItemLocationObjective?.sourceIds.includes(finalStockItemLocationSourceId)) {
+  errors.push("The final Disc III stock objective must cite the item-location guide for Chain Plate, Leather Plate, and Mythril Vest routes.");
+}
+if (
+  !finalStockItemLocationWarning?.sourceIds.includes(finalStockItemLocationSourceId) ||
+  !finalStockItemLocationWarning.classification.includes("missable-opportunity") ||
+  finalStockItemLocationWarning.severity !== "high" ||
+  finalStockItemLocationWarning.verification !== "partial" ||
+  !finalStockItemLocationWarning.recovery.includes("source-limited") ||
+  !finalStockItemLocationWarning.recovery.includes("not a claim that every possible release or route")
+) {
+  errors.push("The final-stock warning must cite the location guide and preserve the high, partial, source-limited recovery scope.");
+}
+for (const { itemId, slug, quantity, price } of finalStockItemSpecs) {
+  const pathId = `item-path.disc-3-stock.black-mage-village.${slug}`;
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const target = sourceInventoryTargets.find((entry) => entry.id === `item-target.disc-3.preparing-to-leave.${slug}`);
+  if (
+    !path || path.itemId !== itemId || path.method !== "shop" || path.shopId !== "black-mage-village.weapon-shop" ||
+    path.availability !== "limited-window" || path.cost?.amount !== price || !path.sourceIds.includes(finalStockItemLocationSourceId)
+  ) {
+    errors.push(`Disc III Black Mage Village final-stock path ${pathId} must retain its source-backed price and limited window.`);
+  }
+  if (!target || target.itemId !== itemId || target.targetQuantity !== quantity) {
+    errors.push(`Final-stock inventory target for ${slug} must remain the source-specific total of ${quantity}.`);
+  }
+}
+const braveSuitRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.brave-suit");
+if (
+  !braveSuitRecipe?.ingredients.some((ingredient) => ingredient.itemId === "game-item.mythril-vest" && ingredient.quantity === 1) ||
+  !braveSuitRecipe.sourceIds.includes("gamefaqs-shops-71891")
+) {
+  errors.push("The Disc IV Brave Suit recipe must preserve Mythril Vest as a sourced consumed ingredient.");
+}
+const finalStockWalkthroughSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.preparing-to-leave")
+  ?.sections.find((section) => section.id === "preparing-leave-shops");
+const finalStockWalkthroughStep = finalStockWalkthroughSection?.steps.find((step) => step.id === "preparing-leave-shop-inventory");
+if (
+  !finalStockWalkthroughSection?.sourceIds.includes(finalStockItemLocationSourceId) ||
+  !finalStockWalkthroughStep?.detail.includes("Item Location Guide") ||
+  !finalStockWalkthroughStep.detail.includes("Mythril Vest is also consumed by the Disc IV Brave Suit recipe")
+) {
+  errors.push("The final-stock walkthrough must link the item-location guide and explain Mythril Vest's Brave Suit synthesis use.");
+}
 for (const claim of equipmentAbilityClaims) {
   if (!gameItemIds.has(claim.itemId)) errors.push(`Equipment ability claim ${claim.id} references unknown item ${claim.itemId}.`);
   if (!claim.abilityName.trim()) errors.push(`Equipment ability claim ${claim.id} is missing an ability name.`);
