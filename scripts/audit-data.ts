@@ -760,6 +760,10 @@ const taharkaRamuhCardStep = walkthroughChapters
   .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
   .find((step) => step.objectiveIds?.includes(taharkaRamuhCardId));
 if (!taharkaRamuhCardStep) errors.push("Taharka's Ramuh Card fallback objective needs a checklist pointer in Ipsen's Castle.");
+const hippaulWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.hippaul-racing");
+if (!hippaulWarning?.sourceIds.includes("gamefaqs-tetra-master-71891") || !hippaulWarning.note?.includes("only Namingway is missable")) {
+  errors.push("Hippaul's warning must distinguish the unique Athlete Queen cutoff from recoverable Tetra Master cards.");
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
