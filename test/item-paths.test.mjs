@@ -36,3 +36,50 @@ test("Cleyra's Magician Shoes and rubbish-pit chests have separate item paths", 
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.cleyra"));
   assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-2.cleyra"));
 });
+
+test("Alexandria's Disc III pickups and Stiltzkin bundle have item-level paths", () => {
+  const alexandria = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-3.the-home-front");
+  const sourcesForAll = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];
+  const sourceBackedItems = ["game-item.phoenix-pinion", "game-item.lapis-lazuli", "game-item.leo-stellazzio"];
+  const expectedPickups = [
+    "item-path.disc-3.home-front.vivi-dock-phoenix-pinion",
+    "item-path.disc-3.home-front.castle-dock-ether",
+    "item-path.disc-3.home-front.castle-dock-phoenix-pinion",
+    "item-path.disc-3.home-front.fountain-lapis-lazuli",
+    "item-path.disc-3.home-front.west-tower-phoenix-pinion",
+    "item-path.disc-3.home-front.leo-stellazzio",
+  ];
+
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.the-home-front"));
+  assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-3.the-home-front"));
+  assert.deepEqual(expectedPickups.map((id) => alexandria.find((path) => path.id === id)?.id), expectedPickups);
+
+  for (const itemId of sourceBackedItems) {
+    assert.ok(gameItems.some((item) => item.id === itemId), `${itemId} is missing from the item catalog`);
+  }
+
+  const bundlePaths = alexandria.filter((path) => path.shopId === "stiltzkin-alexandria-fifth");
+  assert.deepEqual(bundlePaths.map((path) => path.itemId).sort(), [
+    "game-item.elixir",
+    "game-item.hi-potion",
+    "game-item.phoenix-pinion",
+  ]);
+  for (const path of bundlePaths) {
+    assert.equal(path.availability, "limited-window");
+    assert.equal(path.cost?.amount, 777);
+    assert.equal(path.cost?.bundleId, "alexandria-stiltzkin-fifth-bundle");
+    assert.ok(path.walkthroughObjectiveIds?.includes("disc-3.the-home-front.stiltzkin-5"));
+  }
+
+  const pickupPaths = [...expectedPickups.map((id) => alexandria.find((path) => path.id === id)).filter(Boolean), ...bundlePaths];
+  for (const path of pickupPaths) {
+    assert.ok(path.walkthroughObjectiveIds?.includes("disc-3.the-home-front.alexandria-pickups") || bundlePaths.includes(path));
+    for (const sourceId of sourcesForAll) {
+      assert.ok(path.sourceIds.includes(sourceId), `${path.id} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+
+  assert.ok(objectives.some((objective) => objective.id === "disc-3.the-home-front.stiltzkin-5"));
+  assert.ok(objectives.some((objective) => objective.id === "disc-3.the-home-front.alexandria-pickups"));
+});

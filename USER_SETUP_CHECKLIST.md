@@ -6,6 +6,10 @@ This is the consolidated list of actions that need the project owner's GitHub or
 
 Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for User**, **In Progress**, and **Completed**. Do not send passwords, access tokens, service-account JSON, or Firebase config values in chat. Firebase web-app config is included in browser builds, so it is public configuration rather than a secret; access must be protected by Authentication, Firestore rules, and domain/API restrictions.
 
+## Current project milestone
+
+The Disc III Alexandria item-catalog expansion is complete and introduces no account-owner setup step. GitHub repository access, Pages deployment, and Firebase setup retain the statuses below.
+
 ## Dependency order
 
 | Order | Task | Priority | Status | Dependency |
