@@ -3602,6 +3602,35 @@ if (
 ) {
   errors.push("Madain Sari's Banyano Shores record must link the confirmed Blazer Beetle location, source evidence, partial roster limitation, and walkthrough context.");
 }
+const disc4IslandPool = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-gaia.islands-pool");
+const disc4Adamantoise = enemyRecords.find((enemy) => enemy.id === "enemy.adamantoise");
+const disc4Dracozombie = enemyRecords.find((enemy) => enemy.id === "enemy.dracozombie");
+const returnToGaiaWorldMap = walkthroughChapters.find((chapter) => chapter.areaId === "disc-4.return-to-gaia")?.sections.find((section) => section.id === "gaia-return-world-map-sidequests");
+const disc4IslandStep = returnToGaiaWorldMap?.steps.find((step) => step.id === "gaia-return-island-enemy-check");
+if (
+  !disc4IslandPool
+  || disc4IslandPool.kind !== "random-pool"
+  || disc4IslandPool.chapterId !== "disc-4.return-to-gaia"
+  || disc4IslandPool.formation.map((entry) => entry.enemyId).sort().join(",") !== "enemy.adamantoise,enemy.dracozombie"
+  || disc4IslandPool.formation.some((entry) => entry.quantity !== null)
+  || !disc4IslandPool.sourceIds.includes("gamefaqs-enemy-list-71891")
+  || !disc4IslandPool.sourceIds.includes("rpgclassics-bestiary-c-g")
+  || !disc4IslandPool.notes.some((note) => note.includes("not a complete Disc IV world-map roster") && note.includes("rates"))
+  || !disc4Adamantoise?.encounterIds.includes("encounter.return-to-gaia.islands-pool")
+  || !disc4Dracozombie?.encounterIds.includes("encounter.return-to-gaia.islands-pool")
+  || !enemyCatalogCoverage.chapterIds.includes("disc-4.return-to-gaia")
+  || !returnToGaiaWorldMap?.sourceIds.includes("rpgclassics-bestiary-c-g")
+  || !disc4IslandStep?.text.includes("Adamantoise")
+  || !disc4IslandStep.text.includes("Dracozombie")
+  || !disc4IslandStep.detail.includes("exact encounter tiles")
+  || !disc4IslandPool.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
+  || !disc4IslandStep.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
+  || !objectivesById.get("disc-4.return-to-gaia.island-blue-magic")?.chapterIds?.includes("disc-4.return-to-gaia")
+  || !objectivesById.get("disc-4.return-to-gaia.island-blue-magic")?.sourceIds.includes("rpgclassics-bestiary-c-g")
+  || !sources.some((source) => source.id === "rpgclassics-bestiary-c-g")
+) {
+  errors.push("The Disc IV island enemy group must connect Adamantoise and Dracozombie to both bestiary sources, Blue Magic recovery, and explicit partial-location limits.");
+}
 const desertPalacePool = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.random-pool");
 const desertPalaceBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.desert-palace.valia-pira");
 const desertPalaceTeachers = [

@@ -5990,7 +5990,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-world-map-sidequests",
         title: "World map and Chocobo checks",
         summary: "Use the reopened map to finish late Chocobo rewards and the last Frog Catching milestone. Keep the breeding population intact while progressing toward 99 frogs.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-friendly-monsters"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
         steps: [
           {
             id: "gaia-return-dive-spot-five",
@@ -6012,6 +6012,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "If Friendly Yan is still pending and the other eight friendly creatures have been satisfied, land on Vile Island and find Yan in the forest. Bring a Diamond for the exchange.",
             detail: "Disc IV makes Vile Island landable without the Sky Chocobo and provides another opportunity for Friendly Yan. Do not spend the required Diamond if this is part of your selected completion goal.",
             objectiveIds: ["disc-3.aerial-exploration.friendly-yan"],
+          },
+          {
+            id: "gaia-return-island-enemy-check",
+            kind: "optional",
+            text: "If the enemy catalog or Quina's remaining Blue Magic is part of your goal, check the Disc IV field areas for Adamantoise and Dracozombie. RPGClassics names Lachenta Wetlands and Donna Plains for Adamantoise; Dracozombie is reported in multiple Disc IV locations.",
+            detail: "GameFAQs groups Adamantoise and Dracozombie under its Islands enemy heading. The bestiary sources do not give exact encounter tiles, a complete Disc IV roster, formations, or rates. If Quina is in the party and still needs Earth Shake or LV5 Death, use Eat on a weakened enemy.",
+            objectiveIds: ["disc-4.return-to-gaia.island-blue-magic"],
           },
           {
             id: "gaia-return-chocobo-paradise-beach",
