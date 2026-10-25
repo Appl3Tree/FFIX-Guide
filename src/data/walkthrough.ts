@@ -1625,7 +1625,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gargan-roo-mognet-and-chests",
         title: "Gargan Roo — Mochos, letter, and two chests",
         summary: "Make the Mognet handoff, search both branches, and set the switches before taking the outbound ride.",
-        sourceIds: ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-forks", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"],
         steps: [
           {
             id: "journey-cleyra-mochos-letter",
@@ -1659,7 +1659,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-cleyra-ralvurahva-steals",
             kind: "combat",
             text: "When Ralvurahva blocks the ride, have Marcus try to steal its Bone Wrist and Mythril Fork before ending the encounter. Keep Dagger available for Cure; use Blind if learned, and equip Antibody on Dagger and Steiner if available.",
-            detail: "The encounter is one-time. Both steal targets are consistently listed, but published steal rates and some enemy statistics conflict, so no percentage or fixed level is required. Prioritize survival over repeated attempts.",
+            detail: "The encounter is one-time. Both steal targets are consistently listed, but published steal rates and some enemy statistics conflict, so no percentage or fixed level is required. Prioritize survival over repeated attempts. If a steal is missed, Bone Wrist remains available at later shops; Mythril Fork can be bought at Conde Petie, Black Mage Village, Lindblum, or Esto Gaza before the Desert Palace.",
             objectiveIds: ["disc-2.journey-to-cleyra.ralvurahva-steals"],
           },
           {
@@ -5141,7 +5141,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-cotton-robe-trick",
             kind: "optional",
             text: "If you need Gil, synthesize Cotton Robes from Wrists and Steepled Hats, then sell the robes. Dali sells Wrists; Black Mage Village or Atla's Mogshop supplies Steepled Hats.",
-            detail: "This is an optional money loop, not a required completion objective. Compare the material cost and current shop prices before repeating it.",
+            detail: "This is an optional money loop, not a required completion objective. The GameFAQs Shops and RPGClassics tables list a 1,000-Gil recipe, while the GameFAQs Items table lists 2,000 Gil; verify the current in-game cost before repeating it.",
           },
         ],
       },
@@ -6256,7 +6256,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-ruins-ocean-and-kraken",
         title: "Ruins and Ocean — Hades, the Master Synthesist, and Kraken",
         summary: "Find the Strong Phantom and optional Hades, then prepare for Kraken's Water attacks and steal table.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-master-synthesist-71891", "gamefaqs-final-preparations-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamerguides-memoria-kraken", "jegged-memoria-nova-dragon"],
+        sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-frog-catching-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis", "rpgclassics-memoria", "gamefaqs-master-synthesist-71891", "gamefaqs-final-preparations-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamerguides-memoria-kraken", "jegged-memoria-nova-dragon"],
         steps: [
           {
             id: "memoria-ruins-checkpoints-09-10",
@@ -6283,7 +6283,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-kraken-steals",
             kind: "combat",
             text: "Equip Water protection and Body Temp, bring Zidane, and steal Genji Helmet, Wizard Rod, and Glutton's Robe. Kraken is weak to Lightning and absorbs Water; Slow works.",
-            detail: "Kraken has two separately targetable tentacles. Removing them changes its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. GameFAQs lists a Common Elixir steal for each tentacle; its older monster list and RPGClassics instead list Wing Edge for the Right Tentacle. GameFAQs reports 10,001 HP per tentacle while RPGClassics lists 18,169/18,168. The guides also reverse which side uses Water-gun and Ink, so treat those component details as source-disputed. Phoenix Pinion is the body's listed guaranteed drop.",
+            detail: "Kraken has two separately targetable tentacles. Removing them changes its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. GameFAQs lists a Common Elixir steal for each tentacle; its older monster list and RPGClassics instead list Wing Edge for the Right Tentacle. GameFAQs reports 10,001 HP per tentacle while RPGClassics lists 18,169/18,168. The guides also reverse which side uses Water-gun and Ink, so treat those component details as source-disputed. Phoenix Pinion is the body's listed guaranteed drop. If Glutton's Robe is missed, Quale can yield it after the 99-frog milestone or Daguerreo can synthesize it for 6,000 Gil; the GameFAQs Items table lists 8,000 Gil, while its Shops table and independent synthesis references list 6,000.",
             objectiveIds: ["disc-4.memoria.kraken-steals", "disc-4.memoria.kraken-achievement"],
           },
           {

@@ -238,4 +238,32 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-synthesis", "gamefaqs-synthesis-xiamut-38565", "cavesofnarshe-ff9-disc-2-map", "neoseeker-ffix-walkthrough-1816852"],
     notes: "GameFAQs, RPGClassics, Xiamut, and Caves of Narshe list Glass Buckle + Chain Mail for 2,000 Gil. GameFAQs identifies post-Cleyra Lindblum, Black Mage Village (Discs II–III), Alexandria, Treno (Discs III–IV), and Daguerreo; RPGClassics also lists Wayne's later Lindblum shop. The Treno Tradition reward is a separate direct source. Glass Buckle is made from Glass Armlet + Leather Wrist for 500 Gil, and both ingredients have their own source-linked paths. This recipe supports the optional 15 Chain Mail-equivalent target, which can count up to 12 Power Belts; it is not a normal completion requirement. Direct stock behavior on modern releases remains unverified.",
   },
+  {
+    id: "synthesis-recipe.cotton-robe",
+    resultItemId: "game-item.cotton-robe",
+    ingredients: [
+      { itemId: "game-item.wrist", quantity: 1 },
+      { itemId: "game-item.steepled-hat", quantity: 1 },
+    ],
+    chapterId: "disc-1.lindblum",
+    shopId: "lindblum.synthesis-shop.disc-1",
+    shopName: "Torres' Synthesis Shop (Lindblum, Disc I)",
+    cost: { currency: "gil", amount: 1000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    notes: "Wrist + Steepled Hat makes Cotton Robe. GameFAQs' Shops table and RPGClassics list the recipe for 1,000 Gil at the documented shops; the GameFAQs Items table lists 2,000 Gil. The item is also a two-copy Chocograph #2 reward, and Daguerreo appears in the detailed shop tables even though the Items table's location list omits it.",
+  },
+  {
+    id: "synthesis-recipe.gluttons-robe",
+    resultItemId: "game-item.gluttons-robe",
+    ingredients: [
+      { itemId: "game-item.mythril-fork", quantity: 1 },
+      { itemId: "game-item.cotton-robe", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 6000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis"],
+    notes: "Mythril Fork + Cotton Robe makes Glutton's Robe at Daguerreo. The GameFAQs Shops table, RPGClassics, and EliteGrindLab list 6,000 Gil; the GameFAQs Items table lists 8,000 Gil. The recipe is the repeatable recovery route if both one-time steals from Quale and Kraken are missed.",
+  },
 ];
