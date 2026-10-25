@@ -383,7 +383,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-alexandria",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for the Red Rose to Steiner/Marcus handoff, the 30-minute Alexandria Castle escape, Tent and Ice Brand chests, Zorn and Thorn, Friendship ATE, Beatrix's third battle, alternating descent parties, Mosh's letter, and the Gargan Roo escape to Pinnacle Rocks. Its boss table assigns Mythril Armor to Thorn, while its main Items table names Zorn; the guide follows the boss table, which independent walkthroughs also support. Enemy statistics and later-item alternatives are cross-checked before promotion.",
+    notes: "Original PlayStation route for the Red Rose to Steiner/Marcus handoff, the 30-minute Alexandria Castle escape, Tent and Ice Brand chests, Zorn and Thorn, Friendship ATE, Beatrix's third battle, alternating descent parties, Mosh's letter, and the Gargan Roo escape to Pinnacle Rocks. Its boss table assigns Mythril Armor to Thorn, while its main Items table names Zorn; the guide follows the boss table, which independent walkthroughs also support. For the distinct Ralvuimago return-ride fight, its table lists 5,709 HP and Ether in both Always and Common drop slots; independent references mostly print 3,352 HP, while route prose reports one Ether. Enemy statistics and later-item alternatives are cross-checked before promotion.",
   },
   {
     id: "jegged-return-to-alexandria-castle",
@@ -2047,7 +2047,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/gargan-roo/",
     accessed: "2026-10-23",
-    notes: "Cross-checks the two chest inventory, the first-ride cutoff, Nazna's Mognet letter, Ralvurahva steals, and disputed chest positions and boss data. Does not treat copied HP or steal odds as settled where publishers differ.",
+    notes: "Cross-checks the two chest inventory, the first-ride cutoff, Nazna's Mognet letter, Ralvurahva steals, and disputed chest positions and boss data. It also compares the separate Ralvuimago return-ride fight, listing 3,352 HP, Ice weakness, Earth absorption, two Ether drop slots, and steal tiers/rates that differ from other publishers. Does not treat copied HP or steal odds as settled where publishers differ.",
   },
   {
     id: "rpgclassics-gargan-roo",

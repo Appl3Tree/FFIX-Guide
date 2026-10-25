@@ -1997,7 +1997,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "return-alexandria-ralvuimago-steals",
             kind: "combat",
             text: "At the end of the Gargan Roo escape, try to steal Phoenix Down, Adaman Vest, and Oak Staff from Ralvuimago. Use Slow and Ice attacks; when the boss curls up, avoid physical hits until it uncurls. Cure Mini with Remedy if needed.",
-            detail: "Oak Staff teaches Vivi Bio and is the priority if you do not already have a copy. The boss drops an Ether. Published HP values conflict, so the guide lists no required level or exact enemy statistics.",
+            detail: "Oak Staff teaches Vivi Bio and is the priority if you do not already have a copy. GameFAQs lists Ether in two drop slots, while some route guides mention one Ether. Published HP values conflict; the walkthrough does not require a level, and the bestiary retains both reported HP values.",
             objectiveIds: ["disc-2.return-to-alexandria.ralvuimago-steals"],
           },
           {

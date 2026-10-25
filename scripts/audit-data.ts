@@ -2312,6 +2312,42 @@ if (!garganRooBossEncounter || garganRooBossEncounter.kind !== "boss" ||
   !ralvurahvaRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Devil's Kiss")) {
   errors.push("Gargan Roo must link Ralvurahva's boss profile to its existing steal warning/cutoff and preserve the HP and steal-rate source differences.");
 }
+const ralvuimagoEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-alexandria.ralvuimago");
+const ralvuimagoRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvuimago");
+const ralvuimagoHpClaims = ralvuimagoRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
+const ralvuimagoStealPaths = [
+  ["game-item.phoenix-down", "item-path.disc-2.return-to-alexandria.ralvuimago-phoenix-down-steal", "common"],
+  ["game-item.adaman-vest", "item-path.disc-2.return-to-alexandria.ralvuimago-adaman-vest-steal", "uncommon"],
+  ["game-item.oak-staff", "item-path.disc-2.return-to-alexandria.ralvuimago-oak-staff-steal", "semi-rare"],
+] as const;
+if (!ralvuimagoEncounter || ralvuimagoEncounter.kind !== "boss" ||
+  ralvuimagoEncounter.chapterId !== "disc-2.return-to-alexandria" ||
+  !ralvuimagoEncounter.formation.some((entry) => entry.enemyId === "enemy.ralvuimago" && entry.quantity === 1) ||
+  !ralvuimagoEncounter.objectiveIds.includes("disc-2.return-to-alexandria.ralvuimago-steals") ||
+  !ralvuimagoEncounter.missableIds.includes("missable.disc-2.return-to-alexandria.ralvuimago-steals") ||
+  !ralvuimagoEncounter.cutoffIds.includes("cutoff.alexandria-rescue.ralvuimago-steals") ||
+  !ralvuimagoRecord || ralvuimagoRecord.kind !== "boss" ||
+  ralvuimagoRecord.stats.find((stat) => stat.field === "level")?.value !== 18 ||
+  !ralvuimagoHpClaims.some((stat) => stat.value === 3352 && stat.verification === "disputed") ||
+  !ralvuimagoHpClaims.some((stat) => stat.value === 5709 && stat.verification === "disputed") ||
+  ralvuimagoRecord.stats.find((stat) => stat.field === "MP")?.value !== 584 ||
+  !ralvuimagoRecord.facts.some((fact) => fact.category === "elemental-weakness" && fact.label === "Ice") ||
+  !ralvuimagoRecord.facts.some((fact) => fact.category === "elemental-resistance" && fact.label.includes("Earth") && fact.label.includes("absorbs")) ||
+  !ralvuimagoRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Earth Power counter") ||
+  !ralvuimagoRecord.notes.some((note) => note.includes("5,709") && note.includes("3,352")) ||
+  !ralvuimagoRecord.notes.some((note) => note.includes("Semi-Rare") && note.includes("Rare")) ||
+  !ralvuimagoRecord.notes.some((note) => note.includes("Always and Common drop slots"))) {
+  errors.push("Ralvuimago must remain distinct as the return-ride boss and preserve its existing cutoff links, HP disagreement, steal-tier disagreement, and Ether drop-table scope.");
+}
+for (const [itemId, pathId, slot] of ralvuimagoStealPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  if (!ralvuimagoRecord?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) ||
+    !ralvuimagoRecord.routeObjectiveIds.includes("disc-2.return-to-alexandria.ralvuimago-steals") ||
+    !path || path.itemId !== itemId || path.method !== "steal" || path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.return-to-alexandria.ralvuimago-steals")) {
+    errors.push(`Ralvuimago's ${itemId} steal must connect its bestiary table to the existing one-time item path and objective.`);
+  }
+}
 const lindblumMountainPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.mountain-pool");
 const lindblumForestPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum-plateau.forest-pool");
 if (!lindblumMountainPool || lindblumMountainPool.kind !== "random-pool" ||
