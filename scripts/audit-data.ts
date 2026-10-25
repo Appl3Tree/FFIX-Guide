@@ -3323,6 +3323,28 @@ if (!blackWaltz3StealWarning ||
   !blackWaltz3StealWarning.sourceIds.includes("gamefaqs-equipment-33383")) {
   errors.push("The Black Waltz 3 missable warning must list all Flame Staff shop recoveries and their independent equipment source.");
 }
+const steepledHatId = "game-item.steepled-hat";
+const steepledHatBmvPath = itemAcquisitionPaths.find((path) => path.itemId === steepledHatId && path.id === "item-path.disc-2.outer-continent.steepled-hat-black-mage-village-shop");
+if (!steepledHatBmvPath || steepledHatBmvPath.shopId !== "black-mage-village.weapon-shop.disc-2-3" ||
+  steepledHatBmvPath.cost?.amount !== 260 || steepledHatBmvPath.availability !== "limited-window" ||
+  !steepledHatBmvPath.sourceIds.includes("gamefaqs-items-71891") || !steepledHatBmvPath.sourceIds.includes("gamefaqs-shops-71891")) {
+  errors.push("Steepled Hat's Disc II–III Black Mage Village recovery must remain a source-linked 260-Gil shop path.");
+}
+if (itemAcquisitionPaths.some((path) => path.itemId === steepledHatId && path.shopId === "treno.weapon-shop.disc-2") ||
+  !blackWaltz3StealWarning?.recovery.includes("Steepled Hat can be bought at Atla") ||
+  !blackWaltz3StealWarning.recovery.includes("Black Mage Village (Discs II–III)") ||
+  !blackWaltz3StealWarning.recovery.includes("Treno's Disc II weapon-shop list does not include it")) {
+  errors.push("Black Waltz 3 recovery must name Steepled Hat's Atla/Black Mage Village routes and keep Treno excluded for that item.");
+}
+const blackWaltz3RematchSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-treno")
+  ?.sections.find((section) => section.id === "journey-treno-black-waltz-3");
+const blackWaltz3RematchStep = blackWaltz3RematchSection?.steps.find((step) => step.id === "journey-treno-black-waltz-3-steals");
+if (!blackWaltz3RematchStep?.detail.includes("Black Mage Village (Discs II–III)") ||
+  !blackWaltz3RematchStep.detail.includes("Treno's Disc II weapon shop does not list Steepled Hat") ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891"].every((sourceId) => blackWaltz3RematchSection?.sourceIds.includes(sourceId))) {
+  errors.push("The Black Waltz 3 walkthrough must source Steepled Hat's Black Mage Village recovery and clarify that Treno does not sell it.");
+}
 const moonstonePaths = itemAcquisitionPaths.filter((path) => path.itemId === moonstoneId);
 const requiredMoonstonePaths = [
   { id: "item-path.disc-1.alexandria.moonstone-brahne", objectiveId: "disc-1.alexandria.swordfight.moonstone-1" },
