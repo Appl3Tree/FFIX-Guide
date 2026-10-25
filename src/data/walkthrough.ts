@@ -4116,8 +4116,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "high-seas-alexandria-ruins",
         title: "Alexandria — sweep the accessible harbor and ruined town",
-        summary: "The castle is inaccessible, but the gondola dock and town streets still contain pickups, a card, and an optional first-visit Inn match event.",
-        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988"],
+        summary: "The castle is inaccessible, but the gondola dock and town streets still contain pickups, a card, and optional Inn matches; use this Disc III visit as the safe checkpoint and try again later if needed.",
+        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
         steps: [
           {
             id: "high-seas-alexandria-harbor",
@@ -4128,8 +4128,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-alexandria-first-visit-card-players",
             kind: "cutoff",
-            text: "During this Disc III Blue Narciss route, use the first post-destruction visit to Alexandria as the safe checkpoint: enter the Inn and try the Tetra Master matches with the male Red Mage, female Red Mage, and Kabao (Cour89's label) before leaving. If you skip Alexandria, do not rely on the Disc IV visit to recover them.",
-            detail: "Cour89 says these three Inn matches are limited to the first post-destruction visit, when Kabao's welcome event occurs, and says Kabao's Wife is available afterward. GameFAQs labels two Red Mages and Hippaul at the Inn for Discs III–IV, but two Steam Disc IV opponent lists challenge the later Inn availability: one comment corrects the Red Mage/Hippaul listing and another Disc IV roster omits Inn players. The conflict is unresolved; this optional match objective does not gate card types or an achievement.",
+            text: "During this Disc III Blue Narciss route, use the first post-destruction visit to Alexandria as the safe checkpoint: enter the Inn and try Cour89's male Red Mage, female Red Mage, and Kabao matches before leaving. If you miss them, try the Inn again on Disc IV, but treat that as unverified.",
+            detail: "Cour89 says its male and female Red Mages and Kabao are limited to the first post-destruction visit, when Kabao's welcome event occurs. GameFAQs and an Xbox achievement guide list two Red Mages and Hippaul at the Inn for Disc III–IV or endgame, while a Steam comment reports them absent on Disc IV. The names and timing conflict; the separate Steam roster's omission is not proof they are unavailable. This optional match objective does not gate card types or an achievement.",
             objectiveIds: ["disc-3.on-the-high-seas.alexandria-first-visit-card-players"],
           },
           {
@@ -6029,13 +6029,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-alexandria-and-treno",
         title: "Alexandria and Treno — Stiltzkin #8, Behemoth, and auctions",
         summary: "Stiltzkin has returned to Alexandria's steeple for his final bundle. Treno's Weapon Shop has advanced to Behemoth, and the auction adds late Disc IV items.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-card-locations-24067", "cour89-card-players", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-card-locations-24067", "cour89-card-players", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide", "jegged-stiltzkin", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"],
         steps: [
           {
             id: "gaia-return-alexandria-first-visit-card-players",
             kind: "cutoff",
-            text: "If you skipped the first post-destruction Alexandria visit on Disc III, the Disc IV Inn is not a verified fallback for the male Red Mage, female Red Mage, and Kabao (Cour89's label). Check the Inn if convenient, but do not count these matches as recovered.",
-            detail: "Cour89 says these three matches are limited to the first post-destruction visit. GameFAQs lists two Red Mages and Hippaul at the Inn on Discs III–IV, but two Steam Disc IV opponent lists challenge those entries. The timing remains disputed and has not been directly tested. This checklist tracks optional matches only, not card-type or achievement completion.",
+            text: "If you skipped the Disc III Alexandria visit or missed its Inn matches, try the male Red Mage, female Red Mage, and Kabao (Cour89's lineup), plus Hippaul if listed, on Disc IV before leaving. An Xbox achievement guide reports two Red Mages and Hippaul there at endgame, while a Steam comment disputes their Disc IV availability; record only matches you actually complete.",
+            detail: "Cour89 describes a first-post-destruction-visit lineup of male and female Red Mages plus Kabao; GameFAQs and the Xbox guide name Hippaul with the two Red Mages. The sources do not establish whether these are the same NPCs, whether the event repeats after a Disc III visit, or whether versions differ. The separate Steam roster omits Inn players, but omission is not proof of absence. This checklist tracks optional matches only, not card-type or achievement completion.",
             objectiveIds: ["disc-3.on-the-high-seas.alexandria-first-visit-card-players"],
           },
           {

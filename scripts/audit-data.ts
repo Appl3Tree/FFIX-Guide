@@ -2479,6 +2479,7 @@ if (
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("gamefaqs-card-locations-24067")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
+  || !postDestructionAlexandriaCardObjective.sourceIds.includes("trueachievements-tetra-master-guide")
   || !postDestructionAlexandriaCardObjective.chapterIds?.includes("disc-3.on-the-high-seas")
   || !postDestructionAlexandriaCardObjective.chapterIds.includes("disc-4.return-to-gaia")
   || !postDestructionAlexandriaCardWarning
@@ -2487,8 +2488,10 @@ if (
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("gamefaqs-card-locations-24067")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
-  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs' card-location FAQ labels two Red Mages and Hippaul")
-  || !postDestructionAlexandriaCardWarning.note.includes("do not imply Disc IV recovery")
+  || !postDestructionAlexandriaCardWarning.sourceIds.includes("trueachievements-tetra-master-guide")
+  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs' card-location FAQ lists two Red Mages and Hippaul")
+  || !postDestructionAlexandriaCardWarning.note.includes("Xbox achievement guide's indexed text")
+  || !postDestructionAlexandriaCardWarning.note.includes("recommend a later attempt if missed")
   || postDestructionAlexandriaCardSteps.length !== 2
   || !postDestructionAlexandriaCardSteps.every((step) =>
     ["male Red Mage", "female Red Mage", "Kabao"].every((name) => step.text.includes(name)),
@@ -2498,19 +2501,22 @@ if (
   || postDestructionAlexandriaCardCutoffs.some((cutoff) =>
     !cutoff.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
     || !cutoff.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
+    || !cutoff.sourceIds.includes("trueachievements-tetra-master-guide")
   )
   || !postDestructionAlexandriaDetour
   || postDestructionAlexandriaDetour.relationship !== "optional-return"
   || postDestructionAlexandriaDetour.toChapterId !== "disc-1.alexandria"
   || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
   || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
+  || !postDestructionAlexandriaDetour.sourceIds.includes("trueachievements-tetra-master-guide")
   || !postDestructionAlexandriaDetourRejoin
   || postDestructionAlexandriaDetourRejoin.relationship !== "rejoin"
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not identify or time its card matches")
   || !sources.find((source) => source.id === "steam-tetra-disc4-opponents-729676856")?.notes.includes("a 2023 comment reports that Hippaul and the Red Mage are not at Alexandria Inn on Disc IV")
-  || !sources.find((source) => source.id === "steam-tetra-opponents-disc4-2804532988")?.notes.includes("22 Alexandria opponents across Main Street, Square, and Steeple, with no Inn players")
+  || !sources.find((source) => source.id === "steam-tetra-opponents-disc4-2804532988")?.notes.includes("omission alone does not establish they are unavailable")
+  || !sources.find((source) => source.id === "trueachievements-tetra-master-guide")?.notes.includes("two Red Mages and Hippaul are at the Alexandria Inn at endgame")
 ) {
-  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/Steam roster conflict, optional-match scope, and the sourced return route.");
+  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/TrueAchievements/Steam conflict, optional-match scope, and the conditional later attempt.");
 }
 const oglopTradeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card";
 const oglopCardTypeObjectiveId = "disc-2.conde-petie-mountain-path.oglop-card-type";
