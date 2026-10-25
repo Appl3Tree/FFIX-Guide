@@ -77,6 +77,7 @@ export const itemCatalogCoverage = {
     "disc-1.exploring-lindblum-kingdom",
     "disc-2.journey-to-treno",
     "disc-2.treno",
+    "disc-2.cleyra",
     "disc-2.return-to-alexandria",
     "disc-2.journey-to-outer-continent",
     "disc-2.outer-continent",
@@ -92,7 +93,7 @@ export const itemCatalogCoverage = {
     "disc-4.second-battle-of-iifa-tree",
     "disc-4.memoria",
   ],
-  note: "Partial acquisition catalog: Burmecia, Oeilvert and Mount Gulug pickups, Mognet rewards, Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and two structured synthesis recipes. Most recipes, shop cutoffs, recovery paths, and item-level completeness still need independent review.",
+  note: "Partial acquisition catalog: Burmecia and Cleyra pickups, Oeilvert and Mount Gulug routes, Mognet rewards, Stiltzkin bundles, fixed-encounter steals/drops, Disc III final-stock shops, select alternate rewards, and two structured synthesis recipes. Most recipes, shop cutoffs, recovery paths, and item-level completeness still need independent review.",
 };
 
 const burmeciaSources = [
@@ -106,6 +107,7 @@ const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-
 const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"];
 const oeilvertSources = ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"];
 const mountGulugSources = ["gamefaqs-lost-continent-71891", "gamefaqs-items-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"];
+const cleyraSources = ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"];
 const grandArmorSources = ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon", "rpgclassics-armor", "jegged-synthesis", "elitegrindlab-synthesis", "gamefaqs-synthesis-xiamut-38565", "gamefaqs-synthesis-correction-25681"];
 
 export const gameItems: GameItem[] = [
@@ -118,6 +120,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.red-hat", name: "Red Hat", category: "equipment", sourceIds: mountGulugSources, verification: "partial" },
   { id: "game-item.wing-edge", name: "Wing Edge", category: "equipment", sourceIds: [...mountGulugSources, "jegged-esto-gaza"], verification: "partial" },
   { id: "game-item.battle-boots", name: "Battle Boots", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-frog-catching-71891", "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "gamefaqs-master-synthesist-71891", "gamefaqs-final-preparations-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "jegged-synthesis", "elitegrindlab-synthesis"], verification: "partial" },
+  { id: "game-item.magician-shoes", name: "Magician Shoes", category: "equipment", sourceIds: cleyraSources, verification: "partial" },
+  { id: "game-item.silk-robe", name: "Silk Robe", category: "equipment", sourceIds: [...cleyraSources, "gamefaqs-abilities-71891"], verification: "partial" },
   { id: "game-item.demons-mail", name: "Demon's Mail", category: "equipment", sourceIds: mountGulugSources, verification: "partial" },
   { id: "game-item.germinas-boots", name: "Germinas Boots", category: "equipment", sourceIds: [...burmeciaSources, "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
   { id: "game-item.protection-bell", name: "Protection Bell", category: "key-item", sourceIds: burmeciaSources, verification: "partial" },
@@ -355,6 +359,43 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
 export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...disc3ShopPaths,
   ...disc4ShopPaths,
+  {
+    id: "item-path.disc-2.cleyra.trunk-magician-shoes",
+    itemId: "game-item.magician-shoes",
+    chapterId: "disc-2.cleyra",
+    method: "chest",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "One chest on the normal Cleyra's Trunk route. A separate pair of chests becomes accessible later through the settlement rubbish pit.",
+    walkthroughObjectiveIds: ["disc-2.cleyra.treasure-sweep"],
+    sourceIds: cleyraSources,
+  },
+  {
+    id: "item-path.disc-2.cleyra.rubbish-pit-silk-robe",
+    itemId: "game-item.silk-robe",
+    chapterId: "disc-2.cleyra",
+    method: "chest",
+    quantity: 1,
+    availability: "limited-window",
+    recommendedBeforeChapterId: "disc-2.cleyra",
+    conditions: "After viewing No Yummy-Yummies! and There A Mushroom!, jump into the rubbish pit beside the settlement entrance to reach this otherwise inaccessible Trunk chest.",
+    notes: "GameFAQs lists Ability Up on Silk Robe and says Quina can learn it by equipping the item. Alternate acquisition routes and later recovery remain under review.",
+    walkthroughObjectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.rubbish-pit-chests"],
+    sourceIds: [...cleyraSources, "gamefaqs-abilities-71891"],
+  },
+  {
+    id: "item-path.disc-2.cleyra.rubbish-pit-magician-shoes",
+    itemId: "game-item.magician-shoes",
+    chapterId: "disc-2.cleyra",
+    method: "chest",
+    quantity: 1,
+    availability: "limited-window",
+    recommendedBeforeChapterId: "disc-2.cleyra",
+    conditions: "After viewing No Yummy-Yummies! and There A Mushroom!, jump into the rubbish pit beside the settlement entrance to reach this otherwise inaccessible Trunk chest. This is the second Cleyra pair, distinct from the normal-route Trunk chest.",
+    notes: "EliteGrindLab records disagreement among guides about the total Magician Shoes count; this source-backed path is the second chest, separate from the pair on the normal climb. Other acquisition routes remain under review.",
+    walkthroughObjectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.rubbish-pit-chests"],
+    sourceIds: cleyraSources,
+  },
   {
     id: "item-path.disc-2.treno.mythril-sword-shop",
     itemId: "game-item.mythril-sword",
@@ -1134,6 +1175,7 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
 }));
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
+  { id: "item-ability.silk-robe.ability-up", itemId: "game-item.silk-robe", abilityName: "Ability Up", verification: "partial", sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.trident.luna", itemId: "game-item.trident", abilityName: "Luna", verification: "partial", sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.battle-boots.initiative", itemId: "game-item.battle-boots", abilityName: "Initiative", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
   { id: "item-ability.battle-boots.mp-attack", itemId: "game-item.battle-boots", abilityName: "MP Attack", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },
