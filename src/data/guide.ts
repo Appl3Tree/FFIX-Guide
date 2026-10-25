@@ -4433,7 +4433,7 @@ export const objectives: GameObjective[] = [
     id: "disc-3.lost-continent.mount-gulug-blue-magic",
     title: "Learn Mount Gulug Blue Magic with Quina if needed",
     category: "collection",
-    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "gamefaqs-abilities-71891", "elitegrindlab-mount-gulug"],
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "gamefaqs-abilities-71891", "elitegrindlab-mount-gulug", "gamefaqs-enemy-list-71891"],
     chapterIds: ["disc-3.lost-continent"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",

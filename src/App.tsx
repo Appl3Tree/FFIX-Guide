@@ -1494,6 +1494,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
 }) {
   const [enemyQuery, setEnemyQuery] = useState("");
   const [enemyKindFilter, setEnemyKindFilter] = useState<"all" | EnemyRecord["kind"]>("all");
+  const encounterKindCounts = enemyEncounters.reduce((counts, encounter) => ({ ...counts, [encounter.kind]: counts[encounter.kind] + 1 }), { fixed: 0, boss: 0, "random-pool": 0 });
   const filteredEnemies = enemyRecords.filter((enemy) => {
     if (enemyKindFilter !== "all" && enemy.kind !== enemyKindFilter) return false;
     const query = enemyQuery.trim().toLowerCase();
@@ -1501,6 +1502,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
     const relatedText = [
       enemy.name,
       ...enemy.facts.flatMap((fact) => [fact.label, fact.detail ?? ""]),
+      ...enemy.blueMagic.map((entry) => entry.name),
       ...enemy.strategies.flatMap((strategy) => [strategy.title, strategy.detail]),
       ...enemy.steals.map((entry) => lootItemName(entry.itemId, entry.itemName)),
       ...enemy.drops.map((entry) => lootItemName(entry.itemId, entry.itemName)),
@@ -1516,7 +1518,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
           <div>
             <div className="eyebrow">BESTIARY · PARTIAL COVERAGE</div>
             <h2 id="enemy-reference-heading">Mount Gulug encounters</h2>
-            <p>{enemyRecords.length} enemy records · {enemyEncounters.length} fixed or boss encounters · {enemyCatalogCoverage.note}</p>
+            <p>{enemyRecords.length} enemy records · {enemyEncounters.length} encounter groups ({encounterKindCounts.fixed} fixed, {encounterKindCounts.boss} boss, {encounterKindCounts["random-pool"]} random pools) · {enemyCatalogCoverage.note}</p>
           </div>
           <button className="secondary-button" type="button" onClick={() => onOpenChapter("disc-3.lost-continent")}>Open walkthrough <span aria-hidden="true">→</span></button>
         </div>
@@ -1542,8 +1544,8 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
               {},
             );
             const encounterTitles = enemy.encounterIds
-              .map((encounterId) => enemyEncounters.find((encounter) => encounter.id === encounterId)?.title)
-              .filter((title): title is string => Boolean(title));
+              .map((encounterId) => enemyEncounters.find((encounter) => encounter.id === encounterId))
+              .filter((encounter): encounter is (typeof enemyEncounters)[number] => Boolean(encounter));
             const relatedMissables = enemy.missableIds
               .map((missableId) => missables.find((record) => record.id === missableId))
               .filter((record): record is MissableRecord => Boolean(record));
@@ -1554,7 +1556,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
             return <details className="enemy-record" key={enemy.id}>
               <summary className="enemy-record-summary">
                 <span className="reference-index">{String(index + 1).padStart(2, "0")}</span>
-                <span className="enemy-record-name"><strong>{enemy.name}</strong><small>{enemy.kind === "boss" ? "Story boss" : "Fixed encounter enemy"} · {encounterTitles.length} linked {encounterTitles.length === 1 ? "encounter" : "encounters"}</small></span>
+                <span className="enemy-record-name"><strong>{enemy.name}</strong><small>{enemy.kind === "boss" ? "Story boss" : encounterTitles.some((encounter) => encounter.kind === "random-pool") ? "Random encounter enemy" : "Fixed encounter enemy"} · {encounterTitles.length} linked {encounterTitles.length === 1 ? "encounter group" : "encounter groups"}</small></span>
                 <span className="enemy-record-scope">Disc III · Mount Gulug</span>
                 <ChevronDown className="enemy-record-chevron" size={16} aria-hidden="true" />
               </summary>
@@ -1597,6 +1599,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
                   <section className="enemy-detail-section" aria-label={`${enemy.name} route notes`}>
                     <h3>Route notes</h3>
                     <ul className="enemy-strategies">{enemy.strategies.map((strategy) => <li key={strategy.title}><strong>{strategy.title}</strong><span>{strategy.detail}</span></li>)}</ul>
+                    {encounterTitles.length > 0 && <div className="enemy-encounter-list"><h4>Encounter locations</h4><ul>{encounterTitles.map((encounter) => <li key={encounter.id}><strong>{encounter.kind === "random-pool" ? "Random encounter pool" : encounter.kind === "boss" ? "Story boss" : "Fixed encounter"}</strong><span>{encounter.title}</span><small>{encounter.location}</small></li>)}</ul></div>}
                     {enemy.notes.map((note) => <p className="enemy-conflict-note" key={note}>{note}</p>)}
                     {relatedMissables.length > 0 && <div className="enemy-cutoff-links">
                       {relatedMissables.map((record) => <p key={record.id}><strong>One-time window:</strong> {record.deadline} <button type="button" className="inline-link" onClick={() => onNavigate("missables")}>Review missable</button></p>)}
@@ -1619,7 +1622,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
           })}
           {filteredEnemies.length === 0 && <p className="empty-state">No enemy records match those filters.</p>}
         </div>
-        <p className="enemy-coverage-footnote">The remaining Mount Gulug enemies, all other areas, and release-by-release parity are not yet catalogued. Unverified source differences stay visible in each record.</p>
+        <p className="enemy-coverage-footnote">The source-listed Mount Gulug enemy roster is represented here; other areas and release-by-release parity are not yet catalogued. Unverified source differences stay visible in each record.</p>
       </section>
       <section className="reference-coverage" aria-label="Reference database inventory">
         {referenceInventory.map((item, index) => {

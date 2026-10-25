@@ -82,6 +82,7 @@ const supportedEnemyStatFields = new Set(["level", "HP", "MP", "EXP", "AP", "Gil
 const supportedEnemyVerifications = new Set(["cross-checked", "single-source", "disputed"]);
 const supportedEnemyFactCategories = new Set(["type", "elemental-weakness", "elemental-resistance", "status-vulnerability", "attack"]);
 const supportedEnemyLootSlots = new Set(["always", "common", "uncommon", "semi-rare", "rare"]);
+const supportedEnemyEncounterKinds = new Set(["fixed", "boss", "random-pool"]);
 function validateEnemyReferences(label: string, linkedObjectiveIds: string[], linkedMissableIds: string[], linkedCutoffIds: string[], chapterId: string) {
   for (const objectiveId of linkedObjectiveIds) {
     const objective = objectivesById.get(objectiveId);
@@ -184,6 +185,7 @@ for (const enemy of enemyRecords) {
 }
 
 for (const encounter of enemyEncounters) {
+  if (!supportedEnemyEncounterKinds.has(encounter.kind)) errors.push(`Enemy encounter ${encounter.id} has unsupported kind ${encounter.kind}.`);
   if (!enemyCatalogCoverage.chapterIds.includes(encounter.chapterId)) errors.push(`Enemy encounter ${encounter.id} is outside the declared coverage chapter scope.`);
   if (!areaIds.has(encounter.chapterId) || !walkthroughChapterIds.has(encounter.chapterId)) errors.push(`Enemy encounter ${encounter.id} references a missing walkthrough chapter ${encounter.chapterId}.`);
   if (!encounter.title.trim() || !encounter.location.trim() || encounter.notes.length === 0) errors.push(`Enemy encounter ${encounter.id} is missing route context.`);
@@ -194,7 +196,14 @@ for (const encounter of enemyEncounters) {
     const enemy = enemyRecords.find((record) => record.id === member.enemyId);
     if (!enemy) errors.push(`Enemy encounter ${encounter.id} references unknown enemy ${member.enemyId}.`);
     else if (!enemy.encounterIds.includes(encounter.id)) errors.push(`Enemy encounter ${encounter.id} is missing from ${member.enemyId}'s encounter links.`);
-    if (!Number.isInteger(member.quantity) || member.quantity < 1) errors.push(`Enemy encounter ${encounter.id} has an invalid quantity for ${member.enemyId}.`);
+    if (encounter.kind === "random-pool") {
+      if (member.quantity !== null) errors.push(`Random encounter pool ${encounter.id} must not claim an exact quantity for ${member.enemyId}.`);
+      if (enemy?.kind === "boss") errors.push(`Random encounter pool ${encounter.id} cannot contain boss ${member.enemyId}.`);
+    } else {
+      if (!Number.isInteger(member.quantity) || member.quantity === null || member.quantity < 1) errors.push(`Enemy encounter ${encounter.id} has an invalid quantity for ${member.enemyId}.`);
+      if (encounter.kind === "boss" && enemy?.kind !== "boss") errors.push(`Boss encounter ${encounter.id} contains non-boss enemy ${member.enemyId}.`);
+      if (encounter.kind === "fixed" && enemy?.kind === "boss") errors.push(`Fixed encounter ${encounter.id} contains boss enemy ${member.enemyId}.`);
+    }
   }
   validateEnemyReferences(`Enemy encounter ${encounter.id}`, encounter.objectiveIds, encounter.missableIds, encounter.cutoffIds, encounter.chapterId);
 }
@@ -644,7 +653,7 @@ console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} cove
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
 console.log(`Route cutoffs: ${gameRouteCutoffs.length} windows link ${linkedRouteMissableIds.size}/${missables.length} missable warnings; ${missables.filter((record) => record.severity === "high" || record.severity === "critical").length} high/critical records are included.`);
 console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
-console.log(`Enemy reference: ${enemyRecords.length} partial record(s) across ${enemyCatalogCoverage.chapterIds.length} chapter slice(s), with ${enemyEncounters.length} fixed/boss encounter group(s).`);
+console.log(`Enemy reference: ${enemyRecords.length} partial record(s) across ${enemyCatalogCoverage.chapterIds.length} chapter slice(s), with ${enemyEncounters.length} encounter group(s).`);
 for (const warning of warnings) console.warn(`WARN: ${warning}`);
 for (const error of errors) console.error(`ERROR: ${error}`);
 if (errors.length > 0) process.exitCode = 1;

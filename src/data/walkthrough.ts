@@ -4768,7 +4768,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lost-continent-gulug-preparation",
             kind: "save",
             text: "Before exploring the volcano, equip Antibody against Venom and Bio's Poison, and Body Temp against Heat and Freeze if those abilities are available. Put Bird Killer on physical attackers if you have room, then save at Moolan whenever the route returns past the well.",
-            detail: "Antibody does not prevent Virus; keep Vaccines ready for Meltigemini. The local enemies include fixed Red Dragon encounters and Worm Hydra, so bring healing and plan a safe chance for Quina to use Eat if you want the skills.",
+            detail: "Antibody does not prevent Virus; keep Vaccines ready for Meltigemini. The random pools include Grenade and Vepal (Red) throughout, Worm Hydra inside buildings, and both Wraith forms outside. Quina can learn Frost from Wraith (Blue), Bad Breath from Worm Hydra, and Mustard Bomb from Grenade, Vepal (Red), or Wraith (Red). Red Dragon is a separate set of fixed encounters.",
           },
           {
             id: "lost-continent-gulug-entrance-building",
@@ -4809,8 +4809,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lost-continent-gulug-first-red-dragons",
             kind: "combat",
-            text: "On the return from the Gaia Gear path, fight the fixed pair of Red Dragons. During Mount Gulug encounters, use Quina's Eat on Wraith (Blue) for Frost or Worm Hydra for Bad Breath if either is still missing; use Eat on a Red Dragon for Twister before finishing the pair. Use Wind-reducing equipment or status abilities if available, and heal between attacks.",
-            detail: "During Mount Gulug's encounters, Quina can also Eat Wraith (Blue) for Frost and Worm Hydra for Bad Breath if either spell is still missing. Twister can hit the whole party and its damage varies. Sources agree these Red Dragons are scripted; some call them the final Twister opportunity, while another reports a later Memoria source. Learn it here if you want to secure the spell before leaving Gulug.",
+            text: "On the return from the Gaia Gear path, fight the fixed pair of Red Dragons. If Quina still needs Twister, use Eat before defeating either dragon. Use Wind-reducing equipment or status abilities if available, and heal between attacks.",
+            detail: "Twister can hit the whole party and its damage varies. Sources agree these Red Dragons are scripted; some call them the final Twister opportunity, while another reports a later Memoria source. Learn it here if you want to secure the spell before leaving Gulug.",
             objectiveIds: ["disc-3.lost-continent.mount-gulug-blue-magic"],
           },
           {

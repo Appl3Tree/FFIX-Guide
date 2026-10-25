@@ -62,8 +62,8 @@ export type EnemyEncounter = {
   title: string;
   chapterId: string;
   location: string;
-  kind: "fixed" | "boss";
-  formation: { enemyId: string; quantity: number }[];
+  kind: "fixed" | "boss" | "random-pool";
+  formation: { enemyId: string; quantity: number | null }[];
   sourceIds: string[];
   objectiveIds: string[];
   missableIds: string[];
@@ -82,6 +82,38 @@ const storyExitCutoffId = "cutoff.mount-gulug.story-exit";
 const meltigeminiObjectiveId = "disc-3.lost-continent.meltigemini-steals";
 const meltigeminiMissableId = "missable.disc-3.lost-continent.meltigemini-steals";
 const meltigeminiCutoffId = "cutoff.mount-gulug.meltigemini-steals";
+const enemyListSourceId = "gamefaqs-enemy-list-71891";
+const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
+type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
+
+function localEnemy(record: LocalEnemyInput): EnemyRecord {
+  return {
+    ...record,
+    kind: "ordinary",
+    chapterId: mountGulugChapterId,
+    versionScope: "PlayStation walkthrough data; parity with remastered releases has not been audited.",
+    missableIds: [],
+    cutoffIds: [],
+    sourceIds: [...mountGulugEnemySources],
+    coverage: "partial",
+  };
+}
+
+function enemyLoot(slot: EnemyTableSlot, itemId: string | null, itemName?: string): EnemyLootSlot {
+  return { slot, itemId, ...(itemName ? { itemName } : {}), sourceIds: [enemyListSourceId] };
+}
+
+function enemyFact(category: EnemyFact["category"], label: string, detail?: string): EnemyFact {
+  return { category, label, ...(detail ? { detail } : {}), sourceIds: [enemyListSourceId] };
+}
+
+function enemyStats(entries: [EnemyStatField, number][]): EnemyStatClaim[] {
+  return entries.map(([field, value]) => ({ field, value, sourceIds: [enemyListSourceId], verification: "single-source" }));
+}
+
+function quinaSkill(name: string): EnemyBlueMagic {
+  return { name, command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [twisterObjectiveId] };
+}
 
 export const enemyEncounters: EnemyEncounter[] = [
   {
@@ -136,6 +168,153 @@ export const enemyEncounters: EnemyEncounter[] = [
     cutoffIds: [meltigeminiCutoffId],
     notes: ["This is a one-time boss fight; steal attempts must happen before the victory."],
   },
+  {
+    id: "encounter.mount-gulug.common-pool",
+    title: "Common random encounter pool",
+    chapterId: mountGulugChapterId,
+    location: "Throughout Mount Gulug",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.grenade", quantity: null },
+      { enemyId: "enemy.vepal-red", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug"],
+    objectiveIds: [],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Grenade and Vepal (Red) are listed in all three dungeon levels; this pool is a location summary, not a fixed formation."],
+  },
+  {
+    id: "encounter.mount-gulug.building-pool",
+    title: "Building random encounter pool",
+    chapterId: mountGulugChapterId,
+    location: "Inside Mount Gulug buildings",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.worm-hydra", quantity: null }],
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug"],
+    objectiveIds: [twisterObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Worm Hydra is restricted to building interiors in the documented local encounter distribution."],
+  },
+  {
+    id: "encounter.mount-gulug.outside-pool",
+    title: "Outside random encounter pool",
+    chapterId: mountGulugChapterId,
+    location: "Outside the Mount Gulug buildings",
+    kind: "random-pool",
+    formation: [
+      { enemyId: "enemy.wraith-blue", quantity: null },
+      { enemyId: "enemy.wraith-red", quantity: null },
+    ],
+    sourceIds: ["gamefaqs-lost-continent-71891", "jegged-mount-gulug"],
+    objectiveIds: [twisterObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["Both Wraith color variants are listed outside; the guide sources do not specify a fixed party count for random encounters."],
+  },
+];
+
+const localEnemyRecords: EnemyRecord[] = [
+  localEnemy({
+    id: "enemy.grenade",
+    name: "Grenade",
+    encounterIds: ["encounter.mount-gulug.common-pool"],
+    stats: enemyStats([["level", 36], ["HP", 4685], ["MP", 1240], ["EXP", 7459], ["AP", 2], ["Gil", 1336]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", "game-item.ether")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.peridot"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Aerial"),
+      enemyFact("elemental-weakness", "Ice and Wind"),
+      enemyFact("elemental-resistance", "Earth nullified; Fire damage halved"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Firaga, Flame, and Canon", "Flame removes about 20% of each target's maximum HP; Canon halves current HP."),
+    ],
+    blueMagic: [quinaSkill("Mustard Bomb")],
+    strategies: [{ title: "Exploit its elemental weaknesses", detail: "Ice and Wind attacks are effective. Quina can learn Mustard Bomb with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["Grenade appears in the common Mount Gulug random pool. The source table lists no always-drop item and three conditional drop slots."],
+  }),
+  localEnemy({
+    id: "enemy.vepal-red",
+    name: "Vepal (Red)",
+    encounterIds: ["encounter.mount-gulug.common-pool"],
+    stats: enemyStats([["level", 35], ["HP", 4022], ["MP", 1214], ["EXP", 6933], ["AP", 2], ["Gil", 1326]]),
+    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", "game-item.ether")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Topaz"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "Aerial"),
+      enemyFact("elemental-weakness", "Ice and Wind"),
+      enemyFact("elemental-resistance", "Fire resisted; Earth nullified"),
+      enemyFact("status-vulnerability", "Berserk, Confuse, Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Lava Gun, Mustard Bomb, Blizzaga, Twister, and Scorch", "Lava Gun deals heavy Fire-elemental physical damage; Mustard Bomb inflicts Heat. Scorch can nullify elemental damage."),
+    ],
+    blueMagic: [quinaSkill("Mustard Bomb")],
+    strategies: [{ title: "Use Ice or Wind damage", detail: "Both elements exploit Vepal's weaknesses. Quina can learn Mustard Bomb with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["Vepal (Red) is listed throughout the dungeon; this record refers to the red Mount Gulug form, not the later Vepal (Green). Topaz is retained as source text because it is not a normalized item record yet."],
+  }),
+  localEnemy({
+    id: "enemy.worm-hydra",
+    name: "Worm Hydra",
+    encounterIds: ["encounter.mount-gulug.building-pool"],
+    stats: [
+      ...enemyStats([["level", 37], ["MP", 1268], ["EXP", 8010], ["AP", 3], ["Gil", 1345]]),
+      { field: "HP", value: 4846, sourceIds: [enemyListSourceId, "jegged-mount-gulug"], verification: "disputed" },
+      { field: "HP", value: 4486, sourceIds: ["gamefaqs-lost-continent-71891"], verification: "disputed" },
+    ],
+    steals: [enemyLoot("common", "game-item.hi-potion"), enemyLoot("uncommon", null, "Antidote"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "Dragon"),
+      enemyFact("elemental-weakness", "Ice"),
+      enemyFact("elemental-resistance", "Fire damage halved"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Venom Breath, Cold Breath, Flame, Aero Breath, and Lightning", "Venom Breath can inflict Venom; Cold Breath can inflict Freeze. Flame, Aero Breath, and Lightning each deal damage based on a portion of maximum HP."),
+    ],
+    blueMagic: [quinaSkill("Bad Breath")],
+    strategies: [{ title: "Prepare for status and percentage damage", detail: "Antibody helps against Venom, Body Temp against Freeze, and Ice attacks exploit its weakness. Quina can learn Bad Breath with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-lost-continent-71891", "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["HP is disputed: the GameFAQs enemy table and Jegged list 4,846, while the GameFAQs Lost Continent walkthrough lists 4,486. It appears only inside the Mount Gulug buildings in the documented local encounter pool."],
+  }),
+  localEnemy({
+    id: "enemy.wraith-blue",
+    name: "Wraith (Blue)",
+    encounterIds: ["encounter.mount-gulug.outside-pool"],
+    stats: enemyStats([["level", 36], ["HP", 4686], ["MP", 1239], ["EXP", 8950], ["AP", 2], ["Gil", 1654]]),
+    steals: [enemyLoot("common", "game-item.ore"), enemyLoot("uncommon", null, "Nothing"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Opal"), enemyLoot("common", null, "Nothing"), enemyLoot("uncommon", null, "Echo Screen"), enemyLoot("rare", null, "Nothing")],
+    facts: [
+      enemyFact("type", "Aerial and Undead"),
+      enemyFact("elemental-weakness", "Fire, Wind, and Holy"),
+      enemyFact("elemental-resistance", "Earth nullified; Ice and Shadow damage halved"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Devil's Candle, Blizzaga, and Doom", "Devil's Candle can inflict Freeze; Doom applies the Doom status."),
+    ],
+    blueMagic: [quinaSkill("Frost")],
+    strategies: [{ title: "Use its Undead weakness", detail: "Healing effects and Fire attacks are especially effective. Quina can learn Frost with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["Both Wraith color forms are listed outside the buildings. Opal and Echo Screen are preserved as table results because those items are not normalized in the current catalog."],
+  }),
+  localEnemy({
+    id: "enemy.wraith-red",
+    name: "Wraith (Red)",
+    encounterIds: ["encounter.mount-gulug.outside-pool"],
+    stats: enemyStats([["level", 37], ["HP", 4846], ["MP", 1268], ["EXP", 8010], ["AP", 2], ["Gil", 1345]]),
+    steals: [enemyLoot("common", null, "Topaz"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", null, "Nothing")],
+    drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Topaz"), enemyLoot("uncommon", "game-item.hi-potion"), enemyLoot("rare", "game-item.ether")],
+    facts: [
+      enemyFact("type", "Aerial and Undead"),
+      enemyFact("elemental-weakness", "Ice, Wind, and Holy"),
+      enemyFact("elemental-resistance", "Earth nullified; Fire and Shadow damage halved"),
+      enemyFact("status-vulnerability", "Darkness, KO, Doom, Freeze, Heat, Mini, Petrify, Poison, Silence, Sleep, Slow, Stop, Trouble, and Venom"),
+      enemyFact("attack", "Devil's Candle, Firaga, and Doom", "Devil's Candle can inflict Heat; Doom applies the Doom status."),
+    ],
+    blueMagic: [quinaSkill("Mustard Bomb")],
+    strategies: [{ title: "Use Ice, Wind, or healing", detail: "Its Undead nature makes healing effective; Ice and Wind are listed weaknesses. Quina can learn Mustard Bomb with Eat.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"] }],
+    routeObjectiveIds: [],
+    notes: ["Wraith (Red) is one of the two color variants listed outside the buildings. Topaz is retained as source text because it is not a normalized item record yet."],
+  }),
 ];
 
 export const enemyRecords: EnemyRecord[] = [
@@ -252,17 +431,21 @@ export const enemyRecords: EnemyRecord[] = [
       "Steal percentages differ between references and are intentionally not normalized here.",
     ],
   },
+  ...localEnemyRecords,
 ];
 
 export const enemyCatalogCoverage = {
   status: "partial" as const,
   chapterIds: [mountGulugChapterId],
-  enemyIds: ["enemy.red-dragon", "enemy.meltigemini"],
+  enemyIds: ["enemy.red-dragon", "enemy.meltigemini", ...localEnemyRecords.map((enemy) => enemy.id)],
   encounterIds: [
     "encounter.mount-gulug.red-dragon-return-pair",
     "encounter.mount-gulug.red-dragon-mineshaft",
     "encounter.mount-gulug.red-dragon-lower-pair",
     "encounter.mount-gulug.meltigemini",
+    "encounter.mount-gulug.common-pool",
+    "encounter.mount-gulug.building-pool",
+    "encounter.mount-gulug.outside-pool",
   ],
-  note: "Initial reference slice for Mount Gulug's fixed Red Dragon encounters and Meltigemini. Other local enemies and all other areas remain to be researched.",
+  note: "Mount Gulug profiles cover the four source-listed random enemy families and variants, three fixed Red Dragon groups, and Meltigemini. Other areas and release-by-release parity remain to be researched.",
 };
