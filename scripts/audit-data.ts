@@ -1059,6 +1059,41 @@ if (!discTwoJumpRopeStep?.detail?.includes("documented second opportunity") || !
 if (!discThreeJumpRopeStep?.detail?.includes("best-effort") || !discThreeJumpRopeStep.detail.includes("not a promised recovery") || !discThreeJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)) {
   errors.push("The Disc III Mosh step must label the check as best effort and avoid claiming confirmed recovery.");
 }
+const blankEquipmentObjectiveId = "disc-1.evil-forest.blank-equipment";
+const blankEquipmentWarning = missablesById.get("missable.disc-1.evil-forest.blank-equipment");
+const blankSilkShirtPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.evil-forest.blank-silk-shirt");
+const blankSilkShirtAlternativePathIds = [
+  "item-path.disc-1.alexandria.swordfight-silk-shirt-reward",
+  "item-path.disc-1.ice-cavern.black-waltz-1-silk-shirt-steal",
+  "item-path.disc-1.village-of-dali.silk-shirt-shop",
+  "item-path.disc-2.treno.silk-shirt-shop",
+  "item-path.disc-2.return-to-lindblum.silk-shirt-shop",
+  "item-path.disc-2.outer-continent.silk-shirt-black-mage-village-shop",
+];
+const blankEquipmentStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-1.evil-forest")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.objectiveIds?.includes(blankEquipmentObjectiveId));
+if (
+  !blankEquipmentWarning?.sourceIds.includes("gamefaqs-items-71891") ||
+  !blankEquipmentWarning.recovery.includes("You cannot retrieve the same copies from Blank later") ||
+  !blankEquipmentWarning.recovery.includes("80–99-noble swordfighting reward") ||
+  !blankEquipmentWarning.recovery.includes("Black Waltz 1 steal") ||
+  !blankEquipmentWarning.recovery.includes("Dali's 400-Gil shop") ||
+  !blankEquipmentWarning.recovery.includes("Black Mage Village")
+) {
+  errors.push("Blank's equipment warning must separate lost copies from the sourced Silk Shirt alternatives.");
+}
+if (
+  !blankSilkShirtPath ||
+  blankSilkShirtPath.itemId !== "game-item.silk-shirt" ||
+  blankSilkShirtPath.availability !== "limited-window" ||
+  !blankSilkShirtPath.walkthroughObjectiveIds?.includes(blankEquipmentObjectiveId) ||
+  blankSilkShirtAlternativePathIds.some((pathId) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === "game-item.silk-shirt")) ||
+  !blankEquipmentStep?.objectiveIds?.includes(blankEquipmentObjectiveId)
+) {
+  errors.push("Blank's Silk Shirt loss must link its limited-window copy to every modeled recovery path and the forest checklist.");
+}
 const jumpRopeLetterCutoffs = gameRouteCutoffs.filter((cutoff) => cutoff.missableIds.includes(jumpRopeLetterWarning?.id ?? ""));
 const discOneJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.alexandria.jump-rope-mognet-letter");
 const discTwoJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id === "cutoff.return-to-alexandria.jump-rope-letter-recovery");

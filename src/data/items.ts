@@ -3641,9 +3641,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     availability: "limited-window",
     recommendedBeforeChapterId: "disc-1.evil-forest",
     conditions: "Blank joins the party with a Silk Shirt equipped. Remove it after the Plant Spider battle and before the escape sequence closes his equipment window.",
-    notes: "This particular copy is lost when Blank leaves if it is still equipped; Silk Shirt can be replaced through later shops or other routes.",
+    notes: "This particular copy is lost when Blank leaves if it is still equipped. The item type has separate sources: the 80–99-noble swordfighting reward, the Black Waltz 1 steal, Dali's 400-Gil shop, and later Treno, Lindblum, and Black Mage Village shops.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.blank-equipment"],
-    sourceIds: ["gamefaqs-items-71891", "jegged-evil-forest", "vgkami-evil-forest", "elitegrindlab-evil-forest"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-ice-cavern-71891", "gamefaqs-shops-71891", "gamefaqs-alexandria-71891", "gamefaqs-dali-71891", "jegged-evil-forest", "vgkami-evil-forest", "elitegrindlab-evil-forest"],
   },
   {
     id: "item-path.disc-2.madain-sari.eiko-starting-silk-shirt",

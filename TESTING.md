@@ -4,6 +4,8 @@ Last updated: 2026-10-25
 
 ## Latest verification
 
+The Blank equipment recovery update passes `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check`. Audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 358 sources; all warnings map to 97 cutoff windows. The item catalog has 209 records and 831 paths. The build emits 1,965.26 kB JavaScript (479.91 kB gzip) and 60.22 kB CSS (12.77 kB gzip); Vite's existing chunk-size advisory remains. Tests and direct browser, gameplay, and release verification were not run.
+
 The Treno Griffin, Tantarian, Gargan Roo, and Autograph/Moogle Suit register corrections change documentation only. `git diff --check` passes; lint, typecheck, data audit, and production build were not rerun because application data and code did not change.
 
 The Namingway Card recovery update passes `npm run lint`, `npm run typecheck`, `npm run audit:data`, `npm run build`, and `git diff --check`. The audit reports 0 errors and 182 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 358 sources; all warnings map to 97 cutoff windows. The route has 71 links, including a source-backed optional return to Desert Palace. The build emits 1,964.81 kB JavaScript (479.81 kB gzip) and 60.22 kB CSS (12.77 kB gzip), with Vite's existing chunk-size advisory. Tests and direct browser, gameplay, and release verification were not run.

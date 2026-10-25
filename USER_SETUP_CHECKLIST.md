@@ -8,6 +8,8 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
+No account-owner setup action changed. The latest local B02 update clarifies that Blank's exact equipped Silk Shirt copy is lost when he leaves but the item type has six modeled alternatives. Lint, typecheck, audit, build, and whitespace checks pass; no GitHub, Firebase, deployment, or sign-in work is needed. Tests and direct browser, game, and release verification remain open.
+
 No account-owner setup action changed. The latest register updates reflect the hideout-entry cutoff for the Autograph/Moogle Suit, distinguish one-time Griffin/Tantarian encounters from later card/item recovery, and confirm later Chain Plate/Phoenix Down sources for missed Gargan Roo chests. Direct game/release verification remains open. `git diff --check` passes; no GitHub, Firebase, deployment, or sign-in action is needed.
 
 No account-owner setup action changed. The latest B02 update corrects Namingway Card recovery: Desert Palace can be re-entered after Oeilvert, with the Shimmering Island portal as the final documented Disc III cutoff. The route has 71 links, and all 138 missable warnings map to 97 cutoff windows. Lint, typecheck, audit, build, and whitespace checks pass with 0 audit errors and 182 coverage warnings. No GitHub, Firebase, deployment, or sign-in work is needed; tests and direct browser, game, and release verification remain open.
