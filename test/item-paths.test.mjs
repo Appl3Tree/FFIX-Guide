@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { objectives, sources } from "../src/data/guide.ts";
+import { missables, objectives, sources } from "../src/data/guide.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
@@ -403,8 +403,45 @@ test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients
     assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
   }
 
-  assert.equal(itemAcquisitionPaths.length, 244);
-  assert.equal(synthesisRecipes.length, 8);
+  assert.equal(itemAcquisitionPaths.length, 257);
+  assert.equal(synthesisRecipes.length, 9);
+});
+
+test("Magician Shoes and Bone Wrist have sourced acquisition and recovery paths", () => {
+  const magicianShoes = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.magician-shoes");
+  const boneWrist = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.bone-wrist");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.magician-shoes");
+  const stealObjective = objectives.find((objective) => objective.id === "disc-2.journey-to-cleyra.ralvurahva-steals");
+  const warning = missables.find((entry) => entry.id === "missable.disc-2.journey-to-cleyra.ralvurahva-steals");
+  const shoesClaims = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.magician-shoes");
+
+  assert.equal(magicianShoes.length, 8);
+  assert.equal(magicianShoes.filter((path) => path.method === "chest").length, 2);
+  assert.equal(magicianShoes.filter((path) => path.method === "synthesis").length, 6);
+  assert.equal(boneWrist.length, 7);
+  assert.equal(boneWrist.filter((path) => path.method === "shop").length, 6);
+  assert.equal(boneWrist.find((path) => path.method === "steal")?.availability, "one-time-encounter");
+  assert.deepEqual(recipe?.ingredients, [
+    { itemId: "game-item.germinas-boots", quantity: 1 },
+    { itemId: "game-item.bone-wrist", quantity: 1 },
+  ]);
+  assert.equal(recipe?.cost.amount, 1500);
+  assert.equal(shoesClaims.length, 3);
+  assert.deepEqual(new Set(shoesClaims.map((claim) => claim.abilityName)), new Set(["Blind", "Clear Headed", "MP+10%"]));
+  assert.equal(equipmentAbilityClaims.find((claim) => claim.itemId === "game-item.bone-wrist")?.abilityName, "Add Status");
+  assert.ok(stealObjective?.sourceIds.includes("gamefaqs-items-71891"));
+  assert.ok(warning?.recovery?.includes("Bone Wrist"));
+  assert.ok(warning?.recovery?.includes("Mythril Fork recovery has not yet been established"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.journey-to-cleyra"));
+
+  for (const path of [...magicianShoes, ...boneWrist]) {
+    for (const sourceId of path.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${path.id} references unknown source ${sourceId}`);
+    }
+  }
+  for (const sourceId of recipe?.sourceIds ?? []) {
+    assert.ok(sources.some((source) => source.id === sourceId), `recipe references unknown source ${sourceId}`);
+  }
 });
 
 test("Silk Shirt has source-backed starting, encounter, reward, and shop routes", () => {

@@ -20,6 +20,20 @@ export type SynthesisRecipe = {
 // This is an initial, source-cross-checked recipe slice, not a complete list.
 export const synthesisRecipes: SynthesisRecipe[] = [
   {
+    id: "synthesis-recipe.magician-shoes",
+    resultItemId: "game-item.magician-shoes",
+    ingredients: [
+      { itemId: "game-item.germinas-boots", quantity: 1 },
+      { itemId: "game-item.bone-wrist", quantity: 1 },
+    ],
+    chapterId: "disc-2.return-to-lindblum",
+    shopId: "lindblum.synthesis-shop.disc-2",
+    shopName: "Lindblum Synthesis Shop (post-Cleyra)",
+    cost: { currency: "gil", amount: 1500 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"],
+    notes: "GameFAQs and Caves of Narshe list Germinas Boots + Bone Wrist for 1,500 Gil. GameFAQs' main item list puts the early Lindblum shop after Cleyra, while the older item-location guide says after Disc I; the data keeps that timing unresolved and also models the separately documented Disc III–IV Lindblum shop.",
+  },
+  {
     id: "synthesis-recipe.feather-boots",
     resultItemId: "game-item.feather-boots",
     ingredients: [
