@@ -1241,11 +1241,20 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
   {
     id: "cutoff.treno-first-visit.ates",
     edgeId: "story.treno-to-journey-to-cleyra",
-    title: "Treno first-visit ATE sequence",
+    title: "Treno first-six ATE safe route",
     certainty: "conservative",
-    trigger: "View the seven Treno ATEs before advancing the story. The walkthrough uses the researched entrance-to-north route and leaves the eligible prompts visible before opening the Gargan Roo hatch.",
+    trigger: "For the safe screen-order route, view Treno Tradition, Pursuit, Confusion, Ambition, Meeting Place, and Unexpected Visitor before the city pickup sweep and Doctor Tot's story sequence. GameFAQs says the Auction House closes unviewed scenes except Unexpected Visitor and Crime and Punishment; one reviewed route reports Unexpected Visitor may still appear on the tower return if it was missed. Treat this as a conservative route checkpoint, not a verified final trigger for Unexpected Visitor.",
     missableIds: ["missable.disc-2.treno.ates"],
     sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"],
+  },
+  {
+    id: "cutoff.treno.tower-exit-crime-and-punishment",
+    edgeId: "story.treno-to-journey-to-cleyra",
+    title: "Treno Crime and Punishment after Doctor Tot",
+    certainty: "source-supported",
+    trigger: "After Doctor Tot opens the Gargan Roo hatch, climb back out of the tower and view Crime and Punishment before descending through the hatch.",
+    missableIds: ["missable.disc-2.treno.ates"],
+    sourceIds: ["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno"],
   },
   {
     id: "cutoff.treno-four-armed-man.power-belt",

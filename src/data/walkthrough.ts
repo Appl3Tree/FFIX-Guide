@@ -1533,7 +1533,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-six-screen-ates",
             kind: "cutoff",
             text: "Follow Dagger's path in order: go west for Pursuit, descend the stairs for Confusion, head south for Ambition, return to the entrance and take the right-hand stairs for Meeting Place, then go north one screen for Unexpected Visitor. Do not enter the Auction House or stop for city pickups before the route reaches Unexpected Visitor.",
-            detail: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab agree on this screen route. GameFAQs says entering the Auction House closes any unviewed ATE except Unexpected Visitor and Crime and Punishment, so finish the first six before exploring. A TrueAchievements checklist appears to place Unexpected Visitor before Ambition; this route preserves the four-source order. Keep the outside-Treno save until all seven are checked.",
+            detail: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab agree on this screen route. GameFAQs says entering the Auction House closes unviewed ATEs except Unexpected Visitor and Crime and Punishment, so this route finishes all six before exploring. EliteGrindLab reports that one guide says Unexpected Visitor can still appear on the tower return if unseen; the last possible trigger remains unverified. A TrueAchievements checklist appears to place Unexpected Visitor before Ambition, so this walkthrough preserves the four-source order. Keep the outside-Treno save until all seven are checked.",
           },
           {
             id: "treno-power-belt-intercept",
@@ -1584,7 +1584,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-supersoft-and-exit",
         title: "Doctor Tot's tower — Supersoft and the final ATE",
         summary: "Resolve the Treno story scenes, collect the west-walkway dagger, then see Crime and Punishment before descending to Gargan Roo.",
-        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "jegged-treno", "elitegrindlab-treno"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-treno-auction-71891", "gamefaqs-items-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno"],
         steps: [
           {
             id: "treno-story-scenes",
@@ -1610,7 +1610,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-crime-and-punishment-ate",
             kind: "cutoff",
             text: "After Doctor Tot opens the hatch, climb back up through the tower and leave it to trigger Crime and Punishment. Confirm all seven Treno ATEs are checked before returning to the hatch and descending into Gargan Roo.",
-            detail: "GameFAQs and Jegged place this scene after Doctor Tot opens the Gargan Roo hatch and before Steiner descends. Climb out of the tower, confirm Crime and Punishment, then return to the hatch. Leaving Treno through the hatch without viewing it closes this scene window.",
+            detail: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab place this scene after Doctor Tot opens the Gargan Roo hatch and before the party descends. Climb out of the tower, confirm Crime and Punishment, then return to the hatch. Leaving Treno through the hatch without viewing it closes this scene window.",
             objectiveIds: ["disc-2.treno.ates"],
           },
         ],

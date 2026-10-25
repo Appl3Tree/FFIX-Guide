@@ -8,7 +8,7 @@ Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for U
 
 ## Current project milestone
 
-No account-owner setup action changed. The latest route audit separates Lindblum's source-backed ATE sequence through Baku and His Crew at Hideout exit from the Autograph/Moogle Suit cutoff at Hideout entry and the conservative Javelin first-visit purchase. Repository checks pass; direct game/release verification and post-Grotto shop/city access remain open.
+No account-owner setup action changed. The latest route audit separates Treno's first-six safe ATE route from the source-supported Crime and Punishment tower-exit window after Doctor Tot opens the hatch and before descent. Unexpected Visitor's possible later fallback remains unverified. Repository checks pass; direct game/release verification remains open.
 
 No account-owner setup action changed. The latest guide-content milestone reconciles Cleyra's evacuation directions and removes an unsupported version-dependent label; repository lint, typecheck, audit, build, and whitespace checks pass. Direct game/release verification remains open.
 

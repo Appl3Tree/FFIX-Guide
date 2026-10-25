@@ -156,6 +156,44 @@ if (
   errors.push("Lindblum's Javelin purchase must retain its conservative first-visit recommendation, partial timing status, later-copy recovery, and conflicting GameFAQs shop boundaries.");
 }
 
+const trenoAteWarning = missablesById.get("missable.disc-2.treno.ates");
+const trenoFirstSixCutoff = cutoffsById.get("cutoff.treno-first-visit.ates");
+const trenoFinalAteCutoff = cutoffsById.get("cutoff.treno.tower-exit-crime-and-punishment");
+const trenoAteSection = walkthroughChapters
+  .flatMap((chapter) => chapter.sections)
+  .find((section) => section.id === "treno-ate-route");
+const trenoFirstSixStep = trenoAteSection?.steps.find((step) => step.id === "treno-six-screen-ates");
+const trenoCrimeStep = walkthroughChapters
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.id === "treno-crime-and-punishment-ate");
+if (
+  trenoFirstSixCutoff?.certainty !== "conservative" ||
+  !trenoFirstSixCutoff.title.includes("first-six") ||
+  !trenoFirstSixCutoff.trigger.includes("Unexpected Visitor") ||
+  !trenoFirstSixCutoff.trigger.includes("not a verified final trigger") ||
+  trenoFirstSixCutoff.missableIds.length !== 1 ||
+  trenoFirstSixCutoff.missableIds[0] !== trenoAteWarning?.id ||
+  !["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno", "trueachievements-treno-ate-walkthrough"].every((sourceId) => trenoFirstSixCutoff.sourceIds.includes(sourceId)) ||
+  trenoFinalAteCutoff?.certainty !== "source-supported" ||
+  !trenoFinalAteCutoff.trigger.includes("After Doctor Tot opens") ||
+  !trenoFinalAteCutoff.trigger.includes("before descending") ||
+  trenoFinalAteCutoff.missableIds.length !== 1 ||
+  trenoFinalAteCutoff.missableIds[0] !== trenoAteWarning?.id ||
+  !["gamefaqs-treno-71891", "jegged-treno", "gamerguides-treno", "elitegrindlab-treno"].every((sourceId) => trenoFinalAteCutoff.sourceIds.includes(sourceId)) ||
+  !trenoAteWarning?.deadline.includes("first six") ||
+  !trenoAteWarning.deadline.includes("After Doctor Tot opens") ||
+  !trenoAteWarning.action.includes("Treno Tradition, Pursuit, Confusion, Ambition, Meeting Place, and Unexpected Visitor") ||
+  !trenoAteWarning.action.includes("Crime and Punishment") ||
+  !trenoAteWarning.note?.includes("GameFAQs specifically exempts Unexpected Visitor and Crime and Punishment") ||
+  !trenoAteWarning.note.includes("only Crime and Punishment's after-hatch, before-descent timing") ||
+  !trenoFirstSixStep?.detail.includes("last possible trigger remains unverified") ||
+  trenoCrimeStep?.kind !== "cutoff" ||
+  !trenoCrimeStep.text.includes("After Doctor Tot opens the hatch") ||
+  !trenoCrimeStep.detail.includes("before the party descends")
+) {
+  errors.push("Treno's first-six ATE safe route and source-supported Crime and Punishment hatch window must remain separate, with the Unexpected Visitor fallback uncertainty preserved.");
+}
+
 if (enemyCatalogCoverage.status !== "partial") errors.push("Enemy reference coverage must remain explicitly partial until the full bestiary audit is complete.");
 for (const chapterId of enemyCatalogCoverage.chapterIds) {
   if (!areaIds.has(chapterId)) errors.push(`Enemy reference coverage references unknown chapter ${chapterId}.`);
