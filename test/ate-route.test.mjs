@@ -18,7 +18,7 @@ const branchEvents = movieCriticEligibleEvents.filter((event) => event.exclusive
 test("each supported Movie Critic catalog has an ordered 79-view single-save route", () => {
   assert.equal(movieCriticEligibleEvents.length, 80);
   assert.equal(branchEvents.length, 2);
-  assert.equal(objectiveDependencies.length, 29);
+  assert.equal(objectiveDependencies.length, 31);
 
   assert.deepEqual(
     movieCriticEligibleEvents
@@ -58,6 +58,33 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   for (const event of daliEvents) {
     for (const sourceId of ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali"]) {
       assert.ok(event.sourceIds.includes(sourceId), `${event.title} is missing Dali source ${sourceId}`);
+    }
+  }
+
+  const tournamentTrenoEvents = movieCriticEligibleEvents.filter((event) => event.chapterId === "disc-3.card-tournament");
+  assert.deepEqual(
+    tournamentTrenoEvents.map((event) => event.objectiveId),
+    [
+      "ate.treno-eiko-talks-life",
+      "ate.treno-how-he-ended-up-here",
+      "ate.treno-hippos-prize",
+      "ate.treno-memories-by-the-water",
+      "ate.treno-city-people",
+      "ate.treno-good-old-days",
+      "ate.treno-lessons-of-life",
+      "ate.treno-home-sweet-home",
+      "ate.treno-hallucination",
+      "ate.treno-premonition",
+    ],
+    "Disc III Treno's ten named ATEs include a nine-event route with one branch choice",
+  );
+  assert.deepEqual(eventByObjective.get("ate.treno-home-sweet-home")?.prerequisites, [
+    "ate.treno-good-old-days",
+    "ate.treno-lessons-of-life",
+  ]);
+  for (const event of tournamentTrenoEvents) {
+    for (const sourceId of ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament"]) {
+      assert.ok(event.sourceIds.includes(sourceId), `${event.title} is missing Disc III Treno source ${sourceId}`);
     }
   }
 
