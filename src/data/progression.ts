@@ -1466,9 +1466,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.treno-to-journey-to-cleyra",
     title: "Four-Armed Man and Power Belt",
     certainty: "source-supported",
-    trigger: "After viewing Pursuit, intercept the Four-Armed Man in the hallway near the synthesis shop before he leaves. The reward is a recommended item opportunity with later synthesis recovery documented separately.",
+    trigger: "After viewing Pursuit, intercept the Four-Armed Man in the hallway near the synthesis shop before he leaves. If missed, the Disc IV synthesis recovery requires Glass Buckle + a retained Chain Mail; the reviewed item tables list Chain Mail shops only through Disc II.",
     missableIds: ["missable.disc-2.treno.power-belt"],
-    sourceIds: ["gamefaqs-treno-71891", "gamefaqs-items-71891", "rpgclassics-synthesis", "jegged-treno", "elitegrindlab-treno"],
+    sourceIds: ["gamefaqs-treno-71891", "gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-equipment-33383", "rpgclassics-synthesis", "jegged-treno", "elitegrindlab-treno"],
   },
   {
     id: "cutoff.treno-griffin.stage",
@@ -1700,9 +1700,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.memoria-to-final-battle",
     title: "Tiamat's one-fight steals",
     certainty: "source-supported",
-    trigger: "Attempt Tiamat's Blood Sword and Grand Helm steals before defeating the guardian at the top of Time Interval.",
+    trigger: "Attempt Tiamat's Blood Sword and Grand Helm steals before defeating the guardian at the top of Time Interval. If Grand Helm is missed, the Disc IV recipe needs Cross Helm + Power Belt; rebuilding a missing Power Belt requires Glass Buckle + retained Chain Mail.",
     missableIds: ["missable.disc-4.memoria.tiamat-steals"],
-    sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-items-71891"],
+    sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-equipment-33383"],
   },
   {
     id: "cutoff.nova-dragon.grand-armor",

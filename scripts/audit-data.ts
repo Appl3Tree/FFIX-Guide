@@ -4517,7 +4517,7 @@ const ipsensEquipmentPaths = ipsensEquipmentStock.map(([slug]) => {
   return {
     slug,
     item: gameItems.find((item) => item.id === itemId),
-    paths: itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.shopId === "ipsens-castle.kumool-mogshop"),
+    paths: itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.shopId === "ipsens-castle.kumool-mogshop" && path.chapterId === "disc-3.ipsens-castle"),
   };
 });
 const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths }, index) => {
@@ -5716,6 +5716,53 @@ if (overTheMoonRecords.length !== 3 || overTheMoonRecords.some((achievement) =>
   !achievement.guideSourceIds.includes("gamefaqs-chocobo-hot-cold-ysf-9771")
 )) {
   errors.push("Over the Moon must map the four actual Moonstone sources and distinguish Feather Circle's Moonstone cost.");
+}
+const powerBeltTrenoWarning = missablesById.get("missable.disc-2.treno.power-belt");
+const tiamatGrandHelmWarning = missablesById.get("missable.disc-4.memoria.tiamat-steals");
+const trenoPowerBeltCutoff = cutoffsById.get("cutoff.treno-four-armed-man.power-belt");
+const tiamatStealCutoff = cutoffsById.get("cutoff.memoria.tiamat-steals");
+const powerBeltRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.power-belt");
+const grandHelmRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.grand-helm");
+const disc4PowerBeltPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.power-belt-synthesis");
+const disc4GrandHelmPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.grand-helm-synthesis");
+const disc4CrossHelmPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.cross-helm-ipsen-mogshop");
+const tiamatGrandHelmPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.tiamat-grand-helm-steal");
+const gaiaShopWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "gaia-return-shop-stock");
+const tiamatWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-tiamat-steals");
+if (!powerBeltTrenoWarning?.classification.includes("conditional") ||
+  !powerBeltTrenoWarning.nextAvailability?.includes("retained copy") ||
+  !["gamefaqs-item-ability-10332", "gamefaqs-equipment-33383"].every((sourceId) => powerBeltTrenoWarning.sourceIds.includes(sourceId)) ||
+  !trenoPowerBeltCutoff?.sourceIds.includes("gamefaqs-item-ability-10332") ||
+  !trenoPowerBeltCutoff.sourceIds.includes("gamefaqs-equipment-33383") ||
+  !powerBeltRecipe || powerBeltRecipe.cost.amount !== 2000 || powerBeltRecipe.ingredients.length !== 2 ||
+  !powerBeltRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.glass-buckle" && ingredient.quantity === 1) ||
+  !powerBeltRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.chain-mail" && ingredient.quantity === 1) ||
+  !powerBeltRecipe.sourceIds.includes("gamefaqs-item-ability-10332") ||
+  !disc4PowerBeltPath || disc4PowerBeltPath.shopName !== "Daguerreo Synthesis Expert (Disc IV)" ||
+  !disc4PowerBeltPath.conditions?.includes("retained Chain Mail")) {
+  errors.push("Power Belt recovery must retain its source-linked Disc IV recipe and the Chain Mail inventory condition.");
+}
+if (!tiamatGrandHelmWarning?.nextAvailability?.includes("retained Chain Mail") ||
+  !tiamatGrandHelmWarning.recovery?.includes("If neither Power Belt nor Chain Mail remains") ||
+  !["gamefaqs-item-ability-10332", "gamefaqs-equipment-33383"].every((sourceId) => tiamatGrandHelmWarning.sourceIds.includes(sourceId)) ||
+  !tiamatStealCutoff?.sourceIds.includes("gamefaqs-item-ability-10332") ||
+  !tiamatStealCutoff.sourceIds.includes("gamefaqs-equipment-33383") ||
+  !grandHelmRecipe || grandHelmRecipe.cost.amount !== 20000 || grandHelmRecipe.ingredients.length !== 2 ||
+  !grandHelmRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.cross-helm" && ingredient.quantity === 1) ||
+  !grandHelmRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.power-belt" && ingredient.quantity === 1) ||
+  !grandHelmRecipe.sourceIds.includes("gamefaqs-item-ability-10332") ||
+  !disc4GrandHelmPath || !disc4GrandHelmPath.conditions?.includes("retained Chain Mail") ||
+  !disc4CrossHelmPath || disc4CrossHelmPath.shopName !== "Kumool's Mogshop (Ipsen's Castle)" ||
+  tiamatGrandHelmPath?.method !== "steal" || tiamatGrandHelmPath.availability !== "one-time-encounter" ||
+  !tiamatWalkthroughStep?.detail?.includes("last documented Grand Helm steal") ||
+  !gaiaShopWalkthroughStep?.detail?.includes("retained copy")) {
+  errors.push("Grand Helm's Tiamat steal and conditional Disc IV synthesis recovery must remain linked through the route, catalog, and walkthrough.");
 }
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);

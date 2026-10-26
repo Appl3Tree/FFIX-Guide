@@ -266,8 +266,8 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopId: "lindblum.synthesis-shop.disc-2",
     shopName: "Lindblum Synthesis Shop (after Cleyra)",
     cost: { currency: "gil", amount: 2000 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-synthesis", "gamefaqs-synthesis-xiamut-38565", "cavesofnarshe-ff9-disc-2-map", "neoseeker-ffix-walkthrough-1816852"],
-    notes: "GameFAQs, RPGClassics, Xiamut, and Caves of Narshe list Glass Buckle + Chain Mail for 2,000 Gil. GameFAQs identifies post-Cleyra Lindblum, Black Mage Village (Discs II–III), Alexandria, Treno (Discs III–IV), and Daguerreo; RPGClassics also lists Wayne's later Lindblum shop. The Treno Tradition reward is a separate direct source. Glass Buckle is made from Glass Armlet + Leather Wrist for 500 Gil, and both ingredients have their own source-linked paths. This recipe supports the optional 15 Chain Mail-equivalent target, which can count up to 12 Power Belts; it is not a normal completion requirement. Direct stock behavior on modern releases remains unverified.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-synthesis", "gamefaqs-synthesis-xiamut-38565", "cavesofnarshe-ff9-disc-2-map", "neoseeker-ffix-walkthrough-1816852"],
+    notes: "GameFAQs, RPGClassics, Xiamut, and Caves of Narshe list Glass Buckle + Chain Mail for 2,000 Gil. GameFAQs identifies post-Cleyra Lindblum, Black Mage Village (Discs II–III), Alexandria, Treno (Discs III–IV), and Daguerreo; RPGClassics also lists Wayne's later Lindblum shop. The GameFAQs Item + Ability FAQ explicitly lists the Disc IV Daguerreo, Lindblum, and Treno synth shops. Chain Mail itself is listed at Cleyra, Treno (Disc II), and Lindblum (Disc II), with no later acquisition source in the reviewed item tables, so Disc IV Power Belt recovery requires a retained Chain Mail. The Treno Tradition reward is a separate direct source. Glass Buckle is made from Glass Armlet + Leather Wrist for 500 Gil, and both ingredients have their own source-linked paths. This recipe supports the optional 15 Chain Mail-equivalent target, which can count up to 12 Power Belts; it is not a normal completion requirement. Direct stock behavior on modern releases remains unverified.",
   },
   {
     id: "synthesis-recipe.cotton-robe",
@@ -459,8 +459,8 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 20000 },
-    sourceIds: disc4BlackCatRecipeSources,
-    notes: "Cross Helm + Power Belt makes Grand Helm for 20,000 Gil at Black Cat on Disc IV. GameFAQs and RPGClassics agree on the ingredients and price; Tiamat's steal is an additional source.",
+    sourceIds: [...disc4BlackCatRecipeSources, "gamefaqs-item-ability-10332", "gamefaqs-equipment-33383"],
+    notes: "Cross Helm + Power Belt makes Grand Helm for 20,000 Gil at Black Cat on Disc IV. GameFAQs, RPGClassics, and the GameFAQs Item + Ability FAQ agree on the recipe; the latter also lists Disc IV Power Belt synthesis from Glass Buckle + Chain Mail. Cross Helm remains available from Kumool's Ipsen Mogshop on Disc IV, but Chain Mail's listed shops end in Disc II, making a retained Chain Mail the conditional Power Belt fallback. Tiamat's steal remains the no-component fallback.",
   },
   {
     id: "synthesis-recipe.rubber-suit",
