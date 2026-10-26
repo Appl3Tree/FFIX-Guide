@@ -6,6 +6,8 @@ This is the consolidated list of actions that need the project owner's GitHub or
 
 Latest Codex update: the Disc IV Gizamaluke route-source audit is local guide work and did not change GitHub, Firebase, or other owner-side setup requirements.
 
+The Disc IV Mognet rejoin source review was also local guide work; no owner-side setup actions or release settings changed.
+
 Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for User**, **In Progress**, and **Completed**. Do not send passwords, access tokens, service-account JSON, or Firebase config values in chat. Firebase web-app config is included in browser builds, so it is public configuration rather than a secret; access must be protected by Authentication, Firestore rules, and domain/API restrictions.
 
 ## Current project milestone

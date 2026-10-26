@@ -5313,6 +5313,7 @@ const mognetRouteEdgeIds = [
 ];
 const mognetRouteEdges = mognetRouteEdgeIds.map((id) => gameRouteEdgesById.get(id));
 const mognetRepairRoute = gameRouteEdgesById.get("detour.mognet-central-repair-rejoin-gaia");
+const mognetDeliveryRouteEdges = mognetRouteEdges.slice(0, -1);
 const mognetRepairSection = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
   ?.sections.find((section) => section.id === "gaia-return-mognet-central");
@@ -5376,7 +5377,7 @@ if (
   !cour89MognetLetters?.notes.includes("27 Mognet deliveries")
   || !cour89MognetLetters.notes.includes("22–27 alone suffice")
   || !mognetRepairObjective?.sourceIds.includes("cour89-mognet-letters")
-  || mognetRouteEdges.some((edge) => !edge?.sourceIds.includes("jegged-mognet-central") || !edge.sourceIds.includes("cour89-mognet-letters"))
+  || mognetDeliveryRouteEdges.some((edge) => !edge?.sourceIds.includes("jegged-mognet-central") || !edge.sourceIds.includes("cour89-mognet-letters"))
   || mognetRouteEdges.some((edge, index) => edge?.relationship !== (index === mognetRouteEdges.length - 1 ? "rejoin" : "optional-return"))
   || mognetRouteEdges.map((edge) => `${edge?.fromChapterId}->${edge?.toChapterId}`).join("|") !== [
     "disc-4.return-to-gaia->disc-1.alexandria",
@@ -5390,6 +5391,9 @@ if (
   ].join("|")
   || !mognetRepairRoute?.summary.includes("deliveries #22–27")
   || !mognetRepairRoute.summary.includes("not all 27")
+  || !mognetRepairRoute.sourceIds.includes("gamefaqs-return-to-gaia-71891")
+  || mognetRepairRoute.sourceIds.includes("jegged-mognet-central")
+  || mognetRepairRoute.sourceIds.includes("cour89-mognet-letters")
   || !mognetRepairSection?.sourceIds.includes("cour89-mognet-letters")
   || mognetLetterObjectiveIds.some((id) => !objectivesById.get(id)?.sourceIds.includes("cour89-mognet-letters")
     || !objectivesById.get(id)?.sourceIds.includes("jegged-mognet-central"))
@@ -5409,7 +5413,7 @@ if (
   || !objectivesById.get(mognetOceanAbilityObjectiveId)?.sourceIds.includes("jegged-chocographs")
   || !oceanAbilityStep?.objectiveIds?.includes(mognetOceanAbilityObjectiveId)
 ) {
-  errors.push("The Mognet repair route must track the ordered Disc IV deliveries (#22–27), Ruby's Superslick, the repair, and Ocean/crack access prerequisites with source links.");
+  errors.push("The Mognet branch must source its delivery/reward steps, track the #22–27 repair and Ocean/crack prerequisites, and keep delivery-only references off the Invincible rejoin.");
 }
 const disc4TrenoReturnEdge = gameRouteEdgesById.get("detour.return-to-gaia-treno-behemoth");
 const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoin-gaia");

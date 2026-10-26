@@ -2024,7 +2024,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Mognet-Central.html",
     accessed: "2026-10-25",
-    notes: "Lists the Disc IV Mognet chain from Kupo in Alexandria's Steeple through Atla, Mogryo, Kumool, Mois (with Quina), Noggy, back to Kupo, and Ruby's Superslick; an Ocean-capable Chocobo and Dead Pepper reach Mognet Central. Atla's visit confirms Vault access only, not every Burmecia pickup room.",
+    notes: "Lists the Disc IV Mognet chain from Kupo in Alexandria's Steeple through Atla, Mogryo, Kumool, Mois (with Quina), Noggy, back to Kupo, and Ruby's Superslick; an Ocean-capable Chocobo and Dead Pepper reach Mognet Central. It documents the letter chain and repair quest, not the return from Mognet Central to the Invincible. Atla's visit confirms Vault access only, not every Burmecia pickup room.",
   },
   {
     id: "gamerguides-mognet-central",
@@ -2040,7 +2040,7 @@ export const sources = [
     publisher: "Cour89",
     url: "https://cour89.com/ff9/tips/mognet.php",
     accessed: "2026-10-25",
-    notes: "Current-release guide for PS4, Switch, Xbox One, Steam, iOS, and Android. Its numbered table lists 27 Mognet deliveries and says entries 22–27 alone suffice to restore Mognet Central; completing all 27 is the separate maximum delivery-count goal. Entry #21 is Moorock's letter to Mozme and lists Bran Bal or Pandemonium as pickup locations. Its optional-mail table lists the Disc III New Champion letter from Kupo to Mogrich after Hippaul reaches level 20 while the Treno Card Tournament is underway; the named sprinter is Hippaul at levels 20–59 and Vivi at level 60 or above. Older PlayStation references give different checkpoints (racing Hippaul, and the letter after Athlete Queen) but do not establish the earliest unlock or a release difference. The same table lists Kupo's Jump Rope letter for Mosh on Disc I after 50 jumps; it does not describe later reread opportunities, so Jegged's Disc II Mosh entry remains documented independently and Disc III availability is unresolved.",
+    notes: "Current-release guide for PS4, Switch, Xbox One, Steam, iOS, and Android. Its numbered table lists 27 Mognet deliveries and says entries 22–27 alone suffice to restore Mognet Central; completing all 27 is the separate maximum delivery-count goal. It documents letter counts and destinations, not the return from Mognet Central to the Invincible. Entry #21 is Moorock's letter to Mozme and lists Bran Bal or Pandemonium as pickup locations. Its optional-mail table lists the Disc III New Champion letter from Kupo to Mogrich after Hippaul reaches level 20 while the Treno Card Tournament is underway; the named sprinter is Hippaul at levels 20–59 and Vivi at level 60 or above. Older PlayStation references give different checkpoints (racing Hippaul, and the letter after Athlete Queen) but do not establish the earliest unlock or a release difference. The same table lists Kupo's Jump Rope letter for Mosh on Disc I after 50 jumps; it does not describe later reread opportunities, so Jegged's Disc II Mosh entry remains documented independently and Disc III availability is unresolved.",
   },
   {
     id: "gamefaqs-journey-to-treno-71891",

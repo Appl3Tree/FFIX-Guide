@@ -1040,7 +1040,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "With Superslick from Ruby, use an Ocean-capable Chocobo and a Dead Pepper to enter Mognet Central, give the item to Artemicion, and claim the Protect Ring. Return to the Invincible to resume Gaia exploration. The optional repair needs only deliveries #22–27, not all 27 Mognet letters.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "cour89-mognet-letters"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-gizamaluke-kupo-nut",
