@@ -1506,7 +1506,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "For Quan's Dwelling, travel past Treno to the small cave on the mountain. There are no enemy battles inside. Collect the Ether from the first chest, climb down the rope for a second Ether, search the southern edge of the lower cavern for the hidden Scorpio Stellazzio, then climb the ladder in the back room for a third Ether. The hot spring restores HP and MP.",
             detail: "The forest approach can have random encounters; the cave itself has no battles. Inspect the far-right room while you are here because it sets up later story content when the party returns with Vivi. Return to Treno after the cave sweep.",
-            objectiveIds: ["disc-2.journey-to-treno.quans-dwelling"],
+            objectiveIds: ["disc-2.journey-to-treno.quans-dwelling", "disc-2.journey-to-treno.scorpio-stellazzio"],
           },
           {
             id: "journey-treno-enter-city",
@@ -1573,9 +1573,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "treno-king-house-pickup-and-queen",
             kind: "pickup",
-            text: "Search by the window around the King's House, which is also the Auction House, for the hidden 2,225 Gil. Follow the circular path past the Card Stadium and collect the Ether from the riverbank before going north to Queen Stella's house. Turn in the Stellazzio coins you have collected so far; if Cancer and Aries were collected earlier, the Treno coins advance the reward ladder through the Blood Sword.",
+            text: "At the entrance fountain, toss 10 Gil 13 times to receive Gemini. In the slums, inspect behind the Item Shop for Taurus. Then search by the King's House/Auction House window for 2,225 Gil, follow the circular path past the Card Stadium to collect the riverbank Ether, and take your coins to Queen Stella.",
             detail: "Walkthroughs describe the 2,225-Gil cache as left, right, or west of the Auction House window; sweep both sides of the building. Some item lists also report a second Ether in Queen Stella's house while others omit it, so search the room but do not count that disputed chest as confirmed in the current pickup objective. The Auction House first hosts a story scene; after the party reunites in Treno, return for its Disc II bidding offers before leaving town.",
-            objectiveIds: ["disc-2.treno.first-visit-pickups", "disc-2.treno.stellazzio-rewards"],
+            objectiveIds: ["disc-2.treno.first-visit-pickups", "disc-2.treno.stellazzio-rewards", "disc-2.treno.gemini-stellazzio", "disc-2.treno.taurus-stellazzio"],
           },
           {
             id: "treno-griffin-arena",
@@ -2924,7 +2924,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "Circle behind the fountain and collect the Libra Stellazzio. Head north toward the Eidolon Wall entrance to trigger Dagger's Feelings, then speak with Moco; Quina's splashdown scene plays. Walk back left to the fountain plaza, where Eiko's Feelings begins.",
             detail: "GameFAQs, Gamer Guides, and RPGClassics support the Vivi → Dagger → Eiko trigger route; Jegged places Eiko's Feelings earlier in its prose. Use the fountain-to-wall-to-fountain route and confirm each named scene appears.",
-            objectiveIds: ["disc-2.madain-sari.treasure-sweep"],
+            objectiveIds: ["disc-2.madain-sari.treasure-sweep", "disc-2.madain-sari.libra-stellazzio"],
           },
           {
             id: "madain-sari-eiko-feelings-tasks",
@@ -3585,7 +3585,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "Take the gondola to the castle dock. Search the two pillars beside the gondola for an Ether and Phoenix Pinion, then inspect behind the fountain for a Lapis Lazuli. In the West Tower, check near the locked gate for another Phoenix Pinion; enter the Neptune statue room and take the Leo Stellazzio from the back wall.",
             detail: "The Phoenix Pinion is placed differently in some route descriptions, so sweep both the West Tower approach and the nearby gate instead of relying on a single screen coordinate. Leo is the fifth Stellazzio coin in zodiac order.",
-            objectiveIds: ["disc-3.the-home-front.alexandria-pickups"],
+            objectiveIds: ["disc-3.the-home-front.alexandria-pickups", "disc-3.the-home-front.leo-stellazzio"],
           },
           {
             id: "home-front-check-ates-and-transition",
@@ -5188,7 +5188,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Fly to Sacrobless Island, the large southern island in the Salvage Archipelago below the Forgotten Continent, and land on its upper grass plateau. At the entrance fork, follow the right-hand water path and search the far-right niche for Capricorn.",
             detail: "The Hilda Garde can land on the plateau; a Sky Chocobo can also reach Daguerreo. If a Gimme Cat appears, keep your Diamond and do not treat it as a Friendly Creature.",
-            objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep"],
+            objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep", "disc-3.aerial-exploration.capricorn-stellazzio"],
           },
           {
             id: "aerial-daguerreo-rank-and-synthesis",
@@ -5295,7 +5295,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "Open the chest on the left of the foyer for a Dagger, then search behind the right-side pillar for the Aquarius Stellazzio.",
             detail: "The Dagger is the low-power weapon for Zidane if you did not bring one. Keep Aquarius with your other Stellazzio coins for Queen Stella.",
-            objectiveIds: ["disc-3.ipsens-castle.pickups"],
+            objectiveIds: ["disc-3.ipsens-castle.pickups", "disc-3.ipsens-castle.aquarius-stellazzio"],
           },
           {
             id: "ipsens-kumool-mognet-shop",
@@ -5999,7 +5999,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "If Aries is still missing, fly back to Dali, enter the windmill, and inspect behind the central pillar/crank structure on the ground floor.",
             detail: "The GameFAQs original PlayStation guide says no Stellazzio are missable even on Disc IV; Gamer Guides says all can be found on the final disc. Both locate Aries in the Dali windmill. A Disc IV recovery route also includes the Dali stop, but its Aries-location images are from story progression, not the Disc IV visit. The guides do not establish release-by-release parity, and direct gameplay verification remains open.",
-            objectiveIds: ["disc-4.return-to-gaia.aries-stellazzio"],
+            objectiveIds: ["disc-1.village-of-dali.aries-stellazzio"],
           },
         ],
       },
@@ -6092,21 +6092,28 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-invincible-and-stellazzio",
         title: "Invincible bridge — Pisces and Queen Stella's final rewards",
         summary: "The Invincible's bridge contains the final ordinary Stellazzio. Returning to Treno starts Queen Stella's last exchange and reveals the thirteenth coin request.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-stellazzio", "rpgclassics-disc-4-walkthrough"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios", "jegged-stellazzio", "rpgclassics-disc-4-walkthrough"],
         steps: [
+          {
+            id: "gaia-return-stellazzio-recovery-sweep",
+            kind: "optional",
+            text: "If any of the twelve ordinary coins are missing, revisit their locations on Gaia: Dali windmill (Aries), Burmecia (Cancer), Quan's Dwelling (Scorpio), Treno fountain and slums (Gemini and Taurus), Black Mage Village Inn (Virgo), Madain Sari fountain (Libra), Alexandria Castle's Neptune room (Leo), Lindblum Business District (Sagittarius), Daguerreo's entrance pool (Capricorn), and Ipsen's Castle first room (Aquarius). Pisces is on the Invincible bridge.",
+            detail: "GameFAQs' original PlayStation guide says none of the coins are missable, even on Disc IV; Gamer Guides says all can be found on the final disc. The GameFAQs source supplies the locations and Gamer Guides independently lists the same set. The Disc IV article's Aries images are from story progression, so they are not visual proof of its return state. Collect all twelve and deliver them to Queen Stella before searching Quan's Dwelling for Ophiucus. Direct game and release-by-release verification remain open.",
+            objectiveIds: ["disc-1.village-of-dali.aries-stellazzio", "disc-1.burmecia.cancer-stellazzio", "disc-2.journey-to-treno.scorpio-stellazzio", "disc-2.treno.gemini-stellazzio", "disc-2.treno.taurus-stellazzio", "disc-2.magdalene-forest.virgo-stellazzio", "disc-2.madain-sari.libra-stellazzio", "disc-3.the-home-front.leo-stellazzio", "disc-3.the-aftermath.sagittarius", "disc-3.aerial-exploration.capricorn-stellazzio", "disc-3.ipsens-castle.aquarius-stellazzio", "disc-4.return-to-gaia.pisces-stellazzio"],
+          },
           {
             id: "gaia-return-pisces",
             kind: "pickup",
             text: "Search the Invincible's bridge for the Pisces Stellazzio chest, then take Pisces and any other pending coins to Queen Stella in Treno.",
             detail: "Delivering the twelve standard coins completes the regular Queen Stella reward sequence and opens her request for one final coin. Keep collecting the pending rewards until she gives the Ophiucus lead.",
-            objectiveIds: ["disc-3.card-tournament.stellazzio-rewards"],
+            objectiveIds: ["disc-4.return-to-gaia.pisces-stellazzio", "disc-3.card-tournament.stellazzio-rewards"],
           },
           {
             id: "gaia-return-ophiucus-hammer",
             kind: "pickup",
             text: "Go to Quan's Dwelling and search the lower cave where Scorpio was found for Ophiucus. Return it to Queen Stella for the unique Hammer.",
             detail: "This is the final Stellazzio exchange after the twelve ordinary coins. The Hammer is also useful as a synthesis ingredient; check the synthesis plan before selling or using the copy.",
-            objectiveIds: ["disc-3.card-tournament.stellazzio-rewards"],
+            objectiveIds: ["disc-4.return-to-gaia.ophiucus-stellazzio", "disc-4.return-to-gaia.hammer-reward", "disc-3.card-tournament.stellazzio-rewards"],
           },
         ],
       },

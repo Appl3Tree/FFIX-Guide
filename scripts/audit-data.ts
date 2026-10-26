@@ -1821,52 +1821,115 @@ if (
 ) {
   errors.push("The Disc IV Burmecia sweep must connect its six item-copy paths to the scoped source, item records, objective, and walkthrough reminder.");
 }
-const ariesGamefaqsSource = sources.find((source) => source.id === "gamefaqs-stellazzio-71891");
-const ariesGamerGuidesSource = sources.find((source) => source.id === "gamerguides-stellazzios");
-const ariesDisc4RouteSource = sources.find((source) => source.id === "megane-kangaroo-disc4-burmecia-recovery");
-const ariesItem = gameItems.find((item) => item.id === "game-item.aries-stellazzio");
-const ariesDisc1Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.aries-stellazzio");
-const ariesDisc4Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.dali-aries-stellazzio");
-const ariesDisc1Objective = objectivesById.get("disc-1.village-of-dali.aries-stellazzio");
-const ariesDisc4Objective = objectivesById.get("disc-4.return-to-gaia.aries-stellazzio");
-const ariesDisc4Steps = walkthroughChapters
+const stellazzioGamefaqsSource = sources.find((source) => source.id === "gamefaqs-stellazzio-71891");
+const stellazzioGamerGuidesSource = sources.find((source) => source.id === "gamerguides-stellazzios");
+const stellazzioDisc4RouteSource = sources.find((source) => source.id === "megane-kangaroo-disc4-burmecia-recovery");
+const ordinaryStellazzio = [
+  { itemId: "game-item.aries-stellazzio", objectiveId: "disc-1.village-of-dali.aries-stellazzio", firstPathId: "item-path.disc-1.village-of-dali.aries-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.dali-aries-stellazzio" },
+  { itemId: "game-item.cancer-stellazzio", objectiveId: "disc-1.burmecia.cancer-stellazzio", firstPathId: "item-path.burmecia.cancer", latePathId: "item-path.disc-4.return-to-gaia.burmecia-cancer-stellazzio" },
+  { itemId: "game-item.scorpio-stellazzio", objectiveId: "disc-2.journey-to-treno.scorpio-stellazzio", firstPathId: "item-path.disc-2.journey-to-treno.scorpio-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.quans-dwelling-scorpio-stellazzio" },
+  { itemId: "game-item.gemini-stellazzio", objectiveId: "disc-2.treno.gemini-stellazzio", firstPathId: "item-path.disc-2.treno.gemini-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.treno-gemini-stellazzio" },
+  { itemId: "game-item.taurus-stellazzio", objectiveId: "disc-2.treno.taurus-stellazzio", firstPathId: "item-path.disc-2.treno.taurus-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.treno-taurus-stellazzio" },
+  { itemId: "game-item.virgo-stellazzio", objectiveId: "disc-2.magdalene-forest.virgo-stellazzio", firstPathId: "item-path.disc-2.magdalene-forest.virgo-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.black-mage-village-virgo-stellazzio" },
+  { itemId: "game-item.libra-stellazzio", objectiveId: "disc-2.madain-sari.libra-stellazzio", firstPathId: "item-path.disc-2.madain-sari.libra-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.madain-sari-libra-stellazzio" },
+  { itemId: "game-item.leo-stellazzio", objectiveId: "disc-3.the-home-front.leo-stellazzio", firstPathId: "item-path.disc-3.home-front.leo-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.alexandria-leo-stellazzio" },
+  { itemId: "game-item.sagittarius-stellazzio", objectiveId: "disc-3.the-aftermath.sagittarius", firstPathId: "item-path.disc-3.the-aftermath.sagittarius-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.lindblum-sagittarius-stellazzio" },
+  { itemId: "game-item.capricorn-stellazzio", objectiveId: "disc-3.aerial-exploration.capricorn-stellazzio", firstPathId: "item-path.disc-3.aerial-exploration.capricorn-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.daguerreo-capricorn-stellazzio" },
+  { itemId: "game-item.aquarius-stellazzio", objectiveId: "disc-3.ipsens-castle.aquarius-stellazzio", firstPathId: "item-path.disc-3.ipsens-castle.aquarius-stellazzio", latePathId: "item-path.disc-4.return-to-gaia.ipsens-castle-aquarius-stellazzio" },
+  { itemId: "game-item.pisces-stellazzio", objectiveId: "disc-4.return-to-gaia.pisces-stellazzio", firstPathId: "item-path.disc-4.return-to-gaia.pisces-stellazzio", latePathId: undefined },
+];
+const stellazzioSweepStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
   ?.sections.flatMap((section) => section.steps)
-  .filter((step) => step.objectiveIds?.includes("disc-4.return-to-gaia.aries-stellazzio")) ?? [];
-const ariesDisc4Detour = gameRouteEdges.find((edge) => edge.id === "detour.return-to-gaia-dali-aries");
+  .find((step) => step.id === "gaia-return-stellazzio-recovery-sweep");
+const ariesDisc4Step = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "gaia-return-dali-aries-stellazzio");
+const ariesDisc4Route = gameRouteEdges.find((edge) => edge.id === "detour.return-to-gaia-dali-aries");
 const ariesDisc4Rejoin = gameRouteEdges.find((edge) => edge.id === "detour.dali-aries-rejoin-gaia");
+const lateStellazzioRoutePairs = [
+  ["detour.return-to-gaia-lindblum-sagittarius", "detour.lindblum-sagittarius-rejoin-gaia"],
+  ["detour.return-to-gaia-daguerreo-capricorn", "detour.daguerreo-capricorn-rejoin-gaia"],
+  ["detour.return-to-gaia-ipsens-castle-aquarius", "detour.ipsens-castle-aquarius-rejoin-gaia"],
+];
 if (
-  !ariesGamefaqsSource?.notes.includes("none of the Stellazzio are missable, even on Disc IV")
-  || !ariesGamerGuidesSource?.notes.includes("all can be found on the final disc")
-  || !ariesDisc4RouteSource?.notes.includes("images are from story progression")
-  || !ariesItem?.sourceIds.includes("gamefaqs-stellazzio-71891")
-  || !ariesItem.sourceIds.includes("gamerguides-stellazzios")
-  || !ariesDisc1Objective?.sourceIds.includes("gamefaqs-stellazzio-71891")
-  || !ariesDisc4Objective?.sourceIds.includes("gamerguides-stellazzios")
-  || !ariesDisc4Objective.chapterIds?.includes("disc-4.return-to-gaia")
-  || ariesDisc1Path?.chapterId !== "disc-1.village-of-dali"
-  || ariesDisc1Path.itemId !== "game-item.aries-stellazzio"
-  || !ariesDisc1Path.walkthroughObjectiveIds?.includes("disc-1.village-of-dali.aries-stellazzio")
-  || !ariesDisc1Path.sourceIds.includes("gamefaqs-stellazzio-71891")
-  || !ariesDisc1Path.sourceIds.includes("gamerguides-stellazzios")
-  || ariesDisc4Path?.chapterId !== "disc-4.return-to-gaia"
-  || ariesDisc4Path.itemId !== "game-item.aries-stellazzio"
-  || !ariesDisc4Path.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.aries-stellazzio")
-  || !ariesDisc4Path.sourceIds.includes("gamefaqs-stellazzio-71891")
-  || !ariesDisc4Path.sourceIds.includes("gamerguides-stellazzios")
-  || !ariesDisc4Path.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery")
-  || ariesDisc4Steps.length !== 1
-  || !ariesDisc4Steps[0].detail?.includes("images are from story progression")
-  || ariesDisc4Detour?.fromChapterId !== "disc-4.return-to-gaia"
-  || ariesDisc4Detour.toChapterId !== "disc-1.village-of-dali"
-  || ariesDisc4Detour.relationship !== "optional-return"
-  || !ariesDisc4Detour.sourceIds.includes("gamefaqs-stellazzio-71891")
-  || !ariesDisc4Detour.sourceIds.includes("gamerguides-stellazzios")
+  !stellazzioGamefaqsSource?.notes.includes("none of the Stellazzio are missable, even on Disc IV")
+  || !stellazzioGamerGuidesSource?.notes.includes("all can be found on the final disc")
+  || !stellazzioDisc4RouteSource?.notes.includes("images are from story progression")
+  || ordinaryStellazzio.length !== 12
+  || ordinaryStellazzio.some(({ itemId, objectiveId, firstPathId, latePathId }) => {
+    const item = gameItems.find((record) => record.id === itemId);
+    const objective = objectivesById.get(objectiveId);
+    const firstPath = itemAcquisitionPaths.find((path) => path.id === firstPathId);
+    const latePath = latePathId ? itemAcquisitionPaths.find((path) => path.id === latePathId) : undefined;
+    return !item
+      || !item.sourceIds.includes("gamefaqs-stellazzio-71891")
+      || !item.sourceIds.includes("gamerguides-stellazzios")
+      || !objective?.sourceIds.includes("gamefaqs-stellazzio-71891")
+      || !objective.sourceIds.includes("gamerguides-stellazzios")
+      || !objective.chapterIds?.includes("disc-4.return-to-gaia")
+      || firstPath?.itemId !== itemId
+      || !firstPath.walkthroughObjectiveIds?.includes(objectiveId)
+      || !firstPath.sourceIds.includes("gamefaqs-stellazzio-71891")
+      || !firstPath.sourceIds.includes("gamerguides-stellazzios")
+      || (latePathId !== undefined && (
+        latePath?.itemId !== itemId
+        || latePath.chapterId !== "disc-4.return-to-gaia"
+        || !latePath.walkthroughObjectiveIds?.includes(objectiveId)
+        || !latePath.sourceIds.includes("gamefaqs-stellazzio-71891")
+        || !latePath.sourceIds.includes("gamerguides-stellazzios")
+      ));
+  })
+  || ordinaryStellazzio.some(({ objectiveId }) => !stellazzioSweepStep?.objectiveIds?.includes(objectiveId))
+  || !ariesDisc4Step?.objectiveIds?.includes("disc-1.village-of-dali.aries-stellazzio")
+  || !ariesDisc4Step.detail?.includes("images are from story progression")
+  || ariesDisc4Route?.fromChapterId !== "disc-4.return-to-gaia"
+  || ariesDisc4Route.toChapterId !== "disc-1.village-of-dali"
+  || ariesDisc4Route.relationship !== "optional-return"
+  || !ariesDisc4Route.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || !ariesDisc4Route.sourceIds.includes("gamerguides-stellazzios")
   || ariesDisc4Rejoin?.fromChapterId !== "disc-1.village-of-dali"
   || ariesDisc4Rejoin.toChapterId !== "disc-4.return-to-gaia"
   || ariesDisc4Rejoin.relationship !== "rejoin"
+  || lateStellazzioRoutePairs.some(([detourId, rejoinId]) => {
+    const detour = gameRouteEdges.find((edge) => edge.id === detourId);
+    const rejoin = gameRouteEdges.find((edge) => edge.id === rejoinId);
+    return detour?.fromChapterId !== "disc-4.return-to-gaia"
+      || detour.relationship !== "optional-return"
+      || rejoin?.toChapterId !== "disc-4.return-to-gaia"
+      || rejoin.relationship !== "rejoin";
+  })
 ) {
-  errors.push("Aries recovery must link its Disc I and Disc IV sources, item paths, objectives, optional return/rejoin, and story-image caveat.");
+  errors.push("The twelve ordinary Stellazzio need first and late Disc IV paths, individual objectives, sourced coverage, connected return routes, and the Dali image caveat.");
+}
+const ophiucusItem = gameItems.find((item) => item.id === "game-item.ophiucus-stellazzio");
+const ophiucusPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.quans-dwelling-ophiucus-stellazzio");
+const ophiucusObjective = objectivesById.get("disc-4.return-to-gaia.ophiucus-stellazzio");
+const hammerItem = gameItems.find((item) => item.id === "game-item.hammer");
+const hammerPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.queen-stella-hammer-reward");
+const hammerObjective = objectivesById.get("disc-4.return-to-gaia.hammer-reward");
+const finalStellazzioStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "gaia-return-ophiucus-hammer");
+if (
+  !ophiucusItem?.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || ophiucusPath?.itemId !== ophiucusItem?.id
+  || ophiucusPath.availability !== "conditional"
+  || !ophiucusPath.conditions?.includes("all twelve ordinary Stellazzio")
+  || !ophiucusPath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.ophiucus-stellazzio")
+  || !ophiucusObjective?.chapterIds?.includes("disc-4.return-to-gaia")
+  || !hammerItem?.sourceIds.includes("jegged-stellazzio")
+  || hammerPath?.itemId !== hammerItem?.id
+  || hammerPath.method !== "quest-reward"
+  || hammerPath.quantity !== 1
+  || !hammerPath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.hammer-reward")
+  || !hammerObjective?.chapterIds?.includes("disc-4.return-to-gaia")
+  || !finalStellazzioStep?.objectiveIds?.includes("disc-4.return-to-gaia.ophiucus-stellazzio")
+  || !finalStellazzioStep.objectiveIds.includes("disc-4.return-to-gaia.hammer-reward")
+) {
+  errors.push("Ophiucus and the unique Hammer need separate item, conditional-path, objective, source, and walkthrough links.");
 }
 const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
 const burmeciaDisc2SpearStep = walkthroughChapters
