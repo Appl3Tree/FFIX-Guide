@@ -4580,7 +4580,18 @@ if (
   errors.push("Namingway's Treno and post-Oeilvert Desert Palace copies must share one objective, retain the Disc III re-entry route, and use Shimmering Island as the source-supported final cutoff.");
 }
 const mognetRepairObjective = objectivesById.get("disc-4.return-to-gaia.mognet-central");
-const mognetRepairRoute = gameRouteEdgesById.get("detour.return-to-gaia-burmecia-rejoin");
+const mognetRouteEdgeIds = [
+  "detour.return-to-gaia-alexandria-mognet",
+  "detour.alexandria-to-burmecia-mognet",
+  "detour.burmecia-to-black-mage-village-mognet",
+  "detour.black-mage-village-to-ipsen-mognet",
+  "detour.ipsen-to-fossil-roo-mognet",
+  "detour.fossil-roo-to-daguerreo-mognet",
+  "detour.daguerreo-to-alexandria-mognet",
+  "detour.mognet-central-repair-rejoin-gaia",
+];
+const mognetRouteEdges = mognetRouteEdgeIds.map((id) => gameRouteEdgesById.get(id));
+const mognetRepairRoute = gameRouteEdgesById.get("detour.mognet-central-repair-rejoin-gaia");
 const mognetRepairSection = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
   ?.sections.find((section) => section.id === "gaia-return-mognet-central");
@@ -4644,9 +4655,20 @@ if (
   !cour89MognetLetters?.notes.includes("27 Mognet deliveries")
   || !cour89MognetLetters.notes.includes("22–27 alone suffice")
   || !mognetRepairObjective?.sourceIds.includes("cour89-mognet-letters")
-  || !mognetRepairRoute?.sourceIds.includes("cour89-mognet-letters")
-  || !mognetRepairRoute.summary.includes("deliveries 22–27")
-  || !mognetRepairRoute.summary.includes("all 27")
+  || mognetRouteEdges.some((edge) => !edge?.sourceIds.includes("jegged-mognet-central") || !edge.sourceIds.includes("cour89-mognet-letters"))
+  || mognetRouteEdges.some((edge, index) => edge?.relationship !== (index === mognetRouteEdges.length - 1 ? "rejoin" : "optional-return"))
+  || mognetRouteEdges.map((edge) => `${edge?.fromChapterId}->${edge?.toChapterId}`).join("|") !== [
+    "disc-4.return-to-gaia->disc-1.alexandria",
+    "disc-1.alexandria->disc-1.burmecia",
+    "disc-1.burmecia->disc-2.magdalene-forest",
+    "disc-2.magdalene-forest->disc-3.ipsens-castle",
+    "disc-3.ipsens-castle->disc-2.journey-to-outer-continent",
+    "disc-2.journey-to-outer-continent->disc-3.aerial-exploration",
+    "disc-3.aerial-exploration->disc-1.alexandria",
+    "disc-1.alexandria->disc-4.return-to-gaia",
+  ].join("|")
+  || !mognetRepairRoute?.summary.includes("deliveries #22–27")
+  || !mognetRepairRoute.summary.includes("not all 27")
   || !mognetRepairSection?.sourceIds.includes("cour89-mognet-letters")
   || mognetLetterObjectiveIds.some((id) => !objectivesById.get(id)?.sourceIds.includes("cour89-mognet-letters")
     || !objectivesById.get(id)?.sourceIds.includes("jegged-mognet-central"))

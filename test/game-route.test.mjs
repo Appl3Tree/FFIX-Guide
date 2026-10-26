@@ -231,13 +231,38 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
     assert.ok(sources.some((source) => source.id === sourceId), `unknown route source ${sourceId}`);
   }
 
-  const rejoin = gameRouteEdges.find((edge) => edge.id === "detour.return-to-gaia-burmecia-rejoin");
+  const rejoin = gameRouteEdges.find((edge) => edge.id === "detour.mognet-central-repair-rejoin-gaia");
   assert.ok(rejoin);
-  assert.equal(rejoin.fromChapterId, "disc-1.burmecia");
+  assert.equal(rejoin.fromChapterId, "disc-1.alexandria");
   assert.equal(rejoin.toChapterId, "disc-4.return-to-gaia");
   assert.equal(rejoin.relationship, "rejoin");
-  assert.match(rejoin.summary, /Atla hands over Mogryo's letter/);
-  assert.ok(rejoin.sourceIds.includes("gamerguides-side-questing-4"));
+  assert.match(rejoin.summary, /Superslick from Ruby/);
+  assert.match(rejoin.summary, /Ocean-capable Chocobo and a Dead Pepper/);
+  assert.ok(rejoin.sourceIds.includes("jegged-mognet-central"));
+});
+
+test("Disc IV Mognet route graph follows letters 22–27 through each recipient", () => {
+  const expectedStops = [
+    ["detour.return-to-gaia-alexandria-mognet", "disc-4.return-to-gaia", "disc-1.alexandria", /Kupo in Alexandria's Steeple.*letter for Atla/],
+    ["detour.alexandria-to-burmecia-mognet", "disc-1.alexandria", "disc-1.burmecia", /letter for Mogryo/],
+    ["detour.burmecia-to-black-mage-village-mognet", "disc-1.burmecia", "disc-2.magdalene-forest", /letter #22.*#23.*Mogryo.*#24/],
+    ["detour.black-mage-village-to-ipsen-mognet", "disc-2.magdalene-forest", "disc-3.ipsens-castle", /letter #24.*#25/],
+    ["detour.ipsen-to-fossil-roo-mognet", "disc-3.ipsens-castle", "disc-2.journey-to-outer-continent", /letter #25.*#26.*Quina/],
+    ["detour.fossil-roo-to-daguerreo-mognet", "disc-2.journey-to-outer-continent", "disc-3.aerial-exploration", /letter #26.*#27/],
+    ["detour.daguerreo-to-alexandria-mognet", "disc-3.aerial-exploration", "disc-1.alexandria", /letter #27.*Superslick/],
+    ["detour.mognet-central-repair-rejoin-gaia", "disc-1.alexandria", "disc-4.return-to-gaia", /Mognet Central.*Protect Ring/],
+  ];
+
+  for (const [index, [id, from, to, detail]] of expectedStops.entries()) {
+    const edge = gameRouteEdges.find((candidate) => candidate.id === id);
+    assert.ok(edge, `${id} is represented`);
+    assert.equal(edge.fromChapterId, from);
+    assert.equal(edge.toChapterId, to);
+    assert.equal(edge.relationship, index === expectedStops.length - 1 ? "rejoin" : "optional-return");
+    assert.match(edge.summary, detail);
+    assert.ok(edge.sourceIds.includes("jegged-mognet-central"));
+    assert.ok(edge.sourceIds.includes("cour89-mognet-letters"));
+  }
 });
 
 test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () => {
@@ -287,7 +312,7 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
     result[edge.relationship] += 1;
     return result;
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
-  assert.equal(gameRouteEdges.length, 81);
-  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 20, rejoin: 18 });
+  assert.equal(gameRouteEdges.length, 86);
+  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 25, rejoin: 18 });
   assert.equal(storyPartySequences.length, 9);
 });
