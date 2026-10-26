@@ -6428,7 +6428,7 @@ if (!steepledHatNeedTarget || steepledHatNeedTarget.targetQuantity !== 7 ||
   errors.push("Steepled Hat's GameFAQs Need 7 and end-inventory #10 must remain distinct; #10 is not a Buy total.");
 }
 for (const [targetId, expectedBasis] of [
-  ["item-target.disc-2.treno.air-racket", "purchase-recommendation"],
+  ["item-target.disc-2.treno.air-racket", "checkpoint-total"],
   ["item-target.disc-2.journey-to-treno.silver-gloves", "checkpoint-total"],
   ["item-target.disc-2.journey-to-treno.iron-helm", "checkpoint-total"],
   ["item-target.disc-2.return-to-lindblum.chain-mail", "checkpoint-total"],
@@ -6437,6 +6437,27 @@ for (const [targetId, expectedBasis] of [
   if (sourceInventoryTargets.find((target) => target.id === targetId)?.basis !== expectedBasis) {
     errors.push(`Inventory target ${targetId} must retain its ${expectedBasis} semantics.`);
   }
+}
+const airRacketInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.treno.air-racket");
+const airRacketObjective = objectives.find((objective) => objective.id === "disc-2.treno.air-racket-purchase");
+const airRacketWarning = missables.find((missable) => missable.id === "missable.disc-2.treno.air-racket-purchase");
+const airRacketTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.air-racket-shop");
+const airRacketIpsensPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.ipsens-castle.air-racket-lift-chest");
+if (!airRacketInventoryTarget || airRacketInventoryTarget.targetQuantity !== 5 ||
+  airRacketInventoryTarget.basis !== "checkpoint-total" ||
+  !airRacketInventoryTarget.sourceIds.includes("gamefaqs-missables-71891") ||
+  !airRacketInventoryTarget.sourceIds.includes("gamefaqs-treno-71891") ||
+  !airRacketObjective?.sourceIds.includes("gamefaqs-treno-71891") ||
+  !airRacketInventoryTarget.interpretation.includes("at least five Air Rackets in inventory") ||
+  !airRacketInventoryTarget.interpretation.includes("sixth copy") ||
+  !airRacketInventoryTarget.interpretation.includes("three for Need plus three for synthesis") ||
+  !airRacketWarning?.action.includes("at least five Air Rackets in inventory") ||
+  !airRacketWarning.action.includes("Summit Station copy") ||
+  !airRacketWarning.recovery.includes("sixth listed copy") ||
+  !airRacketWarning.recovery.includes("earlier checkpoint") ||
+  !airRacketTrenoPath?.conditions.includes("buy only the shortfall") ||
+  !airRacketIpsensPath?.conditions.includes("sixth Air Racket copy")) {
+  errors.push("Air Racket must model the five-copy pre-Gargan Roo inventory checkpoint, count Summit Station copies, and keep the later sixth Ipsen's Castle copy distinct.");
 }
 if (itemAcquisitionPaths.some((path) => path.itemId === steepledHatId && path.shopId === "treno.weapon-shop.disc-2") ||
   !blackWaltz3StealWarning?.recovery.includes("Steepled Hat can be bought at Atla") ||

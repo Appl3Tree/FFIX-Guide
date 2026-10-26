@@ -9144,7 +9144,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "treno.weapon-shop.disc-2",
     shopName: "Treno Weapon Shop (Disc II)",
     cost: { currency: "gil", amount: 400 },
-    conditions: "GameFAQs identifies Treno as the last shop at which to buy Air Racket before the story leaves for Gargan Roo. The later Ipsen's Castle chest still provides one copy, so this is a shop-source cutoff rather than permanent item loss.",
+    conditions: "GameFAQs identifies Treno as the last shop at which to buy Air Racket before the story leaves for Gargan Roo. For its optional five-copy checkpoint, count any Summit Station copy and buy only the shortfall here. The later Ipsen's Castle chest provides a sixth copy, so this is a shop-source cutoff rather than permanent item loss.",
     walkthroughObjectiveIds: ["disc-2.treno.air-racket-purchase"],
     sourceIds: airRacketReferenceSources,
   },
@@ -9155,7 +9155,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "chest",
     quantity: 1,
     availability: "single-use",
-    conditions: "Open the chest in the lift room after solving the fresco puzzle. This later chest recovers one Air Racket if both Disc II purchases were missed.",
+    conditions: "Open the chest in the lift room after solving the fresco puzzle. GameFAQs counts this as the sixth Air Racket copy for its advanced endgame total of three for Need and three for synthesis; it restores one item copy, not the earlier five-copy pre-Gargan Roo checkpoint.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.treasure-sweep"],
     sourceIds: airRacketReferenceSources,
   },
@@ -10713,7 +10713,6 @@ const finalStockTargetInterpretation = "Source-specific total acquisition target
 type ItemInventoryTargetDraft = Omit<ItemInventoryTarget, "basis">;
 
 const purchaseRecommendationTargetIds = new Set([
-  "item-target.disc-2.treno.air-racket",
   "item-target.disc-3.portal-to-another-world.zorlin-shape",
 ]);
 
@@ -10725,6 +10724,7 @@ const routeNeedTargetIds = new Set([
 
 const checkpointTotalTargetIds = new Set([
   "item-target.disc-3.on-the-high-seas.mythril-sword",
+  "item-target.disc-2.treno.air-racket",
   "item-target.disc-2.journey-to-treno.silver-gloves",
   "item-target.disc-2.journey-to-treno.iron-helm",
   "item-target.disc-2.return-to-lindblum.chain-mail",
@@ -10800,8 +10800,8 @@ const itemInventoryTargetDrafts: ItemInventoryTargetDraft[] = [
     itemId: "game-item.air-racket",
     chapterId: "disc-2.treno",
     targetQuantity: 5,
-    interpretation: "GameFAQs' missables checklist recommends five Air Rackets bought by Treno; the later Ipsen's Castle chest restores one item copy but may not satisfy the five-copy target. This is optional advanced inventory guidance, not a standard completion requirement.",
-    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566"],
+    interpretation: "GameFAQs recommends entering Gargan Roo with at least five Air Rackets in inventory; count any copy already obtained at Summit Station and buy only the shortfall in Treno. The later Ipsen's Castle chest supplies a sixth copy for the advanced endgame total of three for Need plus three for synthesis. This is optional perfect-inventory guidance, not a standard completion requirement.",
+    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-treno-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566"],
   },
   {
     id: "item-target.disc-2.journey-to-treno.silver-gloves",
