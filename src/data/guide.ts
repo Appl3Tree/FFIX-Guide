@@ -195,6 +195,14 @@ export const sources = [
     notes: "Original PlayStation route for Memoria's five hidden weapons, five Tetra Master phantoms, Nero Family checkpoints, four guardian bosses and steal tables, Hades detour, Crystal World, and Deathguise. At Tiamat it recommends stealing Grand Helm because a synthesis component is no longer available by that point; the item and recipe cross-checks identify the constrained Power Belt route and its retained-Chain-Mail condition. It confirms the entrance light returns to the Invincible, leaving requires party reform with Zidane outside, the optional Lindblum checkpoint trip, and the post-Deathguise return for final preparations. It also says the late Crystal World warp is one-way and that returning from Memoria's beginning requires retracing cleared rooms except bosses. At Crystal World entry it explicitly says Quina can learn Twister by using Eat on the revived Tiamat, confirming a later recovery after Mount Gulug. The Iifa Tree portal is documented as the Memoria entry route; its use to resume after an early exit is modeled from the linked entry and exit instructions, not live-verified. Its Crystal World prose says revived guardians lack Steals and Drops, while the item/enemy tables list Wing Edge as Tiamat [B]'s Semi-Rare and Rare steal. For story Kraken it lists 10,001 HP per tentacle and a Common Elixir steal alongside shared tentacle details, but does not give side-specific steal tables; the older monster list and RPGClassics assign Elixir to Left and Wing Edge to Right, while RPGClassics also reports higher tentacle HP. The source says Kraken's two tentacles enable attacks but does not assign moves to either side. It places Kain's Lance in a hidden alcove along the right wall after the first room's save point, providing Disc IV equipment for Freya's Cherry Blossom ability.",
   },
   {
+    id: "gamerguides-memoria-1-maliris",
+    title: "Memoria (1) — Maliris",
+    publisher: "Gamer Guides",
+    url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-4/memoria-1-maliris",
+    accessed: "2026-10-26",
+    notes: "Independent Disc IV walkthrough that says the entry prompt returns the party to the Invincible and identifies the Nero Family sidequest as one reason to leave. The page lists iOS, PC, PS1, PS4, Switch, and Xbox One among its platforms but does not distinguish route behavior by release; the reviewed section does not specify GameFAQs' party-reform/Zidane-outside condition.",
+  },
+  {
     id: "steam-achievements",
     title: "FINAL FANTASY IX — Steam Global Achievements",
     publisher: "Steam Community",
@@ -3000,7 +3008,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/memoria.shtml",
     accessed: "2026-10-26",
-    notes: "Independent original PlayStation check for Memoria's five hidden weapons, five card phantoms, Quina Blue Magic teachers, Hades's hidden location and steal list, four guardian battles, and Deathguise. Its Hades section says he asks for two Pumice Pieces before opening the synthesis shop, unlike GameFAQs' after-victory trigger; direct-game verification remains open. Used to cross-check room directions and mechanics rather than to assert modern achievement parity.",
+    notes: "Independent original PlayStation check for Memoria's five hidden weapons, five card phantoms, Quina Blue Magic teachers, Hades's hidden location and steal list, four guardian battles, and Deathguise. It confirms an entrance icon returns the party to the Invincible but does not address GameFAQs' forced party reformation or Zidane-outside condition. Its Hades section says he asks for two Pumice Pieces before opening the synthesis shop, unlike GameFAQs' after-victory trigger; direct-game verification remains open. Used to cross-check room directions and mechanics rather than to assert modern achievement parity.",
   },
   {
     id: "rpgclassics-kraken-bestiary",

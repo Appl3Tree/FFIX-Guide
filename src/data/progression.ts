@@ -927,8 +927,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-4.memoria",
     toChapterId: "disc-4.return-to-gaia",
     relationship: "optional-return",
-    summary: "At Memoria's entrance, examine the light to return to the Invincible for optional Gaia errands, including Nero Family checkpoint trips to Lindblum. Leaving forces a party reform before boarding, and Zidane must be outside. Re-enter Memoria through the Iifa Tree portal; the later Crystal World warp is a separate one-way return to Memoria's beginning.",
-    sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-nero-brothers-71891", "gamefaqs-return-to-gaia-71891", "gamefaqs-second-battle-iifa-tree-71891"],
+    summary: "At Memoria's entrance, examine the light to return to the Invincible for optional Gaia errands, including Nero Family checkpoint trips to Lindblum. Before boarding, reform the party; GameFAQs specifically says Zidane must be outside. Re-enter Memoria through the Iifa Tree portal; the later Crystal World warp is a separate one-way return to Memoria's beginning.",
+    sourceIds: ["gamefaqs-memoria-71891", "gamerguides-memoria-1-maliris", "rpgclassics-memoria", "gamefaqs-nero-brothers-71891", "gamefaqs-return-to-gaia-71891", "gamefaqs-second-battle-iifa-tree-71891"],
   },
   {
     id: "detour.return-to-gaia-memoria-rejoin",

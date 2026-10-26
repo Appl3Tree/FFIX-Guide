@@ -653,6 +653,16 @@ for (const edge of gameRouteEdges) {
   }
 }
 const aerialTrenoReturn = gameRouteEdgesById.get("detour.aerial-treno-return");
+const memoriaEarlyReturn = gameRouteEdgesById.get("detour.memoria-early-return-to-gaia");
+if (
+  memoriaEarlyReturn?.relationship !== "optional-return" ||
+  !memoriaEarlyReturn.summary.includes("GameFAQs specifically says Zidane must be outside") ||
+  !memoriaEarlyReturn.sourceIds.includes("gamefaqs-memoria-71891") ||
+  !memoriaEarlyReturn.sourceIds.includes("rpgclassics-memoria") ||
+  !memoriaEarlyReturn.sourceIds.includes("gamerguides-memoria-1-maliris")
+) {
+  errors.push("The early Memoria exit must preserve GameFAQs' party condition and its independent entrance-return cross-checks.");
+}
 const aerialTrenoRejoin = gameRouteEdgesById.get("detour.aerial-treno-rejoin");
 if (
   aerialTrenoReturn?.relationship !== "optional-return" ||
