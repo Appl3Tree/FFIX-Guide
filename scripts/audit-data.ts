@@ -798,12 +798,14 @@ if (
 }
 const aerialBlackMageVillageReturn = gameRouteEdgesById.get("detour.aerial-black-mage-village-shops");
 const aerialBlackMageVillageRejoin = gameRouteEdgesById.get("detour.aerial-black-mage-village-rejoin");
+const gamefaqsDisc2MagdaleneSourceNotes = sources.find((source) => source.id === "gamefaqs-magdalene-forest-71891")?.notes;
 if (
   aerialBlackMageVillageReturn?.relationship !== "optional-return" ||
   aerialBlackMageVillageReturn.fromChapterId !== "disc-3.aerial-exploration" ||
   aerialBlackMageVillageReturn.toChapterId !== "disc-2.magdalene-forest" ||
   !aerialBlackMageVillageReturn.summary.includes("Disc II shop stock") ||
   !aerialBlackMageVillageReturn.summary.includes("for a while") ||
+  !aerialBlackMageVillageReturn.summary.includes("Disc II village walkthrough supplies first-visit stock details, not evidence for this later return") ||
   !aerialBlackMageVillageReturn.summary.includes("Flactem independently confirms a Disc III return") ||
   !aerialBlackMageVillageReturn.summary.includes("earlier Blue Narciss phase") ||
   !aerialBlackMageVillageReturn.summary.includes("does not reopen the forest route") ||
@@ -812,6 +814,8 @@ if (
   !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-magdalene-forest-71891") ||
   !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-shops-71891") ||
   !aerialBlackMageVillageReturn.sourceIds.includes("flactem-disc-3-lindblum") ||
+  !gamefaqsDisc2MagdaleneSourceNotes?.includes("does not document the later Disc III Hilda Garde return") ||
+  !gamefaqsDisc2MagdaleneSourceNotes.includes("or establish that Disc II shop stock remains available then") ||
   aerialBlackMageVillageRejoin?.relationship !== "rejoin" ||
   aerialBlackMageVillageRejoin.fromChapterId !== "disc-2.magdalene-forest" ||
   aerialBlackMageVillageRejoin.toChapterId !== "disc-3.aerial-exploration" ||

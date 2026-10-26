@@ -640,7 +640,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/magdalene-forest",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the Magdalene Forest and Dead Forest encounters, four-branch owl puzzle, six Black Mage Village ATEs, Mogryo's time-limited letter to Mocchi, village pickups, shops, and story exit. It lists Cactuar, Goblin Mage, Griffin, and Zaghnol for the Magdalene Forest world map and a separate Griffin, Myconid, and Zemzelett roster for the Dead Forest field area. It gives Everyday Life → Life On The Run → Gourmand's Nose → Different Language → Visitor, Not Invader → Life Cycle; the first three are safe before collecting the letter, which it recommends accepting before any further ATE, conversation, or screen.",
+    notes: "Disc II story-route source for the Magdalene Forest and Dead Forest encounters, four-branch owl puzzle, six Black Mage Village ATEs, Mogryo's time-limited letter to Mocchi, village pickups, original shop stock, and story exit. It does not document the later Disc III Hilda Garde return or establish that Disc II shop stock remains available then; the Disc III Aerial Exploration route supplies the free-flight timing. It lists Cactuar, Goblin Mage, Griffin, and Zaghnol for the Magdalene Forest world map and a separate Griffin, Myconid, and Zemzelett roster for the Dead Forest field area. It gives Everyday Life → Life On The Run → Gourmand's Nose → Different Language → Visitor, Not Invader → Life Cycle; the first three are safe before collecting the letter, which it recommends accepting before any further ATE, conversation, or screen.",
   },
   {
     id: "jegged-black-mage-village",
