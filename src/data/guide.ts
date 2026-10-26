@@ -1819,6 +1819,14 @@ export const sources = [
     notes: "Disc I first-visit bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
   },
   {
+    id: "gamefaqs-single-character-27398",
+    title: "Final Fantasy IX Single Character Challenge FAQ",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/27398",
+    accessed: "2026-10-26",
+    notes: "Original PlayStation challenge route suggests reaching Lv. 15 before entering Gizamaluke's Grotto and gives setup advice for its chosen-character run. The level target is kept challenge-specific and is not used as a normal-party recommendation.",
+  },
+  {
     id: "jegged-gizamaluke",
     title: "Gizamaluke's Grotto — Disc I walkthrough",
     publisher: "Jegged",

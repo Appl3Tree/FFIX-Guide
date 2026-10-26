@@ -269,7 +269,8 @@ const ralvuimagoSources = ["gamefaqs-return-to-alexandria-71891", "jegged-return
 const burmeciaStealsObjectiveId = "disc-1.burmecia.beatrix-steals";
 const burmeciaStealsMissableId = "missable.disc-1.burmecia.beatrix-steals";
 const burmeciaStealsCutoffId = "cutoff.burmecia.beatrix-steals";
-const gizamalukeBossSources = [...grottoEnemySources, "cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss"];
+const gizamalukeBossSources = [...grottoEnemySources, "cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "gamefaqs-single-character-27398", "vgr-no-spoiler-walkthrough"];
+const gizamalukePreparationSources = gizamalukeBossSources;
 const huntEnemySources = [enemyListSourceId, "gamefaqs-hunt-minigame-71891", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
 const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
@@ -4913,6 +4914,13 @@ const grottoEnemyRecords: EnemyRecord[] = [
       { title: "Protect the party while Zidane steals", detail: "Crash hits hard and Water can target the party, so keep a character ready to heal. Vivi's Thunder exploits the listed weakness; Freya can Jump to avoid attacks during her turn.", sourceIds: ["gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke"] },
       { title: "Treat the Tent trick as a gamble", detail: "A Tent may inflict Darkness and Silence, but a failed Tent can fully heal the boss. Save first if trying this tactic, and avoid repeating it when you would rather preserve the boss's current HP.", sourceIds: ["gamefaqs-grotto-south-gate-79143", "jegged-gizamaluke"] },
     ],
+    preparationGuidance: {
+      levelRationale: "The normal-route references list Gizamaluke at Level 16, which is the boss's own stat, not a party target; they do not establish a recommended level for a standard party. A GameFAQs Single Character Challenge suggests Lv. 15 before entering the Grotto, but that target is specific to its challenge route and is not adopted as ordinary-play guidance.",
+      optionalGrinding: "No reviewed normal-route guide requires a fixed grind quota. The party can use the overworld before entering the Grotto if extra encounters are desired; the Lv. 15 note belongs to the separate single-character challenge. Save with Mogmi and use a Tent before opening the Sacred Room.",
+      setupAdvice: "Bring Potions or Hi-Potions and Echo Screens: Dagger is not in this party, and Silent Voice can silence a character. Use an available Glass Armlet to reduce Water damage, keep Zidane stealing while the others heal or attack, and let Freya Jump out of danger. Vivi can use Thunder, but damaging magic can draw Silent Voice. The optional Tent trick may inflict Darkness or Silence, yet can restore the boss to full HP if it fails.",
+      confidence: "partial",
+      sourceIds: gizamalukePreparationSources,
+    },
     routeObjectiveIds: [gizamalukeStealsObjectiveId],
     notes: ["The boss drops a Tent. Route sources agree on the three named steals, but their printed steal rates differ; no probabilities or attempt counts are asserted."],
   }, journeyToBurmeciaChapterId, gizamalukeBossSources, [gizamalukeStealsMissableId], [gizamalukeStealsCutoffId]),

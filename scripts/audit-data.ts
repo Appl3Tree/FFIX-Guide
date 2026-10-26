@@ -4288,6 +4288,17 @@ if (!grottoPool || grottoPool.kind !== "random-pool" || grottoRoster.some((enemy
   !cleyraIceStaffPath || cleyraIceStaffPath.method !== "chest" || cleyraIceStaffPath.chapterId !== "disc-2.cleyra") {
   errors.push("Gizamaluke's Grotto must keep its regional pool, two fixed Type A pairs, boss steal warning, and later Ice Staff recovery linked across the bestiary and item catalog.");
 }
+const gizamalukePreparation = gizamalukeRecord?.preparationGuidance;
+const gizamalukePrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")?.sections.find((section) => section.id === "journey-grotto-boss");
+const gizamalukePrepStep = gizamalukePrepSection?.steps.find((step) => step.id === "journey-gizamaluke-preparation");
+if (!gizamalukePreparation || gizamalukePreparation.suggestedLevelRange !== undefined ||
+  !gizamalukePreparation.levelRationale.includes("not a party target") ||
+  !gizamalukePreparation.levelRationale.includes("challenge route") ||
+  !gizamalukePreparation.sourceIds.includes("gamefaqs-single-character-27398") ||
+  !gizamalukePrepSection?.sourceIds.includes("gamefaqs-single-character-27398") ||
+  !gizamalukePrepStep?.detail?.includes("route-specific")) {
+  errors.push("Gizamaluke preparation must keep its Level 16 enemy stat separate from the challenge-only Lv. 15 target and mirror that caveat in the route.");
+}
 const burmeciaCityPool = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.city-random-pool");
 const burmeciaRegionPool = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia-region.world-map-pool");
 const burmeciaTypeAPair = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.type-a-pair");

@@ -1220,13 +1220,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-grotto-boss",
         title: "Sacred Room — prepare for and defeat Gizamaluke",
         summary: "Save and restock before using the Holy Bell on the remaining door. Gizamaluke has heavy physical and Water attacks, and counters damaging magic with Silence.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "gamefaqs-equipment-33383", "gamefaqs-items-71891", "elitegrindlab-gizamaluke"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "gamefaqs-single-character-27398", "gamefaqs-equipment-33383", "gamefaqs-items-71891", "elitegrindlab-gizamaluke"],
         steps: [
           {
             id: "journey-gizamaluke-preparation",
             kind: "save",
             text: "Save with Mogmi and use a Tent before the boss. Equip available Glass Armlets to reduce Water damage, bring Echo Screens for Silence, and keep Potions or Hi-Potions ready. Use the Holy Bell on the left door from the great-bell room to enter the Sacred Room.",
-            detail: "The boss is reported at Level 16 and 3,175 HP. Published level recommendations are not sufficiently consistent to set a required party level here; the guide records the boss's listed level without presenting it as a recommended minimum.",
+            detail: "The boss's listed Level 16 is its enemy stat, not a party target. A PlayStation Single Character Challenge suggests Lv. 15 before entering, but that advice is route-specific; the reviewed normal-route guides do not establish a standard party-level recommendation.",
           },
           {
             id: "journey-gizamaluke-steals-and-combat",
