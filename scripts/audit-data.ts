@@ -624,6 +624,27 @@ if (
 ) {
   errors.push("The Disc III Hilda Garde Dali return and rejoin must preserve the optional Cotton Robe route and source links.");
 }
+const aerialBlackMageVillageReturn = gameRouteEdgesById.get("detour.aerial-black-mage-village-shops");
+const aerialBlackMageVillageRejoin = gameRouteEdgesById.get("detour.aerial-black-mage-village-rejoin");
+if (
+  aerialBlackMageVillageReturn?.relationship !== "optional-return" ||
+  aerialBlackMageVillageReturn.fromChapterId !== "disc-3.aerial-exploration" ||
+  aerialBlackMageVillageReturn.toChapterId !== "disc-2.magdalene-forest" ||
+  !aerialBlackMageVillageReturn.summary.includes("reopened shops") ||
+  !aerialBlackMageVillageReturn.summary.includes("Disc II stock") ||
+  !aerialBlackMageVillageReturn.summary.includes("for a while") ||
+  !aerialBlackMageVillageReturn.summary.includes("does not reopen the forest route") ||
+  !aerialBlackMageVillageReturn.summary.includes("first-visit ATEs") ||
+  !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-magdalene-forest-71891") ||
+  !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-shops-71891") ||
+  aerialBlackMageVillageRejoin?.relationship !== "rejoin" ||
+  aerialBlackMageVillageRejoin.fromChapterId !== "disc-2.magdalene-forest" ||
+  aerialBlackMageVillageRejoin.toChapterId !== "disc-3.aerial-exploration" ||
+  !aerialBlackMageVillageRejoin.sourceIds.includes("jegged-lindblum-hilda-garde")
+) {
+  errors.push("The Disc III Hilda Garde Black Mage Village shop return and rejoin must preserve the Disc II stock window, its limits, and source links.");
+}
 const routeStartChapterId = gameRouteCoverage.chapterIds[0];
 const routeEndChapterId = gameRouteCoverage.throughChapterId;
 if (!routeStartChapterId) {

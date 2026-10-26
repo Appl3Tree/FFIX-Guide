@@ -787,6 +787,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-dali-71891"],
   },
   {
+    id: "detour.aerial-black-mage-village-shops",
+    fromChapterId: "disc-3.aerial-exploration",
+    toChapterId: "disc-2.magdalene-forest",
+    relationship: "optional-return",
+    summary: "During the Hilda Garde III free-flight window, revisit Black Mage Village to review its reopened shops and their Disc II stock. GameFAQs says some items remain available for a while; the separate final-stock checkpoint handles later shop changes. This return does not reopen the forest route or first-visit ATEs.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-magdalene-forest-71891", "gamefaqs-shops-71891"],
+  },
+  {
+    id: "detour.aerial-black-mage-village-rejoin",
+    fromChapterId: "disc-2.magdalene-forest",
+    toChapterId: "disc-3.aerial-exploration",
+    relationship: "rejoin",
+    summary: "After reviewing Black Mage Village's reopened shops, return to the Hilda Garde III and resume the Disc III free-flight route; continue to Ipsen's Castle when ready.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+  },
+  {
     id: "story.aerial-exploration-to-ipsens-castle",
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-3.ipsens-castle",
