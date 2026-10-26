@@ -5404,6 +5404,22 @@ const ipsensEquipmentPaths = ipsensEquipmentStock.map(([slug]) => {
     paths: itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.shopId === "ipsens-castle.kumool-mogshop" && path.chapterId === "disc-3.ipsens-castle"),
   };
 });
+const ipsensDisc3And4EquipmentSlugs = new Set([
+  "mage-masher", "iron-sword", "mythril-spear", "poison-knuckles", "multina-racket", "mythril-rod",
+  "lamias-flute", "oak-staff", "needle-fork", "rising-sun", "n-kai-armlet", "jade-armlet",
+  "venetia-shield", "red-hat", "golden-hairpin", "cross-helm", "diamond-helm", "power-vest",
+  "gaia-gear", "shield-armor", "demons-mail",
+]);
+const ipsensDisc3And4EquipmentMismatch = ipsensEquipmentPaths
+  .filter(({ slug }) => ipsensDisc3And4EquipmentSlugs.has(slug))
+  .some(({ item, paths }) => {
+    const path = paths[0];
+    return paths.length !== 1
+      || path?.availability !== "repeatable"
+      || !path.sourceIds.includes("gamefaqs-equipment-33383")
+      || !path.conditions.includes("Disc III/IV")
+      || !item?.sourceIds.includes("gamefaqs-equipment-33383");
+  });
 const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths }, index) => {
   const [expectedSlug, expectedPrice] = ipsensEquipmentStock[index];
   const path = paths[0];
@@ -5476,8 +5492,8 @@ const ipsensAbilityMismatch = ipsensAbilityClaims.some(([slug, abilityName]) => 
   && claim.sourceIds.includes("gamefaqs-items-71891")
   && claim.sourceIds.includes("gamefaqs-abilities-71891")
 ));
-if (ipsensEquipmentStock.length !== 22 || ipsensEquipmentPaths.length !== 22 || ipsensStockRouteMismatch || ipsensTargetMismatch || ipsensAbilityMismatch) {
-  errors.push("Ipsen's Castle equipment stock must retain 22 source-linked Mogshop routes, the GameFAQs/RPGClassics Poison Knuckles and stock-table differences, each Need count and positive end-inventory target except Rising Sun, zero-count end-inventory source notes, and the listed equipment abilities.");
+if (ipsensEquipmentStock.length !== 22 || ipsensEquipmentPaths.length !== 22 || ipsensDisc3And4EquipmentSlugs.size !== 21 || ipsensDisc3And4EquipmentMismatch || ipsensStockRouteMismatch || ipsensTargetMismatch || ipsensAbilityMismatch) {
+  errors.push("Ipsen's Castle equipment stock must retain 22 source-linked Mogshop routes, Disc III/IV evidence for the 21 GameFAQs Equipment List sellers, the unverified Coronet exception, GameFAQs/RPGClassics Poison Knuckles and stock-table differences, each Need count and positive end-inventory target except Rising Sun, zero-count end-inventory source notes, and the listed equipment abilities.");
 }
 const nKaiAcquisitionPathExpectations = [
   { id: "item-path.disc-3.desert-palace.n-kai-armlet-bloodstone", chapterId: "disc-3.desert-palace", method: "fixed-pickup", availability: "single-use", objectiveId: "disc-3.desert-palace.bloodstones" },
