@@ -3710,7 +3710,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "card-tournament-treno-sweep",
         title: "Treno side stops — mail, Catoblepas, Stellazzio, and auction",
         summary: "Return to Treno and complete the optional errands before entering the third match.",
-        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "playonline-guide-fr-fhiprace", "gamefaqs-hippaul-racing-10181", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "jegged-stellazzio"],
+        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "playonline-guide-fr-fhiprace", "gamefaqs-hippaul-racing-10181", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "jegged-stellazzio"],
         steps: [
           {
             id: "card-tournament-mogrich-letter",
@@ -3730,6 +3730,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "card-tournament-queen-stella",
             kind: "optional",
             text: "Visit Queen Stella and turn in any Stellazzio coins you are carrying. The Leo coin from the Alexandria castle grounds is now available if you collected it; use the Stellazzio ledger for the full reward order and remaining coin locations.",
+            detail: "If you need another Glass Armlet, inspect Treno's displayed weapon stock while here. Jegged lists a Disc III sale, but the GameFAQs item references list Treno only on Disc II and the later GameFAQs, RPGClassics, and Final Fantasy Wiki stock tables omit it. Buy only if it appears; Alexandria is a documented later seller.",
             objectiveIds: ["disc-3.card-tournament.stellazzio-rewards"],
           },
           {
@@ -5028,7 +5029,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-lindblum-and-airship",
         title: "Lindblum and the Hilda Garde 3 — first flight and ship pickups",
         summary: "After the story grants the airship, inspect its decks, learn the landing rule, and choose a party for optional travel.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops"],
         steps: [
           {
             id: "aerial-first-flight",
@@ -5055,7 +5056,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-plan-route",
             kind: "optional",
             text: "Before flying out, set the party you want for world-map encounters and make sure Quina is available for Frog Catching and Moogle-related tasks. You can return to the bridge to change the active party later.",
-            detail: "The next story destination is Ipsen's Castle. You may go there directly, but this is a convenient window for the optional checks below.",
+            detail: "The next story destination is Ipsen's Castle. You may go there directly, but this is a convenient window for the optional checks below. If you want another Glass Armlet, inspect Dragoos' Lindblum stock before leaving: Jegged and Xenomic's older GameFAQs Item Location Guide list a Disc III sale, while the later shop tables omit it and GameFAQs' item references disagree about the disc range. Treat it as an inventory check, not a guaranteed purchase; Alexandria is a separate later seller.",
           },
         ],
       },
@@ -5155,7 +5156,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-optional-stops",
         title: "Quan's Dwelling and Treno — two Running Shoes routes",
         summary: "Use the post-Mount Gulug flags to collect the optional Running Shoes and turn in accumulated Stellazzios.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-items-71891", "jegged-stellazzio"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "gamefaqs-shops-71891", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "jegged-stellazzio"],
         steps: [
           {
             id: "aerial-quan-running-shoes",
@@ -5175,7 +5176,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-treno-stellazzio",
             kind: "optional",
             text: "While in Treno, visit Queen Stella and turn in any new Stellazzio coins, including Capricorn if you have collected it. Read the reward dialogue and check the coin count afterward.",
-            detail: "At this point the route sources list ten available coins. The full Stellazzio collection remains open for later visits.",
+            detail: "At this point the route sources list ten available coins. The full Stellazzio collection remains open for later visits. If you did not find Glass Armlet during the earlier Disc III Treno stop, inspect the displayed stock again; the sources do not establish whether the candidate sale persists through this later return. Alexandria remains a documented later seller.",
             objectiveIds: ["disc-3.aerial-exploration.treno-return"],
           },
         ],

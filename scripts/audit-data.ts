@@ -3571,9 +3571,10 @@ const glassArmletAlexandriaPath = itemAcquisitionPaths.find((path) => path.id ==
 const glassArmletPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.glass-armlet-shop");
 const glassArmletDisc2TrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.glass-armlet-shop");
 const glassArmletDisc2LindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.glass-armlet-shop");
-const glassArmletDisc3TrenoCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-treno-candidate");
+const glassArmletDisc3TrenoCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.glass-armlet-treno-candidate");
 const glassArmletDisc3LindblumCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.glass-armlet-lindblum-candidate");
 const glassArmletTrenoSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.treno")?.sections.find((section) => section.id === "treno-city-pickups-and-mognet");
+const glassArmletDisc3TrenoSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.card-tournament")?.sections.find((section) => section.id === "card-tournament-treno-sweep");
 if (
   !glassArmletBmvPath ||
   glassArmletBmvPath.itemId !== "game-item.glass-armlet" ||
@@ -3617,7 +3618,7 @@ if (
   errors.push("Glass Armlet's early Lindblum and Disc II shop purchases must remain distinct from the disputed later city listings.");
 }
 for (const [path, chapterId, city] of [
-  [glassArmletDisc3TrenoCandidate, "disc-3.the-home-front", "Treno"],
+  [glassArmletDisc3TrenoCandidate, "disc-3.card-tournament", "Treno"],
   [glassArmletDisc3LindblumCandidate, "disc-3.aerial-exploration", "Lindblum"],
 ] as const) {
   if (
@@ -3628,12 +3629,14 @@ for (const [path, chapterId, city] of [
     !path.shopName?.includes("possible Disc III sale") ||
     path.cost?.amount !== 250 ||
     !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.sourceIds.includes("gamefaqs-items-71891") ||
+    !path.sourceIds.includes("gamefaqs-item-locations-54996") ||
     !path.sourceIds.includes("gamefaqs-equipment-33383") ||
     !path.sourceIds.includes("jegged-arm-gear") ||
     !path.sourceIds.includes("rpgclassics-shops") ||
     !path.sourceIds.includes("ffwiki-shops") ||
-    !/unverified candidate/i.test(path.conditions ?? "") ||
-    !/table omissions corroborate the discrepancy but do not prove/i.test(path.conditions ?? "") ||
+    !/unverified candidate route/i.test(path.conditions ?? "") ||
+    !/do not (?:prove|establish)/i.test(path.conditions ?? "") ||
     !/Alexandria/i.test(path.conditions ?? "")
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
@@ -3645,6 +3648,24 @@ if (
   !sources.find((source) => source.id === "ffwiki-shops")?.notes.includes("For Glass Armlet, Final Fantasy Wiki lists earlier Lindblum and Disc II Treno stock")
 ) {
   errors.push("The Glass Armlet route and source register must preserve Final Fantasy Wiki's later-table omission as corroboration, not proof of unavailable stock.");
+}
+if (
+  !glassArmletDisc3LindblumCandidate?.conditions.includes("Xenomic's GameFAQs Item Location Guide") ||
+  !glassArmletDisc3LindblumCandidate.conditions.includes("Discs II–III") ||
+  !glassArmletDisc3LindblumCandidate.conditions.includes("modern Items table") ||
+  !glassArmletDisc3TrenoCandidate?.conditions.includes("both older GameFAQs reference lists name Treno only on Disc II") ||
+  !sources.find((source) => source.id === "gamefaqs-item-locations-54996")?.notes.includes("Glass Armlet location row lists Lindblum (Discs II–III)") ||
+  !sources.find((source) => source.id === "gamefaqs-items-71891")?.notes.includes("Xenomic's older Item Location Guide instead lists Lindblum for Discs II–III")
+) {
+  errors.push("Glass Armlet's Lindblum candidate must preserve the positive Disc III Item Location listing against conflicting stock tables, while Treno must retain its older GameFAQs Disc II-only listings.");
+}
+if (
+  !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-item-locations-54996") ||
+  !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("inspect Treno's displayed weapon stock") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("Buy only if it appears")
+) {
+  errors.push("The first Disc III Treno stop must expose the uncertain Glass Armlet stock check with its source links and caveat.");
 }
 const leatherWristPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.leather-wrist-shop");
 const leatherWristTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.leather-wrist-shop");
