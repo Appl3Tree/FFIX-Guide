@@ -3998,34 +3998,40 @@ if (
 ) {
   errors.push("Madain Sari's Banyano Shores record must link the confirmed Blazer Beetle location, source evidence, partial roster limitation, and walkthrough context.");
 }
-const disc4IslandPool = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-gaia.islands-pool");
-const disc4Adamantoise = enemyRecords.find((enemy) => enemy.id === "enemy.adamantoise");
-const disc4Dracozombie = enemyRecords.find((enemy) => enemy.id === "enemy.dracozombie");
+const disc4WorldMapRosters: Record<string, string[]> = {
+  "encounter.return-to-gaia.mist-continent-world-map": ["enemy.adamantoise", "enemy.axe-beak", "enemy.bandersnatch", "enemy.bomb", "enemy.carve-spider", "enemy.clipper", "enemy.dracozombie", "enemy.ghost", "enemy.gigan-octopus", "enemy.goblin", "enemy.grand-dragon", "enemy.hedgehog-pie", "enemy.ironite", "enemy.ladybird", "enemy.lizard-man", "enemy.malboro-pandemonium", "enemy.mandragora", "enemy.mistodon-b", "enemy.mu", "enemy.python", "enemy.sand-scorpion", "enemy.serpion", "enemy.skeleton", "enemy.trick-sparrow", "enemy.worm-hydra", "enemy.vice", "enemy.whale-zombie", "enemy.yeti"],
+  "encounter.return-to-gaia.outer-continent-world-map": ["enemy.blazer-beetle", "enemy.cactuar", "enemy.dracozombie", "enemy.gigan-octopus", "enemy.goblin-mage", "enemy.grand-dragon", "enemy.griffin", "enemy.hecteyes", "enemy.land-worm", "enemy.malboro-pandemonium", "enemy.mistodon-b", "enemy.ogre", "enemy.troll", "enemy.whale-zombie"],
+  "encounter.return-to-gaia.lost-continent-world-map": ["enemy.dracozombie", "enemy.feather-circle", "enemy.gigan-octopus", "enemy.hecteyes", "enemy.malboro-pandemonium", "enemy.mistodon-b", "enemy.vepal-green", "enemy.whale-zombie"],
+  "encounter.return-to-gaia.forgotten-continent-world-map": ["enemy.adamantoise", "enemy.armstrong", "enemy.cactuar", "enemy.dracozombie", "enemy.gigan-octopus", "enemy.gimme-cat", "enemy.grand-dragon", "enemy.hecteyes", "enemy.jabberwock", "enemy.malboro-pandemonium", "enemy.mistodon-b", "enemy.worm-hydra"],
+};
+const disc4WorldMapRosterEncounters = Object.entries(disc4WorldMapRosters).map(([id]) => enemyEncounters.find((encounter) => encounter.id === id));
 const returnToGaiaWorldMap = walkthroughChapters.find((chapter) => chapter.areaId === "disc-4.return-to-gaia")?.sections.find((section) => section.id === "gaia-return-world-map-sidequests");
 const disc4IslandStep = returnToGaiaWorldMap?.steps.find((step) => step.id === "gaia-return-island-enemy-check");
 if (
-  !disc4IslandPool
-  || disc4IslandPool.kind !== "random-pool"
-  || disc4IslandPool.chapterId !== "disc-4.return-to-gaia"
-  || disc4IslandPool.formation.map((entry) => entry.enemyId).sort().join(",") !== "enemy.adamantoise,enemy.dracozombie"
-  || disc4IslandPool.formation.some((entry) => entry.quantity !== null)
-  || !disc4IslandPool.sourceIds.includes("gamefaqs-enemy-list-71891")
-  || !disc4IslandPool.sourceIds.includes("rpgclassics-bestiary-c-g")
-  || !disc4IslandPool.notes.some((note) => note.includes("not a complete Disc IV world-map roster") && note.includes("rates"))
-  || !disc4Adamantoise?.encounterIds.includes("encounter.return-to-gaia.islands-pool")
-  || !disc4Dracozombie?.encounterIds.includes("encounter.return-to-gaia.islands-pool")
+  disc4WorldMapRosterEncounters.some((encounter, index) => {
+    const expectedId = Object.keys(disc4WorldMapRosters)[index];
+    const expectedEnemyIds = disc4WorldMapRosters[expectedId] ?? [];
+    return !encounter
+      || encounter.kind !== "random-pool"
+      || encounter.chapterId !== "disc-4.return-to-gaia"
+      || encounter.formation.map((entry) => entry.enemyId).sort().join(",") !== [...expectedEnemyIds].sort().join(",")
+      || encounter.formation.some((entry) => entry.quantity !== null)
+      || !encounter.sourceIds.includes("gamefaqs-enemy-list-71891")
+      || !encounter.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
+      || !encounter.notes.some((note) => note.includes("continent-level roster") && note.includes("exact tiles") && note.includes("rates"));
+  })
+  || disc4WorldMapRosterEncounters.some((encounter, index) => {
+    const id = Object.keys(disc4WorldMapRosters)[index];
+    return !encounter?.formation.every((entry) => enemyRecords.find((enemy) => enemy.id === entry.enemyId)?.encounterIds.includes(id));
+  })
   || !enemyCatalogCoverage.chapterIds.includes("disc-4.return-to-gaia")
-  || !returnToGaiaWorldMap?.sourceIds.includes("rpgclassics-bestiary-c-g")
-  || !disc4IslandStep?.text.includes("Adamantoise")
-  || !disc4IslandStep.text.includes("Dracozombie")
-  || !disc4IslandStep.detail.toLowerCase().includes("exact encounter tiles")
-  || !disc4IslandPool.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
+  || !["Mist", "Outer", "Lost", "Forgotten"].every((continent) => disc4IslandStep?.text.includes(continent))
+  || !disc4IslandStep?.detail.toLowerCase().includes("exact tiles")
   || !disc4IslandStep.objectiveIds.includes("disc-4.return-to-gaia.island-blue-magic")
   || !objectivesById.get("disc-4.return-to-gaia.island-blue-magic")?.chapterIds?.includes("disc-4.return-to-gaia")
-  || !objectivesById.get("disc-4.return-to-gaia.island-blue-magic")?.sourceIds.includes("rpgclassics-bestiary-c-g")
-  || !sources.some((source) => source.id === "rpgclassics-bestiary-c-g")
+  || !["rpgclassics-bestiary-a-c", "rpgclassics-bestiary-c-g", "rpgclassics-kraken-bestiary", "rpgclassics-bestiary-t-z"].every((sourceId) => returnToGaiaWorldMap?.sourceIds.includes(sourceId) && objectivesById.get("disc-4.return-to-gaia.island-blue-magic")?.sourceIds.includes(sourceId) && sources.some((source) => source.id === sourceId))
 ) {
-  errors.push("The Disc IV island enemy group must connect Adamantoise and Dracozombie to both bestiary sources, Blue Magic recovery, and explicit partial-location limits.");
+  errors.push("Disc IV must preserve all four source-listed continent rosters, link every enemy profile reciprocally, and connect them to the Blue Magic checklist with explicit location limits.");
 }
 const highSeasGimmeCatPool = enemyEncounters.find((encounter) => encounter.id === "encounter.on-the-high-seas.gimme-cat-island-grass");
 const disc4GimmeCatPool = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-gaia.sacrobless-gimme-cat");
@@ -4080,9 +4086,10 @@ if (
   || !highSeasLanarSection?.sourceIds.includes("gamefaqs-enemy-list-71891")
   || !highSeasLanarSection?.sourceIds.includes("rpgclassics-bestiary-c-g")
   || !disc4GimmeCatStep?.text.includes("Gimme Cat")
-  || !disc4GimmeCatStep.detail.includes("Keep your Diamond")
+  || !disc4GimmeCatStep.detail.toLowerCase().includes("keep your diamond")
+  || !disc4GimmeCatStep.detail.includes("Auto-Life")
   || !disc4GimmeCatStep.objectiveIds?.includes("disc-4.return-to-gaia.island-blue-magic")
-  || !disc4GimmeCatObjective?.title.includes("Auto-Life")
+  || !disc4GimmeCatObjective?.title.includes("Quina Blue Magic")
   || !disc4GimmeCatObjective?.chapterIds?.includes("disc-4.return-to-gaia")
   || !disc4GimmeCatObjective.sourceIds.includes("rpgclassics-bestiary-c-g")
 ) {

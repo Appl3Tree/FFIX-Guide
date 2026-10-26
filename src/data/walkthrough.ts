@@ -5992,7 +5992,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-world-map-sidequests",
         title: "World map and Chocobo checks",
         summary: "Use the reopened map to finish late Chocobo rewards and the last Frog Catching milestone. Keep the breeding population intact while progressing toward 99 frogs. Track the 21 Chocobo beaches individually after the quest activates.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-a-c", "rpgclassics-bestiary-c-g", "rpgclassics-kraken-bestiary", "rpgclassics-bestiary-t-z"],
         steps: [
           {
             id: "gaia-return-dive-spot-five",
@@ -6018,8 +6018,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gaia-return-island-enemy-check",
             kind: "optional",
-            text: "If the enemy catalog or Quina's remaining Blue Magic is part of your goal, check Sacrobless Island/Daguerreo for Gimme Cat, Lachenta Wetlands or Donna Plains for Adamantoise, and the other Disc IV field areas for Dracozombie.",
-            detail: "GameFAQs groups Adamantoise and Dracozombie under its Islands enemy heading and lists Gimme Cat in the Daguerreo area; RPGClassics names Sacrobless Island for Gimme Cat and gives Disc IV locations for Adamantoise and broad Disc IV locations for Dracozombie. Exact encounter tiles, a complete Disc IV roster, formations, and rates are not established. Keep your Diamond, and use Eat on a weakened enemy for Auto-Life, Earth Shake, or LV5 Death if Quina still needs it.",
+            text: "If bestiary completion or Quina's remaining Blue Magic is part of your goal, check the Disc IV enemy rosters for the Mist, Outer, Lost, and Forgotten Continents, then revisit Sacrobless Island for Gimme Cat if needed.",
+            detail: "GameFAQs lists a separate enemy roster for each continent on Disc IV and says most entries return to their earlier areas; Mistodon [B] is the new Disc IV form. The lists name continent membership, not exact tiles, formations, or rates. RPGClassics independently supplies broad Disc IV locations for several entries. Quina's source-listed teachers in these rosters include Pumpkin Head, Mighty Guard, LV3 Def-less, LV5 Death, Roulette, Matra Magic, Aqua Breath, and Angel's Snack; the separate Sacrobless Gimme Cat teaches Auto-Life. Weaken an enemy before using Eat, keep your Diamond for that optional encounter, and treat the Sacrobless listing as a location opportunity rather than the full Forgotten Continent roster.",
             objectiveIds: ["disc-4.return-to-gaia.island-blue-magic"],
           },
           {

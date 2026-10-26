@@ -2896,15 +2896,15 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/bestiary3.shtml",
     accessed: "2026-10-25",
-    notes: "Original PlayStation bestiary with separate Kraken tentacle entries. It lists 18,169/18,168 HP for the left/right components, Elixir/Wing Edge steals, and Lightning weakness. The higher HP values conflict with GameFAQs' 10,001-HP reports; the right-side Wing Edge also conflicts with the newer GameFAQs walkthrough's Elixir-per-tentacle description.",
+    notes: "Original PlayStation Bestiary H–M. It cross-checks Hecteyes, Landworm, and the distinct Disc IV Mistodon profile and gives broad Disc IV locations; exact continent tiles and encounter formations are not supplied. It also has separate Kraken tentacle entries: 18,169/18,168 HP, Elixir/Wing Edge steals, and Lightning weakness. The higher HP values conflict with GameFAQs' 10,001-HP reports; the right-side Wing Edge also conflicts with the newer GameFAQs walkthrough's Elixir-per-tentacle description.",
   },
   {
     id: "rpgclassics-bestiary-a-c",
-    title: "Final Fantasy IX Bestiary A–C",
+    title: "Final Fantasy IX Bestiary A–B",
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/bestiary1.shtml",
     accessed: "2026-10-25",
-    notes: "Original PlayStation bestiary cross-check. Its Prima Vista Crash Site Baku entry lists Level 2, 202 HP, 1,285 MP, and Hi-Potion/Iron Sword steals. Its first Cargo Ship Black Waltz 3 table lists Level 7, 1,128 HP, 2,080 MP, and Steepled Hat/Linen Cuirass/Silver Gloves; the later South Gate form is a separate entry. It places Blazer Beetle at Banyano Shores and Pualei Plains and agrees with GameFAQs on its level, HP, MP, EXP, AP, Gil, card, steal/drop slots, and Limit Glove teacher entry. It does not provide a complete shoreline formation table or encounter rates.",
+    notes: "Original PlayStation A–B bestiary (the stable source ID predates the corrected page heading). It cross-checks Bandersnatch's stats, Pumpkin Head lesson, and loot and identifies its Alexandria Plateau location. Its Prima Vista Crash Site Baku entry lists Level 2, 202 HP, 1,285 MP, and Hi-Potion/Iron Sword steals. Its first Cargo Ship Black Waltz 3 table lists Level 7, 1,128 HP, 2,080 MP, and Steepled Hat/Linen Cuirass/Silver Gloves; the later South Gate form is a separate entry. It places Blazer Beetle at Banyano Shores and Pualei Plains and agrees with GameFAQs on its level, HP, MP, EXP, AP, Gil, card, steal/drop slots, and Limit Glove teacher entry. It does not provide a complete shoreline formation table or encounter rates.",
   },
   {
     id: "rpgclassics-primavista",
@@ -2928,7 +2928,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/bestiary2.shtml",
     accessed: "2026-10-25",
-    notes: "Original PlayStation bestiary cross-check. It places Adamantoise in Seaways Canyon, Zamo Basin, Lanar Island, Uaho Island, and Disc IV Lachenta Wetlands/Donna Plains; Dracozombie is listed at Iifa Tree and unspecified Disc IV locations. These broad locations support a partial Disc IV field reminder, not exact encounter tiles, formations, rates, or a complete island roster.",
+    notes: "Original PlayStation C–G bestiary cross-check. It confirms Gigan Octopus on all Mist Continent beaches in Disc IV and cross-checks Gigan Octopus and Grand Dragon profiles. It places Adamantoise in Seaways Canyon, Zamo Basin, Lanar Island, Uaho Island, and Disc IV Lachenta Wetlands/Donna Plains; Dracozombie is listed at Iifa Tree and unspecified Disc IV locations. These broad locations do not resolve exact encounter tiles, formations, or rates.",
   },
   {
     id: "rpgclassics-bestiary-n-s",
@@ -2944,7 +2944,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/bestiary5.shtml",
     accessed: "2026-10-25",
-    notes: "Original PlayStation bestiary cross-check. Tantarian's entry lists the Ramuh Card, Ether/Elixir/Silver Fork/Demon's Mail steals, and Running Shoes drop; Taharka's entry lists Level 46, 29,186 HP, 1,776 MP, 8,092 Gil, Fire/Wind weakness, Elixir/Mythril Claws/Orichalcon steals, and the Ramuh Card. Veteran's Ipsen/Memoria entry reports 1,627 MP, compared with GameFAQs' 1,672; Tonberry is listed at 7,886 HP with Ice weakness, compared with GameFAQs' 7,887 HP and no listed weakness. These contrasts stay source-specific. It does not establish remaster behavior or card/drop odds.",
+    notes: "Original PlayStation T–Z bestiary cross-check. It confirms the Disc IV Whale Zombie's broad world-beach location and profile, and cross-checks Vepal [Green]'s stats and loot. Tantarian's entry lists the Ramuh Card, Ether/Elixir/Silver Fork/Demon's Mail steals, and Running Shoes drop; Taharka's entry lists Level 46, 29,186 HP, 1,776 MP, 8,092 Gil, Fire/Wind weakness, Elixir/Mythril Claws/Orichalcon steals, and the Ramuh Card. Veteran's Ipsen/Memoria entry reports 1,627 MP, compared with GameFAQs' 1,672; Tonberry is listed at 7,886 HP with Ice weakness, compared with GameFAQs' 7,887 HP and no listed weakness. These contrasts stay source-specific. It does not establish remaster behavior or card/drop odds.",
   },
   {
     id: "gamerguides-memoria-kraken",
@@ -5819,9 +5819,9 @@ export const objectives: GameObjective[] = [
   },
   {
     id: "disc-4.return-to-gaia.island-blue-magic",
-    title: "Check Disc IV island encounters for any missing Auto-Life, Earth Shake, or LV5 Death",
+    title: "Check Disc IV continent rosters for missing bestiary entries or Quina Blue Magic",
     category: "collection",
-    sourceIds: ["gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
+    sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-abilities-71891", "rpgclassics-bestiary-a-c", "rpgclassics-bestiary-c-g", "rpgclassics-kraken-bestiary", "rpgclassics-bestiary-t-z"],
     chapterIds: ["disc-4.return-to-gaia"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
