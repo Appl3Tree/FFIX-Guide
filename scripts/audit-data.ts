@@ -790,9 +790,10 @@ if (
   cleyraFrogRejoin?.relationship !== "rejoin" ||
   cleyraFrogRejoin.fromChapterId !== "disc-1.exploring-lindblum-kingdom" ||
   cleyraFrogRejoin.toChapterId !== "disc-2.journey-to-cleyra" ||
-  !cleyraFrogRejoin.sourceIds.includes("jegged-gargan-roo")
+  !cleyraFrogRejoin.sourceIds.includes("jegged-gargan-roo") ||
+  cleyraFrogRejoin.sourceIds.includes("gamefaqs-frog-catching-71891")
 ) {
-  errors.push("The pre-Cleyra Lindblum Basin Frog Catching return and rejoin must preserve GameFAQs' third-visit and frog-care scope, Jegged's independent timing cross-check, and source links.");
+  errors.push("The pre-Cleyra Lindblum Basin return must keep GameFAQs' third-visit/frog-care source on the detour and exclude it from the route rejoin.");
 }
 const aerialQuanDwellingReturn = gameRouteEdgesById.get("detour.aerial-quan-dwelling-running-shoes");
 const aerialQuanDwellingRejoin = gameRouteEdgesById.get("detour.aerial-quan-dwelling-rejoin");

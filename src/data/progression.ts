@@ -1216,7 +1216,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-2.journey-to-cleyra",
     relationship: "rejoin",
     summary: "After the optional Qu's Marsh visit, return through Gizamaluke's Grotto to Burmecian territory and continue west to Cleyra; Jegged independently confirms that the party can visit Qu's Marsh for frogs before the Cleyra approach.",
-    sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "jegged-gargan-roo"],
+    sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-exploring-lindblum-71891", "jegged-gargan-roo"],
   },
   {
     id: "detour.return-to-lindblum-pinnacle-rocks-return",
