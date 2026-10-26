@@ -2021,6 +2021,12 @@ export const objectiveAccessDependencies: ObjectiveDependency[] = [
     dependentObjectiveId: "disc-2.cleyra.rubbish-pit-chests",
     sourceIds: ["gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra"],
   },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-3.aerial-exploration.sky-chocobo",
+    dependentObjectiveId: "disc-3.aerial-exploration.air-garden-treasures",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-lindblum-hilda-garde", "jegged-chocographs"],
+  },
 ];
 
 // The first eight Friendly Creatures can be completed in any order when the

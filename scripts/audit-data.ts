@@ -819,6 +819,20 @@ for (const dependency of objectiveDependencies) {
     if (!sourceIds.has(sourceId)) errors.push(`Dependency ${dependency.prerequisiteObjectiveId} -> ${dependency.dependentObjectiveId} references unknown source ${sourceId}.`);
   }
 }
+const airGardenSkyAccessEdges = objectiveDependencies.filter((dependency) =>
+  dependency.prerequisiteObjectiveId === "disc-3.aerial-exploration.sky-chocobo" &&
+  dependency.dependentObjectiveId === "disc-3.aerial-exploration.air-garden-treasures",
+);
+if (
+  airGardenSkyAccessEdges.length !== 1 ||
+  airGardenSkyAccessEdges[0]?.kind !== "objective-access" ||
+  !airGardenSkyAccessEdges[0].sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !airGardenSkyAccessEdges[0].sourceIds.includes("gamefaqs-chocobo-hot-cold-71891") ||
+  !airGardenSkyAccessEdges[0].sourceIds.includes("jegged-lindblum-hilda-garde") ||
+  !airGardenSkyAccessEdges[0].sourceIds.includes("jegged-chocographs")
+) {
+  errors.push("Chocobo's Air Garden objective must have the source-backed Sky Chocobo access prerequisite.");
+}
 const friendlyCreaturePrerequisiteIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
   "disc-2.journey-to-treno.friendly-ghost",
