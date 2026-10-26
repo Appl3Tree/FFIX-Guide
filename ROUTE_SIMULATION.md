@@ -1,6 +1,6 @@
 # Route simulation log
 
-Last updated: 2026-10-24
+Last updated: 2026-10-26
 
 ## Method and scope
 
@@ -84,8 +84,8 @@ The alternative Hippo's Prize route replaces Home Sweet Home in Card Tournament;
 | IV | Return to Gaia | Static route reviewed; pass through the changed Gaia map, Disc IV Chocobo/frog rewards, Stiltzkin #8, Stellazzio/Hammer, Treno and shop updates, Mognet Central, Eidolon Wall, Magical Fingertip, Nero Family start, and Iifa Tree gate | Source trace reaches the Memoria entrance target at 10:40:40; optional content beyond the perfect-save route is excluded |
 | IV | Second Battle of the Iifa Tree | Static route reviewed; pass the Gaia-side Grand Armor fallback check, Nova Dragon steal/drop window, and Memoria entrance handoff | Source trace reaches Memoria entrance at 10:40:40 with 0 random encounters reported for D4-01; target includes two Tantalus return detours |
 | IV | Memoria | Static route reviewed; pass through five hidden weapons and card Phantoms, four Guardian steal windows, Hades, Excalibur II check, Nero Family checkpoints, and Deathguise | Source trace reaches Excalibur II after Lich at 11:13:07; guardian steals and Nero returns are represented in the static target, not live timed |
-| IV | Final Preparations | Static route reviewed; pass through the post-Deathguise return window, optional side content, Ozma, Hades's final Running Shoes steal, Hammer choice, and final commit check | Pending |
-| IV | The Final Battle | Static route reviewed; pass through Trance Kuja's steal window, Necron party change and status recovery, ending, Hammer scene, and postgame achievement check | Pending |
+| IV | Final Preparations | Static trace reviewed from Deathguise's Crystal World save through the optional Gaia cleanup window, Ozma checks, Hades's last Running Shoes steal, Hammer choice, and pre-Kuja commit gate | Run 38 returns through Memoria for optional work, then comes back to the Crystal World save point before the final transition; this is not live or timed verification |
+| IV | The Final Battle | Static trace reviewed through Trance Kuja's steals, the one party-change screen, Necron's steal/battle, ending scene, and completion check | Run 39 saves and prepares before Kuja, finishes both consecutive battles and their steal windows, then checks the Hammer scene and release-scoped achievement; no post-battle free roam or direct-game verification |
 
 ## Excalibur II route — source target schedule
 
@@ -1135,7 +1135,7 @@ The trace accounts for all five hidden weapons, the five Tetra Master Phantoms, 
 
 ### Result
 
-The static route uses the post-Deathguise window to finish selected optional goals, accounts for the last enemy source of Running Shoes and the Ozma rewards, and makes the Hammer's synthesis/ending-scene tradeoff explicit before the final point of no return. GameFAQs confirms previously available activities remain open at this stage and places Ozma and Hades among the remaining optional checks. The standard route now reaches the final commit gate; this is not an Excalibur II speedrun or live gameplay verification.
+The static route uses the post-Deathguise window to finish selected optional goals, accounts for the last enemy source of Running Shoes and the Ozma rewards, and makes the Hammer's synthesis/ending-scene tradeoff explicit before the final point of no return. [GameFAQs' Final Preparations chapter](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/final-preparations) confirms the late cleanup window and identifies Hades's Running Shoes steal as the last copy; [Jegged's final showdown walkthrough](https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/45-Kuja-and-Necron-Final-Showdown.html) independently requires retracing Memoria after sidequest visits. The standard route now reaches the final commit gate; this is not an Excalibur II speedrun or live gameplay verification.
 
 ## Standard route run 39 — The Final Battle
 
@@ -1155,7 +1155,7 @@ The static route uses the post-Deathguise window to finish selected optional goa
 
 ### Result
 
-The final trace reaches both consecutive boss fights, records the last steal tables and the one party-change window, and carries the Hammer choice into the ending. GameFAQs and Jegged agree on the encounter order, Kuja steals, Necron's Elixir steal and Grand Cross-driven preparation; this static route is not hands-on gameplay verification, and it does not establish a timed Excalibur II route.
+The final trace reaches both consecutive boss fights, records the last steal tables and the one party-change window, and carries the Hammer choice into the ending. [GameFAQs' final-battle chapter](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-final-battle) and [Jegged's final showdown walkthrough](https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/45-Kuja-and-Necron-Final-Showdown.html) support the encounter order, Kuja steals, Necron's Elixir steal, the party reconfiguration before Necron, and Grand Cross preparation. This static route is not hands-on gameplay verification, and it does not establish a timed Excalibur II route.
 
 ## Next checkpoints
 
