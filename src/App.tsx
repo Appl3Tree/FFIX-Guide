@@ -1561,6 +1561,7 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
       ...enemy.strategies.flatMap((strategy) => [strategy.title, strategy.detail]),
       ...(enemy.preparationGuidance ? [
         enemy.preparationGuidance.levelRationale,
+        ...(enemy.preparationGuidance.difficultyAssessment ? [enemy.preparationGuidance.difficultyAssessment] : []),
         enemy.preparationGuidance.optionalGrinding,
         enemy.preparationGuidance.setupAdvice,
         ...(enemy.preparationGuidance.suggestedLevelRange ? [

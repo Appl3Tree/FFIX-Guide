@@ -1785,7 +1785,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-settlement-before-antlion",
         title: "Cleyra settlement — ATEs, Quina, and pickups",
         summary: "View every scene prompt, recover the two rubbish-pit chests, and sweep the town before the attack advances.",
-        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "cavesofnarshe-enemies", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "jegged-cleyra", "jegged-missables", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-boss-guide-31490", "kamigame-antlion", "gamefaqs-enemy-list-71891", "cavesofnarshe-enemies", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "jegged-cleyra", "jegged-missables", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
         steps: [
           {
             id: "cleyra-four-ates",
@@ -1825,8 +1825,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-prepare-antlion",
             kind: "save",
-            text: "Save, review equipment and abilities, and keep healing and status recovery available before following the story toward Antlion.",
-            detail: "Antlion can inflict Trouble and Darkness. Annoyntment cures Trouble; if you put Antlion to Sleep, avoid waking it with physical attacks because it can counter physical hits.",
+            text: "Save, check equipment and abilities, and stock healing items before triggering Antlion.",
+            detail: "Level 16 is Antlion's enemy stat; the reviewed standard-route guides do not set a party target. Dagger is absent, so prepare healing items and Phoenix Downs, Remedies for Darkness, and Annoyntments for Trouble. Remove Counter if equipped, favor Vivi's Ice magic, and use Quina's White Wind if already learned. Heal promptly after Sandstorm; Zidane can attempt the three one-time steals. A PS1 boss FAQ labels Antlion Tough, a subjective single-source rating. Kamigame suggests Tents as an optional status tactic, not a guaranteed setup.",
           },
         ],
       },

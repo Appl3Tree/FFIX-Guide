@@ -251,6 +251,7 @@ const burmeciaBossSources = ["gamefaqs-burmecia-71891", "jegged-burmecia", "cave
 const cleyraEnemySources = [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-abilities-71891"];
 const cleyraEncounterSources = ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-cleyra-walkthrough"];
 const cleyraBossSources = ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies"];
+const antlionPreparationSources = [...cleyraBossSources, "gamefaqs-boss-guide-31490", "kamigame-antlion"];
 const cleyraBlueMagicObjectiveId = "disc-2.cleyra.blue-magic";
 const cleyraAntlionStealsObjectiveId = "disc-2.cleyra.antlion-steals";
 const cleyraAntlionStealsMissableId = "missable.disc-2.cleyra.antlion-steals";
@@ -5282,12 +5283,20 @@ const cleyraEnemyRecords: EnemyRecord[] = [
     ],
     blueMagic: [],
     strategies: [
-      { title: "Slow or Sleep it while Zidane steals", detail: "Try to steal Annoyntment, Mythril Vest, and Gold Helm before ending this one-time fight. Slow or Sleep can buy time if they land; use Ice and avoid Water, cure Trouble with Annoyntment, and heal immediately after Sandstorm.", sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"] },
+      { title: "Slow or Sleep it while Zidane steals", detail: "Try to steal Annoyntment, Mythril Vest, and Gold Helm before ending this one-time fight. Slow or Sleep can buy time if they land; use Ice and avoid Water, cure Trouble with Annoyntment, and heal immediately after Sandstorm. Remove Counter if equipped so an automatic physical counter does not provoke Counter Horn.", sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "kamigame-antlion"] },
       { title: "Keep its drop table separate from steals", detail: "Annoyntment is the Always drop, while the three conditional drop slots list Ether. This is separate from the Annoyntment, Mythril Vest, and Gold Helm steal table.", sourceIds: ["gamefaqs-cleyra-71891", "elitegrindlab-cleyra", "cavesofnarshe-enemies"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Antlion's listed Level 16 is the enemy stat, not a party-level target. The reviewed standard-route and boss guides do not provide a normal-party level recommendation, so this profile sets none.",
+      difficultyAssessment: "One PlayStation boss FAQ labels Antlion Tough. This is a subjective single-source rating, not a cross-source or gameplay-tested assessment.",
+      optionalGrinding: "The reviewed standard-route sources do not prescribe extra grinding or a party-level target. Optional Cleyra Trunk encounters can be used for desired Blue Magic or ability AP; no numeric grind target is supported.",
+      setupAdvice: "The Cleyra Antlion party is Zidane, Freya, Vivi, and Quina, without Dagger's White Magic. Carry healing items and Phoenix Downs, Annoyntments for Trouble, and Remedies (or Quina's Angel's Snack if already learned) for Sandstorm's Darkness; Quina's White Wind helps restore party HP if learned from Zuu. Remove Counter from anyone who has it equipped and favor Vivi's Ice magic: Counter Horn can punish physical damage, and Antlion absorbs Water. Zidane can pursue the three listed steals, especially Gold Helm if needed. Slow and Sleep are listed vulnerabilities; when Antlion is asleep, avoid waking it with physical attacks. Heal promptly after Sandstorm, which drops the party to single-digit HP and inflicts Darkness. Kamigame also recommends Tents as a status tactic, but the guide does not rely on a guaranteed effect.",
+      confidence: "partial",
+      sourceIds: antlionPreparationSources,
+    },
     routeObjectiveIds: [cleyraAntlionStealsObjectiveId],
     notes: ["The boss table's three named steal targets remain linked to the existing one-time objective and recovery paths. GameFAQs and independent sources differ on steal probabilities; this record stores the item slots without publishing odds. Caves of Narshe reports Ether in all three conditional drop slots."],
-  }, cleyraChapterId, cleyraBossSources, [cleyraAntlionStealsMissableId], [cleyraAntlionStealsCutoffId]),
+  }, cleyraChapterId, antlionPreparationSources, [cleyraAntlionStealsMissableId], [cleyraAntlionStealsCutoffId]),
   chapterBoss({
     id: "enemy.beatrix-cleyra",
     name: "Beatrix (Cleyra)",

@@ -3017,6 +3017,26 @@ if (!antlionAnnoyntmentDrop || antlionAnnoyntmentDrop.itemId !== "game-item.anno
   !antlionAnnoyntmentDrop.sourceIds.includes("elitegrindlab-cleyra")) {
   errors.push("Antlion's separate guaranteed Annoyntment drop needs a sourced one-time drop path linked to the Cleyra boss checklist.");
 }
+const antlionEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.cleyra.antlion");
+const antlionRecord = enemyRecords.find((enemy) => enemy.id === "enemy.antlion-cleyra");
+const antlionPreparation = antlionRecord?.preparationGuidance;
+const antlionPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections.find((section) => section.id === "cleyra-settlement-before-antlion");
+const antlionPreparationStep = antlionPreparationSection?.steps.find((step) => step.id === "cleyra-prepare-antlion");
+if (!antlionEncounter || antlionEncounter.kind !== "boss" ||
+  !antlionEncounter.formation.some((member) => member.enemyId === "enemy.antlion-cleyra" && member.quantity === 1) ||
+  !antlionRecord || antlionRecord.kind !== "boss" || antlionRecord.stats.find((stat) => stat.field === "level")?.value !== 16 ||
+  !antlionPreparation || antlionPreparation.suggestedLevelRange !== undefined ||
+  !antlionPreparation.levelRationale.includes("enemy stat") || !antlionPreparation.levelRationale.includes("party-level target") ||
+  !antlionPreparation.difficultyAssessment?.includes("Tough") || !antlionPreparation.difficultyAssessment.includes("subjective single-source") ||
+  !antlionPreparation.optionalGrinding.includes("no numeric grind target") ||
+  !antlionPreparation.setupAdvice.includes("Counter") || !antlionPreparation.setupAdvice.includes("White Wind") ||
+  !antlionPreparation.setupAdvice.includes("Sandstorm") || !antlionPreparation.setupAdvice.includes("Vivi's Ice") ||
+  !antlionPreparation.sourceIds.includes("gamefaqs-boss-guide-31490") || !antlionPreparation.sourceIds.includes("kamigame-antlion") ||
+  !antlionPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-31490") || !antlionPreparationSection.sourceIds.includes("kamigame-antlion") ||
+  !antlionPreparationStep?.detail?.includes("Level 16 is Antlion's enemy stat") ||
+  !antlionPreparationStep.detail.includes("Dagger is absent") || !antlionPreparationStep.detail.includes("Tough")) {
+  errors.push("Antlion preparation must keep Level 16 as an enemy stat, label the single-source Tough rating, and link the Cleyra route's source-backed recovery and counter advice.");
+}
 const cleyraAnnoyntmentRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.cleyra-recovery.annoyntment");
 if (!cleyraAnnoyntmentRecovery || cleyraAnnoyntmentRecovery.itemId !== "game-item.annoyntment" || cleyraAnnoyntmentRecovery.cost?.amount !== 150) {
   errors.push("Cleyra Annoyntment recovery needs the priced 150-Gil Lindblum Disc II item-shop path.");

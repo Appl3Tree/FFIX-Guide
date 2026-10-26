@@ -443,6 +443,14 @@ export const sources = [
     notes: "Japanese boss guide says to prepare equipment after control returns to Zidane, then use Vivi's Ice magic, group Cure with Dagger, and non-damaging actions while Ralvuimago is compact; damaging hits trigger Earth Power and restore boss HP. It identifies the three steals and approximate HP but does not set a party-level target. Translated route advice; platform/build parity is not independently established.",
   },
   {
+    id: "kamigame-antlion",
+    title: "Antlion — boss guide",
+    publisher: "Kamigame",
+    url: "https://kamigame.jp/FF9/page/139334240968964893.html",
+    accessed: "2026-10-26",
+    notes: "Japanese boss guide recommends removing the Counter ability, bringing healing/status items, using Vivi's Ice magic, and trying Tents for status; it notes that Sandstorm drops party HP to 1 and inflicts Darkness, and lists Gold Helm as a steal target. It does not recommend a party level. Advice is translated; release/build parity is not independently established.",
+  },
+  {
     id: "gamerguides-alexandria-castle-2",
     title: "Alexandria Castle (2) — Disc II walkthrough",
     publisher: "Gamer Guides",

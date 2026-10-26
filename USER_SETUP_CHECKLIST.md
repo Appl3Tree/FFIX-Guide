@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 This is the consolidated list of actions that need the project owner's GitHub or Firebase account, a real sign-in, or a second device. The app currently stores progress in this browser only. Codex will complete and test the implementation that does not require your account before moving the Firebase steps to **Ready for User**.
 
-Latest Codex update: Added Ralvuimago preparation guidance, labeled its single-source Fair rating subjective, and separated the Level 18 enemy stat from any party-level recommendation. Lint, build/typecheck/data audit, and whitespace checks pass; no project-owner account or setup action changed.
+Latest Codex update: Added Antlion preparation guidance, labeled its single-source Tough rating subjective, and separated the Level 16 enemy stat from any party-level recommendation. Lint, build/typecheck/data audit, and whitespace checks pass; no project-owner account or setup action changed.
+
+Previous Codex update: Added Ralvuimago preparation guidance, labeled its single-source Fair rating subjective, and separated the Level 18 enemy stat from any party-level recommendation. Lint, build/typecheck/data audit, and whitespace checks passed; no project-owner account or setup action changed.
 
 Previous Codex update: Added Gizamaluke preparation guidance and distinguished the boss's Level 16 from the Lv. 15 target in a single-character challenge route. Lint, build/typecheck/data audit, and whitespace checks passed; no owner-side setup action changed.
 
