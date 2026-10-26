@@ -1,4 +1,5 @@
 import { activeTimeEvents } from "./ates.ts";
+import { chocoboBeachObjectiveIds } from "./chocobo.ts";
 
 export type ObjectiveDependency = {
   kind: "ate-sequence" | "objective-access" | "quest-prerequisite";
@@ -2067,9 +2068,49 @@ const stiltzkinRibbonPrerequisiteDependencies: ObjectiveDependency[] = stiltzkin
   sourceIds: ["gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin"],
 }));
 
+const chocoboBeachUnlockPrerequisiteIds = [
+  "disc-3.aerial-exploration.all-chocograph-treasures",
+  "disc-3.on-the-high-seas.mountain-crack",
+  "disc-3.forgotten-continent.mountain-cracks",
+  "disc-3.on-the-high-seas.dive-spots",
+];
+const chocoboBeachUnlockObjectiveId = "disc-4.return-to-gaia.chocobo-beach-unlock";
+const chocoboBeachCompletionObjectiveId = "disc-4.return-to-gaia.chocobo-beach";
+const chocoboBeachPrerequisiteSources = [
+  "gamefaqs-chocobo-hot-cold-71891",
+  "jegged-chocobo-beaches",
+  "jegged-chocobo-dive-spots",
+  "jegged-chocobo-mountain-cracks",
+  "jegged-chocographs",
+];
+const chocoboBeachUnlockPrerequisiteDependencies: ObjectiveDependency[] = chocoboBeachUnlockPrerequisiteIds.map((prerequisiteObjectiveId) => ({
+  kind: "quest-prerequisite",
+  prerequisiteObjectiveId,
+  dependentObjectiveId: chocoboBeachUnlockObjectiveId,
+  sourceIds: chocoboBeachPrerequisiteSources,
+}));
+const chocoboBeachLocationAccessDependencies: ObjectiveDependency[] = chocoboBeachObjectiveIds.map((dependentObjectiveId) => ({
+  kind: "quest-prerequisite",
+  prerequisiteObjectiveId: chocoboBeachUnlockObjectiveId,
+  dependentObjectiveId,
+  sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"],
+}));
+const chocoboBeachCompletionDependencies: ObjectiveDependency[] = chocoboBeachObjectiveIds.map((prerequisiteObjectiveId) => ({
+  kind: "quest-prerequisite",
+  prerequisiteObjectiveId,
+  dependentObjectiveId: chocoboBeachCompletionObjectiveId,
+  sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"],
+}));
+const chocoboBeachQuestDependencies: ObjectiveDependency[] = [
+  ...chocoboBeachUnlockPrerequisiteDependencies,
+  ...chocoboBeachLocationAccessDependencies,
+  ...chocoboBeachCompletionDependencies,
+];
+
 export const questPrerequisiteDependencies: ObjectiveDependency[] = [
   ...friendlyYanPrerequisiteDependencies,
   ...stiltzkinRibbonPrerequisiteDependencies,
+  ...chocoboBeachQuestDependencies,
 ];
 
 export const objectiveDependencies: ObjectiveDependency[] = [

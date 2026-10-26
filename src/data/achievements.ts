@@ -131,7 +131,7 @@ const steamAchievementGuideMap: Record<string, Pick<SteamAchievement, "guideObje
   "skip-to-my-lou": { guideObjectiveIds: ["disc-1.alexandria.jump-rope-king"] },
   "end-of-the-road": { guideChapterIds: ["disc-4.final-preparations"] },
   "the-ultimate-racket": { guideChapterIds: ["disc-4.memoria"] },
-  "diggin-it": { guideChapterIds: ["disc-2.journey-to-outer-continent", "disc-3.aerial-exploration"] },
+  "diggin-it": { guideChapterIds: ["disc-2.journey-to-outer-continent", "disc-3.aerial-exploration"], guideObjectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures"] },
   "the-ultimate-dual-blade": { guideChapterIds: ["disc-4.memoria"] },
   "earning-the-queens-favor": { guideObjectiveIds: ["disc-2.treno.stellazzio-rewards", "disc-3.card-tournament.stellazzio-rewards"] },
   "kains-legacy": { guideObjectiveIds: ["disc-4.memoria.kains-lance"] },

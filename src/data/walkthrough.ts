@@ -1,4 +1,5 @@
 import type { WalkthroughChapter } from "./guide";
+import { chocoboBeachLocations, chocoboBeachObjectiveId } from "./chocobo.ts";
 
 export const walkthroughChapters: WalkthroughChapter[] = [
   {
@@ -5113,15 +5114,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "aerial-chocobo-air-garden",
             kind: "optional",
-            text: "Read the Chocograph Pieces for Air Garden clues, then search the candidate regions for the large moving shadow. Fly over it and use a Dead Pepper to enter. Dig the Garden's Chocographs #21, #23, and #24, then find the corresponding world-map treasures, including #22: Outer Island 2.",
+            text: "Read the Chocograph Pieces for Air Garden clues, then search the candidate regions for the large moving shadow. Fly over it and use a Dead Pepper to enter. Dig the Garden's Chocographs #21, #23, and #24, then find the corresponding world-map treasures, including #22: Outer Island 2. Before marking the global Chocograph objective complete, confirm the earlier treasures are collected too.",
             detail: "Treasure directions: #20 is off the northeastern Mist Continent coast near the small islands; #21 is on Korua Island off the northeastern Outer Continent; #22 is on a small island along the northern Outer Continent shore; #23 is on Vile Island; #24 is on the northern Forgotten Continent island near Qu's Marsh. Rewards for #21–24 are Genji Armor/Ragnarok, Pumice Piece/Circlet, Holy Miter, and Ribbon/Rebirth Ring respectively. Sources disagree whether the Air Garden has five or six candidate locations. The moving shadow is the reliable sign, and the three Garden Chocographs are dug up on land rather than the clouds.",
-            objectiveIds: ["disc-3.aerial-exploration.air-garden-treasures"],
+            objectiveIds: ["disc-3.aerial-exploration.air-garden-treasures", "disc-3.aerial-exploration.all-chocograph-treasures"],
           },
           {
             id: "aerial-chocobo-paradise",
             kind: "optional",
             text: "With the Sky ability, fly to the hidden island in the northwest ocean and use a Dead Pepper on the mountain crack to enter Chocobo's Paradise. Challenge Fat Chocobo to Tetra Master for the Chocobo Card and refill Dead Peppers from a nearby Chocobo if needed.",
-            detail: "You can return for the Chocobo Beaches scene after finding all 24 Chocograph treasures. The final Dive Spot remains unavailable until Disc IV, so this open-world window does not finish every Chocobo exploration task.",
+            detail: "This Disc III visit can award the Chocobo Card and refill Dead Peppers, but the Beach quest is only available in Disc IV after all 24 Chocograph treasures and all Dead Pepper treasure caches are complete. Dive Spot #5 remains unavailable until Disc IV; return to Paradise after the Disc IV prerequisite checklist is satisfied.",
             objectiveIds: ["disc-3.aerial-exploration.air-garden-treasures"],
           },
         ],
@@ -5990,8 +5991,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "gaia-return-world-map-sidequests",
         title: "World map and Chocobo checks",
-        summary: "Use the reopened map to finish late Chocobo rewards and the last Frog Catching milestone. Keep the breeding population intact while progressing toward 99 frogs.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
+        summary: "Use the reopened map to finish late Chocobo rewards and the last Frog Catching milestone. Keep the breeding population intact while progressing toward 99 frogs. Track the 21 Chocobo beaches individually after the quest activates.",
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-c-g"],
         steps: [
           {
             id: "gaia-return-dive-spot-five",
@@ -6022,10 +6023,31 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             objectiveIds: ["disc-4.return-to-gaia.island-blue-magic"],
           },
           {
-            id: "gaia-return-chocobo-paradise-beach",
+            id: "gaia-return-chocobo-prerequisites",
             kind: "optional",
-            text: "After finding all 24 Chocographs and opening all eight Dead Pepper treasure cracks, visit Chocobo's Paradise. Finish its remaining activities, then complete the Chocobo Beach quest by visiting the beaches Choco identifies.",
-            detail: "The beach quest is a late Chocobo reward rather than a story requirement. Its completion lets Choco restore the party while the group is on the world map and in sight of a beach; use the dedicated Chocobo route to verify each prerequisite and beach stop.",
+            text: "Before starting the Beach quest, confirm all 24 Chocograph treasures and all eight Dead Pepper treasure caches: three treasure-producing Mountain Cracks and five Dive Spots, including Disc IV Dive Spot #5.",
+            detail: "GameFAQs requires all Chocographs and Dead Pepper treasures; its Dead Pepper section separates treasure-producing cracks from non-treasure access cracks. The eight caches here are three reward-bearing cracks plus five Dive Spots. The Mognet Central and Chocobo's Paradise entrance cracks are access points, not extra treasure caches.",
+            objectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures", "disc-3.on-the-high-seas.mountain-crack", "disc-3.forgotten-continent.mountain-cracks", "disc-3.on-the-high-seas.dive-spots"],
+          },
+          {
+            id: "gaia-return-chocobo-beach-unlock",
+            kind: "optional",
+            text: "After the prerequisite checklist is complete, return to Chocobo's Paradise and speak with Fat Chocobo; challenge him to Tetra Master to activate the Beach quest. Confirm the beach-quest dialogue before continuing.",
+            detail: "The quest is Disc IV-only. If you challenged Fat Chocobo for the card earlier, check his dialogue again after completing the Disc IV treasure requirements instead of assuming the Beach quest is active.",
+            objectiveIds: ["disc-4.return-to-gaia.chocobo-beach-unlock"],
+          },
+          ...chocoboBeachLocations.map((beach) => ({
+            id: `gaia-return-beach-${beach.id}`,
+            kind: "optional" as const,
+            text: `Visit ${beach.name} (${beach.region}), dismount Choco, and interact with the shore to register this beach.`,
+            detail: `${"location" in beach ? `${beach.location}. ` : ""}Use the Chocobo Beaches map for the exact coastline and confirm the registration cue before marking this stop complete.`,
+            objectiveIds: [chocoboBeachObjectiveId(beach.id)],
+          })),
+          {
+            id: "gaia-return-chocobo-beach-complete",
+            kind: "optional",
+            text: "After all 21 individual beach checks are complete, confirm the Beach quest is finished and mark Beach Bum where supported.",
+            detail: "Completing the quest lets Choco restore party HP and MP whenever the party is on the world map and in sight of a beach. GameFAQs and Jegged both count 21 beaches; the source pages group a few island/coastline labels differently.",
             objectiveIds: ["disc-4.return-to-gaia.chocobo-beach"],
           },
           {

@@ -1,5 +1,6 @@
 import { ps4Trophies, steamAchievements, xboxAchievements } from "./achievements.ts";
 import { activeTimeEventObjectives } from "./ates.ts";
+import { chocoboBeachLocations, chocoboBeachObjectiveId } from "./chocobo.ts";
 
 export type ArcId = "disc-1" | "disc-2" | "disc-3" | "disc-4";
 
@@ -1550,8 +1551,8 @@ export const sources = [
     title: "Chocobo Hot & Cold — FFIX sidequest guide",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold",
-    accessed: "2026-10-23",
-    notes: "Chocobo recruitment, Hot & Cold rules, Forest game location, Chocograph requirements, and treasure/reward tables. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges. The route defers these mountain-ability sources until Disc III and records the separate repeatable point/digging routes from the minigame.",
+    accessed: "2026-10-25",
+    notes: "Chocobo recruitment, Hot & Cold rules, Chocograph requirements, all Chocograph treasure locations, Dead Pepper treasure caches, Chocobo's Paradise, and the Beach Quest. The Beach Quest is Disc IV-only and requires all Chocographs, all Dead Pepper treasures, and a Fat Chocobo card-game challenge. Its Dead Pepper list separates the three treasure-producing Mountain Cracks and five Dive Spots from non-treasure cracks covered by Mognet Central or Paradise. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges.",
   },
   {
     id: "gamefaqs-chocobo-hot-cold-ysf-9771",
@@ -1568,6 +1569,22 @@ export const sources = [
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocographs.html",
     accessed: "2026-10-25",
     notes: "Independent location/reward map for all 24 Chocographs, including the Mist Ocean Sky ability, the Air Garden treasures, and each world-map chest. It confirms Forgotten Island's Ribbon and Rebirth Ring and distinguishes the clue-digging location from the treasure destination.",
+  },
+  {
+    id: "jegged-chocobo-dive-spots",
+    title: "Chocobo Dive Spots — locations and rewards",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocobo-Dive-Spots.html",
+    accessed: "2026-10-25",
+    notes: "Lists the five Dead Pepper Dive Spot treasure caches, including the fifth cache at the former Shimmering Island that is only available on Disc IV.",
+  },
+  {
+    id: "jegged-chocobo-beaches",
+    title: "Chocobo Beaches — locations and quest requirements",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocobo-Beaches.html",
+    accessed: "2026-10-25",
+    notes: "Lists all 21 beach locations and says the Disc IV quest follows completion of the Chocograph, Dive Spot, and Mountain Crack sidequests; challenging Fat Chocobo to Tetra Master starts the beach dialogue and free-restoration reward.",
   },
   {
     id: "gamefaqs-abilities-71891",
@@ -5301,6 +5318,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-3.aerial-exploration.all-chocograph-treasures",
+    title: "Find all 24 Chocograph treasures on the world map",
+    category: "collection",
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+    chapterIds: ["disc-3.aerial-exploration", "disc-4.return-to-gaia"],
+    profileIds: ["comprehensive", "achievements", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
     id: "disc-3.aerial-exploration.friendly-yan",
     title: "Befriend Friendly Yan on Vile Island after the other eight creatures",
     category: "achievement",
@@ -5870,14 +5896,32 @@ export const objectives: GameObjective[] = [
   },
   {
     id: "disc-4.return-to-gaia.chocobo-beach",
-    title: "Finish Chocobo's Paradise and the Chocobo Beach quest",
+    title: "Register all 21 Chocobo beaches to complete the Beach quest",
     category: "achievement",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "steam-achievements", "jegged-achievements"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "steam-achievements", "jegged-achievements"],
     chapterIds: ["disc-4.return-to-gaia"],
     achievementPlatforms: ["steam", "ps4", "xbox"],
     profileIds: ["comprehensive", "achievements", "custom", "perfect"],
     verification: "partial",
   },
+  {
+    id: "disc-4.return-to-gaia.chocobo-beach-unlock",
+    title: "Activate the Chocobo Beach quest at Chocobo's Paradise",
+    category: "side-content",
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-chocographs"],
+    chapterIds: ["disc-4.return-to-gaia"],
+    profileIds: ["comprehensive", "achievements", "custom", "perfect"],
+    verification: "partial",
+  },
+  ...chocoboBeachLocations.map((location) => ({
+    id: chocoboBeachObjectiveId(location.id),
+    title: `Register ${location.name}`,
+    category: "side-content" as const,
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"],
+    chapterIds: ["disc-4.return-to-gaia"],
+    profileIds: ["comprehensive", "achievements", "custom", "perfect"] as GoalProfile[],
+    verification: "partial" as const,
+  })),
   {
     id: "disc-4.return-to-gaia.frog-catching",
     title: "Complete the 99-frog milestone after protecting the breeding population",

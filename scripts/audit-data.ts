@@ -4,6 +4,7 @@ import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
 import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, questPrerequisiteDependencies, storyPartySequences } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
+import { chocoboBeachLocations, chocoboBeachObjectiveId, chocoboBeachObjectiveIds } from "../src/data/chocobo.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
@@ -832,6 +833,77 @@ if (
   !airGardenSkyAccessEdges[0].sourceIds.includes("jegged-chocographs")
 ) {
   errors.push("Chocobo's Air Garden objective must have the source-backed Sky Chocobo access prerequisite.");
+}
+const chocoboBeachUnlockObjectiveId = "disc-4.return-to-gaia.chocobo-beach-unlock";
+const chocoboBeachCompletionObjectiveId = "disc-4.return-to-gaia.chocobo-beach";
+const chocoboBeachRequiredProgressIds = [
+  "disc-3.aerial-exploration.all-chocograph-treasures",
+  "disc-3.on-the-high-seas.mountain-crack",
+  "disc-3.forgotten-continent.mountain-cracks",
+  "disc-3.on-the-high-seas.dive-spots",
+];
+const expectedChocoboBeachDependencies = [
+  ...chocoboBeachRequiredProgressIds.map((id) => `${id}->${chocoboBeachUnlockObjectiveId}`),
+  ...chocoboBeachObjectiveIds.map((id) => `${chocoboBeachUnlockObjectiveId}->${id}`),
+  ...chocoboBeachObjectiveIds.map((id) => `${id}->${chocoboBeachCompletionObjectiveId}`),
+].sort();
+const actualChocoboBeachDependencies = questPrerequisiteDependencies
+  .filter((dependency) => dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId || dependency.prerequisiteObjectiveId === chocoboBeachUnlockObjectiveId || dependency.dependentObjectiveId === chocoboBeachCompletionObjectiveId)
+  .map((dependency) => `${dependency.prerequisiteObjectiveId}->${dependency.dependentObjectiveId}`)
+  .sort();
+if (
+  chocoboBeachLocations.length !== 21 ||
+  chocoboBeachObjectiveIds.length !== 21 ||
+  expectedChocoboBeachDependencies.length !== 46 ||
+  expectedChocoboBeachDependencies.join("|") !== actualChocoboBeachDependencies.join("|")
+) {
+  errors.push("Chocobo Beach must have four sourced unlock gates and 21 separately tracked beach registrations behind the Disc IV activation objective.");
+}
+const chocoboBeachUnlockEdges = questPrerequisiteDependencies.filter((dependency) => dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId);
+for (const dependency of chocoboBeachUnlockEdges) {
+  for (const sourceId of ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-chocographs"]) {
+    if (!dependency.sourceIds.includes(sourceId)) errors.push(`Chocobo Beach unlock dependency ${dependency.prerequisiteObjectiveId} must cite ${sourceId}.`);
+  }
+}
+for (const dependency of questPrerequisiteDependencies.filter((item) => item.prerequisiteObjectiveId === chocoboBeachUnlockObjectiveId || item.dependentObjectiveId === chocoboBeachCompletionObjectiveId)) {
+  for (const sourceId of ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"]) {
+    if (!dependency.sourceIds.includes(sourceId)) errors.push(`Chocobo Beach registration dependency ${dependency.prerequisiteObjectiveId} -> ${dependency.dependentObjectiveId} must cite ${sourceId}.`);
+  }
+}
+const aerialChocographStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.id === "aerial-chocobo-air-garden");
+if (!aerialChocographStep?.objectiveIds?.includes("disc-3.aerial-exploration.all-chocograph-treasures")) {
+  errors.push("The Air Garden walkthrough must link the global all-24-Chocograph completion objective.");
+}
+const discFourChocoboSteps = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+const chocoboBeachPrerequisiteStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-prerequisites");
+if (
+  !chocoboBeachPrerequisiteStep?.text.includes("all 24 Chocograph treasures") ||
+  !chocoboBeachPrerequisiteStep.text.includes("eight Dead Pepper treasure caches") ||
+  !chocoboBeachPrerequisiteStep.text.includes("three treasure-producing Mountain Cracks") ||
+  !chocoboBeachPrerequisiteStep.detail?.includes("The Mognet Central and Chocobo's Paradise entrance cracks are access points, not extra treasure caches.") ||
+  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-3.on-the-high-seas.dive-spots")
+) {
+  errors.push("The Disc IV Chocobo Beach checklist must distinguish all 24 Chocographs, the eight treasure caches, and the access-only cracks.");
+}
+const chocoboBeachActivationStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-beach-unlock");
+if (!chocoboBeachActivationStep?.text.includes("Fat Chocobo") || !chocoboBeachActivationStep.text.includes("Tetra Master") || !chocoboBeachActivationStep.objectiveIds?.includes(chocoboBeachUnlockObjectiveId)) {
+  errors.push("The Disc IV walkthrough must track the Fat Chocobo challenge that activates the Beach quest.");
+}
+const individualChocoboBeachSteps = discFourChocoboSteps.filter((step) => step.id.startsWith("gaia-return-beach-"));
+if (
+  individualChocoboBeachSteps.length !== chocoboBeachLocations.length ||
+  chocoboBeachLocations.some((location) => !individualChocoboBeachSteps.some((step) => step.id === `gaia-return-beach-${location.id}` && step.objectiveIds?.includes(chocoboBeachObjectiveId(location.id))))
+) {
+  errors.push("The Disc IV walkthrough must provide one stable progress objective and action for each of the 21 Chocobo beaches.");
+}
+const chocoboBeachCompletionStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-beach-complete");
+if (!chocoboBeachCompletionStep?.objectiveIds?.includes(chocoboBeachCompletionObjectiveId)) {
+  errors.push("The final Chocobo Beach walkthrough step must link the 21-beach achievement objective.");
 }
 const friendlyCreaturePrerequisiteIds = [
   "disc-1.ice-cavern.mu-friendly-monster",
