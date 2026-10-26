@@ -1853,8 +1853,10 @@ if (
   errors.push("The Desert Palace story edge and party sequence must show where open travel resumes after the split.");
 }
 const moisLetterWarning = missablesById.get("missable.disc-1.ice-cavern.mois-letter");
+const moisLetterObjective = objectivesById.get("disc-1.ice-cavern.mois-letter");
 const moisLetterCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.dali-cargo-ship.mois-letter");
 const moisLetterReturnEdge = gameRouteEdgesById.get("return.dali-to-ice-cavern");
+const moisLetterDiscIVSource = "gamefaqs-moogle-faq-23306";
 const moisLetterRecoverySources = ["cour89-ice-cavern", "game8-mognet-letter-list", "jinsoku-mognet-letter-list"];
 const moisLetterReturnSources = [
   "gamefaqs-ice-cavern-71891",
@@ -1871,9 +1873,17 @@ if (
   !moisLetterWarning?.deadline?.includes("before boarding the Cargo Ship from Dali") ||
   !moisLetterWarning.recovery?.includes("Cour89 independently says") ||
   !moisLetterWarning.recovery.includes("Game8 and Jinsoku") ||
+  !moisLetterWarning.consequence?.includes("That later chain does not establish whether the original Gumo letter can be recovered there") ||
+  !moisLetterWarning.nextAvailability?.includes("is a different Mognet step") ||
+  !moisLetterWarning.recovery.includes("it does not say the original Gumo letter can be recovered there") ||
+  !moisLetterWarning.note?.includes("whether it can recover this letter is unknown") ||
+  !moisLetterWarning.sourceIds.includes(moisLetterDiscIVSource) ||
+  !moisLetterObjective?.sourceIds.includes(moisLetterDiscIVSource) ||
+  moisLetterWarning.consequence.includes("later Mois visits do not provide this letter") ||
+  moisLetterWarning.consequence.includes("available only during the Disc I route") ||
   moisLetterRecoverySources.some((sourceId) => !moisLetterWarning.sourceIds.includes(sourceId))
 ) {
-  errors.push("Mois's letter warning must preserve the post-boss return, Disc I cutoff, and exact-timing source disagreement.");
+  errors.push("Mois's letter warning must preserve the post-boss return and Disc I timing disagreement while distinguishing the separate Disc IV repair letter and unresolved recovery.");
 }
 if (
   moisLetterCutoff?.edgeId !== "story.dali-to-cargo-ship" ||
