@@ -115,6 +115,7 @@ export const itemCatalogCoverage = {
     "disc-2.magdalene-forest",
     "disc-2.conde-petie-mountain-path",
     "disc-2.madain-sari",
+    "disc-2.journey-to-iifa-tree",
     "disc-3.the-home-front",
     "disc-3.trouble-on-the-home-front",
     "disc-3.card-tournament",

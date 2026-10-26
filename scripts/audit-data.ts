@@ -2658,6 +2658,7 @@ for (const path of itemAcquisitionPaths) {
   if (!gameItemIds.has(path.itemId)) errors.push(`Item acquisition path ${path.id} references unknown item ${path.itemId}.`);
   if (!areaIds.has(path.chapterId)) errors.push(`Item acquisition path ${path.id} references unknown chapter ${path.chapterId}.`);
   if (!walkthroughChapterIds.has(path.chapterId)) errors.push(`Item acquisition path ${path.id} has no authored walkthrough for ${path.chapterId}.`);
+  if (!itemCatalogCoverage.chapterIds.includes(path.chapterId)) errors.push(`Item acquisition path ${path.id} is outside item catalog coverage for ${path.chapterId}.`);
   if (!Number.isSafeInteger(path.quantity) || path.quantity < 1) errors.push(`Item acquisition path ${path.id} needs a positive integer quantity.`);
   if (path.sourceIds.length === 0) errors.push(`Item acquisition path ${path.id} has no provenance.`);
   if (path.cost && (!Number.isSafeInteger(path.cost.amount) || path.cost.amount < 0)) {
