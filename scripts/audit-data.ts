@@ -4421,6 +4421,21 @@ if (
 ) {
   errors.push("Stardust Rod shop paths must use the listed 750-Gil shop-table price while preserving the 760-Gil item-table conflict and all shop sources.");
 }
+const magicianShoesLindblumDisc2Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.magician-shoes-post-cleyra-synthesis");
+if (
+  !magicianShoesLindblumDisc2Path ||
+  magicianShoesLindblumDisc2Path.itemId !== "game-item.magician-shoes" ||
+  magicianShoesLindblumDisc2Path.chapterId !== "disc-2.return-to-lindblum" ||
+  magicianShoesLindblumDisc2Path.method !== "synthesis" ||
+  magicianShoesLindblumDisc2Path.recipeId !== "synthesis-recipe.magician-shoes" ||
+  magicianShoesLindblumDisc2Path.shopId !== "lindblum.synthesis-shop.disc-2" ||
+  magicianShoesLindblumDisc2Path.availability !== "window-unverified" ||
+  magicianShoesLindblumDisc2Path.cost?.amount !== 1500 ||
+  !["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891"].every((sourceId) => magicianShoesLindblumDisc2Path.sourceIds.includes(sourceId)) ||
+  !magicianShoesLindblumDisc2Path.notes?.includes("does not infer an earlier accessible window")
+) {
+  errors.push("Magician Shoes' first modeled Lindblum synthesis must stay on the post-Cleyra return, cite both timing labels and the Disc II shop table, and avoid inferring pre-Cleyra availability.");
+}
 for (const itemId of zornThornItemIds) {
   if (!itemAcquisitionPaths.some((path) => path.itemId === itemId && path.method === "steal" && path.chapterId === "disc-2.return-to-alexandria")) {
     errors.push(`Zorn and Thorn recovery for ${itemId} needs its one-time boss steal path.`);
@@ -5394,7 +5409,12 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
     || !item.sourceIds.includes("rpgclassics-shops")
   ) return true;
   if (slug === "poison-knuckles") {
-    return !path.conditions.includes("7,000 Gil") || !path.conditions.includes("5,000 Gil");
+    return !path.conditions.includes("7,000 Gil") ||
+      !path.conditions.includes("5,000 Gil") ||
+      !path.sourceIds.includes("gamefaqs-shop-lists-9772") ||
+      !path.sourceIds.includes("gamefaqs-equipment-33383") ||
+      !item.sourceIds.includes("gamefaqs-shop-lists-9772") ||
+      !item.sourceIds.includes("gamefaqs-equipment-33383");
   }
   if (slug === "needle-fork") {
     return !path.conditions.includes("GameFAQs Shops omits");
