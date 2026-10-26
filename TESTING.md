@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Disc III Jump Rope letter chronology correction: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 421 sources; 100 cutoff windows cover all warnings. Build emitted 2,367.65 kB JavaScript (573.47 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Automated tests, browser review, gameplay, and release verification were not run. Flactem supports the Mosh visit's order, but does not confirm Jump Rope letter availability after Disc II.
+Jump Rope Disc II source cross-check: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 422 sources; 100 cutoff windows cover all warnings. Build emitted 2,369.45 kB JavaScript (574.00 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Automated tests, browser review, gameplay, and release verification were not run. VGR independently lists the read-only message after Zorn and Thorn, but does not establish post-Disc-II or Disc III availability.
+
+Previous verification: Disc III Jump Rope chronology correction passed lint, build/typecheck/audit, and `git diff --check`; Flactem supports the Mosh visit's order, but not letter availability after Disc II.
 
 Previous verification: Mois letter scope update passed lint, typecheck, data audit, production build, and `git diff --check`; the Disc IV repair exchange remains distinct from the Disc I Gumo letter, whose recovery is not established.
 

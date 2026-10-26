@@ -1978,7 +1978,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "return-alexandria-mosh-save",
             kind: "save",
             text: "Speak with Mosh beside the altar, read any new Mognet letters, and save before carrying Dagger out of the room.",
-            detail: "This is the documented second opportunity for Kupo's Jump Rope letter if it was not read as Steiner in Disc I and the 50-jump threshold was met. Jegged lists 'Jump-rope Champion Appears!' among the new letters after Zorn and Thorn. Check Mosh again after the party-split sequence for the separate letter to Monty; sources do not confirm the Jump Rope letter's availability after this Disc II check.",
+            detail: "This is the documented second opportunity for Kupo's Jump Rope letter if it was not read as Steiner in Disc I and the 50-jump threshold was met. Jegged lists 'Jump-rope Champion Appears!' among the new letters after Zorn and Thorn; the VGR no-spoiler walkthrough independently lists the starred Kupo-to-Mosh message after the fight and marks starred mail as read-only. Check Mosh again after the party-split sequence for the separate letter to Monty; sources do not confirm the Jump Rope letter's availability after this Disc II check.",
             objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {

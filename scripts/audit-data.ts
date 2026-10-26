@@ -1723,6 +1723,15 @@ if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
   errors.push("The Jump Rope Mognet letter objective must cite the 50-jump Disc I source.");
 }
 if (
+  !jumpRopeLetterObjective?.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
+  !jumpRopeLetterWarning?.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
+  !jumpRopeLetterWarning?.consequence.includes("independently lists the starred Kupo-to-Mosh message") ||
+  !jumpRopeLetterWarning?.nextAvailability?.includes("does not resolve this read-only message's later state") ||
+  !jumpRopeLetterWarning?.recovery?.includes("generic warning about missed delivery letters does not settle this message's recovery")
+) {
+  errors.push("The VGR walkthrough must corroborate the read-only Disc I/II Jump Rope message without resolving its post-Disc-II state.");
+}
+if (
   !jumpRopeLetterObjective?.sourceIds.includes("game8-jump-rope") ||
   !jumpRopeLetterWarning?.sourceIds.includes("game8-jump-rope") ||
   !jumpRopeLetterWarning?.action.includes("reach 51 consecutive jumps") ||
@@ -1764,8 +1773,12 @@ if (
 ) {
   errors.push("The Jump Rope Mognet letter objective must point to the Disc I, Disc II, and Disc III Mosh checks.");
 }
-if (!discTwoJumpRopeStep?.detail?.includes("documented second opportunity") || !discTwoJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)) {
-  errors.push("The Disc II Mosh step must explain and link the second Jump Rope letter opportunity.");
+if (
+  !discTwoJumpRopeStep?.detail?.includes("documented second opportunity") ||
+  !discTwoJumpRopeStep.detail.includes("VGR no-spoiler walkthrough independently lists") ||
+  !discTwoJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)
+) {
+  errors.push("The Disc II Mosh step must explain and link the independently corroborated second Jump Rope letter opportunity.");
 }
 if (!discThreeJumpRopeStep?.detail?.includes("best-effort") || !discThreeJumpRopeStep.detail.includes("not a promised recovery") || !discThreeJumpRopeStep.objectiveIds?.includes(jumpRopeLetterId)) {
   errors.push("The Disc III Mosh step must label the check as best effort and avoid claiming confirmed recovery.");
@@ -1813,9 +1826,13 @@ if (
   jumpRopeLetterCutoffs.length !== 3 ||
   discOneJumpRopeCutoff?.edgeId !== "story.alexandria-to-evil-forest" ||
   !discOneJumpRopeCutoff.sourceIds.includes("game8-jump-rope") ||
+  !discOneJumpRopeCutoff.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
   !discOneJumpRopeCutoff.trigger.includes("51 consecutive Jump Rope jumps") ||
+  !discOneJumpRopeCutoff.trigger.includes("VGR walkthrough marks this message with its read-only asterisk") ||
   discTwoJumpRopeCutoff?.edgeId !== "story.return-to-alexandria-to-pinnacle-rocks" ||
   !discTwoJumpRopeCutoff?.sourceIds.includes("jegged-return-to-alexandria-castle") ||
+  !discTwoJumpRopeCutoff.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
+  !discTwoJumpRopeCutoff.trigger.includes("independently lists the starred Kupo-to-Mosh message") ||
   !discTwoJumpRopeCutoff?.trigger.includes("Jump-rope Champion Appears!") ||
   discThreeJumpRopeCutoff?.edgeId !== "story.trouble-on-home-front-to-aftermath" ||
   discThreeJumpRopeCutoff.certainty !== "conservative" ||
