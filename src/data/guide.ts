@@ -1552,7 +1552,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold",
     accessed: "2026-10-25",
-    notes: "Chocobo recruitment, Hot & Cold rules, Chocograph requirements, all Chocograph treasure locations, Dead Pepper treasure caches, Chocobo's Paradise, and the Beach Quest. The Beach Quest is Disc IV-only and requires all Chocographs, all Dead Pepper treasures, and a Fat Chocobo card-game challenge. Its Dead Pepper list separates the three treasure-producing Mountain Cracks and five Dive Spots from non-treasure cracks covered by Mognet Central or Paradise. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges.",
+    notes: "Chocobo recruitment, Hot & Cold rules, Chocograph requirements, all Chocograph treasure locations, Dead Pepper treasure caches, Chocobo's Paradise, and the Beach Quest. The Beach Quest is Disc IV-only and requires all Chocographs and Dead Pepper treasures, plus the Fat Chocobo card-game challenge. The eight reward caches are three treasure-producing Mountain Cracks and five Dive Spots. Before Fat Chocobo's first scene, the player must also open the separate Mognet Central access crack; it is not one of those eight caches. The Chocobo's Paradise entrance crack is needed to reach Fat Chocobo. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges.",
   },
   {
     id: "gamefaqs-chocobo-hot-cold-ysf-9771",
@@ -1584,7 +1584,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocobo-Beaches.html",
     accessed: "2026-10-25",
-    notes: "Lists all 21 beach locations and says the Disc IV quest follows completion of the Chocograph, Dive Spot, and Mountain Crack sidequests; challenging Fat Chocobo to Tetra Master starts the beach dialogue and free-restoration reward.",
+    notes: "Lists all 21 beach locations and says the Disc IV quest follows completion of the Chocograph, Dive Spot, and Mountain Crack sidequests; the Mountain Crack list includes the Mognet Central access crack as #4. The first Fat Chocobo scene awards its card, then the Tetra Master challenge starts the beach dialogue and free-restoration reward.",
   },
   {
     id: "gamefaqs-abilities-71891",
@@ -2496,7 +2496,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocobo-Mountain-Cracks.html",
     accessed: "2026-10-23",
-    notes: "Independent location/reward table for the Dead Pepper cracks. Its Forgotten Continent Crack #2/#3 reward labels reverse the grouping in GameFAQs's Forgotten Continent chapter; the walkthrough records both location-specific treasure sets and keeps the numbering conflict visible.",
+    notes: "Independent location/reward table for four Dead Pepper Mountain Cracks. The first three yield treasure caches; crack #4 is the Mognet Central access point and has no treasure reward. Its Forgotten Continent Crack #2/#3 reward labels reverse the grouping in GameFAQs's Forgotten Continent chapter; the walkthrough records both location-specific treasure sets and keeps the numbering conflict visible.",
   },
   {
     id: "gamerguides-chocobo-hot-cold",
@@ -5901,6 +5901,15 @@ export const objectives: GameObjective[] = [
     sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "steam-achievements", "jegged-achievements"],
     chapterIds: ["disc-4.return-to-gaia"],
     achievementPlatforms: ["steam", "ps4", "xbox"],
+    profileIds: ["comprehensive", "achievements", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-4.return-to-gaia.mognet-central-crack",
+    title: "Open the Dead Pepper crack to Mognet Central",
+    category: "side-content",
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"],
+    chapterIds: ["disc-4.return-to-gaia"],
     profileIds: ["comprehensive", "achievements", "custom", "perfect"],
     verification: "partial",
   },

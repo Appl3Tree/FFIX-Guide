@@ -2073,6 +2073,7 @@ const chocoboBeachUnlockPrerequisiteIds = [
   "disc-3.on-the-high-seas.mountain-crack",
   "disc-3.forgotten-continent.mountain-cracks",
   "disc-3.on-the-high-seas.dive-spots",
+  "disc-4.return-to-gaia.mognet-central-crack",
 ];
 const chocoboBeachUnlockObjectiveId = "disc-4.return-to-gaia.chocobo-beach-unlock";
 const chocoboBeachCompletionObjectiveId = "disc-4.return-to-gaia.chocobo-beach";

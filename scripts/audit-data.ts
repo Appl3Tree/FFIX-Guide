@@ -841,6 +841,7 @@ const chocoboBeachRequiredProgressIds = [
   "disc-3.on-the-high-seas.mountain-crack",
   "disc-3.forgotten-continent.mountain-cracks",
   "disc-3.on-the-high-seas.dive-spots",
+  "disc-4.return-to-gaia.mognet-central-crack",
 ];
 const expectedChocoboBeachDependencies = [
   ...chocoboBeachRequiredProgressIds.map((id) => `${id}->${chocoboBeachUnlockObjectiveId}`),
@@ -854,10 +855,10 @@ const actualChocoboBeachDependencies = questPrerequisiteDependencies
 if (
   chocoboBeachLocations.length !== 21 ||
   chocoboBeachObjectiveIds.length !== 21 ||
-  expectedChocoboBeachDependencies.length !== 46 ||
+  expectedChocoboBeachDependencies.length !== 47 ||
   expectedChocoboBeachDependencies.join("|") !== actualChocoboBeachDependencies.join("|")
 ) {
-  errors.push("Chocobo Beach must have four sourced unlock gates and 21 separately tracked beach registrations behind the Disc IV activation objective.");
+  errors.push("Chocobo Beach must have five sourced unlock gates and 21 separately tracked beach registrations behind the Disc IV activation objective.");
 }
 const chocoboBeachUnlockEdges = questPrerequisiteDependencies.filter((dependency) => dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId);
 for (const dependency of chocoboBeachUnlockEdges) {
@@ -885,10 +886,22 @@ if (
   !chocoboBeachPrerequisiteStep?.text.includes("all 24 Chocograph treasures") ||
   !chocoboBeachPrerequisiteStep.text.includes("eight Dead Pepper treasure caches") ||
   !chocoboBeachPrerequisiteStep.text.includes("three treasure-producing Mountain Cracks") ||
-  !chocoboBeachPrerequisiteStep.detail?.includes("The Mognet Central and Chocobo's Paradise entrance cracks are access points, not extra treasure caches.") ||
-  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-3.on-the-high-seas.dive-spots")
+  !chocoboBeachPrerequisiteStep.detail?.includes("Mognet Central access crack among the discoveries required before Fat Chocobo's first scene") ||
+  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-3.on-the-high-seas.dive-spots") ||
+  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-4.return-to-gaia.mognet-central-crack")
 ) {
-  errors.push("The Disc IV Chocobo Beach checklist must distinguish all 24 Chocographs, the eight treasure caches, and the access-only cracks.");
+  errors.push("The Disc IV Chocobo Beach checklist must distinguish the eight reward caches from the required Mognet Central access crack.");
+}
+const chocoboMognetCrackStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-mognet-central-crack");
+const mognetCentralCrackObjective = objectives.find((objective) => objective.id === "disc-4.return-to-gaia.mognet-central-crack");
+if (
+  !chocoboMognetCrackStep?.text.includes("Mognet Central") ||
+  !chocoboMognetCrackStep.detail?.includes("GameFAQs explicitly includes the Mognet Central crack") ||
+  !chocoboMognetCrackStep.objectiveIds?.includes("disc-4.return-to-gaia.mognet-central-crack") ||
+  !mognetCentralCrackObjective?.sourceIds.includes("gamefaqs-chocobo-hot-cold-71891") ||
+  !mognetCentralCrackObjective?.sourceIds.includes("jegged-chocobo-mountain-cracks")
+) {
+  errors.push("The Disc IV walkthrough must track opening the Mognet Central crack as a separate Beach quest prerequisite.");
 }
 const chocoboBeachActivationStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-beach-unlock");
 if (!chocoboBeachActivationStep?.text.includes("Fat Chocobo") || !chocoboBeachActivationStep.text.includes("Tetra Master") || !chocoboBeachActivationStep.objectiveIds?.includes(chocoboBeachUnlockObjectiveId)) {

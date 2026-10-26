@@ -6026,8 +6026,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "gaia-return-chocobo-prerequisites",
             kind: "optional",
             text: "Before starting the Beach quest, confirm all 24 Chocograph treasures and all eight Dead Pepper treasure caches: three treasure-producing Mountain Cracks and five Dive Spots, including Disc IV Dive Spot #5.",
-            detail: "GameFAQs requires all Chocographs and Dead Pepper treasures; its Dead Pepper section separates treasure-producing cracks from non-treasure access cracks. The eight caches here are three reward-bearing cracks plus five Dive Spots. The Mognet Central and Chocobo's Paradise entrance cracks are access points, not extra treasure caches.",
-            objectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures", "disc-3.on-the-high-seas.mountain-crack", "disc-3.forgotten-continent.mountain-cracks", "disc-3.on-the-high-seas.dive-spots"],
+            detail: "The eight Dead Pepper treasure caches are three reward-bearing cracks plus five Dive Spots. Separately, GameFAQs includes the Mognet Central access crack among the discoveries required before Fat Chocobo's first scene; it is not one of the eight caches. The Chocobo's Paradise entrance crack is a route access point needed to reach Fat Chocobo, not another treasure cache.",
+            objectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures", "disc-3.on-the-high-seas.mountain-crack", "disc-3.forgotten-continent.mountain-cracks", "disc-3.on-the-high-seas.dive-spots", "disc-4.return-to-gaia.mognet-central-crack"],
+          },
+          {
+            id: "gaia-return-mognet-central-crack",
+            kind: "optional",
+            text: "Open the separate Dead Pepper Mountain Crack on the island north of the Outer Continent to reach Mognet Central.",
+            detail: "This crack is not a reward cache, but it must be discovered before Fat Chocobo's first scene for the Beach quest. GameFAQs explicitly includes the Mognet Central crack among the completed Dead Pepper discoveries; Jegged lists it as Mountain Crack #4 and identifies it as the entrance to Mognet Central.",
+            objectiveIds: ["disc-4.return-to-gaia.mognet-central-crack"],
           },
           {
             id: "gaia-return-chocobo-beach-unlock",
