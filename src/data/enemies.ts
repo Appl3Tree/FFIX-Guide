@@ -224,6 +224,7 @@ const gizamalukeStealsCutoffId = "cutoff.gizamaluke.boss-steals";
 const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
+const blackWaltz2PreparationSources = [...blackWaltz2Sources, "kamigame-dali-black-waltz-2"];
 const cargoShipEnemySources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
 const summitStationEnemySources = ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "elitegrindlab-south-gate"];
 const bentiniHeightsEnemySources = [enemyListSourceId, "gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station"];
@@ -5500,6 +5501,14 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
       { title: "Steal before attacking", detail: "Try for the Steepled Hat and Leather Plate before ending this one-time encounter. Both item types have later purchase sources, but the boss copies cannot be reclaimed.", sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "elitegrindlab-dali"] },
       { title: "Use physical attacks and keep the party up", detail: "Steiner's Bird Killer helps against the aerial boss. Vivi's spells can draw -ara counters, and crossing the half-HP threshold triggers Fira. Keep the other characters alive so Hypnotize cannot end the fight.", sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali"] },
     ],
+    preparationGuidance: {
+      suggestedLevelRange: { min: 5, max: 6 },
+      levelRationale: "Kamigame recommends party Lv. 5–6 or higher as an HP buffer against Black Waltz 2's party-target Fira. This is a single Japanese source that does not identify its platform or build; the range is an optional benchmark, not a minimum or cap. The reviewed original PlayStation walkthroughs list the boss at Lv. 6 but do not establish a normal-route party-level target.",
+      optionalGrinding: "No mandatory grinding is documented. Dali route sources emphasize steals, equipment, and healing rather than an encounter quota; if the party feels underprepared, extra leveling is optional and no fixed number of battles is supported.",
+      setupAdvice: "Before boarding the Cargo Ship, equip Steiner with strong available gear and Bird Killer if learned. Keep the men healed before crossing Black Waltz 2 below half HP, which can trigger party-target Fira; avoid Silk Shirt on them if possible because it makes them weak to Fire. Use Dagger's Cure or Potions, avoid Vivi's Black Magic when it draws stronger -ara counters, and keep at least one male ally alive so Dagger cannot be left alone for Hypnotize.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "kamigame-dali-black-waltz-2"],
+    },
     routeObjectiveIds: [blackWaltz2StealsObjectiveId],
     notes: [
       "Black Waltz 2's four drop slots all list Ether: one guaranteed slot plus up to three conditional additional copies. Caves of Narshe summarizes this as Ether ×4; several route summaries mention only one.",
@@ -5507,7 +5516,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
       "HP is listed as 1,030 by the cross-checked sources; StrategyWiki's 1,000 figure is an apparent rounding or transcription difference and is not selected as the record value.",
       "Walkthroughs differ on the encounter's field location. The dossier uses the Dali story chapter and keeps Observatory Mountain versus cargo-ship loading-area claims explicit in its encounter note.",
     ],
-  }, daliChapterId, blackWaltz2Sources, [blackWaltz2StealsMissableId], [blackWaltz2StealsCutoffId]),
+  }, daliChapterId, blackWaltz2PreparationSources, [blackWaltz2StealsMissableId], [blackWaltz2StealsCutoffId]),
 ];
 
 const cargoShipEnemyRecords: EnemyRecord[] = [

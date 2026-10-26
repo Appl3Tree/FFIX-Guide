@@ -1379,6 +1379,14 @@ export const sources = [
     notes: "First-visit route, six Dali ATEs, Mognet, windmill, underground route, Black Waltz 2 data, and pre-departure Ice Cavern check; its weapon-shop list confirms Broadsword for 330 Gil. Its pickup list omits the Eye Drops recorded by other sources; Black Waltz 2 is filed under Observatory Mountain although the encounter field is disputed.",
   },
   {
+    id: "kamigame-dali-black-waltz-2",
+    title: "Black Waltz 2 boss guide",
+    publisher: "Kamigame",
+    url: "https://kamigame.jp/FF9/page/139037423278523414.html",
+    accessed: "2026-10-26",
+    notes: "Japanese-language boss guide recommending party level 5–6 or higher for an HP buffer against party-target Fira and advising against magic because of stronger counters. The page does not identify a game build or platform; treat its level advice as optional and source-specific.",
+  },
+  {
     id: "jegged-dali",
     title: "Final Fantasy IX Walkthrough: The Village of Dali",
     publisher: "Jegged",

@@ -3645,6 +3645,17 @@ if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030
   !blackWaltz2Record.facts.some((fact) => fact.category === "status-vulnerability" && fact.label === "Mini" && fact.sourceIds.includes("ffwiki-black-waltz-2"))) {
   errors.push("Black Waltz 2 must preserve its cross-checked HP, four Ether drop slots, and sourced Mini-status conflict.");
 }
+const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
+const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
+const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;
+if (!blackWaltz2Preparation || blackWaltz2Preparation.suggestedLevelRange?.min !== 5 || blackWaltz2Preparation.suggestedLevelRange.max !== 6 ||
+  !blackWaltz2Preparation.sourceIds.includes("kamigame-dali-black-waltz-2") ||
+  !blackWaltz2Preparation.levelRationale.includes("not a minimum or cap") ||
+  !daliBossPrepSection?.sourceIds.includes("kamigame-dali-black-waltz-2") ||
+  !daliBossPrepStep?.text.includes("Lv. 5–6 or higher") || !daliBossPrepStep.text.includes("optional advice, not a verified minimum") ||
+  !daliBossPrepStep.detail?.includes("platform/build is not identified")) {
+  errors.push("Black Waltz 2 preparation must preserve the optional 5–6+ one-source recommendation and its build/platform limits in the route and bestiary.");
+}
 const summitStationWaltzEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.summit-station.black-waltz-3-rematch");
 const summitStationWaltzRecord = enemyRecords.find((enemy) => enemy.id === "enemy.black-waltz-3-rematch");
 const cargoShipWaltzEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.cargo-ship.black-waltz-3");

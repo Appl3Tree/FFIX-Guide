@@ -745,7 +745,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "observatory-and-black-waltz-2",
         title: "Observatory to Cargo-Ship Loading Area — Black Waltz 2",
         summary: "Control shifts to Steiner at Observatory Mountain. Recheck the nearby pickups and Morrid's coffee request, then prepare for the four-character battle that triggers after the Observatory scenes.",
-        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "gamefaqs-optional-route-47344", "gamerguides-ice-cavern", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "kamigame-dali-black-waltz-2", "gamefaqs-optional-route-47344", "gamerguides-ice-cavern", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
         steps: [
           {
             id: "dali-observatory-recheck",
@@ -757,7 +757,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "dali-observatory-boss-prep",
             kind: "optional",
-            text: "Before leaving Observatory Mountain, equip Steiner with your strongest available gear and enable Bird Killer if he has learned it. Keep Tents, Potions, and other older equipment until their abilities are learned; do not grind to a specific level because no standard party-level recommendation is supported here.",
+            text: "Before leaving Observatory Mountain, equip Steiner with your strongest available gear and enable Bird Killer if he has learned it. Keep Tents, Potions, and other older equipment until their abilities are learned. One Japanese boss guide suggests party Lv. 5–6 or higher for an HP buffer; treat that as optional advice, not a verified minimum, and do not grind to a required level.",
+            detail: "The cited level suggestion comes from one source whose platform/build is not identified. The reviewed original PlayStation route guides list Black Waltz 2 at Lv. 6 but do not establish a normal-route party-level target. No fixed grind quota is supported.",
           },
           {
             id: "dali-black-waltz-2-steals",
