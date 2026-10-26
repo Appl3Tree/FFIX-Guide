@@ -2658,6 +2658,9 @@ for (const [itemId, price] of atlaDisc2ShopPrices) {
   if (itemId === "game-item.mythril-gloves" && !path.sourceIds.includes("gamefaqs-equipment-33383")) {
     errors.push("Atla's Disc II Mythril Gloves path must cite the independent GameFAQs equipment table supporting the 980-Gil price.");
   }
+  if (itemId === "game-item.mythril-gloves" && !path.sourceIds.includes("gamefaqs-shop-lists-9772")) {
+    errors.push("Atla's Disc II Mythril Gloves path must cite the older GameFAQs shop list supporting the 980-Gil price.");
+  }
   if (itemId === "game-item.mythril-gloves" &&
     (!path.conditions?.includes("720 Gil") || !path.conditions.includes("likely table typo"))) {
     errors.push("Atla's Disc II Mythril Gloves path must retain the sourced 720-versus-980-Gil discrepancy note.");
