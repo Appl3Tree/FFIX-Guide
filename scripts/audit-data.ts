@@ -592,6 +592,22 @@ for (const edge of gameRouteEdges) {
     if (!sourceIds.has(sourceId)) errors.push(`Game route edge ${edge.id} references unknown source ${sourceId}.`);
   }
 }
+const aerialTrenoReturn = gameRouteEdgesById.get("detour.aerial-treno-return");
+const aerialTrenoRejoin = gameRouteEdgesById.get("detour.aerial-treno-rejoin");
+if (
+  aerialTrenoReturn?.relationship !== "optional-return" ||
+  aerialTrenoReturn.fromChapterId !== "disc-3.aerial-exploration" ||
+  aerialTrenoReturn.toChapterId !== "disc-2.treno" ||
+  !aerialTrenoReturn.summary.includes("Amdusias") ||
+  !aerialTrenoReturn.summary.includes("Running Shoes") ||
+  !aerialTrenoReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  aerialTrenoRejoin?.relationship !== "rejoin" ||
+  aerialTrenoRejoin.fromChapterId !== "disc-2.treno" ||
+  aerialTrenoRejoin.toChapterId !== "disc-3.aerial-exploration" ||
+  !aerialTrenoRejoin.sourceIds.includes("jegged-lindblum-hilda-garde")
+) {
+  errors.push("The Disc III Hilda Garde Treno return and rejoin must preserve the Amdusias reward route and source links.");
+}
 const routeStartChapterId = gameRouteCoverage.chapterIds[0];
 const routeEndChapterId = gameRouteCoverage.throughChapterId;
 if (!routeStartChapterId) {

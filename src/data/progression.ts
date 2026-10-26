@@ -755,6 +755,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-lost-continent-71891", "gamefaqs-aerial-exploration-71891", "jegged-mount-gulug", "jegged-lindblum-hilda-garde"],
   },
   {
+    id: "detour.aerial-treno-return",
+    fromChapterId: "disc-3.aerial-exploration",
+    toChapterId: "disc-2.treno",
+    relationship: "optional-return",
+    summary: "After obtaining the Hilda Garde III following Mount Gulug and before continuing to Ipsen's Castle, fly back to Treno for Queen Stella's available Stellazzio rewards and the Disc III Knight's House Amdusias fight, which awards another pair of Running Shoes. This return is optional; the Hilda Garde III can take the party back to its open-world route.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-treno-71891"],
+  },
+  {
+    id: "detour.aerial-treno-rejoin",
+    fromChapterId: "disc-2.treno",
+    toChapterId: "disc-3.aerial-exploration",
+    relationship: "rejoin",
+    summary: "After any Treno errands, return to the Hilda Garde III and resume the Disc III free-flight route; when ready, continue to Ipsen's Castle.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+  },
+  {
     id: "story.aerial-exploration-to-ipsens-castle",
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-3.ipsens-castle",
