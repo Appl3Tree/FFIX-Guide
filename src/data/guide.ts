@@ -1107,6 +1107,14 @@ export const sources = [
     notes: "Independent Mimic entry that places the enemy in Burmecia and lists Ether, Hi-Potion, and Phoenix Down as wins plus Hi-Potion and Antidote as steals. It does not provide probabilities; those remain tied to the GameFAQs table, with Opa-Til independently listing the drops and chances.",
   },
   {
+    id: "drslice-no-239-armory",
+    title: "No. 239's Armory (Disk 2 & 3)",
+    publisher: "DrSlice",
+    url: "https://www.drslice.com/games/ff9/shop/33",
+    accessed: "2026-10-26",
+    notes: "Lists Glass Armlet for 250 Gil under a No. 239's Armory heading labeled Disk 2 & 3; the location footer labels Black Mage Village (Disk 2). RPGClassics identifies No. 239's Weapon Shop as Black Mage Village. Preserve both DrSlice labels: this is an additional published-table listing for the Black Mage Village route, but the page's different disc labels do not independently settle the Disc III stock window or platform/build behavior.",
+  },
+  {
     id: "gamefaqs-monster-list-20490",
     title: "Monster List — Revival_Flame",
     publisher: "GameFAQs",

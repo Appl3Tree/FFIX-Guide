@@ -670,6 +670,11 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 - [GameFAQs Shops](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists Gold Helm for 1,800 Gil in Treno's Disc III–IV weapon shop. [RPGClassics Shops](https://shrines.rpgclassics.com/psx/ffix/shops.shtml) independently lists Gold Helm for 1,800 Gil in the Disc III Treno armory. Both support repeatable original PlayStation item-type recovery after missing Antlion's one-time Gold Helm steal in Cleyra.
 - The recovery path is distinct from that encounter copy and does not restore it. Newer-release shop behavior and direct game confirmation remain open.
 
+## Glass Armlet Black Mage Village stock cross-check (2026-10-26)
+
+- [DrSlice’s No. 239’s Armory page](https://www.drslice.com/games/ff9/shop/33) lists Glass Armlet for 250 Gil. Its section heading says “Disk 2 & 3,” while the location footer says “Black Mage Village (Disk 2)”; RPGClassics identifies No. 239’s Weapon Shop as Black Mage Village.
+- The catalog links this source only to the Black Mage Village Glass Armlet route and records both DrSlice labels. The other sources listing Black Mage Village on Discs II–III still support the path, but DrSlice’s own labels do not independently establish Disc III persistence. The separate Treno and Lindblum Disc III candidates remain unresolved.
+
 ## Ipsen equipment ability claims (2026-10-26)
 
 - The [GameFAQs Items reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists Reis’s Wind for Mythril Spear; Spare Change and Counter for Poison Knuckles; Float, Stona, and Silence for Lamia’s Flute; and Stop, Bio, and Drain for Oak Staff. Its [Abilities reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/abilities) provides the corresponding ability index.

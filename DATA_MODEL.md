@@ -39,6 +39,8 @@ Ipsen Disc III supply comparison: icksmehl lists seven items and omits five pres
 
 The Ipsen Mogshop audit also checks the source-backed abilities of Mythril Spear, Poison Knuckles, Lamia’s Flute, and Oak Staff against the GameFAQs Items and Abilities references. These checks protect existing catalog claims; ability coverage remains partial overall.
 
+Glass Armlet’s Black Mage Village route includes DrSlice’s No. 239’s Armory listing. Its heading labels the stock “Disk 2 & 3,” while its location footer labels Black Mage Village “Disk 2”; the catalog preserves this source-scope difference and does not infer Disc III persistence from that page alone.
+
 ## Profile schema
 
 The local library uses schema version 3, a stable per-browser `deviceId`, profile list, and selected profile ID. Each profile stores its goal, route, selected product/platform, current story area, manually entered game clock, saved Excalibur II route splits, sparse objective marks, and warning acknowledgements. Normalization adds empty checkpoint and acknowledgement maps to older backups. The Excalibur II timer compares the manual clock with the selected source checkpoint and keeps actual splits separate from target data. Platform choices distinguish the original PlayStation, Steam, PS4 release, Xbox One/Series/Windows app, Switch, iOS/iPadOS, and Android; early broad PlayStation/mobile values remain readable when restoring foundation backups.

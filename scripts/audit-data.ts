@@ -3583,8 +3583,11 @@ if (
   glassArmletBmvPath.availability !== "limited-window" ||
   !glassArmletBmvPath.conditions.includes("Discs II–III") ||
   !glassArmletBmvPath.conditions.includes("Disc IV") ||
+  !glassArmletBmvPath.conditions.includes("No. 239's Armory (Disk 2 & 3)") ||
+  !glassArmletBmvPath.conditions.includes("location footer says Black Mage Village (Disk 2)") ||
   !glassArmletBmvPath.sourceIds.includes("gamefaqs-shops-71891") ||
   !glassArmletBmvPath.sourceIds.includes("jegged-arm-gear") ||
+  !glassArmletBmvPath.sourceIds.includes("drslice-no-239-armory") ||
   !glassArmletAlexandriaPath ||
   glassArmletAlexandriaPath.availability !== "repeatable"
 ) {
