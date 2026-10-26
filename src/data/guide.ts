@@ -2832,7 +2832,7 @@ export const sources = [
     publisher: "Final Fantasy Online",
     url: "https://ffonline.com/ff9/world/Ipsens-Castle",
     accessed: "2026-10-26",
-    notes: "Its Ipsen's Castle shop table lists Coronet for 4,400 Gil, independently corroborating the GameFAQs Shops seller row. It gives no disc range. GameFAQs' Equipment List, RPGClassics, and the Final Fantasy Wiki Ipsen stock table omit the Kumool listing, so this confirms a conflicting location claim but does not resolve the sale's Disc III/IV timing.",
+    notes: "Its Ipsen's Castle shop table lists Coronet for 4,400 Gil, independently corroborating the GameFAQs Shops seller row. It gives no disc range. GameFAQs' Equipment List, RPGClassics, the Final Fantasy Wiki, and icksmehl's Disc III/IV Ipsen stock tables omit the Kumool listing, so the positive seller claim remains unresolved for the later visits.",
   },
   {
     id: "jegged-ipsens-castle",
@@ -3257,6 +3257,14 @@ export const sources = [
     url: "https://shrines.rpgclassics.com/psx/ffix/shops.shtml",
     accessed: "2026-10-26",
     notes: "Independent PlayStation shop tables for city shops and Mogshops, including the 1,200-Gil Chimera Armlet price at Lindblum, Oeilvert, Desert Palace, and Daguerreo. Its Disc III Daguerreo weapon list includes Diamond Armor for 8,800 Gil, and its Disc IV weapon list omits it; this independently supports the documented stock change. It lists Oak Staff for 2,400 Gil at Conde Petie, Black Mage Village, Alexandria, Treno, and Ipsen's Castle, and Adaman Vest for 1,600 Gil at Conde Petie, Black Mage Village, and Madain Sari. It also lists Phoenix Down for 150 Gil in its general item-shop tables; exact shop opening/restock transitions remain unverified. Its Tiger Fangs price conflicts with GameFAQs' shop table, so that discrepancy remains recorded separately. RPGClassics lists Stardust Rod at 760 Gil in its Lindblum, Dragon's Gate, Fossil Roo, Conde Petie, Black Mage Village, Alexandria, and Treno shop tables, unlike GameFAQs Shops' 750-Gil entries and Caves of Narshe's 750-Gil item price. Kumool's Ipsen's Castle Mogshop also lists Mythril Rod for 560 Gil, confirming a later source after the Esto Gaza listing. At Ipsen, its inventory corroborates the other eleven listed supplies but omits Remedy. Its Moorock table lists Dagger but omits Magic Tag and gives Zorlin Shape for 6,000 Gil; these differences are retained against GameFAQs Shops. For Glass Armlet, RPGClassics lists Disc II Treno and post-attack Lindblum stock, then omits it from its Disc III Treno and Lindblum weapon tables. This independently corroborates the discrepancy with Jegged's later city claims but does not establish that those sales are unavailable. Its Disc III Treno armory table also lists Gold Helm for 1,800 Gil, independently confirming GameFAQs' Disc III recovery listing for the missed Cleyra steal.",
+  },
+  {
+    id: "icksmehl-shops-disc-3",
+    title: "Shops (CD 3)",
+    publisher: "icksmehl.de / The Wargod",
+    url: "https://www.icksmehl.de/spiele/final-fantasy-9/shops/cd-3/",
+    accessed: "2026-10-26",
+    notes: "The Disc III Ipsen section lists Kumool's Mogshop inventory, including Needle Fork, but omits Coronet. Its Disc IV Ipsen table also omits Coronet. GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil without a disc range; the GameFAQs Equipment List, RPGClassics, and Final Fantasy Wiki also omit it from Kumool's listing. These published-table omissions do not establish in-game absence or resolve when the positive seller listing applies. The page does not identify a platform/build, so release behavior remains unverified.",
   },
   {
     id: "icksmehl-shops-disc-4",

@@ -5501,15 +5501,17 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
     return path.availability !== "window-unverified"
       || !path.conditions.includes("GameFAQs Shops and Final Fantasy Online")
       || !path.conditions.includes("neither gives a Disc III/IV range")
-      || !path.conditions.includes("Equipment List, RPGClassics, the Final Fantasy Wiki, and icksmehl.de's Disc IV table omit")
-      || !path.conditions.includes("icksmehl.de's Disc IV table omit")
+      || !path.conditions.includes("Disc III and Disc IV Ipsen tables from icksmehl.de")
+      || !path.conditions.includes("these omissions do not prove absence")
       || !path.sourceIds.includes("ffonline-ipsens-castle")
       || !path.sourceIds.includes("ffwiki-shops")
       || !path.sourceIds.includes("gamefaqs-equipment-33383")
+      || !path.sourceIds.includes("icksmehl-shops-disc-3")
       || !path.sourceIds.includes("icksmehl-shops-disc-4")
       || !item.sourceIds.includes("ffonline-ipsens-castle")
       || !item.sourceIds.includes("ffwiki-shops")
       || !item.sourceIds.includes("gamefaqs-equipment-33383")
+      || !item.sourceIds.includes("icksmehl-shops-disc-3")
       || !item.sourceIds.includes("icksmehl-shops-disc-4");
   }
   return false;

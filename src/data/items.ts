@@ -2613,7 +2613,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.lamias-tiara", name: "Lamia's Tiara", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "rpgclassics-addons", "rpgclassics-synthesis", ...fossilRooSources, ...disc4ShopSources], verification: "partial" },
   { id: "game-item.survival-vest", name: "Survival Vest", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-armor", ...fossilRooSources, "gamefaqs-madain-sari-71891", "elitegrindlab-madain-sari", "gamefaqs-return-to-alexandria-71891"], verification: "partial" },
   { id: "game-item.golden-hairpin", name: "Golden Hairpin", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...disc4ShopSources, ...mountGulugSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
-  { id: "game-item.coronet", name: "Coronet", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-shops", "ffonline-ipsens-castle", "icksmehl-shops-disc-4"], verification: "partial" },
+  { id: "game-item.coronet", name: "Coronet", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-shops", "ffonline-ipsens-castle", "icksmehl-shops-disc-3", "icksmehl-shops-disc-4"], verification: "partial" },
   { id: "game-item.flash-hat", name: "Flash Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.adaman-hat", name: "Adaman Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.platinum-helm", name: "Platinum Helm", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
@@ -3326,7 +3326,7 @@ const ipsensMogshopEquipmentPaths: ItemAcquisitionPath[] = ipsensMogshopEquipmen
   shopName: "Kumool's Mogshop (Ipsen's Castle)",
   cost: { currency: "gil", amount: price },
   conditions: slug === "coronet"
-    ? "GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil at Ipsen, but neither gives a Disc III/IV range. GameFAQs' Equipment List, RPGClassics, the Final Fantasy Wiki, and icksmehl.de's Disc IV table omit Kumool's Coronet listing; these omissions do not resolve the positive seller claim, so keep its timing window-unverified pending in-game verification."
+    ? "GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil at Ipsen, but neither gives a Disc III/IV range. The Disc III and Disc IV Ipsen tables from icksmehl.de, GameFAQs' Equipment List, RPGClassics, and the Final Fantasy Wiki omit Kumool's Coronet listing; these omissions do not prove absence, so keep the timing window-unverified pending in-game verification."
     : slug === "n-kai-armlet"
       ? "GameFAQs' Equipment List explicitly lists N-Kai Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,000-Gil price, and icksmehl.de's Disc IV inventory also lists it. The Disc IV Mognet chain returns to Kumool. Direct release behavior remains unverified."
       : slug === "jade-armlet"
@@ -3334,7 +3334,7 @@ const ipsensMogshopEquipmentPaths: ItemAcquisitionPath[] = ipsensMogshopEquipmen
     : ipsensDisc3And4EquipmentProducts.has(slug)
       ? `GameFAQs' Equipment List explicitly lists ${itemName} at Kumool's Mogshop on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory; GameFAQs Shops and RPGClassics support the ${price.toLocaleString("en-US")}-Gil price. Release-specific behavior remains unverified.`
     : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. Exact post-story shop access has not been independently verified.`,
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", ...(ipsensDisc3And4EquipmentProducts.has(slug) ? ["gamefaqs-equipment-33383", "icksmehl-shops-disc-4"] : []), ...(slug === "coronet" ? ["gamefaqs-equipment-33383", "ffwiki-shops", "ffonline-ipsens-castle", "icksmehl-shops-disc-4"] : []), ...(slug === "n-kai-armlet" || slug === "jade-armlet" ? ["elitegrindlab-ipsens-castle"] : [])],
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", ...(ipsensDisc3And4EquipmentProducts.has(slug) ? ["gamefaqs-equipment-33383", "icksmehl-shops-disc-4"] : []), ...(slug === "coronet" ? ["gamefaqs-equipment-33383", "ffwiki-shops", "ffonline-ipsens-castle", "icksmehl-shops-disc-3", "icksmehl-shops-disc-4"] : []), ...(slug === "n-kai-armlet" || slug === "jade-armlet" ? ["elitegrindlab-ipsens-castle"] : [])],
 }));
 
 const ipsensMogshopSupplyProducts = [
