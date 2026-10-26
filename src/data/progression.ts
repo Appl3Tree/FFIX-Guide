@@ -1960,6 +1960,15 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     sourceIds: ["gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-treno-71891", "neoseeker-item-locations-182566"],
   },
   {
+    id: "cutoff.treno.disc-ii-shop-stock",
+    edgeId: "story.treno-to-journey-to-cleyra",
+    title: "Treno Disc II purchase-source inventory",
+    certainty: "conservative",
+    trigger: "Before descending through Doctor Tot's hatch and leaving Treno for Gargan Roo, review the Disc II shop entries you want. GameFAQs labels the later Treno weapon list Disc III–IV and omits these 18 non-disputed entries; the precise in-game stock-change trigger is not directly checked.",
+    missableIds: ["missable.disc-2.treno.disc-ii-shop-stock"],
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-treno-71891"],
+  },
+  {
     id: "cutoff.return-to-lindblum.chain-mail-target",
     edgeId: "story.return-to-lindblum-to-journey-to-outer-continent",
     title: "Lindblum Chain Mail and synthesis target",

@@ -6205,6 +6205,74 @@ if (
 ) {
   errors.push("The Summit Station inventory warning must preserve the GameFAQs/Neoseeker cutoff and Caves of Narshe's ambiguous Disc III South Gate stock, without presenting later recovery as verified.");
 }
+const trenoShopWindowObjective = objectivesById.get("disc-2.treno.shop-stock-window");
+const trenoShopWindowStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.treno")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "treno-mogrich-letter");
+const trenoLimitedStockPaths: [string, string, number][] = [
+  ["item-path.disc-2.treno.flame-staff-shop", "game-item.flame-staff", 1100],
+  ["item-path.disc-2.treno.chain-plate-shop", "game-item.chain-plate", 810],
+  ["item-path.disc-2.treno.leather-plate-shop", "game-item.leather-plate", 530],
+  ["item-path.disc-2.treno.silk-shirt-shop", "game-item.silk-shirt", 400],
+  ["item-path.disc-2.treno.bandana-shop", "game-item.bandana", 500],
+  ["item-path.disc-2.treno.bone-wrist-shop", "game-item.bone-wrist", 330],
+  ["item-path.disc-2.treno.mythril-sword-shop", "game-item.mythril-sword", 1300],
+  ["item-path.disc-2.treno.mythril-spear-shop", "game-item.mythril-spear", 1100],
+  ["item-path.disc-2.treno.lightning-staff-shop", "game-item.lightning-staff", 1200],
+  ["item-path.disc-2.treno.leather-wrist-shop", "game-item.leather-wrist", 200],
+  ["item-path.disc-2.treno.magus-hat-shop", "game-item.magus-hat", 400],
+  ["item-path.disc-2.treno.mythril-rod-shop", "game-item.mythril-rod", 560],
+  ["item-path.disc-2.treno.fork-shop", "game-item.fork", 1100],
+  ["item-path.disc-2.treno.chain-mail-shop", "game-item.chain-mail", 1200],
+  ["item-path.disc-2.treno.ice-staff-shop", "game-item.ice-staff", 980],
+  ["item-path.disc-2.treno.needle-fork-shop", "game-item.needle-fork", 3100],
+  ["item-path.disc-2.treno.barbut-shop", "game-item.barbut", 600],
+  ["item-path.disc-2.treno.bronze-vest-shop", "game-item.bronze-vest", 670],
+];
+const trenoPersistentShopPaths: [string, string, number][] = [
+  ["item-path.disc-2.treno.dagger-shop", "game-item.dagger", 320],
+  ["item-path.disc-2.treno.mage-masher-shop", "game-item.mage-masher", 500],
+  ["item-path.disc-2.treno.mythril-dagger-shop", "game-item.mythril-dagger", 950],
+  ["item-path.disc-2.treno.mythril-gloves-shop", "game-item.mythril-gloves", 980],
+];
+const trenoLinenCuirassPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.linen-cuirass-shop");
+const lindblumLinenCuirassPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.exploring-lindblum-kingdom.linen-cuirass-shop");
+const trenoShopWindowWarning = missablesById.get("missable.disc-2.treno.disc-ii-shop-stock");
+const trenoShopWindowCutoff = cutoffsById.get("cutoff.treno.disc-ii-shop-stock");
+if (
+  trenoLimitedStockPaths.some(([pathId, itemId, price]) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+    return !path || path.itemId !== itemId || path.chapterId !== "disc-2.treno" || path.method !== "shop" ||
+      path.availability !== "limited-window" || path.recommendedBeforeChapterId !== "disc-2.treno" ||
+      path.cost?.amount !== price || !path.walkthroughObjectiveIds?.includes("disc-2.treno.shop-stock-window") ||
+      !path.sourceIds.includes("gamefaqs-shops-71891") || !path.conditions?.includes("Disc II") || !path.conditions.includes("Disc III–IV");
+  }) ||
+  trenoPersistentShopPaths.some(([pathId, itemId, price]) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+    return !path || path.itemId !== itemId || path.chapterId !== "disc-2.treno" || path.method !== "shop" ||
+      path.availability !== "repeatable" || path.cost?.amount !== price || !path.sourceIds.includes("gamefaqs-shops-71891");
+  }) ||
+  !trenoLinenCuirassPath || trenoLinenCuirassPath.availability !== "repeatable" || trenoLinenCuirassPath.cost?.amount !== 800 ||
+  !trenoLinenCuirassPath.conditions?.includes("Disc III–IV") || !trenoLinenCuirassPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !lindblumLinenCuirassPath || lindblumLinenCuirassPath.availability !== "window-unverified" || lindblumLinenCuirassPath.cost?.amount !== 800 ||
+  !trenoShopWindowObjective || trenoShopWindowObjective.category !== "advanced" ||
+  !trenoShopWindowObjective.sourceIds.includes("gamefaqs-shops-71891") ||
+  !trenoShopWindowStep?.objectiveIds?.includes("disc-2.treno.shop-stock-window") ||
+  !trenoShopWindowStep.detail?.includes("Disc III–IV Treno table") ||
+  !trenoShopWindowStep.detail.includes("Glass Armlet is excluded") ||
+  !trenoShopWindowWarning || trenoShopWindowWarning.objectiveId !== "disc-2.treno.shop-stock-window" ||
+  !trenoShopWindowWarning.classification.includes("recoverable-later") ||
+  !trenoShopWindowWarning.consequence.includes("18 tracked shop paths") ||
+  !trenoShopWindowWarning.note?.includes("Glass Armlet remains unresolved") ||
+  !trenoShopWindowWarning.sourceIds.includes("gamefaqs-shops-71891") ||
+  trenoShopWindowCutoff?.certainty !== "conservative" ||
+  !trenoShopWindowCutoff.missableIds.includes("missable.disc-2.treno.disc-ii-shop-stock") ||
+  !gamefaqsShopsSource?.notes.includes("Treno's Disc II weapon-shop table lists 25 products") ||
+  !gamefaqsShopsSource.notes.includes("The Items table's 400-Gil Linen Cuirass figure is its sell value")
+) {
+  errors.push("Treno's Disc II shop catalog must cover the Disc II-only entries and persistent stock with the cited later table comparison, source-specific cutoff objective, and correct Linen Cuirass purchase price.");
+}
 const moonstoneId = "game-item.moonstone";
 const rubyId = "game-item.ruby";
 const rubyPaths = itemAcquisitionPaths.filter((path) => path.itemId === rubyId);
