@@ -2008,7 +2008,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Stiltzkin.html",
     accessed: "2026-10-25",
-    notes: "Lists all eight Stiltzkin locations and bundles, confirms the final Ribbon is conditional on buying every set, and says all available purchases are required for Driving the Hard Bargain. It distinguishes the repeatable final Disc IV purchase opportunity from the earlier one-time stops.",
+    notes: "Lists all eight Stiltzkin locations and bundles, confirms the final Ribbon is conditional on buying every set, and says all available purchases are required for Driving the Hard Bargain. Jegged identifies Disc IV Alexandria as the final stop; GameFAQs explicitly says this last bundle is not missable, unlike the earlier one-time stops.",
   },
   {
     id: "jegged-add-ons",
@@ -3008,7 +3008,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-gaia",
     accessed: "2026-10-24",
-    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It identifies Stiltzkin's Alexandria steeple bundle as Moonstone, Ruby, and Elixir for 5,555 Gil. It says Atla's Mogshop remains open with the same Disc III stock; this route supports the Steepled Hat recovery. It says the other Daguerreo shops retain their previous inventories, but its replacement weapon list omits Diamond Armor; it also identifies earlier quest opportunities that have closed.",
+    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It identifies Stiltzkin's Alexandria steeple bundle as Moonstone, Ruby, and Elixir for 5,555 Gil and explicitly says this final purchase is not missable; a Ribbon follows on a second conversation if all seven earlier bundles were bought. It says Atla's Mogshop remains open with the same Disc III stock; this route supports the Steepled Hat recovery. It says the other Daguerreo shops retain their previous inventories, but its replacement weapon list omits Diamond Armor; it also identifies earlier quest opportunities that have closed.",
   },
   {
     id: "gamerguides-side-questing-4",
