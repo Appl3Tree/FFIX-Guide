@@ -4896,10 +4896,26 @@ for (const target of sourceInventoryTargets) {
     errors.push(`Inventory target ${target.id} needs a positive integer quantity.`);
   }
   if (!target.interpretation.trim()) errors.push(`Inventory target ${target.id} needs an interpretation note.`);
+  if (target.basis === "route-need" && !/\bNeed \d+\b/.test(target.interpretation)) {
+    errors.push(`Inventory target ${target.id} is marked as a route need without a sourced Need count.`);
+  }
+  if (target.basis === "end-inventory" && !target.id.includes("end-inventory")) {
+    errors.push(`Inventory target ${target.id} is marked as end inventory without an explicit end-inventory identity.`);
+  }
+  if (target.basis === "purchase-recommendation" && !/buy|bought|purchase/i.test(target.interpretation)) {
+    errors.push(`Inventory target ${target.id} is marked as a purchase recommendation without purchase wording.`);
+  }
+  if (target.basis === "buy-column-total" && !/Buy\/Synth column/i.test(target.interpretation)) {
+    errors.push(`Inventory target ${target.id} uses the Buy/Synth column basis without identifying that source column.`);
+  }
   if (target.sourceIds.length === 0) errors.push(`Inventory target ${target.id} has no provenance.`);
   for (const sourceId of target.sourceIds) {
     if (!sourceIds.has(sourceId)) errors.push(`Inventory target ${target.id} references unknown source ${sourceId}.`);
   }
+}
+const disc3InventoryCheckpointTargets = sourceInventoryTargets.filter((target) => target.id.startsWith("item-target.disc-3.preparing-to-leave."));
+if (disc3InventoryCheckpointTargets.length !== 24 || disc3InventoryCheckpointTargets.some((target) => target.basis !== "checkpoint-total")) {
+  errors.push("The 24 Disc III preparation inventory targets must remain source checkpoint totals, not route Need or end-inventory counts.");
 }
 const finalStockItemLocationSourceId = "gamefaqs-item-locations-54996";
 const finalStockItemSpecs = [
@@ -5161,13 +5177,26 @@ if (!steepledHatBmvPath || steepledHatBmvPath.shopId !== "black-mage-village.wea
 const steepledHatNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.steepled-hat");
 const steepledHatEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.steepled-hat-end-inventory");
 if (!steepledHatNeedTarget || steepledHatNeedTarget.targetQuantity !== 7 ||
+  steepledHatNeedTarget.basis !== "route-need" ||
   !steepledHatNeedTarget.interpretation.includes("Need 7") ||
   !steepledHatNeedTarget.interpretation.includes("end-inventory #10") ||
   !steepledHatEndInventoryTarget || steepledHatEndInventoryTarget.targetQuantity !== 10 ||
+  steepledHatEndInventoryTarget.basis !== "end-inventory" ||
   !steepledHatEndInventoryTarget.interpretation.includes("including equipped copies") ||
   !steepledHatEndInventoryTarget.interpretation.includes("not a purchase total") ||
   sourceInventoryTargets.some((target) => target.id === "item-target.disc-4.final-preparations.steepled-hat-buy")) {
   errors.push("Steepled Hat's GameFAQs Need 7 and end-inventory #10 must remain distinct; #10 is not a Buy total.");
+}
+for (const [targetId, expectedBasis] of [
+  ["item-target.disc-2.treno.air-racket", "purchase-recommendation"],
+  ["item-target.disc-2.journey-to-treno.silver-gloves", "checkpoint-total"],
+  ["item-target.disc-2.journey-to-treno.iron-helm", "checkpoint-total"],
+  ["item-target.disc-2.return-to-lindblum.chain-mail", "checkpoint-total"],
+  ["item-target.disc-3.portal-to-another-world.zorlin-shape", "purchase-recommendation"],
+] as const) {
+  if (sourceInventoryTargets.find((target) => target.id === targetId)?.basis !== expectedBasis) {
+    errors.push(`Inventory target ${targetId} must retain its ${expectedBasis} semantics.`);
+  }
 }
 if (itemAcquisitionPaths.some((path) => path.itemId === steepledHatId && path.shopId === "treno.weapon-shop.disc-2") ||
   !blackWaltz3StealWarning?.recovery.includes("Steepled Hat can be bought at Atla") ||

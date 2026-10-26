@@ -141,9 +141,9 @@ test("Lindblum's city cutoff is attached to the Grotto entry route", () => {
   const lindblumExit = gameRouteEdges.find((edge) => edge.id === "story.lindblum-to-journey-to-burmecia");
   assert.ok(lindblumExit);
   assert.equal(lindblumExit.relationship, "required-story");
-  assert.match(lindblumExit.summary, /Entering the Grotto stops the trolley/);
-  assert.match(lindblumExit.summary, /closes Lindblum Castle and its three districts/);
-  assert.match(lindblumExit.summary, /basic Dragon's Gate merchant/);
+  assert.match(lindblumExit.summary, /before entering the Grotto as the safe route checkpoint/);
+  assert.match(lindblumExit.summary, /sources disagree about whether the trolley\/district lockout begins at entry or after completing the Grotto/);
+  assert.match(lindblumExit.summary, /only the Dragon's Gate merchant remains/);
 
   for (const sourceId of [
     "gamefaqs-optional-route-47344",
@@ -163,9 +163,9 @@ test("Cleyra's story departure records its closure and disputed local cutoff", (
   assert.ok(departure);
   assert.equal(departure.relationship, "required-story");
   assert.match(departure.summary, /story departure closes Cleyra and its Trunk/);
-  assert.match(departure.summary, /Guides disagree on the exact last safe action/);
-  assert.match(departure.summary, /settlement sweep before leaving it/);
-  assert.match(departure.summary, /post-Antlion rewards before advancing/);
+  assert.match(departure.summary, /Guides disagree on the broad last-safe-action label/);
+  assert.match(departure.summary, /missed chests during it/);
+  assert.match(departure.summary, /Freya's post-Antlion Emerald\/Stiltzkin window/);
 
   for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"]) {
     assert.ok(departure.sourceIds.includes(sourceId), `route is missing ${sourceId}`);
@@ -223,8 +223,8 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   assert.match(atlaVisit.summary, /Atla in the Vault/);
   assert.match(atlaVisit.summary, /deliver the letter for Mogryo/);
   assert.match(atlaVisit.summary, /long, monster-occupied route through the former city/);
-  assert.match(atlaVisit.summary, /leave by the same route/);
-  assert.match(atlaVisit.summary, /do not enumerate every Suburb and Uptown pickup room/);
+  assert.match(atlaVisit.summary, /A Disc IV recovery run also traverses the old Suburb\/Uptown rooms/);
+  assert.match(atlaVisit.summary, /does not establish the availability of every old chest/);
 
   for (const sourceId of ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"]) {
     assert.ok(atlaVisit.sourceIds.includes(sourceId), `Burmecia return is missing ${sourceId}`);
@@ -287,7 +287,7 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
     result[edge.relationship] += 1;
     return result;
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
-  assert.equal(gameRouteEdges.length, 68);
-  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 13, rejoin: 12 });
-  assert.equal(storyPartySequences.length, 8);
+  assert.equal(gameRouteEdges.length, 81);
+  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 20, rejoin: 18 });
+  assert.equal(storyPartySequences.length, 9);
 });

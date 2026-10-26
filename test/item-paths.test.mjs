@@ -5,6 +5,28 @@ import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCov
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
+test("item inventory targets preserve the source quantity they represent", () => {
+  const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
+  const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");
+  const steepledHatEnd = target("item-target.disc-4.final-preparations.steepled-hat-end-inventory");
+  const airRacketPurchase = target("item-target.disc-2.treno.air-racket");
+  const silverGlovesCheckpoint = target("item-target.disc-2.journey-to-treno.silver-gloves");
+  const disc3CheckpointTargets = sourceInventoryTargets.filter((entry) => entry.id.startsWith("item-target.disc-3.preparing-to-leave."));
+
+  assert.equal(steepledHatNeed?.targetQuantity, 7);
+  assert.equal(steepledHatNeed?.basis, "route-need");
+  assert.equal(steepledHatEnd?.targetQuantity, 10);
+  assert.equal(steepledHatEnd?.basis, "end-inventory");
+  assert.equal(airRacketPurchase?.basis, "purchase-recommendation");
+  assert.equal(silverGlovesCheckpoint?.basis, "checkpoint-total");
+  assert.equal(disc3CheckpointTargets.length, 24);
+  assert.ok(disc3CheckpointTargets.every((entry) => entry.basis === "checkpoint-total"));
+  assert.ok(sourceInventoryTargets.every((entry) => entry.basis !== "end-inventory" || entry.id.includes("end-inventory")));
+  assert.ok(sourceInventoryTargets.every((entry) => entry.basis !== "route-need" || /\bNeed \d+\b/.test(entry.interpretation)));
+  assert.ok(!sourceInventoryTargets.some((entry) => entry.basis === "buy-column-total"));
+  assert.ok(!sourceInventoryTargets.some((entry) => entry.id === "item-target.disc-4.final-preparations.steepled-hat-buy"));
+});
+
 test("Cleyra's Magician Shoes and rubbish-pit chests have separate item paths", () => {
   const magicianShoes = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.magician-shoes" && path.chapterId === "disc-2.cleyra");
   const silkRobe = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.rubbish-pit-silk-robe");
@@ -49,7 +71,7 @@ test("Soft has repeatable shop sources through the late game", () => {
     ["item-path.disc-3.on-the-high-seas.soft-alexandria-shop", "alexandria.item-shop.disc-3-4", "shop"],
   ];
 
-  assert.equal(softPaths.length, 9);
+  assert.equal(softPaths.length, 12);
   assert.ok(gameItems.find((item) => item.id === "game-item.soft")?.sourceIds.includes("gamefaqs-shops-71891"));
   for (const [pathId, shopId, method] of shops) {
     const path = softPaths.find((entry) => entry.id === pathId);
@@ -260,7 +282,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 17);
-  assert.equal(orePaths.length, 5);
+  assert.equal(orePaths.length, 10);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -447,7 +469,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   assert.equal(recipe?.cost.amount, 300);
   assert.ok(equipmentAbilityClaims.some((claim) => claim.itemId === "game-item.phoenix-pinion" && claim.abilityName === "Phoenix"));
 
-  assert.equal(greenPaths.length, 5);
+  assert.equal(greenPaths.length, 6);
   assert.equal(greenPaths.find((path) => path.method === "shop")?.cost?.amount, 80);
   assert.match(greenPaths.find((path) => path.method === "point-redemption")?.conditions ?? "", /10 Hot & Cold points/);
   assert.ok(cavesItems?.notes.includes("Earth Guardian, Kraken, Lich, Maliris, and Soulcage"));
@@ -829,10 +851,10 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
 
   assert.match(garganMissable?.recovery ?? "", /Chain Plate's later shops can replace the armor/);
   assert.match(daliMissable?.recovery ?? "", /Leather Plate.*alternate routes/);
-  assert.match(cleyraTreasureMissable?.nextAvailability ?? "", /Mythril Vest.*Pinnacle Rocks/);
+  assert.match(cleyraTreasureMissable?.recovery ?? "", /Other cataloged acquisition paths preserve the item types, not the original copies/);
   assert.match(antlionMissable?.recovery ?? "", /Mythril Vest has the Pinnacle Rocks chest and later shops/);
   assert.match(pinnacleMissable?.recovery ?? "", /Mythril Vest has later shop routes/);
-  assert.match(finalStockMissable?.recovery ?? "", /No post-transition replacement is listed/);
+  assert.match(finalStockMissable?.recovery ?? "", /no later purchase route for these items/);
 });
 
 test("Disc II Treno equipment targets preserve later recovery and optional stock semantics", () => {

@@ -60,6 +60,7 @@ export type ItemInventoryTarget = {
   itemId: string;
   chapterId: string;
   targetQuantity: number;
+  basis: "route-need" | "end-inventory" | "purchase-recommendation" | "checkpoint-total" | "buy-column-total";
   interpretation: string;
   sourceIds: string[];
 };
@@ -9828,7 +9829,37 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
 
 const finalStockTargetInterpretation = "Source-specific total acquisition target from GameFAQs' Disc III pre-departure list. Count copies already owned and copies consumed in synthesis; this is not a universal minimum for every completion route.";
 
-export const sourceInventoryTargets: ItemInventoryTarget[] = [
+type ItemInventoryTargetDraft = Omit<ItemInventoryTarget, "basis">;
+
+const purchaseRecommendationTargetIds = new Set([
+  "item-target.disc-2.treno.air-racket",
+  "item-target.disc-3.portal-to-another-world.zorlin-shape",
+]);
+
+const routeNeedTargetIds = new Set([
+  "item-target.disc-4.final-preparations.dark-matter",
+  "item-target.disc-4.final-preparations.pumice-piece",
+  "item-target.disc-4.final-preparations.pumice",
+]);
+
+const checkpointTotalTargetIds = new Set([
+  "item-target.disc-3.on-the-high-seas.mythril-sword",
+  "item-target.disc-2.journey-to-treno.silver-gloves",
+  "item-target.disc-2.journey-to-treno.iron-helm",
+  "item-target.disc-2.return-to-lindblum.chain-mail",
+]);
+
+function getItemInventoryTargetBasis(target: ItemInventoryTargetDraft): ItemInventoryTarget["basis"] {
+  if (target.id.includes("end-inventory")) return "end-inventory";
+  if (target.id.startsWith("item-target.disc-3.preparing-to-leave.")) return "checkpoint-total";
+  if (purchaseRecommendationTargetIds.has(target.id)) return "purchase-recommendation";
+  if (checkpointTotalTargetIds.has(target.id)) return "checkpoint-total";
+  if (routeNeedTargetIds.has(target.id)) return "route-need";
+  if (/\bNeed \d+\b/.test(target.interpretation)) return "route-need";
+  throw new Error(`Item inventory target ${target.id} needs an explicit semantic basis.`);
+}
+
+const itemInventoryTargetDrafts: ItemInventoryTargetDraft[] = [
   ...([["bandana", 12], ["chain-plate", 3], ["leather-plate", 3], ["mythril-vest", 10],
   ["fairy-flute", 2], ["mythril-claws", 2], ["trident", 2], ["green-beret", 7],
   ["gold-armor", 3], ["judo-uniform", 7], ["diamond-gloves", 3], ["diamond-sword", 2],
@@ -9896,7 +9927,7 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
     itemId: "game-item.dark-matter",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 4,
-    interpretation: "GameFAQs lists four Dark Matter as its source-specific endgame target and says obtaining all four on one file requires perfect Ozma drops. Preserve this as an optional inventory goal, not a universal completion requirement.",
+    interpretation: "GameFAQs Items lists Need 4 for Dark Matter and says obtaining all four on one file requires perfect Ozma drops. Preserve this as an optional route-need target, not a universal completion requirement.",
     sourceIds: ["gamefaqs-items-71891"],
   },
   {
@@ -9904,7 +9935,7 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
     itemId: "game-item.pumice-piece",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 2,
-    interpretation: "GameFAQs lists two Pumice Pieces as its source-specific inventory target. They teach Boost to Dagger and Eiko and provide Shadow/Holy absorption; this is optional preparation and not a minimum required to defeat Ozma.",
+    interpretation: "GameFAQs Items lists Need 2 for Pumice Piece. They teach Boost to Dagger and Eiko and provide Shadow/Holy absorption; this is optional preparation and not a minimum required to defeat Ozma.",
     sourceIds: ["gamefaqs-items-71891"],
   },
   {
@@ -9912,7 +9943,7 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
     itemId: "game-item.pumice",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 1,
-    interpretation: "GameFAQs lists one Pumice as its source-specific inventory target for teaching Ark to Dagger. Ozma's guaranteed drop supplies this copy; synthesis is an alternative that consumes two Pumice Pieces.",
+    interpretation: "GameFAQs Items lists Need 1 for Pumice to teach Ark to Dagger. Ozma's guaranteed drop supplies this copy; synthesis is an alternative that consumes two Pumice Pieces.",
     sourceIds: ["gamefaqs-items-71891"],
   },
   {
@@ -10240,6 +10271,11 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
     sourceIds: ["gamefaqs-items-71891"],
   },
 ];
+
+export const sourceInventoryTargets: ItemInventoryTarget[] = itemInventoryTargetDrafts.map((target) => ({
+  ...target,
+  basis: getItemInventoryTargetBasis(target),
+}));
 
 export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.broadsword.beast-killer", itemId: "game-item.broadsword", abilityName: "Beast Killer", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891"] },

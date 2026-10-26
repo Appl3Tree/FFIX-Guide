@@ -19,9 +19,9 @@ const branchEvents = movieCriticEligibleEvents.filter((event) => event.exclusive
 test("each supported Movie Critic catalog has an ordered 79-view single-save route", () => {
   assert.equal(movieCriticEligibleEvents.length, 80);
   assert.equal(branchEvents.length, 2);
-  assert.equal(ateObjectiveDependencies.length, 31);
-  assert.equal(objectiveAccessDependencies.length, 2);
-  assert.equal(objectiveDependencies.length, 49);
+  assert.equal(ateObjectiveDependencies.length, 32);
+  assert.equal(objectiveAccessDependencies.length, 9);
+  assert.equal(objectiveDependencies.length, 111);
 
   assert.deepEqual(
     movieCriticEligibleEvents
