@@ -802,6 +802,44 @@ const routeChaptersWithoutRejoin = gameRouteCoverage.chapterIds.filter((chapterI
 if (routeChaptersWithoutRejoin.length > 0) {
   errors.push(`Game route chapters have no directed path to the declared endpoint ${routeEndChapterId}: ${routeChaptersWithoutRejoin.join(", ")}.`);
 }
+const optionalRouteBranches = gameRouteEdges.filter((edge) => edge.relationship === "optional-detour" || edge.relationship === "optional-return");
+let optionalRouteBranchesWithRejoin = 0;
+for (const branch of optionalRouteBranches) {
+  const requiredStoryRejoinChapters = new Set([branch.fromChapterId]);
+  const pendingStoryChapters = [branch.fromChapterId];
+  while (pendingStoryChapters.length > 0) {
+    const chapterId = pendingStoryChapters.shift();
+    if (!chapterId) continue;
+    for (const edge of gameRouteEdges) {
+      if (edge.relationship === "required-story" && edge.fromChapterId === chapterId && !requiredStoryRejoinChapters.has(edge.toChapterId)) {
+        requiredStoryRejoinChapters.add(edge.toChapterId);
+        pendingStoryChapters.push(edge.toChapterId);
+      }
+    }
+  }
+  const reachedChapters = new Set<string>();
+  const pendingBranchChapters = [branch.toChapterId];
+  let rejoinsRequiredRoute = false;
+  while (pendingBranchChapters.length > 0) {
+    const chapterId = pendingBranchChapters.shift();
+    if (!chapterId || reachedChapters.has(chapterId)) continue;
+    if (requiredStoryRejoinChapters.has(chapterId)) {
+      rejoinsRequiredRoute = true;
+      break;
+    }
+    reachedChapters.add(chapterId);
+    for (const edge of gameRouteEdges) {
+      if (edge.id !== branch.id && edge.fromChapterId === chapterId && !reachedChapters.has(edge.toChapterId)) {
+        pendingBranchChapters.push(edge.toChapterId);
+      }
+    }
+  }
+  if (!rejoinsRequiredRoute) {
+    errors.push(`Optional route ${branch.id} has no directed path back to its launch chapter or forward into its required-story path.`);
+  } else {
+    optionalRouteBranchesWithRejoin += 1;
+  }
+}
 const supportedGameRouteCutoffCertainties = new Set(["source-supported", "conservative", "disputed"]);
 const linkedRouteMissableIds = new Set<string>();
 for (const cutoff of gameRouteCutoffs) {
@@ -6023,6 +6061,7 @@ console.log(`FFIX data audit: ${errors.length} error(s), ${warnings.length} cove
 console.log(`Scope: ${guideAreas.length} chapter headings (${walkthroughChapters.length} with authored content), ${missables.length} missable record(s), ${objectives.length} objective(s), ${sources.length} source records.`);
 console.log(`Objective dependencies: ${objectiveDependencies.length} total (${ateObjectiveDependencies.length} ATE-order, ${objectiveAccessDependencyCount} objective-access, ${questPrerequisiteDependencyCount} quest-prerequisite).`);
 console.log(`Route cutoffs: ${gameRouteCutoffs.length} windows link ${linkedRouteMissableIds.size}/${missables.length} missable warnings; ${missables.filter((record) => record.severity === "high" || record.severity === "critical").length} high/critical records are included.`);
+console.log(`Optional route connectivity: ${optionalRouteBranchesWithRejoin}/${optionalRouteBranches.length} branch edges reach their launch chapter or a forward required-story chapter.`);
 console.log(`Items: ${gameItems.length} partial item record(s), ${itemAcquisitionPaths.length} source-linked acquisition path(s) across ${itemCatalogCoverage.chapterIds.length} chapter slices; ${synthesisRecipes.length} synthesis recipe(s); ${sourceInventoryTargets.length} source inventory target(s), ${equipmentAbilityClaims.length} partial ability claim(s).`);
 console.log(`Cleyra shops: ${cleyraShopPaths.length} priced stock path(s) for ${cleyraProductIds.length} unique products; ${cleyraProductsWithLaterPaths.length} have a later acquisition path.`);
 console.log(`Enemy reference: ${enemyRecords.length} partial record(s) across ${enemyCatalogCoverage.chapterIds.length} chapter slice(s), with ${enemyEncounters.length} encounter group(s).`);
