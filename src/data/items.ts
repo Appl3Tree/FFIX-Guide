@@ -2572,7 +2572,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.brigandine", name: "Brigandine", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-brigandine", "rpgclassics-armor", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.magician-cloak", name: "Magician Cloak", category: "equipment", sourceIds: ["gamefaqs-iifa-tree-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-magician-cloak"], verification: "partial" },
   { id: "game-item.mythril-claws", name: "Mythril Claws", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"], verification: "partial" },
-  { id: "game-item.poison-knuckles", name: "Poison Knuckles", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-abilities-71891", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "rpgclassics-weapons", "rpgclassics-shops", "ffwiki-shops", "elitegrindlab-madain-sari-eidolon-wall"], verification: "partial" },
+  { id: "game-item.poison-knuckles", name: "Poison Knuckles", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-abilities-71891", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "rpgclassics-weapons", "rpgclassics-shops", "ffwiki-shops", "elitegrindlab-madain-sari-eidolon-wall", "icksmehl-shops-disc-4"], verification: "partial" },
   { id: "game-item.trident", name: "Trident", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-abilities-71891", "rpgclassics-abilities"], verification: "partial" },
   { id: "game-item.green-beret", name: "Green Beret", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.gold-armor", name: "Gold Armor", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
@@ -10409,7 +10409,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil", amount: 7000 },
-    conditions: "GameFAQs' Equipment List places the Ipsen Mogshop sale on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory. GameFAQs Shops lists Poison Knuckles for 7,000 Gil, while the older GameFAQs Shop Lists, Equipment List, and RPGClassics Shops say 5,000 Gil; retain the newer shop table's price and source conflict. Release-specific behavior remains unverified.",
+    conditions: "GameFAQs' Equipment List places the Ipsen Mogshop sale on Disc III/IV, and icksmehl.de lists Poison Knuckles for 5,000 Gil in its Disc IV inventory. GameFAQs Shops lists 7,000 Gil, while the older GameFAQs Shop Lists, Equipment List, and RPGClassics Shops also say 5,000 Gil; retain the newer shop table's price as a source-specific discrepancy and check the displayed price. Release-specific behavior remains unverified.",
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", "icksmehl-shops-disc-4"],
   },
   {

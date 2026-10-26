@@ -5465,10 +5465,13 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
   if (slug === "poison-knuckles") {
     return !path.conditions.includes("7,000 Gil") ||
       !path.conditions.includes("5,000 Gil") ||
+      !path.conditions.includes("icksmehl.de lists Poison Knuckles for 5,000 Gil") ||
       !path.sourceIds.includes("gamefaqs-shop-lists-9772") ||
       !path.sourceIds.includes("gamefaqs-equipment-33383") ||
+      !path.sourceIds.includes("icksmehl-shops-disc-4") ||
       !item.sourceIds.includes("gamefaqs-shop-lists-9772") ||
-      !item.sourceIds.includes("gamefaqs-equipment-33383");
+      !item.sourceIds.includes("gamefaqs-equipment-33383") ||
+      !item.sourceIds.includes("icksmehl-shops-disc-4");
   }
   if (slug === "needle-fork") {
     return !path.conditions.includes("GameFAQs Shops omits");
