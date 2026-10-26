@@ -975,7 +975,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.alexandria",
     toChapterId: "disc-1.burmecia",
     relationship: "optional-return",
-    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault; deliver the letter for Mogryo. Atla's Mogshop remains open with Disc III stock, including Steepled Hat for 260 Gil. A Disc IV recovery run also traverses the old Suburb/Uptown rooms and collects Cancer, two Gold Needles, Ether, Phoenix Down, and Tent before reaching Atla. The run uses booster functions but names no platform/build, and it does not establish the availability of every old chest or release parity.",
+    summary: "After collecting Kupo's letter, travel to Burmecia and follow the long, monster-occupied route through the former city to Atla in the Vault; deliver the letter for Mogryo. Atla's Mogshop remains open with Disc III stock, including Steepled Hat for 260 Gil. A first-hand Disc IV recovery run documents Cancer under the overturned cart, a Gold Needle in the left room, Ether across the balcony, a second Gold Needle behind the stairwell, and Phoenix Down plus Tent in Uptown before Atla. The six pickups are Cancer, two Gold Needles, Ether, Phoenix Down, and Tent. The run uses booster functions but names no platform/build, and it does not establish the availability of every old chest or release parity.",
     sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4", "ff9-kouryaku-disc4", "megane-kangaroo-disc4-burmecia-recovery", "cour89-mognet-letters"],
   },
   {

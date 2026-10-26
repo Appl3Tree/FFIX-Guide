@@ -6154,8 +6154,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gaia-return-burmecia-old-pickups",
             kind: "optional",
-            text: "On the way to Atla in Burmecia, sweep the old town rooms for pickups. A Disc IV item-recovery route reports Cancer, two Gold Needles, Ether, Phoenix Down, and Tent in the Suburb/Uptown route before Atla.",
-            detail: "The author says booster functions were used but does not identify the platform or build. This supports these listed Disc IV pickups in that run, not every Disc I chest or cross-release availability. The Disc II Atla return and the Disc IV Mognet route remain separate evidence for their own visit windows.",
+            text: "On the way to Atla in Burmecia, collect Cancer, two Gold Needles, Ether, Phoenix Down, and Tent in the documented order: take Cancer from under the overturned cart, enter the next room's left door for a Gold Needle, cross the balcony to the side room for Ether, return to the Cancer map and use its upper-right door for the hidden stairwell Gold Needle, then collect Phoenix Down and Tent in Uptown.",
+            detail: "The route also encounters three Mimic chests: one second-floor Mimic in each of the two side rooms and a third in Uptown. The author says the first Mimic can be left alone but clears all three. Booster functions are used, but the platform/build is not identified, so this documents the listed pickups in that run rather than every old room or cross-release availability. The Disc II Atla return and Disc IV Mognet route are separate evidence for their own visit windows.",
             objectiveIds: ["disc-4.return-to-gaia.burmecia-pickup-sweep"],
           },
           {
