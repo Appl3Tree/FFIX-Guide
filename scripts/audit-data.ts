@@ -645,6 +645,35 @@ if (
 ) {
   errors.push("The Disc III Hilda Garde Black Mage Village shop return and rejoin must preserve the Disc II stock window, its limits, and source links.");
 }
+const aerialQuanDwellingReturn = gameRouteEdgesById.get("detour.aerial-quan-dwelling-running-shoes");
+const aerialQuanDwellingRejoin = gameRouteEdgesById.get("detour.aerial-quan-dwelling-rejoin");
+const aerialQuanDwellingObjective = objectivesById.get("disc-3.aerial-exploration.quan-running-shoes");
+const aerialQuanDwellingPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.quan-running-shoes");
+if (
+  aerialQuanDwellingReturn?.relationship !== "optional-return" ||
+  aerialQuanDwellingReturn.fromChapterId !== "disc-3.aerial-exploration" ||
+  aerialQuanDwellingReturn.toChapterId !== "disc-2.journey-to-treno" ||
+  !aerialQuanDwellingReturn.summary.includes("Vivi and Quina") ||
+  !aerialQuanDwellingReturn.summary.includes("Running Shoes") ||
+  !aerialQuanDwellingReturn.summary.includes("does not reopen the earlier Treno tournament ATE branch") ||
+  !aerialQuanDwellingReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialQuanDwellingReturn.sourceIds.includes("jegged-lindblum-hilda-garde") ||
+  !aerialQuanDwellingReturn.sourceIds.includes("gamefaqs-items-71891") ||
+  aerialQuanDwellingRejoin?.relationship !== "rejoin" ||
+  aerialQuanDwellingRejoin.fromChapterId !== "disc-2.journey-to-treno" ||
+  aerialQuanDwellingRejoin.toChapterId !== "disc-3.aerial-exploration" ||
+  !aerialQuanDwellingRejoin.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialQuanDwellingObjective?.chapterIds.includes("disc-3.aerial-exploration") ||
+  !aerialQuanDwellingObjective.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialQuanDwellingObjective.sourceIds.includes("jegged-lindblum-hilda-garde") ||
+  !aerialQuanDwellingPath ||
+  aerialQuanDwellingPath.itemId !== "game-item.running-shoes" ||
+  aerialQuanDwellingPath.method !== "hidden-pickup" ||
+  !aerialQuanDwellingPath.conditions.includes("Vivi and Quina") ||
+  !aerialQuanDwellingPath.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.quan-running-shoes")
+) {
+  errors.push("The Disc III Hilda Garde Quan's Dwelling return must preserve the route, rejoin, party-required objective, Running Shoes item path, branch limit, and source links.");
+}
 const routeStartChapterId = gameRouteCoverage.chapterIds[0];
 const routeEndChapterId = gameRouteCoverage.throughChapterId;
 if (!routeStartChapterId) {

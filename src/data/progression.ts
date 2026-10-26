@@ -803,6 +803,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
   },
   {
+    id: "detour.aerial-quan-dwelling-running-shoes",
+    fromChapterId: "disc-3.aerial-exploration",
+    toChapterId: "disc-2.journey-to-treno",
+    relationship: "optional-return",
+    summary: "After obtaining Hilda Garde III, bring Vivi and Quina to Quan's Dwelling, view the scene, then inspect the fishing-spot clock for a Running Shoes Add-On. This optional Disc III return does not reopen the earlier Treno tournament ATE branch or create a story gate.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-items-71891"],
+  },
+  {
+    id: "detour.aerial-quan-dwelling-rejoin",
+    fromChapterId: "disc-2.journey-to-treno",
+    toChapterId: "disc-3.aerial-exploration",
+    relationship: "rejoin",
+    summary: "After the optional Quan's Dwelling scene and clock pickup, return to the Hilda Garde III and resume Disc III free flight; continue to Ipsen's Castle when ready.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+  },
+  {
     id: "story.aerial-exploration-to-ipsens-castle",
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-3.ipsens-castle",
