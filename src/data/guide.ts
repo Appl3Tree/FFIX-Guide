@@ -2736,7 +2736,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/breaking-the-seal",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for Water (Dagger/Eiko), Fire (Freya/Amarant), Wind (Vivi/Steiner), then Earth (Zidane/Quina), including the full-party preparation window, Earth Shrine movement, Earth Guardian steals, elements, status vulnerabilities, Quina's Earth Shake opportunity, and automatic return to the Hilda Garde 3. Exact steal rates are not repeated as completion requirements.",
+    notes: "Original PlayStation route for Water (Dagger/Eiko), Fire (Freya/Amarant), Wind (Vivi/Steiner), then Earth (Zidane/Quina), including the full-party preparation window, Earth Shrine movement, Earth Guardian steals, elements, status vulnerabilities, Quina's Earth Shake opportunity, and automatic return to the Hilda Garde 3. This is the route the guide follows; the page does not state whether the first three stops are mandatory in that order or can be reordered. Exact steal rates are not repeated as completion requirements.",
   },
   {
     id: "jegged-four-shrines-terra",
@@ -2744,7 +2744,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/38-Four-Seals-Terra.html",
     accessed: "2026-10-25",
-    notes: "Independent cross-check for the four shrine locations, restoring the normal weapon loadout after Ipsen, preparing Quina and the Earth Guardian fight, post-battle party selection, the upcoming Shimmering Island cutoff, and listed equipment ability sources.",
+    notes: "Independent cross-check for the four shrine locations, restoring the normal weapon loadout after Ipsen, preparing Quina and the Earth Guardian fight, post-battle party selection, the upcoming Shimmering Island cutoff, and listed equipment ability sources. It lists Water, Fire, Wind, and Earth in the route order used here but does not state that order is mandatory or flexible.",
   },
   {
     id: "rpgclassics-disc-3-walkthrough",
@@ -2752,7 +2752,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/walkthrough3np.shtml",
     accessed: "2026-10-25",
-    notes: "Independent original PlayStation route corroborating Water (Dagger/Eiko), Fire (Freya/Amarant), Wind (Steiner/Vivi), and Earth (Zidane/Quina), the two Earth Shrine jump prompts, Earth Guardian fight, regroup, and progression to the Shimmering Island. Its Home Front route says to pull the steeple rope for Hippaul's stash, including a Ramuh Card; used as a route cross-check, not as a complete item inventory.",
+    notes: "Independent original PlayStation route corroborating Water (Dagger/Eiko), Fire (Freya/Amarant), Wind (Steiner/Vivi), and Earth (Zidane/Quina), the two Earth Shrine jump prompts, Earth Guardian fight, regroup, and progression to the Shimmering Island. This is one documented route; it does not state whether the first three stops are mandatory in that order or can be reordered. Its Home Front route says to pull the steeple rope for Hippaul's stash, including a Ramuh Card; used as a route cross-check, not as a complete item inventory.",
   },
   {
     id: "elitegrindlab-four-shrines",

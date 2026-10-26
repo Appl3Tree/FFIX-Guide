@@ -553,7 +553,7 @@ if (!pandemoniumPartySequence) {
 }
 const fourShrinesPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.four-shrines-fixed-pairs");
 if (!fourShrinesPartySequence) {
-  errors.push("The Four Shrines fixed party-pair sequence is missing.");
+  errors.push("The Four Shrines party-assignment and documented-route sequence is missing.");
 } else {
   if (fourShrinesPartySequence.phases.length !== 4) errors.push("The Four Shrines sequence must retain its three fixed pairs and Earth Shrine phase.");
   const expectedParties = [
@@ -570,8 +570,16 @@ if (!fourShrinesPartySequence) {
   const expectedLocations = ["Water Shrine", "Fire Shrine", "Wind Shrine", "Earth Shrine"];
   for (const [index, expectedLocation] of expectedLocations.entries()) {
     if (!fourShrinesPartySequence.phases[index]?.location.includes(expectedLocation)) {
-      errors.push(`The Four Shrines sequence must visit ${expectedLocation} in the documented route order.`);
+      errors.push(`The Four Shrines documented route must list ${expectedLocation} in its recommended sequence.`);
     }
+  }
+  if (!fourShrinesPartySequence.phases[0]?.summary.includes("sources do not establish whether the first three stops can be reordered")) {
+    errors.push("The Four Shrines party sequence must preserve the unresolved order-flexibility caveat.");
+  }
+  const shrineRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.breaking-the-seal")?.sections.find((section) => section.id === "breaking-seal-world-map-dropoffs");
+  if (!shrineRouteSection?.summary.includes("documented Water → Fire → Wind sequence") ||
+    !shrineRouteSection.summary.includes("do not confirm whether the first three stops can be reordered")) {
+    errors.push("The Four Shrines walkthrough must distinguish the documented route from an established mandatory order.");
   }
   if (!fourShrinesPartySequence.phases[3]?.location.includes("Hilda Garde 3")) {
     errors.push("The Four Shrines sequence must end with the party regroup on the Hilda Garde 3.");

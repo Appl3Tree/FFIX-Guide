@@ -5420,7 +5420,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
   },
   {
     areaId: "disc-3.breaking-the-seal",
-    overview: "Restore the party's normal weapons after Ipsen's Castle, finish any optional full-party errands, and fly the Hilda Garde 3 to the four mirror shrines. The Water, Fire, and Wind visits are fixed party drop-offs; Zidane and Quina explore the Earth Shrine and fight its guardian. After the cutscenes, reform the party and continue to the separate pre-Terra checklist.",
+    overview: "Restore the party's normal weapons after Ipsen's Castle, finish any optional full-party errands, and fly the Hilda Garde 3 to the four mirror shrines. At Water, Fire, and Wind, drop off the story-assigned pairs; follow the documented Water, Fire, Wind route, since the sources do not establish whether those three stops can be reordered. Zidane and Quina explore the Earth Shrine and fight its guardian. After the cutscenes, reform the party and continue to the separate pre-Terra checklist.",
     timedRouteNote: "The source's D3-10 route drops Dagger/Eiko at Water, Freya/Amarant at Fire, and Steiner/Vivi at Wind, then sends Zidane and Quina through Earth Shrine to fight the Guardian. It steals the Rubber Suit and Avenger for sale, regroups at Blairsurpass Plains at 09:44:56, and reports 0 random encounters. This source split skips the broader free-exploration checklist; the major Gaia-side cutoff remains the later Shimmering Island transition into Terra. These are source targets, not independently timed.",
     sections: [
       {
@@ -5447,28 +5447,28 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       },
       {
         id: "breaking-seal-world-map-dropoffs",
-        title: "Hilda Garde 3 — deliver the Water, Fire, and Wind pairs",
-        summary: "Use the airship and visit the three map shrines in order; each shrine takes a fixed pair from the group.",
+        title: "Hilda Garde 3 — recommended Water, Fire, and Wind route",
+        summary: "Follow the documented Water → Fire → Wind sequence and leave each story-assigned pair at its shrine. The sources show this route but do not confirm whether the first three stops can be reordered.",
         sourceIds: ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough", "elitegrindlab-four-shrines"],
         steps: [
           {
             id: "breaking-seal-water-shrine",
             kind: "required",
-            text: "Fly the Hilda Garde 3 to the Water Shrine in the bay south of Ipsen's Castle. Drop off Dagger and Eiko; the game re-forms the active party if either is currently selected.",
+            text: "First in the documented route, fly the Hilda Garde 3 to the Water Shrine in the bay south of Ipsen's Castle. Drop off Dagger and Eiko; the game re-forms the active party if either is currently selected.",
             detail: "Use the airship for these shrine landings; the Sky Chocobo cannot perform the shrine drop-off interaction. The party assignment is fixed by the story.",
             objectiveIds: ["disc-3.breaking-the-seal.four-shrines"],
           },
           {
             id: "breaking-seal-fire-shrine",
             kind: "required",
-            text: "Fly to the Fire Shrine at the volcano northeast of Esto Gaza on the Lost Continent. Drop off Freya and Amarant.",
+            text: "Next in the documented route, fly to the Fire Shrine at the volcano northeast of Esto Gaza on the Lost Continent. Drop off Freya and Amarant.",
             detail: "The shrine visit is a story drop-off; the inspected routes do not describe a player-controlled dungeon or boss battle here.",
             objectiveIds: ["disc-3.breaking-the-seal.four-shrines"],
           },
           {
             id: "breaking-seal-wind-shrine",
             kind: "required",
-            text: "Fly to the Wind Shrine southeast of Oeilvert, at the southern end of the Forgotten Continent. Drop off Steiner and Vivi; Zidane and Quina remain together for the Earth Shrine.",
+            text: "Third in the documented route, fly to the Wind Shrine southeast of Oeilvert, at the southern end of the Forgotten Continent. Drop off Steiner and Vivi; Zidane and Quina remain together for the Earth Shrine.",
             detail: "The route sources describe this as a map drop-off rather than a playable shrine segment. The four pairs are assigned by the story and cannot be rearranged.",
             objectiveIds: ["disc-3.breaking-the-seal.four-shrines"],
           },

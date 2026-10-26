@@ -385,25 +385,25 @@ export const storyPartySequences: StoryPartySequence[] = [
   },
   {
     id: "party-sequence.four-shrines-fixed-pairs",
-    title: "Four Shrines fixed party assignments",
+    title: "Four Shrines assignments and recommended route",
     phases: [
       {
         party: "Dagger and Eiko dropped at the shrine",
         chapterIds: ["disc-3.breaking-the-seal"],
         location: "Water Shrine",
-        summary: "Restore the normal weapons used before Ipsen's Castle, and finish any desired full-party optional activity before the first drop. Leave Dagger and Eiko at the Water Shrine; they leave the active party for the shrine sequence.",
+        summary: "Restore the normal weapons used before Ipsen's Castle, and finish any desired full-party optional activity before the first drop. The documented route starts at Water Shrine: leave Dagger and Eiko there; they leave the active party for the shrine sequence. The sources do not establish whether the first three stops can be reordered.",
       },
       {
         party: "Freya and Amarant dropped; Zidane, Vivi, Steiner, and Quina remain",
         chapterIds: ["disc-3.breaking-the-seal"],
         location: "Fire Shrine",
-        summary: "Take Freya and Amarant to the Fire Shrine. After they leave the active party, Zidane, Vivi, Steiner, and Quina remain for the next stop.",
+        summary: "The documented route next takes Freya and Amarant to the Fire Shrine. After they leave the active party, Zidane, Vivi, Steiner, and Quina remain for the next stop.",
       },
       {
         party: "Vivi and Steiner dropped; Zidane and Quina remain",
         chapterIds: ["disc-3.breaking-the-seal"],
         location: "Wind Shrine",
-        summary: "Drop Vivi and Steiner at the Wind Shrine. This leaves Zidane and Quina together for the Earth Shrine and its Guardian battle.",
+        summary: "The documented route then drops Vivi and Steiner at the Wind Shrine. This leaves Zidane and Quina together for the Earth Shrine and its Guardian battle.",
       },
       {
         party: "Zidane and Quina at Earth; then player-selected party",
@@ -881,7 +881,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.breaking-the-seal",
     toChapterId: "disc-3.preparing-to-leave",
     relationship: "required-story",
-    summary: "All four shrines must be addressed using their fixed party assignments. Defeating the Earth Guardian returns the group to the Hilda Garde for the final preparation window before the Shimmering Island transition.",
+    summary: "All four shrines must be addressed using their story-assigned party pairs. The sources document Water → Fire → Wind → Earth but do not establish whether the first three stops can be reordered. Defeating the Earth Guardian returns the group to the Hilda Garde for the final preparation window before the Shimmering Island transition.",
     sourceIds: ["gamefaqs-breaking-the-seal-71891", "gamefaqs-preparing-to-leave-71891", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough"],
   },
   {
