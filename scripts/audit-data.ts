@@ -2304,6 +2304,54 @@ for (const [itemId, slot] of cargoShipWaltzSteals) {
     errors.push(`Cargo Ship Black Waltz 3's ${itemId} steal must link to its one-time encounter and item path.`);
   }
 }
+const openingMaskedManEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.alexandria.masked-man-opening");
+const openingMaskedManRecord = enemyRecords.find((enemy) => enemy.id === "enemy.masked-man-opening");
+const openingMaskedManHpClaims = openingMaskedManRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
+const crashSiteBakuEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.evil-forest.baku-crash-site");
+const crashSiteBakuRecord = enemyRecords.find((enemy) => enemy.id === "enemy.baku-crash-site");
+const crashSiteBakuHpClaims = crashSiteBakuRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
+const crashSiteBakuWarning = missablesById.get("missable.disc-1.evil-forest.baku-steals");
+const evilForestEscapeCutoff = cutoffsById.get("cutoff.evil-forest.escape");
+if (!openingMaskedManEncounter || openingMaskedManEncounter.chapterId !== "disc-1.alexandria" ||
+  !openingMaskedManEncounter.formation.some((entry) => entry.enemyId === "enemy.masked-man-opening" && entry.quantity === 1) ||
+  !openingMaskedManEncounter.objectiveIds.includes("disc-1.alexandria.masked-man-steals") ||
+  !openingMaskedManEncounter.missableIds.includes("missable.disc-1.alexandria.masked-man-steals") ||
+  !openingMaskedManHpClaims.some((stat) => stat.value === 188 && stat.verification === "disputed") ||
+  !openingMaskedManHpClaims.some((stat) => stat.value === 160 && stat.verification === "disputed" && stat.sourceIds.includes("gamefaqs-walkthrough-15690")) ||
+  !openingMaskedManRecord?.notes.some((note) => note.includes("188 HP") && note.includes("160 HP")) ||
+  !crashSiteBakuEncounter || crashSiteBakuEncounter.chapterId !== "disc-1.evil-forest" ||
+  !crashSiteBakuEncounter.formation.some((entry) => entry.enemyId === "enemy.baku-crash-site" && entry.quantity === 1) ||
+  !crashSiteBakuEncounter.objectiveIds.includes("disc-1.evil-forest.baku-steals") ||
+  !crashSiteBakuEncounter.missableIds.includes("missable.disc-1.evil-forest.baku-steals") ||
+  !crashSiteBakuHpClaims.some((stat) => stat.value === 202 && stat.verification === "disputed") ||
+  !crashSiteBakuHpClaims.some((stat) => stat.value === 160 && stat.verification === "disputed" && stat.sourceIds.includes("gamefaqs-walkthrough-15690")) ||
+  !crashSiteBakuRecord?.notes.some((note) => note.includes("202 HP") && note.includes("160 HP")) ||
+  !crashSiteBakuWarning?.classification.includes("recoverable-later") ||
+  !evilForestEscapeCutoff?.missableIds.includes("missable.disc-1.evil-forest.baku-steals")) {
+  errors.push("The opening Masked Man and Crash Site Baku must remain separate boss encounters with their respective steal windows and disputed HP claims.");
+}
+for (const [enemyId, itemId, slot, chapterId, objectiveId] of [
+  ["enemy.masked-man-opening", "game-item.potion", "common", "disc-1.alexandria", "disc-1.alexandria.masked-man-steals"],
+  ["enemy.masked-man-opening", "game-item.wrist", "uncommon", "disc-1.alexandria", "disc-1.alexandria.masked-man-steals"],
+  ["enemy.masked-man-opening", "game-item.mage-masher", "semi-rare", "disc-1.alexandria", "disc-1.alexandria.masked-man-steals"],
+  ["enemy.baku-crash-site", "game-item.hi-potion", "common", "disc-1.evil-forest", "disc-1.evil-forest.baku-steals"],
+  ["enemy.baku-crash-site", "game-item.iron-sword", "uncommon", "disc-1.evil-forest", "disc-1.evil-forest.baku-steals"],
+] as const) {
+  const enemy = enemyRecords.find((candidate) => candidate.id === enemyId);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === chapterId && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes(objectiveId));
+  if (!enemy?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) || !path || path.availability !== "one-time-encounter") {
+    errors.push(`${enemyId}'s ${itemId} steal must link to its one-time encounter and objective.`);
+  }
+}
+for (const [itemId, pathId] of [
+  ["game-item.mage-masher", "item-path.disc-1.village-of-dali.mage-masher-shop"],
+  ["game-item.iron-sword", "item-path.disc-1.village-of-dali.iron-sword-shop"],
+] as const) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+  if (path?.itemId !== itemId || path.chapterId !== "disc-1.village-of-dali" || path.method !== "shop" || path.availability !== "repeatable") {
+    errors.push(`${itemId} must have a repeatable Dali shop recovery path for the early boss-steal records.`);
+  }
+}
 const summitStationWaltzSteals = [
   ["game-item.steepled-hat", "common"],
   ["game-item.lightning-staff", "uncommon"],

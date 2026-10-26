@@ -266,7 +266,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "prima-vista-wreckage",
         title: "Prima Vista wreckage — ATEs and pickup sweep",
         summary: "The wreck has multiple rooms and a chest that becomes accessible only after Baku's fight. Check the lower decks and the cargo room's hidden pickup before leaving.",
-        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"],
+        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "rpgclassics-bestiary-a-c"],
         steps: [
           {
             id: "wreckage-ates",
@@ -291,6 +291,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "combat",
             text: "Fight Baku alone as Zidane. Steal the Hi-Potion and Iron Sword before defeating him; the Iron Sword is a strong early option for Steiner. Heal with Potions if needed.",
             detail: "Published odds for the Iron Sword differ, so no fixed attempt count is promised. The item can be obtained through other routes later; the boss encounter itself cannot be replayed after it ends.",
+            objectiveIds: ["disc-1.evil-forest.baku-steals"],
           },
           {
             id: "steiner-room-ether",
