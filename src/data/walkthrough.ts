@@ -35,8 +35,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "alexandria-town",
         title: "Alexandria town — Main Street to the Square",
-        summary: "Sweep the starting streets before advancing. These pickups support the treasure record and Tetra Master collection; the guide has not yet audited every later replacement path.",
-        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista"],
+        summary: "Sweep the starting streets before advancing. Later item-type recovery is cataloged; the first-visit copies, disputed field-marker locations, cards, and Treasure Hunter points have separate checks.",
+        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"],
         steps: [
           {
             id: "starting-street-potion",
@@ -72,8 +72,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "town-square-items",
             kind: "pickup",
-            text: "Before leaving the Square, search the Synthesis Shop for an Ether and the adjoining Weapons Shop passage for a Remedy. Pick up the Phoenix Pinion beside the cart near the north bridge, then speak with Hippaul to learn about his hidden cards.",
-            detail: "The Remedy is listed by multiple walkthroughs, but its exact pickup spot is described inconsistently. Sweep the Weapons Shop and connecting passage rather than relying on one precise floor marker.",
+            text: "Before leaving the Square, search the Synthesis Shop for an Ether and sweep the connected Weapons Shop interior for the Remedy. Check the counter near the entrance, the arrow-marked corner, and the top-right corner by the screen transition; guides describe this one pickup at different nearby points. Pick up the Phoenix Pinion beside the cart near the north bridge, then speak with Hippaul to learn about his hidden cards.",
+            detail: "GameFAQs places the Remedy near the shop counter; RPGClassics and X Buster point to the far arrow-marked corner, while Gamer Guides places it near the transition. These descriptions cover the same connected shop area and do not establish multiple Remedies.",
           },
           {
             id: "ticket-booth",
@@ -108,7 +108,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "alley-steeple-rooftops",
         title: "Alley, Steeple, and rooftops",
         summary: "This route leads Vivi to the performance. The Steeple is also Alexandria's first save and Mognet stop.",
-        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "vgkami-alexandria"],
+        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"],
         steps: [
           {
             id: "alleyway-jack",
@@ -119,7 +119,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "house-by-steeple",
             kind: "pickup",
-            text: "Before climbing the Steeple, enter the nearby house after its occupant leaves. Collect Eye Drops downstairs and 3 Gil upstairs by the bed.",
+            text: "Before climbing the Steeple, enter the nearby house after its occupant leaves. Collect Eye Drops downstairs and 3 Gil upstairs by the bed. Since one map places the 63-Gil pickup in the chapel-side house rather than on a roof, sweep the rooms and frontage for that candidate too.",
           },
           {
             id: "steeple-pickups",
@@ -134,13 +134,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "town-pickup-cutoff",
             kind: "cutoff",
-            text: "Before following Puck up the ladder, confirm the Alexandria pickup sweep is complete. The falling rooftop planks block the return route; Jump Rope, the hidden Hippaul cards, Tom's Bomb Card, and Kupo's letter have separate checks.",
+            text: "Before following Puck up the ladder, confirm the Alexandria pickup sweep is complete, including the chapel-side-house candidate for 63 Gil if you have not checked it. The falling rooftop planks block the return route; Jump Rope, the hidden Hippaul cards, Tom's Bomb Card, and Kupo's letter have separate checks.",
             objectiveIds: ["disc-1.alexandria.town-collectibles"],
           },
           {
             id: "rooftop-treasures",
             kind: "pickup",
-            text: "Follow Rat Kid across the rooftops. Collect 29 Gil from the first rooftop pot, keep Vivi's default name if you want guide names to match, then take 92 Gil from the far rooftop pot and 63 Gil from the lower side path before following Puck to the theater.",
+            text: "Follow Rat Kid across the rooftops. Collect 29 Gil from the first rooftop nest, keep Vivi's default name if you want guide names to match, then take 92 Gil from the far rooftop nest. Most route sources put 63 Gil in a nest along the lower rooftop branch; EliteGrindLab records one map that instead puts it in the house beside the chapel, so search both candidate spots before following Puck to the theater.",
             detail: "Mark the town pickup sweep after collecting the listed street/shop items, fixed cards, and rooftop Gil. Jump Rope rewards and Hippaul/Tom's optional cards have separate checklist entries.",
             objectiveIds: ["disc-1.alexandria.town-collectibles"],
           },

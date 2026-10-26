@@ -5934,9 +5934,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "hidden-pickup",
     quantity: 1,
     availability: "single-use",
-    conditions: "Search the closed Weapons Shop and its connecting passage for the Remedy; guides place the field icon at different nearby spots.",
+    conditions: "Search the closed Weapons Shop and its connecting passage for the Remedy: check the counter near the entrance, the arrow-marked corner, and the top-right screen-transition corner. Guides describe the one pickup at different nearby points, so sweep the connected interior rather than counting multiple Remedies.",
     walkthroughObjectiveIds: ["disc-1.alexandria.town-collectibles"],
-    sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista"],
+    sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"],
   },
   {
     id: "item-path.disc-1.alexandria.ilia-house-eye-drops",

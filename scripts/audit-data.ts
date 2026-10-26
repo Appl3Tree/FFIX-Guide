@@ -84,7 +84,7 @@ const alexandriaPickupPathSpecs = [
   ["item-path.disc-1.alexandria.morning-star-bar-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
   ["item-path.disc-1.alexandria.steeple-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
   ["item-path.disc-1.alexandria.synthesis-shop-ether", "game-item.ether", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
-  ["item-path.disc-1.alexandria.weapons-shop-remedy", "game-item.remedy", ["gamefaqs-alexandria-71891", "elitegrindlab-prima-vista"]],
+  ["item-path.disc-1.alexandria.weapons-shop-remedy", "game-item.remedy", ["gamefaqs-alexandria-71891", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"]],
   ["item-path.disc-1.alexandria.wagon-phoenix-pinion", "game-item.phoenix-pinion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
   ["item-path.disc-1.alexandria.ilia-house-eye-drops", "game-item.eye-drops", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
   ["item-path.disc-1.alexandria.steeple-tent", "game-item.tent", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
@@ -92,7 +92,7 @@ const alexandriaPickupPathSpecs = [
 const alexandriaTownObjective = objectivesById.get(alexandriaTownObjectiveId);
 if (
   !alexandriaTownObjective ||
-  !["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista"]
+  !["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"]
     .every((sourceId) => alexandriaTownObjective.sourceIds.includes(sourceId)) ||
   alexandriaTownObjective.chapterIds.length !== 1 || alexandriaTownObjective.chapterIds[0] !== "disc-1.alexandria"
 ) {
@@ -118,11 +118,20 @@ if (
   !alexandriaTownWarning.consequence.includes("340 points") ||
   !alexandriaTownWarning.consequence.includes("one Treasure Hunter point") ||
   !alexandriaTownWarning.note.includes("disagree whether North Street has one Potion or two") ||
+  !alexandriaTownWarning.note.includes("63-Gil marker") ||
   !alexandriaTownWarning.note.includes("does not prove a perfect town sweep is required") ||
   !alexandriaTownWarning.sourceIds.includes("jegged-treasure-hunter") ||
+  !["rpgclassics-alexandria-town", "xbuster-alexandria"].every((sourceId) => alexandriaTownWarning.sourceIds.includes(sourceId)) ||
   !alexandriaTownCutoff || alexandriaTownCutoff.edgeId !== "story.alexandria-to-evil-forest" ||
   !alexandriaTownCutoff.missableIds.includes("missable.disc-1.alexandria.town-pickups") ||
   !alexandriaTownCutoff.trigger.includes("planks that fall behind him") ||
+  !["rpgclassics-alexandria-town", "xbuster-alexandria"].every((sourceId) => alexandriaTownCutoff.sourceIds.includes(sourceId)) ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "town-square-items")?.detail?.includes("GameFAQs places the Remedy near the shop counter") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "town-square-items")?.text.includes("arrow-marked corner") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "house-by-steeple")?.text.includes("chapel-side house") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "rooftop-treasures")?.text.includes("lower rooftop branch") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "rooftop-treasures")?.text.includes("search both candidate spots") ||
+  walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.alexandria")?.sections.find((section) => section.id === "alexandria-town")?.summary.includes("not yet audited") ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "starting-street-potion")?.text.toLowerCase().includes("before walking south to memorial square") ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "town-pickup-cutoff")?.text.includes("falling rooftop planks")
 ) {
