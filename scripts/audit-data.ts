@@ -5484,6 +5484,7 @@ const nKaiAcquisitionPathExpectations = [
   { id: "item-path.disc-3.on-the-high-seas.n-kai-armlet-abandoned-lagoon", chapterId: "disc-3.on-the-high-seas", method: "chocograph", availability: "conditional", objectiveId: "disc-3.on-the-high-seas.chocographs" },
   { id: "item-path.disc-3.lost-continent.n-kai-armlet-esto-gaza-shop", chapterId: "disc-3.lost-continent", method: "shop", availability: "limited-window", objectiveId: "disc-3.lost-continent.esto-gaza-stock", shopId: "esto-gaza.weapon-shop.after-desert-palace", price: 3000 },
   { id: "item-path.disc-3.aerial-exploration.n-kai-armlet-daguerreo-shop", chapterId: "disc-3.aerial-exploration", method: "shop", availability: "limited-window", objectiveId: "disc-3.aerial-exploration.daguerreo-stock", shopId: "daguerreo.weapon-shop", price: 3000, sourceId: "gamefaqs-return-to-gaia-71891", recommendedBeforeChapterId: "disc-3.preparing-to-leave", conditionPhrase: "omits it from the explicit Disc IV replacement list" },
+  { id: "item-path.disc-3.ipsens-castle.kumool-mogshop.n-kai-armlet", chapterId: "disc-3.ipsens-castle", method: "mogshop", availability: "repeatable", shopId: "ipsens-castle.kumool-mogshop", price: 3000, sourceId: "gamefaqs-equipment-33383", conditionPhrase: "Disc III/IV" },
 ] as const;
 const nKaiAcquisitionPathMismatch = nKaiAcquisitionPathExpectations.some((expected) => {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.id);
@@ -5492,14 +5493,14 @@ const nKaiAcquisitionPathMismatch = nKaiAcquisitionPathExpectations.some((expect
     || path.chapterId !== expected.chapterId
     || path.method !== expected.method
     || path.availability !== expected.availability
-    || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)
+    || ("objectiveId" in expected && !path.walkthroughObjectiveIds?.includes(expected.objectiveId))
     || !path.sourceIds.includes("gamefaqs-items-71891")
     || ("conditionPhrase" in expected && !path.conditions.includes(expected.conditionPhrase))
     || ("sourceId" in expected && !path.sourceIds.includes(expected.sourceId))
     || ("recommendedBeforeChapterId" in expected && path.recommendedBeforeChapterId !== expected.recommendedBeforeChapterId)
     || ("shopId" in expected && path.shopId !== expected.shopId)
     || ("price" in expected && path.cost?.amount !== expected.price);
-});
+}) || !gameItems.find((item) => item.id === "game-item.n-kai-armlet")?.sourceIds.includes("gamefaqs-equipment-33383");
 if (nKaiAcquisitionPathMismatch) {
   errors.push("N-Kai Armlet must retain source-linked Desert Palace and Abandoned Lagoon pickups plus Esto Gaza and Disc III Daguerreo shop paths, including the Reef gate and Disc IV stock-refresh cutoff.");
 }
@@ -5507,6 +5508,7 @@ const jadeArmletAcquisitionPathExpectations = [
   { id: "item-path.disc-3.on-the-high-seas.jade-armlet-uncultivated-land", chapterId: "disc-3.on-the-high-seas", method: "chocograph", availability: "conditional", objectiveId: "disc-3.on-the-high-seas.chocographs", sourceId: "jegged-chocographs", conditionPhrase: "GameFAQs lists no Chocobo ability requirement" },
   { id: "item-path.disc-3.lost-continent.jade-armlet-esto-gaza-shop", chapterId: "disc-3.lost-continent", method: "shop", availability: "limited-window", objectiveId: "disc-3.lost-continent.esto-gaza-stock", shopId: "esto-gaza.weapon-shop.after-desert-palace", price: 3400, sourceId: "gamefaqs-shops-71891" },
   { id: "item-path.disc-3.aerial-exploration.jade-armlet-daguerreo-shop", chapterId: "disc-3.aerial-exploration", method: "shop", availability: "limited-window", objectiveId: "disc-3.aerial-exploration.daguerreo-stock", shopId: "daguerreo.weapon-shop", price: 3400, sourceId: "gamefaqs-return-to-gaia-71891", recommendedBeforeChapterId: "disc-3.preparing-to-leave", conditionPhrase: "omits it from the explicit Disc IV replacement list" },
+  { id: "item-path.disc-3.ipsens-castle.kumool-mogshop.jade-armlet", chapterId: "disc-3.ipsens-castle", method: "mogshop", availability: "repeatable", shopId: "ipsens-castle.kumool-mogshop", price: 3400, sourceId: "gamefaqs-equipment-33383", conditionPhrase: "Disc III/IV" },
 ] as const;
 const jadeArmletAcquisitionPathMismatch = jadeArmletAcquisitionPathExpectations.some((expected) => {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.id);
@@ -5515,13 +5517,13 @@ const jadeArmletAcquisitionPathMismatch = jadeArmletAcquisitionPathExpectations.
     || path.chapterId !== expected.chapterId
     || path.method !== expected.method
     || path.availability !== expected.availability
-    || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)
+    || ("objectiveId" in expected && !path.walkthroughObjectiveIds?.includes(expected.objectiveId))
     || !path.sourceIds.includes(expected.sourceId)
     || ("conditionPhrase" in expected && !path.conditions.includes(expected.conditionPhrase))
     || ("recommendedBeforeChapterId" in expected && path.recommendedBeforeChapterId !== expected.recommendedBeforeChapterId)
     || ("shopId" in expected && path.shopId !== expected.shopId)
     || ("price" in expected && path.cost?.amount !== expected.price);
-});
+}) || !gameItems.find((item) => item.id === "game-item.jade-armlet")?.sourceIds.includes("gamefaqs-equipment-33383");
 if (jadeArmletAcquisitionPathMismatch) {
   errors.push("Jade Armlet must retain source-linked Chocograph #3, Esto Gaza, and Disc III Daguerreo paths with the access difference and Disc IV stock-refresh cutoff.");
 }

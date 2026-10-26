@@ -2684,8 +2684,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.barette", name: "Barette", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-ipsens-castle-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-ipsens-castle", "jegged-add-ons", "rpgclassics-addons", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.bronze-vest", name: "Bronze Vest", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
   { id: "game-item.iron-sword", name: "Iron Sword", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
-  { id: "game-item.n-kai-armlet", name: "N-Kai Armlet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-arm-gear"], verification: "partial" },
-  { id: "game-item.jade-armlet", name: "Jade Armlet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891", "rpgclassics-shops", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-arm-gear", "gamerguides-chocograph-locations"], verification: "partial" },
+  { id: "game-item.n-kai-armlet", name: "N-Kai Armlet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-arm-gear"], verification: "partial" },
+  { id: "game-item.jade-armlet", name: "Jade Armlet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "gamefaqs-return-to-gaia-71891", "rpgclassics-shops", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-arm-gear", "gamerguides-chocograph-locations"], verification: "partial" },
   { id: "game-item.diamond-helm", name: "Diamond Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
 ];
 
@@ -3303,14 +3303,18 @@ const ipsensMogshopEquipmentPaths: ItemAcquisitionPath[] = ipsensMogshopEquipmen
   chapterId: "disc-3.ipsens-castle",
   method: "mogshop",
   quantity: 1,
-  availability: "window-unverified",
+  availability: slug === "n-kai-armlet" || slug === "jade-armlet" ? "repeatable" : "window-unverified",
   shopId: "ipsens-castle.kumool-mogshop",
   shopName: "Kumool's Mogshop (Ipsen's Castle)",
   cost: { currency: "gil", amount: price },
   conditions: slug === "coronet"
     ? "GameFAQs Shops lists Coronet for 4,400 Gil at Ipsen. GameFAQs Items does not list Ipsen as a Coronet seller, and RPGClassics omits it from Kumool's stock; retain this as a source-specific listing pending in-game verification."
+    : slug === "n-kai-armlet"
+      ? "GameFAQs' Equipment List explicitly lists N-Kai Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,000-Gil price. The Disc IV Mognet chain also returns to Kumool, supporting late availability. Direct release behavior remains unverified."
+      : slug === "jade-armlet"
+        ? "GameFAQs' Equipment List explicitly lists Jade Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,400-Gil price. The Disc IV Mognet chain also returns to Kumool, supporting late availability. Direct release behavior remains unverified."
     : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. Exact post-story shop access has not been independently verified.`,
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops"],
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", ...(slug === "n-kai-armlet" || slug === "jade-armlet" ? ["gamefaqs-equipment-33383", "elitegrindlab-ipsens-castle"] : [])],
 }));
 
 const ipsensMogshopSupplyProducts = [
