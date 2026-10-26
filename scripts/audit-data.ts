@@ -5497,6 +5497,18 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
       !item.sourceIds.includes("icksmehl-shops-disc-3") ||
       !item.sourceIds.includes("icksmehl-shops-disc-4");
   }
+  if (slug === "n-kai-armlet") {
+    return !path.conditions.includes("Kains Armreif")
+      || !path.conditions.includes("likely corresponds to N-Kai Armlet")
+      || !path.conditions.includes("Disc III shop table omits that row")
+      || !path.conditions.includes("not proof that Disc III stock is unavailable")
+      || !path.sourceIds.includes("icksmehl-shops-disc-3")
+      || !path.sourceIds.includes("icksmehl-shops-disc-4")
+      || !path.sourceIds.includes("icksmehl-armlets")
+      || !item.sourceIds.includes("icksmehl-armlets")
+      || !item.sourceIds.includes("icksmehl-shops-disc-3")
+      || !item.sourceIds.includes("icksmehl-shops-disc-4");
+  }
   if (slug === "needle-fork") {
     return !path.conditions.includes("GameFAQs Shops omits");
   }
@@ -5560,7 +5572,7 @@ const ipsensAbilityMismatch = ipsensAbilityClaims.some(([slug, abilityName]) => 
   && claim.sourceIds.includes("gamefaqs-abilities-71891")
 ));
 if (ipsensEquipmentStock.length !== 22 || ipsensEquipmentPaths.length !== 22 || ipsensDisc3And4EquipmentSlugs.size !== 21 || ipsensDisc3And4EquipmentMismatch || ipsensStockRouteMismatch || ipsensTargetMismatch || ipsensAbilityMismatch) {
-  errors.push("Ipsen's Castle equipment stock must retain 22 source-linked Mogshop routes, Disc III/IV evidence for the 21 GameFAQs Equipment List sellers, the unverified Coronet exception, GameFAQs/RPGClassics Poison Knuckles and stock-table differences, each Need count and positive end-inventory target except Rising Sun, zero-count end-inventory source notes, and the listed equipment abilities.");
+  errors.push("Ipsen's Castle equipment stock must retain 22 source-linked Mogshop routes, Disc III/IV evidence for the 21 GameFAQs Equipment List sellers, the N-Kai/Kains Armreif identity inference and Disc III table omission caveat, the unverified Coronet exception, GameFAQs/RPGClassics Poison Knuckles and stock-table differences, each Need count and positive end-inventory target except Rising Sun, zero-count end-inventory source notes, and the listed equipment abilities.");
 }
 const nKaiAcquisitionPathExpectations = [
   { id: "item-path.disc-3.desert-palace.n-kai-armlet-bloodstone", chapterId: "disc-3.desert-palace", method: "fixed-pickup", availability: "single-use", objectiveId: "disc-3.desert-palace.bloodstones" },
@@ -5667,6 +5679,7 @@ const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice])
 });
 const icksmehlIpsenDisc3Source = sources.find((source) => source.id === "icksmehl-shops-disc-3");
 const icksmehlIpsenSource = sources.find((source) => source.id === "icksmehl-shops-disc-4");
+const icksmehlArmletsSource = sources.find((source) => source.id === "icksmehl-armlets");
 const ffwikiMagicTagSource = sources.find((source) => source.id === "ffwiki-magic-tag");
 if (
   ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34
@@ -5675,10 +5688,16 @@ if (
   || !icksmehlIpsenDisc3Source.notes.includes("omits Potion, Echo Screen, Soft, Antidote, and Eye Drops")
   || !icksmehlIpsenDisc3Source?.notes.includes("Poison Knuckles for 5,000 Gil")
   || !icksmehlIpsenDisc3Source.notes.includes("Talisman for 150 Gil")
+  || !icksmehlIpsenDisc3Source.notes.includes("omits Coronet and Kains Armreif")
   || !icksmehlIpsenSource?.notes.includes("21 equipment products")
+  || !icksmehlIpsenSource.notes.includes("Kains Armreif")
+  || !icksmehlIpsenSource.notes.includes("Disc III Ipsen table omits the Kains Armreif/N-Kai row")
   || !icksmehlIpsenSource.notes.includes("omits Coronet")
   || !icksmehlIpsenSource?.notes.includes("omits Allheilmittel (Remedy)")
   || !icksmehlIpsenSource.notes.includes("Talisman for 150 Gil")
+  || !icksmehlArmletsSource?.notes.includes("Kains Armreif as item 27")
+  || !icksmehlArmletsSource.notes.includes("strongly support the item mapping")
+  || !icksmehlArmletsSource.notes.includes("records it as an inference")
   || !ffwikiMagicTagSource?.notes.includes("Japanese name as Ofuda")
   || !ffwikiMagicTagSource.notes.includes("Talisman")
 ) {
