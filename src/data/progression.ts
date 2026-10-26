@@ -1971,9 +1971,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.journey-to-treno-to-treno",
     title: "Summit Station optional equipment targets",
     certainty: "source-supported",
-    trigger: "Before leaving Summit Station by train, compare stock against the optional four-Silver-Gloves and three-Iron-Helms targets. GameFAQs and Neoseeker call this the last purchase chance, and Cour89 identifies Summit as the Disc II event-only equipment counter. Caves of Narshe's generic Disc III South Gate listing does not identify a matching later equipment counter or route, so do not count it as confirmed recovery. Count earlier sources separately and buy only the quantity needed for the selected inventory goal.",
+    trigger: "Before leaving Summit Station by train, compare stock against the optional four-Silver-Gloves and three-Iron-Helms targets. GameFAQs and Neoseeker call this the last purchase chance, and Cour89 identifies Summit as the Disc II event-only equipment counter. Caves of Narshe's Disc III map and item pages list both items at South Gate, but do not identify an accessible equipment counter there; keep those separate paths window-unverified and do not count them as confirmed recovery. Count earlier sources separately and buy only the quantity needed for the selected inventory goal.",
     missableIds: ["missable.disc-2.journey-to-treno.summit-station-equipment-stock"],
-    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566", "cavesofnarshe-ff9-disc-3-map", "cour89-south-gate"],
+    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566", "cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate"],
   },
   {
     id: "cutoff.treno.air-racket-stock",

@@ -8,6 +8,8 @@ This is a static playthrough simulation using the authored walkthrough data and 
 
 The static standard-route simulation covers all 44 chapters from Alexandria through the ending. The Excalibur II route has a source-based static trace from Alexandria through the pickup after Lich at 11:13:07; it has not been independently timed, and the target schedule below is not evidence of a validated speed route.
 
+The Disc III South Gate Silver Gloves and Iron Helm listings are source-conflicted candidate checks only. The simulation preserves the safe Summit Station checkpoint and does not model a later purchase as confirmed recovery because the Disc III seller is not mapped to an accessible equipment counter.
+
 ## Movie Critic single-save route simulation
 
 The automated route check builds two versions of the eligible ATE plan: one selects **Home Sweet Home**, and the other selects **Hippo's Prize**. Each plan includes 79 of the 80 eligible ATEs, excludes the unchosen Treno branch, and maps to the Movie Critic entry in all three supported catalogs: Steam, PS4, and Xbox. It also checks the source-supported Treno order (Tradition → Pursuit → Confusion → Ambition → Meeting Place → Unexpected Visitor → Crime and Punishment), Conde Petie's five first-visit ATE order, each modeled prerequisite before its dependent scene, and the Wei and Kal prerequisite in Burmecia before The Rally in Lindblum.

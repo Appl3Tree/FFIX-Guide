@@ -6738,6 +6738,9 @@ const summitSilverGlovesTarget = sourceInventoryTargets.find((target) => target.
 const summitIronHelmTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.iron-helm");
 const summitSilverGlovesPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-silver-gloves-shop");
 const summitIronHelmPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-iron-helm-shop");
+const southGateSilverGlovesCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.south-gate.silver-gloves-candidate");
+const southGateIronHelmCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.south-gate.iron-helm-candidate");
+const southGateCandidateObjective = objectivesById.get("disc-3.aerial-exploration.south-gate-equipment-candidate-check");
 const summitStationWalkthroughStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.journey-to-treno")
   ?.sections.flatMap((section) => section.steps)
@@ -6746,39 +6749,72 @@ const cavesDisc3SouthGateSource = sources.find((source) => source.id === "caveso
 const cour89SouthGateSource = sources.find((source) => source.id === "cour89-south-gate");
 const gamefaqsShopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
 const summitEquipmentCutoff = cutoffsById.get("cutoff.summit-station.equipment-stock");
+const southGateCandidateWalkthrough = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  ?.sections.flatMap((section) => section.steps.map((step) => ({ section, step })))
+  .find(({ step }) => step.id === "aerial-south-gate-equipment-candidate");
 if (
   !summitEquipmentWarning ||
   !summitEquipmentWarning.classification.includes("limited-quantity") ||
   !summitEquipmentWarning.consequence.includes("separates the consumables-only South (Dali) Gate item shop from Summit Station's equipment shop") ||
-  !summitEquipmentWarning.recovery.includes("no post-Summit route is confirmed") ||
+  !summitEquipmentWarning.recovery.includes("separate window-unverified candidate paths prompt an optional stock check") ||
   !summitEquipmentWarning.note.includes("item table gives Need 3") ||
   !summitEquipmentWarning.sourceIds.includes("gamefaqs-shops-71891") ||
   !summitEquipmentWarning.sourceIds.includes("neoseeker-item-locations-182566") ||
   !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
+  !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
+  !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitEquipmentWarning.sourceIds.includes("cour89-south-gate") ||
   !summitEquipmentObjective?.sourceIds.includes("cour89-south-gate") ||
   !summitSilverGlovesTarget || summitSilverGlovesTarget.targetQuantity !== 4 ||
   !summitIronHelmTarget || summitIronHelmTarget.targetQuantity !== 3 ||
   !summitSilverGlovesTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
   !summitIronHelmTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
-  !summitSilverGlovesPath?.notes?.includes("map search-index entry also reports Silver Gloves") ||
-  !summitSilverGlovesPath.notes.includes("Cour89 identifies Summit Station as the Disc II event-only equipment counter") ||
+  !summitSilverGlovesPath?.notes?.includes("generic South Gate equipment-stock entry") ||
+  !summitSilverGlovesPath.notes.includes("does not map the Disc III listing to an accessible equipment counter") ||
+  !summitSilverGlovesPath.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
   !summitSilverGlovesPath.sourceIds.includes("cour89-south-gate") ||
-  !summitIronHelmPath?.notes?.includes("map search-index entry also reports Iron Helm") ||
-  !summitIronHelmPath.notes.includes("Cour89 identifies Summit Station as the Disc II event-only equipment counter") ||
+  !summitIronHelmPath?.notes?.includes("generic South Gate equipment-stock entry") ||
+  !summitIronHelmPath.notes.includes("does not map the Disc III listing to an accessible equipment counter") ||
+  !summitIronHelmPath.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitIronHelmPath.sourceIds.includes("cour89-south-gate") ||
+  !southGateSilverGlovesCandidate || southGateSilverGlovesCandidate.itemId !== "game-item.silver-gloves" ||
+  southGateSilverGlovesCandidate.chapterId !== "disc-3.aerial-exploration" ||
+  southGateSilverGlovesCandidate.method !== "shop" || southGateSilverGlovesCandidate.availability !== "window-unverified" ||
+  southGateSilverGlovesCandidate.cost?.amount !== 720 ||
+  southGateSilverGlovesCandidate.shopId !== "south-gate.unmapped-equipment-counter.disc-3" ||
+  !southGateSilverGlovesCandidate.conditions.includes("do not rely on it for the optional four-copy target") ||
+  !southGateSilverGlovesCandidate.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
+  !["cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-disc-3-map", "cour89-south-gate"].every((sourceId) => southGateSilverGlovesCandidate.sourceIds.includes(sourceId)) ||
+  !southGateIronHelmCandidate || southGateIronHelmCandidate.itemId !== "game-item.iron-helm" ||
+  southGateIronHelmCandidate.chapterId !== "disc-3.aerial-exploration" ||
+  southGateIronHelmCandidate.method !== "shop" || southGateIronHelmCandidate.availability !== "window-unverified" ||
+  southGateIronHelmCandidate.cost?.amount !== 450 ||
+  southGateIronHelmCandidate.shopId !== "south-gate.unmapped-equipment-counter.disc-3" ||
+  !southGateIronHelmCandidate.conditions.includes("do not rely on it for the optional three-copy target or Bright Eyes access") ||
+  !southGateIronHelmCandidate.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
+  !["cavesofnarshe-ff9-iron-helm", "cavesofnarshe-ff9-disc-3-map", "cour89-south-gate"].every((sourceId) => southGateIronHelmCandidate.sourceIds.includes(sourceId)) ||
+  !southGateCandidateObjective?.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
+  !southGateCandidateObjective.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
+  !southGateCandidateObjective.sourceIds.includes("cour89-south-gate") ||
   !summitStationWalkthroughStep?.detail.includes("GameFAQs' missables list recommends four Silver Gloves") ||
-  !summitStationWalkthroughStep.detail.includes("Cour89's cross-release South Gate map says Summit is visited only during the Disc II opening event") ||
-  !summitStationWalkthroughStep.detail.includes("Treat the Caves entry as unresolved rather than confirmed recovery") ||
-  !cavesDisc3SouthGateSource?.notes.includes("Cour89's South Gate map independently identifies Summit as the equipment counter") ||
+  !summitStationWalkthroughStep.detail.includes("Caves of Narshe's Disc III map and its Silver Gloves and Iron Helm pages positively list the items") ||
+  !summitStationWalkthroughStep.detail.includes("separate candidate paths stay window-unverified") ||
+  !southGateCandidateWalkthrough?.step.text.includes("inspect any equipment counter you find") ||
+  !southGateCandidateWalkthrough.step.detail.includes("do not map a Disc III listing to an accessible counter") ||
+  !southGateCandidateWalkthrough.step.objectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
+  !["cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "neoseeker-item-locations-182566"].every((sourceId) => southGateCandidateWalkthrough.section.sourceIds.includes(sourceId)) ||
+  !cavesDisc3SouthGateSource?.notes.includes("supports separate Disc III candidate paths") ||
   !cour89SouthGateSource?.url.includes("/ff9/maps/south_gate.php") ||
   !cour89SouthGateSource.notes.includes("does not list Silver Gloves or Iron Helm stock") ||
-  !summitEquipmentCutoff?.trigger.includes("Cour89 identifies Summit as the Disc II event-only equipment counter") ||
+  !summitEquipmentCutoff?.trigger.includes("keep those separate paths window-unverified") ||
   !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
+  !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
+  !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitEquipmentCutoff.sourceIds.includes("cour89-south-gate") ||
   !gamefaqsShopsSource?.notes.includes("separates the consumables-only South (Dali) Gate item shop from Summit Station's equipment shop")
 ) {
-  errors.push("The Summit Station inventory warning must preserve GameFAQs/Neoseeker's checkpoint, Cour89's Disc II-only equipment-counter route, and Caves of Narshe's unresolved generic Disc III South Gate listing without presenting later recovery as verified.");
+  errors.push("The Summit Station inventory warning must preserve the safe checkpoint while linking Caves of Narshe's Disc III/item-page claims to both window-unverified candidate paths and the optional aerial counter check, without presenting later recovery as confirmed.");
 }
 const trenoShopWindowObjective = objectivesById.get("disc-2.treno.shop-stock-window");
 const trenoShopWindowStep = walkthroughChapters
