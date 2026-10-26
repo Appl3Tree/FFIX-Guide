@@ -1691,6 +1691,14 @@ export const sources = [
     notes: "Japanese guide scoped in its title to iPhone, Android, and PS1. It lists the Beach Quest gates as all Chocograph treasures, all mountain-crack treasures, all underwater-bubble treasures, the treasure at the former Shimmering Island, and entering Mognet Central; after the Choco/Mene scene, it says to speak to Fat Chocobo again to begin visiting beaches. It lists all 21 beaches and says registering them all restores HP, MP, and status; it corroborates the prerequisites but does not establish behavior on other releases or specify the Tetra Master trigger described by other sources.",
   },
   {
+    id: "gameclue-armlets",
+    title: "Armor — Armlets (防具 - 腕輪)",
+    publisher: "GameClue",
+    url: "https://gameclue.jp/wiki/ff9/435/",
+    accessed: "2026-10-26",
+    notes: "Japanese equipment reference scoped in its title to iPhone, Android, and PS1. The Glass Armlet row lists shop stock at Lindblum (Discs I–II) and Burmecia, plus the Lindblum Castle pickup and Eiko's initial equipment; it does not list the disputed later Treno or Lindblum sales. Other rows include Disc III–IV locations for later armlets, but the page labels these as main acquisition methods. Record the omission as a source-specific discrepancy, not proof that the candidate Disc III stock is unavailable or that the list is exhaustive; other release/build behavior remains unverified.",
+  },
+  {
     id: "gamefaqs-abilities-71891",
     title: "Abilities — FFIX character and Blue Magic reference",
     publisher: "GameFAQs",

@@ -3825,8 +3825,10 @@ for (const [path, chapterId, city] of [
     !path.sourceIds.includes("jegged-arm-gear") ||
     !path.sourceIds.includes("rpgclassics-shops") ||
     !path.sourceIds.includes("ffwiki-shops") ||
+    !path.sourceIds.includes("gameclue-armlets") ||
     !/unverified candidate route/i.test(path.conditions ?? "") ||
-    !/do not (?:prove|establish)/i.test(path.conditions ?? "") ||
+    !/(?:does not prove|do not (?:prove|establish))/i.test(path.conditions ?? "") ||
+    !/GameClue's iPhone\/Android\/PS1 armlet list/i.test(path.conditions ?? "") ||
     !/Alexandria/i.test(path.conditions ?? "")
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
@@ -3838,6 +3840,15 @@ if (
   !sources.find((source) => source.id === "ffwiki-shops")?.notes.includes("For Glass Armlet, Final Fantasy Wiki lists earlier Lindblum and Disc II Treno stock")
 ) {
   errors.push("The Glass Armlet route and source register must preserve Final Fantasy Wiki's later-table omission as corroboration, not proof of unavailable stock.");
+}
+if (
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gameclue-armlets") ||
+  !sources.find((source) => source.id === "gameclue-armlets")?.notes.includes("Lindblum (Discs I–II) and Burmecia") ||
+  !sources.find((source) => source.id === "gameclue-armlets")?.notes.includes("not proof that the candidate Disc III stock is unavailable") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gameclue-armlets") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("These table differences do not prove Disc III stock is absent")
+) {
+  errors.push("GameClue's scoped Glass Armlet listing must be linked to the Lindblum candidate and framed as a non-conclusive source omission.");
 }
 if (
   !glassArmletDisc3LindblumCandidate?.conditions.includes("Xenomic's GameFAQs Item Location Guide") ||
@@ -3852,7 +3863,9 @@ if (
 if (
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-item-locations-54996") ||
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletDisc3TrenoSection?.sourceIds.includes("gameclue-armlets") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("inspect Treno's displayed weapon stock") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("GameClue's iPhone/Android/PS1 armlet list does not include Treno") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("Buy only if it appears")
 ) {
   errors.push("The first Disc III Treno stop must expose the uncertain Glass Armlet stock check with its source links and caveat.");

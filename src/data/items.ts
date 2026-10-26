@@ -705,7 +705,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "conditional",
     conditions: "Eiko joins with a Glass Armlet equipped. Remove it when party equipment access is available to use the existing copy or reserve it as a Glass Buckle ingredient.",
-    sourceIds: glassArmletReferenceSources,
+    sourceIds: [...glassArmletReferenceSources, "gameclue-armlets"],
   },
   {
     id: "item-path.disc-1.lindblum.glass-armlet-guest-room-chest",
@@ -716,7 +716,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     availability: "single-use",
     conditions: "Open the chest in Lindblum Castle's Guest Room during the Disc I visit.",
     walkthroughObjectiveIds: ["disc-1.lindblum.first-visit-pickups"],
-    sourceIds: glassArmletReferenceSources,
+    sourceIds: [...glassArmletReferenceSources, "gameclue-armlets"],
   },
   {
     id: "item-path.disc-1.burmecia.glass-armlet-atla-mogshop",
@@ -729,7 +729,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Atla's Mogshop (Burmecia)",
     cost: { currency: "gil", amount: 250 },
     conditions: "Atla sells Glass Armlet for 250 Gil; this is a repeat-purchase source while his Mogshop is available.",
-    sourceIds: glassArmletReferenceSources,
+    sourceIds: [...glassArmletReferenceSources, "gameclue-armlets"],
   },
   {
     id: "item-path.disc-2.journey-to-cleyra.glass-armlet-atla-mogshop",
@@ -755,7 +755,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Dragoos' Weapon Shop (Lindblum, Disc I)",
     cost: { currency: "gil", amount: 250 },
     conditions: "GameFAQs' pre-Cleyra Lindblum stock table lists Glass Armlet and says that inventory lasts until Cleyra is completed. This path covers that early shop window only; the later Disc III Lindblum listing remains disputed because GameFAQs' Disc III–IV table omits it while Jegged lists Lindblum on Disc III.",
-    sourceIds: glassArmletReferenceSources,
+    sourceIds: [...glassArmletReferenceSources, "gameclue-armlets"],
   },
   {
     id: "item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop",
@@ -793,8 +793,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "treno.weapon-shop.disc-3-4",
     shopName: "Treno Weapon Shop (possible Disc III sale)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "Jegged lists Treno as a Glass Armlet seller on Disc III, but GameFAQs' modern Items table and both older GameFAQs reference lists name Treno only on Disc II. GameFAQs Shops, RPGClassics, and Final Fantasy Wiki also omit the armlet from their later Treno tables. These published-table omissions do not prove the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops"],
+    conditions: "Jegged lists Treno as a Glass Armlet seller on Disc III, but GameFAQs' modern Items table and both older GameFAQs reference lists name Treno only on Disc II. GameFAQs Shops, RPGClassics, and Final Fantasy Wiki also omit the armlet from their later Treno tables. GameClue's iPhone/Android/PS1 armlet list names Lindblum (Discs I–II) and Burmecia, but not Treno; this source-specific omission does not prove the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "gameclue-armlets"],
   },
   {
     id: "item-path.disc-2.return-to-lindblum.glass-armlet-shop",
@@ -808,7 +808,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     cost: { currency: "gil", amount: 250 },
     conditions: "GameFAQs' Disc II Lindblum weapon list includes Glass Armlet for 250 Gil. That stock is available before leaving Middle Lindblum, after which only the Dragon's Gate Merchant remains until Disc III. This is a limited Disc II shop visit; the separate claim of a later Disc III Lindblum sale remains disputed because GameFAQs' Disc III–IV table omits the armlet while Jegged lists it.",
     walkthroughObjectiveIds: ["disc-2.return-to-lindblum.arm-gear-stock"],
-    sourceIds: glassArmletReferenceSources,
+    sourceIds: [...glassArmletReferenceSources, "gameclue-armlets"],
   },
   {
     id: "item-path.disc-3.aerial-exploration.glass-armlet-lindblum-candidate",
@@ -820,8 +820,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.weapon-shop.disc-3-4",
     shopName: "Dragoos' Weapon/Item Shop (possible Disc III sale)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "Jegged and Xenomic's GameFAQs Item Location Guide list Lindblum as a Glass Armlet seller on Disc III; the latter gives Lindblum as Discs II–III. GameFAQs' modern Items table and older Equipment List stop at Discs I–II, while the complete later GameFAQs, RPGClassics, and Final Fantasy Wiki shop tables omit it. The conflicting listings do not establish the exact Disc III stock window, so keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops"],
+    conditions: "Jegged and Xenomic's GameFAQs Item Location Guide list Lindblum as a Glass Armlet seller on Disc III; the latter gives Lindblum as Discs II–III. GameFAQs' modern Items table and older Equipment List stop at Discs I–II, while the complete later GameFAQs, RPGClassics, and Final Fantasy Wiki shop tables omit it. GameClue's iPhone/Android/PS1 armlet list names Lindblum only on Discs I–II; that source-specific omission does not prove the Disc III sale is absent. The conflicting listings do not establish the exact Disc III stock window, so keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "gameclue-armlets"],
   },
   {
     id: "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop",
@@ -2560,7 +2560,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.chain-mail", name: "Chain Mail", category: "equipment", sourceIds: chainMailReferenceSources, verification: "partial" },
   { id: "game-item.power-belt", name: "Power Belt", category: "equipment", sourceIds: powerBeltReferenceSources, verification: "partial" },
   { id: "game-item.glass-buckle", name: "Glass Buckle", category: "equipment", sourceIds: glassBuckleReferenceSources, verification: "partial" },
-  { id: "game-item.glass-armlet", name: "Glass Armlet", category: "equipment", sourceIds: [...glassArmletReferenceSources, "drslice-no-239-armory"], verification: "partial" },
+  { id: "game-item.glass-armlet", name: "Glass Armlet", category: "equipment", sourceIds: [...glassArmletReferenceSources, "drslice-no-239-armory", "gameclue-armlets"], verification: "partial" },
   { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: [...leatherWristReferenceSources, ...daliUndergroundSources], verification: "partial" },
   { id: "game-item.kupo-nut", name: "Kupo Nut", category: "key-item", sourceIds: [...burmeciaSources, "gamefaqs-kupo-nuts-71891", "gamefaqs-moogle-faq-23306", ...mountGulugSources], verification: "partial" },
   { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...burmeciaSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },

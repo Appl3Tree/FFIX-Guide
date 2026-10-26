@@ -3723,7 +3723,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "card-tournament-treno-sweep",
         title: "Treno side stops — mail, Catoblepas, Stellazzio, and auction",
         summary: "Return to Treno and complete the optional errands before entering the third match.",
-        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "playonline-guide-fr-fhiprace", "gamefaqs-hippaul-racing-10181", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "jegged-stellazzio"],
+        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "playonline-guide-fr-fhiprace", "gamefaqs-hippaul-racing-10181", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "gameclue-armlets", "jegged-stellazzio"],
         steps: [
           {
             id: "card-tournament-mogrich-letter",
@@ -3743,7 +3743,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "card-tournament-queen-stella",
             kind: "optional",
             text: "Visit Queen Stella and turn in any Stellazzio coins you are carrying. The Leo coin from the Alexandria castle grounds is now available if you collected it; use the Stellazzio ledger for the full reward order and remaining coin locations.",
-            detail: "If you need another Glass Armlet, inspect Treno's displayed weapon stock while here. Jegged lists a Disc III sale, but the GameFAQs item references list Treno only on Disc II and the later GameFAQs, RPGClassics, and Final Fantasy Wiki stock tables omit it. Buy only if it appears; Alexandria is a documented later seller.",
+            detail: "If you need another Glass Armlet, inspect Treno's displayed weapon stock while here. Jegged lists a Disc III sale, but the GameFAQs item references list Treno only on Disc II, GameClue's iPhone/Android/PS1 armlet list does not include Treno, and the later GameFAQs, RPGClassics, and Final Fantasy Wiki stock tables omit it. These published-list omissions do not prove the sale is absent. Buy only if it appears; Alexandria is a documented later seller.",
             objectiveIds: ["disc-3.card-tournament.stellazzio-rewards"],
           },
           {
@@ -5042,7 +5042,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-lindblum-and-airship",
         title: "Lindblum and the Hilda Garde 3 — first flight and ship pickups",
         summary: "After the story grants the airship, inspect its decks, learn the landing rule, and choose a party for optional travel.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "neoseeker-item-locations-182566"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops", "gameclue-armlets", "cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "aerial-first-flight",
@@ -5069,7 +5069,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-plan-route",
             kind: "optional",
             text: "Before flying out, set the party you want for world-map encounters and make sure Quina is available for Frog Catching and Moogle-related tasks. You can return to the bridge to change the active party later.",
-            detail: "The next story destination is Ipsen's Castle. You may go there directly, but this is a convenient window for the optional checks below. GameFAQs also recommends buying Steepled Hats at Black Mage Village or Atla's Mogshop in Burmecia for the optional Cotton Robe money loop, confirming Atla as a Disc III free-flight stop; the recipe uses Steepled Hat, not Headgear. Atla's separately listed Headgear costs 330 Gil and is also available through the Disc IV Mognet return. If you want another Glass Armlet, inspect Dragoos' Lindblum stock before leaving: Jegged and Xenomic's older GameFAQs Item Location Guide list a Disc III sale, while the later shop tables omit it and GameFAQs' item references disagree about the disc range. Treat it as an inventory check, not a guaranteed purchase; Alexandria is a separate later seller.",
+            detail: "The next story destination is Ipsen's Castle. You may go there directly, but this is a convenient window for the optional checks below. GameFAQs also recommends buying Steepled Hats at Black Mage Village or Atla's Mogshop in Burmecia for the optional Cotton Robe money loop, confirming Atla as a Disc III free-flight stop; the recipe uses Steepled Hat, not Headgear. Atla's separately listed Headgear costs 330 Gil and is also available through the Disc IV Mognet return. If you want another Glass Armlet, inspect Dragoos' Lindblum stock before leaving: Jegged and Xenomic's older GameFAQs Item Location Guide list a Disc III sale, while GameClue's iPhone/Android/PS1 armlet list stops at Lindblum Discs I–II and the later shop tables omit the product. These table differences do not prove Disc III stock is absent. Treat it as an inventory check, not a guaranteed purchase; Alexandria is a separate later seller.",
           },
           {
             id: "aerial-south-gate-equipment-candidate",
