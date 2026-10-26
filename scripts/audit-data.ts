@@ -2534,6 +2534,7 @@ for (const missable of missables) {
 const acquisitionCounts = new Map<string, number>();
 const deathguiseWarning = missablesById.get("missable.disc-4.memoria.deathguise-steals");
 const deathguiseStealObjective = objectivesById.get("disc-4.memoria.deathguise-steals");
+const updatedShopsObjective = objectivesById.get("disc-4.return-to-gaia.updated-shops");
 const blackBeltRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.black-belt");
 const blackBeltSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.black-belt-synthesis");
 const blackBeltStellazzioPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.black-belt-stellazzio-reward");
@@ -2546,6 +2547,7 @@ const duelClawsRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthes
 const duelClawsSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.duel-claws-synthesis");
 const dragonClawsChocographPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.dragons-claws-chocograph-7");
 const tigerFangsShopPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.tiger-fangs");
+const tigerFangsDisc4CandidatePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.tiger-fangs-daguerreo-candidate");
 const hadesElixirDropPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-elixir-drop");
 const necronElixirStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.necron-elixir-common-steal");
 const deathguiseWalkthroughStep = walkthroughChapters
@@ -2557,8 +2559,13 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !deathguiseWarning.classification.includes("recoverable-later") ||
   !deathguiseWarning.nextAvailability?.includes("Treno on Disc IV for 4,000 Gil") ||
   !deathguiseWarning.nextAvailability.includes("only if both materials remain") ||
+  !deathguiseWarning.nextAvailability.includes("Caves of Narshe lists a Disc IV Daguerreo Tiger Fangs purchase") ||
+  !deathguiseWarning.nextAvailability.includes("retain the Disc III copy if you need Duel Claws") ||
+  !["cavesofnarshe-ff9-disc-4-map", "gamefaqs-shops-71891", "rpgclassics-shops"].every((sourceId) => deathguiseWarning.sourceIds.includes(sourceId)) ||
   !deathguiseStealObjective ||
-  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "rpgclassics-addons"].every((sourceId) => deathguiseStealObjective.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "rpgclassics-addons", "cavesofnarshe-ff9-disc-4-map", "rpgclassics-shops"].every((sourceId) => deathguiseStealObjective.sourceIds.includes(sourceId)) ||
+  !updatedShopsObjective ||
+  !["gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-4-map"].every((sourceId) => updatedShopsObjective.sourceIds.includes(sourceId)) ||
   !blackBeltRecipe || blackBeltRecipe.resultItemId !== "game-item.black-belt" ||
   blackBeltRecipe.cost.amount !== 4000 || blackBeltRecipe.shopId !== "treno.synthesis-shop.disc-3-4" ||
   !blackBeltRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.twist-headband") ||
@@ -2579,12 +2586,21 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !duelClawsSynthesisPath.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !dragonClawsChocographPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !tigerFangsShopPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !tigerFangsDisc4CandidatePath || tigerFangsDisc4CandidatePath.itemId !== "game-item.tiger-fangs" ||
+  tigerFangsDisc4CandidatePath.chapterId !== "disc-4.return-to-gaia" || tigerFangsDisc4CandidatePath.method !== "shop" ||
+  tigerFangsDisc4CandidatePath.availability !== "window-unverified" || tigerFangsDisc4CandidatePath.cost?.amount !== 13500 ||
+  !tigerFangsDisc4CandidatePath.sourceIds.includes("cavesofnarshe-ff9-disc-4-map") ||
+  !tigerFangsDisc4CandidatePath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !tigerFangsDisc4CandidatePath.sourceIds.includes("rpgclassics-shops") ||
+  !tigerFangsDisc4CandidatePath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.updated-shops") ||
+  !tigerFangsDisc4CandidatePath.walkthroughObjectiveIds.includes("disc-4.memoria.deathguise-steals") ||
   !hadesElixirDropPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !necronElixirStealPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !deathguiseWalkthroughStep?.detail?.includes("Hades's drop table") ||
   !deathguiseWalkthroughStep.detail.includes("8,100 Gil total") ||
-  !deathguiseWalkthroughStep.detail.includes("last listed shop is Daguerreo on Disc III")) {
-  errors.push("Deathguise's one-time steals must distinguish item-type recovery, source-linked Disc IV Black Belt synthesis, and the conditional Duel Claws ingredient route.");
+  !deathguiseWalkthroughStep.detail.includes("Caves of Narshe lists a Disc IV Daguerreo Tiger Fangs purchase") ||
+  !deathguiseWalkthroughStep.detail.includes("retain the Disc III copy if Duel Claws matters until confirmed")) {
+  errors.push("Deathguise's one-time steals must distinguish item-type recovery, source-linked Disc IV Black Belt synthesis, and the conditional Duel Claws ingredient route, including the disputed Tiger Fangs Disc IV candidate.");
 }
 const necronStealWarning = missablesById.get("missable.disc-4.the-final-battle.necron-steals");
 const necronStealObjective = objectivesById.get("disc-4.the-final-battle.necron-steals");
@@ -6495,13 +6511,22 @@ if (
 const finalStockAbilityWarning = missablesById.get("missable.disc-3.preparing-to-leave.final-stock-ability-review");
 const finalStockAbilityObjective = objectives.find((objective) => objective.id === "disc-3.preparing-to-leave.final-stock-ability-review");
 const finalStockAbilitySources = ["gamefaqs-abilities-71891", "rpgclassics-abilities"];
-const finalStockAbilityItems = ["game-item.trident", "game-item.diamond-sword", "game-item.flame-saber", "game-item.heavy-lance"]
+const finalStockAbilityItems = ["game-item.trident", "game-item.diamond-sword", "game-item.flame-saber", "game-item.heavy-lance", "game-item.scissor-fangs", "game-item.tiger-fangs"]
   .map((itemId) => gameItems.find((item) => item.id === itemId));
 const finalStockAbilityClaims = [
   { itemId: "game-item.trident", abilityName: "Luna" },
   { itemId: "game-item.diamond-sword", abilityName: "Power Break" },
   { itemId: "game-item.flame-saber", abilityName: "Magic Break" },
   { itemId: "game-item.heavy-lance", abilityName: "Six Dragons" },
+  { itemId: "game-item.scissor-fangs", abilityName: "Aura" },
+  { itemId: "game-item.scissor-fangs", abilityName: "Counter" },
+  { itemId: "game-item.tiger-fangs", abilityName: "Revive" },
+  { itemId: "game-item.tiger-fangs", abilityName: "Counter" },
+];
+const finalStockAbilityAlternatives = [
+  { itemId: "game-item.duel-claws", abilityName: "Aura" },
+  { itemId: "game-item.rebirth-ring", abilityName: "Revive" },
+  { itemId: "game-item.anklet", abilityName: "Counter" },
 ];
 const finalStockAbilityPaths = [
   { id: "item-path.disc-3-stock.mimoza-oeilvert.trident", itemId: "game-item.trident" },
@@ -6512,6 +6537,9 @@ const finalStockAbilityPaths = [
   { id: "item-path.disc-3-stock.esto-gaza.flame-saber", itemId: "game-item.flame-saber" },
   { id: "item-path.disc-3-stock.esto-gaza.heavy-lance", itemId: "game-item.heavy-lance" },
   { id: "item-path.disc-3.forgotten-continent.oeilvert-diamond-sword", itemId: "game-item.diamond-sword" },
+  { id: "item-path.disc-3-stock.esto-gaza.scissor-fangs", itemId: "game-item.scissor-fangs" },
+  { id: "item-path.disc-3-stock.daguerreo.tiger-fangs", itemId: "game-item.tiger-fangs" },
+  { id: "item-path.disc-4.return-to-gaia.tiger-fangs-daguerreo-candidate", itemId: "game-item.tiger-fangs" },
 ].map(({ id, itemId }) => ({ id, itemId, path: itemAcquisitionPaths.find((candidate) => candidate.id === id) }));
 const finalStockAbilityWalkthrough = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.preparing-to-leave")
@@ -6521,22 +6549,32 @@ if (
   !finalStockAbilityWarning || finalStockAbilityWarning.severity !== "info" ||
   !finalStockAbilityWarning.consequence.includes("GameFAQs and RPGClassics PlayStation ability tables both list") ||
   !finalStockAbilityWarning.consequence.includes("not a claim that missing the gear permanently removes an ability") ||
-  !finalStockAbilityWarning.nextAvailability.includes("Neither reviewed PlayStation ability table lists alternate equipment") ||
+  !finalStockAbilityWarning.nextAvailability.includes("Neither reviewed PlayStation ability table lists alternate equipment for Luna") ||
   !finalStockAbilityWarning.note.includes("post-transition and version-specific ability-source audit remains partial") ||
   !finalStockAbilitySources.every((sourceId) => finalStockAbilityWarning.sourceIds.includes(sourceId)) ||
   !finalStockAbilityObjective || !finalStockAbilitySources.every((sourceId) => finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
   finalStockAbilityItems.some((item) => !item || !finalStockAbilitySources.every((sourceId) => item.sourceIds.includes(sourceId))) ||
-  finalStockAbilityClaims.length !== 4 || finalStockAbilityClaims.some(({ itemId, abilityName }) =>
+  finalStockAbilityPaths.length !== 11 ||
+  finalStockAbilityClaims.length !== 8 || finalStockAbilityClaims.some(({ itemId, abilityName }) =>
     !equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName &&
       finalStockAbilitySources.every((sourceId) => claim.sourceIds.includes(sourceId))),
+  ) ||
+  finalStockAbilityAlternatives.some(({ itemId, abilityName }) =>
+    !equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName &&
+      ["gamefaqs-items-71891", "gamefaqs-abilities-71891"].every((sourceId) => claim.sourceIds.includes(sourceId))),
   ) ||
   finalStockAbilityPaths.some(({ itemId, path }) => !path || path.itemId !== itemId ||
     !finalStockAbilitySources.every((sourceId) => path.sourceIds.includes(sourceId))) ||
   !finalStockAbilityWalkthroughStep ||
   !finalStockAbilityWalkthroughStep.detail.includes("both reviewed PlayStation catalogs list Luna (Trident), Power Break (Diamond Sword), Magic Break (Flame Saber), and Six Dragons (Heavy Lance)") ||
-  !finalStockAbilitySources.every((sourceId) => finalStockAbilityWalkthrough?.sourceIds.includes(sourceId))
+  !finalStockAbilitySources.every((sourceId) => finalStockAbilityWalkthrough?.sourceIds.includes(sourceId)) ||
+  !["cavesofnarshe-ff9-disc-4-map", "cavesofnarshe-ff9-claws", "rpgclassics-shops", "rpgclassics-weapons"].every((sourceId) =>
+    finalStockAbilityWalkthrough?.sourceIds.includes(sourceId) &&
+    finalStockAbilityWarning.sourceIds.includes(sourceId) && finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
+  !finalStockAbilityWarning.consequence.includes("those claw abilities have other listed equipment sources") ||
+  !finalStockAbilityWalkthroughStep.detail.includes("alternate gear sources listed for those claw abilities")
 ) {
-  errors.push("The final-stock ability review must link both PlayStation ability catalogs to its warning, objective, four item records and claims, all seven shop routes and the Oeilvert chest, and the walkthrough checkpoint without claiming permanent ability loss.");
+  errors.push("The final-stock ability review must link both PlayStation ability catalogs to its warning, objective, six item records, eight claims, eleven source-linked paths, and the walkthrough checkpoint while distinguishing the four abilities without listed alternatives from the claw abilities with alternatives.");
 }
 const octagonRodWarning = missablesById.get("missable.disc-3.lost-continent.octagon-rod");
 const octagonRodObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.octagon-rod");
@@ -7131,6 +7169,11 @@ if (!powerBeltTrenoWarning?.classification.includes("conditional") ||
   !disc4PowerBeltPath || disc4PowerBeltPath.shopName !== "Daguerreo Synthesis Expert (Disc IV)" ||
   !disc4PowerBeltPath.conditions?.includes("retained Chain Mail")) {
   errors.push("Power Belt recovery must retain its source-linked Disc IV recipe and the Chain Mail inventory condition.");
+}
+if (!gaiaShopWalkthroughStep?.detail?.includes("Caves of Narshe's Disc IV map lists Tiger Fangs at Daguerreo for 13,500 Gil") ||
+  !gaiaShopWalkthroughStep.detail.includes("GameFAQs and RPGClassics omit it from their Disc IV shop tables") ||
+  !gaiaShopWalkthroughStep.detail.includes("inspect the displayed stock and price before relying on it")) {
+  errors.push("The Disc IV return walkthrough must present Tiger Fangs as an unverified stock candidate with the opposing shop-table evidence.");
 }
 if (!tiamatGrandHelmWarning?.nextAvailability?.includes("retained Chain Mail") ||
   !tiamatGrandHelmWarning.recovery?.includes("If neither Power Belt nor Chain Mail remains") ||

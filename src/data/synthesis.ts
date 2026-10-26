@@ -474,7 +474,7 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 16000 },
     sourceIds: disc4BlackCatRecipeSources,
-    notes: "Dragon's Claws + Tiger Fangs makes Duel Claws for 16,000 Gil at Black Cat on Disc IV. GameFAQs and RPGClassics agree on the ingredients and price. This is only a recovery route if both materials remain: Dragon's Claws is a Chocograph #7 reward, while the reviewed shop/item tables list Tiger Fangs at Daguerreo on Disc III and no Disc IV purchase; GameFAQs labels the synthesis not recommended.",
+    notes: "Dragon's Claws + Tiger Fangs makes Duel Claws for 16,000 Gil at Black Cat on Disc IV. GameFAQs and RPGClassics agree on the ingredients and price. Caves of Narshe lists Tiger Fangs at Daguerreo on Disc IV, while GameFAQs and RPGClassics omit it from their Disc IV shop tables; treat the purchase as unverified and retain the Disc III copy if Duel Claws is a selected goal. Dragon's Claws comes from Chocograph #7; GameFAQs labels the synthesis not recommended.",
   },
   {
     id: "synthesis-recipe.bracer",
