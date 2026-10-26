@@ -449,6 +449,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Twist Headband + Survival Vest makes Black Belt for 4,000 Gil. GameFAQs lists the Treno recipe in its Disc III–IV stock; Twist Headband and Survival Vest are both listed in Treno's Disc III–IV shop stock, so the Disc IV route can rebuild both ingredients for 1,200 + 2,900 Gil if neither is retained.",
   },
   {
+    id: "synthesis-recipe.running-shoes",
+    resultItemId: "game-item.running-shoes",
+    ingredients: [
+      { itemId: "game-item.battle-boots", quantity: 1 },
+      { itemId: "game-item.emerald", quantity: 1 },
+    ],
+    chapterId: "disc-4.return-to-gaia",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 12000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis"],
+    notes: "Battle Boots + Emerald makes Running Shoes for 12,000 Gil at Black Cat on Disc IV. GameFAQs' Final Preparations calls Hades the last Running Shoes copy, but its own Items and Shops references list this Disc IV recipe; Jegged and EliteGrindLab independently confirm it. This recovers the item type after Hades only if the ingredients remain, and does not restore Hades's one-time steal copy. Reserve an Emerald for Friendly Jabberwock if that quest is still open.",
+  },
+  {
     id: "synthesis-recipe.duel-claws",
     resultItemId: "game-item.duel-claws",
     ingredients: [

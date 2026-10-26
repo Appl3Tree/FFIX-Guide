@@ -1951,6 +1951,46 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !deathguiseWalkthroughStep.detail.includes("last listed shop is Daguerreo on Disc III")) {
   errors.push("Deathguise's one-time steals must distinguish item-type recovery, source-linked Disc IV Black Belt synthesis, and the conditional Duel Claws ingredient route.");
 }
+const hadesRunningShoesWarning = missablesById.get("missable.disc-4.memoria.hades-running-shoes");
+const hadesStealObjective = objectivesById.get("disc-4.memoria.hades-steals");
+const runningShoesRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.running-shoes");
+const runningShoesSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.running-shoes-synthesis");
+const runningShoesHadesStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-running-shoes-steal");
+const emeraldCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.high-priest-emerald");
+const emeraldNymphPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-iifa-tree.friendly-nymph-emerald");
+const emeraldOeilvertPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.forgotten-continent.stiltzkin-emerald");
+const runningShoesNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.running-shoes-need");
+const hadesWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-hades");
+if (!hadesRunningShoesWarning?.classification.includes("missable-opportunity") ||
+  !hadesRunningShoesWarning.classification.includes("recoverable-later") ||
+  !hadesRunningShoesWarning.classification.includes("conditional") ||
+  !hadesRunningShoesWarning.nextAvailability?.includes("Black Cat at Black Mage Village") ||
+  !hadesRunningShoesWarning.nextAvailability.includes("12,000 Gil") ||
+  !hadesRunningShoesWarning.recovery?.includes("Synthesis does not restore Hades's exact steal copy") ||
+  !hadesStealObjective ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-synthesis", "elitegrindlab-synthesis"].every((sourceId) => hadesStealObjective.sourceIds.includes(sourceId)) ||
+  !runningShoesRecipe || runningShoesRecipe.resultItemId !== "game-item.running-shoes" ||
+  runningShoesRecipe.cost.amount !== 12000 || runningShoesRecipe.shopId !== "black-mage-village.synthesis-shop.disc-4" ||
+  !runningShoesRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.battle-boots") ||
+  !runningShoesRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.emerald") ||
+  !runningShoesSynthesisPath || runningShoesSynthesisPath.recipeId !== "synthesis-recipe.running-shoes" ||
+  runningShoesSynthesisPath.cost?.amount !== 12000 ||
+  !runningShoesSynthesisPath.conditions?.includes("after Hades during Final Preparations") ||
+  !runningShoesHadesStealPath?.conditions?.includes("one-fight encounter copy") ||
+  !emeraldCleyraPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.hades-steals") ||
+  !emeraldNymphPath?.conditions?.includes("during Final Preparations") ||
+  !emeraldOeilvertPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.hades-steals") ||
+  !runningShoesNeedTarget || runningShoesNeedTarget.targetQuantity !== 4 || runningShoesNeedTarget.basis !== "route-need" ||
+  runningShoesNeedTarget.interpretation.includes("end-inventory #0") === false ||
+  sourceInventoryTargets.some((target) => target.id === "item-target.disc-4.final-preparations.running-shoes-end-inventory") ||
+  !hadesRunningShoesWarning.note?.includes("end-inventory #0") ||
+  !hadesWalkthroughStep?.detail?.includes("its Items and Shops tables list a later Disc IV Black Mage Village recipe") ||
+  !hadesWalkthroughStep.detail.includes("12,000 Gil")) {
+  errors.push("Hades's Running Shoes warning must distinguish the one-time steal from the conditional Disc IV synthesis recovery, source-specific targets, and Emerald prerequisites.");
+}
 for (const item of gameItems) {
   if (!item.name.trim()) errors.push(`Game item ${item.id} is missing a name.`);
   if (item.sourceIds.length === 0) errors.push(`Game item ${item.id} has no provenance.`);
