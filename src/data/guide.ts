@@ -2115,6 +2115,14 @@ export const sources = [
     notes: "Independent ATE route and item sweep; covers Power Belt capture, fountain Gemini, slum Yeti Card and Taurus, Mogrich, shop and synthesis stock, Griffin challenge reward, Mythril Dagger, Supersoft, and final Crime and Punishment ATE.",
   },
   {
+    id: "jegged-returning-treno-disc-3",
+    title: "Returning to Treno — Disc III walkthrough",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/27-Treno.html",
+    accessed: "2026-10-26",
+    notes: "Disc III card-tournament route that directs the party through South Gate to Dali for up to 99 Wrists before the tournament. This is an earlier Disc III Dali stop than the later Hilda Garde III free-flight return; it does not document that later flight-window trip.",
+  },
+  {
     id: "gamerguides-treno",
     title: "Dark City Treno — Disc II walkthrough",
     publisher: "Gamer Guides",
@@ -2688,7 +2696,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/aerial-exploration",
     accessed: "2026-10-24",
-    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. Sidequest and stock claims are cross-checked against dedicated guides.",
+    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It explicitly calls this the best time for the Cotton Robe money loop and directs the player to buy Wrists in Dali, making it the direct source for the later Hilda Garde III Dali detour. Sidequest and stock claims are cross-checked against dedicated guides.",
   },
   {
     id: "jegged-lindblum-hilda-garde",
@@ -3225,6 +3233,14 @@ export const sources = [
     url: "https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml",
     accessed: "2026-10-26",
     notes: "Independent original PlayStation synthesis table. It lists Fairy Earrings from Magic Armlet + Soft for 3,200 Gil at Alexandria and Daguerreo, plus the complete shop list for Disc II–III BMV and later Treno/Lindblum. It also lists Glass Buckle from Glass Armlet + Leather Wrist for 500 Gil in the Disc I Lindblum, Disc II Treno and post-attack Lindblum, Black Mage Village Disc II–III, Alexandria and its alley synthesist, Disc III Treno and later Lindblum, and Disc IV Black Mage Village shops. It lists Power Belt from Glass Buckle + Chain Mail for 2,000 Gil at post-attack Lindblum, Black Mage Village Disc II–III, Treno Disc III, Wayne's Lindblum shop, and Daguerreo; GameFAQs additionally lists Alexandria. It also lists Peridot from Ore + Soft for 100 Gil at Daguerreo, Disc IV Black Mage Village, and Hades; Anklet at Disc III Alexandria and Treno for 4,000 Gil from Gold Choker + Peridot; Gold Choker from Linen Cuirass + Soft for 1,300 Gil at Treno and other shops; Rebirth Ring at Daguerreo for 7,000 Gil from Diamond + Anklet; and Battle Boots at Daguerreo for 6,500 Gil from Feather Boots + Wing Edge. It also lists Desert Boots from Leather Hat + Leather Shirt for 300 Gil and Germinas Boots from Desert Boots + Fork for 900 Gil at the Disc I Lindblum, Disc II Treno/post-attack Lindblum/Black Mage Village, Disc III Alexandria/Treno/Lindblum, and Disc IV Black Mage Village shops. Cross-checks recipe prices and shop locations. The table also lists Wrist + Steepled Hat for Cotton Robe at 1,000 Gil across the early Disc I–IV shops, including Daguerreo, and Mythril Fork + Cotton Robe for Glutton's Robe at Daguerreo for 6,000 Gil. These prices agree with the GameFAQs Shops table and differ from the GameFAQs Items table's 2,000/8,000-Gil fields. It lists Rune Tooth at 2,000 Gil from two Mythril Daggers and Brave Suit at 26,000 Gil from Mythril Vest + Mythril Rod, agreeing with Fandom and FFUniverse against the lower GameFAQs Shops prices. It does not establish the distinct 8,000-Gil Gauntlets recipe: its table labels the Coronet + Rosetta Ring Circlet formula Gauntlets, while GameFAQs, Fandom, Jegged, and FFUniverse give Mythril Gloves + Dragon Wrist as the separate Gauntlets recipe. At Daguerreo, it lists Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil, including in the Disc IV section; this supplies a later item-type recovery path for the Lich steal. Its Hades table lists all fifteen documented stock recipes: Robe of Lords, Tin Armor, Protect Ring, Pumice, seven Ore-based Jewels, Pumice Piece, Save the Queen, Phoenix Pinion, and Ether, with ingredients and Gil prices.",
+  },
+  {
+    id: "jegged-cotton-robe-trick",
+    title: "Cotton Robe Trick — Tips and Tricks",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Tips-and-Tricks/Cotton-Robe-Trick.html",
+    accessed: "2026-10-26",
+    notes: "Independent Cotton Robe synthesis overview with the 130-Gil Wrist, 260-Gil Steepled Hat, 1,000-Gil synthesis cost, 2,000-Gil sale price, and 610-Gil profit. It lists another Dali Wrist opportunity in Disc III and a separate end-of-disc repeat, but does not identify the later Hilda Garde III free-flight Dali return.",
   },
   {
     id: "jegged-synthesis",

@@ -680,17 +680,31 @@ if (
 }
 const aerialDaliReturn = gameRouteEdgesById.get("detour.aerial-dali-cotton-robe");
 const aerialDaliRejoin = gameRouteEdgesById.get("detour.aerial-dali-rejoin");
+const jeggedDisc3TrenoSource = sources.find((source) => source.id === "jegged-returning-treno-disc-3");
+const jeggedCottonRobeSource = sources.find((source) => source.id === "jegged-cotton-robe-trick");
 if (
   aerialDaliReturn?.relationship !== "optional-return" ||
   aerialDaliReturn.fromChapterId !== "disc-3.aerial-exploration" ||
   aerialDaliReturn.toChapterId !== "disc-1.village-of-dali" ||
   !aerialDaliReturn.summary.includes("Cotton Robe") ||
   !aerialDaliReturn.summary.includes("Wrists") ||
+  !aerialDaliReturn.summary.includes("GameFAQs directly places this Dali trip in the free-flight window") ||
+  !aerialDaliReturn.summary.includes("separate earlier Disc III Dali shop stop") ||
+  !aerialDaliReturn.summary.includes("neither page independently confirms this later Hilda Garde return") ||
   !aerialDaliReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialDaliReturn.sourceIds.includes("jegged-returning-treno-disc-3") ||
+  !aerialDaliReturn.sourceIds.includes("jegged-cotton-robe-trick") ||
+  aerialDaliReturn.sourceIds.includes("gamefaqs-dali-71891") ||
+  !jeggedDisc3TrenoSource?.url.endsWith("/Disc-3/27-Treno.html") ||
+  !jeggedDisc3TrenoSource.notes.includes("earlier Disc III Dali stop") ||
+  !jeggedCottonRobeSource?.url.endsWith("/Cotton-Robe-Trick.html") ||
+  !jeggedCottonRobeSource.notes.includes("does not identify the later Hilda Garde III free-flight Dali return") ||
   aerialDaliRejoin?.relationship !== "rejoin" ||
   aerialDaliRejoin.fromChapterId !== "disc-1.village-of-dali" ||
   aerialDaliRejoin.toChapterId !== "disc-3.aerial-exploration" ||
-  !aerialDaliRejoin.sourceIds.includes("gamefaqs-dali-71891")
+  !aerialDaliRejoin.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  aerialDaliRejoin.sourceIds.includes("gamefaqs-dali-71891") ||
+  !aerialDaliRejoin.summary.includes("GameFAQs' aerial route is the source for this free-flight return")
 ) {
   errors.push("The Disc III Hilda Garde Dali return and rejoin must preserve the optional Cotton Robe route and source links.");
 }
