@@ -510,7 +510,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "mois-and-mognet",
         title: "Free Mois — Lesson 2 and the letter for Gumo",
         summary: "At the last fork before the waterfall, the left path leads to Mois. Free him before taking the right-hand route toward the boss.",
-        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-moogle-faq-23306", "jegged-ice-cavern", "rpgclassics-ice-cavern", "steam-missable-content-guide-2988011418"],
+        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-moogle-faq-23306", "jegged-ice-cavern", "rpgclassics-ice-cavern", "steam-missable-content-guide-2988011418", "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"],
         steps: [
           {
             id: "ice-mois-ate",
@@ -530,7 +530,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "ice-waterfall-path",
             kind: "required",
             text: "Return to the fork and take the right-hand path toward the waterfall. Before following the scene onward, make sure Zidane is equipped with your strongest available weapon and armor and has enough HP for a solo battle.",
-            detail: "The story separates Zidane from the rest of the party for the upcoming fight. Mois is the safe save point immediately beforehand.",
+            detail: "The story separates Zidane from the rest of the party for the upcoming fight. Mois is the safe save point immediately beforehand. Optional Zidane guidance spans Lv. 4–5: a Japanese boss guide recommends Lv. 5+, while the PlayStation Excalibur II route targets Lv. 4 Zidane and Lv. 3 support characters and says lower levels can still win. This is not a minimum. That timer route allows at most two or three quick fights; follow its EXP plan if selected.",
           },
         ],
       },

@@ -205,6 +205,7 @@ const maskedManSources = ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-7914
 const crashSiteBakuSources = ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest", "gamefaqs-walkthrough-15690"];
 const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"];
+const iceCavernSealionSources = [...iceCavernBossSources, "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"];
 const iceCavernStealsObjectiveId = "disc-1.ice-cavern.boss-steals";
 const iceCavernStealsMissableId = "missable.disc-1.ice-cavern.boss-steals";
 const iceCavernStealsCutoffId = "cutoff.ice-cavern.boss-steals";
@@ -4810,9 +4811,17 @@ const iceCavernEnemyRecords: EnemyRecord[] = [
       { title: "Steal the Mythril Dagger early", detail: "The uncommon steal is an important Zidane weapon and teaches Bandit. The steal can be missed when the one-time boss battle ends; the dagger has later purchase paths.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"] },
       { title: "Delay damage until ready to finish the boss", detail: "Sealion changes orb phases as it takes damage. Keep Zidane healed and use Tidal Flame after Trance if available; the guides agree that the late red phase adds Tsunami.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"] },
     ],
+    preparationGuidance: {
+      suggestedLevelRange: { min: 4, max: 5 },
+      levelRationale: "This optional comfort range is for Zidane in the combined Ice Cavern boss encounter. A Japanese boss guide recommends Zidane at Lv. 5 or higher; the original PlayStation Excalibur II route recommends Lv. 4 Zidane and Lv. 3 supporting characters before the fight, while noting that lower levels can still win. These route and build contexts do not establish a universal minimum or a required level for inactive party members.",
+      optionalGrinding: "The PlayStation Excalibur II route allows only two or three quick Ice Cavern encounters before the boss and says this is not a grinding challenge. Follow its timer and EXP plan if selected. In a standard run, extra encounters are optional; the references do not show that grinding is required.",
+      setupAdvice: "Restore Zidane at Mois's save point, equip his strongest available weapon and armor, and bring Potions for the solo phase. The Japanese boss guide recommends entering with at least half the Trance gauge and healing before HP falls below 100; defeat Black Waltz 1 first, then use Tidal Flame if Trance is ready. The PlayStation route notes that Silk Shirt helps slightly against Sealion's Wing but makes Zidane weak to Black Waltz 1's Fire.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"],
+    },
     routeObjectiveIds: [iceCavernStealsObjectiveId],
     notes: ["Orb-color behavior differs between the two walkthroughs: GameFAQs lists Blizzard and then Blizzara across phases, while Jegged gives regular attacks in blue and Blizzard in yellow. The exact spell timing is left source-specific."],
-  }, iceCavernChapterId, iceCavernBossSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
+  }, iceCavernChapterId, iceCavernSealionSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
 ];
 
 const grottoEnemyRecords: EnemyRecord[] = [

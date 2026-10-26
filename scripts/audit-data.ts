@@ -3335,6 +3335,21 @@ if (!iceCavernBossEncounter || iceCavernBossEncounter.kind !== "boss" ||
   !iceCavernBossEncounter.cutoffIds.includes("cutoff.ice-cavern.boss-steals")) {
   errors.push("The Ice Cavern boss encounter must group Black Waltz 1 and Sealion and link the one-time steal objective, warning, and cutoff.");
 }
+const sealionEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.sealion");
+const sealionPreparation = sealionEnemy?.preparationGuidance;
+const sealionLevelRange = sealionPreparation?.suggestedLevelRange;
+const iceMoisAndMognetSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.ice-cavern")
+  ?.sections.find((section) => section.id === "mois-and-mognet");
+const iceWaterfallPreparationStep = iceMoisAndMognetSection?.steps.find((step) => step.id === "ice-waterfall-path");
+if (!sealionPreparation || !sealionLevelRange || sealionLevelRange.min !== 4 || sealionLevelRange.max !== 5 ||
+  !sealionPreparation.levelRationale.includes("do not establish a universal minimum") ||
+  !sealionPreparation.sourceIds.includes("gamefaqs-ice-cavern-79143") ||
+  !sealionPreparation.sourceIds.includes("kamigame-ice-cavern-boss") ||
+  !iceWaterfallPreparationStep?.detail?.includes("Lv. 4–5") ||
+  !iceMoisAndMognetSection?.sourceIds.includes("kamigame-ice-cavern-boss")) {
+  errors.push("Sealion preparation must retain the optional Zidane Lv. 4–5 source comparison in both bestiary and pre-boss route guidance.");
+}
 const iceCavernBossSteals = [
   { enemyId: "enemy.black-waltz-1", itemId: "game-item.remedy" },
   { enemyId: "enemy.black-waltz-1", itemId: "game-item.silk-shirt" },

@@ -1171,6 +1171,14 @@ export const sources = [
     notes: "Excalibur II route and timing context for the cavern and approach to Dali. Its post-boss Mois visit comes after the letter was already collected, so it is not independent evidence that a missed letter can be recovered. Kept separate from the standard completion route.",
   },
   {
+    id: "kamigame-ice-cavern-boss",
+    title: "Black Waltz 1 and Sealion boss guide",
+    publisher: "Kamigame",
+    url: "https://kamigame.jp/FF9/page/139034684062481947.html",
+    accessed: "2026-10-26",
+    notes: "Japanese-language boss guide that recommends Zidane at level 5 or higher, entering with at least half a Trance gauge, healing before HP falls below 100, and defeating Black Waltz 1 before Sealion. The page does not identify a game build or platform; those details remain unverified.",
+  },
+  {
     id: "gamefaqs-enemy-list-71891",
     title: "Enemy List — bover_87",
     publisher: "GameFAQs",
