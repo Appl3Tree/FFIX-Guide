@@ -2601,6 +2601,35 @@ const treasureSweepObjective = "disc-1.burmecia.treasure-sweep";
 const beatrixStealObjective = "disc-1.burmecia.beatrix-steals";
 const stiltzkinObjective = "disc-1.burmecia.stiltzkin-1";
 const stiltzkinBundle = { currency: "gil" as const, amount: 333, bundleId: "burmecia-stiltzkin-first-bundle" };
+const burmeciaMimicLootSources = ["gamefaqs-enemy-list-71891", "drslice-mimic"];
+const burmeciaMimicEncounterSources = ["megane-kangaroo-disc4-burmecia-recovery"];
+const burmeciaMimicChests = [
+  { slug: "suburb-balcony", room: "the Suburb balcony-room Mimic" },
+  { slug: "suburb-stairwell", room: "the Suburb stairwell-room Mimic" },
+  { slug: "uptown", room: "the Uptown Mimic" },
+] as const;
+const burmeciaMimicLootSlots = [
+  { id: "steal-hi-potion", itemId: "game-item.hi-potion", method: "steal", slot: "Common steal", result: "Steal Hi-Potion before defeating this Mimic." },
+  { id: "steal-antidote", itemId: "game-item.antidote", method: "steal", slot: "Uncommon steal", result: "Steal Antidote before defeating this Mimic." },
+  { id: "drop-ether-always", itemId: "game-item.ether", method: "drop", slot: "Always drop", result: "The source-listed Always drop is Ether." },
+  { id: "drop-hi-potion-common", itemId: "game-item.hi-potion", method: "drop", slot: "Common drop", result: "The source-listed Common drop is Hi-Potion (37.5%)." },
+  { id: "drop-phoenix-down-uncommon", itemId: "game-item.phoenix-down", method: "drop", slot: "Uncommon drop", result: "The source-listed Uncommon drop is Phoenix Down (12.5%)." },
+  { id: "drop-ether-rare", itemId: "game-item.ether", method: "drop", slot: "Rare drop", result: "The source-listed Rare drop is another Ether (1/256); it can accompany the Always Ether because drop slots are checked separately." },
+] as const;
+const burmeciaMimicLootPaths: ItemAcquisitionPath[] = burmeciaMimicChests.flatMap((chest) =>
+  burmeciaMimicLootSlots.map((loot) => ({
+    id: `item-path.disc-1.burmecia.mimic-${chest.slug}.${loot.id}`,
+    itemId: loot.itemId,
+    chapterId: "disc-1.burmecia",
+    method: loot.method,
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: `${loot.result}${loot.method === "drop" ? " A drop requires a KO defeat; non-KO defeats do not award drops." : ""}`,
+    notes: `This is ${chest.room}. The first-hand Disc IV run reports the same encounter if this chest was left unopened earlier; it is not a second item opportunity.`,
+    walkthroughObjectiveIds: [treasureSweepObjective],
+    sourceIds: [...burmeciaMimicLootSources, ...burmeciaMimicEncounterSources, ...(loot.method === "drop" ? ["opatil-drop-list"] : [])],
+  })),
+);
 
 type Disc3ShopPathInput = {
   id: string;
@@ -3690,6 +3719,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...daliItemShopStockPaths,
   ...daliUndergroundPickupPaths,
   ...iceCavernChestPaths,
+  ...burmeciaMimicLootPaths,
   {
     id: "item-path.disc-1.alexandria.masked-man-potion-steal",
     itemId: "game-item.potion",
