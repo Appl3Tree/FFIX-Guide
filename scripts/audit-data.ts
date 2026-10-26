@@ -2546,6 +2546,8 @@ const treasureHunterFormulaWarnings = [
   "missable.disc-3.lost-continent.mount-gulug-sweep",
   "missable.disc-3.portal-to-another-world.terra-bran-bal-treasures",
   "missable.disc-2.cleyra.antlion-steals",
+  "missable.disc-2.cleyra.beatrix-steals",
+  "missable.disc-2.return-to-alexandria.beatrix-steals",
 ];
 const rankGuide = sources.find((source) => source.id === "jegged-treasure-hunter");
 const rankFormulaCrossCheck = sources.find((source) => source.id === "gamefaqs-chocobo-hot-cold-ysf-9771");

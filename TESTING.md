@@ -77,7 +77,7 @@ The Disc II boss-steal recovery update passes `npm run lint`, `npm run build` (i
 
 ## Latest change status
 
-The Treasure Hunter rank notes now state the published scoring categories and 340-point Rank S threshold. Chests and hidden field icons are one point each, Chocobo world-map treasure chests are two, and Hot & Cold digs/Stiltzkin purchases score zero. The 13 affected warnings no longer imply that one missed pickup automatically blocks Rank S; the auction exception conflict, battle-steal category gap, and uncertain fixed/Gil interactions remain visible. Static checks and the production build pass; tests, browser, gameplay, and release verification were not run.
+The Treasure Hunter rank notes now state the published scoring categories and 340-point Rank S threshold. Chests and hidden field icons are one point each, Chocobo world-map treasure chests are two, and Hot & Cold digs/Stiltzkin purchases score zero. Fifteen pickup/steal warnings now explain that the sources do not list battle steals as a rank category and that one missed qualifying chest does not by itself establish a Rank S lockout; the auction exception conflict and uncertain fixed/Gil interactions remain visible. Static checks and the production build pass; tests, browser, gameplay, and release verification were not run.
 
 The Treno warning now distinguishes the forced in-city fallback reported by GameFAQs from the possible tower-return trigger reported by EliteGrindLab. The conservative six-scene route remains the recommendation; the final trigger and modern-release behavior are still unknown.
 

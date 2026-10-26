@@ -1819,7 +1819,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-antlion-evacuation",
         title: "Antlion, evacuation, and the Cleyra cutoff",
         summary: "Try the Antlion steals, claim the post-battle rewards, then follow the safe evacuation route and survive Beatrix's scripted battle.",
-        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet"],
+        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "cleyra-antlion-steals",
@@ -1867,7 +1867,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-beatrix-steals",
             kind: "combat",
             text: "Before leaving the Cathedral, remove Quina's Add-on and any transferable gear you want available to the remaining party. Save, then exit to begin the one-time Beatrix battle and attempt to steal Phoenix Down, Thunder Gloves, and Ice Brand while keeping everyone alive.",
-            detail: "Quina leaves the active party after Cleyra; equipped items remain associated with Quina until the character rejoins, so remove any gear you want other characters to use in the meantime. The bestiary cross-checks Beatrix's level and HP and preserves the older boss guide's conflicting MP figure. GameFAQs says the battle ends after ten turns or at 0 HP, while Jegged describes her as undefeatable; Stock Break leaves the party at 1 HP either way. After the battle, the story moves to the Red Rose and Cleyra is no longer accessible. Focus on survival and steals.",
+            detail: "Quina leaves the active party after Cleyra; equipped items remain associated with Quina until the character rejoins, so remove any gear you want other characters to use in the meantime. The bestiary cross-checks Beatrix's level and HP and preserves the older boss guide's conflicting MP figure. GameFAQs says the battle ends after ten turns or at 0 HP, while Jegged describes her as undefeatable; Stock Break leaves the party at 1 HP either way. The rank references do not list battle steals as score categories, so treat these as optional item-copy attempts rather than confirmed Rank S points. After the battle, the story moves to the Red Rose and Cleyra is no longer accessible. Focus on survival and steals.",
             objectiveIds: ["disc-2.cleyra.beatrix-steals"],
           },
           {
@@ -1910,7 +1910,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "return-alexandria-cage-and-timer",
         title: "Alexandria Castle — cage escape and timed route",
         summary: "Remove Marcus's useful equipment before he leaves, then follow the shortest route to Dagger.",
-        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2"],
+        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "return-alexandria-cage",
@@ -1971,7 +1971,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "return-alexandria-beatrix-steals",
             kind: "combat",
             text: "On the return to the Queen's Room, strip Freya's Add-on before the scripted Beatrix battle. Have Zidane attempt Phoenix Down, Ice Brand, and Survival Vest while the party stays alive; let the fight end normally instead of trying to defeat Beatrix.",
-            detail: "Slow can extend the scripted window. This is Beatrix's third encounter: Survival Vest is the listed third steal, while Thunder Gloves belonged to the earlier Cleyra fight. Stop stealing and heal if the party is at risk.",
+            detail: "Slow can extend the scripted window. This is Beatrix's third encounter: Survival Vest is the listed third steal, while Thunder Gloves belonged to the earlier Cleyra fight. The published rank categories do not list battle steals, so this encounter is not counted as a confirmed source of Treasure Hunter points. Stop stealing and heal if the party is at risk.",
             objectiveIds: ["disc-2.return-to-alexandria.beatrix-steals"],
           },
         ],
