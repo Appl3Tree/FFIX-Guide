@@ -1622,9 +1622,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.card-tournament-to-trouble-on-home-front",
     title: "Mogrich's New Champion letter during the Treno tournament",
     certainty: "conservative",
-    trigger: "For this optional mail entry, check Mogrich in the Knight's House while the Card Tournament is in progress. Cour89 lists it after Hippaul reaches level 20; if it is not available yet, race Hippaul further and read it before starting the third game. Older PlayStation sources describe the racing condition differently, and later Treno availability is unverified.",
+    trigger: "Check Mogrich in the Knight's House during the Card Tournament after Hippaul reaches level 20. A French PlayOnline-guide transcription says the letter is sent only after level 20, so if it is absent, race to at least level 21 and check again before starting the third game. Older PlayStation sources describe the condition differently; later Treno availability is unverified.",
     missableIds: ["missable.disc-3.card-tournament.mogrich-letter"],
-    sourceIds: ["cour89-mognet-letters", "gamefaqs-card-tournament-71891", "gamefaqs-moogle-faq-23306", "rpgclassics-treno-tournament", "flactem-mognet"],
+    sourceIds: ["cour89-mognet-letters", "playonline-guide-fr-fhiprace", "gamefaqs-hippaul-racing-10181", "gamefaqs-card-tournament-71891", "gamefaqs-moogle-faq-23306", "rpgclassics-treno-tournament", "flactem-mognet"],
   },
   {
     id: "cutoff.card-tournament.treno-prizes",

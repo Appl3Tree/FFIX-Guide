@@ -5526,6 +5526,8 @@ for (const warningId of earlierMognetLetterWarnings) {
   }
 }
 const cour89MognetLetters = sources.find((source) => source.id === "cour89-mognet-letters");
+const playOnlineFrenchHippaulGuide = sources.find((source) => source.id === "playonline-guide-fr-fhiprace");
+const gamefaqsHippaulRacing = sources.find((source) => source.id === "gamefaqs-hippaul-racing-10181");
 const gamefaqsMoogleFaq = sources.find((source) => source.id === "gamefaqs-moogle-faq-23306");
 const gamefaqsCardTournament = sources.find((source) => source.id === "gamefaqs-card-tournament-71891");
 const mogrichLetterObjective = objectivesById.get("disc-3.card-tournament.mogrich-letter");
@@ -5538,31 +5540,43 @@ const mogrichTournamentSection = walkthroughChapters
 const mogrichTournamentStep = mogrichTournamentSection?.steps.find((step) => step.id === "card-tournament-mogrich-letter");
 if (
   !cour89MognetLetters?.notes.includes("New Champion letter")
-  || !cour89MognetLetters.notes.includes("level 20 while the Treno Card Tournament is underway")
+  || !cour89MognetLetters.notes.includes("level 20 or higher while the Treno Card Tournament is underway")
   || !cour89MognetLetters.notes.includes("level 60 or above")
+  || !playOnlineFrenchHippaulGuide?.notes.includes("exceeds 20 (>20)")
+  || !gamefaqsHippaulRacing?.notes.includes("does not say the letter first unlocks only at level 80")
   || !gamefaqsMoogleFaq?.notes.includes("if Hippaul has been raced")
   || !gamefaqsCardTournament?.notes.includes("if Athlete Queen was won")
   || !mogrichLetterObjective?.title.includes("New Champion")
   || !mogrichLetterObjective.sourceIds.includes("cour89-mognet-letters")
+  || !mogrichLetterObjective.sourceIds.includes("playonline-guide-fr-fhiprace")
+  || !mogrichLetterObjective.sourceIds.includes("gamefaqs-hippaul-racing-10181")
   || !mogrichLetterWarning?.classification.includes("conditional")
+  || !mogrichLetterWarning.consequence.includes("at least level 21")
   || !mogrichLetterWarning.consequence.includes("do not establish the earliest unlock")
   || !mogrichLetterWarning.consequence.includes("does not block the separate Disc IV Mognet Central repair chain")
   || !mogrichLetterWarning.recovery.includes("later Treno visit remains unverified")
   || !mogrichLetterWarning.sourceIds.includes("gamerguides-mognet-central")
+  || !mogrichLetterWarning.sourceIds.includes("playonline-guide-fr-fhiprace")
+  || !mogrichLetterWarning.sourceIds.includes("gamefaqs-hippaul-racing-10181")
   || mogrichLetterCutoff?.certainty !== "conservative"
   || mogrichLetterCutoff.edgeId !== cardTournamentActivityCutoff?.edgeId
   || mogrichLetterCutoff.missableIds.length !== 1
   || !mogrichLetterCutoff.missableIds.includes(mogrichLetterWarning.id)
   || !mogrichLetterCutoff.trigger.includes("level 20")
+  || !mogrichLetterCutoff.trigger.includes("at least level 21")
   || !mogrichLetterCutoff.trigger.includes("before starting the third game")
   || cardTournamentActivityCutoff?.missableIds.includes(mogrichLetterWarning.id)
   || !mogrichTournamentSection?.sourceIds.includes("cour89-mognet-letters")
+  || !mogrichTournamentSection.sourceIds.includes("playonline-guide-fr-fhiprace")
+  || !mogrichTournamentSection.sourceIds.includes("gamefaqs-hippaul-racing-10181")
   || !mogrichTournamentStep?.objectiveIds.includes(mogrichLetterObjective.id)
   || !mogrichTournamentStep.text.includes("level 20")
+  || !mogrichTournamentStep.text.includes("level 21")
   || !mogrichTournamentStep.detail?.includes("Athlete Queen")
-  || !mogrichTournamentStep.detail.includes("later Treno availability is unverified")
+  || !mogrichTournamentStep.detail.includes("above level 20")
+  || !mogrichTournamentStep.detail.includes("Treno availability remains unverified")
 ) {
-  errors.push("Mogrich's optional New Champion letter must preserve Cour89's current-release level-20 tournament condition, the older PlayStation condition differences, a separate conservative pre-final-game cutoff, and independence from Mognet Central repair.");
+  errors.push("Mogrich's optional New Champion letter must preserve the Cour89 level-20 and French guide above-20 discrepancy, the level-21 fallback, older PlayStation wording, a conservative pre-final-game cutoff, and independence from Mognet Central repair.");
 }
 const namingwayObjective = objectivesById.get("disc-3.card-tournament.namingway-card");
 const namingwayWarning = missablesById.get("missable.disc-3.card-tournament.namingway-card");

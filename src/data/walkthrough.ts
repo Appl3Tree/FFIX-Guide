@@ -3710,13 +3710,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "card-tournament-treno-sweep",
         title: "Treno side stops — mail, Catoblepas, Stellazzio, and auction",
         summary: "Return to Treno and complete the optional errands before entering the third match.",
-        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "jegged-stellazzio"],
+        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "cour89-mognet-letters", "playonline-guide-fr-fhiprace", "gamefaqs-hippaul-racing-10181", "gamefaqs-moogle-faq-23306", "gamefaqs-treno-auction-71891", "jegged-stellazzio"],
         steps: [
           {
             id: "card-tournament-mogrich-letter",
             kind: "save",
-            text: "Visit Mogrich in the Knight's House and choose Mognet. Cour89 lists Kupo's New Champion letter after Hippaul reaches level 20 while the Card Tournament is in progress; read it before starting the third game.",
-            detail: "The older PlayStation tournament guide notes the letter if Athlete Queen was won but does not establish that as the earliest unlock; the Moogle FAQ says Hippaul must have been raced. If it is absent at level 20, race Hippaul further and check again before the final match. Cour89 says the letter names Hippaul at levels 20–59 and Vivi at level 60 or above; later Treno availability is unverified. This optional Disc III entry does not gate the separate Disc IV Mognet Central repair quest.",
+            text: "After Hippaul reaches level 20, check Mogrich in the Knight's House for Kupo's New Champion letter. If it is absent, race until Hippaul is at least level 21 and check again before starting the third game.",
+            detail: "Cour89 lists level 20 or higher while the tournament is active; a French PlayOnline-guide transcription says above level 20, so use the second check to cover both wordings. Older PlayStation sources say to race Hippaul or mention the letter after Athlete Queen, but do not establish the earliest unlock. Cour89 and the Moogle FAQ say the displayed name changes to Vivi around level 60, while the dedicated Hippaul Racing FAQ associates Vivi's text with Athlete Queen; that naming conflict does not establish the unlock threshold. Later Treno availability remains unverified. This optional Disc III entry does not gate the separate Disc IV Mognet Central repair quest.",
             objectiveIds: ["disc-3.card-tournament.mogrich-letter"],
           },
           {
