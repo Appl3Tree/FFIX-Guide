@@ -1072,7 +1072,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/04-The-Evil-Forest.html",
     accessed: "2026-10-23",
-    notes: "Independent route and boss cross-check for cages, wreckage pickups, Cinna's shop, Monty, the spring, Plant Brain, and escape. Its recommended level 3–4 and published steal probabilities are treated as secondary guidance, not universal requirements.",
+    notes: "Independent route and boss cross-check for cages, wreckage pickups, Cinna's shop, Monty, the spring, Plant Brain, and escape. Its recommended level 3–4 is treated as secondary comfort guidance, not a universal requirement; its published steal probabilities are also secondary and are not normalized where sources disagree.",
   },
   {
     id: "vgkami-evil-forest",
@@ -1080,7 +1080,15 @@ export const sources = [
     publisher: "VGKAMI",
     url: "https://vgkami.com/walkthrough/final-fantasy-ix/evil-forest/",
     accessed: "2026-10-23",
-    notes: "Independent cross-check for the crashed-ship item list, Prison Cage sequence, unlocked post-Baku Ether, Mognet, Plant Brain, and Blank's equipment handoff.",
+    notes: "Independent cross-check for the crashed-ship item list, Prison Cage sequence, unlocked post-Baku Ether, Mognet, Plant Brain, and Blank's equipment handoff. Its walkthrough suggests level 3 as a preparation goal before Plant Brain, not a required threshold.",
+  },
+  {
+    id: "gamefaqs-no-equipment-29826",
+    title: "FFIX No Equipment Challenge FAQ by Ultima13",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/29826",
+    accessed: "2026-10-26",
+    notes: "A PlayStation no-equipment challenge walkthrough recommends reaching level 4 or 5 before Plant Brain. This is route-specific secondary preparation advice; it does not establish a normal-playthrough minimum or prove that grinding is needed.",
   },
   {
     id: "gamerguides-evil-forest",

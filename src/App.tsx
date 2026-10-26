@@ -1559,6 +1559,14 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
       ...enemy.facts.flatMap((fact) => [fact.label, fact.detail ?? ""]),
       ...enemy.blueMagic.map((entry) => entry.name),
       ...enemy.strategies.flatMap((strategy) => [strategy.title, strategy.detail]),
+      ...(enemy.preparationGuidance ? [
+        enemy.preparationGuidance.levelRationale,
+        enemy.preparationGuidance.optionalGrinding,
+        enemy.preparationGuidance.setupAdvice,
+        ...(enemy.preparationGuidance.suggestedLevelRange ? [
+          `level ${enemy.preparationGuidance.suggestedLevelRange.min} ${enemy.preparationGuidance.suggestedLevelRange.max}`,
+        ] : []),
+      ] : []),
       ...enemy.steals.map((entry) => lootItemName(entry.itemId, entry.itemName)),
       ...enemy.drops.map((entry) => lootItemName(entry.itemId, entry.itemName)),
     ].join(" ").toLowerCase();
@@ -1658,8 +1666,19 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
                       {enemy.blueMagic.map((entry) => <p key={entry.name}><strong>{entry.name}</strong> — Quina learns it with {entry.command}.</p>)}
                     </div>}
                   </section>
-                  <section className="enemy-detail-section" aria-label={`${enemy.name} route notes`}>
-                    <h3>Route notes</h3>
+                  <section className="enemy-detail-section" aria-label={`${enemy.name} route and preparation notes`}>
+                    <h3>Route and preparation</h3>
+                    {enemy.preparationGuidance && <div className="enemy-preparation-guidance">
+                      <h4>Optional preparation guidance</h4>
+                      <p>{enemy.preparationGuidance.suggestedLevelRange && <><strong>Optional level range:</strong> Lv. {enemy.preparationGuidance.suggestedLevelRange.min}–{enemy.preparationGuidance.suggestedLevelRange.max}. </>}{enemy.preparationGuidance.levelRationale}</p>
+                      <p><strong>Grinding:</strong> {enemy.preparationGuidance.optionalGrinding}</p>
+                      <p><strong>Setup:</strong> {enemy.preparationGuidance.setupAdvice}</p>
+                      <p className="enemy-preparation-confidence"><strong>Evidence status:</strong> {enemy.preparationGuidance.confidence === "partial" ? "Partial; source recommendations vary and are not gameplay-tested." : "Disputed; compare the linked sources."}</p>
+                      <div className="enemy-preparation-sources"><span>Guidance sources</span>{enemy.preparationGuidance.sourceIds.map((sourceId) => {
+                        const source = sources.find((item) => item.id === sourceId);
+                        return source ? <a key={sourceId} href={source.url} target="_blank" rel="noreferrer">{source.title}<ExternalLink size={10} aria-hidden="true" /></a> : null;
+                      })}</div>
+                    </div>}
                     <ul className="enemy-strategies">{enemy.strategies.map((strategy) => <li key={strategy.title}><strong>{strategy.title}</strong><span>{strategy.detail}</span></li>)}</ul>
                     {encounterTitles.length > 0 && <div className="enemy-encounter-list"><h4>Encounter locations</h4><ul>{encounterTitles.map((encounter) => <li key={encounter.id}><strong>{encounter.kind === "random-pool" ? "Random encounter pool" : encounter.kind === "boss" ? "Story boss" : "Fixed encounter"}</strong><span>{encounter.title}</span><small>{encounter.location}</small></li>)}</ul></div>}
                     {enemy.notes.map((note) => <p className="enemy-conflict-note" key={note}>{note}</p>)}

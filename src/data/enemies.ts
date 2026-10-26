@@ -36,6 +36,15 @@ export type EnemyStrategy = {
   sourceIds: string[];
 };
 
+export type EnemyPreparationGuidance = {
+  suggestedLevelRange?: { min: number; max: number };
+  levelRationale: string;
+  optionalGrinding: string;
+  setupAdvice: string;
+  confidence: "partial" | "disputed";
+  sourceIds: string[];
+};
+
 export type EnemyRecord = {
   id: string;
   name: string;
@@ -49,6 +58,7 @@ export type EnemyRecord = {
   facts: EnemyFact[];
   blueMagic: EnemyBlueMagic[];
   strategies: EnemyStrategy[];
+  preparationGuidance?: EnemyPreparationGuidance;
   routeObjectiveIds: string[];
   missableIds: string[];
   cutoffIds: string[];
@@ -293,7 +303,7 @@ const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memo
 const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
 const finalBattleStatsSources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"];
 const ozmaEnemySources = ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891", "gamefaqs-final-preparations-71891"];
-type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "routeObjectiveIds" | "notes">;
+type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "preparationGuidance" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
   return {
@@ -4537,9 +4547,17 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       { title: "Use Fire and steal before defeating it", detail: "Vivi's Fire and Steiner's Fire Sword exploit Plant Brain's weakness. Steal Eye Drops and Iron Helm before the one-time battle ends; Blank joins during the fight if the party needs another thief.", sourceIds: evilForestBossSources },
       { title: "Tent can disable its magic", detail: "GameFAQs describes a 50% chance for a thrown Tent to inflict Darkness and Silence, but the item also restores Plant Brain to full HP. This is an optional tactic, not a completion requirement.", sourceIds: ["gamefaqs-evil-forest-71891"] },
     ],
+    preparationGuidance: {
+      suggestedLevelRange: { min: 3, max: 5 },
+      levelRationale: "Optional comfort range summarized from secondary recommendations: VGKAMI suggests level 3, Jegged lists level 3–4, and a PlayStation no-equipment challenge guide suggests level 4–5. These are route recommendations, not a tested minimum or requirement; the 4–5 suggestion is specific to that challenge route.",
+      optionalGrinding: "Monty's spring restores HP and MP for free, so a short grind is available if the fight feels risky. It is not needed for story progress; on an Excalibur II route, follow the selected timer and EXP plan instead of adding unbudgeted battles.",
+      setupAdvice: "Arrive healed, keep Vivi able to act, use Fire and Fire Sword, and bring Eye Drops for Pollen's Darkness. Rubber Helm or Silk Shirts can reduce Thunder damage when available.",
+      confidence: "partial",
+      sourceIds: ["vgkami-evil-forest", "jegged-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"],
+    },
     routeObjectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
     notes: ["GameFAQs and Jegged agree on 916 HP. The Hellplant/Plant Brain type is not assigned because the inspected boss table does not list a type."],
-  }, evilForestChapterId, evilForestBossSources, ["missable.disc-1.evil-forest.plant-brain-steals"], ["cutoff.evil-forest.escape"]),
+  }, evilForestChapterId, [...evilForestBossSources, "vgkami-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"], ["missable.disc-1.evil-forest.plant-brain-steals"], ["cutoff.evil-forest.escape"]),
   chapterBoss({
     id: "enemy.baku-crash-site",
     name: "Baku (Prima Vista Crash Site)",

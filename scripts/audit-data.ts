@@ -457,6 +457,24 @@ for (const enemy of enemyRecords) {
       else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits ${sourceId} from its record source list.`);
     }
   }
+  if (enemy.preparationGuidance) {
+    const guidance = enemy.preparationGuidance;
+    if (guidance.confidence !== "partial" && guidance.confidence !== "disputed") {
+      errors.push(`Enemy ${enemy.id} has unsupported preparation confidence ${guidance.confidence}.`);
+    }
+    if (!guidance.levelRationale.trim() || !guidance.optionalGrinding.trim() || !guidance.setupAdvice.trim()) {
+      errors.push(`Enemy ${enemy.id} has incomplete preparation guidance.`);
+    }
+    const levelRange = guidance.suggestedLevelRange;
+    if (levelRange && (!Number.isInteger(levelRange.min) || !Number.isInteger(levelRange.max) || levelRange.min < 1 || levelRange.max < levelRange.min)) {
+      errors.push(`Enemy ${enemy.id} has an invalid optional level range.`);
+    }
+    if (guidance.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} preparation guidance has no source provenance.`);
+    for (const sourceId of guidance.sourceIds) {
+      if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} preparation guidance references unknown source ${sourceId}.`);
+      else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits preparation source ${sourceId} from its record source list.`);
+    }
+  }
   validateEnemyReferences(`Enemy ${enemy.id}`, enemy.routeObjectiveIds, enemy.missableIds, enemy.cutoffIds, enemy.chapterId);
   for (const encounterId of enemy.encounterIds) if (!enemyCatalogCoverage.encounterIds.includes(encounterId)) errors.push(`Enemy ${enemy.id} encounter ${encounterId} is missing from coverage inventory.`);
 }

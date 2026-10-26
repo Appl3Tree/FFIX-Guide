@@ -570,6 +570,15 @@ h1, h2, p { margin-top: 0; }
 .enemy-detail-grid { display: grid; grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); column-gap: 24px; row-gap: 18px; }
 .enemy-detail-section { min-width: 0; padding-top: 10px; border-top: 1px solid #eae8df; }
 .enemy-detail-section h3 { margin: 0 0 9px; color: #48574f; font: 600 10px var(--mono); letter-spacing: .04em; text-transform: uppercase; }
+.enemy-preparation-guidance { display: grid; gap: 7px; margin: 0 0 12px; padding: 11px 12px; border: 1px solid #e5e5d9; border-radius: 8px; background: #f7f7f0; }
+.enemy-preparation-guidance h4 { margin: 0; color: #53685b; font-size: 11px; font-weight: 650; }
+.enemy-preparation-guidance p { margin: 0; color: #59655d; font-size: 11px; line-height: 1.55; }
+.enemy-preparation-guidance p strong { color: #46584d; }
+.enemy-preparation-guidance .enemy-preparation-confidence { color: #818a7e; font-size: 10px; }
+.enemy-preparation-sources { display: flex; flex-wrap: wrap; align-items: center; gap: 5px 10px; margin-top: 1px; }
+.enemy-preparation-sources > span { color: #8a9189; font: 8px var(--mono); text-transform: uppercase; }
+.enemy-preparation-sources a { display: inline-flex; align-items: center; gap: 3px; color: #637a6d; font-size: 9px; text-decoration: none; }
+.enemy-preparation-sources a:hover, .enemy-preparation-sources a:focus-visible { color: #3f6459; text-decoration: underline; }
 .enemy-stat-list, .enemy-loot-tables dl, .enemy-combat-facts > dl { display: grid; gap: 6px; margin: 0; }
 .enemy-stat-list > div, .enemy-loot-tables dl > div, .enemy-combat-facts > dl > div { min-width: 0; display: grid; grid-template-columns: 94px minmax(0, 1fr); gap: 9px; }
 .enemy-stat-list dt, .enemy-loot-tables dt, .enemy-combat-facts dt { color: #869087; font-size: 9px; }

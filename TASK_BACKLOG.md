@@ -372,9 +372,10 @@ Alexandria North Street count review: added Kyokugen's Japanese town map, which 
 ### B07 — Add evidence-based levels, difficulty, and preparation guidance
 
 - **Priority:** Required
-- **Status:** Not started
+- **Status:** In progress
 - **Owner:** Codex
-- **Next work:** Establish a source-backed standard for expected level ranges, difficulty, party configuration, equipment/ability preparation, and optional grinding at meaningful milestones; keep Excalibur II/low-experience routes distinct.
+- **Latest milestone (2026-10-26):** Started a reusable optional enemy-preparation record and bestiary display with Plant Brain. VGKAMI suggests level 3, Jegged 3–4, and a PlayStation no-equipment challenge guide 4–5; the guide summarizes these as an optional comfort range rather than a minimum. The record also explains the free spring, Fire/Thunder setup, and the need to follow the separate Excalibur II timer/EXP route. Source links and level-range integrity are checked by the data audit. Gameplay testing and wider coverage remain open.
+- **Next work:** Extend the source-backed schema to other meaningful bosses and chapter milestones. Reconcile expected level ranges, difficulty, party/equipment/ability setup, and optional grinding per standard route while keeping Excalibur II/low-experience routes and version differences distinct. Mark unsupported guidance partial instead of inventing values.
 - **Completion evidence:** Every chapter and meaningful boss has guidance grounded in comparable version/route evidence or is explicitly labeled when sources cannot support a recommendation; no guessed level values.
 - **Dependencies:** B01, B04, B05, B06.
 
