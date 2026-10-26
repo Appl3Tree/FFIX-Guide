@@ -5812,6 +5812,41 @@ if (!malirisWarning?.classification.includes("recoverable-later") ||
   !malirisWalkthroughStep.detail.includes("Genji Armor Need 3 but only two sources")) {
   errors.push("Maliris's one-time steals must be linked to the documented Chocograph, Daguerreo shop, and Disc IV Masamune synthesis routes, with the Genji Armor copy-count conflict preserved.");
 }
+const lichWarning = missablesById.get("missable.disc-4.memoria.lich-steals");
+const lichStealObjective = objectivesById.get("disc-4.memoria.lich-steals");
+const genjiGlovesDivePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.genji-gloves-dive-spot-1");
+const blackRobeDivePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.black-robe-dive-spot-1");
+const sirensFluteShopPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.black-mage-village.weapon-shop.sirens-flute");
+const blackRobeSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.black-robe-synthesis");
+const blackRobeRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.black-robe");
+const lichWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-lich-steals");
+if (!lichWarning?.classification.includes("recoverable-later") ||
+  !lichWarning.classification.includes("limited-quantity") ||
+  !lichWarning.nextAvailability?.includes("Siren's Flute for 7,000 Gil") ||
+  !lichWarning.nextAvailability.includes("Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil") ||
+  !lichWarning.nextAvailability.includes("Genji Gloves Need 3") ||
+  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis"].every((sourceId) => lichStealObjective?.sourceIds.includes(sourceId)) ||
+  !genjiGlovesDivePath?.walkthroughObjectiveIds?.includes("disc-4.memoria.lich-steals") ||
+  !blackRobeDivePath?.walkthroughObjectiveIds?.includes("disc-4.memoria.lich-steals") ||
+  !sirensFluteShopPath || sirensFluteShopPath.method !== "shop" || sirensFluteShopPath.cost?.amount !== 7000 ||
+  !sirensFluteShopPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !sirensFluteShopPath.walkthroughObjectiveIds?.includes("disc-4.memoria.lich-steals") ||
+  !blackRobeRecipe || blackRobeRecipe.cost.amount !== 8000 ||
+  blackRobeRecipe.resultItemId !== "game-item.black-robe" ||
+  !blackRobeRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.gaia-gear") ||
+  !blackRobeRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.n-kai-armlet") ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"].every((sourceId) => blackRobeRecipe.sourceIds.includes(sourceId)) ||
+  !blackRobeSynthesisPath || blackRobeSynthesisPath.recipeId !== "synthesis-recipe.black-robe" ||
+  blackRobeSynthesisPath.method !== "synthesis" || blackRobeSynthesisPath.cost?.amount !== 8000 ||
+  !blackRobeSynthesisPath.walkthroughObjectiveIds?.includes("disc-4.memoria.lich-steals") ||
+  !lichWalkthroughStep?.detail?.includes("Siren's Flute on Disc IV for 7,000 Gil") ||
+  !lichWalkthroughStep.detail.includes("Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil") ||
+  !lichWalkthroughStep.detail.includes("Genji Gloves Need 3")) {
+  errors.push("Lich's one-time steals must link the Dive Spot #1 copies, the Siren's Flute Disc IV shop, the Black Robe Disc IV synthesis route, and the unresolved Genji Gloves quantity target.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }

@@ -6,7 +6,7 @@ Last updated: 2026-10-25
 
 The project records the claim, source, relevant section, version/platform, access date, verification state, and known conflict for each fact. Walkthroughs are used for scope discovery and fact checking, not copied prose. Critical deadlines and missable consequences require corroboration. Where references disagree, the conflict stays open until evidence resolves it.
 
-The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 365-source register and walkthrough do not establish that the game's content has been comprehensively researched.
+The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 377-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
 ## FFIX references inspected
 
@@ -538,3 +538,9 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 - `partial`: implemented with known gaps.
 - `implemented-unverified`: record exists but still needs independent or platform verification.
 - `verified`: source evidence checked and connected to its current content relationships. This label does not replace full playthrough review.
+
+## Lich steal recovery check (2026-10-25)
+
+- [GameFAQs Memoria](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/memoria) and [RPGClassics Memoria](https://shrines.rpgclassics.com/psx/ffix/memoria.shtml) list Lich's one-time Genji Gloves, Siren's Flute, and Black Robe steals. The [GameFAQs Items table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists Genji Gloves from Dive Spot #1 and Lich, with Need 3 and end-inventory #2. That target remains unresolved against those two listed sources.
+- [GameFAQs Chocobo Hot & Cold](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold) says Dead Pepper Dive Spot #1 is a small inlet at the south tip of the Forgotten Continent, requires Ocean Ability, and rewards 10 Remedy, Black Robe, Genji Gloves, and Blue Narciss Card. It is an alternate item source only while the cache is unclaimed.
+- The [GameFAQs Shops table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists Siren's Flute for 7,000 Gil at Black Mage Village on Disc IV. The [GameFAQs Items](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) and [RPGClassics synthesis table](https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml) list Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil at Daguerreo, including its Disc IV window. These paths recover item types, not the lost Lich steal copies.

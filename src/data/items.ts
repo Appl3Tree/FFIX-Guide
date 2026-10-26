@@ -2466,7 +2466,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.blood-sword", name: "Blood Sword", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-treno-71891"], verification: "partial" },
   { id: "game-item.grand-helm", name: "Grand Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-equipment-33383", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
   { id: "game-item.genji-gloves", name: "Genji Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
-  { id: "game-item.black-robe", name: "Black Robe", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
+  { id: "game-item.black-robe", name: "Black Robe", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.black-belt", name: "Black Belt", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-crystal-world"], verification: "partial" },
   { id: "game-item.duel-claws", name: "Duel Claws", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-crystal-world"], verification: "partial" },
   { id: "game-item.genji-helmet", name: "Genji Helmet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "rpgclassics-memoria", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
@@ -2720,6 +2720,11 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
         walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.maliris-steals"],
         sourceIds: [...disc4ShopSources, "gamefaqs-items-71891"],
       }
+      : itemSlug === "sirens-flute"
+        ? {
+          walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.lich-steals"],
+          sourceIds: [...disc4ShopSources, "gamefaqs-items-71891"],
+        }
       : { sourceIds: disc4ShopSources }),
 }));
 
@@ -7189,6 +7194,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "single-use",
     conditions: "Dead Pepper Dive Spot #1 on the south tip of the Forgotten Continent yields one Genji Gloves; Choco needs the Ocean ability and the treasure consumes a Dead Pepper.",
+    walkthroughObjectiveIds: ["disc-4.memoria.lich-steals"],
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891"],
   },
   {
@@ -7199,7 +7205,23 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "single-use",
     conditions: "Dead Pepper Dive Spot #1 on the south tip of the Forgotten Continent yields one Black Robe; Choco needs the Ocean ability and the treasure consumes a Dead Pepper.",
+    walkthroughObjectiveIds: ["disc-4.memoria.lich-steals"],
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891"],
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.black-robe-synthesis",
+    itemId: "game-item.black-robe",
+    chapterId: "disc-4.return-to-gaia",
+    method: "synthesis",
+    recipeId: "synthesis-recipe.black-robe",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo, Disc IV)",
+    cost: { currency: "gil", amount: 8000 },
+    conditions: "Synthesize Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil at Daguerreo on Disc IV.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.lich-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
   },
   {
     id: "item-path.disc-3.the-home-front.feather-boots-alexandria-synthesis",

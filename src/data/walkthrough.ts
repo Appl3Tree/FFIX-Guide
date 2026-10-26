@@ -6503,7 +6503,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-time-warp-and-lich",
         title: "Time Warp and Gate to Space — Lich and Excalibur II",
         summary: "Use the hidden save point, collect Mace of Zeus, and take the brief Nero Family checkpoint before the Lich trigger.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-nero-brothers-71891", "gamefaqs-perfect-game-41181", "gamefaqs-memoria-79143", "gamefaqs-achievements-71891"],
+        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-nero-brothers-71891", "gamefaqs-perfect-game-41181", "gamefaqs-memoria-79143", "gamefaqs-achievements-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis"],
         steps: [
           {
             id: "memoria-time-warp-checkpoint-13",
@@ -6530,7 +6530,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-lich-steals",
             kind: "combat",
             text: "Before Lich, bring Zidane, remove anyone whose level is divisible by five if possible, and equip Earth protection, Antibody, Locomotion, and Devil Killer. Steal Genji Gloves, Siren's Flute, and Black Robe; attack with Fire, Wind, or Holy and apply Slow.",
-            detail: "Lich absorbs Earth and resists Shadow. LV5 Death KOs characters whose levels are multiples of five; other threats include Death, Stop, Doom, Venom, and Earth attacks. Do not cast Doomsday, which Lich absorbs. Phoenix Pinion is the listed guaranteed drop.",
+            detail: "Lich absorbs Earth and resists Shadow. LV5 Death KOs characters whose levels are multiples of five; other threats include Death, Stop, Doom, Venom, and Earth attacks. Do not cast Doomsday, which Lich absorbs. Phoenix Pinion is the listed guaranteed drop. If a steal is missed, unclaimed Dead Pepper Dive Spot #1 yields Genji Gloves and Black Robe; Black Mage Village sells Siren's Flute on Disc IV for 7,000 Gil, and Daguerreo synthesizes Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil. GameFAQs lists Genji Gloves Need 3 despite listing Dive Spot #1 and Lich as its sources and end-inventory #2, so the target remains unresolved. These routes do not recover Lich's steal copies.",
             objectiveIds: ["disc-4.memoria.lich-steals", "disc-4.memoria.lich-achievement"],
           },
           {

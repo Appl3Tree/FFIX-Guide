@@ -326,6 +326,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Mythril Fork + Cotton Robe makes Glutton's Robe at Daguerreo. The GameFAQs Shops table, RPGClassics, and EliteGrindLab list 6,000 Gil; the GameFAQs Items table lists 8,000 Gil. The recipe is the repeatable recovery route if both one-time steals from Quale and Kraken are missed.",
   },
   {
+    id: "synthesis-recipe.black-robe",
+    resultItemId: "game-item.black-robe",
+    ingredients: [
+      { itemId: "game-item.gaia-gear", quantity: 1 },
+      { itemId: "game-item.n-kai-armlet", quantity: 1 },
+    ],
+    chapterId: "disc-4.return-to-gaia",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo, Disc IV)",
+    cost: { currency: "gil", amount: 8000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    notes: "GameFAQs Items and RPGClassics list Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil at Daguerreo; the Disc IV route is a repeatable recovery source if both one-time copies from Dive Spot #1 and Lich are missed.",
+  },
+  {
     id: "synthesis-recipe.priests-racket",
     resultItemId: "game-item.priests-racket",
     ingredients: [
