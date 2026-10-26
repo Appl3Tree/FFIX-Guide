@@ -1363,6 +1363,14 @@ if (
 if (!jumpRopeLetterObjective?.sourceIds.includes("gamefaqs-jump-rope-71891")) {
   errors.push("The Jump Rope Mognet letter objective must cite the 50-jump Disc I source.");
 }
+if (
+  !jumpRopeLetterObjective?.sourceIds.includes("game8-jump-rope") ||
+  !jumpRopeLetterWarning?.sourceIds.includes("game8-jump-rope") ||
+  !jumpRopeLetterWarning?.action.includes("reach 51 consecutive jumps") ||
+  !jumpRopeLetterWarning?.note.includes("must exceed 50")
+) {
+  errors.push("The Jump Rope letter must cite Game8's exclusive over-50 threshold wording and retain 51 as the safe target.");
+}
 if (!jumpRopeLetterObjective?.sourceIds.includes("gamerguides-alexandria") || !jumpRopeLetterWarning?.sourceIds.includes("gamerguides-alexandria")) {
   errors.push("The Jump Rope Mognet letter objective and warning must retain Gamer Guides' independent 50-jump letter evidence.");
 }
@@ -1445,6 +1453,8 @@ const discThreeJumpRopeCutoff = jumpRopeLetterCutoffs.find((cutoff) => cutoff.id
 if (
   jumpRopeLetterCutoffs.length !== 3 ||
   discOneJumpRopeCutoff?.edgeId !== "story.alexandria-to-evil-forest" ||
+  !discOneJumpRopeCutoff.sourceIds.includes("game8-jump-rope") ||
+  !discOneJumpRopeCutoff.trigger.includes("51 consecutive Jump Rope jumps") ||
   discTwoJumpRopeCutoff?.edgeId !== "story.return-to-alexandria-to-pinnacle-rocks" ||
   !discTwoJumpRopeCutoff?.sourceIds.includes("jegged-return-to-alexandria-castle") ||
   !discTwoJumpRopeCutoff?.trigger.includes("Jump-rope Champion Appears!") ||
