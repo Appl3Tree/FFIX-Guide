@@ -1678,7 +1678,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "source-supported",
     trigger: "Attempt Black Waltz 3's selected steals before the Cargo Ship encounter ends. Prioritize the rare Silver Gloves only while the party remains safe; later copies of the item types are available in Lindblum.",
     missableIds: ["missable.disc-1.cargo-ship.black-waltz-3-steals"],
-    sourceIds: ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship", "cavesofnarshe-cargo-ship-bestiary", "elitegrindlab-cargo-ship"],
+    sourceIds: ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship", "rpgclassics-bestiary-a-c", "elitegrindlab-cargo-ship"],
   },
   {
     id: "cutoff.gizamaluke.boss-steals",

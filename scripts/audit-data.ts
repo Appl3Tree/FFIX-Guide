@@ -2276,6 +2276,34 @@ if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030
 }
 const summitStationWaltzEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.summit-station.black-waltz-3-rematch");
 const summitStationWaltzRecord = enemyRecords.find((enemy) => enemy.id === "enemy.black-waltz-3-rematch");
+const cargoShipWaltzEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.cargo-ship.black-waltz-3");
+const cargoShipWaltzRecord = enemyRecords.find((enemy) => enemy.id === "enemy.black-waltz-3-cargo-ship");
+const cargoShipWaltzSteals = [
+  ["game-item.steepled-hat", "common"],
+  ["game-item.linen-cuirass", "uncommon"],
+  ["game-item.silver-gloves", "semi-rare"],
+] as const;
+if (!cargoShipWaltzEncounter || cargoShipWaltzEncounter.kind !== "boss" ||
+  cargoShipWaltzEncounter.chapterId !== "disc-1.cargo-ship" ||
+  !cargoShipWaltzEncounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-3-cargo-ship" && entry.quantity === 1) ||
+  !cargoShipWaltzEncounter.objectiveIds.includes("disc-1.cargo-ship.black-waltz-3-steals") ||
+  !cargoShipWaltzEncounter.missableIds.includes("missable.disc-1.cargo-ship.black-waltz-3-steals") ||
+  !cargoShipWaltzEncounter.cutoffIds.includes("cutoff.cargo-ship.black-waltz-3-steals") ||
+  !["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough"].every((sourceId) => cargoShipWaltzEncounter.sourceIds.includes(sourceId)) ||
+  cargoShipWaltzRecord?.stats.find((stat) => stat.field === "level")?.value !== 7 ||
+  cargoShipWaltzRecord.stats.find((stat) => stat.field === "HP")?.value !== 1128 ||
+  cargoShipWaltzRecord.steals.length !== 4 ||
+  cargoShipWaltzRecord.drops.length !== 4 || cargoShipWaltzRecord.drops.some((slot) => slot.itemId !== null) ||
+  !cargoShipWaltzRecord.routeObjectiveIds.includes("disc-1.cargo-ship.black-waltz-3-steals") ||
+  !cargoShipWaltzRecord.notes.some((note) => note.includes("Silver Greaves") && note.includes("Silver Gloves"))) {
+  errors.push("The Cargo Ship Black Waltz 3 record must stay distinct, source-linked, and tied to its one-time steals, warning, cutoff, and source-name conflict.");
+}
+for (const [itemId, slot] of cargoShipWaltzSteals) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-1.cargo-ship" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.cargo-ship.black-waltz-3-steals"));
+  if (!cargoShipWaltzRecord?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) || !path || path.availability !== "one-time-encounter") {
+    errors.push(`Cargo Ship Black Waltz 3's ${itemId} steal must link to its one-time encounter and item path.`);
+  }
+}
 const summitStationWaltzSteals = [
   ["game-item.steepled-hat", "common"],
   ["game-item.lightning-staff", "uncommon"],

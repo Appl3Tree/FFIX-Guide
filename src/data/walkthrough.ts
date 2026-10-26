@@ -816,7 +816,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "black-waltz-3",
         title: "Cargo Ship Deck — Black Waltz 3",
         summary: "This one-time battle uses Zidane, Vivi, and Steiner while Dagger handles the ship. Vivi begins in Trance; use the opening to attack and steal before the boss's spell pressure builds.",
-        sourceIds: ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship", "cavesofnarshe-cargo-ship-bestiary", "elitegrindlab-cargo-ship"],
+        sourceIds: ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship", "rpgclassics-bestiary-a-c", "elitegrindlab-cargo-ship"],
         steps: [
           {
             id: "cargo-ship-boss-preparation",

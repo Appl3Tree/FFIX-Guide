@@ -2321,7 +2321,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.peridot", name: "Peridot", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "cavesofnarshe-peridot", "gamefaqs-item-locations-54996", "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "gamerguides-pinnacle-rocks", "rpgclassics-pinnacle-rocks", "gamefaqs-outer-continent-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.opal", name: "Opal", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891"], verification: "partial" },
   { id: "game-item.topaz", name: "Topaz", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891"], verification: "partial" },
-  { id: "game-item.linen-cuirass", name: "Linen Cuirass", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship-bestiary", "elitegrindlab-cargo-ship"], verification: "partial" },
+  { id: "game-item.linen-cuirass", name: "Linen Cuirass", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "elitegrindlab-cargo-ship"], verification: "partial" },
   { id: "game-item.gold-choker", name: "Gold Choker", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.ore", name: "Ore", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
   { id: "game-item.anklet", name: "Anklet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-desert-palace-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-treno-auction-71891", "jegged-returning-desert-palace", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
@@ -6586,7 +6586,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     availability: "one-time-encounter",
     conditions: "Steal from Black Waltz 3 during the Cargo Ship boss battle before defeating it; the boss flees after the fight.",
     walkthroughObjectiveIds: ["disc-1.cargo-ship.black-waltz-3-steals"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship-bestiary", "elitegrindlab-cargo-ship"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "elitegrindlab-cargo-ship"],
   },
   {
     id: "item-path.disc-1.exploring-lindblum-kingdom.linen-cuirass-shop",
