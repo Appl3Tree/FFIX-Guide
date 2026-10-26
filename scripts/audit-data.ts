@@ -700,20 +700,22 @@ if (
   aerialBlackMageVillageReturn?.relationship !== "optional-return" ||
   aerialBlackMageVillageReturn.fromChapterId !== "disc-3.aerial-exploration" ||
   aerialBlackMageVillageReturn.toChapterId !== "disc-2.magdalene-forest" ||
-  !aerialBlackMageVillageReturn.summary.includes("reopened shops") ||
-  !aerialBlackMageVillageReturn.summary.includes("Disc II stock") ||
+  !aerialBlackMageVillageReturn.summary.includes("Disc II shop stock") ||
   !aerialBlackMageVillageReturn.summary.includes("for a while") ||
+  !aerialBlackMageVillageReturn.summary.includes("Flactem independently confirms a Disc III return") ||
+  !aerialBlackMageVillageReturn.summary.includes("earlier Blue Narciss phase") ||
   !aerialBlackMageVillageReturn.summary.includes("does not reopen the forest route") ||
   !aerialBlackMageVillageReturn.summary.includes("first-visit ATEs") ||
   !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
   !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-magdalene-forest-71891") ||
   !aerialBlackMageVillageReturn.sourceIds.includes("gamefaqs-shops-71891") ||
+  !aerialBlackMageVillageReturn.sourceIds.includes("flactem-disc-3-lindblum") ||
   aerialBlackMageVillageRejoin?.relationship !== "rejoin" ||
   aerialBlackMageVillageRejoin.fromChapterId !== "disc-2.magdalene-forest" ||
   aerialBlackMageVillageRejoin.toChapterId !== "disc-3.aerial-exploration" ||
   !aerialBlackMageVillageRejoin.sourceIds.includes("jegged-lindblum-hilda-garde")
 ) {
-  errors.push("The Disc III Hilda Garde Black Mage Village shop return and rejoin must preserve the Disc II stock window, its limits, and source links.");
+  errors.push("The Disc III Hilda Garde Black Mage Village shop return and rejoin must preserve GameFAQs' direct timing evidence, Flactem's earlier Blue Narciss scope, the Disc II stock window, and source links.");
 }
 const aerialQuanDwellingReturn = gameRouteEdgesById.get("detour.aerial-quan-dwelling-running-shoes");
 const aerialQuanDwellingRejoin = gameRouteEdgesById.get("detour.aerial-quan-dwelling-rejoin");

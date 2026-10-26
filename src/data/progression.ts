@@ -823,15 +823,15 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-2.magdalene-forest",
     relationship: "optional-return",
-    summary: "During the Hilda Garde III free-flight window, revisit Black Mage Village to review its reopened shops and their Disc II stock. GameFAQs says some items remain available for a while; the separate final-stock checkpoint handles later shop changes. This return does not reopen the forest route or first-visit ATEs.",
-    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-magdalene-forest-71891", "gamefaqs-shops-71891"],
+    summary: "During Hilda Garde III free flight, revisit Black Mage Village to check which items from its Disc II shop stock remain available in Disc III. GameFAQs documents this flight-window route and says some items remain available for a while. Flactem independently confirms a Disc III return to the village and an Item Shop visit, but its route uses the earlier Blue Narciss phase and does not verify this Hilda Garde timing or exact stock. This return does not reopen the forest route or first-visit ATEs; the separate final-stock checkpoint covers later shop changes.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-magdalene-forest-71891", "gamefaqs-shops-71891", "flactem-disc-3-lindblum"],
   },
   {
     id: "detour.aerial-black-mage-village-rejoin",
     fromChapterId: "disc-2.magdalene-forest",
     toChapterId: "disc-3.aerial-exploration",
     relationship: "rejoin",
-    summary: "After reviewing Black Mage Village's reopened shops, return to the Hilda Garde III and resume the Disc III free-flight route; continue to Ipsen's Castle when ready.",
+    summary: "After the Black Mage Village shop visit, return to the Hilda Garde III and resume the Disc III free-flight route; continue to Ipsen's Castle when ready.",
     sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
   },
   {

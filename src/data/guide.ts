@@ -472,7 +472,7 @@ export const sources = [
     publisher: "Flactem Guides",
     url: "https://guides.flactem.com/final-fantasy-ix/disc-3/lindblum-black-mage-village/",
     accessed: "2026-10-23",
-    notes: "Additional route for the Disc III Lindblum sweep, Mogki's letter, Sagittarius, refreshed Card Freak chests, the three potions, Lapis Lazuli, theater hideout Gil, shop availability, and Blue Narciss transition. This route is distinguished from the site's earlier Lindblum visit page.",
+    notes: "Additional route for the Disc III Lindblum sweep, Mogki's letter, Sagittarius, refreshed Card Freak chests, the three potions, Lapis Lazuli, theater hideout Gil, shop availability, and Blue Narciss transition. Its Black Mage Village section independently documents a Disc III return and entering the Item Shop for a missed Black Belt; this visit is on the earlier Blue Narciss route before Desert Palace, so it does not verify the later Hilda Garde III return timing or exact shop-stock persistence. This route is distinguished from the site's earlier Lindblum visit page.",
   },
   {
     id: "gamefaqs-on-the-high-seas-71891",
