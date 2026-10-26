@@ -2949,6 +2949,20 @@ if (
 ) {
   errors.push("All 14 post-Cleyra Lindblum item-type recoveries must remain source-linked, price-checked, scoped to the PS route, and connected to their walkthrough checkpoint.");
 }
+const linenCuirassPostCleyraCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.linen-cuirass-disc-ii-candidate");
+if (
+  !linenCuirassPostCleyraCandidate || linenCuirassPostCleyraCandidate.itemId !== "game-item.linen-cuirass" ||
+  linenCuirassPostCleyraCandidate.chapterId !== "disc-2.return-to-lindblum" || linenCuirassPostCleyraCandidate.method !== "shop" ||
+  linenCuirassPostCleyraCandidate.availability !== "window-unverified" || linenCuirassPostCleyraCandidate.cost?.amount !== 800 ||
+  linenCuirassPostCleyraCandidate.shopId !== "lindblum.weapon-shop.disc-2" ||
+  !linenCuirassPostCleyraCandidate.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops") ||
+  !["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-return-to-lindblum-71891"].every((sourceId) => linenCuirassPostCleyraCandidate.sourceIds.includes(sourceId)) ||
+  !linenCuirassPostCleyraCandidate.conditions.includes("Items table lists Lindblum only before Cleyra") ||
+  !linenCuirassPostCleyraCandidate.conditions.includes("window-unverified candidate") ||
+  !linenCuirassPostCleyraCandidate.conditions.includes("Newer-release stock is not independently verified")
+) {
+  errors.push("The post-Cleyra Linen Cuirass Lindblum listing must remain a source-conflict candidate at 800 Gil and link to the displayed-stock checkpoint.");
+}
 const cleyraGoldHelmRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.cleyra-recovery.gold-helm-treno-shop");
 if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.availability !== "repeatable" || cleyraGoldHelmRecovery.cost?.amount !== 1800 || !cleyraGoldHelmRecovery.sourceIds.includes("gamefaqs-shops-71891") || !cleyraGoldHelmRecovery.sourceIds.includes("rpgclassics-shops") || !cleyraGoldHelmRecovery.conditions.includes("newer releases")) {
   errors.push("Cleyra Gold Helm recovery needs a source-backed, repeatable Disc III Treno path priced at 1,800 Gil with its release caveat preserved.");
