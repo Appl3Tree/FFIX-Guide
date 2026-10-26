@@ -787,13 +787,16 @@ if (
   !cleyraFrogReturn.summary.includes("Jegged independently confirms") ||
   !cleyraFrogReturn.summary.includes("does not number the visit") ||
   !["gamefaqs-journey-to-cleyra-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "jegged-gargan-roo"].every((sourceId) => cleyraFrogReturn.sourceIds.includes(sourceId)) ||
+  !sources.find((source) => source.id === "gamefaqs-exploring-lindblum-71891")?.notes.includes("does not document the Disc II return/rejoin from Qu's Marsh before Cleyra") ||
   cleyraFrogRejoin?.relationship !== "rejoin" ||
   cleyraFrogRejoin.fromChapterId !== "disc-1.exploring-lindblum-kingdom" ||
   cleyraFrogRejoin.toChapterId !== "disc-2.journey-to-cleyra" ||
+  !cleyraFrogRejoin.sourceIds.includes("gamefaqs-journey-to-cleyra-71891") ||
   !cleyraFrogRejoin.sourceIds.includes("jegged-gargan-roo") ||
-  cleyraFrogRejoin.sourceIds.includes("gamefaqs-frog-catching-71891")
+  cleyraFrogRejoin.sourceIds.includes("gamefaqs-frog-catching-71891") ||
+  cleyraFrogRejoin.sourceIds.includes("gamefaqs-exploring-lindblum-71891")
 ) {
-  errors.push("The pre-Cleyra Lindblum Basin return must keep GameFAQs' third-visit/frog-care source on the detour and exclude it from the route rejoin.");
+  errors.push("The pre-Cleyra return must retain the Disc I-area and frog-strategy sources on the detour, then cite only Disc II travel sources for the route rejoin.");
 }
 const aerialQuanDwellingReturn = gameRouteEdgesById.get("detour.aerial-quan-dwelling-running-shoes");
 const aerialQuanDwellingRejoin = gameRouteEdgesById.get("detour.aerial-quan-dwelling-rejoin");

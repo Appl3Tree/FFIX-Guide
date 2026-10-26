@@ -1488,7 +1488,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/exploring-lindblum-kingdom",
     accessed: "2026-10-24",
-    notes: "Optional route through Qu's Marsh, Lindblum Plateau, Pinnacle Rocks, Chocobo's Forest, and Bohden Arch. Lists Quina recruitment, regional Blue Magic, available Chocographs and rewards, Moccha Coffee, and the Ether pickup. Its chapter inventory groups items from several distinct areas, so the guide names each pickup's actual location.",
+    notes: "Disc I optional route through Qu's Marsh, Lindblum Plateau, Pinnacle Rocks, Chocobo's Forest, and Bohden Arch. Lists Quina recruitment, regional Blue Magic, available Chocographs and rewards, Moccha Coffee, and the Ether pickup. Its chapter inventory groups items from several distinct areas, so the guide names each pickup's actual location. It does not document the Disc II return/rejoin from Qu's Marsh before Cleyra.",
   },
   {
     id: "cavesofnarshe-enemies",
