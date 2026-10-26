@@ -3610,8 +3610,10 @@ for (const [path, chapterId, city] of [
     !path.shopName?.includes("possible Disc III sale") ||
     path.cost?.amount !== 250 ||
     !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.sourceIds.includes("gamefaqs-equipment-33383") ||
     !path.sourceIds.includes("jegged-arm-gear") ||
     !/unverified candidate/i.test(path.conditions ?? "") ||
+    !/omission is corroborating evidence, not proof/i.test(path.conditions ?? "") ||
     !/Alexandria/i.test(path.conditions ?? "")
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
