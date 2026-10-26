@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Gizamaluke preparation: `npm run lint`, `npm run build` (TypeScript, data audit, production Vite build), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 428 sources; 100 cutoff windows cover all warnings. Bundle: 2,382.61 kB JavaScript (578.49 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's existing chunk-size advisory remains. Tests, browser, gameplay, and release verification were not run.
+Ralvuimago preparation: `npm run lint`, `npm run build` (TypeScript, data audit, production Vite build), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 429 sources; 100 cutoff windows cover all warnings. Bundle: 2,385.56 kB JavaScript (579.51 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's existing chunk-size advisory remains. Tests, browser, gameplay, and release verification were not run.
+
+Previous verification: Gizamaluke preparation: lint/build/typecheck/audit and whitespace checks passed with 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 428 sources. Bundle: 2,382.61 kB JavaScript (578.49 kB gzip), 61.11 kB CSS (12.91 kB gzip). Tests, browser, gameplay, and release verification were not run.
 
 Previous verification: Black Waltz 3 preparation evidence audit passed lint/build and whitespace checks with 0 errors and 188 coverage warnings across 44 chapters, 142 missables, 837 objectives, and 427 sources. Bundle: 2,380.85 kB JavaScript (577.83 kB gzip), 61.11 kB CSS (12.91 kB gzip). Tests, browser, gameplay, and release verification were not run.
 

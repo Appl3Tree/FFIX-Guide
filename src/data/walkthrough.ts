@@ -1995,7 +1995,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "return-alexandria-gargan-roo",
         title: "Castle descent and Gargan Roo — return boss",
         summary: "Clear the split-party encounters, collect Mosh's letter, and finish Ralvuimago before the story moves to Pinnacle Rocks.",
-        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2"],
+        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "gamefaqs-boss-guide-31490", "kamigame-ralvuimago"],
         steps: [
           {
             id: "return-alexandria-castle-descent",
@@ -2006,15 +2006,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "return-alexandria-mosh-letter",
             kind: "optional",
-            text: "After control returns to Zidane's party, return to the Chapel and use Mognet with Mosh to collect the letter for Monty. Save before taking the exit toward Gargan Roo.",
-            detail: "Do not leave the altar room without checking Mosh again after the character-split sequence; this letter becomes available at this point in the story.",
+            text: "After control returns to Zidane's party, return to the Chapel and use Mognet with Mosh to collect the letter for Monty. Save, then check Zidane, Dagger, and Vivi's equipment and recovery items before taking the exit toward the Gargant.",
+            detail: "Do not leave the altar room without checking Mosh again after the character-split sequence; this letter becomes available at this point. The Gargant ride triggers Ralvuimago directly, so use this control handoff to prepare the returning trio.",
             objectiveIds: ["disc-2.return-to-alexandria.mosh-letter"],
           },
           {
             id: "return-alexandria-ralvuimago-steals",
             kind: "combat",
             text: "At the end of the Gargan Roo escape, try to steal Phoenix Down, Adaman Vest, and Oak Staff from Ralvuimago. Use Slow and Ice attacks; when the boss curls up, avoid physical hits until it uncurls. Cure Mini with Remedy if needed.",
-            detail: "Oak Staff teaches Vivi Bio and is the priority if you do not already have a copy. GameFAQs lists Ether in two drop slots, while some route guides mention one Ether. Published HP values conflict; the walkthrough does not require a level, and the bestiary retains both reported HP values.",
+            detail: "Oak Staff teaches Vivi Bio and is the priority if you do not already have a copy. The listed Level 18 is the boss's enemy stat, not a party target, and the reviewed guides give no normal-route level recommendation. GameFAQs lists Ether in two drop slots, while some route guides mention one Ether; published HP values also conflict.",
             objectiveIds: ["disc-2.return-to-alexandria.ralvuimago-steals"],
           },
           {

@@ -1671,9 +1671,10 @@ function Reference({ profile, profileCount, profileMessage, onExport, onImport, 
                     {enemy.preparationGuidance && <div className="enemy-preparation-guidance">
                       <h4>Optional preparation guidance</h4>
                       <p>{enemy.preparationGuidance.suggestedLevelRange && <><strong>Optional level range:</strong> Lv. {enemy.preparationGuidance.suggestedLevelRange.min}–{enemy.preparationGuidance.suggestedLevelRange.max}. </>}{enemy.preparationGuidance.levelRationale}</p>
+                      {enemy.preparationGuidance.difficultyAssessment && <p><strong>Published difficulty:</strong> {enemy.preparationGuidance.difficultyAssessment}</p>}
                       <p><strong>Grinding:</strong> {enemy.preparationGuidance.optionalGrinding}</p>
                       <p><strong>Setup:</strong> {enemy.preparationGuidance.setupAdvice}</p>
-                      <p className="enemy-preparation-confidence"><strong>Evidence status:</strong> {enemy.preparationGuidance.confidence === "partial" ? "Partial; source recommendations vary and are not gameplay-tested." : "Disputed; compare the linked sources."}</p>
+                      <p className="enemy-preparation-confidence"><strong>Evidence status:</strong> {enemy.preparationGuidance.confidence === "partial" ? "Partial; source and version coverage is limited, and guidance is not gameplay-tested." : "Disputed; compare the linked sources."}</p>
                       <div className="enemy-preparation-sources"><span>Guidance sources</span>{enemy.preparationGuidance.sourceIds.map((sourceId) => {
                         const source = sources.find((item) => item.id === sourceId);
                         return source ? <a key={sourceId} href={source.url} target="_blank" rel="noreferrer">{source.title}<ExternalLink size={10} aria-hidden="true" /></a> : null;

@@ -384,7 +384,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/31490",
     accessed: "2026-10-25",
-    notes: "Original PlayStation boss guide used to cross-check selected encounter strategies. Its Disc II Cleyra Beatrix entry gives Level 17 and 4,736 HP but prints 3,694 MP, while GameFAQs' walkthrough, Caves of Narshe, and other bestiary references give 3,964 MP; the guide preserves the MP figures as a source conflict. It also describes the ten-turn scripted battle and Cleyra boss steals.",
+    notes: "Original PlayStation boss guide used to cross-check selected encounter strategies. Its Disc II Cleyra Beatrix entry gives Level 17 and 4,736 HP but prints 3,694 MP, while GameFAQs' walkthrough, Caves of Narshe, and other bestiary references give 3,964 MP; the guide preserves the MP figures as a source conflict. It also describes the ten-turn scripted battle and Cleyra boss steals. For Ralvuimago it lists Level 18/3,352 HP, calls the fight Fair, and explains the compact-form counter and Ice strategy; the rating is subjective and not a party-level recommendation.",
   },
   {
     id: "gamerguides-cleyra",
@@ -433,6 +433,14 @@ export const sources = [
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/15-Alexandria-Castle.html",
     accessed: "2026-10-25",
     notes: "Independent route for the cage escape, timed rescue, Tantarian opportunity, treasure platform, Zorn and Thorn, Friendship ATE, Beatrix steals, the alternating Freya/Beatrix and Zidane party fights, Steiner's later handoff, and the Gargant escape. After Zorn and Thorn, Jegged says Mosh's new letters include 'Jump-rope Champion Appears!', documenting a second chance to read the Disc I Jump Rope letter; it separately directs another Mosh visit after the party split for Monty's letter. The exact final availability of the Jump Rope letter after this Disc II read and on Disc III remains unverified. Exact enemy values and steal percentages are not repeated where only one source supports them.",
+  },
+  {
+    id: "kamigame-ralvuimago",
+    title: "Ralvuimago — boss guide",
+    publisher: "Kamigame",
+    url: "https://kamigame.jp/FF9/page/139341476277545315.html",
+    accessed: "2026-10-26",
+    notes: "Japanese boss guide says to prepare equipment after control returns to Zidane, then use Vivi's Ice magic, group Cure with Dagger, and non-damaging actions while Ralvuimago is compact; damaging hits trigger Earth Power and restore boss HP. It identifies the three steals and approximate HP but does not set a party-level target. Translated route advice; platform/build parity is not independently established.",
   },
   {
     id: "gamerguides-alexandria-castle-2",

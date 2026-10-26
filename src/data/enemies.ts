@@ -39,6 +39,7 @@ export type EnemyStrategy = {
 export type EnemyPreparationGuidance = {
   suggestedLevelRange?: { min: number; max: number };
   levelRationale: string;
+  difficultyAssessment?: string;
   optionalGrinding: string;
   setupAdvice: string;
   confidence: "partial" | "disputed";
@@ -266,6 +267,8 @@ const ralvuimagoStealsObjectiveId = "disc-2.return-to-alexandria.ralvuimago-stea
 const ralvuimagoStealsMissableId = "missable.disc-2.return-to-alexandria.ralvuimago-steals";
 const ralvuimagoStealsCutoffId = "cutoff.alexandria-rescue.ralvuimago-steals";
 const ralvuimagoSources = ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "elitegrindlab-gargan-roo", "cavesofnarshe-enemies", "rpgclassics-bestiary-n-s"];
+const ralvuimagoPreparationSources = [...ralvuimagoSources, "gamefaqs-boss-guide-31490", "kamigame-ralvuimago", "gamefaqs-treno-71891"];
+const ralvuimagoCombatSources = [...ralvuimagoSources, "gamefaqs-boss-guide-31490", "kamigame-ralvuimago"];
 const burmeciaStealsObjectiveId = "disc-1.burmecia.beatrix-steals";
 const burmeciaStealsMissableId = "missable.disc-1.burmecia.beatrix-steals";
 const burmeciaStealsCutoffId = "cutoff.burmecia.beatrix-steals";
@@ -6900,17 +6903,26 @@ const allEnemyRecords: EnemyRecord[] = [
     blueMagic: [],
     strategies: [
       { title: "Steal while it is upright", detail: "Attempt Phoenix Down, Adaman Vest, and Oak Staff before finishing the fight. Oak Staff is the priority if Vivi still needs Bio; the item type is obtainable through other routes, but this is its only boss steal window.", sourceIds: ralvuimagoSources },
-      { title: "Avoid its compact-form counter", detail: "Use Slow or Darkness if available and attack with Blizzara while Ralvuimago is upright. A physical hit makes it curl up; while compact, avoid physical attacks because Earth Power counters and heals it. Remedy cures Mini from Ultra Sound Wave.", sourceIds: ralvuimagoSources },
+      { title: "Avoid its compact-form counter", detail: "Use Slow or Darkness if available and attack with Blizzara while Ralvuimago is upright. A physical hit makes it curl up; while compact, use steal or heal and avoid damaging actions. Remedy cures Mini from Ultra Sound Wave.", sourceIds: ralvuimagoCombatSources },
     ],
+    preparationGuidance: {
+      levelRationale: "The listed Level 18 is Ralvuimago's enemy stat, not a recommended party level. The reviewed normal-route and boss guides do not give a standard party-level target; GameFAQs' PS1 boss guide calls the fight Fair but does not tie that rating to a level.",
+      difficultyAssessment: "One PS1 boss FAQ rates the fight Fair. This is a subjective, single-source label rather than a cross-source or gameplay-tested difficulty rating.",
+      optionalGrinding: "No extra grinding is required by the reviewed normal-route guides, and the return ride moves directly into this boss. The earlier outbound Gargan Roo visit has an optional Crawler grind opportunity; it is a separate stop with a different party, not a required level target.",
+      setupAdvice: "Use the control handoff after the castle party split to check Zidane, Dagger, and Vivi's equipment and bring Remedies for Mini. Dagger can use group Cure; Vivi's Blizzara exploits Ice weakness, and Slow can create steal turns. While Ralvuimago is compact, steal or heal and avoid damaging actions; sources differ on whether all damage or only physical hits trigger Earth Power, so save Blizzara for the open phase. Prioritize Oak Staff if Vivi still needs Bio.",
+      confidence: "partial",
+      sourceIds: ralvuimagoPreparationSources,
+    },
     routeObjectiveIds: [ralvuimagoStealsObjectiveId],
     notes: [
       "HP differs substantially across the inspected PlayStation references: GameFAQs 71891 lists 5,709, while Jegged, Gamer Guides, Caves of Narshe, and EliteGrindLab list 3,352. Both values are kept as disputed claims rather than silently selecting one.",
       "GameFAQs 71891 labels Oak Staff Semi-Rare; Jegged calls it the Rare steal and prints a 6% rate. The catalog keeps the GameFAQs slot in its table and records the tier/rate disagreement here without normalizing odds.",
       "GameFAQs' table lists Ether in both the Always and Common drop slots, while some route prose names one Ether. Both source-listed slots are shown without promising the same realized quantity in every fight.",
+      "Guides differ on whether all damage or only physical hits during the compact phase trigger Earth Power: GameFAQs, Jegged, and EliteGrindLab tie the counter to physical hits or the compact phase, while Kamigame recommends non-damaging actions. The route uses the conservative steal/heal approach while compact and reserves Ice damage for the open phase.",
       "RPGClassics' bestiary index spells the name Ralvuimahgo; this profile follows the common Ralvuimago spelling used by the walkthrough sources.",
       "The profile is based on PlayStation sources; modern-release parity has not been audited.",
     ],
-  }, returnToAlexandriaChapterId, ralvuimagoSources, [ralvuimagoStealsMissableId], [ralvuimagoStealsCutoffId]),
+  }, returnToAlexandriaChapterId, ralvuimagoPreparationSources, [ralvuimagoStealsMissableId], [ralvuimagoStealsCutoffId]),
   chapterBoss({
     id: "enemy.tantarian",
     name: "Tantarian",

@@ -4073,6 +4073,10 @@ if (
 const ralvuimagoEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-alexandria.ralvuimago");
 const ralvuimagoRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvuimago");
 const ralvuimagoHpClaims = ralvuimagoRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
+const ralvuimagoPreparation = ralvuimagoRecord?.preparationGuidance;
+const ralvuimagoPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-alexandria")?.sections.find((section) => section.id === "return-alexandria-gargan-roo");
+const ralvuimagoPreparationStep = ralvuimagoPreparationSection?.steps.find((step) => step.id === "return-alexandria-mosh-letter");
+const ralvuimagoPrepCombatStep = ralvuimagoPreparationSection?.steps.find((step) => step.id === "return-alexandria-ralvuimago-steals");
 const ralvuimagoStealPaths = [
   ["game-item.phoenix-down", "item-path.disc-2.return-to-alexandria.ralvuimago-phoenix-down-steal", "common"],
   ["game-item.adaman-vest", "item-path.disc-2.return-to-alexandria.ralvuimago-adaman-vest-steal", "uncommon"],
@@ -4092,8 +4096,21 @@ if (!ralvuimagoEncounter || ralvuimagoEncounter.kind !== "boss" ||
   !ralvuimagoRecord.facts.some((fact) => fact.category === "elemental-weakness" && fact.label === "Ice") ||
   !ralvuimagoRecord.facts.some((fact) => fact.category === "elemental-resistance" && fact.label.includes("Earth") && fact.label.includes("absorbs")) ||
   !ralvuimagoRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Earth Power counter") ||
+  !ralvuimagoPreparation || ralvuimagoPreparation.suggestedLevelRange !== undefined ||
+  !ralvuimagoPreparation.levelRationale.includes("enemy stat") || !ralvuimagoPreparation.levelRationale.includes("party-level target") ||
+  !ralvuimagoPreparation.difficultyAssessment?.includes("Fair") ||
+  !ralvuimagoPreparation.optionalGrinding.includes("Crawler") ||
+  !ralvuimagoPreparation.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !ralvuimagoPreparation.sourceIds.includes("kamigame-ralvuimago") ||
+  !ralvuimagoPreparation.sourceIds.includes("gamefaqs-treno-71891") ||
+  !ralvuimagoPreparation.setupAdvice.includes("all damage or only physical hits") ||
+  !ralvuimagoPreparation.setupAdvice.includes("open phase") ||
+  !ralvuimagoPreparationSection?.sourceIds.includes("kamigame-ralvuimago") ||
+  !ralvuimagoPreparationStep?.text.includes("check Zidane, Dagger, and Vivi") ||
+  !ralvuimagoPrepCombatStep?.detail?.includes("not a party target") ||
   !ralvuimagoRecord.notes.some((note) => note.includes("5,709") && note.includes("3,352")) ||
   !ralvuimagoRecord.notes.some((note) => note.includes("Semi-Rare") && note.includes("Rare")) ||
+  !ralvuimagoRecord.notes.some((note) => note.includes("all damage or only physical hits")) ||
   !ralvuimagoRecord.notes.some((note) => note.includes("Always and Common drop slots"))) {
   errors.push("Ralvuimago must remain distinct as the return-ride boss and preserve its existing cutoff links, HP disagreement, steal-tier disagreement, and Ether drop-table scope.");
 }
