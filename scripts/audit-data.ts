@@ -4417,12 +4417,13 @@ if (
     path.cost?.amount !== 750 ||
     !path.sourceIds.includes("gamefaqs-shops-71891") ||
     !path.sourceIds.includes("cavesofnarshe-ff9-rods") ||
+    !path.sourceIds.includes("gamefaqs-shop-lists-9772") ||
     !path.sourceIds.includes("rpgclassics-shops") ||
     !path.conditions.includes("GameFAQs Shops and Caves of Narshe list 750 Gil") ||
-    !path.conditions.includes("GameFAQs Items and RPGClassics Shops list 760 Gil")
+    !path.conditions.includes("GameFAQs Items, the older GameFAQs Shop Lists, and RPGClassics Shops list 760 Gil")
   )
 ) {
-  errors.push("Stardust Rod shop paths must use the listed 750-Gil shop-table price while preserving the 760-Gil item-table conflict and all shop sources.");
+  errors.push("Stardust Rod shop paths must use the listed 750-Gil shop-table price while preserving both 760-Gil listings and their source links.");
 }
 const magicianShoesLindblumDisc2Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.magician-shoes-post-cleyra-synthesis");
 if (

@@ -2610,7 +2610,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.rosetta-ring", name: "Rosetta Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"], verification: "partial" },
   { id: "game-item.partisan", name: "Partisan", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.broadsword", name: "Broadsword", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-evil-forest-71891", "gamefaqs-dali-71891", "gamefaqs-ipsens-castle-71891", "gamefaqs-abilities-71891", "jegged-evil-forest", "jegged-dali", "jegged-ipsens-castle"], verification: "partial" },
-  { id: "game-item.stardust-rod", name: "Stardust Rod", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "cavesofnarshe-ff9-rods", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.stardust-rod", name: "Stardust Rod", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "cavesofnarshe-ff9-rods", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.multina-racket", name: "Multina Racket", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.flame-staff", name: "Flame Staff", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-equipment-33383", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.ice-staff", name: "Ice Staff", category: "equipment", sourceIds: iceStaffReferenceSources, verification: "partial" },
@@ -3054,7 +3054,7 @@ const zornThornShopRecoveryPath = (route: {
   const isFossilRooShop = route.shopId === "fossil-roo.treasure-hunter-shop";
   const isStardustRod = route.itemSlug === "stardust-rod";
   const stardustRodPriceNote = isStardustRod
-    ? " Price discrepancy: GameFAQs Shops and Caves of Narshe list 750 Gil, while GameFAQs Items and RPGClassics Shops list 760 Gil; this shop path uses the direct GameFAQs Shops-table price."
+    ? " Price discrepancy: GameFAQs Shops and Caves of Narshe list 750 Gil, while GameFAQs Items, the older GameFAQs Shop Lists, and RPGClassics Shops list 760 Gil; this shop path uses the direct GameFAQs Shops-table price."
     : "";
   return {
     id: route.id,
@@ -3077,7 +3077,7 @@ const zornThornShopRecoveryPath = (route: {
       "gamefaqs-items-71891",
       "gamefaqs-shops-71891",
       ...route.locationSourceIds,
-      ...(isStardustRod ? ["cavesofnarshe-ff9-rods", "rpgclassics-shops"] : []),
+      ...(isStardustRod ? ["cavesofnarshe-ff9-rods", "gamefaqs-shop-lists-9772", "rpgclassics-shops"] : []),
       ...(isFossilRooShop ? ["jegged-missables", "ffwiki-unrevisitable-locations"] : []),
     ],
   };
