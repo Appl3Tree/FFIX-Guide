@@ -418,6 +418,7 @@ const glassArmletReferenceSources = [
   "gamefaqs-burmecia-71891",
   "gamefaqs-journey-to-treno-71891",
   "jegged-arm-gear",
+  "rpgclassics-shops",
 ];
 const atlaDisc2ShopSources = ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"];
 const leatherWristReferenceSources = [
@@ -769,8 +770,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "treno.weapon-shop.disc-3-4",
     shopName: "Treno Weapon Shop (possible Disc III sale)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "Jegged lists Treno as a Glass Armlet seller on Disc III, but GameFAQs' Disc III–IV Treno weapon table omits it. The older GameFAQs equipment list includes Treno on Disc II but does not list a later Treno sale; that omission is corroborating evidence, not proof the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear"],
+    conditions: "Jegged lists Treno as a Glass Armlet seller on Disc III, but GameFAQs and RPGClassics' Disc III Treno weapon tables omit it. Both tables list the Disc II sale; the older GameFAQs equipment list does too. That omission is corroborating evidence, not proof the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops"],
   },
   {
     id: "item-path.disc-2.return-to-lindblum.glass-armlet-shop",
@@ -796,8 +797,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.weapon-shop.disc-3-4",
     shopName: "Dragoos' Weapon/Item Shop (possible Disc III sale)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "Jegged lists Lindblum as a Glass Armlet seller on Disc III, but GameFAQs' Disc III–IV Lindblum weapon table omits it. The older GameFAQs equipment list includes Lindblum on Discs I–II but does not list a later Lindblum sale; that omission is corroborating evidence, not proof the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear"],
+    conditions: "Jegged lists Lindblum as a Glass Armlet seller on Disc III, but GameFAQs and RPGClassics' Disc III Lindblum weapon tables omit it. Both tables list earlier Lindblum stock; the older GameFAQs equipment list does too. That omission is corroborating evidence, not proof the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops"],
   },
   {
     id: "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop",

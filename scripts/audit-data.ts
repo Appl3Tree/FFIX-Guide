@@ -3615,6 +3615,7 @@ for (const [path, chapterId, city] of [
     !path.sourceIds.includes("gamefaqs-shops-71891") ||
     !path.sourceIds.includes("gamefaqs-equipment-33383") ||
     !path.sourceIds.includes("jegged-arm-gear") ||
+    !path.sourceIds.includes("rpgclassics-shops") ||
     !/unverified candidate/i.test(path.conditions ?? "") ||
     !/omission is corroborating evidence, not proof/i.test(path.conditions ?? "") ||
     !/Alexandria/i.test(path.conditions ?? "")
