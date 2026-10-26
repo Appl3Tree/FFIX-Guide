@@ -5619,6 +5619,12 @@ const ipsensDisc4RepeatableSupplySlugs = new Set([
   "potion", "hi-potion", "phoenix-down", "echo-screen", "soft", "antidote",
   "eye-drops", "magic-tag", "vaccine", "annoyntment", "tent",
 ]);
+const ipsensDisc3ListedSupplySlugs = new Set([
+  "hi-potion", "phoenix-down", "magic-tag", "remedy", "vaccine", "annoyntment", "tent",
+]);
+const ipsensDisc3OmittedSupplySlugs = new Set([
+  "potion", "echo-screen", "soft", "antidote", "eye-drops",
+]);
 const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice]) => {
   const itemId = `game-item.${slug}`;
   const item = gameItems.find((candidate) => candidate.id === itemId);
@@ -5635,6 +5641,7 @@ const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice])
     || !disc3Path.sourceIds.includes("gamefaqs-items-71891")
     || !disc3Path.sourceIds.includes("gamefaqs-shops-71891")
     || !disc3Path.sourceIds.includes("rpgclassics-shops")
+    || !disc3Path.sourceIds.includes("icksmehl-shops-disc-3")
     || disc4Path?.id !== `item-path.disc-4.return-to-gaia.kumool-mogshop.${slug}`
     || disc4Path.method !== "mogshop"
     || disc4Path.availability !== (ipsensDisc4RepeatableSupplySlugs.has(slug) ? "repeatable" : "window-unverified")
@@ -5652,8 +5659,10 @@ const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice])
     || !item.sourceIds.includes("elitegrindlab-ipsens-castle")
     || (slug === "magic-tag" && (!item.sourceIds.includes("ffwiki-magic-tag") || !disc3Path.sourceIds.includes("icksmehl-shops-disc-3") || !disc3Path.sourceIds.includes("ffwiki-magic-tag") || !disc4Path.sourceIds.includes("icksmehl-shops-disc-3") || !disc4Path.sourceIds.includes("ffwiki-magic-tag")))
   ) return true;
-  if (slug === "remedy") return !disc3Path.conditions.includes("Disc III listing") || !disc4Path.conditions.includes("omits Allheilmittel (Remedy)") || !disc4Path.conditions.includes("remains unverified");
+  if (slug === "remedy") return !disc3Path.conditions.includes("Disc III Ipsen table lists Remedy (Allheilmittel) for 300 Gil") || !disc4Path.conditions.includes("omits Allheilmittel (Remedy)") || !disc4Path.conditions.includes("remains unverified");
   if (slug === "magic-tag") return !disc3Path.conditions.includes("Disc III Ipsen table lists Talisman for 150 Gil") || !disc3Path.conditions.includes("Magic Tag for 100 Gil") || !disc4Path.conditions.includes("Disc III and Disc IV Ipsen inventory tables") || !disc4Path.conditions.includes("Talisman for 150 Gil") || !disc4Path.conditions.includes("Magic Tag for 100 Gil");
+  if (ipsensDisc3OmittedSupplySlugs.has(slug)) return !disc3Path.conditions.includes("Disc III Ipsen table omits this product") || !disc3Path.conditions.includes("does not prove the item is unavailable in game");
+  if (ipsensDisc3ListedSupplySlugs.has(slug)) return !disc3Path.conditions.includes("Disc III Ipsen table includes its corresponding German-language row at that price");
   return !disc4Path.conditions.includes("Disc IV Ipsen inventory table") || !disc4Path.conditions.includes(item.name);
 });
 const icksmehlIpsenDisc3Source = sources.find((source) => source.id === "icksmehl-shops-disc-3");
@@ -5662,6 +5671,8 @@ const ffwikiMagicTagSource = sources.find((source) => source.id === "ffwiki-magi
 if (
   ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34
   || ipsensSupplyRouteMismatch
+  || !icksmehlIpsenDisc3Source?.notes.includes("seven priced supplies")
+  || !icksmehlIpsenDisc3Source.notes.includes("omits Potion, Echo Screen, Soft, Antidote, and Eye Drops")
   || !icksmehlIpsenDisc3Source?.notes.includes("Poison Knuckles for 5,000 Gil")
   || !icksmehlIpsenDisc3Source.notes.includes("Talisman for 150 Gil")
   || !icksmehlIpsenSource?.notes.includes("21 equipment products")
@@ -5671,7 +5682,7 @@ if (
   || !ffwikiMagicTagSource?.notes.includes("Japanese name as Ofuda")
   || !ffwikiMagicTagSource.notes.includes("Talisman")
 ) {
-  errors.push("Ipsen's Castle Mogshop must retain 12 Disc III supply listings and 12 separate Disc IV paths, classify the 11 icksmehl-listed products as repeatable, preserve the unverified Remedy omission and Magic Tag/Talisman price conflict, and link the late routes to Kumool's Mognet return.");
+  errors.push("Ipsen's Castle Mogshop must retain twelve English Disc III supply paths and twelve separate Disc IV paths, record icksmehl's seven Disc III/five omitted supply rows and Disc IV Remedy omission, classify the eleven Disc IV listed products as repeatable, preserve the Magic Tag/Talisman price conflict, and link late routes to Kumool's Mognet return.");
 }
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",

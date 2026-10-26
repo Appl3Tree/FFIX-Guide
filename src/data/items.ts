@@ -74,6 +74,12 @@ export type EquipmentAbilityClaim = {
 };
 
 const ipsensMogshopReentrySources = ["gamefaqs-ipsens-castle-71891", "elitegrindlab-ipsens-castle"];
+const ipsensDisc3SupplyListedSlugs = new Set([
+  "hi-potion", "phoenix-down", "magic-tag", "remedy", "vaccine", "annoyntment", "tent",
+]);
+const ipsensDisc3SupplyOmittedSlugs = new Set([
+  "potion", "echo-screen", "soft", "antidote", "eye-drops",
+]);
 const ipsensMogshopDisc4SupplySlugs = new Set([
   "potion", "hi-potion", "phoenix-down", "echo-screen", "soft", "antidote",
   "eye-drops", "magic-tag", "vaccine", "annoyntment", "tent",
@@ -3363,11 +3369,15 @@ const ipsensMogshopSupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProdu
   shopName: "Kumool's Mogshop (Ipsen's Castle)",
   cost: { currency: "gil", amount: price },
   conditions: slug === "remedy"
-    ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop. RPGClassics corroborates the other listed Ipsen supplies but omits Remedy. This is the Disc III listing; the Disc IV table also omits Remedy, so late stock remains unverified."
+    ? "GameFAQs Shops and icksmehl.de's Disc III Ipsen table lists Remedy (Allheilmittel) for 300 Gil at Kumool's Mogshop. RPGClassics corroborates the other listed Ipsen supplies but omits Remedy. The Disc IV icksmehl table also omits Allheilmittel (Remedy), so late stock remains unverified."
     : slug === "magic-tag"
       ? "GameFAQs Shops and RPGClassics list Magic Tag for 100 Gil at Kumool's Mogshop. icksmehl.de's Disc III Ipsen table lists Talisman for 150 Gil; the Final Fantasy Wiki gloss supports this as the Magic Tag name, so the price remains a source discrepancy. The Disc IV Ipsen table separately lists the same Talisman row for 150 Gil. Cross-release behavior remains unverified."
+    : ipsensDisc3SupplyOmittedSlugs.has(slug)
+      ? `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. icksmehl.de's Disc III Ipsen table omits this product, while its Disc IV table lists it; the Disc III table difference does not prove the item is unavailable in game. Cross-release behavior remains unverified.`
+    : ipsensDisc3SupplyListedSlugs.has(slug)
+      ? `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop, and icksmehl.de's Disc III Ipsen table includes its corresponding German-language row at that price. Its Disc IV table also lists the product. Cross-release behavior remains unverified.`
     : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. This is the Disc III listing; icksmehl.de separately documents this product in its Disc IV Ipsen inventory. Cross-release behavior remains unverified.`,
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", ...(slug === "magic-tag" ? ["icksmehl-shops-disc-3", "ffwiki-magic-tag"] : [])],
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "icksmehl-shops-disc-3", ...(slug === "magic-tag" ? ["ffwiki-magic-tag"] : [])],
 }));
 
 const ipsensMogshopDisc4SupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProducts.map(([slug, itemName, price]) => ({
