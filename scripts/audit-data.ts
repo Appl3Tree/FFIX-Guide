@@ -875,6 +875,25 @@ if (
 ) {
   errors.push("The Disc III Hilda Garde Dali return and rejoin must preserve the optional Cotton Robe route and source links.");
 }
+const aerialAtlaReturn = gameRouteEdgesById.get("detour.aerial-atla-mogshop");
+const aerialAtlaRejoin = gameRouteEdgesById.get("detour.aerial-atla-mogshop-rejoin");
+if (
+  aerialAtlaReturn?.relationship !== "optional-return" ||
+  aerialAtlaReturn.fromChapterId !== "disc-3.aerial-exploration" ||
+  aerialAtlaReturn.toChapterId !== "disc-1.burmecia" ||
+  !aerialAtlaReturn.summary.includes("Atla's Mogshop") ||
+  !aerialAtlaReturn.summary.includes("Steepled Hat, not Headgear") ||
+  !aerialAtlaReturn.summary.includes("330 Gil") ||
+  !aerialAtlaReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialAtlaReturn.sourceIds.includes("gamefaqs-equipment-33383") ||
+  !aerialAtlaReturn.sourceIds.includes("ff9-irodori-items-armor") ||
+  aerialAtlaRejoin?.relationship !== "rejoin" ||
+  aerialAtlaRejoin.fromChapterId !== "disc-1.burmecia" ||
+  aerialAtlaRejoin.toChapterId !== "disc-3.aerial-exploration" ||
+  !aerialAtlaRejoin.sourceIds.includes("gamefaqs-aerial-exploration-71891")
+) {
+  errors.push("The Disc III Atla Mogshop return and rejoin must preserve the optional Cotton Robe route, Headgear price, and scoped sources.");
+}
 const aerialBlackMageVillageReturn = gameRouteEdgesById.get("detour.aerial-black-mage-village-shops");
 const aerialBlackMageVillageRejoin = gameRouteEdgesById.get("detour.aerial-black-mage-village-rejoin");
 const gamefaqsDisc2MagdaleneSourceNotes = sources.find((source) => source.id === "gamefaqs-magdalene-forest-71891")?.notes;

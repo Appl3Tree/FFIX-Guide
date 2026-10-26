@@ -819,6 +819,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-aerial-exploration-71891"],
   },
   {
+    id: "detour.aerial-atla-mogshop",
+    fromChapterId: "disc-3.aerial-exploration",
+    toChapterId: "disc-1.burmecia",
+    relationship: "optional-return",
+    summary: "During Hilda Garde III free flight, return to Burmecia to shop at Atla's Mogshop. GameFAQs recommends buying Steepled Hats there for the optional Cotton Robe money loop; the recipe uses Steepled Hat, not Headgear. The item catalog separately lists Headgear for 330 Gil at this Disc III stop. This is an optional shop visit, not a return to every Burmecia pickup room.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-equipment-33383", "ff9-irodori-items-armor"],
+  },
+  {
+    id: "detour.aerial-atla-mogshop-rejoin",
+    fromChapterId: "disc-1.burmecia",
+    toChapterId: "disc-3.aerial-exploration",
+    relationship: "rejoin",
+    summary: "After Atla's Mogshop visit, return to the Hilda Garde III and resume Disc III free flight; continue to Ipsen's Castle when ready.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891"],
+  },
+  {
     id: "detour.aerial-black-mage-village-shops",
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-2.magdalene-forest",
