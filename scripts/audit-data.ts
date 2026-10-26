@@ -1520,6 +1520,9 @@ if (
   !fossilRooFinalSweepStep?.detail?.includes("Jegged says the entrance can technically be revisited") ||
   !fossilRooFinalSweepStep?.detail?.includes("Treasure Hunter's shop") ||
   !fossilRooFinalSweepStep?.detail?.includes("Newer-release behavior remains unverified") ||
+  !fossilRooFinalSweepStep?.text.includes("buy any desired stock from the separate Treasure Hunter's shop") ||
+  !fossilRooFinalSweepStep?.text.includes("Original PlayStation route evidence") ||
+  !fossilRooFinalSweepStep?.text.includes("newer-release access is unverified") ||
   !fossilRooFinalSweepStep?.detail?.includes("No. 3/No. 4/unnumbered conflict") ||
   !fossilRooExitStep?.text.includes("switch No. 3")
 ) {
