@@ -3500,6 +3500,8 @@ for (const expected of [
 }
 const glassArmletBmvPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop");
 const glassArmletAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-alexandria-shop");
+const glassArmletPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.glass-armlet-shop");
+const glassArmletDisc2LindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.glass-armlet-shop");
 if (
   !glassArmletBmvPath ||
   glassArmletBmvPath.itemId !== "game-item.glass-armlet" ||
@@ -3515,7 +3517,27 @@ if (
 ) {
   errors.push("Glass Armlet's Black Mage Village purchase must close with the Disc IV weapon-stock change while preserving Alexandria recovery.");
 }
-for (const pathId of ["item-path.disc-1.lindblum.glass-armlet-shop", "item-path.disc-2.treno.glass-armlet-shop"]) {
+if (
+  !glassArmletPreCleyraPath ||
+  glassArmletPreCleyraPath.availability !== "limited-window" ||
+  !glassArmletPreCleyraPath.conditions.includes("until Cleyra is completed") ||
+  !glassArmletPreCleyraPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletPreCleyraPath.sourceIds.includes("jegged-arm-gear") ||
+  !glassArmletDisc2LindblumPath ||
+  glassArmletDisc2LindblumPath.itemId !== "game-item.glass-armlet" ||
+  glassArmletDisc2LindblumPath.chapterId !== "disc-2.return-to-lindblum" ||
+  glassArmletDisc2LindblumPath.shopId !== "lindblum.weapon-shop.disc-2" ||
+  glassArmletDisc2LindblumPath.availability !== "limited-window" ||
+  glassArmletDisc2LindblumPath.cost?.amount !== 250 ||
+  !glassArmletDisc2LindblumPath.conditions.includes("before leaving Middle Lindblum") ||
+  !glassArmletDisc2LindblumPath.conditions.includes("remains disputed") ||
+  !glassArmletDisc2LindblumPath.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.arm-gear-stock") ||
+  !glassArmletDisc2LindblumPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletDisc2LindblumPath.sourceIds.includes("jegged-arm-gear")
+) {
+  errors.push("Glass Armlet's pre-Cleyra and Disc II Lindblum purchases must be separate limited shop windows, with the later Disc III stock dispute retained.");
+}
+for (const pathId of ["item-path.disc-2.treno.glass-armlet-shop"]) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
   if (
     !path ||
@@ -3527,6 +3549,44 @@ for (const pathId of ["item-path.disc-1.lindblum.glass-armlet-shop", "item-path.
   ) {
     errors.push(`Glass Armlet's conflicting ${pathId} shop window must remain unresolved and source-scoped.`);
   }
+}
+const leatherWristPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.leather-wrist-shop");
+const leatherWristTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.leather-wrist-shop");
+const leatherWristDisc2LindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.leather-wrist-shop");
+const leatherWristBmvPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.outer-continent.leather-wrist-black-mage-village-shop");
+const lindblumArmGearObjective = objectivesById.get("disc-2.return-to-lindblum.arm-gear-stock");
+const lindblumArmGearStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.return-to-lindblum")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "return-lindblum-shop-preparation");
+if (
+  !leatherWristPreCleyraPath ||
+  leatherWristPreCleyraPath.availability !== "limited-window" ||
+  !leatherWristPreCleyraPath.conditions.includes("until Cleyra is completed") ||
+  !leatherWristPreCleyraPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !leatherWristTrenoPath ||
+  leatherWristTrenoPath.availability !== "limited-window" ||
+  !leatherWristTrenoPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !leatherWristTrenoPath.sourceIds.includes("jegged-arm-gear") ||
+  !leatherWristDisc2LindblumPath ||
+  leatherWristDisc2LindblumPath.itemId !== "game-item.leather-wrist" ||
+  leatherWristDisc2LindblumPath.chapterId !== "disc-2.return-to-lindblum" ||
+  leatherWristDisc2LindblumPath.shopId !== "lindblum.weapon-shop.disc-2" ||
+  leatherWristDisc2LindblumPath.availability !== "limited-window" ||
+  leatherWristDisc2LindblumPath.cost?.amount !== 200 ||
+  !leatherWristDisc2LindblumPath.conditions.includes("before leaving Middle Lindblum") ||
+  !leatherWristDisc2LindblumPath.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.arm-gear-stock") ||
+  !leatherWristDisc2LindblumPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !leatherWristBmvPath ||
+  leatherWristBmvPath.availability !== "limited-window" ||
+  !leatherWristBmvPath.conditions.includes("Disc IV") ||
+  !leatherWristBmvPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !leatherWristBmvPath.sourceIds.includes("jegged-arm-gear") ||
+  lindblumArmGearObjective?.category !== "collection" ||
+  !lindblumArmGearObjective.sourceIds.includes("gamefaqs-shops-71891") ||
+  !lindblumArmGearStep?.objectiveIds?.includes("disc-2.return-to-lindblum.arm-gear-stock")
+) {
+  errors.push("Leather Wrist's Lindblum, Treno, and Black Mage Village stock windows and the Disc II Lindblum walkthrough objective must match the cited tables.");
 }
 const ralvuimagoEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-alexandria.ralvuimago");
 const ralvuimagoRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvuimago");

@@ -232,6 +232,8 @@ These are expected classes, not completion claims. The data audit will grow to v
 
 ## Latest verified slices — 2026-10-26
 
+Leather Wrist and Glass Armlet now have distinct pre-Cleyra and Disc II Lindblum shop paths, including 200/250-Gil Disc II stock before leaving Middle Lindblum. The Disc II walkthrough objective points to those paths; Leather Wrist's Treno/BMV purchase windows are classified against later stock tables, and the conflicting Disc III Glass Armlet listings remain open. Audit: 0 errors and 184 coverage warnings across 44 chapters, 140 missables, 665 objectives, and 392 sources. The catalog has 232 partial items and 1,064 paths; route graph remains 94 links with all 31 optional branches connected. Build: 2,272.85 kB JavaScript (548.27 kB gzip), 60.22 kB CSS (12.77 kB gzip). Tests, browser, gameplay, and release verification were not run.
+
 Disc IV Gizamaluke's Grotto now keeps the Kupo Nut reward guide on the optional Moguta exchange branch and cites the Disc IV Return to Gaia route alone for the rejoin to the Invincible. The audit protects that source boundary. This is route-evidence refinement; the larger guide remains partial, and current audit totals are 44 chapters, 140 missables, 664 objectives, and 392 sources, with 31/31 optional route branches connected.
 
 The Disc IV Mognet branch now assigns Jegged and Cour89 to its letter-delivery and repair legs, and GameFAQs' Disc IV chapter alone to the return edge after the optional Mognet Central visit. Audit: 0 errors, 184 coverage warnings, and 31/31 optional route branches connected; the content remains partial pending broader route and version verification.

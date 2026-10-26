@@ -2159,8 +2159,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "return-lindblum-shop-preparation",
             kind: "optional",
-            text: "Restock from Alice, compare the updated equipment stock, and check the Synthesis Shop. Consider making Exploda for Zidane and Barette for Dagger; equip the Barette to teach Cura, then make sure the active party is prepared before departure.",
-            detail: "Most ordinary equipment overlaps with earlier shop stock, but the party has been through several one-time fights and may need replacements. The synthesis list includes many Disc I recipes; consult the complete item database when it is added.",
+            text: "Before leaving Middle Lindblum, check Dragoos' Disc II weapon stock for Leather Wrist (200 Gil) and Glass Armlet (250 Gil); buy copies only if you need them. Restock from Alice, compare the other updated equipment, and check the Synthesis Shop. Consider making Exploda for Zidane and Barette for Dagger; equip the Barette to teach Cura, then make sure the active party is prepared for departure.",
+            detail: "The Black Mage Village later stocks both armlets on Discs II–III, so these are not item-type deadlines. The Disc II Lindblum stock is a separate purchase window, and the sources conflict about a further Disc III Lindblum Glass Armlet sale. The Glass Armlet and Leather Wrist are also ingredients for the 500-Gil Glass Buckle synthesis, which feeds the Power Belt recipe.",
+            objectiveIds: ["disc-2.return-to-lindblum.arm-gear-stock"],
           },
           {
             id: "return-lindblum-pinnacle-entrance-pickups",
