@@ -1323,11 +1323,11 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
   {
     id: "cutoff.cleyra-freya.before-reunion",
     edgeId: "story.cleyra-to-return-to-alexandria",
-    title: "Freya's post-Antlion Emerald and Stiltzkin window",
+    title: "Freya's post-Antlion Emerald and Stiltzkin safe checkpoint",
     certainty: "conservative",
-    trigger: "During Freya's separate control segment after Antlion, collect the High Priest's Emerald and buy Stiltzkin's second bundle before returning to the settlement entrance. This is the safe checkpoint: GameFAQs and Jegged place the purchase here, while EliteGrindLab records conflicting deadline reports and RPGClassics mentions a later Stiltzkin encounter during the attack return without confirming that the bundle remains purchasable.",
+    trigger: "During Freya's separate control segment after Antlion, collect the High Priest's Emerald and buy Stiltzkin's second bundle at the Inn before returning to the settlement entrance; this is the source-supported safe checkpoint. If the purchase was not recorded, check the Sandpit during the later attack return before Cleyra closes. EliteGrindLab's field-script comparison lists the same bundle in both rooms but cannot establish which offer is active, so the Sandpit is not modeled as confirmed recovery.",
     missableIds: ["missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
-    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"],
+    sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement"],
   },
   {
     id: "cutoff.cleyra-trunk-return.before-bridge",
@@ -1361,9 +1361,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.cleyra-to-return-to-alexandria",
     title: "Cleyra final sweep and departure",
     certainty: "disputed",
-    trigger: "The aggregate treasure warning spans separate windows: first-visit pickups, ATEs, and shops before Antlion; Freya's Emerald and Stiltzkin #2 before rejoining the party; missed Trunk chests on the required return before crossing the bridge; and evacuation rewards before exiting the Cathedral to fight Beatrix. Beatrix's steals happen during that final battle; after it, the story moves to the Red Rose and closes Cleyra. Sources differ on the broad last-chance label: Jegged places its Point of No Return callout before the forced Trunk return, while GameFAQs explicitly allows missed Trunk chests on that return. Use the separate safe checkpoints listed here.",
+    trigger: "The aggregate treasure warning spans separate windows: first-visit pickups, ATEs, and shops before Antlion; Freya's Emerald and the safe Inn checkpoint for Stiltzkin #2 before rejoining the party; a possible Sandpit Stiltzkin check during the later attack return; missed Trunk chests before crossing the bridge; and evacuation rewards before exiting the Cathedral to fight Beatrix. The Sandpit's field-script declaration is not verified as a second active offer. Beatrix's steals happen during that final battle; after it, the story moves to the Red Rose and closes Cleyra. Sources differ on the broad last-chance label: Jegged places its Point of No Return callout before the forced Trunk return, while GameFAQs explicitly allows missed Trunk chests on that return. Use the separate safe checkpoints listed here.",
     missableIds: ["missable.disc-2.cleyra.treasures", "missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"],
-    sourceIds: ["gamefaqs-missables-71891", "jegged-missables", "jegged-cleyra", "gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"],
+    sourceIds: ["gamefaqs-missables-71891", "jegged-missables", "jegged-cleyra", "gamefaqs-cleyra-71891", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement"],
   },
   {
     id: "cutoff.alexandria-vivi.before-mini-theater",

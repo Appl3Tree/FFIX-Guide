@@ -1819,7 +1819,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-antlion-evacuation",
         title: "Antlion, evacuation, and the Cleyra cutoff",
         summary: "Try the Antlion steals, claim the post-battle rewards, then follow the safe evacuation route and survive Beatrix's scripted battle.",
-        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "cleyra-antlion-steals",
@@ -1839,7 +1839,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-stiltzkin-and-inn-mognet",
             kind: "pickup",
             text: "At the Inn, buy Stiltzkin's 444-Gil bundle (Hi-Potion, Ether, and Phoenix Pinion). Check Mognet with Mopli and read the letter available after the Antlion sequence, then return to the settlement entrance to rejoin Zidane, Vivi, and Quina.",
-            detail: "This is the safe purchase point: GameFAQs and Jegged place the bundle during Freya's separate post-Antlion Inn phase. RPGClassics mentions another Stiltzkin encounter at the Sandpit during the later attack return, but only directs the player to check Mognet; it does not confirm that the bundle remains for sale. EliteGrindLab records conflicting deadline reports and possible Sandpit/Inn script declarations without identifying which location is active. GameFAQs identifies a new letter from Monev at this Inn visit; check Mognet and record any new mail. The separate attack letter to Serino is collected from Mopli during the assault and delivered aboard the Red Rose.",
+            detail: "This is the source-supported safe purchase point: GameFAQs and Jegged place the bundle during Freya's separate post-Antlion Inn phase. EliteGrindLab's field-script comparison also lists the same purchase in the later Sandpit script but cannot establish which room is active in a playthrough; if the bundle is not recorded here, check Stiltzkin again during the attack before advancing. GameFAQs identifies a new letter from Monev at this Inn visit; check Mognet and record any new mail. The separate attack letter to Serino is collected from Mopli during the assault and delivered aboard the Red Rose.",
             objectiveIds: ["disc-2.cleyra.stiltzkin-2", "disc-2.cleyra.mognet-mail"],
           },
           {
@@ -1852,9 +1852,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "cleyra-attack-mognet",
             kind: "pickup",
-            text: "After the forced Type B battle at the settlement entrance, return to the sandpit area and speak with Mopli to collect the letter for Serino. Save, then return to the entrance to continue the attack sequence.",
-            detail: "GameFAQs, Jegged, and Flactem place this letter pickup with Mopli in Cleyra during the attack. The entrance Type B battle occurs first; after the letter and save, the fixed assault waves are three Soldiers, two Type Bs, two Soldiers with one Type B, then three Soldiers. Serino receives the letter in the following Red Rose chapter; keep the Mognet handoff objective open until that delivery is complete.",
-            objectiveIds: ["disc-2.cleyra.mognet-mail", "disc-2.return-to-alexandria.mognet-handoff"],
+            text: "After the forced Type B battle at the settlement entrance, return to the sandpit area. If Stiltzkin's 444-Gil bundle was not recorded in the Inn, check whether he offers it here; then speak with Mopli to collect the letter for Serino. Save, then return to the entrance to continue the attack sequence.",
+            detail: "GameFAQs, Jegged, and Flactem place the letter pickup with Mopli in Cleyra during the attack. RPGClassics also places Stiltzkin at the Sandpit. EliteGrindLab's script comparison lists the bundle in both the Inn and Sandpit scripts but cannot verify which offer is active, so this is a recommended follow-up check, not confirmed recovery. The entrance Type B battle occurs first; after the letter and save, the fixed assault waves are three Soldiers, two Type Bs, two Soldiers with one Type B, then three Soldiers. Serino receives the letter in the following Red Rose chapter; keep the Mognet handoff objective open until that delivery is complete.",
+            objectiveIds: ["disc-2.cleyra.stiltzkin-2", "disc-2.cleyra.mognet-mail", "disc-2.return-to-alexandria.mognet-handoff"],
           },
           {
             id: "cleyra-evacuation-choices",
@@ -1874,7 +1874,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-final-sweep-cutoff",
             kind: "cutoff",
             text: "After Beatrix's scripted battle, the story moves to the Red Rose and Cleyra is closed. Review the preceding checkpoints for any missed ATE, pickup, Mognet, shop, evacuation reward, or steal; this departure step is a closure notice, not another chance to collect them.",
-            detail: "The local windows occur in sequence: first-visit ATEs and shop stock before Antlion; Freya's Emerald, Cathedral pickups, Stiltzkin bundle, and Mognet check before rejoining the party; any missed Trunk chests on the required return before crossing the bridge; then evacuation rewards and Beatrix steals before departure. GameFAQs explicitly places the missed-chest recovery on the Trunk return. Jegged's earlier Point of No Return label is broader than that route sequence. All earlier windows are closed once the post-Beatrix story transfers the party to the Red Rose.",
+            detail: "The local windows occur in sequence: first-visit ATEs and shop stock before Antlion; Freya's Emerald, Cathedral pickups, the safe Inn purchase for Stiltzkin #2, and Mognet check before rejoining the party; a possible second Stiltzkin check in the Sandpit during the attack; any missed Trunk chests on the required return before crossing the bridge; then evacuation rewards and Beatrix steals before departure. The Sandpit field-script declaration does not prove a second active offer. GameFAQs explicitly places the missed-chest recovery on the Trunk return. Jegged's earlier Point of No Return label is broader than that route sequence. All earlier windows are closed once the post-Beatrix story transfers the party to the Red Rose.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.movie-critic-ates", "disc-2.cleyra.atla-letter", "disc-2.cleyra.shop-stock", "disc-2.cleyra.mognet-mail", "disc-2.cleyra.emerald", "disc-2.cleyra.stiltzkin-2", "disc-2.cleyra.out-of-harms-way", "disc-2.cleyra.antlion-steals", "disc-2.cleyra.beatrix-steals"],
           },
         ],

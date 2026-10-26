@@ -3000,10 +3000,10 @@ const cleyraStiltzkinBundlePaths: ItemAcquisitionPath[] = ["hi-potion", "ether"]
   recommendedBeforeChapterId: "disc-2.cleyra",
   shopId: "stiltzkin-cleyra-second",
   shopName: "Stiltzkin's second Cleyra bundle",
-  conditions: "Buy this item in Stiltzkin's one-time bundle with a Hi-Potion, Ether, and Phoenix Pinion for 444 Gil.",
+  conditions: "Buy this item in Stiltzkin's one-time bundle with a Hi-Potion, Ether, and Phoenix Pinion for 444 Gil. The Inn is the source-supported safe stop; a field-script cross-check also lists the Sandpit, but its active offer is unverified.",
   cost: { currency: "gil", amount: 444, bundleId: "cleyra-stiltzkin-second-bundle" },
   walkthroughObjectiveIds: ["disc-2.cleyra.stiltzkin-2"],
-  sourceIds: [...cleyraSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin"],
+  sourceIds: [...cleyraSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "elitegrindlab-stiltzkin-bundles"],
 }));
 
 const zornThornShopRecoveryPath = (route: {
@@ -5730,10 +5730,10 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "stiltzkin-cleyra-second",
     shopName: "Stiltzkin's second Cleyra bundle",
     recommendedBeforeChapterId: "disc-2.cleyra",
-    conditions: "Buy Stiltzkin's one-time bundle with a Hi-Potion, Ether, and Phoenix Pinion for 444 Gil.",
+    conditions: "Buy Stiltzkin's one-time bundle with a Hi-Potion, Ether, and Phoenix Pinion for 444 Gil. The Inn is the source-supported safe stop; a field-script cross-check also lists the Sandpit, but its active offer is unverified.",
     cost: { currency: "gil", amount: 444, bundleId: "cleyra-stiltzkin-second-bundle" },
     walkthroughObjectiveIds: ["disc-2.cleyra.stiltzkin-2"],
-    sourceIds: [...cleyraSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", ...phoenixPinionSources],
+    sourceIds: [...cleyraSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "elitegrindlab-stiltzkin-bundles", ...phoenixPinionSources],
   },
   {
     id: "item-path.disc-2.journey-to-outer-continent.stiltzkin-3-phoenix-pinion",

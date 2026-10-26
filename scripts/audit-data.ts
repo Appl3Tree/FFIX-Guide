@@ -66,6 +66,7 @@ const achievementCatalogs = [
 
 const cleyraEvacuationWarning = missablesById.get("missable.disc-2.cleyra.out-of-harms-way");
 const cleyraStiltzkinWarning = missablesById.get("missable.disc-2.cleyra.stiltzkin-2");
+const eliteGrindLabStiltzkinSource = sources.find((source) => source.id === "elitegrindlab-stiltzkin-bundles");
 const cleyraEvacuationCutoff = cutoffsById.get("cutoff.cleyra-evacuation.choice-window");
 const cleyraFreyaCutoff = cutoffsById.get("cutoff.cleyra-freya.before-reunion");
 const cleyraTrunkReturnCutoff = cutoffsById.get("cutoff.cleyra-trunk-return.before-bridge");
@@ -86,8 +87,9 @@ if (
   cleyraFreyaCutoff?.certainty !== "conservative" ||
   !cleyraFreyaCutoff.trigger.includes("Freya's separate control segment") ||
   !cleyraFreyaCutoff.trigger.includes("before returning to the settlement entrance") ||
+  !cleyraFreyaCutoff.trigger.includes("check the Sandpit during the later attack return") ||
   !["missable.disc-2.cleyra.emerald", "missable.disc-2.cleyra.stiltzkin-2"].every((missableId) => cleyraFreyaCutoff.missableIds.includes(missableId)) ||
-  !["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"].every((sourceId) => cleyraFreyaCutoff.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement"].every((sourceId) => cleyraFreyaCutoff.sourceIds.includes(sourceId)) ||
   cleyraTrunkReturnCutoff?.certainty !== "source-supported" ||
   !cleyraTrunkReturnCutoff.trigger.includes("before crossing the bridge") ||
   !cleyraTrunkReturnCutoff.missableIds.includes("missable.disc-2.cleyra.treasures") ||
@@ -97,10 +99,12 @@ if (
 }
 if (
   cleyraStiltzkinWarning?.verification !== "partial" ||
-  !cleyraStiltzkinWarning.note.includes("does not confirm that the bundle remains for sale") ||
-  !["elitegrindlab-cleyra", "rpgclassics-cleyra-settlement"].every((sourceId) => cleyraStiltzkinWarning.sourceIds.includes(sourceId))
+  !cleyraStiltzkinWarning.note.includes("declared in both the Inn and Sandpit field scripts") ||
+  !cleyraStiltzkinWarning.note.includes("recommends checking both") ||
+  !["elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement"].every((sourceId) => cleyraStiltzkinWarning.sourceIds.includes(sourceId)) ||
+  !eliteGrindLabStiltzkinSource?.url.includes("/ff9/stiltzkin/")
 ) {
-  errors.push("Cleyra's Stiltzkin warning must preserve the unresolved later-visit evidence and its RPGClassics/EliteGrindLab provenance.");
+  errors.push("Cleyra's Stiltzkin warning must preserve the Inn safe point, dual-room script evidence, unresolved active-room state, and dedicated source provenance.");
 }
 
 const lindblumTrolleyWarning = missablesById.get("missable.disc-1.lindblum.trolley-cutoff");
@@ -2794,9 +2798,21 @@ if (cleyraStiltzkinProducts.some(([slug, itemId]) => {
   return !path || path.itemId !== itemId || path.chapterId !== "disc-2.cleyra" ||
     path.method !== "moogle-shop" || path.availability !== "limited-window" ||
     path.cost?.currency !== "gil" || path.cost.amount !== 444 || path.cost.bundleId !== "cleyra-stiltzkin-second-bundle" ||
-    !path.walkthroughObjectiveIds?.includes("disc-2.cleyra.stiltzkin-2");
+    !path.walkthroughObjectiveIds?.includes("disc-2.cleyra.stiltzkin-2") ||
+    !path.sourceIds.includes("elitegrindlab-stiltzkin-bundles") ||
+    !path.conditions?.includes("Inn is the source-supported safe stop") ||
+    !path.conditions.includes("Sandpit");
 })) {
   errors.push("Cleyra's Stiltzkin #2 bundle must catalog its Hi-Potion, Ether, and Phoenix Pinion paths at a shared 444-Gil price and checkpoint.");
+}
+if (
+  !cleyraStiltzkinWarning?.sourceIds.includes("elitegrindlab-stiltzkin-bundles") ||
+  !cleyraStiltzkinWarning.note?.includes("declared in both the Inn and Sandpit field scripts") ||
+  !cleyraStiltzkinWarning.action.includes("check the Sandpit") ||
+  !cleyraStiltzkinWarning.recovery?.includes("without counting it as a guaranteed recovery") ||
+  !cleyraStiltzkinWarning.classification.includes("permanently-missable")
+) {
+  errors.push("Cleyra's Stiltzkin warning must preserve the Inn safe checkpoint, conditional Sandpit follow-up, unresolved active-room state, and dedicated bundle source.");
 }
 const hilgigarsChapterIndex = guideAreas.findIndex((area) => area.id === "disc-2.conde-petie-mountain-path");
 const hilgigarsSteals = [
