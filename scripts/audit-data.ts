@@ -1171,6 +1171,41 @@ const branBalReturnEdge = gameRouteEdgesById.get("story.portal-to-return-to-gaia
 const branBalTreasureWarning = missablesById.get("missable.disc-3.portal-to-another-world.terra-bran-bal-treasures");
 const branBalCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.bran-bal.green-gate");
 const branBalReturnSources = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium"];
+const terraTreasureObjective = objectivesById.get("disc-3.portal-to-another-world.terra-treasures");
+const branBalTreasureObjective = objectivesById.get("disc-3.portal-to-another-world.bran-bal-treasures");
+const terraBranFixedPickupRequirements = [
+  ["item-path.disc-3.portal-to-another-world.terra-coronet-chest", "game-item.coronet", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.terra-dragon-wrist-chest", "game-item.dragon-wrist", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.terra-elixir-chest", "game-item.elixir", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.terra-remedy-chest", "game-item.remedy", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.terra-mythril-racket-chest", "game-item.mythril-racket", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.terra-demons-vest-chest", "game-item.demons-vest", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.terra-minervas-plate-chest", "game-item.minervas-plate", "chest", "disc-3.portal-to-another-world.terra-treasures"],
+  ["item-path.disc-3.portal-to-another-world.bran-bal-flash-hat-chest", "game-item.flash-hat", "chest", "disc-3.portal-to-another-world.bran-bal-treasures"],
+  ["item-path.disc-3.portal-to-another-world.bran-bal-laboratory-elixir-pickup", "game-item.elixir", "hidden-pickup", "disc-3.portal-to-another-world.bran-bal-treasures"],
+  ["item-path.disc-3.portal-to-another-world.bran-bal-inn-elixir-chest", "game-item.elixir", "chest", "disc-3.portal-to-another-world.bran-bal-treasures"],
+  ["item-path.disc-3.portal-to-another-world.bran-bal-wing-edge-chest", "game-item.wing-edge", "chest", "disc-3.portal-to-another-world.bran-bal-treasures"],
+  ["item-path.disc-3.portal-to-another-world.bran-bal-angel-earrings-pickup", "game-item.angel-earrings", "hidden-pickup", "disc-3.portal-to-another-world.bran-bal-treasures"],
+] as const;
+const terraBranFixedPickupErrors = terraBranFixedPickupRequirements.filter(([pathId, itemId, method, objectiveId]) => {
+  const path = itemAcquisitionPaths.find((itemPath) => itemPath.id === pathId);
+  return !path
+    || path.itemId !== itemId
+    || path.method !== method
+    || path.quantity !== 1
+    || path.availability !== "single-use"
+    || !path.walkthroughObjectiveIds?.includes(objectiveId);
+});
+const branBalLaterEquipmentRecoveryIds = [
+  "item-path.disc-4-shop.daguerreo.weapon-shop.coronet",
+  "item-path.disc-4-shop.daguerreo.weapon-shop.dragon-wrist",
+  "item-path.disc-4-shop.daguerreo.weapon-shop.mythril-racket",
+  "item-path.disc-4-shop.daguerreo.weapon-shop.demons-vest",
+  "item-path.disc-4-shop.daguerreo.weapon-shop.minervas-plate",
+  "item-path.disc-4-shop.daguerreo.weapon-shop.flash-hat",
+];
+const branBalLaterEquipmentRecoveryCosts = [4400, 4800, 2250, 10250, 12200, 5200] as const;
+const branBalLaterEquipmentRecoveryPaths = branBalLaterEquipmentRecoveryIds.map((pathId) => itemAcquisitionPaths.find((path) => path.id === pathId));
 if (
   !branBalReturnEdge?.summary.includes("linear path back through Bran Bal") ||
   !branBalReturnEdge.summary.includes("gather the Genomes") ||
@@ -1180,13 +1215,36 @@ if (
   errors.push("The post-Kuja route must document the linear Bran Bal story passage without implying a free treasure-room return.");
 }
 if (
+  !terraTreasureObjective ||
+  !branBalTreasureObjective ||
+  branBalTreasureWarning?.objectiveId !== branBalTreasureObjective.id ||
   branBalCutoff?.certainty !== "conservative" ||
   !branBalCutoff.trigger.includes("Mikoto through the green gate") ||
-  !branBalTreasureWarning?.nextAvailability?.includes("Neither guide documents free access") ||
-  !branBalTreasureWarning.recovery?.includes("No reviewed source confirms a free return") ||
+  !branBalTreasureWarning?.nextAvailability?.includes("Neither guide documents free access to the earlier treasure rooms") ||
+  !["Coronet (4,400 Gil)", "Dragon Wrist (4,800)", "Mythril Racket (2,250)", "Demon's Vest (10,250)", "Minerva's Plate (12,200)", "Flash Hat (5,200)", "Angel Earrings"].every((itemText) => branBalTreasureWarning.nextAvailability.includes(itemText)) ||
+  !branBalTreasureWarning.nextAvailability.includes("Angel Earrings") ||
+  !branBalTreasureWarning.recovery?.includes("no reviewed source confirms a free return to the earlier pickup rooms") ||
+  !branBalTreasureWarning.action?.includes("both local Elixirs") ||
+  !branBalTreasureWarning.note?.includes("one Minerva chest") ||
+  !branBalTreasureWarning.note.includes("two local Bran Bal Elixirs") ||
   branBalReturnSources.some((sourceId) => !branBalTreasureWarning.sourceIds.includes(sourceId))
 ) {
   errors.push("Bran Bal's treasure warning must retain the conservative pre-gate checkpoint and distinguish story traversal from pickup recovery.");
+}
+if (
+  terraBranFixedPickupErrors.length > 0 ||
+  !branBalTreasureWarning?.classification.includes("missable-opportunity") ||
+  branBalTreasureWarning.classification.includes("permanently-missable") ||
+  !branBalTreasureWarning.sourceIds.includes("gamefaqs-item-locations-54996") ||
+  !branBalTreasureWarning.sourceIds.includes("elitegrindlab-bran-bal") ||
+  !branBalTreasureWarning.sourceIds.includes("gamefaqs-shops-71891") ||
+  branBalLaterEquipmentRecoveryPaths.some((path, index) => !path || path.availability !== "repeatable" || path.cost?.currency !== "gil" || path.cost?.amount !== branBalLaterEquipmentRecoveryCosts[index]) ||
+  !itemAcquisitionPaths.some((path) => path.itemId === "game-item.elixir" && path.chapterId !== "disc-3.portal-to-another-world") ||
+  !itemAcquisitionPaths.some((path) => path.itemId === "game-item.remedy" && path.chapterId !== "disc-3.portal-to-another-world") ||
+  !itemAcquisitionPaths.some((path) => path.itemId === "game-item.wing-edge" && path.chapterId !== "disc-3.portal-to-another-world") ||
+  !itemAcquisitionPaths.some((path) => path.itemId === "game-item.angel-earrings" && path.chapterId !== "disc-3.portal-to-another-world")
+) {
+  errors.push("Terra and Bran Bal's fixed pickup sweep must map all 12 route items, distinguish the two local Elixirs, preserve the Minerva's Plate label conflict, and retain later item-type routes.");
 }
 const angelEarringsItemId = "game-item.angel-earrings";
 const angelEarringsItem = gameItems.find((item) => item.id === angelEarringsItemId);
