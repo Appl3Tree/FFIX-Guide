@@ -5132,9 +5132,55 @@ if (
   battleBootsHadesPath?.itemId !== "game-item.battle-boots" || battleBootsHadesPath.chapterId !== "disc-4.memoria" ||
   !daguerreoShopStep?.detail.includes("only equipment source for Iai Strike") || !daguerreoShopStep.detail.includes("Kain's Lance") ||
   !finalStockAbilityStep?.detail.includes("Cherry Blossom can also be learned from Kain's Lance") ||
-  !finalStockAbilityStep.detail.includes("only Iai Strike is listed solely on its Disc III weapon")
+  !finalStockAbilityStep.detail.includes("For the specific Rune Blade/Obelisk comparison, Iai Strike appears only on Rune Blade")
 ) {
   errors.push("The Daguerreo ability cutoff must isolate Rune Blade's documented Iai Strike opportunity, preserve Kain's Lance/Battle Boots alternatives, and link Kain's Lance's Disc IV pickup and claims.");
+}
+const finalStockAbilityWarning = missablesById.get("missable.disc-3.preparing-to-leave.final-stock-ability-review");
+const finalStockAbilityObjective = objectives.find((objective) => objective.id === "disc-3.preparing-to-leave.final-stock-ability-review");
+const finalStockAbilitySources = ["gamefaqs-abilities-71891", "rpgclassics-abilities"];
+const finalStockAbilityItems = ["game-item.trident", "game-item.diamond-sword", "game-item.flame-saber", "game-item.heavy-lance"]
+  .map((itemId) => gameItems.find((item) => item.id === itemId));
+const finalStockAbilityClaims = [
+  { itemId: "game-item.trident", abilityName: "Luna" },
+  { itemId: "game-item.diamond-sword", abilityName: "Power Break" },
+  { itemId: "game-item.flame-saber", abilityName: "Magic Break" },
+  { itemId: "game-item.heavy-lance", abilityName: "Six Dragons" },
+];
+const finalStockAbilityPaths = [
+  { id: "item-path.disc-3-stock.mimoza-oeilvert.trident", itemId: "game-item.trident" },
+  { id: "item-path.disc-3-stock.mojito-desert-palace.trident", itemId: "game-item.trident" },
+  { id: "item-path.disc-3-stock.mimoza-oeilvert.diamond-sword", itemId: "game-item.diamond-sword" },
+  { id: "item-path.disc-3-stock.mojito-desert-palace.diamond-sword", itemId: "game-item.diamond-sword" },
+  { id: "item-path.disc-3-stock.esto-gaza.diamond-sword", itemId: "game-item.diamond-sword" },
+  { id: "item-path.disc-3-stock.esto-gaza.flame-saber", itemId: "game-item.flame-saber" },
+  { id: "item-path.disc-3-stock.esto-gaza.heavy-lance", itemId: "game-item.heavy-lance" },
+  { id: "item-path.disc-3.forgotten-continent.oeilvert-diamond-sword", itemId: "game-item.diamond-sword" },
+].map(({ id, itemId }) => ({ id, itemId, path: itemAcquisitionPaths.find((candidate) => candidate.id === id) }));
+const finalStockAbilityWalkthrough = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.preparing-to-leave")
+  ?.sections.find((section) => section.steps.some((step) => step.id === "preparing-leave-shop-inventory"));
+const finalStockAbilityWalkthroughStep = finalStockAbilityWalkthrough?.steps.find((step) => step.id === "preparing-leave-shop-inventory");
+if (
+  !finalStockAbilityWarning || finalStockAbilityWarning.severity !== "info" ||
+  !finalStockAbilityWarning.consequence.includes("GameFAQs and RPGClassics PlayStation ability tables both list") ||
+  !finalStockAbilityWarning.consequence.includes("not a claim that missing the gear permanently removes an ability") ||
+  !finalStockAbilityWarning.nextAvailability.includes("Neither reviewed PlayStation ability table lists alternate equipment") ||
+  !finalStockAbilityWarning.note.includes("post-transition and version-specific ability-source audit remains partial") ||
+  !finalStockAbilitySources.every((sourceId) => finalStockAbilityWarning.sourceIds.includes(sourceId)) ||
+  !finalStockAbilityObjective || !finalStockAbilitySources.every((sourceId) => finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
+  finalStockAbilityItems.some((item) => !item || !finalStockAbilitySources.every((sourceId) => item.sourceIds.includes(sourceId))) ||
+  finalStockAbilityClaims.length !== 4 || finalStockAbilityClaims.some(({ itemId, abilityName }) =>
+    !equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName &&
+      finalStockAbilitySources.every((sourceId) => claim.sourceIds.includes(sourceId))),
+  ) ||
+  finalStockAbilityPaths.some(({ itemId, path }) => !path || path.itemId !== itemId ||
+    !finalStockAbilitySources.every((sourceId) => path.sourceIds.includes(sourceId))) ||
+  !finalStockAbilityWalkthroughStep ||
+  !finalStockAbilityWalkthroughStep.detail.includes("both reviewed PlayStation catalogs list Luna (Trident), Power Break (Diamond Sword), Magic Break (Flame Saber), and Six Dragons (Heavy Lance)") ||
+  !finalStockAbilitySources.every((sourceId) => finalStockAbilityWalkthrough?.sourceIds.includes(sourceId))
+) {
+  errors.push("The final-stock ability review must link both PlayStation ability catalogs to its warning, objective, four item records and claims, all seven shop routes and the Oeilvert chest, and the walkthrough checkpoint without claiming permanent ability loss.");
 }
 const octagonRodWarning = missablesById.get("missable.disc-3.lost-continent.octagon-rod");
 const octagonRodObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.octagon-rod");
