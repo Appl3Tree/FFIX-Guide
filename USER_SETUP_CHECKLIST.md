@@ -4,7 +4,7 @@ Last updated: 2026-10-26
 
 This is the consolidated list of actions that need the project owner's GitHub or Firebase account, a real sign-in, or a second device. The app currently stores progress in this browser only. Codex will complete and test the implementation that does not require your account before moving the Firebase steps to **Ready for User**.
 
-Latest Codex update: the Disc II Kupo Nut route-source audit is local guide work and did not change GitHub, Firebase, or other owner-side setup requirements.
+Latest Codex update: the Disc III Treno route-source audit is local guide work and did not change GitHub, Firebase, or other owner-side setup requirements.
 
 The Disc IV Mognet rejoin source review was also local guide work; no owner-side setup actions or release settings changed.
 

@@ -2096,7 +2096,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/treno",
     accessed: "2026-10-25",
-    notes: "Primary route reference for the seven local ATEs, screen order, Power Belt, first-visit pickup sweep, Mogrich, Stellazzio, weapon-shop Griffin, and the Supersoft story transition. The Auction House first hosts a story scene; after the party reunites in Treno, it opens for Disc II bidding before Doctor Tot's tower.",
+    notes: "Disc II first-visit route reference for the seven local ATEs, screen order, Power Belt, pickup sweep, Mogrich, Stellazzio, weapon-shop Griffin, and the Supersoft story transition. The Auction House first hosts a story scene; after the party reunites in Treno, it opens for Disc II bidding before Doctor Tot's tower. This page does not document the later Hilda Garde III free-flight return to Treno; GameFAQs' Aerial Exploration and Jegged's Hilda Garde III route cover that Disc III stop.",
   },
   {
     id: "gamefaqs-treno-79143",
@@ -2696,7 +2696,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/aerial-exploration",
     accessed: "2026-10-24",
-    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It explicitly calls this the best time for the Cotton Robe money loop and directs the player to buy Wrists in Dali, making it the direct source for the later Hilda Garde III Dali detour. Sidequest and stock claims are cross-checked against dedicated guides.",
+    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It directly lists the Treno Weapon Shop Amdusias fight and Queen Stella's available Stellazzio returns during this free-flight window, supporting the optional Treno stop and Running Shoes reward. It also calls this the best time for the Cotton Robe money loop and directs the player to buy Wrists in Dali, making it the direct source for the later Hilda Garde III Dali detour. Sidequest and stock claims are cross-checked against dedicated guides.",
   },
   {
     id: "jegged-lindblum-hilda-garde",
@@ -2704,7 +2704,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/36-Lindblum-and-Hilda-Garde-III.html",
     accessed: "2026-10-24",
-    notes: "Cross-check for the Mogki-to-Kumool letter, Hilda Garde flight/Elixir, Sky Chocobo fragments and abilities, Chocobo Air Garden, Friendly Yan, Daguerreo, and Queen Stella return.",
+    notes: "Disc III Hilda Garde route cross-check for the Mogki-to-Kumool letter, Hilda Garde flight/Elixir, Sky Chocobo fragments and abilities, Chocobo Air Garden, Friendly Yan, Daguerreo, and Queen Stella return. It directly documents the optional Treno return before Ipsen and identifies the Knight's House Amdusias fight and its Running Shoes reward.",
   },
   {
     id: "jegged-daguerreo",

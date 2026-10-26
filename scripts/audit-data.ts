@@ -742,6 +742,9 @@ if (
   errors.push("The early Memoria exit must preserve GameFAQs' party condition and its independent entrance-return cross-checks.");
 }
 const aerialTrenoRejoin = gameRouteEdgesById.get("detour.aerial-treno-rejoin");
+const gamefaqsDisc2TrenoSourceNotes = sources.find((source) => source.id === "gamefaqs-treno-71891")?.notes;
+const gamefaqsAerialExplorationSourceNotes = sources.find((source) => source.id === "gamefaqs-aerial-exploration-71891")?.notes;
+const jeggedHildaGardeSourceNotes = sources.find((source) => source.id === "jegged-lindblum-hilda-garde")?.notes;
 if (
   aerialTrenoReturn?.relationship !== "optional-return" ||
   aerialTrenoReturn.fromChapterId !== "disc-3.aerial-exploration" ||
@@ -749,12 +752,19 @@ if (
   !aerialTrenoReturn.summary.includes("Amdusias") ||
   !aerialTrenoReturn.summary.includes("Running Shoes") ||
   !aerialTrenoReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialTrenoReturn.sourceIds.includes("jegged-lindblum-hilda-garde") ||
+  aerialTrenoReturn.sourceIds.includes("gamefaqs-treno-71891") ||
   aerialTrenoRejoin?.relationship !== "rejoin" ||
   aerialTrenoRejoin.fromChapterId !== "disc-2.treno" ||
   aerialTrenoRejoin.toChapterId !== "disc-3.aerial-exploration" ||
-  !aerialTrenoRejoin.sourceIds.includes("jegged-lindblum-hilda-garde")
+  !aerialTrenoRejoin.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialTrenoRejoin.sourceIds.includes("jegged-lindblum-hilda-garde") ||
+  !gamefaqsDisc2TrenoSourceNotes?.includes("Disc II first-visit") ||
+  !gamefaqsDisc2TrenoSourceNotes.includes("does not document the later Hilda Garde III free-flight return to Treno") ||
+  !gamefaqsAerialExplorationSourceNotes?.includes("Treno Weapon Shop Amdusias fight and Queen Stella's available Stellazzio returns") ||
+  !jeggedHildaGardeSourceNotes?.includes("Knight's House Amdusias fight and its Running Shoes reward")
 ) {
-  errors.push("The Disc III Hilda Garde Treno return and rejoin must preserve the Amdusias reward route and source links.");
+  errors.push("The Disc III Hilda Garde Treno return and rejoin must cite its Disc III routes and exclude the first-visit Disc II Treno walkthrough.");
 }
 const aerialDaliReturn = gameRouteEdgesById.get("detour.aerial-dali-cotton-robe");
 const aerialDaliRejoin = gameRouteEdgesById.get("detour.aerial-dali-rejoin");

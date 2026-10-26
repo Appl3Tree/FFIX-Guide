@@ -792,7 +792,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-2.treno",
     relationship: "optional-return",
     summary: "After obtaining the Hilda Garde III following Mount Gulug and before continuing to Ipsen's Castle, fly back to Treno for Queen Stella's available Stellazzio rewards and the Disc III Knight's House Amdusias fight, which awards another pair of Running Shoes. This return is optional; the Hilda Garde III can take the party back to its open-world route.",
-    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-treno-71891"],
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
   },
   {
     id: "detour.aerial-treno-rejoin",
