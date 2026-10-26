@@ -5413,6 +5413,7 @@ if (
 }
 const disc4TrenoReturnEdge = gameRouteEdgesById.get("detour.return-to-gaia-treno-behemoth");
 const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoin-gaia");
+const disc4IpsenRejoinEdge = gameRouteEdgesById.get("detour.ipsens-castle-aquarius-rejoin-gaia");
 const disc4LocationListSource = sources.find((source) => source.id === "ff9-kouryaku-disc4");
 if (
   !disc4TrenoReturnEdge?.summary.includes("Quan's Dwelling") ||
@@ -5424,9 +5425,13 @@ if (
   !disc4TrenoRejoinEdge?.summary.includes("Quan's Dwelling") ||
   !disc4TrenoRejoinEdge.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
   disc4TrenoRejoinEdge.sourceIds.includes("ff9-kouryaku-disc4") ||
-  disc4TrenoRejoinEdge.sourceIds.includes("gamefaqs-weapon-shop-monsters-71891")
+  disc4TrenoRejoinEdge.sourceIds.includes("gamefaqs-weapon-shop-monsters-71891") ||
+  !disc4IpsenRejoinEdge?.summary.includes("open Disc IV Gaia route") ||
+  !disc4IpsenRejoinEdge.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  disc4IpsenRejoinEdge.sourceIds.includes("gamefaqs-ipsens-castle-71891") ||
+  disc4IpsenRejoinEdge.sourceIds.includes("jegged-mognet-central")
 ) {
-  errors.push("The Disc IV Gaia route must keep the Japanese accessible-location list on the Treno detour, while the rejoin cites route evidence rather than destination/encounter sources.");
+  errors.push("Disc IV Gaia rejoins must cite the return route and exclude destination, encounter, or Mognet-step sources that do not support the Invincible transition.");
 }
 const cour89BranBal = sources.find((source) => source.id === "cour89-bran-bal");
 const cour89Pandemonium = sources.find((source) => source.id === "cour89-pandemonium");

@@ -1135,8 +1135,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.ipsens-castle",
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
-    summary: "After checking Ipsen's Castle for Aquarius and delivering any pending letter, return to the Invincible and resume Gaia exploration.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-ipsens-castle-71891", "jegged-mognet-central"],
+    summary: "After the optional Ipsen's Castle stop, return to the Invincible and resume the open Disc IV Gaia route.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.journey-to-treno-dali-return",
