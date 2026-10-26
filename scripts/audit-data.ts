@@ -573,14 +573,16 @@ if (!fourShrinesPartySequence) {
       errors.push(`The Four Shrines documented route must list ${expectedLocation} in its recommended sequence.`);
     }
   }
-  if (!fourShrinesPartySequence.phases[0]?.summary.includes("sources do not establish whether the first three stops can be reordered")) {
-    errors.push("The Four Shrines party sequence must preserve the unresolved order-flexibility caveat.");
+  if (!fourShrinesPartySequence.phases[0]?.summary.includes("GamerSky says the four shrine stops must be visited in the Water → Fire → Wind → Earth order") ||
+    !fourShrinesPartySequence.phases[0].summary.includes("Direct game and release verification remain open")) {
+    errors.push("The Four Shrines party sequence must record the source-supported mandatory order and its unverified gameplay status.");
   }
   const shrineRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.breaking-the-seal")?.sections.find((section) => section.id === "breaking-seal-world-map-dropoffs");
   const fourShrinesObjective = objectives.find((objective) => objective.id === "disc-3.breaking-the-seal.four-shrines");
-  if (!shrineRouteSection?.summary.includes("documented Water → Fire → Wind sequence") ||
-    !shrineRouteSection.summary.includes("do not confirm whether the first three stops can be reordered")) {
-    errors.push("The Four Shrines walkthrough must distinguish the documented route from an established mandatory order.");
+  if (!shrineRouteSection?.summary.includes("Visit Water → Fire → Wind → Earth in that order") ||
+    !shrineRouteSection.summary.includes("GamerSky explicitly says the four stops must be entered in order") ||
+    !shrineRouteSection.summary.includes("Direct game and release verification remain open")) {
+    errors.push("The Four Shrines walkthrough must follow the source-supported ordered route and preserve its unverified gameplay status.");
   }
   if (!fourShrinesPartySequence.phases[3]?.location.includes("Hilda Garde 3")) {
     errors.push("The Four Shrines sequence must end with the party regroup on the Hilda Garde 3.");
@@ -589,6 +591,7 @@ if (!fourShrinesPartySequence) {
     "gamefaqs-breaking-the-seal-71891",
     "gamefaqs-four-shrines-gbness-26505",
     "gamefaqs-unlocking-terra-79143",
+    "gamersky-four-shrines",
     "jegged-four-shrines-terra",
     "rpgclassics-disc-3-walkthrough",
     "rpgclassics-four-shrines",
@@ -601,11 +604,13 @@ if (!fourShrinesPartySequence) {
   }
   const fourShrinesSourceNotes = new Map(sources.map((source) => [source.id, source.notes]));
   if (
+    !fourShrinesSourceNotes.get("gamersky-four-shrines")?.includes("must be entered in order") ||
+    !fourShrinesSourceNotes.get("gamersky-four-shrines")?.includes("Water → Fire → Wind → Earth as the correct order") ||
     !fourShrinesSourceNotes.get("gamefaqs-four-shrines-gbness-26505")?.includes("explicitly lists the Water, Fire, Wind, and Earth shrines in that order") ||
     !fourShrinesSourceNotes.get("gamefaqs-unlocking-terra-79143")?.includes("sends Dagger/Eiko to Water, Freya/Amarant to Fire, Vivi/Steiner to Wind, and Zidane/Quina to Earth") ||
     !fourShrinesSourceNotes.get("rpgclassics-four-shrines")?.includes("Water first, Fire next, Wind third, and Earth last")
   ) {
-    errors.push("The expanded Four Shrines route cross-check must preserve the explicit sequence and fixed-pair evidence from the additional guide pages.");
+    errors.push("The expanded Four Shrines route cross-check must preserve the mandatory-order source, explicit sequence, and fixed-pair evidence.");
   }
 }
 const branBalPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.bran-bal-eiko-handoff");
