@@ -4990,6 +4990,48 @@ for (const claim of equipmentAbilityClaims) {
     if (!sourceIds.has(sourceId)) errors.push(`Equipment ability claim ${claim.id} references unknown source ${sourceId}.`);
   }
 }
+const daguerreoAbilityWarning = missablesById.get("missable.disc-3.aerial-exploration.daguerreo-unique-abilities");
+const runeBladeDisc3Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.rune-blade");
+const obeliskDisc3Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.obelisk");
+const kainsLanceItem = gameItems.find((item) => item.id === "game-item.kains-lance");
+const kainsLancePickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.kains-lance-hidden-pickup");
+const kainsLanceTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.kains-lance-need-one");
+const kainsLanceAbilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.kains-lance");
+const battleBootsInitiative = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.battle-boots.initiative");
+const battleBootsHadesPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-battle-boots-steal");
+const daguerreoShopStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "aerial-daguerreo-weapon-shop");
+const finalStockAbilityStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.preparing-to-leave")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "preparing-leave-shop-inventory");
+if (
+  !daguerreoAbilityWarning ||
+  !daguerreoAbilityWarning.consequence.includes("only equipment source for Iai Strike") ||
+  !daguerreoAbilityWarning.nextAvailability.includes("Kain's Lance") ||
+  !daguerreoAbilityWarning.nextAvailability.includes("Battle Boots") ||
+  !daguerreoAbilityWarning.recovery.includes("release-specific behavior") ||
+  !["gamefaqs-abilities-71891", "rpgclassics-abilities", "jegged-daguerreo", "gamefaqs-memoria-71891"].every((sourceId) => daguerreoAbilityWarning.sourceIds.includes(sourceId)) ||
+  !runeBladeDisc3Path || runeBladeDisc3Path.itemId !== "game-item.rune-blade" || !runeBladeDisc3Path.conditions?.includes("only equipment source for Iai Strike") ||
+  !obeliskDisc3Path || obeliskDisc3Path.itemId !== "game-item.obelisk" || !obeliskDisc3Path.notes?.includes("not unique to Obelisk") ||
+  !kainsLanceItem?.sourceIds.includes("gamefaqs-memoria-71891") ||
+  !kainsLancePickup || kainsLancePickup.itemId !== "game-item.kains-lance" || kainsLancePickup.chapterId !== "disc-4.memoria" ||
+  kainsLancePickup.method !== "hidden-pickup" || kainsLancePickup.availability !== "single-use" ||
+  !kainsLancePickup.walkthroughObjectiveIds?.includes("disc-4.memoria.kains-lance") ||
+  !kainsLanceTarget || kainsLanceTarget.itemId !== "game-item.kains-lance" || kainsLanceTarget.targetQuantity !== 1 ||
+  !["White Draw", "Cherry Blossom", "Dragon's Crest"].every((abilityName) => kainsLanceAbilities.some((claim) => claim.abilityName === abilityName)) ||
+  kainsLanceAbilities.length !== 3 ||
+  !kainsLanceAbilities.every((claim) => claim.sourceIds.includes("gamefaqs-abilities-71891") && claim.sourceIds.includes("rpgclassics-abilities")) ||
+  !battleBootsInitiative?.sourceIds.includes("rpgclassics-abilities") ||
+  battleBootsHadesPath?.itemId !== "game-item.battle-boots" || battleBootsHadesPath.chapterId !== "disc-4.memoria" ||
+  !daguerreoShopStep?.detail.includes("only equipment source for Iai Strike") || !daguerreoShopStep.detail.includes("Kain's Lance") ||
+  !finalStockAbilityStep?.detail.includes("Cherry Blossom can also be learned from Kain's Lance") ||
+  !finalStockAbilityStep.detail.includes("only Iai Strike is listed solely on its Disc III weapon")
+) {
+  errors.push("The Daguerreo ability cutoff must isolate Rune Blade's documented Iai Strike opportunity, preserve Kain's Lance/Battle Boots alternatives, and link Kain's Lance's Disc IV pickup and claims.");
+}
 const moonstoneId = "game-item.moonstone";
 const rubyId = "game-item.ruby";
 const rubyPaths = itemAcquisitionPaths.filter((path) => path.itemId === rubyId);
