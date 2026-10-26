@@ -775,8 +775,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.lost-continent",
     toChapterId: "disc-3.desert-palace",
     relationship: "optional-return",
-    summary: "If the Namingway Card is still needed after the Oeilvert return, revisit Kuja's quarters in the Desert Palace from the Lost Continent through the mountain hole near the sandpits. GameFAQs says the card remains available through the end of Disc III; exit by the ladder to resume world-map travel. The existing Desert Palace-to-Lost Continent story link serves as the route back.",
-    sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "elitegrindlab-desert-palace"],
+    summary: "If the Namingway Card is still needed after the Oeilvert return, revisit Kuja's quarters in the Desert Palace from the Lost Continent through the mountain hole near the sandpits. GameFAQs alone documents this later re-entry route (in its Kupo Nut note) and says the card remains available through the end of Disc III. Jegged, Gamer Guides, and EliteGrindLab independently confirm the card pickup on the initial post-Oeilvert return, but do not verify later re-entry or retention; Gamer Guides calls it the second and last chance without discussing the later return. Exit by the ladder to resume world-map travel; the existing Desert Palace-to-Lost Continent story link serves as the route back.",
+    sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-lost-continent-71891", "jegged-returning-desert-palace", "gamerguides-desert-palace", "elitegrindlab-desert-palace"],
   },
   {
     id: "story.lost-continent-to-aerial-exploration",

@@ -5173,6 +5173,7 @@ const namingwayWarning = missablesById.get("missable.disc-3.card-tournament.nami
 const namingwayFinalCutoff = cutoffsById.get("cutoff.shimmering-island.disc-iii-departure");
 const namingwayReturnEdge = gameRouteEdgesById.get("detour.lost-continent-desert-palace-namingway-return");
 const namingwayDesertPalaceExitEdge = gameRouteEdgesById.get("story.desert-palace-to-lost-continent");
+const namingwayGamerGuidesSource = sources.find((source) => source.id === "gamerguides-desert-palace");
 const namingwayDesertPalaceStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.desert-palace")
   ?.sections.flatMap((section) => section.steps)
@@ -5198,7 +5199,17 @@ if (
   || namingwayReturnEdge.fromChapterId !== "disc-3.lost-continent"
   || namingwayReturnEdge.toChapterId !== "disc-3.desert-palace"
   || !namingwayReturnEdge.sourceIds.includes("gamefaqs-desert-palace-71891")
+  || !namingwayReturnEdge.sourceIds.includes("gamefaqs-lost-continent-71891")
+  || !namingwayReturnEdge.sourceIds.includes("jegged-returning-desert-palace")
+  || !namingwayReturnEdge.sourceIds.includes("gamerguides-desert-palace")
   || !namingwayReturnEdge.sourceIds.includes("elitegrindlab-desert-palace")
+  || !namingwayReturnEdge.summary.includes("GameFAQs alone documents this later re-entry route")
+  || !namingwayReturnEdge.summary.includes("initial post-Oeilvert return")
+  || !namingwayReturnEdge.summary.includes("do not verify later re-entry or retention")
+  || !namingwayReturnEdge.summary.includes("Gamer Guides calls it the second and last chance")
+  || !namingwayWarning.note.includes("end-of-Disc-III fallback remains directly sourced only to GameFAQs")
+  || !namingwayGamerGuidesSource?.url.endsWith("/the-desert-palace-2")
+  || !namingwayGamerGuidesSource.notes.includes("second and last chance")
   || namingwayDesertPalaceExitEdge?.relationship !== "required-story"
   || !namingwayDesertPalaceStep?.objectiveIds?.includes(namingwayObjective.id)
   || !namingwayDesertPalaceStep.detail?.includes("hole in the mountain near the sandpits")

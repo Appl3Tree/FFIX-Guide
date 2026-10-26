@@ -2616,7 +2616,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/33-Returning-to-Desert-Palace.html",
     accessed: "2026-10-25",
-    notes: "Independent route cross-check for Cid's two-part escape game, the party's equipment/setup, six bloodstones and their items, Mogsam's letter/save, Valia Pira, the Eiko equipment handoff, Namingway Card, and the ladder exit to the Lost Continent. It explicitly returns the party to the world map after the ladder and says optional activities are available before Esto Gaza, pinpointing where the temporary sinkhole lock-in ends. Its local enemy list is Drakan, Grimlock, Ogre, and Torama; its Valia Pira page reports Level 36 and 12,119 HP, one below the two GameFAQs tables.",
+    notes: "Independent route cross-check for Cid's two-part escape game, the party's equipment/setup, six bloodstones and their items, Mogsam's letter/save, Valia Pira, the Eiko equipment handoff, the Namingway Card pickup on the initial post-Oeilvert return, and the ladder exit to the Lost Continent. It explicitly returns the party to the world map after the ladder and says optional activities are available before Esto Gaza, pinpointing where the temporary sinkhole lock-in ends. It does not document later re-entry through the mountain hole or independently establish how long the card remains. Its local enemy list is Drakan, Grimlock, Ogre, and Torama; its Valia Pira page reports Level 36 and 12,119 HP, one below the two GameFAQs tables.",
   },
   {
     id: "flactem-desert-palace",
@@ -2636,11 +2636,11 @@ export const sources = [
   },
   {
     id: "gamerguides-desert-palace",
-    title: "The Desert Palace — Disc III walkthrough",
+    title: "The Desert Palace (2) — Disc III walkthrough",
     publisher: "Gamer Guides",
-    url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-3/the-desert-palace-1",
-    accessed: "2026-10-23",
-    notes: "Independent cross-check for party split/reunion, Cid's escape game, the post-Oeilvert Namingway Card on the quarters table, and the later card recovery if the Treno tournament branch was not used.",
+    url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-3/the-desert-palace-2",
+    accessed: "2026-10-26",
+    notes: "Independent cross-check for Cid's escape, party reunion, and the Namingway Card on Kuja's quarters table after Oeilvert; it calls this the second and last chance to obtain the card. The page does not document re-entry through the mountain hole or the later retention window described by GameFAQs, so those route and timing claims remain single-sourced.",
   },
   {
     id: "gamefaqs-lost-continent-71891",
@@ -7680,7 +7680,7 @@ export const missables: MissableRecord[] = [
     nextAvailability: "After the Oeilvert return, the Desert Palace card remains available through the end of Disc III. GameFAQs documents re-entry through the hole in the mountain near the sandpits; no Disc IV card source is documented.",
     action: "If you want the tournament copy, choose for Vivi to stay in Treno, view Hippo's Prize, then try to win the Namingway Card from Mario in round two. If the card is still needed after Oeilvert, inspect the table in Kuja's quarters. If you left the Desert Palace, re-enter through the mountain hole near the sandpits and take the card before entering Shimmering Island.",
     recovery: "The Desert Palace remains a same-save fallback after the Treno tournament. If you already left after the Oeilvert return, use the mountain hole near the sandpits to revisit Kuja's quarters; the last documented opportunity is before the Shimmering Island portal at the end of Disc III.",
-    note: "GameFAQs and the tournament cross-checks describe the branch-specific Treno opponent. GameFAQs explicitly says the Desert Palace table card remains available through the end of Disc III and describes re-entry through a hole in the mountain near the sandpits; Jegged, Gamer Guides, and EliteGrindLab corroborate the post-Oeilvert table copy. The guide uses one shared objective ID so collecting either copy clears the profile check.",
+    note: "GameFAQs and the tournament cross-checks describe the branch-specific Treno opponent. GameFAQs explicitly says the Desert Palace table card remains available through the end of Disc III and describes re-entry through a hole in the mountain near the sandpits. Jegged, Gamer Guides, and EliteGrindLab corroborate the card's initial post-Oeilvert table pickup; Gamer Guides calls it the second and last chance but does not discuss the later re-entry or retention window. The guide uses one shared objective ID so collecting either copy clears the profile check, while the end-of-Disc-III fallback remains directly sourced only to GameFAQs.",
     sourceIds: ["gamefaqs-card-tournament-71891", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "gamerguides-desert-palace", "elitegrindlab-desert-palace", "gamefaqs-preparing-to-leave-71891"],
     verification: "partial",
     severity: "info",
