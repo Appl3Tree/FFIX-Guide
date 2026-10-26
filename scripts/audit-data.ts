@@ -508,6 +508,24 @@ if (
 ) {
   errors.push("The optional Disc II Dali return and rejoin must cite its Disc II route sources, not the first-visit Dali walkthrough.");
 }
+const pinnacleRocksReturnEdge = gameRouteEdgesById.get("detour.return-to-lindblum-pinnacle-rocks-return");
+const pinnacleRocksStoryRejoin = gameRouteEdgesById.get("story.pinnacle-rocks-to-return-to-lindblum");
+if (
+  pinnacleRocksReturnEdge?.relationship !== "optional-return"
+  || pinnacleRocksReturnEdge.fromChapterId !== "disc-2.return-to-lindblum"
+  || pinnacleRocksReturnEdge.toChapterId !== "disc-2.pinnacle-rocks"
+  || !["gamefaqs-return-to-lindblum-71891", "gamefaqs-pinnacle-rocks-71891"].every((sourceId) => pinnacleRocksReturnEdge.sourceIds.includes(sourceId))
+  || pinnacleRocksReturnEdge.sourceIds.includes("jegged-return-to-lindblum")
+  || pinnacleRocksReturnEdge.sourceIds.includes("jegged-pinnacle-rocks")
+  || !pinnacleRocksReturnEdge.summary.includes("entrance-side Elixir and Phoenix Down")
+  || !pinnacleRocksReturnEdge.summary.includes("three interior Disc II chests")
+  || pinnacleRocksStoryRejoin?.relationship !== "required-story"
+  || pinnacleRocksStoryRejoin.fromChapterId !== "disc-2.pinnacle-rocks"
+  || pinnacleRocksStoryRejoin.toChapterId !== "disc-2.return-to-lindblum"
+  || !["gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "jegged-return-to-lindblum"].every((sourceId) => pinnacleRocksStoryRejoin.sourceIds.includes(sourceId))
+) {
+  errors.push("The optional Disc II Pinnacle Rocks return must use the GameFAQs re-entry evidence, while Jegged remains scoped to the original route and its required Lindblum rejoin.");
+}
 const tournamentDaliReturnEdge = gameRouteEdgesById.get("detour.card-tournament-dali-return");
 const tournamentQuanStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.card-tournament")

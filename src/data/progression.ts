@@ -1223,8 +1223,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.return-to-lindblum",
     toChapterId: "disc-2.pinnacle-rocks",
     relationship: "optional-return",
-    summary: "From Lindblum, the party can use Hunter's Gate to revisit Pinnacle Rocks and collect the Elixir and Phoenix Down if they were missed earlier.",
-    sourceIds: ["gamefaqs-return-to-lindblum-71891", "gamefaqs-pinnacle-rocks-71891", "jegged-return-to-lindblum", "jegged-pinnacle-rocks"],
+    summary: "Use Hunter's Gate to revisit Pinnacle Rocks for the entrance-side Elixir and Phoenix Down if they were missed on Disc I; GameFAQs also lists them as available on Disc III. This is separate from the three interior Disc II chests on the original Ramuh route.",
+    sourceIds: ["gamefaqs-return-to-lindblum-71891", "gamefaqs-pinnacle-rocks-71891"],
   },
   {
     id: "detour.journey-to-outer-continent-kupo-nut-return",

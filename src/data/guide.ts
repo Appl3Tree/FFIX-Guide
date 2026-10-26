@@ -528,7 +528,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/16-Pinnacle-Rocks.html",
     accessed: "2026-10-24",
-    notes: "Independent route for Monty's Mognet exchange, all five manifestations, the three chests, Ramuh's answer sequence, Peridot reward, and the final jump choice. Its description is compared with other routes where fragment placement differs.",
+    notes: "Independent route for Monty's Mognet exchange, all five manifestations, the three interior chests, Ramuh's answer sequence, Peridot reward, and the original final jump to Lindblum. It does not cover the later return from Lindblum to the entrance-side Elixir and Phoenix Down; GameFAQs documents that recovery. Its description is compared with other routes where fragment placement differs.",
   },
   {
     id: "gamerguides-pinnacle-rocks",
@@ -576,7 +576,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/17-Lindblum.html",
     accessed: "2026-10-24",
-    notes: "Independent route for the Disc II city return, ATE trigger, two Card Freak Gon chests, hidden card, Mognet, Theater District, Lowell, three ATE sequence, Dragon's Gate Bandana, and Outer Continent lead-in. Used as a route cross-check; GameFAQs supplies the specific reopened shop-plaza and still-blocked church-alley details.",
+    notes: "Independent route for the Disc II city return, ATE trigger, two Card Freak Gon chests, hidden card, Mognet, Theater District, Lowell, three ATE sequence, Dragon's Gate Bandana, and Outer Continent lead-in. It begins after the original Pinnacle Rocks-to-Lindblum story transition and does not document a later return from Lindblum to Pinnacle Rocks; GameFAQs supplies that optional re-entry route, as well as the specific reopened shop-plaza and still-blocked church-alley details.",
   },
   {
     id: "gamerguides-return-to-lindblum",
