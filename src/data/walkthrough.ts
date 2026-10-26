@@ -4815,7 +4815,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lost-continent-esto-gaza",
         title: "Esto Gaza — restocked equipment, Vaccine, and Mogrika's letter",
         summary: "Enter the central building for the story scene, then shop on the right and collect the hidden Wing Edge before continuing through the back of the settlement.",
-        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables", "gamefaqs-items-71891", "gamefaqs-item-locations-54996"],
+        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "rpgclassics-abilities"],
         steps: [
           {
             id: "lost-continent-esto-gaza-story",
@@ -4834,7 +4834,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lost-continent-esto-gaza-octagon-rod",
             kind: "optional",
             text: "If Octagon Rod matches your item or ability goals, buy it here or during the next open-world visit to Daguerreo. It teaches Vivi Firaga, Blizzaga, and Thundaga.",
-            detail: "Both shops stock Octagon Rod during Disc III, and Daguerreo's weapon inventory changes at the Shimmering Island transition. GameFAQs lists two copies as an inventory target; that is a profile-specific quantity, not a universal minimum. Sources differ on whether all three spells have alternate ability sources.",
+            detail: "Both shops stock Octagon Rod during Disc III, and Daguerreo's weapon inventory changes at the Shimmering Island transition. GameFAQs and RPGClassics list it as the only equipment source for Firaga, Blizzaga, and Thundaga in their PlayStation ability tables. Buy one and equip Vivi until he learns any of the three spells your profile requires; GameFAQs' two-copy target is optional inventory planning, not the amount needed to learn the abilities. Modern-release behavior has not been directly checked.",
             objectiveIds: ["disc-3.lost-continent.octagon-rod"],
           },
           {
@@ -5181,7 +5181,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-daguerreo",
         title: "Daguerreo — search the island, activate the lifts, and audit its shops",
         summary: "Explore the optional library city south of the Forgotten Continent. Its weapon-shop window matters for a high-completion inventory and selected equipment abilities.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-shops-71891", "gamefaqs-items-71891", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "rpgclassics-abilities", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "aerial-daguerreo-arrival",
@@ -5215,7 +5215,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-daguerreo-octagon-rod",
             kind: "optional",
             text: "If Octagon Rod is still part of your item or ability goals, buy it from the Disc III Weapon Shop before leaving Daguerreo or return for it before the Shimmering Island transition.",
-            detail: "This is the later Disc III purchase point if it was skipped at Esto Gaza. The GameFAQs copy target is two across its inventory plan; choose the quantity that matches your profile and check Vivi's learned abilities.",
+            detail: "This is the later Disc III purchase point if it was skipped at Esto Gaza. GameFAQs and RPGClassics list Octagon Rod as the only equipment source for Vivi's Firaga, Blizzaga, and Thundaga in their PlayStation tables. One retained copy is enough to learn all three; the GameFAQs total of two is optional inventory planning.",
             objectiveIds: ["disc-3.lost-continent.octagon-rod"],
           },
         ],
@@ -5602,13 +5602,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "preparing-leave-shops",
         title: "Check the final Disc III shop stock and ability learning",
         summary: "Some shops disappear or change after the Shimmering Island transition. Buy only the copies and abilities that match your chosen completion goals.",
-        sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-item-locations-54996"],
+        sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "rpgclassics-abilities", "gamefaqs-aerial-exploration-71891", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-item-locations-54996"],
         steps: [
           {
             id: "preparing-leave-octagon-rod",
             kind: "cutoff",
             text: "If Octagon Rod is still part of your item or ability goals, buy it from Esto Gaza or Daguerreo before travelling to Shimmering Island.",
-            detail: "Both are Disc III shops. Daguerreo's weapon stock changes after the transition; the reviewed Disc IV stock list no longer includes Octagon Rod. Its quantity is a profile-specific inventory target, and its ability-source claims remain under review.",
+            detail: "Both are Disc III shops. Daguerreo's weapon stock changes after the transition; the reviewed Disc IV stock list no longer includes Octagon Rod. The two reviewed PlayStation ability tables list it as the sole equipment source for the three spells. Keep the modern-release and direct-game behavior qualification in view; two copies is only the source guide's inventory target.",
             objectiveIds: ["disc-3.lost-continent.octagon-rod"],
           },
           {

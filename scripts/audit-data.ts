@@ -5136,6 +5136,49 @@ if (
 ) {
   errors.push("The Daguerreo ability cutoff must isolate Rune Blade's documented Iai Strike opportunity, preserve Kain's Lance/Battle Boots alternatives, and link Kain's Lance's Disc IV pickup and claims.");
 }
+const octagonRodWarning = missablesById.get("missable.disc-3.lost-continent.octagon-rod");
+const octagonRodObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.octagon-rod");
+const octagonRodItem = gameItems.find((item) => item.id === "game-item.octagon-rod");
+const octagonRodClaims = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.octagon-rod");
+const octagonRodShopPaths = [
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.esto-gaza.octagon-rod"),
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.octagon-rod"),
+];
+const octagonRodAbilitySources = ["gamefaqs-abilities-71891", "rpgclassics-abilities"];
+const octagonRodWalkthroughSteps = [
+  { chapterId: "disc-3.lost-continent", stepId: "lost-continent-esto-gaza-octagon-rod" },
+  { chapterId: "disc-3.aerial-exploration", stepId: "aerial-daguerreo-octagon-rod" },
+  { chapterId: "disc-3.preparing-to-leave", stepId: "preparing-leave-octagon-rod" },
+].map(({ chapterId, stepId }) => {
+  const chapter = walkthroughChapters.find((candidate) => candidate.areaId === chapterId);
+  const section = chapter?.sections.find((candidate) => candidate.steps.some((step) => step.id === stepId));
+  return {
+    section,
+    step: section?.steps.find((candidate) => candidate.id === stepId),
+  };
+});
+if (
+  !octagonRodWarning || octagonRodWarning.severity !== "info" ||
+  !octagonRodWarning.consequence.includes("only equipment source for these spells") ||
+  !octagonRodWarning.recovery.includes("no later learning route is documented") ||
+  !octagonRodWarning.note.includes("direct modern-release behavior remains unverified") ||
+  /under review/i.test(`${octagonRodWarning.consequence} ${octagonRodWarning.nextAvailability} ${octagonRodWarning.recovery} ${octagonRodWarning.note}`) ||
+  !octagonRodAbilitySources.every((sourceId) => octagonRodWarning.sourceIds.includes(sourceId)) ||
+  !octagonRodObjective || !octagonRodAbilitySources.every((sourceId) => octagonRodObjective.sourceIds.includes(sourceId)) ||
+  !octagonRodItem || !octagonRodAbilitySources.every((sourceId) => octagonRodItem.sourceIds.includes(sourceId)) ||
+  octagonRodClaims.length !== 3 ||
+  !["Firaga", "Blizzaga", "Thundaga"].every((abilityName) =>
+    octagonRodClaims.some((claim) => claim.abilityName === abilityName && octagonRodAbilitySources.every((sourceId) => claim.sourceIds.includes(sourceId))),
+  ) ||
+  octagonRodShopPaths.some((path) => !path || path.itemId !== "game-item.octagon-rod" ||
+    !path.conditions?.includes("only equipment source for Firaga, Blizzaga, and Thundaga") ||
+    !octagonRodAbilitySources.every((sourceId) => path.sourceIds.includes(sourceId))) ||
+  octagonRodWalkthroughSteps.some(({ section, step }) => !section || !step ||
+    !/only equipment source|sole equipment source/.test(step.detail) ||
+    !octagonRodAbilitySources.every((sourceId) => section.sourceIds.includes(sourceId)))
+) {
+  errors.push("The Octagon Rod cutoff must link both PlayStation ability catalogs to its warning, objective, item, all three ability claims, both Disc III shop paths, and each walkthrough checkpoint while preserving release uncertainty.");
+}
 const summitEquipmentWarning = missablesById.get("missable.disc-2.journey-to-treno.summit-station-equipment-stock");
 const summitSilverGlovesTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.silver-gloves");
 const summitIronHelmTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.iron-helm");
