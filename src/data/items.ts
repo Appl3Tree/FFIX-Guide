@@ -2453,7 +2453,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.platina-armor", name: "Platina Armor", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.carabini-mail", name: "Carabini Mail", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"], verification: "partial" },
   { id: "game-item.dragon-mail", name: "Dragon Mail", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
-  { id: "game-item.wizard-rod", name: "Wizard Rod", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "rpgclassics-memoria"], verification: "partial" },
+  { id: "game-item.wizard-rod", name: "Wizard Rod", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "rpgclassics-memoria"], verification: "partial" },
   { id: "game-item.sirens-flute", name: "Siren's Flute", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
   { id: "game-item.high-mage-staff", name: "High Mage Staff", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.thief-hat", name: "Thief Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
@@ -2710,7 +2710,12 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
   shopName,
   conditions: "Listed in the Disc IV stock after the party returns to Gaia aboard the Invincible.",
   cost: { currency: "gil", amount: price },
-  sourceIds: disc4ShopSources,
+  ...(itemSlug === "wizard-rod"
+    ? {
+      walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.kraken-steals"],
+      sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods"],
+    }
+    : { sourceIds: disc4ShopSources }),
 }));
 
 const cleyraShopStockInputs: Array<[slug: string, price: number, shopName: string]> = [

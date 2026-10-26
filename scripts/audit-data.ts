@@ -5764,6 +5764,26 @@ if (!tiamatGrandHelmWarning?.nextAvailability?.includes("retained Chain Mail") |
   !gaiaShopWalkthroughStep?.detail?.includes("retained copy")) {
   errors.push("Grand Helm's Tiamat steal and conditional Disc IV synthesis recovery must remain linked through the route, catalog, and walkthrough.");
 }
+const krakenWarning = missablesById.get("missable.disc-4.memoria.kraken-steals");
+const krakenStealObjective = objectivesById.get("disc-4.memoria.kraken-steals");
+const wizardRodItem = gameItems.find((item) => item.id === "game-item.wizard-rod");
+const wizardRodKrakenShopPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.black-mage-village.weapon-shop.wizard-rod");
+const krakenWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-kraken-steals");
+if (!krakenWarning?.classification.includes("recoverable-later") ||
+  !krakenWarning.nextAvailability?.includes("Wizard Rod is sold at Black Mage Village's Disc IV Weapon Shop for 3,990 Gil") ||
+  !krakenWarning.recovery?.includes("Wizard Rod can be bought from Black Mage Village's Disc IV Weapon Shop for 3,990 Gil") ||
+  !krakenStealObjective?.sourceIds.includes("gamefaqs-shops-71891") ||
+  !wizardRodItem?.sourceIds.includes("gamefaqs-equipment-33383") ||
+  !wizardRodKrakenShopPath || wizardRodKrakenShopPath.chapterId !== "disc-4.return-to-gaia" ||
+  wizardRodKrakenShopPath.method !== "shop" || wizardRodKrakenShopPath.cost?.amount !== 3990 ||
+  !["gamefaqs-items-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods"].every((sourceId) => wizardRodKrakenShopPath.sourceIds.includes(sourceId)) ||
+  !wizardRodKrakenShopPath.walkthroughObjectiveIds?.includes("disc-4.memoria.kraken-steals") ||
+  !krakenWalkthroughStep?.detail?.includes("Wizard Rod can be bought later at Black Mage Village's Disc IV Weapon Shop for 3,990 Gil")) {
+  errors.push("Kraken's Wizard Rod steal must be classified as recoverable through the source-linked Disc IV Black Mage Village shop path.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }
