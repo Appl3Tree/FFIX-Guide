@@ -2120,7 +2120,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/27-Treno.html",
     accessed: "2026-10-26",
-    notes: "Disc III card-tournament route that directs the party through South Gate to Dali for up to 99 Wrists before the tournament. This is an earlier Disc III Dali stop than the later Hilda Garde III free-flight return; it does not document that later flight-window trip.",
+    notes: "Disc III route includes Treno ATEs, then directs the party through South Gate to Dali for Mini-Brahne, Mayor's Key, Burman Coffee, and up to 99 Wrists before returning to Treno for tournament registration. It supports the direct route when Vivi stays in Treno, but does not cover the alternate Quan's Dwelling branch or independently establish the full ATE order. This is an earlier Disc III Dali stop than the later Hilda Garde III free-flight return; it does not document that later trip.",
   },
   {
     id: "gamerguides-treno",
