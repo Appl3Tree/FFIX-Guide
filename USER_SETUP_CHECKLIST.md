@@ -8,6 +8,8 @@ Latest Codex update: the Disc IV Gizamaluke route-source audit is local guide wo
 
 The Disc IV Mognet rejoin source review was also local guide work; no owner-side setup actions or release settings changed.
 
+The Alexandria and three Disc IV rejoin evidence corrections were also local; no GitHub, Firebase, or owner-side setup changed.
+
 Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for User**, **In Progress**, and **Completed**. Do not send passwords, access tokens, service-account JSON, or Firebase config values in chat. Firebase web-app config is included in browser builds, so it is public configuration rather than a secret; access must be protected by Authentication, Firestore rules, and domain/API restrictions.
 
 ## Current project milestone

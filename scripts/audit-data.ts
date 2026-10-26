@@ -4904,17 +4904,24 @@ if (
   || !postDestructionAlexandriaDetour
   || postDestructionAlexandriaDetour.relationship !== "optional-return"
   || postDestructionAlexandriaDetour.toChapterId !== "disc-1.alexandria"
+  || !postDestructionAlexandriaDetour.sourceIds.includes("jegged-blue-narciss")
   || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
   || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
   || !postDestructionAlexandriaDetour.sourceIds.includes("trueachievements-tetra-master-guide")
+  || !postDestructionAlexandriaDetour.sourceIds.includes("rpgclassics-alexandria-ruins")
   || !postDestructionAlexandriaDetourRejoin
   || postDestructionAlexandriaDetourRejoin.relationship !== "rejoin"
+  || !postDestructionAlexandriaDetourRejoin.sourceIds.includes("gamefaqs-on-the-high-seas-71891")
+  || postDestructionAlexandriaDetourRejoin.sourceIds.includes("jegged-blue-narciss")
+  || postDestructionAlexandriaDetourRejoin.sourceIds.includes("rpgclassics-alexandria-ruins")
+  || !sources.find((source) => source.id === "jegged-blue-narciss")?.notes.includes("does not specify returning from the Alexandria sweep to the Blue Narciss")
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not identify or time its card matches")
+  || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not document the return to the Blue Narciss")
   || !sources.find((source) => source.id === "steam-tetra-disc4-opponents-729676856")?.notes.includes("a 2023 comment reports that Hippaul and the Red Mage are not at Alexandria Inn on Disc IV")
   || !sources.find((source) => source.id === "steam-tetra-opponents-disc4-2804532988")?.notes.includes("omission alone does not establish they are unavailable")
   || !sources.find((source) => source.id === "trueachievements-tetra-master-guide")?.notes.includes("two Red Mages and Hippaul are at the Alexandria Inn at endgame")
 ) {
-  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/TrueAchievements/Steam conflict, optional-match scope, and the conditional later attempt.");
+  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/TrueAchievements/Steam conflict, optional-match scope, and conditional later attempt; the harbor rejoin must cite the direct Blue Narciss return instruction.");
 }
 const mountainMoonstoneObjectiveId = "disc-2.conde-petie-mountain-path.moonstone";
 const mountainMoonstoneWarning = missablesById.get("missable.disc-2.conde-petie-mountain-path.moonstone");
@@ -5420,6 +5427,12 @@ const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoi
 const disc4IpsenRejoinEdge = gameRouteEdgesById.get("detour.ipsens-castle-aquarius-rejoin-gaia");
 const disc4KupoNutDetourEdge = gameRouteEdgesById.get("detour.return-to-gaia-gizamaluke-kupo-nut");
 const disc4KupoNutRejoinEdge = gameRouteEdgesById.get("detour.gizamaluke-kupo-nut-rejoin-gaia");
+const disc4MadainSariDetourEdge = gameRouteEdgesById.get("detour.return-to-gaia-madain-sari-eidolon-wall");
+const disc4MadainSariRejoinEdge = gameRouteEdgesById.get("detour.madain-sari-eidolon-wall-rejoin-gaia");
+const disc4LindblumStellazzioDetourEdge = gameRouteEdgesById.get("detour.return-to-gaia-lindblum-sagittarius");
+const disc4LindblumStellazzioRejoinEdge = gameRouteEdgesById.get("detour.lindblum-sagittarius-rejoin-gaia");
+const disc4DaguerreoStellazzioDetourEdge = gameRouteEdgesById.get("detour.return-to-gaia-daguerreo-capricorn");
+const disc4DaguerreoStellazzioRejoinEdge = gameRouteEdgesById.get("detour.daguerreo-capricorn-rejoin-gaia");
 const disc4LocationListSource = sources.find((source) => source.id === "ff9-kouryaku-disc4");
 if (
   !disc4TrenoReturnEdge?.summary.includes("Quan's Dwelling") ||
@@ -5438,9 +5451,25 @@ if (
   disc4IpsenRejoinEdge.sourceIds.includes("jegged-mognet-central") ||
   !disc4KupoNutDetourEdge?.sourceIds.includes("gamefaqs-kupo-nuts-71891") ||
   !disc4KupoNutRejoinEdge?.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
-  disc4KupoNutRejoinEdge.sourceIds.includes("gamefaqs-kupo-nuts-71891")
+  disc4KupoNutRejoinEdge.sourceIds.includes("gamefaqs-kupo-nuts-71891") ||
+  !disc4MadainSariDetourEdge?.sourceIds.includes("elitegrindlab-madain-sari-eidolon-wall") ||
+  !disc4MadainSariRejoinEdge?.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  disc4MadainSariRejoinEdge.sourceIds.includes("elitegrindlab-madain-sari-eidolon-wall") ||
+  !disc4LindblumStellazzioDetourEdge?.sourceIds.includes("jegged-the-aftermath") ||
+  !disc4LindblumStellazzioRejoinEdge?.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  disc4LindblumStellazzioRejoinEdge.sourceIds.includes("gamefaqs-the-aftermath-71891") ||
+  disc4LindblumStellazzioRejoinEdge.sourceIds.includes("jegged-the-aftermath") ||
+  !disc4DaguerreoStellazzioDetourEdge?.sourceIds.includes("jegged-daguerreo") ||
+  !disc4DaguerreoStellazzioRejoinEdge?.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  disc4DaguerreoStellazzioRejoinEdge.sourceIds.includes("gamefaqs-daguerreo-71891") ||
+  disc4DaguerreoStellazzioRejoinEdge.sourceIds.includes("jegged-daguerreo") ||
+  !sources.find((source) => source.id === "elitegrindlab-madain-sari-eidolon-wall")?.notes.includes("does not document the return from Madain Sari to the Invincible") ||
+  !sources.find((source) => source.id === "gamefaqs-the-aftermath-71891")?.notes.includes("does not document the later Disc IV return from Lindblum to the Invincible") ||
+  !sources.find((source) => source.id === "jegged-the-aftermath")?.notes.includes("does not document the later Disc IV return from Lindblum to the Invincible") ||
+  !sources.find((source) => source.id === "gamefaqs-daguerreo-71891")?.notes.includes("does not document returning from the Disc IV Daguerreo visit to the Invincible") ||
+  !sources.find((source) => source.id === "jegged-daguerreo")?.notes.includes("does not document returning from Daguerreo to the Invincible")
 ) {
-  errors.push("Disc IV Gaia rejoins must cite the return route and exclude destination, encounter, Mognet-step, or Kupo Nut reward sources that do not support the Invincible transition.");
+  errors.push("Disc IV Gaia rejoins must cite the return route and exclude destination, encounter, Mognet, or Stellazzio-step sources that do not support the Invincible transition.");
 }
 const cour89BranBal = sources.find((source) => source.id === "cour89-bran-bal");
 const cour89Pandemonium = sources.find((source) => source.id === "cour89-pandemonium");

@@ -134,6 +134,8 @@ The Disc II boss-steal recovery update passes `npm run lint`, `npm run build` (i
 
 ## Latest change status
 
+Four route rejoins now separate local area/sidequest sources from the return transition; the Alexandria edge retains GameFAQs' direct return instruction. Lint, typecheck, data audit (0 errors, 184 coverage warnings), production build, and `git diff --check` pass. Tests, browser, gameplay, and release verification were not run.
+
 The Disc IV Mognet Central rejoin cites the general return-to-Gaia route, while Jegged and Cour89 remain on the letter/repair route. Lint, typecheck, data audit (0 errors, 184 coverage warnings), production build, and `git diff --check` pass. Tests, browser, gameplay, and release verification were not run.
 
 The Disc IV Gizamaluke Kupo Nut rejoin now cites the Return to Gaia route, while the Kupo Nuts rewards source remains on the Moguta detour. Lint, typecheck, data audit (0 errors, 184 coverage warnings), production build, and `git diff --check` pass. Tests, browser, gameplay, and release verification were not run.

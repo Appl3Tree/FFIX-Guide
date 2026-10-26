@@ -744,7 +744,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-3.on-the-high-seas",
     relationship: "rejoin",
     summary: "After the Alexandria harbor and ruined-town sweep, return to the Blue Narciss and resume the open-world route. The post-destruction visit does not imply access to the closed castle.",
-    sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "rpgclassics-alexandria-ruins"],
+    sourceIds: ["gamefaqs-on-the-high-seas-71891"],
   },
   {
     id: "story.picking-up-the-trail-to-forgotten-continent",
@@ -1088,7 +1088,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After the optional Eidolon Wall visit, return to the Invincible and continue other Disc IV activities or advance the story.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "elitegrindlab-madain-sari-eidolon-wall"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-lindblum-sagittarius",
@@ -1104,7 +1104,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After searching the Business District for Sagittarius, return to the Invincible and resume Disc IV errands or continue toward the Iifa Tree.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-the-aftermath-71891", "jegged-the-aftermath"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-daguerreo-capricorn",
@@ -1120,7 +1120,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After checking Daguerreo for Capricorn, return to the Invincible and continue Disc IV exploration or head to the Iifa Tree.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-daguerreo-71891", "jegged-daguerreo"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-ipsens-castle-aquarius",

@@ -440,7 +440,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-aftermath",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the eight Lindblum ATE slots, castle and city pickups, three potions for Regent Cid, Gil threshold, Quina scene, and Blue Narciss departure. It directs the player to reduce Gil below 50 before the potion handoff, watch No Free Lunch, visit the Town Square before the harbor, then board the Blue Narciss for Give Me My Money. The renewed Tantalus Gil chests stay closed until that ATE has triggered.",
+    notes: "Original PlayStation Disc III route for the eight Lindblum ATE slots, castle and city pickups, three potions for Regent Cid, Gil threshold, Quina scene, and Blue Narciss departure. It directs the player to reduce Gil below 50 before the potion handoff, watch No Free Lunch, visit the Town Square before the harbor, then board the Blue Narciss for Give Me My Money. It does not document the later Disc IV return from Lindblum to the Invincible. The renewed Tantalus Gil chests stay closed until that ATE has triggered.",
   },
   {
     id: "jegged-the-aftermath",
@@ -448,7 +448,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/29-Lindblum.html",
     accessed: "2026-10-24",
-    notes: "Independent route for the guest-room ATE choice, castle chests, Mognet, Sagittarius, potion search, Gil preparation, optional Lindblum ATEs, and departure on the Blue Narciss. It places The Rally on entering the Theater District after the Burmecia rescue, No Free Lunch after the potion handoff and exit from Cid's room, and Give Me My Money on boarding after the pickle-seller scene with fewer than 50 Gil.",
+    notes: "Independent Disc III route for the guest-room ATE choice, castle chests, Mognet, Sagittarius, potion search, Gil preparation, optional Lindblum ATEs, and departure on the Blue Narciss. It places The Rally on entering the Theater District after the Burmecia rescue, No Free Lunch after the potion handoff and exit from Cid's room, and Give Me My Money on boarding after the pickle-seller scene with fewer than 50 Gil. It does not document the later Disc IV return from Lindblum to the Invincible.",
   },
   {
     id: "gamerguides-the-aftermath",
@@ -480,7 +480,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/on-the-high-seas",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for Blue Narciss party selection, the delayed Tantalus Gil chests, Quina's regional Blue Magic and frog pond, Esto Gaza's final Mythril Sword stock, Alexandria ruins, Mognet/Kupo Nut, Chocograph progression including the Abandoned Lagoon Feather Boots treasure, South Gates, Treno auction, and Chocobo dive spots. It locates the third accessible Qu's Marsh at Lanar Island and names Anemone as the Bad Breath teacher inside the pond. It calls Esto Gaza the final purchase opportunity before advancing the plot and gives five Mythril Swords as an advanced target, kept distinct from ordinary completion.",
+    notes: "Original PlayStation route for Blue Narciss party selection, the delayed Tantalus Gil chests, Quina's regional Blue Magic and frog pond, Esto Gaza's final Mythril Sword stock, Alexandria ruins, Mognet/Kupo Nut, Chocograph progression including the Abandoned Lagoon Feather Boots treasure, South Gates, Treno auction, and Chocobo dive spots. It locates the third accessible Qu's Marsh at Lanar Island and names Anemone as the Bad Breath teacher inside the pond. In the post-destruction Alexandria sweep it explicitly directs the player to return to the Blue Narciss when finished. It calls Esto Gaza the final purchase opportunity before advancing the plot and gives five Mythril Swords as an advanced target, kept distinct from ordinary completion.",
   },
   {
     id: "jegged-blue-narciss",
@@ -488,7 +488,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/30-The-Blue-Narciss.html",
     accessed: "2026-10-24",
-    notes: "Independent cross-check for Blue Magic enemy areas, Esto Gaza and Mythril stock, Alexandria pickups, Chocobo's Lagoon access and ability-gated Chocographs. Its route places the open-world Esto Gaza visit before the return to Black Mage Village and the Desert Palace story route. Pickup directions are kept attached to their actual docks and screens.",
+    notes: "Independent cross-check for Blue Magic enemy areas, Esto Gaza and Mythril stock, Alexandria pickups, Chocobo's Lagoon access and ability-gated Chocographs. Its route places the open-world Esto Gaza visit before the return to Black Mage Village and the Desert Palace story route. It gives Alexandria pickup directions but does not specify returning from the Alexandria sweep to the Blue Narciss; pickup directions are kept attached to their actual docks and screens.",
   },
   {
     id: "rpgclassics-alexandria-ruins",
@@ -496,7 +496,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/alexruins.shtml",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for the post-destruction town sweep. It directs the player to enter the Inn and walk toward the counter, where Hippaul smooths over an awkward situation; it supports the Inn event/location but does not identify or time its card matches.",
+    notes: "Original PlayStation route for the post-destruction town sweep. It directs the player to enter the Inn and walk toward the counter, where Hippaul smooths over an awkward situation; it supports the Inn event/location but does not identify or time its card matches, and it does not document the return to the Blue Narciss.",
   },
   {
     id: "gamerguides-side-questing-2",
@@ -2280,7 +2280,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/madain-sari-eidolon-wall/",
     accessed: "2026-10-24",
-    notes: "Completionist audit of the return-only room, exact return-visit item set, Memory Earring dialogue reward, boss-stat disagreement, steal opportunity, Amarant equipment learning, and party selection. It finds one Survival Vest, one Phoenix Down, Exploda, Elixir, Memory Earring, and a Tent boss drop across the inspected lists. Its source comparison shows Scarlet Hair HP values of 8,985, 8,986, 18,985, and 6,800; the 8,985/8,986/18,985 camps also disagree on how many independent references they represent. It describes level 22, MP 5,865, EXP 0, AP 9, and Gil 4,790 as the otherwise matching profile, but RPGClassics prints MP 5,685.",
+    notes: "Completionist audit of the return-only room, exact return-visit item set, Memory Earring dialogue reward, boss-stat disagreement, steal opportunity, Amarant equipment learning, and party selection. It finds one Survival Vest, one Phoenix Down, Exploda, Elixir, Memory Earring, and a Tent boss drop across the inspected lists. It does not document the return from Madain Sari to the Invincible. Its source comparison shows Scarlet Hair HP values of 8,985, 8,986, 18,985, and 6,800; the 8,985/8,986/18,985 camps also disagree on how many independent references they represent. It describes level 22, MP 5,865, EXP 0, AP 9, and Gil 4,790 as the otherwise matching profile, but RPGClassics prints MP 5,685.",
   },
   {
     id: "flactem-morrid-coffee",
@@ -2712,7 +2712,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Daguerreo.html",
     accessed: "2026-10-25",
-    notes: "Independent route for the Daguerreo entrance and hydrolift puzzle, Aquamarine maker, cards, two Elixirs, Namingway Card service, shops, and Disc III inventory changes. It lists Diamond Armor in the Disc III weapon shop; GameFAQs alone makes the explicit claim that Daguerreo is its only source. Its Disc III reminder broadly calls Rune Blade and Obelisk abilities unavailable elsewhere, while its support-ability table lists Battle Boots as an Initiative source; GameFAQs and RPGClassics also list Kain's Lance as a Cherry Blossom source. The guide therefore treats Rune Blade's Iai Strike as unique in the reviewed PlayStation ability tables, while tracking source-table alternatives for Obelisk's two abilities.",
+    notes: "Independent route for the Daguerreo entrance and hydrolift puzzle, Aquamarine maker, cards, two Elixirs, Namingway Card service, shops, and Disc III inventory changes. It lists Diamond Armor in the Disc III weapon shop; GameFAQs alone makes the explicit claim that Daguerreo is its only source. It does not document returning from Daguerreo to the Invincible. Its Disc III reminder broadly calls Rune Blade and Obelisk abilities unavailable elsewhere, while its support-ability table lists Battle Boots as an Initiative source; GameFAQs and RPGClassics also list Kain's Lance as a Cherry Blossom source. The guide therefore treats Rune Blade's Iai Strike as unique in the reviewed PlayStation ability tables, while tracking source-table alternatives for Obelisk's two abilities.",
   },
   {
     id: "gamefaqs-daguerreo-71891",
@@ -2720,7 +2720,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/daguerreo",
     accessed: "2026-10-24",
-    notes: "Original PlayStation Daguerreo route for Capricorn, the Four-Armed Man, cards, elevators, shops, and stock targets. It lists Octagon Rod among the Disc III weapons, says this stock remains available through that disc and changes in Disc IV, and identifies Hamelin, Rune Blade, and Octagon Rod as unique ability sources; its item/ability tables list Iai Strike only on Rune Blade, Cherry Blossom on Obelisk and Kain's Lance, and Initiative on Obelisk and Battle Boots. These tables narrow the unique-ability warning to Iai Strike; other release versions remain unverified.",
+    notes: "Original PlayStation Daguerreo route for Capricorn, the Four-Armed Man, cards, elevators, shops, and stock targets. It describes the local Disc IV side activities but does not document returning from the Disc IV Daguerreo visit to the Invincible. It lists Octagon Rod among the Disc III weapons, says this stock remains available through that disc and changes in Disc IV, and identifies Hamelin, Rune Blade, and Octagon Rod as unique ability sources; its item/ability tables list Iai Strike only on Rune Blade, Cherry Blossom on Obelisk and Kain's Lance, and Initiative on Obelisk and Battle Boots. These tables narrow the unique-ability warning to Iai Strike; other release versions remain unverified.",
   },
   {
     id: "elitegrindlab-daguerreo",
