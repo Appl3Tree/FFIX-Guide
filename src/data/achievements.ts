@@ -181,7 +181,7 @@ const steamAchievementGuideMap: Record<string, Pick<SteamAchievement, "guideObje
       "disc-4.return-to-gaia.stiltzkin-eighth-bundle",
     ],
     guideNote: "Collect the four Moonstones from Brahne, the Conde Petie Mountain Path colored-stone exchange, Friendly Jabberwock, and Stiltzkin's eighth Alexandria bundle. Friendly Feather Circle is a separate request that consumes a Moonstone; it is not a collection source.",
-    guideSourceIds: ["playstationtrophies-over-the-moon", "gamefaqs-chocobo-hot-cold-ysf-9771", "gamefaqs-items-71891", "gamefaqs-return-to-gaia-71891"],
+    guideSourceIds: ["playstationtrophies-over-the-moon", "gamefaqs-achievements-71891", "gamerguides-over-the-moon-achievement", "gamefaqs-chocobo-hot-cold-ysf-9771", "gamefaqs-items-71891", "gamefaqs-return-to-gaia-71891", "xboxachievements-FFIX-list"],
   },
   "the-ultimate-sword": { guideObjectiveIds: ["advanced.excalibur-ii.acquire"] },
   "beach-bum": { guideObjectiveIds: ["disc-4.return-to-gaia.chocobo-beach"] },

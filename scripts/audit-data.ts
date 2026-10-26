@@ -4292,6 +4292,10 @@ const mountainMoonstoneFinalWarning = missablesById.get("missable.disc-3.prepari
 const mountainMoonstoneFirstPass = cutoffsById.get("cutoff.conde-petie-mountain-path.departure");
 const mountainMoonstoneFinalCutoff = cutoffsById.get("cutoff.shimmering-island.disc-iii-departure");
 const mountainMoonstoneObjective = objectivesById.get(mountainMoonstoneObjectiveId);
+const moonstoneAchievementCriteria = achievementCatalogs.map(({ platform, records }) => ({
+  platform,
+  record: records.find((achievement) => achievement.id === "over-the-moon"),
+}));
 const mountainMoonstoneReturnStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.journey-to-iifa-tree")
   ?.sections.flatMap((section) => section.steps)
@@ -4311,6 +4315,23 @@ if (
   !gameRouteEdgesById.get("story.journey-to-iifa-tree-to-iifa-tree")?.sourceIds.includes("gamefaqs-mountain-path-return-29957") ||
   !mountainMoonstoneFinalWarning?.consequence.includes("Shimmering Island transition") ||
   !mountainMoonstoneFinalWarning.sourceIds.includes("gamefaqs-preparing-to-leave-71891") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("gamefaqs-achievements-71891") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("gamerguides-over-the-moon-achievement") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("playstationtrophies-over-the-moon") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("steam-achievements") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("xboxachievements-FFIX-list") ||
+  !mountainMoonstoneObjective?.achievementPlatforms?.includes("steam") ||
+  !mountainMoonstoneObjective.achievementPlatforms.includes("ps4") ||
+  !mountainMoonstoneObjective.achievementPlatforms.includes("xbox") ||
+  !mountainMoonstoneObjective.sourceIds.includes("gamefaqs-achievements-71891") ||
+  !mountainMoonstoneObjective.sourceIds.includes("gamerguides-over-the-moon-achievement") ||
+  !mountainMoonstoneObjective.sourceIds.includes("xboxachievements-FFIX-list") ||
+  moonstoneAchievementCriteria.length !== 3 ||
+  moonstoneAchievementCriteria.some(({ platform, record }) =>
+    !record || record.criteria !== "Obtain 4 moonstones." ||
+    !record.guideObjectiveIds?.includes(mountainMoonstoneObjectiveId) ||
+    !record.guideSourceIds?.includes("gamerguides-over-the-moon-achievement") ||
+    !["steam", "ps4", "xbox"].includes(platform)) ||
   !mountainMoonstoneFinalCutoff?.missableIds.includes(mountainMoonstoneFinalWarning.id) ||
   !mountainMoonstoneFinalCutoff?.sourceIds.includes("gamefaqs-preparing-to-leave-71891") ||
   !mountainMoonstoneFinalCutoff?.sourceIds.includes("gamefaqs-mountain-path-return-29957")
@@ -5550,8 +5571,12 @@ if (!tantarianRunningShoesPath || tantarianRunningShoesPath.itemId !== "game-ite
   !tantarianRecord?.notes.some((note) => note.includes("not separate victories"))) {
   errors.push("Tantarian's guaranteed Running Shoes route must be shared across the two alternative story windows.");
 }
-if (!gameItems.some((item) => item.id === moonstoneId && item.name === "Moonstone" && item.category === "equipment")) {
-  errors.push("Moonstone must be present in the equipment catalog.");
+const moonstoneItem = gameItems.find((item) => item.id === moonstoneId);
+if (!moonstoneItem || moonstoneItem.name !== "Moonstone" || moonstoneItem.category !== "equipment" ||
+  !moonstoneItem.sourceIds.includes("gamefaqs-achievements-71891") ||
+  !moonstoneItem.sourceIds.includes("gamerguides-over-the-moon-achievement") ||
+  !moonstoneItem.sourceIds.includes("xboxachievements-FFIX-list")) {
+  errors.push("Moonstone must be present in the equipment catalog with cross-platform achievement citations.");
 }
 if (moonstonePaths.length !== requiredMoonstonePaths.length) {
   errors.push(`Moonstone must map exactly four achievement acquisition opportunities; found ${moonstonePaths.length}.`);
