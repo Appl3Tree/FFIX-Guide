@@ -5122,7 +5122,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-chocobo-paradise",
             kind: "optional",
             text: "With the Sky ability, fly to the hidden island in the northwest ocean and use a Dead Pepper on the mountain crack to enter Chocobo's Paradise. Speak with the nearby Chocobo to refill your Dead Pepper supply. Save Fat Chocobo's scene, card, and Tetra Master challenge for Disc IV after the full prerequisite checklist.",
-            detail: "The Disc III visit is for access and Dead Pepper replenishment; the GameFAQs and Jegged quest guides place Fat Chocobo's first scene/card after all 24 Chocograph treasures, all eight Dead Pepper reward caches, and the separate Mognet Central access crack. Return in Disc IV, watch the scene to receive the card, then speak to Fat Chocobo again and challenge him to Tetra Master to start beach registration. Dive Spot #5 is unavailable until Disc IV.",
+            detail: "The Disc III visit is for access and Dead Pepper replenishment; RPG Site reports that the nearby Chocobo supplies 99 peppers, after one pepper was spent to open the entrance. GameFAQs and Jegged place Fat Chocobo's first scene/card after all 24 Chocograph treasures, all eight Dead Pepper reward caches, and the separate Mognet Central access crack. Return in Disc IV, watch the scene to receive the card, then speak to Fat Chocobo again and challenge him to Tetra Master to start beach registration. Dive Spot #5 is unavailable until Disc IV.",
             objectiveIds: ["disc-3.aerial-exploration.chocobo-paradise-refill"],
           },
         ],
@@ -6497,6 +6497,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "In the underwater Birth room, search behind the large rock formation and keep pressing the interaction button until a voice answers. Save and heal nearby, prepare against Shadow damage and status effects, then agree to fight optional boss Hades.",
             detail: "There is no field icon. Hades absorbs Shadow and nullifies Earth; use Holy attacks and Slow. Clear Headed, Body Temp, Auto-Haste, Auto-Regen, Auto-Life, and other status protection help. He steals Reflect Ring, Running Shoes, Battle Boots, and Robe of Lords, and drops Wing Edge. GameFAQs says the synthesis shop opens after victory and remains accessible at the same spot; RPGClassics describes a two-Pumice-Piece handoff before access, so verify the interaction in-game. GameFAQs calls Hades the last Running Shoes copy, but its Items and Shops tables list a later Disc IV Black Mage Village recipe: Battle Boots + Emerald for 12,000 Gil. Jegged and EliteGrindLab corroborate the recipe. Treat Hades as the final direct steal opportunity; the item type is recoverable only if the recipe materials remain, and an Emerald may still be needed for Friendly Jabberwock. If you skip the fight now, it remains available during Final Preparations before Kuja.",
             objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals"],
+          },
+          {
+            id: "memoria-hades-synthesis-shop",
+            kind: "optional",
+            text: "When Hades's Master Synthesist shop is accessible, review its fifteen documented recipes before spending rare ingredients or Queen Stella's Hammer.",
+            detail: "RPGClassics lists fifteen outputs: Robe of Lords, Tin Armor, Protect Ring, Pumice, Garnet, Amethyst, Peridot, Sapphire, Opal, Topaz, Lapis Lazuli, Pumice Piece, Save the Queen, Phoenix Pinion, and Ether. Compare the conditional paths in the item catalog; the unique Hammer is consumed by Tin Armor or Pumice Piece, and the Pumice Piece recipe also consumes Dagger's Ark Pumice. GameFAQs says the shop opens after victory, while RPGClassics describes a two-Pumice-Piece handoff; the exact trigger remains unresolved pending direct game verification.",
+            objectiveIds: ["disc-4.memoria.hades"],
           },
           {
             id: "memoria-nero-checkpoint-11",

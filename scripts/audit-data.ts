@@ -2009,6 +2009,104 @@ if (
 ) {
   errors.push("Hades's Tin Armor/Pumice/Pumice Piece recipes need exact ingredients and prices, conditional item paths, source links, and the unique-Hammer tradeoff in the warning and walkthrough.");
 }
+const hadesCatalogSourceIds = ["gamefaqs-items-71891", "rpgclassics-synthesis"];
+const hadesCatalogChecks = [
+  { recipeId: "synthesis-recipe.robe-of-lords", itemId: "game-item.robe-of-lords", ingredients: [{ itemId: "game-item.white-robe", quantity: 1 }, { itemId: "game-item.black-robe", quantity: 1 }], cost: 30000, pathId: "item-path.disc-4.memoria.hades-robe-of-lords-synthesis", elite: true },
+  { recipeId: "synthesis-recipe.tin-armor", itemId: "game-item.tin-armor", ingredients: [{ itemId: "game-item.hammer", quantity: 1 }, { itemId: "game-item.ore", quantity: 1 }], cost: 50000, pathId: "item-path.disc-4.memoria.hades-tin-armor-synthesis", elite: true },
+  { recipeId: "synthesis-recipe.protect-ring", itemId: "game-item.protect-ring", ingredients: [{ itemId: "game-item.dark-matter", quantity: 1 }, { itemId: "game-item.rebirth-ring", quantity: 1 }], cost: 40000, pathId: "item-path.disc-4.memoria.hades-protect-ring-synthesis", elite: true },
+  { recipeId: "synthesis-recipe.pumice", itemId: "game-item.pumice", ingredients: [{ itemId: "game-item.pumice-piece", quantity: 2 }], cost: 50000, pathId: "item-path.disc-4.memoria.hades-pumice-synthesis", elite: true },
+  { recipeId: "synthesis-recipe.garnet", itemId: "game-item.garnet", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.remedy", quantity: 1 }], cost: 350, pathId: "item-path.disc-4.memoria.hades-garnet-synthesis" },
+  { recipeId: "synthesis-recipe.amethyst", itemId: "game-item.amethyst", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.annoyntment", quantity: 1 }], cost: 200, pathId: "item-path.disc-4.memoria.hades-amethyst-synthesis" },
+  { recipeId: "synthesis-recipe.peridot", itemId: "game-item.peridot", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.soft", quantity: 1 }], cost: 100, pathId: "item-path.disc-4.memoria.hades-peridot-synthesis" },
+  { recipeId: "synthesis-recipe.sapphire", itemId: "game-item.sapphire", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.antidote", quantity: 1 }], cost: 200, pathId: "item-path.disc-4.memoria.hades-sapphire-synthesis" },
+  { recipeId: "synthesis-recipe.opal", itemId: "game-item.opal", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.potion", quantity: 1 }], cost: 100, pathId: "item-path.disc-4.memoria.hades-opal-synthesis" },
+  { recipeId: "synthesis-recipe.topaz", itemId: "game-item.topaz", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.eye-drops", quantity: 1 }], cost: 100, pathId: "item-path.disc-4.memoria.hades-topaz-synthesis" },
+  { recipeId: "synthesis-recipe.lapis-lazuli", itemId: "game-item.lapis-lazuli", ingredients: [{ itemId: "game-item.ore", quantity: 1 }, { itemId: "game-item.dead-pepper", quantity: 1 }], cost: 400, pathId: "item-path.disc-4.memoria.hades-lapis-lazuli-synthesis" },
+  { recipeId: "synthesis-recipe.pumice-piece", itemId: "game-item.pumice-piece", ingredients: [{ itemId: "game-item.hammer", quantity: 1 }, { itemId: "game-item.pumice", quantity: 1 }], cost: 25000, pathId: "item-path.disc-4.memoria.hades-pumice-piece-synthesis", elite: true },
+  { recipeId: "synthesis-recipe.save-the-queen", itemId: "game-item.save-the-queen", ingredients: [{ itemId: "game-item.javelin", quantity: 1 }, { itemId: "game-item.silver-gloves", quantity: 1 }], cost: 50000, pathId: "item-path.disc-4.memoria.hades-save-the-queen-synthesis", elite: true },
+  { recipeId: "synthesis-recipe.phoenix-pinion", itemId: "game-item.phoenix-pinion", ingredients: [{ itemId: "game-item.phoenix-down", quantity: 1 }, { itemId: "game-item.gysahl-greens", quantity: 1 }], cost: 300, pathId: "item-path.disc-4.memoria.phoenix-pinion-hades-synthesis" },
+  { recipeId: "synthesis-recipe.ether", itemId: "game-item.ether", ingredients: [{ itemId: "game-item.echo-screen", quantity: 1 }, { itemId: "game-item.vaccine", quantity: 1 }], cost: 500, pathId: "item-path.disc-4.memoria.hades-ether-synthesis" },
+];
+const hadesCatalogMatches = hadesCatalogChecks.every((expected) => {
+  const recipe = synthesisRecipes.find((record) => record.id === expected.recipeId);
+  const path = itemAcquisitionPaths.find((record) => record.id === expected.pathId);
+  const item = gameItems.find((record) => record.id === expected.itemId);
+  const eliteSourcePresent = !expected.elite || (
+    recipe?.sourceIds.includes("elitegrindlab-synthesis")
+    && path?.sourceIds.includes("elitegrindlab-synthesis")
+    && item?.sourceIds.includes("elitegrindlab-synthesis")
+  );
+  return recipe?.resultItemId === expected.itemId
+    && JSON.stringify(recipe.ingredients) === JSON.stringify(expected.ingredients)
+    && recipe.cost.amount === expected.cost
+    && hadesCatalogSourceIds.every((sourceId) => recipe.sourceIds.includes(sourceId))
+    && path?.itemId === expected.itemId
+    && path.method === "synthesis"
+    && path.recipeId === expected.recipeId
+    && path.chapterId === "disc-4.memoria"
+    && path.availability === "conditional"
+    && path.shopId === "hades.master-synthesist"
+    && path.cost?.amount === expected.cost
+    && path.walkthroughObjectiveIds?.includes("disc-4.memoria.hades")
+    && hadesCatalogSourceIds.every((sourceId) => path.sourceIds.includes(sourceId))
+    && item !== undefined
+    && hadesCatalogSourceIds.every((sourceId) => item.sourceIds.includes(sourceId))
+    && eliteSourcePresent;
+});
+const hadesCatalogPaths = itemAcquisitionPaths.filter((path) => path.method === "synthesis" && path.shopId === "hades.master-synthesist");
+const javelinItem = gameItems.find((item) => item.id === "game-item.javelin");
+const javelinIpsenPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.ipsens-castle.javelin-chest");
+const hadesCatalogStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-hades-synthesis-shop");
+const hadesCatalogObjective = objectivesById.get("disc-4.memoria.hades");
+if (
+  hadesCatalogChecks.length !== 15
+  || hadesCatalogPaths.length !== hadesCatalogChecks.length
+  || !hadesCatalogMatches
+  || !hadesCatalogStep?.text.includes("fifteen documented recipes")
+  || !hadesCatalogStep.detail.includes("exact trigger remains unresolved")
+  || !hadesCatalogStep.objectiveIds?.includes("disc-4.memoria.hades")
+  || !hadesCatalogObjective?.sourceIds.includes("rpgclassics-synthesis")
+  || !hadesCatalogObjective.sourceIds.includes("gamefaqs-items-71891")
+  || !javelinItem?.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+  || javelinIpsenPath?.itemId !== "game-item.javelin"
+  || javelinIpsenPath.method !== "chest"
+  || javelinIpsenPath.chapterId !== "disc-3.ipsens-castle"
+  || !javelinIpsenPath.walkthroughObjectiveIds?.includes("disc-3.ipsens-castle.pickups")
+  || !javelinIpsenPath.sourceIds.includes("gamefaqs-items-71891")
+  || !javelinIpsenPath.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+) {
+  errors.push("Hades's full fifteen-recipe stock, conditional item paths, source-linked Javelin ingredient route, and unresolved shop-opening trigger must remain connected.");
+}
+const deadPepperSourceIds = ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgsite-ffix-chocobo-guide"];
+const deadPepperItem = gameItems.find((item) => item.id === "game-item.dead-pepper");
+const deadPepperDigPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.dead-pepper-hot-cold-dig");
+const deadPepperParadisePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.dead-pepper-paradise-refill");
+const deadPepperParadiseObjective = objectivesById.get("disc-3.aerial-exploration.chocobo-paradise-refill");
+if (
+  !deadPepperItem
+  || !deadPepperSourceIds.every((sourceId) => deadPepperItem.sourceIds.includes(sourceId))
+  || deadPepperDigPath?.itemId !== "game-item.dead-pepper"
+  || deadPepperDigPath.chapterId !== "disc-3.aerial-exploration"
+  || deadPepperDigPath.method !== "quest-reward"
+  || deadPepperDigPath.quantity !== 1
+  || deadPepperDigPath.availability !== "repeatable"
+  || !deadPepperDigPath.conditions?.includes("Mountain ability")
+  || !deadPepperDigPath.conditions?.includes("random")
+  || !deadPepperSourceIds.every((sourceId) => deadPepperDigPath.sourceIds.includes(sourceId))
+  || deadPepperParadisePath?.itemId !== "game-item.dead-pepper"
+  || deadPepperParadisePath.method !== "quest-reward"
+  || deadPepperParadisePath.quantity !== 99
+  || deadPepperParadisePath.availability !== "repeatable"
+  || !deadPepperParadisePath.conditions?.includes("one Dead Pepper")
+  || !deadPepperParadisePath.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.chocobo-paradise-refill")
+  || !deadPepperSourceIds.every((sourceId) => deadPepperParadisePath.sourceIds.includes(sourceId))
+  || !deadPepperParadiseObjective?.sourceIds.includes("rpgsite-ffix-chocobo-guide")
+) {
+  errors.push("Dead Pepper needs source-linked Hot & Cold and repeatable Chocobo's Paradise acquisition paths, with the Mountain ability and one-pepper entrance gates recorded.");
+}
 const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
 const burmeciaDisc2SpearStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra")
