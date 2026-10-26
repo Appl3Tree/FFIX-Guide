@@ -771,6 +771,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
   },
   {
+    id: "detour.aerial-dali-cotton-robe",
+    fromChapterId: "disc-3.aerial-exploration",
+    toChapterId: "disc-1.village-of-dali",
+    relationship: "optional-return",
+    summary: "If using the optional Cotton Robe money loop, return to Dali during the Hilda Garde III free-flight window to buy Wrists, then synthesize and sell Cotton Robes. This is an optional Gil strategy, not a completion requirement or a progression cutoff.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-dali-71891"],
+  },
+  {
+    id: "detour.aerial-dali-rejoin",
+    fromChapterId: "disc-1.village-of-dali",
+    toChapterId: "disc-3.aerial-exploration",
+    relationship: "rejoin",
+    summary: "After the Dali shop stop, return to the Hilda Garde III and resume the Disc III free-flight route; continue to Ipsen's Castle when ready.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-dali-71891"],
+  },
+  {
     id: "story.aerial-exploration-to-ipsens-castle",
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-3.ipsens-castle",

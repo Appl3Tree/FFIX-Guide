@@ -608,6 +608,22 @@ if (
 ) {
   errors.push("The Disc III Hilda Garde Treno return and rejoin must preserve the Amdusias reward route and source links.");
 }
+const aerialDaliReturn = gameRouteEdgesById.get("detour.aerial-dali-cotton-robe");
+const aerialDaliRejoin = gameRouteEdgesById.get("detour.aerial-dali-rejoin");
+if (
+  aerialDaliReturn?.relationship !== "optional-return" ||
+  aerialDaliReturn.fromChapterId !== "disc-3.aerial-exploration" ||
+  aerialDaliReturn.toChapterId !== "disc-1.village-of-dali" ||
+  !aerialDaliReturn.summary.includes("Cotton Robe") ||
+  !aerialDaliReturn.summary.includes("Wrists") ||
+  !aerialDaliReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  aerialDaliRejoin?.relationship !== "rejoin" ||
+  aerialDaliRejoin.fromChapterId !== "disc-1.village-of-dali" ||
+  aerialDaliRejoin.toChapterId !== "disc-3.aerial-exploration" ||
+  !aerialDaliRejoin.sourceIds.includes("gamefaqs-dali-71891")
+) {
+  errors.push("The Disc III Hilda Garde Dali return and rejoin must preserve the optional Cotton Robe route and source links.");
+}
 const routeStartChapterId = gameRouteCoverage.chapterIds[0];
 const routeEndChapterId = gameRouteCoverage.throughChapterId;
 if (!routeStartChapterId) {
