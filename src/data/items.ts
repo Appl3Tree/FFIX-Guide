@@ -9180,9 +9180,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 720 },
     conditions: "The missables checklist names Summit Station as the last listed shop source for Silver Gloves. Earlier copies can come from Black Waltz 3, the Lindblum Synthesis Shop pickup, or Lindblum's pre-Cleyra weapon stock.",
-    notes: "Caves of Narshe's Disc III map also lists Silver Gloves in a generic South Gate shop, but does not identify the shop as Summit Station or document how to reach it; treat later stock as unverified.",
+    notes: "Caves of Narshe's Disc III map search-index entry also reports Silver Gloves in a generic South Gate equipment shop. Cour89 identifies Summit Station as the Disc II event-only equipment counter and lists the other named South Gate counters as recovery-item shops, but does not map the Caves entry to another equipment counter or a reachable Disc III route; treat the possible later stock as unresolved.",
     walkthroughObjectiveIds: ["disc-2.journey-to-treno.station-equipment-targets"],
-    sourceIds: silverGlovesReferenceSources,
+    sourceIds: [...silverGlovesReferenceSources, "cour89-south-gate"],
   },
   {
     id: "item-path.disc-1.evil-forest.iron-helm-plant-brain-steal",
@@ -9232,9 +9232,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 450 },
     conditions: "The missables checklist names Summit Station as the last listed shop source for Iron Helm. Earlier copies can come from the Plant Brain steal, Dali Underground chest, or Lindblum's pre-Cleyra weapon stock.",
-    notes: "Caves of Narshe's Disc III map also lists Iron Helm in a generic South Gate shop, but does not identify the shop as Summit Station or document how to reach it; treat later stock as unverified.",
+    notes: "Caves of Narshe's Disc III map search-index entry also reports Iron Helm in a generic South Gate equipment shop. Cour89 identifies Summit Station as the Disc II event-only equipment counter and lists the other named South Gate counters as recovery-item shops, but does not map the Caves entry to another equipment counter or a reachable Disc III route; treat the possible later stock as unresolved.",
     walkthroughObjectiveIds: ["disc-2.journey-to-treno.station-equipment-targets"],
-    sourceIds: ironHelmReferenceSources,
+    sourceIds: [...ironHelmReferenceSources, "cour89-south-gate"],
   },
   {
     id: "item-path.disc-2.treno.chain-mail-shop",
