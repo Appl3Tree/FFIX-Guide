@@ -4244,6 +4244,81 @@ if (
 ) {
   errors.push("Moorock's #21 letter must preserve its Bran Bal-to-Pandemonium recovery, the Maze receipt/delivery cutoff, and its optional status for the 27-letter count rather than Mognet Central repair.");
 }
+const pandemoniumTreasureObjective = objectivesById.get("disc-3.portal-to-another-world.pandemonium-treasures");
+const pandemoniumTreasureWarning = missablesById.get("missable.disc-3.portal-to-another-world.pandemonium-treasures");
+const pandemoniumHolyMiterPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.pandemonium-holy-miter-throne");
+const pandemoniumCarabiniChestPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.pandemonium-carabini-mail-chest");
+const pandemoniumCarabiniKujaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.pandemonium-carabini-mail-kuja-steal");
+const pandemoniumElixirChestPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.pandemonium-elixir-chest");
+const pandemoniumBattleBootsPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.pandemonium-battle-boots-chest");
+const pandemoniumCarabiniClaim = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.carabini-mail.auto-regen");
+const kujaPandemoniumRecord = enemyRecords.find((enemy) => enemy.id === "enemy.kuja");
+const holyMiterDisc4Recovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.black-mage-village.weapon-shop.holy-miter");
+const carabiniMailDisc4Recovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.daguerreo.weapon-shop.carabini-mail");
+const battleBootsGarlandRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.garland-battle-boots-steal");
+const battleBootsHadesRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-battle-boots-steal");
+const elixirHadesRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-elixir-drop");
+const elixirNecronRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.necron-elixir-common-steal");
+const pandemoniumThroneStep = pandemoniumMoorockSection?.steps.find((step) => step.id === "portal-pandemonium-moorock-holy-miter");
+const pandemoniumElevatorSection = portalChapter?.sections.find((section) => section.id === "portal-pandemonium-orbs-elevator");
+const pandemoniumGilStep = pandemoniumElevatorSection?.steps.find((step) => step.id === "portal-pandemonium-heading-three");
+const pandemoniumBluePadStep = pandemoniumMazeSection?.steps.find((step) => step.id === "portal-pandemonium-maze-entry");
+if (
+  !pandemoniumTreasureObjective
+  || !pandemoniumTreasureWarning
+  || pandemoniumTreasureWarning.objectiveId !== pandemoniumTreasureObjective.id
+  || !pandemoniumTreasureWarning.classification.includes("missable-opportunity")
+  || pandemoniumTreasureWarning.classification.includes("permanently-missable")
+  || !pandemoniumTreasureWarning.nextAvailability.includes("Holy Miter")
+  || !pandemoniumTreasureWarning.nextAvailability.includes("Carabini Mail")
+  || !pandemoniumTreasureWarning.nextAvailability.includes("Battle Boots")
+  || !pandemoniumTreasureWarning.nextAvailability.includes("20,007-Gil amount is a missed chest pickup")
+  || !pandemoniumHolyMiterPath
+  || pandemoniumHolyMiterPath.itemId !== "game-item.holy-miter"
+  || pandemoniumHolyMiterPath.method !== "fixed-pickup"
+  || pandemoniumHolyMiterPath.availability !== "single-use"
+  || !pandemoniumHolyMiterPath.walkthroughObjectiveIds?.includes(pandemoniumTreasureObjective.id)
+  || !pandemoniumCarabiniChestPath
+  || pandemoniumCarabiniChestPath.itemId !== "game-item.carabini-mail"
+  || pandemoniumCarabiniChestPath.method !== "chest"
+  || pandemoniumCarabiniChestPath.availability !== "single-use"
+  || !pandemoniumCarabiniChestPath.notes?.includes("reverse which side they call the first blue pad")
+  || !pandemoniumCarabiniChestPath.walkthroughObjectiveIds?.includes(pandemoniumTreasureObjective.id)
+  || !pandemoniumCarabiniKujaPath
+  || pandemoniumCarabiniKujaPath.itemId !== "game-item.carabini-mail"
+  || pandemoniumCarabiniKujaPath.method !== "steal"
+  || pandemoniumCarabiniKujaPath.availability !== "one-time-encounter"
+  || !pandemoniumCarabiniKujaPath.walkthroughObjectiveIds?.includes("disc-3.portal-to-another-world.pandemonium-boss-steals")
+  || !kujaPandemoniumRecord?.steals.some((slot) => slot.itemId === "game-item.carabini-mail")
+  || !pandemoniumElixirChestPath
+  || pandemoniumElixirChestPath.itemId !== "game-item.elixir"
+  || pandemoniumElixirChestPath.method !== "chest"
+  || pandemoniumElixirChestPath.availability !== "single-use"
+  || !pandemoniumElixirChestPath.walkthroughObjectiveIds?.includes(pandemoniumTreasureObjective.id)
+  || !pandemoniumBattleBootsPath
+  || pandemoniumBattleBootsPath.itemId !== "game-item.battle-boots"
+  || !pandemoniumBattleBootsPath.walkthroughObjectiveIds?.includes(pandemoniumTreasureObjective.id)
+  || !holyMiterDisc4Recovery
+  || holyMiterDisc4Recovery.cost?.amount !== 8300
+  || holyMiterDisc4Recovery.availability !== "repeatable"
+  || !carabiniMailDisc4Recovery
+  || carabiniMailDisc4Recovery.cost?.amount !== 12300
+  || carabiniMailDisc4Recovery.availability !== "repeatable"
+  || !battleBootsGarlandRecovery
+  || !battleBootsHadesRecovery
+  || !elixirHadesRecovery
+  || !elixirNecronRecovery
+  || !pandemoniumCarabiniClaim
+  || pandemoniumCarabiniClaim.itemId !== "game-item.carabini-mail"
+  || pandemoniumCarabiniClaim.abilityName !== "Auto-Regen"
+  || !pandemoniumCarabiniClaim.sourceIds.includes("jegged-pandemonium")
+  || !pandemoniumThroneStep?.text.includes("throne for the Holy Miter")
+  || !pandemoniumGilStep?.text.includes("20,007 Gil")
+  || !pandemoniumBluePadStep?.text.includes("both blue teleporters")
+  || !["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"].every((sourceId) => pandemoniumTreasureWarning.sourceIds.includes(sourceId))
+) {
+  errors.push("Pandemonium's five fixed pickups must map to item paths, preserve the two-blue-pad source discrepancy, distinguish one-time location copies from recoverable item types, and link Carabini Mail's Kuja steal and Auto-Regen lesson.");
+}
 for (const recipe of synthesisRecipes) {
   if (!gameItemIds.has(recipe.resultItemId)) errors.push(`Synthesis recipe ${recipe.id} references unknown result item ${recipe.resultItemId}.`);
   if (!areaIds.has(recipe.chapterId) || !walkthroughChapterIds.has(recipe.chapterId)) {
