@@ -1438,6 +1438,15 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-daguerreo-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "gamefaqs-morrid-coffees-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-conde-petie-colored-stones-71891", "gamefaqs-mountain-path-return-29957", "gamefaqs-oglop-trading-71891", "gamefaqs-card-locations-24067", "jegged-rare-coffees", "playstationtrophies-my-little-airship", "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "jegged-daguerreo", "rpgclassics-abilities", "gamefaqs-desert-palace-71891", "elitegrindlab-desert-palace"],
   },
   {
+    id: "cutoff.alexandria.vivi-town-pickups",
+    edgeId: "story.alexandria-to-evil-forest",
+    title: "Alexandria first-visit pickup sweep before the rooftop lockout",
+    certainty: "source-supported",
+    trigger: "Complete Vivi's first-visit street, square, shop, residence, tavern, and steeple pickup route before crossing the rooftop planks that fall behind him. Use the pre-climb check at Kupo as the safe checkpoint; the first-visit town route cannot be recovered after the planks block the return.",
+    missableIds: ["missable.disc-1.alexandria.town-pickups"],
+    sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "jegged-treasure-hunter"],
+  },
+  {
     id: "cutoff.alexandria-opening-performance",
     edgeId: "story.alexandria-to-evil-forest",
     title: "Opening performance and Moonstone reward",

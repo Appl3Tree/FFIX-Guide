@@ -70,6 +70,69 @@ const eliteGrindLabStiltzkinSource = sources.find((source) => source.id === "eli
 const cleyraEvacuationCutoff = cutoffsById.get("cutoff.cleyra-evacuation.choice-window");
 const cleyraFreyaCutoff = cutoffsById.get("cutoff.cleyra-freya.before-reunion");
 const cleyraTrunkReturnCutoff = cutoffsById.get("cutoff.cleyra-trunk-return.before-bridge");
+const alexandriaTownObjectiveId = "disc-1.alexandria.town-collectibles";
+const alexandriaTownWarning = missablesById.get("missable.disc-1.alexandria.town-pickups");
+const alexandriaTownCutoff = cutoffsById.get("cutoff.alexandria.vivi-town-pickups");
+const alexandriaWalkthroughSteps = walkthroughChapters
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+const alexandriaPickupPathSpecs = [
+  ["item-path.disc-1.alexandria.main-street-start-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "gamerguides-alexandria"]],
+  ["item-path.disc-1.alexandria.memorial-square-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.north-street-awning-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.sewing-residence-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.north-street-barrel-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "elitegrindlab-prima-vista"]],
+  ["item-path.disc-1.alexandria.morning-star-bar-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.steeple-potion", "game-item.potion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.synthesis-shop-ether", "game-item.ether", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.weapons-shop-remedy", "game-item.remedy", ["gamefaqs-alexandria-71891", "elitegrindlab-prima-vista"]],
+  ["item-path.disc-1.alexandria.wagon-phoenix-pinion", "game-item.phoenix-pinion", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.ilia-house-eye-drops", "game-item.eye-drops", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+  ["item-path.disc-1.alexandria.steeple-tent", "game-item.tent", ["gamefaqs-alexandria-71891", "jegged-alexandria"]],
+] as const;
+const alexandriaTownObjective = objectivesById.get(alexandriaTownObjectiveId);
+if (
+  !alexandriaTownObjective ||
+  !["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista"]
+    .every((sourceId) => alexandriaTownObjective.sourceIds.includes(sourceId)) ||
+  alexandriaTownObjective.chapterIds.length !== 1 || alexandriaTownObjective.chapterIds[0] !== "disc-1.alexandria"
+) {
+  errors.push("Alexandria's first-visit pickup objective must cite all route/discrepancy sources and stay scoped to Disc I Alexandria.");
+}
+for (const [pathId, itemId, requiredSourceIds] of alexandriaPickupPathSpecs) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  if (
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.alexandria" ||
+    path.method !== "hidden-pickup" || path.availability !== "single-use" || path.quantity !== 1 ||
+    !path.walkthroughObjectiveIds.includes(alexandriaTownObjectiveId) ||
+    !requiredSourceIds.every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Alexandria pickup path ${pathId} must retain its item, one-time location, shared objective, and source provenance.`);
+  }
+}
+if (
+  !alexandriaTownWarning ||
+  alexandriaTownWarning.objectiveId !== alexandriaTownObjectiveId ||
+  alexandriaTownWarning.severity !== "high" ||
+  !alexandriaTownWarning.classification.includes("missable-opportunity") ||
+  !alexandriaTownWarning.classification.includes("recoverable-later") ||
+  !alexandriaTownWarning.consequence.includes("340 points") ||
+  !alexandriaTownWarning.consequence.includes("one Treasure Hunter point") ||
+  !alexandriaTownWarning.note.includes("disagree whether North Street has one Potion or two") ||
+  !alexandriaTownWarning.note.includes("does not prove a perfect town sweep is required") ||
+  !alexandriaTownWarning.sourceIds.includes("jegged-treasure-hunter") ||
+  !alexandriaTownCutoff || alexandriaTownCutoff.edgeId !== "story.alexandria-to-evil-forest" ||
+  !alexandriaTownCutoff.missableIds.includes("missable.disc-1.alexandria.town-pickups") ||
+  !alexandriaTownCutoff.trigger.includes("planks that fall behind him") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "starting-street-potion")?.text.toLowerCase().includes("before walking south to memorial square") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "town-pickup-cutoff")?.text.includes("falling rooftop planks")
+) {
+  errors.push("Alexandria's first-visit pickup warning, Treasure Hunter qualification, route cutoff, and starting-street/checkpoint steps must stay linked and source-scoped.");
+}
+for (const itemId of ["game-item.potion", "game-item.ether", "game-item.remedy", "game-item.phoenix-pinion", "game-item.eye-drops", "game-item.tent"]) {
+  if (!itemAcquisitionPaths.some((path) => path.itemId === itemId && path.chapterId !== "disc-1.alexandria")) {
+    errors.push(`Alexandria's ${itemId} pickup warning must distinguish the lost location copy from later item-type recovery.`);
+  }
+}
 if (
   !cleyraEvacuationWarning?.action.includes("Choose Right, then Left, then Right") ||
   !cleyraEvacuationWarning.action.includes("Not Yet as the recommended route") ||

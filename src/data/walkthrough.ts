@@ -36,8 +36,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "alexandria-town",
         title: "Alexandria town — Main Street to the Square",
         summary: "Sweep the starting streets before advancing. These pickups support the treasure record and Tetra Master collection; the guide has not yet audited every later replacement path.",
-        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "vgkami-alexandria"],
+        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista"],
         steps: [
+          {
+            id: "starting-street-potion",
+            kind: "pickup",
+            text: "Before walking south to Memorial Square, search the left side of Vivi's starting Main Street for a hidden Potion.",
+            objectiveIds: ["disc-1.alexandria.town-collectibles"],
+          },
           {
             id: "memorial-square",
             kind: "pickup",
@@ -46,7 +52,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "north-walkway",
             kind: "pickup",
-            text: "Head north along the walkway where Rat Kid bumps into Vivi. Check the left side for both Potions before leaving this street; one is under the awning near the entrance and the other is farther up by the barrels.",
+            text: "Return north along the walkway where Rat Kid bumps into Vivi. Search the full left side for both candidate Potions: one is near the awning and the other is at the southern fruit barrel. Sources disagree whether North Street contains one or two, so inspect both spots.",
           },
           {
             id: "sewing-residence",
@@ -124,6 +130,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "kupo-mognet",
             kind: "save",
             text: "After Kupo's introduction, speak to him and choose Mognet to accept the letter for Monty. Save here before climbing to the rooftops; deliver the letter to Monty when the next area opens.",
+          },
+          {
+            id: "town-pickup-cutoff",
+            kind: "cutoff",
+            text: "Before following Puck up the ladder, confirm the Alexandria pickup sweep is complete. The falling rooftop planks block the return route; Jump Rope, the hidden Hippaul cards, Tom's Bomb Card, and Kupo's letter have separate checks.",
+            objectiveIds: ["disc-1.alexandria.town-collectibles"],
           },
           {
             id: "rooftop-treasures",
