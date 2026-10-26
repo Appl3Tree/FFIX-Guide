@@ -1632,7 +1632,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocographs.html",
     accessed: "2026-10-25",
-    notes: "Independent location/reward map for all 24 Chocographs, including the Mist Ocean Sky ability, the Air Garden treasures, and each world-map chest. It confirms Forgotten Island's Ribbon and Rebirth Ring and distinguishes the clue-digging location from the treasure destination.",
+    notes: "Independent location/reward map for all 24 Chocographs, including the Mist Ocean Sky ability, the Air Garden treasures, and each world-map chest. It confirms Uncultivated Land (#3) includes one Jade Armlet and says the treasure requires Blue Narciss access plus either the airship or Mountain ability; it also confirms Forgotten Island's Ribbon and Rebirth Ring and distinguishes the clue-digging location from the treasure destination.",
   },
   {
     id: "jegged-chocobo-dive-spots",
@@ -2635,6 +2635,14 @@ export const sources = [
     notes: "Independent cross-check of the Forgotten Continent Dead Pepper crack locations and their reward sets; aligns with Jegged's location grouping rather than the reward numbering in GameFAQs's Forgotten Continent chapter. Its Hot & Cold tables list Phoenix Pinion as a two-point digging prize and a 150-point Mene reward, and Gysahl Greens as a one-point prize and a 10-point reward.",
   },
   {
+    id: "gamerguides-chocograph-locations",
+    title: "Chocograph Locations — rewards and treasure sites",
+    publisher: "Gamer Guides",
+    url: "https://www.gamerguides.com/final-fantasy-ix/guide/side-quests/chocobo-hot-and-cold/chocograph-locations/",
+    accessed: "2026-10-26",
+    notes: "Independent reward and location reference for Chocograph #3: Uncultivated Land includes one Jade Armlet and is reachable after Choco gains Mountain ability. GameFAQs labels the Chocobo-ability requirement at the treasure site as none, while Jegged says access is after the Blue Narciss using either the airship or Mountain ability; keep the exact access route visible as a source difference.",
+  },
+  {
     id: "elitegrindlab-oeilvert",
     title: "Oeilvert — completionist route and missable audit",
     publisher: "EliteGrindLab",
@@ -3008,7 +3016,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-gaia",
     accessed: "2026-10-24",
-    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It identifies Stiltzkin's Alexandria steeple bundle as Moonstone, Ruby, and Elixir for 5,555 Gil and explicitly says this final purchase is not missable; a Ribbon follows on a second conversation if all seven earlier bundles were bought. It says Atla's Mogshop remains open with the same Disc III stock; this route supports the Steepled Hat recovery. It says the other Daguerreo shops retain their previous inventories, but its replacement weapon list omits Diamond Armor; it also identifies earlier quest opportunities that have closed.",
+    notes: "Disc IV return route and optional-content inventory: Frog Catching, Kupo Nut and Dive Spot updates, Stiltzkin #8, Mognet Central, Pisces/Ophiucus, Treno's Behemoth, changed Black Mage Village item/weapon and synthesis stock, changed Daguerreo weapon stock, Vile Island, Chocobo's Paradise/Beach, Magical Fingertip, Nero Family start, Eidolon Wall, and the route toward the Iifa Tree. It identifies Stiltzkin's Alexandria steeple bundle as Moonstone, Ruby, and Elixir for 5,555 Gil and explicitly says this final purchase is not missable; a Ribbon follows on a second conversation if all seven earlier bundles were bought. It says Atla's Mogshop remains open with the same Disc III stock; this route supports the Steepled Hat recovery. It says the other Daguerreo shops retain their previous inventories, but its replacement weapon list omits Diamond Armor, N-Kai Armlet, and Jade Armlet from the earlier Daguerreo weapon list; this supports the Disc III purchase cutoff for both armlets. It also identifies earlier quest opportunities that have closed.",
   },
   {
     id: "gamerguides-side-questing-4",

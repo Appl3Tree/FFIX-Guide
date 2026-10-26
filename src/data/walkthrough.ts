@@ -4193,8 +4193,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-mountain-chocographs",
             kind: "optional",
-            text: "After gaining Mountain ability, return to the Forest for Chocographs #3, #13, and #14. Complete the reachable treasures; Chocograph #14, Green Plains, grants Ocean ability. Leave any map whose treasure location is still unavailable for a later story window.",
-            detail: "Some Chocograph pieces can be dug up before their treasure sites become reachable. Do not count a dug map as a recovered treasure; #15, #16, and #22 still have later availability constraints in the cited route.",
+            text: "After gaining Mountain ability, return to the Forest for Chocographs #3, #13, and #14. Chocograph #3, Uncultivated Land, includes a Jade Armlet; Chocograph #14, Green Plains, grants Ocean ability. Complete the reachable treasures and leave any unavailable site for a later story window.",
+            detail: "GameFAQs lists no Chocobo ability requirement for the Uncultivated Land treasure, while Jegged and Gamer Guides describe reaching it after the Blue Narciss or with Mountain ability. This route checks it on the Mountain revisit. Some Chocograph pieces can be dug up before their treasure sites become reachable, so do not count a dug map as a recovered treasure; #15, #16, and #22 still have later availability constraints in the cited route.",
             objectiveIds: ["disc-3.on-the-high-seas.chocographs", "disc-3.on-the-high-seas.ocean-ability"],
           },
           {
@@ -4682,6 +4682,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "In the library, light the candle at the back-left corner to raise a staircase. Climb it and light the candle on the top platform to move the bookshelf. Enter the new passage into the stairwell and inspect the bloodstone for an N-Kai Armlet.",
             detail: "This stone removes Valia Pira's evasion enhancement. The N-Kai Armlet teaches Water to Vivi if he is in the active party and has not learned it elsewhere.",
+            objectiveIds: ["disc-3.desert-palace.bloodstones"],
           },
           {
             id: "desert-palace-library-open-mogsam",
