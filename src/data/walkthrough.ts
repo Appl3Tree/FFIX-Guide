@@ -172,7 +172,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "alexandria-castle",
         title: "Alexandria Castle — claim the reward and find the Knights",
         summary: "The castle segment closes when the Prima Vista escapes. Claim the sword-fight prize and the optional Elixir before continuing up the West Tower.",
-        sourceIds: ["gamefaqs-alexandria-71891", "gamefaqs-story-minigames-71891", "gamefaqs-alexandria-castle-47344", "jegged-alexandria-castle", "vgkami-alexandria-castle", "strategywiki-alexandria", "elitegrindlab-prima-vista"],
+        sourceIds: ["gamefaqs-alexandria-71891", "gamefaqs-story-minigames-71891", "gamefaqs-alexandria-castle-47344", "jegged-alexandria-castle", "vgkami-alexandria-castle", "strategywiki-alexandria", "elitegrindlab-prima-vista", "gamefaqs-jump-rope-board-60852153"],
         steps: [
           {
             id: "equip-mage-masher",
@@ -189,7 +189,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "guardhouse-pickup-mognet",
             kind: "save",
-            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached 51 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; 51 satisfies both the sources that say at least 50 and Game8's wording that the record must exceed 50. The letter is separate from the earlier Kupo-to-Monty delivery. This is the first opportunity; if you miss it, Mosh offers the letter again on the Disc II Alexandria return.",
+            text: "Return to the guardhouse where Zidane and Blank began. Take the Phoenix Down from the lower-left corner and save with Mosh. If you reached 51 consecutive jumps during Disc I, use Mognet to read Kupo's Jump Rope letter; 51 satisfies both the sources that say at least 50 and Game8's wording that the record must exceed 50. This is a separate, read-only message, not one of the 27 letters delivered by the player. This is the first opportunity; if you miss it, Mosh offers the letter again on the Disc II Alexandria return.",
             objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {
