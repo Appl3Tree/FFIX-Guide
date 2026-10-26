@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Jump Rope Disc II source cross-check: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 422 sources; 100 cutoff windows cover all warnings. Build emitted 2,369.45 kB JavaScript (574.00 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Automated tests, browser review, gameplay, and release verification were not run. VGR independently lists the read-only message after Zorn and Thorn, but does not establish post-Disc-II or Disc III availability.
+Glass Armlet Disc III stock cross-check: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 423 sources; 100 cutoff windows cover all warnings. Build emitted 2,371.34 kB JavaScript (574.49 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. The older walkthrough adds a positive Treno listing but does not settle the in-game stock window. Automated tests, browser review, gameplay, and release verification were not run.
+
+Previous verification: Cross-checked the read-only Kupo→Mosh Jump Rope message against the VGR no-spoiler community walkthrough, which lists it in Disc I and again after Zorn and Thorn on Disc II. The general missed-delivery warning does not resolve post-Disc-II or Disc III availability.
 
 Previous verification: Disc III Jump Rope chronology correction passed lint, build/typecheck/audit, and `git diff --check`; Flactem supports the Mosh visit's order, but not letter availability after Disc II.
 

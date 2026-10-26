@@ -6,6 +6,8 @@ The registry is a partial research artifact. It contains 142 profile-scoped reco
 
 The optional Jump Rope message from Kupo to Mosh is separate from the 27 letters delivered by the player. A GameFAQs community discussion quotes Atomos199's guide for that distinction. Flactem places Mosh at the Disc III Alexandria Guardhouse after control returns to Zidane and before the library/Tantarian sequence; this is a best-effort check, not proof the letter remains available after Disc II. The exact final read opportunity remains unresolved.
 
+Glass Armlet's Disc III Treno and Lindblum sales remain optional, window-unverified shop candidates. An older GameFAQs walkthrough lists Treno and Alexandria Disc III stock but omits Lindblum; newer GameFAQs, RPGClassics, and Final Fantasy Wiki Treno tables omit the item, while Jegged lists both city sellers. Check the displayed stock in game; the source lists do not establish the transition trigger or release-specific behavior. Alexandria is separately documented as later recovery.
+
 ## Researched windows
 
 | Records | Classification | Cutoff and consequence | Later path | Confidence |

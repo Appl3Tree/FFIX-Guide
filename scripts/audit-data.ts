@@ -3926,6 +3926,7 @@ for (const [path, chapterId, city] of [
     !path.sourceIds.includes("gamefaqs-items-71891") ||
     !path.sourceIds.includes("gamefaqs-item-locations-54996") ||
     !path.sourceIds.includes("gamefaqs-equipment-33383") ||
+    !path.sourceIds.includes("gamefaqs-walkthrough-9801") ||
     !path.sourceIds.includes("jegged-arm-gear") ||
     !path.sourceIds.includes("rpgclassics-shops") ||
     !path.sourceIds.includes("ffwiki-shops") ||
@@ -3950,26 +3951,46 @@ if (
   !sources.find((source) => source.id === "gameclue-armlets")?.notes.includes("Lindblum (Discs I–II) and Burmecia") ||
   !sources.find((source) => source.id === "gameclue-armlets")?.notes.includes("not proof that the candidate Disc III stock is unavailable") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gameclue-armlets") ||
-  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("These table differences do not prove Disc III stock is absent")
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("these source differences do not prove Disc III stock is absent")
 ) {
   errors.push("GameClue's scoped Glass Armlet listing must be linked to the Lindblum candidate and framed as a non-conclusive source omission.");
 }
 if (
   !glassArmletDisc3LindblumCandidate?.conditions.includes("Xenomic's GameFAQs Item Location Guide") ||
   !glassArmletDisc3LindblumCandidate.conditions.includes("Discs II–III") ||
+  !glassArmletDisc3LindblumCandidate.conditions.includes("older _ATadeo_ GameFAQs walkthrough") ||
   !glassArmletDisc3LindblumCandidate.conditions.includes("modern Items table") ||
-  !glassArmletDisc3TrenoCandidate?.conditions.includes("both older GameFAQs reference lists name Treno only on Disc II") ||
+  !glassArmletDisc3TrenoCandidate?.conditions.includes("both older GameFAQs item/equipment references name Treno only on Disc II") ||
+  !glassArmletDisc3TrenoCandidate.conditions.includes("older GameFAQs walkthrough by _ATadeo_ list Glass Armlet for 250 Gil") ||
+  !glassArmletDisc3TrenoCandidate.sourceIds.includes("gamefaqs-walkthrough-9801") ||
+  !glassArmletDisc3LindblumCandidate?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !sources.find((source) => source.id === "gamefaqs-item-locations-54996")?.notes.includes("Glass Armlet location row lists Lindblum (Discs II–III)") ||
   !sources.find((source) => source.id === "gamefaqs-items-71891")?.notes.includes("Xenomic's older Item Location Guide instead lists Lindblum for Discs II–III")
 ) {
   errors.push("Glass Armlet's Lindblum candidate must preserve the positive Disc III Item Location listing against conflicting stock tables, while Treno must retain its older GameFAQs Disc II-only listings.");
 }
+const glassArmletAtadeoSource = sources.find((source) => source.id === "gamefaqs-walkthrough-9801");
+if (
+  !glassArmletAtadeoSource?.notes.includes("Disc III Alexandria and Treno equipment lists include Glass Armlet for 250 Gil") ||
+  !glassArmletAtadeoSource.notes.includes("Lindblum Disc III list omits the armlet") ||
+  !glassArmletDisc3TrenoCandidate?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
+  !glassArmletDisc3TrenoCandidate.conditions.includes("older GameFAQs walkthrough by _ATadeo_ list Glass Armlet for 250 Gil in Treno's Disc III stock") ||
+  !glassArmletDisc3LindblumCandidate?.conditions.includes("omits it from Lindblum's list") ||
+  !glassArmletAlexandriaPath?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
+  !glassArmletAlexandriaPath.conditions.includes("explicitly lists Glass Armlet for 250 Gil in Alexandria's Disc III equipment stock") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gamefaqs-walkthrough-9801")
+) {
+  errors.push("The older _ATadeo_ walkthrough must be scoped to its positive Disc III Treno/Alexandria listings and Lindblum omission without resolving the unverified candidates.");
+}
 if (
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-item-locations-54996") ||
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gameclue-armlets") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("inspect Treno's displayed weapon stock") ||
-  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("GameClue's iPhone/Android/PS1 armlet list does not include Treno") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("GameClue's iPhone/Android/PS1 armlet list also omits Treno") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("older positive listing does not establish the in-game stock window") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("Buy only if it appears")
 ) {
   errors.push("The first Disc III Treno stop must expose the uncertain Glass Armlet stock check with its source links and caveat.");
@@ -7017,7 +7038,9 @@ if (
   !trenoShopWindowWarning.classification.includes("recoverable-later") ||
   !trenoShopWindowWarning.consequence.includes("18 tracked shop paths") ||
   !trenoShopWindowWarning.note?.includes("Glass Armlet remains unresolved") ||
+  !trenoShopWindowWarning.note?.includes("older _ATadeo_ GameFAQs walkthrough list a Disc III Treno sale") ||
   !trenoShopWindowWarning.sourceIds.includes("gamefaqs-shops-71891") ||
+  !trenoShopWindowWarning.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   trenoShopWindowCutoff?.certainty !== "conservative" ||
   !trenoShopWindowCutoff.missableIds.includes("missable.disc-2.treno.disc-ii-shop-stock") ||
   !gamefaqsShopsSource?.notes.includes("Treno's Disc II weapon-shop table lists 25 products") ||
