@@ -6,7 +6,7 @@ Last updated: 2026-10-26
 
 The project records the claim, source, relevant section, version/platform, access date, verification state, and known conflict for each fact. Walkthroughs are used for scope discovery and fact checking, not copied prose. Critical deadlines and missable consequences require corroboration. Where references disagree, the conflict stays open until evidence resolves it.
 
-The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 412-source register and walkthrough do not establish that the game's content has been comprehensively researched.
+The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 414-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
 ## FFIX references inspected
 
@@ -632,6 +632,7 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 - GameFAQs' [Missable Item Walkthrough](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/missable-item-walkthrough) sets the Disc II checkpoint at five Air Rackets before boarding the Gargant, identifies Treno as the final shop, and says a sixth copy is in a later chest. Its [Treno walkthrough](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/treno) clarifies that five must be in inventory before proceeding and that the later chest supplies the sixth copy toward the six-copy endgame list: three for Need and three for synthesis.
 - The [Items table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists the Summit Station and Disc II Treno purchases plus the Ipsen's Castle lift-room chest; the [Shops table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) prices the shop copy at 400 Gil. The five-copy record is therefore an inventory checkpoint, not a count of copies that must all be bought in Treno. Count an earlier Summit Station copy and buy only the shortfall.
 - The catalog labels the target as a checkpoint total and keeps the later single chest copy separate. Missing the Treno purchase window does not mean permanent item loss, but the later chest cannot restore the earlier checkpoint or replace copies already spent. The optional target is advanced inventory guidance, not a standard completion requirement; direct gameplay and release-specific verification remain open.
+- [Cour89's Air Racket page](https://cour89.com/ff9/items/rackets/01.php) lists the Summit Station and Treno Disc II shops, an Ipsen's Castle pickup, Scan and Panacea, and the Priest's Racket recipe for 11,000 Gil. Its platform banner names PS4, Switch, Xbox One, Steam, iOS, and Android, but that is a guide-compatibility claim rather than direct stock verification. A page comment says purchases stop after Dagger's opening Disc II segment except for the later Ipsen copy; treat this as corroboration of the item-source window, not evidence for GameFAQs' optional five-copy checkpoint or for per-build behavior.
 
 
 ## Cleyra Stiltzkin #2 room check (2026-10-26)

@@ -1447,7 +1447,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-treno-summit-station",
         title: "Summit Station — Phoenix Down, Mognet, and supplies",
         summary: "Use the rest stop before boarding. Nazna accepts Grimo's letter and has a second letter for Mochos.",
-        sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-missables-71891", "gamefaqs-equipment-33383", "neoseeker-item-locations-182566", "cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate"],
+        sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-missables-71891", "gamefaqs-equipment-33383", "neoseeker-item-locations-182566", "cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "cour89-air-racket"],
         steps: [
           {
             id: "journey-treno-nazna-letter",
@@ -1568,7 +1568,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-city-pickups-and-mognet",
         title: "First-visit sweep — coins, cards, Mogrich, and hidden Gil",
         summary: "Finish the collectible route before triggering the next story sequence. The first Auction House scene is story-driven; bidding opens after the party reunites in Treno.",
-        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-weapon-shop-monsters-71891", "jegged-treno", "jegged-arm-gear", "elitegrindlab-treno", "rpgclassics-treno-monsters", "rpgclassics-shops", "ffwiki-shops", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-weapon-shop-monsters-71891", "jegged-treno", "jegged-arm-gear", "elitegrindlab-treno", "rpgclassics-treno-monsters", "rpgclassics-shops", "ffwiki-shops", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566", "cour89-air-racket"],
         steps: [
           {
             id: "treno-gemini-and-slums",
@@ -1581,7 +1581,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "treno-mogrich-letter",
             kind: "optional",
             text: "Continue to the Knight's House tower and speak to Mogrich, the Moogle being chased by a dog. Save and choose Mognet to read Stiltzkin's letter, then use the Weapon Shop if you want equipment or synthesis materials.",
-            detail: "Stiltzkin does not sell a bundle in Treno; this is a Mognet letter stop. GameFAQs' Disc II Treno weapon list includes Air Racket (400 Gil), Mythril Rod (560), Mythril Spear (1,100), Lightning Staff (1,200), and Chain Mail (1,200). Its later Disc III–IV Treno table omits these and Mythril Sword, Flame Staff, Ice Staff, Fork, Needle Fork, Leather Wrist, Bone Wrist, Magus Hat, Bandana, Barbut, Silk Shirt, Leather Plate, Bronze Vest, and Chain Plate. Review any quantities or abilities you want from these Treno copies before leaving for Gargan Roo; the exact stock-change trigger is not directly verified, and the item types may have other sources. GameFAQs confirms the Disc II Glass Armlet purchase. Jegged lists possible Disc III sales in Treno and Lindblum; Final Fantasy Wiki omits them from its later city tables, and GameFAQs' Disc III–IV Treno table also omits the Treno stock; the catalog keeps both later routes unverified. Alexandria remains the documented later seller. Air Racket has its own objective and one later Ipsen's Castle chest. Chain Mail also remains for sale at Cleyra and the post-Cleyra Lindblum shop. Mythril Rod remains purchasable at Cleyra, Esto Gaza, and Kumool's Ipsen's Castle Mogshop. GameFAQs and Neoseeker call Summit Station the last documented shop for the optional Silver Gloves/Iron Helm targets; Caves of Narshe lists both in a generic Disc III South Gate shop, without locating it or confirming access.",
+            detail: "Stiltzkin does not sell a bundle in Treno; this is a Mognet letter stop. GameFAQs' Disc II Treno weapon list includes Air Racket (400 Gil), Mythril Rod (560), Mythril Spear (1,100), Lightning Staff (1,200), and Chain Mail (1,200). Its later Disc III–IV Treno table omits these and Mythril Sword, Flame Staff, Ice Staff, Fork, Needle Fork, Leather Wrist, Bone Wrist, Magus Hat, Bandana, Barbut, Silk Shirt, Leather Plate, Bronze Vest, and Chain Plate. Review any quantities or abilities you want from these Treno copies before leaving for Gargan Roo; the exact stock-change trigger is not directly verified, and the item types may have other sources. GameFAQs confirms the Disc II Glass Armlet purchase. Jegged lists possible Disc III sales in Treno and Lindblum; Final Fantasy Wiki omits them from its later city tables, and GameFAQs' Disc III–IV Treno table also omits the Treno stock; the catalog keeps both later routes unverified. Alexandria remains the documented later seller. Air Racket has its own objective and one later Ipsen's Castle chest. Cour89's Air Racket page also lists Summit Station and Treno on Disc II and an Ipsen's Castle pickup; its comment says purchases stop after Dagger's opening Disc II segment. This corroborates the item-source window but does not establish the optional five-copy target or per-build stock behavior. Chain Mail also remains for sale at Cleyra and the post-Cleyra Lindblum shop. Mythril Rod remains purchasable at Cleyra, Esto Gaza, and Kumool's Ipsen's Castle Mogshop. GameFAQs and Neoseeker call Summit Station the last documented shop for the optional Silver Gloves/Iron Helm targets; Caves of Narshe lists both in a generic Disc III South Gate shop, without locating it or confirming access.",
             objectiveIds: ["disc-2.treno.mogrich-letter", "disc-2.treno.air-racket-purchase", "disc-2.treno.shop-stock-window"],
           },
           {
@@ -5400,7 +5400,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "ipsens-post-boss-treasures",
         title: "After Taharka — clear the trapdoor, lift, and chandelier treasures",
         summary: "Finish the hidden item route while the castle is open; the pot puzzle rewards Dagger with Odin's Sword.",
-        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-items-71891"],
+        sourceIds: ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "gamefaqs-items-71891", "cour89-air-racket"],
         steps: [
           {
             id: "ipsens-maiden-prayer",
@@ -5413,7 +5413,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "ipsens-air-racket-and-pots",
             kind: "pickup",
             text: "Return to the foyer and take the staircase opened by the fresco puzzle. Follow it to the Air Racket chest and elevator; in the next room, collect the Golem's Flute, then move the two pots counterclockwise around the platforms until the sword drains. Take the Ancient Aroma.",
-            detail: "Ancient Aroma teaches Dagger the Odin's Sword ability. The sources describe the pots as a counterclockwise cycle; repeat the move until the sword's energy transfers into the item.",
+            detail: "Ancient Aroma teaches Dagger the Odin's Sword ability. Cour89 independently lists Air Racket as an Ipsen's Castle pickup, but does not specify this lift-room route; GameFAQs and the castle walkthroughs supply the chest detail. The sources describe the pots as a counterclockwise cycle; repeat the move until the sword's energy transfers into the item.",
             objectiveIds: ["disc-3.ipsens-castle.treasure-sweep"],
           },
           {

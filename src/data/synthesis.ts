@@ -350,8 +350,8 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 11000 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
-    notes: "Air Racket + Cachusha makes Priest's Racket for 11,000 Gil at Black Mage Village on Disc IV. GameFAQs and RPGClassics agree on the recipe and price. The GameFAQs Items table's 4,000-Gil field is the equipment's sell value, not the synthesis price.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "cour89-air-racket"],
+    notes: "Air Racket + Cachusha makes Priest's Racket for 11,000 Gil at Black Mage Village on Disc IV. GameFAQs, RPGClassics, and Cour89 agree on the recipe and price. The GameFAQs Items table's 4,000-Gil field is the equipment's sell value, not the synthesis price.",
   },
   {
     id: "synthesis-recipe.butterfly-sword",

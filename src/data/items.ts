@@ -296,6 +296,7 @@ const priestsRacketReferenceSources = [
   "gamefaqs-shops-71891",
   "gamefaqs-abilities-71891",
   "rpgclassics-synthesis",
+  "cour89-air-racket",
 ];
 const disc4BlackCatRecipeSources = [
   "gamefaqs-items-71891",
@@ -359,6 +360,7 @@ const airRacketReferenceSources = [
   "gamefaqs-ipsens-castle-71891",
   "jegged-summit-station",
   "neoseeker-item-locations-182566",
+  "cour89-air-racket",
 ];
 const silverGlovesReferenceSources = [
   "gamefaqs-items-71891",
@@ -9570,7 +9572,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "summit-station.weapon-shop",
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 400 },
-    conditions: "Available during Dagger and Steiner's Summit Station stop. Treno's Disc II weapon shop is a later purchase source on the same story route.",
+    conditions: "Available during Dagger and Steiner's Summit Station stop. Cour89 also lists Treno as a Disc II purchase source and Ipsen's Castle as a later pickup; its comment says purchases stop after Dagger's opening Disc II segment. The optional five-copy target remains sourced to GameFAQs, not Cour89.",
     sourceIds: airRacketReferenceSources,
   },
   {
@@ -9584,7 +9586,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "treno.weapon-shop.disc-2",
     shopName: "Treno Weapon Shop (Disc II)",
     cost: { currency: "gil", amount: 400 },
-    conditions: "GameFAQs identifies Treno as the last shop at which to buy Air Racket before the story leaves for Gargan Roo. For its optional five-copy checkpoint, count any Summit Station copy and buy only the shortfall here. The later Ipsen's Castle chest provides a sixth copy, so this is a shop-source cutoff rather than permanent item loss.",
+    conditions: "GameFAQs identifies Treno as the last shop at which to buy Air Racket before the story leaves for Gargan Roo. Cour89 independently lists Treno as a Disc II purchase source and says in a comment that purchases stop after Dagger's opening Disc II segment, with a later Ipsen's Castle pickup. For GameFAQs' optional five-copy checkpoint, count any Summit Station copy and buy only the shortfall here; Cour89 does not substantiate that quantity. This is a shop-source cutoff rather than permanent item loss.",
     walkthroughObjectiveIds: ["disc-2.treno.air-racket-purchase"],
     sourceIds: airRacketReferenceSources,
   },
@@ -9595,7 +9597,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "chest",
     quantity: 1,
     availability: "single-use",
-    conditions: "Open the chest in the lift room after solving the fresco puzzle. GameFAQs counts this as the sixth Air Racket copy for its advanced endgame total of three for Need and three for synthesis; it restores one item copy, not the earlier five-copy pre-Gargan Roo checkpoint.",
+    conditions: "Open the chest in the lift room after solving the fresco puzzle. GameFAQs counts this as the sixth Air Racket copy for its advanced endgame total of three for Need and three for synthesis; Cour89 independently lists an Ipsen's Castle pickup. It restores one item copy, not the earlier five-copy pre-Gargan Roo checkpoint.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.treasure-sweep"],
     sourceIds: airRacketReferenceSources,
   },
@@ -11683,8 +11685,8 @@ export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.mythril-spear.reis-wind", itemId: "game-item.mythril-spear", abilityName: "Reis's Wind", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996"] },
   { id: "item-ability.lightning-staff.thundara", itemId: "game-item.lightning-staff", abilityName: "Thundara", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996"] },
   { id: "item-ability.lightning-staff.poison", itemId: "game-item.lightning-staff", abilityName: "Poison", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996"] },
-  { id: "item-ability.air-racket.scan", itemId: "game-item.air-racket", abilityName: "Scan", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566"] },
-  { id: "item-ability.air-racket.panacea", itemId: "game-item.air-racket", abilityName: "Panacea", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566"] },
+  { id: "item-ability.air-racket.scan", itemId: "game-item.air-racket", abilityName: "Scan", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566", "cour89-air-racket"] },
+  { id: "item-ability.air-racket.panacea", itemId: "game-item.air-racket", abilityName: "Panacea", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566", "cour89-air-racket"] },
   { id: "item-ability.silver-gloves.undead-killer", itemId: "game-item.silver-gloves", abilityName: "Undead Killer", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "neoseeker-item-locations-182566"] },
   { id: "item-ability.headgear.undead-killer", itemId: "game-item.headgear", abilityName: "Undead Killer", verification: "partial", sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-abilities-71891", "ff9-irodori-items-armor"] },
   { id: "item-ability.iron-helm.bright-eyes", itemId: "game-item.iron-helm", abilityName: "Bright Eyes", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "neoseeker-item-locations-182566"] },

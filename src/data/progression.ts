@@ -1980,9 +1980,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.treno-to-journey-to-cleyra",
     title: "Treno Air Racket purchase target",
     certainty: "source-supported",
-    trigger: "Before descending through Doctor Tot's hatch, check the optional five-copy inventory target. Count any Air Racket already obtained at Summit Station, then buy only the shortfall in Treno. The later Ipsen's Castle chest supplies a sixth copy for the advanced endgame total; ordinary completion does not require this target.",
+    trigger: "Before descending through Doctor Tot's hatch, check the optional five-copy inventory target documented by GameFAQs. Count any Air Racket already obtained at Summit Station, then buy only the shortfall in Treno. Cour89 independently supports the Disc II purchase and later Ipsen's Castle pickup, but not the five-copy quantity or behavior on each listed build. The later chest supplies a sixth copy for the advanced endgame total; ordinary completion does not require this target.",
     missableIds: ["missable.disc-2.treno.air-racket-purchase"],
-    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-treno-71891", "neoseeker-item-locations-182566"],
+    sourceIds: ["gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-treno-71891", "neoseeker-item-locations-182566", "cour89-air-racket"],
   },
   {
     id: "cutoff.treno.disc-ii-shop-stock",

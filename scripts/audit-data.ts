@@ -7021,20 +7021,36 @@ const airRacketObjective = objectives.find((objective) => objective.id === "disc
 const airRacketWarning = missables.find((missable) => missable.id === "missable.disc-2.treno.air-racket-purchase");
 const airRacketTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.air-racket-shop");
 const airRacketIpsensPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.ipsens-castle.air-racket-lift-chest");
+const airRacketCour89Source = sources.find((source) => source.id === "cour89-air-racket");
+const airRacketItem = gameItems.find((item) => item.id === "game-item.air-racket");
+const priestsRacketRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.priests-racket");
+const airRacketCutoff = cutoffsById.get("cutoff.treno.air-racket-stock");
+const airRacketAbilityClaims = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.air-racket");
 if (!airRacketInventoryTarget || airRacketInventoryTarget.targetQuantity !== 5 ||
   airRacketInventoryTarget.basis !== "checkpoint-total" ||
   !airRacketInventoryTarget.sourceIds.includes("gamefaqs-missables-71891") ||
   !airRacketInventoryTarget.sourceIds.includes("gamefaqs-treno-71891") ||
+  airRacketInventoryTarget.sourceIds.includes("cour89-air-racket") ||
+  !airRacketCour89Source?.url.endsWith("/ff9/items/rackets/01.php") ||
+  !airRacketCour89Source.notes.includes("not GameFAQs' optional five-copy pre-Gargan inventory target") ||
+  !airRacketItem?.sourceIds.includes("cour89-air-racket") ||
   !airRacketObjective?.sourceIds.includes("gamefaqs-treno-71891") ||
   !airRacketInventoryTarget.interpretation.includes("at least five Air Rackets in inventory") ||
   !airRacketInventoryTarget.interpretation.includes("sixth copy") ||
   !airRacketInventoryTarget.interpretation.includes("three for Need plus three for synthesis") ||
   !airRacketWarning?.action.includes("at least five Air Rackets in inventory") ||
+  !airRacketWarning.sourceIds.includes("cour89-air-racket") ||
   !airRacketWarning.action.includes("Summit Station copy") ||
   !airRacketWarning.recovery.includes("sixth listed copy") ||
   !airRacketWarning.recovery.includes("earlier checkpoint") ||
   !airRacketTrenoPath?.conditions.includes("buy only the shortfall") ||
-  !airRacketIpsensPath?.conditions.includes("sixth Air Racket copy")) {
+  !airRacketTrenoPath.sourceIds.includes("cour89-air-racket") ||
+  !airRacketIpsensPath?.conditions.includes("sixth Air Racket copy") ||
+  !airRacketIpsensPath.sourceIds.includes("cour89-air-racket") ||
+  !priestsRacketRecipe?.sourceIds.includes("cour89-air-racket") ||
+  airRacketAbilityClaims.length !== 2 ||
+  !airRacketAbilityClaims.every((claim) => claim.sourceIds.includes("cour89-air-racket")) ||
+  !airRacketCutoff?.sourceIds.includes("cour89-air-racket")) {
   errors.push("Air Racket must model the five-copy pre-Gargan Roo inventory checkpoint, count Summit Station copies, and keep the later sixth Ipsen's Castle copy distinct.");
 }
 if (itemAcquisitionPaths.some((path) => path.itemId === steepledHatId && path.shopId === "treno.weapon-shop.disc-2") ||
