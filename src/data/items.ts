@@ -209,6 +209,7 @@ const cottonRobeReferenceSources = [
   "rpgclassics-synthesis",
   "jegged-synthesis",
 ];
+const cottonRobeSynthesisSources = [...cottonRobeReferenceSources, "gamefaqs-shop-lists-9772"];
 const gluttonsRobeReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-frog-catching-71891",
@@ -218,6 +219,8 @@ const gluttonsRobeReferenceSources = [
   "rpgclassics-synthesis",
   "elitegrindlab-synthesis",
 ];
+const gluttonsRobeSynthesisSources = [...gluttonsRobeReferenceSources, "gamefaqs-shop-lists-9772"];
+const fairyEarringsSynthesisSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "gamefaqs-shop-lists-9772"];
 const yellowScarfReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-shops-71891",
@@ -1107,8 +1110,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.synthesis-shop.disc-1",
     shopName: "Torres' Synthesis Shop (Lindblum, Disc I)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil. GameFAQs' separate Shops table and RPGClassics agree; the GameFAQs Items table lists 2,000 Gil for the recipe.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil. GameFAQs Shops, the older GameFAQs Shop Lists, and RPGClassics agree; the GameFAQs Items table lists 2,000 Gil for the recipe.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-2.treno.cotton-robe-synthesis",
@@ -1121,8 +1124,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "treno.synthesis-shop.disc-2",
     shopName: "Treno Synthesis Shop (Disc II)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for the 1,000-Gil price in the Disc II shop reference; the GameFAQs Items table lists 2,000 Gil.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil; the older GameFAQs Shop Lists, GameFAQs Shops, and RPGClassics support that price, while the GameFAQs Items table lists 2,000 Gil.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-2.outer-continent.cotton-robe-synthesis",
@@ -1135,8 +1138,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "black-mage-village.synthesis-shop.disc-2-3",
     shopName: "Black Cat Synthesis Shop (Discs II–III)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil at Black Mage Village. GameFAQs and RPGClassics list this shop; the GameFAQs Items table lists a conflicting 2,000-Gil cost.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil at Black Mage Village. GameFAQs Shops, the older GameFAQs Shop Lists, and RPGClassics list this price; the GameFAQs Items table lists a conflicting 2,000-Gil cost.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-3.the-home-front.cotton-robe-synthesis",
@@ -1149,8 +1152,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "alexandria.synthesis-shop.disc-3-4",
     shopName: "Alexandria Synthesis Shop (Discs III–IV)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil at Alexandria; the GameFAQs Items table lists a conflicting 2,000-Gil cost.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "Synthesize one Cotton Robe from Wrist + Steepled Hat for 1,000 Gil at Alexandria; GameFAQs Shops, the older GameFAQs Shop Lists, and RPGClassics support this price, while the GameFAQs Items table lists a conflicting 2,000-Gil cost.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-3.aerial-exploration.daguerreo-cotton-robe-synthesis",
@@ -1163,8 +1166,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "daguerreo.synthesis-expert",
     shopName: "Synthesis Expert's Shop (Daguerreo)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "The GameFAQs Shops table and RPGClassics list Cotton Robe for 1,000 Gil at Daguerreo; the GameFAQs Items table's location list omits this shop and reports 2,000 Gil.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "GameFAQs Shops, the older GameFAQs Shop Lists, and RPGClassics list Cotton Robe for 1,000 Gil at Daguerreo; the GameFAQs Items table's location list omits this shop and reports 2,000 Gil.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-2.return-to-lindblum.cotton-robe-synthesis",
@@ -1177,8 +1180,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.synthesis-shop.post-cleyra",
     shopName: "Torres' Synthesis Shop (post-Cleyra)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "GameFAQs and RPGClassics list Cotton Robe in the Lindblum synthesis inventory after the Cleyra attack. The item table lists a conflicting 2,000-Gil price.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "GameFAQs, the older GameFAQs Shop Lists, and RPGClassics list Cotton Robe in the Lindblum synthesis inventory after the Cleyra attack at 1,000 Gil. The GameFAQs Items table lists a conflicting 2,000-Gil price.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-3.card-tournament.cotton-robe-synthesis",
@@ -1191,8 +1194,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "treno.synthesis-shop.disc-3-4",
     shopName: "Treno Synthesis Shop (Discs III–IV)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "Treno's later synthesis inventory lists Cotton Robe for 1,000 Gil; the GameFAQs Items table gives a conflicting 2,000-Gil figure.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "Treno's later synthesis inventory lists Cotton Robe for 1,000 Gil in GameFAQs, the older GameFAQs Shop Lists, and RPGClassics; the GameFAQs Items table gives a conflicting 2,000-Gil figure.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-3.on-the-high-seas.cotton-robe-synthesis",
@@ -1205,8 +1208,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.synthesis-shop.disc-3-4",
     shopName: "Wayne's Synthesis Shop (Lindblum, Discs III–IV)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "Lindblum's later synthesis inventory lists Cotton Robe for 1,000 Gil; the GameFAQs Items table gives a conflicting 2,000-Gil figure.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "Lindblum's later synthesis inventory lists Cotton Robe for 1,000 Gil in GameFAQs, the older GameFAQs Shop Lists, and RPGClassics; the GameFAQs Items table gives a conflicting 2,000-Gil figure.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-4.return-to-gaia.cotton-robe-synthesis",
@@ -1219,8 +1222,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 1000 },
-    conditions: "RPGClassics lists Cotton Robe in the Disc IV Black Cat shop for 1,000 Gil; the GameFAQs Items table gives a conflicting 2,000-Gil figure.",
-    sourceIds: cottonRobeReferenceSources,
+    conditions: "RPGClassics and the older GameFAQs Shop Lists list Cotton Robe in the Black Cat synthesis stock for 1,000 Gil; the GameFAQs Items table gives a conflicting 2,000-Gil figure.",
+    sourceIds: cottonRobeSynthesisSources,
   },
   {
     id: "item-path.disc-2.outer-continent.quale-gluttons-robe-steal",
@@ -1243,8 +1246,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "daguerreo.synthesis-expert",
     shopName: "Synthesis Expert's Shop (Daguerreo)",
     cost: { currency: "gil", amount: 6000 },
-    conditions: "Synthesize one Glutton's Robe from Mythril Fork + Cotton Robe for 6,000 Gil. GameFAQs Shops and independent synthesis references agree; the GameFAQs Items table lists 8,000 Gil.",
-    sourceIds: gluttonsRobeReferenceSources,
+    conditions: "Synthesize one Glutton's Robe from Mythril Fork + Cotton Robe for 6,000 Gil. GameFAQs Shops, the older GameFAQs Shop Lists, and independent synthesis references agree; the GameFAQs Items table lists 8,000 Gil.",
+    sourceIds: gluttonsRobeSynthesisSources,
   },
 
   {
@@ -1962,9 +1965,9 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 2000 },
-    conditions: "Synthesize Rune Tooth from two Mythril Daggers for 2,000 Gil at Black Mage Village on Disc IV. GameFAQs Shops lists 1,000 Gil; RPGClassics, Fandom, and FFUniverse list 2,000 Gil.",
+    conditions: "Synthesize Rune Tooth from two Mythril Daggers for 2,000 Gil at Black Mage Village on Disc IV. The older GameFAQs Shop Lists, RPGClassics, Fandom, and FFUniverse list 2,000 Gil; GameFAQs Shops lists 1,000 Gil.",
     walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
   },
   {
     id: "item-path.disc-4.return-to-gaia.gauntlets-synthesis",
@@ -1992,9 +1995,9 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 26000 },
-    conditions: "Synthesize Brave Suit from Mythril Vest + Mythril Rod for 26,000 Gil at Black Mage Village on Disc IV. GameFAQs Shops lists 20,000 Gil; RPGClassics, Fandom, and FFUniverse list 26,000 Gil.",
+    conditions: "Synthesize Brave Suit from Mythril Vest + Mythril Rod for 26,000 Gil at Black Mage Village on Disc IV. The older GameFAQs Shop Lists, RPGClassics, Fandom, and FFUniverse list 26,000 Gil; GameFAQs Shops lists 20,000 Gil.",
     walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
   },
   {
     id: "item-path.disc-3.forgotten-continent.gauntlets-mountain-crack-2",
@@ -2465,7 +2468,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.lightning-staff", name: "Lightning Staff", category: "equipment", sourceIds: [...burmeciaSources, ...lightningStaffReferenceSources], verification: "partial" },
   { id: "game-item.air-racket", name: "Air Racket", category: "equipment", sourceIds: airRacketReferenceSources, verification: "partial" },
   { id: "game-item.wrist", name: "Wrist", category: "equipment", sourceIds: wristReferenceSources, verification: "partial" },
-  { id: "game-item.cotton-robe", name: "Cotton Robe", category: "equipment", sourceIds: cottonRobeReferenceSources, verification: "partial" },
+  { id: "game-item.cotton-robe", name: "Cotton Robe", category: "equipment", sourceIds: cottonRobeSynthesisSources, verification: "partial" },
   { id: "game-item.mythril-fork", name: "Mythril Fork", category: "equipment", sourceIds: mythrilForkReferenceSources, verification: "partial" },
   { id: "game-item.steepled-hat", name: "Steepled Hat", category: "equipment", sourceIds: steepledHatSources, verification: "partial" },
   { id: "game-item.silver-gloves", name: "Silver Gloves", category: "equipment", sourceIds: silverGlovesReferenceSources, verification: "partial" },
@@ -2532,7 +2535,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.bistro-fork", name: "Bistro Fork", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-frog-catching-71891", "game8-frog-catching"], verification: "partial" },
   { id: "game-item.rising-sun", name: "Rising Sun", category: "equipment", sourceIds: [...disc4ShopSources, ...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.magic-armlet", name: "Magic Armlet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-armor", ...disc4ShopSources], verification: "partial" },
-  { id: "game-item.fairy-earrings", name: "Fairy Earrings", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-addons", "rpgclassics-synthesis", ...fossilRooSources], verification: "partial" },
+  { id: "game-item.fairy-earrings", name: "Fairy Earrings", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-addons", "rpgclassics-synthesis", ...fossilRooSources], verification: "partial" },
   { id: "game-item.angel-earrings", name: "Angel Earrings", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-trouble-on-home-front-71891", "gamefaqs-portal-to-another-world-71891", "jegged-trouble-on-home-front", "jegged-bran-bal", "jegged-add-ons", "jegged-synthesis", "gamerguides-four-shrines-terra", "rpgclassics-addons", "rpgclassics-abilities", "rpgclassics-bran-bal", "rpgclassics-synthesis", "elitegrindlab-synthesis"], verification: "partial" },
   { id: "game-item.egoists-armlet", name: "Egoist's Armlet", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.dragon-wrist", name: "Dragon Wrist", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
@@ -2571,7 +2574,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.twist-headband", name: "Twist Headband", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.duel-claws", name: "Duel Claws", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-crystal-world"], verification: "partial" },
   { id: "game-item.genji-helmet", name: "Genji Helmet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "rpgclassics-memoria", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
-  { id: "game-item.gluttons-robe", name: "Glutton's Robe", category: "equipment", sourceIds: gluttonsRobeReferenceSources, verification: "partial" },
+  { id: "game-item.gluttons-robe", name: "Glutton's Robe", category: "equipment", sourceIds: gluttonsRobeSynthesisSources, verification: "partial" },
   { id: "game-item.yellow-scarf", name: "Yellow Scarf", category: "equipment", sourceIds: yellowScarfReferenceSources, verification: "partial" },
   { id: "game-item.feather-hat", name: "Feather Hat", category: "equipment", sourceIds: featherHatReferenceSources, verification: "partial" },
   { id: "game-item.magus-hat", name: "Magus Hat", category: "equipment", sourceIds: magusHatReferenceSources, verification: "partial" },
@@ -2598,9 +2601,9 @@ export const gameItems: GameItem[] = [
   { id: "game-item.magician-robe", name: "Magician Robe", category: "equipment", sourceIds: disc4BlackCatRecipeSources, verification: "partial" },
   { id: "game-item.circlet", name: "Circlet", category: "equipment", sourceIds: resolvedDisc4BlackCatRecipeSources, verification: "partial" },
   { id: "game-item.golden-skullcap", name: "Golden Skullcap", category: "equipment", sourceIds: resolvedDisc4BlackCatRecipeSources, verification: "partial" },
-  { id: "game-item.rune-tooth", name: "Rune Tooth", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
+  { id: "game-item.rune-tooth", name: "Rune Tooth", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.gauntlets", name: "Gauntlets", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "ffwiki-synthesis", "jegged-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
-  { id: "game-item.brave-suit", name: "Brave Suit", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
+  { id: "game-item.brave-suit", name: "Brave Suit", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.mythril-gloves", name: "Mythril Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-disc-2-map", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough", "opatil-gizamaluke-map", "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.mythril-rod", name: "Mythril Rod", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-item-ability-10332", "jegged-esto-gaza", "ffuniverse-ff9-guide", "rpgclassics-abilities", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.gold-helm", name: "Gold Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-item-ability-10332"], verification: "partial" },
@@ -5918,7 +5921,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Black Cat Synthesis Shop (Disc II–III)",
     conditions: "Synthesize Fairy Earrings from Magic Armlet + Soft for 3,200 Gil.",
     cost: { currency: "gil", amount: 3200 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    sourceIds: fairyEarringsSynthesisSources,
   },
   {
     id: "item-path.disc-3.the-home-front.fairy-earrings-synthesis",
@@ -5932,7 +5935,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Alexandria Synthesis Shop (Disc III)",
     conditions: "Synthesize Fairy Earrings from Magic Armlet + Soft for 3,200 Gil.",
     cost: { currency: "gil", amount: 3200 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    sourceIds: fairyEarringsSynthesisSources,
   },
   {
     id: "item-path.disc-3.on-the-high-seas.fairy-earrings-synthesis-treno",
@@ -5946,7 +5949,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Treno Synthesis Shop (Disc III–IV)",
     conditions: "Synthesize Fairy Earrings from Magic Armlet + Soft for 3,200 Gil.",
     cost: { currency: "gil", amount: 3200 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    sourceIds: fairyEarringsSynthesisSources,
   },
   {
     id: "item-path.disc-3.on-the-high-seas.fairy-earrings-synthesis-lindblum",
@@ -5960,7 +5963,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Lindblum Synthesis Shop (Disc III–IV)",
     conditions: "Synthesize Fairy Earrings from Magic Armlet + Soft for 3,200 Gil.",
     cost: { currency: "gil", amount: 3200 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    sourceIds: fairyEarringsSynthesisSources,
   },
   {
     id: "item-path.disc-3.aerial-exploration.fairy-earrings-synthesis-daguerreo",
@@ -5974,7 +5977,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Synthesis Expert's Shop (Daguerreo)",
     conditions: "Synthesize Fairy Earrings from Magic Armlet + Soft for 3,200 Gil.",
     cost: { currency: "gil", amount: 3200 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    sourceIds: fairyEarringsSynthesisSources,
   },
   {
     id: "item-path.disc-3.aerial-exploration.angel-earrings-synthesis-daguerreo",
@@ -11048,8 +11051,8 @@ const itemInventoryTargetDrafts: ItemInventoryTargetDraft[] = [
     itemId: "game-item.rune-tooth",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 2,
-    interpretation: "GameFAQs lists Need 2 and end-inventory #2 for Rune Tooth. Its separate 1,900-Gil field is a sell value, not a synthesis cost; the recipe costs 2,000 Gil in RPGClassics, Fandom, and FFUniverse, while GameFAQs Shops lists 1,000 Gil.",
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
+    interpretation: "GameFAQs lists Need 2 and end-inventory #2 for Rune Tooth. Its separate 1,900-Gil field is a sell value, not a synthesis cost; the older GameFAQs Shop Lists, RPGClassics, Fandom, and FFUniverse list the 2,000-Gil recipe, while GameFAQs Shops lists 1,000 Gil.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
   },
   {
     id: "item-target.disc-4.final-preparations.gauntlets",
@@ -11064,8 +11067,8 @@ const itemInventoryTargetDrafts: ItemInventoryTargetDraft[] = [
     itemId: "game-item.brave-suit",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 3,
-    interpretation: "GameFAQs lists Need 3 and end-inventory #3 for Brave Suit. Its separate 11,250-Gil field is a sell value, not a synthesis cost; RPGClassics, Fandom, and FFUniverse list 26,000 Gil, while GameFAQs Shops lists 20,000 Gil.",
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
+    interpretation: "GameFAQs lists Need 3 and end-inventory #3 for Brave Suit. Its separate 11,250-Gil field is a sell value, not a synthesis cost; the older GameFAQs Shop Lists, RPGClassics, Fandom, and FFUniverse list the 26,000-Gil recipe, while GameFAQs Shops lists 20,000 Gil.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "rpgclassics-synthesis", "ffwiki-synthesis", "ffuniverse-ff9-guide"],
   },
   {
     id: "item-target.disc-4.final-preparations.adaman-vest",

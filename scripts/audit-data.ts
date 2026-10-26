@@ -6073,6 +6073,23 @@ if (
 ) {
   errors.push("The Disc IV Brave Suit recipe must preserve Mythril Vest as a sourced consumed ingredient.");
 }
+const legacyShopPriceCrossChecks = new Map<string, { itemId: string; price: number }>([
+  ["synthesis-recipe.cotton-robe", { itemId: "game-item.cotton-robe", price: 1000 }],
+  ["synthesis-recipe.gluttons-robe", { itemId: "game-item.gluttons-robe", price: 6000 }],
+  ["synthesis-recipe.fairy-earrings", { itemId: "game-item.fairy-earrings", price: 3200 }],
+  ["synthesis-recipe.rune-tooth", { itemId: "game-item.rune-tooth", price: 2000 }],
+  ["synthesis-recipe.brave-suit", { itemId: "game-item.brave-suit", price: 26000 }],
+]);
+for (const [recipeId, expected] of legacyShopPriceCrossChecks) {
+  const recipe = synthesisRecipes.find((record) => record.id === recipeId);
+  const item = gameItems.find((record) => record.id === expected.itemId);
+  const paths = itemAcquisitionPaths.filter((path) => path.recipeId === recipeId);
+  if (!recipe || recipe.cost?.currency !== "gil" || recipe.cost.amount !== expected.price ||
+    !recipe.sourceIds.includes("gamefaqs-shop-lists-9772") || !item?.sourceIds.includes("gamefaqs-shop-lists-9772") ||
+    paths.length === 0 || paths.some((path) => path.cost?.amount !== expected.price || !path.sourceIds.includes("gamefaqs-shop-lists-9772"))) {
+    errors.push(`Recipe ${recipeId} must retain its shop-list price cross-check on the recipe, item, and every acquisition path.`);
+  }
+}
 const silkRobeRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.silk-robe");
 if (
   !silkRobeRecipe?.ingredients.some((ingredient) => ingredient.itemId === "game-item.bandana" && ingredient.quantity === 1) ||
