@@ -1337,6 +1337,25 @@ for (const pathId of expectedLaniRecoveryPathIds) {
     errors.push(`Lani's later item-type recovery catalog is missing ${pathId}.`);
   }
 }
+const bronzeGlovesLindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.bronze-gloves-shop");
+const bronzeGlovesDaliDisc3Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.bronze-gloves-dali-shop");
+const bronzeGlovesShopObjective = objectives.find((objective) => objective.id === "disc-1.lindblum.bronze-gloves-shop");
+if (!bronzeGlovesLindblumPath || bronzeGlovesLindblumPath.itemId !== "game-item.bronze-gloves" ||
+  bronzeGlovesLindblumPath.availability !== "limited-window" ||
+  bronzeGlovesLindblumPath.shopId !== "lindblum.weapon-shop.pre-cleyra" ||
+  bronzeGlovesLindblumPath.cost?.amount !== 480 ||
+  !bronzeGlovesLindblumPath.conditions.includes("until Cleyra is completed") ||
+  !bronzeGlovesLindblumPath.walkthroughObjectiveIds?.includes("disc-1.lindblum.bronze-gloves-shop") ||
+  !bronzeGlovesShopObjective || !bronzeGlovesShopObjective.sourceIds.includes("gamefaqs-shops-71891") ||
+  !bronzeGlovesDaliDisc3Path || bronzeGlovesDaliDisc3Path.itemId !== "game-item.bronze-gloves" ||
+  bronzeGlovesDaliDisc3Path.chapterId !== "disc-3.card-tournament" ||
+  bronzeGlovesDaliDisc3Path.availability !== "repeatable" ||
+  bronzeGlovesDaliDisc3Path.shopId !== "dali.weapon-shop" ||
+  bronzeGlovesDaliDisc3Path.cost?.amount !== 480 ||
+  !bronzeGlovesDaliDisc3Path.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
+  !bronzeGlovesDaliDisc3Path.walkthroughObjectiveIds?.includes("disc-3.card-tournament.dali-detour")) {
+  errors.push("Bronze Gloves must distinguish Lindblum's pre-Cleyra stock cutoff from the documented Disc III Dali recovery path.");
+}
 const gladiusDaguerreoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.gladius-daguerreo-shop");
 const gladiusAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.gladius-alexandria-shop");
 const gladiusTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.gladius-treno-shop");

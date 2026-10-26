@@ -621,3 +621,8 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 
 - [GameFAQs Shops](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists Gladius for 2,300 Gil in the earlier Daguerreo weapon list. Its separate Disc IV table identifies the final weapon shop and omits Gladius, indicating that this Daguerreo shop copy is limited to the earlier stock. The catalog ties that path to the Disc III Daguerreo stop and leaves the exact in-game stock-change trigger unverified.
 - The same source lists Gladius in its Disc III–IV Treno and Alexandria weapon shops. Those are later item-type purchase paths, so the cutoff applies to the Daguerreo shop copy rather than the Gladius item type. This is original PlayStation guide evidence; live-game and release-specific behavior remain unverified.
+
+## Bronze Gloves Lindblum cutoff and Dali recovery (2026-10-26)
+
+- [GameFAQs Shops](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists Bronze Gloves for 480 Gil in the initial Lindblum weapon stock and says the stock is available until Cleyra is completed. Its Disc II Lindblum weapon table omits them. This bounds the Lindblum purchase source without claiming the item type is lost.
+- [GameFAQs Card Tournament](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/card-tournament) routes the party back to Dali after the second match and directs them to the weapon shop. [Caves of Narshe's Disc III map](https://www.cavesofnarshe.com/ff9/map.php?disc=3) lists Bronze Gloves for 480 Gil in Dali's equipment stock, providing a later source. These are original PlayStation guide listings; direct-game and release-specific behavior remain unverified.

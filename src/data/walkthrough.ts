@@ -887,7 +887,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lindblum-business-district",
         title: "Business District — Inn, shops, and the first ATEs",
         summary: "View the Inn and street ATEs, collect the district's pickups, and reach the Air Cab to see Vivi's shopping event.",
-        sourceIds: ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum"],
+        sourceIds: ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "gamefaqs-shops-71891"],
         steps: [
           {
             id: "lindblum-inn-mognet-ate",
@@ -905,7 +905,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lindblum-shop-square",
             kind: "optional",
             text: "The three shops are in the northeast shopping square: Dragoo's weapon shop, Alice's item shop, and Lindblum's synthesis shop. Take the Silver Gloves from the bench at the back of the synthesis shop. Check the current inventory and Ability menu before replacing equipment; save enough Gil for healing stock and later purchases.",
-            detail: "You can defer most shopping until after the Festival, when the shops are convenient from the castle. The Cotton Robe synthesis trick is an optional money route if you brought spare Wrists from Dali; it is not required for story progression.",
+            detail: "GameFAQs lists the initial Lindblum weapon stock, including Bronze Gloves for 480 Gil, until Cleyra is completed. Buy them here if you want this shop copy; Dali has a documented Disc III purchase if you miss it. You can defer most other shopping until after the Festival, when the shops are convenient from the castle. The Cotton Robe synthesis trick is an optional money route if you brought spare Wrists from Dali; it is not required for story progression.",
+            objectiveIds: ["disc-1.lindblum.bronze-gloves-shop"],
           },
           {
             id: "lindblum-vivis-shopping-ate",
@@ -3682,7 +3683,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "card-tournament-dali-detour",
         title: "Dali detour — get the Mayor's Key and Burman Coffee",
         summary: "After the second match and its ATEs, leave Treno through South Gate and return to Dali before playing round three.",
-        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "flactem-morrid-coffee", "gamerguides-rare-coffees"],
+        sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "elitegrindlab-treno-tournament", "rpgclassics-treno-tournament", "flactem-disc-3-treno", "flactem-morrid-coffee", "gamerguides-rare-coffees", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-3-map"],
         steps: [
           {
             id: "card-tournament-return-to-quan",
@@ -3693,8 +3694,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "card-tournament-dali-mayor-key",
             kind: "cutoff",
-            text: "In the Mayor's House, search the desk for Mini-Brahne. Search the desk again until the Mayor's son falls asleep, then inspect the heater for Mayor's Key. In the windmill, climb the ladder for Cachusha and Elixir, unlock the back room, and take 30,000 Gil from the chest beside the chocobo pen.",
-            detail: "Inspect the 30,000-Gil chest a second time and choose to reach underneath it for Burman Coffee. This is the tournament-window pickup required for Morrid's Coffee quest and the Theater Ship Model reward.",
+            text: "Before leaving Dali, check the weapon shop for Bronze Gloves (480 Gil) if you missed Lindblum's earlier shop copy. In the Mayor's House, search the desk for Mini-Brahne. Search the desk again until the Mayor's son falls asleep, then inspect the heater for Mayor's Key. In the windmill, climb the ladder for Cachusha and Elixir, unlock the back room, and take 30,000 Gil from the chest beside the chocobo pen.",
+            detail: "Caves of Narshe's Disc III map lists Bronze Gloves in Dali's equipment stock; GameFAQs routes this return after the tournament's second match. Inspect the 30,000-Gil chest a second time and choose to reach underneath it for Burman Coffee. This is the tournament-window pickup required for Morrid's Coffee quest and the Theater Ship Model reward.",
             objectiveIds: ["disc-3.card-tournament.dali-detour"],
           },
           {
