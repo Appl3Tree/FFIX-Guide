@@ -411,6 +411,7 @@ const glassArmletReferenceSources = [
   "gamefaqs-journey-to-outer-continent-71891",
   "gamefaqs-burmecia-71891",
   "gamefaqs-journey-to-treno-71891",
+  "jegged-arm-gear",
 ];
 const atlaDisc2ShopSources = ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"];
 const leatherWristReferenceSources = [
@@ -722,7 +723,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.weapon-shop.pre-cleyra",
     shopName: "Dragoos' Weapon Shop (Lindblum, Disc I)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "The Lindblum shop lists Glass Armlet for 250 Gil. The item reference labels Lindblum stock as Disc I–II, while the shop table's inventory heading is pre-Cleyra; later stock timing for this item remains unresolved.",
+    conditions: "GameFAQs lists Glass Armlet in Lindblum's Disc I–II sources and pre-Cleyra/Disc II shop tables, while Jegged lists Lindblum on Disc III; the Disc III–IV table omits it, so the full stock window remains unresolved.",
     sourceIds: glassArmletReferenceSources,
   },
   {
@@ -748,7 +749,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "treno.weapon-shop.disc-2",
     shopName: "Treno Weapon Shop (Disc II)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "GameFAQs lists Glass Armlet in Treno's Disc II weapon shop for 250 Gil. The Disc III–IV replacement stock does not list this item; the exact last purchase point is unverified.",
+    conditions: "GameFAQs lists Glass Armlet in Treno's Disc II stock and omits it from its Disc III–IV weapon table, while Jegged lists Treno on Disc III; keep the later purchase window unresolved until these references are reconciled.",
     sourceIds: glassArmletReferenceSources,
   },
   {
@@ -757,11 +758,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     chapterId: "disc-2.outer-continent",
     method: "shop",
     quantity: 1,
-    availability: "window-unverified",
+    availability: "limited-window",
     shopId: "black-mage-village.weapon-shop.disc-2-3",
     shopName: "Black Mage Village Weapon Shop (Discs II–III)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "GameFAQs lists Glass Armlet in Black Mage Village on Discs II–III. The Disc IV stock transition for this item has not been independently checked.",
+    conditions: "GameFAQs and Jegged list Glass Armlet in Black Mage Village on Discs II–III; the GameFAQs Disc IV weapon-stock table lists a different final inventory without the armlet. Buy by Disc III to preserve this shop copy.",
+    notes: "Alexandria remains a later seller and Black Cat lists a Disc IV Glass Armlet synthesis ingredient route; the Disc IV stock change closes only this shop purchase.",
     sourceIds: glassArmletReferenceSources,
   },
   {

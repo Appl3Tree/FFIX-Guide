@@ -3498,6 +3498,36 @@ for (const expected of [
     errors.push(`Bone Wrist's ${expected.shopId} purchase must be marked limited to its documented pre-Disc-IV shop stock.`);
   }
 }
+const glassArmletBmvPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop");
+const glassArmletAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-alexandria-shop");
+if (
+  !glassArmletBmvPath ||
+  glassArmletBmvPath.itemId !== "game-item.glass-armlet" ||
+  glassArmletBmvPath.chapterId !== "disc-2.outer-continent" ||
+  glassArmletBmvPath.shopId !== "black-mage-village.weapon-shop.disc-2-3" ||
+  glassArmletBmvPath.availability !== "limited-window" ||
+  !glassArmletBmvPath.conditions.includes("Discs II–III") ||
+  !glassArmletBmvPath.conditions.includes("Disc IV") ||
+  !glassArmletBmvPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletBmvPath.sourceIds.includes("jegged-arm-gear") ||
+  !glassArmletAlexandriaPath ||
+  glassArmletAlexandriaPath.availability !== "repeatable"
+) {
+  errors.push("Glass Armlet's Black Mage Village purchase must close with the Disc IV weapon-stock change while preserving Alexandria recovery.");
+}
+for (const pathId of ["item-path.disc-1.lindblum.glass-armlet-shop", "item-path.disc-2.treno.glass-armlet-shop"]) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+  if (
+    !path ||
+    path.itemId !== "game-item.glass-armlet" ||
+    path.availability !== "window-unverified" ||
+    !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.sourceIds.includes("jegged-arm-gear") ||
+    !/conflict|unresolved/i.test(path.conditions)
+  ) {
+    errors.push(`Glass Armlet's conflicting ${pathId} shop window must remain unresolved and source-scoped.`);
+  }
+}
 const ralvuimagoEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-alexandria.ralvuimago");
 const ralvuimagoRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvuimago");
 const ralvuimagoHpClaims = ralvuimagoRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
