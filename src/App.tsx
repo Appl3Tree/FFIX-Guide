@@ -1028,16 +1028,17 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
       <p>These links describe earlier tracked objectives. They do not predict whether an ATE prompt is currently available; trigger timing is still being verified.</p>
     </section>}
     {accessObjectiveGroups.length > 0 && <section className="ate-access-dependencies" aria-label="Tracked access prerequisites for optional objectives">
-      <div className="ate-access-heading"><div><span className="eyebrow">OPTIONAL OBJECTIVE ACCESS</span><h2>Scene links that open extra routes</h2></div><p>These links describe access to optional content. They do not add an ATE order requirement or predict prompt timing.</p></div>
+      <div className="ate-access-heading"><div><span className="eyebrow">OPTIONAL OBJECTIVE ACCESS</span><h2>Requirements that open extra routes</h2></div><p>These links describe access to optional content. They do not add an ATE order requirement or predict prompt timing.</p></div>
       {accessObjectiveGroups.map(({ objective, dependencies }) => {
         const markedCount = dependencies.filter((dependency) => objectiveIsComplete(profile, dependency.prerequisiteObjectiveId)).length;
         const chapterId = objective.chapterIds?.[0];
         return <article className="ate-access-objective" key={objective.id}>
-          <div className="ate-access-objective-heading"><strong>{objective.title}</strong><span>{markedCount} / {dependencies.length} linked scenes marked</span></div>
+          <div className="ate-access-objective-heading"><strong>{objective.title}</strong><span>{markedCount} / {dependencies.length} linked requirements marked</span></div>
           <ul>{dependencies.map((dependency) => {
             const event = activeTimeEvents.find((candidate) => candidate.objectiveId === dependency.prerequisiteObjectiveId);
+            const prerequisite = objectives.find((candidate) => candidate.id === dependency.prerequisiteObjectiveId);
             const done = objectiveIsComplete(profile, dependency.prerequisiteObjectiveId);
-            return <li className={done ? "is-complete" : ""} key={dependency.prerequisiteObjectiveId}><span className="ate-access-mark" aria-hidden="true">{done ? "✓" : "·"}</span><span>{event?.title ?? dependency.prerequisiteObjectiveId}</span><span>{done ? "Marked" : "Not marked"}</span></li>;
+            return <li className={done ? "is-complete" : ""} key={dependency.prerequisiteObjectiveId}><span className="ate-access-mark" aria-hidden="true">{done ? "✓" : "·"}</span><span>{event?.title ?? prerequisite?.title ?? dependency.prerequisiteObjectiveId}</span><span>{done ? "Marked" : "Not marked"}</span></li>;
           })}</ul>
           {chapterId && <button type="button" className="text-action" onClick={() => onOpenChapter(chapterId)}>Open {chapterId === "disc-2.cleyra" ? "Cleyra walkthrough" : "related walkthrough"} <span aria-hidden="true">↗</span></button>}
         </article>;

@@ -2040,6 +2040,30 @@ export const objectiveAccessDependencies: ObjectiveDependency[] = [
     dependentObjectiveId: "disc-4.return-to-gaia.chocobo-beach-unlock",
     sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"],
   },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-3.on-the-high-seas.ocean-ability",
+    dependentObjectiveId: "disc-3.on-the-high-seas.dive-spots",
+    sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"],
+  },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-3.on-the-high-seas.ocean-ability",
+    dependentObjectiveId: "disc-4.return-to-gaia.mognet-central-crack",
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks", "jegged-mognet-central"],
+  },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-3.on-the-high-seas.ocean-ability",
+    dependentObjectiveId: "disc-4.return-to-gaia.mognet-central",
+    sourceIds: ["jegged-mognet-central"],
+  },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-4.return-to-gaia.mognet-central-crack",
+    dependentObjectiveId: "disc-4.return-to-gaia.mognet-central",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central"],
+  },
 ];
 
 // The first eight Friendly Creatures can be completed in any order when the
@@ -2079,6 +2103,41 @@ const stiltzkinRibbonPrerequisiteDependencies: ObjectiveDependency[] = stiltzkin
   dependentObjectiveId: "disc-4.return-to-gaia.stiltzkin-ribbon",
   sourceIds: ["gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin"],
 }));
+
+const mognetCentralLetterObjectiveIds = [
+  "disc-4.return-to-gaia.mognet-letter-22",
+  "disc-4.return-to-gaia.mognet-letter-23",
+  "disc-4.return-to-gaia.mognet-letter-24",
+  "disc-4.return-to-gaia.mognet-letter-25",
+  "disc-4.return-to-gaia.mognet-letter-26",
+  "disc-4.return-to-gaia.mognet-letter-27",
+];
+const mognetCentralSuperslickObjectiveId = "disc-4.return-to-gaia.mognet-superslick";
+const mognetCentralRepairObjectiveId = "disc-4.return-to-gaia.mognet-central";
+const mognetCentralChainSourceIds = ["jegged-mognet-central", "cour89-mognet-letters"];
+const mognetCentralLetterSequenceDependencies: ObjectiveDependency[] = mognetCentralLetterObjectiveIds
+  .slice(0, -1)
+  .map((prerequisiteObjectiveId, index) => ({
+    kind: "quest-prerequisite",
+    prerequisiteObjectiveId,
+    dependentObjectiveId: mognetCentralLetterObjectiveIds[index + 1],
+    sourceIds: mognetCentralChainSourceIds,
+  }));
+const mognetCentralQuestPrerequisiteDependencies: ObjectiveDependency[] = [
+  ...mognetCentralLetterSequenceDependencies,
+  {
+    kind: "quest-prerequisite",
+    prerequisiteObjectiveId: mognetCentralLetterObjectiveIds[mognetCentralLetterObjectiveIds.length - 1],
+    dependentObjectiveId: mognetCentralSuperslickObjectiveId,
+    sourceIds: mognetCentralChainSourceIds,
+  },
+  {
+    kind: "quest-prerequisite",
+    prerequisiteObjectiveId: mognetCentralSuperslickObjectiveId,
+    dependentObjectiveId: mognetCentralRepairObjectiveId,
+    sourceIds: ["jegged-mognet-central", "steam-achievements", "jegged-achievements"],
+  },
+];
 
 const chocoboBeachUnlockPrerequisiteIds = [
   "disc-3.aerial-exploration.all-chocograph-treasures",
@@ -2123,6 +2182,7 @@ const chocoboBeachQuestDependencies: ObjectiveDependency[] = [
 export const questPrerequisiteDependencies: ObjectiveDependency[] = [
   ...friendlyYanPrerequisiteDependencies,
   ...stiltzkinRibbonPrerequisiteDependencies,
+  ...mognetCentralQuestPrerequisiteDependencies,
   ...chocoboBeachQuestDependencies,
 ];
 

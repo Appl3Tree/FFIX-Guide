@@ -2,7 +2,7 @@ import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sourc
 import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
-import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveDependencies, questPrerequisiteDependencies, storyPartySequences } from "../src/data/progression.ts";
+import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveAccessDependencies, objectiveDependencies, questPrerequisiteDependencies, storyPartySequences } from "../src/data/progression.ts";
 import { findObjectiveDependencyCycles } from "../src/domain/progression.ts";
 import { chocoboBeachLocations, chocoboBeachObjectiveId, chocoboBeachObjectiveIds } from "../src/data/chocobo.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
@@ -4577,7 +4577,62 @@ const mognetRepairRoute = gameRouteEdgesById.get("detour.return-to-gaia-burmecia
 const mognetRepairSection = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
   ?.sections.find((section) => section.id === "gaia-return-mognet-central");
-const mognetRepairStep = mognetRepairSection?.steps.find((step) => step.id === "gaia-return-mognet-central-route");
+const mognetLetterObjectiveIds = [
+  "disc-4.return-to-gaia.mognet-letter-22",
+  "disc-4.return-to-gaia.mognet-letter-23",
+  "disc-4.return-to-gaia.mognet-letter-24",
+  "disc-4.return-to-gaia.mognet-letter-25",
+  "disc-4.return-to-gaia.mognet-letter-26",
+  "disc-4.return-to-gaia.mognet-letter-27",
+];
+const mognetSuperslickObjectiveId = "disc-4.return-to-gaia.mognet-superslick";
+const mognetRepairObjectiveId = "disc-4.return-to-gaia.mognet-central";
+const mognetOceanAbilityObjectiveId = "disc-3.on-the-high-seas.ocean-ability";
+const mognetLetterStepIds = [
+  "gaia-return-mognet-letter-22",
+  "gaia-return-mognet-letter-23",
+  "gaia-return-mognet-letter-24",
+  "gaia-return-mognet-letter-25",
+  "gaia-return-mognet-letter-26",
+  "gaia-return-mognet-letter-27",
+];
+const mognetLetterSteps = mognetLetterStepIds.map((stepId) => mognetRepairSection?.steps.find((step) => step.id === stepId));
+const mognetSuperslickStep = mognetRepairSection?.steps.find((step) => step.id === "gaia-return-mognet-superslick");
+const mognetRepairStep = mognetRepairSection?.steps.find((step) => step.id === "gaia-return-mognet-central-repair");
+const expectedMognetQuestEdges = [
+  ...mognetLetterObjectiveIds.slice(0, -1).map((id, index) => `${id}->${mognetLetterObjectiveIds[index + 1]}`),
+  `${mognetLetterObjectiveIds[mognetLetterObjectiveIds.length - 1]}->${mognetSuperslickObjectiveId}`,
+  `${mognetSuperslickObjectiveId}->${mognetRepairObjectiveId}`,
+].sort();
+const actualMognetQuestEdges = questPrerequisiteDependencies
+  .filter((dependency) => [
+    ...mognetLetterObjectiveIds,
+    mognetSuperslickObjectiveId,
+    mognetRepairObjectiveId,
+  ].includes(dependency.prerequisiteObjectiveId) || [
+    ...mognetLetterObjectiveIds,
+    mognetSuperslickObjectiveId,
+    mognetRepairObjectiveId,
+  ].includes(dependency.dependentObjectiveId))
+  .map((dependency) => `${dependency.prerequisiteObjectiveId}->${dependency.dependentObjectiveId}`)
+  .sort();
+const expectedMognetAccessEdges = [
+  `${mognetOceanAbilityObjectiveId}->disc-3.on-the-high-seas.dive-spots`,
+  `${mognetOceanAbilityObjectiveId}->disc-4.return-to-gaia.mognet-central-crack`,
+  `${mognetOceanAbilityObjectiveId}->${mognetRepairObjectiveId}`,
+  `disc-4.return-to-gaia.mognet-central-crack->${mognetRepairObjectiveId}`,
+].sort();
+const actualMognetAccessEdges = objectiveAccessDependencies
+  .filter((dependency) => dependency.dependentObjectiveId === "disc-3.on-the-high-seas.dive-spots"
+    || dependency.dependentObjectiveId === "disc-4.return-to-gaia.mognet-central-crack"
+    || dependency.dependentObjectiveId === mognetRepairObjectiveId)
+  .map((dependency) => `${dependency.prerequisiteObjectiveId}->${dependency.dependentObjectiveId}`)
+  .sort();
+const oceanAbilityStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.on-the-high-seas")
+  ?.sections.find((section) => section.id === "high-seas-chocobo-lagoon")
+  ?.steps.find((step) => step.id === "high-seas-mountain-chocographs");
+const wellLubricatedAchievement = steamAchievements.find((achievement) => achievement.id === "well-lubricated");
 if (
   !cour89MognetLetters?.notes.includes("27 Mognet deliveries")
   || !cour89MognetLetters.notes.includes("22–27 alone suffice")
@@ -4586,10 +4641,25 @@ if (
   || !mognetRepairRoute.summary.includes("deliveries 22–27")
   || !mognetRepairRoute.summary.includes("all 27")
   || !mognetRepairSection?.sourceIds.includes("cour89-mognet-letters")
-  || !mognetRepairStep?.detail?.includes("deliveries 22–27")
-  || !mognetRepairStep.detail.includes("all 27 numbered deliveries")
+  || mognetLetterObjectiveIds.some((id) => !objectivesById.get(id)?.sourceIds.includes("cour89-mognet-letters")
+    || !objectivesById.get(id)?.sourceIds.includes("jegged-mognet-central"))
+  || actualMognetQuestEdges.join("|") !== expectedMognetQuestEdges.join("|")
+  || mognetLetterSteps.some((step, index) => !step?.objectiveIds?.includes(mognetLetterObjectiveIds[index]))
+  || !mognetLetterSteps[0]?.text.includes("#22")
+  || !mognetLetterSteps[5]?.text.includes("#27")
+  || !mognetLetterSteps[3]?.detail?.includes("Quina")
+  || !mognetLetterSteps[5]?.detail?.includes("all 27 numbered letters")
+  || !objectivesById.get(mognetSuperslickObjectiveId)?.sourceIds.includes("jegged-mognet-central")
+  || !mognetSuperslickStep?.objectiveIds?.includes(mognetSuperslickObjectiveId)
+  || !wellLubricatedAchievement?.guideObjectiveIds?.includes(mognetSuperslickObjectiveId)
+  || !mognetRepairStep?.objectiveIds?.includes(mognetRepairObjectiveId)
+  || !mognetRepairStep.detail?.includes("Ocean ability")
+  || !mognetRepairStep.detail.includes("Dead Pepper")
+  || actualMognetAccessEdges.join("|") !== expectedMognetAccessEdges.join("|")
+  || !objectivesById.get(mognetOceanAbilityObjectiveId)?.sourceIds.includes("jegged-chocographs")
+  || !oceanAbilityStep?.objectiveIds?.includes(mognetOceanAbilityObjectiveId)
 ) {
-  errors.push("The Mognet repair route must distinguish Cour89's six required Disc IV deliveries (#22–27) from the optional full count of 27.");
+  errors.push("The Mognet repair route must track the ordered Disc IV deliveries (#22–27), Ruby's Superslick, the repair, and Ocean/crack access prerequisites with source links.");
 }
 const disc4TrenoReturnEdge = gameRouteEdgesById.get("detour.return-to-gaia-treno-behemoth");
 const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoin-gaia");

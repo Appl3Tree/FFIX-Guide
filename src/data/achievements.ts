@@ -294,7 +294,7 @@ const steamAchievementGuideMap: Record<string, Pick<SteamAchievement, "guideObje
     guideObjectiveIds: ["disc-4.return-to-gaia.frog-catching"],
     guideNote: "The Gastro Fork is Quina's 99-frog reward. Use the frog-catching route and claim Quale's reward when the counter reaches 99.",
   },
-  "well-lubricated": { guideObjectiveIds: ["disc-4.return-to-gaia.mognet-central"] },
+  "well-lubricated": { guideObjectiveIds: ["disc-4.return-to-gaia.mognet-superslick"] },
   "let-the-bodies-hit-the-floor-ii": {
     guideChapterIds: ["disc-4.final-preparations"],
     guideNote: "Cumulative battle count for this save. Check it near the end; the target has no one-time story trigger.",
