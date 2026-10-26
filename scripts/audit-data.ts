@@ -1425,13 +1425,15 @@ for (const pathId of expectedFossilRooShopPathIds) {
     !path ||
     path.chapterId !== "disc-2.journey-to-outer-continent" ||
     path.shopId !== "fossil-roo.treasure-hunter-shop" ||
-    path.availability !== "window-unverified" ||
+    path.availability !== "limited-window" ||
     !path.walkthroughObjectiveIds?.includes(fossilRooTreasureObjectiveId) ||
+    !path.sourceIds.includes("gamefaqs-fossil-roo-reentry-qa") ||
     !path.sourceIds.includes("jegged-missables") ||
     !path.sourceIds.includes("ffwiki-unrevisitable-locations") ||
-    !path.conditions.includes("Buy during the Fossil Roo visit to be safe")
+    !path.conditions.includes("limited to the Disc II visit") ||
+    !path.conditions.includes("Newer-release behavior remains unverified")
   ) {
-    errors.push(`Fossil Roo's disputed Treasure Hunter shop window must link ${pathId} to its safe pre-exit checklist action and access sources.`);
+    errors.push(`Fossil Roo's PlayStation Treasure Hunter shop cutoff must link ${pathId} to its pre-exit checklist action and scoped access sources.`);
   }
 }
 const fossilRooTreasureObjective = objectives.find((objective) => objective.id === fossilRooTreasureObjectiveId);
@@ -1483,7 +1485,10 @@ if (
   !fossilRooTreasureWarning.sourceIds.includes("rpgclassics-synthesis") ||
   !fossilRooTreasureWarning.sourceIds.includes("jegged-missables") ||
   !fossilRooTreasureWarning.sourceIds.includes("ffwiki-unrevisitable-locations") ||
-  !fossilRooTreasureWarning.note.includes("the guide uses the pre-exit deadline as the safe route") ||
+  !fossilRooTreasureWarning.sourceIds.includes("gamefaqs-fossil-roo-reentry-qa") ||
+  !fossilRooTreasureWarning.note.includes("For the original PlayStation route") ||
+  !fossilRooTreasureWarning.note.includes("does not establish access to the inner rooms or Treasure Hunter's shop") ||
+  !fossilRooTreasureWarning.note.includes("Newer-release behavior remains unverified") ||
   !fossilRooTreasureWarning.action.includes("Check the Treasure Hunter's shop")
 ) {
   errors.push("Fossil Roo's warning must preserve the re-entry conflict, safe shop cutoff, and distinction between location copies and recoverable item types.");
@@ -1507,8 +1512,14 @@ if (
   !fossilRooTreasureWarning?.deadline.includes("EliteGrindLab reports an unresolved numbering conflict") ||
   !fossilRooFinalGargantCutoff?.trigger.includes("final vine-chamber switch") ||
   !fossilRooFinalGargantCutoff?.trigger.includes("without attributing its No. 4 claim") ||
+  !fossilRooFinalGargantCutoff?.trigger.includes("on the original PlayStation") ||
+  !fossilRooFinalGargantCutoff?.trigger.includes("Newer-release shop behavior remains unverified") ||
+  !fossilRooFinalGargantCutoff?.sourceIds.includes("gamefaqs-fossil-roo-reentry-qa") ||
   !fossilRooFinalGargantCutoff?.sourceIds.includes("elitegrindlab-fossil-roo") ||
+  !fossilRooFinalSweepStep?.detail?.includes("accepted re-entry answer") ||
   !fossilRooFinalSweepStep?.detail?.includes("Jegged says the entrance can technically be revisited") ||
+  !fossilRooFinalSweepStep?.detail?.includes("Treasure Hunter's shop") ||
+  !fossilRooFinalSweepStep?.detail?.includes("Newer-release behavior remains unverified") ||
   !fossilRooFinalSweepStep?.detail?.includes("No. 3/No. 4/unnumbered conflict") ||
   !fossilRooExitStep?.text.includes("switch No. 3")
 ) {

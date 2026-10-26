@@ -2404,13 +2404,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "fossil-roo-point-of-no-return",
         title: "Final switch and Gargant — one-way exit to the Outer Continent",
         summary: "Finish every selected Fossil Roo objective before operating the last switch and taking the exit ride.",
-        sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"],
+        sourceIds: ["gamefaqs-fossil-roo-reentry-qa", "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"],
         steps: [
           {
             id: "fossil-roo-final-sweep",
             kind: "cutoff",
             text: "Before leaving the vine chamber, verify the Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest. The Stiltzkin bundle's second Ether is a separate purchase. Check both available Mognet letters, any selected Lani steals, and the mining objectives as well.",
-            detail: "GameFAQs, Jegged, and RPGClassics label the terminal upper-left vine-room switch No. 3; Gamer Guides leaves it unnumbered, and EliteGrindLab reports a wider No. 3/No. 4/unnumbered conflict without naming the No. 4 source. GameFAQs and RPGClassics treat the inner route as one-way after the final Gargant, while Jegged says the entrance can technically be revisited without confirming access to the inner rooms or Treasure Hunter's shop. Use this pre-exit sweep as the last safe checkpoint for the chapter's one-time goals.",
+                detail: "For the original PlayStation route, GameFAQs' walkthrough and accepted re-entry answer describe the inner area as inaccessible after the one-way final Gargant. Jegged says the entrance can technically be revisited, but does not establish access to the inner rooms or Treasure Hunter's shop. Newer-release behavior remains unverified. GameFAQs, Jegged, and RPGClassics label the terminal upper-left vine-room switch No. 3; Gamer Guides leaves it unnumbered, and EliteGrindLab reports a wider No. 3/No. 4/unnumbered conflict without naming the No. 4 source. Use this pre-exit sweep as the last safe checkpoint for the chapter's one-time goals.",
             objectiveIds: ["disc-2.journey-to-outer-continent.treasure-sweep", "disc-2.fossil-roo.stiltzkin-3", "disc-2.journey-to-outer-continent.mognet-letters", "disc-2.journey-to-outer-continent.peek-a-boo", "disc-2.journey-to-outer-continent.one-ring"],
           },
           {
