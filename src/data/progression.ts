@@ -967,7 +967,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-4.return-to-gaia",
     toChapterId: "disc-1.village-of-dali",
     relationship: "optional-return",
-    summary: "If Aries is missing, return to Dali during the open Disc IV world-map route and search the windmill's ground floor behind the central pillar/crank. The GameFAQs PlayStation guide and Gamer Guides say Stellazzio remain available on Disc IV/the final disc; direct gameplay and release-specific parity remain unverified.",
+    summary: "If Aries is missing, return to Dali during the open Disc IV world-map route and search the windmill's ground floor behind the central pillar/crank. The GameFAQs PlayStation guide and Gamer Guides say Stellazzio remain available on Disc IV/the final disc; a first-hand Disc IV recovery route also directs players to Aries, though its images are from story progression. That route continues from Dali to Treno, so it does not establish the Dali-to-Invincible rejoin; direct gameplay and release-specific parity remain unverified.",
     sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios", "megane-kangaroo-disc4-burmecia-recovery"],
   },
   {
@@ -976,7 +976,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After checking the windmill, return to the Invincible and resume other Disc IV errands or continue toward the Iifa Tree.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "megane-kangaroo-disc4-burmecia-recovery"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-alexandria-mognet",

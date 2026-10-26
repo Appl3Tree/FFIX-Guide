@@ -1959,6 +1959,7 @@ if (
   !stellazzioGamefaqsSource?.notes.includes("none of the Stellazzio are missable, even on Disc IV")
   || !stellazzioGamerGuidesSource?.notes.includes("all can be found on the final disc")
   || !stellazzioDisc4RouteSource?.notes.includes("images are from story progression")
+  || !stellazzioDisc4RouteSource.notes.includes("does not establish the Dali-to-Invincible rejoin")
   || ordinaryStellazzio.length !== 12
   || ordinaryStellazzio.some(({ itemId, objectiveId, firstPathId, latePathId }) => {
     const item = gameItems.find((record) => record.id === itemId);
@@ -1989,11 +1990,16 @@ if (
   || ariesDisc4Route?.fromChapterId !== "disc-4.return-to-gaia"
   || ariesDisc4Route.toChapterId !== "disc-1.village-of-dali"
   || ariesDisc4Route.relationship !== "optional-return"
+  || !ariesDisc4Route.summary.includes("does not establish the Dali-to-Invincible rejoin")
+  || !ariesDisc4Route.sourceIds.includes("gamefaqs-return-to-gaia-71891")
   || !ariesDisc4Route.sourceIds.includes("gamefaqs-stellazzio-71891")
   || !ariesDisc4Route.sourceIds.includes("gamerguides-stellazzios")
+  || !ariesDisc4Route.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery")
   || ariesDisc4Rejoin?.fromChapterId !== "disc-1.village-of-dali"
   || ariesDisc4Rejoin.toChapterId !== "disc-4.return-to-gaia"
   || ariesDisc4Rejoin.relationship !== "rejoin"
+  || !ariesDisc4Rejoin.sourceIds.includes("gamefaqs-return-to-gaia-71891")
+  || ariesDisc4Rejoin.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery")
   || lateStellazzioRoutePairs.some(([detourId, rejoinId]) => {
     const detour = gameRouteEdges.find((edge) => edge.id === detourId);
     const rejoin = gameRouteEdges.find((edge) => edge.id === rejoinId);
@@ -2003,7 +2009,7 @@ if (
       || rejoin.relationship !== "rejoin";
   })
 ) {
-  errors.push("The twelve ordinary Stellazzio need first and late Disc IV paths, individual objectives, sourced coverage, connected return routes, and the Dali image caveat.");
+  errors.push("The twelve ordinary Stellazzio need first and late Disc IV paths, individual objectives, sourced coverage, connected return routes, and the Dali pickup/rejoin source scopes and image caveat.");
 }
 const ophiucusItem = gameItems.find((item) => item.id === "game-item.ophiucus-stellazzio");
 const ophiucusPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.quans-dwelling-ophiucus-stellazzio");
