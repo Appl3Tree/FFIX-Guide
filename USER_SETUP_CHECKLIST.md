@@ -4,6 +4,8 @@ Last updated: 2026-10-26
 
 This is the consolidated list of actions that need the project owner's GitHub or Firebase account, a real sign-in, or a second device. The app currently stores progress in this browser only. Codex will complete and test the implementation that does not require your account before moving the Firebase steps to **Ready for User**.
 
+Latest Codex update: the Disc IV Gizamaluke route-source audit is local guide work and did not change GitHub, Firebase, or other owner-side setup requirements.
+
 Statuses use the project vocabulary: **Not Started**, **Blocked**, **Ready for User**, **In Progress**, and **Completed**. Do not send passwords, access tokens, service-account JSON, or Firebase config values in chat. Firebase web-app config is included in browser builds, so it is public configuration rather than a secret; access must be protected by Authentication, Firestore rules, and domain/API restrictions.
 
 ## Current project milestone

@@ -5414,6 +5414,8 @@ if (
 const disc4TrenoReturnEdge = gameRouteEdgesById.get("detour.return-to-gaia-treno-behemoth");
 const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoin-gaia");
 const disc4IpsenRejoinEdge = gameRouteEdgesById.get("detour.ipsens-castle-aquarius-rejoin-gaia");
+const disc4KupoNutDetourEdge = gameRouteEdgesById.get("detour.return-to-gaia-gizamaluke-kupo-nut");
+const disc4KupoNutRejoinEdge = gameRouteEdgesById.get("detour.gizamaluke-kupo-nut-rejoin-gaia");
 const disc4LocationListSource = sources.find((source) => source.id === "ff9-kouryaku-disc4");
 if (
   !disc4TrenoReturnEdge?.summary.includes("Quan's Dwelling") ||
@@ -5429,9 +5431,12 @@ if (
   !disc4IpsenRejoinEdge?.summary.includes("open Disc IV Gaia route") ||
   !disc4IpsenRejoinEdge.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
   disc4IpsenRejoinEdge.sourceIds.includes("gamefaqs-ipsens-castle-71891") ||
-  disc4IpsenRejoinEdge.sourceIds.includes("jegged-mognet-central")
+  disc4IpsenRejoinEdge.sourceIds.includes("jegged-mognet-central") ||
+  !disc4KupoNutDetourEdge?.sourceIds.includes("gamefaqs-kupo-nuts-71891") ||
+  !disc4KupoNutRejoinEdge?.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  disc4KupoNutRejoinEdge.sourceIds.includes("gamefaqs-kupo-nuts-71891")
 ) {
-  errors.push("Disc IV Gaia rejoins must cite the return route and exclude destination, encounter, or Mognet-step sources that do not support the Invincible transition.");
+  errors.push("Disc IV Gaia rejoins must cite the return route and exclude destination, encounter, Mognet-step, or Kupo Nut reward sources that do not support the Invincible transition.");
 }
 const cour89BranBal = sources.find((source) => source.id === "cour89-bran-bal");
 const cour89Pandemonium = sources.find((source) => source.id === "cour89-pandemonium");

@@ -1056,7 +1056,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After the optional Moguta exchange, return to the Invincible and resume other Disc IV exploration or continue the story to the Iifa Tree.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-kupo-nuts-71891"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-treno-behemoth",

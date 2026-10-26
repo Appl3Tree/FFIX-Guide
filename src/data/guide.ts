@@ -1720,7 +1720,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/kupo-nuts",
     accessed: "2026-10-24",
-    notes: "Documents Moguta's Kupo Nut rewards: the first delivery on each disc has a fixed prize, while additional same-disc deliveries randomly yield a Tent, Phoenix Pinion, or Ether. It also records the one-nut-at-a-time inventory limit and the need to preserve the unique final Kupo Nut for a perfect item list.",
+    notes: "Documents Moguta's Kupo Nut rewards: the first delivery on each disc has a fixed prize, while additional same-disc deliveries randomly yield a Tent, Phoenix Pinion, or Ether. It also records the one-nut-at-a-time inventory limit and the need to preserve the unique final Kupo Nut for a perfect item list. The sidequest page supports the optional Moguta exchange and reward, not the return from Gizamaluke's Grotto to the Invincible.",
   },
   {
     id: "jegged-kupo-nuts",
