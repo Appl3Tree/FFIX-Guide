@@ -36,7 +36,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "alexandria-town",
         title: "Alexandria town — Main Street to the Square",
         summary: "Sweep the starting streets before advancing. Later item-type recovery is cataloged; the first-visit copies, disputed field-marker locations, cards, and Treasure Hunter points have separate checks.",
-        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"],
+        sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria", "kyokugen-alexandria-map"],
         steps: [
           {
             id: "starting-street-potion",
@@ -52,7 +52,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "north-walkway",
             kind: "pickup",
-            text: "Return north along the walkway where Rat Kid bumps into Vivi. Search the full left side for both candidate Potions: one is near the awning and the other is at the southern fruit barrel. Sources disagree whether North Street contains one or two, so inspect both spots.",
+            text: "Return north along the walkway where Rat Kid bumps into Vivi. Search the full left side for the Potion near the awning and the second reported Potion at the southern fruit barrel; inspect both spots.",
+            detail: "GameFAQs and Jegged describe two Potions in this street segment, and Kyokugen's Japanese Main Street 1 item list also counts two. Gamer Guides reports one, while EliteGrindLab records the one-versus-two disagreement. The Japanese and English guides do not map every street label or marker consistently, so treat the exact count as disputed and search both candidates.",
           },
           {
             id: "sewing-residence",

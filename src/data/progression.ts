@@ -1444,7 +1444,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     certainty: "source-supported",
     trigger: "Complete Vivi's first-visit street, square, shop, residence, tavern, and steeple pickup route before crossing the rooftop planks that fall behind him. Use the pre-climb check at Kupo as the safe checkpoint; the first-visit town route cannot be recovered after the planks block the return.",
     missableIds: ["missable.disc-1.alexandria.town-pickups"],
-    sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria", "jegged-treasure-hunter"],
+    sourceIds: ["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria", "kyokugen-alexandria-map", "jegged-treasure-hunter"],
   },
   {
     id: "cutoff.alexandria-opening-performance",

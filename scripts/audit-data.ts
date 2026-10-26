@@ -92,7 +92,7 @@ const alexandriaPickupPathSpecs = [
 const alexandriaTownObjective = objectivesById.get(alexandriaTownObjectiveId);
 if (
   !alexandriaTownObjective ||
-  !["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria"]
+  !["gamefaqs-alexandria-71891", "jegged-alexandria", "gamerguides-alexandria", "vgkami-alexandria", "elitegrindlab-prima-vista", "rpgclassics-alexandria-town", "xbuster-alexandria", "kyokugen-alexandria-map"]
     .every((sourceId) => alexandriaTownObjective.sourceIds.includes(sourceId)) ||
   alexandriaTownObjective.chapterIds.length !== 1 || alexandriaTownObjective.chapterIds[0] !== "disc-1.alexandria"
 ) {
@@ -117,17 +117,20 @@ if (
   !alexandriaTownWarning.classification.includes("recoverable-later") ||
   !alexandriaTownWarning.consequence.includes("340 points") ||
   !alexandriaTownWarning.consequence.includes("one Treasure Hunter point") ||
-  !alexandriaTownWarning.note.includes("disagree whether North Street has one Potion or two") ||
+  !alexandriaTownWarning.note.includes("Gamer Guides reports one") ||
   !alexandriaTownWarning.note.includes("63-Gil marker") ||
+  !alexandriaTownWarning.note.includes("Kyokugen's Japanese town map") ||
   !alexandriaTownWarning.note.includes("does not prove a perfect town sweep is required") ||
   !alexandriaTownWarning.sourceIds.includes("jegged-treasure-hunter") ||
-  !["rpgclassics-alexandria-town", "xbuster-alexandria"].every((sourceId) => alexandriaTownWarning.sourceIds.includes(sourceId)) ||
+  !["rpgclassics-alexandria-town", "xbuster-alexandria", "kyokugen-alexandria-map"].every((sourceId) => alexandriaTownWarning.sourceIds.includes(sourceId)) ||
   !alexandriaTownCutoff || alexandriaTownCutoff.edgeId !== "story.alexandria-to-evil-forest" ||
   !alexandriaTownCutoff.missableIds.includes("missable.disc-1.alexandria.town-pickups") ||
   !alexandriaTownCutoff.trigger.includes("planks that fall behind him") ||
-  !["rpgclassics-alexandria-town", "xbuster-alexandria"].every((sourceId) => alexandriaTownCutoff.sourceIds.includes(sourceId)) ||
+  !["rpgclassics-alexandria-town", "xbuster-alexandria", "kyokugen-alexandria-map"].every((sourceId) => alexandriaTownCutoff.sourceIds.includes(sourceId)) ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "town-square-items")?.detail?.includes("GameFAQs places the Remedy near the shop counter") ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "town-square-items")?.text.includes("arrow-marked corner") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "north-walkway")?.detail?.includes("Kyokugen's Japanese Main Street 1 item list") ||
+  !alexandriaWalkthroughSteps.find((step) => step.id === "north-walkway")?.detail?.includes("treat the exact count as disputed") ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "house-by-steeple")?.text.includes("chapel-side house") ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "rooftop-treasures")?.text.includes("lower rooftop branch") ||
   !alexandriaWalkthroughSteps.find((step) => step.id === "rooftop-treasures")?.text.includes("search both candidate spots") ||
