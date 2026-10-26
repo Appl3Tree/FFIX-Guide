@@ -3037,6 +3037,22 @@ if (!antlionEncounter || antlionEncounter.kind !== "boss" ||
   !antlionPreparationStep.detail.includes("Dagger is absent") || !antlionPreparationStep.detail.includes("Tough")) {
   errors.push("Antlion preparation must keep Level 16 as an enemy stat, label the single-source Tough rating, and link the Cleyra route's source-backed recovery and counter advice.");
 }
+const cleyraBeatrixPreparation = enemyRecords.find((enemy) => enemy.id === "enemy.beatrix-cleyra")?.preparationGuidance;
+const cleyraBeatrixPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections.find((section) => section.id === "cleyra-antlion-evacuation");
+const cleyraBeatrixPreparationStep = cleyraBeatrixPreparationSection?.steps.find((step) => step.id === "cleyra-beatrix-steals");
+if (!cleyraBeatrixPreparation || cleyraBeatrixPreparation.suggestedLevelRange !== undefined ||
+  !cleyraBeatrixPreparation.levelRationale.includes("enemy stat") || !cleyraBeatrixPreparation.levelRationale.includes("no normal victory condition") ||
+  !cleyraBeatrixPreparation.difficultyAssessment?.includes("Rough") || !cleyraBeatrixPreparation.difficultyAssessment.includes("subjective single-source") ||
+  !cleyraBeatrixPreparation.optionalGrinding.includes("neither leveling nor damage creates a normal victory") ||
+  !cleyraBeatrixPreparation.setupAdvice.includes("scripted survival") || !cleyraBeatrixPreparation.setupAdvice.includes("Ice Brand") ||
+  !cleyraBeatrixPreparation.setupAdvice.includes("Stock Break") ||
+  !cleyraBeatrixPreparation.sourceIds.includes("gamefaqs-boss-guide-31490") || !cleyraBeatrixPreparation.sourceIds.includes("jegged-cleyra") ||
+  !cleyraBeatrixPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !cleyraBeatrixPreparationStep?.detail?.includes("Level 17 is Beatrix's enemy stat") ||
+  !cleyraBeatrixPreparationStep.detail.includes("no reviewed route suggests grinding") ||
+  !cleyraBeatrixPreparationStep.detail.includes("not a party target")) {
+  errors.push("Cleyra Beatrix preparation must distinguish her Level 17 enemy stat from a party target and preserve the scripted survival, no-grinding, steal, and subjective Rough caveats.");
+}
 const cleyraAnnoyntmentRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.cleyra-recovery.annoyntment");
 if (!cleyraAnnoyntmentRecovery || cleyraAnnoyntmentRecovery.itemId !== "game-item.annoyntment" || cleyraAnnoyntmentRecovery.cost?.amount !== 150) {
   errors.push("Cleyra Annoyntment recovery needs the priced 150-Gil Lindblum Disc II item-shop path.");

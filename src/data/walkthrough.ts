@@ -1834,7 +1834,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-antlion-evacuation",
         title: "Antlion, evacuation, and the Cleyra cutoff",
         summary: "Try the Antlion steals, claim the post-battle rewards, then follow the safe evacuation route and survive Beatrix's scripted battle.",
-        sourceIds: ["gamefaqs-cleyra-71891", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-boss-guide-31490", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "cleyra-antlion-steals",
@@ -1882,7 +1882,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-beatrix-steals",
             kind: "combat",
             text: "Before leaving the Cathedral, remove Quina's Add-on and any transferable gear you want available to the remaining party. Save, then exit to begin the one-time Beatrix battle and attempt to steal Phoenix Down, Thunder Gloves, and Ice Brand while keeping everyone alive.",
-            detail: "Quina leaves the active party after Cleyra; equipped items remain associated with Quina until the character rejoins, so remove any gear you want other characters to use in the meantime. The bestiary cross-checks Beatrix's level and HP and preserves the older boss guide's conflicting MP figure. GameFAQs says the battle ends after ten turns or at 0 HP, while Jegged describes her as undefeatable; Stock Break leaves the party at 1 HP either way. The rank references do not list battle steals as score categories, so treat these as optional item-copy attempts rather than confirmed Rank S points. After the battle, the story moves to the Red Rose and Cleyra is no longer accessible. Focus on survival and steals.",
+            detail: "Quina leaves the active party after Cleyra; equipped items remain associated with Quina until the character rejoins, so remove any gear you want other characters to use in the meantime. Level 17 is Beatrix's enemy stat, not a party target, and no reviewed route suggests grinding for this scripted fight. GameFAQs says it ends after ten turns or at 0 HP, while Jegged describes her as undefeatable; Stock Break leaves the party at 1 HP either way. Slow her, use the back row, keep healing ready, and prioritize the Semi-Rare Ice Brand steal if seeking all encounter copies. A PS1 boss FAQ labels the fight Rough, a subjective single-source rating. Rank references do not list battle steals as score categories, so these remain optional item-copy attempts rather than confirmed Rank S points. After the battle, the story moves to the Red Rose and Cleyra is no longer accessible.",
             objectiveIds: ["disc-2.cleyra.beatrix-steals"],
           },
           {
