@@ -13,7 +13,7 @@ export type SteamAchievement = {
 };
 
 export type PlatformAchievement = Omit<SteamAchievement, "sourceId"> & {
-  platform: "ps4" | "xbox";
+  platform: "ps4" | "xbox" | "ios" | "android";
   sourceId: string;
   /** Steam record used to compare the shared gameplay criterion across services. */
   parityId: string;
@@ -334,6 +334,25 @@ export const steamAchievements: SteamAchievement[] = steamAchievementSource.map(
   ...steamAchievementGuideMap[achievement.id],
 }));
 
+const iosExcludedAchievementIds = new Set(["backstabber", "movie-critic"]);
+
+function buildMobileCatalog(platform: "ios" | "android", sourceId: string): PlatformAchievement[] {
+  const platformRecords = platform === "ios"
+    ? steamAchievements.filter((achievement) => !iosExcludedAchievementIds.has(achievement.id))
+    : steamAchievements;
+  return platformRecords.map((achievement) => ({
+    ...achievement,
+    platform,
+    objectiveId: `achievement.${platform}.${achievement.id}`,
+    sourceId,
+    guideSourceIds: [...new Set([...(achievement.guideSourceIds ?? []), sourceId])],
+    parityId: achievement.id,
+  }));
+}
+
+export const iosAchievements: PlatformAchievement[] = buildMobileCatalog("ios", "ios-game-center-achievements");
+export const androidAchievements: PlatformAchievement[] = buildMobileCatalog("android", "android-google-play-achievements");
+
 // PS4 and Xbox list the same 51 gameplay criteria. The console lists call
 // Steam's 10,000-enemy criterion "Bloodlust"; all other shared records retain
 // the same title and requirement. Keep these slugs explicit so the parity
@@ -392,7 +411,7 @@ const consoleSharedAchievementIds = [
   "out-of-harms-way",
 ] as const;
 
-function buildConsoleCatalog(platform: PlatformAchievement["platform"], sourceId: string): PlatformAchievement[] {
+function buildConsoleCatalog(platform: "ps4" | "xbox", sourceId: string): PlatformAchievement[] {
   return consoleSharedAchievementIds.map((parityId) => {
     const sharedRecord = steamAchievements.find((achievement) => achievement.id === parityId);
     if (!sharedRecord) throw new Error(`Console achievement parity record is missing: ${parityId}`);
@@ -436,4 +455,6 @@ export const achievementCatalogs = {
   steam: steamAchievements,
   ps4: ps4Trophies,
   xbox: xboxAchievements,
-} satisfies Record<"steam" | "ps4" | "xbox", AchievementRecord[]>;
+  ios: iosAchievements,
+  android: androidAchievements,
+} satisfies Record<"steam" | "ps4" | "xbox" | "ios" | "android", AchievementRecord[]>;

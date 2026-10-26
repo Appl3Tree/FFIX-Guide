@@ -20,7 +20,7 @@ import {
   Trophy,
   X,
 } from "lucide-react";
-import { ps4Trophies, steamAchievements, xboxAchievements, type AchievementRecord } from "./data/achievements";
+import { androidAchievements, iosAchievements, ps4Trophies, steamAchievements, xboxAchievements, type AchievementRecord } from "./data/achievements";
 import {
   excalibur2Checkpoints,
   EXCALIBUR_II_CUTOFF_SECONDS,
@@ -1005,6 +1005,7 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
   });
   const markedCount = movieCriticEligibleEvents.filter((event) => profile.marks[event.objectiveId]?.complete === true).length;
   const markedDependencyCount = ateObjectiveDependencies.filter((dependency) => objectiveIsComplete(profile, dependency.prerequisiteObjectiveId)).length;
+  const hasMovieCriticAchievement = ["steam", "ps4", "xbox", "android"].includes(profile.platform);
   const accessObjectiveGroups = [...new Set(objectiveAccessDependencies.map((dependency) => dependency.dependentObjectiveId))]
     .map((objectiveId) => ({
       objective: objectives.find((objective) => objective.id === objectiveId),
@@ -1018,11 +1019,15 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
     .filter((source): source is (typeof sources)[number] => Boolean(source));
 
   return <>
-    <PageHeading eyebrow="SIDE CONTENT · SCENE INDEX" title="Active Time Events" lead="Track each named ATE and its trigger in story order. Three Mogster tutorials do not count toward Movie Critic; a mutually exclusive Treno branch leaves 79 scenes achievable on one save." />
-    <section className="ate-progress-panel" aria-label="Movie Critic event progress">
-      <div><span className="eyebrow">MOVIE CRITIC · STEAM / PS4 / XBOX</span><strong>{markedCount} / {movieCriticTarget} target scenes marked</strong><small>{markedCount >= movieCriticTarget ? "The single-save target is reached." : `${Math.max(0, movieCriticTarget - markedCount)} more eligible scene${movieCriticTarget - markedCount === 1 ? "" : "s"} to reach the target.`}</small></div>
-      <div className="ate-progress-meter" role="progressbar" aria-label="Movie Critic target scenes marked" aria-valuemin={0} aria-valuemax={movieCriticTarget} aria-valuenow={Math.min(markedCount, movieCriticTarget)}><span style={{ width: `${Math.min(100, markedCount / movieCriticTarget * 100)}%` }} /></div>
-    </section>
+    <PageHeading eyebrow="SIDE CONTENT · SCENE INDEX" title="Active Time Events" lead="Track each named ATE and its trigger in story order. For platforms with Movie Critic, 80 eligible scenes and one mutually exclusive Treno branch leave 79 scenes achievable on one save; the iOS Game Center catalog does not list Movie Critic." />
+    {hasMovieCriticAchievement
+      ? <section className="ate-progress-panel" aria-label="Movie Critic event progress">
+          <div><span className="eyebrow">MOVIE CRITIC · STEAM / PS4 / XBOX / ANDROID</span><strong>{markedCount} / {movieCriticTarget} target scenes marked</strong><small>{markedCount >= movieCriticTarget ? "The single-save target is reached." : `${Math.max(0, movieCriticTarget - markedCount)} more eligible scene${movieCriticTarget - markedCount === 1 ? "" : "s"} to reach the target.`}</small></div>
+          <div className="ate-progress-meter" role="progressbar" aria-label="Movie Critic target scenes marked" aria-valuemin={0} aria-valuemax={movieCriticTarget} aria-valuenow={Math.min(markedCount, movieCriticTarget)}><span style={{ width: `${Math.min(100, markedCount / movieCriticTarget * 100)}%` }} /></div>
+        </section>
+      : <section className="ate-progress-panel" aria-label="Movie Critic platform availability">
+          <div><span className="eyebrow">MOVIE CRITIC · PLATFORM STATUS</span><strong>{profile.platform === "ios" ? "Not listed for iOS Game Center" : `No confirmed Movie Critic catalog for ${platformLabels[profile.platform]}`}</strong><small>The ATE scene checklist remains available for general completion tracking.</small></div>
+        </section>}
     {ateObjectiveDependencies.length > 0 && <section className="ate-dependency-summary" aria-label="Tracked ATE prerequisite links">
       <div><span className="eyebrow">DOCUMENTED ATE ORDER</span><strong>{markedDependencyCount} / {ateObjectiveDependencies.length} linked prerequisite objectives marked</strong></div>
       <p>These links describe earlier tracked objectives. They do not predict whether an ATE prompt is currently available; trigger timing is still being verified.</p>
@@ -1046,7 +1051,8 @@ function AteTracker({ profile, onToggle, onOpenChapter }: {
     </section>}
     <div className="ate-source-note"><p><strong>80 eligible scene choices are listed, but only 79 countable scenes fit on one save.</strong> Choose one of the two Vivi outcomes in Treno. Comprehensive and Custom profiles can track the three Teach Me, Mogster! tutorials as separate non-achievement checkboxes. ATE trigger ordering can vary by route; unresolved directions stay labeled.</p>
       {profile.platform === "ps1" && <p>Original PlayStation has no platform achievement list. This page still tracks scenes for story and completionist reference.</p>}
-      {(profile.platform === "switch" || profile.platform === "ios" || profile.platform === "android") && <p>Achievement support for this release is not verified. The 79-scene counter reflects the Steam, PS4, and Xbox Movie Critic criteria; use it as a scene reference until the selected platform's achievement service is confirmed.</p>}
+      {profile.platform === "switch" && <p>Nintendo Switch has no platform achievement catalog in this guide. ATEs remain available as game content, but they are not linked to a confirmed Switch achievement set.</p>}
+      {profile.platform === "ios" && <p>The iOS Game Center catalog does not include Movie Critic. The ATE list is still useful as route context, but its 79-scene target is not an iOS achievement requirement.</p>}
     </div>
     {legacyGroupIds.length > 0 && <p className="ate-legacy-note" role="status">This profile has {legacyGroupIds.length} earlier chapter-level ATE mark{legacyGroupIds.length === 1 ? "" : "s"} without scene-by-scene details. Those marks remain preserved; review the rows to get an exact Movie Critic count.</p>}
     <label className="ate-search"><Search size={16} aria-hidden="true" /><span className="sr-only">Search ATEs</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search scene, location, or trigger" /></label>
@@ -1429,19 +1435,34 @@ function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenCha
   const steam = achievementSourceCounts.steam;
   const ps4 = achievementSourceCounts.ps4;
   const xbox = achievementSourceCounts.xbox;
+  const ios = achievementSourceCounts.ios;
+  const android = achievementSourceCounts.android;
   const activeCatalog = platform === "steam"
     ? { id: "steam", label: "Steam", records: steamAchievements }
     : platform === "ps4"
       ? { id: "ps4", label: "PlayStation 4", records: ps4Trophies }
       : platform === "xbox"
         ? { id: "xbox", label: "Xbox", records: xboxAchievements }
-        : null;
+        : platform === "ios"
+          ? { id: "ios", label: "iOS / Game Center", records: iosAchievements }
+          : platform === "android"
+            ? { id: "android", label: "Android / Google Play", records: androidAchievements }
+            : null;
+  const activeCatalogDescription = platform === "steam"
+    ? "Names and criteria are transcribed from Steam's global list. Mark an achievement when Steam records it as unlocked; the guide cannot read Steam's unlock state."
+    : platform === "ps4"
+      ? "The 51 gameplay criteria match Xbox; Heroes of Gaia is the automatic Platinum trophy. Mark a trophy after PlayStation records it as earned."
+      : platform === "xbox"
+        ? "These 51 Xbox criteria match the PS4 gameplay trophy set. Mark an achievement after Xbox records it as unlocked."
+        : platform === "ios"
+          ? "The 83-entry iOS list is catalogued from the Game Center criteria. It does not include Backstabber or Movie Critic; direct device unlock testing remains open."
+          : "The 85-entry Android list is catalogued from Google Play criteria. It includes Backstabber and Movie Critic, matching Steam's current count; direct device unlock testing remains open.";
   const activeCompleted = activeCatalog?.records.filter((achievement) => profile.marks[achievement.objectiveId]?.complete === true).length ?? 0;
   const activeMapped = activeCatalog?.records.filter((achievement) => achievementGuideAreas(achievement).length > 0).length ?? 0;
   const catalogTitleId = activeCatalog ? `${activeCatalog.id}-catalog-title` : undefined;
   return (
     <>
-      <PageHeading eyebrow="PLATFORM GOALS" title="Achievements" lead="View platform criteria, follow walkthrough pointers, and mark recorded unlocks. Trigger details and full missability remain under research; PS4 and Xbox share the same gameplay criteria." />
+      <PageHeading eyebrow="PLATFORM GOALS" title="Achievements" lead="View platform criteria, follow walkthrough pointers, and mark recorded unlocks. Trigger details and full missability remain under research; mobile catalogs are tracked separately because iOS and Android differ." />
       <div className="achievement-toolbar"><label className="field-label" htmlFor="achievement-platform">Selected platform</label><select id="achievement-platform" value={platform} onChange={(event) => onPlatformChange(event.target.value as PlatformChoice)}>{platformOptions(platform).map(([value, label]) => <option key={value} value={value}>{label}</option>)}</select><span className="coverage-status">{activeCatalog ? `${activeCompleted} / ${activeCatalog.records.length} marked unlocked · guide links for ${activeMapped}` : "No catalog is confirmed for this platform"}</span></div>
       <section className="achievement-source-list" aria-label="Achievement source coverage">
         <div className="achievement-source-row"><span className="platform-monogram">PS1</span><div className="achievement-source-copy"><strong>Original PlayStation</strong><span>No platform trophy or achievement checklist applies to the original release; game completion objectives are tracked separately.</span></div><span className="status-label"><span className="state-dot verified" /> No platform set</span><span className="source-unavailable">—</span></div>
@@ -1449,11 +1470,11 @@ function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenCha
         <div className="achievement-source-row"><span className="platform-monogram">PS</span><div className="achievement-source-copy"><strong>PlayStation 4 / PS5 compatibility</strong><span>All {ps4.count} trophies are catalogued: 51 gameplay criteria shared with Xbox plus the automatic Heroes of Gaia Platinum. Trigger and missability audits remain in progress; PS5 feature omissions may apply.</span></div><span className="status-label"><span className="state-dot partial" /> Catalogued</span><a href={sources.find((source) => source.id === ps4.sourceId)?.url} target="_blank" rel="noreferrer" aria-label="Open PlayStation trophy list"><ExternalLink size={15} /></a></div>
         <div className="achievement-source-row"><span className="platform-monogram">XB</span><div className="achievement-source-copy"><strong>Xbox One / Series X|S / Windows app</strong><span>All {xbox.count} criteria are catalogued and match the PS4 gameplay trophy set. The list is worth 1,000 Gamerscore; trigger and missability audits remain in progress.</span></div><span className="status-label"><span className="state-dot partial" /> Catalogued</span><a href={sources.find((source) => source.id === xbox.sourceId)?.url} target="_blank" rel="noreferrer" aria-label="Open Xbox achievement list"><ExternalLink size={15} /></a></div>
         <div className="achievement-source-row"><span className="platform-monogram">NS</span><div className="achievement-source-copy"><strong>Nintendo Switch</strong><span>The official listing confirms the remaster and boosters, but does not establish a platform achievement set. Applicability remains under review.</span></div><span className="status-label"><span className="state-dot planned" /> Unresolved</span><a href={sources.find((source) => source.id === "nintendo-switch-store")?.url} target="_blank" rel="noreferrer" aria-label="Open Nintendo source"><ExternalLink size={15} /></a></div>
-        <div className="achievement-source-row"><span className="platform-monogram">iOS</span><div className="achievement-source-copy"><strong>iOS / iPadOS</strong><span>App Store lists achievements and seven boosters. The achievement service and criteria are not yet verified.</span></div><span className="status-label"><span className="state-dot planned" /> Unresolved</span><a href={sources.find((source) => source.id === "apple-app-store")?.url} target="_blank" rel="noreferrer" aria-label="Open App Store source"><ExternalLink size={15} /></a></div>
-        <div className="achievement-source-row"><span className="platform-monogram">AOS</span><div className="achievement-source-copy"><strong>Android</strong><span>Google Play lists achievements and seven boosters. Google Play Games integration and criteria are not yet verified.</span></div><span className="status-label"><span className="state-dot planned" /> Unresolved</span><a href={sources.find((source) => source.id === "google-play-store")?.url} target="_blank" rel="noreferrer" aria-label="Open Google Play source"><ExternalLink size={15} /></a></div>
+        <div className="achievement-source-row"><span className="platform-monogram">iOS</span><div className="achievement-source-copy"><strong>iOS / iPadOS · Game Center</strong><span>{ios.count} achievements are catalogued. This list omits Backstabber and Movie Critic from the 85-entry Steam/Android sets; trigger and missability audits remain open.</span></div><span className="status-label"><span className="state-dot partial" /> Catalogued</span><a href={sources.find((source) => source.id === ios.sourceId)?.url} target="_blank" rel="noreferrer" aria-label="Open iOS achievement list"><ExternalLink size={15} /></a></div>
+        <div className="achievement-source-row"><span className="platform-monogram">AOS</span><div className="achievement-source-copy"><strong>Android · Google Play</strong><span>{android.count} achievements are catalogued, including Backstabber and Movie Critic; this list matches Steam by criterion. Trigger and missability audits remain open.</span></div><span className="status-label"><span className="state-dot partial" /> Catalogued</span><a href={sources.find((source) => source.id === android.sourceId)?.url} target="_blank" rel="noreferrer" aria-label="Open Android achievement list"><ExternalLink size={15} /></a></div>
       </section>
       {activeCatalog && catalogTitleId ? <section className="achievement-catalog" aria-labelledby={catalogTitleId}>
-        <div className="achievement-catalog-header"><div><div className="eyebrow">{activeCatalog.label.toUpperCase()} · MANUAL TRACKER</div><h2 id={catalogTitleId}>All {activeCatalog.records.length} {platform === "ps4" ? "trophies" : "achievements"}</h2><p>{platform === "steam" ? "Names and criteria are transcribed from Steam's global list. Mark an achievement when Steam records it as unlocked; the guide cannot read Steam's unlock state." : platform === "ps4" ? "The 51 gameplay criteria match Xbox; Heroes of Gaia is the automatic Platinum trophy. Mark a trophy after PlayStation records it as earned." : "These 51 Xbox criteria match the PS4 gameplay trophy set. Mark an achievement after Xbox records it as unlocked."} Walkthrough pointers cover {activeMapped} catalog entries; trigger detail and full missability remain under review.</p></div><span className="coverage-status">{activeCompleted} / {activeCatalog.records.length} marked unlocked</span></div>
+        <div className="achievement-catalog-header"><div><div className="eyebrow">{activeCatalog.label.toUpperCase()} · MANUAL TRACKER</div><h2 id={catalogTitleId}>All {activeCatalog.records.length} {platform === "ps4" ? "trophies" : "achievements"}</h2><p>{activeCatalogDescription} Walkthrough pointers cover {activeMapped} catalog entries; trigger detail and full missability remain under review.</p></div><span className="coverage-status">{activeCompleted} / {activeCatalog.records.length} marked unlocked</span></div>
         <div className="achievement-catalog-list" aria-label={`${activeCatalog.label} achievement criteria`}>
           {activeCatalog.records.map((achievement) => {
             const done = profile.marks[achievement.objectiveId]?.complete === true;
@@ -1482,7 +1503,7 @@ function Achievements({ profile, platform, onPlatformChange, onToggle, onOpenCha
             </div>;
           })}
         </div>
-      </section> : <p className="method-note">Platform counts checked 23 Oct 2026. Switch and mobile achievement-service catalogs remain unresolved.</p>}
+      </section> : <p className="method-note">Platform counts checked 26 Oct 2026. Nintendo Switch has no platform catalog confirmed in this review; iOS and Android lists are transcribed from their service-specific catalogs.</p>}
     </>
   );
 }

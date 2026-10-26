@@ -14,7 +14,7 @@ export type ActiveTimeEvent = {
 };
 
 const routeSources = ["steam-community-ate-guide", "gamerguides-movie-critic-guide"];
-const achievementSources = ["playstationtrophies-movie-critic", "xboxachievements-movie-critic"];
+const achievementSources = ["playstationtrophies-movie-critic", "xboxachievements-movie-critic", "android-google-play-achievements"];
 
 function scene(
   slug: string,

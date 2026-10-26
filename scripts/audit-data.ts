@@ -1,5 +1,5 @@
 import { achievementSourceCounts, arcs, guideAreas, missables, objectives, sources } from "../src/data/guide.ts";
-import { ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
+import { androidAchievements, iosAchievements, ps4Trophies, steamAchievements, xboxAchievements } from "../src/data/achievements.ts";
 import { excalibur2Checkpoints } from "../src/data/excalibur2.ts";
 import { activeTimeEvents, movieCriticEligibleEvents, movieCriticExclusiveGroupId, movieCriticTarget } from "../src/data/ates.ts";
 import { ateObjectiveDependencies, gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, guideChapterSequence, guideSequenceEdges, objectiveAccessDependencies, objectiveDependencies, questPrerequisiteDependencies, storyPartySequences } from "../src/data/progression.ts";
@@ -32,6 +32,8 @@ checkUnique("equipment ability claim", equipmentAbilityClaims.map((claim) => cla
 checkUnique("Steam achievement", steamAchievements.map((achievement) => achievement.id));
 checkUnique("PS4 trophy", ps4Trophies.map((achievement) => achievement.id));
 checkUnique("Xbox achievement", xboxAchievements.map((achievement) => achievement.id));
+checkUnique("iOS Game Center achievement", iosAchievements.map((achievement) => achievement.id));
+checkUnique("Android Google Play achievement", androidAchievements.map((achievement) => achievement.id));
 checkUnique("area", guideAreas.map((area) => area.id));
 checkUnique("walkthrough chapter", walkthroughChapters.map((chapter) => chapter.areaId));
 checkUnique("Excalibur II checkpoint", excalibur2Checkpoints.map((checkpoint) => checkpoint.id));
@@ -62,6 +64,8 @@ const achievementCatalogs = [
   { platform: "steam" as const, records: steamAchievements, expectedCount: achievementSourceCounts.steam.count },
   { platform: "ps4" as const, records: ps4Trophies, expectedCount: achievementSourceCounts.ps4.count },
   { platform: "xbox" as const, records: xboxAchievements, expectedCount: achievementSourceCounts.xbox.count },
+  { platform: "ios" as const, records: iosAchievements, expectedCount: achievementSourceCounts.ios.count },
+  { platform: "android" as const, records: androidAchievements, expectedCount: achievementSourceCounts.android.count },
 ];
 
 const cleyraEvacuationWarning = missablesById.get("missable.disc-2.cleyra.out-of-harms-way");
@@ -1644,6 +1648,10 @@ for (const { platform, records } of achievementCatalogs) {
   const movieCritic = records.find((achievement) =>
     ("parityId" in achievement ? achievement.parityId : achievement.id) === "movie-critic",
   );
+  if (!movieCritic) {
+    if (platform !== "ios") errors.push(`${platform} catalog is missing its Movie Critic achievement.`);
+    continue;
+  }
   for (const event of movieCriticEligibleEvents) {
     if (!movieCritic?.guideObjectiveIds?.includes(event.objectiveId)) {
       errors.push(`${platform} Movie Critic achievement is missing ATE pointer ${event.objectiveId}.`);
@@ -2439,6 +2447,9 @@ for (const { platform, records, expectedCount } of achievementCatalogs) {
       const guideObjective = objectives.find((item) => item.id === objectiveId);
       if (!guideObjective) errors.push(`${platform} achievement ${achievement.id} references unknown guide objective ${objectiveId}.`);
       else if (!guideObjective.chapterIds?.length) errors.push(`${platform} achievement ${achievement.id} guide objective ${objectiveId} has no chapter pointer.`);
+      else if (guideObjective.achievementPlatforms && !guideObjective.achievementPlatforms.includes(platform)) {
+        errors.push(`${platform} achievement ${achievement.id} guide objective ${objectiveId} is filtered from its platform profile.`);
+      }
     }
     for (const chapterId of achievement.guideChapterIds ?? []) {
       if (!areaIds.has(chapterId)) errors.push(`${platform} achievement ${achievement.id} references unknown guide chapter ${chapterId}.`);
@@ -2455,6 +2466,9 @@ for (const { platform, records, expectedCount } of achievementCatalogs) {
 const ps4ParityIds = ps4Trophies.filter((record) => record.parityId !== "ps4-platinum").map((record) => record.parityId).sort();
 const xboxParityIds = xboxAchievements.map((record) => record.parityId).sort();
 const steamAchievementIds = new Set(steamAchievements.map((record) => record.id));
+const iosParityIds = iosAchievements.map((record) => record.parityId).sort();
+const androidParityIds = androidAchievements.map((record) => record.parityId).sort();
+const expectedIosParityIds = [...steamAchievementIds].filter((id) => id !== "backstabber" && id !== "movie-critic").sort();
 if (ps4ParityIds.length !== 51 || new Set(ps4ParityIds).size !== 51) {
   errors.push(`PS4 catalog has ${ps4ParityIds.length} non-Platinum criteria; expected 51 unique gameplay trophies.`);
 }
@@ -2463,6 +2477,26 @@ if (JSON.stringify(ps4ParityIds) !== JSON.stringify(xboxParityIds)) {
 }
 for (const parityId of xboxParityIds) {
   if (!steamAchievementIds.has(parityId)) errors.push(`Console criterion ${parityId} has no Steam comparison record.`);
+}
+if (androidParityIds.length !== 85 || JSON.stringify(androidParityIds) !== JSON.stringify([...steamAchievementIds].sort())) {
+  errors.push("Android Google Play catalog must match the 85 Steam criteria by parity ID.");
+}
+if (iosParityIds.length !== 83 || JSON.stringify(iosParityIds) !== JSON.stringify(expectedIosParityIds)) {
+  errors.push("iOS Game Center catalog must match the 83-entry list without Backstabber and Movie Critic.");
+}
+if (androidAchievements.some((record) => record.sourceId !== "android-google-play-achievements") ||
+  iosAchievements.some((record) => record.sourceId !== "ios-game-center-achievements")) {
+  errors.push("Mobile achievement records must keep their service-specific catalog source IDs.");
+}
+const androidMovieCritic = androidAchievements.find((record) => record.id === "movie-critic");
+const iosMovieCritic = iosAchievements.find((record) => record.id === "movie-critic");
+const androidBackstabber = androidAchievements.find((record) => record.id === "backstabber");
+const iosBackstabber = iosAchievements.find((record) => record.id === "backstabber");
+if (!androidMovieCritic || !androidBackstabber || iosMovieCritic || iosBackstabber) {
+  errors.push("Android must include Movie Critic and Backstabber; the iOS Game Center catalog must omit both.");
+}
+if (androidMovieCritic && activeTimeEvents.some((event) => !event.sourceIds.includes("android-google-play-achievements"))) {
+  errors.push("Android Movie Critic event routes must cite the Google Play achievement catalog.");
 }
 
 for (const objective of objectives) {
@@ -5520,18 +5554,24 @@ if (
   !mountainMoonstoneFinalWarning.sourceIds.includes("playstationtrophies-over-the-moon") ||
   !mountainMoonstoneFinalWarning.sourceIds.includes("steam-achievements") ||
   !mountainMoonstoneFinalWarning.sourceIds.includes("xboxachievements-FFIX-list") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("ios-game-center-achievements") ||
+  !mountainMoonstoneFinalWarning.sourceIds.includes("android-google-play-achievements") ||
   !mountainMoonstoneObjective?.achievementPlatforms?.includes("steam") ||
   !mountainMoonstoneObjective.achievementPlatforms.includes("ps4") ||
   !mountainMoonstoneObjective.achievementPlatforms.includes("xbox") ||
+  !mountainMoonstoneObjective.achievementPlatforms.includes("ios") ||
+  !mountainMoonstoneObjective.achievementPlatforms.includes("android") ||
   !mountainMoonstoneObjective.sourceIds.includes("gamefaqs-achievements-71891") ||
   !mountainMoonstoneObjective.sourceIds.includes("gamerguides-over-the-moon-achievement") ||
   !mountainMoonstoneObjective.sourceIds.includes("xboxachievements-FFIX-list") ||
-  moonstoneAchievementCriteria.length !== 3 ||
+  !mountainMoonstoneObjective.sourceIds.includes("ios-game-center-achievements") ||
+  !mountainMoonstoneObjective.sourceIds.includes("android-google-play-achievements") ||
+  moonstoneAchievementCriteria.length !== 5 ||
   moonstoneAchievementCriteria.some(({ platform, record }) =>
     !record || record.criteria !== "Obtain 4 moonstones." ||
     !record.guideObjectiveIds?.includes(mountainMoonstoneObjectiveId) ||
     !record.guideSourceIds?.includes("gamerguides-over-the-moon-achievement") ||
-    !["steam", "ps4", "xbox"].includes(platform)) ||
+    !["steam", "ps4", "xbox", "ios", "android"].includes(platform)) ||
   !mountainMoonstoneFinalCutoff?.missableIds.includes(mountainMoonstoneFinalWarning.id) ||
   !mountainMoonstoneFinalCutoff?.sourceIds.includes("gamefaqs-preparing-to-leave-71891") ||
   !mountainMoonstoneFinalCutoff?.sourceIds.includes("gamefaqs-mountain-path-return-29957")
@@ -7286,7 +7326,7 @@ const overTheMoonObjectives = [
   "disc-4.return-to-gaia.stiltzkin-eighth-bundle",
 ];
 const overTheMoonRecords = achievementCatalogs.flatMap(({ records }) => records).filter((achievement) => achievement.id === "over-the-moon");
-if (overTheMoonRecords.length !== 3 || overTheMoonRecords.some((achievement) =>
+if (overTheMoonRecords.length !== 5 || overTheMoonRecords.some((achievement) =>
   JSON.stringify(achievement.guideObjectiveIds) !== JSON.stringify(overTheMoonObjectives) ||
   achievement.guideObjectiveIds?.includes("disc-3.lost-continent.feather-circle") ||
   !achievement.guideNote?.includes("Friendly Feather Circle is a separate request that consumes a Moonstone") ||
