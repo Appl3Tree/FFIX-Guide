@@ -473,8 +473,8 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 16000 },
-    sourceIds: disc4BlackCatRecipeSources,
-    notes: "Dragon's Claws + Tiger Fangs makes Duel Claws for 16,000 Gil at Black Cat on Disc IV. GameFAQs and RPGClassics agree on the ingredients and price. Caves of Narshe lists Tiger Fangs at Daguerreo on Disc IV, while GameFAQs and RPGClassics omit it from their Disc IV shop tables; treat the purchase as unverified and retain the Disc III copy if Duel Claws is a selected goal. Dragon's Claws comes from Chocograph #7; GameFAQs labels the synthesis not recommended.",
+    sourceIds: [...disc4BlackCatRecipeSources, "ffwiki-tiger-fangs"],
+    notes: "Dragon's Claws + Tiger Fangs makes Duel Claws for 16,000 Gil at Black Cat on Disc IV. GameFAQs and RPGClassics agree on the ingredients and price; Final Fantasy Wiki also identifies Tiger Fangs as a Duel Claws synthesis ingredient and describes its Daguerreo purchase as missable before Shimmering Island. Caves of Narshe lists Tiger Fangs at Daguerreo on Disc IV, while GameFAQs and RPGClassics omit it from their Disc IV shop tables; treat the purchase as unverified and retain the Disc III copy if Duel Claws is a selected goal. Dragon's Claws comes from Chocograph #7; GameFAQs labels the synthesis not recommended.",
   },
   {
     id: "synthesis-recipe.bracer",
