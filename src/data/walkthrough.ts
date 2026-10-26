@@ -6693,21 +6693,21 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "final-preparations-final-check",
         title: "Final check — Hades, Hammer, and the last open goals",
-        summary: "Use Hades's final acquisition window if needed, and decide whether Hammer is for Tin Armor or the extra ending scene.",
-        sourceIds: ["gamefaqs-final-preparations-71891", "gamefaqs-master-synthesist-71891", "gamefaqs-items-71891"],
+        summary: "Use Hades's final acquisition window if needed, and decide whether Hammer is for Tin Armor, a Pumice Piece, or the extra ending scene.",
+        sourceIds: ["gamefaqs-final-preparations-71891", "gamefaqs-master-synthesist-71891", "gamefaqs-items-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "elitegrindlab-synthesis"],
         steps: [
           {
             id: "final-preparations-hades-running-shoes",
             kind: "optional",
-            text: "If Hades is not defeated, return to the underwater Birth room in Memoria and interact behind the large rock formation. Steal Running Shoes before winning, then use the Master Synthesist for any selected recipes.",
-            detail: "GameFAQs calls Running Shoes the final copy available from an enemy. Keep any existing copy; this steal matters only for another acquisition. Hades remains available after Deathguise and the shop opens when he is defeated.",
+            text: "If Hades is not defeated, return to the underwater Birth room in Memoria and interact behind the large rock formation. Steal Running Shoes before winning; use the Master Synthesist for selected recipes if the shop is available.",
+            detail: "GameFAQs calls Running Shoes the final copy available from an enemy. Keep any existing copy; this steal matters only for another acquisition. Hades remains available after Deathguise. GameFAQs says the shop opens on victory, while RPGClassics says Hades asks for two Pumice Pieces before opening it; the trigger remains unresolved.",
             objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals"],
           },
           {
             id: "final-preparations-hammer-choice",
             kind: "cutoff",
-            text: "Before using Hammer in a Hades synthesis, choose your goal: keep it in inventory for the extra ending scene, or spend it to make Tin Armor.",
-            detail: "This is a one-copy tradeoff. If the extra scene matters, leave Hammer in inventory through the ending and mark the ending objective; do not synthesize Tin Armor with it.",
+            text: "Before using Hammer at Hades, choose whether to keep it for the extra ending scene or spend it on Tin Armor or a Pumice Piece.",
+            detail: "Both recipes consume Queen Stella's unique Hammer. The Pumice Piece recipe also consumes the Pumice used to teach Dagger Ark. If the extra scene matters, leave Hammer in inventory through the ending. Hades's shop-opening trigger remains disputed in the source set.",
             objectiveIds: ["disc-4.final-preparations.hammer-ending"],
           },
           {

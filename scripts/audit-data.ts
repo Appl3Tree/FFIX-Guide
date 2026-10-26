@@ -1931,6 +1931,84 @@ if (
 ) {
   errors.push("Ophiucus and the unique Hammer need separate item, conditional-path, objective, source, and walkthrough links.");
 }
+const hadesRecipeSources = ["gamefaqs-items-71891", "gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "elitegrindlab-synthesis"];
+const hadesRecipeChecks = [
+  {
+    recipeId: "synthesis-recipe.tin-armor",
+    itemId: "game-item.tin-armor",
+    ingredients: [{ itemId: "game-item.hammer", quantity: 1 }, { itemId: "game-item.ore", quantity: 1 }],
+    cost: 50000,
+    pathId: "item-path.disc-4.memoria.hades-tin-armor-synthesis",
+  },
+  {
+    recipeId: "synthesis-recipe.pumice",
+    itemId: "game-item.pumice",
+    ingredients: [{ itemId: "game-item.pumice-piece", quantity: 2 }],
+    cost: 50000,
+    pathId: "item-path.disc-4.memoria.hades-pumice-synthesis",
+  },
+  {
+    recipeId: "synthesis-recipe.pumice-piece",
+    itemId: "game-item.pumice-piece",
+    ingredients: [{ itemId: "game-item.hammer", quantity: 1 }, { itemId: "game-item.pumice", quantity: 1 }],
+    cost: 25000,
+    pathId: "item-path.disc-4.memoria.hades-pumice-piece-synthesis",
+  },
+];
+const hadesRecipeRecordsMatch = hadesRecipeChecks.every((expected) => {
+  const recipe = synthesisRecipes.find((record) => record.id === expected.recipeId);
+  const path = itemAcquisitionPaths.find((record) => record.id === expected.pathId);
+  return recipe?.resultItemId === expected.itemId
+    && JSON.stringify(recipe.ingredients) === JSON.stringify(expected.ingredients)
+    && recipe.chapterId === "disc-4.memoria"
+    && recipe.shopId === "hades.master-synthesist"
+    && recipe.cost.amount === expected.cost
+    && hadesRecipeSources.every((sourceId) => recipe.sourceIds.includes(sourceId))
+    && path?.itemId === expected.itemId
+    && path.method === "synthesis"
+    && path.recipeId === expected.recipeId
+    && path.chapterId === "disc-4.memoria"
+    && path.availability === "conditional"
+    && path.shopId === "hades.master-synthesist"
+    && path.cost?.amount === expected.cost
+    && path.walkthroughObjectiveIds?.includes("disc-4.memoria.hades")
+    && hadesRecipeSources.every((sourceId) => path.sourceIds.includes(sourceId));
+});
+const tinArmorItem = gameItems.find((item) => item.id === "game-item.tin-armor");
+const pumiceItem = gameItems.find((item) => item.id === "game-item.pumice");
+const pumicePieceItem = gameItems.find((item) => item.id === "game-item.pumice-piece");
+const hammerEndingWarning = missablesById.get("missable.disc-4.final-preparations.hammer-ending");
+const hammerChoiceStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.final-preparations")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "final-preparations-hammer-choice");
+const hammerChoiceSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.final-preparations")
+  ?.sections.find((section) => section.steps.some((step) => step.id === "final-preparations-hammer-choice"));
+if (
+  !hadesRecipeRecordsMatch
+  || !tinArmorItem
+  || !hadesRecipeSources.every((sourceId) => tinArmorItem.sourceIds.includes(sourceId))
+  || !pumiceItem?.sourceIds.includes("rpgclassics-synthesis")
+  || !pumiceItem.sourceIds.includes("elitegrindlab-synthesis")
+  || !pumicePieceItem?.sourceIds.includes("rpgclassics-synthesis")
+  || !pumicePieceItem.sourceIds.includes("elitegrindlab-synthesis")
+  || !hammerItem?.sourceIds.includes("rpgclassics-synthesis")
+  || !hammerItem?.sourceIds.includes("elitegrindlab-synthesis")
+  || !hammerEndingWarning?.consequence.includes("Tin Armor")
+  || !hammerEndingWarning.consequence.includes("Pumice Piece")
+  || !hammerEndingWarning.action.includes("Tin Armor")
+  || !hammerEndingWarning.action.includes("Pumice Piece")
+  || !hadesRecipeSources.every((sourceId) => hammerEndingWarning.sourceIds.includes(sourceId))
+  || !hammerChoiceStep?.text.includes("Tin Armor")
+  || !hammerChoiceStep.text.includes("Pumice Piece")
+  || !hammerChoiceStep.detail.includes("Pumice used to teach Dagger Ark")
+  || !hammerChoiceSection?.sourceIds.includes("rpgclassics-memoria")
+  || !hammerChoiceSection.sourceIds.includes("rpgclassics-synthesis")
+  || !hammerChoiceSection.sourceIds.includes("elitegrindlab-synthesis")
+) {
+  errors.push("Hades's Tin Armor/Pumice/Pumice Piece recipes need exact ingredients and prices, conditional item paths, source links, and the unique-Hammer tradeoff in the warning and walkthrough.");
+}
 const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
 const burmeciaDisc2SpearStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra")
