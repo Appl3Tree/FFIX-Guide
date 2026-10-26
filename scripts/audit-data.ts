@@ -2620,31 +2620,36 @@ const dragonClawsChocographPath = itemAcquisitionPaths.find((path) => path.id ==
 const tigerFangsShopPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.tiger-fangs");
 const tigerFangsDisc4CandidatePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.tiger-fangs-daguerreo-candidate");
 const ffwikiTigerFangsSource = sources.find((source) => source.id === "ffwiki-tiger-fangs");
+const jinsokuTigerFangsSource = sources.find((source) => source.id === "jinsoku-limited-items");
 const tigerFangsItem = gameItems.find((item) => item.id === "game-item.tiger-fangs");
 const tigerFangsAbilityClaims = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.tiger-fangs");
 const hadesElixirDropPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-elixir-drop");
 const necronElixirStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.necron-elixir-common-steal");
-const deathguiseWalkthroughStep = walkthroughChapters
+const deathguiseWalkthroughSection = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.memoria")
-  ?.sections.flatMap((section) => section.steps)
-  .find((step) => step.id === "memoria-deathguise-steals");
+  ?.sections.find((section) => section.steps.some((step) => step.id === "memoria-deathguise-steals"));
+const deathguiseWalkthroughStep = deathguiseWalkthroughSection?.steps.find((step) => step.id === "memoria-deathguise-steals");
 if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !deathguiseWarning.classification.includes("limited-quantity") ||
   !deathguiseWarning.classification.includes("recoverable-later") ||
   !deathguiseWarning.nextAvailability?.includes("Treno on Disc IV for 4,000 Gil") ||
   !deathguiseWarning.nextAvailability.includes("only if both materials remain") ||
   !deathguiseWarning.nextAvailability.includes("Caves of Narshe lists a Disc IV Daguerreo Tiger Fangs purchase") ||
-  !deathguiseWarning.nextAvailability.includes("Final Fantasy Wiki's indexed item page says the purchase ends before Shimmering Island") ||
+  !deathguiseWarning.nextAvailability.includes("Final Fantasy Wiki and Jinsoku support a Disc III limited purchase") ||
   !deathguiseWarning.nextAvailability.includes("retain the Disc III copy if Duel Claws matters") ||
   !deathguiseWarning.sourceIds.includes("ffwiki-tiger-fangs") ||
+  !deathguiseWarning.sourceIds.includes("jinsoku-limited-items") ||
   !ffwikiTigerFangsSource?.url.includes("Tiger_Fangs_%28Final_Fantasy_IX%29") ||
   !ffwikiTigerFangsSource.notes.includes("could not be opened directly through the browser fetch") ||
   !ffwikiTigerFangsSource.notes.includes("does not resolve late stock") ||
+  !jinsokuTigerFangsSource?.url.endsWith("/ff9/item/warning_item.html") ||
+  !jinsokuTigerFangsSource.notes.includes("does not give a price, identify a game build") ||
+  !jinsokuTigerFangsSource.notes.includes("without resolving Caves of Narshe's conflicting Disc IV map listing") ||
   !["cavesofnarshe-ff9-disc-4-map", "gamefaqs-shops-71891", "rpgclassics-shops"].every((sourceId) => deathguiseWarning.sourceIds.includes(sourceId)) ||
   !deathguiseStealObjective ||
-  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "rpgclassics-addons", "cavesofnarshe-ff9-disc-4-map", "rpgclassics-shops", "ffwiki-tiger-fangs"].every((sourceId) => deathguiseStealObjective.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "rpgclassics-addons", "cavesofnarshe-ff9-disc-4-map", "rpgclassics-shops", "ffwiki-tiger-fangs", "jinsoku-limited-items"].every((sourceId) => deathguiseStealObjective.sourceIds.includes(sourceId)) ||
   !updatedShopsObjective ||
-  !["gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-4-map"].every((sourceId) => updatedShopsObjective.sourceIds.includes(sourceId)) ||
+  !["gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-4-map", "jinsoku-limited-items"].every((sourceId) => updatedShopsObjective.sourceIds.includes(sourceId)) ||
   !updatedShopsObjective.sourceIds.includes("ffwiki-tiger-fangs") ||
   !blackBeltRecipe || blackBeltRecipe.resultItemId !== "game-item.black-belt" ||
   blackBeltRecipe.cost.amount !== 4000 || blackBeltRecipe.shopId !== "treno.synthesis-shop.disc-3-4" ||
@@ -2669,6 +2674,7 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !dragonClawsChocographPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !tigerFangsShopPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !tigerFangsShopPath.sourceIds.includes("ffwiki-tiger-fangs") ||
+  !tigerFangsShopPath.sourceIds.includes("jinsoku-limited-items") ||
   !tigerFangsDisc4CandidatePath || tigerFangsDisc4CandidatePath.itemId !== "game-item.tiger-fangs" ||
   tigerFangsDisc4CandidatePath.chapterId !== "disc-4.return-to-gaia" || tigerFangsDisc4CandidatePath.method !== "shop" ||
   tigerFangsDisc4CandidatePath.availability !== "window-unverified" || tigerFangsDisc4CandidatePath.cost?.amount !== 13500 ||
@@ -2676,14 +2682,17 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !tigerFangsDisc4CandidatePath.sourceIds.includes("gamefaqs-shops-71891") ||
   !tigerFangsDisc4CandidatePath.sourceIds.includes("rpgclassics-shops") ||
   !tigerFangsDisc4CandidatePath.sourceIds.includes("ffwiki-tiger-fangs") ||
+  !tigerFangsDisc4CandidatePath.sourceIds.includes("jinsoku-limited-items") ||
   !tigerFangsDisc4CandidatePath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.updated-shops") ||
   !tigerFangsDisc4CandidatePath.walkthroughObjectiveIds.includes("disc-4.memoria.deathguise-steals") ||
   !hadesElixirDropPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !necronElixirStealPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !deathguiseWalkthroughStep?.detail?.includes("Hades's drop table") ||
   !deathguiseWalkthroughStep.detail.includes("8,100 Gil total") ||
-  !deathguiseWalkthroughStep.detail.includes("Caves of Narshe lists a Disc IV purchase and GameFAQs/RPGClassics omit it") ||
+  !deathguiseWalkthroughStep.detail.includes("Caves of Narshe lists a Disc IV purchase while GameFAQs/RPGClassics omit it") ||
   !deathguiseWalkthroughStep.detail.includes("Final Fantasy Wiki's indexed item page describes the 13,500-Gil Daguerreo Tiger Fangs purchase as missable before Shimmering Island") ||
+  !deathguiseWalkthroughStep.detail.includes("Jinsoku's Japanese limited-item list independently places it at Daguerreo on Disc III") ||
+  !deathguiseWalkthroughSection?.sourceIds.includes("jinsoku-limited-items") ||
   !deathguiseWalkthroughStep.detail.includes("retain the Disc III copy if Duel Claws matters until confirmed")) {
   errors.push("Deathguise's one-time steals must distinguish item-type recovery, source-linked Disc IV Black Belt synthesis, and the conditional Duel Claws ingredient route, including the disputed Tiger Fangs Disc IV candidate.");
 }
@@ -6665,6 +6674,7 @@ const finalStockAbilityWarning = missablesById.get("missable.disc-3.preparing-to
 const finalStockAbilityObjective = objectives.find((objective) => objective.id === "disc-3.preparing-to-leave.final-stock-ability-review");
 const finalStockAbilitySources = ["gamefaqs-abilities-71891", "rpgclassics-abilities"];
 const finalStockTigerFangsSource = "ffwiki-tiger-fangs";
+const finalStockTigerFangsWindowSource = "jinsoku-limited-items";
 const finalStockAbilityItems = ["game-item.trident", "game-item.diamond-sword", "game-item.flame-saber", "game-item.heavy-lance", "game-item.scissor-fangs", "game-item.tiger-fangs"]
   .map((itemId) => gameItems.find((item) => item.id === itemId));
 const finalStockAbilityClaims = [
@@ -6705,10 +6715,14 @@ if (
   !finalStockAbilityWarning.consequence.includes("not a claim that missing the gear permanently removes an ability") ||
   !finalStockAbilityWarning.nextAvailability.includes("Neither reviewed PlayStation ability table lists alternate equipment for Luna") ||
   !finalStockAbilityWarning.note.includes("post-transition and version-specific ability-source audit remains partial") ||
-  !finalStockAbilityWarning.note.includes("Final Fantasy Wiki's indexed Tiger Fangs entry") ||
+  !finalStockAbilityWarning.note.includes("Final Fantasy Wiki's indexed entry lists Revive/Counter and calls the pre-Shimmering Island purchase missable") ||
+  !finalStockAbilityWarning.note.includes("Jinsoku independently lists the Disc III Daguerreo seller under limited items") ||
   !finalStockAbilityWarning.sourceIds.includes(finalStockTigerFangsSource) ||
+  !finalStockAbilityWarning.sourceIds.includes(finalStockTigerFangsWindowSource) ||
   !finalStockAbilitySources.every((sourceId) => finalStockAbilityWarning.sourceIds.includes(sourceId)) ||
-  !finalStockAbilityObjective || !finalStockAbilityObjective.sourceIds.includes(finalStockTigerFangsSource) || !finalStockAbilitySources.every((sourceId) => finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
+  !finalStockAbilityObjective || !finalStockAbilityObjective.sourceIds.includes(finalStockTigerFangsSource) ||
+  !finalStockAbilityObjective.sourceIds.includes(finalStockTigerFangsWindowSource) ||
+  !finalStockAbilitySources.every((sourceId) => finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
   finalStockAbilityItems.some((item) => !item || !finalStockAbilitySources.every((sourceId) => item.sourceIds.includes(sourceId))) ||
   !tigerFangsItem?.sourceIds.includes(finalStockTigerFangsSource) ||
   finalStockAbilityPaths.length !== 11 ||
@@ -6723,13 +6737,17 @@ if (
   finalStockAbilityPaths.some(({ itemId, path }) => !path || path.itemId !== itemId ||
     !finalStockAbilitySources.every((sourceId) => path.sourceIds.includes(sourceId))) ||
   !tigerFangsShopPath?.sourceIds.includes(finalStockTigerFangsSource) ||
+  !tigerFangsShopPath.sourceIds.includes(finalStockTigerFangsWindowSource) ||
   !tigerFangsDisc4CandidatePath?.sourceIds.includes(finalStockTigerFangsSource) ||
+  !tigerFangsDisc4CandidatePath.sourceIds.includes(finalStockTigerFangsWindowSource) ||
   tigerFangsAbilityClaims.length !== 2 || tigerFangsAbilityClaims.some((claim) => !claim.sourceIds.includes(finalStockTigerFangsSource)) ||
   !finalStockAbilityWalkthroughStep ||
   !finalStockAbilityWalkthroughStep.detail.includes("both reviewed PlayStation catalogs list Luna (Trident), Power Break (Diamond Sword), Magic Break (Flame Saber), and Six Dragons (Heavy Lance)") ||
   !finalStockAbilitySources.every((sourceId) => finalStockAbilityWalkthrough?.sourceIds.includes(sourceId)) ||
   !finalStockAbilityWalkthrough?.sourceIds.includes(finalStockTigerFangsSource) ||
+  !finalStockAbilityWalkthrough?.sourceIds.includes(finalStockTigerFangsWindowSource) ||
   !finalStockAbilityWalkthroughStep.detail.includes("Final Fantasy Wiki's indexed item page says the 13,500-Gil Daguerreo purchase ends before the Shimmering Island portal") ||
+  !finalStockAbilityWalkthroughStep.detail.includes("Jinsoku's Japanese limited-item list independently places the purchase at Daguerreo on Disc III") ||
   !["cavesofnarshe-ff9-disc-4-map", "cavesofnarshe-ff9-claws", "rpgclassics-shops", "rpgclassics-weapons"].every((sourceId) =>
     finalStockAbilityWalkthrough?.sourceIds.includes(sourceId) &&
     finalStockAbilityWarning.sourceIds.includes(sourceId) && finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
