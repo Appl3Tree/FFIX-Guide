@@ -9944,15 +9944,15 @@ export const sourceInventoryTargets: ItemInventoryTarget[] = [
     itemId: "game-item.steepled-hat",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 7,
-    interpretation: "GameFAQs lists Need 7 and Buy 10 for its source-specific complete item list. This optional target records Need 7; a separate Buy 10 target preserves the source acquisition total. Neither figure is a standard story requirement.",
+    interpretation: "GameFAQs lists Need 7 and end-inventory #10 for Steepled Hat. Its introduction defines # as the number of copies to have at game end, including equipped copies. This optional source-specific target is separate from Need 7 and is not a Buy count or a standard story requirement.",
     sourceIds: ["gamefaqs-items-71891"],
   },
   {
-    id: "item-target.disc-4.final-preparations.steepled-hat-buy",
+    id: "item-target.disc-4.final-preparations.steepled-hat-end-inventory",
     itemId: "game-item.steepled-hat",
     chapterId: "disc-4.final-preparations",
     targetQuantity: 10,
-    interpretation: "GameFAQs lists Buy 10 for Steepled Hat in its source-specific complete item plan. This optional acquisition total is distinct from Need 7; source arithmetic across retained copies and synthesis use still needs a dedicated item reconciliation.",
+    interpretation: "GameFAQs lists end-inventory #10 for Steepled Hat, including equipped copies, separately from Need 7. This is an optional source-specific end-inventory target, not a purchase total or a standard story requirement.",
     sourceIds: ["gamefaqs-items-71891"],
   },
   {

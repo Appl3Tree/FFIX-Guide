@@ -5158,6 +5158,17 @@ if (!steepledHatBmvPath || steepledHatBmvPath.shopId !== "black-mage-village.wea
   !steepledHatBmvPath.sourceIds.includes("gamefaqs-items-71891") || !steepledHatBmvPath.sourceIds.includes("gamefaqs-shops-71891")) {
   errors.push("Steepled Hat's Disc II–III Black Mage Village recovery must remain a source-linked 260-Gil shop path.");
 }
+const steepledHatNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.steepled-hat");
+const steepledHatEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.steepled-hat-end-inventory");
+if (!steepledHatNeedTarget || steepledHatNeedTarget.targetQuantity !== 7 ||
+  !steepledHatNeedTarget.interpretation.includes("Need 7") ||
+  !steepledHatNeedTarget.interpretation.includes("end-inventory #10") ||
+  !steepledHatEndInventoryTarget || steepledHatEndInventoryTarget.targetQuantity !== 10 ||
+  !steepledHatEndInventoryTarget.interpretation.includes("including equipped copies") ||
+  !steepledHatEndInventoryTarget.interpretation.includes("not a purchase total") ||
+  sourceInventoryTargets.some((target) => target.id === "item-target.disc-4.final-preparations.steepled-hat-buy")) {
+  errors.push("Steepled Hat's GameFAQs Need 7 and end-inventory #10 must remain distinct; #10 is not a Buy total.");
+}
 if (itemAcquisitionPaths.some((path) => path.itemId === steepledHatId && path.shopId === "treno.weapon-shop.disc-2") ||
   !blackWaltz3StealWarning?.recovery.includes("Steepled Hat can be bought at Atla") ||
   !blackWaltz3StealWarning.recovery.includes("Black Mage Village (Discs II–III)") ||
