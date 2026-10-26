@@ -1633,6 +1633,17 @@ const moisLetterWarning = missablesById.get("missable.disc-1.ice-cavern.mois-let
 const moisLetterCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.dali-cargo-ship.mois-letter");
 const moisLetterReturnEdge = gameRouteEdgesById.get("return.dali-to-ice-cavern");
 const moisLetterRecoverySources = ["cour89-ice-cavern", "game8-mognet-letter-list", "jinsoku-mognet-letter-list"];
+const moisLetterReturnSources = [
+  "gamefaqs-ice-cavern-71891",
+  "steam-missable-content-guide-2988011418",
+  "cour89-ice-cavern",
+  "game8-mognet-letter-list",
+  "jinsoku-mognet-letter-list",
+  "gamefaqs-missables-71891",
+  "gamefaqs-dali-71891",
+  "jegged-ice-cavern",
+  "elitegrindlab-ice-cavern",
+];
 if (
   !moisLetterWarning?.deadline?.includes("before boarding the Cargo Ship from Dali") ||
   !moisLetterWarning.recovery?.includes("Cour89 independently says") ||
@@ -1653,9 +1664,11 @@ if (
 if (
   !moisLetterReturnEdge?.summary.includes("post-boss letter return") ||
   !moisLetterReturnEdge.summary.includes("treat the Cargo Ship as the safe cutoff") ||
-  moisLetterRecoverySources.some((sourceId) => !moisLetterReturnEdge.sourceIds.includes(sourceId))
+  moisLetterReturnSources.some((sourceId) => !moisLetterReturnEdge.sourceIds.includes(sourceId)) ||
+  moisLetterReturnEdge.sourceIds.includes("gamefaqs-ice-cavern-79143") ||
+  moisLetterReturnEdge.sourceIds.includes("jegged-dali")
 ) {
-  errors.push("The Dali return route must distinguish Mois's post-boss letter window from later entrance visits.");
+  errors.push("The Dali return route must cite its scoped Ice Cavern return evidence without treating the timed letter route or first-visit Dali chapter as return evidence.");
 }
 const branBalReturnEdge = gameRouteEdgesById.get("story.portal-to-return-to-gaia");
 const branBalTreasureWarning = missablesById.get("missable.disc-3.portal-to-another-world.terra-bran-bal-treasures");

@@ -528,7 +528,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-1.ice-cavern",
     relationship: "optional-return",
     summary: "Before boarding the Cargo Ship, return from Dali to sweep missed Ice Cavern chests and, if needed, ask Mois for his letter to Gumo. The Steam missables guide recommends this post-boss letter return; Cour89 independently says Mois still gives the Disc I letter before Cargo Ship departure and cannot give it from his Disc II–III entrance location. Game8 and Jinsoku list a broader Disc I/Beatrix window, so treat the Cargo Ship as the safe cutoff. Returning from the sweep rejoins the story at the existing Ice Cavern → Dali link.",
-    sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-ice-cavern-79143", "steam-missable-content-guide-2988011418", "cour89-ice-cavern", "game8-mognet-letter-list", "jinsoku-mognet-letter-list", "gamefaqs-missables-71891", "gamefaqs-dali-71891", "jegged-ice-cavern", "jegged-dali", "elitegrindlab-ice-cavern"],
+    sourceIds: ["gamefaqs-ice-cavern-71891", "steam-missable-content-guide-2988011418", "cour89-ice-cavern", "game8-mognet-letter-list", "jinsoku-mognet-letter-list", "gamefaqs-missables-71891", "gamefaqs-dali-71891", "jegged-ice-cavern", "elitegrindlab-ice-cavern"],
   },
   {
     id: "story.cargo-ship-to-lindblum",

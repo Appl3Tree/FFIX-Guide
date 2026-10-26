@@ -320,7 +320,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/missable-item-walkthrough",
     accessed: "2026-10-25",
-    notes: "Disc I–IV missable-item checklist. Its Lindblum entry says to obtain the Autograph and Moogle Suit before visiting the Tantalus Hideout. Its Mythril Sword entry sets a five-copy target and names Esto Gaza before the Desert Palace as the final opportunity; other listed shop cutoffs and one-time areas need item-specific recovery review.",
+    notes: "Disc I–IV missable-item checklist. Its Ice Cavern entry says leaving Dali ends access to the cave, but it does not discuss Mois's letter. Its Lindblum entry says to obtain the Autograph and Moogle Suit before visiting the Tantalus Hideout. Its Mythril Sword entry sets a five-copy target and names Esto Gaza before the Desert Palace as the final opportunity; other listed shop cutoffs and one-time areas need item-specific recovery review.",
   },
   {
     id: "gamefaqs-missables-21725",
@@ -1080,7 +1080,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/79143/ice-cavern",
     accessed: "2026-10-23",
-    notes: "Excalibur II route and timing context for the cavern and approach to Dali. Kept separate from the standard completion route.",
+    notes: "Excalibur II route and timing context for the cavern and approach to Dali. Its post-boss Mois visit comes after the letter was already collected, so it is not independent evidence that a missed letter can be recovered. Kept separate from the standard completion route.",
   },
   {
     id: "gamefaqs-enemy-list-71891",
@@ -1280,7 +1280,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/06-The-Village-of-Dali.html",
     accessed: "2026-10-23",
-    notes: "Independent route for Dali ATEs, fortune achievement, pickups, factory route, optional encounters, and Black Waltz 2; confirms the 330-Gil Broadsword shop source. Its ATE checklist names five scenes while its walkthrough also mentions a sixth; the guide follows the six-scene list cross-checked with GameFAQs and Gamer Guides.",
+    notes: "Independent first-visit route for Dali ATEs, fortune achievement, pickups, factory route, optional encounters, and Black Waltz 2; it does not describe a later return from Dali to Ice Cavern. Confirms the 330-Gil Broadsword shop source. Its ATE checklist names five scenes while its walkthrough also mentions a sixth; the guide follows the six-scene list cross-checked with GameFAQs and Gamer Guides.",
   },
   {
     id: "gamerguides-dali",
