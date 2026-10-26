@@ -3464,6 +3464,40 @@ if (
 ) {
   errors.push("Bone Wrist's Disc III Daguerreo purchase must be marked closed by the Disc IV weapon-stock change while preserving Alexandria as a later item-type recovery source.");
 }
+for (const expected of [
+  {
+    id: "item-path.disc-2.return-to-lindblum.bone-wrist-shop",
+    chapterId: "disc-2.return-to-lindblum",
+    shopId: "lindblum.weapon-shop.disc-2",
+    sourceStockLabel: "Disc II Lindblum",
+    laterStockLabel: "Disc III–IV",
+  },
+  {
+    id: "item-path.disc-2.outer-continent.bone-wrist-black-mage-village-shop",
+    chapterId: "disc-2.outer-continent",
+    shopId: "black-mage-village.weapon-shop",
+    sourceStockLabel: "Discs II–III",
+    laterStockLabel: "Disc IV",
+  },
+]) {
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.id);
+  if (
+    !path ||
+    path.itemId !== "game-item.bone-wrist" ||
+    path.chapterId !== expected.chapterId ||
+    path.shopId !== expected.shopId ||
+    path.method !== "shop" ||
+    path.availability !== "limited-window" ||
+    path.cost?.currency !== "gil" ||
+    path.cost.amount !== 330 ||
+    !path.conditions.includes(expected.sourceStockLabel) ||
+    !path.conditions.includes(expected.laterStockLabel) ||
+    !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.sourceIds.includes("jegged-arm-gear")
+  ) {
+    errors.push(`Bone Wrist's ${expected.shopId} purchase must be marked limited to its documented pre-Disc-IV shop stock.`);
+  }
+}
 const ralvuimagoEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-alexandria.ralvuimago");
 const ralvuimagoRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvuimago");
 const ralvuimagoHpClaims = ralvuimagoRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
