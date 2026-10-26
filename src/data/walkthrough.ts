@@ -1395,7 +1395,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "burmecia-atla-vault-mognet",
             kind: "optional",
-            text: "In the Vault, collect the Lightning Staff from the back chest before speaking with Atla. If you are carrying Mogki's letter from Lindblum, choose Mognet to deliver it; Atla gives you a Kupo Nut and a letter for Monev. Check Atla's Mogshop, save, and buy Stiltzkin's Soft, Hi-Potion, and Ether bundle for 333 Gil as soon as he appears at the room entrance.",
+            text: "In the Vault, collect the Lightning Staff from the back chest before speaking with Atla. If you are carrying Mogki's letter from Lindblum, choose Mognet to deliver it; Atla gives you a Kupo Nut and a letter for Monev. Check Atla's Mogshop; Headgear costs 330 Gil and teaches Undead Killer if you want it. Save, then buy Stiltzkin's Soft, Hi-Potion, and Ether bundle for 333 Gil as soon as he appears at the room entrance.",
             detail: "Opening the Lightning Staff chest is what triggers Stiltzkin's appearance. Buying this first bundle is required for the full eight-stop Stiltzkin chain and its later Ribbon/Driving the Hard Bargain reward. Atla is reachable again on the Disc II pre-Cleyra route and Disc IV Mognet route, but sources do not establish access to every other pickup room; collect the Disc I chests now.",
             objectiveIds: ["disc-1.burmecia.treasure-sweep", "disc-1.burmecia.stiltzkin-1", "disc-1.burmecia.mognet-atla-monev"],
           },
@@ -1707,7 +1707,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "journey-cleyra-atla-mogshop-return",
             kind: "optional",
-            text: "If you want Atla's Mogshop on Disc II, re-enter Burmecia and visit the shop near the back of town before heading back through Gizamaluke's Grotto. The shop lists Phoenix Down for 150 Gil and Steepled Hat for 260 Gil.",
+            text: "If you want Atla's Mogshop on Disc II, re-enter Burmecia and visit the shop near the back of town before heading back through Gizamaluke's Grotto. The shop lists Headgear for 330 Gil, Phoenix Down for 150 Gil, and Steepled Hat for 260 Gil.",
             detail: "Flactem documents the Disc II city visit and shop stop; the GameFAQs shop table supplies the listed stock and prices. This confirms access to Atla's Mogshop before Cleyra, not the accessibility of every Disc I chest room. Keep the Disc I sweep as the safe route for unverified pickups.",
           },
           {
@@ -6201,7 +6201,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "gaia-return-mognet-letter-22",
             kind: "optional",
             text: "Begin the Disc IV chain with Kupo in Alexandria's Steeple, then deliver letter #22 to Atla in Burmecia's back vault. Atla gives you letter #23 for Mogryo.",
-            detail: "Cour89 numbers these six deliveries #22–27 and says they suffice to restore Mognet Central. Earlier optional mail is not required for this new chain. While at Atla, check his Disc III Mogshop stock; Steepled Hat costs 260 Gil.",
+            detail: "Cour89 numbers these six deliveries #22–27 and says they suffice to restore Mognet Central. Earlier optional mail is not required for this new chain. While at Atla, check his Disc IV Mogshop stock; Headgear costs 330 Gil and Steepled Hat costs 260 Gil.",
             objectiveIds: ["disc-4.return-to-gaia.mognet-letter-22"],
           },
           {

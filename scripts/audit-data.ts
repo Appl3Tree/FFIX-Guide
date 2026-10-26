@@ -2615,6 +2615,19 @@ const runningShoesHadesStealPath = itemAcquisitionPaths.find((path) => path.id =
 const emeraldCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.high-priest-emerald");
 const emeraldNymphPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-iifa-tree.friendly-nymph-emerald");
 const emeraldOeilvertPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.forgotten-continent.stiltzkin-emerald");
+const headgearPathContexts = [
+  { id: "item-path.disc-1.burmecia.headgear-atla-mogshop", chapterId: "disc-1.burmecia", shopId: "burmecia.atla-mogshop", availability: "limited-window" },
+  { id: "item-path.disc-2.journey-to-cleyra.atla-mogshop.headgear", chapterId: "disc-2.journey-to-cleyra", shopId: "burmecia.atla-mogshop", availability: "limited-window" },
+  { id: "item-path.disc-1.lindblum.headgear-dragoos-shop", chapterId: "disc-1.lindblum", shopId: "lindblum.weapon-shop", availability: "limited-window" },
+  { id: "item-path.disc-2.return-to-lindblum.headgear-dragoos-shop", chapterId: "disc-2.return-to-lindblum", shopId: "lindblum.weapon-shop.disc-2", availability: "limited-window" },
+  { id: "item-path.disc-2.journey-to-treno.headgear-summit-station-shop", chapterId: "disc-2.journey-to-treno", shopId: "summit-station.weapon-shop", availability: "limited-window" },
+  { id: "item-path.disc-2.magdalene-forest.headgear-black-mage-village", chapterId: "disc-2.magdalene-forest", shopId: "black-mage-village.weapon-shop.disc-2-3", availability: "limited-window" },
+  { id: "item-path.disc-3.aerial-exploration.headgear-atla-mogshop", chapterId: "disc-3.aerial-exploration", shopId: "burmecia.atla-mogshop", availability: "window-unverified" },
+  { id: "item-path.disc-4.return-to-gaia.headgear-atla-mogshop", chapterId: "disc-4.return-to-gaia", shopId: "burmecia.atla-mogshop", availability: "repeatable" },
+];
+const headgearPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.headgear");
+const headgearItem = gameItems.find((item) => item.id === "game-item.headgear");
+const headgearUndeadKillerClaim = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.headgear.undead-killer");
 const runningShoesNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.running-shoes-need");
 const hadesWalkthroughStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.memoria")
@@ -2646,6 +2659,20 @@ if (!hadesRunningShoesWarning?.classification.includes("missable-opportunity") |
   !hadesWalkthroughStep?.detail?.includes("its Items and Shops tables list a later Disc IV Black Mage Village recipe") ||
   !hadesWalkthroughStep.detail.includes("12,000 Gil")) {
   errors.push("Hades's Running Shoes warning must distinguish the one-time steal from the conditional Disc IV synthesis recovery, source-specific targets, and Emerald prerequisites.");
+}
+if (headgearPaths.length !== headgearPathContexts.length ||
+  headgearPathContexts.some((context) => {
+    const path = headgearPaths.find((candidate) => candidate.id === context.id);
+    return !path || path.chapterId !== context.chapterId || path.shopId !== context.shopId ||
+      path.availability !== context.availability || path.cost?.currency !== "gil" || path.cost.amount !== 330 ||
+      !path.sourceIds.includes("gamefaqs-equipment-33383") || !path.sourceIds.includes("ff9-irodori-items-armor");
+  }) ||
+  !headgearItem?.sourceIds.includes("gamefaqs-equipment-33383") ||
+  !headgearItem.sourceIds.includes("ff9-irodori-items-armor") ||
+  !headgearUndeadKillerClaim ||
+  headgearUndeadKillerClaim.abilityName !== "Undead Killer" ||
+  !headgearUndeadKillerClaim.sourceIds.includes("ff9-irodori-items-armor")) {
+  errors.push("Headgear's eight source-listed 330-Gil shop windows, Disc III Atla uncertainty, Disc IV recovery, and Undead Killer claim must remain linked.");
 }
 for (const item of gameItems) {
   if (!item.name.trim()) errors.push(`Game item ${item.id} is missing a name.`);

@@ -435,6 +435,13 @@ const glassArmletReferenceSources = [
   "ffwiki-shops",
 ];
 const atlaDisc2ShopSources = ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"];
+const headgearReferenceSources = [
+  "gamefaqs-items-71891",
+  "gamefaqs-equipment-33383",
+  "gamefaqs-shops-71891",
+  "rpgclassics-shops",
+  "ff9-irodori-items-armor",
+];
 const leatherWristReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-item-locations-54996",
@@ -2696,7 +2703,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.mythril-helm", name: "Mythril Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: [...daliUndergroundSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.annoyntment", name: "Annoyntment", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
-  { id: "game-item.headgear", name: "Headgear", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
+  { id: "game-item.headgear", name: "Headgear", category: "equipment", sourceIds: [...headgearReferenceSources, ...atlaDisc2ShopSources], verification: "partial" },
   { id: "game-item.barbut", name: "Barbut", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
   { id: "game-item.barette", name: "Barette", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-ipsens-castle-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-ipsens-castle", "jegged-add-ons", "rpgclassics-addons", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.bronze-vest", name: "Bronze Vest", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
@@ -2733,11 +2740,110 @@ const atlaDisc2ShopPaths: ItemAcquisitionPath[] = atlaDisc2ShopProducts.map(([sl
   cost: { currency: "gil" as const, amount: price },
   conditions: itemName === "Mythril Gloves"
     ? "The older GameFAQs Shop Lists and Equipment List, plus Caves of Narshe, give Atla's Mythril Gloves price as 980 Gil. The newer GameFAQs Shops table lists 720 Gil at Atla, but gives 980 Gil for the same item at Summit Station, Treno, and Cleyra and lists Silver Gloves for 720; treat the Atla row as a likely table typo pending in-game verification. Flactem documents the optional return before Cleyra."
+    : itemName === "Headgear"
+      ? "Atla's Disc II Mogshop lists Headgear for 330 Gil; GameFAQs' equipment list and the Japanese armor reference also list Atla as a source across Discs I–IV. This path records the optional Disc II return before Cleyra."
     : `Caves of Narshe lists ${itemName} for ${price.toLocaleString("en-US")} Gil at Atla's Disc II shop; Flactem documents the optional return before Cleyra.`,
   sourceIds: itemName === "Mythril Gloves"
     ? [...atlaDisc2ShopSources, "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383"]
+    : itemName === "Headgear"
+      ? [...headgearReferenceSources, ...atlaDisc2ShopSources]
     : atlaDisc2ShopSources,
 }));
+
+const headgearAdditionalPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.burmecia.headgear-atla-mogshop",
+    itemId: "game-item.headgear",
+    chapterId: "disc-1.burmecia",
+    method: "mogshop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc I)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "Atla sells Headgear for 330 Gil during the first Burmecia visit. GameFAQs and the Japanese armor table also list later Disc II–IV Atla stock; those visits are modeled separately.",
+    sourceIds: [...headgearReferenceSources, "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia"],
+  },
+  {
+    id: "item-path.disc-1.lindblum.headgear-dragoos-shop",
+    itemId: "game-item.headgear",
+    chapterId: "disc-1.lindblum",
+    method: "shop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "lindblum.weapon-shop",
+    shopName: "Dragoos' Weapon Shop (Lindblum, Disc I)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "Headgear is listed for 330 Gil in Lindblum's Disc I weapon-shop stock, available until the Cleyra story segment. Later Lindblum, Atla, Summit Station, and Black Mage Village listings provide additional purchase windows.",
+    sourceIds: [...headgearReferenceSources, "gamefaqs-lindblum-71891", "jegged-lindblum"],
+  },
+  {
+    id: "item-path.disc-2.return-to-lindblum.headgear-dragoos-shop",
+    itemId: "game-item.headgear",
+    chapterId: "disc-2.return-to-lindblum",
+    method: "shop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "lindblum.weapon-shop.disc-2",
+    shopName: "Dragoos' Weapon Shop (Lindblum, Disc II)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "GameFAQs lists Headgear for 330 Gil in Lindblum's separate Disc II weapon-shop inventory. This is a shop-specific purchase window; Atla and Black Mage Village remain other documented sources.",
+    sourceIds: [...headgearReferenceSources, "gamefaqs-return-to-lindblum-71891", "jegged-return-to-lindblum"],
+  },
+  {
+    id: "item-path.disc-2.journey-to-treno.headgear-summit-station-shop",
+    itemId: "game-item.headgear",
+    chapterId: "disc-2.journey-to-treno",
+    method: "shop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "summit-station.weapon-shop",
+    shopName: "Summit Station Shop (Disc II)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "The GameFAQs and RPGClassics Disc II shop tables, the equipment list, and the Japanese armor table list Headgear for 330 Gil at Summit Station. The station shop is a one-time visit; this closes only the Summit Station purchase, not later Headgear sources.",
+    sourceIds: [...headgearReferenceSources, "gamefaqs-journey-to-treno-71891"],
+  },
+  {
+    id: "item-path.disc-2.magdalene-forest.headgear-black-mage-village",
+    itemId: "game-item.headgear",
+    chapterId: "disc-2.magdalene-forest",
+    method: "shop",
+    quantity: 1,
+    availability: "limited-window",
+    shopId: "black-mage-village.weapon-shop.disc-2-3",
+    shopName: "Black Mage Village Weapon Shop (Discs II–III)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "Black Mage Village lists Headgear for 330 Gil on Discs II–III. Disc IV stock is not listed for this seller; Atla's Mogshop has a separate Disc IV route.",
+    sourceIds: [...headgearReferenceSources, "gamefaqs-magdalene-forest-71891", "jegged-black-mage-village"],
+  },
+  {
+    id: "item-path.disc-3.aerial-exploration.headgear-atla-mogshop",
+    itemId: "game-item.headgear",
+    chapterId: "disc-3.aerial-exploration",
+    method: "mogshop",
+    quantity: 1,
+    availability: "window-unverified",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc III)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "GameFAQs' PlayStation equipment list and the Japanese armor table report Atla's Mogshop stock on Disc III, but do not describe the specific visit or access trigger. Keep this source-listed window unverified pending direct route confirmation; the Disc IV Mognet route is separately documented.",
+    sourceIds: [...headgearReferenceSources, "gamefaqs-return-to-gaia-71891"],
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.headgear-atla-mogshop",
+    itemId: "game-item.headgear",
+    chapterId: "disc-4.return-to-gaia",
+    method: "mogshop",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "burmecia.atla-mogshop",
+    shopName: "Atla's Mogshop (Burmecia, Disc IV)",
+    cost: { currency: "gil", amount: 330 },
+    conditions: "After reaching Atla through the Disc IV Mognet route, his Mogshop remains available with Headgear for 330 Gil. This is an item-type recovery source and does not establish that every Disc I Burmecia pickup room reopens.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.mognet-central"],
+    sourceIds: [...headgearReferenceSources, "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "cour89-mognet-letters"],
+  },
+];
 
 const treasureSweepObjective = "disc-1.burmecia.treasure-sweep";
 const beatrixStealObjective = "disc-1.burmecia.beatrix-steals";
@@ -10199,6 +10305,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     sourceIds: steepledHatSources,
   },
   ...atlaDisc2ShopPaths,
+  ...headgearAdditionalPaths,
   {
     id: "item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop",
     itemId: "game-item.steepled-hat",
@@ -11520,6 +11627,7 @@ export const equipmentAbilityClaims: EquipmentAbilityClaim[] = [
   { id: "item-ability.air-racket.scan", itemId: "game-item.air-racket", abilityName: "Scan", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566"] },
   { id: "item-ability.air-racket.panacea", itemId: "game-item.air-racket", abilityName: "Panacea", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "gamefaqs-item-locations-54996", "neoseeker-item-locations-182566"] },
   { id: "item-ability.silver-gloves.undead-killer", itemId: "game-item.silver-gloves", abilityName: "Undead Killer", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "neoseeker-item-locations-182566"] },
+  { id: "item-ability.headgear.undead-killer", itemId: "game-item.headgear", abilityName: "Undead Killer", verification: "partial", sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-abilities-71891", "ff9-irodori-items-armor"] },
   { id: "item-ability.iron-helm.bright-eyes", itemId: "game-item.iron-helm", abilityName: "Bright Eyes", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "neoseeker-item-locations-182566"] },
   { id: "item-ability.iron-helm.level-up", itemId: "game-item.iron-helm", abilityName: "Level Up", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "neoseeker-item-locations-182566"] },
   { id: "item-ability.chain-mail.bird-killer", itemId: "game-item.chain-mail", abilityName: "Bird Killer", verification: "partial", sourceIds: ["gamefaqs-items-71891", "gamefaqs-abilities-71891", "neoseeker-item-locations-182566", "rpgclassics-armor"] },

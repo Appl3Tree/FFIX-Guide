@@ -3339,6 +3339,14 @@ export const sources = [
     notes: "The Japanese Terra section says Moorock's Mogshop is present in both Bran Bal and Pandemonium, uses the same inventory, and is available only during this part of the story. Its equipment list includes Dagger and gives Zorlin Shape a 6,000-Gil price. The section does not list consumables, so it is used for the shared-location claim and equipment cross-check, not the supply stock count.",
   },
   {
+    id: "ff9-irodori-items-armor",
+    title: "Final Fantasy IX item reference — armor",
+    publisher: "The Colorful Earth",
+    url: "https://rapla.cloudfree.jp/data/ff_09/item/grd.html",
+    accessed: "2026-10-26",
+    notes: "The Japanese armor table lists Headgear for 330 Gil at Lindblum on Discs I–II, Burmecia on Discs I–IV, South Gate on Disc II, and Black Mage Village on Discs II–III. It also lists Undead Killer. These source-reported disc labels do not independently verify route access on every release.",
+  },
+  {
     id: "jegged-arm-gear",
     title: "Arm Gear — Final Fantasy IX equipment list",
     publisher: "Jegged",
