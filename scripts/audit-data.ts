@@ -5448,7 +5448,16 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
     return !path.conditions.includes("GameFAQs Shops omits");
   }
   if (slug === "coronet") {
-    return !path.conditions.includes("does not list Ipsen") || !path.conditions.includes("RPGClassics omits");
+    return path.availability !== "window-unverified"
+      || !path.conditions.includes("GameFAQs Shops and Final Fantasy Online")
+      || !path.conditions.includes("neither gives a Disc III/IV range")
+      || !path.conditions.includes("Equipment List, RPGClassics, and the Final Fantasy Wiki Ipsen stock table omit")
+      || !path.sourceIds.includes("ffonline-ipsens-castle")
+      || !path.sourceIds.includes("ffwiki-shops")
+      || !path.sourceIds.includes("gamefaqs-equipment-33383")
+      || !item.sourceIds.includes("ffonline-ipsens-castle")
+      || !item.sourceIds.includes("ffwiki-shops")
+      || !item.sourceIds.includes("gamefaqs-equipment-33383");
   }
   return false;
 });

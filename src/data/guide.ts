@@ -2819,6 +2819,14 @@ export const sources = [
     notes: "Original PlayStation Disc III room route for the inverted weapon-power mechanic, Kumool and Mognet, castle pickups including the Broadsword ladder chest, fresco and pot puzzles, four mirrors, Taharka, steals, and Amarant's return. The chapter supports Kumool as an initial-visit shop location; its Disc III route does not establish the shop's stock on a later Disc IV return. Its initial-area, Stairwell & Lift, Mural Room, and Treasure Hunting rosters support separate bestiary pools; the Taharka table lists Level 46, 29,186 HP, 1,776 MP, 11 AP, 8,092 Gil, three steals, a Ramuh Card, elemental traits, and status vulnerabilities. These Taharka stats agree with RPGClassics, so the older generic HP-variance note has been removed.",
   },
   {
+    id: "ffonline-ipsens-castle",
+    title: "Ipsen's Castle — Final Fantasy IX",
+    publisher: "Final Fantasy Online",
+    url: "https://ffonline.com/ff9/world/Ipsens-Castle",
+    accessed: "2026-10-26",
+    notes: "Its Ipsen's Castle shop table lists Coronet for 4,400 Gil, independently corroborating the GameFAQs Shops seller row. It gives no disc range. GameFAQs' Equipment List, RPGClassics, and the Final Fantasy Wiki Ipsen stock table omit the Kumool listing, so this confirms a conflicting location claim but does not resolve the sale's Disc III/IV timing.",
+  },
+  {
     id: "jegged-ipsens-castle",
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "Jegged",
@@ -3248,7 +3256,7 @@ export const sources = [
     publisher: "Final Fantasy Wiki",
     url: "https://finalfantasy.fandom.com/wiki/Final_Fantasy_IX_shops",
     accessed: "2026-10-25",
-    notes: "Its Bran Bal shop table lists both Dagger and Magic Tag among 32 products, while GameFAQs Shops lists Magic Tag but omits Dagger and RPGClassics/EliteGrindLab list Dagger but omit Magic Tag. It gives Zorlin Shape as 6,000 Gil; GameFAQs Shops lists 2,300, which conflicts with GameFAQs' item price and other shop/item references. Its Mythril Dagger price is 930 Gil, differing from the 950-Gil price corroborated by the remaining shop tables.",
+    notes: "Its Bran Bal shop table lists both Dagger and Magic Tag among 32 products, while GameFAQs Shops lists Magic Tag but omits Dagger and RPGClassics/EliteGrindLab list Dagger but omit Magic Tag. It gives Zorlin Shape as 6,000 Gil; GameFAQs Shops lists 2,300, which conflicts with GameFAQs' item price and other shop/item references. Its Mythril Dagger price is 930 Gil, differing from the 950-Gil price corroborated by the remaining shop tables. Its Ipsen Mogshop table lists 21 equipment entries and omits Coronet, while a separate Disc IV Daguerreo list includes Coronet; the omission does not establish whether Kumool sells it or when.",
   },
   {
     id: "ff9-irodori-shops",
