@@ -3517,7 +3517,10 @@ for (const expected of [
 const glassArmletBmvPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop");
 const glassArmletAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-alexandria-shop");
 const glassArmletPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.glass-armlet-shop");
+const glassArmletDisc2TrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.glass-armlet-shop");
 const glassArmletDisc2LindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.glass-armlet-shop");
+const glassArmletDisc3TrenoCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-treno-candidate");
+const glassArmletDisc3LindblumCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.glass-armlet-lindblum-candidate");
 if (
   !glassArmletBmvPath ||
   glassArmletBmvPath.itemId !== "game-item.glass-armlet" ||
@@ -3549,21 +3552,34 @@ if (
   !glassArmletDisc2LindblumPath.conditions.includes("remains disputed") ||
   !glassArmletDisc2LindblumPath.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.arm-gear-stock") ||
   !glassArmletDisc2LindblumPath.sourceIds.includes("gamefaqs-shops-71891") ||
-  !glassArmletDisc2LindblumPath.sourceIds.includes("jegged-arm-gear")
+  !glassArmletDisc2LindblumPath.sourceIds.includes("jegged-arm-gear") ||
+  !glassArmletDisc2TrenoPath ||
+  glassArmletDisc2TrenoPath.itemId !== "game-item.glass-armlet" ||
+  glassArmletDisc2TrenoPath.chapterId !== "disc-2.treno" ||
+  glassArmletDisc2TrenoPath.availability !== "limited-window" ||
+  glassArmletDisc2TrenoPath.cost?.amount !== 250 ||
+  !glassArmletDisc2TrenoPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletDisc2TrenoPath.conditions?.includes("safe purchase point")
 ) {
-  errors.push("Glass Armlet's pre-Cleyra and Disc II Lindblum purchases must be separate limited shop windows, with the later Disc III stock dispute retained.");
+  errors.push("Glass Armlet's early Lindblum and Disc II shop purchases must remain distinct from the disputed later city listings.");
 }
-for (const pathId of ["item-path.disc-2.treno.glass-armlet-shop"]) {
-  const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
+for (const [path, chapterId, city] of [
+  [glassArmletDisc3TrenoCandidate, "disc-3.the-home-front", "Treno"],
+  [glassArmletDisc3LindblumCandidate, "disc-3.aerial-exploration", "Lindblum"],
+] as const) {
   if (
     !path ||
     path.itemId !== "game-item.glass-armlet" ||
+    path.chapterId !== chapterId ||
     path.availability !== "window-unverified" ||
+    !path.shopName?.includes("possible Disc III sale") ||
+    path.cost?.amount !== 250 ||
     !path.sourceIds.includes("gamefaqs-shops-71891") ||
     !path.sourceIds.includes("jegged-arm-gear") ||
-    !/conflict|unresolved/i.test(path.conditions)
+    !/unverified candidate/i.test(path.conditions ?? "") ||
+    !/Alexandria/i.test(path.conditions ?? "")
   ) {
-    errors.push(`Glass Armlet's conflicting ${pathId} shop window must remain unresolved and source-scoped.`);
+    errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
   }
 }
 const leatherWristPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.leather-wrist-shop");
@@ -6290,7 +6306,7 @@ if (
   !trenoShopWindowObjective.sourceIds.includes("gamefaqs-shops-71891") ||
   !trenoShopWindowStep?.objectiveIds?.includes("disc-2.treno.shop-stock-window") ||
   !trenoShopWindowStep.detail?.includes("Disc III–IV Treno table") ||
-  !trenoShopWindowStep.detail.includes("Glass Armlet is excluded") ||
+  !trenoShopWindowStep.detail.includes("the catalog keeps both later routes unverified") ||
   !trenoShopWindowWarning || trenoShopWindowWarning.objectiveId !== "disc-2.treno.shop-stock-window" ||
   !trenoShopWindowWarning.classification.includes("recoverable-later") ||
   !trenoShopWindowWarning.consequence.includes("18 tracked shop paths") ||
