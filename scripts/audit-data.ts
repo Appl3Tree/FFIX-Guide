@@ -2921,6 +2921,34 @@ const cleyraPhoenixDownRecovery = itemAcquisitionPaths.find((path) => path.id ==
 if (!cleyraPhoenixDownRecovery || cleyraPhoenixDownRecovery.itemId !== "game-item.phoenix-down" || cleyraPhoenixDownRecovery.cost?.amount !== 150) {
   errors.push("Cleyra Phoenix Down recovery needs the priced 150-Gil Lindblum Disc II item-shop path.");
 }
+const cleyraRecoveryCheckpointId = "disc-2.return-to-lindblum.cleyra-recovery-shops";
+const cleyraRecoveryObjective = objectivesById.get(cleyraRecoveryCheckpointId);
+const cleyraRecoveryWalkthroughChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-lindblum");
+const cleyraRecoveryWalkthroughLinked = cleyraRecoveryWalkthroughChapter?.sections.some((section) =>
+  section.steps.some((step) => step.objectiveIds?.includes(cleyraRecoveryCheckpointId)),
+);
+const cleyraLindblumRecoveryExpectations = [
+  ["partisan", 1600], ["multina-racket", 750], ["flame-staff", 1100], ["ice-staff", 980],
+  ["needle-fork", 3100], ["mythril-gloves", 980], ["mythril-armlet", 500], ["thunder-gloves", 1200],
+  ["mages-hat", 600], ["mythril-helm", 1000], ["phoenix-down", 150], ["potion", 50],
+  ["eye-drops", 50], ["annoyntment", 150],
+] as const;
+if (
+  !cleyraRecoveryObjective || cleyraRecoveryObjective.chapterIds[0] !== "disc-2.return-to-lindblum" ||
+  !cleyraRecoveryObjective.sourceIds.includes("gamefaqs-return-to-lindblum-71891") ||
+  !cleyraRecoveryObjective.sourceIds.includes("gamefaqs-shops-71891") ||
+  !cleyraRecoveryObjective.sourceIds.includes("gamefaqs-items-71891") || !cleyraRecoveryWalkthroughLinked ||
+  cleyraLindblumRecoveryExpectations.some(([slug, price]) => {
+    const path = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.return-to-lindblum.cleyra-recovery.${slug}`);
+    return !path || path.itemId !== `game-item.${slug}` || path.chapterId !== "disc-2.return-to-lindblum" ||
+      path.method !== "shop" || path.availability !== "window-unverified" || path.cost?.amount !== price ||
+      !path.walkthroughObjectiveIds?.includes(cleyraRecoveryCheckpointId) ||
+      !["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891"].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+      !path.conditions?.includes("newer-release stock has not been independently verified");
+  })
+) {
+  errors.push("All 14 post-Cleyra Lindblum item-type recoveries must remain source-linked, price-checked, scoped to the PS route, and connected to their walkthrough checkpoint.");
+}
 const cleyraGoldHelmRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.cleyra-recovery.gold-helm-treno-shop");
 if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.availability !== "repeatable" || cleyraGoldHelmRecovery.cost?.amount !== 1800 || !cleyraGoldHelmRecovery.sourceIds.includes("gamefaqs-shops-71891") || !cleyraGoldHelmRecovery.sourceIds.includes("rpgclassics-shops") || !cleyraGoldHelmRecovery.conditions.includes("newer releases")) {
   errors.push("Cleyra Gold Helm recovery needs a source-backed, repeatable Disc III Treno path priced at 1,800 Gil with its release caveat preserved.");

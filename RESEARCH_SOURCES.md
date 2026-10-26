@@ -685,3 +685,8 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 
 - The [GameFAQs Items reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists Reis’s Wind for Mythril Spear; Spare Change and Counter for Poison Knuckles; Float, Stona, and Silence for Lamia’s Flute; and Stop, Bio, and Drain for Oak Staff. Its [Abilities reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/abilities) provides the corresponding ability index.
 - All nine equipment claims were already in the item catalog; the Ipsen audit now requires both source links for each. This is a completeness guard, not a claim that these abilities are exclusive to Ipsen or permanently missable.
+
+## Post-Cleyra Lindblum item recovery checkpoint (2026-10-26)
+
+- [GameFAQs' Return to Lindblum route](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/return-to-lindblum) directs the party through the Business District and shop plaza after Cleyra and says the weapon, item, and synthesis shops have updated wares. Its [Disc II Shops table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists the post-Cleyra Lindblum stock, while the [Items reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) supplies the item-acquisition context.
+- The catalog links 14 specific recovery paths to a dedicated purchase checkpoint in the Disc II walkthrough. Each path replaces an item type, not its original Cleyra copy. The catalog keeps the source-limited stock caveat visible; persistence beyond this return and newer-release parity remain unverified.

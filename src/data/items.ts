@@ -3119,7 +3119,8 @@ const cleyraLaterRecoveryPaths: ItemAcquisitionPath[] = [
     shopId,
     shopName,
     cost: { currency: "gil" as const, amount: price },
-    conditions: `GameFAQs lists ${itemName} for ${price.toLocaleString("en-US")} Gil in Lindblum's Disc II shop stock after Cleyra. This is a later source for the item type; exact stock behavior across releases is not independently verified.`,
+    conditions: `GameFAQs' PlayStation route directs the party to updated Lindblum shops after Cleyra, and its Disc II shop table lists ${itemName} for ${price.toLocaleString("en-US")} Gil. This recovers the item type, not the original Cleyra copy; newer-release stock has not been independently verified.`,
+    walkthroughObjectiveIds: ["disc-2.return-to-lindblum.cleyra-recovery-shops"],
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891"],
   })),
   {
