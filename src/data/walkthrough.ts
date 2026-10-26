@@ -6546,7 +6546,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-crystal-world-and-deathguise",
         title: "Crystal World — Deathguise and the final Memoria checkpoint",
         summary: "The returning guardian enemies offer Quina Blue Magic and repeatable AP. Save and prepare the final party before entering the Deathguise portal.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "elitegrindlab-memoria", "gamefaqs-final-preparations-71891", "gamefaqs-nero-brothers-71891", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996"],
+        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "elitegrindlab-memoria", "gamefaqs-final-preparations-71891", "gamefaqs-nero-brothers-71891", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "rpgclassics-synthesis", "rpgclassics-addons"],
         steps: [
           {
             id: "memoria-crystal-world-checkpoint-17",
@@ -6565,7 +6565,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-deathguise-steals",
             kind: "combat",
             text: "Enter the portal and follow the path to Deathguise. Steal Elixir, Black Belt, and Duel Claws with Zidane, then defeat the boss with Ice or Wind damage while using Sleep and Slow when needed.",
-            detail: "Deathguise can use Meteor, Twister, LV5 Death, Death, and physical attacks. It is weak to Ice and Wind, nullifies Earth, and is vulnerable to Sleep and Slow. Reapply Sleep during the steal attempts. Wing Edge is the listed guaranteed drop.",
+            detail: "Deathguise can use Meteor, Twister, LV5 Death, Death, and physical attacks. It is weak to Ice and Wind, nullifies Earth, and is vulnerable to Sleep and Slow. Reapply Sleep during the steal attempts. Wing Edge is the listed guaranteed drop. If a steal is missed, Elixir remains listed in Hades's drop table during Final Preparations or Necron's Common steal in the final battle; higher Necron steal tiers are disputed. Black Belt can be synthesized at Treno on Disc IV for 4,000 Gil from Twist Headband + Survival Vest; if needed, buy both there for 1,200 + 2,900 Gil (8,100 Gil total). Duel Claws synthesis at Black Cat costs 16,000 Gil but requires retained Dragon's Claws and Tiger Fangs; Chocograph #7 supplies Dragon's Claws, while Tiger Fangs' last listed shop is Daguerreo on Disc III. These recover item types, not Deathguise's one-time steal copies.",
             objectiveIds: ["disc-4.memoria.deathguise-steals", "disc-4.memoria.deathguise"],
           },
           {

@@ -1897,6 +1897,60 @@ for (const missable of missables) {
 }
 
 const acquisitionCounts = new Map<string, number>();
+const deathguiseWarning = missablesById.get("missable.disc-4.memoria.deathguise-steals");
+const deathguiseStealObjective = objectivesById.get("disc-4.memoria.deathguise-steals");
+const blackBeltRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.black-belt");
+const blackBeltSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.black-belt-synthesis");
+const blackBeltStellazzioPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.black-belt-stellazzio-reward");
+const blackBeltVillagePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.magdalene-forest.black-belt-upper-item-shop");
+const blackBeltNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.black-belt-need");
+const blackBeltEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.black-belt-end-inventory");
+const twistHeadbandDisc4Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.treno.armor-shop.twist-headband");
+const survivalVestDisc4Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.treno.armor-shop.survival-vest");
+const duelClawsRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.duel-claws");
+const duelClawsSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.duel-claws-synthesis");
+const dragonClawsChocographPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.dragons-claws-chocograph-7");
+const tigerFangsShopPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.tiger-fangs");
+const hadesElixirDropPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-elixir-drop");
+const necronElixirStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.necron-elixir-common-steal");
+const deathguiseWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-deathguise-steals");
+if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
+  !deathguiseWarning.classification.includes("limited-quantity") ||
+  !deathguiseWarning.classification.includes("recoverable-later") ||
+  !deathguiseWarning.nextAvailability?.includes("Treno on Disc IV for 4,000 Gil") ||
+  !deathguiseWarning.nextAvailability.includes("only if both materials remain") ||
+  !deathguiseStealObjective ||
+  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgclassics-synthesis", "rpgclassics-addons"].every((sourceId) => deathguiseStealObjective.sourceIds.includes(sourceId)) ||
+  !blackBeltRecipe || blackBeltRecipe.resultItemId !== "game-item.black-belt" ||
+  blackBeltRecipe.cost.amount !== 4000 || blackBeltRecipe.shopId !== "treno.synthesis-shop.disc-3-4" ||
+  !blackBeltRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.twist-headband") ||
+  !blackBeltRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.survival-vest") ||
+  !blackBeltSynthesisPath || blackBeltSynthesisPath.recipeId !== "synthesis-recipe.black-belt" ||
+  blackBeltSynthesisPath.cost?.amount !== 4000 || !blackBeltSynthesisPath.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !blackBeltNeedTarget || blackBeltNeedTarget.targetQuantity !== 9 || blackBeltNeedTarget.basis !== "route-need" ||
+  !blackBeltNeedTarget.sourceIds.includes("gamefaqs-items-71891") ||
+  !blackBeltEndInventoryTarget || blackBeltEndInventoryTarget.targetQuantity !== 6 || blackBeltEndInventoryTarget.basis !== "end-inventory" ||
+  !blackBeltEndInventoryTarget.sourceIds.includes("gamefaqs-items-71891") ||
+  !twistHeadbandDisc4Path || twistHeadbandDisc4Path.cost?.amount !== 1200 ||
+  !survivalVestDisc4Path || survivalVestDisc4Path.cost?.amount !== 2900 ||
+  !blackBeltStellazzioPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !blackBeltVillagePath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !duelClawsRecipe || duelClawsRecipe.cost.amount !== 16000 ||
+  !duelClawsRecipe.notes?.includes("Tiger Fangs") ||
+  !duelClawsSynthesisPath?.conditions?.includes("only if both materials remain") ||
+  !duelClawsSynthesisPath.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !dragonClawsChocographPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !tigerFangsShopPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !hadesElixirDropPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !necronElixirStealPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
+  !deathguiseWalkthroughStep?.detail?.includes("Hades's drop table") ||
+  !deathguiseWalkthroughStep.detail.includes("8,100 Gil total") ||
+  !deathguiseWalkthroughStep.detail.includes("last listed shop is Daguerreo on Disc III")) {
+  errors.push("Deathguise's one-time steals must distinguish item-type recovery, source-linked Disc IV Black Belt synthesis, and the conditional Duel Claws ingredient route.");
+}
 for (const item of gameItems) {
   if (!item.name.trim()) errors.push(`Game item ${item.id} is missing a name.`);
   if (item.sourceIds.length === 0) errors.push(`Game item ${item.id} has no provenance.`);

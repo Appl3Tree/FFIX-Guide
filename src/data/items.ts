@@ -1755,6 +1755,21 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     sourceIds: disc4BlackCatRecipeSources,
   },
   {
+    id: "item-path.disc-4.return-to-gaia.black-belt-synthesis",
+    itemId: "game-item.black-belt",
+    chapterId: "disc-4.return-to-gaia",
+    method: "synthesis",
+    recipeId: "synthesis-recipe.black-belt",
+    quantity: 1,
+    availability: "repeatable",
+    shopId: "treno.synthesis-shop.disc-3-4",
+    shopName: "Treno Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 4000 },
+    conditions: "After Deathguise, synthesize Black Belt at Treno for 4,000 Gil from Twist Headband + Survival Vest. Both ingredients remain listed in Treno's Disc IV shop stock for 1,200 and 2,900 Gil respectively, so rebuilding both costs 8,100 Gil total.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.deathguise-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+  },
+  {
     id: "item-path.disc-4.return-to-gaia.duel-claws-synthesis",
     itemId: "game-item.duel-claws",
     chapterId: "disc-4.return-to-gaia",
@@ -1765,8 +1780,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "black-mage-village.synthesis-shop.disc-4",
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 16000 },
-    conditions: "Synthesize Duel Claws from Dragon's Claws + Tiger Fangs for 16,000 Gil at Black Mage Village on Disc IV.",
-    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
+    conditions: "Synthesize Duel Claws from Dragon's Claws + Tiger Fangs for 16,000 Gil at Black Mage Village on Disc IV, but only if both materials remain. Dragon's Claws comes from Chocograph #7; the reviewed tables list Tiger Fangs only at Daguerreo on Disc III, so do not count on rebuilding it after its shop window closes.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.deathguise-steals"],
     sourceIds: disc4BlackCatRecipeSources,
   },
   {
@@ -2260,8 +2275,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "single-use",
     conditions: "Chocograph #7: Forgotten Lagoon rewards Dragon's Claws, an ingredient in Duel Claws synthesis.",
-    walkthroughObjectiveIds: ["disc-3.on-the-high-seas.chocographs"],
-    sourceIds: ["gamefaqs-items-71891"],
+    walkthroughObjectiveIds: ["disc-3.on-the-high-seas.chocographs", "disc-4.memoria.deathguise-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891"],
   },
   {
     id: "item-path.disc-3.desert-palace.venetia-shield-chest",
@@ -2467,7 +2482,8 @@ export const gameItems: GameItem[] = [
   { id: "game-item.grand-helm", name: "Grand Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-equipment-33383", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
   { id: "game-item.genji-gloves", name: "Genji Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
   { id: "game-item.black-robe", name: "Black Robe", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"], verification: "partial" },
-  { id: "game-item.black-belt", name: "Black Belt", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-crystal-world"], verification: "partial" },
+  { id: "game-item.black-belt", name: "Black Belt", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "rpgclassics-addons", "jegged-crystal-world"], verification: "partial" },
+  { id: "game-item.twist-headband", name: "Twist Headband", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.duel-claws", name: "Duel Claws", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-crystal-world"], verification: "partial" },
   { id: "game-item.genji-helmet", name: "Genji Helmet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "rpgclassics-memoria", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
   { id: "game-item.gluttons-robe", name: "Glutton's Robe", category: "equipment", sourceIds: gluttonsRobeReferenceSources, verification: "partial" },
@@ -2639,6 +2655,7 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
     ...(path.id === "daguerreo.rune-blade" || path.id === "daguerreo.obelisk"
       ? ["disc-3.aerial-exploration.daguerreo-unique-abilities"]
       : []),
+    ...(path.id === "daguerreo.tiger-fangs" ? ["disc-4.memoria.deathguise-steals"] : []),
     ...(path.id === "esto-gaza.hamelin" || path.id === "daguerreo.hamelin"
       ? ["disc-3.lost-continent.hamelin-jewel"]
       : []),
@@ -2660,6 +2677,8 @@ const disc3ShopPaths: ItemAcquisitionPath[] = ([
 }));
 
 const disc4ShopPathInputs = [
+  ["treno.armor-shop", "Treno Armor Shop (Disc IV)", "twist-headband", 1200],
+  ["treno.armor-shop", "Treno Armor Shop (Disc IV)", "survival-vest", 2900],
   ["black-mage-village.weapon-shop", "Black Mage Village Weapon Shop (Disc IV)", "wizard-rod", 3990],
   ["black-mage-village.weapon-shop", "Black Mage Village Weapon Shop (Disc IV)", "sirens-flute", 7000],
   ["black-mage-village.weapon-shop", "Black Mage Village Weapon Shop (Disc IV)", "high-mage-staff", 6000],
@@ -2725,6 +2744,11 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
           walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.lich-steals"],
           sourceIds: [...disc4ShopSources, "gamefaqs-items-71891"],
         }
+        : itemSlug === "twist-headband" || itemSlug === "survival-vest"
+          ? {
+            walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.deathguise-steals"],
+            sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "rpgclassics-synthesis"],
+          }
       : { sourceIds: disc4ShopSources }),
 }));
 
@@ -4602,7 +4626,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     availability: "one-time-encounter",
     conditions: "GameFAQs lists Elixir in Necron's Common steal slot. Jegged lists a single Common Elixir steal at 70% per successful attempt.",
     notes: "GameFAQs also lists Elixir in the Uncommon, Semi-Rare, and Rare slots; Jegged lists only this Common slot.",
-    walkthroughObjectiveIds: ["disc-4.the-final-battle.necron-steals"],
+    walkthroughObjectiveIds: ["disc-4.the-final-battle.necron-steals", "disc-4.memoria.deathguise-steals"],
     sourceIds: ["gamefaqs-the-final-battle-71891", "gamefaqs-items-71891", "jegged-kuja-necron-final-showdown"],
   },
   {
@@ -7187,6 +7211,28 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-treno-71891"],
   },
   {
+    id: "item-path.disc-2.treno.black-belt-stellazzio-reward",
+    itemId: "game-item.black-belt",
+    chapterId: "disc-2.treno",
+    method: "quest-reward",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Queen Stella awards one Black Belt after eight Stellazzio coins have been turned in. If the reward is still unclaimed after Deathguise, return to Treno during Final Preparations.",
+    walkthroughObjectiveIds: ["disc-2.treno.stellazzio-rewards", "disc-4.memoria.deathguise-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-treno-71891", "gamefaqs-final-preparations-71891"],
+  },
+  {
+    id: "item-path.disc-2.magdalene-forest.black-belt-upper-item-shop",
+    itemId: "game-item.black-belt",
+    chapterId: "disc-2.magdalene-forest",
+    method: "hidden-pickup",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "In Black Mage Village's Item Shop, ask owner No. 163 for the usual item, climb to the upper level, and hop onto the bed for Black Belt. If left unclaimed, the earlier areas remain part of the documented post-Deathguise preparation return.",
+    walkthroughObjectiveIds: ["disc-2.magdalene-forest.treasure-sweep", "disc-4.memoria.deathguise-steals"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-magdalene-forest-71891", "gamefaqs-final-preparations-71891"],
+  },
+  {
     id: "item-path.disc-3.aerial-exploration.genji-gloves-dive-spot-1",
     itemId: "game-item.genji-gloves",
     chapterId: "disc-3.aerial-exploration",
@@ -7898,7 +7944,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "one-time-encounter",
     conditions: "Hades's drop table lists Elixir in the Common, Uncommon, and Rare slots. Exact odds and combined quantity are not specified here; this path records the conditional Elixir drop opportunity.",
-    walkthroughObjectiveIds: ["disc-4.memoria.hades"],
+    walkthroughObjectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"],
     sourceIds: ["gamefaqs-master-synthesist-71891", "gamefaqs-items-71891"],
   },
   {
@@ -9924,6 +9970,22 @@ function getItemInventoryTargetBasis(target: ItemInventoryTargetDraft): ItemInve
 }
 
 const itemInventoryTargetDrafts: ItemInventoryTargetDraft[] = [
+  {
+    id: "item-target.disc-4.final-preparations.black-belt-need",
+    itemId: "game-item.black-belt",
+    chapterId: "disc-4.final-preparations",
+    targetQuantity: 9,
+    interpretation: "GameFAQs Items lists Need 9 for Black Belt. Preserve this as an optional, source-specific route-need target; it is distinct from the six-copy end-inventory figure and is not a universal completion minimum.",
+    sourceIds: ["gamefaqs-items-71891"],
+  },
+  {
+    id: "item-target.disc-4.final-preparations.black-belt-end-inventory",
+    itemId: "game-item.black-belt",
+    chapterId: "disc-4.final-preparations",
+    targetQuantity: 6,
+    interpretation: "GameFAQs Items lists end-inventory #6 for Black Belt. The source defines # as copies owned at the end, including equipped copies; keep this optional target separate from Need 9.",
+    sourceIds: ["gamefaqs-items-71891"],
+  },
   ...([["bandana", 12], ["chain-plate", 3], ["leather-plate", 3], ["mythril-vest", 10],
   ["fairy-flute", 2], ["mythril-claws", 2], ["trident", 2], ["green-beret", 7],
   ["gold-armor", 3], ["judo-uniform", 7], ["diamond-gloves", 3], ["diamond-sword", 2],
