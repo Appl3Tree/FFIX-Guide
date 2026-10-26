@@ -5179,6 +5179,51 @@ if (
 ) {
   errors.push("The Octagon Rod cutoff must link both PlayStation ability catalogs to its warning, objective, item, all three ability claims, both Disc III shop paths, and each walkthrough checkpoint while preserving release uncertainty.");
 }
+const hamelinJewelWarning = missablesById.get("missable.disc-3.lost-continent.hamelin-jewel");
+const hamelinJewelObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.hamelin-jewel");
+const hamelinItem = gameItems.find((item) => item.id === "game-item.hamelin");
+const hamelinJewelClaims = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.hamelin");
+const hamelinJewelShopPaths = [
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.esto-gaza.hamelin"),
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.hamelin"),
+];
+const hamelinTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-3.preparing-to-leave.hamelin");
+const hamelinAbilitySources = ["gamefaqs-abilities-71891", "rpgclassics-abilities"];
+const hamelinWalkthroughSteps = [
+  { chapterId: "disc-3.lost-continent", stepId: "lost-continent-esto-gaza-shop" },
+  { chapterId: "disc-3.aerial-exploration", stepId: "aerial-daguerreo-weapon-shop" },
+  { chapterId: "disc-3.preparing-to-leave", stepId: "preparing-leave-shop-inventory" },
+].map(({ chapterId, stepId }) => {
+  const chapter = walkthroughChapters.find((candidate) => candidate.areaId === chapterId);
+  const section = chapter?.sections.find((candidate) => candidate.steps.some((step) => step.id === stepId));
+  return {
+    section,
+    step: section?.steps.find((candidate) => candidate.id === stepId),
+  };
+});
+if (
+  !hamelinJewelWarning || hamelinJewelWarning.severity !== "info" ||
+  !hamelinJewelWarning.consequence.includes("only equipment source") ||
+  !hamelinJewelWarning.nextAvailability.includes("neither ability catalog lists an alternate Jewel source") ||
+  !hamelinJewelWarning.action.includes("two-copy target is an inventory-planning count") ||
+  !hamelinJewelWarning.recovery.includes("direct cross-release testing is incomplete") ||
+  !hamelinAbilitySources.every((sourceId) => hamelinJewelWarning.sourceIds.includes(sourceId)) ||
+  !hamelinJewelObjective || !hamelinAbilitySources.every((sourceId) => hamelinJewelObjective.sourceIds.includes(sourceId)) ||
+  !hamelinItem || !hamelinAbilitySources.every((sourceId) => hamelinItem.sourceIds.includes(sourceId)) ||
+  hamelinJewelClaims.length !== 1 || hamelinJewelClaims[0].abilityName !== "Jewel" ||
+  !hamelinAbilitySources.every((sourceId) => hamelinJewelClaims[0].sourceIds.includes(sourceId)) ||
+  hamelinJewelShopPaths.some((path) => !path || path.itemId !== "game-item.hamelin" ||
+    !path.conditions.includes("only equipment source") ||
+    !path.notes?.includes("One copy is enough to teach Jewel") ||
+    !hamelinAbilitySources.every((sourceId) => path.sourceIds.includes(sourceId))) ||
+  !hamelinTarget || hamelinTarget.targetQuantity !== 2 || hamelinTarget.basis !== "checkpoint-total" ||
+  !hamelinTarget.interpretation.includes("not a universal minimum") ||
+  hamelinWalkthroughSteps.some(({ section, step }) => !section || !step ||
+    !/only (documented )?equipment source/.test(step.detail) ||
+    !hamelinAbilitySources.every((sourceId) => section.sourceIds.includes(sourceId)))
+) {
+  errors.push("The Hamelin/Jewel cutoff must link both PlayStation ability catalogs to its warning, objective, item claim, both Disc III shop paths, and walkthrough checkpoints while keeping GameFAQs' two-copy target optional and release behavior unverified.");
+}
 const summitEquipmentWarning = missablesById.get("missable.disc-2.journey-to-treno.summit-station-equipment-stock");
 const summitSilverGlovesTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.silver-gloves");
 const summitIronHelmTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.iron-helm");

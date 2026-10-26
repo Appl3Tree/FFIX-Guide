@@ -398,6 +398,10 @@ The route graph now links all 140 missable records to 98 cutoff windows, includi
 
 [GameFAQs' Abilities reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/abilities) and [RPGClassics' ability table](https://shrines.rpgclassics.com/psx/ffix/abilities.shtml) independently list Octagon Rod as the sole equipment source for Vivi's Firaga, Blizzaga, and Thundaga. GameFAQs and Jegged document Disc III stock at Esto Gaza and Daguerreo; the reviewed Disc IV Daguerreo inventory omits Octagon Rod. One retained copy can teach all three spells, while GameFAQs' two-copy count is an inventory target rather than a learning requirement. These are original PlayStation catalogs and stock listings; direct game and modern-release behavior remain unverified.
 
+## Hamelin/Jewel ability cutoff cross-check
+
+[GameFAQs' Abilities reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/abilities) lists Hamelin as the only equipment source for Eiko's Jewel, and [RPGClassics' ability table](https://shrines.rpgclassics.com/psx/ffix/abilities.shtml) independently lists the same sole source. RPGClassics explains that characters learn abilities by gaining AP while the teaching equipment is equipped. GameFAQs and Jegged document Hamelin in the Disc III Esto Gaza and Daguerreo shops; the reviewed Disc IV Daguerreo inventory omits it. One copy is enough to teach Jewel, while GameFAQs' two-copy total is an optional inventory target. Direct game and modern-release behavior remain unverified.
+
 ## Platform and achievement evidence matrix
 
 | Product/build | Verified platform support | Achievement evidence as of 2026-10-22 | Unresolved |
