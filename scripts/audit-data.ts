@@ -1951,6 +1951,27 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !deathguiseWalkthroughStep.detail.includes("last listed shop is Daguerreo on Disc III")) {
   errors.push("Deathguise's one-time steals must distinguish item-type recovery, source-linked Disc IV Black Belt synthesis, and the conditional Duel Claws ingredient route.");
 }
+const necronStealWarning = missablesById.get("missable.disc-4.the-final-battle.necron-steals");
+const necronStealObjective = objectivesById.get("disc-4.the-final-battle.necron-steals");
+const necronStealPaths = ["common", "uncommon", "semi-rare", "rare"].map((slot) =>
+  itemAcquisitionPaths.find((path) => path.id === `item-path.disc-4.the-final-battle.necron-elixir-${slot}-steal`),
+);
+const necronWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.the-final-battle")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "final-battle-necron-steals");
+const necronStealSources = ["gamefaqs-the-final-battle-71891", "gamefaqs-final-battle-79143", "opatil-steal-list"];
+if (!necronStealWarning || !necronStealObjective ||
+  !necronStealSources.every((sourceId) => necronStealWarning.sourceIds.includes(sourceId) && necronStealObjective.sourceIds.includes(sourceId)) ||
+  !necronStealWarning.sourceIds.includes("jegged-kuja-necron-final-showdown") ||
+  necronStealPaths.some((path) => !path || path.itemId !== "game-item.elixir" || path.availability !== "one-time-encounter" ||
+    !necronStealSources.every((sourceId) => path.sourceIds.includes(sourceId))) ||
+  !necronStealPaths[0]?.notes?.includes("does not contradict the additional slots") ||
+  necronStealPaths.slice(1).some((path) => !path?.conditions?.includes("does not address this slot")) ||
+  !necronWalkthroughStep?.detail?.includes("list Elixir in all four tiers") ||
+  !necronWalkthroughStep.detail.includes("Jegged lists only the Common slot")) {
+  errors.push("Necron's one-fight Elixir warning and four acquisition paths must preserve the corroborated slots and Jegged's shorter Common-only listing.");
+}
 const hadesRunningShoesWarning = missablesById.get("missable.disc-4.memoria.hades-running-shoes");
 const hadesStealObjective = objectivesById.get("disc-4.memoria.hades-steals");
 const runningShoesRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.running-shoes");

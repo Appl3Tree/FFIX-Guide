@@ -6546,7 +6546,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-crystal-world-and-deathguise",
         title: "Crystal World — Deathguise and the final Memoria checkpoint",
         summary: "The returning guardian enemies offer Quina Blue Magic and repeatable AP. Save and prepare the final party before entering the Deathguise portal.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "elitegrindlab-memoria", "gamefaqs-final-preparations-71891", "gamefaqs-nero-brothers-71891", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "rpgclassics-synthesis", "rpgclassics-addons"],
+        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "elitegrindlab-memoria", "gamefaqs-final-preparations-71891", "gamefaqs-nero-brothers-71891", "gamefaqs-enemy-list-71891", "gamefaqs-item-locations-54996", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "gamefaqs-final-battle-79143", "opatil-steal-list", "rpgclassics-synthesis", "rpgclassics-addons"],
         steps: [
           {
             id: "memoria-crystal-world-checkpoint-17",
@@ -6565,7 +6565,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-deathguise-steals",
             kind: "combat",
             text: "Enter the portal and follow the path to Deathguise. Steal Elixir, Black Belt, and Duel Claws with Zidane, then defeat the boss with Ice or Wind damage while using Sleep and Slow when needed.",
-            detail: "Deathguise can use Meteor, Twister, LV5 Death, Death, and physical attacks. It is weak to Ice and Wind, nullifies Earth, and is vulnerable to Sleep and Slow. Reapply Sleep during the steal attempts. Wing Edge is the listed guaranteed drop. If a steal is missed, Elixir remains listed in Hades's drop table during Final Preparations or Necron's Common steal in the final battle; higher Necron steal tiers are disputed. Black Belt can be synthesized at Treno on Disc IV for 4,000 Gil from Twist Headband + Survival Vest; if needed, buy both there for 1,200 + 2,900 Gil (8,100 Gil total). Duel Claws synthesis at Black Cat costs 16,000 Gil but requires retained Dragon's Claws and Tiger Fangs; Chocograph #7 supplies Dragon's Claws, while Tiger Fangs' last listed shop is Daguerreo on Disc III. These recover item types, not Deathguise's one-time steal copies.",
+            detail: "Deathguise can use Meteor, Twister, LV5 Death, Death, and physical attacks. It is weak to Ice and Wind, nullifies Earth, and is vulnerable to Sleep and Slow. Reapply Sleep during the steal attempts. Wing Edge is the listed guaranteed drop. If a steal is missed, Elixir remains listed in Hades's drop table during Final Preparations or Necron's four source-listed steal tiers in the final battle; GameFAQs 71891, independent GameFAQs 79143, and Opatil list all four, while Jegged lists Common only without addressing the others. Black Belt can be synthesized at Treno on Disc IV for 4,000 Gil from Twist Headband + Survival Vest; if needed, buy both there for 1,200 + 2,900 Gil (8,100 Gil total). Duel Claws synthesis at Black Cat costs 16,000 Gil but requires retained Dragon's Claws and Tiger Fangs; Chocograph #7 supplies Dragon's Claws, while Tiger Fangs' last listed shop is Daguerreo on Disc III. These recover item types, not Deathguise's one-time steal copies.",
             objectiveIds: ["disc-4.memoria.deathguise-steals", "disc-4.memoria.deathguise"],
           },
           {
@@ -6758,13 +6758,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "final-battle-necron",
         title: "Necron — final boss",
         summary: "Recover immediately after Grand Cross, then exploit Wind or Holy damage and use items freely.",
-        sourceIds: ["gamefaqs-the-final-battle-71891", "gamefaqs-achievements-71891", "gamefaqs-items-71891", "jegged-kuja-necron-final-showdown"],
+        sourceIds: ["gamefaqs-the-final-battle-71891", "gamefaqs-achievements-71891", "gamefaqs-items-71891", "gamefaqs-final-battle-79143", "jegged-kuja-necron-final-showdown", "opatil-steal-list"],
         steps: [
           {
             id: "final-battle-necron-steals",
             kind: "combat",
             text: "If you want extra Elixirs, have Zidane attempt Necron's four steal slots before defeating it.",
-            detail: "All four listed tiers contain Elixir. Elixirs have other acquisition sources, so this is an optional one-fight collection check rather than a permanent-loss claim for the item type.",
+            detail: "GameFAQs 71891, independent GameFAQs 79143, and Opatil list Elixir in all four tiers; Opatil reports 100%, 25%, 6.25%, and 0.39% table rates. Jegged lists only the Common slot and does not address the other three. Elixirs have other acquisition sources, so this is an optional one-fight collection check rather than a permanent-loss claim for the item type.",
             objectiveIds: ["disc-4.the-final-battle.necron-steals"],
           },
           {
