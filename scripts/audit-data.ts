@@ -5032,6 +5032,37 @@ if (
 ) {
   errors.push("The Daguerreo ability cutoff must isolate Rune Blade's documented Iai Strike opportunity, preserve Kain's Lance/Battle Boots alternatives, and link Kain's Lance's Disc IV pickup and claims.");
 }
+const summitEquipmentWarning = missablesById.get("missable.disc-2.journey-to-treno.summit-station-equipment-stock");
+const summitSilverGlovesTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.silver-gloves");
+const summitIronHelmTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-2.journey-to-treno.iron-helm");
+const summitSilverGlovesPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-silver-gloves-shop");
+const summitIronHelmPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-iron-helm-shop");
+const summitStationWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-treno")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-treno-shop-and-train");
+const cavesDisc3SouthGateSource = sources.find((source) => source.id === "cavesofnarshe-ff9-disc-3-map");
+if (
+  !summitEquipmentWarning ||
+  !summitEquipmentWarning.classification.includes("limited-quantity") ||
+  !summitEquipmentWarning.consequence.includes("later stock availability conflicts") ||
+  !summitEquipmentWarning.recovery.includes("no post-Summit route is confirmed") ||
+  !summitEquipmentWarning.note.includes("item table gives Need 3") ||
+  !summitEquipmentWarning.sourceIds.includes("gamefaqs-shops-71891") ||
+  !summitEquipmentWarning.sourceIds.includes("neoseeker-item-locations-182566") ||
+  !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
+  !summitSilverGlovesTarget || summitSilverGlovesTarget.targetQuantity !== 4 ||
+  !summitIronHelmTarget || summitIronHelmTarget.targetQuantity !== 3 ||
+  !summitSilverGlovesTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
+  !summitIronHelmTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
+  !summitSilverGlovesPath?.notes?.includes("generic South Gate shop") ||
+  !summitIronHelmPath?.notes?.includes("generic South Gate shop") ||
+  !summitStationWalkthroughStep?.detail.includes("GameFAQs' missables list recommends four Silver Gloves") ||
+  !summitStationWalkthroughStep.detail.includes("Caves of Narshe's Disc III map") ||
+  !cavesDisc3SouthGateSource?.notes.includes("does not identify the Disc III shop as Summit Station")
+) {
+  errors.push("The Summit Station inventory warning must preserve the GameFAQs/Neoseeker cutoff and Caves of Narshe's ambiguous Disc III South Gate stock, without presenting later recovery as verified.");
+}
 const moonstoneId = "game-item.moonstone";
 const rubyId = "game-item.ruby";
 const rubyPaths = itemAcquisitionPaths.filter((path) => path.itemId === rubyId);
