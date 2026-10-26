@@ -4407,6 +4407,20 @@ for (const [itemId, expectedCount] of zornThornShopCounts) {
     errors.push(`Zorn and Thorn recovery for ${itemId} needs ${expectedCount} Gil-priced shop paths; found ${paths.length}.`);
   }
 }
+const stardustRodShopPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.stardust-rod" && path.method === "shop");
+if (
+  stardustRodShopPaths.length !== 7 ||
+  stardustRodShopPaths.some((path) =>
+    path.cost?.amount !== 750 ||
+    !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.sourceIds.includes("cavesofnarshe-ff9-rods") ||
+    !path.sourceIds.includes("rpgclassics-shops") ||
+    !path.conditions.includes("GameFAQs Shops and Caves of Narshe list 750 Gil") ||
+    !path.conditions.includes("GameFAQs Items and RPGClassics Shops list 760 Gil")
+  )
+) {
+  errors.push("Stardust Rod shop paths must use the listed 750-Gil shop-table price while preserving the 760-Gil item-table conflict and all shop sources.");
+}
 for (const itemId of zornThornItemIds) {
   if (!itemAcquisitionPaths.some((path) => path.itemId === itemId && path.method === "steal" && path.chapterId === "disc-2.return-to-alexandria")) {
     errors.push(`Zorn and Thorn recovery for ${itemId} needs its one-time boss steal path.`);
