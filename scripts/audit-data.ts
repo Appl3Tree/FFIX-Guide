@@ -5409,15 +5409,20 @@ if (
 }
 const disc4TrenoReturnEdge = gameRouteEdgesById.get("detour.return-to-gaia-treno-behemoth");
 const disc4TrenoRejoinEdge = gameRouteEdgesById.get("detour.treno-behemoth-rejoin-gaia");
+const disc4LocationListSource = sources.find((source) => source.id === "ff9-kouryaku-disc4");
 if (
   !disc4TrenoReturnEdge?.summary.includes("Quan's Dwelling") ||
   !disc4TrenoReturnEdge.summary.includes("Ophiucus") ||
   !disc4TrenoReturnEdge.sourceIds.includes("ff9-kouryaku-disc4") ||
   !disc4TrenoReturnEdge.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  !disc4LocationListSource?.notes.includes("accessible-location list includes Treno and Burmecia") ||
+  !disc4LocationListSource.notes.includes("does not describe returning from a Treno outing to the Invincible") ||
   !disc4TrenoRejoinEdge?.summary.includes("Quan's Dwelling") ||
-  !disc4TrenoRejoinEdge.sourceIds.includes("ff9-kouryaku-disc4")
+  !disc4TrenoRejoinEdge.sourceIds.includes("gamefaqs-return-to-gaia-71891") ||
+  disc4TrenoRejoinEdge.sourceIds.includes("ff9-kouryaku-disc4") ||
+  disc4TrenoRejoinEdge.sourceIds.includes("gamefaqs-weapon-shop-monsters-71891")
 ) {
-  errors.push("The Disc IV Gaia return route must connect Quan's Dwelling and Treno's optional late-game visits to a sourced rejoin.");
+  errors.push("The Disc IV Gaia route must keep the Japanese accessible-location list on the Treno detour, while the rejoin cites route evidence rather than destination/encounter sources.");
 }
 const cour89BranBal = sources.find((source) => source.id === "cour89-bran-bal");
 const cour89Pandemonium = sources.find((source) => source.id === "cour89-pandemonium");

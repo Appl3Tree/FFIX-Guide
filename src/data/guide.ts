@@ -1936,7 +1936,7 @@ export const sources = [
     publisher: "FF9攻略情報サイト",
     url: "https://ff9.kouryaku.red/entry7.html",
     accessed: "2026-10-25",
-    notes: "The Disc IV overview lists Burmecia among the limited locations still visitable. It supports city-level return access only; its location list does not enumerate the old Suburb/Uptown pickup rooms or establish their accessibility on that visit. The platform/build scope is not stated, and direct game/release verification remains open.",
+    notes: "The Disc IV overview's accessible-location list includes Treno and Burmecia. It supports city-level access at those destinations only; it does not describe returning from a Treno outing to the Invincible or enumerate Burmecia's old Suburb/Uptown pickup rooms. The platform/build scope is not stated, and direct game/release verification remains open.",
   },
   {
     id: "megane-kangaroo-disc4-burmecia-recovery",

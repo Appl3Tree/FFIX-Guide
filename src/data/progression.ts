@@ -1072,7 +1072,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-4.return-to-gaia",
     relationship: "rejoin",
     summary: "After the optional Quan's Dwelling and Treno visits, return to the Invincible and resume other Gaia exploration or continue toward the Iifa Tree.",
-    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-weapon-shop-monsters-71891", "ff9-kouryaku-disc4"],
+    sourceIds: ["gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "detour.return-to-gaia-madain-sari-eidolon-wall",
