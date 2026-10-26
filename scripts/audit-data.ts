@@ -1337,6 +1337,22 @@ for (const pathId of expectedLaniRecoveryPathIds) {
     errors.push(`Lani's later item-type recovery catalog is missing ${pathId}.`);
   }
 }
+const gladiusDaguerreoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.gladius-daguerreo-shop");
+const gladiusAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.gladius-alexandria-shop");
+const gladiusTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.gladius-treno-shop");
+if (!gladiusDaguerreoPath || gladiusDaguerreoPath.itemId !== "game-item.gladius" ||
+  gladiusDaguerreoPath.chapterId !== "disc-3.aerial-exploration" ||
+  gladiusDaguerreoPath.shopId !== "daguerreo.weapon-shop" ||
+  gladiusDaguerreoPath.availability !== "limited-window" ||
+  gladiusDaguerreoPath.cost?.amount !== 2300 ||
+  !gladiusDaguerreoPath.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.daguerreo-stock") ||
+  !gladiusDaguerreoPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !gladiusDaguerreoPath.conditions.includes("Disc III") ||
+  !gladiusDaguerreoPath.conditions.includes("Disc IV") ||
+  !gladiusAlexandriaPath || gladiusAlexandriaPath.availability !== "repeatable" ||
+  !gladiusTrenoPath || gladiusTrenoPath.availability !== "repeatable") {
+  errors.push("Gladius's Disc III Daguerreo purchase must be limited by the refreshed Disc IV weapon stock while preserving its later Treno and Alexandria item-type sources.");
+}
 const laniWarning = missables.find((record) => record.id === "missable.disc-2.journey-to-outer-continent.lani-steals");
 if (!laniWarning?.classification.includes("recoverable-later") || laniWarning.recovery.includes("under research")) {
   errors.push("The Lani warning must distinguish one-time steal copies from later Gladius and Coral Sword recovery.");
