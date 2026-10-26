@@ -2499,7 +2499,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.leather-plate", name: "Leather Plate", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "jegged-lindblum", "jegged-dali"], verification: "partial" },
   { id: "game-item.mythril-vest", name: "Mythril Vest", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "gamefaqs-pinnacle-rocks-71891", "gamefaqs-journey-to-outer-continent-71891", "gamefaqs-lost-continent-71891", "gamefaqs-outer-continent-71891", "jegged-pinnacle-rocks", "jegged-esto-gaza", "cavesofnarshe-cleyra-walkthrough"], verification: "partial" },
   { id: "game-item.fairy-flute", name: "Fairy Flute", category: "equipment", sourceIds: fairyFluteReferenceSources, verification: "partial" },
-  { id: "game-item.healing-rod", name: "Healing Rod", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods", "rpgclassics-weapons", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.healing-rod", name: "Healing Rod", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods", "rpgclassics-weapons", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.lamias-flute", name: "Lamia's Flute", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-flutes", "rpgclassics-weapons", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.brigandine", name: "Brigandine", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-brigandine", "rpgclassics-armor", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.magician-cloak", name: "Magician Cloak", category: "equipment", sourceIds: ["gamefaqs-iifa-tree-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-magician-cloak"], verification: "partial" },
@@ -3206,9 +3206,18 @@ const iifaTreeShopRecoveryInputs = ([
   availability,
   shopId,
   shopName,
-  conditions,
+  conditions: itemId === "game-item.healing-rod"
+    ? `${conditions} The older GameFAQs Shop Lists, GameFAQs Shops, Caves of Narshe, and RPGClassics list 1,770 Gil; the older GameFAQs Equipment List lists 1,170 Gil.`
+    : conditions,
   cost: { currency: "gil" as const, amount },
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-item-locations-54996", itemSource, "rpgclassics-shops"],
+  sourceIds: [
+    "gamefaqs-items-71891",
+    "gamefaqs-shops-71891",
+    "gamefaqs-item-locations-54996",
+    itemSource,
+    "rpgclassics-shops",
+    ...(itemId === "game-item.healing-rod" ? ["gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383"] : []),
+  ],
 }));
 
 const ipsensMogshopEquipmentProducts = [

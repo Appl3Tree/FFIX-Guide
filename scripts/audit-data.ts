@@ -4588,6 +4588,14 @@ for (const [itemId, expected] of iifaTreeShopExpectations) {
     errors.push(`Iifa Tree recovery for ${itemId} needs ${expected.count} shop paths priced at ${expected.price} Gil; found ${shopPaths.length}.`);
   }
 }
+const healingRodShopPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.healing-rod" &&
+  (path.method === "shop" || path.method === "mogshop"));
+const healingRodItem = gameItems.find((item) => item.id === "game-item.healing-rod");
+if (!healingRodItem?.sourceIds.includes("gamefaqs-shop-lists-9772") || healingRodShopPaths.length !== 5 ||
+  healingRodShopPaths.some((path) => path.cost?.amount !== 1770 || !path.sourceIds.includes("gamefaqs-shop-lists-9772") ||
+    !path.sourceIds.includes("gamefaqs-equipment-33383") || !path.conditions?.includes("1,170 Gil"))) {
+  errors.push("Healing Rod's five shop paths must cite both GameFAQs price listings and retain the 1,170/1,770-Gil discrepancy.");
+}
 if (!itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.iifa-tree.soulcage-brigandine-steal" &&
     path.itemId === "game-item.brigandine" && path.method === "steal" && path.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.soulcage-steals"))) {
   errors.push("Brigandine recovery coverage needs the linked one-time Soulcage steal path.");
