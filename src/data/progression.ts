@@ -819,6 +819,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
   },
   {
+    id: "detour.aerial-lindblum-airship-elixir",
+    fromChapterId: "disc-3.aerial-exploration",
+    toChapterId: "disc-2.return-to-lindblum",
+    relationship: "optional-return",
+    summary: "For the optional Hilda Garde III Elixir, dock the ship at Lindblum Castle, board to the bridge, and climb the outer-deck ladder. GameFAQs says this copy is available only while docked here; this return does not establish access to other Lindblum areas.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+  },
+  {
+    id: "detour.aerial-lindblum-airship-rejoin",
+    fromChapterId: "disc-2.return-to-lindblum",
+    toChapterId: "disc-3.aerial-exploration",
+    relationship: "rejoin",
+    summary: "After taking the docked Hilda Garde III Elixir, return to the ship and resume Disc III free flight; the lower-hold Tent can be collected from any parking location.",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"],
+  },
+  {
     id: "story.aerial-exploration-to-ipsens-castle",
     fromChapterId: "disc-3.aerial-exploration",
     toChapterId: "disc-3.ipsens-castle",

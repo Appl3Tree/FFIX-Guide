@@ -674,6 +674,38 @@ if (
 ) {
   errors.push("The Disc III Hilda Garde Quan's Dwelling return must preserve the route, rejoin, party-required objective, Running Shoes item path, branch limit, and source links.");
 }
+const aerialLindblumElixirReturn = gameRouteEdgesById.get("detour.aerial-lindblum-airship-elixir");
+const aerialLindblumElixirRejoin = gameRouteEdgesById.get("detour.aerial-lindblum-airship-rejoin");
+const aerialAirshipPickupObjective = objectivesById.get("disc-3.aerial-exploration.airship-pickups");
+const aerialLindblumElixirPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.hilda-garde-lindblum-elixir");
+const aerialHildaGardeTentPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.hilda-garde-tent");
+if (
+  aerialLindblumElixirReturn?.relationship !== "optional-return" ||
+  aerialLindblumElixirReturn.fromChapterId !== "disc-3.aerial-exploration" ||
+  aerialLindblumElixirReturn.toChapterId !== "disc-2.return-to-lindblum" ||
+  !aerialLindblumElixirReturn.summary.includes("only while docked here") ||
+  !aerialLindblumElixirReturn.summary.includes("does not establish access to other Lindblum areas") ||
+  !aerialLindblumElixirReturn.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialLindblumElixirReturn.sourceIds.includes("jegged-lindblum-hilda-garde") ||
+  aerialLindblumElixirRejoin?.relationship !== "rejoin" ||
+  aerialLindblumElixirRejoin.fromChapterId !== "disc-2.return-to-lindblum" ||
+  aerialLindblumElixirRejoin.toChapterId !== "disc-3.aerial-exploration" ||
+  !aerialLindblumElixirRejoin.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialAirshipPickupObjective?.chapterIds.includes("disc-3.aerial-exploration") ||
+  !aerialAirshipPickupObjective.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialLindblumElixirPath ||
+  aerialLindblumElixirPath.itemId !== "game-item.elixir" ||
+  aerialLindblumElixirPath.method !== "hidden-pickup" ||
+  !aerialLindblumElixirPath.conditions.includes("only while the ship is docked at Lindblum") ||
+  !aerialLindblumElixirPath.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.airship-pickups") ||
+  !aerialHildaGardeTentPath ||
+  aerialHildaGardeTentPath.itemId !== "game-item.tent" ||
+  aerialHildaGardeTentPath.method !== "hidden-pickup" ||
+  !aerialHildaGardeTentPath.conditions.includes("available at any parking location") ||
+  !aerialHildaGardeTentPath.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.airship-pickups")
+) {
+  errors.push("The Disc III Hilda Garde Lindblum return must preserve its dock-only Elixir, general ship Tent pickup, shared objective, rejoin, and limited access claim.");
+}
 const routeStartChapterId = gameRouteCoverage.chapterIds[0];
 const routeEndChapterId = gameRouteCoverage.throughChapterId;
 if (!routeStartChapterId) {
