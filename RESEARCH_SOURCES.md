@@ -669,3 +669,8 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 
 - [GameFAQs Shops](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists Gold Helm for 1,800 Gil in Treno's Disc III–IV weapon shop. [RPGClassics Shops](https://shrines.rpgclassics.com/psx/ffix/shops.shtml) independently lists Gold Helm for 1,800 Gil in the Disc III Treno armory. Both support repeatable original PlayStation item-type recovery after missing Antlion's one-time Gold Helm steal in Cleyra.
 - The recovery path is distinct from that encounter copy and does not restore it. Newer-release shop behavior and direct game confirmation remain open.
+
+## Ipsen equipment ability claims (2026-10-26)
+
+- The [GameFAQs Items reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists Reis’s Wind for Mythril Spear; Spare Change and Counter for Poison Knuckles; Float, Stona, and Silence for Lamia’s Flute; and Stop, Bio, and Drain for Oak Staff. Its [Abilities reference](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/abilities) provides the corresponding ability index.
+- All nine equipment claims were already in the item catalog; the Ipsen audit now requires both source links for each. This is a completeness guard, not a claim that these abilities are exclusive to Ipsen or permanently missable.

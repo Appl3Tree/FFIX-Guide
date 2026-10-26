@@ -5554,6 +5554,10 @@ const ipsensTargetMismatch = ipsensInventoryTargets.some(([slug, need, endInvent
 });
 const ipsensAbilityClaims = [
   ["mage-masher", "Flee"], ["mage-masher", "Detect"], ["iron-sword", "Minus Strike"],
+  ["mythril-spear", "Reis's Wind"],
+  ["poison-knuckles", "Spare Change"], ["poison-knuckles", "Counter"],
+  ["lamias-flute", "Float"], ["lamias-flute", "Stona"], ["lamias-flute", "Silence"],
+  ["oak-staff", "Stop"], ["oak-staff", "Bio"], ["oak-staff", "Drain"],
   ["multina-racket", "Blind"], ["multina-racket", "Stona"], ["multina-racket", "Shell"],
   ["needle-fork", "High Tide"], ["n-kai-armlet", "Bandit"], ["n-kai-armlet", "Undead Killer"],
   ["n-kai-armlet", "Water"], ["jade-armlet", "Body Temp"], ["jade-armlet", "High Tide"],

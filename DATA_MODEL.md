@@ -37,6 +37,8 @@ Cleyra now has all six one-time Antlion/Beatrix steal paths linked to their warn
 
 Ipsen Disc III supply comparison: icksmehl lists seven items and omits five present in the English Ipsen tables; those omissions are recorded as table differences, not proof of unavailable stock. Its Disc III table includes Remedy, while its Disc IV table omits it, so the late purchase remains unverified.
 
+The Ipsen Mogshop audit also checks the source-backed abilities of Mythril Spear, Poison Knuckles, Lamia’s Flute, and Oak Staff against the GameFAQs Items and Abilities references. These checks protect existing catalog claims; ability coverage remains partial overall.
+
 ## Profile schema
 
 The local library uses schema version 3, a stable per-browser `deviceId`, profile list, and selected profile ID. Each profile stores its goal, route, selected product/platform, current story area, manually entered game clock, saved Excalibur II route splits, sparse objective marks, and warning acknowledgements. Normalization adds empty checkpoint and acknowledgement maps to older backups. The Excalibur II timer compares the manual clock with the selected source checkpoint and keeps actual splits separate from target data. Platform choices distinguish the original PlayStation, Steam, PS4 release, Xbox One/Series/Windows app, Switch, iOS/iPadOS, and Android; early broad PlayStation/mobile values remain readable when restoring foundation backups.
