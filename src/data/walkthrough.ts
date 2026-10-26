@@ -639,7 +639,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "village-road-and-windmill",
         title: "Village Road and Windmill — shop, hidden Gil, and Aries",
         summary: "View the remaining town ATEs without entering the Weapon Shop before Dagger Tries Harder appears; then prepare the party and collect the Stellazzio before descending.",
-        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali"],
+        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios"],
         steps: [
           {
             id: "dali-cat-eye-and-road-gil",
@@ -665,7 +665,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "dali-aries-stellazzio",
             kind: "pickup",
             text: "After the story points you toward the windmill, enter it and inspect behind the central pillar/crank structure on the ground floor for the Aries Stellazzio.",
-            detail: "Guides disagree on whether Aries is permanently missable here: one labels it missable, while general Stellazzio routes say coins can be recovered on later visits. Dali reopens later, so the guide does not classify this coin as permanently lost; collect it now and keep the later return route on the checklist.",
+            detail: "The first-visit pickup is the recommended route. GameFAQs' original PlayStation guide explicitly says none of the Stellazzio are missable, even on Disc IV, and Gamer Guides says all coins can be found on the final disc; both list Aries at Dali. A separate missables index labels the first visit as missable, so the guide records that conflict without calling Aries permanently lost. Direct gameplay and release-by-release behavior remain unverified.",
             objectiveIds: ["disc-1.village-of-dali.aries-stellazzio"],
           },
           {
@@ -777,8 +777,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "dali-final-ice-cavern-check",
             kind: "cutoff",
             text: "Before boarding, confirm the Ice Cavern's eight chests and check the Mois-to-Gumo delivery. If any chests remain, walk back across the world map to the cave now; if Mois's letter was missed, make a best-effort return, since its post-boss recovery is disputed.",
-            detail: "Dali itself reopens later, and the Aries Stellazzio may be recoverable on a return according to general Stellazzio references. The one-time underground factory has already sealed after its crate sequence; Dali's upper windmill rooms and Mayor's Key rewards are deferred to the later return route.",
-            objectiveIds: ["disc-1.ice-cavern.treasure-sweep", "disc-1.ice-cavern.mois-letter", "disc-1.village-of-dali.mois-letter-delivery"],
+            detail: "GameFAQs' PlayStation Stellazzio guide and Gamer Guides explicitly say the coins remain available on Disc IV/the final disc and locate Aries at Dali's windmill. Collect it now for convenience; if missed, use the Disc IV return step. The one-time underground factory has already sealed after its crate sequence; Dali's upper windmill rooms and Mayor's Key rewards are deferred to the later return route.",
+            objectiveIds: ["disc-1.ice-cavern.treasure-sweep", "disc-1.ice-cavern.mois-letter", "disc-1.village-of-dali.mois-letter-delivery", "disc-1.village-of-dali.aries-stellazzio"],
           },
           {
             id: "dali-board-cargo-ship",
@@ -5985,6 +5985,21 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Before going to the Iifa Tree, visit Black Mage Village's Item Shop, Weapon Shop, and Black Cat Synthesis Shop, then check Daguerreo's Weapon Shop. The Disc IV stock includes Wizard Rod, Siren's Flute, High Mage Staff, Thief Hat, Holy Miter, Dark Gear, and Daguerreo's new weapons and armor; compare abilities and recipes with your goals. If you need Grand Helm, check Cross Helm + Power Belt at Black Cat; a missing Power Belt can be rebuilt only if you kept Chain Mail.",
             detail: "Black Mage Village's Disc IV Item Shop adds Magic Tag and Vaccine (100 Gil each). Its Weapon Shop lists Wizard Rod (3,990), Siren's Flute (7,000), High Mage Staff (6,000), Thief Hat (7,100), Holy Miter (8,300), and Dark Gear (16,300). Daguerreo's Disc IV Weapon Shop lists Orichalcon (17,000), Defender (9,340), Ultima Sword (14,000), Holy Lance (11,000), Avenger (16,000), Kaiser Knuckles (18,000), Mythril Racket (2,250), Fork (1,100), Bistro Fork (10,300), Rising Sun (500), Magic Armlet (1,000), Egoist's Armlet (2,000), Dragon Wrist (4,800), Power Wrist (5,100), Defense Gloves (6,000), Aegis Gloves (7,000), Lamia's Tiara (800), Golden Hairpin (3,700), Coronet (4,400), Flash Hat (5,200), Adaman Hat (6,100), Platinum Helm (4,600), Kaiser Helm (7,120), Demon's Vest (10,250), Minerva's Plate (12,200), Ninja Gear (14,000), Platina Armor (10,500), Carabini Mail (12,300), and Dragon Mail (14,000). These Disc IV stocks replace the earlier Black Mage Village weapon and Daguerreo weapon inventories. Confirmed Black Cat recipes include Butterfly Sword (300 Gil), The Ogre (700), Exploda (1,000), Angel Bless (9,000), Sargatanas (12,000), Masamune and Duel Claws (16,000 each), Priest's Racket (11,000), Bracer (24,000), Grand Helm, Rubber Suit, and Light Robe (20,000 each), Circlet (20,000), Golden Skullcap (15,000), Rune Tooth (2,000), Gauntlets (8,000), Brave Suit (26,000), and Grand Armor (45,000). For Grand Helm, Black Cat requires Cross Helm + Power Belt; if Power Belt is missing, Disc IV synthesis uses Glass Buckle + Chain Mail for 2,000 Gil at Daguerreo, Lindblum, or Treno. Cross Helm remains purchasable from Kumool at Ipsen's Castle on Disc IV, but Chain Mail's listed shop sources end in Disc II, so that fallback depends on a retained copy. GameFAQs and RPGClassics agree on the eleven original formulas and prices. The GameFAQs Item + Ability FAQ and Fandom independently confirm Circlet from Coronet + Rosetta Ring and Golden Skullcap from Gold Helm + Golden Hairpin; RPGClassics labels the Circlet recipe Gauntlets, but GameFAQs separately lists Gauntlets from Mythril Gloves + Dragon Wrist for 8,000 Gil. Circlet also has Chocograph #22 and Treno Behemoth reward routes. Rune Tooth is modeled at 2,000 Gil from two Mythril Daggers; GameFAQs Shops lists 1,000 Gil, while RPGClassics, Fandom, and FFUniverse list 2,000 Gil. Brave Suit is modeled at 26,000 Gil from Mythril Vest + Mythril Rod; GameFAQs Shops lists 20,000 Gil, while RPGClassics, Fandom, and FFUniverse list 26,000 Gil. The GameFAQs Items table's 1,900-Gil Rune Tooth and 11,250-Gil Brave Suit figures are sell prices, not synthesis costs. The separate Daguerreo Item and Synthesis Shops retain their earlier stock.",
             objectiveIds: ["disc-4.return-to-gaia.updated-shops"],
+          },
+        ],
+      },
+      {
+        id: "gaia-return-dali-aries",
+        title: "Dali — recover Aries Stellazzio if needed",
+        summary: "The Disc IV route can return to Dali for the Aries Stellazzio. Search the windmill's ground floor behind its central pillar/crank structure.",
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios", "megane-kangaroo-disc4-burmecia-recovery"],
+        steps: [
+          {
+            id: "gaia-return-dali-aries-stellazzio",
+            kind: "optional",
+            text: "If Aries is still missing, fly back to Dali, enter the windmill, and inspect behind the central pillar/crank structure on the ground floor.",
+            detail: "The GameFAQs original PlayStation guide says no Stellazzio are missable even on Disc IV; Gamer Guides says all can be found on the final disc. Both locate Aries in the Dali windmill. A Disc IV recovery route also includes the Dali stop, but its Aries-location images are from story progression, not the Disc IV visit. The guides do not establish release-by-release parity, and direct gameplay verification remains open.",
+            objectiveIds: ["disc-4.return-to-gaia.aries-stellazzio"],
           },
         ],
       },

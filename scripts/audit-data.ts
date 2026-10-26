@@ -1821,6 +1821,53 @@ if (
 ) {
   errors.push("The Disc IV Burmecia sweep must connect its six item-copy paths to the scoped source, item records, objective, and walkthrough reminder.");
 }
+const ariesGamefaqsSource = sources.find((source) => source.id === "gamefaqs-stellazzio-71891");
+const ariesGamerGuidesSource = sources.find((source) => source.id === "gamerguides-stellazzios");
+const ariesDisc4RouteSource = sources.find((source) => source.id === "megane-kangaroo-disc4-burmecia-recovery");
+const ariesItem = gameItems.find((item) => item.id === "game-item.aries-stellazzio");
+const ariesDisc1Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.aries-stellazzio");
+const ariesDisc4Path = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.dali-aries-stellazzio");
+const ariesDisc1Objective = objectivesById.get("disc-1.village-of-dali.aries-stellazzio");
+const ariesDisc4Objective = objectivesById.get("disc-4.return-to-gaia.aries-stellazzio");
+const ariesDisc4Steps = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+  ?.sections.flatMap((section) => section.steps)
+  .filter((step) => step.objectiveIds?.includes("disc-4.return-to-gaia.aries-stellazzio")) ?? [];
+const ariesDisc4Detour = gameRouteEdges.find((edge) => edge.id === "detour.return-to-gaia-dali-aries");
+const ariesDisc4Rejoin = gameRouteEdges.find((edge) => edge.id === "detour.dali-aries-rejoin-gaia");
+if (
+  !ariesGamefaqsSource?.notes.includes("none of the Stellazzio are missable, even on Disc IV")
+  || !ariesGamerGuidesSource?.notes.includes("all can be found on the final disc")
+  || !ariesDisc4RouteSource?.notes.includes("images are from story progression")
+  || !ariesItem?.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || !ariesItem.sourceIds.includes("gamerguides-stellazzios")
+  || !ariesDisc1Objective?.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || !ariesDisc4Objective?.sourceIds.includes("gamerguides-stellazzios")
+  || !ariesDisc4Objective.chapterIds?.includes("disc-4.return-to-gaia")
+  || ariesDisc1Path?.chapterId !== "disc-1.village-of-dali"
+  || ariesDisc1Path.itemId !== "game-item.aries-stellazzio"
+  || !ariesDisc1Path.walkthroughObjectiveIds?.includes("disc-1.village-of-dali.aries-stellazzio")
+  || !ariesDisc1Path.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || !ariesDisc1Path.sourceIds.includes("gamerguides-stellazzios")
+  || ariesDisc4Path?.chapterId !== "disc-4.return-to-gaia"
+  || ariesDisc4Path.itemId !== "game-item.aries-stellazzio"
+  || !ariesDisc4Path.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.aries-stellazzio")
+  || !ariesDisc4Path.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || !ariesDisc4Path.sourceIds.includes("gamerguides-stellazzios")
+  || !ariesDisc4Path.sourceIds.includes("megane-kangaroo-disc4-burmecia-recovery")
+  || ariesDisc4Steps.length !== 1
+  || !ariesDisc4Steps[0].detail?.includes("images are from story progression")
+  || ariesDisc4Detour?.fromChapterId !== "disc-4.return-to-gaia"
+  || ariesDisc4Detour.toChapterId !== "disc-1.village-of-dali"
+  || ariesDisc4Detour.relationship !== "optional-return"
+  || !ariesDisc4Detour.sourceIds.includes("gamefaqs-stellazzio-71891")
+  || !ariesDisc4Detour.sourceIds.includes("gamerguides-stellazzios")
+  || ariesDisc4Rejoin?.fromChapterId !== "disc-1.village-of-dali"
+  || ariesDisc4Rejoin.toChapterId !== "disc-4.return-to-gaia"
+  || ariesDisc4Rejoin.relationship !== "rejoin"
+) {
+  errors.push("Aries recovery must link its Disc I and Disc IV sources, item paths, objectives, optional return/rejoin, and story-image caveat.");
+}
 const burmeciaMythrilSpear = itemAcquisitionPaths.find((path) => path.id === "item-path.burmecia.mythril-spear");
 const burmeciaDisc2SpearStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra")

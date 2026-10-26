@@ -963,6 +963,22 @@ export const gameRouteEdges: GameRouteEdge[] = [
     sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-final-preparations-71891", "gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"],
   },
   {
+    id: "detour.return-to-gaia-dali-aries",
+    fromChapterId: "disc-4.return-to-gaia",
+    toChapterId: "disc-1.village-of-dali",
+    relationship: "optional-return",
+    summary: "If Aries is missing, return to Dali during the open Disc IV world-map route and search the windmill's ground floor behind the central pillar/crank. The GameFAQs PlayStation guide and Gamer Guides say Stellazzio remain available on Disc IV/the final disc; direct gameplay and release-specific parity remain unverified.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios", "megane-kangaroo-disc4-burmecia-recovery"],
+  },
+  {
+    id: "detour.dali-aries-rejoin-gaia",
+    fromChapterId: "disc-1.village-of-dali",
+    toChapterId: "disc-4.return-to-gaia",
+    relationship: "rejoin",
+    summary: "After checking the windmill, return to the Invincible and resume other Disc IV errands or continue toward the Iifa Tree.",
+    sourceIds: ["gamefaqs-return-to-gaia-71891", "megane-kangaroo-disc4-burmecia-recovery"],
+  },
+  {
     id: "detour.return-to-gaia-alexandria-mognet",
     fromChapterId: "disc-4.return-to-gaia",
     toChapterId: "disc-1.alexandria",

@@ -2329,6 +2329,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
 ];
 
 export const gameItems: GameItem[] = [
+  { id: "game-item.aries-stellazzio", name: "Aries Stellazzio", category: "key-item", sourceIds: ["gamefaqs-dali-71891", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios", "megane-kangaroo-disc4-burmecia-recovery"], verification: "partial" },
   { id: "game-item.cancer-stellazzio", name: "Cancer Stellazzio", category: "key-item", sourceIds: [...burmeciaSources, "jegged-stellazzio", "megane-kangaroo-disc4-burmecia-recovery"], verification: "partial" },
   { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...burmeciaSources, ...daliFirstVisitPickupSources, ...evilForestPickupSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: [...daliFirstVisitPickupSources, ...evilForestPickupSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
@@ -8296,6 +8297,17 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     sourceIds: [...mountGulugSources, "gamefaqs-enemy-list-71891"],
   },
   {
+    id: "item-path.disc-1.village-of-dali.aries-stellazzio",
+    itemId: "game-item.aries-stellazzio",
+    chapterId: "disc-1.village-of-dali",
+    method: "hidden-pickup",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "On the ground floor of Dali's windmill, inspect behind the central pillar/crank structure.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.aries-stellazzio"],
+    sourceIds: ["gamefaqs-dali-71891", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios"],
+  },
+  {
     id: "item-path.burmecia.cancer",
     itemId: "game-item.cancer-stellazzio",
     chapterId: "disc-1.burmecia",
@@ -8506,6 +8518,17 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     conditions: "Uptown balcony room reached by crossing between balconies over the broken statue.",
     walkthroughObjectiveIds: [treasureSweepObjective],
     sourceIds: burmeciaSources,
+  },
+  {
+    id: "item-path.disc-4.return-to-gaia.dali-aries-stellazzio",
+    itemId: "game-item.aries-stellazzio",
+    chapterId: "disc-4.return-to-gaia",
+    method: "hidden-pickup",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "If Aries is still missing, revisit Dali on Disc IV and inspect behind the central pillar/crank structure on the windmill's ground floor.",
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.aries-stellazzio"],
+    sourceIds: ["gamefaqs-stellazzio-71891", "gamerguides-stellazzios", "megane-kangaroo-disc4-burmecia-recovery"],
   },
   {
     id: "item-path.disc-4.return-to-gaia.burmecia-cancer-stellazzio",
