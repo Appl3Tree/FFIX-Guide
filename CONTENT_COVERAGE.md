@@ -2,6 +2,8 @@
 
 Last updated: 2026-10-25
 
+Latest B02/B05 update: Maliris's one-time steal table now points to item-specific recovery: Chocograph #21 for an unclaimed Genji Armor, Daguerreo's Disc IV Ultima Sword purchase (14,000 Gil), and Black Mage Village's Disc IV Masamune recipe (Zorlin Shape + Orichalcon, 16,000 Gil). GameFAQs' Genji Armor Need 3 field conflicts with its two listed sources and end-inventory #2, so the count remains unresolved. The objective, warning, paths, walkthrough, and audit agree. Audit: 0 errors, 184 coverage warnings, 140 missables linked to 98 cutoffs; 44 chapters, 654 objectives, 377 sources, and 996 item paths. Direct game and release behavior remain unverified.
+
 Coverage distinguishes inventory, implementation, and verification. A heading in an inventory does not imply that its walkthrough text or tracker is finished.
 
 Latest B02/B05 update: Kraken’s Wizard Rod steal is now distinguished from item-type recovery. GameFAQs’ Items, Shops, and Equipment references and Caves of Narshe list a 3,990-Gil Black Mage Village Disc IV purchase. The source-linked shop path reaches the Kraken objective, warning, and walkthrough; the audit guards those links. Audit: 0 errors, 184 coverage warnings, 140 missables linked to 98 cutoffs; 44 chapters, 654 objectives, 377 sources, and 996 item paths. Direct game and release behavior remain unverified.

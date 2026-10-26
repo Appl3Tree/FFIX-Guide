@@ -1751,7 +1751,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Black Cat Synthesis Shop (Disc IV)",
     cost: { currency: "gil", amount: 16000 },
     conditions: "Synthesize Masamune from Zorlin Shape + Orichalcon for 16,000 Gil at Black Mage Village on Disc IV.",
-    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops"],
+    walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.maliris-steals"],
     sourceIds: disc4BlackCatRecipeSources,
   },
   {
@@ -2715,7 +2715,12 @@ const disc4ShopPaths: ItemAcquisitionPath[] = disc4ShopPathInputs.map(([shopId, 
       walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.kraken-steals"],
       sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods"],
     }
-    : { sourceIds: disc4ShopSources }),
+    : itemSlug === "ultima-sword"
+      ? {
+        walkthroughObjectiveIds: ["disc-4.return-to-gaia.updated-shops", "disc-4.memoria.maliris-steals"],
+        sourceIds: [...disc4ShopSources, "gamefaqs-items-71891"],
+      }
+      : { sourceIds: disc4ShopSources }),
 }));
 
 const cleyraShopStockInputs: Array<[slug: string, price: number, shopName: string]> = [
@@ -7162,6 +7167,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     quantity: 1,
     availability: "single-use",
     conditions: "Chocograph #21, Outer Island, rewards one Genji Armor after Choco's Sky ability lets the party reach the Air Garden.",
+    walkthroughObjectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures", "disc-4.memoria.maliris-steals"],
     sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891"],
   },
   {

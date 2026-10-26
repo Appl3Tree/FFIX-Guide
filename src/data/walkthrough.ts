@@ -6388,13 +6388,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-maliris",
         title: "Outer Path — Maliris",
         summary: "Bring Zidane for the boss steal table. Fire protection and Body Temp reduce the risk from Maliris's fire and Heat attacks.",
-        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-items-71891"],
+        sourceIds: ["gamefaqs-memoria-71891", "rpgclassics-memoria", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-synthesis", "rpgclassics-armor"],
         steps: [
           {
             id: "memoria-maliris-steals",
             kind: "combat",
             text: "Before starting the fight, equip Fire resistance and Body Temp. Steal Genji Armor, Ultima Sword, and Masamune with Zidane; Soul Blade with Ultima Weapon can put Maliris to Sleep. Maliris absorbs Fire and is weak to Ice.",
-            detail: "Maliris can use Firaga, physical sword attacks, Reflect, and Mustard Bomb, which causes Heat. Raining Swords hits the whole party as she is defeated, so heal before the final hit. The Phoenix Pinion is the listed guaranteed drop.",
+            detail: "Maliris can use Firaga, physical sword attacks, Reflect, and Mustard Bomb, which causes Heat. Raining Swords hits the whole party as she is defeated, so heal before the final hit. The Phoenix Pinion is the listed guaranteed drop. If a steal is missed, Genji Armor also comes from Chocograph #21; Daguerreo sells Ultima Sword on Disc IV for 14,000 Gil; Black Cat synthesizes Masamune on Disc IV from Zorlin Shape + Orichalcon for 16,000 Gil. GameFAQs lists Genji Armor Need 3 but only two sources and end-inventory #2, so that copy target remains disputed.",
             objectiveIds: ["disc-4.memoria.maliris-steals", "disc-4.memoria.maliris-achievement"],
           },
           {

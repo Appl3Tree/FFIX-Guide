@@ -5784,6 +5784,34 @@ if (!krakenWarning?.classification.includes("recoverable-later") ||
   !krakenWalkthroughStep?.detail?.includes("Wizard Rod can be bought later at Black Mage Village's Disc IV Weapon Shop for 3,990 Gil")) {
   errors.push("Kraken's Wizard Rod steal must be classified as recoverable through the source-linked Disc IV Black Mage Village shop path.");
 }
+const malirisWarning = missablesById.get("missable.disc-4.memoria.maliris-steals");
+const malirisStealObjective = objectivesById.get("disc-4.memoria.maliris-steals");
+const genjiArmorChocographPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.genji-armor-chocograph-21");
+const ultimaSwordDaguerreoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4-shop.daguerreo.weapon-shop.ultima-sword");
+const masamuneDisc4SynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.masamune-synthesis");
+const malirisWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-4.memoria")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "memoria-maliris-steals");
+if (!malirisWarning?.classification.includes("recoverable-later") ||
+  !malirisWarning.classification.includes("limited-quantity") ||
+  !malirisWarning.nextAvailability?.includes("Daguerreo's Disc IV Weapon Shop sells Ultima Sword for 14,000 Gil") ||
+  !malirisWarning.nextAvailability?.includes("Black Cat synthesizes Masamune from Zorlin Shape + Orichalcon for 16,000 Gil") ||
+  !malirisWarning.nextAvailability?.includes("Need 3 target conflicts with its two listed sources and end-inventory #2") ||
+  !["gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-synthesis", "rpgclassics-armor"].every((sourceId) => malirisStealObjective?.sourceIds.includes(sourceId)) ||
+  !genjiArmorChocographPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.maliris-steals") ||
+  !genjiArmorChocographPath.sourceIds.includes("gamefaqs-chocobo-hot-cold-71891") ||
+  !ultimaSwordDaguerreoPath || ultimaSwordDaguerreoPath.method !== "shop" || ultimaSwordDaguerreoPath.cost?.amount !== 14000 ||
+  !ultimaSwordDaguerreoPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !ultimaSwordDaguerreoPath.walkthroughObjectiveIds?.includes("disc-4.memoria.maliris-steals") ||
+  !masamuneDisc4SynthesisPath || masamuneDisc4SynthesisPath.method !== "synthesis" ||
+  masamuneDisc4SynthesisPath.recipeId !== "synthesis-recipe.masamune" || masamuneDisc4SynthesisPath.cost?.amount !== 16000 ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"].every((sourceId) => masamuneDisc4SynthesisPath.sourceIds.includes(sourceId)) ||
+  !masamuneDisc4SynthesisPath.walkthroughObjectiveIds?.includes("disc-4.memoria.maliris-steals") ||
+  !malirisWalkthroughStep?.detail?.includes("Daguerreo sells Ultima Sword on Disc IV for 14,000 Gil") ||
+  !malirisWalkthroughStep.detail.includes("Genji Armor Need 3 but only two sources")) {
+  errors.push("Maliris's one-time steals must be linked to the documented Chocograph, Daguerreo shop, and Disc IV Masamune synthesis routes, with the Genji Armor copy-count conflict preserved.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }
