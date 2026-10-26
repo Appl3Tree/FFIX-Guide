@@ -1467,6 +1467,14 @@ export const sources = [
     notes: "Original PlayStation route, confirms no listed ship items, the bridge sequence, party setup, Black Waltz 3's stats and attacks, and its three steals. Its steal odds are recorded as rarity classes and a 1-in-16 rare-slot chance.",
   },
   {
+    id: "game-dog-cargo-ship",
+    title: "Cargo Ship walkthrough (Japanese)",
+    publisher: "Game Dog",
+    url: "https://game.konomi.app/ff9/walkthrough/disc1/cargo-ship",
+    accessed: "2026-10-26",
+    notes: "Lists a Lv. 6 recommendation but also reports Black Waltz 3 at about 650 HP, with Meteor, a time limit, and steal items that conflict with the cross-checked Cargo Ship record. Its party-level suggestion is excluded from guidance; the page does not identify a game build or platform.",
+  },
+  {
     id: "jegged-cargo-ship",
     title: "Final Fantasy IX Walkthrough: The Cargo Ship to Lindblum",
     publisher: "Jegged",

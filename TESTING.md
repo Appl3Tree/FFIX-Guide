@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Black Waltz 2 preparation guidance: `npm run lint`, `npm run build` (TypeScript, data audit, production Vite build), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 426 sources; 100 cutoff windows cover all warnings. Bundle: 2,379.09 kB JavaScript (577.21 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's existing chunk-size advisory remains. Tests, browser, gameplay, and release verification were not run.
+Black Waltz 3 preparation evidence audit: `npm run lint`, `npm run build` (TypeScript, data audit, production Vite build), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 427 sources; 100 cutoff windows cover all warnings. Bundle: 2,380.85 kB JavaScript (577.83 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's existing chunk-size advisory remains. Tests, browser, gameplay, and release verification were not run.
+
+Previous verification: Black Waltz 2 preparation guidance: lint/build and whitespace checks passed with 0 audit errors and 188 coverage warnings across 44 chapters, 142 missables, 837 objectives, and 426 sources; 100 cutoffs cover all missables. Bundle: 2,379.09 kB JavaScript (577.21 kB gzip), 61.11 kB CSS (12.91 kB gzip). Tests, browser, gameplay, and release verification were not run.
 
 Previous verification: Sealion preparation guidance: lint/build and whitespace checks passed. Audit reported 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 425 sources; 100 cutoff windows cover all warnings. Bundle: 2,376.95 kB JavaScript (576.42 kB gzip), 61.11 kB CSS (12.91 kB gzip). Tests, browser, gameplay, and release verification were not run.
 

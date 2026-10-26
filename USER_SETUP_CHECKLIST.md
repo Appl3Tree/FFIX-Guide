@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 This is the consolidated list of actions that need the project owner's GitHub or Firebase account, a real sign-in, or a second device. The app currently stores progress in this browser only. Codex will complete and test the implementation that does not require your account before moving the Firebase steps to **Ready for User**.
 
-Latest Codex update: Added optional Black Waltz 2 party preparation advice to the bestiary and Dali route, including the single-source Lv. 5–6+ benchmark and its unknown build/platform scope. Lint, build/typecheck/data audit, and whitespace checks pass; this content update needs no project-owner account or setup action.
+Latest Codex update: Added source-backed Black Waltz 3 battle preparation and clarified that the reviewed routes do not support a party-level target. A conflicting Lv. 6 claim was excluded after checking it against the game's cross-referenced boss data. Lint, build/typecheck/data audit, and whitespace checks pass; no project-owner account or setup action changed.
+
+Previous Codex update: Added optional Black Waltz 2 party preparation advice to the bestiary and Dali route, including the single-source Lv. 5–6+ benchmark and its unknown build/platform scope. Lint, build/typecheck/data audit, and whitespace checks passed; this content update needed no project-owner account or setup action.
 
 Previous Codex update: Added a source-backed preparation profile for the Ice Cavern's paired Black Waltz 1/Sealion encounter and mirrored optional Lv. 4–5 Zidane guidance in the pre-boss route. Local lint, build/typecheck/data audit, and whitespace checks passed; no project-owner account or setup action changed.
 

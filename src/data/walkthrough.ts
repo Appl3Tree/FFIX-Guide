@@ -838,7 +838,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cargo-ship-boss-preparation",
             kind: "optional",
             text: "Before stepping onto the deck, check the three active characters' gear and learned abilities. Equip a Silk Shirt on the men if you have one to soften lightning damage; put Bird Killer on Zidane or Steiner if learned. Keep Potions available for healing, since Dagger is not in the battle party.",
-            detail: "The party has no further shop or recovery stop until Lindblum. No source-supported level target is needed; equipment and healing supplies are the useful preparation.",
+            detail: "The party has no further shop or recovery stop until Lindblum. Reviewed routes list the boss at Level 7, but that is the enemy's stat, not a party target; these sources give no normal-route level recommendation. The Cargo Ship has no local encounters for grinding.",
           },
           {
             id: "cargo-ship-black-waltz-3-steals",

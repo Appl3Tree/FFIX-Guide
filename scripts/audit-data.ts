@@ -3680,6 +3680,17 @@ if (!cargoShipWaltzEncounter || cargoShipWaltzEncounter.kind !== "boss" ||
   !cargoShipWaltzRecord.notes.some((note) => note.includes("Silver Greaves") && note.includes("Silver Gloves"))) {
   errors.push("The Cargo Ship Black Waltz 3 record must stay distinct, source-linked, and tied to its one-time steals, warning, cutoff, and source-name conflict.");
 }
+const cargoShipPreparation = cargoShipWaltzRecord?.preparationGuidance;
+const cargoShipPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.cargo-ship")?.sections.find((section) => section.id === "black-waltz-3");
+const cargoShipPrepStep = cargoShipPrepSection?.steps.find((step) => step.id === "cargo-ship-boss-preparation");
+if (!cargoShipPreparation || cargoShipPreparation.suggestedLevelRange !== undefined ||
+  !cargoShipPreparation.levelRationale.includes("not a party target") ||
+  !cargoShipPreparation.sourceIds.includes("gamefaqs-cargo-ship-71891") || !cargoShipPreparation.sourceIds.includes("jegged-cargo-ship") ||
+  cargoShipPreparation.sourceIds.includes("game-dog-cargo-ship") ||
+  !cargoShipPrepStep?.detail?.includes("not a party target") ||
+  !cargoShipPrepSection?.sourceIds.includes("gamefaqs-cargo-ship-71891")) {
+  errors.push("Cargo Ship Black Waltz 3 preparation must distinguish its Level 7 enemy stat from an unsupported party-level target and exclude conflicting Game Dog advice.");
+}
 for (const [itemId, slot] of cargoShipWaltzSteals) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-1.cargo-ship" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.cargo-ship.black-waltz-3-steals"));
   if (!cargoShipWaltzRecord?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) || !path || path.availability !== "one-time-encounter") {

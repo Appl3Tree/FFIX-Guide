@@ -226,6 +226,7 @@ const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
 const blackWaltz2PreparationSources = [...blackWaltz2Sources, "kamigame-dali-black-waltz-2"];
 const cargoShipEnemySources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
+const cargoShipPreparationSources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
 const summitStationEnemySources = ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "elitegrindlab-south-gate"];
 const bentiniHeightsEnemySources = [enemyListSourceId, "gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station"];
 const garganRooEnemySources = [enemyListSourceId, "gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"];
@@ -5558,6 +5559,13 @@ const cargoShipEnemyRecords: EnemyRecord[] = [
       { title: "Attempt the three one-time steals before finishing the battle", detail: "Use Zidane to attempt Steepled Hat, Linen Cuirass, and Silver Gloves while Vivi and Steiner manage damage and healing. Silver Gloves is the rare steal; the encounter ends when Black Waltz 3 flees, and Lindblum later stocks all three item types.", sourceIds: cargoShipEnemySources },
       { title: "Prepare for its airborne Thundara", detail: "Keep the party's HP safe when Black Waltz 3 takes flight and casts Thundara on everyone. Standard physical attacks will miss while it is airborne; Vivi begins the battle in Trance.", sourceIds: ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship"] },
     ],
+    preparationGuidance: {
+      levelRationale: "The reviewed original PlayStation GameFAQs route lists Black Waltz 3 at Level 7; that is the boss's own stat, not a party target. Jegged and the other reviewed route sources give tactics but do not establish a normal-route party-level recommendation. No numeric party target is published here.",
+      optionalGrinding: "The Cargo Ship has no random encounters, shop, inn, or save moogle, so any optional leveling or supply check must happen in Dali before boarding. The reviewed routes do not require extra encounters or a fixed grind quota.",
+      setupAdvice: "Before boarding, check Zidane, Vivi, and Steiner's gear, learned abilities, and healing items; Dagger is not in the battle party. The reviewed routes say Vivi starts in Trance and Black Waltz 3 does not counter his magic, so use his spells while Zidane attempts the three steals. Heal through party-wide Thundara when the boss is airborne; physical attacks miss until it lands. The level advice is limited to the boss's Level 7 stat, not a recommended party level.",
+      confidence: "partial",
+      sourceIds: cargoShipPreparationSources,
+    },
     routeObjectiveIds: [cargoShipBlackWaltzStealsObjectiveId],
     notes: [
       "This Level 7, 1,128-HP record is the Cargo Ship form, distinct from the Level 9 South Gate rematch and its different three-item steal table.",
