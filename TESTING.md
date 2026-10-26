@@ -4,7 +4,7 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Glass Armlet Disc III stock cross-check: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 423 sources; 100 cutoff windows cover all warnings. Build emitted 2,371.34 kB JavaScript (574.49 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. The older walkthrough adds a positive Treno listing but does not settle the in-game stock window. Automated tests, browser review, gameplay, and release verification were not run.
+South Gate Disc III equipment source scope: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 424 sources; 100 cutoff windows cover all warnings. Build emitted 2,373.11 kB JavaScript (575.05 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. GameFAQs 79143 confirms the named Summit Shop is in a Disc II route, but its two recommended buys do not settle full stock or Disc III access. Automated tests, browser review, gameplay, and release verification were not run.
 
 Previous verification: Cross-checked the read-only Kupo→Mosh Jump Rope message against the VGR no-spoiler community walkthrough, which lists it in Disc I and again after Zorn and Thorn on Disc II. The general missed-delivery warning does not resolve post-Disc-II or Disc III availability.
 
