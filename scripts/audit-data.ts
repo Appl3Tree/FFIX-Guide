@@ -4302,6 +4302,63 @@ if (
 ) {
   errors.push("Moorock's #21 letter must preserve its Bran Bal-to-Pandemonium recovery, the Maze receipt/delivery cutoff, and its optional status for the 27-letter count rather than Mognet Central repair.");
 }
+const expectedMoorockStock = [
+  ["game-item.dagger", 320], ["game-item.mage-masher", 500], ["game-item.mythril-dagger", 950],
+  ["game-item.gladius", 2300], ["game-item.zorlin-shape", 6000], ["game-item.orichalcon", 17000],
+  ["game-item.defender", 9340], ["game-item.holy-lance", 11000], ["game-item.avenger", 16000],
+  ["game-item.mythril-racket", 2250], ["game-item.bistro-fork", 10300], ["game-item.rising-sun", 500],
+  ["game-item.dragon-wrist", 4800], ["game-item.defense-gloves", 6000], ["game-item.coronet", 4400],
+  ["game-item.flash-hat", 5200], ["game-item.adaman-hat", 6100], ["game-item.platinum-helm", 4600],
+  ["game-item.demons-vest", 10250], ["game-item.minervas-plate", 12200], ["game-item.platina-armor", 10500],
+  ["game-item.hi-potion", 200], ["game-item.phoenix-down", 150], ["game-item.echo-screen", 50],
+  ["game-item.soft", 100], ["game-item.antidote", 50], ["game-item.eye-drops", 50],
+  ["game-item.magic-tag", 100], ["game-item.vaccine", 100], ["game-item.remedy", 300],
+  ["game-item.annoyntment", 150], ["game-item.tent", 800],
+] as const;
+const moorockBranBalPaths = itemAcquisitionPaths.filter((path) => path.shopId === "bran-bal.mogshop");
+const moorockPandemoniumPaths = itemAcquisitionPaths.filter((path) => path.shopId === "pandemonium.moorock");
+const moorockItemIds = new Set(expectedMoorockStock.map(([itemId]) => itemId));
+const branBalMoorockWarning = missablesById.get("missable.disc-3.portal-to-another-world.demons-vest-bran-bal-shop");
+const zorlinMoorockWarning = missablesById.get("missable.disc-3.portal-to-another-world.zorlin-shape-final-mogshop");
+const zorlinMoorockCutoff = cutoffsById.get("cutoff.pandemonium.moorock-shop");
+const zorlinMoorockTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-3.portal-to-another-world.zorlin-shape");
+const moorockShopObjective = objectivesById.get("disc-3.portal-to-another-world.moorock-shop-review");
+const branBalShopReviewStep = branBalMoorockSection?.steps.find((step) => step.id === "portal-bran-bal-shop-review");
+if (
+  moorockBranBalPaths.length !== 32 || moorockPandemoniumPaths.length !== 32 ||
+  ![moorockBranBalPaths, moorockPandemoniumPaths].every((paths) =>
+    paths.every((path) => moorockItemIds.has(path.itemId)) && new Set(paths.map((path) => path.itemId)).size === 32,
+  ) ||
+  expectedMoorockStock.some(([itemId, price]) => {
+    const branPath = moorockBranBalPaths.find((path) => path.itemId === itemId);
+    const pandemoniumPath = moorockPandemoniumPaths.find((path) => path.itemId === itemId);
+    return !branPath || !pandemoniumPath ||
+      branPath.cost?.amount !== price || pandemoniumPath.cost?.amount !== price ||
+      branPath.method !== "mogshop" || pandemoniumPath.method !== "mogshop" ||
+      branPath.availability !== "limited-window" || pandemoniumPath.availability !== "limited-window" ||
+      !branPath.walkthroughObjectiveIds?.includes("disc-3.portal-to-another-world.moorock-shop-review") ||
+      !pandemoniumPath.walkthroughObjectiveIds?.includes("disc-3.portal-to-another-world.moorock-shop-review");
+  }) ||
+  !moorockBranBalPaths.find((path) => path.itemId === "game-item.dagger")?.conditions?.includes("GameFAQs' Shops FAQ omits Dagger") ||
+  !moorockBranBalPaths.find((path) => path.itemId === "game-item.magic-tag")?.conditions?.includes("RPGClassics and EliteGrindLab omit it") ||
+  !moorockBranBalPaths.find((path) => path.itemId === "game-item.zorlin-shape")?.conditions?.includes("2,300 Gil") ||
+  !moorockPandemoniumPaths.find((path) => path.itemId === "game-item.zorlin-shape")?.conditions?.includes("final documented shop window") ||
+  !branBalShopReviewStep?.detail.includes("32 products") ||
+  !branBalShopReviewStep.detail.includes("Magic Tag but omits Dagger") ||
+  !["rpgclassics-shops", "elitegrindlab-bran-bal", "ffwiki-shops", "ff9-irodori-shops"].every((sourceId) => moorockShopObjective?.sourceIds.includes(sourceId)) ||
+  !pandemoniumMoorockStep?.objectiveIds.includes("disc-3.portal-to-another-world.moorock-shop-review") ||
+  !zorlinMoorockWarning?.classification.includes("permanently-missable") ||
+  !zorlinMoorockWarning.deadline.includes("before continuing through the Maze") ||
+  !zorlinMoorockCutoff?.missableIds.includes(zorlinMoorockWarning.id) ||
+  zorlinMoorockCutoff?.certainty !== "source-supported" ||
+  !branBalMoorockWarning?.nextAvailability?.includes("same stock") ||
+  !branBalMoorockWarning.nextAvailability.includes("Pandemonium Hall") ||
+  zorlinMoorockTarget?.targetQuantity !== 9 ||
+  !sources.find((source) => source.id === "ffwiki-shops")?.notes.includes("both Dagger and Magic Tag") ||
+  !sources.find((source) => source.id === "ff9-irodori-shops")?.notes.includes("same inventory")
+) {
+  errors.push("Moorock's full Bran Bal/Pandemonium stock, disputed Dagger/Magic Tag listings, Zorlin Shape price and final purchase cutoff must stay linked to the item catalog and walkthrough.");
+}
 const pandemoniumTreasureObjective = objectivesById.get("disc-3.portal-to-another-world.pandemonium-treasures");
 const pandemoniumTreasureWarning = missablesById.get("missable.disc-3.portal-to-another-world.pandemonium-treasures");
 const pandemoniumHolyMiterPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.pandemonium-holy-miter-throne");

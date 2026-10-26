@@ -5746,7 +5746,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-bran-bal-moorock",
         title: "Storage room — free Moorock, read Mognet, shop, and save",
         summary: "The eastern Storage room contains the Wing Edge, Moorock, the seventh Stiltzkin bundle, the local save point, and a stock check.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-bran-bal", "jegged-pandemonium", "cour89-bran-bal", "cour89-pandemonium", "cour89-mognet-letters", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-moogle-faq-23306", "elitegrindlab-bran-bal", "game8-zorlin-shape"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-shops-71891", "jegged-bran-bal", "jegged-pandemonium", "cour89-bran-bal", "cour89-pandemonium", "cour89-mognet-letters", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-moogle-faq-23306", "elitegrindlab-bran-bal", "game8-zorlin-shape", "rpgclassics-shops", "ffwiki-shops", "ff9-irodori-shops"],
         steps: [
           {
             id: "portal-bran-bal-wing-edge-moorock",
@@ -5758,8 +5758,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-bran-bal-shop-review",
             kind: "optional",
-            text: "Review Moorock's weapon and armor stock against your equipment and synthesis goals, including Demon's Vest (10,250 Gil). Buy any gear you want before continuing the story, and save at his Mognet point before leaving the room.",
-            detail: "The shop includes late gear such as Defender, Holy Lance, Bistro Fork, Adaman Hat, Platinum Helm, Platina Armor, and Zorlin Shape. Demon's Vest is also in the Terra chest before Bran Bal and returns to Daguerreo's Disc IV stock. Review Moorock's Bran Bal stock before following Mikoto through the green gate to Pandemonium: the post-Kuja route returns through Bran Bal linearly, but the reviewed sources do not document reopening the shop on that evacuation path. Moorock's Pandemonium Mogshop is the final documented chance to buy a Zorlin Shape, so review that stock after the forced fights and before continuing through the dungeon.",
+            text: "Review Moorock's full weapon, armor, and supply stock against your equipment and synthesis goals. Buy anything you want now, then save at his Mognet point before leaving the room.",
+            detail: "The cross-source counter list contains 32 products. GameFAQs Shops lists Magic Tag but omits Dagger; RPGClassics and EliteGrindLab list Dagger but omit Magic Tag. The corroborated Zorlin Shape price is 6,000 Gil, although GameFAQs Shops lists 2,300. If you skip Bran Bal purchases, Moorock offers the same stock in Pandemonium after the three forced fights. That Hall visit is the final documented purchase opportunity for Zorlin Shape. Demon's Vest is also in the Terra chest before Bran Bal and returns to Daguerreo's Disc IV stock.",
             objectiveIds: ["disc-3.portal-to-another-world.moorock-shop-review"],
           },
           {
@@ -5804,7 +5804,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-pandemonium-mind-control",
         title: "Pandemonium — survive the forced party-split battles",
         summary: "Three story fights use fixed, changing party groups. The full party reunites afterward in the Hall, where Moorock returns and can provide his letter if Bran Bal was skipped.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "cour89-pandemonium", "cour89-mognet-letters"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-shops-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "cour89-pandemonium", "cour89-mognet-letters", "game8-zorlin-shape", "rpgclassics-shops", "ffwiki-shops", "ff9-irodori-shops"],
         steps: [
           {
             id: "portal-pandemonium-amdusias",
@@ -5830,9 +5830,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-moorock-holy-miter",
             kind: "pickup",
-            text: "After the party reunites, speak with Moorock in the Hall to save, use a Tent, shop, or change party. If you skipped his letter in Bran Bal, choose Mognet now; then return through the rooms and examine the throne for the Holy Miter.",
-            detail: "Cour89 says Moorock offers the same #21 letter here if you missed it in Bran Bal. This is the final reported Moorock Mogshop window for Zorlin Shape; review stock now if needed. Both the letter pickup and its delivery close after passing through the Maze.",
-            objectiveIds: ["disc-3.portal-to-another-world.pandemonium-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter"],
+            text: "After the party reunites, speak with Moorock in the Hall to save, use a Tent, shop, or change party. If you skipped his letter in Bran Bal, choose Mognet now. Review his stock and buy any Zorlin Shapes needed for your selected goals, then return through the rooms and examine the throne for the Holy Miter.",
+            detail: "Moorock's shop has the same stock as Bran Bal; this is the final documented purchase window for Zorlin Shape. The corroborated price is 6,000 Gil, though GameFAQs Shops lists 2,300. Buy any copies needed for your synthesis or collection goals before continuing into the Maze. Cour89 says the same #21 letter is available here if you skipped it in Bran Bal; both receipt and delivery close after passing through the Maze.",
+            objectiveIds: ["disc-3.portal-to-another-world.pandemonium-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter", "disc-3.portal-to-another-world.moorock-shop-review"],
           },
         ],
       },

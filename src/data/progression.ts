@@ -1568,9 +1568,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.portal-to-return-to-gaia",
     title: "Terra and Bran Bal before the green gate",
     certainty: "conservative",
-    trigger: "Before following Mikoto through the green gate toward Pandemonium, finish the Terra/Bran Bal pickup route, view the Bran Bal ATEs, buy Stiltzkin's seventh bundle, and purchase Moorock's Demon's Vest if desired. The separate warning records retain each stop's own trigger and order.",
+    trigger: "Before following Mikoto through the green gate toward Pandemonium, finish the Terra/Bran Bal pickup route, view the Bran Bal ATEs, buy Stiltzkin's seventh bundle, and review Moorock's early stock if desired. The same stock is available after the forced fights in Pandemonium, where Zorlin Shape has its final purchase cutoff before the Maze.",
     missableIds: ["missable.disc-3.portal-to-another-world.terra-bran-bal-treasures", "missable.disc-3.portal-to-another-world.stiltzkin-7", "missable.disc-3.portal-to-another-world.bran-bal-ates", "missable.disc-3.portal-to-another-world.demons-vest-bran-bal-shop"],
-    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-bran-bal", "jegged-pandemonium", "rpgclassics-bran-bal", "gamerguides-four-shrines-terra", "gamerguides-movie-critic-guide", "gamefaqs-stiltzkin-shopping-71891"],
+    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-bran-bal", "jegged-pandemonium", "rpgclassics-bran-bal", "rpgclassics-shops", "gamerguides-four-shrines-terra", "gamerguides-movie-critic-guide", "gamefaqs-stiltzkin-shopping-71891", "elitegrindlab-bran-bal", "ffwiki-shops"],
   },
   {
     id: "cutoff.pandemonium.moorock-mognet-letter",
@@ -1580,6 +1580,15 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     trigger: "Before passing through Pandemonium's Maze. If Moorock's letter was skipped in Bran Bal, receive it from him in the Hall after the three forced fights, then deliver it to Mozme before continuing through the Maze; Cour89 says both interactions become unavailable afterward.",
     missableIds: ["missable.disc-3.portal-to-another-world.moorock-mognet-letter"],
     sourceIds: ["cour89-bran-bal", "cour89-pandemonium", "cour89-mognet-letters"],
+  },
+  {
+    id: "cutoff.pandemonium.moorock-shop",
+    edgeId: "story.portal-to-return-to-gaia",
+    title: "Moorock's final shop stock before the Maze",
+    certainty: "source-supported",
+    trigger: "After the three forced fights, speak with Moorock in the Hall and buy any desired copies before continuing into Pandemonium's Maze. This counter has the same inventory as Bran Bal; leaving the Hall ends the final documented purchase window for Zorlin Shape.",
+    missableIds: ["missable.disc-3.portal-to-another-world.zorlin-shape-final-mogshop"],
+    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "game8-zorlin-shape", "rpgclassics-shops", "elitegrindlab-bran-bal", "ffwiki-shops", "ff9-irodori-shops"],
   },
   {
     id: "cutoff.pandemonium.final-sequence",
