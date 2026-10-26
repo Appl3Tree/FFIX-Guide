@@ -492,6 +492,22 @@ if (!homeFrontPartySequence) {
 }
 const tournamentQuanPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.card-tournament-vivi-quan");
 const tournamentQuanPhases = tournamentQuanPartySequence?.phases ?? [];
+const disc2DaliReturnEdge = gameRouteEdgesById.get("detour.journey-to-treno-dali-return");
+const disc2DaliRejoinEdge = gameRouteEdgesById.get("detour.journey-to-treno-dali-rejoin");
+if (
+  disc2DaliReturnEdge?.relationship !== "optional-return"
+  || disc2DaliReturnEdge.fromChapterId !== "disc-2.journey-to-treno"
+  || disc2DaliReturnEdge.toChapterId !== "disc-1.village-of-dali"
+  || !["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "flactem-disc-2-south-gate-treno"].every((sourceId) => disc2DaliReturnEdge.sourceIds.includes(sourceId))
+  || disc2DaliReturnEdge.sourceIds.includes("gamefaqs-dali-71891")
+  || disc2DaliRejoinEdge?.relationship !== "rejoin"
+  || disc2DaliRejoinEdge.fromChapterId !== "disc-1.village-of-dali"
+  || disc2DaliRejoinEdge.toChapterId !== "disc-2.journey-to-treno"
+  || !["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "flactem-disc-2-south-gate-treno"].every((sourceId) => disc2DaliRejoinEdge.sourceIds.includes(sourceId))
+  || disc2DaliRejoinEdge.sourceIds.includes("gamefaqs-dali-71891")
+) {
+  errors.push("The optional Disc II Dali return and rejoin must cite its Disc II route sources, not the first-visit Dali walkthrough.");
+}
 const tournamentDaliReturnEdge = gameRouteEdgesById.get("detour.card-tournament-dali-return");
 const tournamentQuanStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.card-tournament")

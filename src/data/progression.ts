@@ -1144,7 +1144,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-1.village-of-dali",
     relationship: "optional-return",
     summary: "At Alexandria Station, the left fork returns Dagger and Steiner to Dali and the Observatory; the Dali garden chest is now accessible for an Elixir. This optional sweep can also include the Cotton Robe shop loop before returning to the station.",
-    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamefaqs-dali-71891", "flactem-disc-2-south-gate-treno"],
+    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "flactem-disc-2-south-gate-treno"],
   },
   {
     id: "detour.journey-to-treno-dali-rejoin",
