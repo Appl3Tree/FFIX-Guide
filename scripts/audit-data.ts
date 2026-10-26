@@ -4318,6 +4318,24 @@ const expectedMoorockStock = [
 const moorockBranBalPaths = itemAcquisitionPaths.filter((path) => path.shopId === "bran-bal.mogshop");
 const moorockPandemoniumPaths = itemAcquisitionPaths.filter((path) => path.shopId === "pandemonium.moorock");
 const moorockItemIds = new Set(expectedMoorockStock.map(([itemId]) => itemId));
+const expectedMoorockAbilityClaims = [
+  ["game-item.dagger", "Flee"], ["game-item.mage-masher", "Flee"], ["game-item.mage-masher", "Detect"],
+  ["game-item.mythril-dagger", "Bandit"], ["game-item.gladius", "Annoy"], ["game-item.gladius", "Lucky Seven"],
+  ["game-item.zorlin-shape", "Flee"], ["game-item.orichalcon", "Detect"], ["game-item.defender", "Thunder Slash"],
+  ["game-item.holy-lance", "Dragon's Crest"], ["game-item.holy-lance", "Reis's Wind"],
+  ["game-item.avenger", "Demi Shock"], ["game-item.avenger", "Counter"],
+  ["game-item.mythril-racket", "Reflect"], ["game-item.mythril-racket", "Shell"], ["game-item.mythril-racket", "Protect"],
+  ["game-item.bistro-fork", "High Tide"], ["game-item.dragon-wrist", "Jelly"], ["game-item.dragon-wrist", "Lancer"],
+  ["game-item.defense-gloves", "HP+20%"], ["game-item.coronet", "Man Eater"], ["game-item.coronet", "Return Magic"],
+  ["game-item.flash-hat", "Beast Killer"], ["game-item.flash-hat", "Eye 4 Eye"],
+  ["game-item.adaman-hat", "Gamble Defense"], ["game-item.adaman-hat", "HP+20%"],
+  ["game-item.platinum-helm", "Restore HP"], ["game-item.platinum-helm", "Stone Killer"],
+  ["game-item.demons-vest", "Auto-Potion"], ["game-item.demons-vest", "Devil Killer"], ["game-item.demons-vest", "Locomotion"],
+  ["game-item.minervas-plate", "High Tide"], ["game-item.minervas-plate", "Restore HP"],
+  ["game-item.platina-armor", "Beast Killer"],
+] as const;
+const moorockAbilityClaims = equipmentAbilityClaims.filter((claim) => moorockItemIds.has(claim.itemId));
+const moorockAbilityClaimKeys = new Set(moorockAbilityClaims.map((claim) => `${claim.itemId}:${claim.abilityName}`));
 const branBalMoorockWarning = missablesById.get("missable.disc-3.portal-to-another-world.demons-vest-bran-bal-shop");
 const zorlinMoorockWarning = missablesById.get("missable.disc-3.portal-to-another-world.zorlin-shape-final-mogshop");
 const zorlinMoorockCutoff = cutoffsById.get("cutoff.pandemonium.moorock-shop");
@@ -4338,6 +4356,13 @@ if (
       branPath.availability !== "limited-window" || pandemoniumPath.availability !== "limited-window" ||
       !branPath.walkthroughObjectiveIds?.includes("disc-3.portal-to-another-world.moorock-shop-review") ||
       !pandemoniumPath.walkthroughObjectiveIds?.includes("disc-3.portal-to-another-world.moorock-shop-review");
+  }) ||
+  moorockAbilityClaims.length !== expectedMoorockAbilityClaims.length ||
+  expectedMoorockAbilityClaims.some(([itemId, abilityName]) => {
+    const claim = equipmentAbilityClaims.find((entry) => entry.itemId === itemId && entry.abilityName === abilityName);
+    return !moorockAbilityClaimKeys.has(`${itemId}:${abilityName}`) ||
+      !claim?.sourceIds.includes("gamefaqs-items-71891") ||
+      !claim.sourceIds.includes("gamefaqs-abilities-71891");
   }) ||
   !moorockBranBalPaths.find((path) => path.itemId === "game-item.dagger")?.conditions?.includes("GameFAQs' Shops FAQ omits Dagger") ||
   !moorockBranBalPaths.find((path) => path.itemId === "game-item.magic-tag")?.conditions?.includes("RPGClassics and EliteGrindLab omit it") ||
