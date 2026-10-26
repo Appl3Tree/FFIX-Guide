@@ -233,7 +233,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "crash-site-and-prison-cages",
         title: "Crash Site — Phoenix Down and the Prison Cages",
         summary: "The first two encounters are scripted and teach Trance. The first cage can cause a Game Over if Garnet is drained to zero HP.",
-        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamerguides-evil-forest"],
+        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamerguides-evil-forest", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "forest-keeper-ate",
@@ -244,7 +244,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "crash-site-phoenix-down",
             kind: "pickup",
             text: "Before exiting south from the crash site, check the salvaged cargo beside the fallen Conductor and Trumpeter for a Phoenix Down.",
-            detail: "This copy is easy to overlook, but Phoenix Downs can be bought from Cinna and later shops. Missing this field pickup is not a permanent loss of the item type.",
+            detail: "This copy is easy to overlook, but Phoenix Downs can be bought from Cinna and later shops. The published rank formula gives one point to searched hidden field icons and opened chests, and Rank S takes 340 points (about 75% of all treasures); it does not separately classify this fixed cargo pickup or the bunk Gil pickup, so those should not be counted as confirmed points without a direct game check.",
             objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
           {
@@ -267,7 +267,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "prima-vista-wreckage",
         title: "Prima Vista wreckage — ATEs and pickup sweep",
         summary: "The wreck has multiple rooms and a chest that becomes accessible only after Baku's fight. Check the lower decks and the cargo room's hidden pickup before leaving.",
-        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "rpgclassics-bestiary-a-c"],
+        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "rpgclassics-bestiary-a-c", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "wreckage-ates",
@@ -307,7 +307,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "wreckage-supplies-and-exit",
         title: "Party setup, supplies, and the last ship check",
         summary: "Before leaving the wreck, gather Blank's medicine, check Mognet, and take any supplies needed for the forest. Cinna sells Phoenix Downs here, confirming the crash-site pickup has a replacement.",
-        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"],
+        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "set-abilities-and-gear",
@@ -319,7 +319,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "blank-medicine-and-cinna-shop",
             kind: "pickup",
             text: "Before exiting the wreck, speak with Blank to receive Blank's Medicine. Speak to Cinna and buy supplies if needed: Potions, Phoenix Downs, Antidotes, Eye Drops, and Tents. Cinna's Phoenix Downs are an immediate replacement for the fixed crash-site pickup.",
-            detail: "Cinna's five stock items and prices (50, 150, 50, 50, and 800 Gil) are modeled separately from the one-time pickups. Later Dali and other routes preserve the item types after Prima Vista closes; the Treasure Hunter rank effect for missed location copies remains unverified.",
+            detail: "Cinna's five stock items and prices (50, 150, 50, 50, and 800 Gil) are modeled separately from the one-time pickups. Later Dali and other routes preserve the item types after Prima Vista closes. The rank formula awards one point per qualifying opened chest or searched hidden field icon; Rank S requires 340 points (about 75% of all treasures), so a full sweep is not required. It does not separately classify the fixed crash-site pickup or bunk Gil, so those are not counted as confirmed rank points.",
             objectiveIds: ["disc-1.evil-forest.treasure-sweep"],
           },
           {
@@ -5181,7 +5181,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-daguerreo",
         title: "Daguerreo — search the island, activate the lifts, and audit its shops",
         summary: "Explore the optional library city south of the Forgotten Continent. Its weapon-shop window matters for a high-completion inventory and selected equipment abilities.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-shops-71891", "gamefaqs-items-71891"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-shops-71891", "gamefaqs-items-71891", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "aerial-daguerreo-arrival",
@@ -5194,7 +5194,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-daguerreo-rank-and-synthesis",
             kind: "optional",
             text: "Continue to the Four-Armed Man. After your treasure sweep, ask him to check your Treasure Hunter rank; if he awards Rank S, return to the entrance area for the Rank S Medal. Save first if you still need to win cards from him.",
-            detail: "The exact medal handoff order differs between sources. The Rank S award depends on the save's hidden-treasure and event-item history, not just this visit. Ride the lift to Noggy and inspect the synthesis shop; if Battle Boots are part of your item goal and you have Feather Boots plus Wing Edge, the recipe costs 6,500 Gil.",
+            detail: "Treasure Hunter uses points: one for each opened chest, searched hidden field icon, item gained during an event sequence, and qualifying Treno Auction House key item; two for each Chocobo world-map treasure. Hot & Cold digging and Stiltzkin purchases score zero. GameFAQs excludes Magical Fingertip and Pearl Rouge from the Treno auction category, while Jegged does not name those exceptions. Rank S requires 340 points (about 75% of all treasures), and Another Man's Treasure unlocks at Rank S, so you do not need every treasure. The exact Rank S Medal handoff order differs between sources. Ride the lift to Noggy and inspect the synthesis shop; if Battle Boots are part of your item goal and you have Feather Boots plus Wing Edge, the recipe costs 6,500 Gil.",
             objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep"],
           },
           {
@@ -5624,13 +5624,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "preparing-leave-location-sweep",
         title: "Review the final location and Treasure Hunter cutoffs",
         summary: "Use earlier chapter checks for location copies; several entries on the final list already closed during their own story sections.",
-        sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-outer-continent-71891", "gamefaqs-desert-palace-71891", "gamefaqs-forgotten-continent-71891", "gamefaqs-lost-continent-71891", "gamefaqs-aerial-exploration-71891", "elitegrindlab-missables"],
+        sourceIds: ["gamefaqs-preparing-to-leave-71891", "gamefaqs-outer-continent-71891", "gamefaqs-desert-palace-71891", "gamefaqs-forgotten-continent-71891", "gamefaqs-lost-continent-71891", "gamefaqs-aerial-exploration-71891", "elitegrindlab-missables", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "preparing-leave-review-cutoffs",
             kind: "cutoff",
             text: "Review any open, goal-relevant checks for Conde Petie (Diamond), Conde Petie Mountain Path (Moonstone), Desert Palace (Namingway Card), Esto Gaza and Mount Gulug, North and South Gates (Moccha Coffee at Bohden Arch), Observatory Mountain (Morrid's turn-in), and the previous Oeilvert, Fossil Roo, Ice Cavern, Iifa Tree, and Pinnacle Rocks sweeps.",
-            detail: "The pre-departure list says these locations or their remaining treasure routes close after Shimmering Island and that missed location treasure can affect Treasure Hunter Rank. Some are already inaccessible by this chapter—for example, the Ice Cavern interior, Oeilvert after its Gulug Stone exit, Fossil Roo's inner route, and the Pinnacle Rocks forest—so use their earlier chapter results rather than trying to revisit every name now. If Namingway Card is a selected goal and its objective is still open, return to Kuja's quarters in Desert Palace and inspect the table if that route is still open; the Treno tournament source has already passed. The card is not required from both sources.",
+            detail: "Use earlier chapters for any qualifying unopened chest or unsearched hidden field icon, each worth one point; Chocobo world-map treasures are worth two. Hot & Cold digging and Stiltzkin purchases score zero. Rank S requires 340 points (about 75% of all treasures), so this checklist is a cutoff review and does not require a perfect sweep. Some locations are already inaccessible by this chapter—for example, the Ice Cavern interior, Oeilvert after its Gulug Stone exit, Fossil Roo's inner route, and the Pinnacle Rocks forest—so use their earlier chapter results rather than trying to revisit every name now. If Namingway Card is a selected goal and its objective is still open, return to Kuja's quarters in Desert Palace and inspect the table if that route is still open; the Treno tournament source has already passed. The card is not required from both sources.",
             objectiveIds: ["disc-3.preparing-to-leave.cutoff-review", "disc-2.outer-continent.conde-petie-treasure-sweep", "disc-3.card-tournament.namingway-card"],
           },
         ],

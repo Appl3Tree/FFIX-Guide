@@ -2073,7 +2073,8 @@ if (
   !cleyraTreasureWarning?.classification.includes("recoverable-later") ||
   !cleyraTreasureWarning.consequence.includes("forced return after Antlion") ||
   !cleyraTreasureWarning.consequence.includes("before crossing the bridge") ||
-  !cleyraTreasureWarning.recovery.includes("Treasure Hunter rank impact remains unknown") ||
+  !cleyraTreasureWarning.note?.includes("340 points") || !cleyraTreasureWarning.note?.includes("about 75%") ||
+  !["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"].every((sourceId) => cleyraTreasureWarning.sourceIds.includes(sourceId)) ||
   !cleyraTreasureWarning.nextAvailability.includes("every modeled Cleyra pickup") ||
   cleyraPickupExpectations.some(([slug, itemId, method]) => {
     const path = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.cleyra.${slug}`);
@@ -2088,7 +2089,7 @@ if (
       !gameItemIds.has(itemId) || !hasOtherSource;
   })
 ) {
-  errors.push("Cleyra's fixed Trunk/settlement pickup catalog must cover all newly audited item locations, shared sweep links, source citations, alternative item-type sources, the forced-return cutoff, and the unresolved rank effect.");
+  errors.push("Cleyra's fixed Trunk/settlement pickup catalog must cover all audited item locations, shared sweep links, source citations, alternative item-type sources, the forced-return cutoff, and the documented Treasure Hunter scoring formula.");
 }
 const cleyraEvacuationItemRewards = [
   ["evacuation-phoenix-down-reward", "game-item.phoenix-down"],
@@ -2341,7 +2342,8 @@ if (
   !daliFirstVisitWarning.action.includes("lower-right chest") ||
   !daliFirstVisitWarning.recovery.includes("Cleyra's later item shop") ||
   !daliFirstVisitWarning.recovery.includes("50 Gil each") ||
-  !daliFirstVisitWarning.consequence.includes("Treasure Hunter rank effect") ||
+  !daliFirstVisitWarning.consequence.includes("Rank S requires 340 points") ||
+  !["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"].every((sourceId) => daliFirstVisitWarning.sourceIds.includes(sourceId)) ||
   !daliFirstVisitWarning.sourceIds.includes("gamefaqs-shops-71891") ||
   !daliFirstVisitWarning.sourceIds.includes("gamefaqs-cleyra-71891") ||
   daliFirstVisitChestPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) =>
@@ -2354,7 +2356,7 @@ if (
     path.id === pathId && path.itemId === itemId && path.chapterId === "disc-2.cleyra" &&
     path.method === "shop" && path.cost?.currency === "gil" && path.cost.amount === 50))
 ) {
-  errors.push("Dali's one-time inn consumables must link to the first-visit objective, later 50-Gil Cleyra stock, and a warning that keeps the rank effect unresolved.");
+  errors.push("Dali's one-time inn pickups must link to the first-visit objective, later 50-Gil Cleyra stock, and the sourced 340-point Treasure Hunter threshold.");
 }
 const daliItemShopProducts = [
   { pathId: "item-path.disc-1.village-of-dali.potion-shop", itemId: "game-item.potion", price: 50 },
@@ -2407,7 +2409,9 @@ if (
   !daliUndergroundWarning.nextAvailability.includes("Lindblum and Summit Station shops for Iron Helm") ||
   !daliUndergroundWarning.nextAvailability.includes("Treno for Leather Wrist") ||
   !daliUndergroundWarning.nextAvailability.includes("not the Dali copies") ||
-  !daliUndergroundWarning.recovery.includes("effect on Treasure Hunter rank remains unknown") ||
+  !daliUndergroundWarning.recovery.includes("Rank S needs 340 points") ||
+  !daliUndergroundWarning.note?.includes("Stiltzkin's bundle scores zero") ||
+  !["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"].every((sourceId) => daliUndergroundWarning.sourceIds.includes(sourceId)) ||
   !daliUndergroundWarning.sourceIds.includes("gamefaqs-shops-71891") ||
   !daliUndergroundWarning.sourceIds.includes("gamefaqs-stiltzkin-shopping-71891") ||
   daliUndergroundExpectedPaths.some(({ pathId, itemId, method }) => {
@@ -2421,7 +2425,7 @@ if (
   }) ||
   daliUndergroundRecoveryPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === itemId))
 ) {
-  errors.push("Dali Underground must model all nine one-time item pickups, their shared sweep objective, later item-type recovery routes, and unresolved treasure-rank impact.");
+  errors.push("Dali Underground must model all nine one-time item pickups, their shared sweep objective, later item-type recovery routes, and the sourced Treasure Hunter scoring categories.");
 }
 const evilForestTreasureObjectiveId = "disc-1.evil-forest.treasure-sweep";
 const evilForestTreasureWarning = missablesById.get("missable.disc-1.evil-forest.treasures");
@@ -2458,7 +2462,9 @@ if (
   !evilForestTreasureWarning?.classification.includes("recoverable-later") ||
   !evilForestTreasureWarning.consequence.includes("nine location-specific item copies") ||
   !evilForestTreasureWarning.consequence.includes("116 Gil") ||
-  !evilForestTreasureWarning.recovery.includes("Treasure Hunter rank effect") ||
+  !evilForestTreasureWarning.consequence.includes("Rank S needs 340 points") ||
+  !evilForestTreasureWarning.recovery.includes("does not separately confirm") ||
+  !["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"].every((sourceId) => evilForestTreasureWarning.sourceIds.includes(sourceId)) ||
   !evilForestTreasureWarning.action.includes("Cinna's shop stock") ||
   evilForestPickupPaths.some(({ pathId, itemId, method }) => {
     const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
@@ -2483,7 +2489,7 @@ if (
   bronzeGlovesEndTarget?.itemId !== "game-item.bronze-gloves" || bronzeGlovesEndTarget.targetQuantity !== 1 ||
   !equipmentAbilityClaims.some((claim) => claim.id === "item-ability.bronze-gloves.antibody" && claim.abilityName === "Antibody")
 ) {
-  errors.push("Crash Site and Prima Vista must catalog all nine one-time item pickups, Cinna's five priced products, later sources for the pickup item types, Bronze Gloves' item targets and ability, and the unresolved treasure-rank effect.");
+  errors.push("Crash Site and Prima Vista must catalog all nine one-time item pickups, Cinna's five priced products, later item-type sources, Bronze Gloves' targets and ability, and sourced Treasure Hunter scoring guidance.");
 }
 const iceCavernTreasureObjectiveId = "disc-1.ice-cavern.treasure-sweep";
 const iceCavernTreasureWarning = missablesById.get("missable.disc-1.ice-cavern.treasures");
@@ -2512,7 +2518,8 @@ if (
   !iceCavernTreasureWarning.recovery.includes("Stiltzkin's third bundle at Fossil Roo") ||
   !iceCavernTreasureWarning.recovery.includes("Stiltzkin's fifth bundle at Alexandria") ||
   !iceCavernTreasureWarning.recovery.includes("not the lost Ice Cavern chest copies") ||
-  !iceCavernTreasureWarning.consequence.includes("Treasure Hunter rank remains unresolved") ||
+  !iceCavernTreasureWarning.consequence.includes("Rank S requires 340 points") ||
+  !["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"].every((sourceId) => iceCavernTreasureWarning.sourceIds.includes(sourceId)) ||
   !iceCavernTreasureWarning.sourceIds.includes("gamefaqs-stiltzkin-shopping-71891") ||
   !iceCavernTreasureWarning.sourceIds.includes("gamefaqs-home-front-71891") ||
   !iceCavernTreasureWarning.sourceIds.includes("gamefaqs-ipsens-castle-71891") ||
@@ -2522,7 +2529,35 @@ if (
     path.sourceIds.includes("gamefaqs-ice-cavern-71891"))) ||
   iceCavernLaterRecoveryPaths.some(([pathId, itemId]) => !itemAcquisitionPaths.some((path) => path.id === pathId && path.itemId === itemId))
 ) {
-  errors.push("The Ice Cavern treasure warning must connect all eight one-time chests to their documented later item-type routes and preserve the unresolved rank effect.");
+  errors.push("The Ice Cavern treasure warning must connect all eight one-time chests to their documented later item-type routes and source the one-point-per-chest, 340-point Rank S formula.");
+}
+const treasureHunterFormulaSources = ["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"] as const;
+const treasureHunterFormulaWarnings = [
+  "missable.disc-1.evil-forest.treasures",
+  "missable.disc-1.ice-cavern.treasures",
+  "missable.disc-1.village-of-dali.first-visit-pickups",
+  "missable.disc-1.village-of-dali.underground-treasures",
+  "missable.disc-2.cleyra.treasures",
+  "missable.disc-2.return-to-alexandria.treasure-sweep",
+  "missable.disc-2.return-to-alexandria.zorn-thorn-steals",
+  "missable.disc-2.pinnacle-rocks.treasure-sweep",
+  "missable.disc-2.journey-to-outer-continent.treasure-sweep",
+  "missable.disc-3.forgotten-continent.oeilvert-treasures",
+  "missable.disc-3.lost-continent.mount-gulug-sweep",
+  "missable.disc-3.portal-to-another-world.terra-bran-bal-treasures",
+  "missable.disc-2.cleyra.antlion-steals",
+];
+const rankGuide = sources.find((source) => source.id === "jegged-treasure-hunter");
+const rankFormulaCrossCheck = sources.find((source) => source.id === "gamefaqs-chocobo-hot-cold-ysf-9771");
+if (
+  !rankGuide?.notes.includes("340 points") || !rankGuide.notes.includes("about 75%") ||
+  !rankFormulaCrossCheck?.notes.includes("one point per opened chest") ||
+  treasureHunterFormulaWarnings.some((warningId) => {
+    const warning = missablesById.get(warningId);
+    return !warning || !treasureHunterFormulaSources.every((sourceId) => warning.sourceIds.includes(sourceId));
+  })
+) {
+  errors.push("The Treasure Hunter score formula and 340-point Rank S threshold must be source-registered and linked from each audited pickup/steal warning.");
 }
 const nolrichPool = enemyEncounters.find((encounter) => encounter.id === "encounter.nolrich-heights.world-map-pool");
 const nolrichEnemyIds = ["enemy.carve-spider", "enemy.mu", "enemy.python"];
