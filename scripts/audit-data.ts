@@ -5280,10 +5280,11 @@ const summitStationWalkthroughStep = walkthroughChapters
   ?.sections.flatMap((section) => section.steps)
   .find((step) => step.id === "journey-treno-shop-and-train");
 const cavesDisc3SouthGateSource = sources.find((source) => source.id === "cavesofnarshe-ff9-disc-3-map");
+const gamefaqsShopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
 if (
   !summitEquipmentWarning ||
   !summitEquipmentWarning.classification.includes("limited-quantity") ||
-  !summitEquipmentWarning.consequence.includes("later stock availability conflicts") ||
+  !summitEquipmentWarning.consequence.includes("separates the consumables-only South (Dali) Gate item shop from Summit Station's equipment shop") ||
   !summitEquipmentWarning.recovery.includes("no post-Summit route is confirmed") ||
   !summitEquipmentWarning.note.includes("item table gives Need 3") ||
   !summitEquipmentWarning.sourceIds.includes("gamefaqs-shops-71891") ||
@@ -5296,8 +5297,10 @@ if (
   !summitSilverGlovesPath?.notes?.includes("generic South Gate shop") ||
   !summitIronHelmPath?.notes?.includes("generic South Gate shop") ||
   !summitStationWalkthroughStep?.detail.includes("GameFAQs' missables list recommends four Silver Gloves") ||
+  !summitStationWalkthroughStep.detail.includes("separates the consumables-only South (Dali) Gate shop from Summit Station's equipment stock") ||
   !summitStationWalkthroughStep.detail.includes("Caves of Narshe's Disc III map") ||
-  !cavesDisc3SouthGateSource?.notes.includes("does not identify the Disc III shop as Summit Station")
+  !cavesDisc3SouthGateSource?.notes.includes("does not identify its Disc III listing as either named location") ||
+  !gamefaqsShopsSource?.notes.includes("separates the consumables-only South (Dali) Gate item shop from Summit Station's equipment shop")
 ) {
   errors.push("The Summit Station inventory warning must preserve the GameFAQs/Neoseeker cutoff and Caves of Narshe's ambiguous Disc III South Gate stock, without presenting later recovery as verified.");
 }
