@@ -2816,7 +2816,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ipsens-castle",
     accessed: "2026-10-24",
-    notes: "Original PlayStation room route for the inverted weapon-power mechanic, Kumool and Mognet, castle pickups including the Broadsword ladder chest, fresco and pot puzzles, four mirrors, Taharka, steals, and Amarant's return. Its initial-area, Stairwell & Lift, Mural Room, and Treasure Hunting rosters support separate bestiary pools; the Taharka table lists Level 46, 29,186 HP, 1,776 MP, 11 AP, 8,092 Gil, three steals, a Ramuh Card, elemental traits, and status vulnerabilities. These Taharka stats agree with RPGClassics, so the older generic HP-variance note has been removed.",
+    notes: "Original PlayStation Disc III room route for the inverted weapon-power mechanic, Kumool and Mognet, castle pickups including the Broadsword ladder chest, fresco and pot puzzles, four mirrors, Taharka, steals, and Amarant's return. The chapter supports Kumool as an initial-visit shop location; its Disc III route does not establish the shop's stock on a later Disc IV return. Its initial-area, Stairwell & Lift, Mural Room, and Treasure Hunting rosters support separate bestiary pools; the Taharka table lists Level 46, 29,186 HP, 1,776 MP, 11 AP, 8,092 Gil, three steals, a Ramuh Card, elemental traits, and status vulnerabilities. These Taharka stats agree with RPGClassics, so the older generic HP-variance note has been removed.",
   },
   {
     id: "jegged-ipsens-castle",
@@ -2840,7 +2840,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/ipsens-castle/",
     accessed: "2026-10-26",
-    notes: "Completionist cross-check for the seven weak weapons, enemy and boss mechanics, all treasure, and continued castle access after the main story route. Its Disc IV Mognet chain routes through Kumool, confirming the castle remains enterable late; pair this with GameFAQs' Disc III/IV equipment listings for N-Kai Armlet and Jade Armlet. It distinguishes the unique Taharka encounter's steal opportunity from permanent item loss.",
+    notes: "Completionist cross-check for the seven weak weapons, enemy and boss mechanics, all treasure, and continued castle access after the main story route. Its Disc IV Mognet chain routes through Kumool, confirming late castle and Mogshop access; it does not establish whether any of the 12 consumable listings remain stocked on that return. Pair this with GameFAQs' Disc III/IV equipment listings for N-Kai Armlet and Jade Armlet. It distinguishes the unique Taharka encounter's steal opportunity from permanent item loss.",
   },
   {
     id: "gamefaqs-breaking-the-seal-71891",

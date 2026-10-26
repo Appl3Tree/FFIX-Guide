@@ -5564,14 +5564,21 @@ const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice])
     || !path?.sourceIds.includes("gamefaqs-items-71891")
     || !path?.sourceIds.includes("gamefaqs-shops-71891")
     || !path?.sourceIds.includes("rpgclassics-shops")
+    || !path?.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+    || !path?.sourceIds.includes("elitegrindlab-ipsens-castle")
     || !item.sourceIds.includes("gamefaqs-items-71891")
     || !item.sourceIds.includes("rpgclassics-shops")
+    || !item.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+    || !item.sourceIds.includes("elitegrindlab-ipsens-castle")
+    || !path.conditions?.includes("Disc IV Mognet return through Kumool")
+    || !path.conditions?.includes("do not verify")
+    || !path.conditions?.includes("later purchase window as unverified")
   ) return true;
   if (slug === "remedy") return !path.conditions.includes("RPGClassics") || !path.conditions.includes("omits Remedy");
   return !path.conditions.includes("GameFAQs Shops") || !path.conditions.includes("RPGClassics");
 });
 if (ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34 || ipsensSupplyRouteMismatch) {
-  errors.push("Ipsen's Castle Mogshop must retain all 12 source-linked consumable prices alongside its 22 equipment routes, including GameFAQs' 300-Gil Remedy listing that RPGClassics omits.");
+  errors.push("Ipsen's Castle Mogshop must retain all 12 source-linked consumable prices, cite the Disc IV Mognet re-entry without asserting that stock persists, and preserve GameFAQs' 300-Gil Remedy listing that RPGClassics omits.");
 }
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
@@ -5786,11 +5793,14 @@ if (
   || mognetRepairRoute.sourceIds.includes("jegged-mognet-central")
   || mognetRepairRoute.sourceIds.includes("cour89-mognet-letters")
   || !mognetRepairSection?.sourceIds.includes("cour89-mognet-letters")
+  || !mognetRepairSection.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+  || !mognetRepairSection.sourceIds.includes("elitegrindlab-ipsens-castle")
   || mognetLetterObjectiveIds.some((id) => !objectivesById.get(id)?.sourceIds.includes("cour89-mognet-letters")
     || !objectivesById.get(id)?.sourceIds.includes("jegged-mognet-central"))
   || actualMognetQuestEdges.join("|") !== expectedMognetQuestEdges.join("|")
   || mognetLetterSteps.some((step, index) => !step?.objectiveIds?.includes(mognetLetterObjectiveIds[index]))
   || !mognetLetterSteps[0]?.text.includes("#22")
+  || !mognetLetterSteps[2]?.detail?.includes("12 consumable products remain stocked")
   || !mognetLetterSteps[5]?.text.includes("#27")
   || !mognetLetterSteps[3]?.detail?.includes("Quina")
   || !mognetLetterSteps[5]?.detail?.includes("all 27 numbered letters")
