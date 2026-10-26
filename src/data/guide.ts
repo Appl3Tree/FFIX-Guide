@@ -1552,7 +1552,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/chocobo-hot-and-cold",
     accessed: "2026-10-25",
-    notes: "Chocobo recruitment, Hot & Cold rules, Chocograph requirements, all Chocograph treasure locations, Dead Pepper treasure caches, Chocobo's Paradise, and the Beach Quest. The Beach Quest is Disc IV-only and requires all Chocographs and Dead Pepper treasures, plus the Fat Chocobo card-game challenge. The eight reward caches are three treasure-producing Mountain Cracks and five Dive Spots. Before Fat Chocobo's first scene, the player must also open the separate Mognet Central access crack; it is not one of those eight caches. The Chocobo's Paradise entrance crack is needed to reach Fat Chocobo. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges.",
+    notes: "Chocobo recruitment, Hot & Cold rules, Chocograph requirements, all Chocograph treasure locations, Dead Pepper treasure caches, Chocobo's Paradise, and the Beach Quest. After all 24 Chocograph treasures, the eight Dead Pepper reward caches, and the separate Mognet Central access crack are complete, Fat Chocobo's first scene awards his card; returning to challenge him to Tetra Master starts the Disc IV Beach Quest. The eight reward caches are three treasure-producing Mountain Cracks and five Dive Spots. The Mognet crack is required before the first scene but is not one of those eight caches. The Chocobo's Paradise entrance crack is needed to reach Fat Chocobo. Phoenix Pinion is a random two-point digging prize and a 150-point redemption; Gysahl Greens are a random one-point prize and a 10-point redemption. The page lists Phoenix Pinion correctly in both Hot & Cold tables. Wing Edge is a repeatable 16-point digging prize and a 3,500-point redemption; Chocographs #3 and #13 yield three and ten Wing Edges.",
   },
   {
     id: "gamefaqs-chocobo-hot-cold-ysf-9771",
@@ -1584,7 +1584,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocobo-Beaches.html",
     accessed: "2026-10-25",
-    notes: "Lists all 21 beach locations and says the Disc IV quest follows completion of the Chocograph, Dive Spot, and Mountain Crack sidequests; the Mountain Crack list includes the Mognet Central access crack as #4. The first Fat Chocobo scene awards its card, then the Tetra Master challenge starts the beach dialogue and free-restoration reward.",
+    notes: "Lists all 21 beach locations and says the Disc IV quest follows completion of the Chocograph, Dive Spot, and Mountain Crack sidequests; the Mountain Crack list includes the Mognet Central access crack as #4. The first Fat Chocobo scene awards its card, then a later Tetra Master challenge starts the beach dialogue and free-restoration reward. This supports deferring the scene/card and challenge from the Disc III Paradise visit.",
   },
   {
     id: "gamefaqs-abilities-71891",
@@ -5306,6 +5306,15 @@ export const objectives: GameObjective[] = [
     sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"],
     chapterIds: ["disc-3.aerial-exploration"],
     profileIds: ["comprehensive", "achievements", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-3.aerial-exploration.chocobo-paradise-refill",
+    title: "Open Chocobo's Paradise and replenish Dead Peppers",
+    category: "side-content",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"],
+    chapterIds: ["disc-3.aerial-exploration", "disc-4.return-to-gaia"],
+    profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
   },
   {

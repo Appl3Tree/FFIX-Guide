@@ -834,6 +834,29 @@ if (
 ) {
   errors.push("Chocobo's Air Garden objective must have the source-backed Sky Chocobo access prerequisite.");
 }
+const paradiseSkyAccessEdges = objectiveDependencies.filter((dependency) =>
+  dependency.prerequisiteObjectiveId === "disc-3.aerial-exploration.sky-chocobo" &&
+  dependency.dependentObjectiveId === "disc-3.aerial-exploration.chocobo-paradise-refill",
+);
+const paradiseRefillObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.chocobo-paradise-refill");
+const discThreeParadiseStep = walkthroughChapters
+  .filter((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .find((step) => step.id === "aerial-chocobo-paradise");
+if (
+  paradiseSkyAccessEdges.length !== 1 ||
+  paradiseSkyAccessEdges[0]?.kind !== "objective-access" ||
+  !paradiseSkyAccessEdges[0].sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !paradiseSkyAccessEdges[0].sourceIds.includes("gamefaqs-chocobo-hot-cold-71891") ||
+  !paradiseRefillObjective?.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !paradiseRefillObjective?.sourceIds.includes("gamefaqs-chocobo-hot-cold-71891") ||
+  !discThreeParadiseStep?.text.includes("refill your Dead Pepper supply") ||
+  !discThreeParadiseStep.text.includes("Save Fat Chocobo's scene, card, and Tetra Master challenge for Disc IV") ||
+  !discThreeParadiseStep.objectiveIds?.includes("disc-3.aerial-exploration.chocobo-paradise-refill") ||
+  discThreeParadiseStep.text.includes("Challenge Fat Chocobo to Tetra Master for the Chocobo Card")
+) {
+  errors.push("The Disc III Chocobo's Paradise visit must be Sky-gated and defer Fat Chocobo's scene, card, and Beach challenge until Disc IV.");
+}
 const chocoboBeachUnlockObjectiveId = "disc-4.return-to-gaia.chocobo-beach-unlock";
 const chocoboBeachCompletionObjectiveId = "disc-4.return-to-gaia.chocobo-beach";
 const chocoboBeachRequiredProgressIds = [
@@ -842,29 +865,42 @@ const chocoboBeachRequiredProgressIds = [
   "disc-3.forgotten-continent.mountain-cracks",
   "disc-3.on-the-high-seas.dive-spots",
   "disc-4.return-to-gaia.mognet-central-crack",
+  "disc-3.aerial-exploration.chocobo-paradise-refill",
 ];
 const expectedChocoboBeachDependencies = [
   ...chocoboBeachRequiredProgressIds.map((id) => `${id}->${chocoboBeachUnlockObjectiveId}`),
   ...chocoboBeachObjectiveIds.map((id) => `${chocoboBeachUnlockObjectiveId}->${id}`),
   ...chocoboBeachObjectiveIds.map((id) => `${id}->${chocoboBeachCompletionObjectiveId}`),
 ].sort();
-const actualChocoboBeachDependencies = questPrerequisiteDependencies
+const actualChocoboBeachDependencies = objectiveDependencies
   .filter((dependency) => dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId || dependency.prerequisiteObjectiveId === chocoboBeachUnlockObjectiveId || dependency.dependentObjectiveId === chocoboBeachCompletionObjectiveId)
   .map((dependency) => `${dependency.prerequisiteObjectiveId}->${dependency.dependentObjectiveId}`)
   .sort();
 if (
   chocoboBeachLocations.length !== 21 ||
   chocoboBeachObjectiveIds.length !== 21 ||
-  expectedChocoboBeachDependencies.length !== 47 ||
+  expectedChocoboBeachDependencies.length !== 48 ||
   expectedChocoboBeachDependencies.join("|") !== actualChocoboBeachDependencies.join("|")
 ) {
-  errors.push("Chocobo Beach must have five sourced unlock gates and 21 separately tracked beach registrations behind the Disc IV activation objective.");
+  errors.push("Chocobo Beach must have five sourced quest gates, the separate Paradise access gate, and 21 separately tracked beach registrations behind the Disc IV activation objective.");
 }
 const chocoboBeachUnlockEdges = questPrerequisiteDependencies.filter((dependency) => dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId);
 for (const dependency of chocoboBeachUnlockEdges) {
   for (const sourceId of ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-chocographs"]) {
     if (!dependency.sourceIds.includes(sourceId)) errors.push(`Chocobo Beach unlock dependency ${dependency.prerequisiteObjectiveId} must cite ${sourceId}.`);
   }
+}
+const paradiseBeachAccessEdges = objectiveDependencies.filter((dependency) =>
+  dependency.kind === "objective-access" &&
+  dependency.prerequisiteObjectiveId === "disc-3.aerial-exploration.chocobo-paradise-refill" &&
+  dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId,
+);
+if (
+  paradiseBeachAccessEdges.length !== 1 ||
+  !paradiseBeachAccessEdges[0]?.sourceIds.includes("gamefaqs-chocobo-hot-cold-71891") ||
+  !paradiseBeachAccessEdges[0]?.sourceIds.includes("jegged-chocobo-beaches")
+) {
+  errors.push("Chocobo Beach activation must require source-backed access to Chocobo's Paradise separately from treasure and Mognet prerequisites.");
 }
 for (const dependency of questPrerequisiteDependencies.filter((item) => item.prerequisiteObjectiveId === chocoboBeachUnlockObjectiveId || item.dependentObjectiveId === chocoboBeachCompletionObjectiveId)) {
   for (const sourceId of ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"]) {
@@ -882,15 +918,23 @@ const discFourChocoboSteps = walkthroughChapters
   .filter((chapter) => chapter.areaId === "disc-4.return-to-gaia")
   .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
 const chocoboBeachPrerequisiteStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-prerequisites");
+const discFourParadiseAccessStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-paradise-access");
 if (
   !chocoboBeachPrerequisiteStep?.text.includes("all 24 Chocograph treasures") ||
   !chocoboBeachPrerequisiteStep.text.includes("eight Dead Pepper treasure caches") ||
   !chocoboBeachPrerequisiteStep.text.includes("three treasure-producing Mountain Cracks") ||
   !chocoboBeachPrerequisiteStep.detail?.includes("Mognet Central access crack among the discoveries required before Fat Chocobo's first scene") ||
   !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-3.on-the-high-seas.dive-spots") ||
-  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-4.return-to-gaia.mognet-central-crack")
+  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-4.return-to-gaia.mognet-central-crack") ||
+  !chocoboBeachPrerequisiteStep.objectiveIds?.includes("disc-3.aerial-exploration.chocobo-paradise-refill") ||
+  !chocoboBeachPrerequisiteStep.detail?.includes("Chocobo's Paradise entrance crack is a separate route access point") ||
+  !discFourParadiseAccessStep?.text.includes("Travel by Sky Chocobo") ||
+  !discFourParadiseAccessStep.text.includes("If the Paradise entrance is still closed") ||
+  !discFourParadiseAccessStep.text.includes("use a Dead Pepper") ||
+  !discFourParadiseAccessStep.detail?.includes("not one of the eight reward caches or the Mognet Central crack") ||
+  !discFourParadiseAccessStep.objectiveIds?.includes("disc-3.aerial-exploration.chocobo-paradise-refill")
 ) {
-  errors.push("The Disc IV Chocobo Beach checklist must distinguish the eight reward caches from the required Mognet Central access crack.");
+  errors.push("The Disc IV Chocobo Beach checklist must distinguish its eight reward caches, Mognet Central prerequisite, and Paradise entrance access.");
 }
 const chocoboMognetCrackStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-mognet-central-crack");
 const mognetCentralCrackObjective = objectives.find((objective) => objective.id === "disc-4.return-to-gaia.mognet-central-crack");
@@ -904,8 +948,13 @@ if (
   errors.push("The Disc IV walkthrough must track opening the Mognet Central crack as a separate Beach quest prerequisite.");
 }
 const chocoboBeachActivationStep = discFourChocoboSteps.find((step) => step.id === "gaia-return-chocobo-beach-unlock");
-if (!chocoboBeachActivationStep?.text.includes("Fat Chocobo") || !chocoboBeachActivationStep.text.includes("Tetra Master") || !chocoboBeachActivationStep.objectiveIds?.includes(chocoboBeachUnlockObjectiveId)) {
-  errors.push("The Disc IV walkthrough must track the Fat Chocobo challenge that activates the Beach quest.");
+if (
+  !chocoboBeachActivationStep?.text.includes("first scene") ||
+  !chocoboBeachActivationStep.text.includes("receive the Fat Chocobo Card") ||
+  !chocoboBeachActivationStep.text.includes("Speak with him again and challenge him to Tetra Master") ||
+  !chocoboBeachActivationStep.objectiveIds?.includes(chocoboBeachUnlockObjectiveId)
+) {
+  errors.push("The Disc IV walkthrough must separate Fat Chocobo's prerequisite-gated scene/card from the later Tetra Master challenge that activates beach registration.");
 }
 const individualChocoboBeachSteps = discFourChocoboSteps.filter((step) => step.id.startsWith("gaia-return-beach-"));
 if (

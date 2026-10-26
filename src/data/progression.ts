@@ -2028,6 +2028,18 @@ export const objectiveAccessDependencies: ObjectiveDependency[] = [
     dependentObjectiveId: "disc-3.aerial-exploration.air-garden-treasures",
     sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-lindblum-hilda-garde", "jegged-chocographs"],
   },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-3.aerial-exploration.sky-chocobo",
+    dependentObjectiveId: "disc-3.aerial-exploration.chocobo-paradise-refill",
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-chocobo-hot-cold-71891"],
+  },
+  {
+    kind: "objective-access",
+    prerequisiteObjectiveId: "disc-3.aerial-exploration.chocobo-paradise-refill",
+    dependentObjectiveId: "disc-4.return-to-gaia.chocobo-beach-unlock",
+    sourceIds: ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches"],
+  },
 ];
 
 // The first eight Friendly Creatures can be completed in any order when the

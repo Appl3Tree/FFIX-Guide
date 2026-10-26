@@ -5121,9 +5121,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "aerial-chocobo-paradise",
             kind: "optional",
-            text: "With the Sky ability, fly to the hidden island in the northwest ocean and use a Dead Pepper on the mountain crack to enter Chocobo's Paradise. Challenge Fat Chocobo to Tetra Master for the Chocobo Card and refill Dead Peppers from a nearby Chocobo if needed.",
-            detail: "This Disc III visit can award the Chocobo Card and refill Dead Peppers, but the Beach quest is only available in Disc IV after all 24 Chocograph treasures and all Dead Pepper treasure caches are complete. Dive Spot #5 remains unavailable until Disc IV; return to Paradise after the Disc IV prerequisite checklist is satisfied.",
-            objectiveIds: ["disc-3.aerial-exploration.air-garden-treasures"],
+            text: "With the Sky ability, fly to the hidden island in the northwest ocean and use a Dead Pepper on the mountain crack to enter Chocobo's Paradise. Speak with the nearby Chocobo to refill your Dead Pepper supply. Save Fat Chocobo's scene, card, and Tetra Master challenge for Disc IV after the full prerequisite checklist.",
+            detail: "The Disc III visit is for access and Dead Pepper replenishment; the GameFAQs and Jegged quest guides place Fat Chocobo's first scene/card after all 24 Chocograph treasures, all eight Dead Pepper reward caches, and the separate Mognet Central access crack. Return in Disc IV, watch the scene to receive the card, then speak to Fat Chocobo again and challenge him to Tetra Master to start beach registration. Dive Spot #5 is unavailable until Disc IV.",
+            objectiveIds: ["disc-3.aerial-exploration.chocobo-paradise-refill"],
           },
         ],
       },
@@ -6025,9 +6025,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gaia-return-chocobo-prerequisites",
             kind: "optional",
-            text: "Before starting the Beach quest, confirm all 24 Chocograph treasures and all eight Dead Pepper treasure caches: three treasure-producing Mountain Cracks and five Dive Spots, including Disc IV Dive Spot #5.",
-            detail: "The eight Dead Pepper treasure caches are three reward-bearing cracks plus five Dive Spots. Separately, GameFAQs includes the Mognet Central access crack among the discoveries required before Fat Chocobo's first scene; it is not one of the eight caches. The Chocobo's Paradise entrance crack is a route access point needed to reach Fat Chocobo, not another treasure cache.",
-            objectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures", "disc-3.on-the-high-seas.mountain-crack", "disc-3.forgotten-continent.mountain-cracks", "disc-3.on-the-high-seas.dive-spots", "disc-4.return-to-gaia.mognet-central-crack"],
+            text: "Before starting the Beach quest, confirm all 24 Chocograph treasures and all eight Dead Pepper treasure caches: three treasure-producing Mountain Cracks and five Dive Spots, including Disc IV Dive Spot #5. Also open the separate Mognet Central crack and make sure the Chocobo's Paradise entrance is accessible.",
+            detail: "The eight Dead Pepper treasure caches are three reward-bearing cracks plus five Dive Spots. Separately, GameFAQs includes the Mognet Central access crack among the discoveries required before Fat Chocobo's first scene; it is not one of the eight caches. The Chocobo's Paradise entrance crack is a separate route access point needed to reach Fat Chocobo, not another treasure cache.",
+            objectiveIds: ["disc-3.aerial-exploration.all-chocograph-treasures", "disc-3.on-the-high-seas.mountain-crack", "disc-3.forgotten-continent.mountain-cracks", "disc-3.on-the-high-seas.dive-spots", "disc-4.return-to-gaia.mognet-central-crack", "disc-3.aerial-exploration.chocobo-paradise-refill"],
           },
           {
             id: "gaia-return-mognet-central-crack",
@@ -6037,10 +6037,17 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             objectiveIds: ["disc-4.return-to-gaia.mognet-central-crack"],
           },
           {
+            id: "gaia-return-chocobo-paradise-access",
+            kind: "optional",
+            text: "Travel by Sky Chocobo to the hidden island in the northwest ocean. If the Paradise entrance is still closed, use a Dead Pepper on the mountain crack; then enter and speak with the nearby Chocobo to replenish Dead Peppers.",
+            detail: "This separate Paradise entrance crack is needed to reach Fat Chocobo, but it is not one of the eight reward caches or the Mognet Central crack. You may have opened it and replenished your stash during the Disc III visit.",
+            objectiveIds: ["disc-3.aerial-exploration.chocobo-paradise-refill"],
+          },
+          {
             id: "gaia-return-chocobo-beach-unlock",
             kind: "optional",
-            text: "After the prerequisite checklist is complete, return to Chocobo's Paradise and speak with Fat Chocobo; challenge him to Tetra Master to activate the Beach quest. Confirm the beach-quest dialogue before continuing.",
-            detail: "The quest is Disc IV-only. If you challenged Fat Chocobo for the card earlier, check his dialogue again after completing the Disc IV treasure requirements instead of assuming the Beach quest is active.",
+            text: "After the prerequisite checklist is complete, speak with Fat Chocobo to trigger the first scene and receive the Fat Chocobo Card. Speak with him again and challenge him to Tetra Master to activate the Beach quest; confirm the beach-quest dialogue before continuing.",
+            detail: "GameFAQs says the first scene/card follows all Chocograph treasures, all Dead Pepper treasure caches, and the Mognet Central access crack; the later Tetra Master challenge starts the Disc IV Beach quest. Do not treat the Disc III Paradise visit or Dead Pepper refill as completing either interaction.",
             objectiveIds: ["disc-4.return-to-gaia.chocobo-beach-unlock"],
           },
           ...chocoboBeachLocations.map((beach) => ({
