@@ -2638,12 +2638,16 @@ const headgearPathContexts = [
   { id: "item-path.disc-2.return-to-lindblum.headgear-dragoos-shop", chapterId: "disc-2.return-to-lindblum", shopId: "lindblum.weapon-shop.disc-2", availability: "limited-window" },
   { id: "item-path.disc-2.journey-to-treno.headgear-summit-station-shop", chapterId: "disc-2.journey-to-treno", shopId: "summit-station.weapon-shop", availability: "limited-window" },
   { id: "item-path.disc-2.magdalene-forest.headgear-black-mage-village", chapterId: "disc-2.magdalene-forest", shopId: "black-mage-village.weapon-shop.disc-2-3", availability: "limited-window" },
-  { id: "item-path.disc-3.aerial-exploration.headgear-atla-mogshop", chapterId: "disc-3.aerial-exploration", shopId: "burmecia.atla-mogshop", availability: "window-unverified" },
+  { id: "item-path.disc-3.aerial-exploration.headgear-atla-mogshop", chapterId: "disc-3.aerial-exploration", shopId: "burmecia.atla-mogshop", availability: "repeatable" },
   { id: "item-path.disc-4.return-to-gaia.headgear-atla-mogshop", chapterId: "disc-4.return-to-gaia", shopId: "burmecia.atla-mogshop", availability: "repeatable" },
 ];
 const headgearPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.headgear");
 const headgearItem = gameItems.find((item) => item.id === "game-item.headgear");
 const headgearUndeadKillerClaim = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.headgear.undead-killer");
+const aerialHeadgearInstruction = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "aerial-plan-route");
 const runningShoesNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.running-shoes-need");
 const hadesWalkthroughStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-4.memoria")
@@ -2685,10 +2689,13 @@ if (headgearPaths.length !== headgearPathContexts.length ||
   }) ||
   !headgearItem?.sourceIds.includes("gamefaqs-equipment-33383") ||
   !headgearItem.sourceIds.includes("ff9-irodori-items-armor") ||
+  !headgearPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.headgear-atla-mogshop")?.sourceIds.includes("gamefaqs-aerial-exploration-71891") ||
+  !aerialHeadgearInstruction?.detail?.includes("Atla's Mogshop in Burmecia") ||
+  !aerialHeadgearInstruction.detail.includes("not Headgear") ||
   !headgearUndeadKillerClaim ||
   headgearUndeadKillerClaim.abilityName !== "Undead Killer" ||
   !headgearUndeadKillerClaim.sourceIds.includes("ff9-irodori-items-armor")) {
-  errors.push("Headgear's eight source-listed 330-Gil shop windows, Disc III Atla uncertainty, Disc IV recovery, and Undead Killer claim must remain linked.");
+  errors.push("Headgear's eight source-listed 330-Gil shop paths, confirmed Disc III Atla route, Disc IV recovery, and Undead Killer claim must remain linked.");
 }
 for (const item of gameItems) {
   if (!item.name.trim()) errors.push(`Game item ${item.id} is missing a name.`);

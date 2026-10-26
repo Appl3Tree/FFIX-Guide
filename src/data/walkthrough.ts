@@ -5069,7 +5069,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-plan-route",
             kind: "optional",
             text: "Before flying out, set the party you want for world-map encounters and make sure Quina is available for Frog Catching and Moogle-related tasks. You can return to the bridge to change the active party later.",
-            detail: "The next story destination is Ipsen's Castle. You may go there directly, but this is a convenient window for the optional checks below. If you want another Glass Armlet, inspect Dragoos' Lindblum stock before leaving: Jegged and Xenomic's older GameFAQs Item Location Guide list a Disc III sale, while the later shop tables omit it and GameFAQs' item references disagree about the disc range. Treat it as an inventory check, not a guaranteed purchase; Alexandria is a separate later seller.",
+            detail: "The next story destination is Ipsen's Castle. You may go there directly, but this is a convenient window for the optional checks below. GameFAQs also recommends buying Steepled Hats at Black Mage Village or Atla's Mogshop in Burmecia for the optional Cotton Robe money loop, confirming Atla as a Disc III free-flight stop; the recipe uses Steepled Hat, not Headgear. Atla's separately listed Headgear costs 330 Gil and is also available through the Disc IV Mognet return. If you want another Glass Armlet, inspect Dragoos' Lindblum stock before leaving: Jegged and Xenomic's older GameFAQs Item Location Guide list a Disc III sale, while the later shop tables omit it and GameFAQs' item references disagree about the disc range. Treat it as an inventory check, not a guaranteed purchase; Alexandria is a separate later seller.",
           },
         ],
       },

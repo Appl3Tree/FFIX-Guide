@@ -2791,8 +2791,8 @@ export const sources = [
     title: "Aerial Exploration — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/aerial-exploration",
-    accessed: "2026-10-24",
-    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It directly lists the Treno Weapon Shop Amdusias fight and Queen Stella's available Stellazzio returns during this free-flight window, supporting the optional Treno stop and Running Shoes reward. It also calls this the best time for the Cotton Robe money loop and directs the player to buy Wrists in Dali, making it the direct source for the later Hilda Garde III Dali detour. Sidequest and stock claims are cross-checked against dedicated guides.",
+    accessed: "2026-10-26",
+    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It directly lists the Treno Weapon Shop Amdusias fight and Queen Stella's available Stellazzio returns during this free-flight window, supporting the optional Treno stop and Running Shoes reward. It also calls this the best time for the Cotton Robe money loop: buy Wrists in Dali and Steepled Hats in Black Mage Village or Atla's Mogshop in Burmecia, then synthesize and sell Cotton Robes. This confirms an optional Disc III route to Atla; the recipe uses Steepled Hat, not Headgear. Sidequest and stock claims are cross-checked against dedicated guides.",
   },
   {
     id: "jegged-lindblum-hilda-garde",
