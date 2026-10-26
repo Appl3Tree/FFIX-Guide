@@ -5441,7 +5441,9 @@ const ipsensDisc3And4EquipmentMismatch = ipsensEquipmentPaths
     return paths.length !== 1
       || path?.availability !== "repeatable"
       || !path.sourceIds.includes("gamefaqs-equipment-33383")
+      || !path.sourceIds.includes("icksmehl-shops-disc-4")
       || !path.conditions.includes("Disc III/IV")
+      || !path.conditions.includes("icksmehl.de")
       || !item?.sourceIds.includes("gamefaqs-equipment-33383");
   });
 const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths }, index) => {
@@ -5475,13 +5477,16 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
     return path.availability !== "window-unverified"
       || !path.conditions.includes("GameFAQs Shops and Final Fantasy Online")
       || !path.conditions.includes("neither gives a Disc III/IV range")
-      || !path.conditions.includes("Equipment List, RPGClassics, and the Final Fantasy Wiki Ipsen stock table omit")
+      || !path.conditions.includes("Equipment List, RPGClassics, the Final Fantasy Wiki, and icksmehl.de's Disc IV table omit")
+      || !path.conditions.includes("icksmehl.de's Disc IV table omit")
       || !path.sourceIds.includes("ffonline-ipsens-castle")
       || !path.sourceIds.includes("ffwiki-shops")
       || !path.sourceIds.includes("gamefaqs-equipment-33383")
+      || !path.sourceIds.includes("icksmehl-shops-disc-4")
       || !item.sourceIds.includes("ffonline-ipsens-castle")
       || !item.sourceIds.includes("ffwiki-shops")
-      || !item.sourceIds.includes("gamefaqs-equipment-33383");
+      || !item.sourceIds.includes("gamefaqs-equipment-33383")
+      || !item.sourceIds.includes("icksmehl-shops-disc-4");
   }
   return false;
 });
@@ -5627,6 +5632,8 @@ const ffwikiMagicTagSource = sources.find((source) => source.id === "ffwiki-magi
 if (
   ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34
   || ipsensSupplyRouteMismatch
+  || !icksmehlIpsenSource?.notes.includes("21 equipment products")
+  || !icksmehlIpsenSource.notes.includes("omits Coronet")
   || !icksmehlIpsenSource?.notes.includes("omits Allheilmittel (Remedy)")
   || !icksmehlIpsenSource.notes.includes("Talisman for 150 Gil")
   || !ffwikiMagicTagSource?.notes.includes("Japanese name as Ofuda")
@@ -5854,8 +5861,8 @@ if (
   || actualMognetQuestEdges.join("|") !== expectedMognetQuestEdges.join("|")
   || mognetLetterSteps.some((step, index) => !step?.objectiveIds?.includes(mognetLetterObjectiveIds[index]))
   || !mognetLetterSteps[0]?.text.includes("#22")
-  || !mognetLetterSteps[2]?.detail?.includes("lists 11 consumables")
-  || !mognetLetterSteps[2]?.detail?.includes("Remedy (Allheilmittel) is omitted")
+  || !mognetLetterSteps[2]?.detail?.includes("11 consumables")
+  || !mognetLetterSteps[2]?.detail?.includes("omits Coronet and Remedy (Allheilmittel)")
   || !mognetLetterSteps[2]?.detail?.includes("150 Gil")
   || !mognetLetterSteps[5]?.text.includes("#27")
   || !mognetLetterSteps[3]?.detail?.includes("Quina")

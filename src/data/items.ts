@@ -2087,9 +2087,9 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil", amount: 560 },
-    conditions: "GameFAQs' Equipment List explicitly lists Mythril Rod at Kumool's Mogshop on Disc III/IV; GameFAQs Shops and RPGClassics list the 560-Gil price. Missing Esto Gaza stock therefore does not close later access. Release-specific behavior remains unverified.",
+    conditions: "GameFAQs' Equipment List explicitly lists Mythril Rod at Kumool's Mogshop on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory; GameFAQs Shops and RPGClassics list the 560-Gil price. Missing Esto Gaza stock therefore does not close later access. Release-specific behavior remains unverified.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.mognet"],
-    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops"],
+    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", "icksmehl-shops-disc-4"],
   },
   {
     id: "item-path.disc-3.on-the-high-seas.rosetta-ring-mountain-crack-1",
@@ -2613,7 +2613,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.lamias-tiara", name: "Lamia's Tiara", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-armor", "rpgclassics-addons", "rpgclassics-synthesis", ...fossilRooSources, ...disc4ShopSources], verification: "partial" },
   { id: "game-item.survival-vest", name: "Survival Vest", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-armor", ...fossilRooSources, "gamefaqs-madain-sari-71891", "elitegrindlab-madain-sari", "gamefaqs-return-to-alexandria-71891"], verification: "partial" },
   { id: "game-item.golden-hairpin", name: "Golden Hairpin", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...disc4ShopSources, ...mountGulugSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
-  { id: "game-item.coronet", name: "Coronet", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-shops", "ffonline-ipsens-castle"], verification: "partial" },
+  { id: "game-item.coronet", name: "Coronet", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-shops", "ffonline-ipsens-castle", "icksmehl-shops-disc-4"], verification: "partial" },
   { id: "game-item.flash-hat", name: "Flash Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.adaman-hat", name: "Adaman Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.platinum-helm", name: "Platinum Helm", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
@@ -3032,8 +3032,8 @@ const cleyraLaterRecoveryPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil" as const, amount: 3100 },
-    conditions: "GameFAQs' Equipment List explicitly lists Needle Fork at Kumool's Mogshop on Disc III/IV. GameFAQs Items and RPGClassics list the 3,100-Gil price, while GameFAQs Shops omits it from its Ipsen table; retain the stock-list difference and release caveat.",
-    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops"],
+    conditions: "GameFAQs' Equipment List explicitly lists Needle Fork at Kumool's Mogshop on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory. GameFAQs Items and RPGClassics list the 3,100-Gil price, while GameFAQs Shops omits it from its Ipsen table; retain the stock-list difference and release caveat.",
+    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", "icksmehl-shops-disc-4"],
   },
 ];
 
@@ -3255,7 +3255,7 @@ const iifaTreeShopRecoveryInputs = ([
   ["item-path.disc-3.the-home-front.lamias-flute-alexandria-shop", "game-item.lamias-flute", "disc-3.the-home-front", "shop", "alexandria.weapon-shop.disc-3-4", "Alexandria Weapon Shop (Discs III–IV)", 3800, "repeatable", "Alexandria's later shop stock is a repeatable Lamia's Flute source.", "cavesofnarshe-ff9-flutes"],
   ["item-path.disc-3.card-tournament.lamias-flute-treno-shop", "game-item.lamias-flute", "disc-3.card-tournament", "shop", "treno.weapon-shop.disc-3-4", "Treno Weapon Shop (Discs III–IV)", 3800, "repeatable", "Treno lists Lamia's Flute in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-flutes"],
   ["item-path.disc-3.aerial-exploration.lamias-flute-lindblum-shop", "game-item.lamias-flute", "disc-3.aerial-exploration", "shop", "lindblum.weapon-shop.disc-3-4", "Lindblum Weapon/Item Shop (Discs III–IV)", 3800, "repeatable", "Lindblum lists Lamia's Flute in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-flutes"],
-  ["item-path.disc-3.ipsens-castle.lamias-flute-mogshop", "game-item.lamias-flute", "disc-3.ipsens-castle", "mogshop", "ipsens-castle.kumool-mogshop", "Kumool's Mogshop (Ipsen's Castle)", 3800, "repeatable", "GameFAQs' Equipment List explicitly lists Lamia's Flute at Kumool's Mogshop on Disc III/IV; GameFAQs Shops and RPGClassics list the 3,800-Gil price. Release-specific behavior remains unverified.", "cavesofnarshe-ff9-flutes"],
+  ["item-path.disc-3.ipsens-castle.lamias-flute-mogshop", "game-item.lamias-flute", "disc-3.ipsens-castle", "mogshop", "ipsens-castle.kumool-mogshop", "Kumool's Mogshop (Ipsen's Castle)", 3800, "repeatable", "GameFAQs' Equipment List explicitly lists Lamia's Flute at Kumool's Mogshop on Disc III/IV; icksmehl.de independently lists it in the Disc IV inventory. GameFAQs Shops and RPGClassics list the 3,800-Gil price. Release-specific behavior remains unverified.", "cavesofnarshe-ff9-flutes"],
   ["item-path.disc-3.the-home-front.brigandine-alexandria-shop", "game-item.brigandine", "disc-3.the-home-front", "shop", "alexandria.weapon-shop.disc-3-4", "Alexandria Weapon Shop (Discs III–IV)", 4300, "repeatable", "Alexandria's later shop stock is a repeatable Brigandine source.", "cavesofnarshe-ff9-brigandine"],
   ["item-path.disc-3.card-tournament.brigandine-treno-shop", "game-item.brigandine", "disc-3.card-tournament", "shop", "treno.weapon-shop.disc-3-4", "Treno Weapon Shop (Discs III–IV)", 4300, "repeatable", "Treno lists Brigandine in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-brigandine"],
   ["item-path.disc-3.aerial-exploration.brigandine-lindblum-shop", "game-item.brigandine", "disc-3.aerial-exploration", "shop", "lindblum.weapon-shop.disc-3-4", "Lindblum Weapon/Item Shop (Discs III–IV)", 4300, "repeatable", "Lindblum lists Brigandine in its Disc III–IV weapon stock.", "cavesofnarshe-ff9-brigandine"],
@@ -3284,7 +3284,7 @@ const iifaTreeShopRecoveryInputs = ([
     "gamefaqs-item-locations-54996",
     itemSource,
     "rpgclassics-shops",
-    ...(itemId === "game-item.lamias-flute" && shopId === "ipsens-castle.kumool-mogshop" ? ["gamefaqs-equipment-33383"] : []),
+    ...(itemId === "game-item.lamias-flute" && shopId === "ipsens-castle.kumool-mogshop" ? ["gamefaqs-equipment-33383", "icksmehl-shops-disc-4"] : []),
     ...(itemId === "game-item.healing-rod" ? ["gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383"] : []),
   ],
 }));
@@ -3326,15 +3326,15 @@ const ipsensMogshopEquipmentPaths: ItemAcquisitionPath[] = ipsensMogshopEquipmen
   shopName: "Kumool's Mogshop (Ipsen's Castle)",
   cost: { currency: "gil", amount: price },
   conditions: slug === "coronet"
-    ? "GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil at Ipsen, but neither gives a Disc III/IV range. GameFAQs' Equipment List, RPGClassics, and the Final Fantasy Wiki Ipsen stock table omit Kumool's Coronet listing; keep this seller claim source-specific and its timing window-unverified pending in-game verification."
+    ? "GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil at Ipsen, but neither gives a Disc III/IV range. GameFAQs' Equipment List, RPGClassics, the Final Fantasy Wiki, and icksmehl.de's Disc IV table omit Kumool's Coronet listing; these omissions do not resolve the positive seller claim, so keep its timing window-unverified pending in-game verification."
     : slug === "n-kai-armlet"
-      ? "GameFAQs' Equipment List explicitly lists N-Kai Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,000-Gil price. The Disc IV Mognet chain also returns to Kumool, supporting late availability. Direct release behavior remains unverified."
+      ? "GameFAQs' Equipment List explicitly lists N-Kai Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,000-Gil price, and icksmehl.de's Disc IV inventory also lists it. The Disc IV Mognet chain returns to Kumool. Direct release behavior remains unverified."
       : slug === "jade-armlet"
-        ? "GameFAQs' Equipment List explicitly lists Jade Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,400-Gil price. The Disc IV Mognet chain also returns to Kumool, supporting late availability. Direct release behavior remains unverified."
+        ? "GameFAQs' Equipment List explicitly lists Jade Armlet at Kumool's Mogshop on Disc III/IV; its Shops and RPGClassics tables list the 3,400-Gil price, and icksmehl.de's Disc IV inventory also lists it. The Disc IV Mognet chain returns to Kumool. Direct release behavior remains unverified."
     : ipsensDisc3And4EquipmentProducts.has(slug)
-      ? `GameFAQs' Equipment List explicitly lists ${itemName} at Kumool's Mogshop on Disc III/IV; GameFAQs Shops and RPGClassics support the ${price.toLocaleString("en-US")}-Gil price. Release-specific behavior remains unverified.`
+      ? `GameFAQs' Equipment List explicitly lists ${itemName} at Kumool's Mogshop on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory; GameFAQs Shops and RPGClassics support the ${price.toLocaleString("en-US")}-Gil price. Release-specific behavior remains unverified.`
     : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. Exact post-story shop access has not been independently verified.`,
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", ...(ipsensDisc3And4EquipmentProducts.has(slug) ? ["gamefaqs-equipment-33383"] : []), ...(slug === "coronet" ? ["gamefaqs-equipment-33383", "ffwiki-shops", "ffonline-ipsens-castle"] : []), ...(slug === "n-kai-armlet" || slug === "jade-armlet" ? ["elitegrindlab-ipsens-castle"] : [])],
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", ...(ipsensDisc3And4EquipmentProducts.has(slug) ? ["gamefaqs-equipment-33383", "icksmehl-shops-disc-4"] : []), ...(slug === "coronet" ? ["gamefaqs-equipment-33383", "ffwiki-shops", "ffonline-ipsens-castle", "icksmehl-shops-disc-4"] : []), ...(slug === "n-kai-armlet" || slug === "jade-armlet" ? ["elitegrindlab-ipsens-castle"] : [])],
 }));
 
 const ipsensMogshopSupplyProducts = [
@@ -9196,9 +9196,9 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil", amount: 1100 },
-    conditions: "GameFAQs' Equipment List explicitly lists Mythril Spear at Kumool's Mogshop on Disc III/IV. GameFAQs Shops and RPGClassics list the 1,100-Gil price; release-specific behavior remains unverified.",
+    conditions: "GameFAQs' Equipment List explicitly lists Mythril Spear at Kumool's Mogshop on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory. GameFAQs Shops and RPGClassics list the 1,100-Gil price; release-specific behavior remains unverified.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.mognet"],
-    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "rpgclassics-shops"],
+    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "rpgclassics-shops", "icksmehl-shops-disc-4"],
   },
   {
     id: "item-path.burmecia.lightning-staff-chest",
@@ -10298,8 +10298,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil", amount: 2400 },
-    conditions: "GameFAQs' Equipment List explicitly lists Oak Staff at Kumool's Mogshop on Disc III/IV; GameFAQs Shops and RPGClassics list the 2,400-Gil price. Release-specific behavior remains unverified.",
-    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-weapons", "rpgclassics-shops"],
+    conditions: "GameFAQs' Equipment List explicitly lists Oak Staff at Kumool's Mogshop on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory; GameFAQs Shops and RPGClassics list the 2,400-Gil price. Release-specific behavior remains unverified.",
+    sourceIds: ["gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891", "rpgclassics-weapons", "rpgclassics-shops", "icksmehl-shops-disc-4"],
   },
   ...iifaTreePickupPaths,
   ...iifaTreeShopRecoveryInputs,
@@ -10409,8 +10409,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil", amount: 7000 },
-    conditions: "GameFAQs' Equipment List places the Ipsen Mogshop sale on Disc III/IV. GameFAQs Shops lists Poison Knuckles for 7,000 Gil, while the older GameFAQs Shop Lists, Equipment List, and RPGClassics Shops say 5,000 Gil; retain the newer shop table's price and source conflict. Release-specific behavior remains unverified.",
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops"],
+    conditions: "GameFAQs' Equipment List places the Ipsen Mogshop sale on Disc III/IV, and icksmehl.de independently lists it in the Disc IV inventory. GameFAQs Shops lists Poison Knuckles for 7,000 Gil, while the older GameFAQs Shop Lists, Equipment List, and RPGClassics Shops say 5,000 Gil; retain the newer shop table's price and source conflict. Release-specific behavior remains unverified.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", "icksmehl-shops-disc-4"],
   },
   {
     id: "item-path.disc-2.iifa-tree.ruby-seal-reward",
