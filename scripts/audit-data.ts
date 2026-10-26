@@ -717,6 +717,23 @@ if (
 ) {
   errors.push("The Disc III Hilda Garde Black Mage Village shop return and rejoin must preserve GameFAQs' direct timing evidence, Flactem's earlier Blue Narciss scope, the Disc II stock window, and source links.");
 }
+const cleyraFrogReturn = gameRouteEdgesById.get("detour.journey-to-cleyra-lindblum-basin-frogs");
+const cleyraFrogRejoin = gameRouteEdgesById.get("detour.journey-to-cleyra-lindblum-basin-rejoin");
+if (
+  cleyraFrogReturn?.relationship !== "optional-return" ||
+  cleyraFrogReturn.fromChapterId !== "disc-2.journey-to-cleyra" ||
+  cleyraFrogReturn.toChapterId !== "disc-1.exploring-lindblum-kingdom" ||
+  !cleyraFrogReturn.summary.includes("third Frog Catching visit") ||
+  !cleyraFrogReturn.summary.includes("Jegged independently confirms") ||
+  !cleyraFrogReturn.summary.includes("does not number the visit") ||
+  !["gamefaqs-journey-to-cleyra-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "jegged-gargan-roo"].every((sourceId) => cleyraFrogReturn.sourceIds.includes(sourceId)) ||
+  cleyraFrogRejoin?.relationship !== "rejoin" ||
+  cleyraFrogRejoin.fromChapterId !== "disc-1.exploring-lindblum-kingdom" ||
+  cleyraFrogRejoin.toChapterId !== "disc-2.journey-to-cleyra" ||
+  !cleyraFrogRejoin.sourceIds.includes("jegged-gargan-roo")
+) {
+  errors.push("The pre-Cleyra Lindblum Basin Frog Catching return and rejoin must preserve GameFAQs' third-visit and frog-care scope, Jegged's independent timing cross-check, and source links.");
+}
 const aerialQuanDwellingReturn = gameRouteEdgesById.get("detour.aerial-quan-dwelling-running-shoes");
 const aerialQuanDwellingRejoin = gameRouteEdgesById.get("detour.aerial-quan-dwelling-rejoin");
 const aerialQuanDwellingObjective = objectivesById.get("disc-3.aerial-exploration.quan-running-shoes");

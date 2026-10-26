@@ -2168,7 +2168,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/13-Gargan-Roo.html",
     accessed: "2026-10-24",
-    notes: "Independent route confirming the Treno-to-Gargan Roo-to-Cleyra chronology. After the party handoff it places Zidane's group on the world map just outside Burmecia's city gates and describes the optional Gizamaluke's Grotto Kupo Nut visit before continuing west; it does not describe entering the city on Disc II.",
+    notes: "Independent route confirming the Treno-to-Gargan Roo-to-Cleyra chronology. After the party handoff it places Zidane's group on the world map just outside Burmecia's city gates and explicitly says the party can return to Qu's Marsh for more frogs before entering Cleyra. It does not number this as the third visit, give the frog-preservation advice, or describe the exact Lindblum Basin travel path for this return; it also does not describe entering the city on Disc II.",
   },
   {
     id: "elitegrindlab-gargan-roo",
