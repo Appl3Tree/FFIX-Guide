@@ -576,7 +576,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/17-Lindblum.html",
     accessed: "2026-10-24",
-    notes: "Independent route for the Disc II city return, ATE trigger, two Card Freak Gon chests, hidden card, Mognet, Theater District, Lowell, three ATE sequence, Dragon's Gate Bandana, and Outer Continent lead-in. It begins after the original Pinnacle Rocks-to-Lindblum story transition and does not document a later return from Lindblum to Pinnacle Rocks; GameFAQs supplies that optional re-entry route, as well as the specific reopened shop-plaza and still-blocked church-alley details.",
+    notes: "Independent route for the Disc II city return, ATE trigger, two Card Freak Gon chests, hidden card, Mognet, Theater District, Lowell, three ATE sequence, Dragon's Gate Bandana, and Outer Continent lead-in. At Dragon's Gate it says the party can return to Moguta in Gizamaluke's Grotto to trade a Kupo Nut, but it does not describe returning from the delivery to Dragon's Gate; GameFAQs' Disc II route supplies that rejoin. It begins after the original Pinnacle Rocks-to-Lindblum story transition and does not document a later return from Lindblum to Pinnacle Rocks; GameFAQs supplies that optional re-entry route, as well as the specific reopened shop-plaza and still-blocked church-alley details.",
   },
   {
     id: "gamerguides-return-to-lindblum",
@@ -616,7 +616,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-the-outer-continent",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for Quina's return, Frog Catching, Kupo Nut detours, Chocograph #5, Lani, Fossil Roo's chests and Mognet, mining rewards, and the one-way Gargant exit. It explicitly labels the terminal ivy-room switch No. 3 before the lower-right exit and says prior Fossil Roo areas cannot be revisited after the ride. The item sweep includes the post-Lani Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest; other item references document later replacement sources. Frog-pool advice differs from the guide's breeding-pair recommendation; the conflict is retained.",
+    notes: "Original PlayStation route for Quina's return, Frog Catching, Kupo Nut detours, Chocograph #5, Lani, Fossil Roo's chests and Mognet, mining rewards, and the one-way Gargant exit. It explicitly documents the Disc II Moguta delivery for an Elixir and directs the party back to Dragon's Gate, which remains open, before proceeding to Qu's Marsh; it directly supports the optional return and rejoin. It explicitly labels the terminal ivy-room switch No. 3 before the lower-right exit and says prior Fossil Roo areas cannot be revisited after the ride. The item sweep includes the post-Lani Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest; other item references document later replacement sources. Frog-pool advice differs from the guide's breeding-pair recommendation; the conflict is retained.",
   },
   {
     id: "gamefaqs-outer-continent-71891",
@@ -1680,7 +1680,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-burmecia",
     accessed: "2026-10-24",
-    notes: "Bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. Boss steal percentages and some conditional event details are not copied where sources disagree.",
+    notes: "Disc I first-visit bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
   },
   {
     id: "jegged-gizamaluke",
@@ -1688,7 +1688,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/09-Gizamalukes-Grotto.html",
     accessed: "2026-10-23",
-    notes: "Independent cross-check for the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
+    notes: "Disc I first-visit cross-check for the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
   },
   {
     id: "rpgclassics-gizamaluke",
@@ -1728,7 +1728,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Kupo-Nuts.html",
     accessed: "2026-10-24",
-    notes: "Cross-checks the return to Gizamaluke's Grotto, one-nut inventory limit, Disc II reward, and repeat-delivery rewards. Its recommendation to deliver once per disc is distinguished from the optional random reward on the Cleyra approach.",
+    notes: "Cross-checks the return to Gizamaluke's Grotto, one-nut inventory limit, Disc II Elixir reward, and repeat-delivery rewards. It supports the optional Moguta exchange and reward but does not describe returning from the Grotto to Dragon's Gate; that route is supported by GameFAQs' Disc II walkthrough. Its recommendation to deliver once per disc is distinguished from the optional random reward on the Cleyra approach.",
   },
   {
     id: "gamefaqs-items-71891",

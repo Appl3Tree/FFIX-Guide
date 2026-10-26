@@ -526,6 +526,38 @@ if (
 ) {
   errors.push("The optional Disc II Pinnacle Rocks return must use the GameFAQs re-entry evidence, while Jegged remains scoped to the original route and its required Lindblum rejoin.");
 }
+const disc2KupoNutReturnEdge = gameRouteEdgesById.get("detour.journey-to-outer-continent-kupo-nut-return");
+const disc2KupoNutRejoinEdge = gameRouteEdgesById.get("detour.journey-to-outer-continent-kupo-nut-rejoin");
+const disc2OuterContinentSourceNotes = sources.find((source) => source.id === "gamefaqs-journey-to-outer-continent-71891")?.notes;
+const gamefaqsDisc1BurmeciaSourceNotes = sources.find((source) => source.id === "gamefaqs-journey-to-burmecia-71891")?.notes;
+const jeggedDisc1GrottoSourceNotes = sources.find((source) => source.id === "jegged-gizamaluke")?.notes;
+const jeggedDisc2LindblumSourceNotes = sources.find((source) => source.id === "jegged-return-to-lindblum")?.notes;
+const jeggedKupoNutSourceNotes = sources.find((source) => source.id === "jegged-kupo-nuts")?.notes;
+if (
+  disc2KupoNutReturnEdge?.relationship !== "optional-return"
+  || disc2KupoNutReturnEdge.fromChapterId !== "disc-2.journey-to-outer-continent"
+  || disc2KupoNutReturnEdge.toChapterId !== "disc-1.journey-to-burmecia"
+  || !["gamefaqs-journey-to-outer-continent-71891", "jegged-return-to-lindblum", "jegged-kupo-nuts"].every((sourceId) => disc2KupoNutReturnEdge.sourceIds.includes(sourceId))
+  || disc2KupoNutReturnEdge.sourceIds.includes("gamefaqs-journey-to-burmecia-71891")
+  || disc2KupoNutReturnEdge.sourceIds.includes("jegged-gizamaluke")
+  || !disc2KupoNutReturnEdge.summary.includes("Disc II Kupo Nut")
+  || disc2KupoNutRejoinEdge?.relationship !== "rejoin"
+  || disc2KupoNutRejoinEdge.fromChapterId !== "disc-1.journey-to-burmecia"
+  || disc2KupoNutRejoinEdge.toChapterId !== "disc-2.journey-to-outer-continent"
+  || disc2KupoNutRejoinEdge.sourceIds.length !== 1
+  || !disc2KupoNutRejoinEdge.sourceIds.includes("gamefaqs-journey-to-outer-continent-71891")
+  || !disc2KupoNutRejoinEdge.summary.includes("Dragon's Gate, which remains open")
+  || !disc2OuterContinentSourceNotes?.includes("Disc II Moguta delivery for an Elixir")
+  || !disc2OuterContinentSourceNotes.includes("back to Dragon's Gate, which remains open")
+  || !gamefaqsDisc1BurmeciaSourceNotes?.includes("Disc I first-visit")
+  || !gamefaqsDisc1BurmeciaSourceNotes.includes("does not document the later Disc II Moguta delivery")
+  || !jeggedDisc1GrottoSourceNotes?.includes("Disc I first-visit")
+  || !jeggedDisc1GrottoSourceNotes.includes("does not document the later Disc II Moguta delivery")
+  || !jeggedDisc2LindblumSourceNotes?.includes("does not describe returning from the delivery to Dragon's Gate")
+  || !jeggedKupoNutSourceNotes?.includes("does not describe returning from the Grotto to Dragon's Gate")
+) {
+  errors.push("The Disc II Kupo Nut detour must keep reward and optional-visit sources on the detour while the direct GameFAQs Dragon's Gate route alone supports its rejoin.");
+}
 const tournamentDaliReturnEdge = gameRouteEdgesById.get("detour.card-tournament-dali-return");
 const tournamentQuanStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.card-tournament")

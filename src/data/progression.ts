@@ -1231,16 +1231,16 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-2.journey-to-outer-continent",
     toChapterId: "disc-1.journey-to-burmecia",
     relationship: "optional-return",
-    summary: "Before leaving Dragon's Gate for Qu's Marsh, the party can return to Gizamaluke's Grotto and deliver the Kupo Nut for an optional Elixir reward.",
-    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "jegged-kupo-nuts"],
+    summary: "Before continuing from Dragon's Gate to Qu's Marsh, the party can revisit Gizamaluke's Grotto to deliver the Disc II Kupo Nut to Moguta for an optional Elixir.",
+    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-return-to-lindblum", "jegged-kupo-nuts"],
   },
   {
     id: "detour.journey-to-outer-continent-kupo-nut-rejoin",
     fromChapterId: "disc-1.journey-to-burmecia",
     toChapterId: "disc-2.journey-to-outer-continent",
     relationship: "rejoin",
-    summary: "After the optional Moguta delivery, return to Dragon's Gate and resume the required route to Qu's Marsh and Fossil Roo.",
-    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-return-to-lindblum", "jegged-gizamaluke"],
+    summary: "After Moguta's optional Kupo Nut delivery, return to Dragon's Gate, which remains open, and resume the required route to Qu's Marsh and Fossil Roo.",
+    sourceIds: ["gamefaqs-journey-to-outer-continent-71891"],
   },
 ];
 
