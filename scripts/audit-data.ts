@@ -1819,6 +1819,8 @@ if (
   !discTwoJumpRopeCutoff?.trigger.includes("Jump-rope Champion Appears!") ||
   discThreeJumpRopeCutoff?.edgeId !== "story.trouble-on-home-front-to-aftermath" ||
   discThreeJumpRopeCutoff.certainty !== "conservative" ||
+  !discThreeJumpRopeCutoff.trigger.includes("after control returns to Zidane's party") ||
+  !discThreeJumpRopeCutoff.trigger.includes("before the library/Tantarian sequence") ||
   !discThreeJumpRopeCutoff.trigger.includes("best-effort check, not a confirmed recovery window") ||
   !discThreeJumpRopeCutoff.sourceIds.includes("flactem-disc-3-treno")
 ) {

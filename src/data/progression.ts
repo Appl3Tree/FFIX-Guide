@@ -1881,7 +1881,7 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.trouble-on-home-front-to-aftermath",
     title: "Disc III Alexandria Mosh letter check (availability unverified)",
     certainty: "conservative",
-    trigger: "If Kupo's 50-jump letter remains unread after the Disc II check, visit Mosh in the Knights of Pluto dressing room during the Disc III Alexandria return and try Mognet before following Dagger to the altar and leaving for Lindblum. Flactem confirms Mosh is available there but does not list the Jump Rope letter; Cour89 lists it as Disc I optional mail and does not discuss rereads. Treat this only as a best-effort check, not a confirmed recovery window.",
+    trigger: "If Kupo's 50-jump letter remains unread after the Disc II check, try Mognet with Mosh in the Knights of Pluto dressing room after control returns to Zidane's party on the Disc III Alexandria return, before the library/Tantarian sequence and before leaving for Lindblum. Flactem confirms this location and timing but does not list the Jump Rope letter; Cour89 lists it as Disc I optional mail and does not discuss rereads. Treat this only as a best-effort check, not a confirmed recovery window.",
     missableIds: ["missable.disc-1.alexandria.jump-rope-mognet-letter"],
     sourceIds: ["flactem-disc-3-treno", "cour89-mognet-letters", "elitegrindlab-prima-vista", "gamefaqs-perfect-game-41181"],
   },

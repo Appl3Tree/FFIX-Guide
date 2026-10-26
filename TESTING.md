@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Mois letter scope update: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 421 sources; 100 cutoff windows cover all warnings. Build emitted 2,367.27 kB JavaScript (573.41 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Automated tests, browser review, gameplay, and release verification were not run.
+Disc III Jump Rope letter chronology correction: `npm run lint`, `npm run build` (TypeScript, data audit, production bundle), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 421 sources; 100 cutoff windows cover all warnings. Build emitted 2,367.65 kB JavaScript (573.47 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Automated tests, browser review, gameplay, and release verification were not run. Flactem supports the Mosh visit's order, but does not confirm Jump Rope letter availability after Disc II.
+
+Previous verification: Mois letter scope update passed lint, typecheck, data audit, production build, and `git diff --check`; the Disc IV repair exchange remains distinct from the Disc I Gumo letter, whose recovery is not established.
 
 Tiger Fangs limited-stock cross-check: `npm run lint` passes; `npm run build` passes TypeScript, the data audit, and the production Vite bundle; `git diff --check` passes. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 421 sources. Catalog: 232 items and 1,116 source-linked paths. Vite transformed 1,684 modules and emitted 2,366.24 kB JavaScript (573.15 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. No automated tests, browser review, gameplay check, or release verification was performed for this data-only slice. Jinsoku supports the Disc III purchase but does not resolve the Caves of Narshe Disc IV candidate.
 

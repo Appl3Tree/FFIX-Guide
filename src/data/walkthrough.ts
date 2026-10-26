@@ -3859,8 +3859,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "trouble-save-before-library",
             kind: "save",
-            text: "In the main hall, check the recovered party's equipment and abilities. Go upstairs to the second floor and enter the right-side Guardhouse to save with Mosh; if Kupo's 50-jump letter is still unread, try Mognet here as a best-effort Disc III check.",
-            detail: "Flactem locates Mosh in the Knights of Pluto dressing room during this return, and the guest-room save point is the chapter's only documented save opportunity before Tantarian. Some sources call this same save-point moogle Mogki. No reviewed source confirms the Jump Rope letter remains available after the Disc II check, so treat this as a best-effort check, not a promised recovery.",
+            text: "After control returns to Zidane's party, check the recovered party's equipment and abilities. Go upstairs to the second floor and enter the right-side Guardhouse to save with Mosh before the library/Tantarian sequence; if Kupo's 50-jump letter is still unread, try Mognet here as a best-effort Disc III check.",
+            detail: "Flactem places Mosh in the Knights of Pluto dressing room after control returns to Zidane's group and before the library/Tantarian sequence. The guest-room save point is the chapter's only documented save opportunity before Tantarian. Some sources call this same save-point moogle Mogki. No reviewed source confirms the Jump Rope letter remains available after the Disc II check, so treat this as a best-effort check, not a promised recovery.",
             objectiveIds: ["disc-1.alexandria.jump-rope-mognet-letter"],
           },
           {
