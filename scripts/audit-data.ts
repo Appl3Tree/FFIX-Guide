@@ -490,6 +490,28 @@ if (!homeFrontPartySequence) {
     if (!homeFrontPartySequence.sourceIds.includes(sourceId)) errors.push(`The Disc III Alexandria sequence is missing corroborating source ${sourceId}.`);
   }
 }
+const tournamentQuanPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.card-tournament-vivi-quan");
+const tournamentQuanPhases = tournamentQuanPartySequence?.phases ?? [];
+const tournamentDaliReturnEdge = gameRouteEdgesById.get("detour.card-tournament-dali-return");
+const tournamentQuanStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.card-tournament")
+  ?.sections.find((section) => section.id === "card-tournament-dali-detour")
+  ?.steps.find((step) => step.id === "card-tournament-return-to-quan");
+if (
+  tournamentQuanPhases.length !== 3
+  || !tournamentQuanPhases[0]?.summary.toLowerCase().includes("only if the how he ended up here ate sent vivi home")
+  || !tournamentQuanPhases[0]?.summary.includes("finish the Treno ATE route")
+  || !tournamentQuanPhases[1]?.location.includes("Quan's Dwelling")
+  || !tournamentQuanPhases[1]?.summary.includes("western South Gate route to Dali")
+  || !tournamentQuanPhases[2]?.summary.includes("before playing the final match")
+  || !["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "flactem-disc-3-treno"].every((sourceId) => tournamentQuanPartySequence?.sourceIds.includes(sourceId))
+  || !tournamentDaliReturnEdge?.summary.includes("retrieve him there first")
+  || !tournamentDaliReturnEdge.summary.includes("western South Gate route")
+  || !tournamentQuanStep?.text.includes("after the Treno ATEs are finished")
+  || !tournamentQuanStep.detail?.includes("If Vivi stayed in Treno, go directly to Dali")
+) {
+  errors.push("The Disc III card-tournament branch must finish Treno's ATEs before a conditional Quan's Dwelling return, reunite Vivi, and route the party through Dali before the final match.");
+}
 const cleyraPartySequence = storyPartySequences.find((sequence) => sequence.id === "party-sequence.cleyra-antlion");
 if (!cleyraPartySequence) {
   errors.push("The post-Antlion Cleyra party handoff sequence is missing.");

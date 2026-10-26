@@ -330,6 +330,31 @@ export const storyPartySequences: StoryPartySequence[] = [
     ],
   },
   {
+    id: "party-sequence.card-tournament-vivi-quan",
+    title: "Disc III Treno's conditional Vivi return from Quan's Dwelling",
+    phases: [
+      {
+        party: "Zidane's group; Vivi stays at Quan's Dwelling if sent there",
+        chapterIds: ["disc-3.card-tournament"],
+        location: "Treno and the Card Stadium",
+        summary: "Only if the How He Ended Up Here ATE sent Vivi home, finish the Treno ATE route and the first two tournament matches before visiting Quan's Dwelling. If Vivi stayed in Treno, skip this handoff and branch scene.",
+      },
+      {
+        party: "Zidane and Vivi reunited",
+        chapterIds: ["disc-2.journey-to-treno", "disc-1.village-of-dali"],
+        location: "Quan's Dwelling, then the western South Gate route to Dali",
+        summary: "After the Treno ATEs, visit Quan's Dwelling to view the scene and bring Vivi back into the party. Continue by the western South Gate route to Dali before the final tournament match.",
+      },
+      {
+        party: "Zidane's party with Vivi back in Treno",
+        chapterIds: ["disc-1.village-of-dali", "disc-3.card-tournament"],
+        location: "Dali to the Card Stadium",
+        summary: "Complete the Dali detour, then return to Treno before playing the final match. If Vivi stayed in town, go directly from Treno to Dali without this conditional Dwelling visit.",
+      },
+    ],
+    sourceIds: ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "flactem-disc-3-treno"],
+  },
+  {
     id: "party-sequence.cleyra-antlion",
     title: "Cleyra's post-Antlion party handoff",
     phases: [
@@ -1064,8 +1089,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.card-tournament",
     toChapterId: "disc-1.village-of-dali",
     relationship: "optional-return",
-    summary: "Before the final Treno match, the party can return to Dali for the Mini-Brahne, Mayor's Key, Burman Coffee, and shop preparation.",
-    sourceIds: ["gamefaqs-card-tournament-71891", "gamefaqs-dali-71891", "gamefaqs-morrid-coffees-71891", "jegged-treno-tournament", "jegged-dali", "jegged-rare-coffees"],
+    summary: "After finishing the Treno ATEs and before the final match, return to Dali for Mini-Brahne, Mayor's Key, Burman Coffee, and shop preparation. If the ATE branch sent Vivi to Quan's Dwelling, retrieve him there first and take the western South Gate route through the mountains to Dali; if he stayed in Treno, travel directly.",
+    sourceIds: ["gamefaqs-card-tournament-71891", "gamefaqs-dali-71891", "gamefaqs-morrid-coffees-71891", "jegged-treno-tournament", "jegged-dali", "jegged-rare-coffees", "flactem-disc-3-treno"],
   },
   {
     id: "detour.card-tournament-dali-rejoin",

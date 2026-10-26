@@ -2376,7 +2376,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/card-tournament",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for Treno's nine-ATE chain, the Vivi branch choice, the three-round tournament, Namingway Card opportunity, Dali return for Mini-Brahne/Mayor's Key/Burman Coffee, the Catoblepas challenge, and the Rebirth Ring. It notes Mogrich has Kupo's letter if Athlete Queen was won, but does not say that this is the earliest unlock; Cour89 lists the letter at Hippaul level 20 while the tournament is in progress. Its advice to reload after a final loss is presented as an optional way to retry for the reward, not as a story requirement.",
+    notes: "Original PlayStation route for Treno's nine-ATE chain, the Vivi branch choice, the three-round tournament, Namingway Card opportunity, and Dali return for Mini-Brahne/Mayor's Key/Burman Coffee. It specifically says to finish the ATEs before retrieving Vivi from Quan's Dwelling and then to reach Dali through the western South Gate before the final match. It also covers the Catoblepas challenge and Rebirth Ring. It notes Mogrich has Kupo's letter if Athlete Queen was won, but does not say that this is the earliest unlock; Cour89 lists the letter at Hippaul level 20 while the tournament is in progress. Its advice to reload after a final loss is presented as an optional way to retry for the reward, not as a story requirement.",
   },
   {
     id: "gamefaqs-card-locations-24067",

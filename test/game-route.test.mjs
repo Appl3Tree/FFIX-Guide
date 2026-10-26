@@ -103,6 +103,32 @@ test("early party handoffs record Bohden Gate and the Dagger-Steiner Treno branc
   }
 });
 
+test("Disc III Treno retrieves Vivi from Quan only after the ATE route and before Dali", () => {
+  const sequence = storyPartySequences.find((entry) => entry.id === "party-sequence.card-tournament-vivi-quan");
+  assert.ok(sequence);
+  assert.equal(sequence.phases.length, 3);
+  assert.match(sequence.phases[0].summary, /only if.*ATE sent Vivi home/i);
+  assert.match(sequence.phases[0].summary, /finish the Treno ATE route and the first two tournament matches/);
+  assert.equal(sequence.phases[1].location, "Quan's Dwelling, then the western South Gate route to Dali");
+  assert.match(sequence.phases[1].summary, /After the Treno ATEs.*Quan's Dwelling.*bring Vivi back.*before the final tournament match/);
+  assert.match(sequence.phases[2].summary, /return to Treno before playing the final match/);
+  for (const sourceId of ["gamefaqs-card-tournament-71891", "jegged-treno-tournament", "flactem-disc-3-treno"]) {
+    assert.ok(sequence.sourceIds.includes(sourceId));
+    assert.ok(sources.some((source) => source.id === sourceId));
+  }
+
+  const detour = gameRouteEdges.find((edge) => edge.id === "detour.card-tournament-dali-return");
+  assert.ok(detour);
+  assert.match(detour.summary, /retrieve him there first.*western South Gate route/);
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.card-tournament")
+    ?.sections.find((section) => section.id === "card-tournament-dali-detour")
+    ?.steps.find((entry) => entry.id === "card-tournament-return-to-quan");
+  assert.ok(step);
+  assert.match(step.text, /after the Treno ATEs are finished/);
+  assert.match(step.detail, /If Vivi stayed in Treno, go directly to Dali/);
+});
+
 test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => {
   const returnToMarsh = gameRouteEdges.find((edge) => edge.id === "detour.journey-to-cleyra-lindblum-basin-frogs");
   assert.ok(returnToMarsh, "the pre-Cleyra return to Qu's Marsh is represented");
@@ -314,5 +340,5 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
   assert.equal(gameRouteEdges.length, 86);
   assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 25, rejoin: 18 });
-  assert.equal(storyPartySequences.length, 9);
+  assert.equal(storyPartySequences.length, 10);
 });
