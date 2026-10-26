@@ -5449,7 +5449,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "breaking-seal-world-map-dropoffs",
         title: "Hilda Garde 3 — recommended Water, Fire, and Wind route",
         summary: "Follow the documented Water → Fire → Wind sequence and leave each story-assigned pair at its shrine. The sources show this route but do not confirm whether the first three stops can be reordered.",
-        sourceIds: ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough", "elitegrindlab-four-shrines"],
+        sourceIds: ["gamefaqs-breaking-the-seal-71891", "gamefaqs-four-shrines-gbness-26505", "gamefaqs-unlocking-terra-79143", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough", "rpgclassics-four-shrines", "elitegrindlab-four-shrines"],
         steps: [
           {
             id: "breaking-seal-water-shrine",

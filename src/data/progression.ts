@@ -414,8 +414,12 @@ export const storyPartySequences: StoryPartySequence[] = [
     ],
     sourceIds: [
       "gamefaqs-breaking-the-seal-71891",
+      "gamefaqs-four-shrines-gbness-26505",
+      "gamefaqs-unlocking-terra-79143",
       "jegged-four-shrines-terra",
       "rpgclassics-disc-3-walkthrough",
+      "rpgclassics-four-shrines",
+      "elitegrindlab-four-shrines",
     ],
   },
   {
