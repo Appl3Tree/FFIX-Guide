@@ -391,7 +391,7 @@ export const storyPartySequences: StoryPartySequence[] = [
         party: "Dagger and Eiko dropped at the shrine",
         chapterIds: ["disc-3.breaking-the-seal"],
         location: "Water Shrine",
-        summary: "Restore the normal weapons used before Ipsen's Castle, and finish any desired full-party optional activity before the first drop. Start at Water Shrine and leave Dagger and Eiko there; they leave the active party for the shrine sequence. GamerSky says the four shrine stops must be visited in the Water → Fire → Wind → Earth order. Direct game and release verification remain open.",
+        summary: "Restore the normal weapons used before Ipsen's Castle, and finish any desired full-party optional activity before the first drop. Start at Water Shrine and leave Dagger and Eiko there; they leave the active party for the shrine sequence. GamerSky and a Traditional Chinese route both say the four shrine stops must be visited in the Water → Fire → Wind → Earth order. Direct game and release verification remain open.",
       },
       {
         party: "Freya and Amarant dropped; Zidane, Vivi, Steiner, and Quina remain",
@@ -417,6 +417,7 @@ export const storyPartySequences: StoryPartySequence[] = [
       "gamefaqs-four-shrines-gbness-26505",
       "gamefaqs-unlocking-terra-79143",
       "gamersky-four-shrines",
+      "neocities-vv0817-four-shrines",
       "jegged-four-shrines-terra",
       "rpgclassics-disc-3-walkthrough",
       "rpgclassics-four-shrines",
@@ -886,8 +887,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.breaking-the-seal",
     toChapterId: "disc-3.preparing-to-leave",
     relationship: "required-story",
-    summary: "All four shrines must be addressed using their story-assigned party pairs. GamerSky explicitly says to visit Water → Fire → Wind → Earth in that order. Defeating the Earth Guardian returns the group to the Hilda Garde for the final preparation window before the Shimmering Island transition; direct game and release verification remain open.",
-    sourceIds: ["gamefaqs-breaking-the-seal-71891", "gamefaqs-preparing-to-leave-71891", "gamersky-four-shrines", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough"],
+    summary: "All four shrines must be addressed using their story-assigned party pairs. GamerSky and a Traditional Chinese route explicitly say to visit Water → Fire → Wind → Earth in that order. Defeating the Earth Guardian returns the group to the Hilda Garde for the final preparation window before the Shimmering Island transition; direct game and release verification remain open.",
+    sourceIds: ["gamefaqs-breaking-the-seal-71891", "gamefaqs-preparing-to-leave-71891", "gamersky-four-shrines", "neocities-vv0817-four-shrines", "jegged-four-shrines-terra", "rpgclassics-disc-3-walkthrough"],
   },
   {
     id: "story.preparing-to-leave-to-portal",

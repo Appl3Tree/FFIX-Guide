@@ -573,14 +573,15 @@ if (!fourShrinesPartySequence) {
       errors.push(`The Four Shrines documented route must list ${expectedLocation} in its recommended sequence.`);
     }
   }
-  if (!fourShrinesPartySequence.phases[0]?.summary.includes("GamerSky says the four shrine stops must be visited in the Water → Fire → Wind → Earth order") ||
+  if (!fourShrinesPartySequence.phases[0]?.summary.includes("GamerSky and a Traditional Chinese route both say the four shrine stops must be visited in the Water → Fire → Wind → Earth order") ||
     !fourShrinesPartySequence.phases[0].summary.includes("Direct game and release verification remain open")) {
     errors.push("The Four Shrines party sequence must record the source-supported mandatory order and its unverified gameplay status.");
   }
   const shrineRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.breaking-the-seal")?.sections.find((section) => section.id === "breaking-seal-world-map-dropoffs");
   const fourShrinesObjective = objectives.find((objective) => objective.id === "disc-3.breaking-the-seal.four-shrines");
   if (!shrineRouteSection?.summary.includes("Visit Water → Fire → Wind → Earth in that order") ||
-    !shrineRouteSection.summary.includes("GamerSky explicitly says the four stops must be entered in order") ||
+    !shrineRouteSection.summary.includes("GamerSky and a Traditional Chinese route explicitly say the four stops must be entered in order") ||
+    !shrineRouteSection.summary.includes("does not establish that another order works") ||
     !shrineRouteSection.summary.includes("Direct game and release verification remain open")) {
     errors.push("The Four Shrines walkthrough must follow the source-supported ordered route and preserve its unverified gameplay status.");
   }
@@ -592,6 +593,7 @@ if (!fourShrinesPartySequence) {
     "gamefaqs-four-shrines-gbness-26505",
     "gamefaqs-unlocking-terra-79143",
     "gamersky-four-shrines",
+    "neocities-vv0817-four-shrines",
     "jegged-four-shrines-terra",
     "rpgclassics-disc-3-walkthrough",
     "rpgclassics-four-shrines",
@@ -606,6 +608,8 @@ if (!fourShrinesPartySequence) {
   if (
     !fourShrinesSourceNotes.get("gamersky-four-shrines")?.includes("must be entered in order") ||
     !fourShrinesSourceNotes.get("gamersky-four-shrines")?.includes("Water → Fire → Wind → Earth as the correct order") ||
+    !fourShrinesSourceNotes.get("neocities-vv0817-four-shrines")?.includes("must visit the shrines in Water → Fire → Wind → Earth order") ||
+    !fourShrinesSourceNotes.get("gamedog-four-shrines-order")?.includes("does not demonstrate or explicitly confirm that another order works") ||
     !fourShrinesSourceNotes.get("gamefaqs-four-shrines-gbness-26505")?.includes("explicitly lists the Water, Fire, Wind, and Earth shrines in that order") ||
     !fourShrinesSourceNotes.get("gamefaqs-unlocking-terra-79143")?.includes("sends Dagger/Eiko to Water, Freya/Amarant to Fire, Vivi/Steiner to Wind, and Zidane/Quina to Earth") ||
     !fourShrinesSourceNotes.get("rpgclassics-four-shrines")?.includes("Water first, Fire next, Wind third, and Earth last")
