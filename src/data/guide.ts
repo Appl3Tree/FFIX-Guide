@@ -3263,8 +3263,8 @@ export const sources = [
     title: "Final Fantasy IX shops",
     publisher: "Final Fantasy Wiki",
     url: "https://finalfantasy.fandom.com/wiki/Final_Fantasy_IX_shops",
-    accessed: "2026-10-25",
-    notes: "Its Bran Bal shop table lists both Dagger and Magic Tag among 32 products, while GameFAQs Shops lists Magic Tag but omits Dagger and RPGClassics/EliteGrindLab list Dagger but omit Magic Tag. It gives Zorlin Shape as 6,000 Gil; GameFAQs Shops lists 2,300, which conflicts with GameFAQs' item price and other shop/item references. Its Mythril Dagger price is 930 Gil, differing from the 950-Gil price corroborated by the remaining shop tables. Its Ipsen Mogshop table lists 21 equipment entries and omits Coronet, while a separate Disc IV Daguerreo list includes Coronet; the omission does not establish whether Kumool sells it or when.",
+    accessed: "2026-10-26",
+    notes: "Its Bran Bal shop table lists both Dagger and Magic Tag among 32 products, while GameFAQs Shops lists Magic Tag but omits Dagger and RPGClassics/EliteGrindLab list Dagger but omit Magic Tag. It gives Zorlin Shape as 6,000 Gil; GameFAQs Shops lists 2,300, which conflicts with GameFAQs' item price and other shop/item references. Its Mythril Dagger price is 930 Gil, differing from the 950-Gil price corroborated by the remaining shop tables. Its Ipsen Mogshop table lists 21 equipment entries and omits Coronet, while a separate Disc IV Daguerreo list includes Coronet; the omission does not establish whether Kumool sells it or when. For Glass Armlet, Final Fantasy Wiki lists earlier Lindblum and Disc II Treno stock, then omits it from its Disc III/IV Lindblum and Treno shop tables. These published-table omissions corroborate the discrepancy with Jegged's later-city claims but do not prove the sales are unavailable in game.",
   },
   {
     id: "ff9-irodori-shops",

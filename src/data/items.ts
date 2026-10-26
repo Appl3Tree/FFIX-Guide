@@ -421,6 +421,7 @@ const glassArmletReferenceSources = [
   "gamefaqs-journey-to-treno-71891",
   "jegged-arm-gear",
   "rpgclassics-shops",
+  "ffwiki-shops",
 ];
 const atlaDisc2ShopSources = ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"];
 const leatherWristReferenceSources = [
@@ -772,8 +773,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "treno.weapon-shop.disc-3-4",
     shopName: "Treno Weapon Shop (possible Disc III sale)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "Jegged lists Treno as a Glass Armlet seller on Disc III, but GameFAQs and RPGClassics' Disc III Treno weapon tables omit it. Both tables list the Disc II sale; the older GameFAQs equipment list does too. That omission is corroborating evidence, not proof the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops"],
+    conditions: "Jegged lists Treno as a Glass Armlet seller on Disc III, but GameFAQs, RPGClassics, and Final Fantasy Wiki omit it from their later Treno tables after listing Disc II stock. The older GameFAQs equipment list also lists Treno only on Disc II. These table omissions corroborate the discrepancy but do not prove the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops"],
   },
   {
     id: "item-path.disc-2.return-to-lindblum.glass-armlet-shop",
@@ -799,8 +800,8 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "lindblum.weapon-shop.disc-3-4",
     shopName: "Dragoos' Weapon/Item Shop (possible Disc III sale)",
     cost: { currency: "gil", amount: 250 },
-    conditions: "Jegged lists Lindblum as a Glass Armlet seller on Disc III, but GameFAQs and RPGClassics' Disc III Lindblum weapon tables omit it. Both tables list earlier Lindblum stock; the older GameFAQs equipment list does too. That omission is corroborating evidence, not proof the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops"],
+    conditions: "Jegged lists Lindblum as a Glass Armlet seller on Disc III, but GameFAQs, RPGClassics, and Final Fantasy Wiki omit it from their later Lindblum tables after listing earlier stock. The older GameFAQs equipment list also lists Lindblum only on Discs I–II. These table omissions corroborate the discrepancy but do not prove the sale is absent. Keep this as an unverified candidate route; Alexandria is a separately documented Disc III–IV seller.",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-equipment-33383", "jegged-arm-gear", "rpgclassics-shops", "ffwiki-shops"],
   },
   {
     id: "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop",

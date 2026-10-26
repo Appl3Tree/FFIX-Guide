@@ -3573,6 +3573,7 @@ const glassArmletDisc2TrenoPath = itemAcquisitionPaths.find((path) => path.id ==
 const glassArmletDisc2LindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.glass-armlet-shop");
 const glassArmletDisc3TrenoCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-treno-candidate");
 const glassArmletDisc3LindblumCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.glass-armlet-lindblum-candidate");
+const glassArmletTrenoSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.treno")?.sections.find((section) => section.id === "treno-city-pickups-and-mognet");
 if (
   !glassArmletBmvPath ||
   glassArmletBmvPath.itemId !== "game-item.glass-armlet" ||
@@ -3630,12 +3631,20 @@ for (const [path, chapterId, city] of [
     !path.sourceIds.includes("gamefaqs-equipment-33383") ||
     !path.sourceIds.includes("jegged-arm-gear") ||
     !path.sourceIds.includes("rpgclassics-shops") ||
+    !path.sourceIds.includes("ffwiki-shops") ||
     !/unverified candidate/i.test(path.conditions ?? "") ||
-    !/omission is corroborating evidence, not proof/i.test(path.conditions ?? "") ||
+    !/table omissions corroborate the discrepancy but do not prove/i.test(path.conditions ?? "") ||
     !/Alexandria/i.test(path.conditions ?? "")
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
   }
+}
+if (
+  !glassArmletTrenoSection?.sourceIds.includes("ffwiki-shops") ||
+  !glassArmletTrenoSection?.steps.find((step) => step.id === "treno-mogrich-letter")?.detail?.includes("Final Fantasy Wiki omits them from its later city tables") ||
+  !sources.find((source) => source.id === "ffwiki-shops")?.notes.includes("For Glass Armlet, Final Fantasy Wiki lists earlier Lindblum and Disc II Treno stock")
+) {
+  errors.push("The Glass Armlet route and source register must preserve Final Fantasy Wiki's later-table omission as corroboration, not proof of unavailable stock.");
 }
 const leatherWristPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.leather-wrist-shop");
 const leatherWristTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.leather-wrist-shop");
