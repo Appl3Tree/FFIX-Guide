@@ -6174,7 +6174,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-mognet-central",
         title: "Repair Mognet Central — complete the late letter chain",
         summary: "Disc IV allows a fresh letter route even if some earlier optional Mognet deliveries were skipped. The final Superslick exchange repairs the machine and awards a Protect Ring.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamefaqs-kupo-nuts-71891", "ff9-kouryaku-disc4", "megane-kangaroo-disc4-burmecia-recovery", "cour89-mognet-letters", "gamefaqs-ipsens-castle-71891", "elitegrindlab-ipsens-castle"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamefaqs-kupo-nuts-71891", "ff9-kouryaku-disc4", "megane-kangaroo-disc4-burmecia-recovery", "cour89-mognet-letters", "gamefaqs-ipsens-castle-71891", "elitegrindlab-ipsens-castle", "icksmehl-shops-disc-4", "ffwiki-magic-tag"],
         steps: [
           {
             id: "gaia-return-burmecia-old-pickups",
@@ -6200,7 +6200,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "gaia-return-mognet-letter-24",
             kind: "optional",
             text: "At Ipsen's Castle, find Kumool in the small room, deliver letter #24, and collect letter #25 for Mois.",
-            detail: "This confirms a Disc IV return to Kumool, but the inspected shop references do not verify whether the 12 consumable products remain stocked then. Check the displayed inventory before relying on a late purchase.",
+            detail: "The Disc IV Ipsen inventory table from icksmehl.de lists 11 consumables: Potion, Hi-Potion, Phoenix Down, Echo Screen, Soft, Antidote, Eye Drops, Talisman, Vaccine, Baldrian, and Tent. Talisman maps to Magic Tag via the Final Fantasy Wiki's item-name gloss, but icksmehl gives 150 Gil while the English GameFAQs/RPGClassics tables give 100. Remedy (Allheilmittel) is omitted from the Disc IV table, so check the displayed stock before relying on a late Remedy purchase. The table does not identify its platform/build; newer-release behavior remains unverified.",
             objectiveIds: ["disc-4.return-to-gaia.mognet-letter-24"],
           },
           {

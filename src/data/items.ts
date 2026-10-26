@@ -74,6 +74,10 @@ export type EquipmentAbilityClaim = {
 };
 
 const ipsensMogshopReentrySources = ["gamefaqs-ipsens-castle-71891", "elitegrindlab-ipsens-castle"];
+const ipsensMogshopDisc4SupplySlugs = new Set([
+  "potion", "hi-potion", "phoenix-down", "echo-screen", "soft", "antidote",
+  "eye-drops", "magic-tag", "vaccine", "annoyntment", "tent",
+]);
 
 // This is a sourced initial slice, not a complete item inventory. Keep each
 // acquisition independent so later duplicates, recovery routes, and shop
@@ -2626,7 +2630,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.thief-hat", name: "Thief Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.holy-miter", name: "Holy Miter", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"], verification: "partial" },
   { id: "game-item.dark-gear", name: "Dark Gear", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
-  { id: "game-item.magic-tag", name: "Magic Tag", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, ...disc4ShopSources, "gamefaqs-items-71891", "rpgclassics-shops"], verification: "partial" },
+  { id: "game-item.magic-tag", name: "Magic Tag", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, ...disc4ShopSources, "gamefaqs-items-71891", "rpgclassics-shops", "ffwiki-magic-tag"], verification: "partial" },
   { id: "game-item.vaccine", name: "Vaccine", category: "consumable", sourceIds: [...new Set([...ipsensMogshopReentrySources, ...disc4ShopSources, ...mountGulugSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.genji-armor", name: "Genji Armor", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
   { id: "game-item.masamune", name: "Masamune", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
@@ -3354,14 +3358,33 @@ const ipsensMogshopSupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProdu
   chapterId: "disc-3.ipsens-castle",
   method: "mogshop",
   quantity: 1,
-  availability: "window-unverified",
+  availability: "repeatable",
   shopId: "ipsens-castle.kumool-mogshop",
   shopName: "Kumool's Mogshop (Ipsen's Castle)",
   cost: { currency: "gil", amount: price },
   conditions: slug === "remedy"
-    ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop. RPGClassics corroborates the other listed Ipsen supplies but omits Remedy. EliteGrindLab documents the Disc IV Mognet return through Kumool, but the inspected sources do not verify that Remedy or the other supplies remain stocked on that visit; treat the later purchase window as unverified."
-    : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. EliteGrindLab documents the Disc IV Mognet return through Kumool, but the inspected sources do not verify that this supply remains stocked on that visit; treat the later purchase window as unverified.`,
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", ...ipsensMogshopReentrySources],
+    ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop. RPGClassics corroborates the other listed Ipsen supplies but omits Remedy. This is the Disc III listing; the Disc IV table also omits Remedy, so late stock remains unverified."
+    : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. This is the Disc III listing; icksmehl.de separately documents this product in its Disc IV Ipsen inventory. Cross-release behavior remains unverified.`,
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"],
+}));
+
+const ipsensMogshopDisc4SupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProducts.map(([slug, itemName, price]) => ({
+  id: `item-path.disc-4.return-to-gaia.kumool-mogshop.${slug}`,
+  itemId: `game-item.${slug}`,
+  chapterId: "disc-4.return-to-gaia",
+  method: "mogshop",
+  quantity: 1,
+  availability: ipsensMogshopDisc4SupplySlugs.has(slug) ? "repeatable" : "window-unverified",
+  shopId: "ipsens-castle.kumool-mogshop",
+  shopName: "Kumool's Mogshop (Ipsen's Castle, Disc IV return)",
+  cost: { currency: "gil", amount: price },
+  conditions: slug === "remedy"
+    ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop, but the Disc IV inventory table from icksmehl.de omits Allheilmittel (Remedy), and RPGClassics also omits the Ipsen Remedy listing. GameFAQs and EliteGrindLab route the Disc IV Mognet chain back to Kumool; the late Remedy stock remains unverified, so check the displayed inventory."
+    : slug === "magic-tag"
+      ? "The Disc IV Ipsen inventory table from icksmehl.de lists Talisman for 150 Gil. The Final Fantasy Wiki item page glosses Magic Tag's Japanese name as Talisman, supporting this item match. GameFAQs Shops and RPGClassics list Magic Tag for 100 Gil, so the catalog keeps 100 Gil and records the icksmehl price discrepancy. GameFAQs and EliteGrindLab document the Disc IV Mognet return to Kumool; cross-release behavior remains unverified."
+      : `The Disc IV Ipsen inventory table from icksmehl.de lists ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. GameFAQs and EliteGrindLab document the Disc IV Mognet return to Kumool; cross-release behavior remains unverified.`,
+  walkthroughObjectiveIds: ["disc-4.return-to-gaia.mognet-letter-24"],
+  sourceIds: ["icksmehl-shops-disc-4", "gamefaqs-return-to-gaia-71891", ...ipsensMogshopReentrySources, "gamefaqs-shops-71891", "rpgclassics-shops", ...(slug === "magic-tag" ? ["ffwiki-magic-tag"] : [])],
 }));
 
 const iifaTreeBrigandineStealPath: ItemAcquisitionPath = {
@@ -4075,6 +4098,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   },
   ...ipsensMogshopEquipmentPaths,
   ...ipsensMogshopSupplyPaths,
+  ...ipsensMogshopDisc4SupplyPaths,
   ...zornThornShopRecoveryPaths,
   ...zornThornStealPaths,
   {

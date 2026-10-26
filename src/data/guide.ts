@@ -3259,6 +3259,22 @@ export const sources = [
     notes: "Independent PlayStation shop tables for city shops and Mogshops, including the 1,200-Gil Chimera Armlet price at Lindblum, Oeilvert, Desert Palace, and Daguerreo. Its Disc III Daguerreo weapon list includes Diamond Armor for 8,800 Gil, and its Disc IV weapon list omits it; this independently supports the documented stock change. It lists Oak Staff for 2,400 Gil at Conde Petie, Black Mage Village, Alexandria, Treno, and Ipsen's Castle, and Adaman Vest for 1,600 Gil at Conde Petie, Black Mage Village, and Madain Sari. It also lists Phoenix Down for 150 Gil in its general item-shop tables; exact shop opening/restock transitions remain unverified. Its Tiger Fangs price conflicts with GameFAQs' shop table, so that discrepancy remains recorded separately. RPGClassics lists Stardust Rod at 760 Gil in its Lindblum, Dragon's Gate, Fossil Roo, Conde Petie, Black Mage Village, Alexandria, and Treno shop tables, unlike GameFAQs Shops' 750-Gil entries and Caves of Narshe's 750-Gil item price. Kumool's Ipsen's Castle Mogshop also lists Mythril Rod for 560 Gil, confirming a later source after the Esto Gaza listing. At Ipsen, its inventory corroborates the other eleven listed supplies but omits Remedy. Its Moorock table lists Dagger but omits Magic Tag and gives Zorlin Shape for 6,000 Gil; these differences are retained against GameFAQs Shops. For Glass Armlet, RPGClassics lists Disc II Treno and post-attack Lindblum stock, then omits it from its Disc III Treno and Lindblum weapon tables. This independently corroborates the discrepancy with Jegged's later city claims but does not establish that those sales are unavailable. Its Disc III Treno armory table also lists Gold Helm for 1,800 Gil, independently confirming GameFAQs' Disc III recovery listing for the missed Cleyra steal.",
   },
   {
+    id: "icksmehl-shops-disc-4",
+    title: "Shops (CD 4)",
+    publisher: "icksmehl.de / The Wargod",
+    url: "https://www.icksmehl.de/spiele/final-fantasy-9/shops/cd-4/",
+    accessed: "2026-10-26",
+    notes: "The Disc IV Ipsen Mogshop table lists eleven consumables that match GameFAQs/RPGClassics inventory entries, including Baldrian (Annoyntment), but omits Allheilmittel (Remedy). It lists Talisman for 150 Gil; the English Magic Tag tables list 100 Gil, and the language-specific item match is supported separately by the Final Fantasy Wiki Magic Tag entry. This page does not identify a platform/build, so it supports the published Disc IV inventory table but not behavior across releases.",
+  },
+  {
+    id: "ffwiki-magic-tag",
+    title: "Magic Tag",
+    publisher: "Final Fantasy Wiki",
+    url: "https://finalfantasy.fandom.com/wiki/Magic_Tag",
+    accessed: "2026-10-26",
+    notes: "Identifies Magic Tag's Japanese name as Ofuda and glosses it as 'Talisman'; used only to map icksmehl.de's German Talisman inventory row to Magic Tag. It does not establish Ipsen stock or price.",
+  },
+  {
     id: "ffwiki-shops",
     title: "Final Fantasy IX shops",
     publisher: "Final Fantasy Wiki",

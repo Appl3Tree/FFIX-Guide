@@ -5581,37 +5581,58 @@ const ipsensSupplyStock = [
   ["soft", 100], ["antidote", 50], ["eye-drops", 50], ["magic-tag", 100],
   ["remedy", 300], ["vaccine", 100], ["annoyntment", 150], ["tent", 800],
 ] as const;
+const ipsensDisc4RepeatableSupplySlugs = new Set([
+  "potion", "hi-potion", "phoenix-down", "echo-screen", "soft", "antidote",
+  "eye-drops", "magic-tag", "vaccine", "annoyntment", "tent",
+]);
 const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice]) => {
   const itemId = `game-item.${slug}`;
   const item = gameItems.find((candidate) => candidate.id === itemId);
   const paths = itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.shopId === "ipsens-castle.kumool-mogshop");
-  const path = paths[0];
+  const disc3Path = paths.find((path) => path.chapterId === "disc-3.ipsens-castle");
+  const disc4Path = paths.find((path) => path.chapterId === "disc-4.return-to-gaia");
   if (
     !item
-    || paths.length !== 1
-    || path?.id !== `item-path.disc-3.ipsens-castle.kumool-mogshop.${slug}`
-    || path?.chapterId !== "disc-3.ipsens-castle"
-    || path?.method !== "mogshop"
-    || path?.availability !== "window-unverified"
-    || path?.cost?.amount !== expectedPrice
-    || !path?.sourceIds.includes("gamefaqs-items-71891")
-    || !path?.sourceIds.includes("gamefaqs-shops-71891")
-    || !path?.sourceIds.includes("rpgclassics-shops")
-    || !path?.sourceIds.includes("gamefaqs-ipsens-castle-71891")
-    || !path?.sourceIds.includes("elitegrindlab-ipsens-castle")
+    || paths.length !== 2
+    || disc3Path?.id !== `item-path.disc-3.ipsens-castle.kumool-mogshop.${slug}`
+    || disc3Path.method !== "mogshop"
+    || disc3Path.availability !== "repeatable"
+    || disc3Path.cost?.amount !== expectedPrice
+    || !disc3Path.sourceIds.includes("gamefaqs-items-71891")
+    || !disc3Path.sourceIds.includes("gamefaqs-shops-71891")
+    || !disc3Path.sourceIds.includes("rpgclassics-shops")
+    || disc4Path?.id !== `item-path.disc-4.return-to-gaia.kumool-mogshop.${slug}`
+    || disc4Path.method !== "mogshop"
+    || disc4Path.availability !== (ipsensDisc4RepeatableSupplySlugs.has(slug) ? "repeatable" : "window-unverified")
+    || disc4Path.cost?.amount !== expectedPrice
+    || !disc4Path.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.mognet-letter-24")
+    || !disc4Path.sourceIds.includes("icksmehl-shops-disc-4")
+    || !disc4Path.sourceIds.includes("gamefaqs-return-to-gaia-71891")
+    || !disc4Path.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+    || !disc4Path.sourceIds.includes("elitegrindlab-ipsens-castle")
+    || !disc4Path.sourceIds.includes("gamefaqs-shops-71891")
+    || !disc4Path.sourceIds.includes("rpgclassics-shops")
     || !item.sourceIds.includes("gamefaqs-items-71891")
     || !item.sourceIds.includes("rpgclassics-shops")
     || !item.sourceIds.includes("gamefaqs-ipsens-castle-71891")
     || !item.sourceIds.includes("elitegrindlab-ipsens-castle")
-    || !path.conditions?.includes("Disc IV Mognet return through Kumool")
-    || !path.conditions?.includes("do not verify")
-    || !path.conditions?.includes("later purchase window as unverified")
+    || (slug === "magic-tag" && (!item.sourceIds.includes("ffwiki-magic-tag") || !disc4Path.sourceIds.includes("ffwiki-magic-tag")))
   ) return true;
-  if (slug === "remedy") return !path.conditions.includes("RPGClassics") || !path.conditions.includes("omits Remedy");
-  return !path.conditions.includes("GameFAQs Shops") || !path.conditions.includes("RPGClassics");
+  if (slug === "remedy") return !disc3Path.conditions.includes("Disc III listing") || !disc4Path.conditions.includes("omits Allheilmittel (Remedy)") || !disc4Path.conditions.includes("remains unverified");
+  if (slug === "magic-tag") return !disc4Path.conditions.includes("Talisman for 150 Gil") || !disc4Path.conditions.includes("Magic Tag for 100 Gil");
+  return !disc4Path.conditions.includes("Disc IV Ipsen inventory table") || !disc4Path.conditions.includes(item.name);
 });
-if (ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34 || ipsensSupplyRouteMismatch) {
-  errors.push("Ipsen's Castle Mogshop must retain all 12 source-linked consumable prices, cite the Disc IV Mognet re-entry without asserting that stock persists, and preserve GameFAQs' 300-Gil Remedy listing that RPGClassics omits.");
+const icksmehlIpsenSource = sources.find((source) => source.id === "icksmehl-shops-disc-4");
+const ffwikiMagicTagSource = sources.find((source) => source.id === "ffwiki-magic-tag");
+if (
+  ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34
+  || ipsensSupplyRouteMismatch
+  || !icksmehlIpsenSource?.notes.includes("omits Allheilmittel (Remedy)")
+  || !icksmehlIpsenSource.notes.includes("Talisman for 150 Gil")
+  || !ffwikiMagicTagSource?.notes.includes("Japanese name as Ofuda")
+  || !ffwikiMagicTagSource.notes.includes("Talisman")
+) {
+  errors.push("Ipsen's Castle Mogshop must retain 12 Disc III supply listings and 12 separate Disc IV paths, classify the 11 icksmehl-listed products as repeatable, preserve the unverified Remedy omission and Magic Tag/Talisman price conflict, and link the late routes to Kumool's Mognet return.");
 }
 const earlierMognetLetterWarnings = [
   "missable.disc-1.village-of-dali.kumop-letter",
@@ -5833,7 +5854,9 @@ if (
   || actualMognetQuestEdges.join("|") !== expectedMognetQuestEdges.join("|")
   || mognetLetterSteps.some((step, index) => !step?.objectiveIds?.includes(mognetLetterObjectiveIds[index]))
   || !mognetLetterSteps[0]?.text.includes("#22")
-  || !mognetLetterSteps[2]?.detail?.includes("12 consumable products remain stocked")
+  || !mognetLetterSteps[2]?.detail?.includes("lists 11 consumables")
+  || !mognetLetterSteps[2]?.detail?.includes("Remedy (Allheilmittel) is omitted")
+  || !mognetLetterSteps[2]?.detail?.includes("150 Gil")
   || !mognetLetterSteps[5]?.text.includes("#27")
   || !mognetLetterSteps[3]?.detail?.includes("Quina")
   || !mognetLetterSteps[5]?.detail?.includes("all 27 numbered letters")
