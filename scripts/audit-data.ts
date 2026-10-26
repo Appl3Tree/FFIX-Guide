@@ -2763,8 +2763,8 @@ if (!cleyraPhoenixDownRecovery || cleyraPhoenixDownRecovery.itemId !== "game-ite
   errors.push("Cleyra Phoenix Down recovery needs the priced 150-Gil Lindblum Disc II item-shop path.");
 }
 const cleyraGoldHelmRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.cleyra-recovery.gold-helm-treno-shop");
-if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.cost?.amount !== 1800) {
-  errors.push("Cleyra Gold Helm recovery needs the Disc III Treno shop path priced at 1,800 Gil.");
+if (!cleyraGoldHelmRecovery || cleyraGoldHelmRecovery.itemId !== "game-item.gold-helm" || cleyraGoldHelmRecovery.chapterId !== "disc-3.card-tournament" || cleyraGoldHelmRecovery.availability !== "repeatable" || cleyraGoldHelmRecovery.cost?.amount !== 1800 || !cleyraGoldHelmRecovery.sourceIds.includes("gamefaqs-shops-71891") || !cleyraGoldHelmRecovery.sourceIds.includes("rpgclassics-shops") || !cleyraGoldHelmRecovery.conditions.includes("newer releases")) {
+  errors.push("Cleyra Gold Helm recovery needs a source-backed, repeatable Disc III Treno path priced at 1,800 Gil with its release caveat preserved.");
 }
 const cleyraTreasureWarning = missablesById.get("missable.disc-2.cleyra.treasures");
 const cleyraPickupExpectations = [

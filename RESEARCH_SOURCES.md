@@ -651,3 +651,8 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 
 - The newer [GameFAQs Shops table](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) and [Final Fantasy Online Ipsen guide](https://ffonline.com/ff9/world/Ipsens-Castle) both list Coronet for 4,400 Gil at Ipsen's Castle, but neither gives a Disc III/IV range.
 - The [GameFAQs Equipment List](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/33383), [RPGClassics shop reference](https://shrines.rpgclassics.com/psx/ffix/shops.shtml), and [Final Fantasy Wiki shop table](https://finalfantasy.fandom.com/wiki/Final_Fantasy_IX_shops) omit Coronet from Kumool's stock. The Wiki separately lists Coronet at Daguerreo in its Disc IV table. These omissions do not prove absence, and the additional Ipsen listing does not establish Disc III/IV persistence; the path remains source-conflicted and window-unverified pending in-game verification.
+
+## Gold Helm Treno recovery after Cleyra (2026-10-26)
+
+- [GameFAQs Shops](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/shops) lists Gold Helm for 1,800 Gil in Treno's Disc III–IV weapon shop. [RPGClassics Shops](https://shrines.rpgclassics.com/psx/ffix/shops.shtml) independently lists Gold Helm for 1,800 Gil in the Disc III Treno armory. Both support repeatable original PlayStation item-type recovery after missing Antlion's one-time Gold Helm steal in Cleyra.
+- The recovery path is distinct from that encounter copy and does not restore it. Newer-release shop behavior and direct game confirmation remain open.
