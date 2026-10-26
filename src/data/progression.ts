@@ -1327,9 +1327,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.journey-to-outer-continent-to-outer-continent",
     title: "Final Gargant and Fossil Roo exit",
     certainty: "source-supported",
-    trigger: "Before flipping switch No. 3 and taking the final Gargant out, finish the treasure sweep, Kuppo letter, One Ring dig, Peek-A-Boo rescue, and Stiltzkin's third purchase.",
+    trigger: "Before operating the final vine-chamber switch and taking the exit Gargant, finish the treasure sweep, Kuppo letter, One Ring dig, Peek-A-Boo rescue, and Stiltzkin's third purchase. GameFAQs, Jegged, and RPGClassics label the closing switch No. 3; Gamer Guides leaves it unnumbered, and EliteGrindLab reports an unresolved numbering conflict without attributing its No. 4 claim.",
     missableIds: ["missable.disc-2.journey-to-outer-continent.treasure-sweep", "missable.disc-2.journey-to-outer-continent.kuppo-letter", "missable.disc-2.journey-to-outer-continent.one-ring", "missable.disc-2.journey-to-outer-continent.peek-a-boo", "missable.disc-2.fossil-roo.stiltzkin-3"],
-    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-stiltzkin-shopping-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "playstationtrophies-fossil-roo", "steam-achievements", "xboxachievements-final-fantasy-ix"],
+    sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-stiltzkin-shopping-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "playstationtrophies-fossil-roo", "steam-achievements", "xboxachievements-final-fantasy-ix"],
   },
   {
     id: "cutoff.oeilvert.stiltzkin-sixth-stop",

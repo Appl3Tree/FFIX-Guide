@@ -1237,6 +1237,32 @@ if (
 ) {
   errors.push("Fossil Roo's warning must preserve the re-entry conflict, safe shop cutoff, and distinction between location copies and recoverable item types.");
 }
+const fossilRooSwitchSourceNotes = new Map(sources.map((source) => [source.id, source.notes]));
+const fossilRooFinalGargantCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.fossil-roo.final-gargant");
+const fossilRooWalkthroughSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-outer-continent")
+  ?.sections.find((section) => section.id === "fossil-roo-point-of-no-return");
+const fossilRooFinalSweepStep = fossilRooWalkthroughSection?.steps.find((step) => step.id === "fossil-roo-final-sweep");
+const fossilRooExitStep = fossilRooWalkthroughSection?.steps.find((step) => step.id === "fossil-roo-exit-gargant");
+if (
+  !fossilRooSwitchSourceNotes.get("gamefaqs-journey-to-outer-continent-71891")?.includes("terminal ivy-room switch No. 3") ||
+  !fossilRooSwitchSourceNotes.get("jegged-fossil-roo")?.includes("switch No. 3") ||
+  !fossilRooSwitchSourceNotes.get("rpgclassics-fossil-roo")?.includes("switch No. 3") ||
+  !fossilRooSwitchSourceNotes.get("gamerguides-fossil-roo")?.includes("without assigning a number") ||
+  !fossilRooSwitchSourceNotes.get("gamerguides-fossil-roo")?.includes("earlier Nest switch No. 4 is a different control") ||
+  !fossilRooSwitchSourceNotes.get("elitegrindlab-fossil-roo")?.includes("No. 3, No. 4, or unnumbered") ||
+  !fossilRooSwitchSourceNotes.get("elitegrindlab-fossil-roo")?.includes("does not attribute the No. 4 claim") ||
+  !fossilRooTreasureWarning?.deadline.includes("final vine-chamber switch") ||
+  !fossilRooTreasureWarning?.deadline.includes("EliteGrindLab reports an unresolved numbering conflict") ||
+  !fossilRooFinalGargantCutoff?.trigger.includes("final vine-chamber switch") ||
+  !fossilRooFinalGargantCutoff?.trigger.includes("without attributing its No. 4 claim") ||
+  !fossilRooFinalGargantCutoff?.sourceIds.includes("elitegrindlab-fossil-roo") ||
+  !fossilRooFinalSweepStep?.detail?.includes("Jegged says the entrance can technically be revisited") ||
+  !fossilRooFinalSweepStep?.detail?.includes("No. 3/No. 4/unnumbered conflict") ||
+  !fossilRooExitStep?.text.includes("switch No. 3")
+) {
+  errors.push("Fossil Roo's final Gargant cutoff must keep its safe pre-exit timing while distinguishing the three explicit No. 3 route labels, Gamer Guides' unnumbered prose, EliteGrindLab's unattributed No. 4 conflict, and Jegged's limited re-entry claim.");
+}
 for (const warningId of [
   "missable.disc-2.journey-to-outer-continent.kuppo-letter",
   "missable.disc-2.journey-to-outer-continent.one-ring",

@@ -608,7 +608,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-the-outer-continent",
     accessed: "2026-10-25",
-    notes: "Original PlayStation route for Quina's return, Frog Catching, Kupo Nut detours, Chocograph #5, Lani, Fossil Roo's chests and Mognet, mining rewards, and the one-way Gargant exit. The item sweep includes the post-Lani Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest; other item references document later replacement sources. Frog-pool advice differs from the guide's breeding-pair recommendation; the conflict is retained.",
+    notes: "Original PlayStation route for Quina's return, Frog Catching, Kupo Nut detours, Chocograph #5, Lani, Fossil Roo's chests and Mognet, mining rewards, and the one-way Gargant exit. It explicitly labels the terminal ivy-room switch No. 3 before the lower-right exit and says prior Fossil Roo areas cannot be revisited after the ride. The item sweep includes the post-Lani Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, and Survival Vest; other item references document later replacement sources. Frog-pool advice differs from the guide's breeding-pair recommendation; the conflict is retained.",
   },
   {
     id: "gamefaqs-outer-continent-71891",
@@ -808,7 +808,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/18-Fossil-Roo.html",
     accessed: "2026-10-25",
-    notes: "Independent route for the Armodullahan chase, Lani fight, post-Lani Elixir, Stiltzkin and Mogki, Fairy Earrings and Ether chests, gargant-switch paths, Kuppo excavation, Survival Vest, and final exit. Boss HP/steal odds are not repeated where references differ.",
+    notes: "Independent route for the Armodullahan chase, Lani fight, post-Lani Elixir, Stiltzkin and Mogki, Fairy Earrings and Ether chests, gargant-switch paths, Kuppo excavation, Survival Vest, and final exit. It explicitly labels the upper-left vine-wall switch No. 3 before the lower-right final Gargant; it also says the entrance can be revisited without confirming access to the inner rooms or Treasure Hunter's shop. Boss HP/steal odds are not repeated where references differ.",
   },
   {
     id: "gamerguides-fossil-roo",
@@ -816,7 +816,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://earth.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-2/fossil-roo",
     accessed: "2026-10-25",
-    notes: "Independent check of the cave route, post-Lani Elixir, Fairy Earrings and Ether chests, Lamia's Tiara, Survival Vest, Mognet letters, mining achievements, and point of no return. Used to map optional achievement windows separately from location-item losses.",
+    notes: "Independent check of the cave route, post-Lani Elixir, Fairy Earrings and Ether chests, Lamia's Tiara, Survival Vest, Mognet letters, mining achievements, and point of no return. Its final-switch prose describes the vine-wall switch and lower-right Gargant exit without assigning a number; its earlier Nest switch No. 4 is a different control. Used to map optional achievement windows separately from location-item losses.",
   },
   {
     id: "rpgclassics-fossil-roo",
@@ -824,7 +824,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/fossilroo.shtml",
     accessed: "2026-10-25",
-    notes: "Independent PlayStation route cross-check for Stiltzkin, Fairy Earrings, the Ether chest, Lamia's Tiara, Survival Vest, switches, Kuppo's letter, mining, and the final Gargant. Some switch numbering differs across maps, so the walkthrough checks the in-game labels and destination rather than relying only on a text diagram.",
+    notes: "Independent PlayStation route cross-check for Stiltzkin, Fairy Earrings, the Ether chest, Lamia's Tiara, Survival Vest, switches, Kuppo's letter, mining, and the final Gargant. It explicitly labels the terminal ivy-room switch No. 3 before the final Gargant. Its entrance and inner-route access wording is included in the Fossil Roo re-entry comparison.",
   },
   {
     id: "rpgclassics-lost-continent",
@@ -840,7 +840,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/fossil-roo/",
     accessed: "2026-10-25",
-    notes: "Completionist cross-check for the one-way area, Stiltzkin, treasure checklist, and source disagreements. Its own pickup-location summary reports conflicts, so the guide follows the items independently corroborated by the walkthrough routes and leaves Survival Vest room wording open; the catalog now records later item replacement paths separately.",
+    notes: "Completionist cross-check for the one-way area, Stiltzkin, treasure checklist, and source disagreements. It reports a closing-switch numbering conflict as No. 3, No. 4, or unnumbered, but does not attribute the No. 4 claim to a specific source. Its pickup-location summary also reports conflicts, so the guide follows items independently corroborated by the walkthrough routes and leaves Survival Vest room wording open; the catalog records later item replacement paths separately.",
   },
   {
     id: "playstationtrophies-fossil-roo",
@@ -7888,11 +7888,11 @@ export const missables: MissableRecord[] = [
     classification: ["missable-opportunity"],
     warningChapterIds: ["disc-2.journey-to-outer-continent"],
     consequence: "GameFAQs, Final Fantasy Wiki, and completionist route coverage treat the inner Fossil Roo route as inaccessible after the final Gargant, so its Elixir, Fairy Earrings, Ether chest, Lamia's Tiara, Survival Vest, and Treasure Hunter's shop copies may be lost from this location. Jegged's missable index says the entrance can technically be revisited but does not establish access to the inner rooms or Treasure Hunter's shop. The catalog records later replacements by item type for the listed equipment and supplies; those do not restore the Fossil Roo location copies.",
-    deadline: "Before starting Fossil Roo's final switch sequence and taking the exit Gargant. Sources disagree about the numbered switch that closes the route.",
+    deadline: "Before operating the final vine-chamber switch and taking the exit Gargant. GameFAQs, Jegged, and RPGClassics label that switch No. 3; Gamer Guides leaves it unnumbered, while EliteGrindLab reports an unresolved numbering conflict without identifying its No. 4 source.",
     nextAvailability: "Treat the inner pickups and Treasure Hunter's shop as closed after the final ride: GameFAQs, Final Fantasy Wiki, and EliteGrindLab describe the area as one-way, while Jegged says the entrance can technically be revisited but does not specify which rooms or shops are reachable. The Bandana item type remains available at Black Mage Village, and the other tracked item types have later cataloged sources. Fossil Roo Survival Vest room labels vary but converge on the exit-side storage/woodpile route; the separate Madain Sari chest is confirmed on the Disc II return after the Iifa Tree. Each qualifying opened chest or searched hidden field icon is worth one rank point; Rank S requires 340 points (about 75% of all treasures), so the cutoff does not by itself prove the rank is lost. The local shop and Stiltzkin bundle are not chest/field-icon points.",
     action: "Before starting the final switch sequence, finish the location sweep: backtrack to the Armodullahan alcove for the Elixir; collect Fairy Earrings, the Ether chest, and Lamia's Tiara along the Gargant branches; then sweep the lower route around the Nest and mining screens for the Survival Vest by the woodpile near the exit. Check the Treasure Hunter's shop and buy Bandana here if you want its Fossil Roo purchase route. Buy Stiltzkin's 555-Gil bundle separately for its second Ether, Remedy, and Phoenix Pinion; finish the mining and Mognet goals before taking the exit Gargant.",
     recovery: "The Fossil Roo chests and local shop visit cannot be restored if the inner route is closed. Missing a purchase does not by itself prove item-type loss: Bandana is sold later at Black Mage Village, and the linked catalog records replacement purchases, synthesis, auctions, or encounter sources for the other items. If the goal is the original Fossil Roo location sweep, only a save from before the exit can restore that location-specific completion.",
-    note: "GameFAQs, Final Fantasy Wiki, and EliteGrindLab treat the inner route as one-way after the final Gargant. Jegged's separate missable index says Fossil Roo can technically be revisited through the entrance, but does not state whether its inner rooms or Treasure Hunter's shop remain accessible; the guide uses the pre-exit deadline as the safe route. GameFAQs lists Bandana and other tracked wares at the Treasure Hunter's shop, with later item-type sources recorded separately. The exact closing switch number varies across sources. Survival Vest room labels differ but route landmarks converge on the exit-side storage/woodpile; the separate Madain Sari Survival Vest is on the Disc II return after the Iifa Tree. Rank scoring is separate from item replacement: qualifying chests/field icons score one point, Stiltzkin purchases score zero, and 340 points (about 75%) reaches Rank S.",
+    note: "GameFAQs, Final Fantasy Wiki, and EliteGrindLab treat the inner route as one-way after the final Gargant. Jegged's separate missable index says Fossil Roo can technically be revisited through the entrance, but does not state whether its inner rooms or Treasure Hunter's shop remain accessible; the guide uses the pre-exit deadline as the safe route. GameFAQs lists Bandana and other tracked wares at the Treasure Hunter's shop, with later item-type sources recorded separately. For switch numbering, the three inspected step-by-step routes from GameFAQs, Jegged, and RPGClassics explicitly label the terminal vine-room switch No. 3; Gamer Guides describes the final switch without numbering it, and EliteGrindLab reports a broader No. 3/No. 4/unnumbered conflict without naming the source for No. 4. Survival Vest room labels differ but route landmarks converge on the exit-side storage/woodpile; the separate Madain Sari Survival Vest is on the Disc II return after the Iifa Tree. Rank scoring is separate from item replacement: qualifying chests/field icons score one point, Stiltzkin purchases score zero, and 340 points (about 75%) reaches Rank S.",
     sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-missables-71891", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-treno-auction-71891", "jegged-fossil-roo", "jegged-missables", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "rpgclassics-armor", "rpgclassics-addons", "rpgclassics-synthesis", "elitegrindlab-fossil-roo", "elitegrindlab-madain-sari", "ffwiki-unrevisitable-locations", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
     verification: "partial",
     severity: "high",

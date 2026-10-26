@@ -188,6 +188,8 @@ These are expected classes, not completion claims. The data audit will grow to v
 
 ## Latest verified slices — 2026-10-25
 
+Fossil Roo's closing-switch evidence now distinguishes the direct labels from a secondary report: GameFAQs, Jegged, and RPGClassics say No. 3, Gamer Guides leaves the terminal switch unnumbered, and EliteGrindLab reports a No. 4 conflict without attributing its source. The guide preserves the documented No. 3 route and sets the safe checklist deadline before the terminal switch sequence; the exact inner-route re-entry behavior is still unresolved. Lint, typecheck, audit, build, and whitespace checks pass with 0 errors and 184 coverage warnings across 44 chapters, 140 missables, 654 objectives, and 374 sources.
+
 Lindblum's trolley/district lockout is now source-supported at Gizamaluke's Grotto entry by four walkthroughs. The Disc II route still proves Business/Theater visits and updated shops but not a full trolley or district restoration. Lint, typecheck, audit, build, and whitespace checks pass with 0 audit errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 351 sources.
 
 Cleyra's Out of Harm's Way route now separates the agreed Right → Left → Right directions from the disputed fourth observatory response. The guide follows the published Not Yet route but does not claim that response is required; direct game and release verification remains open. Lint, typecheck, audit, build, and whitespace checks pass with 0 audit errors and 180 coverage warnings across 44 chapters, 138 missables, 618 objectives, and 351 sources.
