@@ -3443,6 +3443,27 @@ if (!garganRooBossEncounter || garganRooBossEncounter.kind !== "boss" ||
   !ralvurahvaRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Devil's Kiss")) {
   errors.push("Gargan Roo must link Ralvurahva's boss profile to its existing steal warning/cutoff and preserve the HP and steal-rate source differences.");
 }
+const boneWristDaguerreoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.bone-wrist-daguerreo-shop");
+const boneWristAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.bone-wrist-alexandria-shop");
+if (
+  !boneWristDaguerreoPath ||
+  boneWristDaguerreoPath.itemId !== "game-item.bone-wrist" ||
+  boneWristDaguerreoPath.chapterId !== "disc-3.aerial-exploration" ||
+  boneWristDaguerreoPath.shopId !== "daguerreo.shop.disc-3" ||
+  boneWristDaguerreoPath.method !== "shop" ||
+  boneWristDaguerreoPath.availability !== "limited-window" ||
+  boneWristDaguerreoPath.cost?.currency !== "gil" ||
+  boneWristDaguerreoPath.cost.amount !== 330 ||
+  !boneWristDaguerreoPath.conditions.includes("Disc III") ||
+  !boneWristDaguerreoPath.conditions.includes("Disc IV") ||
+  !boneWristDaguerreoPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !boneWristDaguerreoPath.sourceIds.includes("jegged-arm-gear") ||
+  !boneWristAlexandriaPath ||
+  boneWristAlexandriaPath.itemId !== "game-item.bone-wrist" ||
+  boneWristAlexandriaPath.availability !== "repeatable"
+) {
+  errors.push("Bone Wrist's Disc III Daguerreo purchase must be marked closed by the Disc IV weapon-stock change while preserving Alexandria as a later item-type recovery source.");
+}
 const ralvuimagoEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.return-to-alexandria.ralvuimago");
 const ralvuimagoRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ralvuimago");
 const ralvuimagoHpClaims = ralvuimagoRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
