@@ -5992,7 +5992,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "gaia-return-world-map-sidequests",
         title: "World map and Chocobo checks",
         summary: "Use the reopened map to finish late Chocobo rewards and the last Frog Catching milestone. Keep the breeding population intact while progressing toward 99 frogs. Track the 21 Chocobo beaches individually after the quest activates.",
-        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-a-c", "rpgclassics-bestiary-c-g", "rpgclassics-kraken-bestiary", "rpgclassics-bestiary-t-z"],
+        sourceIds: ["gamefaqs-return-to-gaia-71891", "gamefaqs-frog-catching-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "gameclue-chocobo-beaches", "jegged-friendly-monsters", "gamefaqs-enemy-list-71891", "rpgclassics-bestiary-a-c", "rpgclassics-bestiary-c-g", "rpgclassics-kraken-bestiary", "rpgclassics-bestiary-t-z"],
         steps: [
           {
             id: "gaia-return-dive-spot-five",

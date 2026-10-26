@@ -935,10 +935,16 @@ if (
   errors.push("Chocobo Beach must have five sourced quest gates, the separate Paradise access gate, and 21 separately tracked beach registrations behind the Disc IV activation objective.");
 }
 const chocoboBeachUnlockEdges = questPrerequisiteDependencies.filter((dependency) => dependency.dependentObjectiveId === chocoboBeachUnlockObjectiveId);
+const chocoboBeachUnlockObjective = objectivesById.get(chocoboBeachUnlockObjectiveId);
+const chocoboBeachCompletionObjective = objectivesById.get(chocoboBeachCompletionObjectiveId);
 for (const dependency of chocoboBeachUnlockEdges) {
-  for (const sourceId of ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-chocographs"]) {
+  for (const sourceId of ["gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-beaches", "jegged-chocobo-dive-spots", "jegged-chocobo-mountain-cracks", "jegged-chocographs", "gameclue-chocobo-beaches"]) {
     if (!dependency.sourceIds.includes(sourceId)) errors.push(`Chocobo Beach unlock dependency ${dependency.prerequisiteObjectiveId} must cite ${sourceId}.`);
   }
+}
+if (!chocoboBeachUnlockObjective?.sourceIds.includes("gameclue-chocobo-beaches") ||
+  !chocoboBeachCompletionObjective?.sourceIds.includes("gameclue-chocobo-beaches")) {
+  errors.push("The Chocobo Beach activation and completion objectives must retain the independent GameClue cross-check.");
 }
 const paradiseBeachAccessEdges = objectiveDependencies.filter((dependency) =>
   dependency.kind === "objective-access" &&

@@ -2223,6 +2223,7 @@ const chocoboBeachPrerequisiteSources = [
   "jegged-chocobo-dive-spots",
   "jegged-chocobo-mountain-cracks",
   "jegged-chocographs",
+  "gameclue-chocobo-beaches",
 ];
 const chocoboBeachUnlockPrerequisiteDependencies: ObjectiveDependency[] = chocoboBeachUnlockPrerequisiteIds.map((prerequisiteObjectiveId) => ({
   kind: "quest-prerequisite",
