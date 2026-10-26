@@ -2572,7 +2572,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.brigandine", name: "Brigandine", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-brigandine", "rpgclassics-armor", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.magician-cloak", name: "Magician Cloak", category: "equipment", sourceIds: ["gamefaqs-iifa-tree-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-equipment-33383", "rpgclassics-shops", "ffwiki-magician-cloak"], verification: "partial" },
   { id: "game-item.mythril-claws", name: "Mythril Claws", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"], verification: "partial" },
-  { id: "game-item.poison-knuckles", name: "Poison Knuckles", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-abilities-71891", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "rpgclassics-weapons", "rpgclassics-shops", "ffwiki-shops", "elitegrindlab-madain-sari-eidolon-wall", "icksmehl-shops-disc-4"], verification: "partial" },
+  { id: "game-item.poison-knuckles", name: "Poison Knuckles", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-abilities-71891", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "rpgclassics-weapons", "rpgclassics-shops", "ffwiki-shops", "elitegrindlab-madain-sari-eidolon-wall", "icksmehl-shops-disc-3", "icksmehl-shops-disc-4"], verification: "partial" },
   { id: "game-item.trident", name: "Trident", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-abilities-71891", "rpgclassics-abilities"], verification: "partial" },
   { id: "game-item.green-beret", name: "Green Beret", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
   { id: "game-item.gold-armor", name: "Gold Armor", category: "equipment", sourceIds: finalStockSources, verification: "partial" },
@@ -2630,7 +2630,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.thief-hat", name: "Thief Hat", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
   { id: "game-item.holy-miter", name: "Holy Miter", category: "equipment", sourceIds: [...disc4ShopSources, "gamefaqs-items-71891", "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"], verification: "partial" },
   { id: "game-item.dark-gear", name: "Dark Gear", category: "equipment", sourceIds: disc4ShopSources, verification: "partial" },
-  { id: "game-item.magic-tag", name: "Magic Tag", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, ...disc4ShopSources, "gamefaqs-items-71891", "rpgclassics-shops", "ffwiki-magic-tag"], verification: "partial" },
+  { id: "game-item.magic-tag", name: "Magic Tag", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, ...disc4ShopSources, "gamefaqs-items-71891", "rpgclassics-shops", "icksmehl-shops-disc-3", "ffwiki-magic-tag"], verification: "partial" },
   { id: "game-item.vaccine", name: "Vaccine", category: "consumable", sourceIds: [...new Set([...ipsensMogshopReentrySources, ...disc4ShopSources, ...mountGulugSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.genji-armor", name: "Genji Armor", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891"], verification: "partial" },
   { id: "game-item.masamune", name: "Masamune", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"], verification: "partial" },
@@ -3364,8 +3364,10 @@ const ipsensMogshopSupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProdu
   cost: { currency: "gil", amount: price },
   conditions: slug === "remedy"
     ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop. RPGClassics corroborates the other listed Ipsen supplies but omits Remedy. This is the Disc III listing; the Disc IV table also omits Remedy, so late stock remains unverified."
+    : slug === "magic-tag"
+      ? "GameFAQs Shops and RPGClassics list Magic Tag for 100 Gil at Kumool's Mogshop. icksmehl.de's Disc III Ipsen table lists Talisman for 150 Gil; the Final Fantasy Wiki gloss supports this as the Magic Tag name, so the price remains a source discrepancy. The Disc IV Ipsen table separately lists the same Talisman row for 150 Gil. Cross-release behavior remains unverified."
     : `GameFAQs Shops and RPGClassics list ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. This is the Disc III listing; icksmehl.de separately documents this product in its Disc IV Ipsen inventory. Cross-release behavior remains unverified.`,
-  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"],
+  sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", ...(slug === "magic-tag" ? ["icksmehl-shops-disc-3", "ffwiki-magic-tag"] : [])],
 }));
 
 const ipsensMogshopDisc4SupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupplyProducts.map(([slug, itemName, price]) => ({
@@ -3381,10 +3383,10 @@ const ipsensMogshopDisc4SupplyPaths: ItemAcquisitionPath[] = ipsensMogshopSupply
   conditions: slug === "remedy"
     ? "GameFAQs Shops lists Remedy for 300 Gil at Kumool's Mogshop, but the Disc IV inventory table from icksmehl.de omits Allheilmittel (Remedy), and RPGClassics also omits the Ipsen Remedy listing. GameFAQs and EliteGrindLab route the Disc IV Mognet chain back to Kumool; the late Remedy stock remains unverified, so check the displayed inventory."
     : slug === "magic-tag"
-      ? "The Disc IV Ipsen inventory table from icksmehl.de lists Talisman for 150 Gil. The Final Fantasy Wiki item page glosses Magic Tag's Japanese name as Talisman, supporting this item match. GameFAQs Shops and RPGClassics list Magic Tag for 100 Gil, so the catalog keeps 100 Gil and records the icksmehl price discrepancy. GameFAQs and EliteGrindLab document the Disc IV Mognet return to Kumool; cross-release behavior remains unverified."
+      ? "The Disc III and Disc IV Ipsen inventory tables from icksmehl.de list Talisman for 150 Gil. The Final Fantasy Wiki item page glosses Magic Tag's Japanese name as Talisman, supporting this item match. GameFAQs Shops and RPGClassics list Magic Tag for 100 Gil, so the catalog keeps 100 Gil and records the icksmehl price discrepancy. GameFAQs and EliteGrindLab document the Disc IV Mognet return to Kumool; cross-release behavior remains unverified."
       : `The Disc IV Ipsen inventory table from icksmehl.de lists ${itemName} for ${price.toLocaleString("en-US")} Gil at Kumool's Mogshop. GameFAQs and EliteGrindLab document the Disc IV Mognet return to Kumool; cross-release behavior remains unverified.`,
   walkthroughObjectiveIds: ["disc-4.return-to-gaia.mognet-letter-24"],
-  sourceIds: ["icksmehl-shops-disc-4", "gamefaqs-return-to-gaia-71891", ...ipsensMogshopReentrySources, "gamefaqs-shops-71891", "rpgclassics-shops", ...(slug === "magic-tag" ? ["ffwiki-magic-tag"] : [])],
+  sourceIds: ["icksmehl-shops-disc-4", "gamefaqs-return-to-gaia-71891", ...ipsensMogshopReentrySources, "gamefaqs-shops-71891", "rpgclassics-shops", ...(slug === "magic-tag" ? ["icksmehl-shops-disc-3", "ffwiki-magic-tag"] : [])],
 }));
 
 const iifaTreeBrigandineStealPath: ItemAcquisitionPath = {
@@ -10409,8 +10411,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopId: "ipsens-castle.kumool-mogshop",
     shopName: "Kumool's Mogshop (Ipsen's Castle)",
     cost: { currency: "gil", amount: 7000 },
-    conditions: "GameFAQs' Equipment List places the Ipsen Mogshop sale on Disc III/IV, and icksmehl.de lists Poison Knuckles for 5,000 Gil in its Disc IV inventory. GameFAQs Shops lists 7,000 Gil, while the older GameFAQs Shop Lists, Equipment List, and RPGClassics Shops also say 5,000 Gil; retain the newer shop table's price as a source-specific discrepancy and check the displayed price. Release-specific behavior remains unverified.",
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", "icksmehl-shops-disc-4"],
+    conditions: "GameFAQs' Equipment List places the Ipsen Mogshop sale on Disc III/IV, and icksmehl.de lists Poison Knuckles for 5,000 Gil in both its Disc III and Disc IV Ipsen tables. GameFAQs Shops lists 7,000 Gil, while the older GameFAQs Shop Lists, Equipment List, and RPGClassics Shops also say 5,000 Gil; retain the newer shop table's price as a source-specific discrepancy and check the displayed price. Release-specific behavior remains unverified.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "gamefaqs-ipsens-castle-71891", "rpgclassics-shops", "icksmehl-shops-disc-3", "icksmehl-shops-disc-4"],
   },
   {
     id: "item-path.disc-2.iifa-tree.ruby-seal-reward",

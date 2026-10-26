@@ -3264,7 +3264,7 @@ export const sources = [
     publisher: "icksmehl.de / The Wargod",
     url: "https://www.icksmehl.de/spiele/final-fantasy-9/shops/cd-3/",
     accessed: "2026-10-26",
-    notes: "The Disc III Ipsen section lists Kumool's Mogshop inventory, including Needle Fork, but omits Coronet. Its Disc IV Ipsen table also omits Coronet. GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil without a disc range; the GameFAQs Equipment List, RPGClassics, and Final Fantasy Wiki also omit it from Kumool's listing. These published-table omissions do not establish in-game absence or resolve when the positive seller listing applies. The page does not identify a platform/build, so release behavior remains unverified.",
+    notes: "The Disc III Ipsen section lists Kumool's Mogshop inventory, including Needle Fork, but omits Coronet. It lists Poison Knuckles for 5,000 Gil and Talisman for 150 Gil; the Final Fantasy Wiki Magic Tag entry supports mapping the German Talisman row to Magic Tag. Its Disc IV Ipsen table also lists Poison Knuckles for 5,000 Gil and Talisman for 150 Gil, while both tables omit Coronet. The two 5,000-Gil Poison Knuckles rows conflict with 7,000 Gil in the newer GameFAQs Shops table; the two Talisman rows differ from the English Magic Tag tables' 100 Gil. GameFAQs Shops and Final Fantasy Online list Coronet for 4,400 Gil without a disc range; the GameFAQs Equipment List, RPGClassics, and Final Fantasy Wiki also omit it from Kumool's listing. These published-table omissions do not establish in-game absence or resolve when the positive seller listing applies. The page does not identify a platform/build, so release behavior remains unverified.",
   },
   {
     id: "icksmehl-shops-disc-4",

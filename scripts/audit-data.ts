@@ -5487,11 +5487,14 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
     return !path.conditions.includes("7,000 Gil") ||
       !path.conditions.includes("5,000 Gil") ||
       !path.conditions.includes("icksmehl.de lists Poison Knuckles for 5,000 Gil") ||
+      !path.conditions.includes("both its Disc III and Disc IV Ipsen tables") ||
       !path.sourceIds.includes("gamefaqs-shop-lists-9772") ||
       !path.sourceIds.includes("gamefaqs-equipment-33383") ||
+      !path.sourceIds.includes("icksmehl-shops-disc-3") ||
       !path.sourceIds.includes("icksmehl-shops-disc-4") ||
       !item.sourceIds.includes("gamefaqs-shop-lists-9772") ||
       !item.sourceIds.includes("gamefaqs-equipment-33383") ||
+      !item.sourceIds.includes("icksmehl-shops-disc-3") ||
       !item.sourceIds.includes("icksmehl-shops-disc-4");
   }
   if (slug === "needle-fork") {
@@ -5647,17 +5650,20 @@ const ipsensSupplyRouteMismatch = ipsensSupplyStock.some(([slug, expectedPrice])
     || !item.sourceIds.includes("rpgclassics-shops")
     || !item.sourceIds.includes("gamefaqs-ipsens-castle-71891")
     || !item.sourceIds.includes("elitegrindlab-ipsens-castle")
-    || (slug === "magic-tag" && (!item.sourceIds.includes("ffwiki-magic-tag") || !disc4Path.sourceIds.includes("ffwiki-magic-tag")))
+    || (slug === "magic-tag" && (!item.sourceIds.includes("ffwiki-magic-tag") || !disc3Path.sourceIds.includes("icksmehl-shops-disc-3") || !disc3Path.sourceIds.includes("ffwiki-magic-tag") || !disc4Path.sourceIds.includes("icksmehl-shops-disc-3") || !disc4Path.sourceIds.includes("ffwiki-magic-tag")))
   ) return true;
   if (slug === "remedy") return !disc3Path.conditions.includes("Disc III listing") || !disc4Path.conditions.includes("omits Allheilmittel (Remedy)") || !disc4Path.conditions.includes("remains unverified");
-  if (slug === "magic-tag") return !disc4Path.conditions.includes("Talisman for 150 Gil") || !disc4Path.conditions.includes("Magic Tag for 100 Gil");
+  if (slug === "magic-tag") return !disc3Path.conditions.includes("Disc III Ipsen table lists Talisman for 150 Gil") || !disc3Path.conditions.includes("Magic Tag for 100 Gil") || !disc4Path.conditions.includes("Disc III and Disc IV Ipsen inventory tables") || !disc4Path.conditions.includes("Talisman for 150 Gil") || !disc4Path.conditions.includes("Magic Tag for 100 Gil");
   return !disc4Path.conditions.includes("Disc IV Ipsen inventory table") || !disc4Path.conditions.includes(item.name);
 });
+const icksmehlIpsenDisc3Source = sources.find((source) => source.id === "icksmehl-shops-disc-3");
 const icksmehlIpsenSource = sources.find((source) => source.id === "icksmehl-shops-disc-4");
 const ffwikiMagicTagSource = sources.find((source) => source.id === "ffwiki-magic-tag");
 if (
   ipsensEquipmentStock.length + ipsensSupplyStock.length !== 34
   || ipsensSupplyRouteMismatch
+  || !icksmehlIpsenDisc3Source?.notes.includes("Poison Knuckles for 5,000 Gil")
+  || !icksmehlIpsenDisc3Source.notes.includes("Talisman for 150 Gil")
   || !icksmehlIpsenSource?.notes.includes("21 equipment products")
   || !icksmehlIpsenSource.notes.includes("omits Coronet")
   || !icksmehlIpsenSource?.notes.includes("omits Allheilmittel (Remedy)")
