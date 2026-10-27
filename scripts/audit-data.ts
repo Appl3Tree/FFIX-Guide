@@ -2881,6 +2881,33 @@ for (const path of itemAcquisitionPaths) {
   }
   acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
 }
+const aftermathCatalogPaths = [
+  ["item-path.disc-3.the-aftermath.elixir-guest-room", "game-item.elixir", "chest", "single-use", "disc-3.the-aftermath.pickups"],
+  ["item-path.disc-3.the-aftermath.egoists-armlet-guest-room", "game-item.egoists-armlet", "chest", "single-use", "disc-3.the-aftermath.pickups"],
+  ["item-path.disc-3.the-aftermath.remedy-dragons-gate", "game-item.remedy", "chest", "single-use", "disc-3.the-aftermath.pickups"],
+  ["item-path.disc-3.the-aftermath.elixir-card-freak-house", "game-item.elixir", "chest", "single-use", "disc-3.the-aftermath.pickups"],
+  ["item-path.disc-3.the-aftermath.remedy-card-freak-house", "game-item.remedy", "chest", "single-use", "disc-3.the-aftermath.pickups"],
+  ["item-path.disc-3.the-aftermath.lapis-lazuli-michaels-studio", "game-item.lapis-lazuli", "chest", "single-use", "disc-3.the-aftermath.pickups"],
+  ["item-path.disc-3.the-aftermath.beautiful-potion-alice", "game-item.beautiful-potion", "quest-reward", "single-use", "disc-3.the-aftermath.potions"],
+  ["item-path.disc-3.the-aftermath.strange-potion-michaels-studio", "game-item.strange-potion", "hidden-pickup", "single-use", "disc-3.the-aftermath.potions"],
+  ["item-path.disc-3.the-aftermath.unusual-potion-cinna", "game-item.unusual-potion", "quest-reward", "single-use", "disc-3.the-aftermath.potions"],
+  ["item-path.disc-3.the-aftermath.ore-studio-recovery-candidate", "game-item.ore", "hidden-pickup", "conditional", "disc-3.the-aftermath.pickups"],
+];
+for (const [pathId, itemId, method, availability, objectiveId] of aftermathCatalogPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  if (!path || path.itemId !== itemId || path.method !== method || path.availability !== availability || !path.walkthroughObjectiveIds?.includes(objectiveId)) {
+    errors.push(`The Aftermath item catalog is missing or misclassifies ${pathId}.`);
+  }
+}
+for (const itemId of ["game-item.beautiful-potion", "game-item.strange-potion", "game-item.unusual-potion"]) {
+  if (!gameItems.some((item) => item.id === itemId && item.category === "key-item")) {
+    errors.push(`The Aftermath quest inventory needs a key-item record for ${itemId}.`);
+  }
+}
+const aftermathOreRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-aftermath.ore-studio-recovery-candidate");
+if (!aftermathOreRecovery?.conditions?.includes("other reviewed Disc III walkthroughs omit") || aftermathOreRecovery.sourceIds.length !== 1 || aftermathOreRecovery.sourceIds[0] !== "gamefaqs-the-aftermath-71891") {
+  errors.push("Ore's Disc III studio recovery must remain a conditional, GameFAQs-only candidate rather than a confirmed extra copy.");
+}
 const atlaDisc2ShopPrices = new Map<string, number>([
   ["game-item.needle-fork", 3100],
   ["game-item.glass-armlet", 250],

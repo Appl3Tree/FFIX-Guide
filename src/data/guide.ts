@@ -488,7 +488,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-aftermath",
     accessed: "2026-10-24",
-    notes: "Original PlayStation Disc III route for the eight Lindblum ATE slots, castle and city pickups, three potions for Regent Cid, Gil threshold, Quina scene, and Blue Narciss departure. It directs the player to reduce Gil below 50 before the potion handoff, watch No Free Lunch, visit the Town Square before the harbor, then board the Blue Narciss for Give Me My Money. It does not document the later Disc IV return from Lindblum to the Invincible. The renewed Tantalus Gil chests stay closed until that ATE has triggered.",
+    notes: "Original PlayStation Disc III route for the eight Lindblum ATE slots, castle/city pickups, and three key-item potions for Regent Cid. It lists the guest-room Elixir and Egoist's Armlet, Dragon's Gate Remedy, Serpent's Gate Chimera Armlet, refreshed Card Freak Gon Elixir/Remedy chests, Sagittarius, Alice's Beautiful Potion, Lapis Lazuli, Michael's Strange Potion, Cinna's Unusual Potion, and Ore if the earlier studio copy was missed. Other reviewed Disc III routes omit that Ore recovery, so keep it conditional and GameFAQs-only pending direct-game verification. It directs the player to reduce Gil below 50 before the potion handoff, watch No Free Lunch, visit the Town Square before the harbor, then board the Blue Narciss for Give Me My Money. It does not document the later Disc IV return from Lindblum to the Invincible. The renewed Tantalus Gil chests stay closed until that ATE has triggered.",
   },
   {
     id: "jegged-the-aftermath",
@@ -496,7 +496,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/29-Lindblum.html",
     accessed: "2026-10-24",
-    notes: "Independent Disc III route for the guest-room ATE choice, castle chests, Mognet, Sagittarius, potion search, Gil preparation, optional Lindblum ATEs, and departure on the Blue Narciss. It places The Rally on entering the Theater District after the Burmecia rescue, No Free Lunch after the potion handoff and exit from Cid's room, and Give Me My Money on boarding after the pickle-seller scene with fewer than 50 Gil. It does not document the later Disc IV return from Lindblum to the Invincible.",
+    notes: "Independent Disc III route for the guest-room Elixir/Egoist's Armlet chests, trolley Remedy/Chimera Armlet, Mognet, Sagittarius, refilled Card Freak Gon Elixir/Remedy chests, Beautiful/Strange/Unusual Potions, and Lapis Lazuli. It omits GameFAQs' possible missed-Ore recovery. It places The Rally on entering the Theater District after the Burmecia rescue, No Free Lunch after the potion handoff and exit from Cid's room, and Give Me My Money on boarding after the pickle-seller scene with fewer than 50 Gil. It does not document the later Disc IV return from Lindblum to the Invincible.",
   },
   {
     id: "gamerguides-the-aftermath",
@@ -504,7 +504,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-3/another-trip-to-lindblum",
     accessed: "2026-10-24",
-    notes: "Independent route cross-check for all eight ATEs, the order of the castle visit, rebuilt shop district, three potion locations, Tantalus hideout Gil, and the under-50-Gil setup. It specifies the pickle-seller scene as setup for Quina's return and the Blue Narciss boarding as the automatic Give Me My Money ATE trigger.",
+    notes: "Independent Disc III route cross-check for the guest-room Elixir/Egoist's Armlet, Dragon's Gate Remedy, Serpent's Gate Chimera Armlet, refreshed Card Freak Gon Elixir/Remedy chests, Sagittarius, all three potions, and Lapis Lazuli. It omits GameFAQs' possible missed-Ore recovery. It also supports all eight ATEs, the under-50-Gil setup, the pickle-seller scene as setup for Quina's return, and the automatic Give Me My Money ATE when boarding the Blue Narciss.",
   },
   {
     id: "deis-spoiler-free-walkthrough",
@@ -520,7 +520,7 @@ export const sources = [
     publisher: "Flactem Guides",
     url: "https://guides.flactem.com/final-fantasy-ix/disc-3/lindblum-black-mage-village/",
     accessed: "2026-10-23",
-    notes: "Additional route for the Disc III Lindblum sweep, Mogki's letter, Sagittarius, refreshed Card Freak chests, the three potions, Lapis Lazuli, theater hideout Gil, shop availability, and Blue Narciss transition. Its Black Mage Village section independently documents a Disc III return and entering the Item Shop for a missed Black Belt; this visit is on the earlier Blue Narciss route before Desert Palace, so it does not verify the later Hilda Garde III return timing or exact shop-stock persistence. This route is distinguished from the site's earlier Lindblum visit page.",
+    notes: "Additional Disc III route lists the guest-room Elixir/Egoist's Armlet, trolley pickups, refreshed Card Freak Elixir/Remedy chests, Sagittarius, Lapis Lazuli, Strange Potion, and Alice/Cinna's Beautiful/Unusual Potion handoffs. It omits GameFAQs' possible missed-Ore recovery. Its Black Mage Village section independently documents a Disc III return and entering the Item Shop for a missed Black Belt; this visit is on the earlier Blue Narciss route before Desert Palace, so it does not verify the later Hilda Garde III return timing or exact shop-stock persistence. This route is distinguished from the site's earlier Lindblum visit page.",
   },
   {
     id: "gamefaqs-on-the-high-seas-71891",

@@ -286,7 +286,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 10);
+  assert.equal(orePaths.length, 11);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -1048,4 +1048,56 @@ test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ing
       assert.ok(sources.some((source) => source.id === sourceId), `${recipe.id} references unknown source ${sourceId}`);
     }
   }
+});
+
+test("The Aftermath pickups and three potion quest items link to the shared checklist", () => {
+  const expected = [
+    ["item-path.disc-3.the-aftermath.elixir-guest-room", "game-item.elixir", "chest", "disc-3.the-aftermath.pickups"],
+    ["item-path.disc-3.the-aftermath.egoists-armlet-guest-room", "game-item.egoists-armlet", "chest", "disc-3.the-aftermath.pickups"],
+    ["item-path.disc-3.the-aftermath.remedy-dragons-gate", "game-item.remedy", "chest", "disc-3.the-aftermath.pickups"],
+    ["item-path.disc-3.the-aftermath.elixir-card-freak-house", "game-item.elixir", "chest", "disc-3.the-aftermath.pickups"],
+    ["item-path.disc-3.the-aftermath.remedy-card-freak-house", "game-item.remedy", "chest", "disc-3.the-aftermath.pickups"],
+    ["item-path.disc-3.the-aftermath.lapis-lazuli-michaels-studio", "game-item.lapis-lazuli", "chest", "disc-3.the-aftermath.pickups"],
+    ["item-path.disc-3.the-aftermath.beautiful-potion-alice", "game-item.beautiful-potion", "quest-reward", "disc-3.the-aftermath.potions"],
+    ["item-path.disc-3.the-aftermath.strange-potion-michaels-studio", "game-item.strange-potion", "hidden-pickup", "disc-3.the-aftermath.potions"],
+    ["item-path.disc-3.the-aftermath.unusual-potion-cinna", "game-item.unusual-potion", "quest-reward", "disc-3.the-aftermath.potions"],
+  ];
+  const routeSources = ["gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath", "flactem-disc-3-lindblum"];
+
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-3.the-aftermath"));
+  assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-3.the-aftermath"));
+  for (const [pathId, itemId, method, objectiveId] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-3.the-aftermath");
+    assert.equal(path.method, method);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.equal(path.availability, "single-use");
+    for (const sourceId of routeSources) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+
+  for (const itemId of ["game-item.beautiful-potion", "game-item.strange-potion", "game-item.unusual-potion"]) {
+    assert.equal(gameItems.find((item) => item.id === itemId)?.category, "key-item");
+    assert.ok(itemAcquisitionPaths.some((path) => path.itemId === itemId && path.chapterId === "disc-3.the-aftermath"));
+  }
+
+  const elixirPickups = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.elixir" && path.chapterId === "disc-3.the-aftermath");
+  const remedyPickups = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.remedy" && path.chapterId === "disc-3.the-aftermath");
+  assert.equal(elixirPickups.filter((path) => path.method === "chest").length, 2);
+  assert.equal(remedyPickups.filter((path) => path.method === "chest").length, 2);
+  assert.match(elixirPickups.find((path) => path.id.endsWith("card-freak-house"))?.conditions ?? "", /refilled for this Disc III visit/);
+
+  const oreCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-aftermath.ore-studio-recovery-candidate");
+  assert.equal(oreCandidate?.availability, "conditional");
+  assert.deepEqual(oreCandidate?.sourceIds, ["gamefaqs-the-aftermath-71891"]);
+  assert.match(oreCandidate?.conditions ?? "", /other reviewed Disc III walkthroughs omit this recovery/);
+  const oreStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.the-aftermath")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "aftermath-the-rally-ate");
+  assert.match(oreStep?.detail ?? "", /Treat it as a conditional check/);
 });

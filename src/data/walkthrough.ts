@@ -3973,7 +3973,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aftermath-the-rally-ate",
             kind: "optional",
             text: "After entering the Theater District, watch The Rally if Kal and Wei were saved in Burmecia. Enter Michael's studio, collect the Lapis Lazuli from the chest, then search near the stairs for the Strange Potion.",
-            detail: "The Rally only appears if the Burmecian couple was rescued during Disc I. Check for Ore only if its earlier studio pickup was left behind; the route sources do not establish it as a new guaranteed Disc III pickup.",
+            detail: "The Rally only appears if the Burmecian couple was rescued during Disc I. GameFAQs says to collect Ore if it was missed earlier; Jegged, Gamer Guides, and Flactem omit that recovery. Treat it as a conditional check for the unclaimed first studio copy, not a guaranteed extra item, pending direct-game verification.",
             objectiveIds: ["disc-3.the-aftermath.ates", "disc-3.the-aftermath.pickups", "disc-3.the-aftermath.potions"],
           },
           {
