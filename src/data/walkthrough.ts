@@ -1397,6 +1397,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             detail: "The item catalog records all 17 item-bearing steal and drop slots for these three city-pool enemies. Always drops still require a KO victory; the other drop slots are conditional. The Magic Vice Common steal route follows the GameFAQs Enemy List and Jegged table while preserving EliteGrindLab's conflicting Eye Drops entry. Slot odds, encounter rates, and exact formations are not inferred.",
           },
           {
+            id: "burmecia-type-a-pair-loot",
+            kind: "optional",
+            text: "Before defeating the two Type A Black Mages in the mandatory street fight, try stealing from each if you want their Phoenix Down or Tent slots. Any drops require KO victories, and each foe's drop slots are chance-based.",
+            detail: "The enemy table lists Common Phoenix Down and Uncommon Tent steals, plus Common Potion, Uncommon Phoenix Down, and Rare Ether drop slots. Since this fixed battle has two Type A enemies, each listed slot has two per-enemy opportunities (up to two copies); the paths are one-time encounter opportunities and remain chance-based. These are separate from the two fixed Type A pairs in Gizamaluke's Grotto.",
+          },
+          {
             id: "burmecia-lower-room-pickups",
             kind: "pickup",
             text: "After the two Type A Black Mages on the next screen, enter the ground-level doorway on the left. Open the visible Soft and Potion chests, then search behind the stairwell on the bottom floor for the second Soft. Climb to the upper floor and ignore the balcony chest there; it is a Mimic.",

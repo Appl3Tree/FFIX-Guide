@@ -2013,6 +2013,56 @@ test("Burmecia's city-pool enemies have repeatable loot paths with the Magic Vic
   }
 });
 
+test("Burmecia's fixed Type A pair has separate one-time loot opportunities", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-burmecia-71891", "jegged-burmecia"];
+  const expected = [
+    ["steal", "common", "game-item.phoenix-down", "phoenix-down-common-steal"],
+    ["steal", "uncommon", "game-item.tent", "tent-uncommon-steal"],
+    ["drop", "common", "game-item.potion", "potion-common-drop"],
+    ["drop", "uncommon", "game-item.phoenix-down", "phoenix-down-uncommon-drop"],
+    ["drop", "rare", "game-item.ether", "ether-rare-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.burmecia.type-a-pair");
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.type-a");
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.burmecia")
+    ?.sections.find((entry) => entry.id === "burmecia-lower-streets");
+  const step = section?.steps.find((entry) => entry.id === "burmecia-type-a-pair-loot");
+
+  assert.equal(expected.length, 5);
+  assert.equal(encounter?.kind, "fixed");
+  assert.ok(encounter?.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2));
+  assert.match(step?.text ?? "", /stealing from each/);
+  assert.match(step?.detail ?? "", /each listed slot has two per-enemy opportunities/);
+  assert.match(step?.detail ?? "", /separate from the two fixed Type A pairs in Gizamaluke's Grotto/);
+  assert.equal(step?.objectiveIds, undefined);
+
+  for (const [method, slotName, itemId, pathSuffix] of expected) {
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.burmecia.type-a-pair-${pathSuffix}`);
+    assert.ok(slots?.some((slot) => slot.slot === slotName && slot.itemId === itemId), `${slotName} ${method} slot is missing`);
+    assert.ok(path, `${pathSuffix} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.burmecia");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 2);
+    assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.match(path.notes ?? "", /two per-enemy slot opportunities/);
+    assert.ok(gameItems.find((item) => item.id === itemId)?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victories/);
+      assert.match(path.conditions ?? "", /slot is conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `Type A is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Burmecia Type A encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Burmecia walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
   const sourceIds = [
     "gamefaqs-journey-to-burmecia-71891",

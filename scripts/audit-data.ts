@@ -4902,6 +4902,40 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of burmeciaCityLootEx
     errors.push(`Burmecia ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, preserve KO/Always behavior, and retain route provenance.`);
   }
 }
+const burmeciaTypeALootExpectations = [
+  ["steal", "common", "game-item.phoenix-down", "phoenix-down-common-steal"],
+  ["steal", "uncommon", "game-item.tent", "tent-uncommon-steal"],
+  ["drop", "common", "game-item.potion", "potion-common-drop"],
+  ["drop", "uncommon", "game-item.phoenix-down", "phoenix-down-uncommon-drop"],
+  ["drop", "rare", "game-item.ether", "ether-rare-drop"],
+];
+const burmeciaTypeALootPathPrefix = "item-path.disc-1.burmecia.type-a-pair-";
+const burmeciaTypeALootStep = burmeciaCityLootSection?.steps.find((step) => step.id === "burmecia-type-a-pair-loot");
+if (!burmeciaTypeAPair || burmeciaTypeAPair.kind !== "fixed" ||
+  !burmeciaTypeAPair.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2) ||
+  !burmeciaTypeALootStep?.text.includes("stealing from each") ||
+  !burmeciaTypeALootStep.detail?.includes("each listed slot has two per-enemy opportunities") ||
+  !burmeciaTypeALootStep.detail.includes("separate from the two fixed Type A pairs in Gizamaluke's Grotto") ||
+  burmeciaTypeALootStep.objectiveIds?.length ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(burmeciaTypeALootPathPrefix)).length !== burmeciaTypeALootExpectations.length) {
+  errors.push("Burmecia's fixed Type A pair must expose its two per-enemy loot opportunities separately from Gizamaluke's Grotto and avoid inventing collection objectives.");
+}
+for (const [method, slotName, itemId, pathSuffix] of burmeciaTypeALootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.type-a");
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `${burmeciaTypeALootPathPrefix}${pathSuffix}`);
+  if (!slots?.some((slot) => slot.slot === slotName && slot.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.burmecia" || path.method !== method ||
+    path.quantity !== 2 || path.availability !== "one-time-encounter" || path.walkthroughObjectiveIds?.length ||
+    !path.notes?.includes("two per-enemy slot opportunities") || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions?.includes("KO victories") || !path.conditions.includes("slot is conditional"))) ||
+    burmeciaCityLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !enemy?.sourceIds.includes(sourceId) || !burmeciaTypeAPair?.sourceIds.includes(sourceId) ||
+      !burmeciaCityLootSection?.sourceIds.includes(sourceId))) {
+    errors.push(`Burmecia Type A ${method} path ${pathSuffix} must match the shared enemy table, two-enemy quantity, one-time window, and source chain.`);
+  }
+}
 const burmeciaTypeARecord = enemyRecords.find((enemy) => enemy.id === "enemy.type-a");
 const burmeciaMagicVice = enemyRecords.find((enemy) => enemy.id === "enemy.magic-vice");
 const burmeciaNymph = enemyRecords.find((enemy) => enemy.id === "enemy.nymph");
