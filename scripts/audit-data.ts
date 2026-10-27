@@ -3862,6 +3862,52 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of iceCavernRegularLo
     errors.push(`Ice Cavern ${method} path ${pathSuffix} must match its enemy slot, stay repeatable, and retain item/encounter provenance.`);
   }
 }
+const nolrichHeightsRegularLootExpectations = [
+  ["enemy.carve-spider", "steal", "common", "game-item.potion", "carve-spider-potion-common-steal"],
+  ["enemy.carve-spider", "steal", "uncommon", "game-item.tent", "carve-spider-tent-uncommon-steal"],
+  ["enemy.carve-spider", "steal", "semi-rare", "game-item.ore", "carve-spider-ore-semi-rare-steal"],
+  ["enemy.carve-spider", "drop", "common", "game-item.ore", "carve-spider-ore-common-drop"],
+  ["enemy.carve-spider", "drop", "uncommon", "game-item.eye-drops", "carve-spider-eye-drops-uncommon-drop"],
+  ["enemy.carve-spider", "drop", "rare", "game-item.phoenix-down", "carve-spider-phoenix-down-rare-drop"],
+  ["enemy.mu", "steal", "uncommon", "game-item.potion", "mu-potion-uncommon-steal"],
+  ["enemy.mu", "drop", "common", "game-item.potion", "mu-potion-common-drop"],
+  ["enemy.mu", "drop", "uncommon", "game-item.echo-screen", "mu-echo-screen-uncommon-drop"],
+  ["enemy.mu", "drop", "rare", "game-item.phoenix-down", "mu-phoenix-down-rare-drop"],
+  ["enemy.python", "steal", "common", "game-item.potion", "python-potion-common-steal"],
+  ["enemy.python", "steal", "uncommon", "game-item.ore", "python-ore-uncommon-steal"],
+  ["enemy.python", "steal", "semi-rare", "game-item.hi-potion", "python-hi-potion-semi-rare-steal"],
+  ["enemy.python", "steal", "rare", "game-item.phoenix-pinion", "python-phoenix-pinion-rare-steal"],
+  ["enemy.python", "drop", "uncommon", "game-item.phoenix-down", "python-phoenix-down-uncommon-drop"],
+];
+const nolrichHeightsLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+const nolrichHeightsEncounter = enemyEncounters.find((entry) => entry.id === "encounter.nolrich-heights.world-map-pool");
+const nolrichHeightsSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.ice-cavern")?.sections
+  .find((section) => section.id === "exit-and-nolrich-heights");
+const nolrichHeightsLootStep = nolrichHeightsSection?.steps.find((step) => step.id === "nolrich-heights-world-map-loot");
+const friendlyMuStep = nolrichHeightsSection?.steps.find((step) => step.id === "friendly-mu");
+if (!nolrichHeightsEncounter || !["enemy.carve-spider", "enemy.mu", "enemy.python"].every((enemyId) =>
+  nolrichHeightsEncounter.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !nolrichHeightsEncounter.notes.join(" ").includes("Gunitas Basin") ||
+  !nolrichHeightsLootStep?.text.includes("Leave a friendly Mu alone") ||
+  !nolrichHeightsLootStep.detail?.includes("Mu/Python under Gunitas Basin") ||
+  !friendlyMuStep?.objectiveIds?.includes("disc-1.ice-cavern.mu-friendly-monster") ||
+  !nolrichHeightsSection?.sourceIds.includes("gamefaqs-enemy-list-71891")) {
+  errors.push("Nolrich Heights loot routes must preserve the regional source difference and keep friendly Mu separate from standard combat.");
+}
+for (const [enemyId, method, slotName, itemId, pathSuffix] of nolrichHeightsRegularLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.ice-cavern.nolrich-${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.ice-cavern" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "repeatable" || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions?.includes("KO defeat") || !path.conditions.includes("conditional"))) ||
+    nolrichHeightsLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) || !enemy?.sourceIds.includes(sourceId) ||
+      !nolrichHeightsEncounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Nolrich Heights ${method} path ${pathSuffix} must match its enemy slot, stay repeatable, and retain item/encounter provenance.`);
+  }
+}
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
 const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;

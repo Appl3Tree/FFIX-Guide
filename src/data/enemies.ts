@@ -1101,7 +1101,7 @@ const earlyDaliEncounters: EnemyEncounter[] = [
     objectiveIds: [],
     missableIds: [],
     cutoffIds: [],
-    notes: ["These are the listed combat enemies for Nolrich Heights; the guides do not publish formation rates or exact combinations. Friendly Mu is a separate sidequest encounter, not part of the battle pool."],
+    notes: ["GameFAQs' walkthrough and Jegged group Mu, Python, and Carve Spider at Nolrich Heights, while GameFAQs' Enemy List places Mu and Python in its Gunitas Basin section and Carve Spider under Nolrich Heights; exact subregion labels therefore differ by source. The guides do not publish formation rates or exact combinations. Friendly Mu is a separate sidequest encounter, not part of the battle pool."],
   },
   {
     id: "encounter.dali-underground.random-pool",
@@ -5440,7 +5440,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Limit Glove", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
     strategies: [{ title: "Finish it with an ordinary attack", detail: "The regular Mu has little HP; its Stone attack is its main threat. The friendly Mu encounter that asks for Ore is a separate sidequest event and is not a battle.", sourceIds: [enemyListSourceId, "jegged-ice-cavern"] }],
     routeObjectiveIds: [],
-    notes: ["The listed combat form is the standard Mu. Jegged separately describes the Friendly Monster Mu, which asks for Ore and rewards a Potion plus 10 AP."],
+    notes: ["The listed combat form is the standard Mu. GameFAQs' Enemy List places it under Gunitas Basin, while the walkthrough and Jegged list the combat form around Nolrich Heights. Jegged separately describes the Friendly Monster Mu, which asks for Ore and rewards a Potion plus 10 AP."],
   }, iceCavernChapterId, nolrichEnemySources),
   chapterEnemy({
     id: "enemy.python",
@@ -5463,7 +5463,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Pumpkin Head", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
     strategies: [{ title: "Use Ice and avoid wasting turns", detail: "Python has low HP, is weak to Ice, and can use Thunder. Quina can learn Pumpkin Head by eating it later.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: [],
-    notes: ["The route sources list Python in the Nolrich Heights world-map pool; no frequency or formation rate is inferred."],
+    notes: ["The walkthrough and Jegged list Python in the Nolrich Heights world-map pool, while GameFAQs' Enemy List places it under Gunitas Basin; no frequency or formation rate is inferred."],
   }, iceCavernChapterId, nolrichEnemySources),
   chapterEnemy({
     id: "enemy.ghost",

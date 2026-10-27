@@ -193,6 +193,7 @@ const blackWaltz2EtherDropSources = {
 const plantBrainDropSources = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
 const iceCavernBossDropSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const iceCavernRegularLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+const nolrichHeightsLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const gizamalukeDropSources = ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"];
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
@@ -2789,7 +2790,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.thunder-gloves", name: "Thunder Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
   { id: "game-item.mages-hat", name: "Mage's Hat", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.mythril-helm", name: "Mythril Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: [...daliUndergroundSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: [...daliUndergroundSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "partial" },
   { id: "game-item.annoyntment", name: "Annoyntment", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
   { id: "game-item.headgear", name: "Headgear", category: "equipment", sourceIds: [...headgearReferenceSources, ...atlaDisc2ShopSources], verification: "partial" },
   { id: "game-item.barbut", name: "Barbut", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
@@ -4208,6 +4209,72 @@ const iceCavernRegularLootPaths: ItemAcquisitionPath[] = iceCavernRegularLootSlo
   })),
 ]);
 
+const nolrichHeightsRegularLootSlots = [
+  {
+    enemyId: "enemy.carve-spider",
+    enemySlug: "carve-spider",
+    enemyName: "Carve Spider",
+    steals: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.tent" },
+      { slot: "semi-rare", itemId: "game-item.ore" },
+    ],
+    drops: [
+      { slot: "common", itemId: "game-item.ore" },
+      { slot: "uncommon", itemId: "game-item.eye-drops" },
+      { slot: "rare", itemId: "game-item.phoenix-down" },
+    ],
+  },
+  {
+    enemyId: "enemy.mu",
+    enemySlug: "mu",
+    enemyName: "Mu",
+    steals: [{ slot: "uncommon", itemId: "game-item.potion" }],
+    drops: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.echo-screen" },
+      { slot: "rare", itemId: "game-item.phoenix-down" },
+    ],
+  },
+  {
+    enemyId: "enemy.python",
+    enemySlug: "python",
+    enemyName: "Python",
+    steals: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.ore" },
+      { slot: "semi-rare", itemId: "game-item.hi-potion" },
+      { slot: "rare", itemId: "game-item.phoenix-pinion" },
+    ],
+    drops: [{ slot: "uncommon", itemId: "game-item.phoenix-down" }],
+  },
+] as const;
+
+const nolrichHeightsRegularLootPaths: ItemAcquisitionPath[] = nolrichHeightsRegularLootSlots.flatMap((enemy) => [
+  ...enemy.steals.map((entry) => ({
+    id: `item-path.disc-1.ice-cavern.nolrich-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-steal`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.ice-cavern",
+    method: "steal" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Nolrich Heights world-map encounters.`,
+    notes: "The route sources list these as the standard combat forms; the friendly Mu is a separate encounter. Slot odds are not inferred here.",
+    sourceIds: nolrichHeightsLootSources,
+  })),
+  ...enemy.drops.map((entry) => ({
+    id: `item-path.disc-1.ice-cavern.nolrich-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.ice-cavern",
+    method: "drop" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: `On a KO defeat, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item in repeatable Nolrich Heights world-map encounters; this slot is conditional.`,
+    notes: "GameFAQs states that non-KO victories do not award drops. No item from these conditional slots is guaranteed.",
+    sourceIds: nolrichHeightsLootSources,
+  })),
+]);
+
 const iceCavernBossDropPaths: ItemAcquisitionPath[] = [
   {
     id: "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop",
@@ -4720,6 +4787,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...blackWaltz2EtherDropPaths,
   ...plantBrainDropPaths,
   ...iceCavernRegularLootPaths,
+  ...nolrichHeightsRegularLootPaths,
   ...iceCavernBossDropPaths,
   ...gizamalukeDropPaths,
   ...burmeciaMimicLootPaths,

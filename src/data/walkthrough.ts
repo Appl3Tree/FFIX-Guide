@@ -573,7 +573,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "exit-and-nolrich-heights",
         title: "Exit check and optional Nolrich Heights stops",
         summary: "Climb the waterfall to the upper exit. The cavern remains open from the world map until the party leaves Dali, giving you a return window for anything skipped below.",
-        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-missables-71891", "elitegrindlab-ice-cavern", "gamefaqs-optional-route-47344", "flactem-friendly-monsters", "gamerguides-ice-cavern", "rpgclassics-coffee"],
+        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-enemy-list-71891", "gamefaqs-missables-71891", "elitegrindlab-ice-cavern", "gamefaqs-optional-route-47344", "flactem-friendly-monsters", "gamerguides-ice-cavern", "rpgclassics-coffee"],
         steps: [
           {
             id: "ice-cavern-exit",
@@ -587,6 +587,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Before leaving Dali for the next story leg, return from the world map if any of the eight Ice Cavern chests remain unopened: Tent, Ether, two Potions, Mage Masher, Elixir, Phoenix Down, and Leather Wrist. Mois's letter is safest to collect on the first pass; if missed, try to accept it on a return and deliver it to Gumo.",
             detail: "The cave exit is not the point of no return for its chests. GameFAQs and the completionist area review place the cutoff at leaving Dali. One Steam guide recommends a post-boss letter return, but another publisher says it found no independent confirmation; treat this as a best-effort check, not a guaranteed recovery.",
             objectiveIds: ["disc-1.ice-cavern.treasure-sweep"],
+          },
+          {
+            id: "nolrich-heights-world-map-loot",
+            kind: "optional",
+            text: "Across the Nolrich Heights plains, repeatable standard battles can include Carve Spider, Mu, and Python. Their separate steal and conditional drop slots are listed in the item routes; drops require KO victories. Leave a friendly Mu alone—it is a separate encounter.",
+            detail: "GameFAQs and Jegged group all three combat enemies around Nolrich Heights, while the GameFAQs enemy table places Carve Spider under Nolrich Heights and Mu/Python under Gunitas Basin. No formation rates are published, so the guide preserves the regional label difference and does not claim exact combinations.",
           },
           {
             id: "friendly-mu",
