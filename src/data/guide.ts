@@ -384,7 +384,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/31490",
     accessed: "2026-10-25",
-    notes: "Original PlayStation boss guide used to cross-check selected encounter strategies. Its Disc II Cleyra Beatrix entry gives Level 17 and 4,736 HP but prints 3,694 MP, while GameFAQs' walkthrough, Caves of Narshe, and other bestiary references give 3,964 MP; the guide preserves the MP figures as a source conflict. It also describes the ten-turn scripted battle and Cleyra boss steals. For Ralvuimago it lists Level 18/3,352 HP, calls the fight Fair, and explains the compact-form counter and Ice strategy; the rating is subjective and not a party-level recommendation. For Zorn and Thorn it lists Level 16 and HP 4,896/2,984, rates the pair Easy, and describes an optional Steiner leveling loop before the rescue timer; the HP differs by one from GameFAQs 71891, and the rating is subjective and battle-only. For Beatrix's third Alexandria fight it rates the battle Medium and describes the scripted Climhazzard ending, but reuses Cleyra's Thunder Gloves instead of Alexandria's Survival Vest; retain only the subjective rating and script as secondary evidence.",
+    notes: "Original PlayStation boss guide used to cross-check selected encounter strategies. Its Disc II Cleyra Beatrix entry gives Level 17 and 4,736 HP but prints 3,694 MP, while GameFAQs' walkthrough, Caves of Narshe, and other bestiary references give 3,964 MP; the guide preserves the MP figures as a source conflict. It also describes the ten-turn scripted battle and Cleyra boss steals. For Ralvuimago it lists Level 18/3,352 HP, calls the fight Fair, and explains the compact-form counter and Ice strategy; the rating is subjective and not a party-level recommendation. For Tantarian it rates the fight Tough, recommends the Disc III window over the timed Disc II rescue, and describes back-row defense, Antibody, Reis's Wind, and magic damage while the book is open; the label is subjective and the guide does not establish a party-level target. For Zorn and Thorn it lists Level 16 and HP 4,896/2,984, rates the pair Easy, and describes an optional Steiner leveling loop before the rescue timer; the HP differs by one from GameFAQs 71891, and the rating is subjective and battle-only. For Beatrix's third Alexandria fight it rates the battle Medium and describes the scripted Climhazzard ending, but reuses Cleyra's Thunder Gloves instead of Alexandria's Survival Vest; retain only the subjective rating and script as secondary evidence.",
   },
   {
     id: "gamerguides-cleyra",
@@ -647,8 +647,8 @@ export const sources = [
     title: "Final Fantasy IX FAQ/Walkthrough — Neoseeker",
     publisher: "Neoseeker",
     url: "https://www.neoseeker.com/final-fantasy-ix/faqs/1816852-m.html",
-    accessed: "2026-10-23",
-    notes: "Cross-check for the Disc II Chain Mail stock recommendation and synthesis routes. The exact 15-copy preparation is retained as a partial, route-specific perfect-inventory claim.",
+    accessed: "2026-10-26",
+    notes: "Cross-check for the Disc II Chain Mail stock recommendation and synthesis routes. Its search-indexed Tantarian section recommends Devil Killer, Antibody, and Counter if available before the final library fight; direct page retrieval returned 403, so these tips remain secondary and not independently verified. The exact 15-copy Chain Mail preparation remains a partial, route-specific perfect-inventory claim.",
   },
   {
     id: "neoseeker-item-locations-182566",
@@ -1673,6 +1673,14 @@ export const sources = [
     url: "https://www.cavesofnarshe.com/ff9/w_enemy.php?enemy=Tantarian",
     accessed: "2026-10-25",
     notes: "Direct boss record cross-checking Tantarian's Level 41, 21,997 HP, 1,456 MP, 12,585 EXP, 30 AP, 4,472 Gil, four steal items, Running Shoes drop, Ramuh card, Demon type, Shadow resistance, Holy weakness, and status immunity list.",
+  },
+  {
+    id: "squareenix-tantarian",
+    title: "FF Weekly: April 23rd Remember When...",
+    publisher: "Square Enix",
+    url: "https://eu.finalfantasy.com/topics/172",
+    accessed: "2026-10-26",
+    notes: "Official FINAL FANTASY Portal description confirms Tantarian's closed book has extraordinarily high defense, that 150–200 total damage opens the vulnerable form, and that its defense drops while open. It does not cover party setup or release-specific behavior.",
   },
   {
     id: "ffonline-gizamaluke-boss",

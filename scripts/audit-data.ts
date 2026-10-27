@@ -7510,6 +7510,28 @@ if (!tantarianRecord || tantarianRecord.kind !== "boss" ||
   !tantarianRecord.facts.some((fact) => fact.category === "elemental-weakness" && fact.label.includes("Fire") && fact.detail === undefined)) {
   errors.push("Tantarian's shared boss profile must retain its cross-checked stats, two encounter windows, weaknesses, and guaranteed Running Shoes.");
 }
+const tantarianPreparation = tantarianRecord?.preparationGuidance;
+const tantarianPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.trouble-on-the-home-front")?.sections.find((section) => section.id === "trouble-library-tantarian");
+const tantarianPreparationStep = tantarianPreparationSection?.steps.find((step) => step.id === "trouble-tantarian-final-chance");
+if (!tantarianPreparation || tantarianPreparation.suggestedLevelRange !== undefined ||
+  !tantarianPreparation.levelRationale.includes("enemy stat") ||
+  !tantarianPreparation.levelRationale.includes("No universal level target") ||
+  !tantarianPreparation.difficultyAssessment?.includes("Tough") ||
+  !tantarianPreparation.difficultyAssessment.includes("subjective, single-source") ||
+  !tantarianPreparation.optionalGrinding.includes("30-minute rescue timer") ||
+  !tantarianPreparation.setupAdvice.includes("Antibody") ||
+  !tantarianPreparation.setupAdvice.includes("back row") ||
+  !tantarianPreparation.setupAdvice.includes("Reis's Wind") ||
+  !tantarianPreparation.setupAdvice.includes("150–200 total damage") ||
+  !tantarianPreparation.sourceIds.includes("squareenix-tantarian") ||
+  !tantarianPreparation.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !tantarianPreparation.sourceIds.includes("neoseeker-ffix-walkthrough-1816852") ||
+  !tantarianPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !tantarianPreparationStep?.detail?.includes("not a recommended party level") ||
+  !tantarianPreparationStep.detail.includes("subjective, single-source rating") ||
+  !tantarianPreparationStep.detail.includes("Master Thief")) {
+  errors.push("Tantarian preparation must distinguish enemy level from party targets and connect the source-backed Disc III setup to its final library checkpoint.");
+}
 if (!tantarianDisc2Encounter || tantarianDisc2Encounter.chapterId !== "disc-2.return-to-alexandria" ||
   !tantarianDisc2Encounter.notes.some((note) => note.includes("first of two")) ||
   !tantarianDisc3Encounter || tantarianDisc3Encounter.chapterId !== "disc-3.trouble-on-the-home-front" ||

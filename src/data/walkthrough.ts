@@ -3855,7 +3855,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "trouble-library-tantarian",
         title: "Alexandria Castle — save with Mosh and decide on Tantarian",
         summary: "This is the final opportunity to fight Tantarian. It is optional for story progress, but the boss's Running Shoes and Ramuh Card rewards are valuable.",
-        sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "elitegrindlab-alexandria-bahamut", "gamefaqs-return-to-alexandria-71891", "flactem-disc-3-treno"],
+        sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "elitegrindlab-alexandria-bahamut", "gamefaqs-return-to-alexandria-71891", "flactem-disc-3-treno", "gamefaqs-boss-guide-31490", "neoseeker-ffix-walkthrough-1816852", "squareenix-tantarian"],
         steps: [
           {
             id: "trouble-save-before-library",
@@ -3868,7 +3868,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "trouble-tantarian-final-chance",
             kind: "cutoff",
             text: "If Tantarian was not defeated during the Disc II Alexandria Castle rescue, go to the main-floor library on the left and inspect the lower-left standing bookshelf. Defeat it before following Dagger's route up to the altar; leaving for the tower closes the last Tantarian window.",
-            detail: "Tantarian is level 41 with 21,997 HP in the cross-checked references. Equip Devil Killer and Antibody if available, and Counter if a party member has learned it. Zidane can try to steal Ether, Elixir, Silver Fork, and the very rare Demon's Mail; the encounter does not repeat after the library cutoff.",
+            detail: "Level 41 is Tantarian's enemy stat, not a recommended party level; the reviewed sources do not set a standard level target. The PS1 boss FAQ calls the fight Tough (a subjective, single-source rating). Equip Devil Killer and Antibody if available, and Counter if a party member has learned it; the boss FAQ also recommends the back row to cut physical damage. Zidane can try the four steals, with Demon's Mail listed at 0.4% per connected attempt and 12.5% with Master Thief by Jegged. The encounter does not repeat after the library cutoff.",
             objectiveIds: ["disc-2.return-to-alexandria.tantarian"],
           },
           {

@@ -121,6 +121,7 @@ const tantarianObjectiveId = "disc-2.return-to-alexandria.tantarian";
 const tantarianMissableId = "missable.disc-3.trouble-on-the-home-front.tantarian";
 const tantarianCutoffId = "cutoff.alexandria-defense.tantarian";
 const tantarianSources = ["gamefaqs-return-to-alexandria-71891", "gamefaqs-trouble-on-home-front-71891", "jegged-return-to-alexandria-castle", "jegged-trouble-on-home-front", "gamerguides-alexandria-castle-2", "rpgclassics-bestiary-t-z", "cavesofnarshe-tantarian"];
+const tantarianPreparationSources = ["gamefaqs-boss-guide-31490", "neoseeker-ffix-walkthrough-1816852", "squareenix-tantarian"];
 const trenoGriffinObjectiveId = "disc-2.treno.griffin-challenge";
 const trenoGriffinMissableId = "missable.disc-2.treno.griffin-challenge";
 const trenoGriffinCutoffId = "cutoff.treno-griffin.stage";
@@ -7097,16 +7098,24 @@ const allEnemyRecords: EnemyRecord[] = [
     ],
     blueMagic: [],
     strategies: [
-      { title: "Damage the book, then use magic while it is open", detail: "The closed book has very high defenses. Damage advances its page count until the exposed form appears around pages 150–200; use magic during that window because a physical hit closes it. The exposed form gains a Fire weakness and lower defenses.", sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front"] },
+      { title: "Damage the book, then use magic while it is open", detail: "The closed book has very high defenses. Damage advances its page count until the exposed form appears around pages 150–200; use magic during that window because a physical hit closes it. The exposed form gains a Fire weakness and lower defenses.", sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "squareenix-tantarian"] },
       { title: "Use one of the two story windows", detail: "The first opportunity is during the timed Disc II rescue. If skipped, Tantarian can be fought in the Disc III library before following Dagger to the altar. Defeating it during the first window removes the later one; leaving the Disc III library closes the final chance.", sourceIds: ["gamefaqs-return-to-alexandria-71891", "gamefaqs-trouble-on-home-front-71891", "jegged-return-to-alexandria-castle", "jegged-trouble-on-home-front"] },
-      { title: "Try the four steals while exposed", detail: "The source-listed slots are Ether, Elixir, Silver Fork, and Demon's Mail. Jegged gives 70%, 23%, 6%, and 0.4% per connected steal attempt respectively; Master Thief raises the rare Demon's Mail chance to 12.5%. Victory guarantees Running Shoes and lists a Ramuh Card.", sourceIds: tantarianSources },
+      { title: "Try the four steals while exposed", detail: "The source-listed slots are Ether, Elixir, Silver Fork, and Demon's Mail. Jegged gives 70%, 23%, 6%, and 0.4% per connected steal attempt respectively; Master Thief raises the rare Demon's Mail chance to 12.5%. Victory guarantees Running Shoes and lists a Ramuh Card.", sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "rpgclassics-bestiary-t-z", "cavesofnarshe-tantarian"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 41 is Tantarian's enemy stat, not a party-level target. The reviewed normal-route sources do not publish a recommended party range; the boss guide instead emphasizes abilities, formation, healing, and waiting for the open-book damage window. No universal level target is inferred.",
+      difficultyAssessment: "GameFAQs' PlayStation boss guide rates Tantarian Tough. This is a subjective, single-source rating rather than a tested difficulty or party-level threshold.",
+      optionalGrinding: "Do not grind to match the boss's Level 41. If you want the lowest-pressure story opportunity, skip the Disc II library fight while the 30-minute rescue timer is active and use the final Disc III library window after normal progression. The guide sources do not establish a required party level.",
+      setupAdvice: "Before the Disc III library fight, save with Mosh and review Zidane, Freya, Vivi, and Amarant. Equip Antibody, Devil Killer, and Counter if available; the boss guide also recommends the back row to reduce physical damage. Keep healing and revival ready for Paper Storm, Edge, and Doom. Freya can open with Reis's Wind while Amarant supports; use Zidane for selected steals and Vivi's magic to damage the exposed form. Closed-book defense is very high: build 150–200 total damage to reveal Tantarian, then avoid physical hits because they close the book. The Devil Killer, Antibody, and Counter recommendations are source-specific, not required equipment.",
+      confidence: "partial",
+      sourceIds: [...tantarianSources, ...tantarianPreparationSources],
+    },
     routeObjectiveIds: [tantarianObjectiveId],
     notes: [
       "The two library appearances are alternate chances to defeat the same optional boss, not separate victories or Running Shoes rewards. The Disc III warning and cutoff apply only if Tantarian was not defeated during the Disc II rescue.",
       "GameFAQs lists Ramuh as Tantarian's card reward; the walkthrough also records the earlier steeple stash and Taharka as separate Ramuh Card routes. Modern-release behavior has not been independently checked.",
     ],
-  }, returnToAlexandriaChapterId, tantarianSources, [tantarianMissableId], [tantarianCutoffId]),
+  }, returnToAlexandriaChapterId, [...tantarianSources, ...tantarianPreparationSources], [tantarianMissableId], [tantarianCutoffId]),
   ...earlyDaliEnemyRecords,
   ...cargoShipEnemyRecords,
   ...trenoGriffinEnemyRecords,
