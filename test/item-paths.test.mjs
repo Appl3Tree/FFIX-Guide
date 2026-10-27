@@ -1317,6 +1317,42 @@ test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
   assert.deepEqual(objective?.sourceIds, sourceIds);
 });
 
+test("the Disc I Kupo Nut reward has a Holy Bell key-item path", () => {
+  const sourceIds = [
+    "gamefaqs-journey-to-burmecia-71891",
+    "gamefaqs-kupo-nuts-71891",
+    "jegged-gizamaluke",
+    "opatil-gizamaluke-map",
+  ];
+  const objectiveId = "disc-1.journey-to-burmecia.kupo-nut-holy-bell";
+  const item = gameItems.find((entry) => entry.id === "game-item.holy-bell");
+  const path = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-1.journey-to-burmecia.holy-bell-kupo-nut-reward");
+  assert.ok(item, "Holy Bell is missing from the key-item catalog");
+  assert.equal(item.category, "key-item");
+  assert.ok(path, "Holy Bell reward path is missing");
+  assert.equal(path.itemId, item.id);
+  assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
+  assert.equal(path.method, "quest-reward");
+  assert.equal(path.quantity, 1);
+  assert.equal(path.availability, "single-use");
+  assert.match(path.conditions ?? "", /story Kupo Nut.*Mogmi.*Moguta.*Holy Bell/);
+  assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+  for (const sourceId of sourceIds) {
+    assert.ok(path.sourceIds.includes(sourceId), `Holy Bell path is missing ${sourceId}`);
+    assert.ok(item.sourceIds.includes(sourceId), `Holy Bell item is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+  }
+
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "journey-grotto-kupo-nut-and-holy-bell");
+  assert.deepEqual(objective?.sourceIds, sourceIds);
+  assert.ok(step?.objectiveIds.includes(objectiveId));
+  assert.match(step?.text ?? "", /Moguta supplies the Holy Bell/);
+});
+
 test("Lindblum's first-visit pickups and rewards have item paths", () => {
   const sharedSources = ["gamefaqs-lindblum-71891", "jegged-lindblum"];
   const festivalSources = [...sharedSources, "gamefaqs-hunt-minigame-71891"];

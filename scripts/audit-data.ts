@@ -5135,6 +5135,36 @@ if (!grottoHiddenEquipmentObjective || grottoHiddenEquipmentObjective.sourceIds.
   !grottoHiddenEquipmentSources.every((sourceId) => grottoHiddenEquipmentObjective.sourceIds.includes(sourceId))) {
   errors.push("Gizamaluke's hidden-equipment objective must preserve the exact route, map, and independent audit sources.");
 }
+const grottoHolyBellSources = [
+  "gamefaqs-journey-to-burmecia-71891",
+  "gamefaqs-kupo-nuts-71891",
+  "jegged-gizamaluke",
+  "opatil-gizamaluke-map",
+];
+const grottoHolyBellPath = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-1.journey-to-burmecia.holy-bell-kupo-nut-reward");
+const grottoHolyBellItem = gameItems.find((entry) => entry.id === "game-item.holy-bell");
+const grottoHolyBellObjective = objectivesById.get("disc-1.journey-to-burmecia.kupo-nut-holy-bell");
+const grottoHolyBellStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-grotto-kupo-nut-and-holy-bell");
+if (!grottoHolyBellItem || grottoHolyBellItem.category !== "key-item" || !grottoHolyBellPath ||
+  grottoHolyBellPath.itemId !== "game-item.holy-bell" || grottoHolyBellPath.chapterId !== "disc-1.journey-to-burmecia" ||
+  grottoHolyBellPath.method !== "quest-reward" || grottoHolyBellPath.quantity !== 1 || grottoHolyBellPath.availability !== "single-use" ||
+  !grottoHolyBellPath.walkthroughObjectiveIds?.includes("disc-1.journey-to-burmecia.kupo-nut-holy-bell") ||
+  !grottoHolyBellStep?.objectiveIds?.includes("disc-1.journey-to-burmecia.kupo-nut-holy-bell") ||
+  !grottoHolyBellStep.text.includes("Holy Bell")) {
+  errors.push("The Disc I Kupo Nut exchange must have a single-use Holy Bell key-item reward linked to its walkthrough objective.");
+}
+for (const sourceId of grottoHolyBellSources) {
+  if (!sourceIds.has(sourceId) || !grottoHolyBellPath?.sourceIds.includes(sourceId) || !grottoHolyBellItem?.sourceIds.includes(sourceId)) {
+    errors.push(`The Disc I Holy Bell reward and key-item record need source ${sourceId}.`);
+  }
+}
+if (!grottoHolyBellObjective || grottoHolyBellObjective.sourceIds.length !== grottoHolyBellSources.length ||
+  !grottoHolyBellSources.every((sourceId) => grottoHolyBellObjective.sourceIds.includes(sourceId))) {
+  errors.push("The Disc I Holy Bell objective must cite the reward guide, route, Grotto walkthrough, and item map.");
+}
 const pinnacleOgreChest = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.the-ogre-chest");
 if (!pinnacleOgreChest || pinnacleOgreChest.itemId !== "game-item.the-ogre" || pinnacleOgreChest.chapterId !== "disc-2.pinnacle-rocks" ||
   pinnacleOgreChest.method !== "chest" || pinnacleOgreChest.quantity !== 1 || pinnacleOgreChest.availability !== "single-use" ||

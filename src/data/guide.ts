@@ -1840,7 +1840,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-burmecia",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit bell-by-bell Grotto route, hidden Bronze Vest, Mythril Gloves, and Magus Hat pickups, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. It places the Bronze Vest in the lower-left corner beyond the left small door, the Mythril Gloves about a third of the way around the far-right spiral stairs, and the Magus Hat under the bridge as a field-icon pickup. Its Daines-horse Basin section identifies Hi-Potion and Tent chests at the eastern Burmecian Arch after the party returns from South Gate. At Bohden Gate it locates the Multina Racket chest in the southwest and the Potion chest on the left side of the station, both before boarding the cable car; the wagon chest is initially inaccessible. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
+    notes: "Disc I first-visit bell-by-bell Grotto route, hidden Bronze Vest, Mythril Gloves, and Magus Hat pickups, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. It places the Bronze Vest in the lower-left corner beyond the left small door, the Mythril Gloves about a third of the way around the far-right spiral stairs, and the Magus Hat under the bridge as a field-icon pickup. For the story Kupo Nut exchange, it directs Vivi to hand the nut to Mogmi, then says Moguta grants the Holy Bell when the party tries to leave, opening the remaining Grotto door. Its Daines-horse Basin section identifies Hi-Potion and Tent chests at the eastern Burmecian Arch after the party returns from South Gate. At Bohden Gate it locates the Multina Racket chest in the southwest and the Potion chest on the left side of the station, both before boarding the cable car; the wagon chest is initially inaccessible. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
   },
   {
     id: "gamefaqs-single-character-27398",
@@ -1856,7 +1856,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/09-Gizamalukes-Grotto.html",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit cross-check for Gizamaluke's Grotto's hidden Bronze Vest, Mythril Gloves, and Magus Hat, the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. In the Grotto it locates the vest behind the wall on the left path, gloves along the Bell Room back wall near the top of the stairs, and hat on the platform beneath the bridge. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
+    notes: "Disc I first-visit cross-check for Gizamaluke's Grotto's hidden Bronze Vest, Mythril Gloves, and Magus Hat, its Kupo Nut/Holy Bell sequence, the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. In the Grotto it locates the vest behind the wall on the left path, gloves along the Bell Room back wall near the top of the stairs, and hat on the platform beneath the bridge. It says to hand over the Kupo Nut at the great bell, then leave the moogle room to receive the Holy Bell from Moguta and open the boss door. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
   },
   {
     id: "rpgclassics-gizamaluke",
@@ -1896,7 +1896,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/kupo-nuts",
     accessed: "2026-10-24",
-    notes: "Documents Moguta's Kupo Nut rewards: the first delivery on each disc has a fixed prize, while additional same-disc deliveries randomly yield a Tent, Phoenix Pinion, or Ether. It also records the one-nut-at-a-time inventory limit and the need to preserve the unique final Kupo Nut for a perfect item list. The sidequest page supports the optional Moguta exchange and reward, not the return from Gizamaluke's Grotto to the Invincible.",
+    notes: "Documents Moguta's Kupo Nut rewards: the first delivery on each disc has a fixed prize, with a Holy Bell [Key Item] on Disc I, while additional same-disc deliveries randomly yield a Tent, Phoenix Pinion, or Ether. It also records the one-nut-at-a-time inventory limit and the need to preserve the unique final Kupo Nut for a perfect item list. The sidequest page supports the optional Moguta exchange and reward, not the return from Gizamaluke's Grotto to the Invincible.",
   },
   {
     id: "jegged-kupo-nuts",
@@ -3960,7 +3960,7 @@ export const objectives: GameObjective[] = [
     id: "disc-1.journey-to-burmecia.kupo-nut-holy-bell",
     title: "Turn in the Disc I Kupo Nut and obtain the Holy Bell",
     category: "collection",
-    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "gamefaqs-kupo-nuts-71891", "opatil-gizamaluke-map"],
+    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "gamefaqs-kupo-nuts-71891", "jegged-gizamaluke", "opatil-gizamaluke-map"],
     chapterIds: ["disc-1.journey-to-burmecia"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
