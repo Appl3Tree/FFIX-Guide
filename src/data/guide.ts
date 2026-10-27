@@ -1176,7 +1176,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ice-cavern",
     accessed: "2026-10-24",
-    notes: "Room route, eight chests, mist-jet encounters, Mogster Lesson 2, Mois's Mognet letter, boss stats/steals, and solo Zidane strategy. Original PlayStation guide; later releases may differ in achievements and controls.",
+    notes: "Room route, eight chests, mist-jet encounters, Mogster Lesson 2, Mois's Mognet letter, and the Black Waltz 1/Sealion boss table. It lists one guaranteed Hi-Potion drop for Black Waltz 1 and one guaranteed Phoenix Down drop for Sealion. Original PlayStation guide; later releases may differ in achievements and controls.",
   },
   {
     id: "gamefaqs-ice-cavern-79143",
@@ -1272,7 +1272,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/05-Ice-Cavern.html",
     accessed: "2026-10-23",
-    notes: "Independent cross-check for the eight Ice Cavern chests, Observatory Mountain's hidden Hi-Potion by the entrance cart and 135-Gil stash, thawing Mois, the Mognet letter, the solo boss encounter, and the route onward. Its Disc I route confirms that the Observatory items can be collected on the first pass.",
+    notes: "Independent cross-check for the eight Ice Cavern chests, Observatory Mountain's hidden Hi-Potion by the entrance cart and 135-Gil stash, thawing Mois, the Mognet letter, and the solo boss encounter. It lists the guaranteed Hi-Potion and Phoenix Down drops from Black Waltz 1 and Sealion. Its Disc I route confirms that the Observatory items can be collected on the first pass.",
   },
   {
     id: "gamerguides-ice-cavern",
@@ -1656,7 +1656,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/w_enemy.php?enemy=Gizamaluke",
     accessed: "2026-10-25",
-    notes: "Direct boss record used to cross-check Gizamaluke's level, HP, MP, Gil, EXP, AP, attack, and Flying type.",
+    notes: "Direct boss record used to cross-check Gizamaluke's level, HP, MP, Gil, EXP, AP, attack, Flying type, and Tent drop.",
   },
   {
     id: "cavesofnarshe-earth-guardian",
@@ -1856,7 +1856,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/09-Gizamalukes-Grotto.html",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit cross-check for Gizamaluke's Grotto's hidden Bronze Vest, Mythril Gloves, and Magus Hat, its Kupo Nut/Holy Bell sequence, the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. In the Grotto it locates the vest behind the wall on the left path, gloves along the Bell Room back wall near the top of the stairs, and hat on the platform beneath the bridge. It says to hand over the Kupo Nut at the great bell, then leave the moogle room to receive the Holy Bell from Moguta and open the boss door. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
+    notes: "Disc I first-visit cross-check for Gizamaluke's Grotto's hidden Bronze Vest, Mythril Gloves, and Magus Hat, its Kupo Nut/Holy Bell sequence, the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. It lists a Tent under Gizamaluke's drops. In the Grotto it locates the vest behind the wall on the left path, gloves along the Bell Room back wall near the top of the stairs, and hat on the platform beneath the bridge. It says to hand over the Kupo Nut at the great bell, then leave the moogle room to receive the Holy Bell from Moguta and open the boss door. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. Under the boss table it lists Tent as Gizamaluke's drop. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
   },
   {
     id: "rpgclassics-gizamaluke",
@@ -3984,6 +3984,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-1.journey-to-burmecia.gizamaluke-drops",
+    title: "Receive Gizamaluke's Tent drop",
+    category: "collection",
+    sourceIds: ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"],
+    chapterIds: ["disc-1.journey-to-burmecia"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
     id: "disc-1.journey-to-burmecia.south-gate-pickups",
     title: "Collect the South Gate Multina Racket and Potion",
     category: "collection",
@@ -4254,6 +4263,15 @@ export const objectives: GameObjective[] = [
     title: "Steal the available items from Black Waltz 1 and Sealion",
     category: "collection",
     sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-enemy-list-71891", "rpgclassics-ice-cavern"],
+    chapterIds: ["disc-1.ice-cavern"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-1.ice-cavern.boss-drops",
+    title: "Receive Black Waltz 1's and Sealion's guaranteed drops",
+    category: "collection",
+    sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"],
     chapterIds: ["disc-1.ice-cavern"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",

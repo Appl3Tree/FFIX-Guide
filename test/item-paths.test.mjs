@@ -1418,6 +1418,68 @@ test("Plant Brain's guaranteed Phoenix Down and conditional Potion drops keep se
   }
 });
 
+test("early Disc I boss drops have guaranteed source-linked item paths", () => {
+  const scenarios = [
+    {
+      chapterId: "disc-1.ice-cavern",
+      objectiveId: "disc-1.ice-cavern.boss-drops",
+      encounterId: "encounter.ice-cavern.black-waltz-1-sealion",
+      stepId: "ice-boss-guaranteed-drops",
+      sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"],
+      entries: [
+        ["enemy.black-waltz-1", "game-item.hi-potion", "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop"],
+        ["enemy.sealion", "game-item.phoenix-down", "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop"],
+      ],
+    },
+    {
+      chapterId: "disc-1.journey-to-burmecia",
+      objectiveId: "disc-1.journey-to-burmecia.gizamaluke-drops",
+      encounterId: "encounter.gizamaluke-grotto.gizamaluke",
+      stepId: "journey-gizamaluke-guaranteed-drop",
+      sourceIds: ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"],
+      entries: [
+        ["enemy.gizamaluke", "game-item.tent", "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop"],
+      ],
+    },
+  ];
+
+  for (const scenario of scenarios) {
+    const objective = objectives.find((entry) => entry.id === scenario.objectiveId);
+    const encounter = enemyEncounters.find((entry) => entry.id === scenario.encounterId);
+    const step = walkthroughChapters
+      .find((chapter) => chapter.areaId === scenario.chapterId)
+      ?.sections.flatMap((section) => section.steps)
+      .find((entry) => entry.id === scenario.stepId);
+
+    assert.ok(objective, `${scenario.objectiveId} is missing`);
+    assert.ok(encounter?.objectiveIds.includes(scenario.objectiveId));
+    assert.ok(step?.objectiveIds.includes(scenario.objectiveId));
+    assert.match(step?.text ?? "", /guaranteed/);
+    for (const [enemyId, itemId, pathId] of scenario.entries) {
+      const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+      const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+      const item = gameItems.find((entry) => entry.id === itemId);
+      assert.ok(enemy?.routeObjectiveIds.includes(scenario.objectiveId));
+      assert.ok(enemy?.drops.some((slot) => slot.slot === "always" && slot.itemId === itemId));
+      assert.ok(path, `${pathId} is missing`);
+      assert.equal(path.itemId, itemId);
+      assert.equal(path.chapterId, scenario.chapterId);
+      assert.equal(path.method, "drop");
+      assert.equal(path.quantity, 1);
+      assert.equal(path.availability, "one-time-encounter");
+      assert.match(path.conditions ?? "", /guaranteed/);
+      assert.ok(path.walkthroughObjectiveIds?.includes(scenario.objectiveId));
+      assert.ok(item, `${itemId} is missing`);
+      for (const sourceId of scenario.sourceIds) {
+        assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+        assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);
+        assert.ok(objective.sourceIds.includes(sourceId), `${scenario.objectiveId} is missing ${sourceId}`);
+        assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+      }
+    }
+  }
+});
+
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
   const sourceIds = [
     "gamefaqs-journey-to-burmecia-71891",

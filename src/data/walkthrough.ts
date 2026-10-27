@@ -560,6 +560,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Defeat Black Waltz 1 first: while it remains alive, it can heal Sealion, and leaving it alive after Sealion falls can cause another Sealion to be summoned. Then finish Sealion. Its attacks become more dangerous as its jewel changes color, so heal before Zidane is near defeat rather than waiting for a critical turn.",
             detail: "Black Waltz 1 has 229 HP and is Level 2; Sealion has 472 HP and is Level 3. Fire is effective against both. Sealion absorbs Ice and nullifies Water and Earth; Slow is listed as effective against both. One enemy table also lists Ice as a Black Waltz 1 weakness, while most route references do not, so Fire is the consistent elemental choice. If Zidane enters Trance after the important steals, Tidal Flame can damage both enemies.",
           },
+          {
+            id: "ice-boss-guaranteed-drops",
+            kind: "pickup",
+            text: "Defeat Black Waltz 1, then Sealion, to receive their guaranteed Hi-Potion and Phoenix Down drops.",
+            detail: "GameFAQs and Jegged list one guaranteed drop from each enemy. These are separate from the four stealable items and the Phoenix Down chest earlier in the cavern.",
+            objectiveIds: ["disc-1.ice-cavern.boss-drops"],
+          },
         ],
       },
       {
@@ -1239,7 +1246,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-grotto-boss",
         title: "Sacred Room — prepare for and defeat Gizamaluke",
         summary: "Save and restock before using the Holy Bell on the remaining door. Gizamaluke has heavy physical and Water attacks, and counters damaging magic with Silence.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "gamefaqs-single-character-27398", "gamefaqs-equipment-33383", "gamefaqs-items-71891", "elitegrindlab-gizamaluke"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "gamefaqs-single-character-27398", "gamefaqs-equipment-33383", "gamefaqs-items-71891", "elitegrindlab-gizamaluke", "cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss"],
         steps: [
           {
             id: "journey-gizamaluke-preparation",
@@ -1253,6 +1260,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "If you want the one-time boss steals, use Zidane to seek Elixir, Magus Hat, and Ice Staff before defeating Gizamaluke. Keep everyone healed: Crash is a heavy physical hit, Water can target the whole party, and Silent Voice counters damaging magic by silencing its caster. Vivi can use Thunder, Freya can Jump out of danger, and Zidane and Quina can attack physically.",
             detail: "Steal-slot odds vary between published tables, so no percentages or attempt count are promised. The fight can be dangerous while Zidane spends turns stealing. A Tent may inflict Darkness or Silence, but sources differ on whether the risk of fully healing Gizamaluke makes this trick worthwhile; save first and stop if the status fails. If the Ice Staff steal is missed, the item is in a later Cleyra's Trunk chest; Magus Hat has a Burmecia Mogshop source, and Elixirs have other sources. Gizamaluke drops a Tent.",
             objectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-steals"],
+          },
+          {
+            id: "journey-gizamaluke-guaranteed-drop",
+            kind: "pickup",
+            text: "After defeating Gizamaluke, collect its guaranteed Tent drop.",
+            detail: "The boss's Tent reward is separate from a Tent used to try for Darkness, Silence, or Poison during the fight.",
+            objectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-drops"],
           },
         ],
       },

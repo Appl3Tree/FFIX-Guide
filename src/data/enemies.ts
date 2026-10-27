@@ -211,6 +211,7 @@ const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", 
 const iceCavernSealionSources = [...iceCavernBossSources, "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"];
 const iceCavernPreparationSources = [...iceCavernSealionSources, "gamerguides-ice-cavern"];
 const iceCavernStealsObjectiveId = "disc-1.ice-cavern.boss-steals";
+const iceCavernDropsObjectiveId = "disc-1.ice-cavern.boss-drops";
 const iceCavernStealsMissableId = "missable.disc-1.ice-cavern.boss-steals";
 const iceCavernStealsCutoffId = "cutoff.ice-cavern.boss-steals";
 const blackWaltz2StealsObjectiveId = "disc-1.village-of-dali.black-waltz-2-steals";
@@ -223,6 +224,7 @@ const cargoShipBlackWaltzStealsObjectiveId = "disc-1.cargo-ship.black-waltz-3-st
 const cargoShipBlackWaltzStealsMissableId = "missable.disc-1.cargo-ship.black-waltz-3-steals";
 const cargoShipBlackWaltzStealsCutoffId = "cutoff.cargo-ship.black-waltz-3-steals";
 const gizamalukeStealsObjectiveId = "disc-1.journey-to-burmecia.gizamaluke-steals";
+const gizamalukeDropsObjectiveId = "disc-1.journey-to-burmecia.gizamaluke-drops";
 const gizamalukeStealsMissableId = "missable.disc-1.journey-to-burmecia.gizamaluke-steals";
 const gizamalukeStealsCutoffId = "cutoff.gizamaluke.boss-steals";
 const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
@@ -569,7 +571,7 @@ const iceCavernEncounters: EnemyEncounter[] = [
       { enemyId: "enemy.sealion", quantity: 1 },
     ],
     sourceIds: iceCavernBossSources,
-    objectiveIds: [iceCavernStealsObjectiveId],
+    objectiveIds: [iceCavernStealsObjectiveId, iceCavernDropsObjectiveId],
     missableIds: [iceCavernStealsMissableId],
     cutoffIds: [iceCavernStealsCutoffId],
     notes: ["Black Waltz 1 summons Sealion at the start. Defeat Waltz first: it heals Sealion and can summon another if Sealion falls while Waltz remains."],
@@ -629,7 +631,7 @@ const grottoEncounters: EnemyEncounter[] = [
     kind: "boss",
     formation: [{ enemyId: "enemy.gizamaluke", quantity: 1 }],
     sourceIds: gizamalukeBossSources,
-    objectiveIds: [gizamalukeStealsObjectiveId],
+    objectiveIds: [gizamalukeStealsObjectiveId, gizamalukeDropsObjectiveId],
     missableIds: [gizamalukeStealsMissableId],
     cutoffIds: [gizamalukeStealsCutoffId],
     notes: ["The Elixir, Magus Hat, and Ice Staff steals are available only during this one-time fight; the item types have later sources."],
@@ -4825,7 +4827,7 @@ const iceCavernEnemyRecords: EnemyRecord[] = [
       confidence: "partial",
       sourceIds: iceCavernPreparationSources,
     },
-    routeObjectiveIds: [iceCavernStealsObjectiveId],
+    routeObjectiveIds: [iceCavernStealsObjectiveId, iceCavernDropsObjectiveId],
     notes: ["The regular battle guides agree on level 2 and 229 HP. The checked sources identify this as a solo Zidane fight; the original PlayStation data has not been compared against remastered releases."],
   }, iceCavernChapterId, iceCavernPreparationSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
   chapterBoss({
@@ -4874,7 +4876,7 @@ const iceCavernEnemyRecords: EnemyRecord[] = [
       confidence: "partial",
       sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"],
     },
-    routeObjectiveIds: [iceCavernStealsObjectiveId],
+    routeObjectiveIds: [iceCavernStealsObjectiveId, iceCavernDropsObjectiveId],
     notes: ["Orb-color behavior differs between the two walkthroughs: GameFAQs lists Blizzard and then Blizzara across phases, while Jegged gives regular attacks in blue and Blizzard in yellow. The exact spell timing is left source-specific."],
   }, iceCavernChapterId, iceCavernSealionSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
 ];
@@ -4973,7 +4975,7 @@ const grottoEnemyRecords: EnemyRecord[] = [
       confidence: "partial",
       sourceIds: gizamalukePreparationSources,
     },
-    routeObjectiveIds: [gizamalukeStealsObjectiveId],
+    routeObjectiveIds: [gizamalukeStealsObjectiveId, gizamalukeDropsObjectiveId],
     notes: ["The boss drops a Tent. Route sources agree on the three named steals, but their printed steal rates differ; no probabilities or attempt counts are asserted."],
   }, journeyToBurmeciaChapterId, gizamalukeBossSources, [gizamalukeStealsMissableId], [gizamalukeStealsCutoffId]),
 ];

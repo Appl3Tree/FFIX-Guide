@@ -3776,6 +3776,51 @@ if (!plantBrainDropsObjective || !plantBrainDropsEncounter?.objectiveIds.include
   !plantBrainDropsRecord?.notes.some((note) => note.includes("37.5%, 12.5%, and 0.4%") && note.includes("different rarity labels"))) {
   errors.push("Plant Brain's guaranteed Phoenix Down and three conditional Potion drop slots must have sourced paths and a dedicated objective preserving the rarity-label conflict.");
 }
+const earlyBossDropExpectations = [
+  {
+    chapterId: "disc-1.ice-cavern",
+    objectiveId: "disc-1.ice-cavern.boss-drops",
+    encounterId: "encounter.ice-cavern.black-waltz-1-sealion",
+    stepId: "ice-boss-guaranteed-drops",
+    sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"],
+    entries: [
+      ["enemy.black-waltz-1", "game-item.hi-potion", "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop"],
+      ["enemy.sealion", "game-item.phoenix-down", "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop"],
+    ],
+  },
+  {
+    chapterId: "disc-1.journey-to-burmecia",
+    objectiveId: "disc-1.journey-to-burmecia.gizamaluke-drops",
+    encounterId: "encounter.gizamaluke-grotto.gizamaluke",
+    stepId: "journey-gizamaluke-guaranteed-drop",
+    sourceIds: ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"],
+    entries: [
+      ["enemy.gizamaluke", "game-item.tent", "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop"],
+    ],
+  },
+];
+for (const expectation of earlyBossDropExpectations) {
+  const objective = objectivesById.get(expectation.objectiveId);
+  const encounter = enemyEncounters.find((entry) => entry.id === expectation.encounterId);
+  const step = walkthroughChapters.find((chapter) => chapter.areaId === expectation.chapterId)?.sections
+    .flatMap((section) => section.steps).find((entry) => entry.id === expectation.stepId);
+  if (!objective || !encounter?.objectiveIds.includes(expectation.objectiveId) ||
+    !step?.objectiveIds.includes(expectation.objectiveId) ||
+    expectation.entries.some(([enemyId, itemId, pathId]) => {
+      const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+      const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+      const item = gameItems.find((entry) => entry.id === itemId);
+      return !enemy?.routeObjectiveIds.includes(expectation.objectiveId) ||
+        !enemy.drops.some((slot) => slot.slot === "always" && slot.itemId === itemId) ||
+        !path || path.itemId !== itemId || path.chapterId !== expectation.chapterId || path.method !== "drop" ||
+        path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+        !path.conditions?.includes("guaranteed") || !path.walkthroughObjectiveIds?.includes(expectation.objectiveId) ||
+        !item || expectation.sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+          !item.sourceIds.includes(sourceId) || !objective.sourceIds.includes(sourceId));
+    })) {
+    errors.push(`Guaranteed item drop paths, encounter links, and collection objective for ${expectation.chapterId} must stay source-linked.`);
+  }
+}
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
 const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;

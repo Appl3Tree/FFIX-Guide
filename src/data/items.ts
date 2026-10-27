@@ -191,6 +191,8 @@ const blackWaltz2EtherDropSources = {
   rare: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
 };
 const plantBrainDropSources = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
+const iceCavernBossDropSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+const gizamalukeDropSources = ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"];
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
 const bronzeGlovesReferenceSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", ...evilForestPickupSources];
@@ -2606,7 +2608,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.protection-bell", name: "Protection Bell", category: "key-item", sourceIds: burmeciaSources, verification: "partial" },
   { id: "game-item.moccha-coffee", name: "Moccha Coffee", category: "key-item", sourceIds: [...bohdenArchPickupSources, "rpgclassics-coffee"], verification: "partial" },
   { id: "game-item.ether", name: "Ether", category: "consumable", sourceIds: [...bohdenArchPickupSources, ...lindblumFirstVisitPickupSources, "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", ...evilForestPickupSources, ...daliUndergroundSources, "cavesofnarshe-dali-enemies", ...burmeciaSources, ...fossilRooSources, ...iifaTreeSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", ...mountGulugSources, ...tantarianSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-the-final-battle-71891", "gamefaqs-monster-list-20490", "gamefaqs-enemy-list-71891", "jegged-kuja-necron-final-showdown", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "elitegrindlab-madain-sari-eidolon-wall", "megane-kangaroo-disc4-burmecia-recovery", "gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
-  { id: "game-item.phoenix-down", name: "Phoenix Down", category: "consumable", sourceIds: [...earlyPinnacleRocksPickupSources, ...evilForestPickupSources, ...daliUndergroundSources, ...burmeciaSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-return-to-alexandria-71891", "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "megane-kangaroo-disc4-burmecia-recovery"], verification: "partial" },
+  { id: "game-item.phoenix-down", name: "Phoenix Down", category: "consumable", sourceIds: [...earlyPinnacleRocksPickupSources, ...evilForestPickupSources, ...daliUndergroundSources, ...burmeciaSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-return-to-alexandria-71891", ...iceCavernBossDropSources, "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "megane-kangaroo-disc4-burmecia-recovery"], verification: "partial" },
   { id: "game-item.gysahl-greens", name: "Gysahl Greens", category: "consumable", sourceIds: gysahlGreensSources, verification: "partial" },
   { id: "game-item.dead-pepper", name: "Dead Pepper", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgsite-ffix-chocobo-guide"], verification: "partial" },
   { id: "game-item.phoenix-pinion", name: "Phoenix Pinion", category: "consumable", sourceIds: [...daliUndergroundSources, ...alexandriaSources, ...phoenixPinionSources, "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-stiltzkin-shopping-71891", "gamefaqs-cleyra-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "gamefaqs-madain-sari-71891", "jegged-chocographs", "gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
@@ -2628,7 +2630,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.protect-ring", name: "Protect Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis"], verification: "partial" },
   { id: "game-item.save-the-queen", name: "Save the Queen", category: "equipment", sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis"], verification: "partial" },
   { id: "game-item.ribbon", name: "Ribbon", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", "gamefaqs-aerial-exploration-71891", "jegged-chocographs", "gamefaqs-treno-auction-71891", "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "jegged-add-ons"], verification: "partial" },
-  { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: [...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, ...lindblumFirstVisitPickupSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bestiary-n-s", "elitegrindlab-madain-sari-eidolon-wall", "megane-kangaroo-disc4-burmecia-recovery", "gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"], verification: "partial" },
+  { id: "game-item.tent", name: "Tent", category: "consumable", sourceIds: [...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...evilForestPickupSources, ...gizamalukeDropSources, ...ipsensMogshopReentrySources, ...lindblumFirstVisitPickupSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bestiary-n-s", "elitegrindlab-madain-sari-eidolon-wall", "megane-kangaroo-disc4-burmecia-recovery", "gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde"], verification: "partial" },
   { id: "game-item.javelin", name: "Javelin", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-ipsens-castle-71891"], verification: "partial" },
   { id: "game-item.mythril-spear", name: "Mythril Spear", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...burmeciaSources, ...mythrilSpearReferenceSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.lightning-staff", name: "Lightning Staff", category: "equipment", sourceIds: [...burmeciaSources, ...lightningStaffReferenceSources], verification: "partial" },
@@ -2646,7 +2648,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: [...leatherWristReferenceSources, ...daliUndergroundSources], verification: "partial" },
   { id: "game-item.kupo-nut", name: "Kupo Nut", category: "key-item", sourceIds: [...burmeciaSources, ...lindblumFirstVisitPickupSources, "gamefaqs-kupo-nuts-71891", "gamefaqs-moogle-faq-23306", ...mountGulugSources], verification: "partial" },
   { id: "game-item.holy-bell", name: "Holy Bell", category: "key-item", sourceIds: grottoHolyBellSources, verification: "partial" },
-  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...observatoryMountainPickupSources, ...lindblumFirstVisitPickupSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
+  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...observatoryMountainPickupSources, ...lindblumFirstVisitPickupSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", ...oeilvertSources, ...iceCavernBossDropSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.shield-armor", name: "Shield Armor", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.power-vest", name: "Power Vest", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.feather-boots", name: "Feather Boots", category: "equipment", sourceIds: [...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-on-the-high-seas-71891", "gamefaqs-treno-auction-71891", "gamefaqs-memoria-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
@@ -4136,6 +4138,48 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
   },
 ];
 
+const iceCavernBossDropPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop",
+    itemId: "game-item.hi-potion",
+    chapterId: "disc-1.ice-cavern",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Defeat Black Waltz 1 to receive its guaranteed Hi-Potion from the Always drop slot.",
+    notes: "GameFAQs and Jegged both list one Hi-Potion as Black Waltz 1's guaranteed drop.",
+    walkthroughObjectiveIds: ["disc-1.ice-cavern.boss-drops"],
+    sourceIds: iceCavernBossDropSources,
+  },
+  {
+    id: "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop",
+    itemId: "game-item.phoenix-down",
+    chapterId: "disc-1.ice-cavern",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Defeat Sealion to receive its guaranteed Phoenix Down from the Always drop slot.",
+    notes: "GameFAQs and Jegged both list one Phoenix Down as Sealion's guaranteed drop.",
+    walkthroughObjectiveIds: ["disc-1.ice-cavern.boss-drops"],
+    sourceIds: iceCavernBossDropSources,
+  },
+];
+
+const gizamalukeDropPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop",
+    itemId: "game-item.tent",
+    chapterId: "disc-1.journey-to-burmecia",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Defeat Gizamaluke to receive its guaranteed Tent drop.",
+    notes: "Caves of Narshe and Final Fantasy Online record Tent as the boss drop; Jegged independently lists Tent under Drops. This reward is separate from any Tent used on Gizamaluke during the fight.",
+    walkthroughObjectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-drops"],
+    sourceIds: gizamalukeDropSources,
+  },
+];
+
 type MoorockShopLocation = "bran-bal" | "pandemonium";
 type MoorockProductSourceGroup = "equipment" | "supply" | "dagger" | "magic-tag";
 type MoorockProduct = { slug: string; itemId: string; name: string; price: number; sourceGroup: MoorockProductSourceGroup };
@@ -4605,6 +4649,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...observatoryMountainPickupPaths,
   ...blackWaltz2EtherDropPaths,
   ...plantBrainDropPaths,
+  ...iceCavernBossDropPaths,
+  ...gizamalukeDropPaths,
   ...burmeciaMimicLootPaths,
   ...earlyDisc1ExplorationItemPaths,
   ...bohdenArchItemPaths,
