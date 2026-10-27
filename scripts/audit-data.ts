@@ -5676,6 +5676,31 @@ if (
 ) {
   errors.push("Desert Palace needs its four sourced ordinary enemies and Eat teachers, a separate Valia Pira boss, and source-marked boss stat and loot disagreements.");
 }
+const valiaPiraPreparation = valiaPira?.preparationGuidance;
+const valiaPiraSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.desert-palace")?.sections.find((section) => section.id === "desert-palace-valia-pira-and-exit");
+const valiaPiraPreparationStep = valiaPiraSection?.steps.find((step) => step.id === "desert-palace-valia-pira-preparation");
+const valiaPiraBattleStep = valiaPiraSection?.steps.find((step) => step.id === "desert-palace-valia-pira-battle");
+if (!valiaPiraPreparation || valiaPiraPreparation.suggestedLevelRange !== undefined ||
+  !valiaPiraPreparation.levelRationale.includes("Level 36") ||
+  !valiaPiraPreparation.levelRationale.includes("not a party-level target") ||
+  !valiaPiraPreparation.difficultyAssessment?.includes("Medium") ||
+  !valiaPiraPreparation.difficultyAssessment.includes("subjective single-source") ||
+  !valiaPiraPreparation.optionalGrinding.includes("six bloodstones") ||
+  !valiaPiraPreparation.setupAdvice.includes("all six bloodstones") ||
+  !valiaPiraPreparation.setupAdvice.includes("all-element nullification") ||
+  !valiaPiraPreparation.setupAdvice.includes("Body Temp") ||
+  !valiaPiraPreparation.setupAdvice.includes("Reflect") ||
+  !valiaPiraPreparation.setupAdvice.includes("Zidane is at Oeilvert") ||
+  !valiaPiraPreparation.setupAdvice.includes("Magic Hammer or Osmose") ||
+  !valiaPiraPreparation.setupAdvice.includes("Water weakness is disputed") ||
+  !valiaPiraPreparation.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !valiaPira?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !valiaPiraSection?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !valiaPiraPreparationStep?.text.includes("all six bloodstones") ||
+  !valiaPiraPreparationStep.detail?.includes("Level 36 is the boss's stat") ||
+  !valiaPiraBattleStep?.detail?.includes("Water weakness is disputed")) {
+  errors.push("Valia Pira preparation must distinguish enemy level from party guidance, connect the six-stone and magic counters to its boss checkpoint, and retain the Water weakness dispute.");
+}
 const alexandriaCardPlayersObjectiveId = "disc-3.the-home-front.card-players";
 const alexandriaCardRosterObjectiveId = "disc-3.the-home-front.card-player-roster";
 const alexandriaCardPlayersWarning = missables.find((missable) => missable.id === "missable.disc-3.the-home-front.card-players");

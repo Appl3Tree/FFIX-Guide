@@ -4746,19 +4746,19 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "desert-palace-valia-pira-and-exit",
         title: "Valia Pira and the reunion — collect the card before leaving",
         summary: "The six bloodstones suppress the boss's opening enhancements. Afterward the game returns to Zidane, opens Kuja's quarters, and sends the story to the Lost Continent.",
-        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamerguides-desert-palace", "gamefaqs-monster-list-20490"],
+        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamerguides-desert-palace", "gamefaqs-monster-list-20490", "gamefaqs-boss-guide-31490"],
         steps: [
           {
             id: "desert-palace-valia-pira-preparation",
             kind: "optional",
-            text: "Climb between the statues and light the final candle to trigger Valia Pira. The fight is much safer after the six stones; put Body Temp on anyone who can equip it, then use Reflect on the party or Eiko's Carbuncle to blunt its magic-only offense.",
-            detail: "Published HP values and elemental weaknesses conflict. This guide does not use an exact HP target or require a particular weakness; the consistent strategy is to collect the stones, protect the party from status effects, and use reliable attacks. Quina can use Magic Hammer or Osmose to drain the boss's MP, which also ends the battle, but this route is slower.",
+            text: "Before lighting the final candle, confirm all six bloodstones, equip Body Temp if available, then use Reflect on the party or Eiko's Carbuncle to blunt Valia Pira's magic-only offense.",
+            detail: "Each bloodstone removes one opening enhancement, including the boss's elemental nullification. Zidane remains at Oeilvert, and Valia Pira's steal table lists only Nothing, so skip steal planning. The sources give no party-level target; Level 36 is the boss's stat, and the Medium label comes from one subjective PlayStation guide.",
           },
           {
             id: "desert-palace-valia-pira-battle",
             kind: "combat",
             text: "Defeat Valia Pira. It uses spells and status attacks rather than physical attacks, and it has no useful steal target. With all six stones collected, use your strongest available attacks while keeping the party healed. If you have not activated all six stones, go back and finish the puzzle before lighting the final candle.",
-            detail: "GameFAQs and the older PAL Monster List show an Elixir in the guaranteed drop slot and Ether in the three chance-based slots; Flactem also mentions Ether. This is a battle reward, separate from the Fairy Earrings chest. Jegged reports 12,119 HP while both GameFAQs tables report 12,120, and the older table lists Water as normal while the walkthrough lists it as weak, so the route omits fixed HP and weakness claims.",
+            detail: "Reflect or Carbuncle can bounce the boss's magic back; if it casts Reflect on itself, adjust how you target spells. Quina's Magic Hammer or Osmose can end the battle by draining MP to zero. Wind is supported by the stat tables, but Water weakness is disputed, so Holy, Wind, or reliable non-elemental attacks are safer recommendations. GameFAQs and the older PAL Monster List show an Elixir in the guaranteed drop slot and Ether in the three chance-based slots; Flactem also mentions Ether. Jegged reports 12,119 HP while both GameFAQs tables report 12,120, so the route omits a fixed HP claim.",
             objectiveIds: ["disc-3.desert-palace.valia-pira"],
           },
           {

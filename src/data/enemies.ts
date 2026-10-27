@@ -183,6 +183,7 @@ const pualeiPlainsEncounterSources = ["gamefaqs-journey-to-iifa-tree-71891", "ga
 const pualeiFriendlyNymphSources = ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"];
 const desertPalaceEnemySources = ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-abilities-71891"];
 const desertPalaceBossSources = ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "elitegrindlab-desert-palace", "gamefaqs-monster-list-20490"];
+const valiaPiraPreparationSources = [...desertPalaceBossSources, "gamefaqs-boss-guide-31490"];
 const desertPalaceBossTableSources = ["gamefaqs-desert-palace-71891", "gamefaqs-monster-list-20490"];
 const ipsensCastleEnemySources = [enemyListSourceId, "gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle", "elitegrindlab-ipsens-castle", "gamefaqs-abilities-71891", "rpgclassics-bestiary-t-z"];
 const ipsensCastleEncounterSources = [enemyListSourceId, "gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "flactem-ipsens-castle"];
@@ -1968,9 +1969,17 @@ const desertPalaceEnemyRecords: EnemyRecord[] = [
       { title: "Complete the six bloodstones before the fight", detail: "Collect the six palace stones before lighting the final candle; they suppress Valia Pira's opening enhancements. Protect the party from Heat and Freeze, and use Reflect or Carbuncle against its magic-focused offense.", sourceIds: desertPalaceBossSources },
       { title: "Optional MP-depletion win", detail: "The battle ends when Valia Pira's MP reaches zero. Quina can use Magic Hammer or Osmose if the party prefers this slower route.", sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Valia Pira's Level 36 is the boss's stat, not a party-level target. The reviewed route and boss sources do not set a normal-party level recommendation.",
+      difficultyAssessment: "One PlayStation boss FAQ calls the battle Medium, a subjective single-source label. GameFAQs' route says the difficulty depends heavily on the party and how many bloodstones were collected.",
+      optionalGrinding: "No reviewed route gives a party-level target or a grinding quota. Collecting the six bloodstones directly removes the boss's opening enhancements; treat extra leveling as optional if the remaining fight still feels difficult.",
+      setupAdvice: "Before lighting the final candle, collect all six bloodstones: each disables one opening enhancement, including the all-element nullification. Use Mogsam's Tent/save checkpoint, equip Body Temp against Heat and Freeze, and consider magic defense or status protection. Valia Pira is a magic-only caster; Reflect or Eiko's Carbuncle can turn its spells back on it. Zidane is at Oeilvert, and the boss has no stealable item. If Quina knows Magic Hammer or Osmose, draining its MP to zero also ends the fight. Wind is supported by the boss tables, while Water weakness is disputed; choose Wind, Holy, or other reliable damage instead of depending on Water. Level 36 is the enemy stat, not a party target.",
+      confidence: "disputed",
+      sourceIds: valiaPiraPreparationSources,
+    },
     routeObjectiveIds: [valiaPiraObjectiveId],
     notes: ["GameFAQs and the older PAL Monster List report 12,120 HP; Jegged reports 12,119, so the stat is marked disputed. The GameFAQs walkthrough reports both Wind and Water weakness, while the older PAL Monster List reports Wind weakness and Water as normal. Steal rows are all Nothing; the boss has an Elixir always-drop slot and Ether in the three chance-based drop slots."],
-  }, desertPalaceChapterId, desertPalaceBossSources),
+  }, desertPalaceChapterId, valiaPiraPreparationSources),
 ];
 
 const ipsensCastleEncounters: EnemyEncounter[] = [
