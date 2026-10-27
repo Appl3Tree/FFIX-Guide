@@ -1986,7 +1986,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "return-alexandria-beatrix-steals",
             kind: "combat",
             text: "On the return to the Queen's Room, strip Freya's Add-on before the scripted Beatrix battle. Have Zidane attempt Phoenix Down, Ice Brand, and Survival Vest while the party stays alive; let the fight end normally instead of trying to defeat Beatrix.",
-            detail: "Slow can extend the scripted window. This is Beatrix's third encounter: Survival Vest is the listed third steal, while Thunder Gloves belonged to the earlier Cleyra fight. The published rank categories do not list battle steals, so this encounter is not counted as a confirmed source of Treasure Hunter points. Stop stealing and heal if the party is at risk.",
+            detail: "Slow can extend the scripted window. The battle ends when Beatrix reaches 0 HP or on her tenth turn, followed by Climhazzard. This is Beatrix's third encounter: Survival Vest is the listed third steal, while Thunder Gloves belonged to the earlier Cleyra fight. One PS1 boss FAQ rates this fight Medium, a subjective single-source label, but repeats Cleyra's Thunder Gloves in its steal table. The published rank categories do not list battle steals, so this encounter is not counted as a confirmed source of Treasure Hunter points. Stop stealing and heal if the party is at risk.",
             objectiveIds: ["disc-2.return-to-alexandria.beatrix-steals"],
           },
         ],

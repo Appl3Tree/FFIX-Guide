@@ -4774,6 +4774,23 @@ for (const expected of alexandriaBeatrixSteals) {
     errors.push(`Alexandria Beatrix's ${expected.itemId} steal must link the enemy table, one-time item path, and warning objective.`);
   }
 }
+const alexandriaBeatrixPreparation = alexandriaBeatrix?.preparationGuidance;
+const alexandriaBeatrixPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-alexandria")?.sections.find((section) => section.id === "return-alexandria-zorn-thorn-and-beatrix");
+const alexandriaBeatrixPreparationStep = alexandriaBeatrixPreparationSection?.steps.find((step) => step.id === "return-alexandria-beatrix-steals");
+if (!alexandriaBeatrix || alexandriaBeatrix.stats.find((stat) => stat.field === "level")?.value !== 19 ||
+  !alexandriaBeatrixPreparation || alexandriaBeatrixPreparation.suggestedLevelRange !== undefined ||
+  !alexandriaBeatrixPreparation.levelRationale.includes("enemy stat") || !alexandriaBeatrixPreparation.levelRationale.includes("party-level recommendation") ||
+  !alexandriaBeatrixPreparation.difficultyAssessment?.includes("Medium") || !alexandriaBeatrixPreparation.difficultyAssessment.includes("subjective, single-source") ||
+  !alexandriaBeatrixPreparation.difficultyAssessment.includes("Thunder Gloves") ||
+  !alexandriaBeatrixPreparation.optionalGrinding.includes("Steiner-only") || !alexandriaBeatrixPreparation.optionalGrinding.includes("before the rescue timer") ||
+  !alexandriaBeatrixPreparation.setupAdvice.includes("Survival Vest") || !alexandriaBeatrixPreparation.setupAdvice.includes("Slow") ||
+  !alexandriaBeatrixPreparation.setupAdvice.includes("Climhazzard") || !alexandriaBeatrixPreparation.setupAdvice.includes("tenth turn") ||
+  !alexandriaBeatrixPreparation.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !alexandriaBeatrixPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !alexandriaBeatrixPreparationStep?.detail?.includes("Medium") || !alexandriaBeatrixPreparationStep.detail.includes("Thunder Gloves") ||
+  !alexandriaBeatrixPreparationStep.detail.includes("followed by Climhazzard")) {
+  errors.push("Alexandria Beatrix preparation must keep Level 19 as an enemy stat, label the subjective Medium rating, and preserve the Survival Vest/survival script in bestiary and route guidance.");
+}
 const alexandriaZornThornEncounter = enemyEncounters.find((candidate) => candidate.id === "encounter.return-to-alexandria.zorn-thorn");
 const alexandriaZorn = enemyRecords.find((candidate) => candidate.id === "enemy.zorn");
 const alexandriaThorn = enemyRecords.find((candidate) => candidate.id === "enemy.thorn");

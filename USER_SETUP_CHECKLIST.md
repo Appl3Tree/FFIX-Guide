@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 This is the consolidated list of actions that need the project owner's GitHub or Firebase account, a real sign-in, or a second device. The app currently stores progress in this browser only. Codex will complete and test the implementation that does not require your account before moving the Firebase steps to **Ready for User**.
 
-Latest Codex update: Added Zorn and Thorn's separate bestiary entries, paired encounter, and source-backed preparation guidance. Their Level 16 values are enemy stats, not party targets; one-point HP differences remain disputed. The route covers Slow, charge interrupts, recovery items, the countdown, and optional pre-timer Steiner leveling. Lint, build/typecheck/data audit, and whitespace checks pass; no project-owner account or setup action changed.
+Latest Codex update: Added preparation guidance to Beatrix's third Alexandria fight, preserved the Level 19 enemy stat without inventing a party target, and labeled the single-source Medium rating subjective. The guide keeps Cleyra's Thunder Gloves out of Alexandria's Survival Vest steal table and documents Slow, healing, and the scripted ending. Lint, build/typecheck/data audit, and whitespace checks pass; no project-owner account or setup action changed.
+
+Previous Codex update: Added Zorn and Thorn's separate bestiary entries, paired encounter, and source-backed preparation guidance. Their Level 16 values are enemy stats, not party targets; one-point HP differences remain disputed. The route covers Slow, charge interrupts, recovery items, the countdown, and optional pre-timer Steiner leveling. Lint, build/typecheck/data audit, and whitespace checks passed; no project-owner account or setup action changed.
 
 Previous Codex update: Added Cleyra Beatrix preparation, labeled its single-source Rough rating subjective, and separated Level 17 from any party-level recommendation. The encounter is documented as scripted survival and stealing, without a grinding-to-win goal. Lint, build/typecheck/data audit, and whitespace checks passed; no project-owner account or setup action changed.
 

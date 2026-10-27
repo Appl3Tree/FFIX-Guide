@@ -264,6 +264,7 @@ const alexandriaBeatrixStealsObjectiveId = "disc-2.return-to-alexandria.beatrix-
 const alexandriaBeatrixStealsMissableId = "missable.disc-2.return-to-alexandria.beatrix-steals";
 const alexandriaBeatrixStealsCutoffId = "cutoff.alexandria-rescue.beatrix-steals";
 const alexandriaBeatrixBossSources = ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "elitegrindlab-missables"];
+const alexandriaBeatrixPreparationSources = [...alexandriaBeatrixBossSources, "gamefaqs-boss-guide-31490"];
 const alexandriaZornThornStealsObjectiveId = "disc-2.return-to-alexandria.zorn-thorn-steals";
 const alexandriaZornThornStealsMissableId = "missable.disc-2.return-to-alexandria.zorn-thorn-steals";
 const alexandriaZornThornStealsCutoffId = "cutoff.alexandria-rescue.rotating-platform";
@@ -6980,9 +6981,17 @@ const allEnemyRecords: EnemyRecord[] = [
     ],
     blueMagic: [],
     strategies: [{ title: "Attempt the steals, then survive the scripted battle", detail: "Slow Beatrix if available and attempt Phoenix Down, Ice Brand, and Survival Vest while keeping the party alive. GameFAQs describes the battle ending when her HP reaches zero or after her tenth turn; do not rely on a particular steal rate.", sourceIds: alexandriaBeatrixBossSources }],
+    preparationGuidance: {
+      levelRationale: "Beatrix's Level 19 is her enemy stat, not a party-level recommendation. The reviewed normal-route sources give no standard party target; this is a scripted steal-and-survive window, not a conventional victory condition.",
+      difficultyAssessment: "One 2004 PlayStation boss FAQ rates this encounter Medium. That is a subjective, single-source label; its steal table carries Cleyra's Thunder Gloves rather than Alexandria's Survival Vest, so the rating is not used to revise this battle's item data.",
+      optionalGrinding: "No reviewed normal route gives a party-level target. A PS1 boss FAQ describes a Steiner-only Alexandrian Soldier leveling loop before the rescue timer starts, but Beatrix's fight still ends at 0 HP or her tenth turn; do not grind with the goal of defeating her.",
+      setupAdvice: "Before the party split, strip Freya's Add-on as the route directs. If collecting the one-time copies, have Zidane try for Phoenix Down, Ice Brand, and Survival Vest; Slow can extend the window. Keep healing and revival available, and stop stealing if the party is at risk. Beatrix ends the fight at 0 HP or on her tenth turn with Climhazzard, reducing the party to 1 HP; the goal is survival and the steals, not victory.",
+      confidence: "partial",
+      sourceIds: alexandriaBeatrixPreparationSources,
+    },
     routeObjectiveIds: [alexandriaBeatrixStealsObjectiveId],
-    notes: ["The published HP, MP, level, and steal tiers here come from GameFAQs' PlayStation walkthrough table. The other linked walkthroughs support the encounter and steal targets; release-specific battle behavior has not been audited."],
-  }, returnToAlexandriaChapterId, alexandriaBeatrixBossSources, [alexandriaBeatrixStealsMissableId], [alexandriaBeatrixStealsCutoffId]),
+    notes: ["The published HP, MP, level, and steal tiers here come from GameFAQs' PlayStation walkthrough table. The older GameFAQs Boss Guide reuses Cleyra's Thunder Gloves instead of Alexandria's Survival Vest; its Medium rating is retained only as a subjective difficulty label. The other linked walkthroughs support the encounter and steal targets; release-specific battle behavior has not been audited."],
+  }, returnToAlexandriaChapterId, alexandriaBeatrixPreparationSources, [alexandriaBeatrixStealsMissableId], [alexandriaBeatrixStealsCutoffId]),
   chapterBoss({
     id: "enemy.ralvuimago",
     name: "Ralvuimago",
