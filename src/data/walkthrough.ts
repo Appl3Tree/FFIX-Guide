@@ -2997,8 +2997,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "mountain-path-hilgigars-boss",
             kind: "combat",
-            text: "Fight Hilgigars (8,106 HP in the cross-checked route tables). Zidane can try to steal Phoenix Down, Mythril Fork, and the very rare Fairy Flute. Silence prevents Curaga and Slow reduces its turns; Dagger's Float protects the party from Earthquake. The boss has no listed elemental weakness.",
-            detail: "The Fairy Flute teaches Eiko Esuna, Haste, and Regen. Do not keep the party in danger to grind for this rare steal; use Eiko and Dagger for healing while Vivi attacks. The battle ends before you can return to this encounter.",
+            text: "Fight Hilgigars (8,106 HP in the cross-checked route tables). Zidane can attempt the Common Phoenix Down, Uncommon Mythril Fork, and Rare Fairy Flute steals before finishing the boss. Jegged and Gamer Guides call the Fairy Flute Very Rare. Silence prevents Curaga and Slow reduces its turns; Dagger's Float protects the party from Earthquake. The boss has no listed elemental weakness.",
+            detail: "Each steal is chance-based and may fail; the Fairy Flute slot label varies by source, and no exact rate or attempt count is promised. The flute teaches Eiko Esuna, Haste, and Regen. Do not keep the party in danger to pursue it; use Eiko and Dagger for healing while Vivi attacks. The battle ends before you can return to this encounter.",
             objectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
           },
           {

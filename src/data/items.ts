@@ -431,6 +431,7 @@ const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-
 const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"];
 const cargoShipWaltzEncounterSources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
 const summitStationWaltzEncounterSources = ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "elitegrindlab-south-gate"];
+const hilgigarsEncounterSources = ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"];
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
@@ -1160,9 +1161,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Try to steal one Mythril Fork from Hilgigars before ending the Mountain Path boss encounter. Later shops replace the item type if this encounter copy is missed.",
+    conditions: "Attempt Hilgigars' Uncommon Mythril Fork steal during the one-time Mountain Path boss battle; the chance-based attempt can fail. Later shops replace the item type if this copy is missed.",
     walkthroughObjectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
-    sourceIds: mythrilForkReferenceSources,
+    enemyId: "enemy.hilgigars",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.conde-petie-mountain-path.hilgigars"],
+    sourceIds: [...new Set([...mythrilForkReferenceSources, ...hilgigarsEncounterSources])],
   },
   {
     id: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal",
@@ -1171,9 +1175,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Try to steal one Phoenix Down from Hilgigars before ending the Mountain Path boss encounter. Phoenix Down remains available through later item shops if this encounter copy is missed.",
+    conditions: "Attempt Hilgigars' Common Phoenix Down steal during the one-time Mountain Path boss battle; the chance-based attempt can fail. Phoenix Down remains available through later item shops if this copy is missed.",
     walkthroughObjectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
-    sourceIds: hilgigarsStealSources,
+    enemyId: "enemy.hilgigars",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.conde-petie-mountain-path.hilgigars"],
+    sourceIds: [...new Set([...hilgigarsStealSources, ...hilgigarsEncounterSources])],
   },
   {
     id: "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal",
@@ -1182,9 +1189,13 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Try to steal one Fairy Flute from Hilgigars before ending the Mountain Path boss encounter. Later Disc III Mogshops at Oeilvert and Desert Palace sell the item type for 4,500 Gil before the Shimmering Island transition.",
+    conditions: "Attempt Hilgigars' Rare Fairy Flute steal during the one-time Mountain Path boss battle; the chance-based attempt can fail. Later Disc III Mogshops at Oeilvert and Desert Palace sell the item type for 4,500 Gil before the Shimmering Island transition.",
     walkthroughObjectiveIds: ["disc-2.conde-petie-mountain-path.hilgigars-steals"],
-    sourceIds: fairyFluteReferenceSources,
+    enemyId: "enemy.hilgigars",
+    enemyLootSlot: "rare",
+    encounterIds: ["encounter.conde-petie-mountain-path.hilgigars"],
+    notes: "GameFAQs places Fairy Flute in the Rare steal slot; Jegged and Gamer Guides call it Very Rare. The linked slot follows the GameFAQs enemy table, and no exact rate is inferred.",
+    sourceIds: [...new Set([...fairyFluteReferenceSources, ...hilgigarsEncounterSources])],
   },
   {
     id: "item-path.disc-2.outer-continent.conde-petie-mythril-fork-shop",

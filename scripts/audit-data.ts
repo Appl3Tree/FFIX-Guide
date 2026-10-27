@@ -3269,20 +3269,35 @@ if (
 }
 const hilgigarsChapterIndex = guideAreas.findIndex((area) => area.id === "disc-2.conde-petie-mountain-path");
 const hilgigarsSteals = [
-  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal", itemId: "game-item.phoenix-down" },
-  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-mythril-fork-steal", itemId: "game-item.mythril-fork" },
-  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal", itemId: "game-item.fairy-flute" },
+  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal", itemId: "game-item.phoenix-down", slot: "common" },
+  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-mythril-fork-steal", itemId: "game-item.mythril-fork", slot: "uncommon" },
+  { pathId: "item-path.disc-2.conde-petie-mountain-path.hilgigars-fairy-flute-steal", itemId: "game-item.fairy-flute", slot: "rare" },
 ];
+const hilgigarsLootEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.hilgigars");
+const hilgigarsLootEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.conde-petie-mountain-path.hilgigars");
+const hilgigarsMappedStealPaths = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-2.conde-petie-mountain-path" &&
+  path.enemyId === "enemy.hilgigars" && path.method === "steal");
 for (const expected of hilgigarsSteals) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  const lootSlot = hilgigarsLootEnemy?.steals.find((steal) => steal.itemId === expected.itemId && steal.slot === expected.slot);
   if (!path) {
     errors.push(`Hilgigars steal coverage is missing ${expected.pathId}.`);
     continue;
   }
-  if (path.itemId !== expected.itemId || path.chapterId !== "disc-2.conde-petie-mountain-path" || path.method !== "steal" ||
+  const expectedSourceIds = new Set([
+    ...(hilgigarsLootEnemy?.sourceIds ?? []),
+    ...(hilgigarsLootEncounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+  ]);
+  if (!lootSlot || path.itemId !== expected.itemId || path.chapterId !== "disc-2.conde-petie-mountain-path" || path.method !== "steal" ||
     path.quantity !== 1 || path.availability !== "one-time-encounter" ||
-    !path.walkthroughObjectiveIds?.includes("disc-2.conde-petie-mountain-path.hilgigars-steals")) {
-    errors.push(`Hilgigars steal path ${expected.pathId} must match its item, one-time encounter, and warning objective.`);
+    path.enemyId !== "enemy.hilgigars" || path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.conde-petie-mountain-path.hilgigars"]) ||
+    !path.conditions?.includes("chance-based") || !path.conditions.includes("can fail") ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.conde-petie-mountain-path.hilgigars-steals") ||
+    [...expectedSourceIds].some((sourceId) => !path.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId)) ||
+    (expected.itemId === "game-item.fairy-flute" && !path.notes?.includes("GameFAQs places Fairy Flute in the Rare steal slot; Jegged and Gamer Guides call it Very Rare"))) {
+    errors.push(`Hilgigars steal path ${expected.pathId} must match its exact loot slot, one-time encounter, chance, warning objective, and source provenance.`);
   }
   for (const sourceId of ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-items-71891"]) {
     if (!path.sourceIds.includes(sourceId)) errors.push(`Hilgigars steal path ${expected.pathId} is missing source ${sourceId}.`);
@@ -5554,6 +5569,7 @@ const hilgigarsStealPathSlugs = itemAcquisitionPaths
   .filter((path) => path.walkthroughObjectiveIds?.includes("disc-2.conde-petie-mountain-path.hilgigars-steals"))
   .map((path) => path.itemId);
 if (!hilgigarsEncounter || !hilgigarsRecord || hilgigarsRecord.kind !== "boss" ||
+  hilgigarsMappedStealPaths.length !== hilgigarsSteals.length ||
   !hilgigarsEncounter.objectiveIds.includes("disc-2.conde-petie-mountain-path.hilgigars-steals") ||
   !hilgigarsEncounter.missableIds.includes("missable.disc-2.conde-petie-mountain-path.hilgigars-steals") ||
   !hilgigarsEncounter.cutoffIds.includes("cutoff.conde-petie.hilgigars-steals") ||
