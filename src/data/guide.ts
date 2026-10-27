@@ -1,6 +1,7 @@
 import { androidAchievements, iosAchievements, ps4Trophies, steamAchievements, xboxAchievements } from "./achievements.ts";
 import { activeTimeEventObjectives } from "./ates.ts";
 import { chocoboBeachLocations, chocoboBeachObjectiveId } from "./chocobo.ts";
+import { ragtimeMouseFinalRewardObjectiveId, ragtimeMouseQuestions, ragtimeQuestionSourceIds } from "./ragtimeMouse.ts";
 
 export type ArcId = "disc-1" | "disc-2" | "disc-3" | "disc-4";
 
@@ -681,6 +682,14 @@ export const sources = [
     url: "https://guides.flactem.com/final-fantasy-ix/disc-2/fossil-roo-outer-continent/",
     accessed: "2026-10-25",
     notes: "Independent Disc II route for Quina's return, Fossil Roo, and the Outer Continent. After the final Gargant exit it directs the player to the separate Outer Continent Qu's Marsh, where Sahagin can teach Aqua Breath and Gigan Toad can teach Frog Drop; it separately identifies the nearby Chocobo tracks and Friendly Ladybug route. Its general enemy labels are cross-checked against GameFAQs' [A]/[B] variant tables rather than treated as exact variant names.",
+  },
+  {
+    id: "flactem-disc-3-hilda-garde-ragtime",
+    title: "Hilda Garde III and Optional Exploration — Disc III walkthrough",
+    publisher: "Flactem Guides",
+    url: "https://guides.flactem.com/final-fantasy-ix/disc-3/hilda-garde-optional-exploration/",
+    accessed: "2026-10-27",
+    notes: "The Disc III route says the final six Ragtime Mouse encounters become available with Hilda Garde III. This supports the conservative post-Mount-Gulug checklist window; cour89.com's Japanese guide places the first fifteen questions earlier, after obtaining Blue Narciss, so the earliest trigger remains disputed pending in-game verification.",
   },
   {
     id: "gamefaqs-magdalene-forest-71891",
@@ -1416,7 +1425,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/the-village-of-dali",
     accessed: "2026-10-23",
-    notes: "Cross-check for Dali's six ATEs, first-visit pickups, and Observatory Mountain's hidden Hi-Potion behind the entrance cart and 135 Gil at the back-right. Its route then switches control to Steiner at the Observatory, supporting a later check for missed pickups, alongside the 156-Gil underground entrance, Eye Drops, optional rear-room treasure, Mognet letter, and Black Waltz 2 strategy.",
+    notes: "Cross-check for Dali's six ATEs, first-visit pickups, and Observatory Mountain's hidden Hi-Potion behind the entrance cart and 135 Gil at the back-right. Its route then switches control to Steiner at the Observatory, supporting a later check for missed pickups, alongside the 156-Gil underground entrance, Eye Drops, optional rear-room treasure, Mognet letter, and Black Waltz 2 strategy. Its Ragtime Mouse section says a wrong response or strike on the Mouse advances to a prompt that will not repeat and documents the first four quiz encounters before the Outer Continent.",
   },
   {
     id: "elitegrindlab-dali",
@@ -2968,7 +2977,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/aerial-exploration",
     accessed: "2026-10-26",
-    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It directly lists the Treno Weapon Shop Amdusias fight and Queen Stella's available Stellazzio returns during this free-flight window, supporting the optional Treno stop and Running Shoes reward. It also calls this the best time for the Cotton Robe money loop: buy Wrists in Dali and Steepled Hats in Black Mage Village or Atla's Mogshop in Burmecia, then synthesize and sell Cotton Robes. This confirms an optional Disc III route to Atla; the recipe uses Steepled Hat, not Headgear. Sidequest and stock claims are cross-checked against dedicated guides.",
+    notes: "Original PlayStation Disc III open-world route: final Frog Catching and Kupo Nut opportunities, Friendly Garuda, Ragtime Mouse, Hilda Garde pickups, Quan's Dwelling, Chocobo's Paradise, Treno, Daguerreo, and post-Gulug shop availability. It directly lists the Treno Weapon Shop Amdusias fight and Queen Stella's available Stellazzio returns during this free-flight window, supporting the optional Treno stop and Running Shoes reward. It also calls this the best time for the Cotton Robe money loop: buy Wrists in Dali and Steepled Hats in Black Mage Village or Atla's Mogshop in Burmecia, then synthesize and sell Cotton Robes. This confirms an optional Disc III route to Atla; the recipe uses Steepled Hat, not Headgear. Sidequest and stock claims are cross-checked against dedicated guides. Its aerial route recommends Millionaire for the final Ragtime Mouse payout; the dedicated quiz page says per-question Gil is unaffected, so the final bonus effect remains unresolved.",
   },
   {
     id: "jegged-lindblum-hilda-garde",
@@ -3032,7 +3041,47 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ragtime-mouse",
     accessed: "2026-10-23",
-    notes: "Cross-check for the sixteen-question quiz progression, final post-quiz encounter, Protect Ring, and Gil rewards. The chapter asks players to check their remaining encounter count and avoid treating the optional quiz as a story gate.",
+    notes: "Original PlayStation question and sidequest table: sixteen answer facts, the variable question order with the defeat prompt last, the 4-before-Outer / six-additional-after-Outer encounter windows, and the post-Mount-Gulug final encounter. It reports a Protect Ring at 13 correct, 23,852 EXP and 59,630 Gil for the all-correct final reward, per-question Gil unaffected by Millionaire, and says the final reward Gil can be increased by Millionaire. It says a timeout is counted as wrong; it does not explain retry behavior after attacking Ragtime Mouse.",
+  },
+  {
+    id: "rpgsite-ragtime-mouse",
+    title: "Ragtime Mouse Quiz — answers and rewards",
+    publisher: "RPG Site",
+    url: "https://www.rpgsite.net/feature/10870-final-fantasy-ix-ragtime-mouse-quiz-answers-rewards-for-all-quiz-events",
+    accessed: "2026-10-27",
+    notes: "Independent question-and-answer list for all sixteen Ragtime Mouse facts, forest encounter behavior, the progression-limited encounter windows, the reported pause option, and final rewards. It reports different all-correct Gil and experience figures from GameFAQs; the project leaves final payout values and Millionaire's final-reward effect unresolved pending direct play verification.",
+  },
+  {
+    id: "rpgclassics-ragtime-mouse",
+    title: "The Ragtime Mouse — sidequest reference",
+    publisher: "RPGClassics",
+    url: "https://shrines.rpgclassics.com/psx/ffix/ragtime.shtml",
+    accessed: "2026-10-27",
+    notes: "Independent original PlayStation question-and-answer list for all sixteen quiz facts. It confirms the True/O and False/X inputs and the all-correct final reward, but does not document the trophy missability, exact encounter caps, or disputed final payout amounts.",
+  },
+  {
+    id: "cour89-ragtime-quiz",
+    title: "O/X Quiz — Ragtime Mouse",
+    publisher: "cour89.com Final Fantasy IX guide",
+    url: "https://cour89.com/ff9/tips/quiz.php",
+    accessed: "2026-10-27",
+    notes: "Japanese-language cross-reference covering PS4, Switch, Xbox One, Steam, iOS, and Android releases. It lists all sixteen answer facts, stage progression, a Protect Ring at 13 correct, and the 23,852 EXP / 59,630 Gil all-correct reward. It places questions 1–15 after obtaining Blue Narciss, earlier than Flactem's Hilda Garde III trigger for the final six. It says a wrong answer or timeout consumes that question, but attacking Ragtime Mouse, fleeing, or attacking both symbols makes the encounter invalid and repeats the same question; this conflicts with English achievement guides that say hitting the Mouse advances past the prompt. Translation and release-specific behavior have not been directly tested.",
+  },
+  {
+    id: "gamerguides-ragtime-blues",
+    title: "Trophies and Achievements — Beating the Ragtime Blues",
+    publisher: "Gamer Guides",
+    url: "https://www.gamerguides.com/final-fantasy-ix/guide/trophies-achievements/guide/overview",
+    accessed: "2026-10-27",
+    notes: "The indexed achievement walkthrough marks Beating the Ragtime Blues missable and says a wrong answer or striking Ragtime Mouse moves to the next question and voids the trophy/achievement. cour89.com's Japanese guide agrees about wrong answers but conflicts on attacking the Mouse, which it says repeats the same question. Treat attacking the Mouse as unsafe until tested; platform/build behavior has not been tested in game.",
+  },
+  {
+    id: "trueachievements-ragtime-mouse",
+    title: "Final Fantasy IX achievement walkthrough — Ragtime Mouse",
+    publisher: "TrueAchievements",
+    url: "https://www.trueachievements.com/game/Final-Fantasy-ix/walkthrough/12",
+    accessed: "2026-10-27",
+    notes: "The indexed Xbox achievement walkthrough independently warns that guessing any question incorrectly makes the achievement unobtainable for that playthrough. Direct page access returned 403 in this review session; use it as corroboration, not direct gameplay verification.",
   },
   {
     id: "gamefaqs-ipsens-castle-71891",
@@ -5963,15 +6012,24 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
-    id: "disc-3.aerial-exploration.ragtime-mouse",
-    title: "Answer all 16 Ragtime Mouse questions and claim the final reward",
+    id: ragtimeMouseFinalRewardObjectiveId,
+    title: "Answer all 16 Ragtime Mouse questions correctly and claim the final reward",
     category: "achievement",
-    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-ragtime-mouse-71891", "gamerguides-side-questing-3"],
-    chapterIds: ["disc-3.aerial-exploration"],
+    sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-ragtime-mouse-71891", "gamerguides-side-questing-3", "gamerguides-ragtime-blues", "trueachievements-ragtime-mouse", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "flactem-disc-3-hilda-garde-ragtime"],
+    chapterIds: ["disc-1.ice-cavern", "disc-2.outer-continent", "disc-3.aerial-exploration", "disc-4.final-preparations"],
     achievementPlatforms: ["steam", "ps4", "xbox", "ios", "android"],
     profileIds: ["comprehensive", "achievements", "custom"],
     verification: "partial",
   },
+  ...ragtimeMouseQuestions.map((question): GameObjective => ({
+    id: question.objectiveId,
+    title: `Record a correct answer: ${question.statement}`,
+    category: "side-content",
+    sourceIds: [...ragtimeQuestionSourceIds],
+    chapterIds: [...question.chapterIds],
+    profileIds: ["comprehensive", "achievements", "custom"],
+    verification: "partial",
+  })),
   {
     id: "disc-3.aerial-exploration.sky-chocobo",
     title: "Find Chocograph #20 and unlock Choco's Sky ability",
@@ -7125,6 +7183,22 @@ export const objectives: GameObjective[] = [
 ];
 
 export const missables: MissableRecord[] = [
+  {
+    id: "missable.disc-1.ice-cavern.ragtime-all-correct",
+    objectiveId: ragtimeMouseFinalRewardObjectiveId,
+    title: "Ragtime Mouse — protect the all-correct quiz run",
+    classification: ["permanently-missable"],
+    warningChapterIds: ["disc-1.ice-cavern", "disc-2.outer-continent", "disc-3.aerial-exploration", "disc-4.final-preparations"],
+    consequence: "A wrong answer or timeout is reported to advance past that question permanently, forfeiting Beating the Ragtime Blues and the all-correct final bonus on that save. Gamer Guides also says hitting Ragtime Mouse has the same effect, while cour89.com says that instead invalidates the encounter and repeats the question; avoid attacking the Mouse until this conflict is tested on the target release. The Protect Ring can still be earned with at least 13 correct answers.",
+    deadline: "Before resolving each quiz encounter through the final question. Confirm the answer key before choosing a target; all 16 must be correct for the achievement and all-correct result.",
+    nextAvailability: null,
+    action: "Save before beginning a quiz run if you may want to reload after a mistake. In each encounter, attack only the answer symbol: red O for True or blue X for False. Use the answer list in the walkthrough and pause to check it when needed.",
+    recovery: "If a response is wrong or times out, the question is not offered again, so the all-correct achievement and bonus cannot be restored on that save; reload a save from before the mistake or start another playthrough. Gamer Guides says hitting Ragtime Mouse also advances permanently, while cour89.com says that invalidates the encounter and repeats the question. Avoid the Mouse target; if you hit it, reload when pursuing a conservative all-correct run. You can still finish the remaining quiz and receive the Protect Ring if at least 13 answers are correct. Skipping early forests alone does not forfeit the questions: later windows remain available through the aerial exploration phase.",
+    note: "GameFAQs, RPG Site, RPGClassics, and cour89.com cross-list the question facts; GameFAQs and cour89.com agree on the main payout totals but conflict on the late-question availability window. Gamer Guides and TrueAchievements warn that a wrong answer voids the achievement, while cour89.com specifically says attacking Ragtime Mouse invalidates the encounter and repeats the question. Direct gameplay and release-by-release confirmation remain open.",
+    sourceIds: ["gamefaqs-ragtime-mouse-71891", "gamefaqs-aerial-exploration-71891", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "gamerguides-ragtime-blues", "gamerguides-dali", "trueachievements-ragtime-mouse", "flactem-disc-3-hilda-garde-ragtime"],
+    verification: "partial",
+    severity: "high",
+  },
   {
     id: "missable.disc-1.alexandria.applause-80",
     objectiveId: "disc-1.alexandria.swordfight.applause",

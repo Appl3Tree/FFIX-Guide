@@ -1265,6 +1265,24 @@ export const gameRouteEdges: GameRouteEdge[] = [
 // area exit when their triggers occur earlier in the same chapter.
 export const gameRouteCutoffs: GameRouteCutoff[] = [
   {
+    id: "cutoff.ragtime-mouse.first-quiz-window",
+    edgeId: "story.evil-forest-to-ice-cavern",
+    title: "Ragtime Mouse — first forest quiz window",
+    certainty: "conservative",
+    trigger: "Before answering any Ragtime Mouse question after the party first reaches the Mist Continent world map. The quiz can be postponed, but a wrong answer or timeout is reported to advance past that question permanently. Sources conflict about attacking Ragtime Mouse itself, so avoid it on an all-correct run.",
+    missableIds: ["missable.disc-1.ice-cavern.ragtime-all-correct"],
+    sourceIds: ["gamefaqs-ragtime-mouse-71891", "gamerguides-ragtime-blues", "gamerguides-dali", "trueachievements-ragtime-mouse", "cour89-ragtime-quiz"],
+  },
+  {
+    id: "cutoff.ragtime-mouse.before-final-battle",
+    edgeId: "detour.final-preparations-rejoin",
+    title: "Ragtime Mouse — final all-correct and reward check",
+    certainty: "source-supported",
+    trigger: "Before leaving Final Preparations for the final battle, finish any remaining questions and the post-quiz encounter if the achievement or reward matters. GameFAQs says the remaining encounters can be completed in Discs III–IV after Mount Gulug; this is the last open-world cleanup point.",
+    missableIds: ["missable.disc-1.ice-cavern.ragtime-all-correct"],
+    sourceIds: ["gamefaqs-ragtime-mouse-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-final-preparations-71891", "gamerguides-ragtime-blues", "cour89-ragtime-quiz", "flactem-disc-3-hilda-garde-ragtime"],
+  },
+  {
     id: "cutoff.dali-cargo-ship.ice-cavern-treasures",
     edgeId: "story.dali-to-cargo-ship",
     title: "Ice Cavern chest sweep",

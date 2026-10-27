@@ -1,4 +1,5 @@
 import { movieCriticEligibleEvents } from "./ates.ts";
+import { ragtimeMouseQuestions, ragtimeMouseFinalRewardObjectiveId } from "./ragtimeMouse.ts";
 
 export type SteamAchievement = {
   id: string;
@@ -185,7 +186,10 @@ const steamAchievementGuideMap: Record<string, Pick<SteamAchievement, "guideObje
   },
   "the-ultimate-sword": { guideObjectiveIds: ["advanced.excalibur-ii.acquire"] },
   "beach-bum": { guideObjectiveIds: ["disc-4.return-to-gaia.chocobo-beach"] },
-  "beating-the-ragtime-blues": { guideObjectiveIds: ["disc-3.aerial-exploration.ragtime-mouse"] },
+  "beating-the-ragtime-blues": {
+    guideObjectiveIds: [...ragtimeMouseQuestions.map((question) => question.objectiveId), ragtimeMouseFinalRewardObjectiveId],
+    guideSourceIds: ["gamefaqs-ragtime-mouse-71891", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "gamerguides-ragtime-blues", "trueachievements-ragtime-mouse", "flactem-disc-3-hilda-garde-ragtime"],
+  },
   "found-in-the-shuffle": { guideObjectiveIds: ["disc-3.the-home-front.found-in-the-shuffle"] },
   "its-all-in-the-cards-iii": { guideChapterIds: ["disc-3.card-tournament"] },
   "movie-critic": { guideObjectiveIds: [

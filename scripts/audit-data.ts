@@ -9,6 +9,7 @@ import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCov
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 import { enemyCatalogCoverage, enemyEncounters, enemyRecords } from "../src/data/enemies.ts";
+import { ragtimeMouseFinalRewardObjectiveId, ragtimeMouseQuestions, ragtimeQuestionSourceIds } from "../src/data/ragtimeMouse.ts";
 
 const errors: string[] = [];
 const warnings: string[] = [];
@@ -49,6 +50,8 @@ checkUnique("game route cutoff", gameRouteCutoffs.map((cutoff) => cutoff.id));
 checkUnique("story party sequence", storyPartySequences.map((sequence) => sequence.id));
 checkUnique("enemy", enemyRecords.map((enemy) => enemy.id));
 checkUnique("enemy encounter", enemyEncounters.map((encounter) => encounter.id));
+checkUnique("Ragtime Mouse question", ragtimeMouseQuestions.map((question) => question.id));
+checkUnique("Ragtime Mouse objective", ragtimeMouseQuestions.map((question) => question.objectiveId));
 
 const sourceIds = new Set(sources.map((source) => source.id));
 const objectiveIds = new Set(objectives.map((objective) => objective.id));
@@ -60,6 +63,50 @@ const gameRouteEdgesById = new Map(gameRouteEdges.map((edge) => [edge.id, edge])
 const missablesById = new Map(missables.map((missable) => [missable.id, missable]));
 const objectivesById = new Map(objectives.map((objective) => [objective.id, objective]));
 const cutoffsById = new Map(gameRouteCutoffs.map((cutoff) => [cutoff.id, cutoff]));
+const ragtimeQuestionWindows = {
+  "before-outer-continent": ragtimeMouseQuestions.filter((question) => question.conservativeWindow === "before-outer-continent"),
+  "outer-continent": ragtimeMouseQuestions.filter((question) => question.conservativeWindow === "outer-continent"),
+  "after-mount-gulug": ragtimeMouseQuestions.filter((question) => question.conservativeWindow === "after-mount-gulug"),
+};
+const ragtimeMissable = missablesById.get("missable.disc-1.ice-cavern.ragtime-all-correct");
+const ragtimeEarlyCutoff = cutoffsById.get("cutoff.ragtime-mouse.first-quiz-window");
+const ragtimeFinalCutoff = cutoffsById.get("cutoff.ragtime-mouse.before-final-battle");
+const chapterObjectiveIds = (chapterId: string) => walkthroughChapters
+  .filter((chapter) => chapter.areaId === chapterId)
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps.flatMap((step) => step.objectiveIds ?? [])));
+const ragtimeQuestionIdsByChapter = {
+  "disc-1.ice-cavern": chapterObjectiveIds("disc-1.ice-cavern").filter((id) => ragtimeMouseQuestions.some((question) => question.objectiveId === id)),
+  "disc-2.outer-continent": chapterObjectiveIds("disc-2.outer-continent").filter((id) => ragtimeMouseQuestions.some((question) => question.objectiveId === id)),
+  "disc-3.aerial-exploration": chapterObjectiveIds("disc-3.aerial-exploration").filter((id) => ragtimeMouseQuestions.some((question) => question.objectiveId === id)),
+  "disc-4.final-preparations": chapterObjectiveIds("disc-4.final-preparations").filter((id) => ragtimeMouseQuestions.some((question) => question.objectiveId === id)),
+};
+if (
+  ragtimeMouseQuestions.length !== 16 ||
+  ragtimeQuestionWindows["before-outer-continent"].length !== 4 ||
+  ragtimeQuestionWindows["outer-continent"].length !== 6 ||
+  ragtimeQuestionWindows["after-mount-gulug"].length !== 6 ||
+  ragtimeQuestionSourceIds.some((sourceId) => !sourceIds.has(sourceId)) ||
+  ragtimeMouseQuestions.some((question) => {
+    const objective = objectivesById.get(question.objectiveId);
+    return !question.statement.trim() || !objective || objective.category !== "side-content" ||
+      question.chapterIds.some((chapterId) => !areaIds.has(chapterId) || !chapterObjectiveIds(chapterId).includes(question.objectiveId)) ||
+      ragtimeQuestionSourceIds.some((sourceId) => !objective.sourceIds.includes(sourceId));
+  }) ||
+  ragtimeQuestionIdsByChapter["disc-1.ice-cavern"].length !== 4 ||
+  ragtimeQuestionIdsByChapter["disc-2.outer-continent"].length !== 10 ||
+  ragtimeQuestionIdsByChapter["disc-3.aerial-exploration"].length !== 16 ||
+  ragtimeQuestionIdsByChapter["disc-4.final-preparations"].length !== 16 ||
+  !ragtimeMissable ||
+  ragtimeMissable.objectiveId !== ragtimeMouseFinalRewardObjectiveId ||
+  !ragtimeMissable.classification.includes("permanently-missable") ||
+  !["disc-1.ice-cavern", "disc-2.outer-continent", "disc-3.aerial-exploration", "disc-4.final-preparations"].every((chapterId) => ragtimeMissable.warningChapterIds?.includes(chapterId)) ||
+  !ragtimeEarlyCutoff?.missableIds.includes(ragtimeMissable.id) ||
+  !ragtimeFinalCutoff?.missableIds.includes(ragtimeMissable.id) ||
+  !ragtimeEarlyCutoff?.sourceIds.includes("gamerguides-ragtime-blues") ||
+  !ragtimeFinalCutoff?.sourceIds.includes("gamefaqs-final-preparations-71891")
+) {
+  errors.push("Ragtime Mouse must keep its 4/6/6 conservative guide windows, all 16 sourced answer objectives, early/final walkthrough checklists, and the all-correct missable warning linked to both route cutoffs.");
+}
 const achievementCatalogs = [
   { platform: "steam" as const, records: steamAchievements, expectedCount: achievementSourceCounts.steam.count },
   { platform: "ps4" as const, records: ps4Trophies, expectedCount: achievementSourceCounts.ps4.count },

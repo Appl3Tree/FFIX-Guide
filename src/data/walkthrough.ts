@@ -1,5 +1,14 @@
 import type { WalkthroughChapter } from "./guide";
 import { chocoboBeachLocations, chocoboBeachObjectiveId } from "./chocobo.ts";
+import { ragtimeMouseQuestions, type RagtimeMouseQuestion } from "./ragtimeMouse.ts";
+
+const ragtimeQuestionSteps = (chapterPrefix: string, questions: RagtimeMouseQuestion[]) => questions.map((question) => ({
+  id: `ragtime-${chapterPrefix}-${question.id}`,
+  kind: "optional" as const,
+  text: question.statement,
+  detail: `Correct response: ${question.answer ? "TRUE — choose the red O" : "FALSE — choose the blue X"}. Mark this fact after answering it correctly.`,
+  objectiveIds: [question.objectiveId],
+}));
 
 export const walkthroughChapters: WalkthroughChapter[] = [
   {
@@ -455,6 +464,22 @@ export const walkthroughChapters: WalkthroughChapter[] = [
     overview: "Cross the Mist Continent's Ice Cavern room by room: collect its eight chests, use Vivi to open the ice paths, free Mois for the Mogster tutorial and Mognet letter, then prepare Zidane for the solo waterfall battle. The cavern can be revisited after the boss until the party leaves Dali, so that departure—not the cave exit—is the final treasure and letter cutoff.",
     timedRouteNote: "The original PlayStation NTSC Perfect Game source targets 01:02:14 after Black Waltz #1 and Sealion, with a 00:54:48 setup/save split at Mois. It takes the cave chests and Mois-to-Gumo letter, avoids the white-wind encounter, and uses extra screen changes to target zero random fights; Zidane must steal the Mythril Dagger and Ether from Sealion. These are source targets, not tested splits or modern-platform guidance.",
     sections: [
+      {
+        id: "ice-ragtime-mouse-early-window",
+        title: "World-map forest detour — Ragtime Mouse's first quiz window",
+        summary: "Optional sidequest. Up to four of the sixteen questions can appear after the Evil Forest escape and before the Outer Continent.",
+        sourceIds: ["gamefaqs-ragtime-mouse-71891", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "gamerguides-ragtime-blues", "gamerguides-dali"],
+        steps: [
+          {
+            id: "ice-ragtime-mouse-safety",
+            kind: "optional",
+            text: "Before entering Ice Cavern, you can detour through a world-map forest. Ragtime Mouse appears only in forests; after a battle or entering the world map, wait at least 20 seconds before trying again.",
+            detail: "The encounter order varies. A wrong answer or timeout is reported to advance to a question that will not repeat, which can void the all-correct achievement. Gamer Guides also warns that striking Ragtime Mouse has the same effect, while cour89.com's guide says the encounter is invalidated and the question repeats; this attack behavior is unresolved. Save first and hit only the red O for True or blue X for False. Skipping this early visit does not itself lose the quest; later windows remain open. Gamer Guides describes short directional taps as an optional way to reduce ordinary encounters, but control behavior is not verified across releases.",
+            objectiveIds: ["disc-3.aerial-exploration.ragtime-mouse"],
+          },
+          ...ragtimeQuestionSteps("ice-cavern", ragtimeMouseQuestions.filter((question) => question.conservativeWindow === "before-outer-continent")),
+        ],
+      },
       {
         id: "ice-cavern-lower-path",
         title: "Lower Ice Path — Tent, Ether, and the hidden Potion",
@@ -2544,7 +2569,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "outer-continent-world-map",
         title: "Outer Continent — world-map route and optional stops",
         summary: "Loop around the plateau to the bridge town. Stop at the new marsh, check Quina's available Blue Magic, and collect the Chocograph treasure if you already dug up its clue.",
-        sourceIds: ["gamefaqs-outer-continent-71891", "gamefaqs-journey-to-outer-continent-71891", "flactem-disc-2-fossil-roo-outer-continent", "jegged-conde-petie", "flactem-friendly-monsters", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "rpgclassics-outer-continent", "jegged-world-map-cactuar", "jegged-world-map-goblin-mage", "jegged-world-map-griffin", "jegged-world-map-zaghnol"],
+        sourceIds: ["gamefaqs-outer-continent-71891", "gamefaqs-ragtime-mouse-71891", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "gamerguides-ragtime-blues", "gamerguides-dali", "gamefaqs-journey-to-outer-continent-71891", "flactem-disc-2-fossil-roo-outer-continent", "jegged-conde-petie", "flactem-friendly-monsters", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "rpgclassics-outer-continent", "jegged-world-map-cactuar", "jegged-world-map-goblin-mage", "jegged-world-map-griffin", "jegged-world-map-zaghnol"],
         steps: [
           {
             id: "outer-continent-loop-to-conde-petie",
@@ -2552,10 +2577,18 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "From the Fossil Roo exit, follow the path north and loop around most of the plateau. Pass beneath the raised bridge, then climb up from the eastern side to reach Conde Petie. The bridge town is visible above the route you used to leave Fossil Roo.",
           },
           {
+            id: "outer-continent-ragtime-window",
+            kind: "optional",
+            text: "Before continuing to Conde Petie, detour through a world-map forest if you want to progress Ragtime Mouse. By the time Hilda Garde III becomes available, you can have encountered it up to ten times in total: the first four before the Outer Continent, then up to six more during this window.",
+            detail: "The quiz can be postponed until Hilda Garde III after Mount Gulug; GameFAQs and Flactem place the final six encounters in this later window. cour89.com instead places questions 1–15 after the Blue Narciss becomes available, so the earliest trigger remains source-conflicted. A wrong response or timeout does not repeat that prompt. Guides also conflict about whether attacking Ragtime Mouse advances permanently or repeats the same question; use the answer rows and hit only the matching O/X symbol. Wait at least 20 seconds after a battle or entering the world map before seeking the next encounter.",
+            objectiveIds: ["disc-3.aerial-exploration.ragtime-mouse"],
+          },
+          ...ragtimeQuestionSteps("outer-continent", ragtimeMouseQuestions.filter((question) => question.conservativeWindow !== "after-mount-gulug")),
+          {
             id: "outer-continent-encounters-and-blue-magic",
             kind: "optional",
             text: "Terrain determines which Outer Continent encounters can appear: dirt at Donna Plains, Dyshnose Shores, Gegalrich Shores, and Kognish Shores has Cactuar, Goblin Mage, Griffin, and Zaghnol; grass at Donna Plains and Gegalrich Shores, plus world-map forests, can also include Friendly Ladybird; beaches and Donna Plains marshes list Griffin and Zaghnol. If Quina is missing a spell, Eat a weakened Goblin Mage for Goblin Punch, Cactuar for 1,000 Needles, Griffin for White Wind, or Zaghnol for Matra Magic.",
-            detail: "The terrain guide records possible formation rosters, not encounter odds or a claim that every listed enemy appears together. White Wind and Matra Magic are also available earlier from Zuu and Dragonfly in Cleyra's Trunk. Enemy references disagree on Cactuar's level (1 or 30) and AP, Goblin Mage AP (0 or 1/2), and Zaghnol's MP/AP; the bestiary keeps those claims separate. Ragtime Mouse may still appear in forests; its quiz sequence and reward checklist are not yet authored here.",
+            detail: "The terrain guide records possible formation rosters, not encounter odds or a claim that every listed enemy appears together. White Wind and Matra Magic are also available earlier from Zuu and Dragonfly in Cleyra's Trunk. Enemy references disagree on Cactuar's level (1 or 30) and AP, Goblin Mage AP (0 or 1/2), and Zaghnol's MP/AP; the bestiary keeps those claims separate. Ragtime Mouse is a separate world-map forest event; its question limits and answer key are listed above.",
             objectiveIds: ["disc-2.outer-continent.blue-magic", "disc-3.forgotten-continent.blue-magic-recovery"],
           },
           {
@@ -2694,7 +2727,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "magdalene-forest-field-encounters",
             kind: "optional",
             text: "The GameFAQs terrain table lists Griffin, Friendly Ladybird, and Zaghnol in the Magdalene Forest world-map forest. Jegged's broader location lists also include Cactuar and Goblin Mage there, but does not map them to a terrain formation. The Dead Forest field area has a separate Griffin, Myconid, and Zemzelett roster.",
-            detail: "In the Dead Forest, Quina can learn Mighty Guard from Myconid and White Wind from Zemzelett; the world-map Griffin is another White Wind teacher, and Zaghnol can teach Matra Magic after Cleyra's Trunk. The source difference about Cactuar/Goblin Mage here remains open; use the detailed terrain roster as the conservative world-map encounter list. Ragtime Mouse may also appear in forests; its full quiz route and reward checklist are not authored here yet.",
+            detail: "In the Dead Forest, Quina can learn Mighty Guard from Myconid and White Wind from Zemzelett; the world-map Griffin is another White Wind teacher, and Zaghnol can teach Matra Magic after Cleyra's Trunk. The source difference about Cactuar/Goblin Mage here remains open; use the detailed terrain roster as the conservative world-map encounter list. Ragtime Mouse is a separate world-map forest event, not part of the Dead Forest field encounter roster; its quiz key is in the Disc III Aerial Exploration chapter.",
             objectiveIds: ["disc-2.outer-continent.blue-magic"],
           },
           {
@@ -5209,15 +5242,22 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       },
       {
         id: "aerial-ragtime-mouse",
-        title: "Ragtime Mouse — finish the remaining quiz encounters",
-        summary: "Check how many questions you have answered, then complete any remaining encounters while roaming eligible forests.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-ragtime-mouse-71891", "gamerguides-side-questing-3"],
+        title: "Ragtime Mouse — complete the quiz and final encounter",
+        summary: "After Mount Gulug and the Hilda Garde III becomes available, all sixteen facts can be answered in world-map forests. Use the individual answer checks, then find Ragtime Mouse once more for the final reward.",
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "gamefaqs-ragtime-mouse-71891", "gamerguides-side-questing-3", "gamerguides-ragtime-blues", "gamerguides-dali", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "trueachievements-ragtime-mouse", "flactem-disc-3-hilda-garde-ragtime"],
         steps: [
           {
             id: "aerial-ragtime-count",
             kind: "optional",
-            text: "If Ragtime Mouse appeared earlier, continue its quiz until all 16 questions have been answered correctly. The remaining encounters become available after Mount Gulug; use the dedicated Ragtime source for each question's answer.",
-            detail: "After the sixteenth question, find Ragtime Mouse once more to claim the final Protect Ring, experience, and Gil reward. At least 13 correct answers are required for the Protect Ring; all 16 correct earns the largest payout. Millionaire increases the final Gil reward, not the quiz payments.",
+            text: "After Mount Gulug and obtaining Hilda Garde III, revisit world-map forests and answer any remaining questions. The prompt order can vary; the question about whether Ragtime Mouse can be defeated is always last and its correct answer is True.",
+            detail: "Answer by striking the red O for True or blue X for False; do not strike Ragtime Mouse. Gamer Guides says hitting it advances past the question, while cour89.com says the question repeats after this invalid encounter. The conservative route is to avoid the target and save before the quiz. Pause to check the fact list if needed. The first ten facts can appear earlier, so their saved checkboxes may already be complete.",
+          },
+          ...ragtimeQuestionSteps("aerial-exploration", ragtimeMouseQuestions),
+          {
+            id: "aerial-ragtime-final-reward",
+            kind: "optional",
+            text: "After the sixteenth question, find Ragtime Mouse one more time and finish the final encounter. At least 13 correct answers earns the Protect Ring; all 16 correct are required for Beating the Ragtime Blues and the all-correct bonus.",
+            detail: "GameFAQs and cour89.com report 23,852 EXP for the party (5,963 each for four characters) and 59,630 Gil; RPG Site reports 5,963 EXP and 70,000 additional Gil. GameFAQs says per-question Gil is unaffected by Millionaire but recommends Millionaire for the final reward. The sources' payout totals disagree, and the final multiplier has not been tested in game.",
             objectiveIds: ["disc-3.aerial-exploration.ragtime-mouse"],
           },
         ],
@@ -6741,7 +6781,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "final-preparations-return-window",
         title: "Open return window — save and finish selected side content",
         summary: "All previously available activities remain open after Deathguise. Use the tracker to decide what still matters for this playthrough goal.",
-        sourceIds: ["gamefaqs-final-preparations-71891", "gamefaqs-memoria-71891", "gamefaqs-return-to-gaia-71891"],
+        sourceIds: ["gamefaqs-final-preparations-71891", "gamefaqs-memoria-71891", "gamefaqs-return-to-gaia-71891", "gamefaqs-ragtime-mouse-71891", "rpgsite-ragtime-mouse", "rpgclassics-ragtime-mouse", "cour89-ragtime-quiz", "gamerguides-ragtime-blues", "trueachievements-ragtime-mouse", "flactem-disc-3-hilda-garde-ragtime"],
         steps: [
           {
             id: "final-preparations-save-and-exit",
@@ -6755,6 +6795,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Review the selected profile's open objectives and Missables warnings. Finish any remaining optional sidequest, treasure, shop, card, Mognet, ATE, Chocobo, Frog Catching, or achievement route that matters to this goal.",
             detail: "GameFAQs says previously available activities remain available at this stage. This is a cleanup window, not a new permanent deadline for every earlier activity. Use each chapter's recovery note for location-specific exceptions and route requirements.",
             objectiveIds: ["disc-4.final-preparations.final-audit"],
+          },
+          {
+            id: "final-preparations-ragtime-mouse",
+            kind: "optional",
+            text: "Before approaching Kuja, finish any remaining Ragtime Mouse questions in a world-map forest, then meet it once more after question 16 to claim the final reward. The quiz is still available in Disc IV after Mount Gulug.",
+            detail: "Use the answer key in Aerial Exploration. A wrong answer or timeout is reported to advance past that question permanently; Gamer Guides warns that attacking Ragtime Mouse may do the same, while cour89.com says it repeats the question after an invalid encounter. Save before attempting the quiz and hit only the correct answer symbol. If you already missed a question, the Protect Ring can still be earned with at least 13 correct answers. Mark the all-correct objective only after the successful final encounter.",
+            objectiveIds: [...ragtimeMouseQuestions.map((question) => question.objectiveId), "disc-3.aerial-exploration.ragtime-mouse"],
           },
           {
             id: "final-preparations-memoria-return",
