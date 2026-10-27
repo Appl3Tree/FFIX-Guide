@@ -3974,17 +3974,24 @@ const gunitasGoblinLootExpectations = [
   ["drop", "uncommon", "game-item.echo-screen", "echo-screen-uncommon-drop"],
   ["drop", "rare", "game-item.phoenix-down", "phoenix-down-rare-drop"],
 ];
+const gunitasBasinLootSourceIds = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-evil-forest-71891",
+  "jegged-evil-forest",
+];
 const gunitasEncounter = enemyEncounters.find((entry) => entry.id === "encounter.gunitas-basin.world-map-pool");
 const gunitasWalkthroughSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.ice-cavern")?.sections
   .find((section) => section.id === "exit-and-nolrich-heights");
 const gunitasGoblinLootStep = gunitasWalkthroughSection?.steps.find((step) => step.id === "gunitas-basin-goblin-loot");
-const gunitasGoblinLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-dali-71891", "jegged-dali"];
-if (!gunitasEncounter || !gunitasEncounter.formation.some((entry) => entry.enemyId === "enemy.goblin") ||
-  !gunitasGoblinLootStep?.text.includes("Goblin's Potion steal") ||
-  !gunitasGoblinLootStep.detail?.includes("four item-bearing loot slots") ||
-  gunitasGoblinLootSourceIds.some((sourceId) => !gunitasEncounter.sourceIds.includes(sourceId) ||
+if (!gunitasEncounter || !["enemy.goblin", "enemy.mu", "enemy.python"].every((enemyId) =>
+  gunitasEncounter.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !gunitasGoblinLootStep?.text.includes("Goblin, Mu, and Python") ||
+  !gunitasGoblinLootStep.text.includes("separate steal and conditional drop slots") ||
+  !gunitasGoblinLootStep.detail?.includes("exact encounter tiles, combinations, and rates are not published") ||
+  !gunitasGoblinLootStep.detail?.includes("friendly Mu belongs to the separate Friendly Monster task") ||
+  gunitasBasinLootSourceIds.some((sourceId) => !gunitasEncounter.sourceIds.includes(sourceId) ||
     !gunitasWalkthroughSection?.sourceIds.includes(sourceId))) {
-  errors.push("Gunitas Basin Goblin loot paths must link to the encounter and the route step with source-backed slot context.");
+  errors.push("Gunitas Basin Goblin, Mu, and Python loot paths must link to the documented regional encounter and route with source-backed slot context.");
 }
 for (const [method, slotName, itemId, pathSuffix] of gunitasGoblinLootExpectations) {
   const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");
@@ -3996,9 +4003,35 @@ for (const [method, slotName, itemId, pathSuffix] of gunitasGoblinLootExpectatio
     path.quantity !== 1 || path.availability !== "repeatable" || path.walkthroughObjectiveIds?.length ||
     !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
     (method === "drop" && (!path.conditions?.includes("KO victory") || !path.conditions.includes("conditional"))) ||
-    gunitasGoblinLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+    gunitasBasinLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
       !goblin?.sourceIds.includes(sourceId) || !gunitasEncounter?.sourceIds.includes(sourceId))) {
     errors.push(`Gunitas Basin Goblin ${method} path ${pathSuffix} must match the enemy slot, stay repeatable, and retain source provenance.`);
+  }
+}
+const gunitasBasinLootExpectations = [
+  ["enemy.mu", "steal", "uncommon", "game-item.potion", "mu-potion-uncommon-steal"],
+  ["enemy.mu", "drop", "common", "game-item.potion", "mu-potion-common-drop"],
+  ["enemy.mu", "drop", "uncommon", "game-item.echo-screen", "mu-echo-screen-uncommon-drop"],
+  ["enemy.mu", "drop", "rare", "game-item.phoenix-down", "mu-phoenix-down-rare-drop"],
+  ["enemy.python", "steal", "common", "game-item.potion", "python-potion-common-steal"],
+  ["enemy.python", "steal", "uncommon", "game-item.ore", "python-ore-uncommon-steal"],
+  ["enemy.python", "steal", "semi-rare", "game-item.hi-potion", "python-hi-potion-semi-rare-steal"],
+  ["enemy.python", "steal", "rare", "game-item.phoenix-pinion", "python-phoenix-pinion-rare-steal"],
+  ["enemy.python", "drop", "uncommon", "game-item.phoenix-down", "python-phoenix-down-uncommon-drop"],
+];
+for (const [enemyId, method, slotName, itemId, pathSuffix] of gunitasBasinLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.village-of-dali.gunitas-${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.village-of-dali" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "repeatable" || path.walkthroughObjectiveIds?.length ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions?.includes("KO defeat") || !path.conditions.includes("conditional"))) ||
+    gunitasBasinLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !enemy?.sourceIds.includes(sourceId) || !gunitasEncounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Gunitas Basin ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, remain repeatable, and retain route provenance.`);
   }
 }
 const evilForestGoblinLootExpectations = [

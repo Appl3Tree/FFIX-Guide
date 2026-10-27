@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 19);
+  assert.equal(orePaths.length, 20);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 32);
+  assert.equal(pinionPaths.length, 33);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -1670,7 +1670,7 @@ test("Dali underground enemy loot has temporary paths and preserves the Skeleton
 });
 
 test("Gunitas Basin Goblin loot has repeatable sourced steal/drop paths", () => {
-  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-dali-71891", "jegged-dali"];
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
   const expected = [
     ["steal", "common", "game-item.potion", "potion-common-steal"],
     ["drop", "common", "game-item.potion", "potion-common-drop"],
@@ -1685,8 +1685,8 @@ test("Gunitas Basin Goblin loot has repeatable sourced steal/drop paths", () => 
   const step = section?.steps.find((entry) => entry.id === "gunitas-basin-goblin-loot");
 
   assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.goblin"));
-  assert.match(step?.text ?? "", /Gunitas Basin.*Goblin/);
-  assert.match(step?.detail ?? "", /four item-bearing loot slots/);
+  assert.match(step?.text ?? "", /Gunitas Basin.*Goblin.*Mu.*Python/);
+  assert.match(step?.detail ?? "", /exact encounter tiles, combinations, and rates are not published/);
 
   for (const [method, slotName, itemId, suffix] of expected) {
     const item = gameItems.find((entry) => entry.id === itemId);
@@ -1707,6 +1707,59 @@ test("Gunitas Basin Goblin loot has repeatable sourced steal/drop paths", () => 
     for (const sourceId of sourceIds) {
       assert.ok(path.sourceIds.includes(sourceId), `Goblin path is missing ${sourceId}`);
       assert.ok(goblin?.sourceIds.includes(sourceId), `Goblin record is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Gunitas Basin encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Gunitas Basin walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Gunitas Basin Mu and Python have repeatable regional loot paths", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
+  const expected = [
+    ["enemy.mu", "steal", "uncommon", "game-item.potion", "mu-potion-uncommon-steal"],
+    ["enemy.mu", "drop", "common", "game-item.potion", "mu-potion-common-drop"],
+    ["enemy.mu", "drop", "uncommon", "game-item.echo-screen", "mu-echo-screen-uncommon-drop"],
+    ["enemy.mu", "drop", "rare", "game-item.phoenix-down", "mu-phoenix-down-rare-drop"],
+    ["enemy.python", "steal", "common", "game-item.potion", "python-potion-common-steal"],
+    ["enemy.python", "steal", "uncommon", "game-item.ore", "python-ore-uncommon-steal"],
+    ["enemy.python", "steal", "semi-rare", "game-item.hi-potion", "python-hi-potion-semi-rare-steal"],
+    ["enemy.python", "steal", "rare", "game-item.phoenix-pinion", "python-phoenix-pinion-rare-steal"],
+    ["enemy.python", "drop", "uncommon", "game-item.phoenix-down", "python-phoenix-down-uncommon-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.gunitas-basin.world-map-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.ice-cavern")
+    ?.sections.find((entry) => entry.id === "exit-and-nolrich-heights");
+  const step = section?.steps.find((entry) => entry.id === "gunitas-basin-goblin-loot");
+
+  assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.mu"));
+  assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.python"));
+  assert.match(step?.text ?? "", /separate steal and conditional drop slots/);
+  assert.match(step?.detail ?? "", /friendly Mu belongs to the separate Friendly Monster task/);
+  assert.equal(expected.length, 9);
+
+  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.village-of-dali.gunitas-${pathSuffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    assert.ok(path, `${pathSuffix} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.village-of-dali");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO defeat/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Gunitas Basin encounter is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `Gunitas Basin walkthrough is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);

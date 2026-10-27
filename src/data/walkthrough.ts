@@ -579,7 +579,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "exit-and-nolrich-heights",
         title: "Exit check and optional Nolrich Heights stops",
         summary: "Climb the waterfall to the upper exit. The cavern remains open from the world map until the party leaves Dali, giving you a return window for anything skipped below.",
-        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-enemy-list-71891", "gamefaqs-missables-71891", "elitegrindlab-ice-cavern", "gamefaqs-optional-route-47344", "flactem-friendly-monsters", "gamerguides-ice-cavern", "rpgclassics-coffee", "gamefaqs-dali-71891", "jegged-dali"],
+        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-enemy-list-71891", "gamefaqs-missables-71891", "elitegrindlab-ice-cavern", "gamefaqs-optional-route-47344", "flactem-friendly-monsters", "gamerguides-ice-cavern", "rpgclassics-coffee", "gamefaqs-dali-71891", "jegged-dali", "gamefaqs-evil-forest-71891", "jegged-evil-forest"],
         steps: [
           {
             id: "ice-cavern-exit",
@@ -603,8 +603,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gunitas-basin-goblin-loot",
             kind: "optional",
-            text: "As you cross Gunitas Basin between Dali and Lindblum, Goblin joins the regional encounter pool alongside Mu and Python. Goblin's Potion steal and its conditional Potion, Echo Screen, and Phoenix Down drops have separate item routes; drops require a KO victory.",
-            detail: "GameFAQs lists Goblin in the Gunitas Basin roster and gives its four item-bearing loot slots. The enemy table does not publish formation rates or exact combinations, so Goblin is not implied to appear in every battle.",
+            text: "As you cross Gunitas Basin between Dali and Lindblum, Goblin, Mu, and Python are listed in the regional pool. Their separate steal and conditional drop slots are mapped to repeatable item routes; drops require KO victories.",
+            detail: "GameFAQs and the route sources list these standard combat enemies in Gunitas Basin. Their loot tables and the separate Nolrich Heights routes are both recorded, but exact encounter tiles, combinations, and rates are not published. A friendly Mu belongs to the separate Friendly Monster task, not this battle-loot route.",
           },
           {
             id: "friendly-mu",

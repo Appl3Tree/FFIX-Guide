@@ -228,7 +228,11 @@ const gizamalukeDropsObjectiveId = "disc-1.journey-to-burmecia.gizamaluke-drops"
 const gizamalukeStealsMissableId = "missable.disc-1.journey-to-burmecia.gizamaluke-steals";
 const gizamalukeStealsCutoffId = "cutoff.gizamaluke.boss-steals";
 const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
-const gunitasBasinSources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali"];
+const gunitasBasinSources = [
+  enemyListSourceId,
+  "gamefaqs-evil-forest-71891",
+  "jegged-evil-forest",
+];
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
 const blackWaltz2PreparationSources = [...blackWaltz2Sources, "kamigame-dali-black-waltz-2"];
@@ -1320,7 +1324,7 @@ const lindblumRegionalEncounters: EnemyEncounter[] = [
     objectiveIds: [],
     missableIds: [],
     cutoffIds: [],
-    notes: ["GameFAQs lists Goblin in addition to Mu and Python in Gunitas Basin. This is separate from the Nolrich Heights pool, which also includes Carve Spider; no formation rates or combinations are inferred."],
+    notes: ["GameFAQs and the route sources list Goblin, Mu, and Python in Gunitas Basin. Mu and Python also appear in the broader Nolrich Heights route listings, while Carve Spider is only listed with that nearby pool; exact tiles, combinations, and encounter rates are not established. The friendly Mu is a separate encounter."],
   },
   {
     id: "encounter.lindblum-area.lowlands-pool",
