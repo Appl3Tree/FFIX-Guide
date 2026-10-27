@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 29);
+  assert.equal(orePaths.length, 33);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 35);
+  assert.equal(pinionPaths.length, 36);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -2148,6 +2148,108 @@ test("Burmecia/Cleyra world-map enemies have repeatable paths for all item-beari
       assert.ok(encounter?.sourceIds.includes(sourceId), `regional pool is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `regional walkthrough is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Cleyra Trunk enemies have limited-window paths for all item-bearing loot slots", () => {
+  const sourceIds = [
+    "gamefaqs-enemy-list-71891",
+    "gamefaqs-cleyra-71891",
+    "jegged-cleyra",
+    "gamerguides-cleyra",
+    "elitegrindlab-cleyra",
+    "cavesofnarshe-enemies",
+    "cavesofnarshe-cleyra-walkthrough",
+    "gamefaqs-missables-71891",
+    "jegged-missables",
+  ];
+  const expected = [
+    ["enemy.carrion-worm", "steal", "common", "game-item.annoyntment"],
+    ["enemy.carrion-worm", "steal", "uncommon", "game-item.tent"],
+    ["enemy.carrion-worm", "drop", "always", "game-item.potion"],
+    ["enemy.carrion-worm", "drop", "common", "game-item.eye-drops"],
+    ["enemy.carrion-worm", "drop", "uncommon", "game-item.phoenix-down"],
+    ["enemy.carrion-worm", "drop", "rare", "game-item.phoenix-down"],
+    ["enemy.dragonfly", "steal", "common", "game-item.eye-drops"],
+    ["enemy.dragonfly", "steal", "uncommon", "game-item.tent"],
+    ["enemy.dragonfly", "drop", "common", "game-item.ore"],
+    ["enemy.dragonfly", "drop", "uncommon", "game-item.echo-screen"],
+    ["enemy.sand-golem", "steal", "common", "game-item.ore"],
+    ["enemy.sand-golem", "steal", "uncommon", "game-item.hi-potion"],
+    ["enemy.sand-golem", "drop", "common", "game-item.hi-potion"],
+    ["enemy.sand-golem", "drop", "uncommon", "game-item.hi-potion"],
+    ["enemy.sand-golem", "drop", "rare", "game-item.hi-potion"],
+    ["enemy.zuu", "steal", "common", "game-item.potion"],
+    ["enemy.zuu", "steal", "uncommon", "game-item.ore"],
+    ["enemy.zuu", "steal", "semi-rare", "game-item.hi-potion"],
+    ["enemy.zuu", "steal", "rare", "game-item.phoenix-pinion"],
+    ["enemy.zuu", "drop", "always", "game-item.potion"],
+    ["enemy.zuu", "drop", "common", "game-item.phoenix-down"],
+    ["enemy.zuu", "drop", "uncommon", "game-item.ether"],
+    ["enemy.zuu", "drop", "rare", "game-item.hi-potion"],
+    ["enemy.sand-scorpion", "steal", "common", "game-item.ore"],
+    ["enemy.sand-scorpion", "steal", "uncommon", "game-item.antidote"],
+    ["enemy.sand-scorpion", "steal", "rare", "game-item.ether"],
+    ["enemy.sand-scorpion", "drop", "always", "game-item.potion"],
+    ["enemy.sand-scorpion", "drop", "common", "game-item.annoyntment"],
+    ["enemy.sand-scorpion", "drop", "uncommon", "game-item.hi-potion"],
+    ["enemy.sand-scorpion", "drop", "rare", "game-item.hi-potion"],
+  ];
+  const encounters = new Map(enemyEncounters.map((entry) => [entry.id, entry]));
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")
+    ?.sections.find((entry) => entry.id === "cleyra-trunk");
+  const step = section?.steps.find((entry) => entry.id === "cleyra-trunk-enemy-loot");
+
+  assert.equal(expected.length, 30);
+  assert.match(step?.text ?? "", /every drop requires a KO victory/);
+  assert.match(step?.detail ?? "", /does not say whether random encounters recur there/);
+  assert.match(step?.detail ?? "", /Cleyra and its Trunk close after the post-Beatrix departure to the Red Rose/);
+  assert.equal(step?.objectiveIds, undefined);
+
+  for (const [enemyId, method, slotName, itemId] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const suffix = `${enemyId.replace("enemy.", "")}-${itemId.replace("game-item.", "")}-${slotName}-${method}`;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-2.cleyra.trunk-loot-${suffix}`);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const hasTrunkRandomPool = enemy?.encounterIds.some((id) => {
+      const encounter = encounters.get(id);
+      return id.startsWith("encounter.cleyra-trunk.") && encounter?.kind === "random-pool";
+    });
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot missing`);
+    assert.ok(hasTrunkRandomPool, `${enemyId} is missing a Cleyra Trunk random pool`);
+    assert.ok(path, `${suffix} item path missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-2.cleyra");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "limited-window");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.match(path.notes ?? "", /Trunk/);
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      if (slotName === "always") {
+        assert.match(path.conditions ?? "", /Always drop slot yields/);
+        assert.doesNotMatch(path.conditions ?? "", /conditional/);
+      } else {
+        assert.match(path.conditions ?? "", /conditional/);
+      }
+    } else {
+      assert.match(path.conditions ?? "", /success is not guaranteed/);
+    }
+    if (enemyId === "enemy.sand-golem" && method === "drop") {
+      assert.match(path.notes ?? "", /Core/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${suffix} is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Cleyra Trunk section is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    for (const sourceId of sourceIds.slice(0, 7)) {
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
+      assert.ok(enemy?.encounterIds.some((id) => encounters.get(id)?.sourceIds.includes(sourceId)), `${enemyId} encounters are missing ${sourceId}`);
     }
   }
 });

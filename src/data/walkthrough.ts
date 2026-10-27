@@ -1824,7 +1824,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-trunk",
         title: "Cleyra's Trunk — sandfalls and hidden branches",
         summary: "Search each branch before activating the sandfall passage; it locks the entrance behind you.",
-        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement", "cavesofnarshe-enemies", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "rpgclassics-cleyra-settlement", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-missables-71891", "jegged-missables", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566"],
         steps: [
           {
             id: "cleyra-trunk-save-and-chests",
@@ -1853,6 +1853,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "In the whirlpool room, jump between the pits to reach the 900-Gil and Hi-Potion chests if safe. Before climbing into Cleyra, take the Gysahl Greens chest behind the ladder. If Quina's Blue Magic is part of your goal, use Eat on Carrion Worm for Auto-Life, Dragonfly for Matra Magic, and Zuu for White Wind while those enemies are available.",
             detail: "Failing to jump out of a quicksand pit triggers the fixed Sand Scorpion battle and returns Zidane to a previous area. The bestiary keeps the Trunk's five room pools separate; against Sand Golem, select its Core and use Ice magic because striking the body can trigger counters. Quina's three Blue Magic opportunities are tracked in the shared objective; later-source coverage is not yet complete enough to call these skills permanently missable.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep", "disc-2.cleyra.blue-magic"],
+          },
+          {
+            id: "cleyra-trunk-enemy-loot",
+            kind: "optional",
+            text: "During the Trunk ascent, use the linked item routes for steals from Carrion Worm, Dragonfly, Sand Golem, Zuu, and Sand Scorpion; every drop requires a KO victory. The listed Always slots for Carrion Worm, Zuu, and Sand Scorpion yield Potion on KO; other item drops are conditional.",
+            detail: "The enemy table supplies each item slot. Sand Golem's listed statistics are for its Core, and defeating that Core also defeats the body and can award its listed drop. GameFAQs confirms chest recovery on the required post-Antlion return but does not say whether random encounters recur there, so try any desired loot slots on the ascent rather than assuming a second encounter window. Cleyra and its Trunk close after the post-Beatrix departure to the Red Rose; these are optional, chance-based opportunities, not completion objectives.",
           },
           {
             id: "cleyra-enter-settlement",

@@ -5010,6 +5010,91 @@ for (const [enemyId, method, slotName, itemId] of burmeciaRegionLootExpectations
     errors.push(`Burmecia/Cleyra regional ${enemyId} ${method} route ${pathSuffix} must match its loot slot, repeatability, KO rule, and regional source chain.`);
   }
 }
+const cleyraTrunkLootExpectations = [
+  ["enemy.carrion-worm", "steal", "common", "game-item.annoyntment"],
+  ["enemy.carrion-worm", "steal", "uncommon", "game-item.tent"],
+  ["enemy.carrion-worm", "drop", "always", "game-item.potion"],
+  ["enemy.carrion-worm", "drop", "common", "game-item.eye-drops"],
+  ["enemy.carrion-worm", "drop", "uncommon", "game-item.phoenix-down"],
+  ["enemy.carrion-worm", "drop", "rare", "game-item.phoenix-down"],
+  ["enemy.dragonfly", "steal", "common", "game-item.eye-drops"],
+  ["enemy.dragonfly", "steal", "uncommon", "game-item.tent"],
+  ["enemy.dragonfly", "drop", "common", "game-item.ore"],
+  ["enemy.dragonfly", "drop", "uncommon", "game-item.echo-screen"],
+  ["enemy.sand-golem", "steal", "common", "game-item.ore"],
+  ["enemy.sand-golem", "steal", "uncommon", "game-item.hi-potion"],
+  ["enemy.sand-golem", "drop", "common", "game-item.hi-potion"],
+  ["enemy.sand-golem", "drop", "uncommon", "game-item.hi-potion"],
+  ["enemy.sand-golem", "drop", "rare", "game-item.hi-potion"],
+  ["enemy.zuu", "steal", "common", "game-item.potion"],
+  ["enemy.zuu", "steal", "uncommon", "game-item.ore"],
+  ["enemy.zuu", "steal", "semi-rare", "game-item.hi-potion"],
+  ["enemy.zuu", "steal", "rare", "game-item.phoenix-pinion"],
+  ["enemy.zuu", "drop", "always", "game-item.potion"],
+  ["enemy.zuu", "drop", "common", "game-item.phoenix-down"],
+  ["enemy.zuu", "drop", "uncommon", "game-item.ether"],
+  ["enemy.zuu", "drop", "rare", "game-item.hi-potion"],
+  ["enemy.sand-scorpion", "steal", "common", "game-item.ore"],
+  ["enemy.sand-scorpion", "steal", "uncommon", "game-item.antidote"],
+  ["enemy.sand-scorpion", "steal", "rare", "game-item.ether"],
+  ["enemy.sand-scorpion", "drop", "always", "game-item.potion"],
+  ["enemy.sand-scorpion", "drop", "common", "game-item.annoyntment"],
+  ["enemy.sand-scorpion", "drop", "uncommon", "game-item.hi-potion"],
+  ["enemy.sand-scorpion", "drop", "rare", "game-item.hi-potion"],
+];
+const cleyraTrunkLootSources = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-cleyra-71891",
+  "jegged-cleyra",
+  "gamerguides-cleyra",
+  "elitegrindlab-cleyra",
+  "cavesofnarshe-enemies",
+  "cavesofnarshe-cleyra-walkthrough",
+  "gamefaqs-missables-71891",
+  "jegged-missables",
+];
+const cleyraTrunkLootSlotSources = cleyraTrunkLootSources.slice(0, 7);
+const cleyraTrunkLootPrefix = "item-path.disc-2.cleyra.trunk-loot-";
+const cleyraTrunkLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections
+  .find((section) => section.id === "cleyra-trunk");
+const cleyraTrunkLootStep = cleyraTrunkLootSection?.steps.find((step) => step.id === "cleyra-trunk-enemy-loot");
+if (cleyraTrunkLootExpectations.length !== 30 ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(cleyraTrunkLootPrefix)).length !== cleyraTrunkLootExpectations.length ||
+  !cleyraTrunkLootStep?.text.includes("every drop requires a KO victory") ||
+  !cleyraTrunkLootStep.detail?.includes("does not say whether random encounters recur there") ||
+  !cleyraTrunkLootStep.detail.includes("Cleyra and its Trunk close after the post-Beatrix departure to the Red Rose") ||
+  cleyraTrunkLootStep.objectiveIds?.length ||
+  cleyraTrunkLootSources.some((sourceId) => !cleyraTrunkLootSection?.sourceIds.includes(sourceId))) {
+  errors.push("Cleyra Trunk loot guidance must expose all 30 enemy slots, preserve its limited story window, and avoid treating chance-based loot as required completion.");
+}
+for (const [enemyId, method, slotName, itemId] of cleyraTrunkLootExpectations) {
+  const enemy = enemyRecords.find((record) => record.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const pathSuffix = `${enemyId.replace("enemy.", "")}-${itemId.replace("game-item.", "")}-${slotName}-${method}`;
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `${cleyraTrunkLootPrefix}${pathSuffix}`);
+  const item = gameItems.find((record) => record.id === itemId);
+  const trunkRandomEncounter = enemy?.encounterIds
+    .map((encounterId) => enemyEncounters.find((record) => record.id === encounterId))
+    .some((encounter) => encounter?.chapterId === "disc-2.cleyra" && encounter.kind === "random-pool");
+  if (!slots?.some((slot) => slot.slot === slotName && slot.itemId === itemId) || !trunkRandomEncounter ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-2.cleyra" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "limited-window" || path.walkthroughObjectiveIds?.length ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") || !path.notes?.includes("Trunk") ||
+    (method === "steal" && !path.conditions?.includes("success is not guaranteed")) ||
+    (method === "drop" && (!path.conditions?.includes("KO victory") ||
+      (slotName === "always" ? !path.conditions.includes("Always drop slot yields") || path.conditions.includes("conditional")
+        : !path.conditions.includes("conditional")))) ||
+    cleyraTrunkLootSources.some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    cleyraTrunkLootSlotSources.some((sourceId) => !enemy?.sourceIds.includes(sourceId) ||
+      !enemy.encounterIds.some((encounterId) => enemyEncounters.find((record) => record.id === encounterId)?.sourceIds.includes(sourceId)) ||
+      !cleyraTrunkLootSection?.sourceIds.includes(sourceId)) ||
+    cleyraTrunkLootSources.slice(7).some((sourceId) => !cleyraTrunkLootSection?.sourceIds.includes(sourceId))) {
+    errors.push(`Cleyra Trunk ${enemyId} ${method} route ${pathSuffix} must match its enemy slot, limited window, KO rule, and source chain.`);
+  }
+  if (enemyId === "enemy.sand-golem" && method === "drop" && !path?.notes?.includes("Core")) {
+    errors.push("Sand Golem's Cleyra drop paths must preserve the Core/body reward distinction.");
+  }
+}
 const burmeciaTypeARecord = enemyRecords.find((enemy) => enemy.id === "enemy.type-a");
 const burmeciaMagicVice = enemyRecords.find((enemy) => enemy.id === "enemy.magic-vice");
 const burmeciaNymph = enemyRecords.find((enemy) => enemy.id === "enemy.nymph");
