@@ -2912,7 +2912,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "conde-petie-mountain-path-first-climb",
         title: "Mountain Path — Eiko, Remedy, Blue Stone, and Red Stone",
         summary: "Meet Eiko and Quina's Mog, equip the new party member, then take the upper branches for the first two stones and chests.",
-        sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path", "elitegrindlab-conde-petie-mountain-path"],
+        sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path", "elitegrindlab-conde-petie-mountain-path", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490"],
         steps: [
           {
             id: "mountain-path-party-transition",
@@ -2989,6 +2989,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             detail: "The Mountain Path pool is Gnoll, Ochu, and Troll; the Lucid Plains pool is Blazer Beetle, Goblin Mage, and Troll. The bestiary records their source-listed combat tables. Quina leaves as soon as this path begins, so Gnoll's Vanish, Ochu's LV3 Def-less, Troll's Vanish, and Blazer Beetle's Limit Glove cannot be learned here on the first pass. Hornet, Lamia, and Mandragora are earlier teachers for those skills; later Mountain Path access with Quina remains unverified.",
           },
           {
+            id: "mountain-path-field-loot",
+            kind: "optional",
+            text: "If you want supplies from Mountain Path fights, use Steal before ending the battle and finish by normal KO to try for a drop. The item reference lists separate slots for Gnoll, Ochu, and Troll.",
+            detail: "Gnoll's Common drop is a Sapphire. Steal attempts and non-Always drops are chance-based; a KO does not guarantee a drop. The source roster does not provide exact formations or encounter rates.",
+          },
+          {
             id: "mountain-path-hilgigars-boss",
             kind: "combat",
             text: "Fight Hilgigars (8,106 HP in the cross-checked route tables). Zidane can try to steal Phoenix Down, Mythril Fork, and the very rare Fairy Flute. Silence prevents Curaga and Slow reduces its turns; Dagger's Float protects the party from Earthquake. The boss has no listed elemental weakness.",
@@ -3024,6 +3030,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Check the forested Lucid Plains route outside Madain Sari for the Friendly Yeti. Give it 2 Ore to receive 20 AP and an Elixir, then continue to the village if you are ready.",
             detail: "The Lucid Plains regular pool is Blazer Beetle, Goblin Mage, and Troll; the Friendly Yeti is tracked as its own non-hostile encounter, separate from the ordinary Yeti. The older PlayStation Monster List provides its partial stats, while the route sources give its 2-Ore reward.",
             objectiveIds: ["disc-2.conde-petie-mountain-path.friendly-yeti"],
+          },
+          {
+            id: "lucid-plains-field-loot",
+            kind: "optional",
+            text: "On Lucid Plains, use Steal before a battle ends if you are targeting loot from Blazer Beetle, Goblin Mage, or Troll. A normal KO can trigger the separate drop checks; see the item reference for each enemy's slots.",
+            detail: "Steals may fail and non-Always drops remain chance-based. The area roster does not establish exact formations or encounter rates.",
           },
           {
             id: "mountain-path-final-check",
@@ -3189,7 +3201,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-iifa-mountain-path-return",
         title: "Return through Mountain Path — take the north fork",
         summary: "Retrace the Mountain Path from Madain Sari and take the north exit at the Hilgigars fork to reach Pualei Plains.",
-        sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-mountain-path-return-29957", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490"],
+        sourceIds: ["gamefaqs-journey-to-iifa-tree-71891", "gamefaqs-mountain-path-return-29957", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "gamefaqs-enemy-list-71891", "gamefaqs-monster-list-20490", "gamefaqs-conde-petie-mountain-path-71891", "elitegrindlab-conde-petie-mountain-path"],
         steps: [
           {
             id: "journey-iifa-retrace-path",
@@ -3204,6 +3216,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "On Pualei Plains, search the forested area beside the Mountain Path exit for the friendly Nymph. Give it 3 Ore to receive 30 AP and an Emerald.",
             detail: "Do not search the open plains for this friendly encounter. If you greeted the Yeti near Madain Sari, Nymph's dialogue refers to that meeting; the route sources do not make the greeting a prerequisite. Keep the Emerald for friendly Jabberwock later in the game.",
             objectiveIds: ["disc-2.journey-to-iifa-tree.nymph"],
+          },
+          {
+            id: "pualei-plains-field-loot",
+            kind: "optional",
+            text: "On Pualei Plains, use Steal before a battle ends if you are targeting loot from Blazer Beetle, Goblin Mage, or Troll. A normal KO can trigger the separate drop checks; see the item reference for each enemy's slots.",
+            detail: "Steals may fail and non-Always drops remain chance-based. The source-listed area roster does not establish exact formations or encounter rates.",
           },
           {
             id: "journey-iifa-enter-tree",

@@ -6681,7 +6681,7 @@ const mountainPathEnemyRecords: EnemyRecord[] = [
       enemyLoot("semi-rare", "game-item.phoenix-pinion"), enemyLoot("rare", "game-item.ether"),
     ],
     drops: [
-      enemyLoot("always", null, "Nothing"), enemyLoot("common", null, "Sapphire"),
+      enemyLoot("always", null, "Nothing"), sourcedLoot("common", "game-item.sapphire", [enemyListSourceId, "elitegrindlab-conde-petie-mountain-path"]),
       enemyLoot("uncommon", null, "Nothing"), enemyLoot("rare", null, "Nothing"),
     ],
     facts: [
@@ -6695,8 +6695,8 @@ const mountainPathEnemyRecords: EnemyRecord[] = [
     blueMagic: [{ name: "Vanish", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [] }],
     strategies: [{ title: "Defeat it before it buffs itself", detail: "GameFAQs warns that Gnoll can use Vanish and Might on itself; Blizzara and Gnoll Attack are its direct damage options. Quina leaves before the path's encounters begin, so this is not an Eat opportunity on the first pass.", sourceIds: mountainPathEnemySources }],
     routeObjectiveIds: [],
-    notes: ["The Enemy List gives the four steal and four drop slots shown here. Vanish is also taught earlier by Hornet in Gizamaluke's Grotto; the Mountain Path re-entry window with Quina has not been established."],
-  }, mountainPathChapterId, mountainPathEnemySources),
+    notes: ["The Enemy List gives the four steal and four drop slots shown here, including a Common Sapphire drop independently confirmed by EliteGrindLab. Vanish is also taught earlier by Hornet in Gizamaluke's Grotto; the Mountain Path re-entry window with Quina has not been established."],
+  }, mountainPathChapterId, [...mountainPathEnemySources, "elitegrindlab-conde-petie-mountain-path"]),
   chapterEnemy({
     id: "enemy.ochu",
     name: "Ochu",

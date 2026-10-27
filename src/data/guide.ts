@@ -761,7 +761,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/conde-petie-mountain-path/",
     accessed: "2026-10-23",
-    notes: "Completionist audit for the four-stone Moonstone puzzle, separate chest and Stiltzkin Tent pickups, Stiltzkin #4, Mogmatt's letter, Oglop card detour, and Hilgigars' steal list. The path's post-exit re-entry status is not used to make a permanent-loss claim.",
+    notes: "Completionist audit for the four-stone Moonstone puzzle, separate chest and Stiltzkin Tent pickups, Stiltzkin #4, Mogmatt's letter, Oglop card detour, Hilgigars' steal list, and the Mountain Path enemy loot. Its enemy review independently confirms Gnoll's Sapphire drop and Ochu's Hi-Potion, Phoenix Pinion, and Ether steals; it does not establish exact encounter formations or loot probabilities. The path's post-exit re-entry status is not used to make a permanent-loss claim.",
   },
   {
     id: "jegged-conde-petie",

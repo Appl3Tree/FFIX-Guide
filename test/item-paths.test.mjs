@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 44);
+  assert.equal(orePaths.length, 49);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 47);
+  assert.equal(pinionPaths.length, 49);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -2602,4 +2602,93 @@ test("Lindblum Plateau, lowlands, and first Qu's Marsh enemy loot slots have sep
     ?.steps.find((step) => step.id === "explore-lindblum-field-loot");
   assert.match(walkthroughStep?.text ?? "", /use Steal before ending a battle/);
   assert.match(walkthroughStep?.detail ?? "", /status victories do not award drops/);
+});
+
+test("Conde Petie Mountain Path, Lucid Plains, and Pualei Plains enemy loot has area-specific paths", () => {
+  const pools = [
+    {
+      encounterId: "encounter.conde-petie-mountain-path.random-pool",
+      chapterId: "disc-2.conde-petie-mountain-path",
+    },
+    {
+      encounterId: "encounter.conde-petie-mountain-path.lucid-plains-pool",
+      chapterId: "disc-2.conde-petie-mountain-path",
+    },
+    {
+      encounterId: "encounter.journey-to-iifa-tree.pualei-plains-pool",
+      chapterId: "disc-2.journey-to-iifa-tree",
+    },
+  ];
+  const encounters = pools.map(({ encounterId }) => enemyEncounters.find((entry) => entry.id === encounterId));
+  assert.ok(encounters.every(Boolean));
+
+  const expected = pools.flatMap((pool) => {
+    const encounter = enemyEncounters.find((entry) => entry.id === pool.encounterId);
+    return encounter.formation.flatMap(({ enemyId }) => {
+      const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+      assert.ok(enemy, `${enemyId} is missing from the bestiary`);
+      return [
+        ...enemy.steals.filter((slot) => slot.itemId).map((slot) => ({ pool, enemy, enemyId, method: "steal", slot })),
+        ...enemy.drops.filter((slot) => slot.itemId).map((slot) => ({ pool, enemy, enemyId, method: "drop", slot })),
+      ];
+    });
+  });
+  assert.equal(expected.length, 31);
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.conde-petie-mountain-path"));
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.journey-to-iifa-tree"));
+
+  const paths = itemAcquisitionPaths.filter((path) =>
+    pools.some((pool) => path.encounterIds?.includes(pool.encounterId)));
+  assert.equal(paths.length, expected.length);
+  assert.deepEqual(
+    paths.map((path) => `${path.encounterIds[0]}|${path.enemyId}|${path.method}|${path.enemyLootSlot}|${path.itemId}`).sort(),
+    expected.map(({ pool, enemyId, method, slot }) => `${pool.encounterId}|${enemyId}|${method}|${slot.slot}|${slot.itemId}`).sort(),
+  );
+
+  for (const { pool, enemy, enemyId, method, slot } of expected) {
+    const path = paths.find((entry) => entry.encounterIds?.[0] === pool.encounterId && entry.enemyId === enemyId &&
+      entry.method === method && entry.enemyLootSlot === slot.slot && entry.itemId === slot.itemId);
+    assert.ok(path, `${pool.encounterId} ${enemyId} ${method} ${slot.slot} path is missing`);
+    assert.equal(path.chapterId, pool.chapterId);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.deepEqual(path.encounterIds, [pool.encounterId]);
+    assert.ok(path.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    assert.ok(enemy.sourceIds.every((sourceId) => path.sourceIds.includes(sourceId)));
+    assert.ok(slot.sourceIds.every((sourceId) => path.sourceIds.includes(sourceId)));
+    assert.ok(enemyEncounters.find((entry) => entry.id === pool.encounterId).sourceIds.every((sourceId) => path.sourceIds.includes(sourceId)));
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+    assert.equal(path.walkthroughObjectiveIds, undefined, "chance-based loot must not become guaranteed checklist progress");
+    assert.match(path.conditions ?? "", /chance-based/);
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /by normal KO/);
+      assert.match(path.conditions ?? "", /not guaranteed/);
+    } else {
+      assert.match(path.conditions ?? "", /may fail/);
+    }
+  }
+
+  const gnoll = enemyRecords.find((entry) => entry.id === "enemy.gnoll");
+  const sapphireDrop = gnoll.drops.find((slot) => slot.slot === "common");
+  assert.equal(sapphireDrop?.itemId, "game-item.sapphire");
+  assert.ok(sapphireDrop?.sourceIds.includes("elitegrindlab-conde-petie-mountain-path"));
+  assert.ok(gameItems.find((item) => item.id === "game-item.sapphire")?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+
+  const chapter = (areaId) => walkthroughChapters.find((entry) => entry.areaId === areaId);
+  const mountainPathStep = chapter("disc-2.conde-petie-mountain-path")?.sections
+    .find((section) => section.id === "mountain-path-hilgigars-and-stones")?.steps
+    .find((step) => step.id === "mountain-path-field-loot");
+  const lucidPlainsStep = chapter("disc-2.conde-petie-mountain-path")?.sections
+    .find((section) => section.id === "mountain-path-hilgigars-and-stones")?.steps
+    .find((step) => step.id === "lucid-plains-field-loot");
+  const pualeiPlainsStep = chapter("disc-2.journey-to-iifa-tree")?.sections
+    .find((section) => section.id === "journey-iifa-mountain-path-return")?.steps
+    .find((step) => step.id === "pualei-plains-field-loot");
+  for (const step of [mountainPathStep, lucidPlainsStep, pualeiPlainsStep]) {
+    assert.match(step?.text ?? "", /use Steal before/);
+    assert.match(step?.text ?? "", /normal KO/);
+    assert.match(step?.detail ?? "", /chance-based/);
+    assert.doesNotMatch(step?.text ?? "", /objective|checklist/i);
+  }
+  assert.match(mountainPathStep?.detail ?? "", /Gnoll's Common drop is a Sapphire/);
 });

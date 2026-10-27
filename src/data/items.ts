@@ -2665,7 +2665,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.lapis-lazuli", name: "Lapis Lazuli", category: "equipment", sourceIds: [...alexandriaSources, "gamefaqs-items-71891", "rpgclassics-synthesis", "gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath", "flactem-disc-3-lindblum"], verification: "partial" },
   { id: "game-item.garnet", name: "Garnet", category: "equipment", sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.amethyst", name: "Amethyst", category: "equipment", sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
-  { id: "game-item.sapphire", name: "Sapphire", category: "equipment", sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
+  { id: "game-item.sapphire", name: "Sapphire", category: "equipment", sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis", "gamefaqs-enemy-list-71891", "elitegrindlab-conde-petie-mountain-path"], verification: "partial" },
   { id: "game-item.leo-stellazzio", name: "Leo Stellazzio", category: "key-item", sourceIds: [...stellazzioReferenceSources, ...alexandriaSources, "ffuniverse-ff9-guide"], verification: "partial" },
   { id: "game-item.chimera-armlet", name: "Chimera Armlet", category: "equipment", sourceIds: [...chimeraArmletSources, "gamefaqs-the-aftermath-71891", "jegged-treno-tournament", "gamerguides-treno-tournament", "elitegrindlab-treno-tournament", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"], verification: "partial" },
   { id: "game-item.diamond", name: "Diamond", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-outer-continent-71891", "gamefaqs-conde-petie-mountain-path-71891", "gamefaqs-preparing-to-leave-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-portal-to-another-world-71891", "gamefaqs-stiltzkin-shopping-71891", "jegged-conde-petie", "jegged-conde-petie-mountain-path", "jegged-chocographs", "jegged-friendly-monsters", "jegged-bran-bal", "elitegrindlab-conde-petie"], verification: "partial" },
@@ -4475,6 +4475,67 @@ const lindblumKingdomLootPaths: ItemAcquisitionPath[] = lindblumKingdomLootEnemy
   return [...slotPaths("steal", enemy.steals), ...slotPaths("drop", enemy.drops)];
 });
 
+const condePetieFieldLootPools = [
+  {
+    encounterId: "encounter.conde-petie-mountain-path.random-pool",
+    chapterId: "disc-2.conde-petie-mountain-path",
+    areaLabel: "Conde Petie Mountain Path",
+    pathSlug: "mountain-path",
+  },
+  {
+    encounterId: "encounter.conde-petie-mountain-path.lucid-plains-pool",
+    chapterId: "disc-2.conde-petie-mountain-path",
+    areaLabel: "Lucid Plains",
+    pathSlug: "lucid-plains",
+  },
+  {
+    encounterId: "encounter.journey-to-iifa-tree.pualei-plains-pool",
+    chapterId: "disc-2.journey-to-iifa-tree",
+    areaLabel: "Pualei Plains",
+    pathSlug: "pualei-plains",
+  },
+] as const;
+const condePetieFieldLootPaths: ItemAcquisitionPath[] = condePetieFieldLootPools.flatMap((pool) => {
+  const encounter = enemyEncounters.find((entry) => entry.id === pool.encounterId);
+  if (!encounter) return [];
+
+  return encounter.formation.flatMap(({ enemyId }) => {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    if (!enemy) return [];
+
+    const sourceIds = [...new Set([...enemy.sourceIds, ...encounter.sourceIds])];
+    const slotPaths = (method: "steal" | "drop", slots: EnemyLootSlot[]) => slots.flatMap((slot) => {
+      if (!slot.itemId) return [];
+
+      const enemySlug = enemyId.replace("enemy.", "");
+      const itemSlug = slot.itemId.replace("game-item.", "");
+      const conditions = method === "steal"
+        ? `During ${pool.areaLabel} encounters, ${enemy.name}'s ${slot.slot} steal slot can yield this item; Steal attempts are chance-based and may fail.`
+        : `During ${pool.areaLabel} encounters, defeat ${enemy.name} by normal KO to try its ${slot.slot} drop slot; the chance-based result is not guaranteed.`;
+      const notes = method === "drop"
+        ? "This enemy has separate drop-table slots. A normal KO is required, but it does not guarantee a drop or fixed yield."
+        : "This is a separate steal-table slot. No fixed success rate or number of attempts is promised.";
+
+      return [{
+        id: `item-path.${pool.chapterId}.${pool.pathSlug}.field-${enemySlug}-${itemSlug}-${slot.slot}-${method}`,
+        itemId: slot.itemId,
+        chapterId: pool.chapterId,
+        method,
+        quantity: 1,
+        availability: "repeatable" as const,
+        conditions,
+        notes,
+        enemyId,
+        enemyLootSlot: slot.slot,
+        encounterIds: [encounter.id],
+        sourceIds: [...new Set([...sourceIds, ...slot.sourceIds])],
+      }];
+    });
+
+    return [...slotPaths("steal", enemy.steals), ...slotPaths("drop", enemy.drops)];
+  });
+});
+
 const goblinLootSlots = [
   { method: "steal" as const, slot: "common", itemId: "game-item.potion" },
   { method: "drop" as const, slot: "common", itemId: "game-item.potion" },
@@ -5601,6 +5662,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...gunitasBasinRegularLootPaths,
   ...daliUndergroundRegularLootPaths,
   ...lindblumKingdomLootPaths,
+  ...condePetieFieldLootPaths,
   ...evilForestGoblinLootPaths,
   ...gunitasGoblinLootPaths,
   ...evilForestRegularLootPaths,

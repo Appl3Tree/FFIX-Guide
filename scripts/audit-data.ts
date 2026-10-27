@@ -4007,6 +4007,62 @@ for (const expected of lindblumKingdomLootExpected) {
     errors.push(`Lindblum Kingdom ${expected.enemyId} ${expected.method} ${expected.slot.slot} path must match its enemy slot, encounters, chance conditions, and source links.`);
   }
 }
+const condePetieFieldLootPoolScopes = [
+  { encounterId: "encounter.conde-petie-mountain-path.random-pool", chapterId: "disc-2.conde-petie-mountain-path", stepId: "mountain-path-field-loot" },
+  { encounterId: "encounter.conde-petie-mountain-path.lucid-plains-pool", chapterId: "disc-2.conde-petie-mountain-path", stepId: "lucid-plains-field-loot" },
+  { encounterId: "encounter.journey-to-iifa-tree.pualei-plains-pool", chapterId: "disc-2.journey-to-iifa-tree", stepId: "pualei-plains-field-loot" },
+];
+const condePetieFieldLootEncounters = condePetieFieldLootPoolScopes.map((pool) => ({
+  ...pool,
+  encounter: enemyEncounters.find((entry) => entry.id === pool.encounterId),
+}));
+const condePetieFieldLootExpected = condePetieFieldLootEncounters.flatMap(({ encounter, ...pool }) =>
+  encounter?.formation.flatMap(({ enemyId }) => {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    if (!enemy) return [];
+    return [
+      ...enemy.steals.filter((slot) => slot.itemId).map((slot) => ({ pool, enemyId, method: "steal", slot })),
+      ...enemy.drops.filter((slot) => slot.itemId).map((slot) => ({ pool, enemyId, method: "drop", slot })),
+    ];
+  }) ?? []);
+const condePetieFieldLootPaths = itemAcquisitionPaths.filter((path) =>
+  condePetieFieldLootPoolScopes.some((pool) => path.encounterIds?.includes(pool.encounterId)));
+const condePetieFieldLootSteps = condePetieFieldLootEncounters.map(({ chapterId, stepId }) =>
+  walkthroughChapters.find((chapter) => chapter.areaId === chapterId)?.sections
+    .flatMap((section) => section.steps).find((step) => step.id === stepId));
+const gnollSapphireSlot = enemyRecords.find((entry) => entry.id === "enemy.gnoll")?.drops
+  .find((slot) => slot.slot === "common");
+if (condePetieFieldLootEncounters.some(({ encounter }) => !encounter) || condePetieFieldLootExpected.length !== 31 ||
+  condePetieFieldLootPaths.length !== condePetieFieldLootExpected.length ||
+  !itemCatalogCoverage.chapterIds.includes("disc-2.conde-petie-mountain-path") ||
+  !itemCatalogCoverage.chapterIds.includes("disc-2.journey-to-iifa-tree") ||
+  condePetieFieldLootSteps.some((step) => !step?.text.includes("use Steal before") ||
+    !step.text.includes("normal KO") || !step.detail?.includes("chance-based")) ||
+  gnollSapphireSlot?.itemId !== "game-item.sapphire" ||
+  !gnollSapphireSlot.sourceIds.includes("elitegrindlab-conde-petie-mountain-path")) {
+  errors.push("Conde Petie Mountain Path, Lucid Plains, and Pualei Plains must link each item-bearing enemy slot to its area path and chance-aware walkthrough step, including Gnoll's Sapphire drop.");
+}
+for (const expected of condePetieFieldLootExpected) {
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === expected.pool.encounterId);
+  const path = condePetieFieldLootPaths.find((entry) => entry.chapterId === expected.pool.chapterId &&
+    entry.encounterIds?.length === 1 && entry.encounterIds[0] === expected.pool.encounterId &&
+    entry.enemyId === expected.enemyId && entry.method === expected.method &&
+    entry.enemyLootSlot === expected.slot.slot && entry.itemId === expected.slot.itemId);
+  const requiredSources = [...new Set([
+    ...expected.slot.sourceIds,
+    ...(enemy?.sourceIds ?? []),
+    ...(encounter?.sourceIds ?? []),
+  ])];
+  if (!path || path.quantity !== 1 || path.availability !== "repeatable" ||
+    !path.conditions?.includes("chance-based") || path.walkthroughObjectiveIds?.length ||
+    (expected.method === "drop" && (!path.conditions.includes("by normal KO") || !path.conditions.includes("not guaranteed"))) ||
+    (expected.method === "steal" && !path.conditions.includes("may fail")) ||
+    requiredSources.some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.sourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId))) {
+    errors.push(`Conde Petie field ${expected.pool.encounterId} ${expected.enemyId} ${expected.method} ${expected.slot.slot} path must preserve its area, loot slot, conditional behavior, and provenance.`);
+  }
+}
 const daliUndergroundLootExpectations = [
   ["enemy.ghost", "steal", "common", "game-item.potion", "ghost-potion-common-steal"],
   ["enemy.ghost", "steal", "uncommon", "game-item.ore", "ghost-ore-uncommon-steal"],
