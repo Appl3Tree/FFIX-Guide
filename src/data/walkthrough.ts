@@ -1921,7 +1921,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-antlion-evacuation",
         title: "Antlion, evacuation, and the Cleyra cutoff",
         summary: "Try the Antlion steals, claim the post-battle rewards, then follow the safe evacuation route and survive Beatrix's scripted battle.",
-        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-boss-guide-31490", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "gamefaqs-boss-guide-31490", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-missables-71891", "jegged-missables", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "cleyra-antlion-steals",
@@ -1957,6 +1957,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "After the forced Type B battle at the settlement entrance, return to the sandpit area. If Stiltzkin's 444-Gil bundle was not recorded in the Inn, check whether he offers it here; then speak with Mopli to collect the letter for Serino. Save, then return to the entrance to continue the attack sequence.",
             detail: "GameFAQs, Jegged, and Flactem place the letter pickup with Mopli in Cleyra during the attack. RPGClassics also places Stiltzkin at the Sandpit. EliteGrindLab's script comparison lists the bundle in both the Inn and Sandpit scripts but cannot verify which offer is active, so this is a recommended follow-up check, not confirmed recovery. The entrance Type B battle occurs first; after the letter and save, the fixed assault waves are three Soldiers, two Type Bs, two Soldiers with one Type B, then three Soldiers. Serino receives the letter in the following Red Rose chapter; keep the Mognet handoff objective open until that delivery is complete.",
             objectiveIds: ["disc-2.cleyra.stiltzkin-2", "disc-2.cleyra.mognet-mail", "disc-2.return-to-alexandria.mognet-handoff"],
+          },
+          {
+            id: "cleyra-assault-enemy-loot",
+            kind: "optional",
+            text: "During the fixed Type B and Soldier [A] assault battles, try any desired steals before defeating each group. KO enemies if pursuing drops; all listed item-bearing drops are conditional. The linked paths count one slot opportunity per enemy in that wave, not guaranteed rewards.",
+            detail: "GameFAQs supplies the two enemy loot tables and the walkthrough identifies the fixed wave sequence. These assault fights happen once before the post-Beatrix Red Rose departure closes Cleyra. The earlier Trunk-return Soldier fights remain separate; their pair count is source-disputed.",
           },
           {
             id: "cleyra-evacuation-choices",

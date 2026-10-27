@@ -5418,6 +5418,63 @@ for (const expected of cleyraAssaultExpectations) {
     errors.push(`Cleyra's fixed assault formation ${expected.id} must match its source-backed wave.`);
   }
 }
+const cleyraAssaultLootPrefix = "item-path.disc-2.cleyra.assault-loot-";
+const cleyraAssaultLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections
+  .find((section) => section.id === "cleyra-antlion-evacuation");
+const cleyraAssaultLootStep = cleyraAssaultLootSection?.steps.find((step) => step.id === "cleyra-assault-enemy-loot");
+const cleyraAssaultLootEntries = cleyraAssaultExpectations.flatMap((expected) => {
+  const encounter = cleyraChapterEncounters.find((candidate) => candidate.id === expected.id);
+  const encounterSlug = expected.id.replace("encounter.cleyra-assault.", "");
+  return (encounter?.formation ?? []).flatMap((member) => {
+    const enemy = enemyRecords.find((record) => record.id === member.enemyId);
+    if (!enemy || member.quantity === null) return [];
+    return (["steal", "drop"] as const).flatMap((method) => {
+      const slots = method === "steal" ? enemy.steals : enemy.drops;
+      return slots.flatMap((slot) => slot.itemId ? [{
+        encounterSlug,
+        encounterId: expected.id,
+        enemyId: member.enemyId,
+        enemySlug: member.enemyId.replace("enemy.", ""),
+        quantity: member.quantity,
+        method,
+        slotName: slot.slot,
+        itemId: slot.itemId,
+        enemy,
+        encounter,
+      }] : []);
+    });
+  });
+});
+if (cleyraAssaultLootEntries.length !== 39 ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(cleyraAssaultLootPrefix)).length !== cleyraAssaultLootEntries.length ||
+  !cleyraAssaultLootStep?.text.includes("try any desired steals before defeating each group") ||
+  !cleyraAssaultLootStep.text.includes("all listed item-bearing drops are conditional") ||
+  !cleyraAssaultLootStep.detail?.includes("happen once before the post-Beatrix Red Rose departure closes Cleyra") ||
+  cleyraAssaultLootStep.objectiveIds?.length ||
+  cleyraTrunkLootSources.some((sourceId) => !cleyraAssaultLootSection?.sourceIds.includes(sourceId))) {
+  errors.push("Cleyra's fixed assault loot must expose all 39 one-time per-enemy slot paths and remain optional, chance-based acquisition.");
+}
+for (const entry of cleyraAssaultLootEntries) {
+  const pathSuffix = `${entry.encounterSlug}-${entry.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slotName}-${entry.method}`;
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === `${cleyraAssaultLootPrefix}${pathSuffix}`);
+  const item = gameItems.find((record) => record.id === entry.itemId);
+  if (!entry.encounter || entry.encounter.kind !== "fixed" ||
+    !entry.encounter.formation.some((member) => member.enemyId === entry.enemyId && member.quantity === entry.quantity) ||
+    !entry.enemy.encounterIds.includes(entry.encounterId) || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    !path || path.itemId !== entry.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== entry.method ||
+    path.quantity !== entry.quantity || path.availability !== "one-time-encounter" || path.walkthroughObjectiveIds?.length ||
+    !path.notes?.includes("per-enemy slot opportunities") ||
+    (entry.method === "steal" && !path.conditions?.includes("success is not guaranteed")) ||
+    (entry.method === "drop" && (!path.conditions?.includes("KO victories") ||
+      (entry.slotName === "always" ? !path.conditions.includes("Always drop slot yields") || path.conditions.includes("conditional")
+        : !path.conditions.includes("slot is conditional")))) ||
+    cleyraTrunkLootSources.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !cleyraAssaultLootSection?.sourceIds.includes(sourceId)) ||
+    cleyraTrunkLootSlotSources.some((sourceId) => !entry.enemy.sourceIds.includes(sourceId) ||
+      !entry.encounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Cleyra assault ${entry.encounterSlug} ${entry.enemyId} ${entry.method} route ${pathSuffix} must match the fixed formation, per-enemy quantity, and source chain.`);
+  }
+}
 const cleyraBossChecks = [
   {
     encounterId: "encounter.cleyra.antlion",
