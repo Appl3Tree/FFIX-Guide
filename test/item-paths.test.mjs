@@ -6,6 +6,36 @@ import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCov
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
+test("both Baku fights link each steal path to its exact enemy slot and encounter", () => {
+  const expected = [
+    { pathId: "item-path.disc-1.alexandria.masked-man-potion-steal", enemyId: "enemy.masked-man-opening", encounterId: "encounter.alexandria.masked-man-opening", itemId: "game-item.potion", slot: "common", objectiveId: "disc-1.alexandria.masked-man-steals" },
+    { pathId: "item-path.disc-1.alexandria.masked-man-wrist-steal", enemyId: "enemy.masked-man-opening", encounterId: "encounter.alexandria.masked-man-opening", itemId: "game-item.wrist", slot: "uncommon", objectiveId: "disc-1.alexandria.masked-man-steals" },
+    { pathId: "item-path.disc-1.alexandria.masked-man-mage-masher-steal", enemyId: "enemy.masked-man-opening", encounterId: "encounter.alexandria.masked-man-opening", itemId: "game-item.mage-masher", slot: "semi-rare", objectiveId: "disc-1.alexandria.masked-man-steals" },
+    { pathId: "item-path.disc-1.evil-forest.baku-hi-potion-steal", enemyId: "enemy.baku-crash-site", encounterId: "encounter.evil-forest.baku-crash-site", itemId: "game-item.hi-potion", slot: "common", objectiveId: "disc-1.evil-forest.baku-steals" },
+    { pathId: "item-path.disc-1.evil-forest.baku-iron-sword-steal", enemyId: "enemy.baku-crash-site", encounterId: "encounter.evil-forest.baku-crash-site", itemId: "game-item.iron-sword", slot: "uncommon", objectiveId: "disc-1.evil-forest.baku-steals" },
+  ];
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const enemy = enemyRecords.find((entry) => entry.id === item.enemyId);
+    const encounter = enemyEncounters.find((entry) => entry.id === item.encounterId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.enemyId, item.enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [item.encounterId]);
+    assert.ok(path?.conditions?.includes("chance-based"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
+  }
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

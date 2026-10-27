@@ -303,6 +303,24 @@ const wristReferenceSources = [
   "vgkami-evil-forest",
   "elitegrindlab-prima-vista",
 ];
+const maskedManOpeningEncounterId = "encounter.alexandria.masked-man-opening";
+const maskedManOpeningEnemyId = "enemy.masked-man-opening";
+const maskedManOpeningEncounter = enemyEncounters.find((encounter) => encounter.id === maskedManOpeningEncounterId);
+const maskedManOpeningEnemy = enemyRecords.find((enemy) => enemy.id === maskedManOpeningEnemyId);
+const maskedManOpeningLootSourceIds = [...new Set([
+  ...(maskedManOpeningEncounter?.sourceIds ?? []),
+  ...(maskedManOpeningEnemy?.sourceIds ?? []),
+  ...(maskedManOpeningEnemy?.steals.flatMap((slot) => slot.sourceIds) ?? []),
+])];
+const bakuCrashSiteEncounterId = "encounter.evil-forest.baku-crash-site";
+const bakuCrashSiteEnemyId = "enemy.baku-crash-site";
+const bakuCrashSiteEncounter = enemyEncounters.find((encounter) => encounter.id === bakuCrashSiteEncounterId);
+const bakuCrashSiteEnemy = enemyRecords.find((enemy) => enemy.id === bakuCrashSiteEnemyId);
+const bakuCrashSiteLootSourceIds = [...new Set([
+  ...(bakuCrashSiteEncounter?.sourceIds ?? []),
+  ...(bakuCrashSiteEnemy?.sourceIds ?? []),
+  ...(bakuCrashSiteEnemy?.steals.flatMap((slot) => slot.sourceIds) ?? []),
+])];
 const cottonRobeReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-shops-71891",
@@ -1080,9 +1098,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Try to steal one Wrist from the Masked Man during the opening battle. The Prima Vista wreckage chest and Dali shop provide later copies.",
+    conditions: "Attempt the chance-based Uncommon steal for one Wrist from the Masked Man during the opening battle. The Prima Vista wreckage chest and Dali shop provide later copies.",
     walkthroughObjectiveIds: ["disc-1.alexandria.masked-man-steals"],
-    sourceIds: wristReferenceSources,
+    enemyId: maskedManOpeningEnemyId,
+    enemyLootSlot: "uncommon",
+    encounterIds: [maskedManOpeningEncounterId],
+    sourceIds: [...new Set([...wristReferenceSources, ...maskedManOpeningLootSourceIds])],
   },
   {
     id: "item-path.disc-1.evil-forest.prima-vista-wrist-chest",
@@ -5686,9 +5707,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal one Potion from the Masked Man in the Prima Vista opening battle. Potions have many later item sources.",
+    conditions: "Attempt the chance-based Common steal for one Potion from the Masked Man in the Prima Vista opening battle. Potions have many later item sources.",
     walkthroughObjectiveIds: ["disc-1.alexandria.masked-man-steals"],
-    sourceIds: ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "rpgclassics-primavista"],
+    enemyId: maskedManOpeningEnemyId,
+    enemyLootSlot: "common",
+    encounterIds: [maskedManOpeningEncounterId],
+    sourceIds: maskedManOpeningLootSourceIds,
   },
   {
     id: "item-path.disc-1.alexandria.masked-man-mage-masher-steal",
@@ -5697,9 +5721,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal one Mage Masher from the Masked Man in the Prima Vista opening battle. Dali's weapon shop sells the item later for 500 Gil.",
+    conditions: "Attempt the chance-based Semi-Rare steal for one Mage Masher from the Masked Man in the Prima Vista opening battle. Dali's weapon shop sells the item later for 500 Gil.",
     walkthroughObjectiveIds: ["disc-1.alexandria.masked-man-steals"],
-    sourceIds: ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "rpgclassics-primavista"],
+    enemyId: maskedManOpeningEnemyId,
+    enemyLootSlot: "semi-rare",
+    encounterIds: [maskedManOpeningEncounterId],
+    sourceIds: maskedManOpeningLootSourceIds,
   },
   {
     id: "item-path.disc-1.evil-forest.baku-hi-potion-steal",
@@ -5708,9 +5735,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal one Hi-Potion from Baku before ending the Prima Vista Crash Site fight. Later shops and repeatable enemies provide the item type.",
+    conditions: "Attempt the chance-based Common steal for one Hi-Potion from Baku before ending the Prima Vista Crash Site fight. Later shops and repeatable enemies provide the item type.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.baku-steals"],
-    sourceIds: ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest"],
+    enemyId: bakuCrashSiteEnemyId,
+    enemyLootSlot: "common",
+    encounterIds: [bakuCrashSiteEncounterId],
+    sourceIds: bakuCrashSiteLootSourceIds,
   },
   {
     id: "item-path.disc-1.evil-forest.baku-iron-sword-steal",
@@ -5719,9 +5749,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal one Iron Sword from Baku before ending the Prima Vista Crash Site fight. Dali's weapon shop sells another copy for 660 Gil.",
+    conditions: "Attempt the chance-based Uncommon steal for one Iron Sword from Baku before ending the Prima Vista Crash Site fight. Dali's weapon shop sells another copy for 660 Gil.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.baku-steals"],
-    sourceIds: ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest"],
+    enemyId: bakuCrashSiteEnemyId,
+    enemyLootSlot: "uncommon",
+    encounterIds: [bakuCrashSiteEncounterId],
+    sourceIds: bakuCrashSiteLootSourceIds,
   },
   {
     id: "item-path.disc-1.village-of-dali.mage-masher-shop",

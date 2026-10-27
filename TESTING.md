@@ -4,7 +4,9 @@ Last updated: 2026-10-27
 
 ## Latest verification
 
-Conde Petie field loot and Gnoll Sapphire correction: the test suite verifies 31 source-linked item paths across three encounter pools, exact enemy/slot/item/encounter/source relationships, repeatability, conditional drops, and no guaranteed completion objectives. `npm test` passes 74/74; lint, typecheck, data audit, production build, and `git diff --check` pass. Audit reports 0 errors and 189 coverage warnings; the catalog has 1,501 acquisition paths. Build: 2,519.46 kB JavaScript (610.35 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite’s chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+Opening and Crash Site Baku steal links: Regression coverage verifies all five existing one-time steal paths map to their exact enemies, slots, distinct encounter IDs, walkthrough objectives, and complete source sets. `npm test` passes 75/75; lint, typecheck, data audit, production build, and `git diff --check` pass. Audit: 0 errors and 189 coverage warnings; catalog remains at 1,501 paths. Build: 2,520.02 kB JavaScript (610.60 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+
+Previous verification — Conde Petie field loot and Gnoll Sapphire correction:
 
 Previous verification — Lindblum-region field-enemy loot: added and verified 67 source-linked repeatable paths for 12 enemies across four pools (35 steals, 32 KO-conditional drops). The regression test covers exact enemy/slot/item/encounter/source links, chance-aware availability, and separation from guaranteed objectives. `npm test` passes 73/73; lint, typecheck, data audit, production build, and `git diff --check` pass. Audit reports 0 errors and 189 coverage warnings; catalog: 1,470 acquisition paths. Build: 2,515.89 kB JavaScript (609.57 kB gzip), 61.11 kB CSS (12.91 kB gzip); the Vite chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
 

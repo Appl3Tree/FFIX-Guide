@@ -4341,9 +4341,23 @@ for (const [enemyId, itemId, slot, chapterId, objectiveId] of [
   ["enemy.baku-crash-site", "game-item.iron-sword", "uncommon", "disc-1.evil-forest", "disc-1.evil-forest.baku-steals"],
 ] as const) {
   const enemy = enemyRecords.find((candidate) => candidate.id === enemyId);
+  const encounterId = enemyId === "enemy.masked-man-opening"
+    ? "encounter.alexandria.masked-man-opening"
+    : "encounter.evil-forest.baku-crash-site";
+  const encounter = enemyEncounters.find((candidate) => candidate.id === encounterId);
+  const lootSlot = enemy?.steals.find((steal) => steal.itemId === itemId && steal.slot === slot);
   const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === chapterId && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes(objectiveId));
-  if (!enemy?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) || !path || path.availability !== "one-time-encounter") {
-    errors.push(`${enemyId}'s ${itemId} steal must link to its one-time encounter and objective.`);
+  const requiredSources = [...new Set([
+    ...(enemy?.sourceIds ?? []),
+    ...(encounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+  ])];
+  if (!lootSlot || !enemy || !encounter || !path || path.availability !== "one-time-encounter" ||
+    path.enemyId !== enemyId || path.enemyLootSlot !== slot || path.encounterIds?.length !== 1 ||
+    path.encounterIds[0] !== encounterId || path.quantity !== 1 ||
+    !path.conditions?.includes("chance-based") || requiredSources.some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.sourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId))) {
+    errors.push(`${enemyId}'s ${itemId} steal must link the exact loot slot to its one-time encounter and complete provenance.`);
   }
 }
 for (const [itemId, pathId] of [
