@@ -4936,6 +4936,80 @@ for (const [method, slotName, itemId, pathSuffix] of burmeciaTypeALootExpectatio
     errors.push(`Burmecia Type A ${method} path ${pathSuffix} must match the shared enemy table, two-enemy quantity, one-time window, and source chain.`);
   }
 }
+const burmeciaRegionLootExpectations = [
+  ["enemy.lizard-man", "steal", "common", "game-item.ore"],
+  ["enemy.lizard-man", "steal", "uncommon", "game-item.tent"],
+  ["enemy.lizard-man", "drop", "common", "game-item.ore"],
+  ["enemy.lizard-man", "drop", "uncommon", "game-item.phoenix-down"],
+  ["enemy.lizard-man", "drop", "rare", "game-item.ether"],
+  ["enemy.nymph", "steal", "common", "game-item.echo-screen"],
+  ["enemy.nymph", "steal", "uncommon", "game-item.ore"],
+  ["enemy.nymph", "steal", "semi-rare", "game-item.hi-potion"],
+  ["enemy.nymph", "steal", "rare", "game-item.phoenix-pinion"],
+  ["enemy.nymph", "drop", "common", "game-item.potion"],
+  ["enemy.nymph", "drop", "uncommon", "game-item.annoyntment"],
+  ["enemy.nymph", "drop", "rare", "game-item.ether"],
+  ["enemy.sand-scorpion", "steal", "common", "game-item.ore"],
+  ["enemy.sand-scorpion", "steal", "uncommon", "game-item.antidote"],
+  ["enemy.sand-scorpion", "steal", "rare", "game-item.ether"],
+  ["enemy.sand-scorpion", "drop", "always", "game-item.potion"],
+  ["enemy.sand-scorpion", "drop", "common", "game-item.annoyntment"],
+  ["enemy.sand-scorpion", "drop", "uncommon", "game-item.hi-potion"],
+  ["enemy.sand-scorpion", "drop", "rare", "game-item.hi-potion"],
+  ["enemy.skeleton", "steal", "common", "game-item.ore"],
+  ["enemy.skeleton", "steal", "uncommon", "game-item.hi-potion"],
+  ["enemy.skeleton", "steal", "rare", "game-item.ether"],
+  ["enemy.skeleton", "drop", "common", "game-item.potion"],
+  ["enemy.skeleton", "drop", "uncommon", "game-item.phoenix-down"],
+  ["enemy.yeti", "steal", "common", "game-item.eye-drops"],
+  ["enemy.yeti", "steal", "uncommon", "game-item.ore"],
+  ["enemy.yeti", "steal", "semi-rare", "game-item.hi-potion"],
+  ["enemy.yeti", "drop", "common", "game-item.potion"],
+  ["enemy.yeti", "drop", "uncommon", "game-item.eye-drops"],
+  ["enemy.yeti", "drop", "rare", "game-item.ether"],
+];
+const burmeciaRegionLootSourceIds = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-journey-to-burmecia-71891",
+  "jegged-gizamaluke",
+  "cavesofnarshe-enemies",
+  "elitegrindlab-burmecia",
+];
+const burmeciaRegionLootPrefix = "item-path.disc-1.journey-to-burmecia.region-";
+const burmeciaRegionLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")?.sections
+  .find((section) => section.id === "journey-daines-horse-basin-detours");
+const burmeciaRegionLootStep = burmeciaRegionLootSection?.steps.find((step) => step.id === "journey-burmecia-region-enemy-loot");
+if (burmeciaRegionLootExpectations.length !== 30 ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(burmeciaRegionLootPrefix)).length !== burmeciaRegionLootExpectations.length ||
+  !burmeciaRegionLootStep?.text.includes("KO enemies if pursuing drops") ||
+  !burmeciaRegionLootStep.detail?.includes("Only an enemy's Always item drop is guaranteed on a KO victory") ||
+  !burmeciaRegionLootStep.detail.includes("These optional loot chances are not completion objectives") ||
+  burmeciaRegionLootStep.objectiveIds?.length ||
+  burmeciaRegionLootSourceIds.some((sourceId) => !burmeciaRegionPool?.sourceIds.includes(sourceId) ||
+    !burmeciaRegionLootSection?.sourceIds.includes(sourceId))) {
+  errors.push("The Burmecia/Cleyra world-map loot guide must cover the 30 item-bearing regional slots without creating completion objectives or inventing encounter details.");
+}
+for (const [enemyId, method, slotName, itemId] of burmeciaRegionLootExpectations) {
+  const enemy = enemyRecords.find((record) => record.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const pathSuffix = `${enemyId.replace("enemy.", "")}-${itemId.replace("game-item.", "")}-${slotName}-${method}`;
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `${burmeciaRegionLootPrefix}${pathSuffix}`);
+  const item = gameItems.find((entry) => entry.id === itemId);
+  if (!slots?.some((slot) => slot.slot === slotName && slot.itemId === itemId) ||
+    !enemy?.encounterIds.includes("encounter.burmecia-region.world-map-pool") ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.journey-to-burmecia" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "repeatable" || path.walkthroughObjectiveIds?.length ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    !path.notes?.includes("exact world-map tile") ||
+    (method === "drop" && (!path.conditions?.includes("KO victory") ||
+      (slotName === "always" ? !path.conditions.includes("Always drop slot yields") || path.conditions.includes("conditional")
+        : !path.conditions.includes("conditional")))) ||
+    burmeciaRegionLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !enemy?.sourceIds.includes(sourceId) || !burmeciaRegionPool?.sourceIds.includes(sourceId) ||
+      !burmeciaRegionLootSection?.sourceIds.includes(sourceId))) {
+    errors.push(`Burmecia/Cleyra regional ${enemyId} ${method} route ${pathSuffix} must match its loot slot, repeatability, KO rule, and regional source chain.`);
+  }
+}
 const burmeciaTypeARecord = enemyRecords.find((enemy) => enemy.id === "enemy.type-a");
 const burmeciaMagicVice = enemyRecords.find((enemy) => enemy.id === "enemy.magic-vice");
 const burmeciaNymph = enemyRecords.find((enemy) => enemy.id === "enemy.nymph");

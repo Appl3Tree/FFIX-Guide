@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 23);
+  assert.equal(orePaths.length, 29);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 34);
+  assert.equal(pinionPaths.length, 35);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -2058,6 +2058,95 @@ test("Burmecia's fixed Type A pair has separate one-time loot opportunities", ()
       assert.ok(enemy?.sourceIds.includes(sourceId), `Type A is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Burmecia Type A encounter is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `Burmecia walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Burmecia/Cleyra world-map enemies have repeatable paths for all item-bearing loot slots", () => {
+  const sourceIds = [
+    "gamefaqs-enemy-list-71891",
+    "gamefaqs-journey-to-burmecia-71891",
+    "jegged-gizamaluke",
+    "cavesofnarshe-enemies",
+    "elitegrindlab-burmecia",
+  ];
+  const expected = [
+    ["enemy.lizard-man", "steal", "common", "game-item.ore"],
+    ["enemy.lizard-man", "steal", "uncommon", "game-item.tent"],
+    ["enemy.lizard-man", "drop", "common", "game-item.ore"],
+    ["enemy.lizard-man", "drop", "uncommon", "game-item.phoenix-down"],
+    ["enemy.lizard-man", "drop", "rare", "game-item.ether"],
+    ["enemy.nymph", "steal", "common", "game-item.echo-screen"],
+    ["enemy.nymph", "steal", "uncommon", "game-item.ore"],
+    ["enemy.nymph", "steal", "semi-rare", "game-item.hi-potion"],
+    ["enemy.nymph", "steal", "rare", "game-item.phoenix-pinion"],
+    ["enemy.nymph", "drop", "common", "game-item.potion"],
+    ["enemy.nymph", "drop", "uncommon", "game-item.annoyntment"],
+    ["enemy.nymph", "drop", "rare", "game-item.ether"],
+    ["enemy.sand-scorpion", "steal", "common", "game-item.ore"],
+    ["enemy.sand-scorpion", "steal", "uncommon", "game-item.antidote"],
+    ["enemy.sand-scorpion", "steal", "rare", "game-item.ether"],
+    ["enemy.sand-scorpion", "drop", "always", "game-item.potion"],
+    ["enemy.sand-scorpion", "drop", "common", "game-item.annoyntment"],
+    ["enemy.sand-scorpion", "drop", "uncommon", "game-item.hi-potion"],
+    ["enemy.sand-scorpion", "drop", "rare", "game-item.hi-potion"],
+    ["enemy.skeleton", "steal", "common", "game-item.ore"],
+    ["enemy.skeleton", "steal", "uncommon", "game-item.hi-potion"],
+    ["enemy.skeleton", "steal", "rare", "game-item.ether"],
+    ["enemy.skeleton", "drop", "common", "game-item.potion"],
+    ["enemy.skeleton", "drop", "uncommon", "game-item.phoenix-down"],
+    ["enemy.yeti", "steal", "common", "game-item.eye-drops"],
+    ["enemy.yeti", "steal", "uncommon", "game-item.ore"],
+    ["enemy.yeti", "steal", "semi-rare", "game-item.hi-potion"],
+    ["enemy.yeti", "drop", "common", "game-item.potion"],
+    ["enemy.yeti", "drop", "uncommon", "game-item.eye-drops"],
+    ["enemy.yeti", "drop", "rare", "game-item.ether"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.burmecia-region.world-map-pool");
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+    ?.sections.find((entry) => entry.id === "journey-daines-horse-basin-detours");
+  const step = section?.steps.find((entry) => entry.id === "journey-burmecia-region-enemy-loot");
+
+  assert.equal(expected.length, 30);
+  assert.match(step?.text ?? "", /KO enemies if pursuing drops/);
+  assert.match(step?.detail ?? "", /Only an enemy's Always item drop is guaranteed on a KO victory/);
+  assert.match(step?.detail ?? "", /These optional loot chances are not completion objectives/);
+  assert.equal(step?.objectiveIds, undefined);
+
+  for (const [enemyId, method, slotName, itemId] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const suffix = `${enemyId.replace("enemy.", "")}-${itemId.replace("game-item.", "")}-${slotName}-${method}`;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.journey-to-burmecia.region-${suffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot missing`);
+    assert.ok(enemy?.encounterIds.includes("encounter.burmecia-region.world-map-pool"));
+    assert.ok(path, `${suffix} item route missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.match(path.notes ?? "", /exact world-map tile/);
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      if (slotName === "always") {
+        assert.match(path.conditions ?? "", /Always drop slot yields/);
+        assert.doesNotMatch(path.conditions ?? "", /conditional/);
+      } else {
+        assert.match(path.conditions ?? "", /conditional/);
+      }
+    } else {
+      assert.match(path.conditions ?? "", /success is not guaranteed/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${suffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `regional pool is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `regional walkthrough is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
   }

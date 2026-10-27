@@ -1332,7 +1332,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-daines-horse-basin-detours",
         title: "Daines-horse Basin — optional Burmecian Arch, Chocograph, and Blue Magic",
         summary: "Before entering Burmecia, take the eastern arch pickups, Choco's newly reachable Reef treasure, and Quina's Night skill if you have Quina in the party.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-enemy-list-71891", "elitegrindlab-burmecia", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-abilities-71891", "steam-missable-content-guide-2988011418"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-enemy-list-71891", "elitegrindlab-burmecia", "cavesofnarshe-enemies", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-abilities-71891", "steam-missable-content-guide-2988011418"],
         steps: [
           {
             id: "journey-burmecian-arch-pickups",
@@ -1353,6 +1353,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "With Quina in the party, use Eat on a weakened Nymph in the basin to learn Night. Check Quina's Blue Magic list before leaving the area.",
             detail: "Eat succeeds when the target is at or below 25% of its maximum HP. Nymph is one of the Daines-horse Basin encounters. GameFAQs also groups Lizard Man, Nymph, Sand Scorpion, Skeleton, and Yeti in the surrounding Burmecia/Cleyra world-map region; this is separate from Burmecia's Basilisk/Ironite/Magic Vice city pool, and no encounter rates or exact formations are published. Do not climb the Grotto vine for White Wind on this route, because Popos Heights contains a dangerous Grand Dragon encounter.",
             objectiveIds: ["disc-1.journey-to-burmecia.blue-magic-night"],
+          },
+          {
+            id: "journey-burmecia-region-enemy-loot",
+            kind: "optional",
+            text: "If you want battle items, use the linked bestiary and item routes for Lizard Man, Nymph, Sand Scorpion, Skeleton, and Yeti when you meet them in the surrounding Burmecia/Cleyra world-map region. Try any desired steals before ending the battle; KO enemies if pursuing drops.",
+            detail: "GameFAQs lists Lizard Man, Nymph, Sand Scorpion, and Yeti under Burmecia Area Enemies and separately says Skeletons also occur in that region; the routes do not map every species to an exact world-map tile or formation. Only an enemy's Always item drop is guaranteed on a KO victory; steals must succeed and other drops are conditional. This regional pool is distinct from Burmecia city's Basilisk, Ironite, and Magic Vice encounters. These optional loot chances are not completion objectives.",
           },
         ],
       },
