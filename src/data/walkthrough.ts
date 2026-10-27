@@ -6692,7 +6692,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "final-preparations-ozma",
         title: "Chocobo's Air Garden — Ozma",
         summary: "Optional superboss; finish Friendly Creatures first if you want its improved Ozma properties and the supported-release achievement.",
-        sourceIds: ["gamefaqs-ultimate-monster-71891", "gamefaqs-achievements-71891", "gamefaqs-final-preparations-71891"],
+        sourceIds: ["gamefaqs-ultimate-monster-71891", "gamefaqs-achievements-71891", "gamefaqs-final-preparations-71891", "gamefaqs-boss-guide-31490", "cavesofnarshe-ozma", "rpgclassics-ozma"],
         steps: [
           {
             id: "final-preparations-ozma-access",
@@ -6704,7 +6704,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "final-preparations-ozma-loadout",
             kind: "save",
             text: "Set Zidane with Master Thief and a prepared support party. Equip protection against Shadow and the status effects you can cover, carry Remedies, and include a party member who can restore multiple allies at once.",
-            detail: "The source recommends level 60 as a guide, not a hard requirement, and notes the fight remains luck-dependent. Shadow-absorbing or nullifying equipment helps against Doomsday; the Friendly Creatures route can make Doomsday damage Ozma instead. Bring Master Thief for the rare Dark Matter and Pumice Piece steals.",
+            detail: "Level advice is source-specific: Caves of Narshe suggests Zidane in the 70s and others in the mid-to-high 60s, while RPGClassics recommends around Lv. 80–90 or higher. The GameFAQs sidequest guide instead suggests a character at a multiple of 5 and one at a multiple of 4 to broaden Ozma's move pool. These are tactical suggestions, not required levels; avoid matching Ozma's Level 99 enemy stat. Shadow/Holy protection, status defense, Auto-Life, healing, and Master Thief may matter more than extra grinding.",
             objectiveIds: ["disc-4.final-preparations.ozma-steals"],
           },
           {

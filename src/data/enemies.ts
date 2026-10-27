@@ -317,7 +317,7 @@ const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"
 const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
 const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
 const finalBattleStatsSources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"];
-const ozmaEnemySources = ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891", "gamefaqs-final-preparations-71891"];
+const ozmaEnemySources = ["gamefaqs-ultimate-monster-71891", "gamefaqs-items-71891", "gamefaqs-final-preparations-71891", "gamefaqs-boss-guide-31490", "cavesofnarshe-ozma", "rpgclassics-ozma"];
 type LocalEnemyInput = Pick<EnemyRecord, "id" | "name" | "encounterIds" | "stats" | "steals" | "drops" | "facts" | "blueMagic" | "strategies" | "preparationGuidance" | "routeObjectiveIds" | "notes">;
 
 function chapterEnemy(record: LocalEnemyInput, chapterId: string, sourceIds: string[]): EnemyRecord {
@@ -4420,9 +4420,18 @@ const ozmaEnemyRecords: EnemyRecord[] = [
     blueMagic: [],
     strategies: [
       { title: "Complete Friendly Creatures before the fight", detail: "Finishing the creature quest makes Ozma physically reachable and changes its Shadow affinity from absorbing Shadow to being weak to it. The sidequest makes the fight easier but is not required to reach the Air Garden.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
-      { title: "Prepare for Shadow, Holy, and status attacks", detail: "Nullify Shadow and Holy damage and equip status defenses for Curse and other ailments. Levels divisible by four can draw LV4 Holy; avoid multiples of five if LV5 Death is a concern.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
+      { title: "Choose an elemental and level-multiple strategy", detail: "Protect against Shadow and Holy and cover Curse's status effects. Caves of Narshe recommends Shadow/Holy absorption for key party members; the GameFAQs AI analysis advises at least one character nullify rather than absorb each element so Ozma keeps those attacks in its move pool. Caves advises avoiding levels divisible by four or five, RPGClassics advises avoiding multiples of five, while the GameFAQs sidequest guide recommends at least one multiple of four and exactly one multiple of five to broaden Ozma's move pool. These are source-specific tradeoffs, not a universal party-level target.", sourceIds: ["gamefaqs-ultimate-monster-71891", "cavesofnarshe-ozma", "rpgclassics-ozma"] },
       { title: "Finish the selected steals before attacking", detail: "Ozma can fill its ATB and act before a command when it is idle. Delay attacks until Zidane completes the selected steals; Dark Matter and Pumice Piece occupy its rare slots.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
+      { title: "Do not rely on Slow for extra turns", detail: "Slow is listed as a vulnerability, but the GameFAQs AI analysis says Ozma can fill its ATB and act before a command when idle, making Slow of little value. Where possible, fit actions into its spell animation instead of treating Slow as a safety window.", sourceIds: ["gamefaqs-ultimate-monster-71891"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Ozma's Level 99 is its enemy stat, not a party target. Published level advice conflicts: Caves of Narshe suggests Zidane in the 70s and the others in the mid-to-high 60s, while RPGClassics suggests around Lv. 80–90 or higher. The GameFAQs sidequest guide gives no shared minimum and instead describes an optional level-multiple tactic; no universal range is inferred.",
+      difficultyAssessment: "A 2004 PlayStation boss FAQ rates Ozma Very hard. This is a subjective, single-source label; its detailed preparation advice is not gameplay-tested in this project.",
+      optionalGrinding: "Ozma is optional, and the reviewed sources do not establish a required party level. Complete Friendly Creatures and prepare equipment, abilities, and healing before choosing to grind. If you want more experience, the separate Final Preparations route lists Grand Dragons, Memoria, and Yans; equip stat-growth gear before gaining levels, and treat the especially dangerous Yans as a higher-risk option.",
+      setupAdvice: "Complete Friendly Creatures first if possible: it enables ordinary physical attacks and changes Ozma's Shadow affinity, though Long Reach or a racket can still hit it without the quest. Save and restore HP/MP before engaging. Bring Zidane with Master Thief and Bandit for the selected steals; use a reliable group healer such as Eiko and Quina's Angel's Snack or Auto-Life if learned. Prioritize Auto-Haste, Auto-Regen, Auto-Life, Clear Headed, and Antibody where available, and carry Remedies and revival items. For Shadow and Holy, choose the linked source's absorb/nullify setup deliberately; the guides trade party safety against keeping elemental moves in Ozma's available attack pool.",
+      confidence: "partial",
+      sourceIds: ozmaEnemySources,
+    },
     routeObjectiveIds: ["disc-4.final-preparations.ozma-steals", "disc-4.final-preparations.ozma-defeated", "disc-4.final-preparations.ozma-rewards"],
     notes: [
       "The GameFAQs table lists Dark Matter in all three conditional drop slots in addition to a Semi-Rare steal and the one-time Treno auction. The separate drop paths preserve the slots without treating any conditional drop as guaranteed.",
