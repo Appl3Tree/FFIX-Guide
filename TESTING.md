@@ -4,7 +4,9 @@ Last updated: 2026-10-27
 
 ## Latest verification
 
-Opening and Crash Site Baku steal links: Regression coverage verifies all five existing one-time steal paths map to their exact enemies, slots, distinct encounter IDs, walkthrough objectives, and complete source sets. `npm test` passes 75/75; lint, typecheck, data audit, production build, and `git diff --check` pass. Audit: 0 errors and 189 coverage warnings; catalog remains at 1,501 paths. Build: 2,520.02 kB JavaScript (610.60 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+Evil Forest trail loot linkage: Regression tests verify all 16 existing item paths for Dendrobium, Fang [A], and Goblin map to the exact enemy slots and repeatable trail-pool encounter, retain full provenance, and preserve the limited pre-escape window and chance/KO behavior. `npm test` passes 75/75; lint, typecheck, data audit, production build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 1,501 item paths. Build: 2,520.54 kB JavaScript (610.77 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+
+Previous verification — Opening and Crash Site Baku steal links:
 
 Previous verification — Conde Petie field loot and Gnoll Sapphire correction:
 

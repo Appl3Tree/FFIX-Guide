@@ -1824,13 +1824,17 @@ test("Evil Forest Dendrobium and Fang [A] have limited-window steal/drop paths",
   assert.match(step?.text ?? "", /Dendrobium, Fang \[A\], and Goblin/);
   assert.match(step?.detail ?? "", /party escapes and the forest closes/);
   assert.equal(expected.length, 12);
+  assert.equal(itemAcquisitionPaths.filter((entry) =>
+    entry.id.startsWith("item-path.disc-1.evil-forest.dendrobium-") ||
+    entry.id.startsWith("item-path.disc-1.evil-forest.fang-a-")).length, 12);
 
   for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
     const enemy = enemyRecords.find((entry) => entry.id === enemyId);
     const item = gameItems.find((entry) => entry.id === itemId);
     const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
     const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.${pathSuffix}`);
-    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    assert.ok(lootSlot, `${enemyId} ${slotName} ${method} slot is missing`);
     assert.ok(path, `${pathSuffix} path is missing`);
     assert.equal(path.itemId, itemId);
     assert.equal(path.chapterId, "disc-1.evil-forest");
@@ -1838,6 +1842,10 @@ test("Evil Forest Dendrobium and Fang [A] have limited-window steal/drop paths",
     assert.equal(path.quantity, 1);
     assert.equal(path.availability, "limited-window");
     assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.equal(path.enemyId, enemyId);
+    assert.equal(path.enemyLootSlot, slotName);
+    assert.deepEqual(path.encounterIds, ["encounter.evil-forest.random-pool"]);
+    assert.match(path.conditions ?? "", /chance-based/);
     assert.ok(path.conditions?.includes("before the area closes"));
     assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
     if (method === "drop") {
@@ -1849,6 +1857,10 @@ test("Evil Forest Dendrobium and Fang [A] have limited-window steal/drop paths",
       assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Evil Forest encounter is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `Evil Forest walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    for (const sourceId of new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing exact slot provenance ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
   }
@@ -1870,20 +1882,26 @@ test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () =
   const step = section?.steps.find((entry) => entry.id === "evil-forest-goblin-loot");
 
   assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.goblin"));
+  assert.equal(itemAcquisitionPaths.filter((entry) => entry.id.startsWith("item-path.disc-1.evil-forest.goblin-")).length, 4);
   assert.match(step?.text ?? "", /Dendrobium, Fang \[A\], and Goblin/);
   assert.match(step?.detail ?? "", /forest closes/);
 
   for (const [method, slotName, itemId, suffix] of expected) {
     const item = gameItems.find((entry) => entry.id === itemId);
     const slots = method === "steal" ? goblin?.steals : goblin?.drops;
+    const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
     const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.goblin-${suffix}`);
-    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId));
+    assert.ok(lootSlot);
     assert.ok(path, `Evil Forest Goblin ${method} ${slotName} path is missing`);
     assert.equal(path.itemId, itemId);
     assert.equal(path.chapterId, "disc-1.evil-forest");
     assert.equal(path.method, method);
     assert.equal(path.availability, "limited-window");
     assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.equal(path.enemyId, "enemy.goblin");
+    assert.equal(path.enemyLootSlot, slotName);
+    assert.deepEqual(path.encounterIds, ["encounter.evil-forest.random-pool"]);
+    assert.match(path.conditions ?? "", /chance-based/);
     assert.ok(path.conditions?.includes("before the area closes"));
     assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
     if (method === "drop") {
@@ -1895,6 +1913,10 @@ test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () =
       assert.ok(goblin?.sourceIds.includes(sourceId), `Goblin record is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Evil Forest encounter is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `Evil Forest walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    for (const sourceId of new Set([...(goblin?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+      assert.ok(path.sourceIds.includes(sourceId), `Evil Forest Goblin path is missing exact slot provenance ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
   }

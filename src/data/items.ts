@@ -241,7 +241,18 @@ const cleyraTrunkLootSources = [
 ];
 const gunitasGoblinLootSources = gunitasBasinLootSources;
 const evilForestRegularLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
-const evilForestGoblinLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
+const evilForestTrailEncounterId = "encounter.evil-forest.random-pool";
+const evilForestTrailEncounter = enemyEncounters.find((encounter) => encounter.id === evilForestTrailEncounterId);
+const evilForestLootPathSources = (enemyId: string, method: "steal" | "drop", slotName: EnemyTableSlot) => {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slot = (method === "steal" ? enemy?.steals : enemy?.drops)?.find((entry) => entry.slot === slotName);
+  return [...new Set([
+    ...evilForestRegularLootSources,
+    ...(enemy?.sourceIds ?? []),
+    ...(evilForestTrailEncounter?.sourceIds ?? []),
+    ...(slot?.sourceIds ?? []),
+  ])];
+};
 const gizamalukeDropSources = ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"];
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
@@ -4605,9 +4616,12 @@ const evilForestRegularLootPaths: ItemAcquisitionPath[] = evilForestRegularLootS
     method: "steal" as const,
     quantity: 1,
     availability: "limited-window" as const,
-    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Evil Forest trail encounters before the area closes; success is not guaranteed.`,
+    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Evil Forest trail encounters before the area closes; the attempt is chance-based and success is not guaranteed.`,
     notes: "GameFAQs lists the item slot, and the route sources list this enemy in the Evil Forest trail pool. Slot odds are not treated as guaranteed acquisitions.",
-    sourceIds: evilForestRegularLootSources,
+    enemyId: enemy.enemyId,
+    enemyLootSlot: entry.slot,
+    encounterIds: [evilForestTrailEncounterId],
+    sourceIds: evilForestLootPathSources(enemy.enemyId, "steal", entry.slot),
   })),
   ...enemy.drops.map((entry) => ({
     id: `item-path.disc-1.evil-forest.${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
@@ -4616,9 +4630,12 @@ const evilForestRegularLootPaths: ItemAcquisitionPath[] = evilForestRegularLootS
     method: "drop" as const,
     quantity: 1,
     availability: "limited-window" as const,
-    conditions: `On a KO victory in a repeated Evil Forest trail encounter before the area closes, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item; the slot is conditional.`,
+    conditions: `On a normal KO victory in a repeated Evil Forest trail encounter before the area closes, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item; the drop is chance-based and conditional.`,
     notes: "GameFAQs lists this conditional drop slot and states that non-KO defeats do not award drops; route sources place the enemy in the Evil Forest trail pool.",
-    sourceIds: evilForestRegularLootSources,
+    enemyId: enemy.enemyId,
+    enemyLootSlot: entry.slot,
+    encounterIds: [evilForestTrailEncounterId],
+    sourceIds: evilForestLootPathSources(enemy.enemyId, "drop", entry.slot),
   })),
 ]);
 
@@ -5159,12 +5176,15 @@ const evilForestGoblinLootPaths: ItemAcquisitionPath[] = goblinLootSlots.map((en
   quantity: 1,
   availability: "limited-window",
   conditions: entry.method === "steal"
-    ? `Goblin's ${entry.slot} steal slot lists this item. Trail encounters can repeat before the area closes; success is not guaranteed.`
-    : `On a KO victory in a repeated Evil Forest trail encounter before the area closes, Goblin's ${entry.slot} drop slot can yield this item; the slot is conditional.`,
+    ? `Goblin's ${entry.slot} steal slot lists this item. Trail encounters can repeat before the area closes; the attempt is chance-based and success is not guaranteed.`
+    : `On a normal KO victory in a repeated Evil Forest trail encounter before the area closes, Goblin's ${entry.slot} drop slot can yield this item; the drop is chance-based and conditional.`,
   notes: entry.method === "steal"
     ? "GameFAQs lists Potion in Goblin's common steal slot; the slot odds are not modeled as guaranteed acquisitions."
     : "GameFAQs lists this conditional drop slot for Goblin and states that non-KO defeats do not award drops.",
-  sourceIds: evilForestGoblinLootSources,
+  enemyId: "enemy.goblin",
+  enemyLootSlot: entry.slot,
+  encounterIds: [evilForestTrailEncounterId],
+  sourceIds: evilForestLootPathSources("enemy.goblin", entry.method, entry.slot),
 }));
 
 const iceCavernBossDropPaths: ItemAcquisitionPath[] = [

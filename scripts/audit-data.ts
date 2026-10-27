@@ -4228,13 +4228,19 @@ if (!evilForestEncounter || !["enemy.dendrobium", "enemy.fang-a", "enemy.goblin"
 for (const [enemyId, method, slotName, itemId, pathSuffix] of evilForestRegularLootExpectations) {
   const enemy = enemyRecords.find((entry) => entry.id === enemyId);
   const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
   const item = gameItems.find((entry) => entry.id === itemId);
   const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.${pathSuffix}`);
-  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+  const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(evilForestEncounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
+  if (!lootSlot ||
     !path || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" || path.method !== method ||
     path.quantity !== 1 || path.availability !== "limited-window" || path.walkthroughObjectiveIds?.length ||
+    path.enemyId !== enemyId || path.enemyLootSlot !== slotName || path.encounterIds?.length !== 1 ||
+    path.encounterIds[0] !== evilForestEncounter?.id || !path.conditions?.includes("chance-based") ||
     !path.conditions?.includes("before the area closes") || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
     (method === "drop" && (!path.conditions.includes("KO victory") || !path.conditions.includes("conditional"))) ||
+    [...requiredSources].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.sourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId)) ||
     evilForestRegularLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
       !enemy?.sourceIds.includes(sourceId) || !evilForestEncounter?.sourceIds.includes(sourceId))) {
     errors.push(`Evil Forest ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, remain limited to the forest window, and retain route provenance.`);
@@ -4243,13 +4249,19 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of evilForestRegularL
 for (const [method, slotName, itemId, pathSuffix] of evilForestGoblinLootExpectations) {
   const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");
   const slots = method === "steal" ? goblin?.steals : goblin?.drops;
+  const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
   const item = gameItems.find((entry) => entry.id === itemId);
   const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.goblin-${pathSuffix}`);
-  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+  const requiredSources = new Set([...(goblin?.sourceIds ?? []), ...(evilForestEncounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
+  if (!lootSlot ||
     !path || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" || path.method !== method ||
     path.quantity !== 1 || path.availability !== "limited-window" || path.walkthroughObjectiveIds?.length ||
+    path.enemyId !== "enemy.goblin" || path.enemyLootSlot !== slotName || path.encounterIds?.length !== 1 ||
+    path.encounterIds[0] !== evilForestEncounter?.id || !path.conditions?.includes("chance-based") ||
     !path.conditions?.includes("before the area closes") || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
     (method === "drop" && (!path.conditions.includes("KO victory") || !path.conditions.includes("conditional"))) ||
+    [...requiredSources].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.sourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId)) ||
     evilForestGoblinLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
       !goblin?.sourceIds.includes(sourceId) || !evilForestEncounter?.sourceIds.includes(sourceId))) {
     errors.push(`Evil Forest Goblin ${method} path ${pathSuffix} must match the enemy slot, retain its limited window, and preserve sources.`);
