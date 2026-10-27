@@ -713,7 +713,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "dali-underground-factory",
         title: "Dali Underground — eleven pickups and Kumop's letter",
         summary: "The factory is a one-time area. Heal before entering, collect the newly revealed items after the worker scene, and finish the hidden-room sweep before the crate sequence closes the route.",
-        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "gamefaqs-moogle-faq-23306", "elitegrindlab-dali"],
+        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "gamefaqs-moogle-faq-23306", "elitegrindlab-dali", "gamefaqs-enemy-list-71891", "cavesofnarshe-dali-walkthrough", "ffwiki-skeleton"],
         steps: [
           {
             id: "dali-underground-preflight",
@@ -751,6 +751,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "After Vivi rejoins, collect 95 Gil beside the large door. Open the rear door for the full pickup route: survive the two-Ghost ambush, take the Phoenix Down, then search behind the large machine for a Potion and Phoenix Pinion.",
             detail: "Opening the door also enables random encounters as you move through the underground. Two formations are reported to include Skeleton with Vice; Skeleton has 400 HP and is weak to Fire, so use Vivi's Fire and keep the party healed. Cure can damage the undead Ghosts. If you skip the door, all three room pickups are lost when the factory seals.",
+          },
+          {
+            id: "dali-underground-optional-loot",
+            kind: "optional",
+            text: "If you want enemy loot, open the rear door and steal from Ghost or Vice encounters before the factory seals. Treat every listed enemy item as a chance-based route, not a required checklist reward.",
+            detail: "GameFAQs lists separate steal and drop slots for Ghost and Vice; its enemy table gives the conditional drop rates and says non-KO defeats award no drops. The fights repeat while the underground remains open, but this temporary window ends after the crate sequence. Dali Skeleton is source-disputed: Jegged and EliteGrindLab include it, while GameFAQs and Caves of Narshe omit it. Final Fantasy Wiki's search-indexed location list names Gizamaluke's Grotto and Vube Desert but not Dali; that omission does not prove absence. Skeleton's loot paths apply only if it appears in the current encounter pool.",
           },
           {
             id: "dali-factory-final-sweep",

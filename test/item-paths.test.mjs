@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 17);
+  assert.equal(orePaths.length, 19);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 31);
+  assert.equal(pinionPaths.length, 32);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -1591,6 +1591,80 @@ test("Nolrich Heights combat loot preserves the regional roster and friendly Mu 
       assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Nolrich Heights encounter is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Dali underground enemy loot has temporary paths and preserves the Skeleton dispute", () => {
+  const sourceIds = [
+    "gamefaqs-enemy-list-71891",
+    "gamefaqs-dali-71891",
+    "jegged-dali",
+    "gamerguides-dali",
+    "cavesofnarshe-dali-walkthrough",
+    "elitegrindlab-dali",
+  ];
+  const expected = [
+    ["enemy.ghost", "steal", "common", "game-item.potion", "ghost-potion-common-steal"],
+    ["enemy.ghost", "steal", "uncommon", "game-item.ore", "ghost-ore-uncommon-steal"],
+    ["enemy.ghost", "steal", "semi-rare", "game-item.hi-potion", "ghost-hi-potion-semi-rare-steal"],
+    ["enemy.ghost", "steal", "rare", "game-item.phoenix-pinion", "ghost-phoenix-pinion-rare-steal"],
+    ["enemy.ghost", "drop", "uncommon", "game-item.echo-screen", "ghost-echo-screen-uncommon-drop"],
+    ["enemy.vice", "steal", "common", "game-item.echo-screen", "vice-echo-screen-common-steal"],
+    ["enemy.vice", "steal", "uncommon", "game-item.potion", "vice-potion-uncommon-steal"],
+    ["enemy.vice", "drop", "common", "game-item.potion", "vice-potion-common-drop"],
+    ["enemy.vice", "drop", "uncommon", "game-item.echo-screen", "vice-echo-screen-uncommon-drop"],
+    ["enemy.vice", "drop", "rare", "game-item.phoenix-down", "vice-phoenix-down-rare-drop"],
+    ["enemy.skeleton", "steal", "common", "game-item.ore", "skeleton-ore-common-steal"],
+    ["enemy.skeleton", "steal", "uncommon", "game-item.hi-potion", "skeleton-hi-potion-uncommon-steal"],
+    ["enemy.skeleton", "steal", "rare", "game-item.ether", "skeleton-ether-rare-steal"],
+    ["enemy.skeleton", "drop", "common", "game-item.potion", "skeleton-potion-common-drop"],
+    ["enemy.skeleton", "drop", "uncommon", "game-item.phoenix-down", "skeleton-phoenix-down-uncommon-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.dali-underground.random-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+    ?.sections.find((entry) => entry.id === "dali-underground-factory");
+  const step = section?.steps.find((entry) => entry.id === "dali-underground-optional-loot");
+
+  assert.deepEqual(encounter?.formation.map((entry) => entry.enemyId), ["enemy.ghost", "enemy.vice", "enemy.skeleton"]);
+  assert.match(encounter?.notes.join(" ") ?? "", /Jegged and EliteGrindLab also include Skeleton/);
+  assert.match(step?.text ?? "", /before the factory seals/);
+  assert.match(step?.detail ?? "", /Skeleton.*source-disputed|source-disputed.*Skeleton/i);
+  assert.ok(encounter?.sourceIds.includes("ffwiki-skeleton"));
+  assert.ok(section?.sourceIds.includes("ffwiki-skeleton"));
+  assert.ok(sources.some((source) => source.id === "ffwiki-skeleton"));
+  assert.equal(expected.length, 15);
+
+  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const path = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-1.village-of-dali.underground-" + pathSuffix);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), enemyId + " " + slotName + " " + method + " slot is missing");
+    assert.ok(path, pathSuffix + " path is missing");
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.village-of-dali");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "limited-window");
+    assert.equal(path.walkthroughObjectiveIds, undefined, "chance-based enemy loot must not become a guaranteed completion objective");
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"), itemId + " is missing the enemy list source");
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO defeat/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    if (enemyId === "enemy.skeleton") {
+      assert.match(path.notes ?? "", /source-disputed/i);
+      assert.match(path.notes ?? "", /Jegged and EliteGrindLab/);
+      assert.ok(path.sourceIds.includes("ffwiki-skeleton"));
+      assert.ok(enemy?.sourceIds.includes("ffwiki-skeleton"));
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), pathSuffix + " is missing " + sourceId);
+      assert.ok(enemy?.sourceIds.includes(sourceId), enemyId + " is missing " + sourceId);
+      assert.ok(encounter?.sourceIds.includes(sourceId), "Dali underground encounter is missing " + sourceId);
+      assert.ok(sources.some((source) => source.id === sourceId), "unknown source " + sourceId);
     }
   }
 });

@@ -3908,6 +3908,66 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of nolrichHeightsRegu
     errors.push(`Nolrich Heights ${method} path ${pathSuffix} must match its enemy slot, stay repeatable, and retain item/encounter provenance.`);
   }
 }
+const daliUndergroundLootExpectations = [
+  ["enemy.ghost", "steal", "common", "game-item.potion", "ghost-potion-common-steal"],
+  ["enemy.ghost", "steal", "uncommon", "game-item.ore", "ghost-ore-uncommon-steal"],
+  ["enemy.ghost", "steal", "semi-rare", "game-item.hi-potion", "ghost-hi-potion-semi-rare-steal"],
+  ["enemy.ghost", "steal", "rare", "game-item.phoenix-pinion", "ghost-phoenix-pinion-rare-steal"],
+  ["enemy.ghost", "drop", "uncommon", "game-item.echo-screen", "ghost-echo-screen-uncommon-drop"],
+  ["enemy.vice", "steal", "common", "game-item.echo-screen", "vice-echo-screen-common-steal"],
+  ["enemy.vice", "steal", "uncommon", "game-item.potion", "vice-potion-uncommon-steal"],
+  ["enemy.vice", "drop", "common", "game-item.potion", "vice-potion-common-drop"],
+  ["enemy.vice", "drop", "uncommon", "game-item.echo-screen", "vice-echo-screen-uncommon-drop"],
+  ["enemy.vice", "drop", "rare", "game-item.phoenix-down", "vice-phoenix-down-rare-drop"],
+  ["enemy.skeleton", "steal", "common", "game-item.ore", "skeleton-ore-common-steal"],
+  ["enemy.skeleton", "steal", "uncommon", "game-item.hi-potion", "skeleton-hi-potion-uncommon-steal"],
+  ["enemy.skeleton", "steal", "rare", "game-item.ether", "skeleton-ether-rare-steal"],
+  ["enemy.skeleton", "drop", "common", "game-item.potion", "skeleton-potion-common-drop"],
+  ["enemy.skeleton", "drop", "uncommon", "game-item.phoenix-down", "skeleton-phoenix-down-uncommon-drop"],
+];
+const daliUndergroundLootSourceIds = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-dali-71891",
+  "jegged-dali",
+  "gamerguides-dali",
+  "cavesofnarshe-dali-walkthrough",
+  "elitegrindlab-dali",
+];
+const daliUndergroundEncounter = enemyEncounters.find((entry) => entry.id === "encounter.dali-underground.random-pool");
+const daliUndergroundSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections
+  .find((section) => section.id === "dali-underground-factory");
+const daliUndergroundLootStep = daliUndergroundSection?.steps.find((step) => step.id === "dali-underground-optional-loot");
+if (!daliUndergroundEncounter || !daliUndergroundSection ||
+  !["enemy.ghost", "enemy.vice", "enemy.skeleton"].every((enemyId) =>
+    daliUndergroundEncounter.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !daliUndergroundEncounter.notes.join(" ").includes("Jegged and EliteGrindLab also include Skeleton") ||
+  !daliUndergroundLootStep?.text.includes("before the factory seals") ||
+  !daliUndergroundLootStep.detail?.includes("Skeleton is source-disputed") ||
+  daliUndergroundLootSourceIds.some((sourceId) => !daliUndergroundEncounter.sourceIds.includes(sourceId) ||
+    !daliUndergroundSection.sourceIds.includes(sourceId)) ||
+  !daliUndergroundEncounter.sourceIds.includes("ffwiki-skeleton") ||
+  !daliUndergroundSection.sourceIds.includes("ffwiki-skeleton")) {
+  errors.push("Dali underground enemy-loot routes must preserve the temporary access window and Skeleton encounter disagreement.");
+}
+for (const [enemyId, method, slotName, itemId, pathSuffix] of daliUndergroundLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.village-of-dali.underground-${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.village-of-dali" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "limited-window" || path.walkthroughObjectiveIds?.length ||
+    !path.conditions?.includes("rear door") || !path.conditions.includes("before the factory seals") ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions.includes("KO defeat") || !path.conditions.includes("conditional"))) ||
+    (enemyId === "enemy.skeleton" && (!path.notes?.includes("source-disputed") || !path.notes.includes("Jegged and EliteGrindLab") ||
+      !path.sourceIds.includes("ffwiki-skeleton") || !enemy?.sourceIds.includes("ffwiki-skeleton"))) ||
+    daliUndergroundLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !enemy?.sourceIds.includes(sourceId) || !daliUndergroundEncounter?.sourceIds.includes(sourceId) ||
+      !daliUndergroundSection?.sourceIds.includes(sourceId))) {
+    errors.push(`Dali underground ${method} path ${pathSuffix} must match its enemy slot, stay limited to the factory window, and retain source conflicts.`);
+  }
+}
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
 const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;
