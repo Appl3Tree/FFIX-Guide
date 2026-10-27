@@ -5034,6 +5034,42 @@ for (const itemId of zornThornItemIds) {
 if (!itemAcquisitionPaths.some((path) => path.id === "item-path.disc-2.pinnacle-rocks.mythril-armlet-chest")) {
   errors.push("Mythril Armlet needs its Pinnacle Rocks chest path in addition to Thorn's steal.");
 }
+const lindblumFirstVisitPathSpecs = [
+  ["item-path.disc-1.lindblum.ether-guest-room-chest", "game-item.ether", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.hi-potion-business-district-chest", "game-item.hi-potion", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.echo-screen-business-district-chest", "game-item.echo-screen", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.tent-church-street-hidden-pickup", "game-item.tent", "hidden-pickup", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.bronze-vest-industrial-district-pickup", "game-item.bronze-vest", "fixed-pickup", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.ore-theater-district-chest", "game-item.ore", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.mini-burmecia-hideout-hidden-pickup", "game-item.mini-burmecia", "hidden-pickup", "single-use", "disc-1.lindblum.first-visit-pickups", ["gamefaqs-lindblum-71891", "jegged-lindblum"]],
+  ["item-path.disc-1.lindblum.autograph-lowell-reward", "game-item.autograph", "quest-reward", "single-use", "disc-1.lindblum.autograph-moogle-suit", ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamefaqs-missables-71891", "gamefaqs-missables-21725"]],
+  ["item-path.disc-1.lindblum.moogle-suit-theater-studio-hidden-pickup", "game-item.moogle-suit", "hidden-pickup", "single-use", "disc-1.lindblum.autograph-moogle-suit", ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamefaqs-missables-71891", "gamefaqs-missables-21725"]],
+  ["item-path.disc-1.lindblum.kupo-nut-vivi-shopping-ate", "game-item.kupo-nut", "quest-reward", "single-use", "disc-1.lindblum.kupo-nut", ["gamefaqs-lindblum-71891"]],
+  ["item-path.disc-1.lindblum.master-hunter-festival-reward", "game-item.master-hunter", "quest-reward", "single-use", "disc-1.lindblum.master-hunter", ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamefaqs-hunt-minigame-71891"]],
+  ["item-path.disc-1.lindblum.coral-ring-freya-festival-reward", "game-item.coral-ring", "quest-reward", "conditional", "disc-1.lindblum.festival-freya-win", ["gamefaqs-lindblum-71891", "jegged-lindblum", "gamefaqs-hunt-minigame-71891"]],
+] as const;
+for (const [pathId, itemId, method, availability, objectiveId, requiredSources] of lindblumFirstVisitPathSpecs) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const item = gameItems.find((entry) => entry.id === itemId);
+  if (!path || path.itemId !== itemId || path.chapterId !== "disc-1.lindblum" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== availability || !path.walkthroughObjectiveIds?.includes(objectiveId) ||
+    !item || !objectivesById.has(objectiveId)) {
+    errors.push(`Lindblum first-visit path ${pathId} must keep its item, quantity, method, availability, and checklist link.`);
+  }
+  for (const sourceId of requiredSources) {
+    if (!sourceIds.has(sourceId) || !path?.sourceIds.includes(sourceId) || !item?.sourceIds.includes(sourceId)) {
+      errors.push(`Lindblum first-visit path ${pathId} and its item need source ${sourceId}.`);
+    }
+  }
+}
+const lindblumViviShoppingStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.lindblum")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "lindblum-vivis-shopping-ate");
+if (!lindblumViviShoppingStep?.objectiveIds?.includes("disc-1.lindblum.kupo-nut") ||
+  !lindblumViviShoppingStep.text.includes("Kupo Nut") || !objectivesById.has("disc-1.lindblum.kupo-nut")) {
+  errors.push("Vivi's Shopping ATE must link its Kupo Nut reward to the dedicated Lindblum objective.");
+}
 const pinnacleOgreChest = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.the-ogre-chest");
 if (!pinnacleOgreChest || pinnacleOgreChest.itemId !== "game-item.the-ogre" || pinnacleOgreChest.chapterId !== "disc-2.pinnacle-rocks" ||
   pinnacleOgreChest.method !== "chest" || pinnacleOgreChest.quantity !== 1 || pinnacleOgreChest.availability !== "single-use" ||

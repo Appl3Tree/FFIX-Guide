@@ -887,7 +887,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "When you regain control by the castle fountain, go up the right-hand staircase and enter the Guest Bedroom. Open the chests for a Glass Armlet and Ether, then speak to Mogki: deliver Kumop's letter from Dali and accept her reply addressed to Atla. Save with Mogki before returning to the fountain.",
             detail: "If Kumop's letter is not in your inventory, continue with the other Mognet and story steps; the Dali factory cutoff is already past. Mogki's new letter is a separate handoff for the upcoming Burmecia route.",
-            objectiveIds: ["disc-1.lindblum.kumop-letter-delivery", "disc-1.lindblum.mogki-letter-atla"],
+            objectiveIds: ["disc-1.lindblum.kumop-letter-delivery", "disc-1.lindblum.mogki-letter-atla", "disc-1.lindblum.first-visit-pickups"],
           },
           {
             id: "lindblum-cid-and-freya",
@@ -914,6 +914,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lindblum-main-street-pickups",
             kind: "pickup",
             text: "In the house at the far side of the shopping square, collect the Hi-Potion and Echo Screen from the upper floor. In Church Street, take the Tent from the tree, enter the church, climb behind the organ, and collect the Leather Plate from the balcony.",
+            objectiveIds: ["disc-1.lindblum.first-visit-pickups"],
           },
           {
             id: "lindblum-shop-square",
@@ -927,6 +928,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "required",
             text: "Return to the Inn and enter the Air Cab station opposite it. View Vivi's Shopping ATE; this scene gives the Kupo Nut Key Item. Then take the Air Cab to the Industrial District.",
             detail: "The Kupo Nut is part of the Mognet sidequest and can be handed to the moogles at Gizamaluke's Grotto on the next route. The ATE is also one of Lindblum's six listed scenes.",
+            objectiveIds: ["disc-1.lindblum.kupo-nut"],
           },
         ],
       },
@@ -941,6 +943,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "After leaving the Air Cab station, search the small left-side alcove near the cat for a Leather Wrist. Take the Bronze Vest from the outside wall beside the pub, then go north to the residence and open the upstairs chests for a Mimic Card and Steepled Hat.",
             detail: "The pub interior has no required pickup for this route. Equip the new armor only after checking learned abilities on the gear you are replacing.",
+            objectiveIds: ["disc-1.lindblum.first-visit-pickups"],
           },
         ],
       },
@@ -955,6 +958,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "Return to the station and take the Air Cab to the Theater District. Exit into the district to view Steam Engine, collect 127 Gil from the hedge in the foreground, and take the Ore from the studio chest.",
             detail: "The ATE prompt is part of the first-visit Lindblum Movie Critic set. Complete it before leaving the district route.",
+            objectiveIds: ["disc-1.lindblum.first-visit-pickups"],
           },
           {
             id: "lindblum-lowell-autograph-moogle-suit",
@@ -968,6 +972,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "pickup",
             text: "Now enter the Tantalus Hideout and view the forced What Can I Do? ATE. Collect the three Gil chests (282, 68, and 97 Gil), then inspect the upper bunk for Mini-Burmecia. Leave the hideout and view Baku and His Crew when its ATE prompt appears.",
             detail: "The Autograph and Moogle Suit are no longer available after entering, but the festival is still ahead. Mini-Burmecia is a Key Item collectible credited toward the Treasure Hunter system.",
+            objectiveIds: ["disc-1.lindblum.first-visit-pickups"],
           },
           {
             id: "lindblum-ate-final-check",

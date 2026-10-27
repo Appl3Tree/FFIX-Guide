@@ -286,7 +286,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 11);
+  assert.equal(orePaths.length, 12);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -1237,4 +1237,58 @@ test("the first two Chocographs and early Pinnacle Rocks chests have item paths"
   assert.match(chocographStep?.text ?? "", /2 Elixirs, 3 Hi-Potions, 4 Ethers, and 2 Germinas Boots/);
   assert.match(chocographStep?.text ?? "", /5 Potions, 5 Hi-Potions, 2 Tents, and 2 Cotton Robes/);
   assert.ok(pinnacleStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups"));
+});
+
+test("Lindblum's first-visit pickups and rewards have item paths", () => {
+  const sharedSources = ["gamefaqs-lindblum-71891", "jegged-lindblum"];
+  const festivalSources = [...sharedSources, "gamefaqs-hunt-minigame-71891"];
+  const expected = [
+    ["item-path.disc-1.lindblum.ether-guest-room-chest", "game-item.ether", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.hi-potion-business-district-chest", "game-item.hi-potion", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.echo-screen-business-district-chest", "game-item.echo-screen", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.tent-church-street-hidden-pickup", "game-item.tent", "hidden-pickup", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.bronze-vest-industrial-district-pickup", "game-item.bronze-vest", "fixed-pickup", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.ore-theater-district-chest", "game-item.ore", "chest", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.mini-burmecia-hideout-hidden-pickup", "game-item.mini-burmecia", "hidden-pickup", "single-use", "disc-1.lindblum.first-visit-pickups", sharedSources],
+    ["item-path.disc-1.lindblum.autograph-lowell-reward", "game-item.autograph", "quest-reward", "single-use", "disc-1.lindblum.autograph-moogle-suit", [...sharedSources, "gamefaqs-missables-71891", "gamefaqs-missables-21725"]],
+    ["item-path.disc-1.lindblum.moogle-suit-theater-studio-hidden-pickup", "game-item.moogle-suit", "hidden-pickup", "single-use", "disc-1.lindblum.autograph-moogle-suit", [...sharedSources, "gamefaqs-missables-71891", "gamefaqs-missables-21725"]],
+    ["item-path.disc-1.lindblum.kupo-nut-vivi-shopping-ate", "game-item.kupo-nut", "quest-reward", "single-use", "disc-1.lindblum.kupo-nut", ["gamefaqs-lindblum-71891"]],
+    ["item-path.disc-1.lindblum.master-hunter-festival-reward", "game-item.master-hunter", "quest-reward", "single-use", "disc-1.lindblum.master-hunter", festivalSources],
+    ["item-path.disc-1.lindblum.coral-ring-freya-festival-reward", "game-item.coral-ring", "quest-reward", "conditional", "disc-1.lindblum.festival-freya-win", festivalSources],
+  ];
+
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.lindblum"));
+  assert.ok(walkthroughChapters.some((chapter) => chapter.areaId === "disc-1.lindblum"));
+
+  for (const [pathId, itemId, method, availability, objectiveId, sourceIds] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.lindblum");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, availability);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(item, `${itemId} is missing from the item catalog`);
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    assert.ok(objectives.some((objective) => objective.id === objectiveId));
+  }
+
+  const lindblumSteps = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.lindblum")
+    ?.sections.flatMap((section) => section.steps);
+  const viviAte = lindblumSteps?.find((step) => step.id === "lindblum-vivis-shopping-ate");
+  const firstVisitCheck = lindblumSteps?.find((step) => step.id === "lindblum-first-visit-pickup-check");
+  const freyaPrize = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.coral-ring-freya-festival-reward");
+
+  assert.match(viviAte?.text ?? "", /Vivi's Shopping ATE.*Kupo Nut/);
+  assert.ok(viviAte?.objectiveIds?.includes("disc-1.lindblum.kupo-nut"));
+  assert.ok(firstVisitCheck?.objectiveIds?.includes("disc-1.lindblum.first-visit-pickups"));
+  assert.match(freyaPrize?.conditions ?? "", /Choose Freya/);
+  assert.match(itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.master-hunter-festival-reward")?.conditions ?? "", /with Zidane, Freya, or Vivi/);
 });
