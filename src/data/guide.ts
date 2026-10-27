@@ -2923,6 +2923,22 @@ export const sources = [
     notes: "Independent screen route and cross-check for Mount Gulug's hidden pickups, Moolan/Mogtaka letters, fixed Red Dragon fights, the solo-dragon Elixir chest, Eiko's story Ribbon, Meltigemini's steals and status effects, and Lindblum return.",
   },
   {
+    id: "gamefaqs-walkthrough-gbness-26505",
+    title: "Final Fantasy IX Guide and Walkthrough — Gbness",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/26505",
+    accessed: "2026-10-26",
+    notes: "Original PlayStation walkthrough with a Meltigemini battle section and enemy table. It describes the forced Eiko party, Virus/AP interaction, healing, Shell, White Wind, and Mini; it calls the battle Hard. Its enemy table lists Holy weakness and Fire absorption, contradicting route sources that call Fire a weakness. Both Fire claims remain source-scoped; no release-specific behavior has been tested.",
+  },
+  {
+    id: "kamigame-meltigemini",
+    title: "Meltigemini strategy — FF9攻略Wiki",
+    publisher: "Kamigame",
+    url: "https://kamigame.jp/FF9/page/141086945919916967.html",
+    accessed: "2026-10-26",
+    notes: "Japanese boss guide, translated for this guide's notes. It recommends around party Level 35 as a safe mark, Antibody, Devil Killer, frequent healing, and Flame Tongue/Holy Lance additional effects; it reports both Fire and Holy weaknesses. Its numeric party level and Fire claim are single-source advice, not treated as universal or release-verified.",
+  },
+  {
     id: "gamerguides-mount-gulug",
     title: "Mount Gulug — Disc III walkthrough",
     publisher: "Gamer Guides",

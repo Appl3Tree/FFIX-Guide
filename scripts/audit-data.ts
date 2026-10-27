@@ -7532,6 +7532,32 @@ if (!tantarianPreparation || tantarianPreparation.suggestedLevelRange !== undefi
   !tantarianPreparationStep.detail.includes("Master Thief")) {
   errors.push("Tantarian preparation must distinguish enemy level from party targets and connect the source-backed Disc III setup to its final library checkpoint.");
 }
+const meltigeminiRecord = enemyRecords.find((enemy) => enemy.id === "enemy.meltigemini");
+const meltigeminiPreparation = meltigeminiRecord?.preparationGuidance;
+const meltigeminiBossSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.lost-continent")?.sections.find((section) => section.id === "lost-continent-gulug-boss");
+const meltigeminiCombatStep = meltigeminiBossSection?.steps.find((step) => step.id === "lost-continent-meltigemini-battle");
+const meltigeminiFacts = meltigeminiRecord?.facts ?? [];
+if (!meltigeminiPreparation || meltigeminiPreparation.suggestedLevelRange !== undefined ||
+  !meltigeminiPreparation.levelRationale.includes("Level 42 is the boss's stat") ||
+  !meltigeminiPreparation.levelRationale.includes("around party Level 35") ||
+  !meltigeminiPreparation.difficultyAssessment?.includes("Hard") ||
+  !meltigeminiPreparation.difficultyAssessment.includes("Rough") ||
+  !meltigeminiPreparation.optionalGrinding.includes("single-source comfort suggestion") ||
+  !meltigeminiPreparation.setupAdvice.includes("Antibody") ||
+  !meltigeminiPreparation.setupAdvice.includes("Vaccines") ||
+  !meltigeminiPreparation.setupAdvice.includes("Vivi leaves") ||
+  !meltigeminiPreparation.setupAdvice.includes("Holy or non-elemental") ||
+  !meltigeminiPreparation.sourceIds.includes("gamefaqs-walkthrough-gbness-26505") ||
+  !meltigeminiPreparation.sourceIds.includes("kamigame-meltigemini") ||
+  !meltigeminiFacts.some((fact) => fact.category === "elemental-weakness" && fact.label === "Holy") ||
+  !meltigeminiFacts.some((fact) => fact.category === "elemental-weakness" && fact.label === "Fire weakness reported") ||
+  !meltigeminiFacts.some((fact) => fact.category === "elemental-resistance" && fact.label === "Fire damage absorbed (disputed report)" && fact.sourceIds.includes("gamefaqs-walkthrough-gbness-26505")) ||
+  !meltigeminiBossSection?.sourceIds.includes("kamigame-meltigemini") ||
+  !meltigeminiCombatStep?.text.includes("Holy or non-elemental") ||
+  !meltigeminiCombatStep.text.includes("Fire's affinity is disputed") ||
+  !meltigeminiCombatStep.detail?.includes("single-source comfort target")) {
+  errors.push("Meltigemini preparation must keep Level 42 separate from party advice, preserve the conflicting Fire reports, and link status/setup guidance to the Mount Gulug boss checkpoint.");
+}
 if (!tantarianDisc2Encounter || tantarianDisc2Encounter.chapterId !== "disc-2.return-to-alexandria" ||
   !tantarianDisc2Encounter.notes.some((note) => note.includes("first of two")) ||
   !tantarianDisc3Encounter || tantarianDisc3Encounter.chapterId !== "disc-3.trouble-on-the-home-front" ||

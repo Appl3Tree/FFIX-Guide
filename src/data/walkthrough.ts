@@ -4973,13 +4973,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lost-continent-gulug-boss",
         title: "Broken wall — take Mog's story Ribbon and defeat Meltigemini",
         summary: "The scenes force Eiko into the active party, remove Vivi, and award Mog's Ribbon automatically. Prepare for Virus and Venom before the one-time boss fight.",
-        sourceIds: ["gamefaqs-lost-continent-71891", "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-portal-to-another-world-71891", "gamefaqs-return-to-gaia-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug"],
+        sourceIds: ["gamefaqs-lost-continent-71891", "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-portal-to-another-world-71891", "gamefaqs-return-to-gaia-71891", "jegged-mount-gulug", "gamerguides-mount-gulug", "elitegrindlab-mount-gulug", "gamefaqs-boss-guide-31490", "gamefaqs-walkthrough-gbness-26505", "kamigame-meltigemini"],
         steps: [
           {
             id: "lost-continent-mog-ribbon-story",
             kind: "required",
-            text: "Before going through the broken wall, confirm the Mount Gulug pickup sweep and equip Antibody on anyone who can use it. Watch the Mog and Eiko story sequence; Eiko receives Mog's Ribbon automatically and learns the path to Madeen.",
-            detail: "The Ribbon is a story grant, not a chest or hidden pickup. Eiko can learn Madeen by equipping it and earning AP; do not count the Ribbon as part of the dungeon treasure sweep.",
+            text: "Before going through the broken wall, confirm the Mount Gulug pickup sweep, equip Antibody where available, and choose the other three party members. Watch the Mog and Eiko story sequence; Eiko receives Mog's Ribbon automatically and joins the boss party when Vivi leaves.",
+            detail: "The Ribbon is a story grant, not a chest or hidden pickup. Eiko can learn Madeen by equipping it and earning AP; do not count the Ribbon as part of the dungeon treasure sweep. The party selection matters because Eiko is forced into the fight and Vivi is removed.",
             objectiveIds: ["disc-3.lost-continent.mog-ribbon-madeen"],
           },
           {
@@ -4992,8 +4992,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lost-continent-meltigemini-battle",
             kind: "combat",
-            text: "Defeat Meltigemini. Keep Antibody equipped against Venom and Bio's Poison, and use Vaccines to cure Virus; Virus prevents affected characters from earning AP at the end of battle. Try reliable Fire or Holy damage and keep the forced Eiko ready to heal or use magic.",
-            detail: "Viral Smoke inflicts Virus, which Antibody does not block. Mini or Quina's Bad Breath can help control the boss, and Zidane can make steal attempts while the group remains safe. The boss is reported at 24,348 HP by the inspected route references; no recommended level is established.",
+            text: "Defeat Meltigemini. Keep Antibody equipped against Venom and Bio's Poison, and use Vaccines to cure Virus; Virus prevents affected characters from earning AP at the end of battle. Prefer Holy or non-elemental damage while Fire's affinity is disputed, and keep the forced Eiko ready to heal.",
+            detail: "Viral Smoke inflicts Virus, which Antibody does not block. Mini can greatly reduce the boss's damage if it lands, and Devil Killer helps physical attackers; Quina's White Wind or Shell can support healing if available. The boss is reported at Level 42 and 24,348 HP, but those are enemy stats, not a recommended party level. Kamigame suggests about party Level 35 as a single-source comfort target. Fire is reported as a weakness by several route references but as absorbed in one PlayStation enemy table, so use Holy or non-elemental attacks unless the player's release confirms the Fire behavior.",
           },
         ],
       },
