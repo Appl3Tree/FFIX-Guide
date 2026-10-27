@@ -193,6 +193,54 @@ test("Festival Zaghnol steals link the Hunt-only boss slots and source conflict"
   }
 });
 
+test("Scarlet Hair item paths link exact solo-boss loot slots and distinguish steal chance from the Tent drop", () => {
+  const expected = [
+    { pathId: "item-path.disc-2.return-to-madain-sari.scarlet-hair-ether-steal", itemId: "game-item.ether", method: "steal", slot: "common", chanceBased: true },
+    { pathId: "item-path.disc-2.return-to-madain-sari.scarlet-hair-poison-knuckles-steal", itemId: "game-item.poison-knuckles", method: "steal", slot: "uncommon", chanceBased: true },
+    { pathId: "item-path.disc-2.return-to-madain-sari.scarlet-hair-tent-drop", itemId: "game-item.tent", method: "drop", slot: "always", chanceBased: false },
+  ];
+  const enemyId = "enemy.scarlet-hair";
+  const encounterId = "encounter.return-madain-sari.scarlet-hair";
+  const objectiveId = "disc-2.return-to-madain-sari.scarlet-hair-steals";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const paths = itemAcquisitionPaths.filter((entry) => entry.chapterId === "disc-2.return-to-madain-sari" && entry.enemyId === enemyId);
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.equal(paths.length, expected.length);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    if (item.chanceBased) {
+      assert.match(path?.conditions ?? "", /chance-based/);
+      assert.match(path?.conditions ?? "", /can fail/);
+      assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    } else {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /defeat him/);
+      assert.equal(path?.walkthroughObjectiveIds, undefined);
+    }
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.pathId} has known sources`);
+  }
+
+  const laterPoisonKnucklesPath = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-2.madain-sari.poison-knuckles-shop");
+  assert.equal(laterPoisonKnucklesPath?.availability, "repeatable");
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

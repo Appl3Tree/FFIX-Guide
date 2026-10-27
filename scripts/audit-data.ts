@@ -6554,6 +6554,32 @@ const scarletHairItemPathIds = [
   "item-path.disc-3.on-the-high-seas.poison-knuckles-lindblum-shop",
   "item-path.disc-3.ipsens-castle.poison-knuckles-ipsen-mogshop",
 ];
+const scarletHairLootPaths = [
+  { id: scarletHairItemPathIds[0], itemId: "game-item.ether", method: "steal", slot: "common", chanceBased: true },
+  { id: scarletHairItemPathIds[1], itemId: "game-item.poison-knuckles", method: "steal", slot: "uncommon", chanceBased: true },
+  { id: scarletHairItemPathIds[2], itemId: "game-item.tent", method: "drop", slot: "always", chanceBased: false },
+];
+for (const expected of scarletHairLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? scarletHair?.steals : scarletHair?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(scarletHair?.sourceIds ?? []), ...(scarletHairEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    path?.itemId !== expected.itemId ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== scarletHair?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    path.encounterIds?.length !== 1 ||
+    path.encounterIds[0] !== scarletHairEncounter?.id ||
+    (expected.chanceBased && (!path.conditions?.includes("chance-based") || !path.conditions.includes("can fail"))) ||
+    (!expected.chanceBased && !path.conditions?.includes("defeat him")) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Scarlet Hair's ${expected.itemId} path must link the exact ${expected.slot} loot slot to its one-time encounter with matching yield conditions and provenance.`);
+  }
+}
 if (
   !gameItemIds.has("game-item.poison-knuckles") ||
   scarletHairItemPathIds.some((pathId) => !itemAcquisitionPaths.some((path) => path.id === pathId)) ||
