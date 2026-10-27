@@ -5070,6 +5070,36 @@ if (!lindblumViviShoppingStep?.objectiveIds?.includes("disc-1.lindblum.kupo-nut"
   !lindblumViviShoppingStep.text.includes("Kupo Nut") || !objectivesById.has("disc-1.lindblum.kupo-nut")) {
   errors.push("Vivi's Shopping ATE must link its Kupo Nut reward to the dedicated Lindblum objective.");
 }
+const burmeciaArchPickupSpecs = [
+  ["item-path.disc-1.journey-to-burmecia.burmecia-arch-hi-potion-chest", "game-item.hi-potion"],
+  ["item-path.disc-1.journey-to-burmecia.burmecia-arch-tent-chest", "game-item.tent"],
+] as const;
+const burmeciaArchSources = ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"];
+for (const [pathId, itemId] of burmeciaArchPickupSpecs) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const item = gameItems.find((entry) => entry.id === itemId);
+  if (!path || path.itemId !== itemId || path.chapterId !== "disc-1.journey-to-burmecia" || path.method !== "chest" ||
+    path.quantity !== 1 || path.availability !== "single-use" ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.journey-to-burmecia.burmecia-arch-pickups") || !item) {
+    errors.push(`Burmecia Arch path ${pathId} must be a single-use chest linked to the pickup objective.`);
+  }
+  for (const sourceId of burmeciaArchSources) {
+    if (!sourceIds.has(sourceId) || !path?.sourceIds.includes(sourceId) || !item?.sourceIds.includes(sourceId)) {
+      errors.push(`Burmecia Arch path ${pathId} and its item need source ${sourceId}.`);
+    }
+  }
+}
+const burmeciaArchObjective = objectivesById.get("disc-1.journey-to-burmecia.burmecia-arch-pickups");
+const burmeciaArchStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-burmecian-arch-pickups");
+if (!burmeciaArchObjective || burmeciaArchObjective.sourceIds.length !== burmeciaArchSources.length ||
+  !burmeciaArchSources.every((sourceId) => burmeciaArchObjective.sourceIds.includes(sourceId)) ||
+  burmeciaArchObjective.sourceIds.includes("opatil-gizamaluke-map") ||
+  !burmeciaArchStep?.objectiveIds?.includes("disc-1.journey-to-burmecia.burmecia-arch-pickups")) {
+  errors.push("Burmecia Arch's pickup objective must cite its two exact route sources and stay linked to the walkthrough step.");
+}
 const pinnacleOgreChest = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.the-ogre-chest");
 if (!pinnacleOgreChest || pinnacleOgreChest.itemId !== "game-item.the-ogre" || pinnacleOgreChest.chapterId !== "disc-2.pinnacle-rocks" ||
   pinnacleOgreChest.method !== "chest" || pinnacleOgreChest.quantity !== 1 || pinnacleOgreChest.availability !== "single-use" ||

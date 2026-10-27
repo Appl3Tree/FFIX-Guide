@@ -1239,6 +1239,42 @@ test("the first two Chocographs and early Pinnacle Rocks chests have item paths"
   assert.ok(pinnacleStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups"));
 });
 
+test("Burmecia Arch's Hi-Potion and Tent chests have item paths", () => {
+  const sourceIds = ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"];
+  const expected = [
+    ["item-path.disc-1.journey-to-burmecia.burmecia-arch-hi-potion-chest", "game-item.hi-potion", /Hi-Potion.*North Gate/],
+    ["item-path.disc-1.journey-to-burmecia.burmecia-arch-tent-chest", "game-item.tent", /Tent.*North Gate/],
+  ];
+
+  for (const [pathId, itemId, conditionPattern] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
+    assert.equal(path.method, "chest");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "single-use");
+    assert.match(path.conditions ?? "", conditionPattern);
+    assert.ok(path.walkthroughObjectiveIds?.includes("disc-1.journey-to-burmecia.burmecia-arch-pickups"));
+    assert.ok(item, `${itemId} is missing from the item catalog`);
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+
+  const objective = objectives.find((entry) => entry.id === "disc-1.journey-to-burmecia.burmecia-arch-pickups");
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "journey-burmecian-arch-pickups");
+  assert.deepEqual(objective?.sourceIds, sourceIds);
+  assert.ok(step?.objectiveIds.includes("disc-1.journey-to-burmecia.burmecia-arch-pickups"));
+  assert.match(step?.text ?? "", /two chests for a Hi-Potion and Tent/);
+});
+
 test("Lindblum's first-visit pickups and rewards have item paths", () => {
   const sharedSources = ["gamefaqs-lindblum-71891", "jegged-lindblum"];
   const festivalSources = [...sharedSources, "gamefaqs-hunt-minigame-71891"];

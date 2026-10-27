@@ -1840,7 +1840,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-burmecia",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. At Bohden Gate it locates the Multina Racket chest in the southwest and the Potion chest on the left side of the station, both before boarding the cable car; the wagon chest is initially inaccessible. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
+    notes: "Disc I first-visit bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. Its Daines-horse Basin section identifies Hi-Potion and Tent chests at the eastern Burmecian Arch after the party returns from South Gate. At Bohden Gate it locates the Multina Racket chest in the southwest and the Potion chest on the left side of the station, both before boarding the cable car; the wagon chest is initially inaccessible. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
   },
   {
     id: "gamefaqs-single-character-27398",
@@ -1856,7 +1856,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/09-Gizamalukes-Grotto.html",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit cross-check for the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
+    notes: "Disc I first-visit cross-check for the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
   },
   {
     id: "rpgclassics-gizamaluke",
@@ -4005,7 +4005,7 @@ export const objectives: GameObjective[] = [
     id: "disc-1.journey-to-burmecia.burmecia-arch-pickups",
     title: "Collect the Hi-Potion and Tent at Burmecia Arch",
     category: "collection",
-    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "opatil-gizamaluke-map"],
+    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"],
     chapterIds: ["disc-1.journey-to-burmecia"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
