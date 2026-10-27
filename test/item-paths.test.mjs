@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 21);
+  assert.equal(orePaths.length, 23);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -1865,6 +1865,78 @@ test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () =
       assert.ok(goblin?.sourceIds.includes(sourceId), `Goblin record is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Evil Forest encounter is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `Evil Forest walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Gizamaluke's Grotto regular enemies have repeatable sourced loot paths", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"];
+  const expected = [
+    ["enemy.hornet", "steal", "common", "game-item.potion", "hornet-potion-common-steal"],
+    ["enemy.hornet", "drop", "common", "game-item.potion", "hornet-potion-common-drop"],
+    ["enemy.hornet", "drop", "rare", "game-item.ether", "hornet-ether-rare-drop"],
+    ["enemy.lamia", "steal", "common", "game-item.ore", "lamia-ore-common-steal"],
+    ["enemy.lamia", "steal", "uncommon", "game-item.phoenix-down", "lamia-phoenix-down-uncommon-steal"],
+    ["enemy.lamia", "drop", "always", "game-item.potion", "lamia-potion-always-drop"],
+    ["enemy.lamia", "drop", "common", "game-item.phoenix-down", "lamia-phoenix-down-common-drop"],
+    ["enemy.lamia", "drop", "uncommon", "game-item.ether", "lamia-ether-uncommon-drop"],
+    ["enemy.skeleton", "steal", "common", "game-item.ore", "skeleton-ore-common-steal"],
+    ["enemy.skeleton", "steal", "uncommon", "game-item.hi-potion", "skeleton-hi-potion-uncommon-steal"],
+    ["enemy.skeleton", "steal", "rare", "game-item.ether", "skeleton-ether-rare-steal"],
+    ["enemy.skeleton", "drop", "common", "game-item.potion", "skeleton-potion-common-drop"],
+    ["enemy.skeleton", "drop", "uncommon", "game-item.phoenix-down", "skeleton-phoenix-down-uncommon-drop"],
+    ["enemy.type-a", "steal", "common", "game-item.phoenix-down", "type-a-phoenix-down-common-steal"],
+    ["enemy.type-a", "steal", "uncommon", "game-item.tent", "type-a-tent-uncommon-steal"],
+    ["enemy.type-a", "drop", "common", "game-item.potion", "type-a-potion-common-drop"],
+    ["enemy.type-a", "drop", "uncommon", "game-item.phoenix-down", "type-a-phoenix-down-uncommon-drop"],
+    ["enemy.type-a", "drop", "rare", "game-item.ether", "type-a-ether-rare-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.gizamaluke-grotto.random-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+    ?.sections.find((entry) => entry.id === "journey-grotto-bells");
+  const step = section?.steps.find((entry) => entry.id === "journey-grotto-regular-enemy-loot");
+
+  assert.ok(["enemy.hornet", "enemy.lamia", "enemy.skeleton", "enemy.type-a"].every((enemyId) =>
+    encounter?.formation.some((entry) => entry.enemyId === enemyId)));
+  assert.match(step?.text ?? "", /Lamia's Always Potion is guaranteed on a KO/);
+  assert.match(step?.text ?? "", /all Grotto drops require KO victories/);
+  assert.match(step?.detail ?? "", /two scripted Type A pairs have separate encounter records/);
+  assert.match(step?.detail ?? "", /No exact formation or random encounter rate is inferred/);
+  assert.equal(expected.length, 18);
+
+  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.journey-to-burmecia.grotto-${pathSuffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    assert.ok(path, `${pathSuffix} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      if (slotName === "always") {
+        assert.match(path.conditions ?? "", /Always drop slot yields/);
+        assert.doesNotMatch(path.conditions ?? "", /conditional/);
+      } else {
+        assert.match(path.conditions ?? "", /conditional/);
+      }
+    }
+    if (enemyId === "enemy.type-a") {
+      assert.match(path.notes ?? "", /two scripted Type A pairs have separate encounter records/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Grotto encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Grotto walkthrough is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
   }

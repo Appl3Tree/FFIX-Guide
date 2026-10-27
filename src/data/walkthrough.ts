@@ -1234,7 +1234,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-grotto-bells",
         title: "Gizamaluke's Grotto — follow the bell route and search the hidden pickups",
         summary: "Spend the bells in this order: left small door, far-right small door, then the large door. Search the room corners and bridge underside before leaving each path.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "opatil-gizamaluke-map", "gamefaqs-kupo-nuts-71891", "flactem-mognet", "elitegrindlab-gizamaluke"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "opatil-gizamaluke-map", "gamefaqs-kupo-nuts-71891", "flactem-mognet", "elitegrindlab-gizamaluke", "gamefaqs-enemy-list-71891"],
         steps: [
           {
             id: "journey-grotto-type-a-and-bronze-vest",
@@ -1249,6 +1249,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Return to the lower room and use a bell on the small door at the far right. On the spiral stair, inspect the hidden field marker about a third of the way around for Mythril Gloves. Continue beneath the bridge and search the hidden marker for a Magus Hat. Return through the entrance and take another bell from the soldier's body if needed; use it on the large central door and collect the bell from the chest beneath the great bell.",
             detail: "The Magus Hat teaches Vivi Slow. Both gloves and hat are easy to walk past because their field markers are partially hidden. This route collects the extra Bronze Vest even if you already obtained Lindblum's copy.",
             objectiveIds: ["disc-1.journey-to-burmecia.grotto-hidden-equipment"],
+          },
+          {
+            id: "journey-grotto-regular-enemy-loot",
+            kind: "optional",
+            text: "While exploring the Grotto, check the separate item routes for Hornet, Lamia, Skeleton, and Type A if you want their listed steals or drops. Lamia's Always Potion is guaranteed on a KO; its other item drops are conditional, and all Grotto drops require KO victories.",
+            detail: "The enemy table gives the item slots; the route sources place Hornet, Lamia, and Skeleton in the cave and describe repeated Type A fights. The two scripted Type A pairs have separate encounter records, while these item paths use the shared Type A loot table. No exact formation or random encounter rate is inferred, and the chance-based slots are not checklist requirements.",
           },
           {
             id: "journey-grotto-kupo-nut-and-holy-bell",

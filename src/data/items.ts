@@ -207,6 +207,11 @@ const gunitasBasinLootSources = [
   "gamefaqs-evil-forest-71891",
   "jegged-evil-forest",
 ];
+const grottoRegularLootSources = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-journey-to-burmecia-71891",
+  "jegged-gizamaluke",
+];
 const gunitasGoblinLootSources = gunitasBasinLootSources;
 const evilForestRegularLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestGoblinLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
@@ -4454,6 +4459,94 @@ const evilForestRegularLootPaths: ItemAcquisitionPath[] = evilForestRegularLootS
   })),
 ]);
 
+const grottoRegularLootSlots = [
+  {
+    enemyId: "enemy.hornet",
+    enemySlug: "hornet",
+    enemyName: "Hornet",
+    steals: [{ slot: "common", itemId: "game-item.potion" }],
+    drops: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "rare", itemId: "game-item.ether" },
+    ],
+  },
+  {
+    enemyId: "enemy.lamia",
+    enemySlug: "lamia",
+    enemyName: "Lamia",
+    steals: [
+      { slot: "common", itemId: "game-item.ore" },
+      { slot: "uncommon", itemId: "game-item.phoenix-down" },
+    ],
+    drops: [
+      { slot: "always", itemId: "game-item.potion" },
+      { slot: "common", itemId: "game-item.phoenix-down" },
+      { slot: "uncommon", itemId: "game-item.ether" },
+    ],
+  },
+  {
+    enemyId: "enemy.skeleton",
+    enemySlug: "skeleton",
+    enemyName: "Skeleton",
+    steals: [
+      { slot: "common", itemId: "game-item.ore" },
+      { slot: "uncommon", itemId: "game-item.hi-potion" },
+      { slot: "rare", itemId: "game-item.ether" },
+    ],
+    drops: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.phoenix-down" },
+    ],
+  },
+  {
+    enemyId: "enemy.type-a",
+    enemySlug: "type-a",
+    enemyName: "Type A",
+    steals: [
+      { slot: "common", itemId: "game-item.phoenix-down" },
+      { slot: "uncommon", itemId: "game-item.tent" },
+    ],
+    drops: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.phoenix-down" },
+      { slot: "rare", itemId: "game-item.ether" },
+    ],
+  },
+] as const;
+
+const grottoRegularLootPaths: ItemAcquisitionPath[] = grottoRegularLootSlots.flatMap((enemy) => [
+  ...enemy.steals.map((entry) => ({
+    id: `item-path.disc-1.journey-to-burmecia.grotto-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-steal`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.journey-to-burmecia",
+    method: "steal" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in Gizamaluke's Grotto encounters; success is not guaranteed.`,
+    notes: enemy.enemyId === "enemy.type-a"
+      ? "The Grotto enemy table lists this slot. The two scripted Type A pairs have separate encounter records; this path uses the shared Type A loot table, without inferring formations or encounter rates."
+      : "The Grotto enemy table lists this slot, and route sources place this enemy in the cave. No formation or encounter rate is inferred.",
+    sourceIds: grottoRegularLootSources,
+  })),
+  ...enemy.drops.map((entry) => ({
+    id: `item-path.disc-1.journey-to-burmecia.grotto-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.journey-to-burmecia",
+    method: "drop" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: entry.slot === "always"
+      ? `On a KO victory, ${enemy.enemyName}'s Always drop slot yields this item in Gizamaluke's Grotto.`
+      : `On a KO victory, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item in Gizamaluke's Grotto; the slot is conditional.`,
+    notes: entry.slot === "always"
+      ? "The enemy table lists this as an Always drop, subject to the KO requirement for enemy drops."
+      : enemy.enemyId === "enemy.type-a"
+        ? "The enemy table lists this conditional drop slot; non-KO victories award no drops. The two scripted Type A pairs have separate encounter records, and this path uses the shared Type A loot table without inferring formations or encounter rates."
+        : "The enemy table lists this conditional drop slot; non-KO victories award no drops.",
+    sourceIds: grottoRegularLootSources,
+  })),
+]);
+
 const gunitasGoblinLootPaths: ItemAcquisitionPath[] = goblinLootSlots.map((entry) => ({
   id: `item-path.disc-1.village-of-dali.gunitas-goblin-${entry.itemId.replace("game-item.", "")}-${entry.slot}-${entry.method}`,
   itemId: entry.itemId,
@@ -5004,6 +5097,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...evilForestGoblinLootPaths,
   ...gunitasGoblinLootPaths,
   ...evilForestRegularLootPaths,
+  ...grottoRegularLootPaths,
   ...iceCavernBossDropPaths,
   ...gizamalukeDropPaths,
   ...burmeciaMimicLootPaths,
