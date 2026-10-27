@@ -387,6 +387,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             objectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
           },
           {
+            id: "plant-brain-drops",
+            kind: "pickup",
+            text: "Defeat Plant Brain to receive its guaranteed Phoenix Down. Its Common, Uncommon, and Rare slots list extra Potions, but those drops are chance-based.",
+            detail: "GameFAQs lists three Potion slots; Jegged gives three conditional rates (37.5%, 12.5%, and 0.4%) with different rarity labels. The checklist target is only the guaranteed Phoenix Down, and exact slot mapping remains unresolved.",
+            objectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
+          },
+          {
             id: "plant-brain-strategy",
             kind: "combat",
             text: "Plant Brain is weak to Fire. Have Vivi cast Fire and Steiner use Fire Sword; Zidane and Blank can attack or steal. Heal when Thunder threatens a KO, and use Eye Drops on blinded physical attackers after Pollen.",

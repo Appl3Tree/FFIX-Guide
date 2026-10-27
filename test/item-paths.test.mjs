@@ -1369,6 +1369,55 @@ test("Black Waltz 2's guaranteed and chance-based Ether drops have separate sour
   }
 });
 
+test("Plant Brain's guaranteed Phoenix Down and conditional Potion drops keep separate paths", () => {
+  const objectiveId = "disc-1.evil-forest.plant-brain-drops";
+  const expected = [
+    ["always", "game-item.phoenix-down", "item-path.disc-1.evil-forest.plant-brain-phoenix-down-always-drop"],
+    ["common", "game-item.potion", "item-path.disc-1.evil-forest.plant-brain-potion-common-drop"],
+    ["uncommon", "game-item.potion", "item-path.disc-1.evil-forest.plant-brain-potion-uncommon-drop"],
+    ["rare", "game-item.potion", "item-path.disc-1.evil-forest.plant-brain-potion-rare-drop"],
+  ];
+  const sourceIds = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.plant-brain");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.evil-forest.plant-brain");
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.evil-forest")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "plant-brain-drops");
+
+  assert.ok(objective, "Plant Brain drop objective is missing");
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
+  assert.ok(step?.objectiveIds.includes(objectiveId));
+  assert.match(step?.text ?? "", /guaranteed Phoenix Down/);
+  assert.match(step?.text ?? "", /chance-based/);
+  assert.match(step?.detail ?? "", /37\.5%, 12\.5%, and 0\.4%.*different rarity labels/);
+  assert.match(enemy?.notes.join(" ") ?? "", /exact slot mapping is unresolved/);
+  assert.deepEqual(enemy?.drops.slice(0, 4).map((slot) => slot.slot), expected.map(([slot]) => slot));
+
+  for (const [slot, itemId, pathId] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    assert.ok(path, `${slot} Plant Brain drop path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.evil-forest");
+    assert.equal(path.method, "drop");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "one-time-encounter");
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(item, `${itemId} is missing from the item catalog`);
+    if (slot === "always") assert.match(path.conditions ?? "", /guaranteed/);
+    else assert.match(path.conditions ?? "", /chance-based/);
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);
+      assert.ok(objective.sourceIds.includes(sourceId), `${objectiveId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
   const sourceIds = [
     "gamefaqs-journey-to-burmecia-71891",

@@ -520,7 +520,7 @@ const evilForestEncounters: EnemyEncounter[] = [
     kind: "boss",
     formation: [{ enemyId: "enemy.plant-brain", quantity: 1 }],
     sourceIds: evilForestBossSources,
-    objectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
+    objectiveIds: ["disc-1.evil-forest.plant-brain-steals", "disc-1.evil-forest.plant-brain-drops"],
     missableIds: ["missable.disc-1.evil-forest.plant-brain-steals"],
     cutoffIds: ["cutoff.evil-forest.escape"],
     notes: ["Blank joins during the battle; exact join trigger wording differs between route references."],
@@ -4580,8 +4580,10 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
     ],
     drops: [
-      evilForestLoot("always", "game-item.phoenix-down"), evilForestLoot("common", "game-item.potion"),
-      evilForestLoot("uncommon", "game-item.potion"), evilForestLoot("rare", "game-item.potion"),
+      sourcedLoot("always", "game-item.phoenix-down", ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"]),
+      sourcedLoot("common", "game-item.potion", ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"]),
+      sourcedLoot("uncommon", "game-item.potion", ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"]),
+      sourcedLoot("rare", "game-item.potion", ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"]),
     ],
     facts: [
       sourcedFact("elemental-weakness", "Fire", evilForestBossSources),
@@ -4602,8 +4604,8 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       confidence: "partial",
       sourceIds: ["vgkami-evil-forest", "jegged-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"],
     },
-    routeObjectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
-    notes: ["GameFAQs and Jegged agree on 916 HP. The Hellplant/Plant Brain type is not assigned because the inspected boss table does not list a type."],
+    routeObjectiveIds: ["disc-1.evil-forest.plant-brain-steals", "disc-1.evil-forest.plant-brain-drops"],
+    notes: ["GameFAQs and Jegged agree on 916 HP. The Hellplant/Plant Brain type is not assigned because the inspected boss table does not list a type.", "GameFAQs lists one guaranteed Phoenix Down and Common/Uncommon/Rare Potion slots. Jegged lists a guaranteed Phoenix Down and conditional Potion rates of 37.5%, 12.5%, and 0.4% under different rarity labels; the extra drops remain chance-based and exact slot mapping is unresolved."],
   }, evilForestChapterId, [...evilForestBossSources, "vgkami-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"], ["missable.disc-1.evil-forest.plant-brain-steals"], ["cutoff.evil-forest.escape"]),
   chapterBoss({
     id: "enemy.baku-crash-site",

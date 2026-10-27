@@ -190,6 +190,7 @@ const blackWaltz2EtherDropSources = {
   uncommon: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
   rare: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
 };
+const plantBrainDropSources = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
 const bronzeGlovesReferenceSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", ...evilForestPickupSources];
@@ -2574,7 +2575,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.pisces-stellazzio", name: "Pisces Stellazzio", category: "key-item", sourceIds: [...stellazzioReferenceSources, "gamefaqs-return-to-gaia-71891", "rpgclassics-disc-4-walkthrough"], verification: "partial" },
   { id: "game-item.ophiucus-stellazzio", name: "Ophiucus Stellazzio", category: "key-item", sourceIds: [...stellazzioReferenceSources, "gamefaqs-return-to-gaia-71891", "rpgclassics-disc-4-walkthrough"], verification: "partial" },
   { id: "game-item.hammer", name: "Hammer", category: "key-item", sourceIds: [...stellazzioReferenceSources, "gamefaqs-return-to-gaia-71891", "jegged-stellazzio", "rpgclassics-disc-4-walkthrough", "gamefaqs-master-synthesist-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis"], verification: "partial" },
-  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...earlyChocographTreasureSources, ...burmeciaSources, ...daliFirstVisitPickupSources, ...southGateDisc1Sources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...earlyChocographTreasureSources, ...burmeciaSources, ...daliFirstVisitPickupSources, ...southGateDisc1Sources, ...evilForestPickupSources, "gamefaqs-enemy-list-71891", ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: [...daliFirstVisitPickupSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...new Set([...fossilRooSources, ...oeilvertSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath", "flactem-disc-3-lindblum"])], verification: "partial" },
@@ -4084,6 +4085,57 @@ const blackWaltz2EtherDropPaths: ItemAcquisitionPath[] = [
   },
 ];
 
+const plantBrainDropPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.evil-forest.plant-brain-phoenix-down-always-drop",
+    itemId: "game-item.phoenix-down",
+    chapterId: "disc-1.evil-forest",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Defeat Plant Brain to receive its guaranteed Phoenix Down from the Always drop slot.",
+    notes: "GameFAQs and Jegged list the Phoenix Down as guaranteed. This path records only that copy as unconditional; the listed Potion slots remain separate chance-based paths.",
+    walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
+    sourceIds: plantBrainDropSources,
+  },
+  {
+    id: "item-path.disc-1.evil-forest.plant-brain-potion-common-drop",
+    itemId: "game-item.potion",
+    chapterId: "disc-1.evil-forest",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "A Potion is listed in Plant Brain's Common drop slot; this additional copy is chance-based.",
+    notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
+    walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
+    sourceIds: plantBrainDropSources,
+  },
+  {
+    id: "item-path.disc-1.evil-forest.plant-brain-potion-uncommon-drop",
+    itemId: "game-item.potion",
+    chapterId: "disc-1.evil-forest",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "A Potion is listed in Plant Brain's Uncommon drop slot; this additional copy is chance-based.",
+    notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
+    walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
+    sourceIds: plantBrainDropSources,
+  },
+  {
+    id: "item-path.disc-1.evil-forest.plant-brain-potion-rare-drop",
+    itemId: "game-item.potion",
+    chapterId: "disc-1.evil-forest",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "A Potion is listed in Plant Brain's Rare drop slot; this additional copy is chance-based.",
+    notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
+    walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
+    sourceIds: plantBrainDropSources,
+  },
+];
+
 type MoorockShopLocation = "bran-bal" | "pandemonium";
 type MoorockProductSourceGroup = "equipment" | "supply" | "dagger" | "magic-tag";
 type MoorockProduct = { slug: string; itemId: string; name: string; price: number; sourceGroup: MoorockProductSourceGroup };
@@ -4552,6 +4604,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...iceCavernChestPaths,
   ...observatoryMountainPickupPaths,
   ...blackWaltz2EtherDropPaths,
+  ...plantBrainDropPaths,
   ...burmeciaMimicLootPaths,
   ...earlyDisc1ExplorationItemPaths,
   ...bohdenArchItemPaths,

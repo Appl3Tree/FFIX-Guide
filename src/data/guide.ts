@@ -1088,7 +1088,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/evil-forest",
     accessed: "2026-10-24",
-    notes: "Crash Site, ATEs, two Prison Cage fights, Prima Vista wreckage sweep, Baku, Monty/Mognet, spring, Plant Brain, and escape route. Its Movie Critic sidebar lists eight events and groups Lesson 2 with Evil Forest; the Moogle FAQ places Lesson 2 after freeing Mois in Ice Cavern, so this guide tracks it there. Steal odds and some enemy data are cross-checked rather than repeated where disputed.",
+    notes: "Crash Site, ATEs, two Prison Cage fights, Prima Vista wreckage sweep, Baku, Monty/Mognet, spring, Plant Brain, and escape route. Its Plant Brain table lists one guaranteed Phoenix Down and three Potion drop slots; the exact Potion rarity labels differ from Jegged's listed rates. Its Movie Critic sidebar lists eight events and groups Lesson 2 with Evil Forest; the Moogle FAQ places Lesson 2 after freeing Mois in Ice Cavern, so this guide tracks it there. Steal odds and some enemy data are cross-checked rather than repeated where disputed.",
   },
   {
     id: "gamefaqs-evil-forest-79143",
@@ -1104,7 +1104,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/04-The-Evil-Forest.html",
     accessed: "2026-10-23",
-    notes: "Independent route and boss cross-check for cages, wreckage pickups, Cinna's shop, Monty, the spring, Plant Brain, and escape. Its recommended level 3–4 is treated as secondary comfort guidance, not a universal requirement; its published steal probabilities are also secondary and are not normalized where sources disagree.",
+    notes: "Independent route and boss cross-check for cages, wreckage pickups, Cinna's shop, Monty, the spring, Plant Brain, and escape. It lists a guaranteed Phoenix Down and three chance-based Potion drops for Plant Brain (37.5%, 12.5%, and 0.4%), using rarity labels that differ from GameFAQs' table. Its recommended level 3–4 is treated as secondary comfort guidance, not a universal requirement; its published steal probabilities are also secondary and are not normalized where sources disagree.",
   },
   {
     id: "vgkami-evil-forest",
@@ -4081,6 +4081,15 @@ export const objectives: GameObjective[] = [
     title: "Steal Eye Drops and Iron Helm from Plant Brain",
     category: "collection",
     sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamefaqs-equipment-33383"],
+    chapterIds: ["disc-1.evil-forest"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-1.evil-forest.plant-brain-drops",
+    title: "Receive Plant Brain's guaranteed Phoenix Down drop",
+    category: "collection",
+    sourceIds: ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"],
     chapterIds: ["disc-1.evil-forest"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",

@@ -3750,6 +3750,32 @@ if (!blackWaltz2EtherObjective || !blackWaltz2Encounter?.objectiveIds.includes(b
   })) {
   errors.push("Black Waltz 2's guaranteed and conditional Ether drop slots must have source-linked paths and a separate collection objective.");
 }
+const plantBrainDropsObjectiveId = "disc-1.evil-forest.plant-brain-drops";
+const plantBrainDropsObjective = objectivesById.get(plantBrainDropsObjectiveId);
+const plantBrainDropsEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.evil-forest.plant-brain");
+const plantBrainDropsRecord = enemyRecords.find((enemy) => enemy.id === "enemy.plant-brain");
+const plantBrainDropPathIds = [
+  "item-path.disc-1.evil-forest.plant-brain-phoenix-down-always-drop",
+  "item-path.disc-1.evil-forest.plant-brain-potion-common-drop",
+  "item-path.disc-1.evil-forest.plant-brain-potion-uncommon-drop",
+  "item-path.disc-1.evil-forest.plant-brain-potion-rare-drop",
+];
+const plantBrainDropItemIds = ["game-item.phoenix-down", "game-item.potion", "game-item.potion", "game-item.potion"];
+if (!plantBrainDropsObjective || !plantBrainDropsEncounter?.objectiveIds.includes(plantBrainDropsObjectiveId) ||
+  !plantBrainDropsRecord?.routeObjectiveIds.includes(plantBrainDropsObjectiveId) ||
+  plantBrainDropPathIds.some((pathId, index) => {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === plantBrainDropItemIds[index]);
+    return !path || !plantBrainDropsRecord?.drops[index] ||
+      plantBrainDropsRecord.drops[index].itemId !== plantBrainDropItemIds[index] || path.itemId !== plantBrainDropItemIds[index] ||
+      path.chapterId !== "disc-1.evil-forest" || path.method !== "drop" || path.quantity !== 1 ||
+      path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes(plantBrainDropsObjectiveId) ||
+      (index === 0 ? !path.conditions?.includes("guaranteed") : !path.conditions?.includes("chance-based")) ||
+      !item || path.sourceIds.some((sourceId) => !plantBrainDropsObjective.sourceIds.includes(sourceId) || !item.sourceIds.includes(sourceId));
+  }) ||
+  !plantBrainDropsRecord?.notes.some((note) => note.includes("37.5%, 12.5%, and 0.4%") && note.includes("different rarity labels"))) {
+  errors.push("Plant Brain's guaranteed Phoenix Down and three conditional Potion drop slots must have sourced paths and a dedicated objective preserving the rarity-label conflict.");
+}
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
 const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;
