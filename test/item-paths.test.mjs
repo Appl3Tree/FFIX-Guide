@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 39);
+  assert.equal(pinionPaths.length, 42);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -2291,7 +2291,7 @@ test("Cleyra's fixed assault battles record per-enemy steal and conditional drop
   assert.match(step?.text ?? "", /try any desired steals before defeating each group/);
   assert.match(step?.text ?? "", /all listed item-bearing drops are conditional/);
   assert.match(step?.detail ?? "", /happen once before the post-Beatrix Red Rose departure closes Cleyra/);
-  assert.match(step?.detail ?? "", /Trunk-return Soldier fights remain separate; their pair count is source-disputed/);
+  assert.match(step?.detail ?? "", /first pair count is unnumbered in Jegged but listed as two by Gamer Guides/);
   assert.equal(step?.objectiveIds, undefined);
 
   for (const [encounterSlug, enemyId, quantity, method, slotName, itemId] of expected) {
@@ -2326,6 +2326,83 @@ test("Cleyra's fixed assault battles record per-enemy steal and conditional drop
     }
     for (const sourceId of sourceIds.slice(0, 7)) {
       assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `${encounterId} missing ${sourceId}`);
+    }
+  }
+});
+
+test("Cleyra's forced Trunk-return Soldier fights link each loot slot and retain the first-count caveat", () => {
+  const sourceIds = [
+    "gamefaqs-enemy-list-71891",
+    "gamefaqs-cleyra-71891",
+    "jegged-cleyra",
+    "gamerguides-cleyra",
+    "elitegrindlab-cleyra",
+    "cavesofnarshe-enemies",
+    "cavesofnarshe-cleyra-walkthrough",
+    "gamefaqs-missables-71891",
+    "jegged-missables",
+  ];
+  const groups = [
+    ["whirlpool-soldiers", 2, /Jegged describes Soldiers at the whirlpool but does not print a count/],
+    ["sand-pit-soldiers", 2, /Jegged and Gamer Guides report a pair/],
+    ["bridge-cave-soldiers", 2, /Jegged and Gamer Guides report a pair/],
+  ];
+  const encounters = new Map(enemyEncounters.map((entry) => [entry.id, entry]));
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")
+    ?.sections.find((entry) => entry.id === "cleyra-antlion-evacuation");
+  const step = section?.steps.find((entry) => entry.id === "cleyra-return-enemy-loot");
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.soldier-a");
+  const expected = groups.flatMap(([encounterSlug, quantity]) => [
+    ...(enemy?.steals ?? []).filter((entry) => entry.itemId).map((entry) => [encounterSlug, quantity, "steal", entry.slot, entry.itemId]),
+    ...(enemy?.drops ?? []).filter((entry) => entry.itemId).map((entry) => [encounterSlug, quantity, "drop", entry.slot, entry.itemId]),
+  ]);
+
+  assert.equal(expected.length, 21);
+  assert.equal(itemAcquisitionPaths.filter((entry) => entry.id.startsWith("item-path.disc-2.cleyra.trunk-return-loot-")).length, 21);
+  assert.match(step?.text ?? "", /try desired steals from each Soldier \[A\]/);
+  assert.match(step?.text ?? "", /KO the enemies if pursuing drops/);
+  assert.match(step?.text ?? "", /reported per-enemy opportunities rather than guaranteed items/);
+  assert.match(step?.detail ?? "", /first, dormant-whirlpool fight/);
+  assert.match(step?.detail ?? "", /GameFAQs confirms the three-fight sequence but does not print counts/);
+  assert.equal(step?.objectiveIds, undefined);
+
+  for (const [encounterSlug, quantity, method, slotName, itemId] of expected) {
+    const encounterId = `encounter.cleyra-trunk.return.${encounterSlug}`;
+    const encounter = encounters.get(encounterId);
+    const suffix = `${encounterSlug}-soldier-a-${itemId.replace("game-item.", "")}-${slotName}-${method}`;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-2.cleyra.trunk-return-loot-${suffix}`);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    assert.ok(encounter?.kind === "fixed" && encounter.formation.some((member) => member.enemyId === "enemy.soldier-a" && member.quantity === quantity));
+    assert.ok(enemy?.encounterIds.includes(encounterId));
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId));
+    assert.ok(path, `${suffix} path missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-2.cleyra");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, quantity);
+    assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.match(path.notes ?? "", /source-reported per-enemy opportunities/);
+    assert.match(path.notes ?? "", /Cleyra closes after the post-Beatrix departure/);
+    const countNotePattern = groups.find(([slug]) => slug === encounterSlug)?.[2];
+    assert.match(path.notes ?? "", countNotePattern);
+    if (encounterSlug === "whirlpool-soldiers") {
+      assert.match(path.notes ?? "", /Jegged describes Soldiers at the whirlpool but does not print a count/);
+    }
+    if (method === "steal") {
+      assert.match(path.conditions ?? "", /success is not guaranteed/);
+    } else {
+      assert.match(path.conditions ?? "", /KO victory/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${suffix} missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Cleyra Trunk return section missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    for (const sourceId of sourceIds.slice(0, 7)) {
+      assert.ok(enemy?.sourceIds.includes(sourceId), `Soldier [A] missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `${encounterId} missing ${sourceId}`);
     }
   }

@@ -5404,6 +5404,61 @@ if (!cleyraSoldier || !cleyraSoldier.stats.some((stat) => stat.field === "HP" &&
   cleyraReturnFights.slice(1).some((encounter) => encounter?.formation.find((member) => member.enemyId === "enemy.soldier-a")?.quantity !== 2)) {
   errors.push("Cleyra's post-Antlion Trunk return must use its Soldier [A] variant and preserve the source-reported pair formation with its quantity caveat.");
 }
+const cleyraReturnLootPrefix = "item-path.disc-2.cleyra.trunk-return-loot-";
+const cleyraReturnLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections
+  .find((section) => section.id === "cleyra-antlion-evacuation");
+const cleyraReturnLootStep = cleyraReturnLootSection?.steps.find((step) => step.id === "cleyra-return-enemy-loot");
+const cleyraReturnLootEntries = cleyraReturnFights.flatMap((encounter) => {
+  if (!encounter) return [];
+  const encounterSlug = encounter.id.replace("encounter.cleyra-trunk.return.", "");
+  return encounter.formation.flatMap((member) => {
+    const enemy = enemyRecords.find((record) => record.id === member.enemyId);
+    if (!enemy || member.quantity === null) return [];
+    return (["steal", "drop"] as const).flatMap((method) => {
+      const slots = method === "steal" ? enemy.steals : enemy.drops;
+      return slots.flatMap((slot) => slot.itemId ? [{
+        encounterSlug,
+        encounterId: encounter.id,
+        enemy,
+        enemyId: member.enemyId,
+        quantity: member.quantity,
+        method,
+        slotName: slot.slot,
+        itemId: slot.itemId,
+      }] : []);
+    });
+  });
+});
+if (cleyraReturnLootEntries.length !== 21 ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(cleyraReturnLootPrefix)).length !== cleyraReturnLootEntries.length ||
+  !cleyraReturnLootStep?.text.includes("try desired steals from each Soldier [A]") ||
+  !cleyraReturnLootStep.text.includes("The listed drops are conditional") ||
+  !cleyraReturnLootStep.text.includes("reported per-enemy opportunities") ||
+  !cleyraReturnLootStep.detail?.includes("first, dormant-whirlpool fight") ||
+  !cleyraReturnLootStep.detail.includes("GameFAQs confirms the three-fight sequence but does not print counts") ||
+  cleyraReturnLootStep.objectiveIds?.length ||
+  cleyraTrunkLootSources.some((sourceId) => !cleyraReturnLootSection?.sourceIds.includes(sourceId))) {
+  errors.push("Cleyra's Trunk-return loot must expose all 21 optional, one-time Soldier [A] paths with per-enemy counts and the first-fight count caveat.");
+}
+for (const entry of cleyraReturnLootEntries) {
+  const pathSuffix = `${entry.encounterSlug}-soldier-a-${entry.itemId.replace("game-item.", "")}-${entry.slotName}-${entry.method}`;
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === `${cleyraReturnLootPrefix}${pathSuffix}`);
+  const encounter = cleyraReturnFights.find((candidate) => candidate?.id === entry.encounterId);
+  const item = gameItems.find((record) => record.id === entry.itemId);
+  if (!encounter || encounter.kind !== "fixed" ||
+    !encounter.formation.some((member) => member.enemyId === entry.enemyId && member.quantity === entry.quantity) ||
+    !entry.enemy.encounterIds.includes(entry.encounterId) || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    !path || path.itemId !== entry.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== entry.method ||
+    path.quantity !== entry.quantity || path.availability !== "one-time-encounter" || path.walkthroughObjectiveIds?.length ||
+    !path.notes?.includes("source-reported per-enemy opportunities") || !path.notes?.includes("Cleyra closes after the post-Beatrix departure") ||
+    (entry.encounterSlug === "whirlpool-soldiers" && !path.notes?.includes("Jegged describes Soldiers at the whirlpool but does not print a count")) ||
+    (entry.method === "steal" && !path.conditions?.includes("success is not guaranteed")) ||
+    (entry.method === "drop" && (!path.conditions?.includes("KO victory") || !path.conditions.includes("conditional"))) ||
+    cleyraTrunkLootSources.some((sourceId) => !path.sourceIds.includes(sourceId) || !cleyraReturnLootSection?.sourceIds.includes(sourceId)) ||
+    !cleyraTrunkLootSlotSources.every((sourceId) => entry.enemy.sourceIds.includes(sourceId) && encounter.sourceIds.includes(sourceId))) {
+    errors.push(`Cleyra Trunk-return ${entry.encounterSlug} ${entry.method} route ${pathSuffix} must match its Soldier [A] table, source-reported quantity, and one-time window.`);
+  }
+}
 const cleyraAssaultExpectations = [
   { id: "encounter.cleyra-assault.entrance-type-b", formation: ["enemy.type-b:1"] },
   { id: "encounter.cleyra-assault.first-soldiers", formation: ["enemy.soldier-a:3"] },

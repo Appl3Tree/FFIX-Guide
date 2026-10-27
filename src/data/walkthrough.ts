@@ -1948,8 +1948,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-return-through-trunk",
             kind: "required",
             text: "After the reunion, descend through Cleyra's Trunk for three forced Soldier [A] encounters. The sandpits are inactive on this return trip; cross the bridge to trigger the cutscene that returns the group automatically to town.",
-            detail: "The bestiary separates the whirlpool, sand-pit, and bridge-cave fights. Walkthroughs commonly describe pairs, though the first fight's count is not printed consistently. This is the story transit back to the settlement, not a second full treasure route; recover missed Trunk chests before crossing the bridge and advancing the assault.",
+            detail: "The bestiary separates the whirlpool, sand-pit, and bridge-cave fights. The sources report pairs for all three; the first count is unnumbered in Jegged, while Gamer Guides prints two. This is the story transit back to the settlement, not a second full treasure route; recover missed Trunk chests before crossing the bridge and advancing the assault.",
             objectiveIds: ["disc-2.cleyra.treasure-sweep"],
+          },
+          {
+            id: "cleyra-return-enemy-loot",
+            kind: "optional",
+            text: "On the Trunk return, try desired steals from each Soldier [A] before defeating the group; KO the enemies if pursuing drops. The listed drops are conditional, and each linked quantity counts reported per-enemy opportunities rather than guaranteed items.",
+            detail: "Gamer Guides reports two Soldiers in the first, dormant-whirlpool fight, while Jegged names Soldiers there without a count. Both sources give pairs for the later split-path and cave fights; GameFAQs confirms the three-fight sequence but does not print counts. These battles occur on the mandatory return before Cleyra closes after the later Red Rose departure.",
           },
           {
             id: "cleyra-attack-mognet",
@@ -1962,7 +1968,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-assault-enemy-loot",
             kind: "optional",
             text: "During the fixed Type B and Soldier [A] assault battles, try any desired steals before defeating each group. KO enemies if pursuing drops; all listed item-bearing drops are conditional. The linked paths count one slot opportunity per enemy in that wave, not guaranteed rewards.",
-            detail: "GameFAQs supplies the two enemy loot tables and the walkthrough identifies the fixed wave sequence. These assault fights happen once before the post-Beatrix Red Rose departure closes Cleyra. The earlier Trunk-return Soldier fights remain separate; their pair count is source-disputed.",
+            detail: "GameFAQs supplies the two enemy loot tables and the walkthrough identifies the fixed wave sequence. These assault fights happen once before the post-Beatrix Red Rose departure closes Cleyra. The earlier three Trunk-return Soldier fights have a separate optional loot step; the first pair count is unnumbered in Jegged but listed as two by Gamer Guides.",
           },
           {
             id: "cleyra-evacuation-choices",
