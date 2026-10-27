@@ -156,6 +156,43 @@ test("Hilgigars steals link exact boss slots and preserve the Fairy Flute label 
   assert.match(fairyFlutePath?.notes ?? "", /GameFAQs places Fairy Flute in the Rare steal slot; Jegged and Gamer Guides call it Very Rare/);
 });
 
+test("Festival Zaghnol steals link the Hunt-only boss slots and source conflict", () => {
+  const expected = [
+    { pathId: "item-path.disc-1.lindblum.zaghnol-mythril-gloves-steal", itemId: "game-item.mythril-gloves", slot: "common" },
+    { pathId: "item-path.disc-1.lindblum.zaghnol-needle-fork-steal", itemId: "game-item.needle-fork", slot: "uncommon" },
+  ];
+  const enemyId = "enemy.zaghnol-hunt";
+  const encounterId = "encounter.lindblum.festival-zaghnol";
+  const objectiveId = "disc-1.lindblum.zaghnol-steals";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const paths = itemAcquisitionPaths.filter((entry) => entry.chapterId === "disc-1.lindblum" && entry.enemyId === enemyId && entry.method === "steal");
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.equal(paths.length, expected.length);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.conditions?.includes("chance-based"));
+    assert.ok(path?.conditions?.includes("Caves of Narshe's Hunt table lists no steals"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.pathId} has known sources`);
+  }
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

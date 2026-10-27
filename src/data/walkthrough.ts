@@ -1081,7 +1081,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "lindblum-festival-zaghnol",
             kind: "combat",
             text: "Start the hunt by taking the Air Cab near the castle. The 12-minute timer begins as the festival starts; field monsters in the three districts award points. To pursue Zaghnol, wait until about 4:30 remains, enter the Business District plaza, and leave/re-enter the screen if it is already loaded and the boss has not appeared. Have Zidane steal Mythril Gloves and Needle Fork before resolving the battle.",
-            detail: "If Freya is the chosen winner, weaken Zaghnol with Zidane and let Freya finish it, or keep Zidane down so Freya can take the result. For Vivi's achievement, KO both Zidane and Freya in the Zaghnol fight or another battle before the timer ends. The exact point balance and winner setup have version-specific reports; use the chosen route, not a score estimate, as the check.",
+            detail: "GameFAQs labels Mythril Gloves Common and Needle Fork Uncommon; both attempts are chance-based and may fail. Caves of Narshe's Festival table lists no Zaghnol steals, so the item paths retain that disagreement. If Freya is the chosen winner, weaken Zaghnol with Zidane and let Freya finish it, or keep Zidane down so Freya can take the result. For Vivi's achievement, KO both Zidane and Freya in the Zaghnol fight or another battle before the timer ends. The exact point balance and winner setup have version-specific reports; use the chosen route, not a score estimate, as the check.",
             objectiveIds: ["disc-1.lindblum.zaghnol-steals", "disc-1.lindblum.festival-freya-win", "disc-1.lindblum.festival-vivi-win"],
           },
           {

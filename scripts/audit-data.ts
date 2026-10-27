@@ -5977,23 +5977,37 @@ if (huntFang?.stats.find((stat) => stat.field === "HP")?.value !== 216 || huntFa
 }
 const zaghnolHuntEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum.festival-zaghnol");
 const zaghnolHunt = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hunt");
+const zaghnolHuntStealPaths = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-1.lindblum" &&
+  path.enemyId === "enemy.zaghnol-hunt" && path.method === "steal");
 if (!zaghnolHuntEncounter || zaghnolHuntEncounter.kind !== "boss" ||
   !zaghnolHuntEncounter.formation.some((entry) => entry.enemyId === "enemy.zaghnol-hunt" && entry.quantity === 1) ||
   !zaghnolHuntEncounter.objectiveIds.includes("disc-1.lindblum.zaghnol-steals") ||
   !zaghnolHuntEncounter.missableIds.includes("missable.disc-1.lindblum.zaghnol-steals") ||
   !zaghnolHuntEncounter.cutoffIds.includes("cutoff.lindblum-festival.vivi-outcome") ||
+  zaghnolHuntStealPaths.length !== 2 ||
   zaghnolHunt?.stats.find((stat) => stat.field === "HP")?.value !== 1574 ||
   !zaghnolHunt?.notes.some((note) => note.includes("Caves of Narshe's event table lists no stolen items"))) {
   errors.push("The Festival Zaghnol battle must stay separate from the regular form and preserve its sourced steal disagreement and cutoff links.");
 }
-for (const [itemId, pathId] of [
-  ["game-item.mythril-gloves", "item-path.disc-1.lindblum.zaghnol-mythril-gloves-steal"],
-  ["game-item.needle-fork", "item-path.disc-1.lindblum.zaghnol-needle-fork-steal"],
+for (const { itemId, pathId, slot } of [
+  { itemId: "game-item.mythril-gloves", pathId: "item-path.disc-1.lindblum.zaghnol-mythril-gloves-steal", slot: "common" },
+  { itemId: "game-item.needle-fork", pathId: "item-path.disc-1.lindblum.zaghnol-needle-fork-steal", slot: "uncommon" },
 ] as const) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
-  if (!zaghnolHunt?.steals.some((slot) => slot.itemId === itemId) || !zaghnolHunt.routeObjectiveIds.includes("disc-1.lindblum.zaghnol-steals") ||
-    path?.itemId !== itemId || path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes("disc-1.lindblum.zaghnol-steals")) {
-    errors.push(`Zaghnol's ${itemId} steal must link the boss table, checklist objective, one-time item path, and cutoff warning.`);
+  const lootSlot = zaghnolHunt?.steals.find((steal) => steal.itemId === itemId && steal.slot === slot);
+  const expectedSourceIds = new Set([
+    ...(zaghnolHunt?.sourceIds ?? []),
+    ...(zaghnolHuntEncounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+  ]);
+  if (!lootSlot || !zaghnolHunt?.routeObjectiveIds.includes("disc-1.lindblum.zaghnol-steals") ||
+    path?.itemId !== itemId || path.method !== "steal" || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.zaghnol-hunt" || path.enemyLootSlot !== slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.lindblum.festival-zaghnol"]) ||
+    !path.conditions?.includes("chance-based") || !path.conditions.includes("Caves of Narshe's Hunt table lists no steals") ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.lindblum.zaghnol-steals") ||
+    [...expectedSourceIds].some((sourceId) => !path.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId))) {
+    errors.push(`Zaghnol's ${itemId} steal must link its exact Hunt-only slot to the one-time encounter, objective, source conflict, and provenance.`);
   }
   const recoveryPath = itemAcquisitionPaths.find((candidate) => candidate.id === `item-path.disc-2.return-to-lindblum.cleyra-recovery.${itemId.replace("game-item.", "")}`);
   if (recoveryPath?.itemId !== itemId || recoveryPath.availability !== "window-unverified") {

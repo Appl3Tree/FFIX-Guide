@@ -432,6 +432,7 @@ const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891
 const cargoShipWaltzEncounterSources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
 const summitStationWaltzEncounterSources = ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "elitegrindlab-south-gate"];
 const hilgigarsEncounterSources = ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"];
+const zaghnolHuntEncounterSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
@@ -2364,9 +2365,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Use Zidane's Steal on Zaghnol during the Festival before defeating it. The Hunt-specific steal table conflicts with Caves of Narshe's listing of no stolen items; GameFAQs and multiple walkthroughs identify the Mythril Gloves steal.",
+    conditions: "Attempt Zaghnol's Common Mythril Gloves steal during the one-time Festival battle; the chance-based attempt can fail. GameFAQs and walkthroughs list it, while Caves of Narshe's Hunt table lists no steals.",
     walkthroughObjectiveIds: ["disc-1.lindblum.zaghnol-steals"],
-    sourceIds: ["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"],
+    enemyId: "enemy.zaghnol-hunt",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.lindblum.festival-zaghnol"],
+    sourceIds: [...new Set(["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough", ...zaghnolHuntEncounterSources])],
   },
   {
     id: "item-path.disc-1.lindblum.zaghnol-needle-fork-steal",
@@ -2375,9 +2379,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Use Zidane's Steal on Zaghnol during the Festival before defeating it. The Hunt-specific steal table conflicts with Caves of Narshe's listing of no stolen items; GameFAQs and multiple walkthroughs identify the Needle Fork steal.",
+    conditions: "Attempt Zaghnol's Uncommon Needle Fork steal during the one-time Festival battle; the chance-based attempt can fail. GameFAQs and walkthroughs list it, while Caves of Narshe's Hunt table lists no steals.",
     walkthroughObjectiveIds: ["disc-1.lindblum.zaghnol-steals"],
-    sourceIds: ["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"],
+    enemyId: "enemy.zaghnol-hunt",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.lindblum.festival-zaghnol"],
+    sourceIds: [...new Set(["gamefaqs-hunt-minigame-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough", ...zaghnolHuntEncounterSources])],
   },
   {
     id: "item-path.disc-2.outer-continent.gladius-black-mage-village-shop",
