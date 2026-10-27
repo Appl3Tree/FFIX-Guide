@@ -1275,6 +1275,48 @@ test("Burmecia Arch's Hi-Potion and Tent chests have item paths", () => {
   assert.match(step?.text ?? "", /two chests for a Hi-Potion and Tent/);
 });
 
+test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
+  const sourceIds = [
+    "gamefaqs-journey-to-burmecia-71891",
+    "jegged-gizamaluke",
+    "opatil-gizamaluke-map",
+    "elitegrindlab-gizamaluke",
+  ];
+  const objectiveId = "disc-1.journey-to-burmecia.grotto-hidden-equipment";
+  const expected = [
+    ["item-path.disc-1.journey-to-burmecia.bronze-vest-grotto-hidden-chest", "game-item.bronze-vest", /lower-left.*small door/i, "journey-grotto-type-a-and-bronze-vest"],
+    ["item-path.disc-1.journey-to-burmecia.mythril-gloves-grotto-hidden-chest", "game-item.mythril-gloves", /Bell Room.*spiral stairs/i, "journey-grotto-mythril-magus-hat"],
+    ["item-path.disc-1.journey-to-burmecia.magus-hat-grotto-chest", "game-item.magus-hat", /ledge beneath the bridge/i, "journey-grotto-mythril-magus-hat"],
+  ];
+
+  for (const [pathId, itemId, conditionPattern, stepId] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
+    assert.equal(path.method, "chest");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "single-use");
+    assert.match(path.conditions ?? "", conditionPattern);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(item, `${itemId} is missing from the item catalog`);
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    const step = walkthroughChapters
+      .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+      ?.sections.flatMap((section) => section.steps)
+      .find((entry) => entry.id === stepId);
+    assert.ok(step?.objectiveIds.includes(objectiveId), `${stepId} is not linked to ${objectiveId}`);
+  }
+
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  assert.deepEqual(objective?.sourceIds, sourceIds);
+});
+
 test("Lindblum's first-visit pickups and rewards have item paths", () => {
   const sharedSources = ["gamefaqs-lindblum-71891", "jegged-lindblum"];
   const festivalSources = [...sharedSources, "gamefaqs-hunt-minigame-71891"];

@@ -5100,6 +5100,41 @@ if (!burmeciaArchObjective || burmeciaArchObjective.sourceIds.length !== burmeci
   !burmeciaArchStep?.objectiveIds?.includes("disc-1.journey-to-burmecia.burmecia-arch-pickups")) {
   errors.push("Burmecia Arch's pickup objective must cite its two exact route sources and stay linked to the walkthrough step.");
 }
+const grottoHiddenEquipmentSpecs = [
+  ["item-path.disc-1.journey-to-burmecia.bronze-vest-grotto-hidden-chest", "game-item.bronze-vest", "journey-grotto-type-a-and-bronze-vest"],
+  ["item-path.disc-1.journey-to-burmecia.mythril-gloves-grotto-hidden-chest", "game-item.mythril-gloves", "journey-grotto-mythril-magus-hat"],
+  ["item-path.disc-1.journey-to-burmecia.magus-hat-grotto-chest", "game-item.magus-hat", "journey-grotto-mythril-magus-hat"],
+] as const;
+const grottoHiddenEquipmentSources = [
+  "gamefaqs-journey-to-burmecia-71891",
+  "jegged-gizamaluke",
+  "opatil-gizamaluke-map",
+  "elitegrindlab-gizamaluke",
+];
+for (const [pathId, itemId, stepId] of grottoHiddenEquipmentSpecs) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === stepId);
+  if (!path || path.itemId !== itemId || path.chapterId !== "disc-1.journey-to-burmecia" || path.method !== "chest" ||
+    path.quantity !== 1 || path.availability !== "single-use" ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.journey-to-burmecia.grotto-hidden-equipment") ||
+    !step?.objectiveIds?.includes("disc-1.journey-to-burmecia.grotto-hidden-equipment") || !item) {
+    errors.push(`Gizamaluke's Grotto hidden-equipment path ${pathId} must be a single-use pickup linked to the walkthrough objective.`);
+  }
+  for (const sourceId of grottoHiddenEquipmentSources) {
+    if (!sourceIds.has(sourceId) || !path?.sourceIds.includes(sourceId) || !item?.sourceIds.includes(sourceId)) {
+      errors.push(`Gizamaluke's Grotto hidden-equipment path ${pathId} and its item need source ${sourceId}.`);
+    }
+  }
+}
+const grottoHiddenEquipmentObjective = objectivesById.get("disc-1.journey-to-burmecia.grotto-hidden-equipment");
+if (!grottoHiddenEquipmentObjective || grottoHiddenEquipmentObjective.sourceIds.length !== grottoHiddenEquipmentSources.length ||
+  !grottoHiddenEquipmentSources.every((sourceId) => grottoHiddenEquipmentObjective.sourceIds.includes(sourceId))) {
+  errors.push("Gizamaluke's hidden-equipment objective must preserve the exact route, map, and independent audit sources.");
+}
 const pinnacleOgreChest = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.pinnacle-rocks.the-ogre-chest");
 if (!pinnacleOgreChest || pinnacleOgreChest.itemId !== "game-item.the-ogre" || pinnacleOgreChest.chapterId !== "disc-2.pinnacle-rocks" ||
   pinnacleOgreChest.method !== "chest" || pinnacleOgreChest.quantity !== 1 || pinnacleOgreChest.availability !== "single-use" ||

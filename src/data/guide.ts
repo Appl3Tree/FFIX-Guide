@@ -1328,7 +1328,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/gizamaluke-s-grotto",
     accessed: "2026-10-25",
-    notes: "Cross-checks that entering the Grotto locks access to Lindblum's districts while leaving the Dragon's Gate merchant available, along with the route and hidden pickups.",
+    notes: "Cross-checks that entering the Grotto locks access to Lindblum's districts while leaving the Dragon's Gate merchant available. Its route locates the hidden Bronze Vest, Mythril Gloves, and Magus Hat pickups.",
   },
   {
     id: "gamerevolution-ffix-walkthrough",
@@ -1840,7 +1840,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-burmecia",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit bell-by-bell Grotto route, hidden equipment, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. Its Daines-horse Basin section identifies Hi-Potion and Tent chests at the eastern Burmecian Arch after the party returns from South Gate. At Bohden Gate it locates the Multina Racket chest in the southwest and the Potion chest on the left side of the station, both before boarding the cable car; the wagon chest is initially inaccessible. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
+    notes: "Disc I first-visit bell-by-bell Grotto route, hidden Bronze Vest, Mythril Gloves, and Magus Hat pickups, conditional Mognet check, Gizamaluke boss data/strategy, South Gate party split, North Gate pickups, Chocograph #4, and Nymph Blue Magic. It places the Bronze Vest in the lower-left corner beyond the left small door, the Mythril Gloves about a third of the way around the far-right spiral stairs, and the Magus Hat under the bridge as a field-icon pickup. Its Daines-horse Basin section identifies Hi-Potion and Tent chests at the eastern Burmecian Arch after the party returns from South Gate. At Bohden Gate it locates the Multina Racket chest in the southwest and the Potion chest on the left side of the station, both before boarding the cable car; the wagon chest is initially inaccessible. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Boss steal percentages and some conditional event details are not copied where sources disagree.",
   },
   {
     id: "gamefaqs-single-character-27398",
@@ -1856,7 +1856,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/09-Gizamalukes-Grotto.html",
     accessed: "2026-10-26",
-    notes: "Disc I first-visit cross-check for the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
+    notes: "Disc I first-visit cross-check for Gizamaluke's Grotto's hidden Bronze Vest, Mythril Gloves, and Magus Hat, the boss, split-party South Gate events, inaccessible caravan chest, station shop and Mognet, Burmecian Arch chests, Chocograph #4 Reef ability, and Night Blue Magic. In the Grotto it locates the vest behind the wall on the left path, gloves along the Bell Room back wall near the top of the stairs, and hat on the platform beneath the bridge. It identifies North Gate as Burmecia Arch, east of the Grotto exit, and lists its two chests as Hi-Potion and Tent. At South Gate, which it identifies as Bohden Arch, it places Moccha Coffee near the water and Ether on the opposite side of the bridge. It also locates Multina Racket in the left-side Bohden Gate chest and Potion in the left-side Bohden Station chest, both before taking the train; the caravan chest is inaccessible on this visit. It does not document the later Disc II Moguta delivery or the return to Dragon's Gate. Calls Chocograph #4 'Healing Water'; other references call it 'Healing Shore'.",
   },
   {
     id: "rpgclassics-gizamaluke",
@@ -1888,7 +1888,7 @@ export const sources = [
     publisher: "OpaTil FFIX Strategy Guide",
     url: "https://ff9.opatil.com/eng/map/m21.html",
     accessed: "2026-10-23",
-    notes: "Map-indexed key item and equipment placements for the Grotto's bell sequence, including Bronze Vest, Mythril Gloves, Magus Hat, and Holy Bell.",
+    notes: "Map-indexed Grotto treasure locations: Bronze Vest on the lower-left cavern path, Mythril Gloves on the Bell Room stairs, Magus Hat beneath the bridge, and Holy Bell. These placements cross-check the three equipment pickup paths.",
   },
   {
     id: "gamefaqs-kupo-nuts-71891",
@@ -2120,7 +2120,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/gizamalukes-grotto/",
     accessed: "2026-10-25",
-    notes: "Independent field-oriented audit of bell counts, hidden pickups, Mogmi's Festival letter condition, boss stats and strategy conflicts, and the dangerous Popos Heights vine. It places Lindblum's trolley and three-district lockout at Grotto entry and says four publishers agree; the GameFAQs route also says the Dragon's Gate remains open through Grotto completion and places the trolley cutoff after completion, while warning that Lindblum cannot be reached for some time on entry. Preserve the exact trigger as disputed until directly verified.",
+    notes: "Independent field-oriented audit of bell counts, the Bronze Vest, Mythril Gloves, and Magus Hat hidden pickups, Mogmi's Festival letter condition, boss stats and strategy conflicts, and the dangerous Popos Heights vine. It places Lindblum's trolley and three-district lockout at Grotto entry and says four publishers agree; the GameFAQs route also says the Dragon's Gate remains open through Grotto completion and places the trolley cutoff after completion, while warning that Lindblum cannot be reached for some time on entry. Preserve the exact trigger as disputed until directly verified.",
   },
   {
     id: "elitegrindlab-missables",
