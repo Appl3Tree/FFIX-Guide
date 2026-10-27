@@ -429,6 +429,7 @@ const resolvedDisc4BlackCatRecipeSources = [
 
 const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891"];
 const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"];
+const cargoShipWaltzEncounterSources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
@@ -9028,9 +9029,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from Black Waltz 3 during the Cargo Ship boss battle before defeating it; the boss flees after the fight.",
+    conditions: "Attempt Black Waltz 3's Uncommon Linen Cuirass steal during the one-time Cargo Ship battle; the chance-based attempt can fail, and the boss flees after the fight.",
     walkthroughObjectiveIds: ["disc-1.cargo-ship.black-waltz-3-steals"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "elitegrindlab-cargo-ship"],
+    enemyId: "enemy.black-waltz-3-cargo-ship",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.cargo-ship.black-waltz-3"],
+    sourceIds: [...new Set(["gamefaqs-items-71891", "gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "elitegrindlab-cargo-ship", ...cargoShipWaltzEncounterSources])],
   },
   {
     id: "item-path.disc-1.exploring-lindblum-kingdom.linen-cuirass-shop",
@@ -11446,9 +11450,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from the first Black Waltz 3 encounter aboard the Cargo Ship.",
+    conditions: "Attempt Black Waltz 3's Semi-Rare Silver Gloves steal during the one-time Cargo Ship battle; the chance-based attempt can fail, and the boss flees after the fight.",
     walkthroughObjectiveIds: ["disc-1.cargo-ship.black-waltz-3-steals"],
-    sourceIds: silverGlovesReferenceSources,
+    enemyId: "enemy.black-waltz-3-cargo-ship",
+    enemyLootSlot: "semi-rare",
+    encounterIds: ["encounter.cargo-ship.black-waltz-3"],
+    sourceIds: [...new Set([...silverGlovesReferenceSources, ...cargoShipWaltzEncounterSources])],
   },
   {
     id: "item-path.disc-1.lindblum.silver-gloves-synthesis-shop-pickup",
@@ -12149,9 +12156,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal a Steepled Hat from Black Waltz 3 during the Cargo Ship boss encounter.",
+    conditions: "Attempt Black Waltz 3's Common Steepled Hat steal during the one-time Cargo Ship battle; the chance-based attempt can fail, and the boss flees after the fight.",
     walkthroughObjectiveIds: ["disc-1.cargo-ship.black-waltz-3-steals"],
-    sourceIds: steepledHatSources,
+    enemyId: "enemy.black-waltz-3-cargo-ship",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.cargo-ship.black-waltz-3"],
+    sourceIds: [...new Set([...steepledHatSources, ...cargoShipWaltzEncounterSources])],
   },
   {
     id: "item-path.disc-2.journey-to-treno.steepled-hat-black-waltz-3-steal",

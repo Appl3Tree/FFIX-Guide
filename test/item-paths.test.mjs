@@ -36,6 +36,44 @@ test("both Baku fights link each steal path to its exact enemy slot and encounte
   }
 });
 
+test("Cargo Ship Black Waltz 3 steals link their exact one-time encounter slots", () => {
+  const expected = [
+    { pathId: "item-path.disc-1.cargo-ship.steepled-hat-black-waltz-3-steal", itemId: "game-item.steepled-hat", slot: "common" },
+    { pathId: "item-path.disc-1.cargo-ship.black-waltz-3-linen-cuirass-steal", itemId: "game-item.linen-cuirass", slot: "uncommon" },
+    { pathId: "item-path.disc-1.cargo-ship.silver-gloves-black-waltz-3-steal", itemId: "game-item.silver-gloves", slot: "semi-rare" },
+  ];
+  const enemyId = "enemy.black-waltz-3-cargo-ship";
+  const encounterId = "encounter.cargo-ship.black-waltz-3";
+  const objectiveId = "disc-1.cargo-ship.black-waltz-3-steals";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const paths = itemAcquisitionPaths.filter((entry) => entry.chapterId === "disc-1.cargo-ship" && entry.enemyId === enemyId && entry.method === "steal");
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.equal(paths.length, expected.length);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.conditions?.includes("chance-based"));
+    assert.ok(path?.conditions?.includes("can fail"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.pathId} has known sources`);
+  }
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

@@ -4293,6 +4293,8 @@ const cargoShipWaltzSteals = [
   ["game-item.linen-cuirass", "uncommon"],
   ["game-item.silver-gloves", "semi-rare"],
 ] as const;
+const cargoShipWaltzStealPaths = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-1.cargo-ship" &&
+  path.enemyId === "enemy.black-waltz-3-cargo-ship" && path.method === "steal");
 if (!cargoShipWaltzEncounter || cargoShipWaltzEncounter.kind !== "boss" ||
   cargoShipWaltzEncounter.chapterId !== "disc-1.cargo-ship" ||
   !cargoShipWaltzEncounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-3-cargo-ship" && entry.quantity === 1) ||
@@ -4305,6 +4307,7 @@ if (!cargoShipWaltzEncounter || cargoShipWaltzEncounter.kind !== "boss" ||
   cargoShipWaltzRecord.steals.length !== 4 ||
   cargoShipWaltzRecord.drops.length !== 4 || cargoShipWaltzRecord.drops.some((slot) => slot.itemId !== null) ||
   !cargoShipWaltzRecord.routeObjectiveIds.includes("disc-1.cargo-ship.black-waltz-3-steals") ||
+  cargoShipWaltzStealPaths.length !== cargoShipWaltzSteals.length ||
   !cargoShipWaltzRecord.notes.some((note) => note.includes("Silver Greaves") && note.includes("Silver Gloves"))) {
   errors.push("The Cargo Ship Black Waltz 3 record must stay distinct, source-linked, and tied to its one-time steals, warning, cutoff, and source-name conflict.");
 }
@@ -4320,9 +4323,19 @@ if (!cargoShipPreparation || cargoShipPreparation.suggestedLevelRange !== undefi
   errors.push("Cargo Ship Black Waltz 3 preparation must distinguish its Level 7 enemy stat from an unsupported party-level target and exclude conflicting Game Dog advice.");
 }
 for (const [itemId, slot] of cargoShipWaltzSteals) {
+  const lootSlot = cargoShipWaltzRecord?.steals.find((steal) => steal.itemId === itemId && steal.slot === slot);
   const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-1.cargo-ship" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.cargo-ship.black-waltz-3-steals"));
-  if (!cargoShipWaltzRecord?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) || !path || path.availability !== "one-time-encounter") {
-    errors.push(`Cargo Ship Black Waltz 3's ${itemId} steal must link to its one-time encounter and item path.`);
+  const expectedSourceIds = new Set([
+    ...(cargoShipWaltzRecord?.sourceIds ?? []),
+    ...(cargoShipWaltzEncounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+  ]);
+  if (!lootSlot || !path || path.method !== "steal" || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.black-waltz-3-cargo-ship" || path.enemyLootSlot !== slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.cargo-ship.black-waltz-3"]) ||
+    !path.conditions?.includes("chance-based") || !path.conditions.includes("can fail") ||
+    [...expectedSourceIds].some((sourceId) => !path.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId))) {
+    errors.push(`Cargo Ship Black Waltz 3's ${itemId} steal must match its exact loot slot, one-time encounter, chance, and source provenance.`);
   }
 }
 const openingMaskedManEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.alexandria.masked-man-opening");

@@ -914,7 +914,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cargo-ship-black-waltz-3-steals",
             kind: "combat",
             text: "Black Waltz 3 is Level 7 with 1,128 HP. Start with Zidane using Steal for the Steepled Hat, Linen Cuirass, and Silver Gloves. Vivi begins in Trance, so use Double Black to deal damage while Zidane works; Black Waltz 3 does not counter Vivi's magic.",
-            detail: "The boss flees after the encounter, so any of these three boss-only steals you miss are gone. Lindblum sells all three item types later, making this an early-copy opportunity rather than permanent loss of the equipment. The rare Silver Gloves steal may take time; heal as needed and decide whether the copy is worth continuing to pursue.",
+            detail: "The enemy table lists the Steepled Hat as Common, Linen Cuirass as Uncommon, and Silver Gloves as Semi-Rare; each steal attempt is chance-based and may fail. The boss flees after the encounter, ending this one-time steal window. Lindblum sells all three item types later, so these are early-copy opportunities rather than permanent losses. The Silver Gloves attempt may take time; heal as needed and decide whether the extra copy is worth pursuing.",
             objectiveIds: ["disc-1.cargo-ship.black-waltz-3-steals"],
           },
           {
