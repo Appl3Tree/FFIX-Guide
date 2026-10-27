@@ -6589,6 +6589,58 @@ if (
 ) {
   errors.push("Scarlet Hair's Ether/Poison Knuckles/Tent acquisition and recovery paths, Poison Knuckles target, and weapon abilities must remain linked in the item catalog.");
 }
+const alexandriaBossLootPaths = [
+  { id: "item-path.disc-2.return-to-alexandria.zorn-partisan-steal", enemyId: "enemy.zorn", itemId: "game-item.partisan", method: "steal", slot: "common", encounterIds: ["encounter.return-to-alexandria.zorn-thorn"], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.zorn-stardust-rod-steal", enemyId: "enemy.zorn", itemId: "game-item.stardust-rod", method: "steal", slot: "uncommon", encounterIds: ["encounter.return-to-alexandria.zorn-thorn"], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.thorn-mythril-armlet-steal", enemyId: "enemy.thorn", itemId: "game-item.mythril-armlet", method: "steal", slot: "uncommon", encounterIds: ["encounter.return-to-alexandria.zorn-thorn"], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.thorn-mythril-armor", enemyId: "enemy.thorn", itemId: "game-item.mythril-armor", method: "steal", slot: "common", encounterIds: ["encounter.return-to-alexandria.zorn-thorn"], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.beatrix-phoenix-down-steal", enemyId: "enemy.beatrix-alexandria", itemId: "game-item.phoenix-down", method: "steal", slot: "common", encounterIds: ["encounter.return-to-alexandria.beatrix"], objectiveId: "disc-2.return-to-alexandria.beatrix-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.beatrix-ice-brand-steal", enemyId: "enemy.beatrix-alexandria", itemId: "game-item.ice-brand", method: "steal", slot: "uncommon", encounterIds: ["encounter.return-to-alexandria.beatrix"], objectiveId: "disc-2.return-to-alexandria.beatrix-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.survival-vest-beatrix-steal", enemyId: "enemy.beatrix-alexandria", itemId: "game-item.survival-vest", method: "steal", slot: "semi-rare", encounterIds: ["encounter.return-to-alexandria.beatrix"], objectiveId: "disc-2.return-to-alexandria.beatrix-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.ralvuimago-phoenix-down-steal", enemyId: "enemy.ralvuimago", itemId: "game-item.phoenix-down", method: "steal", slot: "common", encounterIds: ["encounter.return-to-alexandria.ralvuimago"], objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.ralvuimago-adaman-vest-steal", enemyId: "enemy.ralvuimago", itemId: "game-item.adaman-vest", method: "steal", slot: "uncommon", encounterIds: ["encounter.return-to-alexandria.ralvuimago"], objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.ralvuimago-oak-staff-steal", enemyId: "enemy.ralvuimago", itemId: "game-item.oak-staff", method: "steal", slot: "semi-rare", encounterIds: ["encounter.return-to-alexandria.ralvuimago"], objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.tantarian-ether-steal", enemyId: "enemy.tantarian", itemId: "game-item.ether", method: "steal", slot: "common", encounterIds: ["encounter.tantarian.disc-2-library", "encounter.tantarian.disc-3-library"], objectiveId: "disc-2.return-to-alexandria.tantarian", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.tantarian-elixir-steal", enemyId: "enemy.tantarian", itemId: "game-item.elixir", method: "steal", slot: "uncommon", encounterIds: ["encounter.tantarian.disc-2-library", "encounter.tantarian.disc-3-library"], objectiveId: "disc-2.return-to-alexandria.tantarian", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.tantarian-silver-fork-steal", enemyId: "enemy.tantarian", itemId: "game-item.silver-fork", method: "steal", slot: "semi-rare", encounterIds: ["encounter.tantarian.disc-2-library", "encounter.tantarian.disc-3-library"], objectiveId: "disc-2.return-to-alexandria.tantarian", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.tantarian-demons-mail-steal", enemyId: "enemy.tantarian", itemId: "game-item.demons-mail", method: "steal", slot: "rare", encounterIds: ["encounter.tantarian.disc-2-library", "encounter.tantarian.disc-3-library"], objectiveId: "disc-2.return-to-alexandria.tantarian", chanceBased: true },
+  { id: "item-path.disc-2.return-to-alexandria.tantarian-running-shoes", enemyId: "enemy.tantarian", itemId: "game-item.running-shoes", method: "drop", slot: "always", encounterIds: ["encounter.tantarian.disc-2-library", "encounter.tantarian.disc-3-library"], objectiveId: "disc-2.return-to-alexandria.tantarian", chanceBased: false },
+];
+const alexandriaBossLootPathIds = new Set(alexandriaBossLootPaths.map((expected) => expected.id));
+if (itemAcquisitionPaths.filter((path) => alexandriaBossLootPathIds.has(path.id)).length !== alexandriaBossLootPaths.length) {
+  errors.push("Alexandria boss loot paths must retain all 15 Zorn/Thorn, Beatrix, Ralvuimago, and Tantarian entries.");
+}
+for (const expected of alexandriaBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const encounters = enemyEncounters.filter((entry) => expected.encounterIds.includes(entry.id));
+  const lootTable = expected.method === "steal" ? enemy?.steals : enemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...encounters.flatMap((entry) => entry.sourceIds), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== expected.enemyId ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(expected.encounterIds) ||
+    encounters.length !== expected.encounterIds.length ||
+    !encounters.every((encounter) => encounter.kind === "boss" && encounter.formation.some((member) => member.enemyId === expected.enemyId)) ||
+    !path.walkthroughObjectiveIds?.includes(expected.objectiveId) ||
+    (expected.chanceBased && (!path.conditions?.includes("chance-based") || !path.conditions.includes("can fail"))) ||
+    (!expected.chanceBased && (!path.conditions?.includes("Always drop") || !path.conditions.includes("victory"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Alexandria boss path ${expected.id} must match its one-time encounter, exact ${expected.slot} loot slot, conditions, objective, and provenance.`);
+  }
+}
+const thornMythrilArmorPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-alexandria.thorn-mythril-armor");
+if (!thornMythrilArmorPath?.notes?.includes("The GameFAQs Items index lists Mythril Armor as Zorn's common steal")) {
+  errors.push("The Thorn Mythril Armor path must preserve the source disagreement about which clown owns its steal.");
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

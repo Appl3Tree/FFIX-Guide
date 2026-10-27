@@ -241,6 +241,68 @@ test("Scarlet Hair item paths link exact solo-boss loot slots and distinguish st
   assert.equal(laterPoisonKnucklesPath?.availability, "repeatable");
 });
 
+test("Alexandria boss item paths link exact slots across the Zorn/Thorn, Beatrix, Ralvuimago, and Tantarian encounters", () => {
+  const zornThornEncounterId = "encounter.return-to-alexandria.zorn-thorn";
+  const beatrixEncounterId = "encounter.return-to-alexandria.beatrix";
+  const ralvuimagoEncounterId = "encounter.return-to-alexandria.ralvuimago";
+  const tantarianEncounterIds = ["encounter.tantarian.disc-2-library", "encounter.tantarian.disc-3-library"];
+  const expected = [
+    { id: "item-path.disc-2.return-to-alexandria.zorn-partisan-steal", enemyId: "enemy.zorn", itemId: "game-item.partisan", method: "steal", slot: "common", encounterIds: [zornThornEncounterId], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.zorn-stardust-rod-steal", enemyId: "enemy.zorn", itemId: "game-item.stardust-rod", method: "steal", slot: "uncommon", encounterIds: [zornThornEncounterId], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.thorn-mythril-armlet-steal", enemyId: "enemy.thorn", itemId: "game-item.mythril-armlet", method: "steal", slot: "uncommon", encounterIds: [zornThornEncounterId], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.thorn-mythril-armor", enemyId: "enemy.thorn", itemId: "game-item.mythril-armor", method: "steal", slot: "common", encounterIds: [zornThornEncounterId], objectiveId: "disc-2.return-to-alexandria.zorn-thorn-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.beatrix-phoenix-down-steal", enemyId: "enemy.beatrix-alexandria", itemId: "game-item.phoenix-down", method: "steal", slot: "common", encounterIds: [beatrixEncounterId], objectiveId: "disc-2.return-to-alexandria.beatrix-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.beatrix-ice-brand-steal", enemyId: "enemy.beatrix-alexandria", itemId: "game-item.ice-brand", method: "steal", slot: "uncommon", encounterIds: [beatrixEncounterId], objectiveId: "disc-2.return-to-alexandria.beatrix-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.survival-vest-beatrix-steal", enemyId: "enemy.beatrix-alexandria", itemId: "game-item.survival-vest", method: "steal", slot: "semi-rare", encounterIds: [beatrixEncounterId], objectiveId: "disc-2.return-to-alexandria.beatrix-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.ralvuimago-phoenix-down-steal", enemyId: "enemy.ralvuimago", itemId: "game-item.phoenix-down", method: "steal", slot: "common", encounterIds: [ralvuimagoEncounterId], objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.ralvuimago-adaman-vest-steal", enemyId: "enemy.ralvuimago", itemId: "game-item.adaman-vest", method: "steal", slot: "uncommon", encounterIds: [ralvuimagoEncounterId], objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.ralvuimago-oak-staff-steal", enemyId: "enemy.ralvuimago", itemId: "game-item.oak-staff", method: "steal", slot: "semi-rare", encounterIds: [ralvuimagoEncounterId], objectiveId: "disc-2.return-to-alexandria.ralvuimago-steals" },
+    { id: "item-path.disc-2.return-to-alexandria.tantarian-ether-steal", enemyId: "enemy.tantarian", itemId: "game-item.ether", method: "steal", slot: "common", encounterIds: tantarianEncounterIds, objectiveId: "disc-2.return-to-alexandria.tantarian" },
+    { id: "item-path.disc-2.return-to-alexandria.tantarian-elixir-steal", enemyId: "enemy.tantarian", itemId: "game-item.elixir", method: "steal", slot: "uncommon", encounterIds: tantarianEncounterIds, objectiveId: "disc-2.return-to-alexandria.tantarian" },
+    { id: "item-path.disc-2.return-to-alexandria.tantarian-silver-fork-steal", enemyId: "enemy.tantarian", itemId: "game-item.silver-fork", method: "steal", slot: "semi-rare", encounterIds: tantarianEncounterIds, objectiveId: "disc-2.return-to-alexandria.tantarian" },
+    { id: "item-path.disc-2.return-to-alexandria.tantarian-demons-mail-steal", enemyId: "enemy.tantarian", itemId: "game-item.demons-mail", method: "steal", slot: "rare", encounterIds: tantarianEncounterIds, objectiveId: "disc-2.return-to-alexandria.tantarian" },
+    { id: "item-path.disc-2.return-to-alexandria.tantarian-running-shoes", enemyId: "enemy.tantarian", itemId: "game-item.running-shoes", method: "drop", slot: "always", encounterIds: tantarianEncounterIds, objectiveId: "disc-2.return-to-alexandria.tantarian" },
+  ];
+  const linkedPaths = itemAcquisitionPaths.filter((entry) => expected.some((item) => item.id === entry.id));
+
+  assert.equal(linkedPaths.length, expected.length);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const enemy = enemyRecords.find((entry) => entry.id === item.enemyId);
+    const relatedEncounters = enemyEncounters.filter((entry) => item.encounterIds.includes(entry.id));
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...relatedEncounters.flatMap((entry) => entry.sourceIds), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a real enemy-table slot`);
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, item.enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, item.encounterIds);
+    assert.ok(relatedEncounters.every((entry) => entry.kind === "boss" && entry.formation.some((member) => member.enemyId === item.enemyId)));
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", /chance-based/);
+      assert.match(path?.conditions ?? "", /can fail/);
+      assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    } else {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /victory/);
+      assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    }
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.id} has known sources`);
+  }
+
+  const mythrilArmorPath = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-2.return-to-alexandria.thorn-mythril-armor");
+  assert.match(mythrilArmorPath?.notes ?? "", /GameFAQs Items index lists Mythril Armor as Zorn's common steal/);
+  assert.match(mythrilArmorPath?.notes ?? "", /boss-specific table and independent walkthroughs/);
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");
