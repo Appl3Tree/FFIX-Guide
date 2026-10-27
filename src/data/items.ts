@@ -155,6 +155,7 @@ const earlyChocographTreasureSources = ["gamefaqs-exploring-lindblum-71891", "ga
 const earlyPinnacleRocksPickupSources = ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke"];
 const lindblumFirstVisitPickupSources = ["gamefaqs-lindblum-71891", "jegged-lindblum"];
 const burmeciaArchPickupSources = ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"];
+const observatoryMountainPickupSources = ["gamefaqs-optional-route-47344", "gamefaqs-dali-71891", "jegged-ice-cavern", "gamerguides-dali"];
 const grottoHiddenEquipmentSources = [
   "gamefaqs-journey-to-burmecia-71891",
   "jegged-gizamaluke",
@@ -183,6 +184,12 @@ const daliUndergroundSources = [
   "gamerguides-dali",
   "elitegrindlab-dali",
 ];
+const blackWaltz2EtherDropSources = {
+  always: ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"],
+  common: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+  uncommon: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+  rare: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+};
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
 const bronzeGlovesReferenceSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", ...evilForestPickupSources];
@@ -2597,7 +2604,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.desert-boots", name: "Desert Boots", category: "equipment", sourceIds: [...desertBootsReferenceSources, ...burmeciaSources], verification: "partial" },
   { id: "game-item.protection-bell", name: "Protection Bell", category: "key-item", sourceIds: burmeciaSources, verification: "partial" },
   { id: "game-item.moccha-coffee", name: "Moccha Coffee", category: "key-item", sourceIds: [...bohdenArchPickupSources, "rpgclassics-coffee"], verification: "partial" },
-  { id: "game-item.ether", name: "Ether", category: "consumable", sourceIds: [...bohdenArchPickupSources, ...lindblumFirstVisitPickupSources, "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", ...evilForestPickupSources, ...daliUndergroundSources, ...burmeciaSources, ...fossilRooSources, ...iifaTreeSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", ...mountGulugSources, ...tantarianSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-the-final-battle-71891", "gamefaqs-monster-list-20490", "gamefaqs-enemy-list-71891", "jegged-kuja-necron-final-showdown", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "elitegrindlab-madain-sari-eidolon-wall", "megane-kangaroo-disc4-burmecia-recovery", "gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
+  { id: "game-item.ether", name: "Ether", category: "consumable", sourceIds: [...bohdenArchPickupSources, ...lindblumFirstVisitPickupSources, "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs", ...evilForestPickupSources, ...daliUndergroundSources, "cavesofnarshe-dali-enemies", ...burmeciaSources, ...fossilRooSources, ...iifaTreeSources, "gamefaqs-stiltzkin-shopping-71891", "jegged-stiltzkin", ...mountGulugSources, ...tantarianSources, "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamefaqs-the-final-battle-71891", "gamefaqs-monster-list-20490", "gamefaqs-enemy-list-71891", "jegged-kuja-necron-final-showdown", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "rpgclassics-bounty-hunters", "elitegrindlab-madain-sari-eidolon-wall", "megane-kangaroo-disc4-burmecia-recovery", "gamefaqs-items-71891", "rpgclassics-synthesis"], verification: "partial" },
   { id: "game-item.phoenix-down", name: "Phoenix Down", category: "consumable", sourceIds: [...earlyPinnacleRocksPickupSources, ...evilForestPickupSources, ...daliUndergroundSources, ...burmeciaSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-return-to-alexandria-71891", "gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "megane-kangaroo-disc4-burmecia-recovery"], verification: "partial" },
   { id: "game-item.gysahl-greens", name: "Gysahl Greens", category: "consumable", sourceIds: gysahlGreensSources, verification: "partial" },
   { id: "game-item.dead-pepper", name: "Dead Pepper", category: "consumable", sourceIds: ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgsite-ffix-chocobo-guide"], verification: "partial" },
@@ -2638,7 +2645,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: [...leatherWristReferenceSources, ...daliUndergroundSources], verification: "partial" },
   { id: "game-item.kupo-nut", name: "Kupo Nut", category: "key-item", sourceIds: [...burmeciaSources, ...lindblumFirstVisitPickupSources, "gamefaqs-kupo-nuts-71891", "gamefaqs-moogle-faq-23306", ...mountGulugSources], verification: "partial" },
   { id: "game-item.holy-bell", name: "Holy Bell", category: "key-item", sourceIds: grottoHolyBellSources, verification: "partial" },
-  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...lindblumFirstVisitPickupSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
+  { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...observatoryMountainPickupSources, ...lindblumFirstVisitPickupSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", ...oeilvertSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
   { id: "game-item.shield-armor", name: "Shield Armor", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.power-vest", name: "Power Vest", category: "equipment", sourceIds: ["gamefaqs-equipment-33383", ...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.feather-boots", name: "Feather Boots", category: "equipment", sourceIds: [...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-on-the-high-seas-71891", "gamefaqs-treno-auction-71891", "gamefaqs-memoria-71891", "rpgclassics-memoria", "rpgclassics-synthesis", "jegged-synthesis"], verification: "partial" },
@@ -4011,6 +4018,72 @@ const iceCavernChestPaths: ItemAcquisitionPath[] = [
   },
 ];
 
+const observatoryMountainPickupPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.ice-cavern.observatory-hidden-hi-potion",
+    itemId: "game-item.hi-potion",
+    chapterId: "disc-1.ice-cavern",
+    method: "hidden-pickup",
+    quantity: 1,
+    availability: "single-use",
+    conditions: "Search by the entrance cart at Observatory Mountain. If you skip it on the optional approach before Dali, check the same area again when control later switches to Steiner; GameFAQs directs the party to search for this Hi-Potion if it was missed before coming to Dali.",
+    notes: "Jegged and Gamer Guides describe a hidden pickup behind the cart; GameFAQs' detailed Dali walkthrough calls the later Hi-Potion a chest partly obscured by a foreground barrel. The exact in-game presentation is unresolved.",
+    walkthroughObjectiveIds: ["disc-1.ice-cavern.observatory-pickups"],
+    sourceIds: observatoryMountainPickupSources,
+  },
+];
+
+const blackWaltz2EtherDropPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-always-drop",
+    itemId: "game-item.ether",
+    chapterId: "disc-1.village-of-dali",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Defeat Black Waltz 2 to receive the guaranteed Ether from its Always drop slot.",
+    notes: "GameFAQs' boss table and Caves of Narshe's enemy table list one guaranteed Ether slot plus three conditional Ether slots. Jegged summarizes the boss drop as a single Ether; this path records only the guaranteed copy as unconditional.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
+    sourceIds: blackWaltz2EtherDropSources.always,
+  },
+  {
+    id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-common-drop",
+    itemId: "game-item.ether",
+    chapterId: "disc-1.village-of-dali",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "This additional Ether is listed in Black Waltz 2's Common drop slot and is chance-based.",
+    notes: "GameFAQs, Caves of Narshe, and EliteGrindLab list Ether in this conditional slot; route summaries that list only one Ether do not confirm extra copies. The source-listed slot is not treated as guaranteed.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
+    sourceIds: blackWaltz2EtherDropSources.common,
+  },
+  {
+    id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-uncommon-drop",
+    itemId: "game-item.ether",
+    chapterId: "disc-1.village-of-dali",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "This additional Ether is listed in Black Waltz 2's Uncommon drop slot and is chance-based.",
+    notes: "GameFAQs, Caves of Narshe, and EliteGrindLab list Ether in this conditional slot; route summaries that list only one Ether do not confirm extra copies. The source-listed slot is not treated as guaranteed.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
+    sourceIds: blackWaltz2EtherDropSources.uncommon,
+  },
+  {
+    id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-rare-drop",
+    itemId: "game-item.ether",
+    chapterId: "disc-1.village-of-dali",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "This additional Ether is listed in Black Waltz 2's Rare drop slot and is chance-based.",
+    notes: "GameFAQs, Caves of Narshe, and EliteGrindLab list Ether in this conditional slot; route summaries that list only one Ether do not confirm extra copies. The source-listed slot is not treated as guaranteed.",
+    walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
+    sourceIds: blackWaltz2EtherDropSources.rare,
+  },
+];
+
 type MoorockShopLocation = "bran-bal" | "pandemonium";
 type MoorockProductSourceGroup = "equipment" | "supply" | "dagger" | "magic-tag";
 type MoorockProduct = { slug: string; itemId: string; name: string; price: number; sourceGroup: MoorockProductSourceGroup };
@@ -4477,6 +4550,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...daliItemShopStockPaths,
   ...daliUndergroundPickupPaths,
   ...iceCavernChestPaths,
+  ...observatoryMountainPickupPaths,
+  ...blackWaltz2EtherDropPaths,
   ...burmeciaMimicLootPaths,
   ...earlyDisc1ExplorationItemPaths,
   ...bohdenArchItemPaths,

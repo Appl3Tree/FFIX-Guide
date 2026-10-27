@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { missables, objectives, sources } from "../src/data/guide.ts";
+import { enemyEncounters, enemyRecords } from "../src/data/enemies.ts";
 import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCoverage, sourceInventoryTargets } from "../src/data/items.ts";
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
@@ -1273,6 +1274,99 @@ test("Burmecia Arch's Hi-Potion and Tent chests have item paths", () => {
   assert.deepEqual(objective?.sourceIds, sourceIds);
   assert.ok(step?.objectiveIds.includes("disc-1.journey-to-burmecia.burmecia-arch-pickups"));
   assert.match(step?.text ?? "", /two chests for a Hi-Potion and Tent/);
+});
+
+test("Observatory Mountain's hidden Hi-Potion has a later missed-pickup check", () => {
+  const sourceIds = ["gamefaqs-optional-route-47344", "gamefaqs-dali-71891", "jegged-ice-cavern", "gamerguides-dali"];
+  const objectiveId = "disc-1.ice-cavern.observatory-pickups";
+  const path = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-1.ice-cavern.observatory-hidden-hi-potion");
+  const item = gameItems.find((entry) => entry.id === "game-item.hi-potion");
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const iceCavernStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.ice-cavern")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "observatory-mountain");
+  const daliStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "dali-observatory-recheck");
+
+  assert.ok(path, "Observatory Mountain Hi-Potion path is missing");
+  assert.equal(path.itemId, "game-item.hi-potion");
+  assert.equal(path.chapterId, "disc-1.ice-cavern");
+  assert.equal(path.method, "hidden-pickup");
+  assert.equal(path.quantity, 1);
+  assert.equal(path.availability, "single-use");
+  assert.match(path.conditions ?? "", /by the entrance cart/);
+  assert.match(path.conditions ?? "", /later switches to Steiner/);
+  assert.match(path.notes ?? "", /calls the later Hi-Potion a chest.*unresolved/);
+  assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+  assert.ok(item, "Hi-Potion is missing from the item catalog");
+  assert.deepEqual(objective?.sourceIds, sourceIds);
+  for (const sourceId of sourceIds) {
+    assert.ok(path.sourceIds.includes(sourceId), `${path.id} is missing ${sourceId}`);
+    assert.ok(item.sourceIds.includes(sourceId), `${item.id} is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+  }
+  assert.ok(iceCavernStep?.objectiveIds.includes(objectiveId));
+  assert.match(iceCavernStep?.text ?? "", /search the entrance cart area for a Hi-Potion/i);
+  assert.match(iceCavernStep?.detail ?? "", /check this Hi-Potion location again when control switches to Steiner/i);
+  assert.ok(daliStep?.objectiveIds.includes(objectiveId));
+  assert.match(daliStep?.text ?? "", /check the entrance cart\/barrel area.*if either pickup is still unclaimed/i);
+});
+
+test("Black Waltz 2's guaranteed and chance-based Ether drops have separate sourced paths", () => {
+  const objectiveId = "disc-1.village-of-dali.black-waltz-2-ether-drop";
+  const expected = [
+    ["always", "item-path.disc-1.village-of-dali.black-waltz-2-ether-always-drop", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]],
+    ["common", "item-path.disc-1.village-of-dali.black-waltz-2-ether-common-drop", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]],
+    ["uncommon", "item-path.disc-1.village-of-dali.black-waltz-2-ether-uncommon-drop", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]],
+    ["rare", "item-path.disc-1.village-of-dali.black-waltz-2-ether-rare-drop", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]],
+  ];
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const item = gameItems.find((entry) => entry.id === "game-item.ether");
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.black-waltz-2");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.dali.black-waltz-2");
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "dali-black-waltz-2-ether-drop");
+
+  assert.ok(objective, "Black Waltz 2 Ether collection objective is missing");
+  assert.ok(item?.sourceIds.includes("cavesofnarshe-dali-enemies"), "Ether item is missing the Black Waltz 2 enemy source");
+  assert.deepEqual(enemy?.drops.map((slot) => slot.slot), expected.map(([slot]) => slot));
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
+  assert.ok(step?.objectiveIds.includes(objectiveId));
+  assert.match(step?.text ?? "", /guaranteed Ether drop/);
+  assert.match(step?.text ?? "", /each is chance-based/);
+  assert.match(step?.detail ?? "", /Caves of Narshe summarizes.*Ether ×4, while Jegged lists a single Ether/);
+  assert.match(enemy?.notes.join(" ") ?? "", /one guaranteed slot plus up to three conditional additional copies/);
+
+  for (const [slot, pathId, sourceIds] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${slot} Ether drop path is missing`);
+    assert.equal(path.itemId, "game-item.ether");
+    assert.equal(path.chapterId, "disc-1.village-of-dali");
+    assert.equal(path.method, "drop");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "one-time-encounter");
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.match(path.conditions ?? "", new RegExp(slot, "i"));
+    if (slot === "always") {
+      assert.match(path.conditions ?? "", /guaranteed/i);
+      assert.match(path.notes ?? "", /only the guaranteed copy as unconditional/);
+    } else {
+      assert.match(path.conditions ?? "", /chance-based/);
+      assert.match(path.notes ?? "", /not treated as guaranteed/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(item.sourceIds.includes(sourceId), `Ether item is missing ${sourceId}`);
+      assert.ok(objective.sourceIds.includes(sourceId), `${objectiveId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
 });
 
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {

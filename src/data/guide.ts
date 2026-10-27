@@ -1272,7 +1272,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/05-Ice-Cavern.html",
     accessed: "2026-10-23",
-    notes: "Independent cross-check for chest locations, thawing Mois, the Mognet letter, the solo boss encounter, and the route onward. Pickup directions are reconciled with other walkthroughs.",
+    notes: "Independent cross-check for the eight Ice Cavern chests, Observatory Mountain's hidden Hi-Potion by the entrance cart and 135-Gil stash, thawing Mois, the Mognet letter, the solo boss encounter, and the route onward. Its Disc I route confirms that the Observatory items can be collected on the first pass.",
   },
   {
     id: "gamerguides-ice-cavern",
@@ -1320,7 +1320,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/47344",
     accessed: "2026-10-25",
-    notes: "Cross-check for optional South Gate and Observatory Mountain content. In its Disc I route, one passage says the Dragon's Gate remains open until Gizamaluke's Grotto is completed and the trolley then cannot return the party to Lindblum; another warns that Lindblum cannot be reached for quite some time as soon as the party enters. Preserve the timing conflict and use pre-entry as the conservative safe checkpoint.",
+    notes: "Cross-check for optional South Gate and Observatory Mountain content. Its Disc I route places a Hi-Potion by the Observatory entrance wagon and directs the party to search for it again during the later Steiner visit if it was missed before coming to Dali. In the separate Lindblum timing passage, one sentence says the Dragon's Gate remains open until Gizamaluke's Grotto is completed and the trolley then cannot return the party to Lindblum; another warns that Lindblum cannot be reached for quite some time as soon as the party enters. Preserve that conflict and use pre-entry as the conservative safe checkpoint.",
   },
   {
     id: "gamerguides-gizamaluke",
@@ -1392,7 +1392,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/village-of-dali",
     accessed: "2026-10-24",
-    notes: "First-visit route, six Dali ATEs, Mognet, windmill, underground route, Black Waltz 2 data, and pre-departure Ice Cavern check; its weapon-shop list confirms Broadsword for 330 Gil. Its pickup list omits the Eye Drops recorded by other sources; Black Waltz 2 is filed under Observatory Mountain although the encounter field is disputed.",
+    notes: "First-visit route, six Dali ATEs, Mognet, windmill, underground route, Black Waltz 2 data, and pre-departure Ice Cavern check; its weapon-shop list confirms Broadsword for 330 Gil. Its Observatory Mountain route says to check for the Hi-Potion during the later Steiner segment, describing it as a chest partly obscured by a foreground barrel; Jegged and Gamer Guides instead call it a hidden pickup behind the entrance cart, so the exact presentation remains unresolved. Its Dali pickup list omits the Eye Drops recorded by other sources. Its boss table lists Ether in the Always, Common, Uncommon, and Rare drop slots, while some route summaries report only one Ether; the catalog separates the guaranteed drop from three chance-based slots. Black Waltz 2 is filed under Observatory Mountain although the encounter field is disputed.",
   },
   {
     id: "kamigame-dali-black-waltz-2",
@@ -1408,7 +1408,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/06-The-Village-of-Dali.html",
     accessed: "2026-10-23",
-    notes: "Independent first-visit route for Dali ATEs, fortune achievement, pickups, factory route, optional encounters, and Black Waltz 2; it does not describe a later return from Dali to Ice Cavern. Confirms the 330-Gil Broadsword shop source. Its ATE checklist names five scenes while its walkthrough also mentions a sixth; the guide follows the six-scene list cross-checked with GameFAQs and Gamer Guides.",
+    notes: "Independent first-visit route for Dali ATEs, fortune achievement, pickups, factory route, optional encounters, and Black Waltz 2; it does not describe a later return from Dali to Ice Cavern. Its Black Waltz 2 reward summary lists one Ether, while GameFAQs and enemy tables list one guaranteed and three chance-based Ether slots. Confirms the 330-Gil Broadsword shop source. Its ATE checklist names five scenes while its walkthrough also mentions a sixth; the guide follows the six-scene list cross-checked with GameFAQs and Gamer Guides.",
   },
   {
     id: "gamerguides-dali",
@@ -1416,7 +1416,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/the-village-of-dali",
     accessed: "2026-10-23",
-    notes: "Cross-check for Dali's six ATEs, first-visit pickups, 156-Gil underground entrance, Eye Drops, optional rear-room treasure, Mognet letter, and Black Waltz 2 strategy.",
+    notes: "Cross-check for Dali's six ATEs, first-visit pickups, and Observatory Mountain's hidden Hi-Potion behind the entrance cart and 135 Gil at the back-right. Its route then switches control to Steiner at the Observatory, supporting a later check for missed pickups, alongside the 156-Gil underground entrance, Eye Drops, optional rear-room treasure, Mognet letter, and Black Waltz 2 strategy.",
   },
   {
     id: "elitegrindlab-dali",
@@ -1440,7 +1440,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/w_enemy.php?enemy=Black+Waltz+2",
     accessed: "2026-10-23",
-    notes: "Independent Black Waltz 2 encounter table and drop cross-check. Its Ether drop count differs from the single-Ether listings in several walkthroughs.",
+    notes: "Independent Black Waltz 2 encounter table and drop cross-check. It lists Ether in the Always, Common, Uncommon, and Rare drop slots and summarizes the reward as Ether ×4; its table disagrees with single-Ether route summaries.",
   },
   {
     id: "ffwiki-black-waltz-2",
@@ -4223,6 +4223,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-1.village-of-dali.black-waltz-2-ether-drop",
+    title: "Receive Black Waltz 2's guaranteed Ether drop",
+    category: "collection",
+    sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+    chapterIds: ["disc-1.village-of-dali"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
     id: "disc-1.cargo-ship.black-waltz-3-steals",
     title: "Steal Steepled Hat, Linen Cuirass, and Silver Gloves from Black Waltz 3",
     category: "collection",
@@ -4254,7 +4263,7 @@ export const objectives: GameObjective[] = [
     id: "disc-1.ice-cavern.observatory-pickups",
     title: "Search Observatory Mountain for its Hi-Potion and 135 Gil",
     category: "collection",
-    sourceIds: ["gamefaqs-optional-route-47344", "gamerguides-ice-cavern"],
+    sourceIds: ["gamefaqs-optional-route-47344", "gamefaqs-dali-71891", "jegged-ice-cavern", "gamerguides-dali"],
     chapterIds: ["disc-1.ice-cavern"],
     profileIds: ["comprehensive", "custom"],
     verification: "partial",

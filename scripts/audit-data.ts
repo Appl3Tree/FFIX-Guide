@@ -3644,6 +3644,23 @@ if (
 ) {
   errors.push("The Ice Cavern treasure warning must connect all eight one-time chests to their documented later item-type routes and source the one-point-per-chest, 340-point Rank S formula.");
 }
+const observatoryPickupSources = ["gamefaqs-optional-route-47344", "gamefaqs-dali-71891", "jegged-ice-cavern", "gamerguides-dali"];
+const observatoryPickupObjectiveId = "disc-1.ice-cavern.observatory-pickups";
+const observatoryPickupPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.ice-cavern.observatory-hidden-hi-potion");
+const observatoryPickupItem = gameItems.find((item) => item.id === "game-item.hi-potion");
+const observatoryPickupObjective = objectivesById.get(observatoryPickupObjectiveId);
+if (!observatoryPickupPath || observatoryPickupPath.itemId !== "game-item.hi-potion" ||
+  observatoryPickupPath.chapterId !== "disc-1.ice-cavern" || observatoryPickupPath.method !== "hidden-pickup" ||
+  observatoryPickupPath.quantity !== 1 || observatoryPickupPath.availability !== "single-use" ||
+  !observatoryPickupPath.conditions?.includes("by the entrance cart") ||
+  !observatoryPickupPath.conditions.includes("later switches to Steiner") ||
+  !observatoryPickupPath.notes?.includes("exact in-game presentation is unresolved") ||
+  !observatoryPickupPath.walkthroughObjectiveIds?.includes(observatoryPickupObjectiveId) ||
+  !observatoryPickupItem || observatoryPickupSources.some((sourceId) =>
+    !observatoryPickupPath.sourceIds.includes(sourceId) || !observatoryPickupItem.sourceIds.includes(sourceId)) ||
+  !observatoryPickupObjective || observatoryPickupSources.some((sourceId) => !observatoryPickupObjective.sourceIds.includes(sourceId))) {
+  errors.push("Observatory Mountain's Hi-Potion must have a source-backed single-use hidden-pickup path linked to the collection objective and later Steiner recheck.");
+}
 const treasureHunterFormulaSources = ["jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"] as const;
 const treasureHunterFormulaWarnings = [
   "missable.disc-1.evil-forest.treasures",
@@ -3692,6 +3709,7 @@ const blackWaltz2Record = enemyRecords.find((enemy) => enemy.id === "enemy.black
 if (!blackWaltz2Encounter || blackWaltz2Encounter.kind !== "boss" ||
   !blackWaltz2Encounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-2" && entry.quantity === 1) ||
   !blackWaltz2Encounter.objectiveIds.includes("disc-1.village-of-dali.black-waltz-2-steals") ||
+  !blackWaltz2Encounter.objectiveIds.includes("disc-1.village-of-dali.black-waltz-2-ether-drop") ||
   !blackWaltz2Encounter.missableIds.includes("missable.disc-1.village-of-dali.black-waltz-2-steals") ||
   !blackWaltz2Encounter.cutoffIds.includes("cutoff.dali.black-waltz-2-steals") ||
   !blackWaltz2Encounter.notes.some((note) => note.includes("Observatory Mountain") && note.includes("cargo-ship"))) {
@@ -3705,8 +3723,32 @@ for (const itemId of ["game-item.steepled-hat", "game-item.leather-plate"]) {
 }
 if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030 ||
   blackWaltz2Record.drops.length !== 4 || blackWaltz2Record.drops.some((slot) => slot.itemId !== "game-item.ether") ||
+  !blackWaltz2Record.notes.some((note) => note.includes("one guaranteed slot plus up to three conditional additional copies")) ||
+  !blackWaltz2Record.routeObjectiveIds.includes("disc-1.village-of-dali.black-waltz-2-ether-drop") ||
   !blackWaltz2Record.facts.some((fact) => fact.category === "status-vulnerability" && fact.label === "Mini" && fact.sourceIds.includes("ffwiki-black-waltz-2"))) {
   errors.push("Black Waltz 2 must preserve its cross-checked HP, four Ether drop slots, and sourced Mini-status conflict.");
+}
+const blackWaltz2EtherObjectiveId = "disc-1.village-of-dali.black-waltz-2-ether-drop";
+const blackWaltz2EtherObjective = objectivesById.get(blackWaltz2EtherObjectiveId);
+const blackWaltz2EtherItem = gameItems.find((item) => item.id === "game-item.ether");
+const blackWaltz2EtherPaths: [string, string, string[]][] = [
+  ["always", "item-path.disc-1.village-of-dali.black-waltz-2-ether-always-drop", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]],
+  ["common", "item-path.disc-1.village-of-dali.black-waltz-2-ether-common-drop", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]],
+  ["uncommon", "item-path.disc-1.village-of-dali.black-waltz-2-ether-uncommon-drop", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]],
+  ["rare", "item-path.disc-1.village-of-dali.black-waltz-2-ether-rare-drop", ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"]],
+];
+if (!blackWaltz2EtherObjective || !blackWaltz2Encounter?.objectiveIds.includes(blackWaltz2EtherObjectiveId) ||
+  !blackWaltz2Record?.routeObjectiveIds.includes(blackWaltz2EtherObjectiveId) ||
+  blackWaltz2EtherPaths.some(([slot, pathId, sourceIds]) => {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    return !blackWaltz2Record?.drops.some((drop) => drop.slot === slot && drop.itemId === "game-item.ether") ||
+      !path || path.itemId !== "game-item.ether" || path.chapterId !== "disc-1.village-of-dali" ||
+      path.method !== "drop" || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+      !path.walkthroughObjectiveIds?.includes(blackWaltz2EtherObjectiveId) ||
+      (slot === "always" ? !path.conditions?.includes("guaranteed") : !path.conditions?.includes("chance-based")) ||
+      sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) || !blackWaltz2EtherObjective.sourceIds.includes(sourceId) || !blackWaltz2EtherItem?.sourceIds.includes(sourceId));
+  })) {
+  errors.push("Black Waltz 2's guaranteed and conditional Ether drop slots must have source-linked paths and a separate collection objective.");
 }
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");

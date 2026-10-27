@@ -584,8 +584,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "observatory-mountain",
             kind: "optional",
-            text: "If you explore Observatory Mountain on Nolrich Heights, search by the cart near the entrance for a hidden Hi-Potion and behind the rock near the back-right for 135 Gil. Speak to Morrid and inspect the model airship in his house to start his rare-coffee request.",
-            detail: "The coffee quest can be completed later, but return the requested beans to Morrid before the end of Disc III. The Hi-Potion and Gil are nearby pickups; collect them while passing through.",
+            text: "If you explore Observatory Mountain on Nolrich Heights, search the entrance cart area for a Hi-Potion and behind the rock near the back-right for 135 Gil. Speak to Morrid and inspect the model airship in his house to start his rare-coffee request.",
+            detail: "The coffee quest can be completed later, but return the requested beans to Morrid before the end of Disc III. Check this Hi-Potion location again when control switches to Steiner later in the chapter; sources differ on whether the pickup is a hidden item or a chest partly obscured by a barrel.",
             objectiveIds: ["disc-1.ice-cavern.observatory-pickups", "disc-1.ice-cavern.morrid-coffee-start"],
           },
           {
@@ -750,7 +750,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "dali-observatory-recheck",
             kind: "pickup",
-            text: "When control switches to Steiner at Observatory Mountain, check around the entrance cart for the hidden Hi-Potion and behind the back-right rock/fence for 135 Gil if either pickup is still unclaimed. Speak with Morrid at his house; if the coffee request was not started on the earlier pass, inspect the model airship and ask about his collection.",
+            text: "When control switches to Steiner at Observatory Mountain, check the entrance cart/barrel area for the Hi-Potion and behind the back-right rock/fence for 135 Gil if either pickup is still unclaimed. Speak with Morrid at his house; if the coffee request was not started on the earlier pass, inspect the model airship and ask about his collection.",
             detail: "The Hi-Potion and 135 Gil are already covered in the Ice Cavern approach objective. The sources differ slightly on the field-item landmarks; sweep the entrance and back-right edge rather than relying on a single pixel marker.",
             objectiveIds: ["disc-1.ice-cavern.observatory-pickups", "disc-1.ice-cavern.morrid-coffee-start"],
           },
@@ -768,10 +768,17 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             objectiveIds: ["disc-1.village-of-dali.black-waltz-2-steals"],
           },
           {
+            id: "dali-black-waltz-2-ether-drop",
+            kind: "pickup",
+            text: "Defeat Black Waltz 2 to receive its guaranteed Ether drop. Its Common, Uncommon, and Rare slots list three additional Ether copies, but each is chance-based.",
+            detail: "GameFAQs and enemy tables list one Always Ether plus three chance-based slots; Caves of Narshe summarizes the reward as Ether ×4, while Jegged lists a single Ether. This checklist target is only the guaranteed copy, and exact extra-drop rates are not established here.",
+            objectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
+          },
+          {
             id: "dali-black-waltz-2-strategy",
             kind: "combat",
             text: "Let Dagger heal the other three with Cure. Black Waltz 2 ignores her while another ally is alive, but if she is the last survivor it can put her to Sleep and cause a Game Over. Once it announces its mission to take back the princess, stop Vivi's Black Magic if the stronger -ara counters are damaging the party; use physical attacks, items, or Steiner's Sword Magic instead.",
-            detail: "The enemy's Fira counter can hit the men while sparing Dagger. GameFAQs, Jegged, and Gamer Guides agree on the counter warning and safe healer role. Enemy tables disagree on the exact Ether reward count (one versus up to four), so this boss drop is not included in a collection checklist. GameFAQs also lists Mini as effective while another enemy reference lists it as immune; the route does not depend on Mini.",
+            detail: "The enemy's Fira counter can hit the men while sparing Dagger. GameFAQs, Jegged, and Gamer Guides agree on the counter warning and safe healer role. The Ether drop and its source-count disagreement are tracked separately above. GameFAQs lists Mini as effective while another enemy reference lists it as immune; the route does not depend on Mini.",
           },
         ],
       },
