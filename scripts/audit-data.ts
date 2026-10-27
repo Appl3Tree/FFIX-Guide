@@ -3821,6 +3821,47 @@ for (const expectation of earlyBossDropExpectations) {
     errors.push(`Guaranteed item drop paths, encounter links, and collection objective for ${expectation.chapterId} must stay source-linked.`);
   }
 }
+const iceCavernRegularLootExpectations = [
+  ["enemy.cave-imp", "steal", "common", "game-item.potion", "cave-imp-potion-common-steal"],
+  ["enemy.cave-imp", "steal", "uncommon", "game-item.phoenix-down", "cave-imp-phoenix-down-uncommon-steal"],
+  ["enemy.cave-imp", "drop", "common", "game-item.ore", "cave-imp-ore-common-drop"],
+  ["enemy.cave-imp", "drop", "uncommon", "game-item.phoenix-down", "cave-imp-phoenix-down-uncommon-drop"],
+  ["enemy.cave-imp", "drop", "rare", "game-item.tent", "cave-imp-tent-rare-drop"],
+  ["enemy.flan-ice-cavern", "steal", "common", "game-item.potion", "flan-potion-common-steal"],
+  ["enemy.flan-ice-cavern", "steal", "uncommon", "game-item.ore", "flan-ore-uncommon-steal"],
+  ["enemy.flan-ice-cavern", "drop", "common", "game-item.potion", "flan-potion-common-drop"],
+  ["enemy.flan-ice-cavern", "drop", "uncommon", "game-item.phoenix-down", "flan-phoenix-down-uncommon-drop"],
+  ["enemy.wyerd", "steal", "common", "game-item.potion", "wyerd-potion-common-steal"],
+  ["enemy.wyerd", "steal", "uncommon", "game-item.tent", "wyerd-tent-uncommon-steal"],
+  ["enemy.wyerd", "steal", "semi-rare", "game-item.phoenix-down", "wyerd-phoenix-down-semi-rare-steal"],
+  ["enemy.wyerd", "drop", "common", "game-item.potion", "wyerd-potion-common-drop"],
+  ["enemy.wyerd", "drop", "uncommon", "game-item.ether", "wyerd-ether-uncommon-drop"],
+];
+const iceCavernLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+const iceCavernMistJetEncounter = enemyEncounters.find((entry) => entry.id === "encounter.ice-cavern.mist-jet-pool");
+const iceCavernLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.ice-cavern")?.sections
+  .find((section) => section.id === "ice-cavern-lower-path");
+const iceCavernMistJetStep = iceCavernLootSection?.steps.find((step) => step.id === "ice-mist-jets");
+if (!iceCavernMistJetEncounter || !["enemy.cave-imp", "enemy.flan-ice-cavern", "enemy.wyerd"].every((enemyId) =>
+  iceCavernMistJetEncounter.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !iceCavernMistJetStep?.detail?.includes("drops require a KO") ||
+  !iceCavernLootSection?.sourceIds.includes("gamefaqs-enemy-list-71891")) {
+  errors.push("Ice Cavern mist-jet loot routes must remain linked to the documented Cave Imp, Flan, and Wyerd encounter pool and KO-drop guidance.");
+}
+for (const [enemyId, method, slotName, itemId, pathSuffix] of iceCavernRegularLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.ice-cavern.${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.ice-cavern" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "repeatable" || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions?.includes("KO defeat") || !path.conditions.includes("conditional"))) ||
+    iceCavernLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) || !enemy?.sourceIds.includes(sourceId) ||
+      !iceCavernMistJetEncounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Ice Cavern ${method} path ${pathSuffix} must match its enemy slot, stay repeatable, and retain item/encounter provenance.`);
+  }
+}
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
 const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;

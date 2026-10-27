@@ -453,13 +453,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "ice-cavern-lower-path",
         title: "Lower Ice Path — Tent, Ether, and the hidden Potion",
         summary: "Mist jets start encounters immediately when touched. Avoid them while moving through the rooms, or use the respawning jets as a deliberate, controllable grind source.",
-        sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamerguides-ice-cavern", "elitegrindlab-ice-cavern"],
+        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-enemy-list-71891", "jegged-ice-cavern", "gamerguides-ice-cavern", "elitegrindlab-ice-cavern"],
         steps: [
           {
             id: "ice-mist-jets",
             kind: "optional",
             text: "Watch the wall vents before crossing each room: walking into a plume starts a battle immediately. Wait for the mist to fade if you want to avoid an encounter; the vents respawn, so you can deliberately trigger fights here if you want more AP or practice.",
-            detail: "Cave Imp, Flan, and Wyerd appear in the cavern. Vivi's Fire is an effective attack against these enemies. There is no source-supported level requirement for this route; use the optional encounters only if you need more ability AP or preparation.",
+            detail: "Cave Imp, Flan, and Wyerd appear in the cavern. Their separate steal and drop slots are recorded in the item routes; drops require a KO and every item drop listed for this pool is conditional. Vivi's Fire is effective against these enemies. There is no source-supported level requirement for this route; use the optional encounters for AP, preparation, or repeatable loot.",
           },
           {
             id: "ice-entrance-tent",

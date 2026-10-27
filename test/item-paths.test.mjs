@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 12);
+  assert.equal(orePaths.length, 14);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -1476,6 +1476,61 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
         assert.ok(objective.sourceIds.includes(sourceId), `${scenario.objectiveId} is missing ${sourceId}`);
         assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
       }
+    }
+  }
+});
+
+test("Ice Cavern mist-jet steals and conditional drops are repeatable and slot-specific", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+  const expected = [
+    ["enemy.cave-imp", "steal", "common", "game-item.potion", "cave-imp-potion-common-steal"],
+    ["enemy.cave-imp", "steal", "uncommon", "game-item.phoenix-down", "cave-imp-phoenix-down-uncommon-steal"],
+    ["enemy.cave-imp", "drop", "common", "game-item.ore", "cave-imp-ore-common-drop"],
+    ["enemy.cave-imp", "drop", "uncommon", "game-item.phoenix-down", "cave-imp-phoenix-down-uncommon-drop"],
+    ["enemy.cave-imp", "drop", "rare", "game-item.tent", "cave-imp-tent-rare-drop"],
+    ["enemy.flan-ice-cavern", "steal", "common", "game-item.potion", "flan-potion-common-steal"],
+    ["enemy.flan-ice-cavern", "steal", "uncommon", "game-item.ore", "flan-ore-uncommon-steal"],
+    ["enemy.flan-ice-cavern", "drop", "common", "game-item.potion", "flan-potion-common-drop"],
+    ["enemy.flan-ice-cavern", "drop", "uncommon", "game-item.phoenix-down", "flan-phoenix-down-uncommon-drop"],
+    ["enemy.wyerd", "steal", "common", "game-item.potion", "wyerd-potion-common-steal"],
+    ["enemy.wyerd", "steal", "uncommon", "game-item.tent", "wyerd-tent-uncommon-steal"],
+    ["enemy.wyerd", "steal", "semi-rare", "game-item.phoenix-down", "wyerd-phoenix-down-semi-rare-steal"],
+    ["enemy.wyerd", "drop", "common", "game-item.potion", "wyerd-potion-common-drop"],
+    ["enemy.wyerd", "drop", "uncommon", "game-item.ether", "wyerd-ether-uncommon-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.ice-cavern.mist-jet-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.ice-cavern")
+    ?.sections.find((entry) => entry.id === "ice-cavern-lower-path");
+  const step = section?.steps.find((entry) => entry.id === "ice-mist-jets");
+
+  assert.deepEqual(encounter?.formation.map((entry) => entry.enemyId), ["enemy.cave-imp", "enemy.flan-ice-cavern", "enemy.wyerd"]);
+  assert.ok(step?.detail?.includes("drops require a KO"));
+  assert.ok(section?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+  assert.equal(expected.length, 14);
+
+  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.ice-cavern.${pathSuffix}`);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    assert.ok(path, `${pathSuffix} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.ice-cavern");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"), `${itemId} is missing the enemy list source`);
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO defeat/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `mist-jet encounter is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
   }
 });

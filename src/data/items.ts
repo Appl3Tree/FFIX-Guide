@@ -192,6 +192,7 @@ const blackWaltz2EtherDropSources = {
 };
 const plantBrainDropSources = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
 const iceCavernBossDropSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+const iceCavernRegularLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const gizamalukeDropSources = ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"];
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
@@ -4138,6 +4139,75 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
   },
 ];
 
+const iceCavernRegularLootSlots = [
+  {
+    enemyId: "enemy.cave-imp",
+    enemySlug: "cave-imp",
+    enemyName: "Cave Imp",
+    steals: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.phoenix-down" },
+    ],
+    drops: [
+      { slot: "common", itemId: "game-item.ore" },
+      { slot: "uncommon", itemId: "game-item.phoenix-down" },
+      { slot: "rare", itemId: "game-item.tent" },
+    ],
+  },
+  {
+    enemyId: "enemy.flan-ice-cavern",
+    enemySlug: "flan",
+    enemyName: "Flan",
+    steals: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.ore" },
+    ],
+    drops: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.phoenix-down" },
+    ],
+  },
+  {
+    enemyId: "enemy.wyerd",
+    enemySlug: "wyerd",
+    enemyName: "Wyerd",
+    steals: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.tent" },
+      { slot: "semi-rare", itemId: "game-item.phoenix-down" },
+    ],
+    drops: [
+      { slot: "common", itemId: "game-item.potion" },
+      { slot: "uncommon", itemId: "game-item.ether" },
+    ],
+  },
+] as const;
+
+const iceCavernRegularLootPaths: ItemAcquisitionPath[] = iceCavernRegularLootSlots.flatMap((enemy) => [
+  ...enemy.steals.map((entry) => ({
+    id: `item-path.disc-1.ice-cavern.${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-steal`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.ice-cavern",
+    method: "steal" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Ice Cavern mist-jet encounters.`,
+    notes: "The source table's separate slot odds are not treated as a guaranteed steal.",
+    sourceIds: iceCavernRegularLootSources,
+  })),
+  ...enemy.drops.map((entry) => ({
+    id: `item-path.disc-1.ice-cavern.${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.ice-cavern",
+    method: "drop" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: `On a KO defeat, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item in repeatable Ice Cavern mist-jet encounters; this slot is conditional.`,
+    notes: "GameFAQs states that non-KO victories do not award drops. No item from these conditional slots is guaranteed.",
+    sourceIds: iceCavernRegularLootSources,
+  })),
+]);
+
 const iceCavernBossDropPaths: ItemAcquisitionPath[] = [
   {
     id: "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop",
@@ -4649,6 +4719,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...observatoryMountainPickupPaths,
   ...blackWaltz2EtherDropPaths,
   ...plantBrainDropPaths,
+  ...iceCavernRegularLootPaths,
   ...iceCavernBossDropPaths,
   ...gizamalukeDropPaths,
   ...burmeciaMimicLootPaths,
