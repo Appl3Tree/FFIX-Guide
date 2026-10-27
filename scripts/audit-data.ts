@@ -6641,6 +6641,49 @@ const thornMythrilArmorPath = itemAcquisitionPaths.find((path) => path.id === "i
 if (!thornMythrilArmorPath?.notes?.includes("The GameFAQs Items index lists Mythril Armor as Zorn's common steal")) {
   errors.push("The Thorn Mythril Armor path must preserve the source disagreement about which clown owns its steal.");
 }
+const ozmaLootPaths = [
+  { id: "item-path.disc-4.final-preparations.ozma-elixir-steal", itemId: "game-item.elixir", method: "steal", slot: "common", objectiveIds: ["disc-4.final-preparations.ozma-steals"] },
+  { id: "item-path.disc-4.final-preparations.ozma-robe-of-lords-steal", itemId: "game-item.robe-of-lords", method: "steal", slot: "uncommon", objectiveIds: ["disc-4.final-preparations.ozma-steals"] },
+  { id: "item-path.disc-4.final-preparations.ozma-dark-matter-semi-rare-steal", itemId: "game-item.dark-matter", method: "steal", slot: "semi-rare", objectiveIds: ["disc-4.final-preparations.ozma-steals"] },
+  { id: "item-path.disc-4.final-preparations.ozma-pumice-piece-rare-steal", itemId: "game-item.pumice-piece", method: "steal", slot: "rare", objectiveIds: ["disc-4.final-preparations.ozma-steals"] },
+  { id: "item-path.disc-4.final-preparations.ozma-pumice-drop", itemId: "game-item.pumice", method: "drop", slot: "always", objectiveIds: ["disc-4.final-preparations.ozma-defeated", "disc-4.final-preparations.ozma-rewards"] },
+  { id: "item-path.disc-4.final-preparations.ozma-dark-matter-common-drop", itemId: "game-item.dark-matter", method: "drop", slot: "common", objectiveIds: ["disc-4.final-preparations.ozma-defeated"] },
+  { id: "item-path.disc-4.final-preparations.ozma-dark-matter-uncommon-drop", itemId: "game-item.dark-matter", method: "drop", slot: "uncommon", objectiveIds: ["disc-4.final-preparations.ozma-defeated"] },
+  { id: "item-path.disc-4.final-preparations.ozma-dark-matter-rare-drop", itemId: "game-item.dark-matter", method: "drop", slot: "rare", objectiveIds: ["disc-4.final-preparations.ozma-defeated"] },
+];
+const ozmaEncounterId = "encounter.final-preparations.ozma";
+const ozmaEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.ozma");
+const ozmaEncounter = enemyEncounters.find((encounter) => encounter.id === ozmaEncounterId);
+if (itemAcquisitionPaths.filter((path) => ozmaLootPaths.some((expected) => expected.id === path.id)).length !== ozmaLootPaths.length) {
+  errors.push("Ozma must retain all four steal paths and four distinct drop-slot paths.");
+}
+for (const expected of ozmaLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? ozmaEnemy?.steals : ozmaEnemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(ozmaEnemy?.sourceIds ?? []), ...(ozmaEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.final-preparations" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== ozmaEnemy?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([ozmaEncounterId]) ||
+    ozmaEncounter?.kind !== "boss" ||
+    !ozmaEncounter.formation.some((member) => member.enemyId === ozmaEnemy?.id) ||
+    expected.objectiveIds.some((objectiveId) => !path.walkthroughObjectiveIds?.includes(objectiveId)) ||
+    (expected.method === "steal" && (!path.conditions?.includes("chance-based") || !path.conditions.includes("can fail"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always drop") || !path.conditions.includes("victory"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && !path.conditions?.includes("conditional")) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Ozma path ${expected.id} must match its one-time encounter, exact ${expected.slot} loot slot, yield condition, objective, and provenance.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

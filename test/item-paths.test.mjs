@@ -303,6 +303,61 @@ test("Alexandria boss item paths link exact slots across the Zorn/Thorn, Beatrix
   assert.match(mythrilArmorPath?.notes ?? "", /boss-specific table and independent walkthroughs/);
 });
 
+test("Ozma item paths link all four steals and four drops to the optional boss table", () => {
+  const enemyId = "enemy.ozma";
+  const encounterId = "encounter.final-preparations.ozma";
+  const encounterIds = [encounterId];
+  const expected = [
+    { id: "item-path.disc-4.final-preparations.ozma-elixir-steal", itemId: "game-item.elixir", method: "steal", slot: "common", objectiveId: "disc-4.final-preparations.ozma-steals" },
+    { id: "item-path.disc-4.final-preparations.ozma-robe-of-lords-steal", itemId: "game-item.robe-of-lords", method: "steal", slot: "uncommon", objectiveId: "disc-4.final-preparations.ozma-steals" },
+    { id: "item-path.disc-4.final-preparations.ozma-dark-matter-semi-rare-steal", itemId: "game-item.dark-matter", method: "steal", slot: "semi-rare", objectiveId: "disc-4.final-preparations.ozma-steals" },
+    { id: "item-path.disc-4.final-preparations.ozma-pumice-piece-rare-steal", itemId: "game-item.pumice-piece", method: "steal", slot: "rare", objectiveId: "disc-4.final-preparations.ozma-steals" },
+    { id: "item-path.disc-4.final-preparations.ozma-pumice-drop", itemId: "game-item.pumice", method: "drop", slot: "always", objectiveIds: ["disc-4.final-preparations.ozma-defeated", "disc-4.final-preparations.ozma-rewards"] },
+    { id: "item-path.disc-4.final-preparations.ozma-dark-matter-common-drop", itemId: "game-item.dark-matter", method: "drop", slot: "common", objectiveIds: ["disc-4.final-preparations.ozma-defeated"] },
+    { id: "item-path.disc-4.final-preparations.ozma-dark-matter-uncommon-drop", itemId: "game-item.dark-matter", method: "drop", slot: "uncommon", objectiveIds: ["disc-4.final-preparations.ozma-defeated"] },
+    { id: "item-path.disc-4.final-preparations.ozma-dark-matter-rare-drop", itemId: "game-item.dark-matter", method: "drop", slot: "rare", objectiveIds: ["disc-4.final-preparations.ozma-defeated"] },
+  ];
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const relatedEncounters = enemyEncounters.filter((entry) => encounterIds.includes(entry.id));
+  const linkedPaths = itemAcquisitionPaths.filter((entry) => expected.some((item) => item.id === entry.id));
+
+  assert.equal(linkedPaths.length, expected.length);
+  assert.equal(relatedEncounters.length, encounterIds.length);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...relatedEncounters.flatMap((entry) => entry.sourceIds), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a real enemy-table slot`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-4.final-preparations");
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, encounterIds);
+    assert.ok(relatedEncounters.every((entry) => entry.kind === "boss" && entry.formation.some((member) => member.enemyId === enemyId)));
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", /chance-based/);
+      assert.match(path?.conditions ?? "", /can fail/);
+      assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    } else if (item.slot === "always") {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /victory/);
+      for (const objectiveId of item.objectiveIds) assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    } else {
+      assert.match(path?.conditions ?? "", /conditional/);
+      assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveIds[0]));
+    }
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.id} has known sources`);
+  }
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");
