@@ -212,6 +212,11 @@ const grottoRegularLootSources = [
   "gamefaqs-journey-to-burmecia-71891",
   "jegged-gizamaluke",
 ];
+const burmeciaRegularLootSources = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-burmecia-71891",
+  "jegged-burmecia",
+];
 const gunitasGoblinLootSources = gunitasBasinLootSources;
 const evilForestRegularLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestGoblinLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
@@ -2602,7 +2607,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.hammer", name: "Hammer", category: "key-item", sourceIds: [...stellazzioReferenceSources, "gamefaqs-return-to-gaia-71891", "jegged-stellazzio", "rpgclassics-disc-4-walkthrough", "gamefaqs-master-synthesist-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis"], verification: "partial" },
   { id: "game-item.potion", name: "Potion", category: "consumable", sourceIds: [...earlyChocographTreasureSources, ...burmeciaSources, ...daliFirstVisitPickupSources, ...southGateDisc1Sources, ...evilForestPickupSources, "gamefaqs-enemy-list-71891", ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.antidote", name: "Antidote", category: "consumable", sourceIds: [...daliFirstVisitPickupSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
+  { id: "game-item.soft", name: "Soft", category: "consumable", sourceIds: [...burmeciaSources, "gamefaqs-enemy-list-71891", ...ipsensMogshopReentrySources, "jegged-stiltzkin", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.remedy", name: "Remedy", category: "consumable", sourceIds: [...new Set([...fossilRooSources, ...oeilvertSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath", "flactem-disc-3-lindblum"])], verification: "partial" },
   { id: "game-item.elixir", name: "Elixir", category: "consumable", sourceIds: [...earlyChocographTreasureSources, "jegged-gizamaluke", ...fossilRooSources, ...oeilvertSources, ...mountGulugSources, ...tantarianSources, ...southGateDisc3Sources, ...iifaTreeSources, "gamefaqs-journey-to-burmecia-71891", "gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke", "gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "jegged-crystal-world", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamefaqs-master-synthesist-71891", "gamefaqs-the-final-battle-71891", "gamefaqs-final-battle-79143", "jegged-kuja-necron-final-showdown", "opatil-steal-list", "gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z", "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-the-aftermath-71891", "jegged-the-aftermath", "gamerguides-the-aftermath", "flactem-disc-3-lindblum"], verification: "partial" },
   { id: "game-item.emerald", name: "Emerald", category: "consumable", sourceIds: [...new Set([...oeilvertSources, "gamefaqs-items-71891", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters"])], verification: "partial" },
@@ -4547,6 +4552,85 @@ const grottoRegularLootPaths: ItemAcquisitionPath[] = grottoRegularLootSlots.fla
   })),
 ]);
 
+const burmeciaRegularLootSlots = [
+  {
+    enemyId: "enemy.basilisk",
+    enemySlug: "basilisk",
+    enemyName: "Basilisk",
+    steals: [
+      { slot: "common", itemId: "game-item.soft" },
+      { slot: "uncommon", itemId: "game-item.hi-potion" },
+    ],
+    drops: [
+      { slot: "always", itemId: "game-item.potion" },
+      { slot: "common", itemId: "game-item.soft" },
+      { slot: "uncommon", itemId: "game-item.hi-potion" },
+      { slot: "rare", itemId: "game-item.soft" },
+    ],
+  },
+  {
+    enemyId: "enemy.ironite",
+    enemySlug: "ironite",
+    enemyName: "Ironite",
+    steals: [
+      { slot: "common", itemId: "game-item.hi-potion" },
+      { slot: "uncommon", itemId: "game-item.soft" },
+    ],
+    drops: [
+      { slot: "always", itemId: "game-item.hi-potion" },
+      { slot: "common", itemId: "game-item.phoenix-down" },
+      { slot: "uncommon", itemId: "game-item.soft" },
+      { slot: "rare", itemId: "game-item.ether" },
+    ],
+  },
+  {
+    enemyId: "enemy.magic-vice",
+    enemySlug: "magic-vice",
+    enemyName: "Magic Vice",
+    steals: [
+      { slot: "common", itemId: "game-item.echo-screen" },
+      { slot: "uncommon", itemId: "game-item.ether" },
+      { slot: "semi-rare", itemId: "game-item.ether" },
+      { slot: "rare", itemId: "game-item.ether" },
+    ],
+    drops: [{ slot: "common", itemId: "game-item.ether" }],
+  },
+] as const;
+
+const burmeciaRegularLootPaths: ItemAcquisitionPath[] = burmeciaRegularLootSlots.flatMap((enemy) => [
+  ...enemy.steals.map((entry) => ({
+    id: `item-path.disc-1.burmecia.city-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-steal`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.burmecia",
+    method: "steal" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in Burmecia city encounters; success is not guaranteed.`,
+    notes: enemy.enemyId === "enemy.magic-vice" && entry.slot === "common"
+      ? "GameFAQs and Jegged list Echo Screen in the Common steal slot, while EliteGrindLab lists Eye Drops. This route follows the GameFAQs enemy table; the conflict remains unresolved, and Magic Vice may flee after Mugging an item."
+      : `The Burmecia enemy table lists this slot. Steal before the battle ends; ${enemy.enemyName === "Magic Vice" ? "it may flee after Mugging an item. " : ""}Slot success and odds are not modeled as guaranteed acquisitions.`,
+    sourceIds: [
+      ...burmeciaRegularLootSources,
+      ...(enemy.enemyId === "enemy.magic-vice" && entry.slot === "common" ? ["elitegrindlab-burmecia"] : []),
+    ],
+  })),
+  ...enemy.drops.map((entry) => ({
+    id: `item-path.disc-1.burmecia.city-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
+    itemId: entry.itemId,
+    chapterId: "disc-1.burmecia",
+    method: "drop" as const,
+    quantity: 1,
+    availability: "repeatable" as const,
+    conditions: entry.slot === "always"
+      ? `On a KO victory, ${enemy.enemyName}'s Always drop slot yields this item in Burmecia city encounters.`
+      : `On a KO victory in a Burmecia city encounter, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item; the slot is conditional.`,
+    notes: entry.slot === "always"
+      ? "The enemy table lists this as an Always drop, subject to the KO requirement for enemy drops."
+      : "The enemy table lists this conditional drop slot; non-KO victories award no drops.",
+    sourceIds: burmeciaRegularLootSources,
+  })),
+]);
+
 const gunitasGoblinLootPaths: ItemAcquisitionPath[] = goblinLootSlots.map((entry) => ({
   id: `item-path.disc-1.village-of-dali.gunitas-goblin-${entry.itemId.replace("game-item.", "")}-${entry.slot}-${entry.method}`,
   itemId: entry.itemId,
@@ -5098,6 +5182,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...gunitasGoblinLootPaths,
   ...evilForestRegularLootPaths,
   ...grottoRegularLootPaths,
+  ...burmeciaRegularLootPaths,
   ...iceCavernBossDropPaths,
   ...gizamalukeDropPaths,
   ...burmeciaMimicLootPaths,

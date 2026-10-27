@@ -1381,7 +1381,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "burmecia-lower-streets",
         title: "Burmecia's streets — Cancer, Blue Magic, and the first houses",
         summary: "Check the first street before moving north, then clear the ground-floor rooms and the upper house route without opening Mimic chests by mistake.",
-        sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "jegged-stellazzio"],
+        sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "jegged-stellazzio", "gamefaqs-enemy-list-71891"],
         steps: [
           {
             id: "burmecia-cancer-blue-magic",
@@ -1389,6 +1389,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "On the first street, search behind the overturned cart/wooden box for the Cancer Stellazzio. If Quina is in the party, use Eat on weakened Ironites for Angel's Snack. Weaken a Magic Vice to Eat range, then try Eat promptly for Magic Hammer; Magic Vices have low HP and may flee.",
             detail: "Cancer can be recovered later through the Stellazzio quest, so this is a completion pickup rather than a permanent-loss warning. Sources place the cart on the first street using slightly different left/right descriptions; inspect behind the overturned object before leaving. The city random pool is Basilisk, Ironite, and Magic Vice; Type A is the scripted pair on the next screen, and the three Mimics are optional chest fights. Magic Vice has low HP and can flee after Mugging an item; its first steal slot is disputed, so the bestiary follows the GameFAQs table and leaves the alternate claim visible.",
             objectiveIds: ["disc-1.burmecia.cancer-stellazzio", "disc-1.burmecia.blue-magic"],
+          },
+          {
+            id: "burmecia-city-regular-enemy-loot",
+            kind: "optional",
+            text: "In ordinary city encounters, steal from Basilisk, Ironite, and Magic Vice before ending the battle; defeat enemies with KO for their drop slots. Magic Vice may flee after Mugging an item. Its Common steal is listed as Echo Screen by GameFAQs and Jegged, while EliteGrindLab lists Eye Drops.",
+            detail: "The item catalog records all 17 item-bearing steal and drop slots for these three city-pool enemies. Always drops still require a KO victory; the other drop slots are conditional. The Magic Vice Common steal route follows the GameFAQs Enemy List and Jegged table while preserving EliteGrindLab's conflicting Eye Drops entry. Slot odds, encounter rates, and exact formations are not inferred.",
           },
           {
             id: "burmecia-lower-room-pickups",

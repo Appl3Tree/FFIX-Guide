@@ -4848,6 +4848,60 @@ if (!burmeciaCityPool || burmeciaCityPool.chapterId !== "disc-1.burmecia" || bur
   burmeciaMimicEncounters.some((encounter) => !encounter || encounter.kind !== "fixed" || !encounter.formation.some((member) => member.enemyId === "enemy.mimic" && member.quantity === 1))) {
   errors.push("Burmecia must keep its city pool, regional world-map pool, scripted Type A pair, and three optional Mimic chest battles separate.");
 }
+const burmeciaCityLootExpectations = [
+  ["enemy.basilisk", "steal", "common", "game-item.soft", "basilisk-soft-common-steal"],
+  ["enemy.basilisk", "steal", "uncommon", "game-item.hi-potion", "basilisk-hi-potion-uncommon-steal"],
+  ["enemy.basilisk", "drop", "always", "game-item.potion", "basilisk-potion-always-drop"],
+  ["enemy.basilisk", "drop", "common", "game-item.soft", "basilisk-soft-common-drop"],
+  ["enemy.basilisk", "drop", "uncommon", "game-item.hi-potion", "basilisk-hi-potion-uncommon-drop"],
+  ["enemy.basilisk", "drop", "rare", "game-item.soft", "basilisk-soft-rare-drop"],
+  ["enemy.ironite", "steal", "common", "game-item.hi-potion", "ironite-hi-potion-common-steal"],
+  ["enemy.ironite", "steal", "uncommon", "game-item.soft", "ironite-soft-uncommon-steal"],
+  ["enemy.ironite", "drop", "always", "game-item.hi-potion", "ironite-hi-potion-always-drop"],
+  ["enemy.ironite", "drop", "common", "game-item.phoenix-down", "ironite-phoenix-down-common-drop"],
+  ["enemy.ironite", "drop", "uncommon", "game-item.soft", "ironite-soft-uncommon-drop"],
+  ["enemy.ironite", "drop", "rare", "game-item.ether", "ironite-ether-rare-drop"],
+  ["enemy.magic-vice", "steal", "common", "game-item.echo-screen", "magic-vice-echo-screen-common-steal"],
+  ["enemy.magic-vice", "steal", "uncommon", "game-item.ether", "magic-vice-ether-uncommon-steal"],
+  ["enemy.magic-vice", "steal", "semi-rare", "game-item.ether", "magic-vice-ether-semi-rare-steal"],
+  ["enemy.magic-vice", "steal", "rare", "game-item.ether", "magic-vice-ether-rare-steal"],
+  ["enemy.magic-vice", "drop", "common", "game-item.ether", "magic-vice-ether-common-drop"],
+];
+const burmeciaCityLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-burmecia-71891", "jegged-burmecia"];
+const burmeciaCityLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.burmecia")?.sections
+  .find((section) => section.id === "burmecia-lower-streets");
+const burmeciaCityLootStep = burmeciaCityLootSection?.steps.find((step) => step.id === "burmecia-city-regular-enemy-loot");
+const burmeciaCityLootPathPrefix = "item-path.disc-1.burmecia.city-";
+if (!burmeciaCityLootStep?.text.includes("defeat enemies with KO for their drop slots") ||
+  !burmeciaCityLootStep.detail?.includes("all 17 item-bearing steal and drop slots") ||
+  !burmeciaCityLootStep.detail.includes("Magic Vice Common steal route follows the GameFAQs Enemy List and Jegged table") ||
+  burmeciaCityLootStep.objectiveIds?.length ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(burmeciaCityLootPathPrefix)).length !== burmeciaCityLootExpectations.length ||
+  burmeciaCityLootSourceIds.some((sourceId) => !burmeciaCityPool?.sourceIds.includes(sourceId) ||
+    !burmeciaCityLootSection?.sourceIds.includes(sourceId))) {
+  errors.push("Burmecia city loot guidance must cover the item-slot routes, preserve the Magic Vice Common steal disagreement, and avoid inventing checklist objectives.");
+}
+for (const [enemyId, method, slotName, itemId, pathSuffix] of burmeciaCityLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `${burmeciaCityLootPathPrefix}${pathSuffix}`);
+  const isMagicViceDispute = enemyId === "enemy.magic-vice" && method === "steal" && slotName === "common";
+  if (!slots?.some((slot) => slot.slot === slotName && slot.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.burmecia" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "repeatable" || path.walkthroughObjectiveIds?.length ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions?.includes("KO victory") ||
+      (slotName === "always" ? !path.conditions.includes("Always drop slot yields") || path.conditions.includes("conditional")
+        : !path.conditions.includes("conditional")))) ||
+    (isMagicViceDispute && (!path.notes?.includes("GameFAQs and Jegged list Echo Screen") ||
+      !path.notes.includes("EliteGrindLab lists Eye Drops") || !path.sourceIds.includes("elitegrindlab-burmecia"))) ||
+    burmeciaCityLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !enemy?.sourceIds.includes(sourceId) || !burmeciaCityPool?.sourceIds.includes(sourceId) ||
+      !burmeciaCityLootSection?.sourceIds.includes(sourceId))) {
+    errors.push(`Burmecia ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, preserve KO/Always behavior, and retain route provenance.`);
+  }
+}
 const burmeciaTypeARecord = enemyRecords.find((enemy) => enemy.id === "enemy.type-a");
 const burmeciaMagicVice = enemyRecords.find((enemy) => enemy.id === "enemy.magic-vice");
 const burmeciaNymph = enemyRecords.find((enemy) => enemy.id === "enemy.nymph");

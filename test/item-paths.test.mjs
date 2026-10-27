@@ -73,7 +73,7 @@ test("Soft has repeatable shop sources through the late game", () => {
     ["item-path.disc-3.on-the-high-seas.soft-alexandria-shop", "alexandria.item-shop.disc-3-4", "shop"],
   ];
 
-  assert.equal(softPaths.length, 13);
+  assert.equal(softPaths.length, 18);
   assert.ok(gameItems.find((item) => item.id === "game-item.soft")?.sourceIds.includes("gamefaqs-shops-71891"));
   for (const [pathId, shopId, method] of shops) {
     const path = softPaths.find((entry) => entry.id === pathId);
@@ -1937,6 +1937,77 @@ test("Gizamaluke's Grotto regular enemies have repeatable sourced loot paths", (
       assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `Grotto encounter is missing ${sourceId}`);
       assert.ok(section?.sourceIds.includes(sourceId), `Grotto walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Burmecia's city-pool enemies have repeatable loot paths with the Magic Vice dispute retained", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-burmecia-71891", "jegged-burmecia"];
+  const expected = [
+    ["enemy.basilisk", "steal", "common", "game-item.soft", "basilisk-soft-common-steal"],
+    ["enemy.basilisk", "steal", "uncommon", "game-item.hi-potion", "basilisk-hi-potion-uncommon-steal"],
+    ["enemy.basilisk", "drop", "always", "game-item.potion", "basilisk-potion-always-drop"],
+    ["enemy.basilisk", "drop", "common", "game-item.soft", "basilisk-soft-common-drop"],
+    ["enemy.basilisk", "drop", "uncommon", "game-item.hi-potion", "basilisk-hi-potion-uncommon-drop"],
+    ["enemy.basilisk", "drop", "rare", "game-item.soft", "basilisk-soft-rare-drop"],
+    ["enemy.ironite", "steal", "common", "game-item.hi-potion", "ironite-hi-potion-common-steal"],
+    ["enemy.ironite", "steal", "uncommon", "game-item.soft", "ironite-soft-uncommon-steal"],
+    ["enemy.ironite", "drop", "always", "game-item.hi-potion", "ironite-hi-potion-always-drop"],
+    ["enemy.ironite", "drop", "common", "game-item.phoenix-down", "ironite-phoenix-down-common-drop"],
+    ["enemy.ironite", "drop", "uncommon", "game-item.soft", "ironite-soft-uncommon-drop"],
+    ["enemy.ironite", "drop", "rare", "game-item.ether", "ironite-ether-rare-drop"],
+    ["enemy.magic-vice", "steal", "common", "game-item.echo-screen", "magic-vice-echo-screen-common-steal"],
+    ["enemy.magic-vice", "steal", "uncommon", "game-item.ether", "magic-vice-ether-uncommon-steal"],
+    ["enemy.magic-vice", "steal", "semi-rare", "game-item.ether", "magic-vice-ether-semi-rare-steal"],
+    ["enemy.magic-vice", "steal", "rare", "game-item.ether", "magic-vice-ether-rare-steal"],
+    ["enemy.magic-vice", "drop", "common", "game-item.ether", "magic-vice-ether-common-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.burmecia.city-random-pool");
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.burmecia")
+    ?.sections.find((entry) => entry.id === "burmecia-lower-streets");
+  const step = section?.steps.find((entry) => entry.id === "burmecia-city-regular-enemy-loot");
+
+  assert.equal(expected.length, 17);
+  assert.ok(["enemy.basilisk", "enemy.ironite", "enemy.magic-vice"].every((enemyId) =>
+    encounter?.formation.some((entry) => entry.enemyId === enemyId && entry.quantity === null)));
+  assert.match(step?.text ?? "", /defeat enemies with KO for their drop slots/);
+  assert.match(step?.detail ?? "", /all 17 item-bearing steal and drop slots/);
+  assert.match(step?.detail ?? "", /Magic Vice Common steal route follows the GameFAQs Enemy List and Jegged table/);
+  assert.equal(step?.objectiveIds, undefined);
+
+  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.burmecia.city-${pathSuffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    assert.ok(path, `${pathSuffix} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.burmecia");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      if (slotName === "always") {
+        assert.match(path.conditions ?? "", /Always drop slot yields/);
+        assert.doesNotMatch(path.conditions ?? "", /conditional/);
+      } else {
+        assert.match(path.conditions ?? "", /conditional/);
+      }
+    }
+    if (enemyId === "enemy.magic-vice" && slotName === "common" && method === "steal") {
+      assert.match(path.notes ?? "", /GameFAQs and Jegged list Echo Screen.*EliteGrindLab lists Eye Drops/);
+      assert.ok(path.sourceIds.includes("elitegrindlab-burmecia"));
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Burmecia city encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Burmecia walkthrough is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
   }
