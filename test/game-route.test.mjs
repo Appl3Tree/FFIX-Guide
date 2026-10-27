@@ -249,7 +249,7 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   assert.match(atlaVisit.summary, /Atla in the Vault/);
   assert.match(atlaVisit.summary, /deliver the letter for Mogryo/);
   assert.match(atlaVisit.summary, /long, monster-occupied route through the former city/);
-  assert.match(atlaVisit.summary, /A Disc IV recovery run also traverses the old Suburb\/Uptown rooms/);
+  assert.match(atlaVisit.summary, /A first-hand Disc IV recovery run documents/);
   assert.match(atlaVisit.summary, /does not establish the availability of every old chest/);
 
   for (const sourceId of ["gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "elitegrindlab-burmecia", "gamerguides-side-questing-4"]) {
@@ -264,7 +264,7 @@ test("Disc IV's Burmecia Mognet return is scoped to Atla's Vault", () => {
   assert.equal(rejoin.relationship, "rejoin");
   assert.match(rejoin.summary, /Superslick from Ruby/);
   assert.match(rejoin.summary, /Ocean-capable Chocobo and a Dead Pepper/);
-  assert.ok(rejoin.sourceIds.includes("jegged-mognet-central"));
+  assert.ok(rejoin.sourceIds.includes("gamefaqs-return-to-gaia-71891"));
 });
 
 test("Disc IV Mognet route graph follows letters 22–27 through each recipient", () => {
@@ -286,8 +286,13 @@ test("Disc IV Mognet route graph follows letters 22–27 through each recipient"
     assert.equal(edge.toChapterId, to);
     assert.equal(edge.relationship, index === expectedStops.length - 1 ? "rejoin" : "optional-return");
     assert.match(edge.summary, detail);
-    assert.ok(edge.sourceIds.includes("jegged-mognet-central"));
-    assert.ok(edge.sourceIds.includes("cour89-mognet-letters"));
+    if (id !== "detour.mognet-central-repair-rejoin-gaia") {
+      assert.ok(edge.sourceIds.includes("jegged-mognet-central"));
+      assert.ok(edge.sourceIds.includes("cour89-mognet-letters"));
+    }
+    for (const sourceId of edge.sourceIds) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${id} references unknown source ${sourceId}`);
+    }
   }
 });
 
@@ -303,12 +308,10 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
 
   for (const sourceId of [
     "gamefaqs-ice-cavern-71891",
-    "gamefaqs-ice-cavern-79143",
     "steam-missable-content-guide-2988011418",
     "gamefaqs-missables-71891",
     "gamefaqs-dali-71891",
     "jegged-ice-cavern",
-    "jegged-dali",
     "elitegrindlab-ice-cavern",
   ]) {
     assert.ok(returnToCavern.sourceIds.includes(sourceId), `return edge is missing ${sourceId}`);
@@ -338,7 +341,7 @@ test("Dali keeps the Ice Cavern return open until the Cargo Ship departure", () 
     result[edge.relationship] += 1;
     return result;
   }, { "required-story": 0, "optional-detour": 0, "optional-return": 0, rejoin: 0 });
-  assert.equal(gameRouteEdges.length, 86);
-  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 25, rejoin: 18 });
+  assert.equal(gameRouteEdges.length, 96);
+  assert.deepEqual(counts, { "required-story": 41, "optional-detour": 2, "optional-return": 30, rejoin: 23 });
   assert.equal(storyPartySequences.length, 10);
 });

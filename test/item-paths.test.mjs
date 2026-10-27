@@ -17,7 +17,8 @@ test("item inventory targets preserve the source quantity they represent", () =>
   assert.equal(steepledHatNeed?.basis, "route-need");
   assert.equal(steepledHatEnd?.targetQuantity, 10);
   assert.equal(steepledHatEnd?.basis, "end-inventory");
-  assert.equal(airRacketPurchase?.basis, "purchase-recommendation");
+  assert.equal(airRacketPurchase?.basis, "checkpoint-total");
+  assert.match(airRacketPurchase?.interpretation ?? "", /at least five Air Rackets in inventory/);
   assert.equal(silverGlovesCheckpoint?.basis, "checkpoint-total");
   assert.equal(disc3CheckpointTargets.length, 24);
   assert.ok(disc3CheckpointTargets.every((entry) => entry.basis === "checkpoint-total"));
@@ -71,7 +72,7 @@ test("Soft has repeatable shop sources through the late game", () => {
     ["item-path.disc-3.on-the-high-seas.soft-alexandria-shop", "alexandria.item-shop.disc-3-4", "shop"],
   ];
 
-  assert.equal(softPaths.length, 12);
+  assert.equal(softPaths.length, 13);
   assert.ok(gameItems.find((item) => item.id === "game-item.soft")?.sourceIds.includes("gamefaqs-shops-71891"));
   for (const [pathId, shopId, method] of shops) {
     const path = softPaths.find((entry) => entry.id === pathId);
@@ -86,6 +87,9 @@ test("Soft has repeatable shop sources through the late game", () => {
 
   const blackMageVillage = softPaths.find((path) => path.id === shops[2][0]);
   assert.match(blackMageVillage?.conditions ?? "", /rest of the game/);
+  const atlaReturn = softPaths.find((path) => path.id === "item-path.disc-2.journey-to-cleyra.atla-mogshop.soft");
+  assert.equal(atlaReturn?.method, "mogshop");
+  assert.equal(atlaReturn?.availability, "limited-window");
   assert.equal(softPaths.filter((path) => path.method === "chest" || path.method === "hidden-pickup").length, 2);
 });
 
@@ -281,12 +285,13 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.ok(oreExtractionPath?.conditions?.includes("Jewel"));
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
-  assert.equal(peridotPaths.length, 17);
+  assert.equal(peridotPaths.length, 18);
   assert.equal(orePaths.length, 10);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
-  assert.equal(linenCuirassPaths.length, 5);
+  assert.equal(linenCuirassPaths.length, 6);
+  assert.ok(linenCuirassPaths.some((path) => path.id === "item-path.disc-2.journey-to-cleyra.atla-mogshop.linen-cuirass"));
   assert.deepEqual(
     equipmentAbilityClaims
       .filter((claim) => ["game-item.anklet", "game-item.peridot", "game-item.gold-choker", "game-item.linen-cuirass"].includes(claim.itemId))
@@ -376,7 +381,7 @@ test("Peridot enemy routes record their source, repeatability, and conditional w
     }
   }
 
-  assert.equal(itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot").length, 17);
+  assert.equal(itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot").length, 18);
   assert.ok(objectives.some((objective) => objective.id === "disc-4.memoria.tiamat-achievement"));
 });
 
@@ -546,7 +551,8 @@ test("Silk Shirt has source-backed starting, encounter, reward, and shop routes"
   assert.equal(swordfightReward?.availability, "conditional");
   assert.match(swordfightReward?.conditions ?? "", /80–99 nobles/);
   assert.match(swordfightReward?.conditions ?? "", /100 nobles.*Moonstone #1/);
-  assert.ok(shopPaths.every((path) => path?.method === "shop" && path.availability === "repeatable"));
+  assert.ok(shopPaths.every((path) => path?.method === "shop"));
+  assert.deepEqual(shopPaths.map((path) => path?.availability), ["repeatable", "limited-window", "repeatable", "repeatable"]);
   assert.ok(shopPaths.every((path) => path?.cost?.amount === 400));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.alexandria"));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.evil-forest"));
@@ -582,7 +588,7 @@ test("Bandana has a hidden pickup and source-backed Disc II/III shop routes", ()
   assert.ok(pickup?.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.treasure-sweep"));
   assert.equal(cleyra?.availability, "limited-window");
   assert.ok(cleyra?.walkthroughObjectiveIds?.includes("disc-2.cleyra.shop-stock"));
-  assert.equal(fossilRoo?.availability, "window-unverified");
+  assert.equal(fossilRoo?.availability, "limited-window");
   assert.equal(earlyBlackMageVillage?.availability, "repeatable");
   assert.ok(shopPaths.every((path) => path?.method === "shop" && path.cost?.amount === 500));
   assert.ok(itemCatalogCoverage.chapterIds.includes("disc-2.journey-to-outer-continent"));
@@ -815,7 +821,7 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
 
   assert.equal(newPaths[0]?.method, "chest");
   assert.ok(newPaths[0]?.walkthroughObjectiveIds?.includes("disc-2.journey-to-cleyra.gargan-roo-chests"));
-  assert.equal(newPaths[1]?.availability, "window-unverified");
+  assert.equal(newPaths[1]?.availability, "limited-window");
   assert.equal(newPaths[2]?.availability, "limited-window");
   assert.equal(newPaths[2]?.recommendedBeforeChapterId, "disc-2.cleyra");
   assert.ok(newPaths[2]?.walkthroughObjectiveIds?.includes("disc-2.cleyra.shop-stock"));
@@ -860,8 +866,8 @@ test("Chain Plate, Leather Plate, and Mythril Vest have item-level earlier route
 test("Disc II Treno equipment targets preserve later recovery and optional stock semantics", () => {
   const equipment = [
     ["game-item.air-racket", 3],
-    ["game-item.silver-gloves", 4],
-    ["game-item.iron-helm", 4],
+    ["game-item.silver-gloves", 5],
+    ["game-item.iron-helm", 5],
     ["game-item.chain-mail", 4],
   ];
   const expectedAbilities = [
@@ -910,7 +916,7 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
   const airRacketIpsen = itemAcquisitionPaths.find((path) => path.id === routeIds[2]);
   const beatrixChainMail = itemAcquisitionPaths.find((path) => path.id === routeIds[13]);
   assert.equal(airRacketIpsen?.chapterId, "disc-3.ipsens-castle");
-  assert.match(airRacketIpsen?.conditions ?? "", /recovers one Air Racket/);
+  assert.match(airRacketIpsen?.conditions ?? "", /restores one item copy/);
   assert.equal(beatrixChainMail?.method, "starting-equipment");
   assert.match(beatrixChainMail?.conditions ?? "", /not a copy available in the player's inventory/);
 
@@ -958,7 +964,7 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
 
 test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
   const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
-  const pathCounts = [7, 9, 9, 9];
+  const pathCounts = [8, 9, 12, 10];
   const powerBelt = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.power-belt");
   const glassBuckle = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.glass-buckle");
   const powerBeltPaths = itemAcquisitionPaths.filter((path) => path.itemId === itemIds[0]);
@@ -987,6 +993,7 @@ test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ing
     [
       "alexandria.synthesis-shop.disc-3",
       "black-mage-village.synthesis-shop.disc-2-3",
+      "daguerreo.synthesis-expert",
       "daguerreo.synthesis-expert",
       "lindblum.synthesis-shop.disc-2",
       "lindblum.synthesis-shop.disc-3-4",

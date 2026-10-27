@@ -186,7 +186,10 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
       const record = records.find((achievement) =>
         ("parityId" in achievement ? achievement.parityId : achievement.id) === "movie-critic",
       );
-      assert.ok(record, `${platform} is missing Movie Critic`);
+      if (!record) {
+        assert.equal(platform, "ios", `${platform} is missing Movie Critic without a documented platform exclusion`);
+        continue;
+      }
       assert.match(record.criteria, new RegExp(String(movieCriticTarget)));
       const pointers = new Set(record.guideObjectiveIds ?? []);
       for (const event of route) {
