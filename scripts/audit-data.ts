@@ -4925,17 +4925,22 @@ for (const [pathId, itemId, method, slot] of blairsurpassAnemoneLootPaths) {
   }
 }
 const grottoPool = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.random-pool");
+const grottoRandomPoolId = "encounter.gizamaluke-grotto.random-pool";
 const grottoTypeAFights = [
   enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.type-a-first-pair"),
   enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.type-a-second-pair"),
 ];
 const gizamalukeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.gizamaluke-grotto.gizamaluke");
 const gizamalukeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.gizamaluke");
-const grottoRoster = ["enemy.hornet", "enemy.lamia", "enemy.skeleton", "enemy.type-a"];
+const grottoRoamingEnemyIds = ["enemy.hornet", "enemy.lamia", "enemy.skeleton"];
+const grottoTypeARecord = enemyRecords.find((enemy) => enemy.id === "enemy.type-a");
 const gizamalukeElixirStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.journey-to-burmecia.elixir-gizamaluke-steal");
 const gizamalukeIceStaffStealPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.journey-to-burmecia.ice-staff-gizamaluke-steal");
 const cleyraIceStaffPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.ice-staff-trunk-chest");
-if (!grottoPool || grottoPool.kind !== "random-pool" || grottoRoster.some((enemyId) => !grottoPool.formation.some((member) => member.enemyId === enemyId && member.quantity === null)) ||
+if (!grottoPool || grottoPool.kind !== "random-pool" || grottoPool.formation.length !== grottoRoamingEnemyIds.length ||
+  grottoRoamingEnemyIds.some((enemyId) => !grottoPool.formation.some((member) => member.enemyId === enemyId && member.quantity === null)) ||
+  grottoPool.formation.some((member) => member.enemyId === "enemy.type-a") ||
+  !grottoTypeARecord || grottoTypeARecord.encounterIds.includes(grottoRandomPoolId) ||
   grottoTypeAFights.some((encounter) => !encounter || encounter.kind !== "fixed" || !encounter.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2)) ||
   !gizamalukeEncounter || gizamalukeEncounter.kind !== "boss" || !gizamalukeEncounter.formation.some((member) => member.enemyId === "enemy.gizamaluke" && member.quantity === 1) ||
   !gizamalukeRecord || gizamalukeRecord.kind !== "boss" || gizamalukeRecord.stats.find((stat) => stat.field === "HP")?.value !== 3175 ||
@@ -4945,7 +4950,7 @@ if (!grottoPool || grottoPool.kind !== "random-pool" || grottoRoster.some((enemy
   !gizamalukeElixirStealPath || gizamalukeElixirStealPath.method !== "steal" || !gizamalukeElixirStealPath.walkthroughObjectiveIds?.includes("disc-1.journey-to-burmecia.gizamaluke-steals") ||
   !gizamalukeIceStaffStealPath || gizamalukeIceStaffStealPath.method !== "steal" ||
   !cleyraIceStaffPath || cleyraIceStaffPath.method !== "chest" || cleyraIceStaffPath.chapterId !== "disc-2.cleyra") {
-  errors.push("Gizamaluke's Grotto must keep its regional pool, two fixed Type A pairs, boss steal warning, and later Ice Staff recovery linked across the bestiary and item catalog.");
+  errors.push("Gizamaluke's Grotto must separate the three roaming enemies from its two fixed Type A pairs and retain the boss steal warning and later Ice Staff recovery.");
 }
 const grottoRegularLootExpectations = [
   ["enemy.hornet", "steal", "common", "game-item.potion", "hornet-potion-common-steal"],
@@ -4971,31 +4976,55 @@ const grottoRegularLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-journ
 const grottoRegularLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")?.sections
   .find((section) => section.id === "journey-grotto-bells");
 const grottoRegularLootStep = grottoRegularLootSection?.steps.find((step) => step.id === "journey-grotto-regular-enemy-loot");
+const grottoRegularLootPathPrefix = "item-path.disc-1.journey-to-burmecia.grotto-";
 if (!grottoRegularLootSection || !grottoRegularLootStep?.text.includes("Lamia's Always Potion is guaranteed on a KO") ||
   !grottoRegularLootStep.text.includes("all Grotto drops require KO victories") ||
-  !grottoRegularLootStep.detail?.includes("two scripted Type A pairs have separate encounter records") ||
-  !grottoRegularLootStep.detail.includes("No exact formation or random encounter rate is inferred") ||
+  !grottoRegularLootStep.detail?.includes("Type A item routes are linked to each fixed pair separately") ||
+  !grottoRegularLootStep.detail.includes("No random formation or encounter rate is inferred") ||
+  itemAcquisitionPaths.filter((path) => path.id.startsWith(grottoRegularLootPathPrefix)).length !== 23 ||
   grottoRegularLootSourceIds.some((sourceId) => !grottoPool?.sourceIds.includes(sourceId) ||
     !grottoRegularLootSection.sourceIds.includes(sourceId))) {
-  errors.push("Gizamaluke's Grotto regular-enemy loot guidance must preserve the guaranteed Lamia Always drop, KO requirement, separate Type A encounters, and source chain.");
+  errors.push("Gizamaluke's Grotto loot guidance must preserve the guaranteed Lamia Always drop, KO requirement, separate Type A encounter paths, and source chain.");
 }
 for (const [enemyId, method, slotName, itemId, pathSuffix] of grottoRegularLootExpectations) {
   const enemy = enemyRecords.find((entry) => entry.id === enemyId);
   const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
   const item = gameItems.find((entry) => entry.id === itemId);
-  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.journey-to-burmecia.grotto-${pathSuffix}`);
-  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
-    !path || path.itemId !== itemId || path.chapterId !== "disc-1.journey-to-burmecia" || path.method !== method ||
-    path.quantity !== 1 || path.availability !== "repeatable" || path.walkthroughObjectiveIds?.length ||
-    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
-    (method === "drop" && (!path.conditions?.includes("KO victory") ||
-      (slotName === "always" ? !path.conditions.includes("Always drop slot yields") || path.conditions.includes("conditional")
-        : !path.conditions.includes("conditional")))) ||
-    (enemyId === "enemy.type-a" && !path.notes?.includes("two scripted Type A pairs have separate encounter records")) ||
-    grottoRegularLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
-      !enemy?.sourceIds.includes(sourceId) || !grottoPool?.sourceIds.includes(sourceId) ||
-      !grottoRegularLootSection?.sourceIds.includes(sourceId))) {
-    errors.push(`Gizamaluke's Grotto ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, retain the KO/Always distinction, and preserve route provenance.`);
+  const fixedPair = enemyId === "enemy.type-a";
+  const encounterChoices = fixedPair
+    ? [
+      ["first-pair", "encounter.gizamaluke-grotto.type-a-first-pair"],
+      ["second-pair", "encounter.gizamaluke-grotto.type-a-second-pair"],
+    ]
+    : [["", grottoRandomPoolId]];
+  if (!lootSlot || !item?.sourceIds.includes("gamefaqs-enemy-list-71891")) {
+    errors.push(`Gizamaluke's Grotto ${enemyId} ${method} slot ${slotName} must exist in the enemy and item tables.`);
+    continue;
+  }
+  for (const [pairSlug, encounterId] of encounterChoices) {
+    const pathSlug = fixedPair ? `type-a-${pairSlug}-${pathSuffix.slice("type-a-".length)}` : pathSuffix;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `${grottoRegularLootPathPrefix}${pathSlug}`);
+    const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+    const expectedSources = new Set([
+      ...grottoRegularLootSourceIds,
+      ...(enemy?.sourceIds ?? []),
+      ...(encounter?.sourceIds ?? []),
+      ...lootSlot.sourceIds,
+    ]);
+    if (!path || path.itemId !== itemId || path.chapterId !== "disc-1.journey-to-burmecia" || path.method !== method ||
+      path.quantity !== (fixedPair ? 2 : 1) || path.availability !== (fixedPair ? "one-time-encounter" : "repeatable") ||
+      path.enemyId !== enemyId || path.enemyLootSlot !== slotName ||
+      JSON.stringify(path.encounterIds) !== JSON.stringify([encounterId]) || path.walkthroughObjectiveIds?.length ||
+      (method === "steal" && (!path.conditions?.includes("chance-based") || !path.conditions.includes("not guaranteed"))) ||
+      (method === "drop" && (!path.conditions?.includes("normal KO victory") ||
+        (slotName === "always" ? !path.conditions.includes("Always drop slot yields") || path.conditions.includes("conditional")
+          : !path.conditions.includes("chance-based") || !path.conditions.includes("conditional")))) ||
+      (fixedPair && (!path.conditions?.includes("two Type A enemies") || !path.notes?.includes("Quantity two records one loot opportunity"))) ||
+      [...expectedSources].some((sourceId) => !path.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId)) ||
+      grottoRegularLootSection?.sourceIds.some((sourceId) => expectedSources.has(sourceId) && !path.sourceIds.includes(sourceId))) {
+      errors.push(`Gizamaluke's Grotto ${enemyId} ${method} path ${pathSlug} must match its exact enemy, slot, encounter, quantity, and source provenance.`);
+    }
   }
 }
 const gizamalukePreparation = gizamalukeRecord?.preparationGuidance;

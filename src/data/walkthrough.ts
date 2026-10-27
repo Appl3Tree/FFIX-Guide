@@ -1257,7 +1257,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-enter-grotto",
             kind: "required",
             text: "From Lindblum's Dragon's Gate, follow the northern road past Qu's Marsh to Gizamaluke's Grotto. Enter to trigger Freya's scene, then go right and speak to the dying Burmecian soldier for a Gizamaluke Bell. Use it on the nearby small door to open the route into the cavern.",
-            detail: "The bestiary records Hornet, Lamia, Skeleton, and Type A as the regional pool and tracks the two scripted Type A pairs separately; exact random formations are not published by the reviewed sources. If Quina is in the party and the selected profile tracks Blue Magic, Hornet, Lamia, and Skeleton can teach Vanish, LV3 Def-less, and Pumpkin Head respectively.",
+            detail: "The bestiary records Hornet, Lamia, and Skeleton in the repeatable cave pool and tracks Type A through the two scripted pairs. Exact random formations are not published by the reviewed sources. If Quina is in the party and the selected profile tracks Blue Magic, Hornet, Lamia, and Skeleton can teach Vanish, LV3 Def-less, and Pumpkin Head respectively.",
           },
         ],
       },
@@ -1285,7 +1285,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-grotto-regular-enemy-loot",
             kind: "optional",
             text: "While exploring the Grotto, check the separate item routes for Hornet, Lamia, Skeleton, and Type A if you want their listed steals or drops. Lamia's Always Potion is guaranteed on a KO; its other item drops are conditional, and all Grotto drops require KO victories.",
-            detail: "The enemy table gives the item slots; the route sources place Hornet, Lamia, and Skeleton in the cave and describe repeated Type A fights. The two scripted Type A pairs have separate encounter records, while these item paths use the shared Type A loot table. No exact formation or random encounter rate is inferred, and the chance-based slots are not checklist requirements.",
+            detail: "The enemy table gives the item slots; the route sources place Hornet, Lamia, and Skeleton in the repeatable cave pool and describe two scripted Type A pairs. Type A item routes are linked to each fixed pair separately. No random formation or encounter rate is inferred, and chance-based slots are not checklist requirements.",
           },
           {
             id: "journey-grotto-kupo-nut-and-holy-bell",

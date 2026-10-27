@@ -594,13 +594,12 @@ const grottoEncounters: EnemyEncounter[] = [
       { enemyId: "enemy.hornet", quantity: null },
       { enemyId: "enemy.lamia", quantity: null },
       { enemyId: "enemy.skeleton", quantity: null },
-      { enemyId: "enemy.type-a", quantity: null },
     ],
     sourceIds: grottoEnemySources,
     objectiveIds: [],
     missableIds: [],
     cutoffIds: [],
-    notes: ["The regional roster is source-listed, but published route references do not provide complete formation rates for the Grotto. The two scripted Type A pairs are tracked separately."],
+    notes: ["The walkthroughs list Hornet, Lamia, and Skeleton among the repeatable cave enemies and describe Type A in two scripted pairs; those fixed encounters are modeled separately. Published routes do not provide complete random formation rates for the Grotto."],
   },
   {
     id: "encounter.gizamaluke-grotto.type-a-first-pair",
@@ -4931,7 +4930,7 @@ const grottoEnemyRecords: EnemyRecord[] = [
   chapterEnemy({
     id: "enemy.type-a",
     name: "Type A",
-    encounterIds: ["encounter.gizamaluke-grotto.random-pool", "encounter.gizamaluke-grotto.type-a-first-pair", "encounter.gizamaluke-grotto.type-a-second-pair", "encounter.burmecia.type-a-pair"],
+    encounterIds: ["encounter.gizamaluke-grotto.type-a-first-pair", "encounter.gizamaluke-grotto.type-a-second-pair", "encounter.burmecia.type-a-pair"],
     stats: enemyStats([["level", 8], ["HP", 398], ["MP", 293], ["EXP", 115], ["AP", 2], ["Gil", 199]]),
     steals: [enemyLoot("common", "game-item.phoenix-down"), enemyLoot("uncommon", "game-item.tent"), enemyLoot("semi-rare", null, "Nothing"), enemyLoot("rare", null, "Nothing")],
     drops: [enemyLoot("always", null, "Nothing"), enemyLoot("common", "game-item.potion"), enemyLoot("uncommon", "game-item.phoenix-down"), enemyLoot("rare", "game-item.ether")],

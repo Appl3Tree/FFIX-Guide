@@ -4712,38 +4712,85 @@ const grottoRegularLootSlots = [
   },
 ] as const;
 
-const grottoRegularLootPaths: ItemAcquisitionPath[] = grottoRegularLootSlots.flatMap((enemy) => [
-  ...enemy.steals.map((entry) => ({
-    id: `item-path.disc-1.journey-to-burmecia.grotto-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-steal`,
-    itemId: entry.itemId,
-    chapterId: "disc-1.journey-to-burmecia",
-    method: "steal" as const,
-    quantity: 1,
-    availability: "repeatable" as const,
-    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in Gizamaluke's Grotto encounters; success is not guaranteed.`,
-    notes: enemy.enemyId === "enemy.type-a"
-      ? "The Grotto enemy table lists this slot. The two scripted Type A pairs have separate encounter records; this path uses the shared Type A loot table, without inferring formations or encounter rates."
-      : "The Grotto enemy table lists this slot, and route sources place this enemy in the cave. No formation or encounter rate is inferred.",
-    sourceIds: grottoRegularLootSources,
-  })),
-  ...enemy.drops.map((entry) => ({
-    id: `item-path.disc-1.journey-to-burmecia.grotto-${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
-    itemId: entry.itemId,
-    chapterId: "disc-1.journey-to-burmecia",
-    method: "drop" as const,
-    quantity: 1,
-    availability: "repeatable" as const,
-    conditions: entry.slot === "always"
-      ? `On a KO victory, ${enemy.enemyName}'s Always drop slot yields this item in Gizamaluke's Grotto.`
-      : `On a KO victory, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item in Gizamaluke's Grotto; the slot is conditional.`,
-    notes: entry.slot === "always"
-      ? "The enemy table lists this as an Always drop, subject to the KO requirement for enemy drops."
-      : enemy.enemyId === "enemy.type-a"
-        ? "The enemy table lists this conditional drop slot; non-KO victories award no drops. The two scripted Type A pairs have separate encounter records, and this path uses the shared Type A loot table without inferring formations or encounter rates."
-        : "The enemy table lists this conditional drop slot; non-KO victories award no drops.",
-    sourceIds: grottoRegularLootSources,
-  })),
-]);
+const grottoRandomPoolEncounterId = "encounter.gizamaluke-grotto.random-pool";
+const grottoTypeAPairEncounters = [
+  { id: "encounter.gizamaluke-grotto.type-a-first-pair", pathSlug: "first-pair", label: "first scripted Type A pair" },
+  { id: "encounter.gizamaluke-grotto.type-a-second-pair", pathSlug: "second-pair", label: "second scripted Type A pair" },
+] as const;
+const grottoRegularLootPaths: ItemAcquisitionPath[] = grottoRegularLootSlots.flatMap((enemy) => {
+  const enemyRecord = enemyRecords.find((record) => record.id === enemy.enemyId);
+  if (!enemyRecord) return [];
+
+  const pathForSlot = (
+    method: "steal" | "drop",
+    entry: { slot: EnemyTableSlot; itemId: string },
+    encounter: (typeof enemyEncounters)[number],
+    pairLabel?: string,
+    pairSlug?: string,
+  ) => {
+    const enemySlots = method === "steal" ? enemyRecord.steals : enemyRecord.drops;
+    const lootSlot = enemySlots.find((slot) => slot.slot === entry.slot && slot.itemId === entry.itemId);
+    if (!lootSlot) return [];
+
+    const itemSlug = entry.itemId.replace("game-item.", "");
+    const isFixedPair = pairSlug !== undefined;
+    const conditions = isFixedPair
+      ? method === "steal"
+        ? `In the ${pairLabel}, each of the two Type A enemies has this ${entry.slot} steal slot; each attempt is chance-based and success is not guaranteed.`
+        : `On a normal KO victory in the ${pairLabel}, each of the two Type A enemies has a ${entry.slot} drop slot that can yield this item; this slot is chance-based and conditional.`
+      : method === "steal"
+        ? `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Gizamaluke's Grotto random encounters; success is chance-based and not guaranteed.`
+        : entry.slot === "always"
+          ? `On a normal KO victory, ${enemy.enemyName}'s Always drop slot yields this item in repeatable Gizamaluke's Grotto random encounters.`
+          : `On a normal KO victory in repeatable Gizamaluke's Grotto random encounters, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item; the slot is chance-based and conditional.`;
+    const notes = isFixedPair
+      ? "Quantity two records one loot opportunity for each enemy in this one-time pair; it does not guarantee two acquisitions."
+      : entry.slot === "always" && method === "drop"
+        ? "The enemy table lists this as an Always drop. The KO requirement still applies."
+        : method === "drop"
+          ? "GameFAQs states that non-KO victories do not award drops. No fixed random formation or encounter rate is inferred."
+          : "This is a separate steal-table slot in the repeatable cave pool. No random formation or encounter rate is inferred.";
+    const pathSlug = pairSlug ? `${enemy.enemySlug}-${pairSlug}` : enemy.enemySlug;
+
+    return [{
+      id: `item-path.disc-1.journey-to-burmecia.grotto-${pathSlug}-${itemSlug}-${entry.slot}-${method}`,
+      itemId: entry.itemId,
+      chapterId: "disc-1.journey-to-burmecia",
+      method,
+      quantity: isFixedPair ? 2 : 1,
+      availability: isFixedPair ? "one-time-encounter" as const : "repeatable" as const,
+      conditions,
+      notes,
+      enemyId: enemy.enemyId,
+      enemyLootSlot: entry.slot,
+      encounterIds: [encounter.id],
+      sourceIds: [...new Set([
+        ...grottoRegularLootSources,
+        ...enemyRecord.sourceIds,
+        ...encounter.sourceIds,
+        ...lootSlot.sourceIds,
+      ])],
+    }];
+  };
+
+  if (enemy.enemyId === "enemy.type-a") {
+    return grottoTypeAPairEncounters.flatMap((pair) => {
+      const encounter = enemyEncounters.find((record) => record.id === pair.id);
+      if (!encounter?.formation.some((member) => member.enemyId === enemy.enemyId && member.quantity === 2)) return [];
+      return [
+        ...enemy.steals.flatMap((entry) => pathForSlot("steal", entry, encounter, pair.label, pair.pathSlug)),
+        ...enemy.drops.flatMap((entry) => pathForSlot("drop", entry, encounter, pair.label, pair.pathSlug)),
+      ];
+    });
+  }
+
+  const encounter = enemyEncounters.find((record) => record.id === grottoRandomPoolEncounterId);
+  if (!encounter?.formation.some((member) => member.enemyId === enemy.enemyId && member.quantity === null)) return [];
+  return [
+    ...enemy.steals.flatMap((entry) => pathForSlot("steal", entry, encounter)),
+    ...enemy.drops.flatMap((entry) => pathForSlot("drop", entry, encounter)),
+  ];
+});
 
 const burmeciaRegularLootSlots = [
   {

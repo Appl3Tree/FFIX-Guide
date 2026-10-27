@@ -4,7 +4,7 @@ Last updated: 2026-10-27
 
 ## Latest verification
 
-Ice Cavern mist-jet loot linkage: Linked the 14 existing Cave Imp, Flan, and Wyerd item paths to each exact enemy, steal/drop slot, and repeatable mist-jet pool encounter. Paths combine enemy, encounter, and slot provenance; steals remain chance-based, conditional drops require normal KO, and no fixed formations or encounter rates are inferred. Regression tests and the data audit verify all links without changing catalog counts. `npm test` passes 75/75; lint, typecheck, audit, build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 1,501 acquisition paths. Build: 2,520.93 kB JavaScript (611.05 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+Gizamaluke's Grotto encounter and loot correction: Split the repeatable Hornet/Lamia/Skeleton pool from the two fixed Type A pairs; each pair's five item-bearing slots now has its own one-time path with two per-enemy opportunities. Linked the 13 ordinary-enemy paths to the random pool, kept Lamia's Always Potion distinct from conditional drops, and combined enemy/encounter/slot provenance. GameFAQs' room roster includes Type A but the walkthrough sources identify its Grotto appearances as two scripted pairs; the random pool no longer implies it can recur. `npm test` passes 75/75; lint, typecheck, audit, build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 1,506 paths. Build: 2,521.94 kB JavaScript (611.51 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
 
 Previous verification — Opening and Crash Site Baku steal links:
 

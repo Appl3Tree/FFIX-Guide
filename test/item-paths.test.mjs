@@ -1934,7 +1934,7 @@ test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () =
   }
 });
 
-test("Gizamaluke's Grotto regular enemies have repeatable sourced loot paths", () => {
+test("Gizamaluke's Grotto loot paths separate the random pool from fixed Type A pairs", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke"];
   const expected = [
     ["enemy.hornet", "steal", "common", "game-item.potion", "hornet-potion-common-steal"],
@@ -1956,56 +1956,92 @@ test("Gizamaluke's Grotto regular enemies have repeatable sourced loot paths", (
     ["enemy.type-a", "drop", "uncommon", "game-item.phoenix-down", "type-a-phoenix-down-uncommon-drop"],
     ["enemy.type-a", "drop", "rare", "game-item.ether", "type-a-ether-rare-drop"],
   ];
-  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.gizamaluke-grotto.random-pool");
+  const poolId = "encounter.gizamaluke-grotto.random-pool";
+  const pairEncounters = [
+    { id: "encounter.gizamaluke-grotto.type-a-first-pair", slug: "first-pair", label: "first scripted Type A pair" },
+    { id: "encounter.gizamaluke-grotto.type-a-second-pair", slug: "second-pair", label: "second scripted Type A pair" },
+  ];
+  const encounterIds = [poolId, ...pairEncounters.map((entry) => entry.id)];
+  const pool = enemyEncounters.find((entry) => entry.id === poolId);
+  const pairs = pairEncounters.map((expectedPair) => enemyEncounters.find((entry) => entry.id === expectedPair.id));
+  const typeA = enemyRecords.find((entry) => entry.id === "enemy.type-a");
   const section = walkthroughChapters
     .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
     ?.sections.find((entry) => entry.id === "journey-grotto-bells");
   const step = section?.steps.find((entry) => entry.id === "journey-grotto-regular-enemy-loot");
+  const grottoLootPaths = itemAcquisitionPaths.filter((path) => path.encounterIds?.some((id) => encounterIds.includes(id)));
+  const poolLootPaths = itemAcquisitionPaths.filter((path) => path.encounterIds?.includes(poolId));
+  const fixedPairLootPaths = itemAcquisitionPaths.filter((path) => pairEncounters.some((pair) => path.encounterIds?.includes(pair.id)));
 
-  assert.ok(["enemy.hornet", "enemy.lamia", "enemy.skeleton", "enemy.type-a"].every((enemyId) =>
-    encounter?.formation.some((entry) => entry.enemyId === enemyId)));
+  assert.deepEqual(pool?.formation.map((entry) => entry.enemyId), ["enemy.hornet", "enemy.lamia", "enemy.skeleton"]);
+  assert.deepEqual(typeA?.encounterIds, [
+    "encounter.gizamaluke-grotto.type-a-first-pair",
+    "encounter.gizamaluke-grotto.type-a-second-pair",
+    "encounter.burmecia.type-a-pair",
+  ]);
+  assert.ok(pairs.every((entry) => entry?.kind === "fixed" && entry.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2)));
   assert.match(step?.text ?? "", /Lamia's Always Potion is guaranteed on a KO/);
   assert.match(step?.text ?? "", /all Grotto drops require KO victories/);
-  assert.match(step?.detail ?? "", /two scripted Type A pairs have separate encounter records/);
-  assert.match(step?.detail ?? "", /No exact formation or random encounter rate is inferred/);
+  assert.match(step?.detail ?? "", /Type A item routes are linked to each fixed pair separately/);
+  assert.match(step?.detail ?? "", /No random formation or encounter rate is inferred/);
   assert.equal(expected.length, 18);
+  assert.equal(poolLootPaths.length, 13);
+  assert.equal(fixedPairLootPaths.length, 10);
+  assert.equal(grottoLootPaths.length, 23);
 
-  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+  for (const [enemyId, method, slotName, itemId, baseSuffix] of expected) {
     const enemy = enemyRecords.find((entry) => entry.id === enemyId);
     const item = gameItems.find((entry) => entry.id === itemId);
     const slots = method === "steal" ? enemy?.steals : enemy?.drops;
-    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.journey-to-burmecia.grotto-${pathSuffix}`);
-    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
-    assert.ok(path, `${pathSuffix} path is missing`);
-    assert.equal(path.itemId, itemId);
-    assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
-    assert.equal(path.method, method);
-    assert.equal(path.quantity, 1);
-    assert.equal(path.availability, "repeatable");
-    assert.equal(path.walkthroughObjectiveIds, undefined);
+    const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
+    assert.ok(lootSlot, `${enemyId} ${slotName} ${method} slot is missing`);
     assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
-    if (method === "drop") {
-      assert.match(path.conditions ?? "", /KO victory/);
-      if (slotName === "always") {
-        assert.match(path.conditions ?? "", /Always drop slot yields/);
-        assert.doesNotMatch(path.conditions ?? "", /conditional/);
+
+    const isFixedPair = enemyId === "enemy.type-a";
+    const linkedPairs = isFixedPair ? pairEncounters : [{ id: poolId, slug: "", label: "Grotto random pool" }];
+    for (const pair of linkedPairs) {
+      const pathSuffix = isFixedPair ? `type-a-${pair.slug}-${baseSuffix.slice("type-a-".length)}` : baseSuffix;
+      const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.journey-to-burmecia.grotto-${pathSuffix}`);
+      const encounter = enemyEncounters.find((entry) => entry.id === pair.id);
+      assert.ok(path, `${pathSuffix} path is missing`);
+      assert.equal(path.itemId, itemId);
+      assert.equal(path.chapterId, "disc-1.journey-to-burmecia");
+      assert.equal(path.method, method);
+      assert.equal(path.quantity, isFixedPair ? 2 : 1);
+      assert.equal(path.availability, isFixedPair ? "one-time-encounter" : "repeatable");
+      assert.equal(path.enemyId, enemyId);
+      assert.equal(path.enemyLootSlot, slotName);
+      assert.deepEqual(path.encounterIds, [pair.id]);
+      assert.equal(path.walkthroughObjectiveIds, undefined);
+      if (method === "steal") {
+        assert.match(path.conditions ?? "", /chance-based/);
+        assert.match(path.conditions ?? "", /not guaranteed/);
       } else {
-        assert.match(path.conditions ?? "", /conditional/);
+        assert.match(path.conditions ?? "", /normal KO victory/);
+        if (slotName === "always") {
+          assert.match(path.conditions ?? "", /Always drop slot yields/);
+          assert.doesNotMatch(path.conditions ?? "", /conditional/);
+        } else {
+          assert.match(path.conditions ?? "", /chance-based/);
+          assert.match(path.conditions ?? "", /conditional/);
+        }
       }
-    }
-    if (enemyId === "enemy.type-a") {
-      assert.match(path.notes ?? "", /two scripted Type A pairs have separate encounter records/);
-    }
-    for (const sourceId of sourceIds) {
-      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
-      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
-      assert.ok(encounter?.sourceIds.includes(sourceId), `Grotto encounter is missing ${sourceId}`);
-      assert.ok(section?.sourceIds.includes(sourceId), `Grotto walkthrough is missing ${sourceId}`);
-      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+      if (isFixedPair) {
+        assert.match(path.conditions ?? "", new RegExp(pair.label));
+        assert.match(path.notes ?? "", /two.*loot opportunity/);
+      }
+      for (const sourceId of new Set([
+        ...sourceIds,
+        ...(enemy?.sourceIds ?? []),
+        ...(encounter?.sourceIds ?? []),
+        ...(lootSlot?.sourceIds ?? []),
+      ])) {
+        assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+        assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+      }
     }
   }
 });
-
 test("Burmecia's city-pool enemies have repeatable loot paths with the Magic Vice dispute retained", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-burmecia-71891", "jegged-burmecia"];
   const expected = [
