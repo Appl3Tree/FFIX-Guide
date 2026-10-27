@@ -430,6 +430,7 @@ const resolvedDisc4BlackCatRecipeSources = [
 const finalStockSources = ["gamefaqs-preparing-to-leave-71891", "gamefaqs-shops-71891"];
 const disc4ShopSources = ["gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891"];
 const cargoShipWaltzEncounterSources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
+const summitStationWaltzEncounterSources = ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "elitegrindlab-south-gate"];
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
@@ -5908,9 +5909,13 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Attempt this one-time steal during the Black Waltz 3 train-car rematch; later shop routes recover the item type if the steal is missed.",
+    conditions: "Attempt Black Waltz 3's semi-rare Flame Staff steal during the one-time train-car rematch; the chance-based attempt can fail, and later shop routes recover the item type.",
     walkthroughObjectiveIds: ["disc-2.journey-to-treno.black-waltz-3-steals"],
-    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamefaqs-items-71891", "gamefaqs-equipment-33383"],
+    enemyId: "enemy.black-waltz-3-rematch",
+    enemyLootSlot: "semi-rare",
+    encounterIds: ["encounter.summit-station.black-waltz-3-rematch"],
+    notes: "GameFAQs labels Flame Staff Semi-Rare; Jegged labels it Rare. The linked enemy slot follows the GameFAQs table and preserves the source disagreement.",
+    sourceIds: [...new Set(["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "gamefaqs-items-71891", "gamefaqs-equipment-33383", ...summitStationWaltzEncounterSources])],
   },
   {
     id: "item-path.disc-2.cleyra.flame-staff-cleyra-trunk-chest",
@@ -11333,9 +11338,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from the Black Waltz 3 rematch during the train sequence.",
+    conditions: "Attempt Black Waltz 3's Uncommon Lightning Staff steal during the one-time train-car rematch; the chance-based attempt can fail.",
     walkthroughObjectiveIds: ["disc-2.journey-to-treno.black-waltz-3-steals"],
-    sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station"],
+    enemyId: "enemy.black-waltz-3-rematch",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.summit-station.black-waltz-3-rematch"],
+    sourceIds: [...new Set(["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", ...summitStationWaltzEncounterSources])],
   },
   {
     id: "item-path.disc-2.treno.lightning-staff-shop",
@@ -12170,9 +12178,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal a Steepled Hat from the separate Disc II Black Waltz 3 encounter at South Gate.",
+    conditions: "Attempt Black Waltz 3's Common Steepled Hat steal during the one-time South Gate rematch; the chance-based attempt can fail.",
     walkthroughObjectiveIds: ["disc-2.journey-to-treno.black-waltz-3-steals"],
-    sourceIds: steepledHatSources,
+    enemyId: "enemy.black-waltz-3-rematch",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.summit-station.black-waltz-3-rematch"],
+    sourceIds: [...new Set([...steepledHatSources, ...summitStationWaltzEncounterSources])],
   },
   {
     id: "item-path.disc-1.lindblum.steepled-hat-shop",

@@ -4,7 +4,11 @@ Last updated: 2026-10-27
 
 ## Latest verification
 
-Cargo Ship Black Waltz 3 steal links: `npm test` passes 76/76; lint, typecheck, audit, production build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 44 chapters, 143 missables, 859 objectives, and 442 sources; catalog has 242 partial items and 1,506 acquisition paths. The three one-time steals match the boss's Common, Uncommon, and Semi-Rare enemy slots, exact encounter, objective, and combined provenance. Build: 2,522.46 kB JavaScript (611.65 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+Summit Station Black Waltz 3 rematch links: `npm test` passes 77/77; lint, typecheck, audit, production build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 44 chapters, 143 missables, 859 objectives, and 442 sources; catalog has 242 partial items and 1,506 acquisition paths. The three one-time steals match the rematch's Common, Uncommon, and GameFAQs Semi-Rare enemy slots, exact encounter, objective, and combined provenance; the Flame Staff Rare/Semi-Rare disagreement remains explicit. Build: 2,523.23 kB JavaScript (611.80 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+
+Previous verification — Cargo Ship Black Waltz 3 steal links: `npm test` passed 76/76; lint, typecheck, audit, production build, and `git diff --check` passed. Audit reported 0 errors and 189 coverage warnings across 44 chapters, 143 missables, 859 objectives, and 442 sources. The three one-time steals match the boss's Common, Uncommon, and Semi-Rare enemy slots, exact encounter, objective, and combined provenance. Build: 2,522.46 kB JavaScript (611.65 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remained.
+
+Previous verification — Gizamaluke's Grotto encounter and loot correction: `npm test` passed 75/75; lint, typecheck, audit, build, and `git diff --check` passed. Audit: 0 errors, 189 coverage warnings, 1,506 paths. Build: 2,521.94 kB JavaScript (611.51 kB gzip), 61.11 kB CSS (12.91 kB gzip). Browser, gameplay, and release parity remain unverified.
 
 Previous verification — Opening and Crash Site Baku steal links:
 

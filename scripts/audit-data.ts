@@ -4405,21 +4405,34 @@ const summitStationWaltzSteals = [
   ["game-item.lightning-staff", "uncommon"],
   ["game-item.flame-staff", "semi-rare"],
 ] as const;
+const summitStationWaltzStealPaths = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-2.journey-to-treno" &&
+  path.enemyId === "enemy.black-waltz-3-rematch" && path.method === "steal");
 if (!summitStationWaltzEncounter || summitStationWaltzEncounter.kind !== "boss" ||
   summitStationWaltzEncounter.chapterId !== "disc-2.journey-to-treno" ||
   !summitStationWaltzEncounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-3-rematch" && entry.quantity === 1) ||
   !summitStationWaltzEncounter.objectiveIds.includes("disc-2.journey-to-treno.black-waltz-3-steals") ||
   !summitStationWaltzEncounter.missableIds.includes("missable.disc-2.journey-to-treno.black-waltz-3-steals") ||
   !summitStationWaltzEncounter.cutoffIds.includes("cutoff.journey-to-treno.black-waltz-3-steals") ||
+  summitStationWaltzStealPaths.length !== summitStationWaltzSteals.length ||
   !["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station"].every((sourceId) => summitStationWaltzEncounter.sourceIds.includes(sourceId))) {
   errors.push("The Summit Station Black Waltz 3 rematch must have its own source-linked boss encounter tied to the existing steal objective, missable, and cutoff.");
 }
 for (const [itemId, slot] of summitStationWaltzSteals) {
+  const lootSlot = summitStationWaltzRecord?.steals.find((steal) => steal.itemId === itemId && steal.slot === slot);
   const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-2.journey-to-treno" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-2.journey-to-treno.black-waltz-3-steals"));
-  if (!summitStationWaltzRecord?.steals.some((steal) => steal.itemId === itemId && steal.slot === slot) ||
-    !summitStationWaltzRecord.routeObjectiveIds.includes("disc-2.journey-to-treno.black-waltz-3-steals") ||
-    !path || path.availability !== "one-time-encounter") {
-    errors.push(`The Summit Station Black Waltz 3 ${itemId} steal must link the profile, encounter objective, and one-time item path.`);
+  const expectedSourceIds = new Set([
+    ...(summitStationWaltzRecord?.sourceIds ?? []),
+    ...(summitStationWaltzEncounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+  ]);
+  if (!lootSlot || !summitStationWaltzRecord?.routeObjectiveIds.includes("disc-2.journey-to-treno.black-waltz-3-steals") ||
+    !path || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.black-waltz-3-rematch" || path.enemyLootSlot !== slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.summit-station.black-waltz-3-rematch"]) ||
+    !path.conditions?.includes("chance-based") || !path.conditions.includes("can fail") ||
+    [...expectedSourceIds].some((sourceId) => !path.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId)) ||
+    (itemId === "game-item.flame-staff" && !path.notes?.includes("GameFAQs labels Flame Staff Semi-Rare; Jegged labels it Rare"))) {
+    errors.push(`The Summit Station Black Waltz 3 ${itemId} steal must match its exact rematch slot, one-time encounter, chance, source provenance, and any source-specific slot conflict.`);
   }
 }
 const summitWaltzHpClaims = summitStationWaltzRecord?.stats.filter((stat) => stat.field === "HP") ?? [];
