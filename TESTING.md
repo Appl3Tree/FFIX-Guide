@@ -4,7 +4,7 @@ Last updated: 2026-10-27
 
 ## Latest verification
 
-Evil Forest trail loot linkage: Regression tests verify all 16 existing item paths for Dendrobium, Fang [A], and Goblin map to the exact enemy slots and repeatable trail-pool encounter, retain full provenance, and preserve the limited pre-escape window and chance/KO behavior. `npm test` passes 75/75; lint, typecheck, data audit, production build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 1,501 item paths. Build: 2,520.54 kB JavaScript (610.77 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+Ice Cavern mist-jet loot linkage: Linked the 14 existing Cave Imp, Flan, and Wyerd item paths to each exact enemy, steal/drop slot, and repeatable mist-jet pool encounter. Paths combine enemy, encounter, and slot provenance; steals remain chance-based, conditional drops require normal KO, and no fixed formations or encounter rates are inferred. Regression tests and the data audit verify all links without changing catalog counts. `npm test` passes 75/75; lint, typecheck, audit, build, and `git diff --check` pass. Audit: 0 errors, 189 coverage warnings, 1,501 acquisition paths. Build: 2,520.93 kB JavaScript (611.05 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
 
 Previous verification — Opening and Crash Site Baku steal links:
 

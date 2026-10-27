@@ -3885,7 +3885,8 @@ const iceCavernRegularLootExpectations = [
   ["enemy.wyerd", "drop", "uncommon", "game-item.ether", "wyerd-ether-uncommon-drop"],
 ];
 const iceCavernLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
-const iceCavernMistJetEncounter = enemyEncounters.find((entry) => entry.id === "encounter.ice-cavern.mist-jet-pool");
+const iceCavernMistJetEncounterId = "encounter.ice-cavern.mist-jet-pool";
+const iceCavernMistJetEncounter = enemyEncounters.find((entry) => entry.id === iceCavernMistJetEncounterId);
 const iceCavernLootSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.ice-cavern")?.sections
   .find((section) => section.id === "ice-cavern-lower-path");
 const iceCavernMistJetStep = iceCavernLootSection?.steps.find((step) => step.id === "ice-mist-jets");
@@ -3898,15 +3899,20 @@ if (!iceCavernMistJetEncounter || !["enemy.cave-imp", "enemy.flan-ice-cavern", "
 for (const [enemyId, method, slotName, itemId, pathSuffix] of iceCavernRegularLootExpectations) {
   const enemy = enemyRecords.find((entry) => entry.id === enemyId);
   const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
   const item = gameItems.find((entry) => entry.id === itemId);
   const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.ice-cavern.${pathSuffix}`);
-  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+  if (!lootSlot ||
     !path || path.itemId !== itemId || path.chapterId !== "disc-1.ice-cavern" || path.method !== method ||
-    path.quantity !== 1 || path.availability !== "repeatable" || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
-    (method === "drop" && (!path.conditions?.includes("KO defeat") || !path.conditions.includes("conditional"))) ||
+    path.quantity !== 1 || path.availability !== "repeatable" || path.enemyId !== enemyId || path.enemyLootSlot !== slotName ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([iceCavernMistJetEncounterId]) ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "steal" && (!path.conditions?.includes("chance-based") || !path.conditions.includes("not guaranteed"))) ||
+    (method === "drop" && (!path.conditions?.includes("normal KO defeat") || !path.conditions.includes("chance-based") || !path.conditions.includes("conditional"))) ||
     iceCavernLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) || !enemy?.sourceIds.includes(sourceId) ||
-      !iceCavernMistJetEncounter?.sourceIds.includes(sourceId))) {
-    errors.push(`Ice Cavern ${method} path ${pathSuffix} must match its enemy slot, stay repeatable, and retain item/encounter provenance.`);
+      !iceCavernMistJetEncounter?.sourceIds.includes(sourceId) ||
+      (sourceId === "gamefaqs-enemy-list-71891" && !lootSlot.sourceIds.includes(sourceId)))) {
+    errors.push(`Ice Cavern ${method} path ${pathSuffix} must match its exact enemy, loot slot, mist-jet encounter, repeatable chance conditions, and complete provenance.`);
   }
 }
 const nolrichHeightsRegularLootExpectations = [

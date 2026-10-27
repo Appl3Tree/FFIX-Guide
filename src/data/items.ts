@@ -4264,30 +4264,48 @@ const iceCavernRegularLootSlots = [
   },
 ] as const;
 
-const iceCavernRegularLootPaths: ItemAcquisitionPath[] = iceCavernRegularLootSlots.flatMap((enemy) => [
-  ...enemy.steals.map((entry) => ({
-    id: `item-path.disc-1.ice-cavern.${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-steal`,
-    itemId: entry.itemId,
-    chapterId: "disc-1.ice-cavern",
-    method: "steal" as const,
-    quantity: 1,
-    availability: "repeatable" as const,
-    conditions: `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Ice Cavern mist-jet encounters.`,
-    notes: "The source table's separate slot odds are not treated as a guaranteed steal.",
-    sourceIds: iceCavernRegularLootSources,
-  })),
-  ...enemy.drops.map((entry) => ({
-    id: `item-path.disc-1.ice-cavern.${enemy.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slot}-drop`,
-    itemId: entry.itemId,
-    chapterId: "disc-1.ice-cavern",
-    method: "drop" as const,
-    quantity: 1,
-    availability: "repeatable" as const,
-    conditions: `On a KO defeat, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item in repeatable Ice Cavern mist-jet encounters; this slot is conditional.`,
-    notes: "GameFAQs states that non-KO victories do not award drops. No item from these conditional slots is guaranteed.",
-    sourceIds: iceCavernRegularLootSources,
-  })),
-]);
+const iceCavernMistJetEncounterId = "encounter.ice-cavern.mist-jet-pool";
+const iceCavernRegularLootPaths: ItemAcquisitionPath[] = iceCavernRegularLootSlots.flatMap((enemy) => {
+  const enemyRecord = enemyRecords.find((record) => record.id === enemy.enemyId);
+  const encounter = enemyEncounters.find((record) => record.id === iceCavernMistJetEncounterId);
+  if (!enemyRecord || !encounter) return [];
+
+  const slotPaths = (method: "steal" | "drop", entries: readonly { slot: EnemyTableSlot; itemId: string }[]) => entries.flatMap((entry) => {
+    const enemySlots = method === "steal" ? enemyRecord.steals : enemyRecord.drops;
+    const lootSlot = enemySlots.find((slot) => slot.slot === entry.slot && slot.itemId === entry.itemId);
+    if (!lootSlot) return [];
+
+    const itemSlug = entry.itemId.replace("game-item.", "");
+    const conditions = method === "steal"
+      ? `${enemy.enemyName}'s ${entry.slot} steal slot lists this item in repeatable Ice Cavern mist-jet encounters; the attempt is chance-based and success is not guaranteed.`
+      : `On a normal KO defeat, ${enemy.enemyName}'s ${entry.slot} drop slot can yield this item in repeatable Ice Cavern mist-jet encounters; the drop is chance-based and conditional.`;
+    const notes = method === "steal"
+      ? "The route sources identify a random enemy pool triggered by touching mist jets; no exact formation, encounter rate, or steal odds are inferred."
+      : "GameFAQs states that non-KO victories do not award drops. Conditional drop slots do not guarantee an item, and no exact formation or encounter rate is inferred.";
+
+    return [{
+      id: `item-path.disc-1.ice-cavern.${enemy.enemySlug}-${itemSlug}-${entry.slot}-${method}`,
+      itemId: entry.itemId,
+      chapterId: "disc-1.ice-cavern",
+      method,
+      quantity: 1,
+      availability: "repeatable" as const,
+      conditions,
+      notes,
+      enemyId: enemy.enemyId,
+      enemyLootSlot: entry.slot,
+      encounterIds: [encounter.id],
+      sourceIds: [...new Set([
+        ...iceCavernRegularLootSources,
+        ...enemyRecord.sourceIds,
+        ...encounter.sourceIds,
+        ...lootSlot.sourceIds,
+      ])],
+    }];
+  });
+
+  return [...slotPaths("steal", enemy.steals), ...slotPaths("drop", enemy.drops)];
+});
 
 const nolrichHeightsRegularLootSlots = [
   {

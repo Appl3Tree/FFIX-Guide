@@ -1512,6 +1512,7 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
 
 test("Ice Cavern mist-jet steals and conditional drops are repeatable and slot-specific", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
+  const encounterId = "encounter.ice-cavern.mist-jet-pool";
   const expected = [
     ["enemy.cave-imp", "steal", "common", "game-item.potion", "cave-imp-potion-common-steal"],
     ["enemy.cave-imp", "steal", "uncommon", "game-item.phoenix-down", "cave-imp-phoenix-down-uncommon-steal"],
@@ -1528,7 +1529,8 @@ test("Ice Cavern mist-jet steals and conditional drops are repeatable and slot-s
     ["enemy.wyerd", "drop", "common", "game-item.potion", "wyerd-potion-common-drop"],
     ["enemy.wyerd", "drop", "uncommon", "game-item.ether", "wyerd-ether-uncommon-drop"],
   ];
-  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.ice-cavern.mist-jet-pool");
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const encounterPaths = itemAcquisitionPaths.filter((path) => path.encounterIds?.includes(encounterId));
   const section = walkthroughChapters
     .find((chapter) => chapter.areaId === "disc-1.ice-cavern")
     ?.sections.find((entry) => entry.id === "ice-cavern-lower-path");
@@ -1538,23 +1540,33 @@ test("Ice Cavern mist-jet steals and conditional drops are repeatable and slot-s
   assert.ok(step?.detail?.includes("drops require a KO"));
   assert.ok(section?.sourceIds.includes("gamefaqs-enemy-list-71891"));
   assert.equal(expected.length, 14);
+  assert.equal(encounterPaths.length, expected.length);
 
   for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
     const enemy = enemyRecords.find((entry) => entry.id === enemyId);
     const item = gameItems.find((entry) => entry.id === itemId);
     const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.ice-cavern.${pathSuffix}`);
     const slots = method === "steal" ? enemy?.steals : enemy?.drops;
-    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
+    assert.ok(lootSlot, `${enemyId} ${slotName} ${method} slot is missing`);
     assert.ok(path, `${pathSuffix} path is missing`);
     assert.equal(path.itemId, itemId);
     assert.equal(path.chapterId, "disc-1.ice-cavern");
     assert.equal(path.method, method);
     assert.equal(path.quantity, 1);
     assert.equal(path.availability, "repeatable");
+    assert.equal(path.enemyId, enemyId);
+    assert.equal(path.enemyLootSlot, slotName);
+    assert.deepEqual(path.encounterIds, [encounterId]);
     assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"), `${itemId} is missing the enemy list source`);
+    assert.ok(lootSlot.sourceIds.includes("gamefaqs-enemy-list-71891"), `${enemyId} ${slotName} slot is missing its loot-table source`);
     if (method === "drop") {
-      assert.match(path.conditions ?? "", /KO defeat/);
+      assert.match(path.conditions ?? "", /normal KO defeat/);
+      assert.match(path.conditions ?? "", /chance-based/);
       assert.match(path.conditions ?? "", /conditional/);
+    } else {
+      assert.match(path.conditions ?? "", /chance-based/);
+      assert.match(path.conditions ?? "", /not guaranteed/);
     }
     for (const sourceId of sourceIds) {
       assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
