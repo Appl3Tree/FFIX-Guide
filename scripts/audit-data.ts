@@ -3955,6 +3955,58 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of nolrichHeightsRegu
     errors.push(`Nolrich Heights ${method} path ${pathSuffix} must match its enemy slot, stay repeatable, and retain item/encounter provenance.`);
   }
 }
+const lindblumKingdomLootEncounterIds = [
+  "encounter.lindblum-plateau.mountain-pool",
+  "encounter.lindblum-plateau.forest-pool",
+  "encounter.lindblum-area.lowlands-pool",
+  "encounter.qus-marsh.disc-1-interior-pool",
+];
+const lindblumKingdomLootEncounters = lindblumKingdomLootEncounterIds.map((id) =>
+  enemyEncounters.find((entry) => entry.id === id));
+const lindblumKingdomLootEnemyIds = [...new Set(lindblumKingdomLootEncounters.flatMap((encounter) =>
+  encounter?.formation.map((member) => member.enemyId) ?? []))];
+const lindblumKingdomLootExpected = lindblumKingdomLootEnemyIds.flatMap((enemyId) => {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  if (!enemy) return [];
+  return [
+    ...enemy.steals.filter((slot) => slot.itemId).map((slot) => ({ enemyId, method: "steal", slot })),
+    ...enemy.drops.filter((slot) => slot.itemId).map((slot) => ({ enemyId, method: "drop", slot })),
+  ];
+});
+const lindblumKingdomLootPaths = itemAcquisitionPaths.filter((path) =>
+  path.chapterId === "disc-1.exploring-lindblum-kingdom" && path.enemyId);
+const lindblumKingdomLootStep = walkthroughChapters.find((chapter) =>
+  chapter.areaId === "disc-1.exploring-lindblum-kingdom")?.sections
+  .find((section) => section.id === "explore-lindblum-plateau")?.steps
+  .find((step) => step.id === "explore-lindblum-field-loot");
+if (lindblumKingdomLootEncounters.some((entry) => !entry) || lindblumKingdomLootExpected.length !== 67 ||
+  lindblumKingdomLootPaths.length !== lindblumKingdomLootExpected.length ||
+  !itemCatalogCoverage.chapterIds.includes("disc-1.exploring-lindblum-kingdom") ||
+  !lindblumKingdomLootStep?.text.includes("use Steal before ending a battle") ||
+  !lindblumKingdomLootStep.detail?.includes("status victories do not award drops")) {
+  errors.push("Lindblum Plateau, lowland, and first Qu's Marsh loot coverage must include every listed slot and its chance-aware walkthrough guidance.");
+}
+for (const expected of lindblumKingdomLootExpected) {
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const path = lindblumKingdomLootPaths.find((entry) => entry.enemyId === expected.enemyId &&
+    entry.method === expected.method && entry.enemyLootSlot === expected.slot.slot && entry.itemId === expected.slot.itemId);
+  const relatedEncounters = lindblumKingdomLootEncounters.filter((entry) =>
+    entry?.formation.some((member) => member.enemyId === expected.enemyId));
+  const requiredSources = [...new Set([
+    ...expected.slot.sourceIds,
+    ...(enemy?.sourceIds ?? []),
+    ...relatedEncounters.flatMap((entry) => entry?.sourceIds ?? []),
+  ])];
+  if (!path || path.quantity !== 1 || path.availability !== "repeatable" ||
+    !path.encounterIds || path.encounterIds.join("|") !== relatedEncounters.map((entry) => entry?.id).join("|") ||
+    !path.conditions?.includes("chance-based") || path.walkthroughObjectiveIds?.length ||
+    (expected.method === "drop" && (!path.conditions.includes("by KO") || !path.conditions.includes("not guaranteed"))) ||
+    (expected.method === "steal" && !path.conditions.includes("may fail")) ||
+    requiredSources.some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.sourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId))) {
+    errors.push(`Lindblum Kingdom ${expected.enemyId} ${expected.method} ${expected.slot.slot} path must match its enemy slot, encounters, chance conditions, and source links.`);
+  }
+}
 const daliUndergroundLootExpectations = [
   ["enemy.ghost", "steal", "common", "game-item.potion", "ghost-potion-common-steal"],
   ["enemy.ghost", "steal", "uncommon", "game-item.ore", "ghost-ore-uncommon-steal"],

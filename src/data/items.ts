@@ -1,4 +1,5 @@
 import type { CoverageState } from "./guide.ts";
+import { enemyEncounters, enemyRecords, type EnemyLootSlot, type EnemyTableSlot } from "./enemies.ts";
 
 export type GameItemCategory = "consumable" | "equipment" | "key-item";
 
@@ -52,6 +53,9 @@ export type ItemAcquisitionPath = {
   notes?: string;
   cost?: ItemCost;
   walkthroughObjectiveIds?: string[];
+  enemyId?: string;
+  enemyLootSlot?: EnemyTableSlot;
+  encounterIds?: string[];
   sourceIds: string[];
 };
 
@@ -4417,6 +4421,60 @@ const daliUndergroundRegularLootPaths: ItemAcquisitionPath[] = daliUndergroundLo
   })),
 ]);
 
+const lindblumKingdomLootEncounterIds = [
+  "encounter.lindblum-plateau.mountain-pool",
+  "encounter.lindblum-plateau.forest-pool",
+  "encounter.lindblum-area.lowlands-pool",
+  "encounter.qus-marsh.disc-1-interior-pool",
+] as const;
+const lindblumKingdomLootEncounterIdSet = new Set<string>(lindblumKingdomLootEncounterIds);
+const lindblumKingdomLootEncounters = enemyEncounters.filter((encounter) => lindblumKingdomLootEncounterIdSet.has(encounter.id));
+const lindblumKingdomLootEnemyIds = [...new Set(lindblumKingdomLootEncounters.flatMap((encounter) =>
+  encounter.formation.map((member) => member.enemyId)))];
+const lindblumKingdomLootPaths: ItemAcquisitionPath[] = lindblumKingdomLootEnemyIds.flatMap((enemyId) => {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  if (!enemy) return [];
+
+  const encounters = lindblumKingdomLootEncounters.filter((encounter) =>
+    encounter.formation.some((member) => member.enemyId === enemyId));
+  const locations = [...new Set(encounters.map((encounter) => encounter.location))];
+  const encounterIds = encounters.map((encounter) => encounter.id);
+  const sourceIds = [...new Set([
+    ...enemy.sourceIds,
+    ...encounters.flatMap((encounter) => encounter.sourceIds),
+  ])];
+  const slotPaths = (method: "steal" | "drop", slots: EnemyLootSlot[]) => slots.flatMap((slot) => {
+    if (!slot.itemId) return [];
+
+    const enemySlug = enemyId.replace("enemy.", "");
+    const itemSlug = slot.itemId.replace("game-item.", "");
+    const locationLabel = locations.join("; ");
+    const conditions = method === "steal"
+      ? `In ${locationLabel}, ${enemy.name}'s ${slot.slot} steal slot can yield this item; Steal attempts are chance-based and may fail.`
+      : `In ${locationLabel}, defeat ${enemy.name} by KO to trigger its ${slot.slot} drop slot; this chance-based slot can yield the item but is not guaranteed.`;
+    const notes = method === "drop"
+      ? "This is a separate drop-table slot. Multiple successful slots may award multiple items on one KO, but no fixed yield or success rate is promised."
+      : "This is a separate steal-table slot. No fixed success rate or number of attempts is promised.";
+
+    return [{
+      id: `item-path.disc-1.exploring-lindblum-kingdom.field-${enemySlug}-${itemSlug}-${slot.slot}-${method}`,
+      itemId: slot.itemId,
+      chapterId: "disc-1.exploring-lindblum-kingdom",
+      method,
+      quantity: 1,
+      availability: "repeatable" as const,
+      conditions,
+      notes,
+      enemyId,
+      enemyLootSlot: slot.slot,
+      encounterIds,
+      sourceIds: [...new Set([...sourceIds, ...slot.sourceIds])],
+    }];
+  });
+
+  return [...slotPaths("steal", enemy.steals), ...slotPaths("drop", enemy.drops)];
+});
+
 const goblinLootSlots = [
   { method: "steal" as const, slot: "common", itemId: "game-item.potion" },
   { method: "drop" as const, slot: "common", itemId: "game-item.potion" },
@@ -5542,6 +5600,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...nolrichHeightsRegularLootPaths,
   ...gunitasBasinRegularLootPaths,
   ...daliUndergroundRegularLootPaths,
+  ...lindblumKingdomLootPaths,
   ...evilForestGoblinLootPaths,
   ...gunitasGoblinLootPaths,
   ...evilForestRegularLootPaths,

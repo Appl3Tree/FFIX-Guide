@@ -1166,7 +1166,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "explore-lindblum-plateau",
         title: "Lindblum Plateau — Blue Magic and Pinnacle Rocks",
         summary: "Use the Business District Hunter's Gate to reach the plateau; check the available skill sources and take the early treasure detour.",
-        sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891", "jegged-gizamaluke"],
+        sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891", "jegged-gizamaluke", "gamefaqs-enemy-list-71891", "cavesofnarshe-lindblum-walkthrough", "cavesofnarshe-enemies", "elitegrindlab-qus-marsh"],
         steps: [
           {
             id: "explore-blue-magic-plateau",
@@ -1174,6 +1174,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "From Lindblum, leave through the Business District Hunter's Gate. With Quina active, use Eat on weakened enemies to learn Mustard Bomb from Bomb, Limit Glove from Axe Beak or Mandragora, and LV3 Def-less from Carve Spider. In the Lindblum basin, the other listed sources are Serpion for Mighty Guard, Ironite for Angel's Snack, Vice for Vanish, and Hedgehog Pie or Ladybird for Pumpkin Head.",
             detail: "Ladybird is called Ladybug in non-PAL releases. Eat works only after the target is sufficiently weakened; these are optional ability pickups, not required battle targets. Verify the learned list for all nine current-area skills before checking the collection objective.",
             objectiveIds: ["disc-1.exploring-lindblum-kingdom.blue-magic"],
+          },
+          {
+            id: "explore-lindblum-field-loot",
+            kind: "optional",
+            text: "If you want extra supplies from the Plateau, Lindblum lowlands, or first Qu's Marsh encounters, use Steal before ending a battle and finish by normal KO if you are trying for a drop. The item reference lists each enemy's separate loot slots.",
+            detail: "Steal attempts and non-Always drops are chance-based; status victories do not award drops. Several drop slots can succeed on one KO, but no fixed yield or encounter rate is promised. The encounter pools differ by terrain, so use the named area for each listed enemy.",
           },
           {
             id: "explore-pinnacle-rocks-early-treasure",

@@ -73,7 +73,7 @@ test("Soft has repeatable shop sources through the late game", () => {
     ["item-path.disc-3.on-the-high-seas.soft-alexandria-shop", "alexandria.item-shop.disc-3-4", "shop"],
   ];
 
-  assert.equal(softPaths.length, 18);
+  assert.equal(softPaths.length, 20);
   assert.ok(gameItems.find((item) => item.id === "game-item.soft")?.sourceIds.includes("gamefaqs-shops-71891"));
   for (const [pathId, shopId, method] of shops) {
     const path = softPaths.find((entry) => entry.id === pathId);
@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 36);
+  assert.equal(orePaths.length, 44);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 42);
+  assert.equal(pinionPaths.length, 47);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -2538,4 +2538,68 @@ test("Lindblum's first-visit pickups and rewards have item paths", () => {
   assert.ok(firstVisitCheck?.objectiveIds?.includes("disc-1.lindblum.first-visit-pickups"));
   assert.match(freyaPrize?.conditions ?? "", /Choose Freya/);
   assert.match(itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.master-hunter-festival-reward")?.conditions ?? "", /with Zidane, Freya, or Vivi/);
+});
+
+test("Lindblum Plateau, lowlands, and first Qu's Marsh enemy loot slots have separate item paths", () => {
+  const encounterIds = [
+    "encounter.lindblum-plateau.mountain-pool",
+    "encounter.lindblum-plateau.forest-pool",
+    "encounter.lindblum-area.lowlands-pool",
+    "encounter.qus-marsh.disc-1-interior-pool",
+  ];
+  const encounters = encounterIds.map((id) => enemyEncounters.find((entry) => entry.id === id));
+  assert.ok(encounters.every(Boolean));
+
+  const enemyIds = [...new Set(encounters.flatMap((entry) => entry.formation.map((member) => member.enemyId)))];
+  const expectedSlots = [];
+  for (const enemyId of enemyIds) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    assert.ok(enemy, `${enemyId} is missing from the bestiary`);
+    for (const [method, slots] of [["steal", enemy.steals], ["drop", enemy.drops]]) {
+      for (const slot of slots.filter((entry) => entry.itemId)) {
+        expectedSlots.push(`${enemyId}|${method}|${slot.slot}|${slot.itemId}`);
+      }
+    }
+  }
+
+  const paths = itemAcquisitionPaths.filter((path) =>
+    path.chapterId === "disc-1.exploring-lindblum-kingdom" && path.enemyId);
+  assert.equal(expectedSlots.length, 67);
+  assert.equal(paths.length, expectedSlots.length);
+  assert.deepEqual(paths.map((path) => `${path.enemyId}|${path.method}|${path.enemyLootSlot}|${path.itemId}`).sort(), expectedSlots.sort());
+  assert.ok(itemCatalogCoverage.chapterIds.includes("disc-1.exploring-lindblum-kingdom"));
+
+  for (const path of paths) {
+    const enemy = enemyRecords.find((entry) => entry.id === path.enemyId);
+    const slot = (path.method === "steal" ? enemy.steals : enemy.drops)
+      .find((entry) => entry.slot === path.enemyLootSlot && entry.itemId === path.itemId);
+    const item = gameItems.find((entry) => entry.id === path.itemId);
+    const relatedEncounters = encounters.filter((encounter) =>
+      encounter.formation.some((member) => member.enemyId === path.enemyId));
+
+    assert.ok(slot, `${path.id} must match an enemy loot slot`);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "repeatable");
+    assert.deepEqual(path.encounterIds, relatedEncounters.map((entry) => entry.id));
+    assert.ok(path.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    assert.ok(slot.sourceIds.every((sourceId) => path.sourceIds.includes(sourceId)));
+    assert.ok(relatedEncounters.every((encounter) => encounter.sourceIds.every((sourceId) => path.sourceIds.includes(sourceId))));
+    assert.ok(item, `${path.itemId} is missing from the item catalog`);
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${path.id} has an unknown source`);
+    assert.equal(path.walkthroughObjectiveIds, undefined, "chance-based loot must not become guaranteed checklist progress");
+    assert.match(path.conditions ?? "", /chance-based/);
+    if (path.method === "drop") {
+      assert.match(path.conditions ?? "", /by KO/);
+      assert.match(path.conditions ?? "", /not guaranteed/);
+    } else {
+      assert.match(path.conditions ?? "", /may fail/);
+    }
+  }
+
+  const walkthroughStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.exploring-lindblum-kingdom")
+    ?.sections.find((section) => section.id === "explore-lindblum-plateau")
+    ?.steps.find((step) => step.id === "explore-lindblum-field-loot");
+  assert.match(walkthroughStep?.text ?? "", /use Steal before ending a battle/);
+  assert.match(walkthroughStep?.detail ?? "", /status victories do not award drops/);
 });
