@@ -1153,3 +1153,40 @@ test("South Gate item paths separate the lost Potion chest from conditional Mult
   assert.match(lateRouteStep?.text ?? "", /front and rear chests for two Elixirs/);
   assert.match(lateRouteStep?.detail ?? "", /Elixir Card is tracked in the card collection/);
 });
+
+test("Bohden Arch Ether and Moccha Coffee have separate sourced pickup records", () => {
+  const expected = [
+    ["item-path.disc-1.exploring-lindblum-kingdom.bohden-arch-ether", "game-item.ether", "disc-1.exploring-lindblum-kingdom.bohden-arch-ether", ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke"]],
+    ["item-path.disc-1.exploring-lindblum-kingdom.bohden-arch-moccha-coffee", "game-item.moccha-coffee", "disc-1.exploring-lindblum-kingdom.moccha-coffee", ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke", "rpgclassics-coffee"]],
+  ];
+
+  for (const [pathId, itemId, objectiveId, sourceIds] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.exploring-lindblum-kingdom");
+    assert.equal(path.method, "fixed-pickup");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "single-use");
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(item, `${itemId} is missing from the item catalogue`);
+    assert.ok(item.sourceIds.some((sourceId) => sourceIds.includes(sourceId)));
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    assert.ok(objectives.some((objective) => objective.id === objectiveId));
+  }
+
+  const ether = itemAcquisitionPaths.find((path) => path.id === expected[0][0]);
+  const coffee = itemAcquisitionPaths.find((path) => path.id === expected[1][0]);
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.exploring-lindblum-kingdom")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "explore-bohden-arch-pickups");
+  assert.match(ether?.conditions ?? "", /far end of Bohden Arch's bridge beside the right-hand post/);
+  assert.match(coffee?.conditions ?? "", /base of the large tree on the far right/);
+  assert.ok(step?.objectiveIds.includes(expected[0][2]));
+  assert.ok(step?.objectiveIds.includes(expected[1][2]));
+});

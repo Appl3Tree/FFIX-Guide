@@ -1135,14 +1135,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "explore-bohden-arch",
         title: "Bohden Arch — recover and record the coffee",
         summary: "North of Chocobo's Forest, pick up the one-time coffee quest item and the nearby Ether.",
-        sourceIds: ["gamefaqs-exploring-lindblum-71891", "arrpeegeez-qus-marsh-chocobo-forest", "rpgclassics-coffee"],
+        sourceIds: ["gamefaqs-exploring-lindblum-71891", "arrpeegeez-qus-marsh-chocobo-forest", "rpgclassics-coffee", "jegged-gizamaluke"],
         steps: [
           {
             id: "explore-bohden-arch-pickups",
             kind: "pickup",
             text: "At Bohden Arch, inspect the far end of the bridge beside the right-hand post for an Ether. Search at the base of the large tree on the right for the Moccha Coffee Key Item. Use the healing spring to restore HP and MP before returning to the world map.",
-            detail: "Keep Moccha Coffee for Morrid's three-coffee quest; it cannot be turned in until later. Bohden Arch and Qu's Marsh are separate locations, even though some area lists group their pickups under one chapter heading.",
-            objectiveIds: ["disc-1.exploring-lindblum-kingdom.moccha-coffee"],
+            detail: "Keep Moccha Coffee for Morrid's three-coffee quest; it cannot be turned in until later. The Ether is a separate supply pickup. Bohden Arch and Qu's Marsh are separate locations, even though some area lists group their pickups under one chapter heading.",
+            objectiveIds: ["disc-1.exploring-lindblum-kingdom.bohden-arch-ether", "disc-1.exploring-lindblum-kingdom.moccha-coffee"],
           },
           {
             id: "explore-lindblum-kingdom-exit",

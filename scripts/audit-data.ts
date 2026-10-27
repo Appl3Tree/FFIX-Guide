@@ -7294,6 +7294,33 @@ if (
 ) {
   errors.push("South Gate acquisition paths must separate the Disc I Potion cutoff from the missed Multina Racket's conditional Disc III recovery and record both Treno Arch Elixir chests with their shared route sources.");
 }
+const bohdenArchAcquisitionExpectations: [string, string, string, string[]][] = [
+  ["item-path.disc-1.exploring-lindblum-kingdom.bohden-arch-ether", "game-item.ether", "disc-1.exploring-lindblum-kingdom.bohden-arch-ether", ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.bohden-arch-moccha-coffee", "game-item.moccha-coffee", "disc-1.exploring-lindblum-kingdom.moccha-coffee", ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke", "rpgclassics-coffee"]],
+];
+const bohdenArchAcquisitions = bohdenArchAcquisitionExpectations.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const bohdenArchWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.exploring-lindblum-kingdom")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "explore-bohden-arch-pickups");
+if (
+  bohdenArchAcquisitions.some((path) => !path) ||
+  bohdenArchAcquisitions.some((path, index) => !path || path.itemId !== bohdenArchAcquisitionExpectations[index][1] || path.chapterId !== "disc-1.exploring-lindblum-kingdom" || path.method !== "fixed-pickup" || path.quantity !== 1 || path.availability !== "single-use" || !path.walkthroughObjectiveIds?.includes(bohdenArchAcquisitionExpectations[index][2]) || !bohdenArchAcquisitionExpectations[index][3].every((sourceId) => path.sourceIds.includes(sourceId))) ||
+  bohdenArchAcquisitionExpectations.flatMap(([, , , sourceIds]) => sourceIds).some((sourceId) => !sources.some((source) => source.id === sourceId)) ||
+  !bohdenArchAcquisitions[0]?.conditions.includes("far end of Bohden Arch's bridge") ||
+  !bohdenArchAcquisitions[0]?.conditions.includes("right-hand post") ||
+  !bohdenArchAcquisitions[1]?.conditions.includes("base of the large tree") ||
+  !bohdenArchAcquisitions[1]?.conditions.includes("far right") ||
+  !gameItems.find((item) => item.id === "game-item.moccha-coffee")?.sourceIds.includes("rpgclassics-coffee") ||
+  !gameItems.find((item) => item.id === "game-item.ether")?.sourceIds.includes("jegged-gizamaluke") ||
+  !objectivesById.get("disc-1.exploring-lindblum-kingdom.bohden-arch-ether")?.sourceIds.includes("jegged-gizamaluke") ||
+  !bohdenArchWalkthroughStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.bohden-arch-ether") ||
+  !bohdenArchWalkthroughStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.moccha-coffee") ||
+  !bohdenArchWalkthroughStep?.text.includes("far end of the bridge") ||
+  !bohdenArchWalkthroughStep?.text.includes("base of the large tree")
+) {
+  errors.push("Bohden Arch must keep the Ether and Moccha Coffee pickups as separate source-linked item paths and checklist objectives at their documented locations.");
+}
 const trenoShopWindowObjective = objectivesById.get("disc-2.treno.shop-stock-window");
 const trenoShopWindowStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.treno")
