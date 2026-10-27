@@ -7236,6 +7236,64 @@ if (
 ) {
   errors.push("The Summit Station inventory warning must preserve the safe checkpoint while linking Caves of Narshe's Disc III/item-page claims to both window-unverified candidate paths and the optional aerial counter check, without presenting later recovery as confirmed.");
 }
+const southGateAcquisitionExpectations: [string, string, string, string, string][] = [
+  ["item-path.disc-1.journey-to-burmecia.bohden-gate-multina-racket", "game-item.multina-racket", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups"],
+  ["item-path.disc-1.journey-to-burmecia.bohden-station-potion", "game-item.potion", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups"],
+  ["item-path.disc-3.on-the-high-seas.bohden-gate-multina-racket-recovery", "game-item.multina-racket", "disc-3.on-the-high-seas", "conditional", "disc-3.on-the-high-seas.south-gates"],
+  ["item-path.disc-3.on-the-high-seas.treno-arch-elixir-front", "game-item.elixir", "disc-3.on-the-high-seas", "single-use", "disc-3.on-the-high-seas.south-gates"],
+  ["item-path.disc-3.on-the-high-seas.treno-arch-elixir-rear", "game-item.elixir", "disc-3.on-the-high-seas", "single-use", "disc-3.on-the-high-seas.south-gates"],
+];
+const southGateDisc1SourceIds = ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "elitegrindlab-south-gate"];
+const southGateDisc3SourceIds = ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"];
+const southGateWarning = missablesById.get("missable.disc-1.journey-to-burmecia.south-gate-pickups");
+const southGateCableCarCutoff = cutoffsById.get("cutoff.south-gate.cable-car-departure");
+const southGateDisc1Objective = objectivesById.get("disc-1.journey-to-burmecia.south-gate-pickups");
+const southGateDisc3Objective = objectivesById.get("disc-3.on-the-high-seas.south-gates");
+const southGateDisc1WalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-south-gate-station");
+const southGateDisc3WalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.on-the-high-seas")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "high-seas-south-gates");
+const southGateAcquisitions = southGateAcquisitionExpectations.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+if (
+  southGateAcquisitions.some((path) => !path) ||
+  southGateAcquisitions.some((path, index) => !path || path.itemId !== southGateAcquisitionExpectations[index][1] || path.chapterId !== southGateAcquisitionExpectations[index][2] || path.availability !== southGateAcquisitionExpectations[index][3] || path.method !== "chest" || !path.walkthroughObjectiveIds?.includes(southGateAcquisitionExpectations[index][4])) ||
+  southGateDisc1SourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId)) ||
+  southGateDisc3SourceIds.some((sourceId) => !sources.some((source) => source.id === sourceId)) ||
+  southGateAcquisitions.slice(0, 2).some((path) => !southGateDisc1SourceIds.every((sourceId) => path?.sourceIds.includes(sourceId))) ||
+  southGateAcquisitions.slice(2).some((path) => !southGateDisc3SourceIds.every((sourceId) => path?.sourceIds.includes(sourceId))) ||
+  !southGateAcquisitions[0]?.conditions.includes("same copy remains available on the Disc III return") ||
+  !southGateAcquisitions[1]?.conditions.includes("chest copy is lost after leaving the gate complex") ||
+  !southGateAcquisitions[2]?.conditions.includes("only if the Disc I pickup was missed") ||
+  !southGateAcquisitions[2]?.conditions.includes("Elixir Card") ||
+  !southGateAcquisitions[3]?.conditions.includes("front Elixir chest") ||
+  !southGateAcquisitions[4]?.conditions.includes("second Elixir chest farther back") ||
+  !southGateAcquisitions[4]?.conditions.includes("Elixir Card") ||
+  !southGateWarning?.classification.includes("recoverable-later") ||
+  !southGateWarning.consequence.includes("Potion chest") ||
+  !southGateWarning.consequence.includes("existing copy remains at Bohden Gate") ||
+  !southGateWarning.recovery.includes("Return to Bohden Gate on Disc III") ||
+  !southGateCableCarCutoff?.trigger.includes("Boarding closes the Potion chest") ||
+  !southGateCableCarCutoff.trigger.includes("the Racket remains at Bohden Gate for the Disc III return") ||
+  !southGateCableCarCutoff.sourceIds.includes("gamefaqs-on-the-high-seas-71891") ||
+  !southGateCableCarCutoff.sourceIds.includes("jegged-blue-narciss") ||
+  !southGateWarning.sourceIds.includes("gamefaqs-on-the-high-seas-71891") ||
+  !southGateWarning.sourceIds.includes("jegged-blue-narciss") ||
+  !southGateDisc1Objective?.sourceIds.includes("gamefaqs-on-the-high-seas-71891") ||
+  !southGateDisc3Objective?.sourceIds.includes("jegged-blue-narciss") ||
+  !southGateDisc1WalkthroughStep?.detail.includes("that chest copy does not return") ||
+  !southGateDisc1WalkthroughStep.detail.includes("still at Bohden Gate on the Disc III return") ||
+  !southGateDisc3WalkthroughStep?.text.includes("front and rear chests for two Elixirs") ||
+  !southGateDisc3WalkthroughStep.text.includes("the separate chest by the gate holds 3,206 Gil") ||
+  !southGateDisc3WalkthroughStep.detail.includes("Elixir Card is tracked in the card collection") ||
+  !gameItems.find((item) => item.id === "game-item.multina-racket")?.sourceIds.includes("gamefaqs-on-the-high-seas-71891") ||
+  !gameItems.find((item) => item.id === "game-item.elixir")?.sourceIds.includes("jegged-blue-narciss")
+) {
+  errors.push("South Gate acquisition paths must separate the Disc I Potion cutoff from the missed Multina Racket's conditional Disc III recovery and record both Treno Arch Elixir chests with their shared route sources.");
+}
 const trenoShopWindowObjective = objectivesById.get("disc-2.treno.shop-stock-window");
 const trenoShopWindowStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.treno")

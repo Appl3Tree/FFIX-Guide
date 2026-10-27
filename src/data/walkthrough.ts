@@ -1241,7 +1241,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-south-gate-steiner-dagger",
         title: "South Gate — Steiner and Dagger's route through Bohden Gate",
         summary: "After the boss, control switches to Steiner and Dagger. Clear the alley, then search, collect the letter, shop, and save before boarding the cable car.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "gamefaqs-equipment-33383", "elitegrindlab-missables"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "gamefaqs-grotto-south-gate-79143", "gamefaqs-equipment-33383", "elitegrindlab-south-gate", "elitegrindlab-missables"],
         steps: [
           {
             id: "journey-south-gate-multina-racket",
@@ -1254,7 +1254,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "journey-south-gate-station",
             kind: "pickup",
             text: "After Dagger is freed, search the left side of the station for a Potion. Speak to Grimo and choose Mognet to accept his letter for Nazna, then save and check the item shop for healing and status-curing supplies. Review Steiner and Dagger's equipment, remembering that their items are shared with Zidane's party, and remove any gear the main group still needs.",
-            detail: "The Grimo-to-Nazna letter starts a later Mognet handoff. South Gate is a one-way story trip; accept the letter and collect the station copy before boarding. The Potion is replaceable, and Multina Racket can be bought later, but the South Gate copies are lost when this visit closes.",
+            detail: "The Grimo-to-Nazna letter starts a later Mognet handoff. South Gate is a one-way story trip, so collect the Potion before boarding; that chest copy does not return, though Potions remain widely available. A missed Multina Racket is still at Bohden Gate on the Disc III return, and the item is also sold later.",
             objectiveIds: ["disc-1.journey-to-burmecia.south-gate-pickups", "disc-1.journey-to-burmecia.grimo-letter"],
           },
           {
@@ -4246,14 +4246,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "high-seas-gates-and-treno",
         title: "South Gates and Treno — optional return pickups",
-        summary: "Blue Narciss travel opens two South Gate chests and updates Treno's auction inventory.",
+        summary: "Blue Narciss travel opens the South Gate revisits, including a missed Bohden Gate Racket and two remote Elixir chests.",
         sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamefaqs-treno-auction-71891", "jegged-blue-narciss"],
         steps: [
           {
             id: "high-seas-south-gates",
             kind: "pickup",
-            text: "At Bohden's Gate near Chocobo's Forest, open the previously unreachable wagon chest for an Elixir Card; collect the Multina Racket there only if you left the earlier pickup behind. At the valley-level gate near Evil Forest, collect two Elixirs and 3,206 Gil.",
-            detail: "The Multina Racket is conditional because it was available on the earlier South Gate route. These revisits recover local pickups without requiring you to replay the story area.",
+            text: "At Bohden Gate near Chocobo's Forest, open the previously unreachable wagon chest for an Elixir Card. If you missed it on Disc I, collect the Multina Racket that remains at Bohden Gate. At the valley-level Treno Arch near Evil Forest, open the front and rear chests for two Elixirs; the separate chest by the gate holds 3,206 Gil.",
+            detail: "The Multina Racket check is conditional because it is the same copy available on the earlier South Gate route. The Elixir Card is tracked in the card collection, and Gil is currency; neither belongs in the item acquisition catalog. GameFAQs and Jegged both list the two Elixir chests and the distinct Gil chest at Treno Arch.",
             objectiveIds: ["disc-3.on-the-high-seas.south-gates"],
           },
           {

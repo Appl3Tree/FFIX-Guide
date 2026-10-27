@@ -1935,9 +1935,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.journey-to-burmecia-to-burmecia",
     title: "South Gate pickups before the cable car",
     certainty: "source-supported",
-    trigger: "Before boarding the South Gate cable car, search Bohden Gate for the Multina Racket and Bohden Station for the Potion. The chest copies themselves do not return, though both item types have later sources.",
+    trigger: "Before boarding the South Gate cable car, collect the Multina Racket at Bohden Gate and the Potion chest at Bohden Station. Boarding closes the Potion chest; if missed, the Racket remains at Bohden Gate for the Disc III return. Both item types also have later purchase sources.",
     missableIds: ["missable.disc-1.journey-to-burmecia.south-gate-pickups"],
-    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "gamefaqs-equipment-33383", "elitegrindlab-missables"],
+    sourceIds: ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "gamefaqs-grotto-south-gate-79143", "gamefaqs-equipment-33383", "elitegrindlab-south-gate", "elitegrindlab-missables"],
   },
   {
     id: "cutoff.south-gate.grimo-letter",

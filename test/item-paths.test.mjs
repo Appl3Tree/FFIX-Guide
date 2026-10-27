@@ -1101,3 +1101,55 @@ test("The Aftermath pickups and three potion quest items link to the shared chec
     .find((step) => step.id === "aftermath-the-rally-ate");
   assert.match(oreStep?.detail ?? "", /Treat it as a conditional check/);
 });
+
+test("South Gate item paths separate the lost Potion chest from conditional Multina Racket recovery", () => {
+  const expected = [
+    ["item-path.disc-1.journey-to-burmecia.bohden-gate-multina-racket", "game-item.multina-racket", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups", ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "elitegrindlab-south-gate"]],
+    ["item-path.disc-1.journey-to-burmecia.bohden-station-potion", "game-item.potion", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups", ["gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "elitegrindlab-south-gate"]],
+    ["item-path.disc-3.on-the-high-seas.bohden-gate-multina-racket-recovery", "game-item.multina-racket", "disc-3.on-the-high-seas", "conditional", "disc-3.on-the-high-seas.south-gates", ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"]],
+    ["item-path.disc-3.on-the-high-seas.treno-arch-elixir-front", "game-item.elixir", "disc-3.on-the-high-seas", "single-use", "disc-3.on-the-high-seas.south-gates", ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"]],
+    ["item-path.disc-3.on-the-high-seas.treno-arch-elixir-rear", "game-item.elixir", "disc-3.on-the-high-seas", "single-use", "disc-3.on-the-high-seas.south-gates", ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss"]],
+  ];
+
+  for (const [pathId, itemId, chapterId, availability, objectiveId, sourceIds] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, chapterId);
+    assert.equal(path.method, "chest");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, availability);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+
+  const racketRecovery = itemAcquisitionPaths.find((path) => path.id === expected[2][0]);
+  const trenoArchElixirs = itemAcquisitionPaths.filter((path) => path.id.startsWith("item-path.disc-3.on-the-high-seas.treno-arch-elixir-"));
+  const warning = missables.find((entry) => entry.id === "missable.disc-1.journey-to-burmecia.south-gate-pickups");
+  assert.match(racketRecovery?.conditions ?? "", /only if the Disc I pickup was missed/);
+  assert.match(racketRecovery?.conditions ?? "", /Elixir Card/);
+  assert.equal(trenoArchElixirs.length, 2);
+  assert.ok(trenoArchElixirs.every((path) => path.itemId === "game-item.elixir"));
+  assert.ok(warning?.classification.includes("recoverable-later"));
+  assert.match(warning?.consequence ?? "", /Potion chest/);
+  assert.match(warning?.consequence ?? "", /existing copy remains at Bohden Gate/);
+  assert.match(warning?.recovery ?? "", /Return to Bohden Gate on Disc III/);
+  assert.ok(objectives.some((objective) => objective.id === "disc-1.journey-to-burmecia.south-gate-pickups"));
+  assert.ok(objectives.some((objective) => objective.id === "disc-3.on-the-high-seas.south-gates"));
+
+  const earlyRouteStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.journey-to-burmecia")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "journey-south-gate-station");
+  const lateRouteStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.on-the-high-seas")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "high-seas-south-gates");
+  assert.match(earlyRouteStep?.detail ?? "", /that chest copy does not return/);
+  assert.match(earlyRouteStep?.detail ?? "", /still at Bohden Gate on the Disc III return/);
+  assert.match(lateRouteStep?.text ?? "", /front and rear chests for two Elixirs/);
+  assert.match(lateRouteStep?.detail ?? "", /Elixir Card is tracked in the card collection/);
+});
