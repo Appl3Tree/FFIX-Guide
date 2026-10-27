@@ -4044,13 +4044,46 @@ const evilForestEncounter = enemyEncounters.find((entry) => entry.id === "encoun
 const evilForestRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.evil-forest")?.sections
   .find((section) => section.id === "forest-path-monty");
 const evilForestGoblinLootStep = evilForestRouteSection?.steps.find((step) => step.id === "evil-forest-goblin-loot");
+const evilForestRegularLootExpectations = [
+  ["enemy.dendrobium", "steal", "common", "game-item.eye-drops", "dendrobium-eye-drops-common-steal"],
+  ["enemy.dendrobium", "steal", "uncommon", "game-item.tent", "dendrobium-tent-uncommon-steal"],
+  ["enemy.dendrobium", "steal", "semi-rare", "game-item.ore", "dendrobium-ore-semi-rare-steal"],
+  ["enemy.dendrobium", "drop", "common", "game-item.eye-drops", "dendrobium-eye-drops-common-drop"],
+  ["enemy.dendrobium", "drop", "uncommon", "game-item.potion", "dendrobium-potion-uncommon-drop"],
+  ["enemy.dendrobium", "drop", "rare", "game-item.phoenix-down", "dendrobium-phoenix-down-rare-drop"],
+  ["enemy.fang-a", "steal", "common", "game-item.potion", "fang-a-potion-common-steal"],
+  ["enemy.fang-a", "steal", "uncommon", "game-item.phoenix-down", "fang-a-phoenix-down-uncommon-steal"],
+  ["enemy.fang-a", "steal", "semi-rare", "game-item.hi-potion", "fang-a-hi-potion-semi-rare-steal"],
+  ["enemy.fang-a", "steal", "rare", "game-item.phoenix-pinion", "fang-a-phoenix-pinion-rare-steal"],
+  ["enemy.fang-a", "drop", "common", "game-item.eye-drops", "fang-a-eye-drops-common-drop"],
+  ["enemy.fang-a", "drop", "uncommon", "game-item.phoenix-down", "fang-a-phoenix-down-uncommon-drop"],
+];
+const evilForestRegularLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestGoblinLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
-if (!evilForestEncounter || !evilForestEncounter.formation.some((entry) => entry.enemyId === "enemy.goblin") ||
-  !evilForestGoblinLootStep?.text.includes("Goblin appears in the repeatable random pool") ||
-  !evilForestGoblinLootStep.detail?.includes("forest closes") ||
+if (!evilForestEncounter || !["enemy.dendrobium", "enemy.fang-a", "enemy.goblin"].every((enemyId) =>
+  evilForestEncounter.formation.some((entry) => entry.enemyId === enemyId)) ||
+  !evilForestGoblinLootStep?.text.includes("Dendrobium, Fang [A], and Goblin") ||
+  !evilForestGoblinLootStep.text.includes("chance-based steal slots and conditional drop slots") ||
+  !evilForestGoblinLootStep.detail?.includes("party escapes and the forest closes") ||
+  !evilForestGoblinLootStep.detail.includes("exact formations and encounter rates are not inferred") ||
   evilForestGoblinLootSourceIds.some((sourceId) => !evilForestEncounter.sourceIds.includes(sourceId) ||
     !evilForestRouteSection?.sourceIds.includes(sourceId))) {
-  errors.push("Evil Forest Goblin loot paths must link to the trail encounter, its limited window, and source context.");
+  errors.push("Evil Forest Dendrobium, Fang, and Goblin loot paths must link to the trail encounter, its limited window, and source context.");
+}
+for (const [enemyId, method, slotName, itemId, pathSuffix] of evilForestRegularLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "limited-window" || path.walkthroughObjectiveIds?.length ||
+    !path.conditions?.includes("before the area closes") || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions.includes("KO victory") || !path.conditions.includes("conditional"))) ||
+    evilForestRegularLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !enemy?.sourceIds.includes(sourceId) || !evilForestEncounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Evil Forest ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, remain limited to the forest window, and retain route provenance.`);
+  }
 }
 for (const [method, slotName, itemId, pathSuffix] of evilForestGoblinLootExpectations) {
   const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");

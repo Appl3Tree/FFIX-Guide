@@ -351,8 +351,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "evil-forest-goblin-loot",
             kind: "optional",
-            text: "While crossing the Evil Forest trail, Goblin appears in the repeatable random pool. Its common Potion steal and conditional Potion, Echo Screen, and Phoenix Down drops have separate item routes; drops require a KO victory.",
-            detail: "GameFAQs and Jegged list Goblin among the trail enemies. This farming window ends when the party escapes and the forest closes; the item routes keep chance-based slots optional rather than checklist rewards.",
+            text: "On the Evil Forest trail, the regular random pool includes Dendrobium, Fang [A], and Goblin. Their chance-based steal slots and conditional drop slots are listed in separate item routes; drops require KO victories.",
+            detail: "GameFAQs lists each enemy's item slots, and GameFAQs and Jegged list all three in the trail pool. These repeatable opportunities end when the party escapes and the forest closes; exact formations and encounter rates are not inferred, and chance-based loot is not a checklist reward.",
           },
           {
             id: "orchestra-ate",

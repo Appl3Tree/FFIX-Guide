@@ -287,7 +287,7 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 20);
+  assert.equal(orePaths.length, 21);
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -452,7 +452,7 @@ test("Phoenix Pinion and Gysahl Greens have source-backed acquisition and recipe
   const cavesItems = sources.find((source) => source.id === "cavesofnarshe-ff9-items");
   const cavesChocobo = sources.find((source) => source.id === "cavesofnarshe-ff9-chocobo-guide");
 
-  assert.equal(pinionPaths.length, 33);
+  assert.equal(pinionPaths.length, 34);
   assert.equal(pinionsById.get("item-path.disc-1.alexandria.phoenix-pinion-starting")?.method, "starting-inventory");
   assert.equal(fixedCleyra.length, 3);
   assert.ok(fixedCleyra.every((path) => path?.availability === "single-use"));
@@ -1767,6 +1767,63 @@ test("Gunitas Basin Mu and Python have repeatable regional loot paths", () => {
   }
 });
 
+test("Evil Forest Dendrobium and Fang [A] have limited-window steal/drop paths", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
+  const expected = [
+    ["enemy.dendrobium", "steal", "common", "game-item.eye-drops", "dendrobium-eye-drops-common-steal"],
+    ["enemy.dendrobium", "steal", "uncommon", "game-item.tent", "dendrobium-tent-uncommon-steal"],
+    ["enemy.dendrobium", "steal", "semi-rare", "game-item.ore", "dendrobium-ore-semi-rare-steal"],
+    ["enemy.dendrobium", "drop", "common", "game-item.eye-drops", "dendrobium-eye-drops-common-drop"],
+    ["enemy.dendrobium", "drop", "uncommon", "game-item.potion", "dendrobium-potion-uncommon-drop"],
+    ["enemy.dendrobium", "drop", "rare", "game-item.phoenix-down", "dendrobium-phoenix-down-rare-drop"],
+    ["enemy.fang-a", "steal", "common", "game-item.potion", "fang-a-potion-common-steal"],
+    ["enemy.fang-a", "steal", "uncommon", "game-item.phoenix-down", "fang-a-phoenix-down-uncommon-steal"],
+    ["enemy.fang-a", "steal", "semi-rare", "game-item.hi-potion", "fang-a-hi-potion-semi-rare-steal"],
+    ["enemy.fang-a", "steal", "rare", "game-item.phoenix-pinion", "fang-a-phoenix-pinion-rare-steal"],
+    ["enemy.fang-a", "drop", "common", "game-item.eye-drops", "fang-a-eye-drops-common-drop"],
+    ["enemy.fang-a", "drop", "uncommon", "game-item.phoenix-down", "fang-a-phoenix-down-uncommon-drop"],
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.evil-forest.random-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.evil-forest")
+    ?.sections.find((entry) => entry.id === "forest-path-monty");
+  const step = section?.steps.find((entry) => entry.id === "evil-forest-goblin-loot");
+
+  assert.ok(["enemy.dendrobium", "enemy.fang-a", "enemy.goblin"].every((enemyId) =>
+    encounter?.formation.some((entry) => entry.enemyId === enemyId)));
+  assert.match(step?.text ?? "", /Dendrobium, Fang \[A\], and Goblin/);
+  assert.match(step?.detail ?? "", /party escapes and the forest closes/);
+  assert.equal(expected.length, 12);
+
+  for (const [enemyId, method, slotName, itemId, pathSuffix] of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? enemy?.steals : enemy?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.${pathSuffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId), `${enemyId} ${slotName} ${method} slot is missing`);
+    assert.ok(path, `${pathSuffix} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.evil-forest");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "limited-window");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.ok(path.conditions?.includes("before the area closes"));
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing ${sourceId}`);
+      assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Evil Forest encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Evil Forest walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
 test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
   const expected = [
@@ -1783,7 +1840,7 @@ test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () =
   const step = section?.steps.find((entry) => entry.id === "evil-forest-goblin-loot");
 
   assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.goblin"));
-  assert.match(step?.text ?? "", /Goblin.*Potion steal/);
+  assert.match(step?.text ?? "", /Dendrobium, Fang \[A\], and Goblin/);
   assert.match(step?.detail ?? "", /forest closes/);
 
   for (const [method, slotName, itemId, suffix] of expected) {
