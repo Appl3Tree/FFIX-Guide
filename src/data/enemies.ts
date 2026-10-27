@@ -207,6 +207,7 @@ const crashSiteBakuSources = ["gamefaqs-evil-forest-71891", "rpgclassics-bestiar
 const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"];
 const iceCavernSealionSources = [...iceCavernBossSources, "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"];
+const iceCavernPreparationSources = [...iceCavernSealionSources, "gamerguides-ice-cavern"];
 const iceCavernStealsObjectiveId = "disc-1.ice-cavern.boss-steals";
 const iceCavernStealsMissableId = "missable.disc-1.ice-cavern.boss-steals";
 const iceCavernStealsCutoffId = "cutoff.ice-cavern.boss-steals";
@@ -4796,9 +4797,16 @@ const iceCavernEnemyRecords: EnemyRecord[] = [
       { title: "Finish Waltz before Sealion", detail: "Black Waltz 1 supports and can resummon Sealion. Steal the selected items first, then defeat Waltz before attacking Sealion.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"] },
       { title: "Keep Zidane healed during the solo fight", detail: "Only Zidane enters the waterfall battle. Heal before pushing Sealion into its later orb phases, which add stronger ice and water attacks.", sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Black Waltz 1's Level 2 is its enemy stat, not a recommended level for Zidane. The Japanese boss guide suggests Zidane at Lv. 5 or higher, while other route contexts focus on Trance, equipment, and healing instead; no universal party-level target is inferred.",
+      optionalGrinding: "The reviewed completion routes do not require extra battles before the waterfall. Any additional encounters are optional; a near-ready Trance can help, but no grind target is established. The Excalibur II route has a different timing goal and should not be treated as a normal-play level prescription.",
+      setupAdvice: "Before triggering the fight, restore Zidane at Mois's save point, equip his strongest available weapon and armor, and keep Potions ready. If collecting the one-time steals, try Black Waltz 1's Remedy and Silk Shirt, then Sealion's Ether and Mythril Dagger; prioritize the dagger if Zidane still needs Bandit. Do not attack Sealion while Waltz is alive: it can heal Sealion and may summon another if Sealion falls first. Keep Zidane above danger range, defeat Waltz, then finish Sealion; use Tidal Flame if Trance activates after the desired steals.",
+      confidence: "partial",
+      sourceIds: iceCavernPreparationSources,
+    },
     routeObjectiveIds: [iceCavernStealsObjectiveId],
     notes: ["The regular battle guides agree on level 2 and 229 HP. The checked sources identify this as a solo Zidane fight; the original PlayStation data has not been compared against remastered releases."],
-  }, iceCavernChapterId, iceCavernBossSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
+  }, iceCavernChapterId, iceCavernPreparationSources, [iceCavernStealsMissableId], [iceCavernStealsCutoffId]),
   chapterBoss({
     id: "enemy.sealion",
     name: "Sealion",
