@@ -1190,3 +1190,51 @@ test("Bohden Arch Ether and Moccha Coffee have separate sourced pickup records",
   assert.ok(step?.objectiveIds.includes(expected[0][2]));
   assert.ok(step?.objectiveIds.includes(expected[1][2]));
 });
+
+test("the first two Chocographs and early Pinnacle Rocks chests have item paths", () => {
+  const sourcesForChocographs = ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"];
+  const sourcesForPinnacleRocks = ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke"];
+  const expected = [
+    ["item-path.disc-1.exploring-lindblum-kingdom.streamside-elixir", "game-item.elixir", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.streamside-hi-potion", "game-item.hi-potion", 3, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.streamside-ether", "game-item.ether", 4, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.lindblum.streamside-germinas-boots", "game-item.germinas-boots", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-potion", "game-item.potion", 5, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-hi-potion", "game-item.hi-potion", 5, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-tent", "game-item.tent", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-cotton-robe", "game-item.cotton-robe", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", sourcesForChocographs],
+    ["item-path.disc-1.exploring-lindblum-kingdom.pinnacle-rocks-elixir", "game-item.elixir", 1, "chest", "disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups", sourcesForPinnacleRocks],
+    ["item-path.disc-1.exploring-lindblum-kingdom.pinnacle-rocks-phoenix-down", "game-item.phoenix-down", 1, "chest", "disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups", sourcesForPinnacleRocks],
+  ];
+
+  for (const [pathId, itemId, quantity, method, objectiveId, sourceIds] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    assert.ok(path, `${pathId} is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.exploring-lindblum-kingdom");
+    assert.equal(path.method, method);
+    assert.equal(path.quantity, quantity);
+    assert.equal(path.availability, "single-use");
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(item, `${itemId} is missing from the item catalogue`);
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
+      assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+    assert.ok(objectives.some((objective) => objective.id === objectiveId));
+  }
+
+  const chocographStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.exploring-lindblum-kingdom")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "explore-first-two-chocographs");
+  const pinnacleStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.exploring-lindblum-kingdom")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "explore-pinnacle-rocks-early-treasure");
+  assert.match(chocographStep?.text ?? "", /2 Elixirs, 3 Hi-Potions, 4 Ethers, and 2 Germinas Boots/);
+  assert.match(chocographStep?.text ?? "", /5 Potions, 5 Hi-Potions, 2 Tents, and 2 Cotton Robes/);
+  assert.ok(pinnacleStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups"));
+});

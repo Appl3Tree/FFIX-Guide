@@ -7321,6 +7321,36 @@ if (
 ) {
   errors.push("Bohden Arch must keep the Ether and Moccha Coffee pickups as separate source-linked item paths and checklist objectives at their documented locations.");
 }
+const earlyExplorationAcquisitionExpectations: [string, string, number, "chocograph" | "chest", string, string[]][] = [
+  ["item-path.disc-1.exploring-lindblum-kingdom.streamside-elixir", "game-item.elixir", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.streamside-hi-potion", "game-item.hi-potion", 3, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.streamside-ether", "game-item.ether", 4, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.lindblum.streamside-germinas-boots", "game-item.germinas-boots", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-potion", "game-item.potion", 5, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-hi-potion", "game-item.hi-potion", 5, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-tent", "game-item.tent", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.between-mountains-cotton-robe", "game-item.cotton-robe", 2, "chocograph", "disc-1.exploring-lindblum-kingdom.first-chocographs", ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocographs"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.pinnacle-rocks-elixir", "game-item.elixir", 1, "chest", "disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups", ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke"]],
+  ["item-path.disc-1.exploring-lindblum-kingdom.pinnacle-rocks-phoenix-down", "game-item.phoenix-down", 1, "chest", "disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups", ["gamefaqs-exploring-lindblum-71891", "jegged-gizamaluke"]],
+];
+const earlyExplorationAcquisitions = earlyExplorationAcquisitionExpectations.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const earlyExplorationSteps = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.exploring-lindblum-kingdom")
+  ?.sections.flatMap((section) => section.steps);
+const firstChocographsStep = earlyExplorationSteps?.find((step) => step.id === "explore-first-two-chocographs");
+const earlyPinnacleRocksStep = earlyExplorationSteps?.find((step) => step.id === "explore-pinnacle-rocks-early-treasure");
+if (
+  earlyExplorationAcquisitions.some((path) => !path) ||
+  earlyExplorationAcquisitions.some((path, index) => !path || path.itemId !== earlyExplorationAcquisitionExpectations[index][1] || path.quantity !== earlyExplorationAcquisitionExpectations[index][2] || path.method !== earlyExplorationAcquisitionExpectations[index][3] || path.chapterId !== "disc-1.exploring-lindblum-kingdom" || path.availability !== "single-use" || !path.walkthroughObjectiveIds?.includes(earlyExplorationAcquisitionExpectations[index][4]) || !earlyExplorationAcquisitionExpectations[index][5].every((sourceId) => path.sourceIds.includes(sourceId))) ||
+  earlyExplorationAcquisitionExpectations.flatMap(([, , , , , sourceIds]) => sourceIds).some((sourceId) => !sources.some((source) => source.id === sourceId)) ||
+  earlyExplorationAcquisitions.some((path, index) => !path || !earlyExplorationAcquisitionExpectations[index][5].every((sourceId) => gameItems.find((item) => item.id === path.itemId)?.sourceIds.includes(sourceId))) ||
+  !firstChocographsStep?.text.includes("2 Elixirs, 3 Hi-Potions, 4 Ethers, and 2 Germinas Boots") ||
+  !firstChocographsStep?.text.includes("5 Potions, 5 Hi-Potions, 2 Tents, and 2 Cotton Robes") ||
+  !firstChocographsStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.first-chocographs") ||
+  !earlyPinnacleRocksStep?.objectiveIds.includes("disc-1.exploring-lindblum-kingdom.pinnacle-rocks-pickups")
+) {
+  errors.push("The early Lindblum exploration sweep must catalog all rewards from the first two Chocographs and both Pinnacle Rocks chests with their existing objectives and source links.");
+}
 const trenoShopWindowObjective = objectivesById.get("disc-2.treno.shop-stock-window");
 const trenoShopWindowStep = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-2.treno")

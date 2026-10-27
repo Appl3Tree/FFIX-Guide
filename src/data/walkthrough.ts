@@ -1091,7 +1091,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "explore-lindblum-plateau",
         title: "Lindblum Plateau — Blue Magic and Pinnacle Rocks",
         summary: "Use the Business District Hunter's Gate to reach the plateau; check the available skill sources and take the early treasure detour.",
-        sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891"],
+        sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-abilities-71891", "jegged-gizamaluke"],
         steps: [
           {
             id: "explore-blue-magic-plateau",
@@ -1113,7 +1113,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "explore-chocobos-forest",
         title: "Chocobo's Forest — catch Choco and dig the first treasures",
         summary: "Visit the forest across the Lindblum basin, then return while riding Choco to unlock Hot & Cold.",
-        sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "arrpeegeez-qus-marsh-chocobo-forest"],
+        sourceIds: ["gamefaqs-exploring-lindblum-71891", "gamefaqs-chocobo-hot-cold-71891", "arrpeegeez-qus-marsh-chocobo-forest", "jegged-chocographs"],
         steps: [
           {
             id: "explore-catch-choco",
