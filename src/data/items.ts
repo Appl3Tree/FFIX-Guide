@@ -202,6 +202,8 @@ const daliUndergroundLootSources = [
   "cavesofnarshe-dali-walkthrough",
   "elitegrindlab-dali",
 ];
+const gunitasGoblinLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-dali-71891", "jegged-dali"];
+const evilForestGoblinLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
 const gizamalukeDropSources = ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"];
 const evilForestPickupSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"];
 const primaVistaShopSources = [...evilForestPickupSources, "gamefaqs-shops-71891"];
@@ -4355,6 +4357,45 @@ const daliUndergroundRegularLootPaths: ItemAcquisitionPath[] = daliUndergroundLo
   })),
 ]);
 
+const goblinLootSlots = [
+  { method: "steal" as const, slot: "common", itemId: "game-item.potion" },
+  { method: "drop" as const, slot: "common", itemId: "game-item.potion" },
+  { method: "drop" as const, slot: "uncommon", itemId: "game-item.echo-screen" },
+  { method: "drop" as const, slot: "rare", itemId: "game-item.phoenix-down" },
+] as const;
+
+const gunitasGoblinLootPaths: ItemAcquisitionPath[] = goblinLootSlots.map((entry) => ({
+  id: `item-path.disc-1.village-of-dali.gunitas-goblin-${entry.itemId.replace("game-item.", "")}-${entry.slot}-${entry.method}`,
+  itemId: entry.itemId,
+  chapterId: "disc-1.village-of-dali",
+  method: entry.method,
+  quantity: 1,
+  availability: "repeatable",
+  conditions: entry.method === "steal"
+    ? `Goblin's ${entry.slot} steal slot lists this item. The Gunitas Basin encounter can repeat; success is not guaranteed.`
+    : `On a KO victory in Gunitas Basin, Goblin's ${entry.slot} drop slot can yield this item; the slot is conditional.`,
+  notes: entry.method === "steal"
+    ? "GameFAQs lists Potion in Goblin's common steal slot; the slot odds are not modeled as guaranteed acquisitions."
+    : "GameFAQs lists this conditional drop slot for Goblin and states that non-KO defeats do not award drops.",
+  sourceIds: gunitasGoblinLootSources,
+}));
+
+const evilForestGoblinLootPaths: ItemAcquisitionPath[] = goblinLootSlots.map((entry) => ({
+  id: `item-path.disc-1.evil-forest.goblin-${entry.itemId.replace("game-item.", "")}-${entry.slot}-${entry.method}`,
+  itemId: entry.itemId,
+  chapterId: "disc-1.evil-forest",
+  method: entry.method,
+  quantity: 1,
+  availability: "limited-window",
+  conditions: entry.method === "steal"
+    ? `Goblin's ${entry.slot} steal slot lists this item. Trail encounters can repeat before the area closes; success is not guaranteed.`
+    : `On a KO victory in a repeated Evil Forest trail encounter before the area closes, Goblin's ${entry.slot} drop slot can yield this item; the slot is conditional.`,
+  notes: entry.method === "steal"
+    ? "GameFAQs lists Potion in Goblin's common steal slot; the slot odds are not modeled as guaranteed acquisitions."
+    : "GameFAQs lists this conditional drop slot for Goblin and states that non-KO defeats do not award drops.",
+  sourceIds: evilForestGoblinLootSources,
+}));
+
 const iceCavernBossDropPaths: ItemAcquisitionPath[] = [
   {
     id: "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop",
@@ -4869,6 +4910,8 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...iceCavernRegularLootPaths,
   ...nolrichHeightsRegularLootPaths,
   ...daliUndergroundRegularLootPaths,
+  ...evilForestGoblinLootPaths,
+  ...gunitasGoblinLootPaths,
   ...iceCavernBossDropPaths,
   ...gizamalukeDropPaths,
   ...burmeciaMimicLootPaths,

@@ -346,8 +346,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "forest-path-monty",
         title: "Evil Forest path — Orchestra, Monty, and the spring",
         summary: "The path is mostly linear, with an optional river look-off. Monty is at the spring; deliver Kupo's letter, then check Mognet again for Stiltzkin's message.",
-        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamerguides-evil-forest"],
+        sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest", "gamerguides-evil-forest", "gamefaqs-enemy-list-71891", "elitegrindlab-evil-forest"],
         steps: [
+          {
+            id: "evil-forest-goblin-loot",
+            kind: "optional",
+            text: "While crossing the Evil Forest trail, Goblin appears in the repeatable random pool. Its common Potion steal and conditional Potion, Echo Screen, and Phoenix Down drops have separate item routes; drops require a KO victory.",
+            detail: "GameFAQs and Jegged list Goblin among the trail enemies. This farming window ends when the party escapes and the forest closes; the item routes keep chance-based slots optional rather than checklist rewards.",
+          },
           {
             id: "orchestra-ate",
             kind: "optional",
@@ -573,7 +579,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "exit-and-nolrich-heights",
         title: "Exit check and optional Nolrich Heights stops",
         summary: "Climb the waterfall to the upper exit. The cavern remains open from the world map until the party leaves Dali, giving you a return window for anything skipped below.",
-        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-enemy-list-71891", "gamefaqs-missables-71891", "elitegrindlab-ice-cavern", "gamefaqs-optional-route-47344", "flactem-friendly-monsters", "gamerguides-ice-cavern", "rpgclassics-coffee"],
+        sourceIds: ["gamefaqs-ice-cavern-71891", "gamefaqs-enemy-list-71891", "gamefaqs-missables-71891", "elitegrindlab-ice-cavern", "gamefaqs-optional-route-47344", "flactem-friendly-monsters", "gamerguides-ice-cavern", "rpgclassics-coffee", "gamefaqs-dali-71891", "jegged-dali"],
         steps: [
           {
             id: "ice-cavern-exit",
@@ -593,6 +599,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Across the Nolrich Heights plains, repeatable standard battles can include Carve Spider, Mu, and Python. Their separate steal and conditional drop slots are listed in the item routes; drops require KO victories. Leave a friendly Mu alone—it is a separate encounter.",
             detail: "GameFAQs and Jegged group all three combat enemies around Nolrich Heights, while the GameFAQs enemy table places Carve Spider under Nolrich Heights and Mu/Python under Gunitas Basin. No formation rates are published, so the guide preserves the regional label difference and does not claim exact combinations.",
+          },
+          {
+            id: "gunitas-basin-goblin-loot",
+            kind: "optional",
+            text: "As you cross Gunitas Basin between Dali and Lindblum, Goblin joins the regional encounter pool alongside Mu and Python. Goblin's Potion steal and its conditional Potion, Echo Screen, and Phoenix Down drops have separate item routes; drops require a KO victory.",
+            detail: "GameFAQs lists Goblin in the Gunitas Basin roster and gives its four item-bearing loot slots. The enemy table does not publish formation rates or exact combinations, so Goblin is not implied to appear in every battle.",
           },
           {
             id: "friendly-mu",

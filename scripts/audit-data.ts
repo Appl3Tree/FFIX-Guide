@@ -3968,6 +3968,72 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of daliUndergroundLoo
     errors.push(`Dali underground ${method} path ${pathSuffix} must match its enemy slot, stay limited to the factory window, and retain source conflicts.`);
   }
 }
+const gunitasGoblinLootExpectations = [
+  ["steal", "common", "game-item.potion", "potion-common-steal"],
+  ["drop", "common", "game-item.potion", "potion-common-drop"],
+  ["drop", "uncommon", "game-item.echo-screen", "echo-screen-uncommon-drop"],
+  ["drop", "rare", "game-item.phoenix-down", "phoenix-down-rare-drop"],
+];
+const gunitasEncounter = enemyEncounters.find((entry) => entry.id === "encounter.gunitas-basin.world-map-pool");
+const gunitasWalkthroughSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.ice-cavern")?.sections
+  .find((section) => section.id === "exit-and-nolrich-heights");
+const gunitasGoblinLootStep = gunitasWalkthroughSection?.steps.find((step) => step.id === "gunitas-basin-goblin-loot");
+const gunitasGoblinLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-dali-71891", "jegged-dali"];
+if (!gunitasEncounter || !gunitasEncounter.formation.some((entry) => entry.enemyId === "enemy.goblin") ||
+  !gunitasGoblinLootStep?.text.includes("Goblin's Potion steal") ||
+  !gunitasGoblinLootStep.detail?.includes("four item-bearing loot slots") ||
+  gunitasGoblinLootSourceIds.some((sourceId) => !gunitasEncounter.sourceIds.includes(sourceId) ||
+    !gunitasWalkthroughSection?.sourceIds.includes(sourceId))) {
+  errors.push("Gunitas Basin Goblin loot paths must link to the encounter and the route step with source-backed slot context.");
+}
+for (const [method, slotName, itemId, pathSuffix] of gunitasGoblinLootExpectations) {
+  const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");
+  const slots = method === "steal" ? goblin?.steals : goblin?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.village-of-dali.gunitas-goblin-${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.village-of-dali" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "repeatable" || path.walkthroughObjectiveIds?.length ||
+    !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions?.includes("KO victory") || !path.conditions.includes("conditional"))) ||
+    gunitasGoblinLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !goblin?.sourceIds.includes(sourceId) || !gunitasEncounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Gunitas Basin Goblin ${method} path ${pathSuffix} must match the enemy slot, stay repeatable, and retain source provenance.`);
+  }
+}
+const evilForestGoblinLootExpectations = [
+  ["steal", "common", "game-item.potion", "potion-common-steal"],
+  ["drop", "common", "game-item.potion", "potion-common-drop"],
+  ["drop", "uncommon", "game-item.echo-screen", "echo-screen-uncommon-drop"],
+  ["drop", "rare", "game-item.phoenix-down", "phoenix-down-rare-drop"],
+];
+const evilForestEncounter = enemyEncounters.find((entry) => entry.id === "encounter.evil-forest.random-pool");
+const evilForestRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.evil-forest")?.sections
+  .find((section) => section.id === "forest-path-monty");
+const evilForestGoblinLootStep = evilForestRouteSection?.steps.find((step) => step.id === "evil-forest-goblin-loot");
+const evilForestGoblinLootSourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
+if (!evilForestEncounter || !evilForestEncounter.formation.some((entry) => entry.enemyId === "enemy.goblin") ||
+  !evilForestGoblinLootStep?.text.includes("Goblin appears in the repeatable random pool") ||
+  !evilForestGoblinLootStep.detail?.includes("forest closes") ||
+  evilForestGoblinLootSourceIds.some((sourceId) => !evilForestEncounter.sourceIds.includes(sourceId) ||
+    !evilForestRouteSection?.sourceIds.includes(sourceId))) {
+  errors.push("Evil Forest Goblin loot paths must link to the trail encounter, its limited window, and source context.");
+}
+for (const [method, slotName, itemId, pathSuffix] of evilForestGoblinLootExpectations) {
+  const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");
+  const slots = method === "steal" ? goblin?.steals : goblin?.drops;
+  const item = gameItems.find((entry) => entry.id === itemId);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.goblin-${pathSuffix}`);
+  if (!slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId) ||
+    !path || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" || path.method !== method ||
+    path.quantity !== 1 || path.availability !== "limited-window" || path.walkthroughObjectiveIds?.length ||
+    !path.conditions?.includes("before the area closes") || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "drop" && (!path.conditions.includes("KO victory") || !path.conditions.includes("conditional"))) ||
+    evilForestGoblinLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !goblin?.sourceIds.includes(sourceId) || !evilForestEncounter?.sourceIds.includes(sourceId))) {
+    errors.push(`Evil Forest Goblin ${method} path ${pathSuffix} must match the enemy slot, retain its limited window, and preserve sources.`);
+  }
+}
 const daliBossPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")?.sections.find((section) => section.id === "observatory-and-black-waltz-2");
 const daliBossPrepStep = daliBossPrepSection?.steps.find((step) => step.id === "dali-observatory-boss-prep");
 const blackWaltz2Preparation = blackWaltz2Record?.preparationGuidance;

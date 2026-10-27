@@ -228,6 +228,7 @@ const gizamalukeDropsObjectiveId = "disc-1.journey-to-burmecia.gizamaluke-drops"
 const gizamalukeStealsMissableId = "missable.disc-1.journey-to-burmecia.gizamaluke-steals";
 const gizamalukeStealsCutoffId = "cutoff.gizamaluke.boss-steals";
 const nolrichEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "gamefaqs-abilities-71891"];
+const gunitasBasinSources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali"];
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
 const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
 const blackWaltz2PreparationSources = [...blackWaltz2Sources, "kamigame-dali-black-waltz-2"];
@@ -469,7 +470,7 @@ const evilForestEncounters: EnemyEncounter[] = [
       { enemyId: "enemy.fang-a", quantity: null },
       { enemyId: "enemy.goblin", quantity: null },
     ],
-    sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest"],
+    sourceIds: [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"],
     objectiveIds: [],
     missableIds: [],
     cutoffIds: [],
@@ -1315,7 +1316,7 @@ const lindblumRegionalEncounters: EnemyEncounter[] = [
       { enemyId: "enemy.mu", quantity: null },
       { enemyId: "enemy.python", quantity: null },
     ],
-    sourceIds: [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali"],
+    sourceIds: gunitasBasinSources,
     objectiveIds: [],
     missableIds: [],
     cutoffIds: [],
@@ -4696,7 +4697,7 @@ const evilForestEnemyRecords: EnemyRecord[] = [
     strategies: [],
     routeObjectiveIds: [],
     notes: ["Goblin's Eat result is Goblin Punch. Quina is not yet available in the Evil Forest, so the early record is a bestiary source; GameFAQs also lists Goblin in Gunitas Basin."],
-  }, evilForestChapterId, evilForestEnemySources),
+  }, evilForestChapterId, [...new Set([...evilForestEnemySources, ...gunitasBasinSources, "elitegrindlab-evil-forest"])]),
   chapterEnemy({
     id: "enemy.plant-spider",
     name: "Plant Spider",
@@ -5441,7 +5442,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
     strategies: [{ title: "Finish it with an ordinary attack", detail: "The regular Mu has little HP; its Stone attack is its main threat. The friendly Mu encounter that asks for Ore is a separate sidequest event and is not a battle.", sourceIds: [enemyListSourceId, "jegged-ice-cavern"] }],
     routeObjectiveIds: [],
     notes: ["The listed combat form is the standard Mu. GameFAQs' Enemy List places it under Gunitas Basin, while the walkthrough and Jegged list the combat form around Nolrich Heights. Jegged separately describes the Friendly Monster Mu, which asks for Ore and rewards a Potion plus 10 AP."],
-  }, iceCavernChapterId, nolrichEnemySources),
+  }, iceCavernChapterId, [...new Set([...nolrichEnemySources, ...gunitasBasinSources])]),
   chapterEnemy({
     id: "enemy.python",
     name: "Python",
@@ -5464,7 +5465,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
     strategies: [{ title: "Use Ice and avoid wasting turns", detail: "Python has low HP, is weak to Ice, and can use Thunder. Quina can learn Pumpkin Head by eating it later.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: [],
     notes: ["The walkthrough and Jegged list Python in the Nolrich Heights world-map pool, while GameFAQs' Enemy List places it under Gunitas Basin; no frequency or formation rate is inferred."],
-  }, iceCavernChapterId, nolrichEnemySources),
+  }, iceCavernChapterId, [...new Set([...nolrichEnemySources, ...gunitasBasinSources])]),
   chapterEnemy({
     id: "enemy.ghost",
     name: "Ghost",

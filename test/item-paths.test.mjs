@@ -1669,6 +1669,97 @@ test("Dali underground enemy loot has temporary paths and preserves the Skeleton
   }
 });
 
+test("Gunitas Basin Goblin loot has repeatable sourced steal/drop paths", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-dali-71891", "jegged-dali"];
+  const expected = [
+    ["steal", "common", "game-item.potion", "potion-common-steal"],
+    ["drop", "common", "game-item.potion", "potion-common-drop"],
+    ["drop", "uncommon", "game-item.echo-screen", "echo-screen-uncommon-drop"],
+    ["drop", "rare", "game-item.phoenix-down", "phoenix-down-rare-drop"],
+  ];
+  const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.gunitas-basin.world-map-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.ice-cavern")
+    ?.sections.find((entry) => entry.id === "exit-and-nolrich-heights");
+  const step = section?.steps.find((entry) => entry.id === "gunitas-basin-goblin-loot");
+
+  assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.goblin"));
+  assert.match(step?.text ?? "", /Gunitas Basin.*Goblin/);
+  assert.match(step?.detail ?? "", /four item-bearing loot slots/);
+
+  for (const [method, slotName, itemId, suffix] of expected) {
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? goblin?.steals : goblin?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.village-of-dali.gunitas-goblin-${suffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId));
+    assert.ok(path, `Goblin ${method} ${slotName} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.village-of-dali");
+    assert.equal(path.method, method);
+    assert.equal(path.availability, "repeatable");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `Goblin path is missing ${sourceId}`);
+      assert.ok(goblin?.sourceIds.includes(sourceId), `Goblin record is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Gunitas Basin encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Gunitas Basin walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
+test("Evil Forest Goblin loot has limited-window sourced steal/drop paths", () => {
+  const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "elitegrindlab-evil-forest"];
+  const expected = [
+    ["steal", "common", "game-item.potion", "potion-common-steal"],
+    ["drop", "common", "game-item.potion", "potion-common-drop"],
+    ["drop", "uncommon", "game-item.echo-screen", "echo-screen-uncommon-drop"],
+    ["drop", "rare", "game-item.phoenix-down", "phoenix-down-rare-drop"],
+  ];
+  const goblin = enemyRecords.find((entry) => entry.id === "enemy.goblin");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.evil-forest.random-pool");
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.evil-forest")
+    ?.sections.find((entry) => entry.id === "forest-path-monty");
+  const step = section?.steps.find((entry) => entry.id === "evil-forest-goblin-loot");
+
+  assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.goblin"));
+  assert.match(step?.text ?? "", /Goblin.*Potion steal/);
+  assert.match(step?.detail ?? "", /forest closes/);
+
+  for (const [method, slotName, itemId, suffix] of expected) {
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const slots = method === "steal" ? goblin?.steals : goblin?.drops;
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `item-path.disc-1.evil-forest.goblin-${suffix}`);
+    assert.ok(slots?.some((entry) => entry.slot === slotName && entry.itemId === itemId));
+    assert.ok(path, `Evil Forest Goblin ${method} ${slotName} path is missing`);
+    assert.equal(path.itemId, itemId);
+    assert.equal(path.chapterId, "disc-1.evil-forest");
+    assert.equal(path.method, method);
+    assert.equal(path.availability, "limited-window");
+    assert.equal(path.walkthroughObjectiveIds, undefined);
+    assert.ok(path.conditions?.includes("before the area closes"));
+    assert.ok(item?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+    if (method === "drop") {
+      assert.match(path.conditions ?? "", /KO victory/);
+      assert.match(path.conditions ?? "", /conditional/);
+    }
+    for (const sourceId of sourceIds) {
+      assert.ok(path.sourceIds.includes(sourceId), `Evil Forest Goblin path is missing ${sourceId}`);
+      assert.ok(goblin?.sourceIds.includes(sourceId), `Goblin record is missing ${sourceId}`);
+      assert.ok(encounter?.sourceIds.includes(sourceId), `Evil Forest encounter is missing ${sourceId}`);
+      assert.ok(section?.sourceIds.includes(sourceId), `Evil Forest walkthrough is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
   const sourceIds = [
     "gamefaqs-journey-to-burmecia-71891",
