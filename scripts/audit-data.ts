@@ -4774,6 +4774,65 @@ for (const expected of alexandriaBeatrixSteals) {
     errors.push(`Alexandria Beatrix's ${expected.itemId} steal must link the enemy table, one-time item path, and warning objective.`);
   }
 }
+const alexandriaZornThornEncounter = enemyEncounters.find((candidate) => candidate.id === "encounter.return-to-alexandria.zorn-thorn");
+const alexandriaZorn = enemyRecords.find((candidate) => candidate.id === "enemy.zorn");
+const alexandriaThorn = enemyRecords.find((candidate) => candidate.id === "enemy.thorn");
+const alexandriaZornThornRecords = [alexandriaZorn, alexandriaThorn];
+const alexandriaZornThornExpectedSteals = [
+  { enemyId: "enemy.zorn", itemId: "game-item.partisan", pathId: "item-path.disc-2.return-to-alexandria.zorn-partisan-steal" },
+  { enemyId: "enemy.zorn", itemId: "game-item.stardust-rod", pathId: "item-path.disc-2.return-to-alexandria.zorn-stardust-rod-steal" },
+  { enemyId: "enemy.thorn", itemId: "game-item.mythril-armor", pathId: "item-path.disc-2.return-to-alexandria.thorn-mythril-armor" },
+  { enemyId: "enemy.thorn", itemId: "game-item.mythril-armlet", pathId: "item-path.disc-2.return-to-alexandria.thorn-mythril-armlet-steal" },
+];
+const alexandriaZornThornPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-alexandria")?.sections.find((section) => section.id === "return-alexandria-zorn-thorn-and-beatrix");
+const alexandriaZornThornPreparationStep = alexandriaZornThornPreparationSection?.steps.find((step) => step.id === "return-alexandria-zorn-thorn-steals");
+const alexandriaPreTimerPreparationStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-alexandria")?.sections.find((section) => section.id === "return-alexandria-cage-and-timer")?.steps.find((step) => step.id === "return-alexandria-cage");
+if (!alexandriaZornThornEncounter || alexandriaZornThornEncounter.kind !== "boss" ||
+  alexandriaZornThornEncounter.chapterId !== "disc-2.return-to-alexandria" ||
+  !alexandriaZornThornEncounter.formation.some((member) => member.enemyId === "enemy.zorn" && member.quantity === 1) ||
+  !alexandriaZornThornEncounter.formation.some((member) => member.enemyId === "enemy.thorn" && member.quantity === 1) ||
+  !alexandriaZornThornEncounter.objectiveIds.includes("disc-2.return-to-alexandria.zorn-thorn-steals") ||
+  !alexandriaZornThornEncounter.missableIds.includes("missable.disc-2.return-to-alexandria.zorn-thorn-steals") ||
+  !alexandriaZornThornEncounter.cutoffIds.includes("cutoff.alexandria-rescue.rotating-platform") ||
+  alexandriaZornThornRecords.some((enemy) => !enemy || enemy.kind !== "boss" ||
+    !enemy.encounterIds.includes("encounter.return-to-alexandria.zorn-thorn") ||
+    enemy.stats.find((stat) => stat.field === "level")?.value !== 16 ||
+    !enemy.routeObjectiveIds.includes("disc-2.return-to-alexandria.zorn-thorn-steals") ||
+    !enemy.missableIds.includes("missable.disc-2.return-to-alexandria.zorn-thorn-steals") ||
+    !enemy.cutoffIds.includes("cutoff.alexandria-rescue.rotating-platform") ||
+    enemy.preparationGuidance?.suggestedLevelRange !== undefined ||
+    !enemy.preparationGuidance?.levelRationale.includes("enemy stat") ||
+    !enemy.preparationGuidance?.levelRationale.includes("party-level recommendation") ||
+    !enemy.preparationGuidance?.difficultyAssessment?.includes("Easy") ||
+    !enemy.preparationGuidance.difficultyAssessment.includes("subjective single-source") ||
+    !enemy.preparationGuidance.optionalGrinding.includes("pre-timer") ||
+    !enemy.preparationGuidance.setupAdvice.includes("no healer") ||
+    !enemy.preparationGuidance.setupAdvice.includes("Slow") ||
+    !enemy.preparationGuidance.setupAdvice.includes("rescue countdown") ||
+    !enemy.preparationGuidance.sourceIds.includes("gamefaqs-boss-guide-31490")) ||
+  !alexandriaZorn?.stats.some((stat) => stat.field === "HP" && stat.value === 4897 && stat.verification === "disputed") ||
+  !alexandriaZorn?.stats.some((stat) => stat.field === "HP" && stat.value === 4896 && stat.verification === "disputed") ||
+  !alexandriaThorn?.stats.some((stat) => stat.field === "HP" && stat.value === 2985 && stat.verification === "disputed") ||
+  !alexandriaThorn?.stats.some((stat) => stat.field === "HP" && stat.value === 2984 && stat.verification === "disputed") ||
+  !alexandriaZorn?.facts.some((fact) => fact.category === "attack" && fact.label === "Meteorite") ||
+  !alexandriaThorn?.facts.some((fact) => fact.category === "attack" && fact.label === "Light Flare") ||
+  !alexandriaZornThornPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !alexandriaZornThornPreparationStep?.detail?.includes("no healer") ||
+  !alexandriaZornThornPreparationStep.detail.includes("rescue timer continues") ||
+  !alexandriaPreTimerPreparationStep?.detail?.includes("optional Alexandrian Soldier loop") ||
+  !alexandriaPreTimerPreparationStep.detail.includes("before the rescue timer starts")) {
+  errors.push("Alexandria's Zorn/Thorn bestiary must keep the paired encounter, disputed HP values, Level 16 enemy stats, timed steal guidance, and pre-timer Steiner leveling caveat linked.");
+}
+for (const expected of alexandriaZornThornExpectedSteals) {
+  const enemy = enemyRecords.find((candidate) => candidate.id === expected.enemyId);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!enemy?.steals.some((slot) => slot.itemId === expected.itemId) || !path || path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-2.return-to-alexandria" || path.method !== "steal" || path.availability !== "one-time-encounter" ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.return-to-alexandria.zorn-thorn-steals") ||
+    !path.sourceIds.includes("gamefaqs-return-to-alexandria-71891")) {
+    errors.push(`Zorn and Thorn's ${expected.itemId} steal must link the correct enemy, one-time item path, and shared warning objective.`);
+  }
+}
 const cleyraAntlion = enemyRecords.find((enemy) => enemy.id === "enemy.antlion-cleyra");
 const cleyraBeatrix = enemyRecords.find((enemy) => enemy.id === "enemy.beatrix-cleyra");
 if (!cleyraAntlion?.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.annoyntment") ||

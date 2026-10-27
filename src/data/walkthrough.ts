@@ -1925,13 +1925,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "return-alexandria-cage-and-timer",
         title: "Alexandria Castle — cage escape and timed route",
         summary: "Remove Marcus's useful equipment before he leaves, then follow the shortest route to Dagger.",
-        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "gamefaqs-boss-guide-31490", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "return-alexandria-cage",
             kind: "required",
             text: "Rock the hanging cage by pressing the direction it is moving when Marcus calls out. After it breaks, walk to the far ladder, remove any useful equipment from Marcus, and replace his weapon with a spare Broadsword or Iron Sword before he leaves.",
-            detail: "Marcus leaves the party shortly after you climb the ladder. His weapon cannot be removed outright, so swap it for a common sword and transfer any gear you want to keep available.",
+            detail: "Marcus leaves the party shortly after you climb the ladder. His weapon cannot be removed outright, so swap it for a common sword and transfer any gear you want to keep available. If you want extra levels, the reviewed PS1 guides describe an optional Alexandrian Soldier loop for Steiner before the rescue timer starts; it is an EXP detour, not a required party-level target.",
           },
           {
             id: "return-alexandria-timed-rescue",
@@ -1959,13 +1959,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "return-alexandria-zorn-thorn-and-beatrix",
         title: "Rescue Dagger — Zorn and Thorn, Friendship, and Beatrix",
         summary: "Use the one-time steal windows, rescue Dagger, check Mognet, and let the scripted Beatrix battle end normally.",
-        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2"],
+        sourceIds: ["gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "gamefaqs-boss-guide-31490"],
         steps: [
           {
             id: "return-alexandria-zorn-thorn-steals",
             kind: "combat",
             text: "In the Zorn and Thorn fight, have Zidane try to steal Partisan and Stardust Rod from Zorn, then Mythril Armor and Mythril Armlet from Thorn. When either clown receives power, attack that target to interrupt its spell before it lands.",
-            detail: "Use Slow if it is available, and defeat either clown only after the desired steals or when the rescue timer makes it unsafe to continue. The battle ends when one clown is defeated; no exact HP or steal percentage is required.",
+            detail: "Both are vulnerable to Slow. Keep recovery items ready because Dagger is absent and the party has no healer; the 30-minute rescue timer continues during the fight. Complete the desired steals before defeating either clown, and finish the battle rather than letting the countdown reach zero.",
             objectiveIds: ["disc-2.return-to-alexandria.zorn-thorn-steals"],
           },
           {

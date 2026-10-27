@@ -4,7 +4,9 @@ Last updated: 2026-10-26
 
 ## Latest verification
 
-Beatrix (Cleyra) preparation: `npm run lint`, `npm run build` (TypeScript, data audit, production Vite build), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 430 sources; 100 cutoff windows cover all warnings. Bundle: 2,389.80 kB JavaScript (580.64 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's existing chunk-size advisory remains. Tests, browser, gameplay, and release verification were not run.
+Zorn and Thorn preparation: `npm run lint`, `npm run build` (TypeScript, data audit, production Vite build), and `git diff --check` pass. Audit reports 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 430 sources; the bestiary has 151 records and 141 encounter groups, and 100 cutoff windows cover all warnings. Bundle: 2,398.01 kB JavaScript (582.41 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's existing chunk-size advisory remains. Tests, browser, gameplay, and release verification were not run.
+
+Previous verification: Beatrix (Cleyra) preparation: lint/build/typecheck/audit and whitespace checks passed with 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 430 sources; 100 cutoff windows covered all warnings. Bundle: 2,389.80 kB JavaScript (580.64 kB gzip), 61.11 kB CSS (12.91 kB gzip). Tests, browser, gameplay, and release verification were not run.
 
 Previous verification: Antlion preparation: lint/build/typecheck/audit and whitespace checks passed with 0 errors and 188 partial-coverage warnings across 44 chapters, 142 missables, 837 objectives, and 430 sources; 100 cutoff windows covered all warnings. Bundle: 2,388.23 kB JavaScript (580.25 kB gzip), 61.11 kB CSS (12.91 kB gzip). Tests, browser, gameplay, and release verification were not run.
 
