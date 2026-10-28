@@ -340,6 +340,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "GameFAQs Items and RPGClassics list Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil at Daguerreo; the Disc IV route is a repeatable recovery source if both one-time copies from Dive Spot #1 and Lich are missed.",
   },
   {
+    id: "synthesis-recipe.white-robe",
+    resultItemId: "game-item.white-robe",
+    ingredients: [
+      { itemId: "game-item.gaia-gear", quantity: 1 },
+      { itemId: "game-item.jade-armlet", quantity: 1 },
+    ],
+    chapterId: "disc-3.aerial-exploration",
+    shopId: "daguerreo.synthesis-expert",
+    shopName: "Synthesis Expert's Shop (Daguerreo)",
+    cost: { currency: "gil", amount: 8000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-equipment-33383", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    notes: "Daguerreo synthesizes White Robe from Gaia Gear + Jade Armlet for 8,000 Gil. GameFAQs Items identifies this recipe as a recovery route, and its older Equipment List and RPGClassics give the Disc III/IV availability. The Sea at Dusk Chocograph is the separate world-map treasure route; White Robe is also used in the Hades Robe of Lords recipe.",
+  },
+  {
     id: "synthesis-recipe.priests-racket",
     resultItemId: "game-item.priests-racket",
     ingredients: [

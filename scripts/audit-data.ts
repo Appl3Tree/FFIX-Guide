@@ -10746,6 +10746,42 @@ if (!lichWarning?.classification.includes("recoverable-later") ||
   !lichWalkthroughStep.detail.includes("Genji Gloves Need 3")) {
   errors.push("Lich's one-time steals must link the Dive Spot #1 copies, the Siren's Flute Disc IV shop, the Black Robe Disc IV synthesis route, and the unresolved Genji Gloves quantity target.");
 }
+const whiteRobeObjective = objectives.find((objective) => objective.id === "disc-3.white-robe");
+const whiteRobeChocographPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.white-robe-sea-at-dusk");
+const whiteRobeSynthesisPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.white-robe-daguerreo-synthesis");
+const whiteRobeKujaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.the-final-battle.trance-kuja-white-robe-steal");
+const whiteRobeRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.white-robe");
+const whiteRobeTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.white-robe");
+const whiteRobeAbilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.white-robe").map((claim) => claim.abilityName);
+const whiteRobeWalkthroughSteps = walkthroughChapters
+  .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
+  .filter((step) => ["high-seas-ocean-chocographs", "aerial-daguerreo-rank-and-synthesis", "final-preparations-open-activities", "final-battle-kuja-steals"].includes(step.id));
+const whiteRobeWalkthroughStepIds = new Set(whiteRobeWalkthroughSteps.map((step) => step.id));
+const whiteRobeNeedTarget = whiteRobeTargets.find((target) => target.id === "item-target.disc-4.final-preparations.white-robe-need-three");
+const whiteRobeEndTarget = whiteRobeTargets.find((target) => target.id === "item-target.disc-4.final-preparations.white-robe-end-inventory");
+if (!whiteRobeObjective ||
+  !["disc-3.on-the-high-seas", "disc-3.aerial-exploration", "disc-4.final-preparations", "disc-4.the-final-battle"].every((chapterId) => whiteRobeObjective.chapterIds?.includes(chapterId)) ||
+  !whiteRobeRecipe || whiteRobeRecipe.resultItemId !== "game-item.white-robe" || whiteRobeRecipe.cost.amount !== 8000 ||
+  !whiteRobeRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.gaia-gear") ||
+  !whiteRobeRecipe.ingredients.some((ingredient) => ingredient.itemId === "game-item.jade-armlet") ||
+  !["gamefaqs-items-71891", "gamefaqs-equipment-33383", "gamefaqs-shops-71891", "rpgclassics-synthesis"].every((sourceId) => whiteRobeRecipe.sourceIds.includes(sourceId)) ||
+  !whiteRobeChocographPath || whiteRobeChocographPath.method !== "chocograph" || whiteRobeChocographPath.availability !== "single-use" ||
+  !whiteRobeChocographPath.conditions?.includes("Chocograph #17: Sea at Dusk") ||
+  !whiteRobeChocographPath.walkthroughObjectiveIds?.includes("disc-3.white-robe") ||
+  !whiteRobeSynthesisPath || whiteRobeSynthesisPath.method !== "synthesis" || whiteRobeSynthesisPath.availability !== "repeatable" ||
+  whiteRobeSynthesisPath.recipeId !== "synthesis-recipe.white-robe" || whiteRobeSynthesisPath.cost?.amount !== 8000 ||
+  !whiteRobeSynthesisPath.walkthroughObjectiveIds?.includes("disc-3.white-robe") ||
+  !whiteRobeKujaPath?.walkthroughObjectiveIds?.includes("disc-3.white-robe") ||
+  whiteRobeNeedTarget?.targetQuantity !== 3 || whiteRobeNeedTarget.basis !== "route-need" ||
+  whiteRobeEndTarget?.targetQuantity !== 1 || whiteRobeEndTarget.basis !== "end-inventory" ||
+  !["Auto-Potion", "Holy", "Loudmouth"].every((abilityName) => whiteRobeAbilities.includes(abilityName)) ||
+  !whiteRobeWalkthroughStepIds.has("high-seas-ocean-chocographs") ||
+  !whiteRobeWalkthroughSteps.find((step) => step.id === "high-seas-ocean-chocographs")?.text.includes("White Robe") ||
+  !whiteRobeWalkthroughSteps.find((step) => step.id === "aerial-daguerreo-rank-and-synthesis")?.detail?.includes("White Robe from Gaia Gear + Jade Armlet for 8,000 Gil") ||
+  !whiteRobeWalkthroughSteps.find((step) => step.id === "final-preparations-open-activities")?.detail?.includes("Need 3") ||
+  !whiteRobeWalkthroughSteps.find((step) => step.id === "final-battle-kuja-steals")?.detail?.includes("Daguerreo synthesis routes")) {
+  errors.push("White Robe must link the Sea at Dusk treasure, repeatable Daguerreo synthesis, Trance Kuja steal, source-specific inventory targets, abilities, and walkthrough checkpoints.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }

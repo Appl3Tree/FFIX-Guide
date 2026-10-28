@@ -4387,9 +4387,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-ocean-chocographs",
             kind: "optional",
-            text: "Once Choco has Ocean ability, collect the newly reachable Chocograph treasures #17 Sea at Dusk, #18 Ocean, and #19 Cold Lagoon. These maps reward additional equipment, gemstones, and cards; use the linked Chocograph reference for their treasure-site directions.",
+            text: "Once Choco has Ocean ability, collect the newly reachable Chocograph treasures #17 Sea at Dusk, #18 Ocean, and #19 Cold Lagoon. Sea at Dusk includes a White Robe, Phoenix Pinions, a Diamond, and a Masamune Card; use the linked Chocograph reference for the treasure-site directions.",
             detail: "Ocean access also unlocks the four Dive Spots below. The route leaves Chocograph treasure sites that are still flagged as unavailable for later chapters rather than treating them as missed.",
-            objectiveIds: ["disc-3.on-the-high-seas.chocographs"],
+            objectiveIds: ["disc-3.on-the-high-seas.chocographs", "disc-3.white-robe"],
           },
         ],
       },
@@ -5398,8 +5398,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-daguerreo-rank-and-synthesis",
             kind: "optional",
             text: "Continue to the Four-Armed Man. After your treasure sweep, ask him to check your Treasure Hunter rank; if he awards Rank S, return to the entrance area for the Rank S Medal. Save first if you still need to win cards from him.",
-            detail: "Treasure Hunter uses points: one for each opened chest, searched hidden field icon, item gained during an event sequence, and qualifying Treno Auction House key item; two for each Chocobo world-map treasure. Hot & Cold digging and Stiltzkin purchases score zero. GameFAQs excludes Magical Fingertip and Pearl Rouge from the Treno auction category, while Jegged does not name those exceptions. Rank S requires 340 points (about 75% of all treasures), and Another Man's Treasure unlocks at Rank S, so you do not need every treasure. The exact Rank S Medal handoff order differs between sources. Ride the lift to Noggy and inspect the synthesis shop; if Battle Boots are part of your item goal and you have Feather Boots plus Wing Edge, the recipe costs 6,500 Gil.",
-            objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep"],
+            detail: "Treasure Hunter uses points: one for each opened chest, searched hidden field icon, item gained during an event sequence, and qualifying Treno Auction House key item; two for each Chocobo world-map treasure. Hot & Cold digging and Stiltzkin purchases score zero. GameFAQs excludes Magical Fingertip and Pearl Rouge from the Treno auction category, while Jegged does not name those exceptions. Rank S requires 340 points (about 75% of all treasures), and Another Man's Treasure unlocks at Rank S, so you do not need every treasure. The exact Rank S Medal handoff order differs between sources. Ride the lift to Noggy and inspect the synthesis shop; if Battle Boots are part of your item goal and you have Feather Boots plus Wing Edge, the recipe costs 6,500 Gil. Daguerreo also synthesizes White Robe from Gaia Gear + Jade Armlet for 8,000 Gil; this remains a repeatable recovery route and supplies the White Robe ingredient for Robe of Lords.",
+            objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep", "disc-3.aerial-exploration.daguerreo-stock", "disc-3.white-robe"],
           },
           {
             id: "aerial-daguerreo-library-items",
@@ -6833,9 +6833,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "final-preparations-open-activities",
             kind: "optional",
-            text: "Review the selected profile's open objectives and Missables warnings. Finish any remaining optional sidequest, treasure, shop, card, Mognet, ATE, Chocobo, Frog Catching, or achievement route that matters to this goal.",
-            detail: "GameFAQs says previously available activities remain available at this stage. This is a cleanup window, not a new permanent deadline for every earlier activity. Use each chapter's recovery note for location-specific exceptions and route requirements.",
-            objectiveIds: ["disc-4.final-preparations.final-audit"],
+            text: "Review the selected profile's open objectives and Missables warnings. Finish any remaining optional sidequest, treasure, shop, card, Mognet, ATE, Chocobo, Frog Catching, or achievement route that matters to this goal; use the White Robe Chocograph or Daguerreo recipe if its earlier route was skipped.",
+            detail: "GameFAQs says previously available activities remain available at this stage. This is a cleanup window, not a new permanent deadline for every earlier activity. White Robe can be recovered at Daguerreo from Gaia Gear + Jade Armlet for 8,000 Gil; the source-specific Need 3 and end-inventory #1 targets are optional inventory planning, not universal requirements. Use each chapter's recovery note for location-specific exceptions and route requirements.",
+            objectiveIds: ["disc-4.final-preparations.final-audit", "disc-3.white-robe"],
           },
           {
             id: "final-preparations-ragtime-mouse",
@@ -6970,8 +6970,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "final-battle-kuja-steals",
             kind: "combat",
             text: "With Zidane, attempt Ether, White Robe, and Rebirth Ring before defeating Trance Kuja.",
-            detail: "Rebirth Ring has other routes if still available, including the Chocograph #24 treasure and synthesis. This is the last encounter steal window; the final sequence cannot be repeated without loading the Crystal World save.",
-            objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals", "disc-3.card-tournament.rebirth-ring"],
+            detail: "Rebirth Ring has other routes if still available, including the Chocograph #24 treasure and synthesis. White Robe also has the Sea at Dusk Chocograph and repeatable Daguerreo synthesis routes, so this optional encounter copy is not the only source. This is the last encounter steal window; the final sequence cannot be repeated without loading the Crystal World save.",
+            objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals", "disc-3.card-tournament.rebirth-ring", "disc-3.white-robe"],
           },
           {
             id: "final-battle-kuja-fight",

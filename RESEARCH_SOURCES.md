@@ -6,7 +6,7 @@ Last updated: 2026-10-28
 
 The project records the claim, source, relevant section, version/platform, access date, verification state, and known conflict for each fact. Walkthroughs are used for scope discovery and fact checking, not copied prose. Critical deadlines and missable consequences require corroboration. Where references disagree, the conflict stays open until evidence resolves it.
 
-The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 446-source register and walkthrough do not establish that the game's content has been comprehensively researched.
+The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 447-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
 ## FFIX references inspected
 
@@ -754,3 +754,9 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 - The older [GameFAQs Monster List](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/20490) labels its Left Elixir and Right Wing Edge steals Very Common; the guide preserves that wording and normalizes each slot to Common. [RPGClassics’ bestiary](https://shrines.rpgclassics.com/psx/ffix/bestiary3.shtml) lists the same sides. [Opa-Til’s steal table](https://ff9.opatil.com/eng/data/steal.html) agrees on those assignments and reports 100% table rates; it also lists the Kraken body’s 100%/25%/0.39% steal tiers and [drop table](https://ff9.opatil.com/eng/data/drop.html) rates of 100%/37.5%/12.5%/0.39%. These are source-reported table percentages.
 - [Jegged’s Memoria walkthrough](https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/42-Memoria.html) says its body-steal percentages are odds per connected steal action: 70%/23%/0.4%. It also lists the three conditional drop percentages as 37.5%/12.5%/0.4% but shifts their rarity labels to Uncommon/Rare/Very Rare; those label differences remain explicit against GameFAQs’ Common/Uncommon/Rare slots. Rates have not been tested in game or across releases.
 - The guide links all seven body paths and three tentacle-steal interpretations to the single Kraken encounter. The newer shared Elixir report remains a disputed Right Tentacle candidate; its item path links to the same normalized Common slot carrying the source note for the older Wing Edge claim, rather than creating two slots at one rarity.
+
+## White Robe acquisition sweep (2026-10-28)
+
+- [GameFAQs Items](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/items) lists White Robe from Chocograph #17: Sea at Dusk, Trance Kuja's Uncommon steal, and Daguerreo synthesis from Gaia Gear + Jade Armlet for 8,000 Gil. The optional source-specific totals are Need 3 and end-inventory #1; these are kept separate.
+- The older [GameFAQs Equipment List](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/33383) gives Disc III/IV timing for Sea at Dusk and Daguerreo synthesis, while [Jegged's Chocograph reference](https://jegged.com/Games/Final-Fantasy-IX/Side-Quests/Chocographs.html) independently lists White Robe in the #17 reward and the Ocean Ability requirement. [RPGClassics' synthesis table](https://shrines.rpgclassics.com/psx/ffix/synthesis.shtml) confirms the ingredients, price, and Daguerreo shop.
+- The guide models the Chocograph treasure and repeatable synthesis as item-type recovery, not recovery of the exact lost treasure or steal copy. The final-battle steal remains a separate one-time path. Direct game and release behavior remain unverified.

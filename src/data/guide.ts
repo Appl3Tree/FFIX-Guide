@@ -6170,6 +6170,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-3.white-robe",
+    title: "Collect White Robe and keep a copy available for Robe of Lords synthesis",
+    category: "collection",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-equipment-33383", "gamefaqs-chocobo-hot-cold-71891", "gamefaqs-aerial-exploration-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-chocographs", "gamefaqs-the-final-battle-71891"],
+    chapterIds: ["disc-3.on-the-high-seas", "disc-3.aerial-exploration", "disc-3.preparing-to-leave", "disc-4.final-preparations", "disc-4.the-final-battle"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
     id: "disc-3.aerial-exploration.friendly-yan",
     title: "Befriend Friendly Yan on Vile Island after the other eight creatures",
     category: "achievement",

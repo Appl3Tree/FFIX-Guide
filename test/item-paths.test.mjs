@@ -5209,3 +5209,39 @@ test("Kraken body and tentacle loot paths link to the one-time encounter and pre
   const leftTentacleSlot = leftTentacle?.steals.find((slot) => slot.slot === "common");
   assert.match(leftTentacleSlot?.note ?? "", /Very Common.*normalizes.*Common/i);
 });
+
+test("White Robe links the Sea at Dusk treasure, repeatable Daguerreo synthesis, and optional inventory targets", () => {
+  const whiteRobePaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.white-robe");
+  const chocographPath = whiteRobePaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.white-robe-sea-at-dusk");
+  const synthesisPath = whiteRobePaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.white-robe-daguerreo-synthesis");
+  const kujaPath = whiteRobePaths.find((path) => path.id === "item-path.disc-4.the-final-battle.trance-kuja-white-robe-steal");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.white-robe");
+  const objective = objectives.find((entry) => entry.id === "disc-3.white-robe");
+  const targets = sourceInventoryTargets.filter((entry) => entry.itemId === "game-item.white-robe");
+  const abilities = equipmentAbilityClaims.filter((entry) => entry.itemId === "game-item.white-robe");
+  const steps = walkthroughChapters.flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+
+  assert.equal(whiteRobePaths.length, 3);
+  assert.equal(chocographPath?.method, "chocograph");
+  assert.equal(chocographPath?.availability, "single-use");
+  assert.match(chocographPath?.conditions ?? "", /Chocograph #17: Sea at Dusk/);
+  assert.equal(synthesisPath?.method, "synthesis");
+  assert.equal(synthesisPath?.availability, "repeatable");
+  assert.equal(synthesisPath?.recipeId, "synthesis-recipe.white-robe");
+  assert.equal(synthesisPath?.cost?.amount, 8000);
+  assert.equal(recipe?.resultItemId, "game-item.white-robe");
+  assert.equal(recipe?.cost.amount, 8000);
+  assert.deepEqual(recipe?.ingredients.map((ingredient) => ingredient.itemId).sort(), ["game-item.gaia-gear", "game-item.jade-armlet"]);
+  assert.ok(kujaPath?.walkthroughObjectiveIds?.includes("disc-3.white-robe"));
+  assert.ok(objective?.chapterIds?.includes("disc-4.final-preparations"));
+  assert.equal(targets.find((entry) => entry.basis === "route-need")?.targetQuantity, 3);
+  assert.equal(targets.find((entry) => entry.basis === "end-inventory")?.targetQuantity, 1);
+  assert.deepEqual(abilities.map((entry) => entry.abilityName).sort(), ["Auto-Potion", "Holy", "Loudmouth"]);
+  assert.ok(steps.find((step) => step.id === "high-seas-ocean-chocographs")?.text.includes("White Robe"));
+  assert.ok(steps.find((step) => step.id === "aerial-daguerreo-rank-and-synthesis")?.detail?.includes("White Robe from Gaia Gear + Jade Armlet for 8,000 Gil"));
+  assert.ok(steps.find((step) => step.id === "final-preparations-open-activities")?.objectiveIds?.includes("disc-3.white-robe"));
+  for (const path of [chocographPath, synthesisPath, kujaPath]) {
+    assert.ok(path?.walkthroughObjectiveIds?.includes("disc-3.white-robe"));
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+});
