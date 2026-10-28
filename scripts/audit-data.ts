@@ -6851,6 +6851,49 @@ for (const expected of malirisBossLootPaths) {
     errors.push(`Memoria Maliris path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
   }
 }
+const lichBossLootPaths = [
+  { id: "item-path.disc-4.memoria.lich-genji-gloves-steal", itemId: "game-item.genji-gloves", method: "steal", slot: "common", rate: "100%" },
+  { id: "item-path.disc-4.memoria.lich-sirens-flute-steal", itemId: "game-item.sirens-flute", method: "steal", slot: "uncommon", rate: "25%" },
+  { id: "item-path.disc-4.memoria.lich-black-robe-steal", itemId: "game-item.black-robe", method: "steal", slot: "semi-rare", rate: "6.25%" },
+  { id: "item-path.disc-4.memoria.lich-phoenix-pinion-drop", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always" },
+  { id: "item-path.disc-4.memoria.lich-phoenix-down-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%" },
+  { id: "item-path.disc-4.memoria.lich-ether-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%" },
+  { id: "item-path.disc-4.memoria.lich-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%" },
+];
+const lichEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.lich-memoria");
+const lichEncounterId = "encounter.memoria.lich";
+const lichEncounter = enemyEncounters.find((encounter) => encounter.id === lichEncounterId);
+if (itemAcquisitionPaths.filter((path) => lichBossLootPaths.some((expected) => expected.id === path.id)).length !== lichBossLootPaths.length) {
+  errors.push("Memoria Lich must retain all seven item-bearing boss slots.");
+}
+for (const expected of lichBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? lichEnemy?.steals : lichEnemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(lichEnemy?.sourceIds ?? []), ...(lichEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== lichEnemy?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([lichEncounterId]) ||
+    lichEncounter?.kind !== "boss" ||
+    !lichEncounter.formation.some((member) => member.enemyId === lichEnemy?.id) ||
+    !path.walkthroughObjectiveIds?.includes("disc-4.memoria.lich-steals") ||
+    (expected.method === "steal" && (!path.conditions?.includes(expected.rate ?? "") || !path.conditions.includes("source-reported") || !path.sourceIds.includes("opatil-steal-list"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always") || !path.conditions.includes("victory") || !path.sourceIds.includes("opatil-drop-list"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.conditions.includes(expected.rate ?? "") || !path.conditions.includes("not guaranteed") || !path.notes?.includes("source-reported, not release-verified"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+    (expected.itemId === "game-item.black-robe" && (!path.notes?.includes("Semi-Rare") || !path.notes.includes("Rare")))
+  ) {
+    errors.push(`Memoria Lich path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);
