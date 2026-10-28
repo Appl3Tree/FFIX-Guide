@@ -169,13 +169,15 @@ test("Lindblum's city cutoff is attached to the Grotto entry route", () => {
   assert.equal(lindblumExit.relationship, "required-story");
   assert.match(lindblumExit.summary, /before entering the Grotto as the safe route checkpoint/);
   assert.match(lindblumExit.summary, /sources disagree about whether the trolley\/district lockout begins at entry or after completing the Grotto/);
-  assert.match(lindblumExit.summary, /only the Dragon's Gate merchant remains/);
+  assert.match(lindblumExit.summary, /VGR independently says Lindblum closes on entry/);
+  assert.match(lindblumExit.summary, /[Oo]nly the Dragon's Gate merchant remains/);
 
   for (const sourceId of [
     "gamefaqs-optional-route-47344",
     "gamerguides-gizamaluke",
     "gamerevolution-ffix-walkthrough",
     "elitegrindlab-gizamaluke",
+    "vgr-no-spoiler-walkthrough",
   ]) {
     assert.ok(lindblumExit.sourceIds.includes(sourceId), `route is missing ${sourceId}`);
   }

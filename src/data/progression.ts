@@ -543,8 +543,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-1.lindblum",
     toChapterId: "disc-1.journey-to-burmecia",
     relationship: "required-story",
-    summary: "The Festival of the Hunt concludes with a revealed next destination and party change. Leaving Lindblum starts the story route toward Gizamaluke's Grotto and Burmecia; the kingdom exploration can be skipped. Finish any remaining city visits before entering the Grotto as the safe route checkpoint: sources disagree about whether the trolley/district lockout begins at entry or after completing the Grotto, and only the Dragon's Gate merchant remains during the documented lockout.",
-    sourceIds: ["gamefaqs-lindblum-71891", "gamefaqs-exploring-lindblum-71891", "gamefaqs-journey-to-burmecia-71891", "gamefaqs-optional-route-47344", "jegged-lindblum", "jegged-gizamaluke", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"],
+    summary: "The Festival of the Hunt concludes with a revealed next destination and party change. Leaving Lindblum starts the story route toward Gizamaluke's Grotto and Burmecia; the kingdom exploration can be skipped. Finish any remaining city visits before entering the Grotto as the safe route checkpoint: sources disagree about whether the trolley/district lockout begins at entry or after completing the Grotto. VGR independently says Lindblum closes on entry, but does not resolve the trolley timing. Only the Dragon's Gate merchant remains during the documented lockout.",
+    sourceIds: ["gamefaqs-lindblum-71891", "gamefaqs-exploring-lindblum-71891", "gamefaqs-journey-to-burmecia-71891", "gamefaqs-optional-route-47344", "jegged-lindblum", "jegged-gizamaluke", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke", "vgr-no-spoiler-walkthrough"],
   },
   {
     id: "story.journey-to-burmecia-to-burmecia",
@@ -1332,9 +1332,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.lindblum-to-journey-to-burmecia",
     title: "Lindblum transit lockout during the Grotto sequence",
     certainty: "disputed",
-    trigger: "Use entry to Gizamaluke's Grotto as the conservative last checkpoint for unfinished Lindblum visits. Gamer Guides, GameRevolution, and EliteGrindLab place the district lockout at entry. GameFAQs' route says the Dragon's Gate remains open until Grotto completion and then the trolley cannot return the party to Lindblum, while also warning that Lindblum cannot be reached for some time on entry. The exact lockout trigger remains unresolved; the Dragon's Gate merchant is the documented remaining shop during the lockout.",
+    trigger: "Use entry to Gizamaluke's Grotto as the conservative last checkpoint for unfinished Lindblum visits. Gamer Guides, GameRevolution, and EliteGrindLab place the district lockout at entry; VGR independently says Lindblum closes on entry but does not mention the trolley or resolve GameFAQs' optional-route wording: GameFAQs says the Dragon's Gate remains open until Grotto completion and then the trolley cannot return the party to Lindblum, while also warning that Lindblum cannot be reached for some time on entry. The exact trolley lockout trigger remains unresolved; the Dragon's Gate merchant is the documented remaining shop during the lockout.",
     missableIds: ["missable.disc-1.lindblum.trolley-cutoff"],
-    sourceIds: ["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"],
+    sourceIds: ["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke", "vgr-no-spoiler-walkthrough"],
   },
   {
     id: "cutoff.cleyra-antlion-sequence.local-windows",

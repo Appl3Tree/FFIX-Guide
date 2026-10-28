@@ -1229,7 +1229,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "explore-lindblum-kingdom-exit",
             kind: "required",
             text: "When the optional sweep is done, return to Lindblum's Dragon's Gate and follow the north road toward Gizamaluke's Grotto. The next chapter covers the journey to Burmecia and the route through the grotto.",
-            detail: "The detours above do not close when you walk away from Lindblum. Before entering Gizamaluke's Grotto is the conservative last checkpoint for unfinished city visits: Gamer Guides and EliteGrindLab place the lockout at entry, while GameFAQs' route also describes the trolley cutoff after Grotto completion. This chapter is a route checklist, not a claim that the wider Blue Magic or Chocobo sidequests are complete.",
+            detail: "The detours above do not close when you walk away from Lindblum. Before entering Gizamaluke's Grotto is the conservative last checkpoint for unfinished city visits: Gamer Guides and EliteGrindLab place the district lockout at entry, and VGR says Lindblum closes at entry, while GameFAQs' route also describes the trolley cutoff after Grotto completion. VGR does not identify the trolley trigger or reconcile that wording. This chapter is a route checklist, not a claim that the wider Blue Magic or Chocobo sidequests are complete.",
           },
         ],
       },
@@ -1244,13 +1244,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "journey-north-to-grotto",
         title: "Lindblum to Gizamaluke's Grotto",
         summary: "Finish the Lindblum trolley sweep first, then head north from Dragon's Gate. Ride Choco if you completed the previous chapter's optional Chocobo route.",
-        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "gamefaqs-optional-route-47344", "jegged-gizamaluke", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke", "steam-missable-content-guide-2988011418"],
+        sourceIds: ["gamefaqs-journey-to-burmecia-71891", "gamefaqs-optional-route-47344", "jegged-gizamaluke", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke", "vgr-no-spoiler-walkthrough", "steam-missable-content-guide-2988011418"],
         steps: [
           {
             id: "journey-before-enter-grotto-lindblum-cutoff",
             kind: "cutoff",
-            text: "Before entering Gizamaluke's Grotto, finish any remaining Lindblum castle or district visits, first-visit ATEs, Key Items, Mognet letters, and shopping. Use this as the conservative checkpoint: some sources place the trolley/district lockout at entry, while GameFAQs' route also describes it after Grotto completion. If anything remains, backtrack to Dragon's Gate and use the trolley before you cross the threshold.",
-            detail: "Gamer Guides, GameRevolution, and EliteGrindLab place the district lockout at entry. GameFAQs' route says the Dragon's Gate remains open until the Grotto is completed and then the trolley cannot return the party to Lindblum, while also warning that city access is lost for some time on entry. Keep the pre-entry recommendation conservative until direct gameplay resolves the wording. First-visit permanent windows are listed separately in the Lindblum chapter; later trolley/district reopening remains unverified.",
+            text: "Before entering Gizamaluke's Grotto, finish any remaining Lindblum castle or district visits, first-visit ATEs, Key Items, Mognet letters, and shopping. Use this as the conservative checkpoint: VGR independently says Lindblum closes on entry, while GameFAQs' route also describes the trolley cutoff after Grotto completion. If anything remains, backtrack to Dragon's Gate and use the trolley before you cross the threshold.",
+            detail: "Gamer Guides, GameRevolution, and EliteGrindLab place the district lockout at entry. VGR independently says Lindblum closes on entry, but does not mention the trolley or resolve GameFAQs' optional-route wording: GameFAQs says the Dragon's Gate remains open until the Grotto is completed and then the trolley cannot return the party to Lindblum, while also warning that city access is lost for some time on entry. Keep the pre-entry recommendation conservative until direct gameplay resolves the wording. First-visit permanent windows are listed separately in the Lindblum chapter; later trolley/district reopening remains unverified.",
             objectiveIds: ["disc-1.exploring-lindblum-kingdom.before-grotto-check"],
           },
           {
