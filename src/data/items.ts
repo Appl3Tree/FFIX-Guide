@@ -527,6 +527,7 @@ const summitStationWaltzEncounterSources = ["gamefaqs-journey-to-treno-71891", "
 const hilgigarsEncounterSources = ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"];
 const zaghnolHuntEncounterSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
+const prisonCageViviStealPathSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "opatil-steal-list"];
 const blackWaltz2StealSources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
@@ -1120,9 +1121,13 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal Leather Wrist from the second Prison Cage while it holds Vivi. This steal is separate from the fixed Ice Cavern and Dali sources.",
+    conditions: "Attempt the chance-based Uncommon Leather Wrist steal from Prison Cage (Vivi) before defeating it; an individual attempt can fail. This is separate from the fixed Ice Cavern and Dali sources.",
+    notes: "GameFAQs and enemy tables list Leather Wrist in Uncommon. Jegged reports 23% per connected steal attempt, while Opa-Til lists 25%; these source-reported rates are not reconciled.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
-    sourceIds: leatherWristReferenceSources,
+    enemyId: "enemy.prison-cage-vivi",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.evil-forest.prison-cage-vivi"],
+    sourceIds: [...new Set([...leatherWristReferenceSources, ...prisonCageViviStealPathSources])],
   },
   {
     id: "item-path.disc-1.village-of-dali.leather-wrist-shop",
@@ -2853,7 +2858,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.power-belt", name: "Power Belt", category: "equipment", sourceIds: powerBeltReferenceSources, verification: "partial" },
   { id: "game-item.glass-buckle", name: "Glass Buckle", category: "equipment", sourceIds: glassBuckleReferenceSources, verification: "partial" },
   { id: "game-item.glass-armlet", name: "Glass Armlet", category: "equipment", sourceIds: [...glassArmletReferenceSources, "drslice-no-239-armory", "gameclue-armlets", "gamefaqs-walkthrough-9801"], verification: "partial" },
-  { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: [...leatherWristReferenceSources, ...daliUndergroundSources], verification: "partial" },
+  { id: "game-item.leather-wrist", name: "Leather Wrist", category: "equipment", sourceIds: [...new Set([...leatherWristReferenceSources, ...daliUndergroundSources, ...prisonCageViviStealPathSources])], verification: "partial" },
   { id: "game-item.kupo-nut", name: "Kupo Nut", category: "key-item", sourceIds: [...burmeciaSources, ...lindblumFirstVisitPickupSources, "gamefaqs-kupo-nuts-71891", "gamefaqs-moogle-faq-23306", ...mountGulugSources], verification: "partial" },
   { id: "game-item.holy-bell", name: "Holy Bell", category: "key-item", sourceIds: grottoHolyBellSources, verification: "partial" },
   { id: "game-item.hi-potion", name: "Hi-Potion", category: "consumable", sourceIds: [...new Set([...earlyChocographTreasureSources, ...burmeciaSources, ...burmeciaArchPickupSources, ...observatoryMountainPickupSources, ...lindblumFirstVisitPickupSources, ...iifaTreeSources, ...ipsensMogshopReentrySources, "jegged-stiltzkin", ...oeilvertSources, ...iceCavernBossDropSources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops"])], verification: "partial" },
@@ -2986,7 +2991,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.gold-helm", name: "Gold Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "gamefaqs-item-ability-10332"], verification: "partial" },
   { id: "game-item.rosetta-ring", name: "Rosetta Ring", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-item-ability-10332", "gamefaqs-chocobo-hot-cold-71891", "jegged-chocobo-mountain-cracks"], verification: "partial" },
   { id: "game-item.partisan", name: "Partisan", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.broadsword", name: "Broadsword", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-evil-forest-71891", "gamefaqs-dali-71891", "gamefaqs-ipsens-castle-71891", "gamefaqs-abilities-71891", "jegged-evil-forest", "jegged-dali", "jegged-ipsens-castle"], verification: "partial" },
+  { id: "game-item.broadsword", name: "Broadsword", category: "equipment", sourceIds: [...new Set(["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-dali-71891", "gamefaqs-ipsens-castle-71891", "gamefaqs-abilities-71891", "jegged-dali", "jegged-ipsens-castle", ...prisonCageViviStealPathSources])], verification: "partial" },
   { id: "game-item.stardust-rod", name: "Stardust Rod", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "cavesofnarshe-ff9-rods", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.multina-racket", name: "Multina Racket", category: "equipment", sourceIds: [...southGateDisc1Sources, ...southGateDisc3Sources, "gamefaqs-equipment-33383", "gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "rpgclassics-shops"], verification: "partial" },
   { id: "game-item.flame-staff", name: "Flame Staff", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-equipment-33383", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
@@ -6201,9 +6206,13 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Common steal from the second Prison Cage while Vivi is captive. The encounter cannot be repeated, but the Broadsword remains available through later sources.",
+    conditions: "Attempt the chance-based Common Broadsword steal from Prison Cage (Vivi) before defeating it; an individual attempt can fail. The Broadsword remains available through later sources.",
+    notes: "GameFAQs and enemy tables list Broadsword in Common. Jegged reports 70% per connected steal attempt, while Opa-Til lists 100%; these source-reported rates are not reconciled.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
-    sourceIds: ["gamefaqs-evil-forest-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "jegged-evil-forest"],
+    enemyId: "enemy.prison-cage-vivi",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.evil-forest.prison-cage-vivi"],
+    sourceIds: [...new Set([...prisonCageViviStealPathSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996"])],
   },
   {
     id: "item-path.disc-1.village-of-dali.broadsword-shop",

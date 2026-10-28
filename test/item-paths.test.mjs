@@ -36,6 +36,68 @@ test("both Baku fights link each steal path to its exact enemy slot and encounte
   }
 });
 
+test("Prison Cage (Vivi) steals link exact slots and preserve their source-specific rates", () => {
+  const expected = [
+    {
+      pathId: "item-path.disc-1.evil-forest.prison-cage-broadsword-steal",
+      itemId: "game-item.broadsword",
+      slot: "common",
+      connectedAttemptRate: "70% per connected steal attempt",
+      tableRate: "100%",
+    },
+    {
+      pathId: "item-path.disc-1.evil-forest.leather-wrist-prison-cage-steal",
+      itemId: "game-item.leather-wrist",
+      slot: "uncommon",
+      connectedAttemptRate: "23% per connected steal attempt",
+      tableRate: "25%",
+    },
+  ];
+  const enemyId = "enemy.prison-cage-vivi";
+  const encounterId = "encounter.evil-forest.prison-cage-vivi";
+  const objectiveId = "disc-1.evil-forest.prison-cage-steals";
+  const warningId = "missable.disc-1.evil-forest.prison-cage-steals";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const warning = missables.find((entry) => entry.id === warningId);
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(encounter?.missableIds.includes(warningId));
+  assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
+  assert.ok(warning?.classification.includes("recoverable-later"));
+  assert.match(warning?.note ?? "", /Jegged reports 70%\/23%.*Opa-Til lists 100%\/25%/);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const catalogItem = gameItems.find((entry) => entry.id === item.itemId);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.conditions?.includes("chance-based"));
+    assert.ok(path?.conditions?.includes("can fail"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.match(path?.notes ?? "", new RegExp(item.connectedAttemptRate));
+    assert.ok(path?.notes?.includes(item.tableRate));
+    assert.ok(path?.notes?.includes("not reconciled"));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
+    assert.ok([...requiredSources].every((sourceId) => catalogItem?.sourceIds.includes(sourceId)), `${item.itemId} includes steal provenance`);
+    assert.ok([...requiredSources].every((sourceId) => objective?.sourceIds.includes(sourceId)), `${objectiveId} includes source provenance`);
+    assert.ok([...requiredSources].every((sourceId) => warning?.sourceIds.includes(sourceId)), `${warningId} includes source provenance`);
+    assert.ok([...requiredSources].every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.pathId} references known sources`);
+  }
+});
+
 test("Cargo Ship Black Waltz 3 steals link their exact one-time encounter slots", () => {
   const expected = [
     { pathId: "item-path.disc-1.cargo-ship.steepled-hat-black-waltz-3-steal", itemId: "game-item.steepled-hat", slot: "common" },

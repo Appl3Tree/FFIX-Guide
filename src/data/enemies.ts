@@ -204,6 +204,7 @@ const worldMapZaghnolStatSources = [enemyListSourceId, "gamefaqs-monster-list-20
 const outerContinentFriendlySources = ["gamefaqs-monster-list-20490", "gamefaqs-friendly-creatures-71891", "gamefaqs-outer-continent-71891", "gamefaqs-magdalene-forest-71891", "flactem-friendly-monsters", "jegged-friendly-monsters"];
 const evilForestEnemySources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestBossSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
+const prisonCageViviStealSources = [...evilForestBossSources, "opatil-steal-list"];
 const plantBrainEyeDropsStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"];
 const plantBrainIronHelmStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "gamerguides-evil-forest"];
 const maskedManSources = ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "rpgclassics-primavista", "gamefaqs-walkthrough-15690"];
@@ -505,7 +506,7 @@ const evilForestEncounters: EnemyEncounter[] = [
     location: "Immediately after the Garnet rescue battle",
     kind: "boss",
     formation: [{ enemyId: "enemy.prison-cage-vivi", quantity: 1 }],
-    sourceIds: evilForestBossSources,
+    sourceIds: prisonCageViviStealSources,
     objectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
     missableIds: ["missable.disc-1.evil-forest.prison-cage-steals"],
     cutoffIds: ["cutoff.evil-forest.escape"],
@@ -4561,7 +4562,8 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       { field: "Gil", value: 436, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
     ],
     steals: [
-      evilForestLoot("common", "game-item.broadsword"), evilForestLoot("uncommon", "game-item.leather-wrist"),
+      sourcedLoot("common", "game-item.broadsword", prisonCageViviStealSources),
+      sourcedLoot("uncommon", "game-item.leather-wrist", prisonCageViviStealSources),
       evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
     ],
     drops: [
@@ -4575,11 +4577,14 @@ const evilForestEnemyRecords: EnemyRecord[] = [
     ],
     blueMagic: [],
     strategies: [
-      { title: "Take the Broadsword and Leather Wrist", detail: "The second battle is the first Prison Cage encounter with stealable equipment. Heal Vivi after repeated Absorb attacks and steal before finishing the boss.", sourceIds: evilForestBossSources },
+      { title: "Attempt both equipment steals", detail: "The second battle is the first Prison Cage encounter with stealable equipment. Broadsword is Common and Leather Wrist is Uncommon; either attempt can fail. Heal Vivi after repeated Absorb attacks and retry before finishing the boss.", sourceIds: prisonCageViviStealSources },
     ],
     routeObjectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
-    notes: ["The two sources disagree on the second battle's HP: GameFAQs lists 533 and Jegged repeats 513. Both values are preserved without assuming cross-release parity."],
-  }, evilForestChapterId, evilForestBossSources, ["missable.disc-1.evil-forest.prison-cage-steals"], ["cutoff.evil-forest.escape"]),
+    notes: [
+      "The two sources disagree on the second battle's HP: GameFAQs lists 533 and Jegged repeats 513. Both values are preserved without assuming cross-release parity.",
+      "GameFAQs and enemy tables list Broadsword as Common and Leather Wrist as Uncommon. Jegged reports 70%/23% per connected attempt, while Opa-Til lists 100%/25%; these rates remain source-specific.",
+    ],
+  }, evilForestChapterId, prisonCageViviStealSources, ["missable.disc-1.evil-forest.prison-cage-steals"], ["cutoff.evil-forest.escape"]),
   chapterBoss({
     id: "enemy.plant-brain",
     name: "Plant Brain",

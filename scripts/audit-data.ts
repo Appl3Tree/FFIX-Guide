@@ -3448,6 +3448,45 @@ if (!broadswordEnemy?.steals.some((slot) => slot.itemId === broadswordId)) {
   errors.push("The second Prison Cage enemy record must link its Broadsword steal to the catalog item.");
 }
 const broadswordWarning = missablesById.get("missable.disc-1.evil-forest.prison-cage-steals");
+const prisonCageViviEncounterId = "encounter.evil-forest.prison-cage-vivi";
+const prisonCageViviEncounter = enemyEncounters.find((encounter) => encounter.id === prisonCageViviEncounterId);
+const prisonCageStealObjectiveId = "disc-1.evil-forest.prison-cage-steals";
+const prisonCageStealObjective = objectivesById.get(prisonCageStealObjectiveId);
+const prisonCageStealExpectations = [
+  { itemId: "game-item.broadsword", slot: "common", pathId: "item-path.disc-1.evil-forest.prison-cage-broadsword-steal", rateNote: "70% per connected steal attempt", tableRateNote: "100%" },
+  { itemId: "game-item.leather-wrist", slot: "uncommon", pathId: "item-path.disc-1.evil-forest.leather-wrist-prison-cage-steal", rateNote: "23% per connected steal attempt", tableRateNote: "25%" },
+];
+for (const expected of prisonCageStealExpectations) {
+  const slot = broadswordEnemy?.steals.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.pathId);
+  const item = gameItems.find((entry) => entry.id === expected.itemId);
+  const expectedSources = new Set([
+    ...(broadswordEnemy?.sourceIds ?? []),
+    ...(prisonCageViviEncounter?.sourceIds ?? []),
+    ...(slot?.sourceIds ?? []),
+  ]);
+  if (!slot || !path || path.itemId !== expected.itemId || path.method !== "steal" ||
+    path.availability !== "one-time-encounter" || path.quantity !== 1 ||
+    path.enemyId !== "enemy.prison-cage-vivi" || path.enemyLootSlot !== expected.slot ||
+    !path.encounterIds?.includes(prisonCageViviEncounterId) ||
+    !path.walkthroughObjectiveIds?.includes(prisonCageStealObjectiveId) ||
+    !path.conditions.includes("chance-based") || !path.conditions.includes("can fail") ||
+    [...expectedSources].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    [...expectedSources].some((sourceId) => !item?.sourceIds.includes(sourceId)) ||
+    [...expectedSources].some((sourceId) => !prisonCageStealObjective?.sourceIds.includes(sourceId)) ||
+    [...expectedSources].some((sourceId) => !broadswordWarning?.sourceIds.includes(sourceId)) ||
+    !path.notes?.includes(expected.rateNote) || !path.notes.includes(expected.tableRateNote) ||
+    !path.notes.includes("not reconciled")) {
+    errors.push(`Prison Cage (Vivi) ${expected.slot} ${expected.itemId} steal must link its chance-based one-time slot, encounter, checklist, and provenance while preserving source-specific rates.`);
+  }
+}
+if (!prisonCageViviEncounter || !prisonCageViviEncounter.objectiveIds.includes(prisonCageStealObjectiveId) ||
+  !prisonCageViviEncounter.missableIds.includes("missable.disc-1.evil-forest.prison-cage-steals") ||
+  !broadswordEnemy?.notes.some((note) => note.includes("70%/23% per connected attempt") && note.includes("100%/25%")) ||
+  !broadswordWarning?.note.includes("70%/23% per connected steal attempt") ||
+  !broadswordWarning.note.includes("100%/25%")) {
+  errors.push("Prison Cage (Vivi) must retain the one-time warning and source-specific steal-rate disagreement.");
+}
 if (!broadswordWarning?.classification.includes("recoverable-later") || !broadswordWarning.recovery.includes("Dali") || !broadswordWarning.recovery.includes("Ipsen")) {
   errors.push("The Prison Cage steal warning must distinguish the one-time steal from Broadsword's Dali and Ipsen recovery routes.");
 }
