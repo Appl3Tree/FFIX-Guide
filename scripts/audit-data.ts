@@ -9129,6 +9129,50 @@ if (
 ) {
   errors.push("Black Mage Village's 13 Disc II–III weapon paths must link their exact GameFAQs prices to the Disc III restock checkpoint while keeping the Disc IV inventory change separate from item-type loss and preserving the source's imprecise timing.");
 }
+const lindblumPreCleyraStockObjective = objectivesById.get("disc-1.lindblum.pre-cleyra-stock");
+const lindblumPreCleyraStockSpecs: [string, string, number, string][] = [
+  ["item-path.disc-1.lindblum.silver-gloves-shop", "game-item.silver-gloves", 720, "Silver Gloves"],
+  ["item-path.disc-1.lindblum.iron-helm-shop", "game-item.iron-helm", 450, "Iron Helm"],
+  ["item-path.disc-1.lindblum.glass-armlet-shop", "game-item.glass-armlet", 250, "Glass Armlet"],
+  ["item-path.disc-1.lindblum.leather-wrist-shop", "game-item.leather-wrist", 200, "Leather Wrist"],
+  ["item-path.disc-1.lindblum.mythril-dagger-shop", "game-item.mythril-dagger", 950, "Mythril Dagger"],
+  ["item-path.disc-1.lindblum.fork-shop", "game-item.fork", 1100, "Fork"],
+  ["item-path.disc-1.lindblum.steepled-hat-shop", "game-item.steepled-hat", 260, "Steepled Hat"],
+  ["item-path.disc-1.lindblum.headgear-dragoos-shop", "game-item.headgear", 330, "Headgear"],
+];
+const lindblumPreCleyraStockPaths = lindblumPreCleyraStockSpecs.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const lindblumPreCleyraStockStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-1.lindblum")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "lindblum-shop-synthesis-javelin");
+const lindblumShopSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
+const lindblumRouteSource = sources.find((source) => source.id === "gamefaqs-lindblum-71891");
+if (
+  !lindblumPreCleyraStockObjective ||
+  lindblumPreCleyraStockObjective.category !== "collection" ||
+  !lindblumPreCleyraStockObjective.chapterIds?.includes("disc-1.lindblum") ||
+  !lindblumPreCleyraStockObjective.profileIds?.includes("comprehensive") ||
+  !["gamefaqs-shops-71891", "gamefaqs-lindblum-71891"].every((sourceId) => lindblumPreCleyraStockObjective.sourceIds.includes(sourceId)) ||
+  lindblumPreCleyraStockPaths.some((path, index) => !path ||
+    path.itemId !== lindblumPreCleyraStockSpecs[index][1] ||
+    path.chapterId !== "disc-1.lindblum" ||
+    path.method !== "shop" ||
+    path.availability !== "limited-window" ||
+    !path.shopId?.startsWith("lindblum.weapon-shop") ||
+    path.cost?.amount !== lindblumPreCleyraStockSpecs[index][2] ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.lindblum.pre-cleyra-stock") ||
+    !path.sourceIds.includes("gamefaqs-shops-71891")) ||
+  !lindblumPreCleyraStockStep?.objectiveIds?.includes("disc-1.lindblum.pre-cleyra-stock") ||
+  !lindblumPreCleyraStockStep.text.includes("Review Dragoos' pre-Cleyra stock") ||
+  !lindblumPreCleyraStockSpecs.every(([, , price, itemName]) => lindblumPreCleyraStockStep.text.includes(`${itemName} (${price.toLocaleString("en-US")}`)) ||
+  !lindblumPreCleyraStockStep.detail?.includes("inventories remain available until Cleyra is completed") ||
+  !lindblumPreCleyraStockStep.detail.includes("checklist tracks that seller window only") ||
+  !lindblumPreCleyraStockStep.detail.includes("does not say that missing the stock removes the item types") ||
+  !lindblumShopSource?.notes.includes("until Cleyra is completed") ||
+  !lindblumRouteSource?.notes.includes("After the Festival")
+) {
+  errors.push("Dragoos' eight pre-Cleyra stock paths must link exact prices to the post-Festival Lindblum checkpoint and preserve the shop-window versus item-type distinction.");
+}
 const bandanaDragonGatePickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.dragon-gate-bandana-pickup");
 if (
   !bandanaDragonGatePickup ||

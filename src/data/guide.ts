@@ -1561,7 +1561,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/lindblum",
     accessed: "2026-10-26",
-    notes: "Original PlayStation route for castle and district pickups, including the Guest Bedroom Ether; Business District Hi-Potion, Echo Screen, and Tent; Industrial District Bronze Vest; Theater District Ore; and Hideout Mini-Burmecia. It also gives the Autograph/Moogle Suit steps and their one-time window, says Vivi's Shopping ATE gives a Kupo Nut, and covers the Master Hunter Key Item plus Freya's Coral Ring, Vivi's Theater Ship Card, or Zidane's 5,000-Gil Festival prize. Its explicit missable alert says the two Theater District Key Items become unavailable once Zidane has gone to the Tantalus Hideout. The Javelin shop timing and Festival prize claims are cross-checked separately.",
+    notes: "Original PlayStation route for castle and district pickups, including the Guest Bedroom Ether; Business District Hi-Potion, Echo Screen, and Tent; Industrial District Bronze Vest; Theater District Ore; and Hideout Mini-Burmecia. It also gives the Autograph/Moogle Suit steps and their one-time window, says Vivi's Shopping ATE gives a Kupo Nut, and covers the Master Hunter Key Item plus Freya's Coral Ring, Vivi's Theater Ship Card, or Zidane's 5,000-Gil Festival prize. Its explicit missable alert says the two Theater District Key Items become unavailable once Zidane has gone to the Tantalus Hideout. After the Festival, it recommends using the Weapon Shop and Synthesis Shop before leaving for Gizamaluke's Grotto. The Javelin shop timing and Festival prize claims are cross-checked separately.",
   },
   {
     id: "jegged-lindblum",
@@ -3933,6 +3933,15 @@ export const objectives: GameObjective[] = [
   {
     id: "disc-1.lindblum.bronze-gloves-shop",
     title: "Buy Bronze Gloves from Lindblum's initial weapon stock",
+    category: "collection",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-lindblum-71891"],
+    chapterIds: ["disc-1.lindblum"],
+    profileIds: ["comprehensive", "custom"],
+    verification: "partial",
+  },
+  {
+    id: "disc-1.lindblum.pre-cleyra-stock",
+    title: "Review Dragoos' pre-Cleyra weapon stock",
     category: "collection",
     sourceIds: ["gamefaqs-shops-71891", "gamefaqs-lindblum-71891"],
     chapterIds: ["disc-1.lindblum"],

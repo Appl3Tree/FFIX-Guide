@@ -2393,6 +2393,56 @@ test("Black Mage Village Disc II–III weapon paths link to the Disc III stock r
   }
 });
 
+test("Dragoos' pre-Cleyra stock paths link to the post-Festival purchase checkpoint", () => {
+  const objectiveId = "disc-1.lindblum.pre-cleyra-stock";
+  const expected = [
+    ["item-path.disc-1.lindblum.silver-gloves-shop", "game-item.silver-gloves", 720],
+    ["item-path.disc-1.lindblum.iron-helm-shop", "game-item.iron-helm", 450],
+    ["item-path.disc-1.lindblum.glass-armlet-shop", "game-item.glass-armlet", 250],
+    ["item-path.disc-1.lindblum.leather-wrist-shop", "game-item.leather-wrist", 200],
+    ["item-path.disc-1.lindblum.mythril-dagger-shop", "game-item.mythril-dagger", 950],
+    ["item-path.disc-1.lindblum.fork-shop", "game-item.fork", 1100],
+    ["item-path.disc-1.lindblum.steepled-hat-shop", "game-item.steepled-hat", 260],
+    ["item-path.disc-1.lindblum.headgear-dragoos-shop", "game-item.headgear", 330],
+  ];
+  const stockObjective = objectives.find((objective) => objective.id === objectiveId);
+  const stockStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.lindblum")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "lindblum-shop-synthesis-javelin");
+  const shopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
+  const lindblumSource = sources.find((source) => source.id === "gamefaqs-lindblum-71891");
+
+  assert.equal(stockObjective?.category, "collection");
+  assert.ok(stockObjective?.chapterIds?.includes("disc-1.lindblum"));
+  assert.ok(stockObjective?.profileIds?.includes("comprehensive"));
+  assert.ok(["gamefaqs-shops-71891", "gamefaqs-lindblum-71891"]
+    .every((sourceId) => stockObjective?.sourceIds.includes(sourceId)));
+  assert.ok(stockStep?.objectiveIds?.includes(objectiveId));
+  assert.match(stockStep?.text ?? "", /Review Dragoos' pre-Cleyra stock/);
+  assert.match(stockStep?.detail ?? "", /inventories remain available until Cleyra is completed/);
+  assert.match(stockStep?.detail ?? "", /checklist tracks that seller window only/);
+  assert.match(stockStep?.detail ?? "", /does not say that missing the stock removes the item types/);
+  assert.match(shopsSource?.notes ?? "", /Silver Gloves/);
+  assert.match(lindblumSource?.notes ?? "", /After the Festival/);
+
+  for (const [pathId, itemId, price] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} exists`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.chapterId, "disc-1.lindblum");
+    assert.equal(path?.method, "shop");
+    assert.equal(path?.availability, "limited-window");
+    assert.ok(path?.shopId?.startsWith("lindblum.weapon-shop"));
+    assert.equal(path?.cost?.amount, price);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
+    }
+  }
+});
+
 test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
   const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
   const pathCounts = [8, 9, 12, 10];
