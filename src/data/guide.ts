@@ -1177,7 +1177,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/79143/dali",
     accessed: "2026-10-23",
-    notes: "Excalibur II walkthrough cross-check for the Dali weapon shop and later early-game equipment sources, including Mage Masher.",
+    notes: "Excalibur II walkthrough cross-check for the Dali weapon shop and later early-game equipment sources, including Mage Masher. Its Black Waltz 2 table lists Steepled Hat as Common and Leather Plate as Uncommon.",
   },
   {
     id: "gamefaqs-ice-cavern-71891",
@@ -1401,7 +1401,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/village-of-dali",
     accessed: "2026-10-24",
-    notes: "First-visit route, six Dali ATEs, Mognet, windmill, underground route, Black Waltz 2 data, and pre-departure Ice Cavern check; opening the rear door enables repeatable Ghost/Vice encounters while the factory is open, and its Dali roster omits Skeleton. Its weapon-shop list confirms Broadsword for 330 Gil. Its Observatory Mountain route says to check for the Hi-Potion during the later Steiner segment, describing it as a chest partly obscured by a foreground barrel; Jegged and Gamer Guides instead call it a hidden pickup behind the entrance cart, so the exact presentation remains unresolved. Its Dali pickup list omits the Eye Drops recorded by other sources. Its boss table lists Ether in the Always, Common, Uncommon, and Rare drop slots, while some route summaries report only one Ether; the catalog separates the guaranteed drop from three chance-based slots. Black Waltz 2 is filed under Observatory Mountain although the encounter field is disputed.",
+    notes: "First-visit route, six Dali ATEs, Mognet, windmill, underground route, Black Waltz 2 data, and pre-departure Ice Cavern check; opening the rear door enables repeatable Ghost/Vice encounters while the factory is open, and its Dali roster omits Skeleton. Its weapon-shop list confirms Broadsword for 330 Gil. Its Observatory Mountain route says to check for the Hi-Potion during the later Steiner segment, describing it as a chest partly obscured by a foreground barrel; Jegged and Gamer Guides instead call it a hidden pickup behind the entrance cart, so the exact presentation remains unresolved. Its Dali pickup list omits the Eye Drops recorded by other sources. Its Black Waltz 2 table lists Steepled Hat as Common and Leather Plate as Uncommon, and Ether in the Always, Common, Uncommon, and Rare drop slots; some route summaries report only one Ether, so the catalog separates the guaranteed drop from three chance-based slots. Black Waltz 2 is filed under Observatory Mountain although the encounter field is disputed.",
   },
   {
     id: "kamigame-dali-black-waltz-2",
@@ -1417,7 +1417,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/06-The-Village-of-Dali.html",
     accessed: "2026-10-23",
-    notes: "Independent first-visit route for Dali ATEs, fortune achievement, pickups, factory route, optional encounters, and Black Waltz 2; it lists Ghost, Skeleton, and Vice underground, making Skeleton a source-disputed route opportunity. It does not describe a later return from Dali to Ice Cavern. Its Black Waltz 2 reward summary lists one Ether, while GameFAQs and enemy tables list one guaranteed and three chance-based Ether slots. Confirms the 330-Gil Broadsword shop source. Its ATE checklist names five scenes while its walkthrough also mentions a sixth; the guide follows the six-scene list cross-checked with GameFAQs and Gamer Guides.",
+    notes: "Independent first-visit route for Dali ATEs, fortune achievement, pickups, factory route, optional encounters, and Black Waltz 2; it lists Ghost, Skeleton, and Vice underground, making Skeleton a source-disputed route opportunity. Its Black Waltz 2 table lists Steepled Hat as Common at 70% and Leather Plate as Uncommon at 23%, specifying these as odds per connected steal attempt. It does not describe a later return from Dali to Ice Cavern. Its boss reward summary lists one Ether, while GameFAQs and enemy tables list one guaranteed and three chance-based Ether slots. Confirms the 330-Gil Broadsword shop source. Its ATE checklist names five scenes while its walkthrough also mentions a sixth; the guide follows the six-scene list cross-checked with GameFAQs and Gamer Guides.",
   },
   {
     id: "gamerguides-dali",
@@ -1433,7 +1433,7 @@ export const sources = [
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/dali/",
     accessed: "2026-10-23",
-    notes: "Completionist audit for the one-time underground factory, first-visit pickups, 11-item underground sweep, Skeleton encounter and its reported Skeleton + Vice/Ghost-only formations, Mognet letter, local ATE count, Black Waltz 2 location/stats, and return-trip items. Its Skeleton report conflicts with GameFAQs and Caves of Narshe; it documents disagreements instead of treating every publisher's area labels as reliable.",
+    notes: "Completionist audit for the one-time underground factory, first-visit pickups, 11-item underground sweep, Skeleton encounter and its reported Skeleton + Vice/Ghost-only formations, Mognet letter, local ATE count, Black Waltz 2 location/stats, and return-trip items. It reports 100%/25% for Black Waltz 2's Steepled Hat/Leather Plate steals, differing from Jegged's 70%/23% per connected steal attempt. Its Skeleton report conflicts with GameFAQs and Caves of Narshe; it documents disagreements instead of treating every publisher's area labels as reliable.",
   },
   {
     id: "cavesofnarshe-dali-walkthrough",
@@ -1449,7 +1449,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/w_enemy.php?enemy=Black+Waltz+2",
     accessed: "2026-10-23",
-    notes: "Independent Black Waltz 2 encounter table and drop cross-check. It lists Ether in the Always, Common, Uncommon, and Rare drop slots and summarizes the reward as Ether ×4; its table disagrees with single-Ether route summaries.",
+    notes: "Independent Black Waltz 2 encounter table and drop cross-check. Its enemy table lists Steepled Hat as Common and Leather Plate as Uncommon, and Ether in the Always, Common, Uncommon, and Rare drop slots; it summarizes the reward as Ether ×4, differing from single-Ether route summaries.",
   },
   {
     id: "ffwiki-black-waltz-2",
@@ -3457,7 +3457,7 @@ export const sources = [
     publisher: "Opa-Til",
     url: "https://ff9.opatil.com/eng/data/steal.html",
     accessed: "2026-10-27",
-    notes: "Independent steal reference listing Deathguise's Elixir (100%), Black Belt (25%), and Duel Claws (0.39%) tiers; Lich's Genji Gloves (100%), Siren's Flute (25%), and Black Robe (6.25%) tiers; Maliris's Genji Armor (100%), Ultima Sword (25%), and Masamune (6.25%) tiers; Tiamat's Blood Sword (100%), Feather Boots (25%), and Grand Helm (0.39%) tiers; Kraken's Genji Helm (100%), Wizard Rod (25%), and Glutton's Robe (0.39%) body tiers plus Right Wing Edge and Left Elixir tentacle steals at 100%; Hades's Reflect Ring (100%), Running Shoes (25%), Battle Boots (6.25%), and Robe of Lords (0.39%) tiers; Trance Kuja's Ether (100%), White Robe (25%), and Rebirth Ring (0.39%); and Necron's four Elixir tiers (100%, 25%, 6.25%, 0.39%). Rates remain source-reported rather than release-verified. Necron's four slots corroborate GameFAQs 71891 and independent 79143; Jegged lists only Common.",
+    notes: "Independent steal reference listing Black Waltz 2's Steepled Hat (100%) and Leather Plate (25%); Deathguise's Elixir (100%), Black Belt (25%), and Duel Claws (0.39%) tiers; Lich's Genji Gloves (100%), Siren's Flute (25%), and Black Robe (6.25%) tiers; Maliris's Genji Armor (100%), Ultima Sword (25%), and Masamune (6.25%) tiers; Tiamat's Blood Sword (100%), Feather Boots (25%), and Grand Helm (0.39%) tiers; Kraken's Genji Helm (100%), Wizard Rod (25%), and Glutton's Robe (0.39%) body tiers plus Right Wing Edge and Left Elixir tentacle steals at 100%; Hades's Reflect Ring (100%), Running Shoes (25%), Battle Boots (6.25%), and Robe of Lords (0.39%) tiers; Trance Kuja's Ether (100%), White Robe (25%), and Rebirth Ring (0.39%); and Necron's four Elixir tiers (100%, 25%, 6.25%, 0.39%). Rates remain source-reported rather than release-verified. Necron's four slots corroborate GameFAQs 71891 and independent 79143; Jegged lists only Common.",
   },
   {
     id: "opatil-drop-list",
@@ -4292,7 +4292,7 @@ export const objectives: GameObjective[] = [
     id: "disc-1.village-of-dali.black-waltz-2-steals",
     title: "Steal Steepled Hat and Leather Plate from Black Waltz 2",
     category: "collection",
-    sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+    sourceIds: ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"],
     chapterIds: ["disc-1.village-of-dali"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
@@ -7507,8 +7507,8 @@ export const missables: MissableRecord[] = [
     nextAvailability: "Steepled Hat has a later Lindblum shop source. Leather Plate can be found in Lindblum's Business District or bought later at Lindblum, Treno, and Black Mage Village; only this boss's steal opportunities are lost.",
     action: "Use Zidane's Steal command to obtain the Steepled Hat and Leather Plate before finishing the fight. Published steal odds vary, so no fixed attempt count is promised.",
     recovery: "If Steepled Hat is missed, buy it later in Lindblum. If Leather Plate is missed here, use its Business District pickup or a later listed shop. Neither boss steal copy returns, but both item types have alternate routes.",
-    note: "Steal-slot odds are published as both 70%/23% and 100%/25%. The guide lists the item names without choosing between those rates. The fight is filed under different area headings across guides; the completionist field review places its trigger at the cargo-ship loading area after the Observatory scenes.",
-    sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
+    note: "Jegged reports 70%/23% per connected steal attempt; EliteGrindLab and Opa-Til list 100%/25%. GameFAQs 71891 and 79143, Jegged, and Caves of Narshe agree on the Common Steepled Hat and Uncommon Leather Plate slots, but the published rates remain source-specific. The fight is filed under different area headings across guides; the completionist field review places its trigger at the cargo-ship loading area after the Observatory scenes.",
+    sourceIds: ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"],
     verification: "partial",
     severity: "info",
   },

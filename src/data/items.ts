@@ -527,6 +527,7 @@ const summitStationWaltzEncounterSources = ["gamefaqs-journey-to-treno-71891", "
 const hilgigarsEncounterSources = ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"];
 const zaghnolHuntEncounterSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
+const blackWaltz2StealSources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
 const fossilRooShopAccessSourceIds = ["gamefaqs-fossil-roo-reentry-qa", "jegged-missables", "ffwiki-unrevisitable-locations"];
@@ -2845,7 +2846,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.wrist", name: "Wrist", category: "equipment", sourceIds: wristReferenceSources, verification: "partial" },
   { id: "game-item.cotton-robe", name: "Cotton Robe", category: "equipment", sourceIds: cottonRobeSynthesisSources, verification: "partial" },
   { id: "game-item.mythril-fork", name: "Mythril Fork", category: "equipment", sourceIds: mythrilForkReferenceSources, verification: "partial" },
-  { id: "game-item.steepled-hat", name: "Steepled Hat", category: "equipment", sourceIds: steepledHatSources, verification: "partial" },
+  { id: "game-item.steepled-hat", name: "Steepled Hat", category: "equipment", sourceIds: [...new Set([...steepledHatSources, ...blackWaltz2StealSources])], verification: "partial" },
   { id: "game-item.silver-gloves", name: "Silver Gloves", category: "equipment", sourceIds: silverGlovesReferenceSources, verification: "partial" },
   { id: "game-item.iron-helm", name: "Iron Helm", category: "equipment", sourceIds: [...new Set([...ironHelmReferenceSources, ...daliUndergroundSources, ...plantBrainIronHelmStealSources])], verification: "partial" },
   { id: "game-item.chain-mail", name: "Chain Mail", category: "equipment", sourceIds: chainMailReferenceSources, verification: "partial" },
@@ -2872,7 +2873,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.mythril-armor", name: "Mythril Armor", category: "equipment", sourceIds: [...grandArmorSources, "gamefaqs-shops-71891", "gamefaqs-return-to-gaia-71891", "gamefaqs-return-to-alexandria-71891", "jegged-return-to-alexandria-castle", "gamerguides-alexandria-castle-2", "rpgclassics-armor"], verification: "partial" },
   { id: "game-item.grand-armor", name: "Grand Armor", category: "equipment", sourceIds: grandArmorSources, verification: "partial" },
   { id: "game-item.bandana", name: "Bandana", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-cleyra-71891", "gamefaqs-return-to-lindblum-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo"], verification: "partial" },
-  { id: "game-item.leather-plate", name: "Leather Plate", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "jegged-lindblum", "jegged-dali"], verification: "partial" },
+  { id: "game-item.leather-plate", name: "Leather Plate", category: "equipment", sourceIds: [...new Set([...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-lindblum-71891", "gamefaqs-treno-71891", "gamefaqs-outer-continent-71891", "jegged-lindblum", ...blackWaltz2StealSources])], verification: "partial" },
   { id: "game-item.mythril-vest", name: "Mythril Vest", category: "equipment", sourceIds: [...finalStockSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-cleyra-71891", "gamefaqs-pinnacle-rocks-71891", "gamefaqs-journey-to-outer-continent-71891", "gamefaqs-lost-continent-71891", "gamefaqs-outer-continent-71891", "jegged-pinnacle-rocks", "jegged-esto-gaza", "cavesofnarshe-cleyra-walkthrough"], verification: "partial" },
   { id: "game-item.fairy-flute", name: "Fairy Flute", category: "equipment", sourceIds: fairyFluteReferenceSources, verification: "partial" },
   { id: "game-item.healing-rod", name: "Healing Rod", category: "equipment", sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383", "cavesofnarshe-ff9-rods", "rpgclassics-weapons", "rpgclassics-shops"], verification: "partial" },
@@ -6477,10 +6478,13 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from Black Waltz 2 before defeating it in the underground factory sequence.",
-    notes: "The encounter cannot be repeated, but Leather Plate has documented later shop sources in Lindblum, Treno, and Black Mage Village.",
+    conditions: "Attempt the chance-based Uncommon Leather Plate steal from Black Waltz 2 before defeating it; an individual attempt can fail.",
+    notes: "GameFAQs 71891 and 79143, Jegged, and Caves of Narshe list Leather Plate in Uncommon. Jegged reports 23% per connected steal attempt, while EliteGrindLab and Opa-Til report 25%; these source-specific rates are not reconciled. Leather Plate has later Lindblum, Treno, and Black Mage Village shops.",
     walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-steals"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali"],
+    enemyId: "enemy.black-waltz-2",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    sourceIds: [...new Set([...blackWaltz2StealSources, "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamerguides-dali"])],
   },
   {
     id: "item-path.disc-2.return-to-lindblum.leather-plate-shop",
@@ -12794,9 +12798,13 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal a Steepled Hat from Black Waltz 2 during the Dali story encounter.",
+    conditions: "Attempt the chance-based Common Steepled Hat steal from Black Waltz 2 before defeating it; an individual attempt can fail.",
+    notes: "GameFAQs 71891 and 79143, Jegged, and Caves of Narshe list Steepled Hat in Common. Jegged reports 70% per connected steal attempt, while EliteGrindLab and Opa-Til report 100%; these source-specific rates are not reconciled. Steepled Hat has later Lindblum shop sources.",
     walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-steals"],
-    sourceIds: steepledHatSources,
+    enemyId: "enemy.black-waltz-2",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    sourceIds: [...new Set([...steepledHatSources, ...blackWaltz2StealSources])],
   },
   {
     id: "item-path.disc-1.cargo-ship.steepled-hat-black-waltz-3-steal",

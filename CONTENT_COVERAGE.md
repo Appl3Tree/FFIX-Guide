@@ -344,6 +344,8 @@ These are expected classes, not completion claims. The data audit will grow to v
 
 ## Latest verified slices — 2026-10-27
 
+Black Waltz 2 B04 enemy record and B05 item catalog: Linked the Common Steepled Hat and Uncommon Leather Plate slots to exact item paths and the one-time encounter. Jegged reports 70%/23% per connected attempt; EliteGrindLab and Opa-Til list 100%/25%; rates stay source-scoped. Regression/audit checks cover slot, encounter, objective, warning, and provenance. `npm test` passes 94/94; lint, typecheck, audit, build, and `git diff --check` pass. Audit: 0 errors, 189 warnings, 1,527 paths. Build: 2,538.59 kB JavaScript (615.59 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Browser, gameplay, and release parity remain unverified.
+
 Plant Brain B04 enemy record: Eye Drops uses the source-agreed Common slot; Iron Helm keeps the GameFAQs/Gamer Guides Uncommon versus Jegged Rare/6%-per-connected-attempt disagreement.
 
 Plant Brain B05 item catalog: Added its missing Eye Drops steal path and linked both one-time steals to exact enemy slots and the boss encounter. Source provenance, missable warning, and later item-type recovery are retained; regression/audit checks pass.

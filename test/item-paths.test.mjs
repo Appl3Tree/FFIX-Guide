@@ -2092,6 +2092,66 @@ test("Black Waltz 2's guaranteed and chance-based Ether drops have separate sour
   }
 });
 
+test("Black Waltz 2 steals link Common and Uncommon slots to their exact one-time paths", () => {
+  const objectiveId = "disc-1.village-of-dali.black-waltz-2-steals";
+  const sourceIds = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"];
+  const expected = [
+    { itemId: "game-item.steepled-hat", slot: "common", pathId: "item-path.disc-1.village-of-dali.steepled-hat-black-waltz-2-steal", rate: /70%.*100%/ },
+    { itemId: "game-item.leather-plate", slot: "uncommon", pathId: "item-path.disc-1.village-of-dali.leather-plate-black-waltz-2-steal", rate: /23%.*25%/ },
+  ];
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const warning = missables.find((entry) => entry.id === "missable.disc-1.village-of-dali.black-waltz-2-steals");
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.black-waltz-2");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.dali.black-waltz-2");
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "dali-black-waltz-2-steals");
+
+  assert.ok(objective, "Black Waltz 2 steal objective is missing");
+  assert.ok(warning, "Black Waltz 2 one-time steal warning is missing");
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId: "enemy.black-waltz-2", quantity: 1 }]);
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
+  assert.ok(step?.objectiveIds.includes(objectiveId));
+  assert.match(step?.text ?? "", /Common Steepled Hat and Uncommon Leather Plate/);
+  assert.match(step?.text ?? "", /individual attempts can fail/);
+  assert.match(step?.detail ?? "", /Jegged reports 70%\/23% per connected steal attempt/);
+  assert.match(step?.detail ?? "", /EliteGrindLab and Opa-Til list 100%\/25%/);
+  assert.match(warning.note, /Jegged reports 70%\/23% per connected steal attempt/);
+  assert.match(warning.note, /EliteGrindLab and Opa-Til list 100%\/25%/);
+  assert.match(enemy?.notes.join(" ") ?? "", /GameFAQs 71891 and 79143.*Common.*Uncommon/);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const itemRecord = gameItems.find((entry) => entry.id === item.itemId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    assert.ok(path, `${item.pathId} is missing`);
+    assert.equal(slot?.itemId, item.itemId);
+    assert.equal(path.itemId, item.itemId);
+    assert.equal(path.chapterId, "disc-1.village-of-dali");
+    assert.equal(path.method, "steal");
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.enemyId, "enemy.black-waltz-2");
+    assert.equal(path.enemyLootSlot, item.slot);
+    assert.deepEqual(path.encounterIds, ["encounter.dali.black-waltz-2"]);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.match(path.conditions ?? "", /chance-based/);
+    assert.match(path.conditions ?? "", /individual attempt can fail/);
+    assert.match(path.notes ?? "", item.rate);
+    for (const sourceId of sourceIds) {
+      assert.ok(slot?.sourceIds.includes(sourceId), `${item.slot} slot is missing ${sourceId}`);
+      assert.ok(path.sourceIds.includes(sourceId), `${item.pathId} is missing ${sourceId}`);
+      assert.ok(itemRecord?.sourceIds.includes(sourceId), `${item.itemId} is missing ${sourceId}`);
+      assert.ok(objective.sourceIds.includes(sourceId), `${objectiveId} is missing ${sourceId}`);
+      assert.ok(warning.sourceIds.includes(sourceId), `Black Waltz 2 warning is missing ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
+  }
+});
+
 test("Plant Brain's guaranteed Phoenix Down and conditional Potion drops keep separate paths", () => {
   const objectiveId = "disc-1.evil-forest.plant-brain-drops";
   const expected = [

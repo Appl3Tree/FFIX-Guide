@@ -826,8 +826,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "dali-black-waltz-2-steals",
             kind: "combat",
-            text: "After the Observatory scenes, the fight triggers at the cargo-ship loading area. Use Zidane's Steal until he gets the Steepled Hat and Leather Plate, then defeat Black Waltz 2. Both item types have later sources, so these are recommended early steals rather than permanently unique equipment.",
-            detail: "Black Waltz 2 is Level 6 with 1,030 HP; one secondary table prints 1,000. It is weak to Wind and nullifies Earth. Sources put the boss under different area headings; a field review places the encounter trigger at the cargo-ship loading field, after the Observatory events. Published steal odds range from 70%/23% to 100%/25%, so this guide omits a percentage.",
+            text: "After the Observatory scenes, the fight triggers at the cargo-ship loading area. Attempt the Common Steepled Hat and Uncommon Leather Plate steals with Zidane before defeating Black Waltz 2; individual attempts can fail. Both item types have later sources, so these are recommended early steals rather than permanently unique equipment.",
+            detail: "Black Waltz 2 is Level 6 with 1,030 HP; one secondary table prints 1,000. It is weak to Wind and nullifies Earth. Sources put the boss under different area headings; a field review places the encounter trigger at the cargo-ship loading field, after the Observatory events. Jegged reports 70%/23% per connected steal attempt; EliteGrindLab and Opa-Til list 100%/25%. These source-specific rates remain unreconciled, so the guide promises no fixed attempt count.",
             objectiveIds: ["disc-1.village-of-dali.black-waltz-2-steals"],
           },
           {

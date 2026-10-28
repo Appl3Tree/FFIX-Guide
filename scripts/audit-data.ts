@@ -3783,11 +3783,33 @@ if (!blackWaltz2Encounter || blackWaltz2Encounter.kind !== "boss" ||
   !blackWaltz2Encounter.notes.some((note) => note.includes("Observatory Mountain") && note.includes("cargo-ship"))) {
   errors.push("Black Waltz 2 must be a separate fixed boss encounter linked to its steal warning/cutoff and documented location conflict.");
 }
-for (const itemId of ["game-item.steepled-hat", "game-item.leather-plate"]) {
-  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === itemId && candidate.chapterId === "disc-1.village-of-dali" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.village-of-dali.black-waltz-2-steals"));
-  if (!blackWaltz2Record?.steals.some((slot) => slot.itemId === itemId) || !blackWaltz2Record.routeObjectiveIds.includes("disc-1.village-of-dali.black-waltz-2-steals") || !path || path.availability !== "one-time-encounter") {
-    errors.push(`Black Waltz 2's ${itemId} steal must remain linked to the one-time objective and item path.`);
+const blackWaltz2StealRequiredSources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"];
+const blackWaltz2StealObjectiveId = "disc-1.village-of-dali.black-waltz-2-steals";
+const blackWaltz2StealObjective = objectivesById.get(blackWaltz2StealObjectiveId);
+const blackWaltz2StealWarning = missablesById.get("missable.disc-1.village-of-dali.black-waltz-2-steals");
+const blackWaltz2StealExpectations = [
+  { itemId: "game-item.steepled-hat", slot: "common", pathId: "item-path.disc-1.village-of-dali.steepled-hat-black-waltz-2-steal" },
+  { itemId: "game-item.leather-plate", slot: "uncommon", pathId: "item-path.disc-1.village-of-dali.leather-plate-black-waltz-2-steal" },
+];
+for (const expected of blackWaltz2StealExpectations) {
+  const slot = blackWaltz2Record?.steals.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  const item = gameItems.find((candidate) => candidate.id === expected.itemId);
+  const requiredSourcesPresent = blackWaltz2StealRequiredSources.every((sourceId) =>
+    slot?.sourceIds.includes(sourceId) && path?.sourceIds.includes(sourceId) && item?.sourceIds.includes(sourceId) &&
+    blackWaltz2StealObjective?.sourceIds.includes(sourceId) && blackWaltz2StealWarning?.sourceIds.includes(sourceId));
+  if (!slot || !blackWaltz2Record?.routeObjectiveIds.includes(blackWaltz2StealObjectiveId) || !path ||
+    path.method !== "steal" || path.availability !== "one-time-encounter" || path.enemyId !== "enemy.black-waltz-2" ||
+    path.enemyLootSlot !== expected.slot || !path.encounterIds?.includes("encounter.dali.black-waltz-2") ||
+    !path.walkthroughObjectiveIds?.includes(blackWaltz2StealObjectiveId) || !path.conditions?.includes("chance-based") ||
+    !requiredSourcesPresent) {
+    errors.push(`Black Waltz 2's ${expected.itemId} must link its exact ${expected.slot} slot, one-time encounter, objective, and source provenance to its item path.`);
   }
+}
+if (!blackWaltz2Record?.notes.some((note) => note.includes("Jegged reports 70%/23% per connected steal attempt") && note.includes("EliteGrindLab and Opa-Til report 100%/25%")) ||
+  !blackWaltz2StealWarning?.note.includes("Jegged reports 70%/23% per connected steal attempt") ||
+  !blackWaltz2StealWarning.note.includes("EliteGrindLab and Opa-Til list 100%/25%")) {
+  errors.push("Black Waltz 2's conflicting steal-rate reports must remain source-specific in its enemy profile and warning.");
 }
 if (blackWaltz2Record?.stats.find((stat) => stat.field === "HP")?.value !== 1030 ||
   blackWaltz2Record.drops.length !== 4 || blackWaltz2Record.drops.some((slot) => slot.itemId !== "game-item.ether") ||

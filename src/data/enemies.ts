@@ -236,7 +236,8 @@ const gunitasBasinSources = [
   "jegged-evil-forest",
 ];
 const daliEnemySources = [enemyListSourceId, "gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "cavesofnarshe-dali-walkthrough", "elitegrindlab-dali", "gamefaqs-abilities-71891"];
-const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2"];
+const blackWaltz2Sources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "cavesofnarshe-dali-enemies", "ffwiki-black-waltz-2", "opatil-steal-list"];
+const blackWaltz2StealSources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"];
 const blackWaltz2PreparationSources = [...blackWaltz2Sources, "kamigame-dali-black-waltz-2"];
 const cargoShipEnemySources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "rpgclassics-bestiary-a-c", "rpgclassics-cargo-ship-walkthrough", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
 const cargoShipPreparationSources = ["gamefaqs-cargo-ship-71891", "jegged-cargo-ship", "cavesofnarshe-cargo-ship", "elitegrindlab-cargo-ship"];
@@ -5568,8 +5569,8 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
       { field: "Gil", value: 441, sourceIds: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies"], verification: "cross-checked" },
     ],
     steals: [
-      sourcedLoot("common", "game-item.steepled-hat", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]),
-      sourcedLoot("uncommon", "game-item.leather-plate", ["gamefaqs-dali-71891", "jegged-dali", "cavesofnarshe-dali-enemies"]),
+      sourcedLoot("common", "game-item.steepled-hat", blackWaltz2StealSources),
+      sourcedLoot("uncommon", "game-item.leather-plate", blackWaltz2StealSources),
       sourcedLoot("semi-rare", null, ["gamefaqs-dali-71891"], "Nothing"),
       sourcedLoot("rare", null, ["gamefaqs-dali-71891"], "Nothing"),
     ],
@@ -5609,6 +5610,7 @@ const earlyDaliEnemyRecords: EnemyRecord[] = [
       "GameFAQs lists Mini as a vulnerability, while Final Fantasy Wiki lists Mini among immunities. The catalog keeps the disagreement rather than resolving it without a direct game check.",
       "HP is listed as 1,030 by the cross-checked sources; StrategyWiki's 1,000 figure is an apparent rounding or transcription difference and is not selected as the record value.",
       "Walkthroughs differ on the encounter's field location. The dossier uses the Dali story chapter and keeps Observatory Mountain versus cargo-ship loading-area claims explicit in its encounter note.",
+      "GameFAQs 71891 and 79143, Jegged, and Caves of Narshe list Steepled Hat in Common and Leather Plate in Uncommon. Jegged reports 70%/23% per connected steal attempt; EliteGrindLab and Opa-Til report 100%/25%. These are source-reported rates with different scopes, so no single probability is selected.",
     ],
   }, daliChapterId, blackWaltz2PreparationSources, [blackWaltz2StealsMissableId], [blackWaltz2StealsCutoffId]),
 ];
