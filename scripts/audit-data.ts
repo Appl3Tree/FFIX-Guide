@@ -3063,6 +3063,20 @@ for (const exception of sourceDisputedOneTimeLootPathExceptions) {
     errors.push(`The documented one-time enemy loot disagreement ${exception.pathId} is missing from item acquisition coverage.`);
   }
 }
+const limitedWindowShopPathsWithoutRouteLink = itemAcquisitionPaths.filter((path) =>
+  ["shop", "mogshop"].includes(path.method) &&
+  path.availability === "limited-window" &&
+  !(path.walkthroughObjectiveIds ?? []).some((objectiveId) =>
+    walkthroughChapters.some((chapter) =>
+      chapter.sections.some((section) =>
+        section.steps.some((step) => step.objectiveIds?.includes(objectiveId)),
+      ),
+    ),
+  ),
+);
+if (limitedWindowShopPathsWithoutRouteLink.length) {
+  errors.push(`Limited-window shop and Mogshop paths need a walkthrough checkpoint; missing links: ${limitedWindowShopPathsWithoutRouteLink.map((path) => path.id).join(", ")}.`);
+}
 const aftermathCatalogPaths = [
   ["item-path.disc-3.the-aftermath.elixir-guest-room", "game-item.elixir", "chest", "single-use", "disc-3.the-aftermath.pickups"],
   ["item-path.disc-3.the-aftermath.egoists-armlet-guest-room", "game-item.egoists-armlet", "chest", "single-use", "disc-3.the-aftermath.pickups"],
@@ -9207,6 +9221,49 @@ if (
 ) {
   errors.push("The five Disc II Lindblum and Dragon's Gate shop paths must link exact prices to the departure stock review, preserving the city lockout and separating Bandana's purchase from its chest pickup.");
 }
+const linkedLimitedShopSpecs = [
+  { pathId: "item-path.disc-1.burmecia.magus-hat-atla-shop", itemId: "game-item.magus-hat", chapterId: "disc-1.burmecia", method: "mogshop", shopId: "burmecia.atla-mogshop", price: 400, objectiveId: "disc-1.burmecia.atla-mogshop-stock", stepId: "burmecia-atla-vault-mognet" },
+  { pathId: "item-path.disc-1.burmecia.headgear-atla-mogshop", itemId: "game-item.headgear", chapterId: "disc-1.burmecia", method: "mogshop", shopId: "burmecia.atla-mogshop", price: 330, objectiveId: "disc-1.burmecia.atla-mogshop-stock", stepId: "burmecia-atla-vault-mognet" },
+  { pathId: "item-path.disc-2.treno.glass-armlet-shop", itemId: "game-item.glass-armlet", chapterId: "disc-2.treno", method: "shop", shopId: "treno.weapon-shop.disc-2", price: 250, objectiveId: "disc-2.treno.shop-stock-window", stepId: "treno-mogrich-letter" },
+  { pathId: "item-path.disc-2.outer-continent.bone-wrist-black-mage-village-shop", itemId: "game-item.bone-wrist", chapterId: "disc-2.outer-continent", method: "shop", shopId: "black-mage-village.weapon-shop", price: 330, objectiveId: "disc-2.outer-continent.black-mage-village-bone-wrist-stock", stepId: "black-mage-village-shop-check", stepChapterId: "disc-2.magdalene-forest" },
+  { pathId: "item-path.disc-3.lost-continent.gladius-esto-gaza-shop", itemId: "game-item.gladius", chapterId: "disc-3.lost-continent", method: "shop", shopId: "esto-gaza.weapon-shop.after-desert-palace", price: 2300, objectiveId: "disc-3.lost-continent.esto-gaza-stock", stepId: "lost-continent-esto-gaza-shop" },
+];
+const linkedLimitedShopPaths = linkedLimitedShopSpecs.map(({ pathId }) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const getLinkedShopStep = (chapterId: string, stepId: string) => walkthroughChapters
+  .find((chapter) => chapter.areaId === chapterId)
+  ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === stepId);
+const atlaMogshopObjective = objectivesById.get("disc-1.burmecia.atla-mogshop-stock");
+const blackMageVillageBoneWristObjective = objectivesById.get("disc-2.outer-continent.black-mage-village-bone-wrist-stock");
+const atlaMogshopStep = getLinkedShopStep("disc-1.burmecia", "burmecia-atla-vault-mognet");
+const trenoGlassArmletStep = getLinkedShopStep("disc-2.treno", "treno-mogrich-letter");
+const blackMageVillageBoneWristStep = getLinkedShopStep("disc-2.magdalene-forest", "black-mage-village-shop-check");
+const estoGazaGladiusStep = getLinkedShopStep("disc-3.lost-continent", "lost-continent-esto-gaza-shop");
+if (
+  !atlaMogshopObjective || atlaMogshopObjective.category !== "collection" ||
+  !atlaMogshopObjective.chapterIds?.includes("disc-1.burmecia") ||
+  !atlaMogshopObjective.sourceIds.includes("gamefaqs-shops-71891") ||
+  !blackMageVillageBoneWristObjective || blackMageVillageBoneWristObjective.category !== "collection" ||
+  !blackMageVillageBoneWristObjective.chapterIds?.includes("disc-2.outer-continent") ||
+  !blackMageVillageBoneWristObjective.sourceIds.includes("gamefaqs-shops-71891") ||
+  linkedLimitedShopPaths.some((path, index) => {
+    const spec = linkedLimitedShopSpecs[index];
+    return !path || path.itemId !== spec.itemId || path.chapterId !== spec.chapterId ||
+      path.method !== spec.method || path.availability !== "limited-window" || path.shopId !== spec.shopId ||
+      path.cost?.amount !== spec.price || !path.walkthroughObjectiveIds?.includes(spec.objectiveId) ||
+      !path.sourceIds.includes("gamefaqs-shops-71891") ||
+      !getLinkedShopStep(spec.stepChapterId ?? spec.chapterId, spec.stepId)?.objectiveIds?.includes(spec.objectiveId);
+  }) ||
+  !atlaMogshopStep?.text.includes("Headgear costs 330 Gil and Magus Hat 400 Gil") ||
+  !trenoGlassArmletStep?.detail?.includes("Glass Armlet at 250 Gil here") ||
+  !trenoGlassArmletStep.detail.includes("later Treno listing") ||
+  !blackMageVillageBoneWristStep?.detail?.includes("GameFAQs lists Bone Wrist in this Weapon Shop on Discs II–III") ||
+  !blackMageVillageBoneWristStep.detail.includes("Alexandria remains a later seller") ||
+  !estoGazaGladiusStep?.text.includes("Gladius (2,300 Gil)") ||
+  !estoGazaGladiusStep.detail?.includes("post-Desert Palace Esto Gaza stock")
+) {
+  errors.push("Atla, Treno, Black Mage Village, and Esto Gaza limited-window shop paths must link their exact source-listed items and prices to the matching stock checkpoints, preserving later recovery and disputed-window scope.");
+}
 const bandanaDragonGatePickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.dragon-gate-bandana-pickup");
 if (
   !bandanaDragonGatePickup ||
@@ -9638,11 +9695,13 @@ if (
   errors.push("The Summit Station inventory warning must preserve the safe checkpoint while linking Caves of Narshe's Disc III/item-page claims to both window-unverified candidate paths and the optional aerial counter check, without presenting later recovery as confirmed.");
 }
 const summitShopStockObjective = objectivesById.get("disc-2.journey-to-treno.station-shop-stock");
-const summitShopStockPathExpectations: [string, string, number][] = [
-  ["item-path.disc-2.journey-to-treno.summit-station-air-racket-shop", "game-item.air-racket", 400],
-  ["item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop", "game-item.glass-armlet", 250],
-  ["item-path.disc-2.journey-to-treno.headgear-summit-station-shop", "game-item.headgear", 330],
-  ["item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop", "game-item.steepled-hat", 260],
+const summitShopStockPathExpectations: [string, string, number, string][] = [
+  ["item-path.disc-2.journey-to-treno.summit-station-air-racket-shop", "game-item.air-racket", 400, "disc-2.journey-to-treno"],
+  ["item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop", "game-item.glass-armlet", 250, "disc-2.journey-to-treno"],
+  ["item-path.disc-2.journey-to-treno.headgear-summit-station-shop", "game-item.headgear", 330, "disc-2.journey-to-treno"],
+  ["item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop", "game-item.steepled-hat", 260, "disc-2.journey-to-treno"],
+  ["item-path.disc-1.journey-to-burmecia.magus-hat-summit-station-shop", "game-item.magus-hat", 400, "disc-1.journey-to-burmecia"],
+  ["item-path.disc-1.journey-to-burmecia.rubber-helm-summit-station-shop", "game-item.rubber-helm", 250, "disc-1.journey-to-burmecia"],
 ];
 const summitShopStockPaths = summitShopStockPathExpectations.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
 const summitShopStockStep = walkthroughChapters
@@ -9658,23 +9717,22 @@ if (
   summitShopStockSources.some((sourceId) => !summitShopStockObjective.sourceIds.includes(sourceId)) ||
   summitShopStockPaths.some((path, index) => !path ||
     path.itemId !== summitShopStockPathExpectations[index][1] ||
-    path.chapterId !== "disc-2.journey-to-treno" ||
+    path.chapterId !== summitShopStockPathExpectations[index][3] ||
     path.method !== "shop" ||
     path.availability !== "limited-window" ||
     path.shopId !== "summit-station.weapon-shop" ||
     path.cost?.amount !== summitShopStockPathExpectations[index][2] ||
     !path.walkthroughObjectiveIds?.includes("disc-2.journey-to-treno.station-shop-stock") ||
-    !path.sourceIds.includes("gamefaqs-shops-71891") ||
-    !path.sourceIds.includes("gamefaqs-journey-to-treno-71891")) ||
+    !path.sourceIds.includes("gamefaqs-shops-71891")) ||
   !summitShopStockPaths[0]?.walkthroughObjectiveIds?.includes("disc-2.treno.air-racket-purchase") ||
   !summitShopStockStep?.objectiveIds?.includes("disc-2.journey-to-treno.station-shop-stock") ||
-  !summitShopStockStep.text.includes("Air Racket (400 Gil), Glass Armlet (250), Steepled Hat (260), and Headgear (330)") ||
+  !summitShopStockStep.text.includes("Air Racket (400 Gil), Glass Armlet (250), Steepled Hat (260), Headgear (330), Magus Hat (400), and Rubber Helm (250)") ||
   !summitShopStockStep.detail?.includes("This closes only this seller's window") ||
   !summitShopStockStep.detail.includes("this Summit copy counts toward that total") ||
   !summitShopStockStep.detail.includes("one more copy is in Ipsen's Castle") ||
   !gamefaqsShopsSource?.notes.includes("the Summit stock is first-visit only")
 ) {
-  errors.push("Summit Station's four limited-window shop paths must link to the sourced optional stock-review checkpoint, retain their listed prices, and distinguish this seller's closure from later item-type routes.");
+  errors.push("Summit Station's six limited-window shop paths must link to the sourced optional stock-review checkpoint, retain their listed prices, and distinguish this seller's closure from later item-type routes.");
 }
 const southGateAcquisitionExpectations: [string, string, string, string, string][] = [
   ["item-path.disc-1.journey-to-burmecia.bohden-gate-multina-racket", "game-item.multina-racket", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups"],

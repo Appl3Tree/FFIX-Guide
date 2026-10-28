@@ -2294,10 +2294,12 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
 test("Summit Station's limited-window shop paths link to the optional stock checkpoint", () => {
   const objectiveId = "disc-2.journey-to-treno.station-shop-stock";
   const expected = [
-    ["item-path.disc-2.journey-to-treno.summit-station-air-racket-shop", "game-item.air-racket", 400],
-    ["item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop", "game-item.glass-armlet", 250],
-    ["item-path.disc-2.journey-to-treno.headgear-summit-station-shop", "game-item.headgear", 330],
-    ["item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop", "game-item.steepled-hat", 260],
+    ["item-path.disc-2.journey-to-treno.summit-station-air-racket-shop", "game-item.air-racket", 400, "disc-2.journey-to-treno"],
+    ["item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop", "game-item.glass-armlet", 250, "disc-2.journey-to-treno"],
+    ["item-path.disc-2.journey-to-treno.headgear-summit-station-shop", "game-item.headgear", 330, "disc-2.journey-to-treno"],
+    ["item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop", "game-item.steepled-hat", 260, "disc-2.journey-to-treno"],
+    ["item-path.disc-1.journey-to-burmecia.magus-hat-summit-station-shop", "game-item.magus-hat", 400, "disc-1.journey-to-burmecia"],
+    ["item-path.disc-1.journey-to-burmecia.rubber-helm-summit-station-shop", "game-item.rubber-helm", 250, "disc-1.journey-to-burmecia"],
   ];
   const stockObjective = objectives.find((objective) => objective.id === objectiveId);
   const stationShopStep = walkthroughChapters
@@ -2312,24 +2314,23 @@ test("Summit Station's limited-window shop paths link to the optional stock chec
   assert.ok(["gamefaqs-shops-71891", "gamefaqs-journey-to-treno-71891", "cour89-air-racket"]
     .every((sourceId) => stockObjective?.sourceIds.includes(sourceId)));
   assert.ok(stationShopStep?.objectiveIds?.includes(objectiveId));
-  assert.match(stationShopStep?.text ?? "", /Air Racket \(400 Gil\), Glass Armlet \(250\), Steepled Hat \(260\), and Headgear \(330\)/);
+  assert.match(stationShopStep?.text ?? "", /Air Racket \(400 Gil\), Glass Armlet \(250\), Steepled Hat \(260\), Headgear \(330\), Magus Hat \(400\), and Rubber Helm \(250\)/);
   assert.match(stationShopStep?.detail ?? "", /closes only this seller's window/);
   assert.match(stationShopStep?.detail ?? "", /this Summit copy counts toward that total/);
   assert.match(stationShopStep?.detail ?? "", /one more copy is in Ipsen's Castle/);
   assert.match(shopsSource?.notes ?? "", /Summit stock is first-visit only/);
 
-  for (const [pathId, itemId, price] of expected) {
+  for (const [pathId, itemId, price, chapterId] of expected) {
     const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
     assert.ok(path, `${pathId} exists`);
     assert.equal(path?.itemId, itemId);
-    assert.equal(path?.chapterId, "disc-2.journey-to-treno");
+    assert.equal(path?.chapterId, chapterId);
     assert.equal(path?.method, "shop");
     assert.equal(path?.availability, "limited-window");
     assert.equal(path?.shopId, "summit-station.weapon-shop");
     assert.equal(path?.cost?.amount, price);
     assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
     assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
-    assert.ok(path?.sourceIds.includes("gamefaqs-journey-to-treno-71891"));
     for (const sourceId of path?.sourceIds ?? []) {
       assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
     }
@@ -2441,6 +2442,53 @@ test("Dragoos' pre-Cleyra stock paths link to the post-Festival purchase checkpo
       assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
     }
   }
+});
+
+test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their walkthrough stock checks", () => {
+  const expected = [
+    ["item-path.disc-1.burmecia.magus-hat-atla-shop", "game-item.magus-hat", "disc-1.burmecia", "mogshop", "burmecia.atla-mogshop", 400, "disc-1.burmecia.atla-mogshop-stock", "burmecia-atla-vault-mognet"],
+    ["item-path.disc-1.burmecia.headgear-atla-mogshop", "game-item.headgear", "disc-1.burmecia", "mogshop", "burmecia.atla-mogshop", 330, "disc-1.burmecia.atla-mogshop-stock", "burmecia-atla-vault-mognet"],
+    ["item-path.disc-2.treno.glass-armlet-shop", "game-item.glass-armlet", "disc-2.treno", "shop", "treno.weapon-shop.disc-2", 250, "disc-2.treno.shop-stock-window", "treno-mogrich-letter"],
+    ["item-path.disc-2.outer-continent.bone-wrist-black-mage-village-shop", "game-item.bone-wrist", "disc-2.outer-continent", "shop", "black-mage-village.weapon-shop", 330, "disc-2.outer-continent.black-mage-village-bone-wrist-stock", "black-mage-village-shop-check", "disc-2.magdalene-forest"],
+    ["item-path.disc-3.lost-continent.gladius-esto-gaza-shop", "game-item.gladius", "disc-3.lost-continent", "shop", "esto-gaza.weapon-shop.after-desert-palace", 2300, "disc-3.lost-continent.esto-gaza-stock", "lost-continent-esto-gaza-shop"],
+  ];
+  const getStep = (chapterId, stepId) => walkthroughChapters
+    .find((chapter) => chapter.areaId === chapterId)
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === stepId);
+  const checkpointPhrases = [
+    ["disc-1.burmecia", "burmecia-atla-vault-mognet", /Headgear costs 330 Gil and Magus Hat 400 Gil/],
+    ["disc-2.treno", "treno-mogrich-letter", /Glass Armlet at 250 Gil here/],
+    ["disc-2.magdalene-forest", "black-mage-village-shop-check", /Bone Wrist \(330 Gil\)/],
+    ["disc-3.lost-continent", "lost-continent-esto-gaza-shop", /Gladius \(2,300 Gil\)/],
+  ];
+
+  for (const [pathId, itemId, chapterId, method, shopId, price, objectiveId, stepId, stepChapterId = chapterId] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const objective = objectives.find((entry) => entry.id === objectiveId);
+    const step = getStep(stepChapterId, stepId);
+    assert.ok(path, `${pathId} exists`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.chapterId, chapterId);
+    assert.equal(path?.method, method);
+    assert.equal(path?.availability, "limited-window");
+    assert.equal(path?.shopId, shopId);
+    assert.equal(path?.cost?.amount, price);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(objective?.chapterIds?.includes(chapterId));
+    assert.ok(step?.objectiveIds?.includes(objectiveId));
+    assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
+    }
+  }
+
+  for (const [chapterId, stepId, phrase] of checkpointPhrases) {
+    const step = getStep(chapterId, stepId);
+    assert.match(`${step?.text ?? ""} ${step?.detail ?? ""}`, phrase);
+  }
+  assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /distinct from the unresolved later Treno listing/);
+  assert.match(getStep("disc-2.magdalene-forest", "black-mage-village-shop-check")?.detail ?? "", /Alexandria remains a later seller/);
 });
 
 test("Disc II Lindblum and Dragon's Gate shop paths link to the departure stock review", () => {

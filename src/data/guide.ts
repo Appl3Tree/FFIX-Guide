@@ -4396,6 +4396,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-1.burmecia.atla-mogshop-stock",
+    title: "Review Atla's optional Mogshop stock",
+    category: "collection",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia"],
+    chapterIds: ["disc-1.burmecia"],
+    profileIds: ["comprehensive", "custom"],
+    verification: "partial",
+  },
+  {
     id: "disc-1.burmecia.germinas-boots",
     title: "Collect the Germinas Boots from the Burmecia balcony",
     category: "collection",
@@ -5024,6 +5033,15 @@ export const objectives: GameObjective[] = [
     sourceIds: ["gamefaqs-outer-continent-71891", "jegged-conde-petie", "elitegrindlab-conde-petie"],
     chapterIds: ["disc-2.outer-continent", "disc-3.preparing-to-leave"],
     profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
+    id: "disc-2.outer-continent.black-mage-village-bone-wrist-stock",
+    title: "Review Black Mage Village's Disc II–III Bone Wrist stock",
+    category: "collection",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "jegged-arm-gear", "cavesofnarshe-ff9-disc-2-map"],
+    chapterIds: ["disc-2.outer-continent"],
+    profileIds: ["comprehensive", "custom"],
     verification: "partial",
   },
   {
