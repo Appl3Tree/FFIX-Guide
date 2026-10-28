@@ -6215,6 +6215,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-3.aerial-exploration.rosetta-ring-stellazzio",
+    title: "Collect Rosetta Ring as Queen Stella's tenth Stellazzio reward",
+    category: "collection",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-stellazzio-71891", "gamefaqs-aerial-exploration-71891", "jegged-stellazzio"],
+    chapterIds: ["disc-3.aerial-exploration"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
     id: "disc-3.aerial-exploration.quan-running-shoes",
     title: "Bring Vivi and Quina to Quan's Dwelling for the Running Shoes",
     category: "collection",

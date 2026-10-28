@@ -10822,6 +10822,43 @@ if (!gameItems.some((item) => item.id === "game-item.madain-ring" && item.name =
   !fossilMadainRingStep?.detail?.includes("later sources provide alternatives")) {
   errors.push("Reflect Ring and Madain's Ring must keep their auction, five-shop synthesis, Hades/Fossil Roo/Mountain Crack, ability, inventory-target, source, and walkthrough links complete.");
 }
+const rosettaRingPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rosetta-ring");
+const rosettaRingRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.rosetta-ring");
+const rosettaRingTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.rosetta-ring");
+const rosettaRingAbilityNames = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.rosetta-ring").map((claim) => claim.abilityName);
+const rosettaRingStellazzioPath = rosettaRingPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.rosetta-ring-stellazzio-reward");
+const rosettaRingFriendlyYanPath = rosettaRingPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.rosetta-ring-friendly-yan-gift");
+const rosettaRingSynthesisPath = rosettaRingPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.rosetta-ring-black-mage-village-synthesis");
+const rosettaRingStellazzioObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.rosetta-ring-stellazzio");
+const rosettaRingSteps = walkthroughChapters.flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+const rosettaRingStellazzioStep = rosettaRingSteps.find((step) => step.id === "aerial-treno-stellazzio");
+const rosettaRingFriendlyYanStep = rosettaRingSteps.find((step) => step.id === "aerial-friendly-yan-gift");
+const rosettaRingShopStep = rosettaRingSteps.find((step) => step.id === "gaia-return-shop-stock");
+const rosettaRingFinalPrepStep = rosettaRingSteps.find((step) => step.id === "final-preparations-open-activities");
+if (!gameItems.some((item) => item.id === "game-item.rosetta-ring" &&
+    ["gamefaqs-stellazzio-71891", "gamefaqs-friendly-creatures-71891", "rpgclassics-synthesis"].every((sourceId) => item.sourceIds.includes(sourceId))) ||
+  rosettaRingPaths.length !== 4 ||
+  !rosettaRingStellazzioObjective?.chapterIds?.includes("disc-3.aerial-exploration") ||
+  rosettaRingStellazzioPath?.method !== "quest-reward" || rosettaRingStellazzioPath.availability !== "single-use" ||
+  !rosettaRingStellazzioPath.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.rosetta-ring-stellazzio") ||
+  rosettaRingFriendlyYanPath?.method !== "quest-reward" || rosettaRingFriendlyYanPath.availability !== "conditional" ||
+  !rosettaRingFriendlyYanPath?.conditions?.includes("other eight") || !rosettaRingFriendlyYanPath?.conditions?.includes("Diamond") ||
+  !rosettaRingFriendlyYanPath?.notes?.includes("Always drop") || !rosettaRingFriendlyYanPath?.notes?.includes("gift route") ||
+  !rosettaRingFriendlyYanPath.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.friendly-yan") ||
+  !rosettaRingRecipe || rosettaRingRecipe.cost.amount !== 24000 || rosettaRingRecipe.chapterId !== "disc-4.return-to-gaia" ||
+  rosettaRingRecipe.shopId !== "black-mage-village.synthesis-shop.disc-4" ||
+  !["game-item.holy-lance", "game-item.madain-ring"].every((itemId) => rosettaRingRecipe.ingredients.some((ingredient) => ingredient.itemId === itemId)) ||
+  rosettaRingSynthesisPath?.availability !== "repeatable" || rosettaRingSynthesisPath.cost?.amount !== 24000 ||
+  rosettaRingTargets.find((target) => target.basis === "route-need")?.targetQuantity !== 9 ||
+  rosettaRingTargets.find((target) => target.basis === "end-inventory")?.targetQuantity !== 13 ||
+  !["Concentrate", "Level Up", "Reflectx2"].every((abilityName) => rosettaRingAbilityNames.includes(abilityName)) ||
+  !rosettaRingStellazzioStep?.objectiveIds?.includes("disc-3.aerial-exploration.rosetta-ring-stellazzio") ||
+  !rosettaRingStellazzioStep?.text.includes("Rosetta Ring") ||
+  !rosettaRingFriendlyYanStep?.objectiveIds?.includes("disc-3.aerial-exploration.friendly-yan") ||
+  !rosettaRingShopStep?.detail?.includes("Rosetta Ring from Madain's Ring + Holy Lance (24,000)") ||
+  !rosettaRingFinalPrepStep?.detail?.includes("end-inventory #13")) {
+  errors.push("Rosetta Ring must link its Mountain Crack, Stellazzio, Friendly Yan, and Disc IV synthesis routes, preserve the Friendly Yan drop/gift distinction, and record its targets, abilities, and walkthrough checkpoints.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }

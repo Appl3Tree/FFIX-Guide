@@ -589,6 +589,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Coronet + Rosetta Ring makes Circlet for 20,000 Gil at Black Cat on Disc IV. GameFAQs and an independent item/ability FAQ identify the output as Circlet; RPGClassics labels this formula Gauntlets despite GameFAQs documenting a distinct 8,000-Gil Gauntlets recipe.",
   },
   {
+    id: "synthesis-recipe.rosetta-ring",
+    resultItemId: "game-item.rosetta-ring",
+    ingredients: [
+      { itemId: "game-item.madain-ring", quantity: 1 },
+      { itemId: "game-item.holy-lance", quantity: 1 },
+    ],
+    chapterId: "disc-4.return-to-gaia",
+    shopId: "black-mage-village.synthesis-shop.disc-4",
+    shopName: "Black Cat Synthesis Shop (Disc IV)",
+    cost: { currency: "gil", amount: 24000 },
+    sourceIds: [...disc4BlackCatRecipeSources, "gamefaqs-item-ability-10332"],
+    notes: "Madain's Ring + Holy Lance makes Rosetta Ring for 24,000 Gil at Black Cat in Black Mage Village on Disc IV. GameFAQs Shops and RPGClassics agree on the recipe, price, and shop window.",
+  },
+  {
     id: "synthesis-recipe.golden-skullcap",
     resultItemId: "game-item.golden-skullcap",
     ingredients: [

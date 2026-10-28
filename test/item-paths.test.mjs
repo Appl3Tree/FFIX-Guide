@@ -5325,3 +5325,49 @@ test("Reflect Ring and Madain's Ring link every listed recovery route, recipe, a
     assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
   }
 });
+
+test("Rosetta Ring links its Stellazzio, Friendly Yan, Mountain Crack, and Disc IV synthesis routes", () => {
+  const rosettaPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rosetta-ring");
+  const stellaPath = rosettaPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.rosetta-ring-stellazzio-reward");
+  const yanPath = rosettaPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.rosetta-ring-friendly-yan-gift");
+  const crackPath = rosettaPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.rosetta-ring-mountain-crack-1");
+  const synthesisPath = rosettaPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.rosetta-ring-black-mage-village-synthesis");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.rosetta-ring");
+  const objective = objectives.find((entry) => entry.id === "disc-3.aerial-exploration.rosetta-ring-stellazzio");
+  const targets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.rosetta-ring");
+  const abilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.rosetta-ring");
+  const steps = walkthroughChapters.flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+
+  assert.equal(rosettaPaths.length, 4);
+  assert.ok(stellaPath);
+  assert.equal(stellaPath.method, "quest-reward");
+  assert.equal(stellaPath.availability, "single-use");
+  assert.ok(stellaPath.conditions.includes("ten Stellazzio"));
+  assert.ok(stellaPath.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.rosetta-ring-stellazzio"));
+  assert.equal(yanPath?.method, "quest-reward");
+  assert.equal(yanPath?.availability, "conditional");
+  assert.match(yanPath?.conditions ?? "", /other eight.*Diamond/);
+  assert.match(yanPath?.notes ?? "", /Always drop.*gift route.*not directly verified/);
+  assert.ok(yanPath?.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.friendly-yan"));
+  assert.equal(crackPath?.availability, "single-use");
+  assert.ok(crackPath?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.mountain-crack"));
+  assert.equal(synthesisPath?.availability, "repeatable");
+  assert.equal(synthesisPath?.shopId, "black-mage-village.synthesis-shop.disc-4");
+  assert.equal(synthesisPath?.cost?.amount, 24000);
+  assert.ok(synthesisPath?.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.updated-shops"));
+
+  assert.equal(recipe?.resultItemId, "game-item.rosetta-ring");
+  assert.equal(recipe?.cost.amount, 24000);
+  assert.deepEqual(recipe?.ingredients.map((ingredient) => ingredient.itemId).sort(), ["game-item.holy-lance", "game-item.madain-ring"]);
+  assert.ok(objective?.chapterIds?.includes("disc-3.aerial-exploration"));
+  assert.equal(targets.find((target) => target.basis === "route-need")?.targetQuantity, 9);
+  assert.equal(targets.find((target) => target.basis === "end-inventory")?.targetQuantity, 13);
+  assert.deepEqual(abilities.map((claim) => claim.abilityName).sort(), ["Concentrate", "Level Up", "Reflectx2"]);
+  assert.ok(steps.find((step) => step.id === "aerial-treno-stellazzio")?.objectiveIds?.includes("disc-3.aerial-exploration.rosetta-ring-stellazzio"));
+  assert.ok(steps.find((step) => step.id === "aerial-friendly-yan-gift")?.text.includes("Rosetta Ring"));
+  assert.ok(steps.find((step) => step.id === "gaia-return-shop-stock")?.detail?.includes("Rosetta Ring from Madain's Ring + Holy Lance (24,000)"));
+  assert.ok(steps.find((step) => step.id === "final-preparations-open-activities")?.detail?.includes("end-inventory #13"));
+  for (const path of rosettaPaths) {
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+});
