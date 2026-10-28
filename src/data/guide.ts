@@ -5277,6 +5277,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-2.return-to-lindblum.optional-shop-stock",
+    title: "Review Disc II Lindblum and Dragon's Gate shop stock",
+    category: "collection",
+    sourceIds: ["gamefaqs-return-to-lindblum-71891", "gamefaqs-shops-71891"],
+    chapterIds: ["disc-2.return-to-lindblum"],
+    profileIds: ["comprehensive", "perfect", "custom"],
+    verification: "partial",
+  },
+  {
     id: "disc-2.return-to-lindblum.cleyra-recovery-shops",
     title: "Check post-Cleyra Lindblum stock for missed item types",
     category: "collection",

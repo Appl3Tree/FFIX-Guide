@@ -9173,6 +9173,40 @@ if (
 ) {
   errors.push("Dragoos' eight pre-Cleyra stock paths must link exact prices to the post-Festival Lindblum checkpoint and preserve the shop-window versus item-type distinction.");
 }
+const returnLindblumShopObjective = objectivesById.get("disc-2.return-to-lindblum.optional-shop-stock");
+const returnLindblumShopSpecs: [string, string, number, string][] = [
+  ["item-path.disc-2.return-to-lindblum.bandana-shop", "game-item.bandana", 500, "Dragoos' Weapon Shop (Disc II)"],
+  ["item-path.disc-2.return-to-lindblum.bone-wrist-shop", "game-item.bone-wrist", 330, "Lindblum Weapon Shop (Disc II)"],
+  ["item-path.disc-2.return-to-lindblum.headgear-dragoos-shop", "game-item.headgear", 330, "Dragoos' Weapon Shop (Lindblum, Disc II)"],
+  ["item-path.disc-2.return-to-lindblum.magus-hat-shop", "game-item.magus-hat", 400, "Lindblum Weapon Shop (Disc II)"],
+  ["item-path.disc-2.return-to-lindblum.dragon-gate-bandana-shop", "game-item.bandana", 500, "Dragon's Gate Merchant (Disc II)"],
+];
+const returnLindblumShopPaths = returnLindblumShopSpecs.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const returnLindblumChapter = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-lindblum");
+const returnLindblumShopStep = returnLindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-shop-preparation");
+const returnLindblumGateShopStep = returnLindblumChapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-moonte-bandana");
+if (
+  !returnLindblumShopObjective ||
+  returnLindblumShopObjective.category !== "collection" ||
+  !returnLindblumShopObjective.chapterIds?.includes("disc-2.return-to-lindblum") ||
+  !returnLindblumShopObjective.profileIds?.includes("comprehensive") ||
+  !["gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891"].every((sourceId) => returnLindblumShopObjective.sourceIds.includes(sourceId)) ||
+  returnLindblumShopPaths.some((path, index) => !path ||
+    path.itemId !== returnLindblumShopSpecs[index][1] ||
+    path.chapterId !== "disc-2.return-to-lindblum" ||
+    path.method !== "shop" ||
+    path.availability !== "limited-window" ||
+    path.shopName !== returnLindblumShopSpecs[index][3] ||
+    path.cost?.amount !== returnLindblumShopSpecs[index][2] ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.optional-shop-stock") ||
+    !path.sourceIds.includes("gamefaqs-shops-71891")) ||
+  !returnLindblumShopStep?.objectiveIds?.includes("disc-2.return-to-lindblum.optional-shop-stock") ||
+  !returnLindblumGateShopStep?.objectiveIds?.includes("disc-2.return-to-lindblum.optional-shop-stock") ||
+  !returnLindblumShopStep.detail?.includes("only the Dragon's Gate Merchant remains available until Disc III") ||
+  !returnLindblumGateShopStep.detail?.includes("separate free pickup from the Dragon's Gate Merchant's 500-Gil Bandana listing")
+) {
+  errors.push("The five Disc II Lindblum and Dragon's Gate shop paths must link exact prices to the departure stock review, preserving the city lockout and separating Bandana's purchase from its chest pickup.");
+}
 const bandanaDragonGatePickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.dragon-gate-bandana-pickup");
 if (
   !bandanaDragonGatePickup ||

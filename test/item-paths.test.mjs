@@ -2443,6 +2443,51 @@ test("Dragoos' pre-Cleyra stock paths link to the post-Festival purchase checkpo
   }
 });
 
+test("Disc II Lindblum and Dragon's Gate shop paths link to the departure stock review", () => {
+  const objectiveId = "disc-2.return-to-lindblum.optional-shop-stock";
+  const expected = [
+    ["item-path.disc-2.return-to-lindblum.bandana-shop", "game-item.bandana", 500, "Dragoos' Weapon Shop (Disc II)"],
+    ["item-path.disc-2.return-to-lindblum.bone-wrist-shop", "game-item.bone-wrist", 330, "Lindblum Weapon Shop (Disc II)"],
+    ["item-path.disc-2.return-to-lindblum.headgear-dragoos-shop", "game-item.headgear", 330, "Dragoos' Weapon Shop (Lindblum, Disc II)"],
+    ["item-path.disc-2.return-to-lindblum.magus-hat-shop", "game-item.magus-hat", 400, "Lindblum Weapon Shop (Disc II)"],
+    ["item-path.disc-2.return-to-lindblum.dragon-gate-bandana-shop", "game-item.bandana", 500, "Dragon's Gate Merchant (Disc II)"],
+  ];
+  const stockObjective = objectives.find((objective) => objective.id === objectiveId);
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-2.return-to-lindblum");
+  const shopStep = chapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-shop-preparation");
+  const gateStep = chapter?.sections.flatMap((section) => section.steps).find((step) => step.id === "return-lindblum-moonte-bandana");
+  const shopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
+  const routeSource = sources.find((source) => source.id === "gamefaqs-return-to-lindblum-71891");
+
+  assert.equal(stockObjective?.category, "collection");
+  assert.ok(stockObjective?.chapterIds?.includes("disc-2.return-to-lindblum"));
+  assert.ok(stockObjective?.profileIds?.includes("comprehensive"));
+  assert.ok(["gamefaqs-shops-71891", "gamefaqs-return-to-lindblum-71891"]
+    .every((sourceId) => stockObjective?.sourceIds.includes(sourceId)));
+  assert.ok(shopStep?.objectiveIds?.includes(objectiveId));
+  assert.ok(gateStep?.objectiveIds?.includes(objectiveId));
+  assert.match(shopStep?.detail ?? "", /only the Dragon's Gate Merchant remains available until Disc III/);
+  assert.match(gateStep?.detail ?? "", /separate free pickup from the Dragon's Gate Merchant's 500-Gil Bandana listing/);
+  assert.match(shopsSource?.notes ?? "", /Disc II/);
+  assert.match(routeSource?.notes ?? "", /Dragon's Gate/);
+
+  for (const [pathId, itemId, price, shopName] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} exists`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.chapterId, "disc-2.return-to-lindblum");
+    assert.equal(path?.method, "shop");
+    assert.equal(path?.availability, "limited-window");
+    assert.equal(path?.shopName, shopName);
+    assert.equal(path?.cost?.amount, price);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
+    }
+  }
+});
+
 test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
   const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
   const pathCounts = [8, 9, 12, 10];
