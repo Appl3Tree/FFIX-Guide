@@ -3857,8 +3857,8 @@ const firstIifaTreeEnemyRecords: EnemyRecord[] = [
       sourcedLoot("rare", null, firstIifaTreeEnemySources, "Nothing"),
     ],
     drops: [
-      sourcedLoot("always", "game-item.phoenix-pinion", firstIifaTreeEnemySources),
-      sourcedLoot("common", "game-item.elixir", firstIifaTreeEnemySources),
+      sourcedLoot("always", "game-item.phoenix-pinion", [...firstIifaTreeEnemySources, "opatil-drop-list"]),
+      sourcedLoot("common", "game-item.elixir", [...firstIifaTreeEnemySources, "opatil-drop-list"]),
       sourcedLoot("uncommon", "game-item.elixir", firstIifaTreeEnemySources),
       sourcedLoot("rare", "game-item.elixir", firstIifaTreeEnemySources),
     ],
@@ -3875,12 +3875,12 @@ const firstIifaTreeEnemyRecords: EnemyRecord[] = [
     ],
     blueMagic: [],
     strategies: [
-      { title: "Steal before using Life", detail: "Attempt Oak Staff, Magician Cloak, and Brigandine before ending the one-time fight. Life defeats Soulcage immediately, so it closes the steal window; the nearby Brigandine chest remains a guaranteed copy.", sourceIds: firstIifaTreeEnemySources },
+      { title: "Steal before using Life", detail: "Attempt Oak Staff, Magician Cloak, and Brigandine before ending the one-time fight. Life defeats Soulcage immediately, so it closes the steal window; the nearby Brigandine chest remains a guaranteed copy. A normal KO victory guarantees a Phoenix Pinion and checks three conditional Elixir drop slots.", sourceIds: [...firstIifaTreeEnemySources, "opatil-drop-list"] },
       { title: "Avoid Fire despite the listed weakness", detail: "Fire damage, including Soulcage's reflected Fira, triggers the Fire Blades counter. Use non-Fire damage or its Sleep, Slow, and Darkness vulnerabilities while Zidane steals; Life is a fast finish after stealing is complete.", sourceIds: firstIifaTreeEnemySources },
     ],
     routeObjectiveIds: [firstIifaTreeStealsObjectiveId],
-    notes: ["GameFAQs, Jegged, and EliteGrindLab agree on level 26 and 9,765 HP. Published steal odds vary by rarity and rounding convention and are intentionally omitted. The Fire weakness is a tactical trap because Fire triggers the Fire Blades counter."],
-  }, firstIifaTreeChapterId, firstIifaTreeEnemySources, [firstIifaTreeStealsMissableId], [firstIifaTreeStealsCutoffId]),
+    notes: ["GameFAQs, Jegged, and EliteGrindLab agree on level 26 and 9,765 HP. Published steal odds vary by rarity and rounding convention and are intentionally omitted. GameFAQs lists three separate conditional Elixir drop slots; Opa-Til lists the Always Phoenix Pinion and one Common Elixir slot only. The Fire weakness is a tactical trap because Fire triggers the Fire Blades counter."],
+  }, firstIifaTreeChapterId, [...firstIifaTreeEnemySources, "opatil-drop-list"], [firstIifaTreeStealsMissableId], [firstIifaTreeStealsCutoffId]),
 ];
 
 const battleIifaTreeEnemyRecords: EnemyRecord[] = [

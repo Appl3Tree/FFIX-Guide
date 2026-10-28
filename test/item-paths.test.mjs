@@ -1457,6 +1457,61 @@ test("Pandemonium item paths link Silver Dragon, Garland, and Kuja loot to exact
   }
 });
 
+test("Soulcage item paths link every sourced steal and drop slot to its one-time encounter", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.soulcage");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.iifa-tree.soulcage");
+  const expected = [
+    { id: "item-path.disc-2.iifa-tree.soulcage-oak-staff-steal", itemId: "game-item.oak-staff", method: "steal", slot: "common", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Common slot", "each attempt can fail"] },
+    { id: "item-path.disc-2.iifa-tree.soulcage-magician-cloak-steal", itemId: "game-item.magician-cloak", method: "steal", slot: "uncommon", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Uncommon slot", "each attempt can fail"] },
+    { id: "item-path.disc-2.iifa-tree.soulcage-brigandine-steal", itemId: "game-item.brigandine", method: "steal", slot: "semi-rare", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Semi-Rare slot", "each attempt can fail", "Caves of Narshe calls it Rare"] },
+    { id: "item-path.disc-2.iifa-tree.soulcage-phoenix-pinion-drop", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always", objectiveId: null, markers: ["normal KO victory", "Always Phoenix Pinion", "Opa-Til"] },
+    { id: "item-path.disc-2.iifa-tree.soulcage-elixir-common-drop", itemId: "game-item.elixir", method: "drop", slot: "common", objectiveId: null, markers: ["normal KO victory", "37.5%", "source-reported, not release-verified", "Opa-Til lists one Common Elixir slot"] },
+    { id: "item-path.disc-2.iifa-tree.soulcage-elixir-uncommon-drop", itemId: "game-item.elixir", method: "drop", slot: "uncommon", objectiveId: null, markers: ["normal KO victory", "12.5%", "source-reported, not release-verified", "Opa-Til lists only the Common Elixir slot"] },
+    { id: "item-path.disc-2.iifa-tree.soulcage-elixir-rare-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", objectiveId: null, markers: ["normal KO victory", "0.391%", "source-reported, not release-verified", "Opa-Til lists only the Common Elixir slot"] },
+  ];
+
+  assert.ok(enemy);
+  assert.equal(enemy?.kind, "boss");
+  assert.ok(encounter);
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId: "enemy.soulcage", quantity: 1 }]);
+  assert.ok(enemy?.sourceIds.includes("opatil-drop-list"));
+
+  const itemBearingSlots = [
+    ...enemy.steals.filter((slot) => slot.itemId).map((slot) => ({ method: "steal", slot: slot.slot, itemId: slot.itemId })),
+    ...enemy.drops.filter((slot) => slot.itemId).map((slot) => ({ method: "drop", slot: slot.slot, itemId: slot.itemId })),
+  ].sort((a, b) => `${a.method}-${a.slot}-${a.itemId}`.localeCompare(`${b.method}-${b.slot}-${b.itemId}`));
+  assert.deepEqual(itemBearingSlots, expected.map(({ method, slot, itemId }) => ({ method, slot, itemId }))
+    .sort((a, b) => `${a.method}-${a.slot}-${a.itemId}`.localeCompare(`${b.method}-${b.slot}-${b.itemId}`)));
+
+  for (const expectedPath of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.id);
+    const lootTable = expectedPath.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === expectedPath.itemId && entry.slot === expectedPath.slot);
+    const requiredSources = new Set([...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${expectedPath.id} exists`);
+    assert.ok(slot, `${expectedPath.id} matches an enemy slot`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.chapterId, "disc-2.iifa-tree");
+    assert.equal(path?.method, expectedPath.method);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.enemyId, "enemy.soulcage");
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, ["encounter.iifa-tree.soulcage"]);
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${expectedPath.id} retains enemy, encounter, and slot provenance`);
+    for (const marker of expectedPath.markers) {
+      assert.ok(path?.conditions?.includes(marker) || path?.notes?.includes(marker), `${expectedPath.id} retains ${marker}`);
+    }
+    if (expectedPath.objectiveId) assert.ok(path?.walkthroughObjectiveIds?.includes(expectedPath.objectiveId));
+    else assert.ok(!path?.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.soulcage-steals"), `${expectedPath.id} is not misfiled under the steal checklist`);
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.id} references known source ${sourceId}`);
+    }
+  }
+});
+
 test("Disc II Mistodon steals separate fixed fights from the unverified downhill pool", () => {
   const expected = [
     { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-upper-pair", availability: "one-time-encounter", routeSourceId: "gamefaqs-battle-iifa-tree-71891" },

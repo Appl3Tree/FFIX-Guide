@@ -6664,7 +6664,9 @@ if (!sourceInventoryTargets.some((target) => target.itemId === "game-item.magici
   errors.push("Magician Cloak needs the source-listed Need 5 target and both equipment ability claims.");
 }
 if (!soulcageStealWarning || !soulcageStealWarning.recovery.includes("Morrison's Madain Sari Mogshop") ||
-    !soulcageStealWarning.sourceIds.includes("ffwiki-magician-cloak")) {
+    !soulcageStealWarning.sourceIds.includes("ffwiki-magician-cloak") ||
+    !soulcageStealWarning.action.includes("Semi-Rare slot") || !soulcageStealWarning.action.includes("Caves of Narshe calls it Rare") ||
+    !soulcageStealWarning.sourceIds.includes("cavesofnarshe-ff9-brigandine")) {
   errors.push("Soulcage's warning must distinguish lost steal copies from later Magician Cloak recovery and link its source.");
 }
 const firstIifaTreeRootPool = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.tree-roots-pool");
@@ -6717,6 +6719,29 @@ if (
   !firstIifaTreeSoulcage.routeObjectiveIds.includes("disc-2.iifa-tree.soulcage-steals")
 ) {
   errors.push("Soulcage's Disc II boss record must preserve its cross-checked HP and connect the one-time steal warning.");
+}
+const firstIifaTreeSoulcageLootExpectations = [
+  { id: "item-path.disc-2.iifa-tree.soulcage-oak-staff-steal", itemId: "game-item.oak-staff", method: "steal", slot: "common", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Common slot", "each attempt can fail"] },
+  { id: "item-path.disc-2.iifa-tree.soulcage-magician-cloak-steal", itemId: "game-item.magician-cloak", method: "steal", slot: "uncommon", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Uncommon slot", "each attempt can fail"] },
+  { id: "item-path.disc-2.iifa-tree.soulcage-brigandine-steal", itemId: "game-item.brigandine", method: "steal", slot: "semi-rare", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Semi-Rare slot", "each attempt can fail", "Caves of Narshe calls it Rare"] },
+  { id: "item-path.disc-2.iifa-tree.soulcage-phoenix-pinion-drop", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always", objectiveId: null, markers: ["normal KO victory", "Always Phoenix Pinion", "Opa-Til"] },
+  { id: "item-path.disc-2.iifa-tree.soulcage-elixir-common-drop", itemId: "game-item.elixir", method: "drop", slot: "common", objectiveId: null, markers: ["normal KO victory", "37.5%", "source-reported", "Opa-Til lists one Common Elixir slot"] },
+  { id: "item-path.disc-2.iifa-tree.soulcage-elixir-uncommon-drop", itemId: "game-item.elixir", method: "drop", slot: "uncommon", objectiveId: null, markers: ["normal KO victory", "12.5%", "source-reported", "Opa-Til lists only the Common Elixir slot"] },
+  { id: "item-path.disc-2.iifa-tree.soulcage-elixir-rare-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", objectiveId: null, markers: ["normal KO victory", "0.391%", "source-reported", "Opa-Til lists only the Common Elixir slot"] },
+];
+for (const expected of firstIifaTreeSoulcageLootExpectations) {
+  const lootTable = expected.method === "steal" ? firstIifaTreeSoulcage?.steals : firstIifaTreeSoulcage?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.id);
+  const requiredSources = new Set([...(firstIifaTreeSoulcageEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (!slot || !path || path.itemId !== expected.itemId || path.method !== expected.method || path.chapterId !== "disc-2.iifa-tree" ||
+    path.quantity !== 1 || path.availability !== "one-time-encounter" || path.enemyId !== "enemy.soulcage" ||
+    path.enemyLootSlot !== expected.slot || JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.iifa-tree.soulcage"]) ||
+    (expected.objectiveId ? !path.walkthroughObjectiveIds?.includes(expected.objectiveId) : Boolean(path.walkthroughObjectiveIds?.includes("disc-2.iifa-tree.soulcage-steals"))) ||
+    !expected.markers.every((marker) => path.conditions?.includes(marker) || path.notes?.includes(marker)) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))) {
+    errors.push(`Soulcage path ${expected.id} must match its one-time enemy loot slot, encounter, objective scope, outcomes, and provenance.`);
+  }
 }
 if (
   !firstIifaTreeDracozombie?.blueMagic.some((claim) => claim.name === "LV5 Death" && claim.objectiveIds.includes("disc-2.iifa-tree.lv5-death")) ||

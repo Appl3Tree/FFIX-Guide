@@ -3876,9 +3876,13 @@ const iifaTreeBrigandineStealPath: ItemAcquisitionPath = {
   method: "steal",
   quantity: 1,
   availability: "one-time-encounter",
-  conditions: "Try to steal Soulcage's rare Brigandine before defeating the boss; the guaranteed chest copy is immediately before the fight.",
+  conditions: "Steal Brigandine from Soulcage's Semi-Rare slot before defeating the boss; each attempt can fail, and the guaranteed chest copy is immediately before the fight.",
+  notes: "GameFAQs, Jegged, Gamer Guides, and EliteGrindLab list the Semi-Rare slot; Caves of Narshe calls it Rare. Keep the rarity labels source-specific pending direct verification.",
   walkthroughObjectiveIds: ["disc-2.iifa-tree.soulcage-steals"],
   sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "cavesofnarshe-ff9-brigandine"],
+  enemyId: "enemy.soulcage",
+  enemyLootSlot: "semi-rare",
+  encounterIds: ["encounter.iifa-tree.soulcage"],
 };
 
 const iifaTreeMagicianCloakStealPath: ItemAcquisitionPath = {
@@ -3888,10 +3892,59 @@ const iifaTreeMagicianCloakStealPath: ItemAcquisitionPath = {
   method: "steal",
   quantity: 1,
   availability: "one-time-encounter",
-  conditions: "Try to steal Magician Cloak before defeating Soulcage; later purchase routes are available if this encounter copy is missed.",
+  conditions: "Steal Magician Cloak from Soulcage's Uncommon slot before defeating the boss; each attempt can fail, and later purchase routes remain available if this encounter copy is missed.",
   walkthroughObjectiveIds: ["disc-2.iifa-tree.soulcage-steals"],
   sourceIds: [...iifaTreeSources, "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "ffwiki-magician-cloak"],
+  enemyId: "enemy.soulcage",
+  enemyLootSlot: "uncommon",
+  encounterIds: ["encounter.iifa-tree.soulcage"],
 };
+
+const iifaTreeSoulcageEnemyPathSources = [...new Set([...iifaTreeSources, "gamefaqs-enemy-list-71891"])] as string[];
+const iifaTreeSoulcageElixirDropPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-2.iifa-tree.soulcage-elixir-common-drop",
+    itemId: "game-item.elixir",
+    chapterId: "disc-2.iifa-tree",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "After a normal KO victory, Soulcage's Common Elixir drop slot has a 96/256 (37.5%) chance to award one Elixir. Opa-Til reports the Common rate; this is source-reported, not release-verified.",
+    notes: "GameFAQs lists Common, Uncommon, and Rare Elixir slots; Opa-Til lists one Common Elixir slot alongside the Always Phoenix Pinion.",
+    enemyId: "enemy.soulcage",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.iifa-tree.soulcage"],
+    sourceIds: [...iifaTreeSoulcageEnemyPathSources, "opatil-drop-list"],
+  },
+  {
+    id: "item-path.disc-2.iifa-tree.soulcage-elixir-uncommon-drop",
+    itemId: "game-item.elixir",
+    chapterId: "disc-2.iifa-tree",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "After a normal KO victory, Soulcage's separate Uncommon Elixir drop slot has a 32/256 (12.5%) chance to award one additional Elixir under GameFAQs' drop-table rules. Opa-Til lists only the Common Elixir slot; this extra tier and rate are source-reported, not release-verified.",
+    notes: "GameFAQs lists an Uncommon Elixir slot; Opa-Til's table does not show a second Elixir tier.",
+    enemyId: "enemy.soulcage",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.iifa-tree.soulcage"],
+    sourceIds: iifaTreeSoulcageEnemyPathSources,
+  },
+  {
+    id: "item-path.disc-2.iifa-tree.soulcage-elixir-rare-drop",
+    itemId: "game-item.elixir",
+    chapterId: "disc-2.iifa-tree",
+    method: "drop",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "After a normal KO victory, Soulcage's separate Rare Elixir drop slot has a 1/256 (~0.391%) chance to award one additional Elixir under GameFAQs' drop-table rules. Opa-Til lists only the Common Elixir slot; this extra tier and rate are source-reported, not release-verified.",
+    notes: "GameFAQs lists a Rare Elixir slot; Opa-Til's table does not show a third Elixir tier.",
+    enemyId: "enemy.soulcage",
+    enemyLootSlot: "rare",
+    encounterIds: ["encounter.iifa-tree.soulcage"],
+    sourceIds: iifaTreeSoulcageEnemyPathSources,
+  },
+];
 
 const daliFirstVisitChestPaths: ItemAcquisitionPath[] = [
   {
@@ -8970,9 +9023,11 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Caves of Narshe lists Phoenix Pinion as a possible Soulcage win. The drop chance is not established here; other Pinion routes remain available.",
-    walkthroughObjectiveIds: ["disc-2.iifa-tree.soulcage-steals"],
-    sourceIds: ["cavesofnarshe-ff9-items", "gamefaqs-items-71891", "gamefaqs-iifa-tree-71891"],
+    conditions: "A normal KO victory guarantees Soulcage's Always Phoenix Pinion drop. Caves of Narshe lists it as a possible win without a slot or chance; GameFAQs, Jegged, EliteGrindLab, and Opa-Til identify it as the Always drop.",
+    enemyId: "enemy.soulcage",
+    enemyLootSlot: "always",
+    encounterIds: ["encounter.iifa-tree.soulcage"],
+    sourceIds: [...new Set([...iifaTreeSoulcageEnemyPathSources, "opatil-drop-list", "cavesofnarshe-ff9-items", "gamefaqs-items-71891"])],
   },
   {
     id: "item-path.disc-4.memoria.kraken-phoenix-pinion-drop",
@@ -13252,9 +13307,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Common steal from Soulcage during its one-time boss battle.",
+    conditions: "Steal Oak Staff from Soulcage's Common slot during its one-time boss battle; each attempt can fail.",
     walkthroughObjectiveIds: ["disc-2.iifa-tree.soulcage-steals"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "elitegrindlab-iifa-tree", "rpgclassics-weapons"],
+    enemyId: "enemy.soulcage",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.iifa-tree.soulcage"],
+    sourceIds: [...new Set(["gamefaqs-items-71891", "gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "elitegrindlab-iifa-tree", "rpgclassics-weapons", "gamefaqs-enemy-list-71891"])],
   },
   {
     id: "item-path.disc-3.on-the-high-seas.oak-staff-chocograph-11",
@@ -13336,6 +13394,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...iifaTreeShopRecoveryInputs,
   iifaTreeBrigandineStealPath,
   iifaTreeMagicianCloakStealPath,
+  ...iifaTreeSoulcageElixirDropPaths,
   {
     id: "item-path.disc-2.return-to-madain-sari.scarlet-hair-ether-steal",
     itemId: "game-item.ether",
