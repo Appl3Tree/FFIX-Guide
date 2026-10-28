@@ -3397,6 +3397,8 @@ if (
   linenCuirassPostCleyraCandidate.shopId !== "lindblum.weapon-shop.disc-2" ||
   !linenCuirassPostCleyraCandidate.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops") ||
   !["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-return-to-lindblum-71891"].every((sourceId) => linenCuirassPostCleyraCandidate.sourceIds.includes(sourceId)) ||
+  !linenCuirassPostCleyraCandidate.sourceIds.includes("neoseeker-lindblum-shops") ||
+  !linenCuirassPostCleyraCandidate.conditions.includes("Neoseeker's indexed Lindblum article lists Linen Cuirass") ||
   !linenCuirassPostCleyraCandidate.conditions.includes("Items table lists Lindblum only before Cleyra") ||
   !linenCuirassPostCleyraCandidate.conditions.includes("window-unverified candidate") ||
   !linenCuirassPostCleyraCandidate.conditions.includes("Newer-release stock is not independently verified")
@@ -5185,9 +5187,14 @@ if (
   !linenCuirassRecoveryObjective?.sourceIds.includes("ffwiki-lindblum") ||
   !linenCuirassRecoverySection?.sourceIds.includes("rpgclassics-shops") ||
   !linenCuirassRecoverySection?.sourceIds.includes("ffwiki-lindblum") ||
+  !linenCuirassRecoverySection?.sourceIds.includes("neoseeker-lindblum-shops") ||
   !linenCuirassRecoveryStep?.detail?.includes("source-disputed, window-unverified candidate and buy only if it appears in the displayed stock") ||
   !sources.find((source) => source.id === "rpgclassics-shops")?.notes.includes("post-attack Disc II Lindblum Dragoos table omits Linen Cuirass") ||
-  !sources.find((source) => source.id === "ffwiki-lindblum")?.notes.includes("omits it from the Disc II Dragoos' Weapon Shop list")
+  !sources.find((source) => source.id === "ffwiki-lindblum")?.notes.includes("omits it from the Disc II Dragoos' Weapon Shop list") ||
+  !sources.find((source) => source.id === "neoseeker-lindblum-shops")?.notes.includes("lists Linen Cuirass for 800 Gil in the general Dragoos' Armory table") ||
+  !sources.find((source) => source.id === "neoseeker-lindblum-shops")?.notes.includes("returned 403") ||
+  !gameItems.find((item) => item.id === "game-item.linen-cuirass")?.sourceIds.includes("neoseeker-lindblum-shops") ||
+  !linenCuirassRecoveryObjective?.sourceIds.includes("neoseeker-lindblum-shops")
 ) {
   errors.push("The post-Cleyra Linen Cuirass candidate must preserve GameFAQs' positive Lindblum stock listing against RPGClassics and Final Fantasy Wiki omissions, without resolving the shop window.");
 }

@@ -2711,7 +2711,8 @@ test("post-Cleyra Linen Cuirass stock preserves the Lindblum source conflict", (
   const step = section?.steps.find((entry) => entry.id === "return-lindblum-shop-preparation");
   const rpgClassics = sources.find((entry) => entry.id === "rpgclassics-shops");
   const ffwiki = sources.find((entry) => entry.id === "ffwiki-lindblum");
-  const requiredSources = ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-shops", "ffwiki-lindblum"];
+  const neoseeker = sources.find((entry) => entry.id === "neoseeker-lindblum-shops");
+  const requiredSources = ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-shops", "ffwiki-lindblum", "neoseeker-lindblum-shops"];
 
   assert.ok(path);
   assert.equal(path?.itemId, "game-item.linen-cuirass");
@@ -2729,6 +2730,9 @@ test("post-Cleyra Linen Cuirass stock preserves the Lindblum source conflict", (
   assert.ok(requiredSources.every((sourceId) => section?.sourceIds.includes(sourceId)));
   assert.match(rpgClassics?.notes ?? "", /post-attack Disc II Lindblum Dragoos table omits Linen Cuirass/);
   assert.match(ffwiki?.notes ?? "", /omits it from the Disc II Dragoos' Weapon Shop list/);
+  assert.match(path?.conditions ?? "", /Neoseeker's indexed Lindblum article lists Linen Cuirass.*separate Disc II Dragoos' Weapon Shop table/);
+  assert.match(neoseeker?.notes ?? "", /lists Linen Cuirass for 800 Gil in the general Dragoos' Armory table but omits it from the separate Disc II/);
+  assert.match(neoseeker?.notes ?? "", /returned 403/);
   assert.match(step?.detail ?? "", /source-disputed, window-unverified candidate and buy only if it appears in the displayed stock/);
   for (const sourceId of path?.sourceIds ?? []) {
     assert.ok(sources.some((source) => source.id === sourceId), `${path?.id} references known source ${sourceId}`);

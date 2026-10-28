@@ -1281,7 +1281,7 @@ export const sources = [
     publisher: "Neoseeker",
     url: "https://finalfantasy.neoseeker.com/wiki/Lindblum_%28FFIX%29",
     accessed: "2026-10-28",
-    notes: "The search-indexed article lists Glass Armlet for 250 Gil in Dragoos' Armory and the Disc II table, but omits it from the Disc III–IV Weapon/Medicine Shop table. Direct page retrieval returned 403 during this review; preserve this as a published-table difference, not proof that the later sale is unavailable or evidence for a particular build.",
+    notes: "The search-indexed article lists Glass Armlet for 250 Gil in Dragoos' Armory and the Disc II table, but omits it from the Disc III–IV Weapon/Medicine Shop table. It also lists Linen Cuirass for 800 Gil in the general Dragoos' Armory table but omits it from the separate Disc II Dragoos' Weapon Shop table. Direct page retrieval returned 403 during this review; treat both as published-table differences, not proof of shop availability or absence on a particular build.",
   },
   {
     id: "gamefaqs-monster-list-20490",
@@ -5469,7 +5469,7 @@ export const objectives: GameObjective[] = [
     id: "disc-2.return-to-lindblum.cleyra-recovery-shops",
     title: "Check post-Cleyra Lindblum stock for missed item types",
     category: "collection",
-    sourceIds: ["gamefaqs-return-to-lindblum-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "rpgclassics-shops", "ffwiki-lindblum"],
+    sourceIds: ["gamefaqs-return-to-lindblum-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891", "rpgclassics-shops", "ffwiki-lindblum", "neoseeker-lindblum-shops"],
     chapterIds: ["disc-2.return-to-lindblum"],
     profileIds: ["comprehensive", "perfect", "custom"],
     verification: "partial",
