@@ -11033,14 +11033,18 @@ const coralRingRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthes
 const coralRingTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.coral-ring");
 const coralRingAbilityNames = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.coral-ring").map((claim) => claim.abilityName);
 const coralRingPostCleyraPath = coralRingPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.coral-ring-post-cleyra-synthesis");
-const coralRingTrenoCandidate = coralRingPaths.find((path) => path.id === "item-path.disc-2.treno.coral-ring-synthesis-candidate");
+const coralRingTrenoPath = coralRingPaths.find((path) => path.id === "item-path.disc-2.treno.coral-ring-synthesis");
 const coralRingTrenoLaterPath = coralRingPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.coral-ring-treno-synthesis");
 const coralRingSections = walkthroughChapters.flatMap((chapter) => chapter.sections);
 const coralRingShopStep = coralRingSections.flatMap((section) => section.steps)
   .find((step) => step.id === "return-lindblum-shop-preparation");
 const coralRingShopSection = coralRingSections.find((section) => section.id === "return-lindblum-business-district");
+const coralRingTrenoSection = coralRingSections.find((section) => section.id === "treno-city-pickups-and-mognet");
+const coralRingTrenoStep = coralRingSections.flatMap((section) => section.steps)
+  .find((step) => step.id === "treno-mogrich-letter");
+const coralRingTrenoObjective = objectives.find((objective) => objective.id === "disc-2.treno.shop-stock-window");
 if (!gameItems.some((item) => item.id === "game-item.coral-ring" &&
-    ["gamefaqs-hunt-minigame-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "rpgclassics-synthesis"].every((sourceId) => item.sourceIds.includes(sourceId))) ||
+    ["gamefaqs-hunt-minigame-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "rpgclassics-synthesis", "drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno"].every((sourceId) => item.sourceIds.includes(sourceId))) ||
   coralRingPaths.length !== 9 ||
   coralRingSynthesisPaths.length !== 8 ||
   !coralRingSynthesisPaths.every((path) => path.recipeId === "synthesis-recipe.coral-ring" && path.cost?.amount === 1200) ||
@@ -11048,15 +11052,21 @@ if (!gameItems.some((item) => item.id === "game-item.coral-ring" &&
   !["game-item.lightning-staff", "game-item.rod"].every((itemId) => coralRingRecipe.ingredients.some((ingredient) => ingredient.itemId === itemId)) ||
   coralRingPostCleyraPath?.availability !== "repeatable" || coralRingPostCleyraPath.cost?.amount !== 1200 ||
   !coralRingPostCleyraPath.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops") ||
-  coralRingTrenoCandidate?.availability !== "window-unverified" ||
-  !coralRingTrenoCandidate?.conditions?.includes("GameFAQs Shops' Disc II Treno recipe list omits Coral Ring") ||
+  coralRingTrenoPath?.availability !== "repeatable" ||
+  !["drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno", "rpgclassics-synthesis", "gamefaqs-shops-71891"]
+    .every((sourceId) => coralRingTrenoPath?.sourceIds.includes(sourceId)) ||
+  !coralRingTrenoPath?.conditions?.includes("GameFAQs Shops omits Coral Ring from its Disc II Treno list") ||
+  !coralRingTrenoPath?.conditions?.includes("source-table difference") ||
   coralRingTrenoLaterPath?.availability !== "repeatable" ||
   coralRingTargets.find((target) => target.basis === "route-need")?.targetQuantity !== 9 ||
   coralRingTargets.find((target) => target.basis === "end-inventory")?.targetQuantity !== 8 ||
   !["Insomniac", "Lancer", "Man Eater"].every((abilityName) => coralRingAbilityNames.includes(abilityName)) ||
   !coralRingShopStep?.detail?.includes("Lightning Staff + Rod for 1,200 Gil") ||
-  !coralRingShopSection?.sourceIds?.includes("rpgclassics-synthesis")) {
-  errors.push("Coral Ring must retain the Festival reward, priced synthesis recipe and source-listed seller routes, separate uncertain Disc II Treno stock from its later confirmed route, and preserve its targets, abilities, and walkthrough/source links.");
+  !coralRingShopSection?.sourceIds?.includes("rpgclassics-synthesis") ||
+  !coralRingTrenoSection?.sourceIds?.includes("drslice-treno-synthesis-disc2") ||
+  !coralRingTrenoStep?.detail?.includes("GameFAQs Shops omits Coral Ring from its Disc II Treno recipe table") ||
+  !coralRingTrenoObjective?.sourceIds.includes("ffwiki-treno")) {
+  errors.push("Coral Ring must retain its Festival reward, priced synthesis routes and distinct later Treno path, document the Disc II Treno source-table difference, and preserve targets, abilities, and walkthrough/source links.");
 }
 const rodPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rod");
 const rodDaliPath = rodPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.rod-shop");

@@ -3,7 +3,8 @@
 Last updated: 2026-10-28
 
 ## Latest verification
-Latest verification — `npm test` passes 127/127, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The latest build is 2,644.04 kB JavaScript (637.95 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. This change records the post-Cleyra Linen Cuirass conflict across GameFAQs, RPGClassics, and Final Fantasy Wiki, retaining `window-unverified` status and a displayed-stock check. No GitHub Actions run, push, or deployment occurred.
+Latest verification — `npm test` passes 127/127, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The latest build is 2,646.46 kB JavaScript (638.71 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Coral Ring now has a source-listed repeatable Disc II Treno recipe supported by DrSlice, RPGClassics, Gamer Guides, and Final Fantasy Wiki; GameFAQs Shops omits it from that table, and direct menu/release behavior remains unverified. Source records: 460. No Actions run, push, or deployment occurred.
+Previous verification — Reconciled the post-Cleyra Linen Cuirass stock difference across GameFAQs, RPGClassics, and Final Fantasy Wiki. Its path remains `window-unverified`, with a displayed-stock check. Validation then passed with 127/127 tests, lint, build, and whitespace checks.
 
 Previous verification — Reviewed FFDQ.com
 Previous verification — Reduced redundant CI work in the Pages workflow: removed standalone typecheck/data-audit steps already run by `npm run build`, added PR-only supersession cancellation, and preserved deployment triggers. Local lint, 125 tests, build, YAML syntax parse, and `git diff --check` passed. No GitHub Actions run, push, or deployment was triggered.

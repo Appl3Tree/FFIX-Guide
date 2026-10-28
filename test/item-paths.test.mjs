@@ -5498,7 +5498,7 @@ test("Coral Ring keeps its Festival prize, synthesis recovery routes, abilities,
   const coralSynthesisPaths = coralPaths.filter((path) => path.method === "synthesis");
   const festivalPath = coralPaths.find((path) => path.id === "item-path.disc-1.lindblum.coral-ring-freya-festival-reward");
   const lindblumPath = coralPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.coral-ring-post-cleyra-synthesis");
-  const trenoCandidate = coralPaths.find((path) => path.id === "item-path.disc-2.treno.coral-ring-synthesis-candidate");
+  const trenoDisc2Path = coralPaths.find((path) => path.id === "item-path.disc-2.treno.coral-ring-synthesis");
   const laterTrenoPath = coralPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.coral-ring-treno-synthesis");
   const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.coral-ring");
   const targets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.coral-ring");
@@ -5508,6 +5508,9 @@ test("Coral Ring keeps its Festival prize, synthesis recovery routes, abilities,
   const returnLindblumStep = returnLindblumSections.flatMap((section) => section.steps)
     .find((step) => step.id === "return-lindblum-shop-preparation");
   const returnLindblumSection = returnLindblumSections.find((section) => section.id === "return-lindblum-business-district");
+  const trenoSection = returnLindblumSections.find((section) => section.id === "treno-city-pickups-and-mognet");
+  const trenoStep = trenoSection?.steps.find((step) => step.id === "treno-mogrich-letter");
+  const trenoObjective = objectives.find((objective) => objective.id === "disc-2.treno.shop-stock-window");
 
   assert.equal(coralPaths.length, 9);
   assert.equal(coralSynthesisPaths.length, 8);
@@ -5517,9 +5520,13 @@ test("Coral Ring keeps its Festival prize, synthesis recovery routes, abilities,
   assert.equal(lindblumPath?.availability, "repeatable");
   assert.equal(lindblumPath?.cost?.amount, 1200);
   assert.ok(lindblumPath?.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops"));
-  assert.equal(trenoCandidate?.availability, "window-unverified");
-  assert.match(trenoCandidate?.conditions ?? "", /GameFAQs Shops.*omits Coral Ring/i);
-  assert.ok(trenoCandidate?.conditions?.includes("Disc III–IV Treno route"));
+  assert.equal(trenoDisc2Path?.availability, "repeatable");
+  assert.match(trenoDisc2Path?.conditions ?? "", /DrSlice.*Treno \(Disk 2\).*Coral Ring/i);
+  assert.match(trenoDisc2Path?.conditions ?? "", /RPGClassics, Gamer Guides, and Final Fantasy Wiki/);
+  assert.match(trenoDisc2Path?.conditions ?? "", /GameFAQs Shops omits Coral Ring.*source-table difference/i);
+  assert.ok(trenoDisc2Path?.conditions?.includes("actual menu stock and release-specific behavior remain unverified"));
+  assert.ok(["drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno", "rpgclassics-synthesis", "gamefaqs-shops-71891"]
+    .every((sourceId) => trenoDisc2Path?.sourceIds.includes(sourceId)));
   assert.equal(laterTrenoPath?.availability, "repeatable");
 
   assert.equal(recipe?.resultItemId, "game-item.coral-ring");
@@ -5529,8 +5536,13 @@ test("Coral Ring keeps its Festival prize, synthesis recovery routes, abilities,
   assert.equal(targets.find((target) => target.basis === "end-inventory")?.targetQuantity, 8);
   assert.deepEqual(abilities.map((claim) => claim.abilityName).sort(), ["Insomniac", "Lancer", "Man Eater"]);
   assert.ok(item?.sourceIds.includes("rpgclassics-synthesis"));
+  assert.ok(["drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno"]
+    .every((sourceId) => item?.sourceIds.includes(sourceId) && recipe?.sourceIds.includes(sourceId)));
   assert.ok(returnLindblumStep?.detail?.includes("Lightning Staff + Rod for 1,200 Gil"));
   assert.ok(returnLindblumSection?.sourceIds?.includes("rpgclassics-synthesis"));
+  assert.ok(trenoSection?.sourceIds?.includes("drslice-treno-synthesis-disc2"));
+  assert.ok(trenoStep?.detail?.includes("GameFAQs Shops omits Coral Ring from its Disc II Treno recipe table"));
+  assert.ok(trenoObjective?.sourceIds.includes("ffwiki-treno"));
   for (const path of coralPaths) {
     assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
   }

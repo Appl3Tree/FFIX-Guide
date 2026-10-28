@@ -378,8 +378,8 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     shopId: "lindblum.synthesis-shop.post-cleyra",
     shopName: "Lindblum Synthesis Shop (post-Cleyra, Disc II)",
     cost: { currency: "gil", amount: 1200 },
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
-    notes: "Lightning Staff + Rod synthesizes Coral Ring for 1,200 Gil. GameFAQs lists the recipe at Lindblum after Cleyra, Black Mage Village, Alexandria, Treno, and Daguerreo; RPGClassics also lists the Alexandria Alley Synthesist and Disc II Treno. GameFAQs Shops omits Coral Ring from its Disc II Treno recipe list, so that seller window remains an unverified candidate while the separate Disc III–IV Treno route is retained. The Festival of the Hunt is a separate one-time Freya prize.",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno"],
+    notes: "Lightning Staff + Rod synthesizes Coral Ring for 1,200 Gil. GameFAQs lists the recipe at Lindblum after Cleyra, Black Mage Village, Alexandria, Treno, and Daguerreo; RPGClassics also lists the Alexandria Alley Synthesist and Disc II Treno. DrSlice, Gamer Guides, and Final Fantasy Wiki also document the Disc II Treno recipe. GameFAQs Shops omits it from its Disc II Treno recipe list but includes it in the separate Disc III–IV Treno table; preserve this as a source-table difference. Direct menu stock and release behavior remain unverified. The Festival of the Hunt is a separate one-time Freya prize.",
   },
   {
     id: "synthesis-recipe.reflect-ring",

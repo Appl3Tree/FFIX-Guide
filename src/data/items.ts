@@ -2840,7 +2840,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
 
 export const gameItems: GameItem[] = [
   { id: "game-item.autograph", name: "Autograph", category: "key-item", sourceIds: [...lindblumFirstVisitPickupSources, "gamefaqs-missables-71891", "gamefaqs-missables-21725"], verification: "partial" },
-  { id: "game-item.coral-ring", name: "Coral Ring", category: "equipment", sourceIds: [...lindblumFirstVisitPickupSources, "gamefaqs-hunt-minigame-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "rpgclassics-synthesis"], verification: "partial" },
+  { id: "game-item.coral-ring", name: "Coral Ring", category: "equipment", sourceIds: [...lindblumFirstVisitPickupSources, "gamefaqs-hunt-minigame-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "rpgclassics-synthesis", "drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno"], verification: "partial" },
   { id: "game-item.master-hunter", name: "Master Hunter", category: "key-item", sourceIds: [...lindblumFirstVisitPickupSources, "gamefaqs-hunt-minigame-71891"], verification: "partial" },
   { id: "game-item.mini-burmecia", name: "Mini-Burmecia", category: "key-item", sourceIds: lindblumFirstVisitPickupSources, verification: "partial" },
   { id: "game-item.moogle-suit", name: "Moogle Suit", category: "key-item", sourceIds: [...lindblumFirstVisitPickupSources, "gamefaqs-missables-71891", "gamefaqs-missables-21725"], verification: "partial" },
@@ -6517,19 +6517,19 @@ const coralRingAdditionalPaths: ItemAcquisitionPath[] = [
     sourceIds: ["gamefaqs-items-71891", "rpgclassics-synthesis"],
   },
   {
-    id: "item-path.disc-2.treno.coral-ring-synthesis-candidate",
+    id: "item-path.disc-2.treno.coral-ring-synthesis",
     itemId: "game-item.coral-ring",
     chapterId: "disc-2.treno",
     method: "synthesis",
     quantity: 1,
-    availability: "window-unverified",
+    availability: "repeatable",
     shopId: "treno.synthesis-shop.disc-2",
-    shopName: "Treno Synthesis Shop (Disc II; source difference)",
+    shopName: "Treno Synthesis Shop (Disc II)",
     recipeId: "synthesis-recipe.coral-ring",
     cost: { currency: "gil", amount: 1200 },
-    conditions: "RPGClassics lists Lightning Staff + Rod for 1,200 Gil at Disc II Treno, but GameFAQs Shops' Disc II Treno recipe list omits Coral Ring. Treat this as an unverified seller window and inspect the displayed stock; the separately documented Disc III–IV Treno route remains available in its own source path.",
+    conditions: "DrSlice's Treno Synth Shop table identifies its location as Treno (Disk 2) and lists Coral Ring from Lightning Staff + Rod for 1,200 Gil; RPGClassics, Gamer Guides, and Final Fantasy Wiki also document the Disc II Treno recipe. GameFAQs Shops omits Coral Ring from its Disc II Treno list but includes it on Disc III–IV. Preserve this as a source-table difference, not proof of absence. The synthesis is repeatable; actual menu stock and release-specific behavior remain unverified.",
     walkthroughObjectiveIds: ["disc-2.treno.shop-stock-window"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno"],
   },
   {
     id: "item-path.disc-3.on-the-high-seas.coral-ring-treno-synthesis",
