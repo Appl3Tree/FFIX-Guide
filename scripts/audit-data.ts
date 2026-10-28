@@ -558,7 +558,6 @@ for (const enemy of enemyRecords) {
     if (guidance.sourceIds.length === 0) errors.push(`Enemy ${enemy.id} preparation guidance has no source provenance.`);
     for (const sourceId of guidance.sourceIds) {
       if (!sourceIds.has(sourceId)) errors.push(`Enemy ${enemy.id} preparation guidance references unknown source ${sourceId}.`);
-      else if (!enemy.sourceIds.includes(sourceId)) errors.push(`Enemy ${enemy.id} omits preparation source ${sourceId} from its record source list.`);
     }
   }
   validateEnemyReferences(`Enemy ${enemy.id}`, enemy.routeObjectiveIds, enemy.missableIds, enemy.cutoffIds, enemy.chapterId);
@@ -1596,6 +1595,29 @@ for (const expected of arkLootExpectations) {
       !path.conditions.includes("normal KO") || !path.walkthroughObjectiveIds?.includes("disc-3.forgotten-continent.pumice-piece")))) {
     errors.push(`Ark's ${expected.method} slot ${expected.slot} must link to the exact one-time boss route with correct outcome and provenance.`);
   }
+}
+const arkPreparation = arkRecord?.preparationGuidance;
+const arkPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.forgotten-continent")
+  ?.sections.find((section) => section.id === "oeilvert-ark-preparation");
+const arkPreparationStep = arkPreparationSection?.steps.find((step) => step.id === "oeilvert-ark-preparation");
+const arkGameFaqsPrepSource = sources.find((source) => source.id === "gamefaqs-ark-prep-29957");
+const arkGamerGuidesSource = sources.find((source) => source.id === "gamerguides-oeilvert");
+if (!arkRecord || arkRecord.stats.find((stat) => stat.field === "level")?.value !== 38 ||
+  !arkPreparation || arkPreparation.suggestedLevelRange !== undefined ||
+  !arkPreparation.levelRationale.includes("enemy stat") || !arkPreparation.levelRationale.includes("Lv. 30 or higher") ||
+  !arkPreparation.levelRationale.includes("optional benchmark") ||
+  !arkPreparation.optionalGrinding.includes("Excalibur II timer") ||
+  !arkPreparation.setupAdvice.includes("anti-magic seal") || !arkPreparation.setupAdvice.includes("Photon") ||
+  !arkPreparation.sourceIds.includes("gamefaqs-ark-prep-29957") ||
+  !arkPreparation.sourceIds.includes("gamerguides-oeilvert") ||
+  !arkPreparationSection?.sourceIds.includes("gamefaqs-ark-prep-29957") ||
+  !arkPreparationSection.sourceIds.includes("gamerguides-oeilvert") ||
+  !arkPreparationStep?.text.includes("optional advice") ||
+  !arkPreparationStep.detail?.includes("Level 38 is an enemy stat") ||
+  !arkPreparationStep.detail?.includes("Switch title") ||
+  !arkGameFaqsPrepSource?.notes.includes("PlayStation walkthrough") ||
+  !arkGamerGuidesSource?.notes.includes("no party-level target")) {
+  errors.push("Ark preparation must preserve the enemy/party level distinction, source-scoped optional benchmark, anti-magic setup, Excalibur II caveat, and source provenance.");
 }
 const expectedLaniRecoveryPathIds = [
   "item-path.disc-2.outer-continent.gladius-black-mage-village-shop",

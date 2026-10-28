@@ -2972,6 +2972,22 @@ export const sources = [
     notes: "Independent Oeilvert room route and cross-check for Mimoza's letter, the Mogshop, Stiltzkin #6, all eight listed chests, the light sequence, Ark preparation/attacks, steals, drops, the Gulug Stone trigger, and the control handoff to the Desert Palace team.",
   },
   {
+    id: "gamefaqs-ark-prep-29957",
+    title: "Oeilvert and Ark — Andrew_Testa walkthrough",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/switch/248080-final-fantasy-ix/faqs/29957",
+    accessed: "2026-10-28",
+    notes: "The GameFAQs page is filed under Nintendo Switch, but the FAQ body identifies itself as a PlayStation walkthrough by Andrew_Testa, version .96 updated in 2004. At Ark, it recommends all characters at Lv. 30 or higher and lists its own party at Zidane/Steiner/Amarant Lv. 34 and Quina Lv. 30; it also recommends Clear Headed, Auto-Potion, and Hi-Potions. The level advice is a single-route benchmark, not a verified minimum or release-wide requirement; the page's platform tag does not resolve build scope.",
+  },
+  {
+    id: "gamerguides-oeilvert",
+    title: "Oeilvert — Disc III walkthrough",
+    publisher: "Gamer Guides",
+    url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-3/oeilvert",
+    accessed: "2026-10-28",
+    notes: "Independent Oeilvert route and Ark preparation source. It recommends Clear Headed, optional Bird Killer, Wind-reducing equipment, and item healing under the anti-magic seal; it also describes Freya's Reis's Wind and Amarant's Chakra as non-magic recovery options. Its subjective difficulty description is conditional on preparation, and it gives no party-level target. The page lists iOS, PC, PS1, PS4, Switch, and Xbox One but does not separate behavior by build.",
+  },
+  {
     id: "jegged-chocobo-mountain-cracks",
     title: "Chocobo Mountain Cracks — locations and rewards",
     publisher: "Jegged",

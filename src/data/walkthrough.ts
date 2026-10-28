@@ -4741,14 +4741,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "oeilvert-ark-preparation",
         title: "Gulug Stone elevator — prepare for Ark",
-        summary: "Ark's fight begins when you try to take the Gulug Stone. Equip against Confuse and Wind damage before using the elevator.",
-        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"],
+        summary: "Ark's fight begins when you try to take the Gulug Stone. Equip against Confuse and Wind damage; any level advice remains source-specific.",
+        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert", "gamefaqs-boss-guide-31490", "gamefaqs-ark-prep-29957", "gamerguides-oeilvert"],
         steps: [
           {
             id: "oeilvert-ark-preparation",
             kind: "optional",
-            text: "Equip Clear Headed to prevent Confuse, Bird Killer for the aerial boss, and any available Wind-damage reduction such as Lamia's Tiara, Gauntlets, or Shield Armor. Keep Hi-Potions ready for emergency healing.",
-            detail: "The Oeilvert seal still blocks spellcasting, so plan on items, physical attacks, Freya's Jump, and other non-magic abilities. Save with Mooel before riding down.",
+            text: "Equip Clear Headed to prevent Confuse, Bird Killer for the aerial boss, and any available Wind-damage reduction such as Lamia's Tiara, Gauntlets, or Shield Armor. Keep Hi-Potions ready for emergency healing. One older GameFAQs route recommends Lv. 30+ for its party; this is optional advice, not a required target.",
+            detail: "Ark's Level 38 is an enemy stat. The GameFAQs FAQ is filed under the Switch title but identifies itself as a PlayStation walkthrough from 2004; its Lv. 30 floor is a single-route benchmark, and the reviewed Jegged/Gamer Guides routes set no party-level target. Oeilvert blocks ordinary spellcasting, so plan item healing, physical attacks, Freya's Reis's Wind, or Amarant's Chakra. Save with Mooel before riding down; preserve the selected Excalibur II timer/EXP plan.",
           },
           {
             id: "oeilvert-ark-steals",

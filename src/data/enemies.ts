@@ -201,6 +201,7 @@ const fossilRooEnemySources = [enemyListSourceId, "gamefaqs-journey-to-outer-con
 const fossilRooBossSources = ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-boss-guide-31490"];
 const laniStatSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-boss-guide-31490"];
 const arkBossSources = ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert", "gamefaqs-enemy-list-71891"];
+const arkPreparationSources = [...arkBossSources, "gamefaqs-boss-guide-31490", "gamefaqs-ark-prep-29957", "gamerguides-oeilvert"];
 const lostContinentFeatherSources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "rpgclassics-lost-continent"];
 const friendlyFeatherCircleSources = ["gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters", "cavesofnarshe-friendly-creatures", "gamefaqs-lost-continent-71891", "gamerguides-mount-gulug"];
 const outerContinentEnemySources = [enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-outer-continent-71891", "jegged-conde-petie", "rpgclassics-outer-continent", "gamefaqs-abilities-71891"];
@@ -6709,6 +6710,14 @@ const forgottenContinentEnemyRecords: EnemyRecord[] = [
       { title: "Equip Clear Headed and Wind protection", detail: "Clear Headed blocks Propeller Wind's Confuse. The walkthrough also recommends Wind-reducing equipment and Bird Killer. Heal immediately after Photon leaves a character at 1 HP, especially before a party-target attack.", sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"] },
       { title: "Finish the selected steals before winning", detail: "Ark's one-time Elixir, Power Vest, and Holy Lance steals occupy the Common, Uncommon, and Semi-Rare slots. Each chance-based attempt may fail; the Holy Lance is the rarest target and has later shop recovery.", sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Ark's Level 38 is its enemy stat, not a party-level requirement. One 2004 PlayStation-written GameFAQs route recommends party members at Lv. 30 or higher and reports its own team at Lv. 30–34; treat that as a single-source optional benchmark, not a verified minimum. The FAQ is currently filed under GameFAQs' Switch listing, so that tag does not verify its build scope.",
+      difficultyAssessment: "Published difficulty descriptions are subjective and setup-dependent: GameFAQs' boss guide says equipment changes the fight substantially, Jegged calls it tough, and Gamer Guides says its recommended preparation should make it manageable. None is gameplay-tested here.",
+      optionalGrinding: "The reviewed standard routes do not require extra battles or a party-level target. The Lv. 30 GameFAQs advice describes one author's party, not a universal threshold. Optional Forgotten Continent encounters before entering Oeilvert can provide EXP if desired; preserve the chosen Excalibur II timer and EXP plan rather than adding an unbudgeted grind.",
+      setupAdvice: "Before triggering the elevator fight, save and use Mooel's Tent. Equip Clear Headed on every active character if available; Bird Killer and Wind-reducing equipment are optional support. Oeilvert's anti-magic seal prevents ordinary spell healing, so stock Hi-Potions and Phoenix Downs and plan physical attacks; Freya's Reis's Wind or Amarant's Chakra can help if those characters are present. Photon leaves one target at 1 HP, Whirlwind adds Float before Wind damage, and Propeller Wind causes Confuse. Zidane can attempt the one-time steals, but stop if survival is at risk; the Power Vest is also in an Oeilvert chest and Holy Lance has later shop recovery.",
+      confidence: "partial",
+      sourceIds: arkPreparationSources,
+    },
     routeObjectiveIds: [arkStealsObjectiveId, arkPumiceObjectiveId],
     notes: ["The Always Pumice Piece is a guaranteed normal-KO drop. Ether occupies all three conditional drop slots; the Enemy List gives Common 96/256, Uncommon 32/256, and Rare 1/256 probabilities, which are source-reported rather than release-verified. Oeilvert's boss-table data is from PlayStation references; modern-release parity has not been audited."],
   }, forgottenContinentChapterId, arkBossSources, [arkStealsMissableId], [arkStealsCutoffId]),

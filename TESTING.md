@@ -3,7 +3,7 @@
 Last updated: 2026-10-28
 
 ## Latest verification
-Latest verification — `npm test` passes 130/130, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The build is 2,658.25 kB JavaScript (642.47 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Added an audit invariant and regression coverage for Ralvurahva's optional Lv. 12–13 party benchmark, enemy Level 13 distinction, source-reported Marcus stat-growth detour, and route placement before the outbound ride. Sources: 464. Direct browser/gameplay/release checks were not part of this validation. No Actions run, push, or deployment occurred.
+Latest verification — `npm test` passes 131/131, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The build is 2,662.03 kB JavaScript (643.73 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Added audit and regression coverage for Ark's enemy-Level-38 versus optional GameFAQs party-level advice, anti-magic setup, source-scoped confidence, and Excalibur II route separation. Sources: 466. Direct browser/gameplay/release checks were not part of this validation. No Actions run, push, or deployment occurred.
 Previous verification — Reconciled the post-Cleyra Linen Cuirass stock difference across GameFAQs, RPGClassics, and Final Fantasy Wiki. Its path remains `window-unverified`, with a displayed-stock check. Validation then passed with 127/127 tests, lint, build, and whitespace checks.
 
 Previous verification — Reviewed FFDQ.com

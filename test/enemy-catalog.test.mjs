@@ -178,3 +178,36 @@ test("Ralvurahva preparation scopes the party benchmark and Marcus grind to thei
   assert.match(levelingStep?.detail ?? "", /not gameplay-tested here or confirmed across releases/);
   assert.match(levelingStep?.detail ?? "", /Excalibur II\/low-EXP route/);
 });
+
+test("Ark preparation keeps the GameFAQs party benchmark optional and distinguishes it from enemy Level 38", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.ark");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-ark-prep-29957");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-oeilvert");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-3.forgotten-continent")
+    ?.sections.find((entry) => entry.id === "oeilvert-ark-preparation");
+  const prepStep = section?.steps.find((entry) => entry.id === "oeilvert-ark-preparation");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 38);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 38 is its enemy stat/);
+  assert.match(guidance.levelRationale, /Lv\. 30 or higher/);
+  assert.match(guidance.levelRationale, /single-source optional benchmark/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective and setup-dependent/);
+  assert.match(guidance.optionalGrinding, /Excalibur II timer/);
+  assert.match(guidance.setupAdvice, /anti-magic seal/);
+  assert.match(guidance.setupAdvice, /Reis's Wind or Amarant's Chakra/);
+  assert.ok(["gamefaqs-ark-prep-29957", "gamerguides-oeilvert", "gamefaqs-boss-guide-31490"]
+    .every((id) => guidance.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /filed under Nintendo Switch.*PlayStation walkthrough/);
+  assert.match(gamefaqs?.notes ?? "", /not a verified minimum/);
+  assert.match(gamerGuides?.notes ?? "", /no party-level target/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-ark-prep-29957"));
+  assert.ok(section?.sourceIds.includes("gamerguides-oeilvert"));
+  assert.match(prepStep?.text ?? "", /optional advice, not a required target/);
+  assert.match(prepStep?.detail ?? "", /Level 38 is an enemy stat/);
+  assert.match(prepStep?.detail ?? "", /Switch title but identifies itself as a PlayStation walkthrough/);
+  assert.match(prepStep?.detail ?? "", /preserve the selected Excalibur II timer\/EXP plan/);
+});
