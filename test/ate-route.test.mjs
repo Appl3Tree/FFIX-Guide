@@ -245,3 +245,46 @@ test("Cleyra's Quina ATEs are linked to the rubbish-pit chest objective", () => 
   assert.ok(rubbishPitStep.objectiveIds.includes(chestObjectiveId));
   assert.match(rubbishPitStep.text, /No Yummy-Yummies! and There A Mushroom!/);
 });
+
+test("Madain Sari's dinner route follows the supported choices and records source conflicts", () => {
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-2.madain-sari");
+  assert.ok(chapter);
+
+  const ateSection = chapter.sections.find((section) => section.id === "madain-sari-first-visit-ates");
+  assert.ok(ateSection);
+  for (const sourceId of [
+    "gamefaqs-madain-sari-71891",
+    "gamefaqs-story-minigames-71891",
+    "jegged-madain-sari",
+    "gamerguides-madain-sari",
+    "gamerguides-movie-critic-guide",
+    "rpgclassics-madain-sari",
+  ]) {
+    assert.ok(ateSection.sourceIds.includes(sourceId), `Madain Sari ATE section is missing ${sourceId}`);
+  }
+
+  const taskStep = ateSection.steps.find((step) => step.id === "madain-sari-eiko-feelings-tasks");
+  assert.ok(taskStep);
+  assert.match(taskStep.text, /Momatose to fishing, Mocha to digging up potatoes, and Chimomo to helping in the kitchen/);
+  assert.match(taskStep.detail, /Gamer Guides assigns Chimomo to fish and Momatose to the kitchen/);
+  assert.match(taskStep.detail, /RPGClassics assigns Mocha to fish and Momatose to potatoes/);
+  assert.match(taskStep.detail, /not item rewards/);
+  assert.ok(taskStep.objectiveIds.includes("disc-2.madain-sari.best-dinner"));
+
+  const kitchenStep = ateSection.steps.find((step) => step.id === "madain-sari-eiko-kitchen-ate");
+  assert.ok(kitchenStep);
+  for (const choice of ["11 servings", "leave out Oglop", "Chimomo to cook and lend a hand", "keep Momatose's caught fish", "ask Quina for help"]) {
+    assert.ok(kitchenStep.text.includes(choice), `Madain Sari kitchen step is missing ${choice}`);
+  }
+  assert.match(kitchenStep.detail, /Jegged and RPGClassics recommend Chimomo as cook/);
+  assert.match(kitchenStep.detail, /Gamer Guides instead recommends Momatose/);
+  assert.match(kitchenStep.detail, /no items/);
+
+  const sourceNotes = new Map(sources.map((source) => [source.id, source.notes]));
+  assert.match(sourceNotes.get("gamefaqs-story-minigames-71891"), /Momatose to fishing, Mocha to potatoes, and Chimomo to kitchen help/);
+  assert.match(sourceNotes.get("jegged-madain-sari"), /Chimomo cooking and lending a hand/);
+  assert.match(sourceNotes.get("gamerguides-madain-sari"), /Chimomo to fish, Mocha to potatoes, and Momatose to kitchen help/);
+  assert.match(sourceNotes.get("gamerguides-movie-critic-guide"), /assigns Chimomo to fishing, Mocha to potatoes, and Momatose to kitchen help/);
+  assert.match(sourceNotes.get("gamerguides-movie-critic-guide"), /recommends Momatose as cook/);
+  assert.match(sourceNotes.get("rpgclassics-madain-sari"), /Mocha to fish, Momatose to potatoes, and Chimomo to kitchen help/);
+});

@@ -873,7 +873,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://earth.gamerguides.com/final-fantasy-ix/guide/trophies-achievements/guide/movie-critic-guide",
     accessed: "2026-10-24",
-    notes: "Cross-checks first-visit ATE routes in Dali, Conde Petie, Black Mage Village, and Madain Sari, plus Disc III Treno; some town screens close earlier prompts. For Dali it says Cat's Eye 2 requires Cat's Eye, Dagger Tries Harder requires Dagger Tries and should be protected by avoiding the Weapon Shop until it appears, and Queen Brahne's Steiner is automatic. For Disc III Treno it places Hippo's Prize before Memories By The Water when Vivi stays, then Good Old Days → Lessons of Life → Home Sweet Home after the first win when Vivi went home; choose that you are interested to unlock Lessons. For Black Mage Village it gives Everyday Life → Life On The Run → Gourmand's Nose → Different Language → Visitor, Not Invader → Life Cycle; its screen directions differ from GameFAQs and Jegged. Three Madain Sari walkthroughs support Vivi → Dagger → Eiko, while Jegged gives a different order; live confirmation remains pending. It gives the Pandemonium Lift/Elevator trigger as Heading 0, try all three blocked ledges, Heading 2, repeat, return to the controls, then re-enter the lift room and view the event. It also specifies under 50 Gil before No Free Lunch; that ATE takes the remaining money, and Give Me My Money follows when boarding the Blue Narciss. The total is 79 of 80 eligible scenes; other global trigger conditions remain under review.",
+    notes: "Cross-checks first-visit ATE routes in Dali, Conde Petie, Black Mage Village, and Madain Sari, plus Disc III Treno; some town screens close earlier prompts. For Dali it says Cat's Eye 2 requires Cat's Eye, Dagger Tries Harder requires Dagger Tries and should be protected by avoiding the Weapon Shop until it appears, and Queen Brahne's Steiner is automatic. For Disc III Treno it places Hippo's Prize before Memories By The Water when Vivi stays, then Good Old Days → Lessons of Life → Home Sweet Home after the first win when Vivi went home; choose that you are interested to unlock Lessons. For Black Mage Village it gives Everyday Life → Life On The Run → Gourmand's Nose → Different Language → Visitor, Not Invader → Life Cycle; its screen directions differ from GameFAQs and Jegged. Three Madain Sari walkthroughs support Vivi → Dagger → Eiko, while Jegged gives a different order; its Madain Sari task list assigns Chimomo to fishing, Mocha to potatoes, and Momatose to kitchen help, then recommends Momatose as cook, differing from GameFAQs/Jegged and Jegged/RPGClassics respectively. Live confirmation remains pending. It gives the Pandemonium Lift/Elevator trigger as Heading 0, try all three blocked ledges, Heading 2, repeat, return to the controls, then re-enter the lift room and view the event. It also specifies under 50 Gil before No Free Lunch; that ATE takes the remaining money, and Give Me My Money follows when boarding the Blue Narciss. The total is 79 of 80 eligible scenes; other global trigger conditions remain under review.",
   },
   {
     id: "jegged-fossil-roo",
@@ -1000,8 +1000,8 @@ export const sources = [
     title: "Storyline Mini-Games — bover_87",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/storyline-mini-games",
-    accessed: "2026-10-23",
-    notes: "Documents the sword-fight score/retry rules and reward thresholds, plus the eight Knights of Pluto besides Steiner and their Elixir reward.",
+    accessed: "2026-10-28",
+    notes: "Documents the sword-fight score/retry rules, the eight Knights of Pluto besides Steiner and their Elixir reward, and Cooking in Madain Sari. For the meal it assigns Momatose to fishing, Mocha to potatoes, and Chimomo to kitchen help; recommends 11 servings, no Oglop, keeping Momatose's fish, and asking Quina for help. It says the meal has no item reward but changes later scenes.",
   },
   {
     id: "jegged-alexandria",
@@ -2481,7 +2481,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/madain-sari",
     accessed: "2026-10-24",
-    notes: "Original PlayStation walkthrough, version 2.01 updated 2023-06-20. It orders Vivi's Feelings, Dagger's Feelings, and Eiko's Feelings, then describes the kitchen doorway/Eidolon Wall route for Eiko's Kitchen and Dagger's Wall scene before Eiko's Kitchen 2. It recommends viewing all five before entering the kitchen as Zidane.",
+    notes: "Original PlayStation walkthrough, version 2.01 updated 2023-06-20. It orders Vivi's Feelings, Dagger's Feelings, and Eiko's Feelings, then describes the kitchen doorway/Eidolon Wall route for Eiko's Kitchen and Dagger's Wall scene before Eiko's Kitchen 2. It recommends viewing all five before entering the kitchen as Zidane. Its separate Storyline Mini-Games page gives the cooking task assignments and meal choices.",
   },
   {
     id: "jegged-madain-sari",
@@ -2489,7 +2489,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/22-Madain-Sari.html",
     accessed: "2026-10-24",
-    notes: "Independent route and achievement cross-check for the five ATEs, village pickups, best-dinner choices, Kirman Coffee, party transition, and post-rest Morrison shop. Its prose places Eiko's Feelings before Dagger's Feelings, unlike GameFAQs, Gamer Guides, and RPGClassics; the chapter records that order disagreement and keeps live confirmation pending.",
+    notes: "Independent route and achievement cross-check for the five ATEs, village pickups, dinner choices, Kirman Coffee, party transition, and post-rest Morrison shop. It agrees with GameFAQs on assigning Momatose to fish, Mocha to dig potatoes, and Chimomo to help in the kitchen; it recommends 11 servings, no Oglop, Chimomo cooking and lending a hand, and says the choices change the story outcome rather than item rewards. Its prose places Eiko's Feelings before Dagger's Feelings, unlike GameFAQs, Gamer Guides, and RPGClassics; the chapter records that order disagreement and keeps live confirmation pending.",
   },
   {
     id: "gamerguides-madain-sari",
@@ -2497,7 +2497,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-2/madain-sari/",
     accessed: "2026-10-24",
-    notes: "Independent route for the Yeti approach, first-visit ATE route, pickups, dinner sequence, and return to Morrison. It supports Vivi → Dagger → Eiko, describes the doorway/Morrison route for Eiko's Kitchen and Dagger's Eidolon Wall scene before Kitchen 2, and differs from other walkthroughs on the later cook choice.",
+    notes: "Independent route for the Yeti approach, first-visit ATE route, pickups, dinner sequence, and return to Morrison. It supports Vivi → Dagger → Eiko, assigns Chimomo to fish, Mocha to potatoes, and Momatose to kitchen help, then recommends 11 servings, no Oglop, and Momatose cooking and lending a hand. It describes the doorway/Morrison route for Eiko's Kitchen and Dagger's Eidolon Wall scene before Kitchen 2; its moogle task and cook choices differ from other walkthroughs.",
   },
   {
     id: "rpgclassics-madain-sari",
@@ -2505,7 +2505,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/madainsari.shtml",
     accessed: "2026-10-24",
-    notes: "Independent first-visit route for Madain Sari's ATEs, moogle tasks, pickups, dinner, Kirman Coffee, party transition, and local enemy names. It supports Vivi → Dagger → Eiko, with Eiko's Kitchen on Morrison's Eidolon Wall route and Kitchen 2 after Dagger inspects the murals; its best-meal task order differs from GameFAQs and Gamer Guides.",
+    notes: "Independent first-visit route for Madain Sari's ATEs, moogle tasks, pickups, dinner, Kirman Coffee, party transition, and local enemy names. It supports Vivi → Dagger → Eiko, assigns Mocha to fish, Momatose to potatoes, and Chimomo to kitchen help, and says to cook for 11 without Oglop and let Chimomo cook. It places Eiko's Kitchen on Morrison's Eidolon Wall route and Kitchen 2 after Dagger inspects the murals; its task assignments differ from GameFAQs, Jegged, and Gamer Guides.",
   },
   {
     id: "elitegrindlab-madain-sari",

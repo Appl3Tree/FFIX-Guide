@@ -3089,7 +3089,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "madain-sari-first-visit-ates",
         title: "Fountain and Eidolon Wall — five first-visit ATEs",
         summary: "Follow the Fountain → Eidolon Wall → Fountain route and keep Eiko's kitchen closed to Zidane until all five scenes have played.",
-        sourceIds: ["gamefaqs-madain-sari-71891", "jegged-madain-sari", "gamerguides-madain-sari", "rpgclassics-madain-sari", "gamerguides-movie-critic-guide"],
+        sourceIds: ["gamefaqs-madain-sari-71891", "gamefaqs-story-minigames-71891", "jegged-madain-sari", "gamerguides-madain-sari", "rpgclassics-madain-sari", "gamerguides-movie-critic-guide"],
         steps: [
           {
             id: "madain-sari-libra-and-dagger-ate",
@@ -3102,7 +3102,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "madain-sari-eiko-feelings-tasks",
             kind: "optional",
             text: "During Eiko's Feelings, assign Momatose to fishing, Mocha to digging up potatoes, and Chimomo to helping in the kitchen.",
-            detail: "GameFAQs and Jegged support this task set. RPGClassics and Gamer Guides give different names for the fishing and kitchen assignments; Mocha digging up potatoes is the common recommendation. These choices affect the later dinner scene, not item rewards.",
+            detail: "GameFAQs' cooking guide and Jegged support this task set. Gamer Guides assigns Chimomo to fish and Momatose to the kitchen; RPGClassics assigns Mocha to fish and Momatose to potatoes. The meal choices affect the story scenes, not item rewards.",
             objectiveIds: ["disc-2.madain-sari.best-dinner"],
           },
           {
@@ -3114,8 +3114,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "madain-sari-eiko-kitchen-ate",
             kind: "cutoff",
-            text: "As Morrison escorts Zidane toward the Eidolon Wall, view Eiko's Kitchen when its prompt appears along the route, then continue to the Wall. GameFAQs describes returning to the fountain after the doorway attempt; confirm the named ATE before continuing. For the best-supported dinner route, plan for 11 people, leave the Oglop seasoning out, and let Chimomo cook and lend a hand. If the fish question appears, tell Momatose not to release it.",
-            detail: "Walkthroughs split on the later cook choice: Jegged and RPGClassics say to let Chimomo cook and lend a hand, while Gamer Guides names Momatose. GameFAQs gives the separate instruction not to let Momatose release the fish when asked. The route uses Chimomo and keeps the disagreement visible because the meal result is narrative-only.",
+            text: "As Morrison escorts Zidane toward the Eidolon Wall, view Eiko's Kitchen when its prompt appears along the route, then continue to the Wall. GameFAQs describes returning to the fountain after the doorway attempt; confirm the named ATE before continuing. For the best-supported meal route, prepare 11 servings, leave out Oglop, choose Chimomo to cook and lend a hand, keep Momatose's caught fish, and ask Quina for help during Kitchen 2.",
+            detail: "Jegged and RPGClassics recommend Chimomo as cook; Jegged specifies that he also lends a hand. Gamer Guides instead recommends Momatose. GameFAQs' cooking guide agrees with the 11-serving/no-Oglop choices, says to keep Momatose's fish and ask Quina for help, and notes that the result changes scenes but awards no items. The guide follows the two-source Chimomo choice; direct game and release verification remain open.",
             objectiveIds: ["disc-2.madain-sari.ates", "disc-2.madain-sari.best-dinner"],
           },
           {
