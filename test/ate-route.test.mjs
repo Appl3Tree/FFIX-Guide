@@ -7,7 +7,7 @@ import {
   movieCriticExclusiveGroupId,
   movieCriticTarget,
 } from "../src/data/ates.ts";
-import { objectives, sources } from "../src/data/guide.ts";
+import { missables, objectives, sources } from "../src/data/guide.ts";
 import { ateObjectiveDependencies, guideChapterSequence, objectiveAccessDependencies, objectiveDependencies } from "../src/data/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
@@ -63,6 +63,15 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
       assert.ok(event.sourceIds.includes(sourceId), `${event.title} is missing Dali source ${sourceId}`);
     }
   }
+  const daliDaggerTriesHarder = eventByObjective.get("ate.dali-dagger-tries-harder");
+  const daliAteWarning = missables.find((entry) => entry.id === "missable.disc-1.village-of-dali.ates");
+  const trueAchievementsDaliAteSource = sources.find((entry) => entry.id === "trueachievements-dali-ate-walkthrough");
+  assert.ok(daliDaggerTriesHarder?.trigger.includes("returning from the eastern field"));
+  assert.ok(daliDaggerTriesHarder?.trigger.includes("Exact trigger timing remains unverified"));
+  assert.ok(daliDaggerTriesHarder?.sourceIds.includes("trueachievements-dali-ate-walkthrough"));
+  assert.ok(daliAteWarning?.action.includes("return to the inn to check for Dagger Tries Harder"));
+  assert.ok(daliAteWarning?.note.includes("returned HTTP 402"));
+  assert.ok(trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402"));
 
   const tournamentTrenoEvents = movieCriticEligibleEvents.filter((event) => event.chapterId === "disc-3.card-tournament");
   assert.deepEqual(

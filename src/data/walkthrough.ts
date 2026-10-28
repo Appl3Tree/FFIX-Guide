@@ -709,20 +709,20 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "village-road-and-windmill",
         title: "Village Road and Windmill — shop, hidden Gil, and Aries",
         summary: "View the remaining town ATEs without entering the Weapon Shop before Dagger Tries Harder appears; then prepare the party and collect the Stellazzio before descending.",
-        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "elitegrindlab-dali", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios"],
+        sourceIds: ["gamefaqs-dali-71891", "jegged-dali", "gamerguides-dali", "trueachievements-dali-ate-walkthrough", "elitegrindlab-dali", "gamefaqs-stellazzio-71891", "gamerguides-stellazzios"],
         steps: [
           {
             id: "dali-cat-eye-and-road-gil",
             kind: "pickup",
-            text: "Leave the inn to view Cat's Eye. Inspect the ground by the wheel/sign near the equipment shop for 120 Gil, then speak to Vivi at the north end of town.",
+            text: "Leave the inn to view Cat's Eye, then cross into the eastern field and return to the inn to check for Dagger Tries Harder. Inspect the ground by the wheel/sign near the equipment shop for 120 Gil, then speak to Vivi at the north end of town.",
             detail: "One widely mirrored route prints 137 Gil; the other inspected routes and the field-script audit give 120. The 156-Gil pickup is underground at the elevator landing, not this village-road spot.",
             objectiveIds: ["disc-1.village-of-dali.first-visit-pickups"],
           },
           {
             id: "dali-town-ate-followup",
             kind: "required",
-            text: "After speaking with Vivi, change screens as needed until Cat's Eye 2 and Dagger Tries Harder appear; view both before entering the Weapon Shop. Cat's Eye 2 requires Cat's Eye, and Dagger Tries Harder requires Dagger Tries. You can view these two prompts in either order. Then speak with Dagger in the shop, return to the inn, and talk to her for the automatic Queen Brahne's Steiner ATE.",
-            detail: "Gamer Guides recommends avoiding the Weapon Shop until Dagger Tries Harder appears. GameFAQs and Jegged place the Queen Brahne's Steiner trigger after Dagger Tries Harder and Cat's Eye, with Dagger's Weapon Shop and inn conversations. The town ATE window ends on the first departure.",
+            text: "After speaking with Vivi, change screens as needed until Cat's Eye 2 appears and check again for Dagger Tries Harder if it did not appear on the Inn return; enter and leave a building to refresh the prompt if needed. View both before entering the Weapon Shop. Cat's Eye 2 requires Cat's Eye, and Dagger Tries Harder requires Dagger Tries. The prompts can be viewed in either order. Then speak with Dagger in the shop, return to the inn, and talk to her for the automatic Queen Brahne's Steiner ATE.",
+            detail: "TrueAchievements' search-indexed route checks Dagger Tries Harder after returning from the eastern field to the Inn, before Vivi; direct access to that page returned HTTP 402, so the timing is indirect evidence. GameFAQs, Jegged, and Gamer Guides also describe a later screen-change prompt around Vivi. Gamer Guides recommends avoiding the Weapon Shop until Dagger Tries Harder appears. This route checks on Inn return and again after Vivi if needed. GameFAQs and Jegged place Queen Brahne's Steiner after the Weapon Shop and Inn conversations. The town ATE window ends on the first departure.",
             objectiveIds: ["disc-1.village-of-dali.movie-critic-ates"],
           },
           {

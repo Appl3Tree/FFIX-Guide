@@ -567,6 +567,23 @@ if (movieCriticEligibleEvents.length !== 80) errors.push(`Movie Critic candidate
 if (activeTimeEvents.filter((event) => !event.countsTowardMovieCritic).length !== 3) errors.push("The three Mogster tutorials must remain outside Movie Critic progress.");
 if (activeTimeEvents.filter((event) => event.exclusiveGroupId === movieCriticExclusiveGroupId).length !== 2) errors.push("Movie Critic must have exactly two mutually exclusive Treno branch events.");
 if (movieCriticEligibleEvents.length - 1 !== movieCriticTarget) errors.push("Movie Critic target must equal eligible choices minus the single mutually exclusive branch.");
+const daliDaggerTriesHarderEvent = activeTimeEvents.find((event) => event.objectiveId === "ate.dali-dagger-tries-harder");
+const daliAteWarning = missables.find((missable) => missable.id === "missable.disc-1.village-of-dali.ates");
+const daliAteRouteStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+  ?.sections.find((section) => section.id === "village-road-and-windmill")?.steps.find((step) => step.id === "dali-town-ate-followup");
+const trueAchievementsDaliAteSource = sources.find((source) => source.id === "trueachievements-dali-ate-walkthrough");
+if (
+  !daliDaggerTriesHarderEvent?.trigger.includes("returning from the eastern field") ||
+  !daliDaggerTriesHarderEvent.trigger.includes("Exact trigger timing remains unverified") ||
+  !daliDaggerTriesHarderEvent.sourceIds.includes("trueachievements-dali-ate-walkthrough") ||
+  !daliAteWarning?.note?.includes("trigger timing differs by route") ||
+  !daliAteWarning.note.includes("returned HTTP 402") ||
+  !daliAteWarning.action.includes("return to the inn to check for Dagger Tries Harder") ||
+  !daliAteRouteStep?.detail?.includes("indirect evidence") ||
+  !trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402")
+) {
+  errors.push("Dali's Dagger Tries Harder route must preserve the alternate source timing, conservative checks, and the indexed-source access limit.");
+}
 if (guideChapterSequence.length !== 44) errors.push(`Guide navigation sequence has ${guideChapterSequence.length} chapters; expected 44.`);
 if (guideChapterSequence.join("|") !== guideAreas.map((area) => area.id).join("|")) errors.push("Guide navigation sequence order does not match the source-ordered chapter inventory used by progression checks.");
 if (guideSequenceEdges.length !== Math.max(guideChapterSequence.length - 1, 0)) errors.push("Guide navigation sequence must have exactly one edge between each adjacent chapter pair.");
