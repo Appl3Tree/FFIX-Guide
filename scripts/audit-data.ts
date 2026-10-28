@@ -2854,6 +2854,8 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !tigerFangsShopPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
   !tigerFangsShopPath.sourceIds.includes("ffwiki-tiger-fangs") ||
   !tigerFangsShopPath.sourceIds.includes("jinsoku-limited-items") ||
+  !tigerFangsShopPath.sourceIds.includes("drslice-daguerreo-armory") ||
+  !tigerFangsShopPath.conditions.includes("DrSlice independently lists the 13,500-Gil item in Daguerreo's Disk 3 inventory") ||
   !tigerFangsDisc4CandidatePath || tigerFangsDisc4CandidatePath.itemId !== "game-item.tiger-fangs" ||
   tigerFangsDisc4CandidatePath.chapterId !== "disc-4.return-to-gaia" || tigerFangsDisc4CandidatePath.method !== "shop" ||
   tigerFangsDisc4CandidatePath.availability !== "window-unverified" || tigerFangsDisc4CandidatePath.cost?.amount !== 13500 ||
@@ -2862,6 +2864,9 @@ if (!deathguiseWarning?.classification.includes("missable-opportunity") ||
   !tigerFangsDisc4CandidatePath.sourceIds.includes("rpgclassics-shops") ||
   !tigerFangsDisc4CandidatePath.sourceIds.includes("ffwiki-tiger-fangs") ||
   !tigerFangsDisc4CandidatePath.sourceIds.includes("jinsoku-limited-items") ||
+  !tigerFangsDisc4CandidatePath.sourceIds.includes("drslice-daguerreo-armory") ||
+  !tigerFangsDisc4CandidatePath.conditions.includes("DrSlice lists a 13,500-Gil Tiger Fangs in Daguerreo's Disk 3 inventory") ||
+  !tigerFangsDisc4CandidatePath.conditions.includes("does not establish Disc IV stock") ||
   !tigerFangsDisc4CandidatePath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.updated-shops") ||
   !tigerFangsDisc4CandidatePath.walkthroughObjectiveIds.includes("disc-4.memoria.deathguise-steals") ||
   !hadesElixirDropPath?.walkthroughObjectiveIds?.includes("disc-4.memoria.deathguise-steals") ||
@@ -9481,6 +9486,7 @@ if (
   !finalStockAbilitySources.every((sourceId) => finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
   finalStockAbilityItems.some((item) => !item || !finalStockAbilitySources.every((sourceId) => item.sourceIds.includes(sourceId))) ||
   !tigerFangsItem?.sourceIds.includes(finalStockTigerFangsSource) ||
+  !tigerFangsItem.sourceIds.includes("drslice-daguerreo-armory") ||
   finalStockAbilityPaths.length !== 11 ||
   finalStockAbilityClaims.length !== 8 || finalStockAbilityClaims.some(({ itemId, abilityName }) =>
     !equipmentAbilityClaims.some((claim) => claim.itemId === itemId && claim.abilityName === abilityName &&

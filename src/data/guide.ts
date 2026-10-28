@@ -3124,6 +3124,14 @@ export const sources = [
     notes: "The shop index classifies Kumool's Mogshop at Ipsen's Castle as Disk 3. It supports the Disc III placement of the shop, but does not expose an item inventory here and cannot independently confirm Coronet stock or Disc IV availability.",
   },
   {
+    id: "drslice-daguerreo-armory",
+    title: "Weaponsmith's Armory — Daguerreo",
+    publisher: "DrSlice",
+    url: "https://drslice.com/games/ff9/shop/51",
+    accessed: "2026-10-28",
+    notes: "Lists Tiger Fangs at 13,500 Gil in the Daguerreo weaponsmith's inventory and labels the shop Disk 3. This independently supports the Disc III purchase and price; the page does not establish Disc IV stock.",
+  },
+  {
     id: "jegged-ipsens-castle",
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "Jegged",
