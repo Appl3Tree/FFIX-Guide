@@ -141,3 +141,40 @@ test("Soulcage preparation explains the opening LV5 Death without inventing a pa
   assert.match(prepStep?.detail ?? "", /Level 26 is the enemy stat/);
   assert.match(prepStep?.detail ?? "", /EXP-free route/);
 });
+
+test("Ralvurahva preparation scopes the party benchmark and Marcus grind to their sources", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.ralvurahva");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-treno-71891");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-gargan-roo");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.journey-to-cleyra")
+    ?.sections.find((entry) => entry.id === "gargan-roo-mognet-and-chests");
+  const levelingStep = section?.steps.find((entry) => entry.id === "journey-cleyra-gargan-roo-optional-leveling");
+  const rideStepIndex = section?.steps.findIndex((entry) => entry.id === "journey-cleyra-route-the-gargant") ?? -1;
+  const levelingStepIndex = section?.steps.findIndex((entry) => entry.id === "journey-cleyra-gargan-roo-optional-leveling") ?? -1;
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 13 is the enemy stat/);
+  assert.match(guidance.levelRationale, /party Lv\. 12–13 as an optional/);
+  assert.match(guidance.difficultyAssessment ?? "", /characterizes the fight as simple/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective, single-source/);
+  assert.match(guidance.optionalGrinding, /GameFAQs says Marcus's stat gains transfer/);
+  assert.match(guidance.optionalGrinding, /his level does not/);
+  assert.match(guidance.optionalGrinding, /not gameplay-tested here or confirmed across releases/);
+  assert.match(guidance.optionalGrinding, /timer\/low-EXP plan/);
+  assert.match(guidance.setupAdvice, /Antibody on Dagger and Steiner/);
+  assert.match(guidance.setupAdvice, /Marcus remains vulnerable to Poison/);
+  assert.ok(["gamefaqs-treno-71891", "gamerguides-gargan-roo"].every((id) => guidance.sourceIds.includes(id)));
+  assert.ok(guidance.sourceIds.every((id) => enemy.sourceIds.includes(id)));
+  assert.match(gamefaqs?.notes ?? "", /Marcus's stat growth transfers/);
+  assert.match(gamerGuides?.notes ?? "", /Lv\. 12–13/);
+  assert.match(gamerGuides?.notes ?? "", /does not specify the stat-transfer behavior by release or build/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-treno-71891"));
+  assert.ok(section?.sourceIds.includes("gamerguides-gargan-roo"));
+  assert.ok(levelingStepIndex >= 0 && rideStepIndex > levelingStepIndex);
+  assert.match(levelingStep?.text ?? "", /party Lv\. 12–13 as a stopping point/);
+  assert.match(levelingStep?.detail ?? "", /not gameplay-tested here or confirmed across releases/);
+  assert.match(levelingStep?.detail ?? "", /Excalibur II\/low-EXP route/);
+});

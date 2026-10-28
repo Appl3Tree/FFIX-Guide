@@ -2472,8 +2472,8 @@ export const sources = [
     title: "Treno — Disc II walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/treno",
-    accessed: "2026-10-26",
-    notes: "Disc II first-visit route reference for the seven local ATEs, screen order, Power Belt, pickup sweep, Mogrich, Stellazzio, weapon-shop Griffin, and the Supersoft story transition. Its Air Racket alert sets five copies before proceeding, counts the Ipsen's Castle chest as the sixth copy, and explains the six-copy endgame target as three for Need plus three for synthesis. The Auction House first hosts a story scene; after the party reunites in Treno, it opens for Disc II bidding before Doctor Tot's tower. This page does not document the later Hilda Garde III free-flight return to Treno; GameFAQs' Aerial Exploration and Jegged's Hilda Garde III route cover that Disc III stop.",
+    accessed: "2026-10-28",
+    notes: "Disc II first-visit route reference for the seven local ATEs, screen order, Power Belt, pickup sweep, Mogrich, Stellazzio, weapon-shop Griffin, and the Supersoft story transition. Its Air Racket alert sets five copies before proceeding, counts the Ipsen's Castle chest as the sixth copy, and explains the six-copy endgame target as three for Need plus three for synthesis. The Auction House first hosts a story scene; after the party reunites in Treno, it opens for Disc II bidding before Doctor Tot's tower. Its Gargan Roo section calls the field a strong optional grind, says Marcus's stat growth transfers to a character who has not joined while his level does not, and recommends KO'ing Dagger and Steiner to focus EXP on Marcus. This is a source-reported PlayStation glitch and has not been checked on other releases. This page does not document the later Hilda Garde III free-flight return to Treno; GameFAQs' Aerial Exploration and Jegged's Hilda Garde III route cover that Disc III stop.",
   },
   {
     id: "gamefaqs-treno-79143",
@@ -2576,8 +2576,8 @@ export const sources = [
     title: "Gargan Roo — Disc II walkthrough",
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-2/gargan-roo",
-    accessed: "2026-10-23",
-    notes: "Independent route and boss cross-check; its leveling notes concern guest Marcus and are kept separate from standard completion advice.",
+    accessed: "2026-10-28",
+    notes: "Independent route and boss cross-check. It suggests party Lv. 12–13 as an optional stopping point in Gargan Roo and describes Marcus's level as influencing a later character's stats; both are kept separate from required completion advice. The page lists iOS, PC, PS1, PS4, Switch, and Xbox One but does not specify the stat-transfer behavior by release or build, so that claim remains unverified here.",
   },
   {
     id: "gamefaqs-madain-sari-71891",

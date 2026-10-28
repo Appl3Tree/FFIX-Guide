@@ -1770,8 +1770,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
     sections: [
       {
         id: "gargan-roo-mognet-and-chests",
-        title: "Gargan Roo — Mochos, letter, and two chests",
-        summary: "Make the Mognet handoff, search both branches, and set the switches before taking the outbound ride.",
+        title: "Gargan Roo — Mochos, chests, and party preparation",
+        summary: "Make the Mognet handoff, search both branches, then choose whether optional leveling fits before the outbound ride.",
         sourceIds: ["gamefaqs-treno-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-forks", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"],
         steps: [
           {
@@ -1787,6 +1787,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Take the southwest passage first and collect the Chain Plate and Phoenix Down before boarding. Pull the nearby lever, then return to the central room.",
             detail: "GameFAQs and Gamer Guides place both chests in the southwest branch; RPGClassics describes the Phoenix Down as being in the central area. Search the southwest passage thoroughly, then check the central room before leaving if the chest count is short.",
             objectiveIds: ["disc-2.journey-to-cleyra.gargan-roo-chests"],
+          },
+          {
+            id: "journey-cleyra-gargan-roo-optional-leveling",
+            kind: "optional",
+            text: "If extra leveling fits your route, Gargan Roo is an optional grind stop; Gamer Guides suggests party Lv. 12–13 as a stopping point. A separate advanced detour has Marcus gain levels for reported later stat growth.",
+            detail: "The boss's Level 13 is an enemy stat, not a party target. GameFAQs says Marcus's stat gains transfer to a character who has not joined while his level does not, and recommends KO'ing Dagger and Steiner to focus EXP on him; Gamer Guides also reports Marcus's level affects a later character's stats. These claims are not gameplay-tested here or confirmed across releases, and the detour costs time. Skip it for standard completion or preserve the chosen Excalibur II/low-EXP route's own timer and EXP plan.",
           },
           {
             id: "journey-cleyra-route-the-gargant",

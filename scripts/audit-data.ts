@@ -4891,6 +4891,31 @@ if (!garganRooBossEncounter || garganRooBossEncounter.kind !== "boss" ||
   !ralvurahvaRecord.facts.some((fact) => fact.category === "attack" && fact.label === "Devil's Kiss")) {
   errors.push("Gargan Roo must link Ralvurahva's boss profile to its existing steal warning/cutoff and preserve the HP and steal-rate source differences.");
 }
+const ralvurahvaPreparation = ralvurahvaRecord?.preparationGuidance;
+const garganRooPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.journey-to-cleyra")?.sections.find((section) => section.id === "gargan-roo-mognet-and-chests");
+const garganRooLevelingStep = garganRooPreparationSection?.steps.find((step) => step.id === "journey-cleyra-gargan-roo-optional-leveling");
+const garganRooRideStepIndex = garganRooPreparationSection?.steps.findIndex((step) => step.id === "journey-cleyra-route-the-gargant") ?? -1;
+const garganRooLevelingStepIndex = garganRooPreparationSection?.steps.findIndex((step) => step.id === "journey-cleyra-gargan-roo-optional-leveling") ?? -1;
+if (!ralvurahvaPreparation || ralvurahvaPreparation.suggestedLevelRange !== undefined ||
+  !ralvurahvaPreparation.levelRationale.includes("Level 13 is the enemy stat") ||
+  !ralvurahvaPreparation.levelRationale.includes("Lv. 12–13 as an optional stopping point") ||
+  !ralvurahvaPreparation.difficultyAssessment?.includes("characterizes the fight as simple") ||
+  !ralvurahvaPreparation.difficultyAssessment.includes("subjective, single-source") ||
+  !ralvurahvaPreparation.optionalGrinding.includes("GameFAQs says Marcus's stat gains transfer") ||
+  !ralvurahvaPreparation.optionalGrinding.includes("his level does not") ||
+  !ralvurahvaPreparation.optionalGrinding.includes("not gameplay-tested here or confirmed across releases") ||
+  !ralvurahvaPreparation.optionalGrinding.includes("timer/low-EXP plan") ||
+  !ralvurahvaPreparation.setupAdvice.includes("Antibody on Dagger and Steiner") ||
+  !ralvurahvaPreparation.setupAdvice.includes("Marcus remains vulnerable to Poison") ||
+  !["gamefaqs-treno-71891", "gamerguides-gargan-roo"].every((sourceId) => ralvurahvaPreparation.sourceIds.includes(sourceId) && ralvurahvaRecord?.sourceIds.includes(sourceId)) ||
+  !garganRooPreparationSection?.sourceIds.includes("gamefaqs-treno-71891") ||
+  !garganRooPreparationSection.sourceIds.includes("gamerguides-gargan-roo") ||
+  !garganRooLevelingStep || garganRooRideStepIndex <= garganRooLevelingStepIndex ||
+  !garganRooLevelingStep.text.includes("party Lv. 12–13 as a stopping point") ||
+  !garganRooLevelingStep.detail?.includes("not gameplay-tested here or confirmed across releases") ||
+  !garganRooLevelingStep.detail.includes("Excalibur II/low-EXP route")) {
+  errors.push("Ralvurahva preparation must separate the Level 13 enemy stat from optional Lv. 12–13 party advice, keep Marcus stat-growth claims source-scoped, and place the optional detour before the one-way ride.");
+}
 const boneWristDaguerreoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.bone-wrist-daguerreo-shop");
 const boneWristAlexandriaPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.bone-wrist-alexandria-shop");
 if (

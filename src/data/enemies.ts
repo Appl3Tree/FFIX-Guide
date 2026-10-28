@@ -257,6 +257,7 @@ const summitStationEnemySources = ["gamefaqs-journey-to-treno-71891", "jegged-su
 const bentiniHeightsEnemySources = [enemyListSourceId, "gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station"];
 const garganRooEnemySources = [enemyListSourceId, "gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"];
 const garganRooBossSources = ["gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"];
+const garganRooPreparationSources = ["gamefaqs-treno-71891", "jegged-gargan-roo", "gamerguides-gargan-roo"];
 const garganRooRalvurahvaObjectiveId = "disc-2.journey-to-cleyra.ralvurahva-steals";
 const garganRooRalvurahvaMissableId = "missable.disc-2.journey-to-cleyra.ralvurahva-steals";
 const garganRooRalvurahvaCutoffId = "cutoff.gargan-roo.ralvurahva-steals";
@@ -6001,6 +6002,14 @@ const garganRooEnemyRecords: EnemyRecord[] = [
       { title: "Take the steals before reducing it to 0 HP", detail: "Marcus can use Attack, Steal, and Item but has no abilities. Keep him attempting Bone Wrist and Mythril Fork while Dagger heals with Cure or tries Blind; Steiner can handle most of the damage after the steals. Ralvurahva escapes at 0 HP and awards no spoils.", sourceIds: garganRooBossSources },
       { title: "Protect the temporary party from status effects", detail: "Equip Antibody on Dagger and Steiner if available. Blind and Slow are listed vulnerabilities; the boss can inflict Slow with String and Poison with Devil's Kiss.", sourceIds: ["gamefaqs-treno-71891", "jegged-gargan-roo", "gamerguides-gargan-roo"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Ralvurahva's Level 13 is the enemy stat, not a party-level requirement. Gamer Guides suggests party Lv. 12–13 as an optional stopping point for Gargan Roo; this is a single-guide comfort benchmark, not a tested minimum.",
+      difficultyAssessment: "Gamer Guides characterizes the fight as simple. That is a subjective, single-source description, not a gameplay-tested difficulty rating.",
+      optionalGrinding: "Gargan Roo's Crawler and Dragonfly encounters provide an optional grind. Gamer Guides suggests stopping around party Lv. 12–13, but the reviewed routes do not require that target. As a separate advanced stat-growth detour, GameFAQs says Marcus's stat gains transfer to a later character but his level does not, and recommends KO'ing Dagger and Steiner to focus EXP on Marcus; Gamer Guides also reports that Marcus's level influences a later character's stats. This source-reported effect is not gameplay-tested here or confirmed across releases, and the detour costs time. Skip it for ordinary completion or follow the selected timer/low-EXP plan instead.",
+      setupAdvice: "Before the outbound ride, equip Antibody on Dagger and Steiner if available. During the fight, Marcus has only Attack, Steal, and Item and cannot equip abilities; keep Dagger ready to apply Blind and heal with Cure. Blind can make attacks miss, but Marcus remains vulnerable to Poison from Devil's Kiss. Have Marcus attempt Bone Wrist and Mythril Fork before Steiner reduces Ralvurahva to 0 HP; it escapes without spoils, so prioritize survival over repeated failed attempts.",
+      confidence: "partial",
+      sourceIds: garganRooPreparationSources,
+    },
     routeObjectiveIds: [garganRooRalvurahvaObjectiveId],
     notes: [
       "GameFAQs, Jegged, and EliteGrindLab's publisher comparison support Level 13 and HP 2,296. EliteGrindLab also reports outlier HP claims of 2,200 and 2,500 from other references, so all three values remain marked disputed.",
