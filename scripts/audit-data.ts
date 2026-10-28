@@ -7084,6 +7084,77 @@ for (const expected of tiamatBossLootPaths) {
     errors.push(`Memoria Tiamat path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
   }
 }
+const crystalTiamatLootPaths = [
+  { id: "item-path.disc-4.memoria.tiamat-crystal-ether-common-steal", itemId: "game-item.ether", method: "steal", slot: "common", rate: "256/256" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-ether-uncommon-steal", itemId: "game-item.ether", method: "steal", slot: "uncommon", rate: "64/256" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-wing-edge-steal", itemId: "game-item.wing-edge", method: "steal", slot: "semi-rare", rate: "16/256" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-wing-edge-rare-steal", itemId: "game-item.wing-edge", method: "steal", slot: "rare", rate: "1/256" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-remedy-always-drop", itemId: "game-item.remedy", method: "drop", slot: "always" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-peridot-drop", itemId: "game-item.peridot", method: "drop", slot: "common", rate: "96/256" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-phoenix-down-uncommon-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "uncommon", rate: "32/256" },
+  { id: "item-path.disc-4.memoria.tiamat-crystal-echo-screen-rare-drop", itemId: "game-item.echo-screen", method: "drop", slot: "rare", rate: "1/256" },
+];
+const crystalTiamatId = "enemy.tiamat-crystal-world";
+const crystalTiamatEncounterId = "encounter.memoria.tiamat-crystal-world";
+const crystalTiamat = enemyRecords.find((enemy) => enemy.id === crystalTiamatId);
+const crystalTiamatEncounter = enemyEncounters.find((encounter) => encounter.id === crystalTiamatEncounterId);
+const timeIntervalTiamat = enemyRecords.find((enemy) => enemy.id === "enemy.tiamat-memoria");
+const crystalTiamatBlueMagic = crystalTiamat?.blueMagic.find((entry) => entry.name === "Twister");
+const crystalTiamatPathIds = itemAcquisitionPaths.filter((path) => path.enemyId === crystalTiamatId && path.encounterIds?.includes(crystalTiamatEncounterId));
+if (
+  !crystalTiamat ||
+  crystalTiamat.name !== "Tiamat [B]" ||
+  crystalTiamat.kind !== "ordinary" ||
+  crystalTiamat.chapterId !== "disc-4.memoria" ||
+  JSON.stringify(crystalTiamat.encounterIds) !== JSON.stringify([crystalTiamatEncounterId]) ||
+  crystalTiamatEncounter?.kind !== "random-pool" ||
+  crystalTiamatEncounter.location !== "Crystal World" ||
+  JSON.stringify(crystalTiamatEncounter.formation) !== JSON.stringify([{ enemyId: crystalTiamatId, quantity: null }]) ||
+  !crystalTiamatEncounter.notes.some((note) => note.includes("loot table/prose conflict remains unresolved")) ||
+  !crystalTiamat.notes.some((note) => note.includes("lacks Float and Snort")) ||
+  !crystalTiamatBlueMagic ||
+  crystalTiamatBlueMagic.command !== "Eat" ||
+  !crystalTiamatBlueMagic.objectiveIds.includes("disc-4.memoria.quina-blue-magic") ||
+  !crystalTiamatBlueMagic.objectiveIds.includes("disc-3.lost-continent.mount-gulug-blue-magic") ||
+  !crystalTiamat.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+  !crystalTiamat.sourceIds.includes("gamefaqs-memoria-71891") ||
+  timeIntervalTiamat?.encounterIds.includes(crystalTiamatEncounterId) ||
+  crystalTiamatPathIds.length !== crystalTiamatLootPaths.length
+) {
+  errors.push("Crystal World Tiamat [B] must remain a separate random encounter with its own sourced profile, Twister route, and visible table/prose conflict.");
+}
+const expectedCrystalTiamatStats = [["level", 71], ["HP", 24127], ["MP", 3338], ["EXP", 0], ["AP", 7], ["Gil", 2956]] as const;
+for (const [field, value] of expectedCrystalTiamatStats) {
+  if (!crystalTiamat?.stats.some((entry) => entry.field === field && entry.value === value && entry.verification === "single-source" && entry.sourceIds.includes("gamefaqs-enemy-list-71891"))) {
+    errors.push(`Crystal World Tiamat [B] must retain its GameFAQs ${field} value of ${value}.`);
+  }
+}
+for (const expected of crystalTiamatLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? crystalTiamat?.steals : crystalTiamat?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(crystalTiamat?.sourceIds ?? []), ...(crystalTiamatEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "repeatable" ||
+    path.enemyId !== crystalTiamatId ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([crystalTiamatEncounterId]) ||
+    path.walkthroughObjectiveIds?.includes("disc-4.memoria.tiamat-achievement") ||
+    !path.notes?.includes("revived guardians lack Steals and Drops") ||
+    (expected.method === "steal" && (!path.conditions?.includes("Steal attempt can fail") || !path.conditions.includes(expected.rate ?? "") || !path.conditions.includes("not release-verified"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always drop") || !path.conditions.includes("KO victory"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.conditions.includes(expected.rate ?? "") || !path.conditions.includes("not guaranteed") || !path.conditions.includes("not release-verified"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Crystal World Tiamat [B] path ${expected.id} must match its exact repeatable enemy slot, source-reported yield, encounter, conflict note, and provenance.`);
+  }
+}
 const malirisBossLootPaths = [
   { id: "item-path.disc-4.memoria.maliris-genji-armor-steal", itemId: "game-item.genji-armor", method: "steal", slot: "common", rate: "100%" },
   { id: "item-path.disc-4.memoria.maliris-ultima-sword-steal", itemId: "game-item.ultima-sword", method: "steal", slot: "uncommon", rate: "25%" },

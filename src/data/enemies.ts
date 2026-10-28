@@ -328,6 +328,9 @@ const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-drag
 const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
 const memoriaTiamatSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
+const crystalTiamatSources = ["gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "gamefaqs-abilities-71891"];
+const crystalTiamatEncounterId = "encounter.memoria.tiamat-crystal-world";
+const memoriaQuinaBlueMagicObjectiveId = "disc-4.memoria.quina-blue-magic";
 const memoriaMalirisSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
 const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
 const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
@@ -3154,6 +3157,19 @@ const memoriaEncounters: EnemyEncounter[] = [
     notes: ["Tiamat appears at the top of the Time Interval stairs; avoid triggering Snort by attacking while a character is floating."],
   },
   {
+    id: crystalTiamatEncounterId,
+    title: "Tiamat [B] — Crystal World random encounter",
+    chapterId: memoriaChapterId,
+    location: "Crystal World",
+    kind: "random-pool",
+    formation: [{ enemyId: "enemy.tiamat-crystal-world", quantity: null }],
+    sourceIds: crystalTiamatSources,
+    objectiveIds: [memoriaQuinaBlueMagicObjectiveId, twisterObjectiveId],
+    missableIds: [],
+    cutoffIds: [],
+    notes: ["This repeatable Crystal World enemy is separate from the one-time Time Interval boss. GameFAQs' Enemy List supplies a separate loot table; its Memoria prose says revived guardians lack steals and drops, so the loot table/prose conflict remains unresolved and the table entries are not release-verified."],
+  },
+  {
     id: "encounter.memoria.kraken",
     title: "Kraken — Guardian of Water",
     chapterId: memoriaChapterId,
@@ -4000,6 +4016,40 @@ const iifaTreeEnemyRecords: EnemyRecord[] = [
 ];
 
 const memoriaEnemyRecords: EnemyRecord[] = [
+  chapterEnemy({
+    id: "enemy.tiamat-crystal-world",
+    name: "Tiamat [B]",
+    encounterIds: [crystalTiamatEncounterId],
+    stats: enemyStats([["level", 71], ["HP", 24127], ["MP", 3338], ["EXP", 0], ["AP", 7], ["Gil", 2956]]),
+    steals: [
+      sourcedLoot("common", "game-item.ether", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.ether", [enemyListSourceId]),
+      sourcedLoot("semi-rare", "game-item.wing-edge", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.wing-edge", [enemyListSourceId]),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.remedy", [enemyListSourceId]),
+      sourcedLoot("common", "game-item.peridot", [enemyListSourceId]),
+      sourcedLoot("uncommon", "game-item.phoenix-down", [enemyListSourceId]),
+      sourcedLoot("rare", "game-item.echo-screen", [enemyListSourceId]),
+    ],
+    facts: [
+      enemyFact("type", "Dragon"),
+      enemyFact("elemental-weakness", "Ice"),
+      enemyFact("elemental-resistance", "Wind absorbed"),
+      enemyFact("attack", "Twister", "Wind-elemental damage to the party."),
+      enemyFact("attack", "Absorb MP, Absorb Magic, and Absorb Strength", "Drain MP or lower one character's Magic or Strength."),
+      enemyFact("attack", "Jet Fire", "Fire damage with a chance to inflict Heat."),
+      enemyFact("attack", "Silent Claw", "Physical damage with a chance to inflict Silence."),
+    ],
+    blueMagic: [{ name: "Twister", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "gamefaqs-memoria-71891"], objectiveIds: [memoriaQuinaBlueMagicObjectiveId, twisterObjectiveId] }],
+    strategies: [{ title: "Recover Twister with Quina", detail: "If Quina missed Twister from the fixed Red Dragon fights in Mount Gulug, use Eat on a weakened Tiamat [B] before Deathguise. The Crystal World opportunity is repeatable, but its optional loot table remains disputed against GameFAQs' Memoria prose.", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891", "gamefaqs-memoria-71891"] }],
+    routeObjectiveIds: [memoriaQuinaBlueMagicObjectiveId, twisterObjectiveId],
+    notes: [
+      "The GameFAQs Enemy List gives this Crystal World Tiamat [B] a separate profile: Level 71, 24,127 HP, 3,338 MP, 0 EXP, 7 AP, and 2,956 Gil. It says this version lacks Float and Snort, so those Time Interval boss attacks are not copied here.",
+      "The Enemy List supplies Ether and Wing Edge steal slots plus Remedy, Peridot, Phoenix Down, and Echo Screen drop slots. GameFAQs' Memoria prose says revived guardians lack steals and drops; both reports remain visible, and this table has not been verified in-game or across releases.",
+    ],
+  }, memoriaChapterId, crystalTiamatSources),
   chapterBoss({
     id: "enemy.hades",
     name: "Hades",

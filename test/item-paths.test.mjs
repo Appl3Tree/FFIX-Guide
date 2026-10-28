@@ -1199,8 +1199,14 @@ test("Peridot enemy routes record their source, repeatability, and conditional w
   assert.ok(!grenade.sourceIds.includes("cavesofnarshe-peridot"));
   assert.match(grenade.conditions ?? "", /Caves of Narshe.*omits/i);
   assert.ok(tiamat);
-  assert.equal(tiamat.availability, "one-time-encounter");
+  assert.equal(tiamat.availability, "repeatable");
+  assert.equal(tiamat.enemyId, "enemy.tiamat-crystal-world");
+  assert.equal(tiamat.enemyLootSlot, "common");
+  assert.deepEqual(tiamat.encounterIds, ["encounter.memoria.tiamat-crystal-world"]);
+  assert.match(tiamat.conditions ?? "", /96\/256/);
   assert.match(tiamat.conditions ?? "", /not guaranteed/i);
+  assert.match(tiamat.notes ?? "", /revived guardians lack Steals and Drops/);
+  assert.ok(!tiamat.walkthroughObjectiveIds?.includes("disc-4.memoria.tiamat-achievement"));
   assert.ok(mirrorPaths.every((path) => path?.availability === "conditional"));
   assert.ok(mirrorPaths.every((path) => /Quina|Vivi/.test(path?.conditions ?? "")));
   assert.deepEqual(
@@ -1219,6 +1225,83 @@ test("Peridot enemy routes record their source, repeatability, and conditional w
 
   assert.equal(itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot").length, 18);
   assert.ok(objectives.some((objective) => objective.id === "disc-4.memoria.tiamat-achievement"));
+});
+
+test("Crystal World Tiamat [B] has a separate source-scoped encounter and all eight loot paths", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.tiamat-crystal-world");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.memoria.tiamat-crystal-world");
+  const timeIntervalTiamat = enemyRecords.find((entry) => entry.id === "enemy.tiamat-memoria");
+  const twister = enemy?.blueMagic.find((entry) => entry.name === "Twister");
+  const expected = [
+    { id: "item-path.disc-4.memoria.tiamat-crystal-ether-common-steal", itemId: "game-item.ether", method: "steal", slot: "common", rate: "256/256" },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-ether-uncommon-steal", itemId: "game-item.ether", method: "steal", slot: "uncommon", rate: "64/256" },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-wing-edge-steal", itemId: "game-item.wing-edge", method: "steal", slot: "semi-rare", rate: "16/256", extraSources: ["gamefaqs-item-locations-54996", "gamefaqs-items-71891"] },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-wing-edge-rare-steal", itemId: "game-item.wing-edge", method: "steal", slot: "rare", rate: "1/256", extraSources: ["gamefaqs-item-locations-54996", "gamefaqs-items-71891"] },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-remedy-always-drop", itemId: "game-item.remedy", method: "drop", slot: "always" },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-peridot-drop", itemId: "game-item.peridot", method: "drop", slot: "common", rate: "96/256", extraSources: ["cavesofnarshe-peridot"] },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-phoenix-down-uncommon-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "uncommon", rate: "32/256" },
+    { id: "item-path.disc-4.memoria.tiamat-crystal-echo-screen-rare-drop", itemId: "game-item.echo-screen", method: "drop", slot: "rare", rate: "1/256" },
+  ];
+  const crystalLootPaths = itemAcquisitionPaths.filter((path) => path.enemyId === "enemy.tiamat-crystal-world");
+
+  assert.ok(enemy);
+  assert.equal(enemy.name, "Tiamat [B]");
+  assert.equal(enemy.kind, "ordinary");
+  assert.deepEqual(enemy.stats.map(({ field, value }) => [field, value]), [["level", 71], ["HP", 24127], ["MP", 3338], ["EXP", 0], ["AP", 7], ["Gil", 2956]]);
+  assert.deepEqual(enemy.encounterIds, ["encounter.memoria.tiamat-crystal-world"]);
+  assert.ok(!enemy.facts.some((fact) => fact.label === "Float" || fact.label === "Snort"));
+  assert.ok(timeIntervalTiamat?.encounterIds.includes("encounter.memoria.tiamat"));
+  assert.ok(!timeIntervalTiamat?.encounterIds.includes("encounter.memoria.tiamat-crystal-world"));
+  assert.ok(encounter);
+  assert.equal(encounter.kind, "random-pool");
+  assert.equal(encounter.location, "Crystal World");
+  assert.deepEqual(encounter.formation, [{ enemyId: "enemy.tiamat-crystal-world", quantity: null }]);
+  assert.match(encounter.notes.join(" "), /loot table\/prose conflict remains unresolved/);
+  assert.ok(twister);
+  assert.equal(twister.command, "Eat");
+  assert.ok(twister.objectiveIds.includes("disc-4.memoria.quina-blue-magic"));
+  assert.ok(twister.objectiveIds.includes("disc-3.lost-continent.mount-gulug-blue-magic"));
+  assert.deepEqual([...enemy.routeObjectiveIds].sort(), ["disc-3.lost-continent.mount-gulug-blue-magic", "disc-4.memoria.quina-blue-magic"].sort());
+  assert.equal(crystalLootPaths.length, 8);
+
+  for (const expectedPath of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.id);
+    const lootTable = expectedPath.method === "steal" ? enemy.steals : enemy.drops;
+    const slot = lootTable.find((entry) => entry.itemId === expectedPath.itemId && entry.slot === expectedPath.slot);
+    const requiredSources = new Set([...(enemy.sourceIds ?? []), ...(encounter.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${expectedPath.id} exists`);
+    assert.ok(slot, `${expectedPath.id} matches an enemy loot slot`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.chapterId, "disc-4.memoria");
+    assert.equal(path?.method, expectedPath.method);
+    assert.equal(path?.availability, "repeatable");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.enemyId, "enemy.tiamat-crystal-world");
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, ["encounter.memoria.tiamat-crystal-world"]);
+    assert.match(path?.notes ?? "", /revived guardians lack Steals and Drops/);
+    assert.ok(!path?.walkthroughObjectiveIds?.includes("disc-4.memoria.tiamat-achievement"));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${expectedPath.id} retains enemy, encounter, and slot provenance`);
+    assert.ok((expectedPath.extraSources ?? []).every((sourceId) => path?.sourceIds.includes(sourceId)), `${expectedPath.id} retains item-specific provenance`);
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.id} references known source ${sourceId}`);
+    }
+
+    if (expectedPath.method === "steal") {
+      assert.match(path?.conditions ?? "", /Steal attempt can fail/);
+    } else if (expectedPath.slot === "always") {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /KO victory/);
+    } else {
+      assert.match(path?.conditions ?? "", /conditional and not guaranteed/);
+      assert.match(path?.conditions ?? "", /KO victory/);
+    }
+    if (expectedPath.rate) {
+      assert.match(path?.conditions ?? "", new RegExp(expectedPath.rate.replace("/", "\\/")));
+      assert.match(path?.conditions ?? "", /source-reported|source-reported, not release-verified|not release-verified/);
+    }
+  }
 });
 
 test("Disc II Mistodon steals separate fixed fights from the unverified downhill pool", () => {
@@ -1542,6 +1625,7 @@ test("Wing Edge has sourced item, minigame, treasure, boss, and steal routes", (
     "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-wing-edge-drop",
     "item-path.disc-4.memoria.tiamat-wing-edge-drop",
     "item-path.disc-4.memoria.tiamat-crystal-wing-edge-steal",
+    "item-path.disc-4.memoria.tiamat-crystal-wing-edge-rare-steal",
     "item-path.disc-4.memoria.kraken-right-tentacle-wing-edge-steal",
     "item-path.disc-4.memoria.deathguise-wing-edge-drop",
     "item-path.disc-4.memoria.hades-wing-edge-drop",
@@ -1559,7 +1643,7 @@ test("Wing Edge has sourced item, minigame, treasure, boss, and steal routes", (
   ];
 
   assert.ok(wingEdge);
-  assert.equal(wingEdgePaths.length, 14);
+  assert.equal(wingEdgePaths.length, 15);
   assert.ok(sourceIds.every((sourceId) => wingEdge?.sourceIds.includes(sourceId)));
   assert.equal(pathsById.get(expectedPathIds[2])?.method, "quest-reward");
   assert.equal(pathsById.get(expectedPathIds[2])?.availability, "repeatable");
@@ -1571,17 +1655,22 @@ test("Wing Edge has sourced item, minigame, treasure, boss, and steal routes", (
   assert.ok(pathsById.get(expectedPathIds[4])?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.chocographs"));
   assert.equal(pathsById.get(expectedPathIds[6])?.method, "chest");
 
-  for (const pathId of [expectedPathIds[7], expectedPathIds[8], expectedPathIds[9], expectedPathIds[12], expectedPathIds[13]]) {
+  for (const pathId of [expectedPathIds[7], expectedPathIds[8], expectedPathIds[9], expectedPathIds[13], expectedPathIds[14]]) {
     const path = pathsById.get(pathId);
     assert.equal(path?.method, "drop", `${pathId} should be a boss drop`);
     assert.equal(path?.availability, "one-time-encounter", `${pathId} should be one-time`);
   }
   assert.equal(pathsById.get(expectedPathIds[10])?.method, "steal");
   assert.equal(pathsById.get(expectedPathIds[10])?.availability, "repeatable");
+  assert.equal(pathsById.get(expectedPathIds[10])?.enemyLootSlot, "semi-rare");
   assert.match(pathsById.get(expectedPathIds[10])?.notes ?? "", /conflict/);
   assert.equal(pathsById.get(expectedPathIds[11])?.method, "steal");
-  assert.equal(pathsById.get(expectedPathIds[11])?.availability, "one-time-encounter");
-  assert.match(pathsById.get(expectedPathIds[11])?.notes ?? "", /disputed/);
+  assert.equal(pathsById.get(expectedPathIds[11])?.availability, "repeatable");
+  assert.equal(pathsById.get(expectedPathIds[11])?.enemyLootSlot, "rare");
+  assert.match(pathsById.get(expectedPathIds[11])?.notes ?? "", /conflict/);
+  assert.equal(pathsById.get(expectedPathIds[12])?.method, "steal");
+  assert.equal(pathsById.get(expectedPathIds[12])?.availability, "one-time-encounter");
+  assert.match(pathsById.get(expectedPathIds[12])?.notes ?? "", /disputed/);
 
   for (const pathId of expectedPathIds) {
     const path = pathsById.get(pathId);
