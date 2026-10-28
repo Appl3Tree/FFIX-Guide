@@ -9511,6 +9511,45 @@ if (
 ) {
   errors.push("The Summit Station inventory warning must preserve the safe checkpoint while linking Caves of Narshe's Disc III/item-page claims to both window-unverified candidate paths and the optional aerial counter check, without presenting later recovery as confirmed.");
 }
+const summitShopStockObjective = objectivesById.get("disc-2.journey-to-treno.station-shop-stock");
+const summitShopStockPathExpectations: [string, string, number][] = [
+  ["item-path.disc-2.journey-to-treno.summit-station-air-racket-shop", "game-item.air-racket", 400],
+  ["item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop", "game-item.glass-armlet", 250],
+  ["item-path.disc-2.journey-to-treno.headgear-summit-station-shop", "game-item.headgear", 330],
+  ["item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop", "game-item.steepled-hat", 260],
+];
+const summitShopStockPaths = summitShopStockPathExpectations.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const summitShopStockStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.journey-to-treno")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "journey-treno-shop-stock-review");
+const summitShopStockSources = ["gamefaqs-shops-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-missables-71891", "gamefaqs-treno-71891", "cour89-air-racket"];
+if (
+  !summitShopStockObjective ||
+  summitShopStockObjective.category !== "collection" ||
+  !summitShopStockObjective.chapterIds?.includes("disc-2.journey-to-treno") ||
+  !summitShopStockObjective.profileIds?.includes("comprehensive") ||
+  summitShopStockSources.some((sourceId) => !summitShopStockObjective.sourceIds.includes(sourceId)) ||
+  summitShopStockPaths.some((path, index) => !path ||
+    path.itemId !== summitShopStockPathExpectations[index][1] ||
+    path.chapterId !== "disc-2.journey-to-treno" ||
+    path.method !== "shop" ||
+    path.availability !== "limited-window" ||
+    path.shopId !== "summit-station.weapon-shop" ||
+    path.cost?.amount !== summitShopStockPathExpectations[index][2] ||
+    !path.walkthroughObjectiveIds?.includes("disc-2.journey-to-treno.station-shop-stock") ||
+    !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.sourceIds.includes("gamefaqs-journey-to-treno-71891")) ||
+  !summitShopStockPaths[0]?.walkthroughObjectiveIds?.includes("disc-2.treno.air-racket-purchase") ||
+  !summitShopStockStep?.objectiveIds?.includes("disc-2.journey-to-treno.station-shop-stock") ||
+  !summitShopStockStep.text.includes("Air Racket (400 Gil), Glass Armlet (250), Steepled Hat (260), and Headgear (330)") ||
+  !summitShopStockStep.detail?.includes("This closes only this seller's window") ||
+  !summitShopStockStep.detail.includes("this Summit copy counts toward that total") ||
+  !summitShopStockStep.detail.includes("one more copy is in Ipsen's Castle") ||
+  !gamefaqsShopsSource?.notes.includes("the Summit stock is first-visit only")
+) {
+  errors.push("Summit Station's four limited-window shop paths must link to the sourced optional stock-review checkpoint, retain their listed prices, and distinguish this seller's closure from later item-type routes.");
+}
 const southGateAcquisitionExpectations: [string, string, string, string, string][] = [
   ["item-path.disc-1.journey-to-burmecia.bohden-gate-multina-racket", "game-item.multina-racket", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups"],
   ["item-path.disc-1.journey-to-burmecia.bohden-station-potion", "game-item.potion", "disc-1.journey-to-burmecia", "single-use", "disc-1.journey-to-burmecia.south-gate-pickups"],

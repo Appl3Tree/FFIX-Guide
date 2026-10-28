@@ -2291,6 +2291,54 @@ test("Disc II Treno equipment targets preserve later recovery and optional stock
   }
 });
 
+test("Summit Station's limited-window shop paths link to the optional stock checkpoint", () => {
+  const objectiveId = "disc-2.journey-to-treno.station-shop-stock";
+  const expected = [
+    ["item-path.disc-2.journey-to-treno.summit-station-air-racket-shop", "game-item.air-racket", 400],
+    ["item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop", "game-item.glass-armlet", 250],
+    ["item-path.disc-2.journey-to-treno.headgear-summit-station-shop", "game-item.headgear", 330],
+    ["item-path.disc-2.journey-to-treno.steepled-hat-summit-station-shop", "game-item.steepled-hat", 260],
+  ];
+  const stockObjective = objectives.find((objective) => objective.id === objectiveId);
+  const stationShopStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-2.journey-to-treno")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "journey-treno-shop-stock-review");
+  const shopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
+
+  assert.equal(stockObjective?.category, "collection");
+  assert.ok(stockObjective?.chapterIds?.includes("disc-2.journey-to-treno"));
+  assert.ok(stockObjective?.profileIds?.includes("comprehensive"));
+  assert.ok(["gamefaqs-shops-71891", "gamefaqs-journey-to-treno-71891", "cour89-air-racket"]
+    .every((sourceId) => stockObjective?.sourceIds.includes(sourceId)));
+  assert.ok(stationShopStep?.objectiveIds?.includes(objectiveId));
+  assert.match(stationShopStep?.text ?? "", /Air Racket \(400 Gil\), Glass Armlet \(250\), Steepled Hat \(260\), and Headgear \(330\)/);
+  assert.match(stationShopStep?.detail ?? "", /closes only this seller's window/);
+  assert.match(stationShopStep?.detail ?? "", /this Summit copy counts toward that total/);
+  assert.match(stationShopStep?.detail ?? "", /one more copy is in Ipsen's Castle/);
+  assert.match(shopsSource?.notes ?? "", /Summit stock is first-visit only/);
+
+  for (const [pathId, itemId, price] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} exists`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.chapterId, "disc-2.journey-to-treno");
+    assert.equal(path?.method, "shop");
+    assert.equal(path?.availability, "limited-window");
+    assert.equal(path?.shopId, "summit-station.weapon-shop");
+    assert.equal(path?.cost?.amount, price);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
+    assert.ok(path?.sourceIds.includes("gamefaqs-journey-to-treno-71891"));
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
+    }
+  }
+  assert.ok(itemAcquisitionPaths
+    .find((path) => path.id === expected[0][0])
+    ?.walkthroughObjectiveIds?.includes("disc-2.treno.air-racket-purchase"));
+});
+
 test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
   const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
   const pathCounts = [8, 9, 12, 10];

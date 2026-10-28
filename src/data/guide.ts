@@ -4487,6 +4487,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-2.journey-to-treno.station-shop-stock",
+    title: "Review Summit Station's limited-window shop stock",
+    category: "collection",
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-missables-71891", "gamefaqs-treno-71891", "cour89-air-racket"],
+    chapterIds: ["disc-2.journey-to-treno"],
+    profileIds: ["comprehensive", "custom", "perfect"],
+    verification: "partial",
+  },
+  {
     id: "disc-2.journey-to-treno.south-gate-gil",
     title: "Collect the 1,610 Gil chest at South Gate",
     category: "collection",

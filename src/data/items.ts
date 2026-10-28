@@ -1026,6 +1026,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 250 },
     conditions: "Summit Station lists Glass Armlet for 250 Gil during this first-visit shop window.",
+    walkthroughObjectiveIds: ["disc-2.journey-to-treno.station-shop-stock"],
     sourceIds: glassArmletReferenceSources,
   },
   {
@@ -3155,6 +3156,7 @@ const headgearAdditionalPaths: ItemAcquisitionPath[] = [
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 330 },
     conditions: "The GameFAQs and RPGClassics Disc II shop tables, the equipment list, and the Japanese armor table list Headgear for 330 Gil at Summit Station. The station shop is a one-time visit; this closes only the Summit Station purchase, not later Headgear sources.",
+    walkthroughObjectiveIds: ["disc-2.journey-to-treno.station-shop-stock"],
     sourceIds: [...headgearReferenceSources, "gamefaqs-journey-to-treno-71891"],
   },
   {
@@ -12491,6 +12493,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 400 },
     conditions: "Available during Dagger and Steiner's Summit Station stop. Cour89 also lists Treno as a Disc II purchase source and Ipsen's Castle as a later pickup; its comment says purchases stop after Dagger's opening Disc II segment. The optional five-copy target remains sourced to GameFAQs, not Cour89.",
+    walkthroughObjectiveIds: ["disc-2.journey-to-treno.station-shop-stock", "disc-2.treno.air-racket-purchase"],
     sourceIds: airRacketReferenceSources,
   },
   {
@@ -13328,6 +13331,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Summit Station Shop (Disc II)",
     cost: { currency: "gil", amount: 260 },
     conditions: "The Summit Station shop lists Steepled Hat for 260 Gil and is available only during the first stop there.",
+    walkthroughObjectiveIds: ["disc-2.journey-to-treno.station-shop-stock"],
     sourceIds: steepledHatSources,
   },
   {

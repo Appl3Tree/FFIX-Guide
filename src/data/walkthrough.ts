@@ -1576,6 +1576,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             objectiveIds: ["disc-2.journey-to-treno.nazna-letter"],
           },
           {
+            id: "journey-treno-shop-stock-review",
+            kind: "optional",
+            text: "Before boarding, review Summit Station's one-visit stock for any copies your goal needs: Air Racket (400 Gil), Glass Armlet (250), Steepled Hat (260), and Headgear (330). Buy only the amount you want; leaving closes this counter's purchase window.",
+            detail: "GameFAQs lists these four products in Summit Station's Disc II shop, which it says is available only on the first visit. This closes only this seller's window: Glass Armlet, Headgear, and Steepled Hat have separately listed later shops. Air Racket is sold again at Treno, where GameFAQs checks the optional five-copy target before the Gargant route; this Summit copy counts toward that total, and one more copy is in Ipsen's Castle. Cour89 independently lists Summit Station and Treno as Disc II Air Racket shops and Ipsen's Castle as a later pickup, but its page does not establish the five-copy target.",
+            objectiveIds: ["disc-2.journey-to-treno.station-shop-stock"],
+          },
+          {
             id: "journey-treno-shop-and-train",
             kind: "save",
             text: "Check the Summit Station shop for supplies and useful equipment for Dagger and Steiner. If following the source's perfect-inventory targets, compare stock against four Silver Gloves and three Iron Helms before leaving; GameFAQs and Neoseeker call this the last purchase chance. Use Summit as the safe checkpoint. Caves of Narshe lists both items in generic Disc III South Gate stock, but the seller is not mapped to an accessible counter; do not count a later purchase as confirmed. Then speak to the attendant behind the left counter to advance the trip. Go outside when the story sends you there; after Cinna and Marcus arrive, return to the rest area and speak with them and Steiner. Board the train when the scene is ready, then speak to Marcus to trigger the encounter.",
