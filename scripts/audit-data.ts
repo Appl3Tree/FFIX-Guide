@@ -6809,6 +6809,48 @@ for (const expected of tiamatBossLootPaths) {
     errors.push(`Memoria Tiamat path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
   }
 }
+const malirisBossLootPaths = [
+  { id: "item-path.disc-4.memoria.maliris-genji-armor-steal", itemId: "game-item.genji-armor", method: "steal", slot: "common", rate: "100%" },
+  { id: "item-path.disc-4.memoria.maliris-ultima-sword-steal", itemId: "game-item.ultima-sword", method: "steal", slot: "uncommon", rate: "25%" },
+  { id: "item-path.disc-4.memoria.maliris-masamune-steal", itemId: "game-item.masamune", method: "steal", slot: "semi-rare", rate: "6.25%" },
+  { id: "item-path.disc-4.memoria.maliris-phoenix-pinion-drop", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always" },
+  { id: "item-path.disc-4.memoria.maliris-phoenix-down-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%" },
+  { id: "item-path.disc-4.memoria.maliris-ether-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%" },
+  { id: "item-path.disc-4.memoria.maliris-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%" },
+];
+const malirisEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.maliris");
+const malirisEncounterId = "encounter.memoria.maliris";
+const malirisEncounter = enemyEncounters.find((encounter) => encounter.id === malirisEncounterId);
+if (itemAcquisitionPaths.filter((path) => malirisBossLootPaths.some((expected) => expected.id === path.id)).length !== malirisBossLootPaths.length) {
+  errors.push("Memoria Maliris must retain all seven item-bearing boss slots.");
+}
+for (const expected of malirisBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? malirisEnemy?.steals : malirisEnemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(malirisEnemy?.sourceIds ?? []), ...(malirisEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== malirisEnemy?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([malirisEncounterId]) ||
+    malirisEncounter?.kind !== "boss" ||
+    !malirisEncounter.formation.some((member) => member.enemyId === malirisEnemy?.id) ||
+    !path.walkthroughObjectiveIds?.includes("disc-4.memoria.maliris-steals") ||
+    (expected.method === "steal" && (!path.conditions?.includes(expected.rate ?? "") || !path.conditions.includes("source-reported") || !path.sourceIds.includes("opatil-steal-list"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always") || !path.conditions.includes("victory") || !path.sourceIds.includes("opatil-drop-list"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.conditions.includes(expected.rate ?? "") || !path.conditions.includes("not guaranteed") || !path.notes?.includes("source-reported, not release-verified"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Memoria Maliris path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

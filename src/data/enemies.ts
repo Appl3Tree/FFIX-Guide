@@ -324,6 +324,7 @@ const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-drag
 const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
 const memoriaTiamatSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
+const memoriaMalirisSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
 const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
 const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
 const finalBattleStatsSources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"];
@@ -3129,7 +3130,7 @@ const memoriaEncounters: EnemyEncounter[] = [
     location: "Outer Path",
     kind: "boss",
     formation: [{ enemyId: "enemy.maliris", quantity: 1 }],
-    sourceIds: memoriaEnemySources,
+    sourceIds: memoriaMalirisSources,
     objectiveIds: ["disc-4.memoria.maliris-steals"],
     missableIds: ["missable.disc-4.memoria.maliris-steals"],
     cutoffIds: ["cutoff.memoria.maliris-steals"],
@@ -4081,7 +4082,7 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       "HP claims conflict: GameFAQs lists 56,497 while Jegged lists 59,497. Both are retained pending direct game verification.",
       "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Masamune as Rare rather than Semi-Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops.",
     ],
-  }, "missable.disc-4.memoria.maliris-steals", "cutoff.memoria.maliris-steals"),
+  }, "missable.disc-4.memoria.maliris-steals", "cutoff.memoria.maliris-steals", memoriaMalirisSources),
   memoriaBoss({
     id: "enemy.tiamat-memoria",
     name: "Tiamat",
