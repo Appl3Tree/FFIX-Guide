@@ -1474,14 +1474,71 @@ if (!sourceInventoryTargets.some((target) => target.itemId === ribbonItemId && t
 }
 const laniStealObjectiveId = "disc-2.journey-to-outer-continent.lani-steals";
 const expectedLaniStealPaths = [
-  { id: "item-path.disc-2.journey-to-outer-continent.lani-ether-steal", itemId: "game-item.ether" },
-  { id: "item-path.disc-2.journey-to-outer-continent.lani-gladius-steal", itemId: "game-item.gladius" },
-  { id: "item-path.disc-2.journey-to-outer-continent.lani-coral-sword-steal", itemId: "game-item.coral-sword" },
+  { id: "item-path.disc-2.journey-to-outer-continent.lani-ether-steal", itemId: "game-item.ether", slot: "common" },
+  { id: "item-path.disc-2.journey-to-outer-continent.lani-gladius-steal", itemId: "game-item.gladius", slot: "uncommon" },
+  { id: "item-path.disc-2.journey-to-outer-continent.lani-coral-sword-steal", itemId: "game-item.coral-sword", slot: "semi-rare" },
 ];
+const laniRecord = enemyRecords.find((enemy) => enemy.id === "enemy.lani");
+const laniEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.fossil-roo.lani");
+const laniWarningRecord = missables.find((record) => record.id === "missable.disc-2.journey-to-outer-continent.lani-steals");
+const laniCutoffRecord = cutoffsById.get("cutoff.fossil-roo.lani-steals");
+if (!laniRecord || laniRecord.kind !== "boss" || laniRecord.chapterId !== "disc-2.journey-to-outer-continent" ||
+  !laniRecord.stats.some((stat) => stat.field === "HP" && stat.value === 5709 && stat.verification === "disputed") ||
+  !laniRecord.stats.some((stat) => stat.field === "HP" && stat.value === 5708 && stat.verification === "disputed") ||
+  !laniEncounter || laniEncounter.kind !== "boss" || !laniEncounter.missableIds.includes("missable.disc-2.journey-to-outer-continent.lani-steals") ||
+  !laniEncounter.cutoffIds.includes("cutoff.fossil-roo.lani-steals") ||
+  !laniWarningRecord || !laniCutoffRecord) {
+  errors.push("Lani must have a separate one-time Fossil Roo boss encounter with her published HP disagreement and existing warning/cutoff.");
+}
 for (const expected of expectedLaniStealPaths) {
   const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id && entry.itemId === expected.itemId);
-  if (!path || path.method !== "steal" || !path.walkthroughObjectiveIds?.includes(laniStealObjectiveId)) {
-    errors.push(`Lani's one-time-steal checklist must link ${expected.itemId} to acquisition path ${expected.id}.`);
+  const slot = laniRecord?.steals.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  if (!path || path.method !== "steal" || path.enemyId !== "enemy.lani" || path.enemyLootSlot !== expected.slot ||
+    path.encounterIds?.length !== 1 || path.encounterIds[0] !== "encounter.fossil-roo.lani" ||
+    !path.walkthroughObjectiveIds?.includes(laniStealObjectiveId) ||
+    !path.conditions?.includes("chance-based") || !path.conditions.includes("can fail") ||
+    !slot || [...new Set([...(laniRecord?.sourceIds ?? []), ...(laniEncounter?.sourceIds ?? []), ...slot.sourceIds])]
+      .some((sourceId) => !path.sourceIds.includes(sourceId))) {
+    errors.push(`Lani's one-time-steal checklist must link ${expected.itemId} to its exact ${expected.slot} slot, encounter, and sources.`);
+  }
+}
+const arkRecord = enemyRecords.find((enemy) => enemy.id === "enemy.ark");
+const arkEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.oeilvert.ark");
+const arkLootExpectations = [
+  { id: "item-path.disc-3.forgotten-continent.ark-elixir-steal", itemId: "game-item.elixir", method: "steal", slot: "common", objectiveId: "disc-3.forgotten-continent.ark-steals" },
+  { id: "item-path.disc-3.forgotten-continent.ark-power-vest-steal", itemId: "game-item.power-vest", method: "steal", slot: "uncommon", objectiveId: "disc-3.forgotten-continent.ark-steals" },
+  { id: "item-path.disc-3.forgotten-continent.ark-holy-lance-steal", itemId: "game-item.holy-lance", method: "steal", slot: "semi-rare", objectiveId: "disc-3.forgotten-continent.ark-steals" },
+  { id: "item-path.disc-3.forgotten-continent.ark-ether-common-drop", itemId: "game-item.ether", method: "drop", slot: "common", rate: "96/256 (37.5%)" },
+  { id: "item-path.disc-3.forgotten-continent.ark-ether-uncommon-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "32/256 (12.5%)" },
+  { id: "item-path.disc-3.forgotten-continent.ark-ether-rare-drop", itemId: "game-item.ether", method: "drop", slot: "rare", rate: "1/256 (~0.391%)" },
+  { id: "item-path.disc-3.forgotten-continent.ark-pumice-piece-drop", itemId: "game-item.pumice-piece", method: "drop", slot: "always", objectiveId: "disc-3.forgotten-continent.pumice-piece" },
+];
+if (!arkRecord || arkRecord.kind !== "boss" || !arkEncounter || arkEncounter.kind !== "boss" ||
+  !arkEncounter.formation.some((member) => member.enemyId === "enemy.ark" && member.quantity === 1) ||
+  !arkEncounter.missableIds.includes("missable.disc-3.forgotten-continent.ark-steals") ||
+  !arkEncounter.cutoffIds.includes("cutoff.oeilvert.ark-steals") ||
+  arkRecord.drops.filter((slot) => slot.itemId === "game-item.ether").length !== 3 ||
+  !arkRecord.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.pumice-piece") ||
+  !arkRecord.notes.some((note) => note.includes("source-reported") && note.includes("normal-KO"))) {
+  errors.push("Ark must separate the one-time Oeilvert boss, guaranteed Pumice Piece, and three source-rated conditional Ether drop slots.");
+}
+for (const expected of arkLootExpectations) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id && entry.itemId === expected.itemId);
+  const lootSlots = expected.method === "steal" ? arkRecord?.steals : arkRecord?.drops;
+  const slot = lootSlots?.find((entry) => entry.slot === expected.slot && entry.itemId === expected.itemId);
+  if (!path || !slot || path.method !== expected.method || path.enemyId !== "enemy.ark" ||
+    path.enemyLootSlot !== expected.slot || path.encounterIds?.length !== 1 || path.encounterIds[0] !== "encounter.oeilvert.ark" ||
+    path.availability !== "one-time-encounter" ||
+    [...new Set([...(arkRecord?.sourceIds ?? []), ...(arkEncounter?.sourceIds ?? []), ...slot.sourceIds])]
+      .some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    (expected.objectiveId && !path.walkthroughObjectiveIds?.includes(expected.objectiveId)) ||
+    (expected.method === "steal" && (!path.conditions?.includes("chance-based") || !path.conditions.includes("can fail"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes(expected.rate ?? "") ||
+      !path.conditions.includes("normal KO") || !path.conditions.includes("not guaranteed") ||
+      path.walkthroughObjectiveIds?.includes("disc-3.forgotten-continent.ark-steals"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always slot guarantees") ||
+      !path.conditions.includes("normal KO") || !path.walkthroughObjectiveIds?.includes("disc-3.forgotten-continent.pumice-piece")))) {
+    errors.push(`Ark's ${expected.method} slot ${expected.slot} must link to the exact one-time boss route with correct outcome and provenance.`);
   }
 }
 const expectedLaniRecoveryPathIds = [
@@ -5881,7 +5938,7 @@ const fossilSeekerBat = enemyRecords.find((enemy) => enemy.id === "enemy.seeker-
 const lostContinentFeatherTeacher = enemyEncounters.find((encounter) => encounter.id === "encounter.lost-continent.feather-circle-teacher");
 const friendlyFeatherEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.lost-continent.friendly-feather-circle");
 const friendlyFeather = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-feather-circle");
-if (fossilRooPools.length !== 2 || !fossilRooPool || fossilRooPool.kind !== "random-pool" ||
+if (fossilRooPools.length !== 3 || !fossilRooPool || fossilRooPool.kind !== "random-pool" ||
   !sameSortedValues(fossilRooPool.formation.map((member) => member.enemyId), ["enemy.abomination", "enemy.feather-circle", "enemy.griffin", "enemy.seeker-bat"]) ||
   fossilRooPool.formation.some((member) => member.quantity !== null) ||
   !["gamefaqs-enemy-list-71891", "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo"].every((sourceId) => fossilRooPool.sourceIds.includes(sourceId)) ||
@@ -6222,14 +6279,28 @@ if (!cleyraAntlion?.drops.some((slot) => slot.slot === "always" && slot.itemId =
 }
 const qualeEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.qus-marsh.quale-99-frogs");
 const qualeRecord = enemyRecords.find((enemy) => enemy.id === "enemy.quale");
+const qualeGluttonsRobePath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.outer-continent.quale-gluttons-robe-steal");
 if (!qualeEncounter || qualeEncounter.kind !== "boss" ||
   !qualeEncounter.formation.some((entry) => entry.enemyId === "enemy.quale" && entry.quantity === 1) ||
   !qualeEncounter.objectiveIds.includes("disc-4.return-to-gaia.frog-catching") ||
+  !qualeEncounter.location.includes("whichever of the four Qu's Marsh ponds") ||
+  !qualeEncounter.notes.some((note) => note.includes("not a game restriction") && note.includes("Disc III")) ||
   !qualeRecord || qualeRecord.kind !== "boss" || qualeRecord.chapterId !== "disc-4.return-to-gaia" || qualeRecord.routeObjectiveIds.length !== 1 ||
   !qualeRecord.steals.some((slot) => slot.itemId === "game-item.gluttons-robe") ||
   qualeRecord.drops.filter((slot) => slot.itemId === "game-item.elixir").length !== 4 ||
-  !qualeRecord.notes.some((note) => note.includes("Gastro Fork"))) {
-  errors.push("Quale must link the optional 99-frog boss encounter, its four Elixir drops, Glutton's Robe steal, and frog-catching objective.");
+  !qualeRecord.notes.some((note) => note.includes("Gastro Fork")) ||
+  !qualeGluttonsRobePath || qualeGluttonsRobePath.itemId !== "game-item.gluttons-robe" ||
+  qualeGluttonsRobePath.chapterId !== "disc-4.return-to-gaia" || qualeGluttonsRobePath.method !== "steal" ||
+  qualeGluttonsRobePath.enemyId !== "enemy.quale" || qualeGluttonsRobePath.enemyLootSlot !== "semi-rare" ||
+  qualeGluttonsRobePath.encounterIds?.length !== 1 || qualeGluttonsRobePath.encounterIds[0] !== qualeEncounter.id ||
+  !qualeGluttonsRobePath.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.frog-catching") ||
+  !qualeGluttonsRobePath.conditions?.includes("whichever Qu's Marsh pond") ||
+  !qualeGluttonsRobePath.conditions.includes("can happen earlier") ||
+  !qualeGluttonsRobePath.conditions.includes("chance-based and can fail") ||
+  [...new Set([...(qualeRecord?.sourceIds ?? []), ...qualeEncounter.sourceIds,
+    ...(qualeRecord?.steals.find((slot) => slot.itemId === "game-item.gluttons-robe" && slot.slot === "semi-rare")?.sourceIds ?? [])])]
+    .some((sourceId) => !qualeGluttonsRobePath.sourceIds.includes(sourceId))) {
+  errors.push("Quale must link the 99th-frog trigger at any pond and its Glutton's Robe steal to the exact enemy slot, encounter, planned timing, and sources.");
 }
 const huntPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum.festival-random-pool");
 const huntEnemyIds = ["enemy.fang-b", "enemy.mu-b", "enemy.trick-sparrow-hunt"];
@@ -9874,6 +9945,59 @@ if (!meltigeminiPreparation || meltigeminiPreparation.suggestedLevelRange !== un
   !meltigeminiCombatStep.text.includes("Fire's affinity is disputed") ||
   !meltigeminiCombatStep.detail?.includes("single-source comfort target")) {
   errors.push("Meltigemini preparation must keep Level 42 separate from party advice, preserve the conflicting Fire reports, and link status/setup guidance to the Mount Gulug boss checkpoint.");
+}
+const meltigeminiLootExpectations = [
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-steal", method: "steal", slot: "common", itemId: "game-item.vaccine" },
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-golden-hairpin-steal", method: "steal", slot: "uncommon", itemId: "game-item.golden-hairpin" },
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-demons-vest-steal", method: "steal", slot: "semi-rare", itemId: "game-item.demons-vest" },
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-drop", method: "drop", slot: "always", itemId: "game-item.vaccine" },
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-common-drop", method: "drop", slot: "common", itemId: "game-item.vaccine" },
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-uncommon-drop", method: "drop", slot: "uncommon", itemId: "game-item.vaccine" },
+  { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-rare-drop", method: "drop", slot: "rare", itemId: "game-item.vaccine" },
+];
+const meltigeminiEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.mount-gulug.meltigemini");
+for (const expected of meltigeminiLootExpectations) {
+  const lootTable = expected.method === "steal" ? meltigeminiRecord?.steals : meltigeminiRecord?.drops;
+  const lootSlot = lootTable?.find((slot) => slot.slot === expected.slot && slot.itemId === expected.itemId);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!meltigeminiRecord || !meltigeminiEncounter || meltigeminiEncounter.kind !== "boss" || !lootSlot || !path ||
+    !meltigeminiRecord.encounterIds.includes(meltigeminiEncounter.id) ||
+    !meltigeminiEncounter.formation.some((member) => member.enemyId === "enemy.meltigemini" && member.quantity === 1) ||
+    path.enemyId !== "enemy.meltigemini" || path.enemyLootSlot !== expected.slot ||
+    path.encounterIds?.length !== 1 || path.encounterIds[0] !== meltigeminiEncounter.id ||
+    path.itemId !== expected.itemId || path.chapterId !== "disc-3.lost-continent" || path.method !== expected.method ||
+    path.availability !== "one-time-encounter" ||
+    [...new Set([...meltigeminiEncounter.sourceIds, ...lootSlot.sourceIds])].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    (expected.method === "steal" && (!path.conditions.includes("each attempt can fail") || !path.walkthroughObjectiveIds?.includes("disc-3.lost-continent.meltigemini-steals"))) ||
+    (expected.method === "drop" && path.walkthroughObjectiveIds?.includes("disc-3.lost-continent.meltigemini-steals")) ||
+    (expected.slot === "always" && (!path.conditions.includes("normal KO victory") || !path.conditions.includes("Always drop slot guarantees one Vaccine"))) ||
+    (expected.slot === "common" && expected.method === "drop" && (!path.conditions.includes("96/256 (37.5%)") || !path.conditions.includes("not release-verified"))) ||
+    (expected.slot === "uncommon" && expected.method === "drop" && (!path.conditions.includes("32/256 (12.5%)") || !path.conditions.includes("not release-verified"))) ||
+    (expected.slot === "rare" && expected.method === "drop" && (!path.conditions.includes("1/256 (~0.391%)") || !path.conditions.includes("not release-verified")))) {
+    errors.push(`Meltigemini ${expected.method} slot ${expected.slot} must link to its one-time boss encounter with the correct item, outcome, and provenance.`);
+  }
+}
+const redDragonLootRecord = enemyRecords.find((enemy) => enemy.id === "enemy.red-dragon");
+const redDragonEtherSlot = redDragonLootRecord?.drops.find((slot) => slot.slot === "always" && slot.itemId === "game-item.ether");
+const redDragonEtherPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.lost-continent.mount-gulug-red-dragon-ether-drop");
+const redDragonLootEncounterIds = [
+  "encounter.mount-gulug.red-dragon-return-pair",
+  "encounter.mount-gulug.red-dragon-mineshaft",
+  "encounter.mount-gulug.red-dragon-lower-pair",
+];
+const redDragonLootEncounters = redDragonLootEncounterIds.map((id) => enemyEncounters.find((encounter) => encounter.id === id));
+if (!redDragonLootRecord || !redDragonEtherSlot || !redDragonEtherPath ||
+  !sameSortedValues(redDragonLootRecord.encounterIds, redDragonLootEncounterIds) ||
+  redDragonEtherPath.enemyId !== "enemy.red-dragon" || redDragonEtherPath.enemyLootSlot !== "always" ||
+  !sameSortedValues(redDragonEtherPath.encounterIds ?? [], redDragonLootEncounterIds) ||
+  !redDragonEtherPath.conditions.includes("three or four encounters") ||
+  !redDragonEtherPath.conditions.includes("does not claim a total copy count") ||
+  redDragonEtherPath.walkthroughObjectiveIds?.length ||
+  redDragonLootEncounters.some((encounter) => !encounter || encounter.kind !== "fixed" ||
+    !encounter.formation.some((member) => member.enemyId === "enemy.red-dragon")) ||
+  [...new Set([...(redDragonEtherSlot?.sourceIds ?? []), ...redDragonLootEncounters.flatMap((encounter) => encounter?.sourceIds ?? [])])]
+    .some((sourceId) => !redDragonEtherPath.sourceIds.includes(sourceId))) {
+  errors.push("Red Dragon's guaranteed Ether path must link its Always slot to each fixed Mount Gulug encounter without asserting the disputed total yield.");
 }
 if (!tantarianDisc2Encounter || tantarianDisc2Encounter.chapterId !== "disc-2.return-to-alexandria" ||
   !tantarianDisc2Encounter.notes.some((note) => note.includes("first of two")) ||

@@ -4147,6 +4147,192 @@ test("Cleyra boss item paths link exact loot slots while keeping Antlion's Alway
   assert.equal(expected.length, 7);
 });
 
+test("Mount Gulug loot paths separate Meltigemini's four Vaccine slots and link Red Dragon's fixed Ether drops", () => {
+  const meltigeminiExpected = [
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-steal", slot: "common", method: "steal", itemId: "game-item.vaccine" },
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-golden-hairpin-steal", slot: "uncommon", method: "steal", itemId: "game-item.golden-hairpin" },
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-demons-vest-steal", slot: "semi-rare", method: "steal", itemId: "game-item.demons-vest" },
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-drop", slot: "always", method: "drop", itemId: "game-item.vaccine" },
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-common-drop", slot: "common", method: "drop", itemId: "game-item.vaccine" },
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-uncommon-drop", slot: "uncommon", method: "drop", itemId: "game-item.vaccine" },
+    { pathId: "item-path.disc-3.lost-continent.meltigemini-vaccine-rare-drop", slot: "rare", method: "drop", itemId: "game-item.vaccine" },
+  ];
+  const encounterMap = new Map(enemyEncounters.map((entry) => [entry.id, entry]));
+  const meltigemini = enemyRecords.find((entry) => entry.id === "enemy.meltigemini");
+  const meltigeminiEncounterId = "encounter.mount-gulug.meltigemini";
+  const meltigeminiEncounter = encounterMap.get(meltigeminiEncounterId);
+  assert.equal(meltigeminiExpected.length, 7);
+
+  for (const item of meltigeminiExpected) {
+    const lootTable = item.method === "steal" ? meltigemini?.steals : meltigemini?.drops;
+    const lootSlot = lootTable?.find((entry) => entry.slot === item.slot && entry.itemId === item.itemId);
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    assert.ok(meltigemini?.kind === "boss");
+    assert.ok(meltigeminiEncounter?.kind === "boss");
+    assert.deepEqual(meltigeminiEncounter?.formation, [{ enemyId: "enemy.meltigemini", quantity: 1 }]);
+    assert.ok(meltigemini?.encounterIds.includes(meltigeminiEncounterId));
+    assert.ok(lootSlot, `${item.pathId} matches its exact slot`);
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path.enemyId, "enemy.meltigemini");
+    assert.equal(path.enemyLootSlot, item.slot);
+    assert.deepEqual(path.encounterIds, [meltigeminiEncounterId]);
+    assert.equal(path.itemId, item.itemId);
+    assert.equal(path.method, item.method);
+    assert.equal(path.availability, "one-time-encounter");
+    if (item.method === "steal") {
+      assert.match(path.conditions ?? "", /each attempt can fail/);
+      assert.ok(path.walkthroughObjectiveIds?.includes("disc-3.lost-continent.meltigemini-steals"));
+    } else {
+      assert.ok(!path.walkthroughObjectiveIds?.includes("disc-3.lost-continent.meltigemini-steals"));
+      if (item.slot === "always") assert.match(path.conditions ?? "", /normal KO victory.*Always drop slot guarantees one Vaccine/);
+      else {
+        assert.match(path.conditions ?? "", /normal KO victory/);
+        assert.match(path.conditions ?? "", /source-reported, not release-verified/);
+        assert.match(path.conditions ?? "", item.slot === "common" ? /96\/256 \(37\.5%\)/ : item.slot === "uncommon" ? /32\/256 \(12\.5%\)/ : /1\/256 \(~0\.391%\)/);
+      }
+    }
+    for (const sourceId of new Set([...(meltigeminiEncounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+      assert.ok(path.sourceIds.includes(sourceId), `${item.pathId} missing slot/encounter source ${sourceId}`);
+    }
+  }
+
+  const redDragon = enemyRecords.find((entry) => entry.id === "enemy.red-dragon");
+  const redDragonEncounterIds = [
+    "encounter.mount-gulug.red-dragon-return-pair",
+    "encounter.mount-gulug.red-dragon-mineshaft",
+    "encounter.mount-gulug.red-dragon-lower-pair",
+  ];
+  const redDragonPath = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-3.lost-continent.mount-gulug-red-dragon-ether-drop");
+  const redDragonSlot = redDragon?.drops.find((entry) => entry.slot === "always" && entry.itemId === "game-item.ether");
+  assert.ok(redDragon);
+  assert.ok(redDragonSlot);
+  assert.ok(redDragonPath);
+  assert.deepEqual(redDragon?.encounterIds, redDragonEncounterIds);
+  assert.equal(redDragonPath.enemyId, "enemy.red-dragon");
+  assert.equal(redDragonPath.enemyLootSlot, "always");
+  assert.deepEqual(redDragonPath.encounterIds, redDragonEncounterIds);
+  assert.match(redDragonPath.conditions ?? "", /three or four encounters/);
+  assert.match(redDragonPath.conditions ?? "", /does not claim a total copy count/);
+  assert.equal(redDragonPath.walkthroughObjectiveIds, undefined);
+  for (const encounterId of redDragonEncounterIds) {
+    const encounter = encounterMap.get(encounterId);
+    assert.ok(encounter?.kind === "fixed");
+    assert.ok(encounter.formation.some((member) => member.enemyId === "enemy.red-dragon"));
+    for (const sourceId of encounter.sourceIds) assert.ok(redDragonPath.sourceIds.includes(sourceId), `Red Dragon Ether path missing ${sourceId}`);
+  }
+  for (const sourceId of redDragonSlot?.sourceIds ?? []) assert.ok(redDragonPath.sourceIds.includes(sourceId));
+});
+
+test("Lani, Ark, and Quale loot paths link to exact one-time boss slots", () => {
+  const laniExpected = [
+    { pathId: "item-path.disc-2.journey-to-outer-continent.lani-ether-steal", itemId: "game-item.ether", slot: "common" },
+    { pathId: "item-path.disc-2.journey-to-outer-continent.lani-gladius-steal", itemId: "game-item.gladius", slot: "uncommon" },
+    { pathId: "item-path.disc-2.journey-to-outer-continent.lani-coral-sword-steal", itemId: "game-item.coral-sword", slot: "semi-rare" },
+  ];
+  const arkExpected = [
+    { pathId: "item-path.disc-3.forgotten-continent.ark-elixir-steal", itemId: "game-item.elixir", method: "steal", slot: "common", objectiveId: "disc-3.forgotten-continent.ark-steals" },
+    { pathId: "item-path.disc-3.forgotten-continent.ark-power-vest-steal", itemId: "game-item.power-vest", method: "steal", slot: "uncommon", objectiveId: "disc-3.forgotten-continent.ark-steals" },
+    { pathId: "item-path.disc-3.forgotten-continent.ark-holy-lance-steal", itemId: "game-item.holy-lance", method: "steal", slot: "semi-rare", objectiveId: "disc-3.forgotten-continent.ark-steals" },
+    { pathId: "item-path.disc-3.forgotten-continent.ark-ether-common-drop", itemId: "game-item.ether", method: "drop", slot: "common", rate: "96/256 (37.5%)" },
+    { pathId: "item-path.disc-3.forgotten-continent.ark-ether-uncommon-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "32/256 (12.5%)" },
+    { pathId: "item-path.disc-3.forgotten-continent.ark-ether-rare-drop", itemId: "game-item.ether", method: "drop", slot: "rare", rate: "1/256 (~0.391%)" },
+    { pathId: "item-path.disc-3.forgotten-continent.ark-pumice-piece-drop", itemId: "game-item.pumice-piece", method: "drop", slot: "always", objectiveId: "disc-3.forgotten-continent.pumice-piece" },
+  ];
+  const lani = enemyRecords.find((entry) => entry.id === "enemy.lani");
+  const laniEncounter = enemyEncounters.find((entry) => entry.id === "encounter.fossil-roo.lani");
+  const laniObjective = objectives.find((entry) => entry.id === "disc-2.journey-to-outer-continent.lani-steals");
+  const laniWarning = missables.find((entry) => entry.id === "missable.disc-2.journey-to-outer-continent.lani-steals");
+  const ark = enemyRecords.find((entry) => entry.id === "enemy.ark");
+  const arkEncounter = enemyEncounters.find((entry) => entry.id === "encounter.oeilvert.ark");
+
+  assert.equal(lani?.kind, "boss");
+  assert.equal(laniEncounter?.kind, "boss");
+  assert.deepEqual(laniEncounter?.formation, [{ enemyId: "enemy.lani", quantity: 1 }]);
+  assert.ok(laniObjective);
+  assert.ok(laniWarning?.classification.includes("recoverable-later"));
+  assert.ok(laniEncounter?.missableIds.includes("missable.disc-2.journey-to-outer-continent.lani-steals"));
+  assert.ok(laniEncounter?.cutoffIds.includes("cutoff.fossil-roo.lani-steals"));
+  assert.ok(lani?.stats.some((stat) => stat.field === "HP" && stat.value === 5709 && stat.verification === "disputed"));
+  assert.ok(lani?.stats.some((stat) => stat.field === "HP" && stat.value === 5708 && stat.verification === "disputed"));
+
+  for (const item of laniExpected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slot = lani?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    assert.ok(path, item.pathId + " exists");
+    assert.ok(slot, item.slot + " Lani slot exists");
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.enemyId, "enemy.lani");
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, ["encounter.fossil-roo.lani"]);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.ok(path?.walkthroughObjectiveIds?.includes("disc-2.journey-to-outer-continent.lani-steals"));
+    assert.match(path?.conditions ?? "", /chance-based.*can fail/);
+    for (const sourceId of new Set([...(lani?.sourceIds ?? []), ...(laniEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])])) {
+      assert.ok(path?.sourceIds.includes(sourceId), item.pathId + " missing provenance " + sourceId);
+      assert.ok(sources.some((source) => source.id === sourceId));
+    }
+  }
+
+  assert.equal(ark?.kind, "boss");
+  assert.equal(arkEncounter?.kind, "boss");
+  assert.deepEqual(arkEncounter?.formation, [{ enemyId: "enemy.ark", quantity: 1 }]);
+  assert.ok(arkEncounter?.missableIds.includes("missable.disc-3.forgotten-continent.ark-steals"));
+  assert.ok(arkEncounter?.cutoffIds.includes("cutoff.oeilvert.ark-steals"));
+  assert.equal(itemAcquisitionPaths.filter((entry) => entry.enemyId === "enemy.ark").length, arkExpected.length);
+  assert.equal(ark?.drops.filter((entry) => entry.itemId === "game-item.ether").length, 3);
+  assert.ok(ark?.drops.some((entry) => entry.slot === "always" && entry.itemId === "game-item.pumice-piece"));
+
+  for (const item of arkExpected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slots = item.method === "steal" ? ark?.steals : ark?.drops;
+    const slot = slots?.find((entry) => entry.slot === item.slot && entry.itemId === item.itemId);
+    assert.ok(path, item.pathId + " exists");
+    assert.ok(slot, item.slot + " Ark slot exists");
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.enemyId, "enemy.ark");
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, ["encounter.oeilvert.ark"]);
+    assert.equal(path?.availability, "one-time-encounter");
+    if (item.objectiveId) assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    if (item.method === "steal") assert.match(path?.conditions ?? "", /chance-based.*can fail/);
+    if (item.method === "drop" && item.slot !== "always") {
+      assert.ok(!path?.walkthroughObjectiveIds?.includes("disc-3.forgotten-continent.ark-steals"));
+      assert.ok(path?.conditions?.includes(item.rate));
+      assert.match(path?.conditions ?? "", /normal KO.*not guaranteed/);
+      assert.match(path?.conditions ?? "", /source-reported, not release-verified/);
+    }
+    if (item.slot === "always") {
+      assert.ok(path?.walkthroughObjectiveIds?.includes("disc-3.forgotten-continent.pumice-piece"));
+      assert.match(path?.conditions ?? "", /Always slot guarantees.*normal KO/);
+    }
+    for (const sourceId of new Set([...(ark?.sourceIds ?? []), ...(arkEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])])) {
+      assert.ok(path?.sourceIds.includes(sourceId), item.pathId + " missing provenance " + sourceId);
+      assert.ok(sources.some((source) => source.id === sourceId));
+    }
+  }
+
+  const qualePath = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-2.outer-continent.quale-gluttons-robe-steal");
+  const quale = enemyRecords.find((entry) => entry.id === "enemy.quale");
+  const qualeEncounter = enemyEncounters.find((entry) => entry.id === "encounter.qus-marsh.quale-99-frogs");
+  const qualeSlot = quale?.steals.find((entry) => entry.itemId === "game-item.gluttons-robe" && entry.slot === "semi-rare");
+  assert.ok(qualePath);
+  assert.ok(qualeSlot);
+  assert.equal(quale?.chapterId, "disc-4.return-to-gaia");
+  assert.equal(qualeEncounter?.chapterId, "disc-4.return-to-gaia");
+  assert.match(qualeEncounter?.location ?? "", /whichever of the four Qu's Marsh ponds/);
+  assert.match(qualeEncounter?.notes.join(" ") ?? "", /not a game restriction.*Disc III/);
+  assert.equal(qualePath?.chapterId, "disc-4.return-to-gaia");
+  assert.equal(qualePath?.enemyId, "enemy.quale");
+  assert.equal(qualePath?.enemyLootSlot, "semi-rare");
+  assert.deepEqual(qualePath?.encounterIds, ["encounter.qus-marsh.quale-99-frogs"]);
+  assert.ok(qualePath?.walkthroughObjectiveIds?.includes("disc-4.return-to-gaia.frog-catching"));
+  assert.match(qualePath?.conditions ?? "", /whichever Qu's Marsh pond.*can happen earlier/);
+  assert.match(qualePath?.conditions ?? "", /chance-based and can fail/);
+  for (const sourceId of new Set([...(quale?.sourceIds ?? []), ...(qualeEncounter?.sourceIds ?? []), ...(qualeSlot?.sourceIds ?? [])])) {
+    assert.ok(qualePath?.sourceIds.includes(sourceId), "Quale Glutton's Robe path missing provenance " + sourceId);
+  }
+});
+
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
   const sourceIds = [
     "gamefaqs-journey-to-burmecia-71891",

@@ -133,6 +133,9 @@ const outerContinentMarshBlueMagicObjectiveId = "disc-2.journey-to-outer-contine
 const madainSariChapterId = "disc-2.madain-sari";
 const pinnacleRocksChapterId = "disc-2.pinnacle-rocks";
 const fossilRooChapterId = "disc-2.journey-to-outer-continent";
+const laniStealsObjectiveId = "disc-2.journey-to-outer-continent.lani-steals";
+const laniStealsMissableId = "missable.disc-2.journey-to-outer-continent.lani-steals";
+const laniStealsCutoffId = "cutoff.fossil-roo.lani-steals";
 const mountainPathChapterId = "disc-2.conde-petie-mountain-path";
 const pualeiPlainsChapterId = "disc-2.journey-to-iifa-tree";
 const desertPalaceChapterId = "disc-3.desert-palace";
@@ -158,6 +161,10 @@ const fossilRooBlueMagicObjectiveId = "disc-2.journey-to-outer-continent.blue-ma
 const lostContinentBlueMagicObjectiveId = "disc-3.on-the-high-seas.blue-magic";
 const lanarMarshChapterId = "disc-3.on-the-high-seas";
 const forgottenContinentChapterId = "disc-3.forgotten-continent";
+const arkStealsObjectiveId = "disc-3.forgotten-continent.ark-steals";
+const arkStealsMissableId = "missable.disc-3.forgotten-continent.ark-steals";
+const arkStealsCutoffId = "cutoff.oeilvert.ark-steals";
+const arkPumiceObjectiveId = "disc-3.forgotten-continent.pumice-piece";
 const forgottenContinentBlueMagicRecoveryObjectiveId = "disc-3.forgotten-continent.blue-magic-recovery";
 const friendlyFeatherCircleObjectiveId = "disc-3.lost-continent.feather-circle";
 const nightBlueMagicObjectiveId = "disc-1.journey-to-burmecia.blue-magic-night";
@@ -190,6 +197,9 @@ const ipsensCastleEncounterSources = [enemyListSourceId, "gamefaqs-ipsens-castle
 const ipsensTaharkaTableSources = ["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"];
 const pinnacleRocksEnemySources = [enemyListSourceId, "gamefaqs-pinnacle-rocks-71891", "jegged-pinnacle-rocks", "cavesofnarshe-pinnacle-rocks", "cavesofnarshe-enemies", "gamefaqs-item-locations-54996", "elitegrindlab-pinnacle-rocks", "gamefaqs-abilities-71891", "rpgclassics-bestiary-n-s"];
 const fossilRooEnemySources = [enemyListSourceId, "gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-abilities-71891"];
+const fossilRooBossSources = ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-boss-guide-31490"];
+const laniStatSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-boss-guide-31490"];
+const arkBossSources = ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert", "gamefaqs-enemy-list-71891"];
 const lostContinentFeatherSources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-esto-gaza", "rpgclassics-lost-continent"];
 const friendlyFeatherCircleSources = ["gamefaqs-friendly-creatures-71891", "jegged-friendly-monsters", "cavesofnarshe-friendly-creatures", "gamefaqs-lost-continent-71891", "gamerguides-mount-gulug"];
 const outerContinentEnemySources = [enemyListSourceId, "gamefaqs-monster-list-20490", "gamefaqs-outer-continent-71891", "jegged-conde-petie", "rpgclassics-outer-continent", "gamefaqs-abilities-71891"];
@@ -1389,16 +1399,16 @@ const lindblumRegionalEncounters: EnemyEncounter[] = [
   },
   {
     id: "encounter.qus-marsh.quale-99-frogs",
-    title: "Quale — 99-frog challenge",
+    title: "Quale — 99th-frog challenge",
     chapterId: returnToGaiaChapterId,
-    location: "Quale's house at Qu's Marsh after the shared frog count reaches 99",
+    location: "At whichever of the four Qu's Marsh ponds contains Quina's 99th frog",
     kind: "boss",
     formation: [{ enemyId: "enemy.quale", quantity: 1 }],
     sourceIds: qualeSources,
     objectiveIds: ["disc-4.return-to-gaia.frog-catching"],
     missableIds: [],
     cutoffIds: [],
-    notes: ["Quale challenges the party when the 99-frog milestone is reached and gives Quina the Gastro Fork after victory. The battle is optional; the frog count is shared across the marshes and Frog Drop's damage can continue scaling beyond the boss trigger."],
+    notes: ["The 99th frog triggers Quale immediately at whichever Qu's Marsh pond Quina is using; Disc IV is the walkthrough's planned timing, not a game restriction, and the battle can occur earlier (including Disc III). The frog count is shared across all four marshes. Defeating Quale gives Quina the Gastro Fork, while Frog Drop's damage can continue scaling beyond the boss trigger."],
   },
 ];
 
@@ -1680,6 +1690,19 @@ const forgottenContinentFieldEncounters: EnemyEncounter[] = [
     missableIds: [],
     cutoffIds: [],
     notes: ["The older GameFAQs Monster List names one Armstrong and Jabberwock (F) in the forest table. The friendly creature's quest encounter is not a hostile battle."],
+  },
+  {
+    id: "encounter.oeilvert.ark",
+    title: "Ark",
+    chapterId: forgottenContinentChapterId,
+    location: "Oeilvert's Gulug Stone elevator, when the party attempts to take the stone",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.ark", quantity: 1 }],
+    sourceIds: arkBossSources,
+    objectiveIds: [arkStealsObjectiveId, arkPumiceObjectiveId],
+    missableIds: [arkStealsMissableId],
+    cutoffIds: [arkStealsCutoffId],
+    notes: ["Ark has three one-time steals. The Always Pumice Piece drop is separate from the conditional Ether drops in its Common, Uncommon, and Rare slots; only normal KO victories produce drops."],
   },
 ];
 
@@ -2388,6 +2411,19 @@ const fossilRooEncounters: EnemyEncounter[] = [
     cutoffIds: [],
     notes: ["The Fossil Roo Enemy List and route walkthroughs identify Abomination, Feather Circle, Griffin, and Seeker Bat. The formation records the area roster without inventing exact enemy counts, tunnel-by-tunnel distribution, or encounter rates. The Armodullahan chase and Lani are separate story encounters."],
   },
+  {
+    id: "encounter.fossil-roo.lani",
+    title: "Lani",
+    chapterId: fossilRooChapterId,
+    location: "Fossil Roo entrance, immediately after the Armodullahan chase",
+    kind: "boss",
+    formation: [{ enemyId: "enemy.lani", quantity: 1 }],
+    sourceIds: fossilRooBossSources,
+    objectiveIds: [laniStealsObjectiveId],
+    missableIds: [laniStealsMissableId],
+    cutoffIds: [laniStealsCutoffId],
+    notes: ["Lani is a one-time story boss separate from the Fossil Roo random pool. Attempt her Ether, Gladius, and Coral Sword steals before defeating her; all three item types have later recovery routes."],
+  },
 ];
 
 const lanarMarshEncounters: EnemyEncounter[] = [
@@ -2648,6 +2684,48 @@ const pinnacleRocksEnemyRecords: EnemyRecord[] = [
 ];
 
 const fossilRooEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.lani",
+    name: "Lani",
+    encounterIds: ["encounter.fossil-roo.lani"],
+    stats: [
+      { field: "level", value: 19, sourceIds: laniStatSources, verification: "cross-checked" },
+      { field: "HP", value: 5709, sourceIds: ["gamefaqs-journey-to-outer-continent-71891"], verification: "disputed" },
+      { field: "HP", value: 5708, sourceIds: ["gamefaqs-boss-guide-31490"], verification: "disputed" },
+      { field: "MP", value: 4802, sourceIds: laniStatSources, verification: "cross-checked" },
+      { field: "EXP", value: 0, sourceIds: ["gamefaqs-journey-to-outer-continent-71891"], verification: "single-source" },
+      { field: "AP", value: 0, sourceIds: ["gamefaqs-journey-to-outer-continent-71891"], verification: "single-source" },
+      { field: "Gil", value: 0, sourceIds: ["gamefaqs-journey-to-outer-continent-71891"], verification: "single-source" },
+    ],
+    steals: [
+      sourcedLoot("common", "game-item.ether", fossilRooBossSources),
+      sourcedLoot("uncommon", "game-item.gladius", fossilRooBossSources),
+      sourcedLoot("semi-rare", "game-item.coral-sword", fossilRooBossSources),
+      sourcedLoot("rare", null, fossilRooBossSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", null, fossilRooBossSources, "Nothing"),
+      sourcedLoot("common", null, fossilRooBossSources, "Nothing"),
+      sourcedLoot("uncommon", null, fossilRooBossSources, "Nothing"),
+      sourcedLoot("rare", null, fossilRooBossSources, "Nothing"),
+    ],
+    facts: [
+      sourcedFact("type", "Human", fossilRooBossSources),
+      sourcedFact("elemental-weakness", "None listed", fossilRooBossSources),
+      sourcedFact("elemental-resistance", "None listed", fossilRooBossSources),
+      sourcedFact("status-vulnerability", "Darkness and Slow", fossilRooBossSources),
+      sourcedFact("attack", "Water", ["gamefaqs-journey-to-outer-continent-71891"], "Can hit the whole party."),
+      sourcedFact("attack", "Aera and Fira, Blizzara, and Thundara", fossilRooBossSources),
+      sourcedFact("attack", "Physical axe attacks", fossilRooBossSources),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Attempt all three steals before defeating her", detail: "Ether, Gladius, and Coral Sword occupy Lani's Common, Uncommon, and Semi-Rare slots. Steal attempts may fail, and the fight does not repeat; each item type has a later recovery source if its encounter copy is missed.", sourceIds: fossilRooBossSources },
+      { title: "Protect Dagger and use Darkness or Slow", detail: "Lani tends to focus Dagger and can use party-target Water. Keep Dagger healed; Darkness can hinder physical attacks and Slow reduces Lani's speed advantage.", sourceIds: fossilRooBossSources },
+    ],
+    routeObjectiveIds: [laniStealsObjectiveId],
+    notes: ["The GameFAQs walkthrough lists 5,709 HP; its older Boss Guide lists 5,708. Both list Level 19 and 4,802 MP. The four steal/drop slots and boss attacks are PlayStation guide data; remastered-release parity has not been audited."],
+  }, fossilRooChapterId, fossilRooBossSources, [laniStealsMissableId], [laniStealsCutoffId]),
   chapterEnemy({
     id: "enemy.abomination",
     name: "Abomination",
@@ -6580,6 +6658,41 @@ const outerContinentEnemyRecords: EnemyRecord[] = [
 ];
 
 const forgottenContinentEnemyRecords: EnemyRecord[] = [
+  chapterBoss({
+    id: "enemy.ark",
+    name: "Ark",
+    encounterIds: ["encounter.oeilvert.ark"],
+    stats: crossCheckedStats([["level", 38], ["HP", 20002], ["MP", 1374], ["EXP", 0], ["AP", 11], ["Gil", 5964]], ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"]),
+    steals: [
+      sourcedLoot("common", "game-item.elixir", arkBossSources),
+      sourcedLoot("uncommon", "game-item.power-vest", arkBossSources),
+      sourcedLoot("semi-rare", "game-item.holy-lance", arkBossSources),
+      sourcedLoot("rare", null, arkBossSources, "Nothing"),
+    ],
+    drops: [
+      sourcedLoot("always", "game-item.pumice-piece", arkBossSources),
+      sourcedLoot("common", "game-item.ether", arkBossSources),
+      sourcedLoot("uncommon", "game-item.ether", arkBossSources),
+      sourcedLoot("rare", "game-item.ether", arkBossSources),
+    ],
+    facts: [
+      sourcedFact("type", "Aerial", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"]),
+      sourcedFact("elemental-weakness", "Wind", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"]),
+      sourcedFact("elemental-resistance", "Earth (nullifies)", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"]),
+      sourcedFact("status-vulnerability", "Darkness, Silence, Sleep, and Slow", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"]),
+      sourcedFact("attack", "Photon", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"], "Reduces one character's HP to 1."),
+      sourcedFact("attack", "Whirlwind", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"], "Deals Wind damage and inflicts Float."),
+      sourcedFact("attack", "Boomerang", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"]),
+      sourcedFact("attack", "Propeller Wind", ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"], "Inflicts Confuse on the party."),
+    ],
+    blueMagic: [],
+    strategies: [
+      { title: "Equip Clear Headed and Wind protection", detail: "Clear Headed blocks Propeller Wind's Confuse. The walkthrough also recommends Wind-reducing equipment and Bird Killer. Heal immediately after Photon leaves a character at 1 HP, especially before a party-target attack.", sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"] },
+      { title: "Finish the selected steals before winning", detail: "Ark's one-time Elixir, Power Vest, and Holy Lance steals occupy the Common, Uncommon, and Semi-Rare slots. Each chance-based attempt may fail; the Holy Lance is the rarest target and has later shop recovery.", sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"] },
+    ],
+    routeObjectiveIds: [arkStealsObjectiveId, arkPumiceObjectiveId],
+    notes: ["The Always Pumice Piece is a guaranteed normal-KO drop. Ether occupies all three conditional drop slots; the Enemy List gives Common 96/256, Uncommon 32/256, and Rare 1/256 probabilities, which are source-reported rather than release-verified. Oeilvert's boss-table data is from PlayStation references; modern-release parity has not been audited."],
+  }, forgottenContinentChapterId, arkBossSources, [arkStealsMissableId], [arkStealsCutoffId]),
   chapterEnemy({
     id: "enemy.adamantoise",
     name: "Adamantoise",
