@@ -326,6 +326,7 @@ if (
 
 const lindblumJavelinWarning = missablesById.get("missable.disc-1.lindblum.javelin-shop");
 const lindblumJavelinObjective = objectivesById.get("disc-1.lindblum.javelin-purchase");
+const lindblumJavelinAcquisitionPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.javelin-shop");
 const lindblumJavelinWalkthroughSection = walkthroughChapters
   .flatMap((chapter) => chapter.sections)
   .find((section) => section.id === "lindblum-after-festival-shops");
@@ -345,6 +346,15 @@ if (
   lindblumAteCutoff?.missableIds.includes("missable.disc-1.lindblum.javelin-shop") ||
   !["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumJavelinObjective?.sourceIds.includes(sourceId)) ||
   !lindblumJavelinWalkthroughStep?.text.includes("Before entering Gizamaluke's Grotto") ||
+  lindblumJavelinAcquisitionPath?.itemId !== "game-item.javelin" ||
+  lindblumJavelinAcquisitionPath.chapterId !== "disc-1.lindblum" ||
+  lindblumJavelinAcquisitionPath.method !== "shop" ||
+  lindblumJavelinAcquisitionPath.availability !== "limited-window" ||
+  lindblumJavelinAcquisitionPath.shopId !== "lindblum.weapon-shop.pre-cleyra" ||
+  lindblumJavelinAcquisitionPath.cost?.amount !== 880 ||
+  !lindblumJavelinAcquisitionPath.walkthroughObjectiveIds?.includes("disc-1.lindblum.pre-cleyra-stock") ||
+  !lindblumJavelinAcquisitionPath.walkthroughObjectiveIds?.includes("disc-1.lindblum.javelin-purchase") ||
+  !["gamefaqs-items-71891", "gamefaqs-shops-71891"].every((sourceId) => lindblumJavelinAcquisitionPath.sourceIds.includes(sourceId)) ||
   !lindblumJavelinWalkthroughSection?.sourceIds.includes("elitegrindlab-gizamaluke") ||
   !["gamefaqs-lindblum-71891", "gamefaqs-missables-71891", "gamefaqs-missables-21725", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke", "elitegrindlab-lindblum"].every((sourceId) => lindblumJavelinWarning.sourceIds.includes(sourceId)) ||
   !["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumDepartureCutoff.sourceIds.includes(sourceId))
@@ -2571,6 +2581,10 @@ const hadesCatalogStep = walkthroughChapters
   ?.sections.flatMap((section) => section.steps)
   .find((step) => step.id === "memoria-hades-synthesis-shop");
 const hadesCatalogObjective = objectivesById.get("disc-4.memoria.hades");
+const javelinStartingPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.freya-starting-javelin");
+const javelinNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.javelin-need-two");
+const javelinEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.javelin-end-inventory-one");
+const javelinDragonKillerClaim = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.javelin.dragon-killer");
 if (
   hadesCatalogChecks.length !== 15
   || hadesCatalogPaths.length !== hadesCatalogChecks.length
@@ -2581,6 +2595,22 @@ if (
   || !hadesCatalogObjective?.sourceIds.includes("rpgclassics-synthesis")
   || !hadesCatalogObjective.sourceIds.includes("gamefaqs-items-71891")
   || !javelinItem?.sourceIds.includes("gamefaqs-ipsens-castle-71891")
+  || !javelinItem?.sourceIds.includes("gamefaqs-abilities-71891")
+  || javelinStartingPath?.itemId !== "game-item.javelin"
+  || javelinStartingPath.method !== "starting-equipment"
+  || javelinStartingPath.chapterId !== "disc-1.lindblum"
+  || javelinNeedTarget?.itemId !== "game-item.javelin"
+  || javelinNeedTarget.targetQuantity !== 2
+  || javelinNeedTarget.basis !== "route-need"
+  || !javelinNeedTarget.interpretation.includes("optional source-specific route-need target")
+  || javelinEndInventoryTarget?.itemId !== "game-item.javelin"
+  || javelinEndInventoryTarget.targetQuantity !== 1
+  || javelinEndInventoryTarget.basis !== "end-inventory"
+  || !javelinEndInventoryTarget.interpretation.includes("distinct from Need 2")
+  || javelinDragonKillerClaim?.itemId !== "game-item.javelin"
+  || javelinDragonKillerClaim.abilityName !== "Dragon Killer"
+  || javelinDragonKillerClaim.verification !== "partial"
+  || !javelinDragonKillerClaim.sourceIds.includes("gamefaqs-abilities-71891")
   || javelinIpsenPath?.itemId !== "game-item.javelin"
   || javelinIpsenPath.method !== "chest"
   || javelinIpsenPath.chapterId !== "disc-3.ipsens-castle"
@@ -2588,7 +2618,7 @@ if (
   || !javelinIpsenPath.sourceIds.includes("gamefaqs-items-71891")
   || !javelinIpsenPath.sourceIds.includes("gamefaqs-ipsens-castle-71891")
 ) {
-  errors.push("Hades's full fifteen-recipe stock, conditional item paths, source-linked Javelin ingredient route, and unresolved shop-opening trigger must remain connected.");
+  errors.push("Hades's full fifteen-recipe stock, conditional item paths, Javelin's starting and Ipsen copies, source-specific Need 2 target, Dragon Killer claim, and unresolved shop-opening trigger must remain connected.");
 }
 const deadPepperSourceIds = ["gamefaqs-items-71891", "gamefaqs-chocobo-hot-cold-71891", "rpgsite-ffix-chocobo-guide"];
 const deadPepperItem = gameItems.find((item) => item.id === "game-item.dead-pepper");

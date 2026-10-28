@@ -2511,6 +2511,7 @@ test("Dragoos' pre-Cleyra stock paths link to the post-Festival purchase checkpo
     ["item-path.disc-1.lindblum.fork-shop", "game-item.fork", 1100],
     ["item-path.disc-1.lindblum.steepled-hat-shop", "game-item.steepled-hat", 260],
     ["item-path.disc-1.lindblum.headgear-dragoos-shop", "game-item.headgear", 330],
+    ["item-path.disc-1.lindblum.javelin-shop", "game-item.javelin", 880],
   ];
   const stockObjective = objectives.find((objective) => objective.id === objectiveId);
   const stockStep = walkthroughChapters
@@ -2548,6 +2549,22 @@ test("Dragoos' pre-Cleyra stock paths link to the post-Festival purchase checkpo
       assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
     }
   }
+
+  const javelinStartingPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.freya-starting-javelin");
+  const javelinNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.javelin-need-two");
+  const javelinEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.javelin-end-inventory-one");
+  const javelinDragonKillerClaim = equipmentAbilityClaims.find((claim) => claim.id === "item-ability.javelin.dragon-killer");
+  assert.equal(javelinStartingPath?.itemId, "game-item.javelin");
+  assert.equal(javelinStartingPath?.method, "starting-equipment");
+  assert.equal(javelinNeedTarget?.targetQuantity, 2);
+  assert.equal(javelinNeedTarget?.basis, "route-need");
+  assert.ok(javelinNeedTarget?.interpretation.includes("optional source-specific route-need target"));
+  assert.equal(javelinEndInventoryTarget?.targetQuantity, 1);
+  assert.equal(javelinEndInventoryTarget?.basis, "end-inventory");
+  assert.ok(javelinEndInventoryTarget?.interpretation.includes("distinct from Need 2"));
+  assert.equal(javelinDragonKillerClaim?.abilityName, "Dragon Killer");
+  assert.equal(javelinDragonKillerClaim?.verification, "partial");
+  assert.ok(javelinDragonKillerClaim?.sourceIds.includes("gamefaqs-abilities-71891"));
 });
 
 test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their walkthrough stock checks", () => {
