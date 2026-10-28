@@ -6527,7 +6527,7 @@ if (
   battleIifaMistodonDownhillPool?.kind !== "random-pool" ||
   battleIifaMistodonDownhillPool.formation[0]?.enemyId !== "enemy.mistodon-a" ||
   battleIifaMistodonDownhillPool.formation[0]?.quantity !== null ||
-  !battleIifaMistodonDownhillPool.notes.some((note) => note.includes("story guides describe further Mistodon battles as waves"))
+  !battleIifaMistodonDownhillPool.notes.some((note) => note.includes("GameFAQs' Excalibur II route calls one or two fights on the later descent random"))
 ) {
   errors.push("The Disc II return must separate the fixed Mistodon pair/solo fight from the disputed downhill pool reports.");
 }
@@ -6543,6 +6543,31 @@ if (
   !battleIifaMistodon.routeObjectiveIds.includes("disc-2.battle-of-iifa-tree.mistodon-steals")
 ) {
   errors.push("Mistodon [A] needs the cross-checked Disc II stats, its sourced steals/drops, and the Angel's Snack/steal checklist links.");
+}
+const battleIifaMistodonStealPathExpectations = [
+  ["item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal", "game-item.ore", "common", "encounter.iifa-tree-return.mistodon-upper-pair", "one-time-encounter"],
+  ["item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-hi-potion-uncommon-steal", "game-item.hi-potion", "uncommon", "encounter.iifa-tree-return.mistodon-upper-pair", "one-time-encounter"],
+  ["item-path.disc-2.battle-of-iifa-tree.mistodon-after-dagger-ore-common-steal", "game-item.ore", "common", "encounter.iifa-tree-return.mistodon-after-dagger", "one-time-encounter"],
+  ["item-path.disc-2.battle-of-iifa-tree.mistodon-after-dagger-hi-potion-uncommon-steal", "game-item.hi-potion", "uncommon", "encounter.iifa-tree-return.mistodon-after-dagger", "one-time-encounter"],
+  ["item-path.disc-2.battle-of-iifa-tree.mistodon-downhill-ore-common-steal", "game-item.ore", "common", "encounter.iifa-tree-return.mistodon-reported-downhill-pool", "window-unverified"],
+  ["item-path.disc-2.battle-of-iifa-tree.mistodon-downhill-hi-potion-uncommon-steal", "game-item.hi-potion", "uncommon", "encounter.iifa-tree-return.mistodon-reported-downhill-pool", "window-unverified"],
+] as const;
+const battleIifaMistodonStealPaths = battleIifaMistodonStealPathExpectations.map(([id]) => itemAcquisitionPaths.find((path) => path.id === id));
+if (
+  battleIifaMistodonStealPaths.some((path, index) =>
+    path?.itemId !== battleIifaMistodonStealPathExpectations[index][1] ||
+    path?.method !== "steal" ||
+    path?.enemyId !== "enemy.mistodon-a" ||
+    path?.enemyLootSlot !== battleIifaMistodonStealPathExpectations[index][2] ||
+    path?.availability !== battleIifaMistodonStealPathExpectations[index][4] ||
+    path?.encounterIds?.length !== 1 ||
+    path?.encounterIds[0] !== battleIifaMistodonStealPathExpectations[index][3] ||
+    !path?.walkthroughObjectiveIds?.includes("disc-2.battle-of-iifa-tree.mistodon-steals")
+  ) ||
+  battleIifaMistodonStealPaths.some((path) => !path?.conditions?.includes("chance-based")) ||
+  !battleIifaMistodonStealPaths.slice(4).every((path) => path?.conditions?.includes("not confirmed as repeatable"))
+) {
+  errors.push("Mistodon [A] Hi-Potion/Ore paths must link the exact fixed encounters and keep the reported downhill pool unverified.");
 }
 if (
   !battleIifaMistodonWarning?.classification.includes("missable-opportunity") ||

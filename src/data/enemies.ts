@@ -3073,7 +3073,7 @@ const battleIifaTreeEncounters: EnemyEncounter[] = [
     objectiveIds: [battleIifaTreeMistodonStealsObjectiveId, battleIifaTreeAngelSnackObjectiveId],
     missableIds: [battleIifaTreeMistodonStealsMissableId],
     cutoffIds: [battleIifaTreeMistodonStealsCutoffId],
-    notes: ["GameFAQs' Excalibur II route calls one or two fights on the later descent random, while the story guides describe further Mistodon battles as waves. EliteGrindLab says the scripted story waves cannot be refought or farmed. This records the reported downhill encounter opportunity without claiming that it repeats the same steal table after leaving and re-entering."],
+    notes: ["GameFAQs' Excalibur II route calls one or two fights on the later descent random, and its PS1 walkthrough says Mistodons continue to appear after leaving at the top and returning. Other story guides describe forced Mistodon waves, and EliteGrindLab says those scripted waves cannot be refought or farmed. Keep the random downhill pool separate from the fixed pair/solo encounters; whether the reported repeat offers the same loot table remains unverified."],
   },
 ];
 
@@ -3895,7 +3895,7 @@ const battleIifaTreeEnemyRecords: EnemyRecord[] = [
       blueMagic: [{ name: "Angel's Snack", command: "Eat", sourceIds: [enemyListSourceId, "gamefaqs-abilities-71891"], objectiveIds: [battleIifaTreeAngelSnackObjectiveId] }],
       strategies: [{ title: "Prepare for Sleep and exploit its undead nature", detail: "Mist can put the party to Sleep, so equip Insomniac where available. Life or Phoenix Down defeats Mistodon quickly; use those only after any desired Hi-Potion/Ore steals or Quina's Angel's Snack Eat attempt.", sourceIds: battleIifaTreeEnemySources }],
       routeObjectiveIds: [battleIifaTreeMistodonStealsObjectiveId, battleIifaTreeAngelSnackObjectiveId],
-      notes: ["GameFAQs and Jegged agree on the Disc II variant's level and HP. GameFAQs distinguishes this level-19 Mistodon [A] from the stronger Disc IV Mistodon [B]. The return-route sources disagree about whether the scripted waves can be repeated by leaving and re-entering; the linked story cutoff remains disputed, not a conclusive permanent-loss claim."],
+      notes: ["GameFAQs and Jegged agree on the Disc II variant's level and HP. GameFAQs distinguishes this level-19 Mistodon [A] from the stronger Disc IV Mistodon [B]. The fixed pair and solo fight are separate from the later random downhill encounters reported by GameFAQs; whether that pool repeats the same loot table after leaving and re-entering remains disputed, so the linked cutoff is not a conclusive permanent-loss claim."],
     }, battleIifaTreeChapterId, battleIifaTreeEnemySources),
     missableIds: [battleIifaTreeMistodonStealsMissableId],
     cutoffIds: [battleIifaTreeMistodonStealsCutoffId],

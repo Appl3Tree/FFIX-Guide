@@ -966,7 +966,12 @@ test("Rebirth Ring records its acquisition sources and synthesis ingredients", (
   assert.equal(oreExtractionPath?.method, "ability-extract");
   assert.ok(ramuhPeridot?.walkthroughObjectiveIds?.includes("disc-2.pinnacle-rocks.ramuh"));
   assert.equal(peridotPaths.length, 18);
-  assert.equal(orePaths.length, 49);
+  assert.equal(orePaths.length, 52);
+  for (const id of [
+    "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal",
+    "item-path.disc-2.battle-of-iifa-tree.mistodon-after-dagger-ore-common-steal",
+    "item-path.disc-2.battle-of-iifa-tree.mistodon-downhill-ore-common-steal",
+  ]) assert.ok(orePaths.some((path) => path.id === id));
   assert.equal(chocographPeridots?.quantity, 12);
   assert.ok(alexandriaPeridot?.walkthroughObjectiveIds?.includes("disc-3.on-the-high-seas.alexandria-ruins"));
   assert.ok(startingLinenCuirass?.conditions?.includes("Freya joins the party"));
@@ -1063,6 +1068,45 @@ test("Peridot enemy routes record their source, repeatability, and conditional w
 
   assert.equal(itemAcquisitionPaths.filter((path) => path.itemId === "game-item.peridot").length, 18);
   assert.ok(objectives.some((objective) => objective.id === "disc-4.memoria.tiamat-achievement"));
+});
+
+test("Disc II Mistodon steals separate fixed fights from the unverified downhill pool", () => {
+  const expected = [
+    { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-upper-pair", availability: "one-time-encounter", routeSourceId: "gamefaqs-battle-iifa-tree-71891" },
+    { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-hi-potion-uncommon-steal", itemId: "game-item.hi-potion", slot: "uncommon", encounterId: "encounter.iifa-tree-return.mistodon-upper-pair", availability: "one-time-encounter", routeSourceId: "gamefaqs-battle-iifa-tree-71891" },
+    { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-after-dagger-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-after-dagger", availability: "one-time-encounter", routeSourceId: "jegged-iifa-tree-revisited" },
+    { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-after-dagger-hi-potion-uncommon-steal", itemId: "game-item.hi-potion", slot: "uncommon", encounterId: "encounter.iifa-tree-return.mistodon-after-dagger", availability: "one-time-encounter", routeSourceId: "jegged-iifa-tree-revisited" },
+    { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-downhill-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-reported-downhill-pool", availability: "window-unverified", routeSourceId: "gamefaqs-wrapping-up-disc-2-79143" },
+    { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-downhill-hi-potion-uncommon-steal", itemId: "game-item.hi-potion", slot: "uncommon", encounterId: "encounter.iifa-tree-return.mistodon-reported-downhill-pool", availability: "window-unverified", routeSourceId: "gamefaqs-wrapping-up-disc-2-79143" },
+  ];
+
+  for (const expectedPath of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.id);
+    const enemy = enemyRecords.find((entry) => entry.id === "enemy.mistodon-a");
+    const encounter = enemyEncounters.find((entry) => entry.id === expectedPath.encounterId);
+    const lootSlot = enemy?.steals.find((entry) => entry.slot === expectedPath.slot && entry.itemId === expectedPath.itemId);
+
+    assert.ok(path, `${expectedPath.id} exists`);
+    assert.equal(encounter?.chapterId, "disc-2.battle-of-iifa-tree");
+    assert.ok(encounter?.formation.some((entry) => entry.enemyId === "enemy.mistodon-a"), `${expectedPath.id} encounter contains Mistodon [A]`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.availability, expectedPath.availability);
+    assert.equal(path?.enemyId, "enemy.mistodon-a");
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, [expectedPath.encounterId]);
+    assert.equal(path?.quantity, 1);
+    assert.ok(path?.walkthroughObjectiveIds?.includes("disc-2.battle-of-iifa-tree.mistodon-steals"));
+    assert.ok(path?.sourceIds.includes("gamefaqs-enemy-list-71891"), `${expectedPath.id} cites the enemy loot table`);
+    assert.ok(path?.sourceIds.includes(expectedPath.routeSourceId), `${expectedPath.id} cites its route/encounter source`);
+    assert.ok(path?.sourceIds.includes(lootSlot?.sourceIds[0] ?? ""), `${expectedPath.id} cites the steal slot`);
+    for (const sourceId of path?.sourceIds ?? []) assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.id} references known source ${sourceId}`);
+  }
+
+  const downhillPaths = expected.filter((entry) => entry.availability === "window-unverified");
+  assert.equal(downhillPaths.length, 2);
+  assert.ok(downhillPaths.every((entry) => itemAcquisitionPaths.find((path) => path.id === entry.id)?.conditions?.includes("not confirmed as repeatable")));
+  assert.equal(missables.find((entry) => entry.id === "missable.disc-2.battle-of-iifa-tree.mistodon-steals")?.classification.includes("permanent"), false);
 });
 
 test("Silk Robe has its frog reward, synthesis recovery, and sourced ingredients", () => {
