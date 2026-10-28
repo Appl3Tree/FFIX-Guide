@@ -5142,6 +5142,31 @@ if (
 ) {
   errors.push("The first Disc III Treno stop must expose the uncertain Glass Armlet stock check with its source links and caveat.");
 }
+const linenCuirassDisc2Candidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.linen-cuirass-disc-ii-candidate");
+const linenCuirassRecoveryObjective = objectivesById.get("disc-2.return-to-lindblum.cleyra-recovery-shops");
+const linenCuirassRecoverySection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.return-to-lindblum")?.sections.find((section) => section.id === "return-lindblum-business-district");
+const linenCuirassRecoveryStep = linenCuirassRecoverySection?.steps.find((step) => step.id === "return-lindblum-shop-preparation");
+if (
+  !linenCuirassDisc2Candidate ||
+  linenCuirassDisc2Candidate.availability !== "window-unverified" ||
+  linenCuirassDisc2Candidate.cost?.amount !== 800 ||
+  !linenCuirassDisc2Candidate.conditions.includes("GameFAQs' Disc II Shops table lists Linen Cuirass for 800 Gil") ||
+  !linenCuirassDisc2Candidate.conditions.includes("RPGClassics' post-attack Lindblum Dragoos table and Final Fantasy Wiki's Disc II Dragoos table omit it") ||
+  !linenCuirassDisc2Candidate.conditions.includes("buy only if the displayed stock confirms it") ||
+  !linenCuirassDisc2Candidate.sourceIds.includes("rpgclassics-shops") ||
+  !linenCuirassDisc2Candidate.sourceIds.includes("ffwiki-lindblum") ||
+  !gameItems.find((item) => item.id === "game-item.linen-cuirass")?.sourceIds.includes("rpgclassics-shops") ||
+  !gameItems.find((item) => item.id === "game-item.linen-cuirass")?.sourceIds.includes("ffwiki-lindblum") ||
+  !linenCuirassRecoveryObjective?.sourceIds.includes("rpgclassics-shops") ||
+  !linenCuirassRecoveryObjective?.sourceIds.includes("ffwiki-lindblum") ||
+  !linenCuirassRecoverySection?.sourceIds.includes("rpgclassics-shops") ||
+  !linenCuirassRecoverySection?.sourceIds.includes("ffwiki-lindblum") ||
+  !linenCuirassRecoveryStep?.detail?.includes("source-disputed, window-unverified candidate and buy only if it appears in the displayed stock") ||
+  !sources.find((source) => source.id === "rpgclassics-shops")?.notes.includes("post-attack Disc II Lindblum Dragoos table omits Linen Cuirass") ||
+  !sources.find((source) => source.id === "ffwiki-lindblum")?.notes.includes("omits it from the Disc II Dragoos' Weapon Shop list")
+) {
+  errors.push("The post-Cleyra Linen Cuirass candidate must preserve GameFAQs' positive Lindblum stock listing against RPGClassics and Final Fantasy Wiki omissions, without resolving the shop window.");
+}
 const leatherWristPreCleyraPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-1.lindblum.leather-wrist-shop");
 const leatherWristTrenoPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.leather-wrist-shop");
 const leatherWristDisc2LindblumPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.leather-wrist-shop");

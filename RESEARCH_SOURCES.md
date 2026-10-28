@@ -8,6 +8,8 @@ The project records the claim, source, relevant section, version/platform, acces
 
 The implementation remains incomplete. All 44 chapters are partially authored and source-linked through Necron and the ending on Disc IV. The 458-source register and walkthrough do not establish that the game's content has been comprehensively researched.
 
+Current unresolved shop comparison (2026-10-28): GameFAQs Shops lists Linen Cuirass for 800 Gil in Disc II Lindblum stock, while RPGClassics' post-attack Lindblum list and Final Fantasy Wiki's Disc II Dragoos list omit it. The guide preserves the candidate as `window-unverified`; those published-table omissions do not prove in-game absence.
+
 ## FFIX references inspected
 
 | Source | Use | Notes |

@@ -2685,6 +2685,39 @@ test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their wa
   assert.match(getStep("disc-2.magdalene-forest", "black-mage-village-shop-check")?.detail ?? "", /Alexandria remains a later seller/);
 });
 
+test("post-Cleyra Linen Cuirass stock preserves the Lindblum source conflict", () => {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-2.return-to-lindblum.linen-cuirass-disc-ii-candidate");
+  const item = gameItems.find((entry) => entry.id === "game-item.linen-cuirass");
+  const objective = objectives.find((entry) => entry.id === "disc-2.return-to-lindblum.cleyra-recovery-shops");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-2.return-to-lindblum");
+  const section = chapter?.sections.find((entry) => entry.id === "return-lindblum-business-district");
+  const step = section?.steps.find((entry) => entry.id === "return-lindblum-shop-preparation");
+  const rpgClassics = sources.find((entry) => entry.id === "rpgclassics-shops");
+  const ffwiki = sources.find((entry) => entry.id === "ffwiki-lindblum");
+  const requiredSources = ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-return-to-lindblum-71891", "rpgclassics-shops", "ffwiki-lindblum"];
+
+  assert.ok(path);
+  assert.equal(path?.itemId, "game-item.linen-cuirass");
+  assert.equal(path?.availability, "window-unverified");
+  assert.equal(path?.chapterId, "disc-2.return-to-lindblum");
+  assert.equal(path?.shopId, "lindblum.weapon-shop.disc-2");
+  assert.equal(path?.cost?.amount, 800);
+  assert.match(path?.conditions ?? "", /GameFAQs' Disc II Shops table lists Linen Cuirass for 800 Gil/);
+  assert.match(path?.conditions ?? "", /RPGClassics' post-attack Lindblum Dragoos table and Final Fantasy Wiki's Disc II Dragoos table omit it/);
+  assert.match(path?.conditions ?? "", /buy only if the displayed stock confirms it/);
+  assert.ok(path?.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops"));
+  assert.ok(requiredSources.every((sourceId) => path?.sourceIds.includes(sourceId)));
+  assert.ok(requiredSources.every((sourceId) => item?.sourceIds.includes(sourceId)));
+  assert.ok(requiredSources.every((sourceId) => objective?.sourceIds.includes(sourceId)));
+  assert.ok(requiredSources.every((sourceId) => section?.sourceIds.includes(sourceId)));
+  assert.match(rpgClassics?.notes ?? "", /post-attack Disc II Lindblum Dragoos table omits Linen Cuirass/);
+  assert.match(ffwiki?.notes ?? "", /omits it from the Disc II Dragoos' Weapon Shop list/);
+  assert.match(step?.detail ?? "", /source-disputed, window-unverified candidate and buy only if it appears in the displayed stock/);
+  for (const sourceId of path?.sourceIds ?? []) {
+    assert.ok(sources.some((source) => source.id === sourceId), `${path?.id} references known source ${sourceId}`);
+  }
+});
+
 test("Disc II Lindblum and Dragon's Gate shop paths link to the departure stock review", () => {
   const objectiveId = "disc-2.return-to-lindblum.optional-shop-stock";
   const expected = [
