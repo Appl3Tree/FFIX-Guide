@@ -1418,7 +1418,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "burmecia-lower-streets",
         title: "Burmecia's streets — Cancer, Blue Magic, and the first houses",
         summary: "Check the first street before moving north, then clear the ground-floor rooms and the upper house route without opening Mimic chests by mistake.",
-        sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "jegged-stellazzio", "gamefaqs-enemy-list-71891"],
+        sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "jegged-stellazzio", "gamefaqs-enemy-list-71891", "drslice-mimic", "opatil-drop-list", "megane-kangaroo-disc4-burmecia-recovery"],
         steps: [
           {
             id: "burmecia-cancer-blue-magic",
@@ -1445,6 +1445,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "After the two Type A Black Mages on the next screen, enter the ground-level doorway on the left. Open the visible Soft and Potion chests, then search behind the stairwell on the bottom floor for the second Soft. Climb to the upper floor and ignore the balcony chest there; it is a Mimic.",
             detail: "Mimics can summon a Magic Vice, which may steal an item from the party. If you want Magic Hammer, this encounter can create another chance to Eat a Magic Vice; otherwise, defeat the summoned enemy promptly and keep an eye on the party inventory.",
             objectiveIds: ["disc-1.burmecia.treasure-sweep", "disc-1.burmecia.blue-magic"],
+          },
+          {
+            id: "burmecia-mimic-chest-loot",
+            kind: "optional",
+            text: "If you open any of Burmecia's three optional Mimic chests, try stealing its Common Hi-Potion and Uncommon Antidote before defeating it; either steal can fail. A KO victory gives the source-listed Always Ether drop, while the other drop slots are conditional.",
+            detail: "The three Suburb/Uptown chests trigger separate Mimic fights. Gamer Guides mentions the Ether drop; the GameFAQs enemy table additionally lists conditional Hi-Potion, Phoenix Down, and rare Ether drops. This difference in detail does not establish that the additional slots are absent. DrSlice cross-checks the steal and win item names, while Opa-Til supplies the drop rates. The first-hand Disc IV route reports these same fights only if the chests were left unopened earlier; it does not establish behavior across releases. Optional steals and drops are not requirements for the Burmecia treasure-sweep checklist.",
           },
         ],
       },

@@ -3061,6 +3061,85 @@ test("Burmecia's fixed Type A pair loot paths link exact slots to both enemies",
   }
 });
 
+test("Burmecia's three Mimic chests link their loot slots to separate optional encounters", () => {
+  const chests = [
+    { slug: "suburb-balcony", encounterId: "encounter.burmecia.suburb.mimic-chest-1" },
+    { slug: "suburb-stairwell", encounterId: "encounter.burmecia.suburb.mimic-chest-2" },
+    { slug: "uptown", encounterId: "encounter.burmecia.uptown.mimic-chest" },
+  ];
+  const lootSlots = [
+    { id: "steal-hi-potion", itemId: "game-item.hi-potion", method: "steal", slot: "common" },
+    { id: "steal-antidote", itemId: "game-item.antidote", method: "steal", slot: "uncommon" },
+    { id: "drop-ether-always", itemId: "game-item.ether", method: "drop", slot: "always" },
+    { id: "drop-hi-potion-common", itemId: "game-item.hi-potion", method: "drop", slot: "common" },
+    { id: "drop-phoenix-down-uncommon", itemId: "game-item.phoenix-down", method: "drop", slot: "uncommon" },
+    { id: "drop-ether-rare", itemId: "game-item.ether", method: "drop", slot: "rare" },
+  ];
+  const enemyId = "enemy.mimic";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.burmecia")
+    ?.sections.find((entry) => entry.id === "burmecia-lower-streets");
+  const step = section?.steps.find((entry) => entry.id === "burmecia-mimic-chest-loot");
+  const expectedStepSources = [
+    "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia",
+    "gamefaqs-enemy-list-71891", "drslice-mimic", "opatil-drop-list", "megane-kangaroo-disc4-burmecia-recovery",
+  ];
+
+  assert.equal(step?.kind, "optional");
+  assert.match(step?.text ?? "", /Common Hi-Potion and Uncommon Antidote/);
+  assert.match(step?.text ?? "", /either steal can fail/);
+  assert.match(step?.detail ?? "", /not requirements for the Burmecia treasure-sweep checklist/);
+  assert.ok(expectedStepSources.every((sourceId) => section?.sourceIds.includes(sourceId)));
+
+  for (const chest of chests) {
+    const encounter = enemyEncounters.find((entry) => entry.id === chest.encounterId);
+    const paths = itemAcquisitionPaths.filter((entry) => entry.encounterIds?.includes(chest.encounterId));
+
+    assert.equal(encounter?.kind, "fixed");
+    assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+    assert.ok(enemy?.encounterIds.includes(chest.encounterId));
+    assert.equal(paths.length, lootSlots.length);
+
+    for (const expected of lootSlots) {
+      const pathId = `item-path.disc-1.burmecia.mimic-${chest.slug}.${expected.id}`;
+      const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+      const slotRecord = (expected.method === "steal" ? enemy?.steals : enemy?.drops)
+        ?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+      const catalogItem = gameItems.find((entry) => entry.id === expected.itemId);
+      const expectedSources = new Set([
+        ...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slotRecord?.sourceIds ?? []),
+        "drslice-mimic", ...(expected.method === "drop" ? ["opatil-drop-list"] : []),
+      ]);
+
+      assert.ok(path, `${pathId} exists`);
+      assert.equal(path?.itemId, expected.itemId);
+      assert.equal(path?.method, expected.method);
+      assert.equal(path?.chapterId, "disc-1.burmecia");
+      assert.equal(path?.quantity, 1);
+      assert.equal(path?.availability, "one-time-encounter");
+      assert.equal(path?.enemyId, enemyId);
+      assert.equal(path?.enemyLootSlot, expected.slot);
+      assert.deepEqual(path?.encounterIds, [chest.encounterId]);
+      assert.equal(path?.walkthroughObjectiveIds, undefined);
+      assert.match(path?.notes ?? "", /same encounter if its chest was left unopened earlier/);
+      if (expected.method === "steal") {
+        assert.match(path?.conditions ?? "", /chance-based and can fail/);
+      } else {
+        assert.match(path?.conditions ?? "", /KO defeat/);
+        if (expected.slot === "always") {
+          assert.match(path?.conditions ?? "", /Always drop slot yields Ether/);
+          assert.doesNotMatch(path?.conditions ?? "", /conditional/);
+        } else {
+          assert.match(path?.conditions ?? "", /chance-based and conditional/);
+        }
+      }
+      assert.ok(catalogItem?.sourceIds.includes("gamefaqs-enemy-list-71891"));
+      assert.ok([...expectedSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${pathId} includes enemy, encounter, and slot provenance`);
+      assert.ok([...expectedSources].every((sourceId) => sources.some((source) => source.id === sourceId)), `${pathId} references known sources`);
+    }
+  }
+});
+
 test("Burmecia's city-pool enemies have repeatable loot paths with the Magic Vice dispute retained", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-burmecia-71891", "jegged-burmecia"];
   const expected = [

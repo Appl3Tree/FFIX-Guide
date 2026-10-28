@@ -5307,6 +5307,65 @@ for (const [enemyId, method, slotName, itemId, pathSuffix] of burmeciaCityLootEx
     errors.push(`Burmecia ${enemyId} ${method} path ${pathSuffix} must match its enemy slot, preserve KO/Always behavior, and retain route provenance.`);
   }
 }
+const burmeciaMimicEncounterExpectations = [
+  { slug: "suburb-balcony", encounterId: "encounter.burmecia.suburb.mimic-chest-1" },
+  { slug: "suburb-stairwell", encounterId: "encounter.burmecia.suburb.mimic-chest-2" },
+  { slug: "uptown", encounterId: "encounter.burmecia.uptown.mimic-chest" },
+];
+const burmeciaMimicLootExpectations = [
+  { id: "steal-hi-potion", method: "steal", slot: "common", itemId: "game-item.hi-potion" },
+  { id: "steal-antidote", method: "steal", slot: "uncommon", itemId: "game-item.antidote" },
+  { id: "drop-ether-always", method: "drop", slot: "always", itemId: "game-item.ether" },
+  { id: "drop-hi-potion-common", method: "drop", slot: "common", itemId: "game-item.hi-potion" },
+  { id: "drop-phoenix-down-uncommon", method: "drop", slot: "uncommon", itemId: "game-item.phoenix-down" },
+  { id: "drop-ether-rare", method: "drop", slot: "rare", itemId: "game-item.ether" },
+];
+const burmeciaMimicLootPathPrefix = "item-path.disc-1.burmecia.mimic-";
+const burmeciaMimicLootStep = burmeciaCityLootSection?.steps.find((step) => step.id === "burmecia-mimic-chest-loot");
+const burmeciaMimicLootStepSourceIds = [
+  "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia",
+  "gamefaqs-enemy-list-71891", "drslice-mimic", "opatil-drop-list", "megane-kangaroo-disc4-burmecia-recovery",
+];
+if (itemAcquisitionPaths.filter((path) => path.id.startsWith(burmeciaMimicLootPathPrefix)).length !== 18 ||
+  burmeciaMimicEncounterExpectations.some(({ encounterId }) => !burmeciaMimicEncounters.some((encounter) => encounter?.id === encounterId)) ||
+  burmeciaMimicLootStep?.kind !== "optional" ||
+  !burmeciaMimicLootStep.text.includes("Common Hi-Potion and Uncommon Antidote") ||
+  !burmeciaMimicLootStep.text.includes("either steal can fail") ||
+  !burmeciaMimicLootStep.detail?.includes("not requirements for the Burmecia treasure-sweep checklist") ||
+  burmeciaMimicLootStep.objectiveIds?.length ||
+  burmeciaMimicLootStepSourceIds.some((sourceId) => !burmeciaCityLootSection?.sourceIds.includes(sourceId))) {
+  errors.push("Burmecia's three Mimic chests must have separate optional loot guidance, all eighteen exact paths, and no implied treasure-sweep requirement.");
+}
+for (const chest of burmeciaMimicEncounterExpectations) {
+  const encounter = enemyEncounters.find((entry) => entry.id === chest.encounterId);
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.mimic");
+  for (const expected of burmeciaMimicLootExpectations) {
+    const slots = expected.method === "steal" ? enemy?.steals : enemy?.drops;
+    const lootSlot = slots?.find((slot) => slot.slot === expected.slot && slot.itemId === expected.itemId);
+    const item = gameItems.find((entry) => entry.id === expected.itemId);
+    const path = itemAcquisitionPaths.find((entry) => entry.id === `${burmeciaMimicLootPathPrefix}${chest.slug}.${expected.id}`);
+    const expectedSources = new Set([
+      ...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? []), "drslice-mimic",
+      ...(expected.method === "drop" ? ["opatil-drop-list"] : []),
+    ]);
+    if (!encounter || encounter.kind !== "fixed" ||
+      !encounter.formation.some((member) => member.enemyId === "enemy.mimic" && member.quantity === 1) ||
+      !lootSlot || !path || path.itemId !== expected.itemId || path.chapterId !== "disc-1.burmecia" ||
+      path.method !== expected.method || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+      path.walkthroughObjectiveIds?.length || path.enemyId !== "enemy.mimic" || path.enemyLootSlot !== expected.slot ||
+      JSON.stringify(path.encounterIds) !== JSON.stringify([chest.encounterId]) ||
+      !path.notes?.includes("same encounter if its chest was left unopened earlier") ||
+      (expected.method === "steal" && (!path.conditions?.includes("chance-based") || !path.conditions.includes("can fail"))) ||
+      (expected.method === "drop" && (!path.conditions?.includes("KO defeat") ||
+        (expected.slot === "always"
+          ? !path.conditions.includes("Always drop slot yields Ether") || path.conditions.includes("conditional")
+          : !path.conditions.includes("chance-based") || !path.conditions.includes("conditional")))) ||
+      !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+      [...expectedSources].some((sourceId) => !path.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId))) {
+      errors.push(`Burmecia Mimic ${chest.slug} ${expected.method} path ${expected.id} must match the exact enemy slot, chest encounter, outcome, and provenance.`);
+    }
+  }
+}
 const burmeciaTypeALootExpectations = [
   ["steal", "common", "game-item.phoenix-down", "phoenix-down-common-steal"],
   ["steal", "uncommon", "game-item.tent", "tent-uncommon-steal"],

@@ -2193,7 +2193,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/burmecia",
     accessed: "2026-10-23",
-    notes: "Independent route for chest locations, Mimics, hidden pickups, Wei and Kal, Mognet, Stiltzkin, Atla's shop, and Beatrix. The guide maps three Mimic chests and says the unreachable one drops Ether; that detail is not promoted without further verification.",
+    notes: "Independent route for chest locations, Mimics, hidden pickups, Wei and Kal, Mognet, Stiltzkin, Atla's shop, and Beatrix. The guide maps three Mimic chests and mentions an Ether drop; the GameFAQs enemy table lists the Always Ether plus three additional conditional drops, and Opa-Til cross-checks their item names and reports the rates. The guide's shorter description does not establish that the other slots are absent.",
   },
   {
     id: "elitegrindlab-burmecia",
