@@ -9470,6 +9470,38 @@ const finalStockAbilityWalkthrough = walkthroughChapters
   .find((chapter) => chapter.areaId === "disc-3.preparing-to-leave")
   ?.sections.find((section) => section.steps.some((step) => step.id === "preparing-leave-shop-inventory"));
 const finalStockAbilityWalkthroughStep = finalStockAbilityWalkthrough?.steps.find((step) => step.id === "preparing-leave-shop-inventory");
+const drsliceDaguerreoSourceId = "drslice-daguerreo-armory";
+const drsliceDaguerreoItemIds = [
+  "game-item.mage-masher", "game-item.mythril-dagger", "game-item.gladius", "game-item.zorlin-shape",
+  "game-item.rune-blade", "game-item.obelisk", "game-item.tiger-fangs", "game-item.mythril-racket",
+  "game-item.asuras-rod", "game-item.hamelin", "game-item.octagon-rod", "game-item.rising-sun",
+  "game-item.bone-wrist", "game-item.mythril-armlet", "game-item.chimera-armlet", "game-item.egoists-armlet",
+  "game-item.n-kai-armlet", "game-item.jade-armlet", "game-item.venetia-shield", "game-item.defense-gloves",
+  "game-item.lamias-tiara", "game-item.twist-headband", "game-item.golden-hairpin", "game-item.coronet",
+  "game-item.diamond-helm", "game-item.gaia-gear", "game-item.demons-vest", "game-item.demons-mail",
+  "game-item.diamond-armor",
+];
+const drsliceDaguerreoItems = drsliceDaguerreoItemIds.map((itemId) => gameItems.find((item) => item.id === itemId));
+const drsliceDaguerreoExpectedPaths = ([
+  ["item-path.disc-3-stock.daguerreo.asuras-rod", "game-item.asuras-rod", 3180],
+  ["item-path.disc-3-stock.daguerreo.hamelin", "game-item.hamelin", 5700],
+  ["item-path.disc-3-stock.daguerreo.octagon-rod", "game-item.octagon-rod", 4500],
+  ["item-path.disc-3-stock.daguerreo.obelisk", "game-item.obelisk", 6000],
+  ["item-path.disc-3-stock.daguerreo.rune-blade", "game-item.rune-blade", 8900],
+  ["item-path.disc-3-stock.daguerreo.tiger-fangs", "game-item.tiger-fangs", 13500],
+  ["item-path.disc-3-stock.daguerreo.diamond-armor", "game-item.diamond-armor", 8800],
+  ["item-path.disc-3.aerial-exploration.gladius-daguerreo-shop", "game-item.gladius", 2300],
+  ["item-path.disc-3.aerial-exploration.n-kai-armlet-daguerreo-shop", "game-item.n-kai-armlet", 3000],
+  ["item-path.disc-3.aerial-exploration.jade-armlet-daguerreo-shop", "game-item.jade-armlet", 3400],
+  ["item-path.disc-3.aerial-exploration.chimera-armlet-daguerreo-shop", "game-item.chimera-armlet", 1200],
+  ["item-path.disc-3.aerial-exploration.bone-wrist-daguerreo-shop", "game-item.bone-wrist", 330],
+] as const).map(([id, itemId, price]) => ({ id, itemId, price, path: itemAcquisitionPaths.find((candidate) => candidate.id === id) }));
+const drsliceDaguerreoSource = sources.find((source) => source.id === drsliceDaguerreoSourceId);
+const drsliceDaguerreoObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.daguerreo-stock");
+const drsliceDaguerreoWarning = missablesById.get("missable.disc-3.aerial-exploration.daguerreo-stock");
+const drsliceDaguerreoRoute = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  ?.sections.find((section) => section.id === "aerial-daguerreo");
+const drsliceMagicArmlet = gameItems.find((item) => item.id === "game-item.magic-armlet");
 if (
   !finalStockAbilityWarning || finalStockAbilityWarning.severity !== "info" ||
   !finalStockAbilityWarning.consequence.includes("GameFAQs and RPGClassics PlayStation ability tables both list") ||
@@ -9517,6 +9549,20 @@ if (
   !finalStockAbilityWalkthroughStep.detail.includes("alternate gear sources listed for those claw abilities")
 ) {
   errors.push("The final-stock ability review must link both PlayStation ability catalogs to its warning, objective, six item records, eight claims, eleven source-linked paths, and the walkthrough checkpoint while distinguishing the four abilities without listed alternatives from the claw abilities with alternatives.");
+}
+if (
+  !drsliceDaguerreoSource?.notes.includes("Lists 29 products and prices under Daguerreo (Disk 3)") ||
+  !drsliceDaguerreoSource.notes.includes("does not establish Disc IV inventory") ||
+  drsliceDaguerreoItems.length !== 29 || drsliceDaguerreoItems.some((item) => !item?.sourceIds.includes(drsliceDaguerreoSourceId)) ||
+  drsliceDaguerreoExpectedPaths.length !== 12 || drsliceDaguerreoExpectedPaths.some(({ itemId, price, path }) =>
+    !path || path.itemId !== itemId || path.cost?.amount !== price || !path.sourceIds.includes(drsliceDaguerreoSourceId)) ||
+  !drsliceMagicArmlet || drsliceMagicArmlet.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !drsliceDaguerreoObjective?.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !drsliceDaguerreoWarning?.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !drsliceDaguerreoWarning.note.includes("omits Magic Armlet, which GameFAQs and RPGClassics list") ||
+  !drsliceDaguerreoRoute?.sourceIds.includes(drsliceDaguerreoSourceId)
+) {
+  errors.push("DrSlice's Disk 3 Daguerreo table must stay linked to its 29 listed item records, the 12 matching priced shop paths, and the stock objective/warning; its Magic Armlet omission and lack of Disc IV evidence must remain explicit.");
 }
 const octagonRodWarning = missablesById.get("missable.disc-3.lost-continent.octagon-rod");
 const octagonRodObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.octagon-rod");

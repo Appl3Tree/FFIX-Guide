@@ -5384,7 +5384,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "aerial-daguerreo",
         title: "Daguerreo — search the island, activate the lifts, and audit its shops",
         summary: "Explore the optional library city south of the Forgotten Continent. Its weapon-shop window matters for a high-completion inventory and selected equipment abilities.",
-        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "rpgclassics-abilities", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-aerial-exploration-71891", "jegged-lindblum-hilda-garde", "gamefaqs-daguerreo-71891", "jegged-daguerreo", "elitegrindlab-daguerreo", "gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-abilities-71891", "rpgclassics-abilities", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771", "drslice-daguerreo-armory"],
         steps: [
           {
             id: "aerial-daguerreo-arrival",
