@@ -6724,6 +6724,49 @@ for (const expected of finalBattleStealPaths) {
     errors.push(`Final-battle path ${expected.id} must link its exact boss steal slot, sourced rate, objective, and provenance while preserving known source differences.`);
   }
 }
+const hadesLootPaths = [
+  { id: "item-path.disc-4.memoria.hades-reflect-ring-steal", itemId: "game-item.reflect-ring", method: "steal", slot: "common", rate: "100%", objectiveIds: ["disc-4.memoria.hades-steals"] },
+  { id: "item-path.disc-4.memoria.hades-running-shoes-steal", itemId: "game-item.running-shoes", method: "steal", slot: "uncommon", rate: "25%", objectiveIds: ["disc-4.memoria.hades-steals", "disc-4.return-to-gaia.updated-shops"] },
+  { id: "item-path.disc-4.memoria.hades-battle-boots-steal", itemId: "game-item.battle-boots", method: "steal", slot: "semi-rare", rate: "6.25%", objectiveIds: ["disc-4.memoria.hades-steals"] },
+  { id: "item-path.disc-4.memoria.hades-robe-of-lords-steal", itemId: "game-item.robe-of-lords", method: "steal", slot: "rare", rate: "0.39%", objectiveIds: ["disc-4.memoria.hades-steals"] },
+  { id: "item-path.disc-4.memoria.hades-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", objectiveIds: ["disc-4.memoria.hades"] },
+  { id: "item-path.disc-4.memoria.hades-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "common", objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"] },
+  { id: "item-path.disc-4.memoria.hades-elixir-uncommon-drop", itemId: "game-item.elixir", method: "drop", slot: "uncommon", objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"] },
+  { id: "item-path.disc-4.memoria.hades-elixir-rare-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"] },
+];
+const hadesEncounterId = "encounter.memoria.hades";
+const hadesEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.hades");
+const hadesEncounter = enemyEncounters.find((encounter) => encounter.id === hadesEncounterId);
+if (itemAcquisitionPaths.filter((path) => hadesLootPaths.some((expected) => expected.id === path.id)).length !== hadesLootPaths.length) {
+  errors.push("Hades must retain all four steal slots, its guaranteed Wing Edge, and three separately recorded conditional Elixir slots.");
+}
+for (const expected of hadesLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? hadesEnemy?.steals : hadesEnemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(hadesEnemy?.sourceIds ?? []), ...(hadesEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== hadesEnemy?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([hadesEncounterId]) ||
+    hadesEncounter?.kind !== "boss" ||
+    !hadesEncounter.formation.some((member) => member.enemyId === hadesEnemy?.id) ||
+    expected.objectiveIds.some((objectiveId) => !path.walkthroughObjectiveIds?.includes(objectiveId)) ||
+    (expected.method === "steal" && (!path.conditions?.includes(expected.rate) || !path.sourceIds.includes("opatil-steal-list"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always drop") || !path.conditions.includes("victory"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.notes?.includes("do not assert three guaranteed Elixirs"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Hades path ${expected.id} must match its one-time encounter, exact ${expected.slot} loot slot, yield semantics, objective, and provenance.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

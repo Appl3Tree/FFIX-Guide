@@ -3417,7 +3417,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/the-master-synthesist",
     accessed: "2026-10-26",
-    notes: "Confirms Hades is hidden behind the rock formation in the underwater Birth room, lists its four steals and Wing Edge drop, documents the optional boss strategy, and says the synthesis shop opens after victory and remains accessible on return. Its linked Items table lists formulas for the fifteen documented Hades recipes; RPGClassics supplies the full shop table and costs, while EliteGrindLab independently cross-checks the six exclusive gear recipes. RPGClassics Memoria describes a two-Pumice-Piece handoff before shop access, so the trigger discrepancy remains open pending direct game verification.",
+    notes: "Confirms Hades is hidden behind the rock formation in the underwater Birth room. Its loot table lists Common Reflect Ring, Uncommon Running Shoes, Semi-Rare Battle Boots, and Rare Robe of Lords steals; Always Wing Edge and Common/Uncommon/Rare Elixir drops. The Elixir paths preserve separate conditional table outcomes without inferred rates or combined yield. The source also documents the optional boss strategy and says the synthesis shop opens after victory and remains accessible on return. Its linked Items table lists formulas for the fifteen documented Hades recipes; RPGClassics supplies the full shop table and costs, while EliteGrindLab independently cross-checks the six exclusive gear recipes. RPGClassics Memoria describes a two-Pumice-Piece handoff before shop access, so the trigger discrepancy remains open pending direct game verification.",
   },
   {
     id: "gamefaqs-final-preparations-71891",
@@ -3457,7 +3457,7 @@ export const sources = [
     publisher: "Opa-Til",
     url: "https://ff9.opatil.com/eng/data/steal.html",
     accessed: "2026-10-26",
-    notes: "Independent steal reference that lists Necron with four Elixir slots at 100%, 25%, 6.25%, and 0.39% table rates. Corroborates all four item slots; listed values are retained as source-reported chances rather than release-verified measurements.",
+    notes: "Independent steal reference listing Hades's Reflect Ring (100%), Running Shoes (25%), Battle Boots (6.25%), and Robe of Lords (0.39%) tiers; Trance Kuja's Ether (100%), White Robe (25%), and Rebirth Ring (0.39%); and Necron's four Elixir tiers (100%, 25%, 6.25%, 0.39%). Rates remain source-reported rather than release-verified. Necron's four slots corroborate GameFAQs 71891 and independent 79143; Jegged lists only Common.",
   },
   {
     id: "opatil-drop-list",

@@ -400,6 +400,59 @@ test("final-battle steal paths link Trance Kuja and Necron to their distinct loo
   }
 });
 
+test("Hades item paths link all steal and drop slots without collapsing its three Elixir outcomes", () => {
+  const enemyId = "enemy.hades";
+  const encounterId = "encounter.memoria.hades";
+  const expected = [
+    { id: "item-path.disc-4.memoria.hades-reflect-ring-steal", itemId: "game-item.reflect-ring", method: "steal", slot: "common", rate: "100%", objectiveIds: ["disc-4.memoria.hades-steals"] },
+    { id: "item-path.disc-4.memoria.hades-running-shoes-steal", itemId: "game-item.running-shoes", method: "steal", slot: "uncommon", rate: "25%", objectiveIds: ["disc-4.memoria.hades-steals", "disc-4.return-to-gaia.updated-shops"] },
+    { id: "item-path.disc-4.memoria.hades-battle-boots-steal", itemId: "game-item.battle-boots", method: "steal", slot: "semi-rare", rate: "6.25%", objectiveIds: ["disc-4.memoria.hades-steals"] },
+    { id: "item-path.disc-4.memoria.hades-robe-of-lords-steal", itemId: "game-item.robe-of-lords", method: "steal", slot: "rare", rate: "0.39%", objectiveIds: ["disc-4.memoria.hades-steals"] },
+    { id: "item-path.disc-4.memoria.hades-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", objectiveIds: ["disc-4.memoria.hades"] },
+    { id: "item-path.disc-4.memoria.hades-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "common", objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"] },
+    { id: "item-path.disc-4.memoria.hades-elixir-uncommon-drop", itemId: "game-item.elixir", method: "drop", slot: "uncommon", objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"] },
+    { id: "item-path.disc-4.memoria.hades-elixir-rare-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.deathguise-steals"] },
+  ];
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const linkedPaths = itemAcquisitionPaths.filter((entry) => expected.some((item) => item.id === entry.id));
+
+  assert.equal(linkedPaths.length, expected.length);
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a real loot slot`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-4.memoria");
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(item.objectiveIds.every((objectiveId) => path?.walkthroughObjectiveIds?.includes(objectiveId)));
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", new RegExp(item.rate.replace("%", "\\%")));
+      assert.ok(path?.sourceIds.includes("opatil-steal-list"));
+    } else if (item.slot === "always") {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /victory/);
+    } else {
+      assert.match(path?.conditions ?? "", /conditional/);
+      assert.match(path?.notes ?? "", /do not assert three guaranteed Elixirs/);
+    }
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.id} has known sources`);
+  }
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");
