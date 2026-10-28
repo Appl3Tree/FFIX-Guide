@@ -3057,24 +3057,32 @@ for (const itemId of cleyraProductIds) {
   }
 }
 const cleyraBossSteals = [
-  { pathId: "item-path.disc-2.cleyra.antlion-annoyntment-steal", itemId: "game-item.annoyntment", objectiveId: "disc-2.cleyra.antlion-steals" },
-  { pathId: "item-path.disc-2.cleyra.mythril-vest-antlion-steal", itemId: "game-item.mythril-vest", objectiveId: "disc-2.cleyra.antlion-steals" },
-  { pathId: "item-path.disc-2.cleyra.antlion-gold-helm-steal", itemId: "game-item.gold-helm", objectiveId: "disc-2.cleyra.antlion-steals" },
-  { pathId: "item-path.disc-2.cleyra.beatrix-phoenix-down-steal", itemId: "game-item.phoenix-down", objectiveId: "disc-2.cleyra.beatrix-steals" },
-  { pathId: "item-path.disc-2.cleyra.beatrix-thunder-gloves-steal", itemId: "game-item.thunder-gloves", objectiveId: "disc-2.cleyra.beatrix-steals" },
-  { pathId: "item-path.disc-2.cleyra.beatrix-ice-brand-steal", itemId: "game-item.ice-brand", objectiveId: "disc-2.cleyra.beatrix-steals" },
+  { pathId: "item-path.disc-2.cleyra.antlion-annoyntment-steal", itemId: "game-item.annoyntment", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "common", objectiveId: "disc-2.cleyra.antlion-steals" },
+  { pathId: "item-path.disc-2.cleyra.mythril-vest-antlion-steal", itemId: "game-item.mythril-vest", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "uncommon", objectiveId: "disc-2.cleyra.antlion-steals" },
+  { pathId: "item-path.disc-2.cleyra.antlion-gold-helm-steal", itemId: "game-item.gold-helm", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "semi-rare", objectiveId: "disc-2.cleyra.antlion-steals" },
+  { pathId: "item-path.disc-2.cleyra.beatrix-phoenix-down-steal", itemId: "game-item.phoenix-down", enemyId: "enemy.beatrix-cleyra", encounterId: "encounter.cleyra.beatrix", slot: "common", objectiveId: "disc-2.cleyra.beatrix-steals" },
+  { pathId: "item-path.disc-2.cleyra.beatrix-thunder-gloves-steal", itemId: "game-item.thunder-gloves", enemyId: "enemy.beatrix-cleyra", encounterId: "encounter.cleyra.beatrix", slot: "uncommon", objectiveId: "disc-2.cleyra.beatrix-steals" },
+  { pathId: "item-path.disc-2.cleyra.beatrix-ice-brand-steal", itemId: "game-item.ice-brand", enemyId: "enemy.beatrix-cleyra", encounterId: "encounter.cleyra.beatrix", slot: "semi-rare", objectiveId: "disc-2.cleyra.beatrix-steals" },
 ];
 for (const expected of cleyraBossSteals) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
-  if (!path) {
+  const enemy = enemyRecords.find((candidate) => candidate.id === expected.enemyId);
+  const encounter = enemyEncounters.find((candidate) => candidate.id === expected.encounterId);
+  const lootSlot = enemy?.steals.find((candidate) => candidate.slot === expected.slot && candidate.itemId === expected.itemId);
+  if (!path || !enemy || !encounter || !lootSlot) {
     errors.push(`Cleyra boss-steal coverage is missing ${expected.pathId}.`);
     continue;
   }
   if (path.itemId !== expected.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== "steal" ||
-    path.quantity !== 1 || path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
-    errors.push(`Cleyra boss-steal path ${expected.pathId} must match its item, one-time encounter, and warning objective.`);
+    path.quantity !== 1 || path.availability !== "one-time-encounter" || path.enemyId !== expected.enemyId ||
+    path.enemyLootSlot !== expected.slot || path.encounterIds?.length !== 1 || path.encounterIds[0] !== expected.encounterId ||
+    !path.walkthroughObjectiveIds?.includes(expected.objectiveId) || !path.conditions?.includes("each attempt can fail")) {
+    errors.push(`Cleyra boss-steal path ${expected.pathId} must match its exact item slot, one-time encounter, failed-attempt semantics, and warning objective.`);
   }
-  for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"]) {
+  for (const sourceId of new Set([...encounter.sourceIds, ...lootSlot.sourceIds])) {
+    if (!path.sourceIds.includes(sourceId)) errors.push(`Cleyra boss-steal path ${expected.pathId} is missing linked slot/encounter source ${sourceId}.`);
+  }
+  for (const sourceId of ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies"]) {
     if (!path.sourceIds.includes(sourceId)) errors.push(`Cleyra boss-steal path ${expected.pathId} is missing source ${sourceId}.`);
   }
   if (!itemAcquisitionPaths.some((candidate) => candidate.itemId === expected.itemId &&
@@ -3083,16 +3091,21 @@ for (const expected of cleyraBossSteals) {
   }
 }
 const antlionAnnoyntmentDrop = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.cleyra.antlion-annoyntment-drop");
+const antlionRecord = enemyRecords.find((enemy) => enemy.id === "enemy.antlion-cleyra");
+const antlionAnnoyntmentSlot = antlionRecord?.drops.find((slot) => slot.slot === "always" && slot.itemId === "game-item.annoyntment");
+const antlionEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.cleyra.antlion");
 if (!antlionAnnoyntmentDrop || antlionAnnoyntmentDrop.itemId !== "game-item.annoyntment" ||
   antlionAnnoyntmentDrop.chapterId !== "disc-2.cleyra" || antlionAnnoyntmentDrop.method !== "drop" ||
   antlionAnnoyntmentDrop.quantity !== 1 || antlionAnnoyntmentDrop.availability !== "one-time-encounter" ||
-  !antlionAnnoyntmentDrop.walkthroughObjectiveIds?.includes("disc-2.cleyra.antlion-steals") ||
-  !antlionAnnoyntmentDrop.sourceIds.includes("gamefaqs-cleyra-71891") ||
-  !antlionAnnoyntmentDrop.sourceIds.includes("elitegrindlab-cleyra")) {
-  errors.push("Antlion's separate guaranteed Annoyntment drop needs a sourced one-time drop path linked to the Cleyra boss checklist.");
+  antlionAnnoyntmentDrop.enemyId !== "enemy.antlion-cleyra" || antlionAnnoyntmentDrop.enemyLootSlot !== "always" ||
+  antlionAnnoyntmentDrop.encounterIds?.length !== 1 || antlionAnnoyntmentDrop.encounterIds[0] !== "encounter.cleyra.antlion" ||
+  !antlionAnnoyntmentDrop.conditions.includes("normal KO") ||
+  antlionAnnoyntmentDrop.walkthroughObjectiveIds?.includes("disc-2.cleyra.antlion-steals") ||
+  !antlionAnnoyntmentSlot || !antlionEncounter ||
+  [...new Set([...antlionAnnoyntmentSlot.sourceIds, ...antlionEncounter.sourceIds])].some((sourceId) => !antlionAnnoyntmentDrop.sourceIds.includes(sourceId)) ||
+  !antlionAnnoyntmentDrop.notes?.includes("independent of the Common Annoyntment steal")) {
+  errors.push("Antlion's Always Annoyntment drop needs a KO-gated, source-complete path to its exact one-time encounter slot, outside the steal checklist.");
 }
-const antlionEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.cleyra.antlion");
-const antlionRecord = enemyRecords.find((enemy) => enemy.id === "enemy.antlion-cleyra");
 const antlionPreparation = antlionRecord?.preparationGuidance;
 const antlionPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections.find((section) => section.id === "cleyra-settlement-before-antlion");
 const antlionPreparationStep = antlionPreparationSection?.steps.find((step) => step.id === "cleyra-prepare-antlion");
@@ -5953,10 +5966,16 @@ for (const entry of cleyraReturnLootEntries) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === `${cleyraReturnLootPrefix}${pathSuffix}`);
   const encounter = cleyraReturnFights.find((candidate) => candidate?.id === entry.encounterId);
   const item = gameItems.find((record) => record.id === entry.itemId);
+  const lootTable = entry.method === "steal" ? entry.enemy.steals : entry.enemy.drops;
+  const lootSlot = lootTable.find((slot) => slot.slot === entry.slotName && slot.itemId === entry.itemId);
+  const slotAndEncounterSources = new Set([...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
   if (!encounter || encounter.kind !== "fixed" ||
     !encounter.formation.some((member) => member.enemyId === entry.enemyId && member.quantity === entry.quantity) ||
     !entry.enemy.encounterIds.includes(entry.encounterId) || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
-    !path || path.itemId !== entry.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== entry.method ||
+    !lootSlot || !path || [...slotAndEncounterSources].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.enemyId !== entry.enemyId || path.enemyLootSlot !== entry.slotName ||
+    path.encounterIds?.length !== 1 || path.encounterIds[0] !== entry.encounterId ||
+    path.itemId !== entry.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== entry.method ||
     path.quantity !== entry.quantity || path.availability !== "one-time-encounter" || path.walkthroughObjectiveIds?.length ||
     !path.notes?.includes("source-reported per-enemy opportunities") || !path.notes?.includes("Cleyra closes after the post-Beatrix departure") ||
     (entry.encounterSlug === "whirlpool-soldiers" && !path.notes?.includes("Jegged describes Soldiers at the whirlpool but does not print a count")) ||
@@ -6021,10 +6040,16 @@ for (const entry of cleyraAssaultLootEntries) {
   const pathSuffix = `${entry.encounterSlug}-${entry.enemySlug}-${entry.itemId.replace("game-item.", "")}-${entry.slotName}-${entry.method}`;
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === `${cleyraAssaultLootPrefix}${pathSuffix}`);
   const item = gameItems.find((record) => record.id === entry.itemId);
+  const lootTable = entry.method === "steal" ? entry.enemy.steals : entry.enemy.drops;
+  const lootSlot = lootTable.find((slot) => slot.slot === entry.slotName && slot.itemId === entry.itemId);
+  const slotAndEncounterSources = new Set([...(entry.encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
   if (!entry.encounter || entry.encounter.kind !== "fixed" ||
     !entry.encounter.formation.some((member) => member.enemyId === entry.enemyId && member.quantity === entry.quantity) ||
     !entry.enemy.encounterIds.includes(entry.encounterId) || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
-    !path || path.itemId !== entry.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== entry.method ||
+    !lootSlot || !path || [...slotAndEncounterSources].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+    path.enemyId !== entry.enemyId || path.enemyLootSlot !== entry.slotName ||
+    path.encounterIds?.length !== 1 || path.encounterIds[0] !== entry.encounterId ||
+    path.itemId !== entry.itemId || path.chapterId !== "disc-2.cleyra" || path.method !== entry.method ||
     path.quantity !== entry.quantity || path.availability !== "one-time-encounter" || path.walkthroughObjectiveIds?.length ||
     !path.notes?.includes("per-enemy slot opportunities") ||
     (entry.method === "steal" && !path.conditions?.includes("success is not guaranteed")) ||

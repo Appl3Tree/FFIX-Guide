@@ -3309,7 +3309,7 @@ test("Evil Forest Dendrobium and Fang [A] have limited-window steal/drop paths",
       assert.ok(section?.sourceIds.includes(sourceId), `Evil Forest walkthrough is missing ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
-    for (const sourceId of new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+    for (const sourceId of new Set([...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
       assert.ok(path.sourceIds.includes(sourceId), `${pathSuffix} is missing exact slot provenance ${sourceId}`);
       assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
@@ -3985,6 +3985,9 @@ test("Cleyra's fixed assault battles record per-enemy steal and conditional drop
     assert.equal(path.method, method);
     assert.equal(path.quantity, quantity);
     assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.enemyId, enemyId);
+    assert.equal(path.enemyLootSlot, slotName);
+    assert.deepEqual(path.encounterIds, [encounterId]);
     assert.equal(path.walkthroughObjectiveIds, undefined);
     assert.match(path.notes ?? "", /per-enemy slot opportunities/);
     assert.ok(gameItems.find((entry) => entry.id === itemId)?.sourceIds.includes("gamefaqs-enemy-list-71891"));
@@ -4002,6 +4005,11 @@ test("Cleyra's fixed assault battles record per-enemy steal and conditional drop
     for (const sourceId of sourceIds.slice(0, 7)) {
       assert.ok(enemy?.sourceIds.includes(sourceId), `${enemyId} missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `${encounterId} missing ${sourceId}`);
+    }
+    const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
+    assert.ok(lootSlot);
+    for (const sourceId of new Set([...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+      assert.ok(path.sourceIds.includes(sourceId), `${suffix} missing linked enemy/encounter/slot provenance ${sourceId}`);
     }
   }
 });
@@ -4057,6 +4065,9 @@ test("Cleyra's forced Trunk-return Soldier fights link each loot slot and retain
     assert.equal(path.method, method);
     assert.equal(path.quantity, quantity);
     assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.enemyId, "enemy.soldier-a");
+    assert.equal(path.enemyLootSlot, slotName);
+    assert.deepEqual(path.encounterIds, [encounterId]);
     assert.equal(path.walkthroughObjectiveIds, undefined);
     assert.match(path.notes ?? "", /source-reported per-enemy opportunities/);
     assert.match(path.notes ?? "", /Cleyra closes after the post-Beatrix departure/);
@@ -4080,7 +4091,60 @@ test("Cleyra's forced Trunk-return Soldier fights link each loot slot and retain
       assert.ok(enemy?.sourceIds.includes(sourceId), `Soldier [A] missing ${sourceId}`);
       assert.ok(encounter?.sourceIds.includes(sourceId), `${encounterId} missing ${sourceId}`);
     }
+    const lootSlot = slots?.find((entry) => entry.slot === slotName && entry.itemId === itemId);
+    assert.ok(lootSlot);
+    for (const sourceId of new Set([...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+      assert.ok(path.sourceIds.includes(sourceId), `${suffix} missing linked enemy/encounter/slot provenance ${sourceId}`);
+    }
   }
+});
+
+test("Cleyra boss item paths link exact loot slots while keeping Antlion's Always drop outside its steal checklist", () => {
+  const expected = [
+    { pathId: "item-path.disc-2.cleyra.antlion-annoyntment-steal", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "common", itemId: "game-item.annoyntment", method: "steal", objectiveId: "disc-2.cleyra.antlion-steals" },
+    { pathId: "item-path.disc-2.cleyra.mythril-vest-antlion-steal", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "uncommon", itemId: "game-item.mythril-vest", method: "steal", objectiveId: "disc-2.cleyra.antlion-steals" },
+    { pathId: "item-path.disc-2.cleyra.antlion-gold-helm-steal", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "semi-rare", itemId: "game-item.gold-helm", method: "steal", objectiveId: "disc-2.cleyra.antlion-steals" },
+    { pathId: "item-path.disc-2.cleyra.antlion-annoyntment-drop", enemyId: "enemy.antlion-cleyra", encounterId: "encounter.cleyra.antlion", slot: "always", itemId: "game-item.annoyntment", method: "drop", objectiveId: null },
+    { pathId: "item-path.disc-2.cleyra.beatrix-phoenix-down-steal", enemyId: "enemy.beatrix-cleyra", encounterId: "encounter.cleyra.beatrix", slot: "common", itemId: "game-item.phoenix-down", method: "steal", objectiveId: "disc-2.cleyra.beatrix-steals" },
+    { pathId: "item-path.disc-2.cleyra.beatrix-thunder-gloves-steal", enemyId: "enemy.beatrix-cleyra", encounterId: "encounter.cleyra.beatrix", slot: "uncommon", itemId: "game-item.thunder-gloves", method: "steal", objectiveId: "disc-2.cleyra.beatrix-steals" },
+    { pathId: "item-path.disc-2.cleyra.beatrix-ice-brand-steal", enemyId: "enemy.beatrix-cleyra", encounterId: "encounter.cleyra.beatrix", slot: "semi-rare", itemId: "game-item.ice-brand", method: "steal", objectiveId: "disc-2.cleyra.beatrix-steals" },
+  ];
+  const encounters = new Map(enemyEncounters.map((entry) => [entry.id, entry]));
+
+  for (const item of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === item.enemyId);
+    const encounter = encounters.get(item.encounterId);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const lootSlot = lootTable?.find((entry) => entry.slot === item.slot && entry.itemId === item.itemId);
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    assert.ok(enemy?.kind === "boss");
+    assert.ok(encounter?.kind === "boss");
+    assert.deepEqual(encounter?.formation, [{ enemyId: item.enemyId, quantity: 1 }]);
+    assert.ok(enemy?.encounterIds.includes(item.encounterId));
+    assert.ok(lootSlot, `${item.pathId} matches its exact enemy slot`);
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path.itemId, item.itemId);
+    assert.equal(path.chapterId, "disc-2.cleyra");
+    assert.equal(path.method, item.method);
+    assert.equal(path.quantity, 1);
+    assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.enemyId, item.enemyId);
+    assert.equal(path.enemyLootSlot, item.slot);
+    assert.deepEqual(path.encounterIds, [item.encounterId]);
+    if (item.objectiveId) assert.ok(path.walkthroughObjectiveIds?.includes(item.objectiveId));
+    else assert.ok(!path.walkthroughObjectiveIds?.includes("disc-2.cleyra.antlion-steals"));
+    if (item.method === "steal") assert.match(path.conditions ?? "", /each attempt can fail/);
+    else {
+      assert.match(path.conditions ?? "", /normal KO victory/);
+      assert.match(path.conditions ?? "", /Always Annoyntment drop/);
+      assert.match(path.notes ?? "", /independent of the Common Annoyntment steal/);
+    }
+    for (const sourceId of new Set([...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])])) {
+      assert.ok(path.sourceIds.includes(sourceId), `${item.pathId} missing slot/encounter provenance ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `${item.pathId} cites known source ${sourceId}`);
+    }
+  }
+  assert.equal(expected.length, 7);
 });
 
 test("Gizamaluke's three hidden equipment pickups have sourced paths", () => {
