@@ -3441,3 +3441,87 @@ test("Conde Petie Mountain Path, Lucid Plains, and Pualei Plains enemy loot has 
   }
   assert.match(mountainPathStep?.detail ?? "", /Gnoll's Common drop is a Sapphire/);
 });
+
+test("Kraken body and tentacle loot paths link to the one-time encounter and preserve side conflicts", () => {
+  const encounterId = "encounter.memoria.kraken";
+  const objectiveId = "disc-4.memoria.kraken-steals";
+  const expected = [
+    { id: "item-path.disc-4.memoria.kraken-genji-helmet-steal", enemyId: "enemy.kraken-memoria", itemId: "game-item.genji-helmet", method: "steal", slot: "common", rates: ["100%", "70%"] },
+    { id: "item-path.disc-4.memoria.kraken-wizard-rod-steal", enemyId: "enemy.kraken-memoria", itemId: "game-item.wizard-rod", method: "steal", slot: "uncommon", rates: ["25%", "23%"] },
+    { id: "item-path.disc-4.memoria.kraken-gluttons-robe-steal", enemyId: "enemy.kraken-memoria", itemId: "game-item.gluttons-robe", method: "steal", slot: "rare", rates: ["0.39%", "0.4%"] },
+    { id: "item-path.disc-4.memoria.kraken-phoenix-pinion-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always", rates: ["100%"] },
+    { id: "item-path.disc-4.memoria.kraken-phoenix-down-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rates: ["37.5%"] },
+    { id: "item-path.disc-4.memoria.kraken-ether-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.ether", method: "drop", slot: "uncommon", rates: ["12.5%"] },
+    { id: "item-path.disc-4.memoria.kraken-elixir-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.elixir", method: "drop", slot: "rare", rates: ["0.39%", "0.4%"] },
+    { id: "item-path.disc-4.memoria.kraken-right-tentacle-wing-edge-steal", enemyId: "enemy.kraken-right-tentacle", itemId: "game-item.wing-edge", alternateSlotItemId: "game-item.elixir", method: "steal", slot: "common", rates: ["100%"], disputed: true, labelNormalization: "Very Common" },
+    { id: "item-path.disc-4.memoria.kraken-left-tentacle-elixir-steal", enemyId: "enemy.kraken-left-tentacle", itemId: "game-item.elixir", method: "steal", slot: "common", rates: ["100%"], labelNormalization: "Very Common" },
+    { id: "item-path.disc-4.memoria.kraken-right-tentacle-elixir-steal", enemyId: "enemy.kraken-right-tentacle", itemId: "game-item.elixir", method: "steal", slot: "common", disputed: true },
+  ];
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const paths = itemAcquisitionPaths.filter((entry) => expected.some((item) => item.id === entry.id));
+
+  assert.equal(paths.length, expected.length);
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [
+    { enemyId: "enemy.kraken-memoria", quantity: 1 },
+    { enemyId: "enemy.kraken-left-tentacle", quantity: 1 },
+    { enemyId: "enemy.kraken-right-tentacle", quantity: 1 },
+  ]);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const enemy = enemyRecords.find((entry) => entry.id === item.enemyId);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.slot === item.slot &&
+      (entry.itemId === item.itemId || entry.itemId === item.alternateSlotItemId));
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a source-backed loot slot`);
+    if (item.alternateSlotItemId) {
+      assert.equal(slot?.itemId, item.alternateSlotItemId);
+      assert.match(slot?.note ?? "", /Wing Edge/);
+    }
+    assert.equal(path?.chapterId, "disc-4.memoria");
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, item.enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot provenance`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+    for (const rate of item.rates ?? []) assert.ok(path?.conditions?.includes(rate), `${item.id} preserves source-reported ${rate}`);
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", /chance-based/);
+      assert.ok(path?.sourceIds.includes("opatil-steal-list"));
+    } else if (item.slot === "always") {
+      assert.match(path?.conditions ?? "", /Always/);
+      assert.match(path?.conditions ?? "", /victory/);
+    } else {
+      assert.match(path?.conditions ?? "", /conditional/);
+      assert.match(path?.conditions ?? "", /normal KO/);
+      assert.match(path?.conditions ?? "", /not guaranteed/);
+      assert.ok(path?.sourceIds.includes("opatil-drop-list"));
+    }
+    if (item.disputed) assert.match(`${path?.conditions ?? ""} ${path?.notes ?? ""}`, /disputed/i);
+    if (item.labelNormalization) {
+      assert.match(`${path?.conditions ?? ""} ${path?.notes ?? ""}`, new RegExp(item.labelNormalization));
+      assert.match(`${path?.conditions ?? ""} ${path?.notes ?? ""}`, /normaliz\w* to Common/i);
+    }
+  }
+
+  const rightTentacle = enemyRecords.find((entry) => entry.id === "enemy.kraken-right-tentacle");
+  const rightTentacleSlot = rightTentacle?.steals.find((slot) => slot.slot === "common");
+  assert.equal(rightTentacle?.steals.filter((slot) => slot.slot === "common").length, 1);
+  assert.ok(rightTentacleSlot?.itemId === "game-item.elixir");
+  assert.ok(rightTentacleSlot?.sourceIds.includes("gamefaqs-memoria-71891"));
+  assert.ok(["gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"].every((sourceId) => rightTentacleSlot?.sourceIds.includes(sourceId)));
+  assert.match(rightTentacleSlot?.note ?? "", /disputed/i);
+  assert.match(rightTentacleSlot?.note ?? "", /Very Common.*normalizes.*Common/i);
+  const leftTentacle = enemyRecords.find((entry) => entry.id === "enemy.kraken-left-tentacle");
+  const leftTentacleSlot = leftTentacle?.steals.find((slot) => slot.slot === "common");
+  assert.match(leftTentacleSlot?.note ?? "", /Very Common.*normalizes.*Common/i);
+});

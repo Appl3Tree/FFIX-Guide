@@ -6939,6 +6939,79 @@ for (const expected of deathguiseBossLootPaths) {
     errors.push(`Memoria Deathguise path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
   }
 }
+const krakenBossLootPaths = [
+  { id: "item-path.disc-4.memoria.kraken-genji-helmet-steal", enemyId: "enemy.kraken-memoria", itemId: "game-item.genji-helmet", method: "steal", slot: "common", rate: "100%", comparison: "70%" },
+  { id: "item-path.disc-4.memoria.kraken-wizard-rod-steal", enemyId: "enemy.kraken-memoria", itemId: "game-item.wizard-rod", method: "steal", slot: "uncommon", rate: "25%", comparison: "23%" },
+  { id: "item-path.disc-4.memoria.kraken-gluttons-robe-steal", enemyId: "enemy.kraken-memoria", itemId: "game-item.gluttons-robe", method: "steal", slot: "rare", rate: "0.39%", comparison: "0.4%", label: "Very Rare" },
+  { id: "item-path.disc-4.memoria.kraken-phoenix-pinion-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always", rate: "100%" },
+  { id: "item-path.disc-4.memoria.kraken-phoenix-down-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%", label: "Uncommon" },
+  { id: "item-path.disc-4.memoria.kraken-ether-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%", label: "Rare" },
+  { id: "item-path.disc-4.memoria.kraken-elixir-drop", enemyId: "enemy.kraken-memoria", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%", comparison: "0.4%", label: "Very Rare" },
+  { id: "item-path.disc-4.memoria.kraken-right-tentacle-wing-edge-steal", enemyId: "enemy.kraken-right-tentacle", itemId: "game-item.wing-edge", alternateSlotItemId: "game-item.elixir", method: "steal", slot: "common", rate: "100%", disputed: true, labelNormalization: "Very Common" },
+  { id: "item-path.disc-4.memoria.kraken-left-tentacle-elixir-steal", enemyId: "enemy.kraken-left-tentacle", itemId: "game-item.elixir", method: "steal", slot: "common", rate: "100%", labelNormalization: "Very Common" },
+  { id: "item-path.disc-4.memoria.kraken-right-tentacle-elixir-steal", enemyId: "enemy.kraken-right-tentacle", itemId: "game-item.elixir", method: "steal", slot: "common", disputed: true },
+];
+const krakenEncounterId = "encounter.memoria.kraken";
+const krakenEncounter = enemyEncounters.find((encounter) => encounter.id === krakenEncounterId);
+if (itemAcquisitionPaths.filter((path) => krakenBossLootPaths.some((expected) => expected.id === path.id)).length !== krakenBossLootPaths.length) {
+  errors.push("Kraken must retain seven linked body loot slots and three separately linked tentacle-steal paths.");
+}
+for (const expected of krakenBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const lootTable = expected.method === "steal" ? enemy?.steals : enemy?.drops;
+  const slot = lootTable?.find((entry) => entry.slot === expected.slot &&
+    (entry.itemId === expected.itemId || entry.itemId === expected.alternateSlotItemId));
+  const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(krakenEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    (expected.alternateSlotItemId && (slot.itemId !== expected.alternateSlotItemId || !slot.note?.includes("Wing Edge"))) ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== expected.enemyId ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([krakenEncounterId]) ||
+    krakenEncounter?.kind !== "boss" ||
+    !krakenEncounter.formation.some((member) => member.enemyId === expected.enemyId) ||
+    !path.walkthroughObjectiveIds?.includes("disc-4.memoria.kraken-steals") ||
+    (expected.rate && !path.conditions?.includes(expected.rate)) ||
+    (expected.method === "steal" && (!path.conditions?.includes("chance-based") || !path.sourceIds.includes("opatil-steal-list"))) ||
+    (expected.comparison && !path.conditions?.includes(expected.comparison)) ||
+    (expected.method === "steal" && expected.comparison && (!path.conditions?.includes("per connected steal") || !path.notes?.includes("rate scopes differ"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always") || !path.conditions.includes("victory") || !path.sourceIds.includes("opatil-drop-list"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.conditions.includes("normal KO") || !path.conditions.includes("not guaranteed") || !path.notes?.includes("source-reported, not release-verified"))) ||
+    (expected.label && !path.notes?.includes(expected.label)) ||
+    (expected.labelNormalization && (!`${path.conditions ?? ""} ${path.notes ?? ""}`.includes(expected.labelNormalization) || !/normaliz\w* to Common/i.test(`${path.conditions ?? ""} ${path.notes ?? ""}`))) ||
+    (expected.disputed && !`${path.conditions ?? ""} ${path.notes ?? ""}`.includes("disputed")) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Kraken path ${expected.id} must match its one-time enemy slot, source rates, conditional outcome, and encounter provenance.`);
+  }
+}
+const krakenRightTentacle = enemyRecords.find((enemy) => enemy.id === "enemy.kraken-right-tentacle");
+const krakenLeftTentacle = enemyRecords.find((enemy) => enemy.id === "enemy.kraken-left-tentacle");
+const krakenLeftElixirSlot = krakenLeftTentacle?.steals.find((slot) => slot.itemId === "game-item.elixir" && slot.slot === "common");
+const krakenRightElixirSlot = krakenRightTentacle?.steals.find((slot) => slot.itemId === "game-item.elixir" && slot.slot === "common");
+const krakenRightWingEdgeSlot = krakenRightTentacle?.steals.find((slot) => slot.slot === "common");
+if (
+  !krakenRightElixirSlot?.sourceIds.includes("gamefaqs-memoria-71891") ||
+  !krakenLeftElixirSlot?.note?.includes("Very Common") ||
+  !krakenLeftElixirSlot?.note?.includes("normalizes") ||
+  !krakenLeftElixirSlot?.sourceIds.includes("gamefaqs-monster-list-20490") ||
+  !krakenRightWingEdgeSlot ||
+  krakenRightWingEdgeSlot.itemId !== "game-item.elixir" ||
+  !krakenRightWingEdgeSlot.note?.includes("Wing Edge") ||
+  !krakenRightWingEdgeSlot.note?.toLowerCase().includes("disputed") ||
+  !krakenRightWingEdgeSlot.note.includes("Very Common") ||
+  !krakenRightWingEdgeSlot.note.includes("normalizes") ||
+  !["gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"].every((sourceId) => krakenRightWingEdgeSlot.sourceIds.includes(sourceId))
+) {
+  errors.push("Kraken's Right Tentacle must preserve both the newer shared Elixir report and the older Wing Edge table as separate Common-slot source claims.");
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

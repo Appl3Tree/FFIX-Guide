@@ -321,7 +321,7 @@ const memoriaEntryObjectiveId = "disc-4.second-battle-of-iifa-tree.memoria-entry
 const novaDragonMissableId = "missable.disc-4.second-battle-of-iifa-tree.grand-armor";
 const novaDragonCutoffId = "cutoff.nova-dragon.grand-armor";
 const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"];
-const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"];
+const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
 const memoriaTiamatSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
 const memoriaMalirisSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
@@ -4183,7 +4183,10 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       ...sourcedStats([["MP", 3339], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-monster-list-20490"]),
     ],
     steals: [
-      sourcedLoot("common", "game-item.elixir", ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490"]),
+      {
+        ...sourcedLoot("common", "game-item.elixir", ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490", "opatil-steal-list"]),
+        note: "The older GameFAQs Monster List calls this Very Common; the newer Memoria walkthrough calls the shared tentacle steal Common. The profile normalizes the slot to Common.",
+      },
     ],
     drops: [],
     facts: [
@@ -4198,7 +4201,7 @@ const memoriaEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [],
     notes: [
       "GameFAQs lists 10,001 HP, but RPGClassics lists 18,169 HP. Preserve both values pending direct verification.",
-      "The older GameFAQs monster list gives the Left Tentacle a Common Elixir steal. Its current walkthrough reports a Common Elixir steal with shared tentacle details but does not print side-specific tables. GameFAQs says the tentacles have no drops.",
+      "The older GameFAQs monster list and Opa-Til give the Left Tentacle a Common Elixir steal; Opa-Til lists a 100% table rate. The current GameFAQs walkthrough reports a Common Elixir steal with shared tentacle details but does not print side-specific tables. GameFAQs says the tentacles have no drops.",
     ],
   }, memoriaTentacleSources),
   memoriaComponent({
@@ -4212,7 +4215,10 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       ...sourcedStats([["MP", 3338], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-monster-list-20490"]),
     ],
     steals: [
-      sourcedLoot("common", "game-item.elixir", ["gamefaqs-memoria-71891"], "The walkthrough reports a Common Elixir steal alongside shared tentacle details but does not print a side-specific table. Its older enemy list and RPGClassics instead list Wing Edge for the Right Tentacle."),
+      {
+        ...sourcedLoot("common", "game-item.elixir", ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"]),
+        note: "Disputed Common-slot claim: the newer GameFAQs walkthrough reports Elixir with shared tentacle details but does not assign a side; the older GameFAQs Monster List calls Right Tentacle Wing Edge Very Common, while RPGClassics and Opa-Til also list Wing Edge for Right. The profile normalizes the old label to Common; Opa-Til reports 100%.",
+      },
     ],
     drops: [],
     facts: [
@@ -4227,7 +4233,7 @@ const memoriaEnemyRecords: EnemyRecord[] = [
     routeObjectiveIds: [],
     notes: [
       "GameFAQs lists 10,001 HP, but RPGClassics lists 18,168 HP. Preserve both values pending direct verification.",
-      "The Right Tentacle's steal is disputed: the GameFAQs Memoria walkthrough reports a Common Elixir steal alongside shared tentacle details but does not name a side; its older monster list and RPGClassics list Wing Edge for Right Tentacle.",
+      "The Right Tentacle's normalized Common steal is disputed: the GameFAQs Memoria walkthrough reports an Elixir steal alongside shared tentacle details but does not name a side; its older Monster List calls the Right Wing Edge slot Very Common, and RPGClassics/Opa-Til also list Wing Edge for Right. Opa-Til's 100% rate is a source-reported table value, not game-verified.",
     ],
   }, memoriaTentacleSources),
   memoriaBoss({
