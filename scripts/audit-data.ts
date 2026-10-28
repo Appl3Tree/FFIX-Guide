@@ -9805,6 +9805,9 @@ const summitStationWalkthroughStep = walkthroughChapters
 const cavesDisc3SouthGateSource = sources.find((source) => source.id === "cavesofnarshe-ff9-disc-3-map");
 const cour89SouthGateSource = sources.find((source) => source.id === "cour89-south-gate");
 const cour89LimitedShopsSource = sources.find((source) => source.id === "cour89-limited-shops");
+const cour89SilverGlovesSource = sources.find((source) => source.id === "cour89-silver-gloves");
+const gamefaqsEquipmentTranslationSource = sources.find((source) => source.id === "gamefaqs-equipment-translation-8240");
+const ffwikiTranslationsSource = sources.find((source) => source.id === "ffwiki-translations");
 const gamefaqsShopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
 const atadeoSouthGateSource = sources.find((source) => source.id === "gamefaqs-walkthrough-9801");
 const gamefaqsSouthGateStationSource = sources.find((source) => source.id === "gamefaqs-south-gate-station-79143");
@@ -9826,12 +9829,22 @@ if (
   !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitEquipmentWarning.sourceIds.includes("cour89-south-gate") ||
   !summitEquipmentWarning.sourceIds.includes("cour89-limited-shops") ||
+  !summitEquipmentWarning.sourceIds.includes("cour89-silver-gloves") ||
+  !summitEquipmentWarning.sourceIds.includes("gamefaqs-equipment-translation-8240") ||
+  !summitEquipmentWarning.sourceIds.includes("ffwiki-translations") ||
   !summitEquipmentWarning.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !summitEquipmentWarning.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !summitEquipmentObjective?.sourceIds.includes("cour89-south-gate") ||
   !summitEquipmentObjective.sourceIds.includes("cour89-limited-shops") ||
+  !summitEquipmentObjective.sourceIds.includes("cour89-silver-gloves") ||
+  !summitEquipmentObjective.sourceIds.includes("gamefaqs-equipment-translation-8240") ||
+  !summitEquipmentObjective.sourceIds.includes("ffwiki-translations") ||
   !summitSilverGlovesTarget || summitSilverGlovesTarget.targetQuantity !== 4 ||
   !summitIronHelmTarget || summitIronHelmTarget.targetQuantity !== 3 ||
+  !summitSilverGlovesTarget.sourceIds.includes("cour89-limited-shops") ||
+  !summitSilverGlovesTarget.sourceIds.includes("cour89-silver-gloves") ||
+  !summitSilverGlovesTarget.sourceIds.includes("gamefaqs-equipment-translation-8240") ||
+  !summitSilverGlovesTarget.sourceIds.includes("ffwiki-translations") ||
   !summitSilverGlovesTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
   !summitIronHelmTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
   !summitSilverGlovesPath?.notes?.includes("generic South Gate equipment-stock entry") ||
@@ -9840,6 +9853,10 @@ if (
   !summitSilverGlovesPath.notes.includes("labels the Dali-side South Gate Citadel shop as consumables-only") ||
   !summitSilverGlovesPath.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
   !summitSilverGlovesPath.sourceIds.includes("cour89-south-gate") ||
+  !summitSilverGlovesPath.sourceIds.includes("cour89-limited-shops") ||
+  !summitSilverGlovesPath.sourceIds.includes("cour89-silver-gloves") ||
+  !summitSilverGlovesPath.sourceIds.includes("gamefaqs-equipment-translation-8240") ||
+  !summitSilverGlovesPath.sourceIds.includes("ffwiki-translations") ||
   !summitSilverGlovesPath.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !summitSilverGlovesPath.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !summitIronHelmPath?.notes?.includes("generic South Gate equipment-stock entry") ||
@@ -9859,7 +9876,7 @@ if (
   southGateSilverGlovesCandidate.shopId !== "south-gate.unmapped-equipment-counter.disc-3" ||
   !southGateSilverGlovesCandidate.conditions.includes("do not rely on it for the optional four-copy target") ||
   !southGateSilverGlovesCandidate.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
-  !["cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-disc-3-map", "cour89-south-gate", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143"].every((sourceId) => southGateSilverGlovesCandidate.sourceIds.includes(sourceId)) ||
+  !["cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-disc-3-map", "cour89-south-gate", "cour89-limited-shops", "cour89-silver-gloves", "gamefaqs-equipment-translation-8240", "ffwiki-translations", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143"].every((sourceId) => southGateSilverGlovesCandidate.sourceIds.includes(sourceId)) ||
   !southGateSilverGlovesCandidate.conditions.includes("no Disc III route or timing") ||
   !southGateSilverGlovesCandidate.conditions.includes("no complete stock or Disc III access evidence") ||
   !southGateIronHelmCandidate || southGateIronHelmCandidate.itemId !== "game-item.iron-helm" ||
@@ -9879,30 +9896,40 @@ if (
   !southGateCandidateObjective.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !southGateCandidateObjective.sourceIds.includes("cour89-south-gate") ||
   !southGateCandidateObjective.sourceIds.includes("cour89-limited-shops") ||
+  !southGateCandidateObjective.sourceIds.includes("cour89-silver-gloves") ||
+  !southGateCandidateObjective.sourceIds.includes("gamefaqs-equipment-translation-8240") ||
+  !southGateCandidateObjective.sourceIds.includes("ffwiki-translations") ||
   !southGateCandidateObjective.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !southGateCandidateObjective.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !summitStationWalkthroughStep?.detail.includes("GameFAQs' missables list recommends four Silver Gloves") ||
-  !summitStationWalkthroughStep.detail.includes("Cour89's limited-shop table independently names Summit Station as the last purchase location for Iron Helm") ||
+  !summitStationWalkthroughStep.detail.includes("Cour89's limited-shop table lists Iron Helm and the Japanese エスカッション row as last purchases at Summit") ||
   !summitStationWalkthroughStep.detail.includes("Caves of Narshe's Disc III map and its Silver Gloves and Iron Helm pages positively list the items") ||
   !summitStationWalkthroughStep.detail.includes("lists only two recommended purchases rather than complete stock") ||
   !summitStationWalkthroughStep.detail.includes("consumables-only South Gate Citadel shop") ||
   !summitStationWalkthroughStep.detail.includes("separate candidate paths stay window-unverified") ||
   !southGateCandidateWalkthrough?.step.text.includes("inspect any equipment counter you find") ||
   !southGateCandidateWalkthrough.step.detail.includes("do not map a Disc III listing to an accessible counter") ||
-  !southGateCandidateWalkthrough.step.detail.includes("last Iron Helm purchase before boarding the train") ||
+  !southGateCandidateWalkthrough.step.detail.includes("lists Iron Helm and the Japanese エスカッション row as last purchases there before boarding") ||
   !southGateCandidateWalkthrough.step.objectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
-  !["cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "cour89-limited-shops", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143", "neoseeker-item-locations-182566"].every((sourceId) => southGateCandidateWalkthrough.section.sourceIds.includes(sourceId)) ||
+  !["cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "cour89-limited-shops", "cour89-silver-gloves", "gamefaqs-equipment-translation-8240", "ffwiki-translations", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143", "neoseeker-item-locations-182566"].every((sourceId) => southGateCandidateWalkthrough.section.sourceIds.includes(sourceId)) ||
   !cavesDisc3SouthGateSource?.notes.includes("supports separate Disc III candidate paths") ||
   !cour89SouthGateSource?.url.includes("/ff9/maps/south_gate.php") ||
   !cour89SouthGateSource.notes.includes("does not list Silver Gloves or Iron Helm stock") ||
   !cour89LimitedShopsSource?.url.includes("/ff9/tips/goods.php") ||
-  !cour89LimitedShopsSource.notes.includes("Iron Helm's last purchase is at South Gate: Summit Station before boarding the Iron Horse") ||
-  !cour89LimitedShopsSource.notes.includes("does not list Silver Gloves in the table") ||
+  !cour89LimitedShopsSource.notes.includes("places アイアンヘルム and エスカッション at South Gate: Summit Station as the last purchase locations") ||
+  !cour89LimitedShopsSource.notes.includes("supports the Summit cutoff for both localized item records") ||
+  !cour89SilverGlovesSource?.notes.includes("Lindblum pickup on Disc III–IV") ||
+  !gamefaqsEquipmentTranslationSource?.notes.includes("Esukashon (Escutcheon)") ||
+  !ffwikiTranslationsSource?.notes.includes("maps Japanese エスカッション") ||
   !summitEquipmentCutoff?.trigger.includes("keep those separate paths window-unverified") ||
   !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
   !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
   !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitEquipmentCutoff.sourceIds.includes("cour89-south-gate") ||
+  !summitEquipmentCutoff.sourceIds.includes("cour89-limited-shops") ||
+  !summitEquipmentCutoff.sourceIds.includes("cour89-silver-gloves") ||
+  !summitEquipmentCutoff.sourceIds.includes("gamefaqs-equipment-translation-8240") ||
+  !summitEquipmentCutoff.sourceIds.includes("ffwiki-translations") ||
   !summitEquipmentCutoff.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !summitEquipmentCutoff.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !summitEquipmentCutoff.trigger.includes("does not give a Disc III window") ||

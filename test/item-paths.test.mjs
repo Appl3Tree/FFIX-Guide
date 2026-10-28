@@ -2446,28 +2446,42 @@ test("Summit Station's limited-window shop paths link to the optional stock chec
     ?.walkthroughObjectiveIds?.includes("disc-2.treno.air-racket-purchase"));
 });
 
-test("Cour89's time-limited shop table scopes the Summit cutoff evidence to Iron Helm", () => {
+test("Cour89's time-limited shop table supports both Summit equipment cutoffs through the item-name mapping", () => {
   const source = sources.find((entry) => entry.id === "cour89-limited-shops");
+  const cour89Gloves = sources.find((entry) => entry.id === "cour89-silver-gloves");
+  const translationGuide = sources.find((entry) => entry.id === "gamefaqs-equipment-translation-8240");
+  const translations = sources.find((entry) => entry.id === "ffwiki-translations");
   const summitIronHelm = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-iron-helm-shop");
+  const summitSilverGloves = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-silver-gloves-shop");
   const southGateIronHelm = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.south-gate.iron-helm-candidate");
   const southGateSilverGloves = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.south-gate.silver-gloves-candidate");
   const warning = missables.find((entry) => entry.id === "missable.disc-2.journey-to-treno.summit-station-equipment-stock");
 
   assert.equal(source?.url, "https://cour89.com/ff9/tips/goods.php");
-  assert.match(source?.notes ?? "", /Iron Helm's last purchase is at South Gate: Summit Station before boarding the Iron Horse/);
-  assert.match(source?.notes ?? "", /does not list Silver Gloves in the table/);
+  assert.match(source?.notes ?? "", /places アイアンヘルム and エスカッション at South Gate: Summit Station as the last purchase locations/);
+  assert.match(cour89Gloves?.notes ?? "", /Lindblum pickup on Disc III–IV/);
+  assert.match(translationGuide?.notes ?? "", /Esukashon \(Escutcheon\)/);
+  assert.match(translations?.notes ?? "", /maps Japanese .* to the English-localized item Silver Gloves/);
+  assert.match(cour89Gloves?.notes ?? "", /used only to identify the Japanese item entry/);
   assert.match(source?.notes ?? "", /does not identify the counter behind Caves of Narshe's generic Disc III South Gate listing/);
 
   assert.equal(summitIronHelm?.availability, "limited-window");
   assert.ok(summitIronHelm?.sourceIds.includes("cour89-limited-shops"));
   assert.match(summitIronHelm?.conditions ?? "", /last purchase location before boarding the train/);
+  assert.equal(summitSilverGloves?.availability, "limited-window");
+  assert.ok(summitSilverGloves?.sourceIds.includes("cour89-limited-shops"));
+  assert.ok(summitSilverGloves?.sourceIds.includes("cour89-silver-gloves"));
+  assert.ok(summitSilverGloves?.sourceIds.includes("gamefaqs-equipment-translation-8240"));
+  assert.ok(summitSilverGloves?.sourceIds.includes("ffwiki-translations"));
   assert.equal(southGateIronHelm?.availability, "window-unverified");
   assert.ok(southGateIronHelm?.sourceIds.includes("cour89-limited-shops"));
   assert.match(southGateIronHelm?.conditions ?? "", /does not map Caves' generic Disc III listing to an accessible counter/);
   assert.equal(southGateSilverGloves?.availability, "window-unverified");
-  assert.ok(!southGateSilverGloves?.sourceIds.includes("cour89-limited-shops"));
+  assert.ok(southGateSilverGloves?.sourceIds.includes("cour89-limited-shops"));
+  assert.ok(southGateSilverGloves?.sourceIds.includes("ffwiki-translations"));
   assert.ok(warning?.sourceIds.includes("cour89-limited-shops"));
-  assert.match(warning?.note ?? "", /does not list Silver Gloves; that omission does not establish the Gloves' cutoff/);
+  assert.ok(warning?.sourceIds.includes("ffwiki-translations"));
+  assert.match(warning?.note ?? "", /Japanese-to-English translation mapping/);
 });
 
 test("Black Mage Village Disc II–III weapon paths link to the Disc III stock review", () => {
