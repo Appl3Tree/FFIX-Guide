@@ -1409,6 +1409,54 @@ test("Nova Dragon item paths link its Grand Armor steal and Always Wing Edge dro
   assert.match(recovery?.conditions ?? "", /Mythril Sword/);
 });
 
+test("Pandemonium item paths link Silver Dragon, Garland, and Kuja loot to exact slots", () => {
+  const expected = [
+    { id: "item-path.disc-3.portal-to-another-world.silver-dragon-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", enemyId: "enemy.silver-dragon", encounterId: "encounter.pandemonium.silver-dragon", objectiveId: "disc-3.portal-to-another-world.pandemonium-climax", outcome: "after the Observatory boss victory" },
+    { id: "item-path.disc-3.portal-to-another-world.garland-battle-boots-steal", itemId: "game-item.battle-boots", method: "steal", slot: "common", enemyId: "enemy.garland", encounterId: "encounter.pandemonium.garland", objectiveId: "disc-3.portal-to-another-world.pandemonium-boss-steals", rate: "70% chance per connected steal check", recovery: "Battle Boots chest is available earlier in the Maze" },
+    { id: "item-path.disc-3.portal-to-another-world.pandemonium-carabini-mail-kuja-steal", itemId: "game-item.carabini-mail", method: "steal", slot: "uncommon", enemyId: "enemy.kuja", encounterId: "encounter.pandemonium.kuja", objectiveId: "disc-3.portal-to-another-world.pandemonium-boss-steals", rate: "23% chance per connected steal check", recovery: "alternate item copy after the maze chest" },
+  ];
+
+  for (const expectedPath of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.id);
+    const enemy = enemyRecords.find((entry) => entry.id === expectedPath.enemyId);
+    const encounter = enemyEncounters.find((entry) => entry.id === expectedPath.encounterId);
+    const lootTable = expectedPath.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === expectedPath.itemId && entry.slot === expectedPath.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${expectedPath.id} exists`);
+    assert.ok(enemy, `${expectedPath.enemyId} exists`);
+    assert.equal(enemy?.kind, "boss");
+    assert.ok(encounter, `${expectedPath.encounterId} exists`);
+    assert.equal(encounter?.kind, "boss");
+    assert.deepEqual(encounter?.formation, [{ enemyId: expectedPath.enemyId, quantity: 1 }]);
+    assert.ok(slot, `${expectedPath.id} matches an enemy loot slot`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.chapterId, "disc-3.portal-to-another-world");
+    assert.equal(path?.method, expectedPath.method);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.enemyId, expectedPath.enemyId);
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, [expectedPath.encounterId]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(expectedPath.objectiveId));
+    assert.ok(encounter?.objectiveIds.includes(expectedPath.objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${expectedPath.id} retains enemy, encounter, and slot provenance`);
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.id} references known source ${sourceId}`);
+    }
+
+    if (expectedPath.method === "steal") {
+      assert.match(path?.conditions ?? "", new RegExp(expectedPath.rate));
+      assert.match(path?.conditions ?? "", /source-reported, not release-verified/);
+      assert.match(path?.conditions ?? "", new RegExp(expectedPath.recovery, "i"));
+    } else {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", new RegExp(expectedPath.outcome));
+    }
+  }
+});
+
 test("Disc II Mistodon steals separate fixed fights from the unverified downhill pool", () => {
   const expected = [
     { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-upper-pair", availability: "one-time-encounter", routeSourceId: "gamefaqs-battle-iifa-tree-71891" },

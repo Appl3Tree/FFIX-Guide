@@ -9645,6 +9645,31 @@ for (const expected of novaDragonLootExpectations) {
     errors.push(`Nova Dragon path ${expected.id} must link its exact one-time enemy slot, encounter, source-specific outcome, and provenance.`);
   }
 }
+const pandemoniumLootExpectations = [
+  { id: "item-path.disc-3.portal-to-another-world.silver-dragon-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", enemyId: "enemy.silver-dragon", encounterId: "encounter.pandemonium.silver-dragon", objectiveId: "disc-3.portal-to-another-world.pandemonium-climax", outcome: "after the Observatory boss victory" },
+  { id: "item-path.disc-3.portal-to-another-world.garland-battle-boots-steal", itemId: "game-item.battle-boots", method: "steal", slot: "common", enemyId: "enemy.garland", encounterId: "encounter.pandemonium.garland", objectiveId: "disc-3.portal-to-another-world.pandemonium-boss-steals", rate: "70% chance per connected steal check", recovery: "Battle Boots chest is available earlier in the Maze" },
+  { id: "item-path.disc-3.portal-to-another-world.pandemonium-carabini-mail-kuja-steal", itemId: "game-item.carabini-mail", method: "steal", slot: "uncommon", enemyId: "enemy.kuja", encounterId: "encounter.pandemonium.kuja", objectiveId: "disc-3.portal-to-another-world.pandemonium-boss-steals", rate: "23% chance per connected steal check", recovery: "alternate item copy after the maze chest" },
+];
+for (const expected of pandemoniumLootExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === expected.encounterId);
+  const lootTable = expected.method === "steal" ? enemy?.steals : enemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (!enemy || enemy.kind !== "boss" || !enemy.encounterIds.includes(expected.encounterId) || !encounter ||
+    encounter.kind !== "boss" || !encounter.formation.some((member) => member.enemyId === expected.enemyId && member.quantity === 1) ||
+    !encounter.objectiveIds.includes(expected.objectiveId) || !slot || !path || path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-3.portal-to-another-world" || path.method !== expected.method || path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" || path.enemyId !== expected.enemyId || path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([expected.encounterId]) ||
+    !path.walkthroughObjectiveIds?.includes(expected.objectiveId) ||
+    (expected.method === "steal" && (!path.conditions?.includes(expected.rate) || !path.conditions.includes("source-reported, not release-verified") || !path.conditions.includes(expected.recovery))) ||
+    (expected.method === "drop" && (!path.conditions?.includes("Always drop") || !path.conditions.includes(expected.outcome))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))) {
+    errors.push(`Pandemonium path ${expected.id} must link its exact one-time enemy slot, encounter, objective, outcome, and source provenance.`);
+  }
+}
 const novaDragonSynthesisRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.black-mage-village-grand-armor-synthesis");
 if (!novaDragonSynthesisRecovery || novaDragonSynthesisRecovery.itemId !== "game-item.grand-armor" ||
   novaDragonSynthesisRecovery.method !== "synthesis" || novaDragonSynthesisRecovery.availability !== "conditional" ||
