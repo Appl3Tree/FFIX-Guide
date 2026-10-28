@@ -453,6 +453,63 @@ test("Hades item paths link all steal and drop slots without collapsing its thre
   }
 });
 
+test("Memoria Tiamat item paths link its seven item-bearing boss slots and retain source-reported rates", () => {
+  const enemyId = "enemy.tiamat-memoria";
+  const encounterId = "encounter.memoria.tiamat";
+  const expected = [
+    { id: "item-path.disc-4.memoria.tiamat-blood-sword-steal", itemId: "game-item.blood-sword", method: "steal", slot: "common", rate: "100%" },
+    { id: "item-path.disc-4.memoria.tiamat-feather-boots-steal", itemId: "game-item.feather-boots", method: "steal", slot: "uncommon", rate: "25%" },
+    { id: "item-path.disc-4.memoria.tiamat-grand-helm-steal", itemId: "game-item.grand-helm", method: "steal", slot: "rare", rate: "0.39%" },
+    { id: "item-path.disc-4.memoria.tiamat-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always" },
+    { id: "item-path.disc-4.memoria.tiamat-phoenix-down-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%" },
+    { id: "item-path.disc-4.memoria.tiamat-ether-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%" },
+    { id: "item-path.disc-4.memoria.tiamat-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%" },
+  ];
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const linkedPaths = itemAcquisitionPaths.filter((entry) => expected.some((item) => item.id === entry.id));
+
+  assert.equal(linkedPaths.length, expected.length);
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a real loot slot`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-4.memoria");
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes("disc-4.memoria.tiamat-steals"));
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", new RegExp(item.rate.replace("%", "\\%")));
+      assert.match(path?.conditions ?? "", /source-reported/);
+      assert.ok(path?.sourceIds.includes("opatil-steal-list"));
+    } else if (item.slot === "always") {
+      assert.match(path?.conditions ?? "", /Always slot/);
+      assert.match(path?.conditions ?? "", /victory/);
+      assert.ok(path?.sourceIds.includes("opatil-drop-list"));
+    } else {
+      assert.match(path?.conditions ?? "", /conditional/);
+      assert.match(path?.conditions ?? "", new RegExp(item.rate.replace("%", "\\%")));
+      assert.match(path?.notes ?? "", /source-reported, not release-verified/);
+      assert.match(path?.conditions ?? "", /not guaranteed/);
+    }
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.id} has known sources`);
+  }
+  assert.match(itemAcquisitionPaths.find((entry) => entry.id === expected[2].id)?.notes ?? "", /Rare.*Very Rare/);
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

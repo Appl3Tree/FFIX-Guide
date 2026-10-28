@@ -6767,6 +6767,48 @@ for (const expected of hadesLootPaths) {
     errors.push(`Hades path ${expected.id} must match its one-time encounter, exact ${expected.slot} loot slot, yield semantics, objective, and provenance.`);
   }
 }
+const tiamatBossLootPaths = [
+  { id: "item-path.disc-4.memoria.tiamat-blood-sword-steal", itemId: "game-item.blood-sword", method: "steal", slot: "common", rate: "100%" },
+  { id: "item-path.disc-4.memoria.tiamat-feather-boots-steal", itemId: "game-item.feather-boots", method: "steal", slot: "uncommon", rate: "25%" },
+  { id: "item-path.disc-4.memoria.tiamat-grand-helm-steal", itemId: "game-item.grand-helm", method: "steal", slot: "rare", rate: "0.39%" },
+  { id: "item-path.disc-4.memoria.tiamat-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always" },
+  { id: "item-path.disc-4.memoria.tiamat-phoenix-down-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%" },
+  { id: "item-path.disc-4.memoria.tiamat-ether-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%" },
+  { id: "item-path.disc-4.memoria.tiamat-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%" },
+];
+const tiamatEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.tiamat-memoria");
+const tiamatEncounterId = "encounter.memoria.tiamat";
+const tiamatEncounter = enemyEncounters.find((encounter) => encounter.id === tiamatEncounterId);
+if (itemAcquisitionPaths.filter((path) => tiamatBossLootPaths.some((expected) => expected.id === path.id)).length !== tiamatBossLootPaths.length) {
+  errors.push("Memoria Tiamat must retain all seven item-bearing boss slots.");
+}
+for (const expected of tiamatBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? tiamatEnemy?.steals : tiamatEnemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(tiamatEnemy?.sourceIds ?? []), ...(tiamatEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== tiamatEnemy?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([tiamatEncounterId]) ||
+    tiamatEncounter?.kind !== "boss" ||
+    !tiamatEncounter.formation.some((member) => member.enemyId === tiamatEnemy?.id) ||
+    !path.walkthroughObjectiveIds?.includes("disc-4.memoria.tiamat-steals") ||
+    (expected.method === "steal" && (!path.conditions?.includes(expected.rate ?? "") || !path.conditions.includes("source-reported") || !path.sourceIds.includes("opatil-steal-list"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always slot") || !path.conditions.includes("victory") || !path.sourceIds.includes("opatil-drop-list"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.conditions.includes(expected.rate ?? "") || !path.conditions.includes("not guaranteed") || !path.notes?.includes("source-reported, not release-verified"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Memoria Tiamat path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);

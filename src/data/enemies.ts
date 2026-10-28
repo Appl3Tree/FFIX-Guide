@@ -323,6 +323,7 @@ const novaDragonCutoffId = "cutoff.nova-dragon.grand-armor";
 const memoriaEnemySources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"];
 const memoriaTentacleSources = ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary"];
 const deathguiseEnemySources = ["gamefaqs-memoria-71891", "jegged-crystal-world"];
+const memoriaTiamatSources = [...memoriaEnemySources, "rpgclassics-bestiary-t-z"];
 const hadesEnemySources = ["gamefaqs-master-synthesist-71891", "rpgclassics-memoria", "gamefaqs-final-preparations-71891"];
 const finalBattleEnemySources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"];
 const finalBattleStatsSources = ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown"];
@@ -3141,7 +3142,7 @@ const memoriaEncounters: EnemyEncounter[] = [
     location: "Time Interval",
     kind: "boss",
     formation: [{ enemyId: "enemy.tiamat-memoria", quantity: 1 }],
-    sourceIds: memoriaEnemySources,
+    sourceIds: memoriaTiamatSources,
     objectiveIds: ["disc-4.memoria.tiamat-steals"],
     missableIds: ["missable.disc-4.memoria.tiamat-steals"],
     cutoffIds: ["cutoff.memoria.tiamat-steals"],
@@ -4125,7 +4126,7 @@ const memoriaEnemyRecords: EnemyRecord[] = [
       "HP claims conflict: GameFAQs lists 56,497 while Jegged lists 59,494. Both are retained pending direct game verification.",
       "Steal and drop slot labels follow GameFAQs's four-slot table. Jegged labels Grand Helm Very Rare and uses different rarity terms for the Phoenix Down, Ether, and Elixir drops.",
     ],
-  }, "missable.disc-4.memoria.tiamat-steals", "cutoff.memoria.tiamat-steals"),
+  }, "missable.disc-4.memoria.tiamat-steals", "cutoff.memoria.tiamat-steals", memoriaTiamatSources),
   memoriaBoss({
     id: "enemy.kraken-memoria",
     name: "Kraken",
