@@ -536,6 +536,7 @@ const zaghnolHuntEncounterSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-l
 const steepledHatSources = ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-abilities-71891", "gamefaqs-lindblum-71891", "gamefaqs-dali-71891", "gamefaqs-cargo-ship-71891", "gamefaqs-journey-to-treno-71891", "gamefaqs-burmecia-71891", "gamefaqs-return-to-gaia-71891", "jegged-mognet-central", "gamerguides-side-questing-4", "flactem-disc-2-cleyra"];
 const prisonCageViviStealPathSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "opatil-steal-list"];
 const blackWaltz2StealSources = ["gamefaqs-dali-71891", "gamefaqs-dali-79143", "jegged-dali", "cavesofnarshe-dali-enemies", "elitegrindlab-dali", "opatil-steal-list"];
+const blackWaltz2EncounterProvenanceSources = [...new Set([...blackWaltz2StealSources, "gamerguides-dali", "ffwiki-black-waltz-2", "kamigame-dali-black-waltz-2"])];
 const fossilRooSources = ["gamefaqs-journey-to-outer-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo"];
 const fossilRooShopWindowNote = "This shop is inside Fossil Roo's inner route, which the original PlayStation GameFAQs walkthrough and accepted re-entry answer describe as inaccessible after the final Gargant. Jegged's separate entrance-revisit note does not establish access to this shop; treat the purchase as limited to the Disc II visit. Newer-release behavior remains unverified.";
 const fossilRooShopAccessSourceIds = ["gamefaqs-fossil-roo-reentry-qa", "jegged-missables", "ffwiki-unrevisitable-locations"];
@@ -4283,7 +4284,10 @@ const blackWaltz2EtherDropPaths: ItemAcquisitionPath[] = [
     conditions: "Defeat Black Waltz 2 to receive the guaranteed Ether from its Always drop slot.",
     notes: "GameFAQs' boss table and Caves of Narshe's enemy table list one guaranteed Ether slot plus three conditional Ether slots. Jegged summarizes the boss drop as a single Ether; this path records only the guaranteed copy as unconditional.",
     walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
-    sourceIds: blackWaltz2EtherDropSources.always,
+    enemyId: "enemy.black-waltz-2",
+    enemyLootSlot: "always",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    sourceIds: [...new Set([...blackWaltz2EtherDropSources.always, ...blackWaltz2EncounterProvenanceSources])],
   },
   {
     id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-common-drop",
@@ -4292,10 +4296,13 @@ const blackWaltz2EtherDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "This additional Ether is listed in Black Waltz 2's Common drop slot and is chance-based.",
+    conditions: "After a KO victory, Black Waltz 2's Common drop slot can award one additional Ether; this drop is chance-based.",
     notes: "GameFAQs, Caves of Narshe, and EliteGrindLab list Ether in this conditional slot; route summaries that list only one Ether do not confirm extra copies. The source-listed slot is not treated as guaranteed.",
     walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
-    sourceIds: blackWaltz2EtherDropSources.common,
+    enemyId: "enemy.black-waltz-2",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    sourceIds: [...new Set([...blackWaltz2EtherDropSources.common, ...blackWaltz2EncounterProvenanceSources])],
   },
   {
     id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-uncommon-drop",
@@ -4304,10 +4311,13 @@ const blackWaltz2EtherDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "This additional Ether is listed in Black Waltz 2's Uncommon drop slot and is chance-based.",
+    conditions: "After a KO victory, Black Waltz 2's Uncommon drop slot can award one additional Ether; this drop is chance-based.",
     notes: "GameFAQs, Caves of Narshe, and EliteGrindLab list Ether in this conditional slot; route summaries that list only one Ether do not confirm extra copies. The source-listed slot is not treated as guaranteed.",
     walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
-    sourceIds: blackWaltz2EtherDropSources.uncommon,
+    enemyId: "enemy.black-waltz-2",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    sourceIds: [...new Set([...blackWaltz2EtherDropSources.uncommon, ...blackWaltz2EncounterProvenanceSources])],
   },
   {
     id: "item-path.disc-1.village-of-dali.black-waltz-2-ether-rare-drop",
@@ -4316,10 +4326,13 @@ const blackWaltz2EtherDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "This additional Ether is listed in Black Waltz 2's Rare drop slot and is chance-based.",
+    conditions: "After a KO victory, Black Waltz 2's Rare drop slot can award one additional Ether; this drop is chance-based.",
     notes: "GameFAQs, Caves of Narshe, and EliteGrindLab list Ether in this conditional slot; route summaries that list only one Ether do not confirm extra copies. The source-listed slot is not treated as guaranteed.",
     walkthroughObjectiveIds: ["disc-1.village-of-dali.black-waltz-2-ether-drop"],
-    sourceIds: blackWaltz2EtherDropSources.rare,
+    enemyId: "enemy.black-waltz-2",
+    enemyLootSlot: "rare",
+    encounterIds: ["encounter.dali.black-waltz-2"],
+    sourceIds: [...new Set([...blackWaltz2EtherDropSources.rare, ...blackWaltz2EncounterProvenanceSources])],
   },
 ];
 

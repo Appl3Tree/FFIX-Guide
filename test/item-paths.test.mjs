@@ -2174,12 +2174,17 @@ test("Black Waltz 2's guaranteed and chance-based Ether drops have separate sour
 
   for (const [slot, pathId, sourceIds] of expected) {
     const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const dropSlot = enemy?.drops.find((entry) => entry.slot === slot && entry.itemId === "game-item.ether");
+    const requiredProvenance = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(dropSlot?.sourceIds ?? [])]);
     assert.ok(path, `${slot} Ether drop path is missing`);
     assert.equal(path.itemId, "game-item.ether");
     assert.equal(path.chapterId, "disc-1.village-of-dali");
     assert.equal(path.method, "drop");
     assert.equal(path.quantity, 1);
     assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.enemyId, "enemy.black-waltz-2");
+    assert.equal(path.enemyLootSlot, slot);
+    assert.deepEqual(path.encounterIds, ["encounter.dali.black-waltz-2"]);
     assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
     assert.match(path.conditions ?? "", new RegExp(slot, "i"));
     if (slot === "always") {
@@ -2187,7 +2192,12 @@ test("Black Waltz 2's guaranteed and chance-based Ether drops have separate sour
       assert.match(path.notes ?? "", /only the guaranteed copy as unconditional/);
     } else {
       assert.match(path.conditions ?? "", /chance-based/);
+      assert.match(path.conditions ?? "", /KO victory/);
       assert.match(path.notes ?? "", /not treated as guaranteed/);
+    }
+    for (const sourceId of requiredProvenance) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing enemy/encounter/slot source ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
     }
     for (const sourceId of sourceIds) {
       assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);

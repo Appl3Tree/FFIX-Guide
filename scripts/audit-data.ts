@@ -3884,11 +3884,16 @@ if (!blackWaltz2EtherObjective || !blackWaltz2Encounter?.objectiveIds.includes(b
   !blackWaltz2Record?.routeObjectiveIds.includes(blackWaltz2EtherObjectiveId) ||
   blackWaltz2EtherPaths.some(([slot, pathId, sourceIds]) => {
     const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const dropSlot = blackWaltz2Record?.drops.find((drop) => drop.slot === slot && drop.itemId === "game-item.ether");
+    const requiredProvenance = new Set([...(blackWaltz2Record?.sourceIds ?? []), ...(blackWaltz2Encounter?.sourceIds ?? []), ...(dropSlot?.sourceIds ?? [])]);
     return !blackWaltz2Record?.drops.some((drop) => drop.slot === slot && drop.itemId === "game-item.ether") ||
       !path || path.itemId !== "game-item.ether" || path.chapterId !== "disc-1.village-of-dali" ||
       path.method !== "drop" || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+      path.enemyId !== "enemy.black-waltz-2" || path.enemyLootSlot !== slot ||
+      JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.dali.black-waltz-2"]) ||
       !path.walkthroughObjectiveIds?.includes(blackWaltz2EtherObjectiveId) ||
       (slot === "always" ? !path.conditions?.includes("guaranteed") : !path.conditions?.includes("chance-based")) ||
+      [...requiredProvenance].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
       sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) || !blackWaltz2EtherObjective.sourceIds.includes(sourceId) || !blackWaltz2EtherItem?.sourceIds.includes(sourceId));
   })) {
   errors.push("Black Waltz 2's guaranteed and conditional Ether drop slots must have source-linked paths and a separate collection objective.");
