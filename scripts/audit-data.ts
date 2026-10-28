@@ -5029,7 +5029,15 @@ for (const [path, chapterId, city] of [
     !/(?:does not prove|do not (?:prove|establish))/i.test(path.conditions ?? "") ||
     !/GameClue's iPhone\/Android\/PS1 armlet list/i.test(path.conditions ?? "") ||
     !path.conditions.includes("FFDQ.com's disc-indexed table") ||
-    !/Alexandria/i.test(path.conditions ?? "")
+    !/Alexandria/i.test(path.conditions ?? "") ||
+    (city === "Treno" && (
+      !path.sourceIds.includes("drslice-treno-disc3-armory") ||
+      !path.conditions.includes("DrSlice's Disc III Knight's Residence Armory list also omits it")
+    )) ||
+    (city === "Lindblum" && (
+      !path.sourceIds.includes("drslice-lindblum-disc3-armory") ||
+      !path.conditions.includes("DrSlice's Disc III Dragoos's Armory table also omits it")
+    ))
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
   }
@@ -5069,6 +5077,8 @@ if (
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gameclue-armlets") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("ffdq-glass-armlet") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("drslice-lindblum-disc3-armory") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("DrSlice's Disc III Dragoos's Armory table also omits it") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("These source differences do not prove Disc III stock is absent") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table")
 ) {
@@ -5090,6 +5100,8 @@ if (
 }
 const glassArmletAtadeoSource = sources.find((source) => source.id === "gamefaqs-walkthrough-9801");
 const glassArmletDrSliceAlexandriaSource = sources.find((source) => source.id === "drslice-alexandria-armory");
+const glassArmletDrSliceLindblumDisc3Source = sources.find((source) => source.id === "drslice-lindblum-disc3-armory");
+const glassArmletDrSliceTrenoDisc3Source = sources.find((source) => source.id === "drslice-treno-disc3-armory");
 if (
   !glassArmletAtadeoSource?.notes.includes("Disc III Alexandria and Treno equipment lists include Glass Armlet for 250 Gil") ||
   !glassArmletAtadeoSource.notes.includes("Lindblum Disc III list omits the armlet") ||
@@ -5103,8 +5115,16 @@ if (
   !glassArmletDrSliceAlexandriaSource?.url.includes("/shop/36") ||
   !glassArmletDrSliceAlexandriaSource.notes.includes("Alexandria (Disk 3)") ||
   !glassArmletDrSliceAlexandriaSource.notes.includes("does not identify the stock-change trigger") ||
+  !glassArmletDrSliceLindblumDisc3Source?.url.includes("/shop/14") ||
+  !glassArmletDrSliceLindblumDisc3Source.notes.includes("Lindblum (Disk 3)") ||
+  !glassArmletDrSliceLindblumDisc3Source.notes.includes("does not list Glass Armlet") ||
+  !glassArmletDrSliceTrenoDisc3Source?.url.includes("/shop/21") ||
+  !glassArmletDrSliceTrenoDisc3Source.notes.includes("Treno (Disk 3)") ||
+  !glassArmletDrSliceTrenoDisc3Source.notes.includes("does not list Glass Armlet") ||
   !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
-  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-alexandria-armory")
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-alexandria-armory") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-lindblum-disc3-armory") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-treno-disc3-armory")
 ) {
   errors.push("The older _ATadeo_ walkthrough and DrSlice Alexandria table must support only their documented Disc III seller listings without resolving the unverified city candidates.");
 }
@@ -5113,8 +5133,10 @@ if (
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-shops-71891") ||
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gameclue-armlets") ||
+  !glassArmletDisc3TrenoSection?.sourceIds.includes("drslice-treno-disc3-armory") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("inspect Treno's displayed weapon stock") ||
-  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table omit the later sale") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("DrSlice's Disc III Knight's Residence Armory omit the armlet") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("older positive listing does not establish the in-game stock window") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("Buy only if it appears")
 ) {

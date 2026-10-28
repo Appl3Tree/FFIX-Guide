@@ -1252,6 +1252,22 @@ export const sources = [
     notes: "Lists Glass Armlet for 250 Gil in this armory and identifies the location in the footer as Alexandria (Disk 3). This independently supports the Disc III Alexandria seller route and price; it does not identify the stock-change trigger or establish behavior across platforms/builds.",
   },
   {
+    id: "drslice-lindblum-disc3-armory",
+    title: "Dragoos's Armory (Disk 3) — Final Fantasy IX shop table",
+    publisher: "DrSlice",
+    url: "https://www.drslice.com/games/ff9/shop/14",
+    accessed: "2026-10-28",
+    notes: "The table identifies its location as Lindblum (Disk 3) and does not list Glass Armlet among its products. This is contrary evidence to the older positive Lindblum Disc III candidate; the omission alone does not prove unavailable stock or establish release/build behavior.",
+  },
+  {
+    id: "drslice-treno-disc3-armory",
+    title: "Knight's Residence Armory — Final Fantasy IX shop table",
+    publisher: "DrSlice",
+    url: "https://www.drslice.com/games/ff9/shop/21?d=&o=buy",
+    accessed: "2026-10-28",
+    notes: "The table identifies its location as Treno (Disk 3) and does not list Glass Armlet among its products. This is contrary evidence to the older positive Treno Disc III candidate; the omission alone does not prove unavailable stock or establish release/build behavior.",
+  },
+  {
     id: "gamefaqs-monster-list-20490",
     title: "Monster List — Revival_Flame",
     publisher: "GameFAQs",

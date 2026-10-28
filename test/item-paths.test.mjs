@@ -2654,6 +2654,8 @@ test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their wa
   const alexandriaGlassArmletPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-alexandria-shop");
   const drsliceTrenoArmory = sources.find((source) => source.id === "drslice-treno-armory");
   const drsliceAlexandriaArmory = sources.find((source) => source.id === "drslice-alexandria-armory");
+  const drsliceLindblumDisc3Armory = sources.find((source) => source.id === "drslice-lindblum-disc3-armory");
+  const drsliceTrenoDisc3Armory = sources.find((source) => source.id === "drslice-treno-disc3-armory");
   assert.ok(trenoGlassArmletPath?.sourceIds.includes("drslice-treno-armory"));
   assert.ok(trenoGlassArmletCandidate?.sourceIds.includes("drslice-treno-armory"));
   assert.equal(trenoGlassArmletCandidate?.availability, "window-unverified");
@@ -2663,11 +2665,23 @@ test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their wa
   assert.ok(alexandriaGlassArmletPath?.sourceIds.includes("drslice-alexandria-armory"));
   assert.match(alexandriaGlassArmletPath?.conditions ?? "", /DrSlice independently lists the item for 250 Gil.*Alexandria \(Disk 3\)/);
   assert.equal(lindblumGlassArmletCandidate?.availability, "window-unverified");
+  assert.ok(lindblumGlassArmletCandidate?.sourceIds.includes("drslice-lindblum-disc3-armory"));
+  assert.match(lindblumGlassArmletCandidate?.conditions ?? "", /DrSlice's Disc III Dragoos's Armory table also omits it/);
+  assert.ok(trenoGlassArmletCandidate?.sourceIds.includes("drslice-treno-disc3-armory"));
+  assert.match(trenoGlassArmletCandidate?.conditions ?? "", /DrSlice's Disc III Knight's Residence Armory list also omits it/);
   assert.ok(drsliceAlexandriaArmory?.url.includes("/shop/36"));
   assert.match(drsliceAlexandriaArmory?.notes ?? "", /Glass Armlet for 250 Gil.*Alexandria \(Disk 3\)/);
+  assert.ok(drsliceLindblumDisc3Armory?.url.includes("/shop/14"));
+  assert.match(drsliceLindblumDisc3Armory?.notes ?? "", /Lindblum \(Disk 3\).*does not list Glass Armlet/);
+  assert.ok(drsliceTrenoDisc3Armory?.url.includes("/shop/21"));
+  assert.match(drsliceTrenoDisc3Armory?.notes ?? "", /Treno \(Disk 3\).*does not list Glass Armlet/);
   assert.ok(gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-alexandria-armory"));
+  assert.ok(gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-lindblum-disc3-armory"));
+  assert.ok(gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-treno-disc3-armory"));
   assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /DrSlice independently lists it in the Treno Armory and labels the location Treno \(Disk 2\)/);
   assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /distinct from the unresolved later Treno listing/);
+  assert.match(getStep("disc-3.card-tournament", "card-tournament-queen-stella")?.detail ?? "", /DrSlice's Disc III Knight's Residence Armory omit the armlet/);
+  assert.match(getStep("disc-3.aerial-exploration", "aerial-plan-route")?.detail ?? "", /DrSlice's Disc III Dragoos's Armory table also omits it/);
   assert.match(getStep("disc-2.magdalene-forest", "black-mage-village-shop-check")?.detail ?? "", /Alexandria remains a later seller/);
 });
 
