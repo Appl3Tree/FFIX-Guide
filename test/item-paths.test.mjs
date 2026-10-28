@@ -1355,6 +1355,60 @@ test("Earth Guardian item paths link both conditional steals and its Always Phoe
   assert.match(itemAcquisitionPaths.find((path) => path.id === expected[1].id)?.conditions ?? "", /Black Cat synthesis for 20,000 Gil/);
 });
 
+test("Nova Dragon item paths link its Grand Armor steal and Always Wing Edge drop to exact slots", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.nova-dragon");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.iifa-tree.nova-dragon");
+  const expected = [
+    { id: "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-grand-armor-steal", itemId: "game-item.grand-armor", method: "steal", slot: "rare", objectiveId: "disc-4.second-battle-of-iifa-tree.nova-dragon-steals" },
+    { id: "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", objectiveId: "disc-4.second-battle-of-iifa-tree.memoria-entry" },
+  ];
+  const recovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.black-mage-village-grand-armor-synthesis");
+
+  assert.ok(enemy);
+  assert.equal(enemy.kind, "boss");
+  assert.ok(encounter);
+  assert.equal(encounter.kind, "boss");
+  assert.deepEqual(encounter.formation, [{ enemyId: "enemy.nova-dragon", quantity: 1 }]);
+
+  for (const expectedPath of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.id);
+    const lootTable = expectedPath.method === "steal" ? enemy.steals : enemy.drops;
+    const slot = lootTable.find((entry) => entry.itemId === expectedPath.itemId && entry.slot === expectedPath.slot);
+    const requiredSources = new Set([...(enemy.sourceIds ?? []), ...(encounter.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${expectedPath.id} exists`);
+    assert.ok(slot, `${expectedPath.id} matches an enemy slot`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.chapterId, "disc-4.second-battle-of-iifa-tree");
+    assert.equal(path?.method, expectedPath.method);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.enemyId, "enemy.nova-dragon");
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, ["encounter.iifa-tree.nova-dragon"]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(expectedPath.objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${expectedPath.id} retains enemy, encounter, and slot sources`);
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.id} references known source ${sourceId}`);
+    }
+    if (expectedPath.method === "steal") {
+      assert.match(path?.conditions ?? "", /0\.4% chance per connected steal check/);
+      assert.match(path?.conditions ?? "", /source-reported, not release-verified/);
+      assert.match(path?.notes ?? "", /GameFAQs labels the slot Rare; Jegged calls it Very Rare/);
+    } else {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /after boss victory/);
+      assert.ok(path?.sourceIds.includes("jegged-memoria-nova-dragon"));
+    }
+  }
+
+  assert.ok(recovery);
+  assert.equal(recovery?.method, "synthesis");
+  assert.equal(recovery?.availability, "conditional");
+  assert.equal(recovery?.cost?.amount, 45000);
+  assert.match(recovery?.conditions ?? "", /Mythril Sword/);
+});
+
 test("Disc II Mistodon steals separate fixed fights from the unverified downhill pool", () => {
   const expected = [
     { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-upper-pair", availability: "one-time-encounter", routeSourceId: "gamefaqs-battle-iifa-tree-71891" },

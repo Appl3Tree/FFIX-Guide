@@ -9623,6 +9623,34 @@ const requiredMoonstonePaths = [
   { id: "item-path.disc-3.forgotten-continent.moonstone-friendly-jabberwock", objectiveId: "disc-3.forgotten-continent.jabberwock" },
   { id: "item-path.disc-4.return-to-gaia.moonstone-stiltzkin-eighth-bundle", objectiveId: "disc-4.return-to-gaia.stiltzkin-eighth-bundle" },
 ];
+const novaDragonRecord = enemyRecords.find((enemy) => enemy.id === "enemy.nova-dragon");
+const novaDragonEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.iifa-tree.nova-dragon");
+const novaDragonLootExpectations = [
+  { id: "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-grand-armor-steal", itemId: "game-item.grand-armor", method: "steal", slot: "rare", objectiveId: "disc-4.second-battle-of-iifa-tree.nova-dragon-steals" },
+  { id: "item-path.disc-4.second-battle-of-iifa-tree.nova-dragon-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", objectiveId: "disc-4.second-battle-of-iifa-tree.memoria-entry" },
+];
+for (const expected of novaDragonLootExpectations) {
+  const lootTable = expected.method === "steal" ? novaDragonRecord?.steals : novaDragonRecord?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const requiredSources = new Set([...(novaDragonRecord?.sourceIds ?? []), ...(novaDragonEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (!slot || !path || path.itemId !== expected.itemId || path.chapterId !== "disc-4.second-battle-of-iifa-tree" ||
+    path.method !== expected.method || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.nova-dragon" || path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.iifa-tree.nova-dragon"]) ||
+    !path.walkthroughObjectiveIds?.includes(expected.objectiveId) ||
+    (expected.method === "steal" && (!path.conditions?.includes("0.4%") || !path.conditions.includes("per connected steal check") || !path.conditions.includes("source-reported, not release-verified") || !path.notes?.includes("GameFAQs labels the slot Rare; Jegged calls it Very Rare"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always drop") || !path.conditions.includes("after boss victory"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))) {
+    errors.push(`Nova Dragon path ${expected.id} must link its exact one-time enemy slot, encounter, source-specific outcome, and provenance.`);
+  }
+}
+const novaDragonSynthesisRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.black-mage-village-grand-armor-synthesis");
+if (!novaDragonSynthesisRecovery || novaDragonSynthesisRecovery.itemId !== "game-item.grand-armor" ||
+  novaDragonSynthesisRecovery.method !== "synthesis" || novaDragonSynthesisRecovery.availability !== "conditional" ||
+  novaDragonSynthesisRecovery.cost?.amount !== 45000 || !novaDragonSynthesisRecovery.conditions?.includes("Mythril Sword")) {
+  errors.push("Nova Dragon's Grand Armor route must preserve its conditional Disc IV synthesis recovery when Mythril Sword was retained.");
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

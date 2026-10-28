@@ -3329,7 +3329,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-4/42-Memoria.html",
     accessed: "2026-10-27",
-    notes: "Independent route, pickup, boss, and achievement cross-check for Memoria. The preceding chapter used this page for Nova Dragon's attacks and steals; this chapter also uses it for the five hidden weapons, guardian sequence, and Crystal World handoff. For Kraken, it reports 70%/23%/0.4% odds per connected body steal and 37.5%/12.5%/0.4% conditional drops; its Glutton's Robe steal is Very Rare, and its drop rarity labels differ from GameFAQs. For Lich, it lists Black Robe as Rare where GameFAQs labels it Semi-Rare and uses different rarity terms for Phoenix Down, Ether, and Elixir drops. These are source reports, not release-verified rates.",
+    notes: "Independent route, pickup, boss, and achievement cross-check for Memoria. The preceding chapter uses this page for Nova Dragon's attacks and steals; it calls Grand Armor Very Rare and reports a 0.4% chance per connected steal check, while GameFAQs labels the slot Rare. This source-reported rate is not release-verified. This chapter also uses the page for the five hidden weapons, guardian sequence, and Crystal World handoff. For Kraken, it reports 70%/23%/0.4% odds per connected body steal and 37.5%/12.5%/0.4% conditional drops; its Glutton's Robe steal is Very Rare, and its drop rarity labels differ from GameFAQs. For Lich, it lists Black Robe as Rare where GameFAQs labels it Semi-Rare and uses different rarity terms for Phoenix Down, Ether, and Elixir drops. These are source reports, not release-verified rates.",
   },
   {
     id: "jegged-crystal-world",
