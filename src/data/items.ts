@@ -371,6 +371,13 @@ const mythrilForkReferenceSources = [
   "jegged-forks",
   "jegged-conde-petie-mountain-path",
 ];
+const ralvurahvaEncounterSources = [
+  "gamefaqs-treno-71891",
+  "jegged-gargan-roo",
+  "elitegrindlab-gargan-roo",
+  "rpgclassics-gargan-roo",
+  "gamerguides-gargan-roo",
+];
 const hilgigarsStealSources = [
   "gamefaqs-conde-petie-mountain-path-71891",
   "jegged-conde-petie-mountain-path",
@@ -1253,9 +1260,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Try to steal one Mythril Fork from Ralvurahva before ending the outbound Gargant encounter. Later shops replace the item type if this encounter copy is missed.",
+    conditions: "Attempt Ralvurahva's Uncommon Mythril Fork steal before ending the outbound Gargant encounter; the chance-based attempt can fail, and published rates disagree. Later shops replace the item type if this encounter copy is missed.",
     walkthroughObjectiveIds: ["disc-2.journey-to-cleyra.ralvurahva-steals"],
-    sourceIds: mythrilForkReferenceSources,
+    enemyId: "enemy.ralvurahva",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.gargan-roo.ralvurahva"],
+    sourceIds: [...new Set([...mythrilForkReferenceSources, ...ralvurahvaEncounterSources])],
   },
   {
     id: "item-path.disc-2.conde-petie-mountain-path.hilgigars-mythril-fork-steal",
@@ -9214,10 +9224,13 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal Bone Wrist from Ralvurahva during the outbound Gargant ride before defeating the boss.",
+    conditions: "Attempt Ralvurahva's Common Bone Wrist steal during the outbound Gargant ride before reducing the boss to 0 HP; the chance-based attempt can fail, and published rates disagree.",
     notes: "This encounter's copy is unique to the one-time steal window, but Bone Wrist is replaceable from later shop sources at Cleyra, Treno, Lindblum, Black Mage Village, Alexandria, and Daguerreo.",
     walkthroughObjectiveIds: ["disc-2.journey-to-cleyra.ralvurahva-steals"],
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-journey-to-cleyra-71891", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"],
+    enemyId: "enemy.ralvurahva",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.gargan-roo.ralvurahva"],
+    sourceIds: [...new Set(["gamefaqs-items-71891", "gamefaqs-journey-to-cleyra-71891", ...ralvurahvaEncounterSources])],
   },
   {
     id: "item-path.disc-2.cleyra.bone-wrist-shop",

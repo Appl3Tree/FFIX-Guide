@@ -218,6 +218,50 @@ test("Hilgigars steals link exact boss slots and preserve the Fairy Flute label 
   assert.match(fairyFlutePath?.notes ?? "", /GameFAQs places Fairy Flute in the Rare steal slot; Jegged and Gamer Guides call it Very Rare/);
 });
 
+test("Ralvurahva steals link exact slots and preserve chance-based recovery routes", () => {
+  const expected = [
+    { pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-bone-wrist-steal", itemId: "game-item.bone-wrist", slot: "common" },
+    { pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-mythril-fork-steal", itemId: "game-item.mythril-fork", slot: "uncommon" },
+  ];
+  const enemyId = "enemy.ralvurahva";
+  const encounterId = "encounter.gargan-roo.ralvurahva";
+  const objectiveId = "disc-2.journey-to-cleyra.ralvurahva-steals";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const warning = missables.find((entry) => entry.id === "missable.disc-2.journey-to-cleyra.ralvurahva-steals");
+  const paths = itemAcquisitionPaths.filter((entry) => entry.chapterId === "disc-2.journey-to-cleyra" && entry.enemyId === enemyId && entry.method === "steal");
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.equal(paths.length, expected.length);
+  assert.equal(enemy?.drops.every((entry) => entry.itemId === null), true);
+  assert.equal(warning?.classification.includes("recoverable-later"), true);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.conditions?.includes("chance-based"));
+    assert.ok(path?.conditions?.includes("can fail"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
+    assert.ok(itemAcquisitionPaths.some((candidate) => candidate.itemId === item.itemId && candidate.chapterId !== "disc-2.journey-to-cleyra"), `${item.itemId} has a later recovery path`);
+  }
+
+  const step = walkthroughChapters.flatMap((chapter) => chapter.sections ?? []).flatMap((section) => section.steps ?? []).find((entry) => entry.id === "journey-cleyra-ralvurahva-steals");
+  assert.match(step?.text ?? "", /Common Bone Wrist and Uncommon Mythril Fork/);
+  assert.match(step?.text ?? "", /chance-based attempt can fail/);
+});
+
 test("Festival Zaghnol steals link the Hunt-only boss slots and source conflict", () => {
   const expected = [
     { pathId: "item-path.disc-1.lindblum.zaghnol-mythril-gloves-steal", itemId: "game-item.mythril-gloves", slot: "common" },

@@ -3331,9 +3331,11 @@ const recoverableDiscTwoBossStealWarnings = [
   {
     missableId: "missable.disc-2.journey-to-cleyra.ralvurahva-steals",
     objectiveId: "disc-2.journey-to-cleyra.ralvurahva-steals",
+    enemyId: "enemy.ralvurahva",
+    encounterId: "encounter.gargan-roo.ralvurahva",
     items: [
-      { itemId: "game-item.bone-wrist", pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-bone-wrist-steal", name: "Bone Wrist" },
-      { itemId: "game-item.mythril-fork", pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-mythril-fork-steal", name: "Mythril Fork" },
+      { itemId: "game-item.bone-wrist", pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-bone-wrist-steal", name: "Bone Wrist", slot: "common" },
+      { itemId: "game-item.mythril-fork", pathId: "item-path.disc-2.journey-to-cleyra.ralvurahva-mythril-fork-steal", name: "Mythril Fork", slot: "uncommon" },
     ],
   },
   {
@@ -3408,6 +3410,18 @@ for (const expected of recoverableDiscTwoBossStealWarnings) {
     if (!stealPath || stealPath.itemId !== item.itemId || stealPath.method !== "steal" || stealPath.availability !== "one-time-encounter" ||
       !stealPath.walkthroughObjectiveIds?.includes(expected.objectiveId)) {
       errors.push(`${expected.missableId} is missing the linked one-time ${item.name} steal path.`);
+    }
+    if (stealPath && expected.enemyId && expected.encounterId) {
+      const enemy = enemyRecords.find((record) => record.id === expected.enemyId);
+      const encounter = enemyEncounters.find((record) => record.id === expected.encounterId);
+      const lootSlot = enemy?.steals.find((slot) => slot.itemId === item.itemId && slot.slot === item.slot);
+      const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
+      if (stealPath.enemyId !== expected.enemyId || stealPath.enemyLootSlot !== item.slot ||
+        JSON.stringify(stealPath.encounterIds) !== JSON.stringify([expected.encounterId]) ||
+        !stealPath.conditions?.includes("chance-based") || !stealPath.conditions.includes("can fail") ||
+        !lootSlot || [...requiredSources].some((sourceId) => !stealPath.sourceIds.includes(sourceId))) {
+        errors.push(`${expected.missableId} ${item.name} path must match its exact ${item.slot} steal slot, one-time encounter, chance-based outcome, and source provenance.`);
+      }
     }
     if (!itemAcquisitionPaths.some((path) => path.itemId === item.itemId && guideAreas.findIndex((area) => area.id === path.chapterId) > chapterIndex)) {
       errors.push(`${expected.missableId} needs a later item-type source for ${item.name}.`);

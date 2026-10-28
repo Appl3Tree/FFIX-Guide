@@ -1793,13 +1793,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "ralvurahva-and-alexandria",
         title: "Ralvurahva — boss steals and story transition",
         summary: "Attempt the two steals, keep Dagger ready to heal, and finish the encounter to continue the story.",
-        sourceIds: ["gamefaqs-treno-71891", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"],
+        sourceIds: ["gamefaqs-treno-71891", "jegged-gargan-roo", "elitegrindlab-gargan-roo", "rpgclassics-gargan-roo", "gamerguides-gargan-roo"],
         steps: [
           {
             id: "journey-cleyra-ralvurahva-steals",
             kind: "combat",
-            text: "When Ralvurahva blocks the ride, have Marcus try to steal its Bone Wrist and Mythril Fork before ending the encounter. Keep Dagger available for Cure; use Blind if learned, and equip Antibody on Dagger and Steiner if available.",
-            detail: "The encounter is one-time. Both steal targets are consistently listed, but published steal rates and some enemy statistics conflict, so no percentage or fixed level is required. Prioritize survival over repeated attempts. If a steal is missed, Bone Wrist remains available at later shops; Mythril Fork can be bought at Conde Petie, Black Mage Village, Lindblum, or Esto Gaza before the Desert Palace.",
+            text: "When Ralvurahva blocks the ride, have Marcus attempt its Common Bone Wrist and Uncommon Mythril Fork steals before attacking it down to 0 HP; either chance-based attempt can fail. Keep Dagger available for Cure; use Blind if learned, and equip Antibody on Dagger and Steiner if available.",
+            detail: "The encounter is one-time and Ralvurahva escapes at 0 HP without drops, so finish the steal attempts first. Published success rates and some enemy statistics conflict; the guide records no fixed percentage or level. Prioritize survival over repeated attempts. If a steal is missed, Bone Wrist remains available at later shops; Mythril Fork can be bought at Conde Petie, Black Mage Village, Lindblum, or Esto Gaza before the Desert Palace.",
             objectiveIds: ["disc-2.journey-to-cleyra.ralvurahva-steals"],
           },
           {
