@@ -272,6 +272,8 @@ const blackWaltz2EtherDropSources = {
   rare: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
 };
 const plantBrainDropSources = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
+const plantBrainEyeDropsStealSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"];
+const plantBrainIronHelmStealSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "jegged-evil-forest", "gamerguides-evil-forest"];
 const iceCavernBossDropSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const iceCavernRegularLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const nolrichHeightsLootSources = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
@@ -2845,7 +2847,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.mythril-fork", name: "Mythril Fork", category: "equipment", sourceIds: mythrilForkReferenceSources, verification: "partial" },
   { id: "game-item.steepled-hat", name: "Steepled Hat", category: "equipment", sourceIds: steepledHatSources, verification: "partial" },
   { id: "game-item.silver-gloves", name: "Silver Gloves", category: "equipment", sourceIds: silverGlovesReferenceSources, verification: "partial" },
-  { id: "game-item.iron-helm", name: "Iron Helm", category: "equipment", sourceIds: [...ironHelmReferenceSources, ...daliUndergroundSources], verification: "partial" },
+  { id: "game-item.iron-helm", name: "Iron Helm", category: "equipment", sourceIds: [...new Set([...ironHelmReferenceSources, ...daliUndergroundSources, ...plantBrainIronHelmStealSources])], verification: "partial" },
   { id: "game-item.chain-mail", name: "Chain Mail", category: "equipment", sourceIds: chainMailReferenceSources, verification: "partial" },
   { id: "game-item.power-belt", name: "Power Belt", category: "equipment", sourceIds: powerBeltReferenceSources, verification: "partial" },
   { id: "game-item.glass-buckle", name: "Glass Buckle", category: "equipment", sourceIds: glassBuckleReferenceSources, verification: "partial" },
@@ -2993,7 +2995,7 @@ export const gameItems: GameItem[] = [
   { id: "game-item.thunder-gloves", name: "Thunder Gloves", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
   { id: "game-item.mages-hat", name: "Mage's Hat", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
   { id: "game-item.mythril-helm", name: "Mythril Helm", category: "equipment", sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"], verification: "partial" },
-  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: [...daliUndergroundSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"], verification: "partial" },
+  { id: "game-item.eye-drops", name: "Eye Drops", category: "consumable", sourceIds: [...new Set([...daliUndergroundSources, ...evilForestPickupSources, ...ipsensMogshopReentrySources, "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern", ...plantBrainEyeDropsStealSources])], verification: "partial" },
   { id: "game-item.annoyntment", name: "Annoyntment", category: "consumable", sourceIds: [...ipsensMogshopReentrySources, "gamefaqs-enemy-list-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-shops", "cavesofnarshe-ff9-disc-2-map", "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra"], verification: "partial" },
   { id: "game-item.headgear", name: "Headgear", category: "equipment", sourceIds: [...headgearReferenceSources, ...atlaDisc2ShopSources], verification: "partial" },
   { id: "game-item.barbut", name: "Barbut", category: "equipment", sourceIds: atlaDisc2ShopSources, verification: "partial" },
@@ -4349,6 +4351,24 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
     notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
     sourceIds: plantBrainDropSources,
+  },
+];
+
+const plantBrainStealPaths: ItemAcquisitionPath[] = [
+  {
+    id: "item-path.disc-1.evil-forest.plant-brain-eye-drops-common-steal",
+    itemId: "game-item.eye-drops",
+    chapterId: "disc-1.evil-forest",
+    method: "steal",
+    quantity: 1,
+    availability: "one-time-encounter",
+    conditions: "Attempt the chance-based Common steal for one Eye Drops from Plant Brain before the encounter ends; individual attempts can fail.",
+    notes: "GameFAQs, Jegged, and Gamer Guides list Eye Drops in the Common steal slot. The item type remains recoverable from Cinna if the boss opportunity is missed.",
+    walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
+    enemyId: "enemy.plant-brain",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    sourceIds: plantBrainEyeDropsStealSources,
   },
 ];
 
@@ -5903,6 +5923,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
   ...iceCavernChestPaths,
   ...observatoryMountainPickupPaths,
   ...blackWaltz2EtherDropPaths,
+  ...plantBrainStealPaths,
   ...plantBrainDropPaths,
   ...iceCavernRegularLootPaths,
   ...nolrichHeightsRegularLootPaths,
@@ -12140,10 +12161,13 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from Plant Brain before the first Evil Forest boss encounter ends.",
-    notes: "The boss-specific steal window ends with the encounter; Dali Underground and later shop paths replace the item copy.",
+    conditions: "Attempt the chance-based Uncommon steal for one Iron Helm from Plant Brain before the encounter ends; individual attempts can fail.",
+    notes: "GameFAQs and Gamer Guides label Iron Helm Uncommon; Jegged labels it Rare and reports 6% per connected attempt. These are source-specific claims, so no normalized or release-specific rate is asserted. The boss-specific window ends with the encounter; Dali Underground and later shop paths replace the item copy.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
-    sourceIds: ironHelmReferenceSources,
+    enemyId: "enemy.plant-brain",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    sourceIds: [...new Set([...ironHelmReferenceSources, ...plantBrainIronHelmStealSources])],
   },
   {
     id: "item-path.disc-1.village-of-dali.iron-helm-underground-chest",

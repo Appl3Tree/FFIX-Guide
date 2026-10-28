@@ -398,7 +398,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "plant-brain-steal-window",
             kind: "cutoff",
             text: "Before defeating Plant Brain, steal both Eye Drops and Iron Helm. Zidane can keep trying, and Blank joins during the fight so he can help if an item is still missing. Finish the boss only after deciding whether you want these one-time steals.",
-            detail: "The boss encounter is unique, but the item types have other sources: Cinna sells Eye Drops, and Iron Helm appears in Dali Underground and later shops. Published steal odds conflict, so the guide tracks the item names without a percentage.",
+            detail: "The boss encounter is unique, but the item types have other sources: Cinna sells Eye Drops, and Iron Helm appears in Dali Underground and later shops. GameFAQs and Gamer Guides label Iron Helm Uncommon; Jegged labels it Rare and reports 6% per connected attempt. Keep those claims source-specific; the guide does not assert a universal steal rate.",
             objectiveIds: ["disc-1.evil-forest.plant-brain-steals"],
           },
           {

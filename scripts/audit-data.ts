@@ -3844,6 +3844,49 @@ if (!plantBrainDropsObjective || !plantBrainDropsEncounter?.objectiveIds.include
   !plantBrainDropsRecord?.notes.some((note) => note.includes("37.5%, 12.5%, and 0.4%") && note.includes("different rarity labels"))) {
   errors.push("Plant Brain's guaranteed Phoenix Down and three conditional Potion drop slots must have sourced paths and a dedicated objective preserving the rarity-label conflict.");
 }
+const plantBrainStealsObjectiveId = "disc-1.evil-forest.plant-brain-steals";
+const plantBrainStealsObjective = objectivesById.get(plantBrainStealsObjectiveId);
+const plantBrainStealsWarning = missablesById.get("missable.disc-1.evil-forest.plant-brain-steals");
+const plantBrainStealsEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.evil-forest.plant-brain");
+const plantBrainStealsRecord = enemyRecords.find((enemy) => enemy.id === "enemy.plant-brain");
+const plantBrainStealExpectations = [
+  {
+    slot: "common",
+    itemId: "game-item.eye-drops",
+    pathId: "item-path.disc-1.evil-forest.plant-brain-eye-drops-common-steal",
+    sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"],
+  },
+  {
+    slot: "uncommon",
+    itemId: "game-item.iron-helm",
+    pathId: "item-path.disc-1.evil-forest.iron-helm-plant-brain-steal",
+    sourceIds: ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "gamerguides-evil-forest"],
+  },
+];
+if (!plantBrainStealsObjective || !plantBrainStealsWarning || plantBrainStealsWarning.objectiveId !== plantBrainStealsObjectiveId ||
+  !plantBrainStealsEncounter?.objectiveIds.includes(plantBrainStealsObjectiveId) ||
+  !plantBrainStealsRecord?.routeObjectiveIds.includes(plantBrainStealsObjectiveId) ||
+  itemAcquisitionPaths.filter((path) => path.enemyId === "enemy.plant-brain" && path.method === "steal").length !== plantBrainStealExpectations.length ||
+  plantBrainStealExpectations.some(({ slot, itemId, pathId, sourceIds }) => {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const enemySlot = plantBrainStealsRecord?.steals.find((entry) => entry.slot === slot && entry.itemId === itemId);
+    return !path || !item || !enemySlot || path.itemId !== itemId || path.chapterId !== "disc-1.evil-forest" ||
+      path.method !== "steal" || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+      path.enemyId !== "enemy.plant-brain" || path.enemyLootSlot !== slot ||
+      JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.evil-forest.plant-brain"]) ||
+      !path.conditions?.includes("chance-based") || !path.conditions.includes("can fail") ||
+      !path.walkthroughObjectiveIds?.includes(plantBrainStealsObjectiveId) ||
+      plantBrainStealsEncounter.sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+      sourceIds.some((sourceId) => !enemySlot.sourceIds.includes(sourceId) || !path.sourceIds.includes(sourceId) ||
+        !item.sourceIds.includes(sourceId) || !plantBrainStealsObjective.sourceIds.includes(sourceId) ||
+        !plantBrainStealsWarning.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId));
+  }) ||
+  !plantBrainStealsRecord?.notes.some((note) => note.includes("GameFAQs and Gamer Guides label Plant Brain's Iron Helm steal Uncommon") && note.includes("Jegged labels it Rare and reports 6% per connected attempt")) ||
+  !plantBrainStealsWarning.note?.includes("GameFAQs and Gamer Guides label the Iron Helm steal Uncommon") ||
+  !plantBrainStealsWarning.note.includes("Jegged labels it Rare and reports 6% per connected attempt")) {
+  errors.push("Plant Brain's Eye Drops and Iron Helm steals must link to their exact chance-based slots, encounter, objective, warning, and sources while preserving the Uncommon/Rare conflict.");
+}
 const earlyBossDropExpectations = [
   {
     chapterId: "disc-1.ice-cavern",

@@ -2141,6 +2141,67 @@ test("Plant Brain's guaranteed Phoenix Down and conditional Potion drops keep se
   }
 });
 
+test("Plant Brain steals link Eye Drops and Iron Helm to exact slots and preserve the rarity conflict", () => {
+  const enemyId = "enemy.plant-brain";
+  const encounterId = "encounter.evil-forest.plant-brain";
+  const objectiveId = "disc-1.evil-forest.plant-brain-steals";
+  const warningId = "missable.disc-1.evil-forest.plant-brain-steals";
+  const expected = [
+    { pathId: "item-path.disc-1.evil-forest.plant-brain-eye-drops-common-steal", itemId: "game-item.eye-drops", slot: "common" },
+    { pathId: "item-path.disc-1.evil-forest.iron-helm-plant-brain-steal", itemId: "game-item.iron-helm", slot: "uncommon" },
+  ];
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const warning = missables.find((entry) => entry.id === warningId);
+  const linkedStealPaths = itemAcquisitionPaths.filter((entry) => entry.enemyId === enemyId && entry.method === "steal");
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.equal(linkedStealPaths.length, expected.length);
+  assert.ok(objective, "Plant Brain steal objective is missing");
+  assert.ok(warning, "Plant Brain steal warning is missing");
+  assert.equal(warning?.objectiveId, objectiveId);
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const catalogItem = gameItems.find((entry) => entry.id === item.itemId);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.ok(slot, `${item.slot} Plant Brain steal slot exists`);
+    assert.ok(catalogItem, `${item.itemId} is missing from the item catalog`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-1.evil-forest");
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.conditions?.includes("chance-based"));
+    assert.ok(path?.conditions?.includes("can fail"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+
+    for (const sourceId of slot?.sourceIds ?? []) {
+      assert.ok(path?.sourceIds.includes(sourceId), `${item.pathId} omits slot source ${sourceId}`);
+      assert.ok(catalogItem?.sourceIds.includes(sourceId), `${item.itemId} omits slot source ${sourceId}`);
+      assert.ok(objective?.sourceIds.includes(sourceId), `${objectiveId} omits slot source ${sourceId}`);
+      assert.ok(warning?.sourceIds.includes(sourceId), `${warningId} omits slot source ${sourceId}`);
+    }
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${item.pathId} has unknown source ${sourceId}`);
+    }
+  }
+
+  const ironHelmPath = itemAcquisitionPaths.find((entry) => entry.id === "item-path.disc-1.evil-forest.iron-helm-plant-brain-steal");
+  assert.match(ironHelmPath?.notes ?? "", /GameFAQs and Gamer Guides label Iron Helm Uncommon; Jegged labels it Rare and reports 6% per connected attempt/);
+  assert.match(enemy?.notes.join(" ") ?? "", /GameFAQs and Gamer Guides label Plant Brain's Iron Helm steal Uncommon; Jegged labels it Rare and reports 6% per connected attempt/);
+  assert.match(warning?.note ?? "", /GameFAQs and Gamer Guides label the Iron Helm steal Uncommon; Jegged labels it Rare and reports 6% per connected attempt/);
+});
+
 test("early Disc I boss drops have guaranteed source-linked item paths", () => {
   const scenarios = [
     {

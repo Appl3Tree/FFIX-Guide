@@ -204,6 +204,8 @@ const worldMapZaghnolStatSources = [enemyListSourceId, "gamefaqs-monster-list-20
 const outerContinentFriendlySources = ["gamefaqs-monster-list-20490", "gamefaqs-friendly-creatures-71891", "gamefaqs-outer-continent-71891", "gamefaqs-magdalene-forest-71891", "flactem-friendly-monsters", "jegged-friendly-monsters"];
 const evilForestEnemySources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
 const evilForestBossSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest"];
+const plantBrainEyeDropsStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"];
+const plantBrainIronHelmStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "gamerguides-evil-forest"];
 const maskedManSources = ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "rpgclassics-primavista", "gamefaqs-walkthrough-15690"];
 const crashSiteBakuSources = ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest", "gamefaqs-walkthrough-15690"];
 const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
@@ -4590,7 +4592,8 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       { field: "Gil", value: 468, sourceIds: ["gamefaqs-evil-forest-71891"], verification: "single-source" },
     ],
     steals: [
-      evilForestLoot("common", "game-item.eye-drops"), evilForestLoot("uncommon", "game-item.iron-helm"),
+      sourcedLoot("common", "game-item.eye-drops", plantBrainEyeDropsStealSources),
+      sourcedLoot("uncommon", "game-item.iron-helm", plantBrainIronHelmStealSources),
       evilForestLoot("semi-rare", null, "Nothing"), evilForestLoot("rare", null, "Nothing"),
     ],
     drops: [
@@ -4619,8 +4622,8 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       sourceIds: ["vgkami-evil-forest", "jegged-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"],
     },
     routeObjectiveIds: ["disc-1.evil-forest.plant-brain-steals", "disc-1.evil-forest.plant-brain-drops"],
-    notes: ["GameFAQs and Jegged agree on 916 HP. The Hellplant/Plant Brain type is not assigned because the inspected boss table does not list a type.", "GameFAQs lists one guaranteed Phoenix Down and Common/Uncommon/Rare Potion slots. Jegged lists a guaranteed Phoenix Down and conditional Potion rates of 37.5%, 12.5%, and 0.4% under different rarity labels; the extra drops remain chance-based and exact slot mapping is unresolved."],
-  }, evilForestChapterId, [...evilForestBossSources, "vgkami-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"], ["missable.disc-1.evil-forest.plant-brain-steals"], ["cutoff.evil-forest.escape"]),
+    notes: ["GameFAQs and Jegged agree on 916 HP. The Hellplant/Plant Brain type is not assigned because the inspected boss table does not list a type.", "GameFAQs lists one guaranteed Phoenix Down and Common/Uncommon/Rare Potion slots. Jegged lists a guaranteed Phoenix Down and conditional Potion rates of 37.5%, 12.5%, and 0.4% under different rarity labels; the extra drops remain chance-based and exact slot mapping is unresolved.", "GameFAQs and Gamer Guides label Plant Brain's Iron Helm steal Uncommon; Jegged labels it Rare and reports 6% per connected attempt. The Eye Drops Common label is consistent across the inspected tables. Keep the Iron Helm rarity and odds source-scoped; no normalized rate is asserted."],
+  }, evilForestChapterId, [...evilForestBossSources, "gamefaqs-evil-forest-79143", "gamerguides-evil-forest", "vgkami-evil-forest", "gamefaqs-no-equipment-29826", "gamefaqs-perfect-game-41181"], ["missable.disc-1.evil-forest.plant-brain-steals"], ["cutoff.evil-forest.escape"]),
   chapterBoss({
     id: "enemy.baku-crash-site",
     name: "Baku (Prima Vista Crash Site)",
