@@ -2593,6 +2593,16 @@ test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their wa
     const step = getStep(chapterId, stepId);
     assert.match(`${step?.text ?? ""} ${step?.detail ?? ""}`, phrase);
   }
+  const trenoGlassArmletPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.glass-armlet-shop");
+  const trenoGlassArmletCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.glass-armlet-treno-candidate");
+  const drsliceTrenoArmory = sources.find((source) => source.id === "drslice-treno-armory");
+  assert.ok(trenoGlassArmletPath?.sourceIds.includes("drslice-treno-armory"));
+  assert.ok(trenoGlassArmletCandidate?.sourceIds.includes("drslice-treno-armory"));
+  assert.equal(trenoGlassArmletCandidate?.availability, "window-unverified");
+  assert.match(trenoGlassArmletPath?.conditions ?? "", /DrSlice independently lists it for 250 Gil under Treno \(Disk 2\)/);
+  assert.match(trenoGlassArmletCandidate?.conditions ?? "", /does not resolve the Disc III candidate/);
+  assert.match(drsliceTrenoArmory?.notes ?? "", /Treno \(Disk 2\)/);
+  assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /DrSlice independently lists it in the Treno Armory and labels the location Treno \(Disk 2\)/);
   assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /distinct from the unresolved later Treno listing/);
   assert.match(getStep("disc-2.magdalene-forest", "black-mage-village-shop-check")?.detail ?? "", /Alexandria remains a later seller/);
 });

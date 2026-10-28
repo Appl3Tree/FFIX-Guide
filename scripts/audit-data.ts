@@ -4964,6 +4964,8 @@ if (
   glassArmletDisc2TrenoPath.availability !== "limited-window" ||
   glassArmletDisc2TrenoPath.cost?.amount !== 250 ||
   !glassArmletDisc2TrenoPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !glassArmletDisc2TrenoPath.sourceIds.includes("drslice-treno-armory") ||
+  !glassArmletDisc2TrenoPath.conditions?.includes("DrSlice independently lists it for 250 Gil under Treno (Disk 2)") ||
   !glassArmletDisc2TrenoPath.conditions?.includes("safe purchase point")
 ) {
   errors.push("Glass Armlet's early Lindblum and Disc II shop purchases must remain distinct from the disputed later city listings.");
@@ -4988,6 +4990,10 @@ for (const [path, chapterId, city] of [
     !path.sourceIds.includes("rpgclassics-shops") ||
     !path.sourceIds.includes("ffwiki-shops") ||
     !path.sourceIds.includes("gameclue-armlets") ||
+    (city === "Treno" && (
+      !path.sourceIds.includes("drslice-treno-armory") ||
+      !/DrSlice independently labels its Treno Armory listing as Disk 2/i.test(path.conditions ?? "")
+    )) ||
     !/unverified candidate route/i.test(path.conditions ?? "") ||
     !/(?:does not prove|do not (?:prove|establish))/i.test(path.conditions ?? "") ||
     !/GameClue's iPhone\/Android\/PS1 armlet list/i.test(path.conditions ?? "") ||
@@ -9280,6 +9286,7 @@ if (
   }) ||
   !atlaMogshopStep?.text.includes("Headgear costs 330 Gil and Magus Hat 400 Gil") ||
   !trenoGlassArmletStep?.detail?.includes("Glass Armlet at 250 Gil here") ||
+  !trenoGlassArmletStep.detail.includes("DrSlice independently lists it in the Treno Armory") ||
   !trenoGlassArmletStep.detail.includes("later Treno listing") ||
   !blackMageVillageBoneWristStep?.detail?.includes("GameFAQs lists Bone Wrist in this Weapon Shop on Discs II–III") ||
   !blackMageVillageBoneWristStep.detail.includes("Alexandria remains a later seller") ||

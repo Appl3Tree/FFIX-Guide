@@ -1236,6 +1236,14 @@ export const sources = [
     notes: "Lists Glass Armlet for 250 Gil under a No. 239's Armory heading labeled Disk 2 & 3; the location footer labels Black Mage Village (Disk 2). RPGClassics identifies No. 239's Weapon Shop as Black Mage Village. Preserve both DrSlice labels: this is an additional published-table listing for the Black Mage Village route, but the page's different disc labels do not independently settle the Disc III stock window or platform/build behavior.",
   },
   {
+    id: "drslice-treno-armory",
+    title: "Treno Armory — Final Fantasy IX shops",
+    publisher: "DrSlice",
+    url: "https://www.drslice.com/games/ff9/shop/47?d=&o=name",
+    accessed: "2026-10-28",
+    notes: "Lists Glass Armlet for 250 Gil in the Treno Armory and labels the location Treno (Disk 2). This independently supports the Disc II Treno purchase; it does not establish later Treno stock or release-specific behavior.",
+  },
+  {
     id: "gamefaqs-monster-list-20490",
     title: "Monster List — Revival_Flame",
     publisher: "GameFAQs",

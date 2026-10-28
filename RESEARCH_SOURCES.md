@@ -721,6 +721,11 @@ Item-target quantity semantics check (2026-10-25): [GameFAQs' Items reference](h
 - [The older _ATadeo_ GameFAQs walkthrough](https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/9801) lists Glass Armlet for 250 Gil in its Disc III Alexandria and Treno equipment lists. Its Lindblum Disc III list omits the item.
 - Treno's positive listing adds a source conflict against the newer GameFAQs Shops table and older GameFAQs Items/Equipment references, which list Treno only on Disc II. Jegged also lists both Disc III city sales; GameFAQs, RPGClassics, and Final Fantasy Wiki later Treno tables omit Glass Armlet. The Treno and Lindblum paths remain `window-unverified`: published lists do not confirm in-game access or the exact stock window, and Lindblum's omission does not prove absence. Alexandria remains the documented Disc III–IV recovery shop.
 
+## Glass Armlet Treno Armory Disc II cross-check (2026-10-28)
+
+- [DrSlice's Treno Armory table](https://www.drslice.com/games/ff9/shop/47?d=&o=name) lists Glass Armlet for 250 Gil and labels the location “Treno (Disk 2).” This independently supports the Disc II purchase already listed by GameFAQs and RPGClassics.
+- The page provides only the Disc II listing; it does not establish later Treno stock or release-specific behavior. Keep the separate Disc III Treno and Lindblum candidates `window-unverified` pending direct stock evidence.
+
 ## Glass Armlet Black Mage Village stock cross-check (2026-10-26)
 
 - [DrSlice’s No. 239’s Armory page](https://www.drslice.com/games/ff9/shop/33) lists Glass Armlet for 250 Gil. Its section heading says “Disk 2 & 3,” while the location footer says “Black Mage Village (Disk 2)”; RPGClassics identifies No. 239’s Weapon Shop as Black Mage Village.
