@@ -2435,6 +2435,74 @@ test("Plant Brain steals link Eye Drops and Iron Helm to exact slots and preserv
   assert.match(warning?.note ?? "", /GameFAQs and Gamer Guides label the Iron Helm steal Uncommon; Jegged labels it Rare and reports 6% per connected attempt/);
 });
 
+test("Taharka steals link all three items to their exact slots in the one-time Ipsen encounter", () => {
+  const enemyId = "enemy.taharka";
+  const encounterId = "encounter.ipsens-castle.taharka";
+  const objectiveId = "disc-3.ipsens-castle.taharka-steals";
+  const warningId = "missable.disc-3.ipsens-castle.taharka-steals";
+  const expected = [
+    { pathId: "item-path.disc-3.ipsens-castle.taharka-elixir-steal", itemId: "game-item.elixir", slot: "common" },
+    { pathId: "item-path.disc-3.ipsens-castle.taharka-mythril-claws-steal", itemId: "game-item.mythril-claws", slot: "uncommon" },
+    { pathId: "item-path.disc-3.ipsens-castle.taharka-orichalcon-steal", itemId: "game-item.orichalcon", slot: "semi-rare" },
+  ];
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const warning = missables.find((entry) => entry.id === warningId);
+  const linkedPaths = itemAcquisitionPaths.filter((entry) => entry.enemyId === enemyId && entry.method === "steal");
+  const step = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.ipsens-castle")
+    ?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "ipsens-taharka");
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  assert.equal(linkedPaths.length, expected.length);
+  assert.ok(objective, "Taharka steal objective is missing");
+  assert.ok(warning, "Taharka steal warning is missing");
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
+  assert.equal(warning?.objectiveId, objectiveId);
+
+  for (const { pathId, itemId, slot: slotName } of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === itemId && entry.slot === slotName);
+    const item = gameItems.find((entry) => entry.id === itemId);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${pathId} exists`);
+    assert.ok(slot, `${slotName} Taharka steal slot exists`);
+    assert.ok(item, `${itemId} is missing from the item catalog`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.chapterId, "disc-3.ipsens-castle");
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, slotName);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.match(path?.conditions ?? "", /chance-based/);
+    assert.match(path?.conditions ?? "", /can fail/);
+    assert.doesNotMatch(path?.conditions ?? "", /\d+(?:\.\d+)?%/);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${pathId} includes enemy, encounter, and slot provenance`);
+
+    for (const sourceId of slot?.sourceIds ?? []) {
+      assert.ok(item?.sourceIds.includes(sourceId), `${itemId} omits slot source ${sourceId}`);
+      assert.ok(objective?.sourceIds.includes(sourceId), `${objectiveId} omits slot source ${sourceId}`);
+      assert.ok(warning?.sourceIds.includes(sourceId), `${warningId} omits slot source ${sourceId}`);
+    }
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} has unknown source ${sourceId}`);
+    }
+    assert.ok(itemAcquisitionPaths.some((candidate) => candidate.itemId === itemId && candidate.chapterId !== "disc-3.ipsens-castle"), `${itemId} has a later recovery path`);
+  }
+
+  assert.match(step?.text ?? "", /Common Elixir, Uncommon Mythril Claws, and Semi-Rare Orichalcon/);
+  assert.match(step?.text ?? "", /Each chance-based attempt can fail/);
+  assert.doesNotMatch(`${step?.text ?? ""} ${step?.detail ?? ""}`, /\d+(?:\.\d+)?%/);
+});
+
 test("early Disc I boss drops have guaranteed source-linked item paths", () => {
   const scenarios = [
     {

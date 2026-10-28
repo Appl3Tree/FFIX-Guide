@@ -78,6 +78,16 @@ export type EquipmentAbilityClaim = {
 };
 
 const ipsensMogshopReentrySources = ["gamefaqs-ipsens-castle-71891", "elitegrindlab-ipsens-castle"];
+const ipsensTaharkaStealPathSources = [
+  "gamefaqs-enemy-list-71891",
+  "gamefaqs-ipsens-castle-71891",
+  "jegged-ipsens-castle",
+  "flactem-ipsens-castle",
+  "elitegrindlab-ipsens-castle",
+  "gamefaqs-abilities-71891",
+  "rpgclassics-bestiary-t-z",
+  "gamefaqs-items-71891",
+];
 const ipsensDisc3SupplyListedSlugs = new Set([
   "hi-potion", "phoenix-down", "magic-tag", "remedy", "vaccine", "annoyntment", "tent",
 ]);
@@ -6094,9 +6104,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Attempt this Taharka steal before the fixed mural-room fight ends. Elixir remains obtainable through other item routes if this encounter copy is missed.",
+    conditions: "Attempt Taharka's Common Elixir steal before the fixed mural-room fight ends; the chance-based attempt can fail. Elixir remains obtainable through other item routes if this encounter copy is missed.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.taharka-steals"],
-    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "rpgclassics-bestiary-t-z"],
+    enemyId: "enemy.taharka",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.ipsens-castle.taharka"],
+    sourceIds: [...new Set(ipsensTaharkaStealPathSources)],
   },
   {
     id: "item-path.disc-3.ipsens-castle.taharka-mythril-claws-steal",
@@ -6105,9 +6118,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Attempt this Taharka steal before the fixed mural-room fight ends. Later Mogshops sell Mythril Claws if this encounter copy is missed.",
+    conditions: "Attempt Taharka's Uncommon Mythril Claws steal before the fixed mural-room fight ends; the chance-based attempt can fail. Later Mogshops sell Mythril Claws if this encounter copy is missed.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.taharka-steals"],
-    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "rpgclassics-bestiary-t-z"],
+    enemyId: "enemy.taharka",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.ipsens-castle.taharka"],
+    sourceIds: [...new Set(ipsensTaharkaStealPathSources)],
   },
   {
     id: "item-path.disc-3.ipsens-castle.taharka-orichalcon-steal",
@@ -6116,9 +6132,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Attempt this semi-rare Taharka steal before the fixed mural-room fight ends. Bran Bal and Daguerreo sell Orichalcon later if this encounter copy is missed.",
+    conditions: "Attempt Taharka's Semi-Rare Orichalcon steal before the fixed mural-room fight ends; the chance-based attempt can fail. Bran Bal and Daguerreo sell Orichalcon later if this encounter copy is missed.",
     walkthroughObjectiveIds: ["disc-3.ipsens-castle.taharka-steals"],
-    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "rpgclassics-bestiary-t-z"],
+    enemyId: "enemy.taharka",
+    enemyLootSlot: "semi-rare",
+    encounterIds: ["encounter.ipsens-castle.taharka"],
+    sourceIds: [...new Set(ipsensTaharkaStealPathSources)],
   },
   {
     id: "item-path.disc-2.journey-to-treno.flame-staff-black-waltz-3-steal",

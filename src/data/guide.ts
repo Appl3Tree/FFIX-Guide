@@ -6206,7 +6206,7 @@ export const objectives: GameObjective[] = [
     id: "disc-3.ipsens-castle.taharka-steals",
     title: "Attempt all three Taharka steals before the one-time fight ends",
     category: "collection",
-    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "flactem-ipsens-castle"],
+    sourceIds: ["gamefaqs-ipsens-castle-71891", "gamefaqs-items-71891", "flactem-ipsens-castle", "rpgclassics-bestiary-t-z"],
     chapterIds: ["disc-3.ipsens-castle"],
     profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",

@@ -7342,17 +7342,39 @@ const ipsensTaharkaEncounter = ipsensEncounterById.get("encounter.ipsens-castle.
 const ipsensTaharkaWarning = missablesById.get("missable.disc-3.ipsens-castle.taharka-steals");
 const ipsensTaharkaCutoff = cutoffsById.get("cutoff.ipsens-castle.taharka-steals");
 const ipsensTaharkaStealPaths = [
-  ["item-path.disc-3.ipsens-castle.taharka-elixir-steal", "game-item.elixir"],
-  ["item-path.disc-3.ipsens-castle.taharka-mythril-claws-steal", "game-item.mythril-claws"],
-  ["item-path.disc-3.ipsens-castle.taharka-orichalcon-steal", "game-item.orichalcon"],
+  ["item-path.disc-3.ipsens-castle.taharka-elixir-steal", "game-item.elixir", "common"],
+  ["item-path.disc-3.ipsens-castle.taharka-mythril-claws-steal", "game-item.mythril-claws", "uncommon"],
+  ["item-path.disc-3.ipsens-castle.taharka-orichalcon-steal", "game-item.orichalcon", "semi-rare"],
 ] as const;
-const ipsensTaharkaPathMismatch = ipsensTaharkaStealPaths.some(([pathId, itemId]) => {
+const ipsensTaharkaStealObjective = objectivesById.get("disc-3.ipsens-castle.taharka-steals");
+const ipsensTaharkaPathMismatch = ipsensTaharkaStealPaths.some(([pathId, itemId, slotName]) => {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === pathId);
-  return path?.itemId !== itemId
+  const item = gameItems.find((candidate) => candidate.id === itemId);
+  const lootSlot = ipsensTaharka?.steals.find((candidate) => candidate.itemId === itemId && candidate.slot === slotName);
+  const requiredSources = new Set([
+    ...(ipsensTaharka?.sourceIds ?? []),
+    ...(ipsensTaharkaEncounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+  ]);
+  return !path || !item || !lootSlot || lootSlot.itemId !== itemId
+    || path.itemId !== itemId
     || path.chapterId !== "disc-3.ipsens-castle"
     || path.method !== "steal"
+    || path.quantity !== 1
     || path.availability !== "one-time-encounter"
-    || !path.walkthroughObjectiveIds?.includes("disc-3.ipsens-castle.taharka-steals");
+    || path.enemyId !== "enemy.taharka"
+    || path.enemyLootSlot !== slotName
+    || JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.ipsens-castle.taharka"])
+    || !path.conditions?.includes("chance-based")
+    || !path.conditions.includes("can fail")
+    || !path.walkthroughObjectiveIds?.includes("disc-3.ipsens-castle.taharka-steals")
+    || [...requiredSources].some((sourceId) => !path.sourceIds.includes(sourceId))
+    || !["gamefaqs-ipsens-castle-71891", "rpgclassics-bestiary-t-z"].every((sourceId) =>
+      lootSlot.sourceIds.includes(sourceId) && path.sourceIds.includes(sourceId) &&
+      item.sourceIds.includes(sourceId) && ipsensTaharkaStealObjective?.sourceIds.includes(sourceId) &&
+      ipsensTaharkaWarning?.sourceIds.includes(sourceId) && sourceIds.has(sourceId))
+    || path.sourceIds.some((sourceId) => !sourceIds.has(sourceId))
+    || /\d+(?:\.\d+)?%/.test(path.conditions);
 });
 if (
   ipsensPoolsMismatch || ipsensBlueMagicMismatch ||
@@ -7364,6 +7386,8 @@ if (
   !ipsensTaharka.cutoffIds.includes("cutoff.ipsens-castle.taharka-steals") ||
   ipsensTaharkaEncounter?.kind !== "boss" ||
   !ipsensTaharkaEncounter.objectiveIds.includes("disc-3.ipsens-castle.mirrors") ||
+  !ipsensTaharkaEncounter.objectiveIds.includes("disc-3.ipsens-castle.taharka-steals") ||
+  itemAcquisitionPaths.filter((path) => path.enemyId === "enemy.taharka" && path.method === "steal").length !== ipsensTaharkaStealPaths.length ||
   ipsensTaharkaStealPaths.some(([pathId]) => !itemAcquisitionPaths.some((path) => path.id === pathId)) ||
   ipsensTaharkaPathMismatch ||
   !ipsensTaharkaWarning?.sourceIds.includes("rpgclassics-bestiary-t-z") ||
