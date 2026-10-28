@@ -3112,8 +3112,13 @@ const atlaDisc2Paths = itemAcquisitionPaths.filter((path) =>
   path.chapterId === "disc-2.journey-to-cleyra" && path.shopId === "burmecia.atla-mogshop",
 );
 const atlaDisc2ItemIds = new Set(atlaDisc2Paths.map((path) => path.itemId));
+const atlaDisc2StockObjectiveId = "disc-2.journey-to-cleyra.atla-mogshop-stock";
+const atlaDisc2StockObjective = objectives.find((objective) => objective.id === atlaDisc2StockObjectiveId);
 if (atlaDisc2Paths.length !== atlaDisc2ShopPrices.size || atlaDisc2ItemIds.size !== atlaDisc2ShopPrices.size) {
   errors.push(`Atla's Disc II Mogshop must have exactly ${atlaDisc2ShopPrices.size} distinct priced product paths; found ${atlaDisc2Paths.length} paths for ${atlaDisc2ItemIds.size} products.`);
+}
+if (!atlaDisc2StockObjective || !atlaDisc2StockObjective.chapterIds.includes("disc-2.journey-to-cleyra")) {
+  errors.push("Atla's Disc II Mogshop stock checkpoint must exist in the pre-Cleyra chapter.");
 }
 for (const [itemId, price] of atlaDisc2ShopPrices) {
   const path = atlaDisc2Paths.find((candidate) => candidate.itemId === itemId);
@@ -3124,8 +3129,14 @@ for (const [itemId, price] of atlaDisc2ShopPrices) {
   if (path.method !== "mogshop" || path.quantity !== 1 || path.cost?.currency !== "gil" || path.cost.amount !== price) {
     errors.push(`Atla's Disc II Mogshop path for ${itemId} must be one Mogshop purchase priced at ${price} Gil.`);
   }
+  if (path.availability !== "limited-window" || !path.walkthroughObjectiveIds?.includes(atlaDisc2StockObjectiveId)) {
+    errors.push(`Atla's Disc II Mogshop path for ${itemId} must be limited-window and link to its stock checkpoint.`);
+  }
   for (const sourceId of ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map"]) {
     if (!path.sourceIds.includes(sourceId)) errors.push(`Atla's Disc II Mogshop path for ${itemId} must cite ${sourceId}.`);
+  }
+  if (!path.sourceIds.includes("flactem-disc-2-cleyra")) {
+    errors.push(`Atla's Disc II Mogshop path for ${itemId} must cite the optional return route source.`);
   }
   if (itemId === "game-item.mythril-gloves" && !path.sourceIds.includes("gamefaqs-equipment-33383")) {
     errors.push("Atla's Disc II Mythril Gloves path must cite the independent GameFAQs equipment table supporting the 980-Gil price.");
@@ -3160,10 +3171,11 @@ const atlaDisc2Instruction = walkthroughChapters
   ?.sections.flatMap((section) => section.steps)
   .find((step) => step.id === "journey-cleyra-atla-mogshop-return");
 if (!atlaDisc2Instruction || !atlaDisc2Instruction.text.includes("Atla's Mogshop on Disc II") ||
-  !atlaDisc2Instruction.detail?.includes("not the accessibility of every Disc I chest room")) {
+  !atlaDisc2Instruction.detail?.includes("not the accessibility of every Disc I chest room") ||
+  !atlaDisc2Instruction.objectiveIds?.includes(atlaDisc2StockObjectiveId)) {
   errors.push("The optional Atla return needs a walkthrough instruction that preserves its Disc II access scope.");
 }
-console.log(`Atla's Disc II Mogshop: ${atlaDisc2ItemIds.size}/${atlaDisc2ShopPrices.size} sourced stock paths on the pre-Cleyra return.`);
+console.log(`Atla's Disc II Mogshop: ${atlaDisc2ItemIds.size}/${atlaDisc2ShopPrices.size} sourced stock paths linked to the pre-Cleyra checkpoint.`);
 const cleyraShopPaths = itemAcquisitionPaths.filter((path) =>
   path.chapterId === "disc-2.cleyra" && path.shopId?.startsWith("cleyra."),
 );

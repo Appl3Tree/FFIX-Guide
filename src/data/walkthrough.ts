@@ -1814,7 +1814,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "optional-cleyra-approach",
         title: "Before Cleyra — Burmecia, Kupo Nut, and Qu's Marsh",
         summary: "Use the available return routes before entering Cleyra's one-way story area.",
-        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "flactem-disc-2-cleyra", "ff9-kouryaku-burmecia", "jegged-gargan-roo"],
+        sourceIds: ["gamefaqs-journey-to-cleyra-71891", "gamefaqs-kupo-nuts-71891", "gamefaqs-frog-catching-71891", "gamefaqs-exploring-lindblum-71891", "gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra", "ff9-kouryaku-burmecia", "jegged-gargan-roo"],
         steps: [
           {
             id: "journey-cleyra-burmecia-mythril-spear",
@@ -1826,8 +1826,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "journey-cleyra-atla-mogshop-return",
             kind: "optional",
-            text: "If you want Atla's Mogshop on Disc II, re-enter Burmecia and visit the shop near the back of town before heading back through Gizamaluke's Grotto. The shop lists Headgear for 330 Gil, Phoenix Down for 150 Gil, and Steepled Hat for 260 Gil.",
-            detail: "Flactem documents the Disc II city visit and shop stop; the GameFAQs shop table supplies the listed stock and prices. This confirms access to Atla's Mogshop before Cleyra, not the accessibility of every Disc I chest room. Keep the Disc I sweep as the safe route for unverified pickups.",
+            text: "If you want Atla's Mogshop on Disc II, re-enter Burmecia and check the full 16-product stock before returning through Gizamaluke's Grotto and entering Cleyra. Use the item reference to choose any needed copies; you do not need to buy every product.",
+            detail: "Flactem confirms the optional Disc II return before Cleyra; GameFAQs and Caves of Narshe list Atla's stock. The Mythril Gloves price conflicts (720 Gil in the newer GameFAQs shop table, 980 Gil in Caves of Narshe and older GameFAQs shop/equipment references), so check the in-game price. This is a limited window for this shop visit, not proof that every listed item type becomes permanently unavailable. It confirms access to Atla's Mogshop before Cleyra, not the accessibility of every Disc I chest room.",
+            objectiveIds: ["disc-2.journey-to-cleyra.atla-mogshop-stock"],
           },
           {
             id: "journey-cleyra-kupo-nut",

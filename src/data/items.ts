@@ -693,6 +693,7 @@ const glassArmletReferenceSources = [
   "ffwiki-shops",
 ];
 const atlaDisc2ShopSources = ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"];
+const atlaDisc2ShopObjectiveId = "disc-2.journey-to-cleyra.atla-mogshop-stock";
 const headgearReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-equipment-33383",
@@ -998,6 +999,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Atla's Mogshop (Burmecia, Disc II)",
     cost: { currency: "gil", amount: 250 },
     conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Glass Armlet for 250 Gil.",
+    walkthroughObjectiveIds: [atlaDisc2ShopObjectiveId],
     sourceIds: [...glassArmletReferenceSources, "flactem-disc-2-cleyra"],
   },
   {
@@ -1857,6 +1859,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopName: "Atla's Mogshop (Burmecia, Disc II)",
     cost: { currency: "gil", amount: 400 },
     conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Magus Hat for 400 Gil.",
+    walkthroughObjectiveIds: [atlaDisc2ShopObjectiveId],
     sourceIds: [...magusHatReferenceSources, "flactem-disc-2-cleyra"],
   },
   {
@@ -3087,6 +3090,7 @@ const atlaDisc2ShopPaths: ItemAcquisitionPath[] = atlaDisc2ShopProducts.map(([sl
   shopId: "burmecia.atla-mogshop",
   shopName: "Atla's Mogshop (Burmecia, Disc II)",
   cost: { currency: "gil" as const, amount: price },
+  walkthroughObjectiveIds: [atlaDisc2ShopObjectiveId],
   conditions: itemName === "Mythril Gloves"
     ? "The older GameFAQs Shop Lists and Equipment List, plus Caves of Narshe, give Atla's Mythril Gloves price as 980 Gil. The newer GameFAQs Shops table lists 720 Gil at Atla, but gives 980 Gil for the same item at Summit Station, Treno, and Cleyra and lists Silver Gloves for 720; treat the Atla row as a likely table typo pending in-game verification. Flactem documents the optional return before Cleyra."
     : itemName === "Headgear"
@@ -12092,6 +12096,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Atla's Mogshop (Burmecia, Disc II)",
     conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; GameFAQs and Caves of Narshe list Phoenix Down for 150 Gil in the shop stock.",
     cost: { currency: "gil", amount: 150 },
+    walkthroughObjectiveIds: [atlaDisc2ShopObjectiveId],
     sourceIds: ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"],
   },
   {
@@ -13295,6 +13300,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     shopName: "Atla's Mogshop (Burmecia, Disc II)",
     cost: { currency: "gil", amount: 260 },
     conditions: "Atla's Mogshop is accessible during the optional Disc II return before Cleyra; the GameFAQs shop table lists Steepled Hat for 260 Gil. This confirms the shop route, not access to every Disc I Burmecia chest room.",
+    walkthroughObjectiveIds: [atlaDisc2ShopObjectiveId],
     sourceIds: steepledHatSources,
   },
   ...atlaDisc2ShopPaths,

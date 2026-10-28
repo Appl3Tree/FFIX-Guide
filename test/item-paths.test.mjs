@@ -978,6 +978,53 @@ test("Soft has repeatable shop sources through the late game", () => {
   assert.equal(softPaths.filter((path) => path.method === "chest" || path.method === "hidden-pickup").length, 2);
 });
 
+test("Disc II Atla Mogshop paths link to the pre-Cleyra stock checkpoint", () => {
+  const objectiveId = "disc-2.journey-to-cleyra.atla-mogshop-stock";
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const paths = itemAcquisitionPaths.filter((path) =>
+    path.chapterId === "disc-2.journey-to-cleyra" && path.shopId === "burmecia.atla-mogshop",
+  );
+  const expectedItems = [
+    "game-item.antidote",
+    "game-item.barbut",
+    "game-item.bronze-vest",
+    "game-item.echo-screen",
+    "game-item.eye-drops",
+    "game-item.glass-armlet",
+    "game-item.headgear",
+    "game-item.linen-cuirass",
+    "game-item.magus-hat",
+    "game-item.mythril-gloves",
+    "game-item.needle-fork",
+    "game-item.phoenix-down",
+    "game-item.potion",
+    "game-item.soft",
+    "game-item.steepled-hat",
+    "game-item.tent",
+  ];
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-2.journey-to-cleyra");
+  const step = chapter?.sections.flatMap((section) => section.steps)
+    .find((entry) => entry.id === "journey-cleyra-atla-mogshop-return");
+
+  assert.equal(paths.length, 16);
+  assert.deepEqual(paths.map((path) => path.itemId).sort(), expectedItems);
+  assert.equal(objective?.category, "side-content");
+  assert.ok(objective?.chapterIds.includes("disc-2.journey-to-cleyra"));
+  for (const sourceId of ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"]) {
+    assert.ok(objective?.sourceIds.includes(sourceId), `${objectiveId} is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+  }
+  for (const path of paths) {
+    assert.equal(path.availability, "limited-window", `${path.id} should retain its shop-window classification`);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId), `${path.id} is not linked to the stock checkpoint`);
+    assert.ok(path.sourceIds.includes("flactem-disc-2-cleyra"), `${path.id} is missing the route source`);
+  }
+  assert.ok(step?.objectiveIds?.includes(objectiveId));
+  assert.match(step?.text ?? "", /before returning through Gizamaluke's Grotto and entering Cleyra/i);
+  assert.match(step?.detail ?? "", /not proof that every listed item type becomes permanently unavailable/i);
+  assert.match(step?.detail ?? "", /720 Gil.*980 Gil/i);
+});
+
 test("Alexandria's Disc III pickups and Stiltzkin bundle have item-level paths", () => {
   const alexandria = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-3.the-home-front");
   const sourcesForAll = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];

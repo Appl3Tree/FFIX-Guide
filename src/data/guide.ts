@@ -4678,6 +4678,15 @@ export const objectives: GameObjective[] = [
     verification: "partial",
   },
   {
+    id: "disc-2.journey-to-cleyra.atla-mogshop-stock",
+    title: "Review Atla's limited Disc II Mogshop stock before Cleyra",
+    category: "side-content",
+    sourceIds: ["gamefaqs-shops-71891", "cavesofnarshe-ff9-disc-2-map", "flactem-disc-2-cleyra"],
+    chapterIds: ["disc-2.journey-to-cleyra"],
+    profileIds: ["comprehensive", "perfect", "custom"],
+    verification: "partial",
+  },
+  {
     id: "disc-2.cleyra.treasure-sweep",
     title: "Clear Cleyra's Trunk and settlement treasure before the final departure",
     category: "exploration",
