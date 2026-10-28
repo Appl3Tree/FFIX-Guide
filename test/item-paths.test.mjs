@@ -2446,6 +2446,30 @@ test("Summit Station's limited-window shop paths link to the optional stock chec
     ?.walkthroughObjectiveIds?.includes("disc-2.treno.air-racket-purchase"));
 });
 
+test("Cour89's time-limited shop table scopes the Summit cutoff evidence to Iron Helm", () => {
+  const source = sources.find((entry) => entry.id === "cour89-limited-shops");
+  const summitIronHelm = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.journey-to-treno.summit-station-iron-helm-shop");
+  const southGateIronHelm = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.south-gate.iron-helm-candidate");
+  const southGateSilverGloves = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.south-gate.silver-gloves-candidate");
+  const warning = missables.find((entry) => entry.id === "missable.disc-2.journey-to-treno.summit-station-equipment-stock");
+
+  assert.equal(source?.url, "https://cour89.com/ff9/tips/goods.php");
+  assert.match(source?.notes ?? "", /Iron Helm's last purchase is at South Gate: Summit Station before boarding the Iron Horse/);
+  assert.match(source?.notes ?? "", /does not list Silver Gloves in the table/);
+  assert.match(source?.notes ?? "", /does not identify the counter behind Caves of Narshe's generic Disc III South Gate listing/);
+
+  assert.equal(summitIronHelm?.availability, "limited-window");
+  assert.ok(summitIronHelm?.sourceIds.includes("cour89-limited-shops"));
+  assert.match(summitIronHelm?.conditions ?? "", /last purchase location before boarding the train/);
+  assert.equal(southGateIronHelm?.availability, "window-unverified");
+  assert.ok(southGateIronHelm?.sourceIds.includes("cour89-limited-shops"));
+  assert.match(southGateIronHelm?.conditions ?? "", /does not map Caves' generic Disc III listing to an accessible counter/);
+  assert.equal(southGateSilverGloves?.availability, "window-unverified");
+  assert.ok(!southGateSilverGloves?.sourceIds.includes("cour89-limited-shops"));
+  assert.ok(warning?.sourceIds.includes("cour89-limited-shops"));
+  assert.match(warning?.note ?? "", /does not list Silver Gloves; that omission does not establish the Gloves' cutoff/);
+});
+
 test("Black Mage Village Disc II–III weapon paths link to the Disc III stock review", () => {
   const objectiveId = "disc-3.aerial-exploration.black-mage-village-stock";
   const expected = [

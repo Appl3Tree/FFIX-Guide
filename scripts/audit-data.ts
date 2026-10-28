@@ -9804,6 +9804,7 @@ const summitStationWalkthroughStep = walkthroughChapters
   .find((step) => step.id === "journey-treno-shop-and-train");
 const cavesDisc3SouthGateSource = sources.find((source) => source.id === "cavesofnarshe-ff9-disc-3-map");
 const cour89SouthGateSource = sources.find((source) => source.id === "cour89-south-gate");
+const cour89LimitedShopsSource = sources.find((source) => source.id === "cour89-limited-shops");
 const gamefaqsShopsSource = sources.find((source) => source.id === "gamefaqs-shops-71891");
 const atadeoSouthGateSource = sources.find((source) => source.id === "gamefaqs-walkthrough-9801");
 const gamefaqsSouthGateStationSource = sources.find((source) => source.id === "gamefaqs-south-gate-station-79143");
@@ -9824,9 +9825,11 @@ if (
   !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
   !summitEquipmentWarning.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitEquipmentWarning.sourceIds.includes("cour89-south-gate") ||
+  !summitEquipmentWarning.sourceIds.includes("cour89-limited-shops") ||
   !summitEquipmentWarning.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !summitEquipmentWarning.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !summitEquipmentObjective?.sourceIds.includes("cour89-south-gate") ||
+  !summitEquipmentObjective.sourceIds.includes("cour89-limited-shops") ||
   !summitSilverGlovesTarget || summitSilverGlovesTarget.targetQuantity !== 4 ||
   !summitIronHelmTarget || summitIronHelmTarget.targetQuantity !== 3 ||
   !summitSilverGlovesTarget.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
@@ -9843,8 +9846,10 @@ if (
   !summitIronHelmPath.notes.includes("does not map the Disc III listing to an accessible equipment counter") ||
   !summitIronHelmPath.notes.includes("not its full stock or any Disc III counter") ||
   !summitIronHelmPath.notes.includes("labels the Dali-side South Gate Citadel shop as consumables-only") ||
+  !summitIronHelmPath.notes.includes("Cour89's time-limited shop table supports Iron Helm's Summit Station purchase cutoff") ||
   !summitIronHelmPath.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !summitIronHelmPath.sourceIds.includes("cour89-south-gate") ||
+  !summitIronHelmPath.sourceIds.includes("cour89-limited-shops") ||
   !summitIronHelmPath.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !summitIronHelmPath.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !southGateSilverGlovesCandidate || southGateSilverGlovesCandidate.itemId !== "game-item.silver-gloves" ||
@@ -9865,25 +9870,34 @@ if (
   !southGateIronHelmCandidate.conditions.includes("do not rely on it for the optional three-copy target or Bright Eyes access") ||
   !southGateIronHelmCandidate.walkthroughObjectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
   !["cavesofnarshe-ff9-iron-helm", "cavesofnarshe-ff9-disc-3-map", "cour89-south-gate", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143"].every((sourceId) => southGateIronHelmCandidate.sourceIds.includes(sourceId)) ||
+  !southGateIronHelmCandidate.sourceIds.includes("cour89-limited-shops") ||
+  !southGateIronHelmCandidate.conditions.includes("last purchase location before boarding the train") ||
+  !southGateIronHelmCandidate.conditions.includes("does not map Caves' generic Disc III listing to an accessible counter") ||
   !southGateIronHelmCandidate.conditions.includes("no Disc III route or timing") ||
   !southGateIronHelmCandidate.conditions.includes("no complete stock or Disc III access evidence") ||
   !southGateCandidateObjective?.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
   !southGateCandidateObjective.sourceIds.includes("cavesofnarshe-ff9-iron-helm") ||
   !southGateCandidateObjective.sourceIds.includes("cour89-south-gate") ||
+  !southGateCandidateObjective.sourceIds.includes("cour89-limited-shops") ||
   !southGateCandidateObjective.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !southGateCandidateObjective.sourceIds.includes("gamefaqs-south-gate-station-79143") ||
   !summitStationWalkthroughStep?.detail.includes("GameFAQs' missables list recommends four Silver Gloves") ||
+  !summitStationWalkthroughStep.detail.includes("Cour89's limited-shop table independently names Summit Station as the last purchase location for Iron Helm") ||
   !summitStationWalkthroughStep.detail.includes("Caves of Narshe's Disc III map and its Silver Gloves and Iron Helm pages positively list the items") ||
   !summitStationWalkthroughStep.detail.includes("lists only two recommended purchases rather than complete stock") ||
   !summitStationWalkthroughStep.detail.includes("consumables-only South Gate Citadel shop") ||
   !summitStationWalkthroughStep.detail.includes("separate candidate paths stay window-unverified") ||
   !southGateCandidateWalkthrough?.step.text.includes("inspect any equipment counter you find") ||
   !southGateCandidateWalkthrough.step.detail.includes("do not map a Disc III listing to an accessible counter") ||
+  !southGateCandidateWalkthrough.step.detail.includes("last Iron Helm purchase before boarding the train") ||
   !southGateCandidateWalkthrough.step.objectiveIds.includes("disc-3.aerial-exploration.south-gate-equipment-candidate-check") ||
-  !["cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143", "neoseeker-item-locations-182566"].every((sourceId) => southGateCandidateWalkthrough.section.sourceIds.includes(sourceId)) ||
+  !["cavesofnarshe-ff9-disc-3-map", "cavesofnarshe-ff9-silver-gloves", "cavesofnarshe-ff9-iron-helm", "cour89-south-gate", "cour89-limited-shops", "gamefaqs-walkthrough-9801", "gamefaqs-south-gate-station-79143", "neoseeker-item-locations-182566"].every((sourceId) => southGateCandidateWalkthrough.section.sourceIds.includes(sourceId)) ||
   !cavesDisc3SouthGateSource?.notes.includes("supports separate Disc III candidate paths") ||
   !cour89SouthGateSource?.url.includes("/ff9/maps/south_gate.php") ||
   !cour89SouthGateSource.notes.includes("does not list Silver Gloves or Iron Helm stock") ||
+  !cour89LimitedShopsSource?.url.includes("/ff9/tips/goods.php") ||
+  !cour89LimitedShopsSource.notes.includes("Iron Helm's last purchase is at South Gate: Summit Station before boarding the Iron Horse") ||
+  !cour89LimitedShopsSource.notes.includes("does not list Silver Gloves in the table") ||
   !summitEquipmentCutoff?.trigger.includes("keep those separate paths window-unverified") ||
   !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-disc-3-map") ||
   !summitEquipmentCutoff.sourceIds.includes("cavesofnarshe-ff9-silver-gloves") ||
