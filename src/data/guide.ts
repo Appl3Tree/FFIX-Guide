@@ -1244,6 +1244,14 @@ export const sources = [
     notes: "Lists Glass Armlet for 250 Gil in the Treno Armory and labels the location Treno (Disk 2). This independently supports the Disc II Treno purchase; it does not establish later Treno stock or release-specific behavior.",
   },
   {
+    id: "drslice-alexandria-armory",
+    title: "Shopkeeper Outside the Inn's Armory — Final Fantasy IX shop table",
+    publisher: "DrSlice",
+    url: "https://www.drslice.com/games/ff9/shop/36?d=&o=buy",
+    accessed: "2026-10-28",
+    notes: "Lists Glass Armlet for 250 Gil in this armory and identifies the location in the footer as Alexandria (Disk 3). This independently supports the Disc III Alexandria seller route and price; it does not identify the stock-change trigger or establish behavior across platforms/builds.",
+  },
+  {
     id: "gamefaqs-monster-list-20490",
     title: "Monster List — Revival_Flame",
     publisher: "GameFAQs",

@@ -5089,6 +5089,7 @@ if (
   errors.push("Glass Armlet's Lindblum candidate must preserve the positive Disc III Item Location listing against conflicting stock tables, while Treno must retain its older GameFAQs Disc II-only listings.");
 }
 const glassArmletAtadeoSource = sources.find((source) => source.id === "gamefaqs-walkthrough-9801");
+const glassArmletDrSliceAlexandriaSource = sources.find((source) => source.id === "drslice-alexandria-armory");
 if (
   !glassArmletAtadeoSource?.notes.includes("Disc III Alexandria and Treno equipment lists include Glass Armlet for 250 Gil") ||
   !glassArmletAtadeoSource.notes.includes("Lindblum Disc III list omits the armlet") ||
@@ -5097,9 +5098,15 @@ if (
   !glassArmletDisc3LindblumCandidate?.conditions.includes("omits it from Lindblum's list") ||
   !glassArmletAlexandriaPath?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !glassArmletAlexandriaPath.conditions.includes("explicitly lists Glass Armlet for 250 Gil in Alexandria's Disc III equipment stock") ||
-  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gamefaqs-walkthrough-9801")
+  !glassArmletAlexandriaPath.sourceIds.includes("drslice-alexandria-armory") ||
+  !glassArmletAlexandriaPath.conditions.includes("DrSlice independently lists the item for 250 Gil") ||
+  !glassArmletDrSliceAlexandriaSource?.url.includes("/shop/36") ||
+  !glassArmletDrSliceAlexandriaSource.notes.includes("Alexandria (Disk 3)") ||
+  !glassArmletDrSliceAlexandriaSource.notes.includes("does not identify the stock-change trigger") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-alexandria-armory")
 ) {
-  errors.push("The older _ATadeo_ walkthrough must be scoped to its positive Disc III Treno/Alexandria listings and Lindblum omission without resolving the unverified candidates.");
+  errors.push("The older _ATadeo_ walkthrough and DrSlice Alexandria table must support only their documented Disc III seller listings without resolving the unverified city candidates.");
 }
 if (
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-item-locations-54996") ||

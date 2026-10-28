@@ -2650,13 +2650,22 @@ test("Atla, Treno, Black Mage Village, and Esto Gaza shop paths link to their wa
   }
   const trenoGlassArmletPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.treno.glass-armlet-shop");
   const trenoGlassArmletCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.card-tournament.glass-armlet-treno-candidate");
+  const lindblumGlassArmletCandidate = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.aerial-exploration.glass-armlet-lindblum-candidate");
+  const alexandriaGlassArmletPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.the-home-front.glass-armlet-alexandria-shop");
   const drsliceTrenoArmory = sources.find((source) => source.id === "drslice-treno-armory");
+  const drsliceAlexandriaArmory = sources.find((source) => source.id === "drslice-alexandria-armory");
   assert.ok(trenoGlassArmletPath?.sourceIds.includes("drslice-treno-armory"));
   assert.ok(trenoGlassArmletCandidate?.sourceIds.includes("drslice-treno-armory"));
   assert.equal(trenoGlassArmletCandidate?.availability, "window-unverified");
   assert.match(trenoGlassArmletPath?.conditions ?? "", /DrSlice independently lists it for 250 Gil under Treno \(Disk 2\)/);
   assert.match(trenoGlassArmletCandidate?.conditions ?? "", /does not resolve the Disc III candidate/);
   assert.match(drsliceTrenoArmory?.notes ?? "", /Treno \(Disk 2\)/);
+  assert.ok(alexandriaGlassArmletPath?.sourceIds.includes("drslice-alexandria-armory"));
+  assert.match(alexandriaGlassArmletPath?.conditions ?? "", /DrSlice independently lists the item for 250 Gil.*Alexandria \(Disk 3\)/);
+  assert.equal(lindblumGlassArmletCandidate?.availability, "window-unverified");
+  assert.ok(drsliceAlexandriaArmory?.url.includes("/shop/36"));
+  assert.match(drsliceAlexandriaArmory?.notes ?? "", /Glass Armlet for 250 Gil.*Alexandria \(Disk 3\)/);
+  assert.ok(gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-alexandria-armory"));
   assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /DrSlice independently lists it in the Treno Armory and labels the location Treno \(Disk 2\)/);
   assert.match(getStep("disc-2.treno", "treno-mogrich-letter")?.detail ?? "", /distinct from the unresolved later Treno listing/);
   assert.match(getStep("disc-2.magdalene-forest", "black-mage-village-shop-check")?.detail ?? "", /Alexandria remains a later seller/);
