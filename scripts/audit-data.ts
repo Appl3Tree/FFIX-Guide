@@ -3900,6 +3900,7 @@ if (!blackWaltz2EtherObjective || !blackWaltz2Encounter?.objectiveIds.includes(b
 }
 const plantBrainDropsObjectiveId = "disc-1.evil-forest.plant-brain-drops";
 const plantBrainDropsObjective = objectivesById.get(plantBrainDropsObjectiveId);
+const plantBrainDropSourceIds = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
 const plantBrainDropsEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.evil-forest.plant-brain");
 const plantBrainDropsRecord = enemyRecords.find((enemy) => enemy.id === "enemy.plant-brain");
 const plantBrainDropPathIds = [
@@ -3914,12 +3915,19 @@ if (!plantBrainDropsObjective || !plantBrainDropsEncounter?.objectiveIds.include
   plantBrainDropPathIds.some((pathId, index) => {
     const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
     const item = gameItems.find((entry) => entry.id === plantBrainDropItemIds[index]);
+    const lootSlot = plantBrainDropsRecord?.drops[index];
+    const requiredProvenance = new Set([...(plantBrainDropsRecord?.sourceIds ?? []), ...(plantBrainDropsEncounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
     return !path || !plantBrainDropsRecord?.drops[index] ||
       plantBrainDropsRecord.drops[index].itemId !== plantBrainDropItemIds[index] || path.itemId !== plantBrainDropItemIds[index] ||
       path.chapterId !== "disc-1.evil-forest" || path.method !== "drop" || path.quantity !== 1 ||
       path.availability !== "one-time-encounter" || !path.walkthroughObjectiveIds?.includes(plantBrainDropsObjectiveId) ||
+      path.enemyId !== "enemy.plant-brain" || path.enemyLootSlot !== lootSlot?.slot ||
+      JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.evil-forest.plant-brain"]) ||
       (index === 0 ? !path.conditions?.includes("guaranteed") : !path.conditions?.includes("chance-based")) ||
-      !item || path.sourceIds.some((sourceId) => !plantBrainDropsObjective.sourceIds.includes(sourceId) || !item.sourceIds.includes(sourceId));
+      (index > 0 && !path.conditions?.includes("KO victory")) ||
+      [...requiredProvenance].some((sourceId) => !path.sourceIds.includes(sourceId)) ||
+      !item || plantBrainDropSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
+        !plantBrainDropsObjective.sourceIds.includes(sourceId) || !item.sourceIds.includes(sourceId));
   }) ||
   !plantBrainDropsRecord?.notes.some((note) => note.includes("37.5%, 12.5%, and 0.4%") && note.includes("different rarity labels"))) {
   errors.push("Plant Brain's guaranteed Phoenix Down and three conditional Potion drop slots must have sourced paths and a dedicated objective preserving the rarity-label conflict.");

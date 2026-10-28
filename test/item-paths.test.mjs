@@ -2298,16 +2298,28 @@ test("Plant Brain's guaranteed Phoenix Down and conditional Potion drops keep se
   for (const [slot, itemId, pathId] of expected) {
     const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
     const item = gameItems.find((entry) => entry.id === itemId);
+    const dropSlot = enemy?.drops.find((entry) => entry.slot === slot && entry.itemId === itemId);
+    const requiredProvenance = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(dropSlot?.sourceIds ?? [])]);
     assert.ok(path, `${slot} Plant Brain drop path is missing`);
     assert.equal(path.itemId, itemId);
     assert.equal(path.chapterId, "disc-1.evil-forest");
     assert.equal(path.method, "drop");
     assert.equal(path.quantity, 1);
     assert.equal(path.availability, "one-time-encounter");
+    assert.equal(path.enemyId, "enemy.plant-brain");
+    assert.equal(path.enemyLootSlot, slot);
+    assert.deepEqual(path.encounterIds, ["encounter.evil-forest.plant-brain"]);
     assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId));
     assert.ok(item, `${itemId} is missing from the item catalog`);
     if (slot === "always") assert.match(path.conditions ?? "", /guaranteed/);
-    else assert.match(path.conditions ?? "", /chance-based/);
+    else {
+      assert.match(path.conditions ?? "", /chance-based/);
+      assert.match(path.conditions ?? "", /KO victory/);
+    }
+    for (const sourceId of requiredProvenance) {
+      assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing enemy/encounter/slot source ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+    }
     for (const sourceId of sourceIds) {
       assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
       assert.ok(item.sourceIds.includes(sourceId), `${itemId} is missing ${sourceId}`);

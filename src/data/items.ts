@@ -272,6 +272,14 @@ const blackWaltz2EtherDropSources = {
   rare: ["gamefaqs-dali-71891", "cavesofnarshe-dali-enemies", "elitegrindlab-dali"],
 };
 const plantBrainDropSources = ["gamefaqs-evil-forest-71891", "gamefaqs-enemy-list-71891", "jegged-evil-forest"];
+const plantBrainEncounterProvenanceSources = [...new Set([
+  ...plantBrainDropSources,
+  "gamefaqs-evil-forest-79143",
+  "gamerguides-evil-forest",
+  "vgkami-evil-forest",
+  "gamefaqs-no-equipment-29826",
+  "gamefaqs-perfect-game-41181",
+])];
 const plantBrainEyeDropsStealSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"];
 const plantBrainIronHelmStealSources = ["gamefaqs-enemy-list-71891", "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "jegged-evil-forest", "gamerguides-evil-forest"];
 const iceCavernBossDropSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
@@ -4347,7 +4355,10 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
     conditions: "Defeat Plant Brain to receive its guaranteed Phoenix Down from the Always drop slot.",
     notes: "GameFAQs and Jegged list the Phoenix Down as guaranteed. This path records only that copy as unconditional; the listed Potion slots remain separate chance-based paths.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
-    sourceIds: plantBrainDropSources,
+    enemyId: "enemy.plant-brain",
+    enemyLootSlot: "always",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    sourceIds: [...new Set([...plantBrainDropSources, ...plantBrainEncounterProvenanceSources])],
   },
   {
     id: "item-path.disc-1.evil-forest.plant-brain-potion-common-drop",
@@ -4356,10 +4367,13 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "A Potion is listed in Plant Brain's Common drop slot; this additional copy is chance-based.",
+    conditions: "After a KO victory, Plant Brain's Common drop slot can award one additional Potion; this drop is chance-based.",
     notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
-    sourceIds: plantBrainDropSources,
+    enemyId: "enemy.plant-brain",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    sourceIds: [...new Set([...plantBrainDropSources, ...plantBrainEncounterProvenanceSources])],
   },
   {
     id: "item-path.disc-1.evil-forest.plant-brain-potion-uncommon-drop",
@@ -4368,10 +4382,13 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "A Potion is listed in Plant Brain's Uncommon drop slot; this additional copy is chance-based.",
+    conditions: "After a KO victory, Plant Brain's Uncommon drop slot can award one additional Potion; this drop is chance-based.",
     notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
-    sourceIds: plantBrainDropSources,
+    enemyId: "enemy.plant-brain",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    sourceIds: [...new Set([...plantBrainDropSources, ...plantBrainEncounterProvenanceSources])],
   },
   {
     id: "item-path.disc-1.evil-forest.plant-brain-potion-rare-drop",
@@ -4380,10 +4397,13 @@ const plantBrainDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "A Potion is listed in Plant Brain's Rare drop slot; this additional copy is chance-based.",
+    conditions: "After a KO victory, Plant Brain's Rare drop slot can award one additional Potion; this drop is chance-based.",
     notes: "GameFAQs lists Common, Uncommon, and Rare Potion slots. Jegged lists three conditional Potion rates (37.5%, 12.5%, and 0.4%) with different rarity labels; exact tier mapping remains unresolved.",
     walkthroughObjectiveIds: ["disc-1.evil-forest.plant-brain-drops"],
-    sourceIds: plantBrainDropSources,
+    enemyId: "enemy.plant-brain",
+    enemyLootSlot: "rare",
+    encounterIds: ["encounter.evil-forest.plant-brain"],
+    sourceIds: [...new Set([...plantBrainDropSources, ...plantBrainEncounterProvenanceSources])],
   },
 ];
 
