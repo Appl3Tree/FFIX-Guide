@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { enemyCatalogCoverage, enemyEncounters, enemyRecords } from "../src/data/enemies.ts";
 import { objectives, sources } from "../src/data/guide.ts";
+import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 const objectiveId = "disc-4.return-to-gaia.island-blue-magic";
 const sourceId = "gamefaqs-enemy-list-71891";
@@ -87,4 +88,29 @@ test("Disc IV bestiary and Quina lessons share the Return to Gaia checklist", ()
     assert.ok(skill.objectiveIds.includes(objectiveId));
     assert.ok(enemy?.routeObjectiveIds.includes(objectiveId));
   }
+});
+
+test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
+  const guidance = enemy?.preparationGuidance;
+  const source = sources.find((entry) => entry.id === "kamigame-hilgigars");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.conde-petie-mountain-path")
+    ?.sections.find((entry) => entry.id === "mountain-path-hilgigars-and-stones");
+  const prepStep = section?.steps.find((entry) => entry.id === "mountain-path-encounters-and-boss-prep");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Lv\. 21 or higher/);
+  assert.match(guidance.levelRationale, /single-source/);
+  assert.match(guidance.levelRationale, /Level 28 is the enemy's stat/);
+  assert.match(guidance.optionalGrinding, /Excalibur II or low-experience route/);
+  assert.ok(guidance.sourceIds.includes("kamigame-hilgigars"));
+  assert.ok(guidance.sourceIds.includes("gamefaqs-conde-petie-mountain-path-71891"));
+  assert.ok(enemy.sourceIds.includes("kamigame-hilgigars"));
+  assert.match(source?.notes ?? "", /platform or game build/);
+  assert.ok(section?.sourceIds.includes("kamigame-hilgigars"));
+  assert.match(prepStep?.text ?? "", /Lv\. 21 or higher as an optional benchmark/);
+  assert.match(prepStep?.detail ?? "", /does not identify the platform or build/);
+  assert.match(prepStep?.detail ?? "", /Excalibur II or low-experience route/);
 });

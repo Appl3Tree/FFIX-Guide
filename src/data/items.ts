@@ -407,6 +407,8 @@ const hilgigarsStealSources = [
   "jegged-conde-petie-mountain-path",
   "gamerguides-conde-petie-mountain-path",
   "gamefaqs-items-71891",
+  "gamefaqs-boss-guide-31490",
+  "kamigame-hilgigars",
 ];
 const fairyFluteReferenceSources = [
   ...hilgigarsStealSources,
@@ -1315,7 +1317,7 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     enemyId: "enemy.hilgigars",
     enemyLootSlot: "uncommon",
     encounterIds: ["encounter.conde-petie-mountain-path.hilgigars"],
-    sourceIds: [...new Set([...mythrilForkReferenceSources, ...hilgigarsEncounterSources])],
+    sourceIds: [...new Set([...mythrilForkReferenceSources, ...hilgigarsEncounterSources, "gamefaqs-boss-guide-31490", "kamigame-hilgigars"])],
   },
   {
     id: "item-path.disc-2.conde-petie-mountain-path.hilgigars-phoenix-down-steal",

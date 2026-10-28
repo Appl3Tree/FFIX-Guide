@@ -5596,6 +5596,22 @@ if (!gizamalukePreparation || gizamalukePreparation.suggestedLevelRange !== unde
   !gizamalukePrepStep?.detail?.includes("route-specific")) {
   errors.push("Gizamaluke preparation must keep its Level 16 enemy stat separate from the challenge-only Lv. 15 target and mirror that caveat in the route.");
 }
+const hilgigarsPrepRecord = enemyRecords.find((enemy) => enemy.id === "enemy.hilgigars");
+const hilgigarsPreparation = hilgigarsPrepRecord?.preparationGuidance;
+const hilgigarsPrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.conde-petie-mountain-path")?.sections.find((section) => section.id === "mountain-path-hilgigars-and-stones");
+const hilgigarsPrepStep = hilgigarsPrepSection?.steps.find((step) => step.id === "mountain-path-encounters-and-boss-prep");
+if (!hilgigarsPreparation || hilgigarsPreparation.suggestedLevelRange !== undefined ||
+  !hilgigarsPreparation.levelRationale.includes("21 or higher") ||
+  !hilgigarsPreparation.levelRationale.includes("single-source") ||
+  !hilgigarsPreparation.levelRationale.includes("enemy's stat") ||
+  !hilgigarsPreparation.sourceIds.includes("kamigame-hilgigars") ||
+  !hilgigarsPreparation.sourceIds.includes("gamefaqs-conde-petie-mountain-path-71891") ||
+  !hilgigarsPrepSection?.sourceIds.includes("kamigame-hilgigars") ||
+  !hilgigarsPrepStep?.text.includes("Lv. 21 or higher") ||
+  !hilgigarsPrepStep.detail?.includes("does not identify the platform or build") ||
+  !hilgigarsPrepStep.detail.includes("Excalibur II")) {
+  errors.push("Hilgigars preparation must retain the optional, single-source Lv. 21+ benchmark, distinguish it from the enemy's Level 28 stat, and keep timed low-EXP routes separate.");
+}
 const burmeciaCityPool = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.city-random-pool");
 const burmeciaRegionPool = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia-region.world-map-pool");
 const burmeciaTypeAPair = enemyEncounters.find((encounter) => encounter.id === "encounter.burmecia.type-a-pair");

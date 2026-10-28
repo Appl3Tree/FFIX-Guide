@@ -181,6 +181,7 @@ const forgottenContinentFriendlyJabberwockSources = ["gamefaqs-monster-list-2049
 const deadForestEncounterSources = ["gamefaqs-magdalene-forest-71891", enemyListSourceId];
 const deadForestEnemySources = [enemyListSourceId, "gamefaqs-magdalene-forest-71891", "gamefaqs-abilities-71891"];
 const mountainPathEnemySources = [enemyListSourceId, "gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-abilities-71891"];
+const hilgigarsPreparationSources = ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamefaqs-boss-guide-31490", "kamigame-hilgigars"];
 const lucidPlainsEnemySources = [...mountainPathEnemySources, "gamefaqs-monster-list-20490"];
 const banyanoShoresEnemySources = [enemyListSourceId, "rpgclassics-bestiary-a-c"];
 const disc4WorldMapEncounterSources = [enemyListSourceId];
@@ -6992,9 +6993,17 @@ const mountainPathEnemyRecords: EnemyRecord[] = [
       { title: "Silence and Slow before attempting steals", detail: "Silence prevents Curaga and Slow reduces the boss's turns. Use Float to protect against Earthquake, and stop stealing if the party's survival is at risk.", sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"] },
       { title: "Fairy Flute is the rare steal", detail: "The steal table lists Phoenix Down, Mythril Fork, and Fairy Flute; Jegged describes Fairy Flute as a very rare target. The item-type recovery routes are linked from the existing steal objective.", sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Kamigame recommends party members at Lv. 21 or higher, but this is a single-source benchmark from a Japanese guide that does not identify its platform or build. The reviewed PlayStation route sources provide no standard-party level target. Hilgigars's Level 28 is the enemy's stat, not a party target; no universal minimum is inferred.",
+      difficultyAssessment: "A PlayStation boss FAQ rates Hilgigars Medium. This is a subjective, single-source label, not a gameplay-tested difficulty assessment.",
+      optionalGrinding: "Kamigame suggests leveling before proceeding if the party is below its Lv. 21 benchmark. Treat that grind as optional: the reviewed PlayStation route guides do not require extra battles or set a party-level target. If following an Excalibur II or low-experience route, keep its own timer and EXP plan rather than assuming this benchmark fits.",
+      setupAdvice: "Before climbing toward the boss, use Suzuna's Tent/save service to restore HP/MP and save, then check the party's equipment and healing. Silence can prevent Curaga, Slow reduces Hilgigars's turns, and group-cast Float protects the party from Earthquake. Keep healing available for its physical attacks and Earthquake. Zidane can try the one-time steals while Vivi attacks; Dagger and Eiko can heal or use Float. Fairy Flute is in the Rare slot, so stop stealing if survival is at risk.",
+      confidence: "partial",
+      sourceIds: hilgigarsPreparationSources,
+    },
     routeObjectiveIds: [hilgigarsStealsObjectiveId],
     notes: ["The GameFAQs walkthrough's boss table lists Always Tent and three Elixir drop slots. Jegged's prose instead names Phoenix Down and Elixir without assigning slots, so the published drop-table disagreement is retained; this entry does not turn the conflict into a guaranteed extra item."],
-  }, mountainPathChapterId, ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path"], [hilgigarsStealsMissableId], [hilgigarsStealsCutoffId]),
+  }, mountainPathChapterId, [...hilgigarsPreparationSources, "gamerguides-conde-petie-mountain-path"], [hilgigarsStealsMissableId], [hilgigarsStealsCutoffId]),
   {
     ...chapterEnemy({
       id: "enemy.friendly-yeti",

@@ -74,7 +74,7 @@ test("both Baku fights link each steal path to its exact enemy slot and encounte
     const enemy = enemyRecords.find((entry) => entry.id === item.enemyId);
     const encounter = enemyEncounters.find((entry) => entry.id === item.encounterId);
     const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
-    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+    const requiredSources = new Set([...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
 
     assert.ok(path, `${item.pathId} exists`);
     assert.equal(path?.itemId, item.itemId);
@@ -185,6 +185,7 @@ test("Cargo Ship Black Waltz 3 steals link their exact one-time encounter slots"
     assert.ok(path?.conditions?.includes("chance-based"));
     assert.ok(path?.conditions?.includes("can fail"));
     assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => enemy?.sourceIds.includes(sourceId)), `${item.pathId} sources are also registered on the enemy profile`);
     assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} includes enemy, encounter, and slot sources`);
     assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.pathId} has known sources`);
   }

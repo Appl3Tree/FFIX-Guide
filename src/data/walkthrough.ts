@@ -2995,13 +2995,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "mountain-path-hilgigars-and-stones",
         title: "Hilgigars — steals, final stones, and Moonstone",
         summary: "Prepare for Hilgigars, collect Yellow and Green Stones after the battle, then return to the pedestal by Suzuna before taking the world-map exit.",
-        sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path", "elitegrindlab-conde-petie-mountain-path"],
+        sourceIds: ["gamefaqs-conde-petie-mountain-path-71891", "jegged-conde-petie-mountain-path", "gamerguides-conde-petie-mountain-path", "elitegrindlab-conde-petie-mountain-path", "gamefaqs-boss-guide-31490", "kamigame-hilgigars"],
         steps: [
           {
             id: "mountain-path-encounters-and-boss-prep",
             kind: "optional",
-            text: "The path's listed field encounters are Gnoll, Ochu, and Troll. Heal the party, check Eiko's abilities, and use the back row for the upcoming Hilgigars fight.",
-            detail: "The Mountain Path pool is Gnoll, Ochu, and Troll; the Lucid Plains pool is Blazer Beetle, Goblin Mage, and Troll. The bestiary records their source-listed combat tables. Quina leaves as soon as this path begins, so Gnoll's Vanish, Ochu's LV3 Def-less, Troll's Vanish, and Blazer Beetle's Limit Glove cannot be learned here on the first pass. Hornet, Lamia, and Mandragora are earlier teachers for those skills; later Mountain Path access with Quina remains unverified.",
+            text: "The path's listed field encounters are Gnoll, Ochu, and Troll. Heal the party and check Eiko's abilities before Hilgigars. One Japanese guide suggests party Lv. 21 or higher as an optional benchmark; it is not a required level.",
+            detail: "Kamigame suggests leveling before proceeding if below Lv. 21, but its page does not identify the platform or build and the reviewed PlayStation routes set no normal-party target. Hilgigars's Level 28 is the enemy's stat. Extra encounters are optional; keep any Excalibur II or low-experience route on its own timer and EXP plan. The Mountain Path pool is Gnoll, Ochu, and Troll; the Lucid Plains pool is Blazer Beetle, Goblin Mage, and Troll. Quina leaves as soon as this path begins, so Gnoll's Vanish, Ochu's LV3 Def-less, Troll's Vanish, and Blazer Beetle's Limit Glove cannot be learned here on the first pass. Hornet, Lamia, and Mandragora are earlier teachers for those skills; later Mountain Path access with Quina remains unverified.",
           },
           {
             id: "mountain-path-field-loot",
