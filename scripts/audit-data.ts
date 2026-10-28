@@ -8344,10 +8344,12 @@ const ipsensStockRouteMismatch = ipsensEquipmentPaths.some(({ slug, item, paths 
   if (slug === "coronet") {
     return path.availability !== "window-unverified"
       || !path.conditions.includes("GameFAQs Shops and Final Fantasy Online")
-      || !path.conditions.includes("neither gives a Disc III/IV range")
-      || !path.conditions.includes("Disc III and Disc IV Ipsen tables from icksmehl.de")
+      || !path.conditions.includes("DrSlice classifies Kumool's Mogshop there as a Disc III shop")
+      || !path.conditions.includes("do not establish exact stock timing or whether Coronet remains in stock on the Disc IV return")
+      || !path.conditions.includes("icksmehl.de's Disc III/IV Ipsen tables")
       || !path.conditions.includes("these omissions do not prove absence")
       || !path.sourceIds.includes("ffonline-ipsens-castle")
+      || !path.sourceIds.includes("drslice-ff9-shops")
       || !path.sourceIds.includes("ffwiki-shops")
       || !path.sourceIds.includes("gamefaqs-equipment-33383")
       || !path.sourceIds.includes("icksmehl-shops-disc-3")

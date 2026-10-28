@@ -3116,6 +3116,14 @@ export const sources = [
     notes: "Its Ipsen's Castle shop table lists Coronet for 4,400 Gil, independently corroborating the GameFAQs Shops seller row. It gives no disc range. GameFAQs' Equipment List, RPGClassics, the Final Fantasy Wiki, and icksmehl's Disc III/IV Ipsen stock tables omit the Kumool listing, so the positive seller claim remains unresolved for the later visits.",
   },
   {
+    id: "drslice-ff9-shops",
+    title: "Final Fantasy IX Shops",
+    publisher: "DrSlice",
+    url: "https://drslice.com/games/ff9/shop",
+    accessed: "2026-10-28",
+    notes: "The shop index classifies Kumool's Mogshop at Ipsen's Castle as Disk 3. It supports the Disc III placement of the shop, but does not expose an item inventory here and cannot independently confirm Coronet stock or Disc IV availability.",
+  },
+  {
     id: "jegged-ipsens-castle",
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "Jegged",
