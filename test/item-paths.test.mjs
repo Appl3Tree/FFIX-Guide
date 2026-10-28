@@ -5245,3 +5245,83 @@ test("White Robe links the Sea at Dusk treasure, repeatable Daguerreo synthesis,
     assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
   }
 });
+
+test("Reflect Ring and Madain's Ring link every listed recovery route, recipe, and optional quantity", () => {
+  const reflectRingPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.reflect-ring");
+  const madainRingPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.madain-ring");
+  const reflectRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.reflect-ring");
+  const madainRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.madain-ring");
+  const reflectObjective = objectives.find((objective) => objective.id === "disc-2.reflect-ring");
+  const madainObjective = objectives.find((objective) => objective.id === "disc-2.madain-ring");
+  const reflectTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.reflect-ring");
+  const madainTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.madain-ring");
+  const reflectAbilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.reflect-ring");
+  const madainAbilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.madain-ring");
+  const steps = walkthroughChapters.flatMap((chapter) => chapter.sections.flatMap((section) => section.steps));
+  const reflectSynthesisPaths = reflectRingPaths.filter((path) => path.method === "synthesis");
+  const madainSynthesisPaths = madainRingPaths.filter((path) => path.method === "synthesis");
+  const reflectAuction = reflectRingPaths.find((path) => path.method === "auction");
+  const madainAuction = madainRingPaths.find((path) => path.method === "auction");
+  const fossilPath = madainRingPaths.find((path) => path.id === "item-path.disc-2.journey-to-outer-continent.madain-ring-fossil-roo-digging");
+  const crackPath = madainRingPaths.find((path) => path.id === "item-path.disc-3.forgotten-continent.madain-ring-near-landing-mountain-crack");
+  const hadesPath = reflectRingPaths.find((path) => path.id === "item-path.disc-4.memoria.hades-reflect-ring-steal");
+
+  assert.equal(gameItems.find((item) => item.id === "game-item.madain-ring")?.name, "Madain's Ring");
+  assert.equal(reflectRingPaths.length, 7);
+  assert.equal(madainRingPaths.length, 8);
+  assert.equal(reflectAuction?.availability, "single-use");
+  assert.match(reflectAuction?.conditions ?? "", /non-repeatable/);
+  assert.equal(madainAuction?.availability, "repeatable");
+  assert.equal(fossilPath?.availability, "conditional");
+  assert.ok(fossilPath?.walkthroughObjectiveIds?.includes("disc-2.journey-to-outer-continent.one-ring"));
+  assert.equal(crackPath?.availability, "single-use");
+  assert.match(crackPath?.conditions ?? "", /#2.*#3/);
+  assert.ok(crackPath?.walkthroughObjectiveIds?.includes("disc-3.forgotten-continent.mountain-cracks"));
+  assert.equal(hadesPath?.method, "steal");
+  assert.ok(hadesPath?.walkthroughObjectiveIds?.includes("disc-2.reflect-ring"));
+
+  assert.deepEqual(reflectSynthesisPaths.map((path) => path.shopId).sort(), [
+    "alexandria.synthesis-shop.disc-3-4",
+    "black-mage-village.synthesis-shop.disc-2-3",
+    "daguerreo.synthesis-expert",
+    "lindblum.synthesis-shop.disc-3-4",
+    "treno.synthesis-shop.disc-3-4",
+  ].sort());
+  assert.deepEqual(madainSynthesisPaths.map((path) => path.shopId).sort(), [
+    "alexandria.synthesis-shop.disc-3-4",
+    "black-mage-village.synthesis-shop.disc-2-3",
+    "daguerreo.synthesis-expert",
+    "lindblum.synthesis-shop.disc-3-4",
+    "treno.synthesis-shop.disc-3-4",
+  ].sort());
+  for (const path of [...reflectSynthesisPaths, ...madainSynthesisPaths]) {
+    assert.equal(path.availability, "repeatable");
+    assert.ok(path.recipeId);
+    assert.ok(path.walkthroughObjectiveIds?.some((id) => id === "disc-2.reflect-ring" || id === "disc-2.madain-ring"));
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+
+  assert.equal(reflectRecipe?.resultItemId, "game-item.reflect-ring");
+  assert.equal(reflectRecipe?.cost.amount, 7000);
+  assert.deepEqual(reflectRecipe?.ingredients.map((ingredient) => ingredient.itemId).sort(), ["game-item.anklet", "game-item.madain-ring"]);
+  assert.equal(madainRecipe?.resultItemId, "game-item.madain-ring");
+  assert.equal(madainRecipe?.cost.amount, 3000);
+  assert.deepEqual(madainRecipe?.ingredients.map((ingredient) => ingredient.itemId).sort(), ["game-item.bone-wrist", "game-item.stardust-rod"]);
+  assert.ok(reflectObjective?.chapterIds?.includes("disc-4.memoria"));
+  assert.ok(madainObjective?.chapterIds?.includes("disc-3.forgotten-continent"));
+  assert.equal(reflectTargets.find((target) => target.basis === "route-need")?.targetQuantity, 9);
+  assert.equal(reflectTargets.find((target) => target.basis === "end-inventory")?.targetQuantity, 8);
+  assert.equal(madainTargets.find((target) => target.basis === "route-need")?.targetQuantity, 9);
+  assert.equal(madainTargets.find((target) => target.basis === "end-inventory")?.targetQuantity, 22);
+  assert.deepEqual(reflectAbilities.map((claim) => claim.abilityName).sort(), ["Auto-Reflect", "Distract", "Reflect"]);
+  assert.deepEqual(madainAbilities.map((claim) => claim.abilityName).sort(), ["Body Temp", "Chemist", "Guardian Mog"]);
+
+  assert.ok(steps.find((step) => step.id === "treno-fairy-earrings-auction")?.objectiveIds?.includes("disc-2.reflect-ring"));
+  assert.ok(steps.find((step) => step.id === "fossil-roo-madains-ring")?.detail?.includes("later sources provide alternatives"));
+  assert.ok(steps.find((step) => step.id === "forgotten-continent-mountain-cracks")?.objectiveIds?.includes("disc-2.madain-ring"));
+  assert.ok(steps.find((step) => step.id === "aerial-daguerreo-rank-and-synthesis")?.detail?.includes("Reflect Ring (Anklet + Madain's Ring, 7,000 Gil)"));
+  for (const path of [...reflectRingPaths, ...madainRingPaths]) {
+    assert.ok(path.walkthroughObjectiveIds?.includes(path.itemId === "game-item.reflect-ring" ? "disc-2.reflect-ring" : "disc-2.madain-ring"));
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+});

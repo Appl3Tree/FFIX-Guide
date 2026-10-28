@@ -354,6 +354,34 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Daguerreo synthesizes White Robe from Gaia Gear + Jade Armlet for 8,000 Gil. GameFAQs Items identifies this recipe as a recovery route, and its older Equipment List and RPGClassics give the Disc III/IV availability. The Sea at Dusk Chocograph is the separate world-map treasure route; White Robe is also used in the Hades Robe of Lords recipe.",
   },
   {
+    id: "synthesis-recipe.madain-ring",
+    resultItemId: "game-item.madain-ring",
+    ingredients: [
+      { itemId: "game-item.bone-wrist", quantity: 1 },
+      { itemId: "game-item.stardust-rod", quantity: 1 },
+    ],
+    chapterId: "disc-2.magdalene-forest",
+    shopId: "black-mage-village.synthesis-shop.disc-2-3",
+    shopName: "Black Cat Synthesis Shop (Discs II–III)",
+    cost: { currency: "gil", amount: 3000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "Bone Wrist + Stardust Rod synthesizes Madain's Ring for 3,000 Gil. The recipe is listed at Black Mage Village (Discs II–III), Alexandria, Treno and Lindblum (Discs III–IV), and Daguerreo. The ring is also a repeatable Treno Auction item and a reward from the Fossil Roo digging game and a Forgotten Continent Mountain Crack; that crack's #2/#3 label differs by source.",
+  },
+  {
+    id: "synthesis-recipe.reflect-ring",
+    resultItemId: "game-item.reflect-ring",
+    ingredients: [
+      { itemId: "game-item.anklet", quantity: 1 },
+      { itemId: "game-item.madain-ring", quantity: 1 },
+    ],
+    chapterId: "disc-2.magdalene-forest",
+    shopId: "black-mage-village.synthesis-shop.disc-2-3",
+    shopName: "Black Cat Synthesis Shop (Discs II–III)",
+    cost: { currency: "gil", amount: 7000 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis", "jegged-synthesis"],
+    notes: "Anklet + Madain's Ring synthesizes Reflect Ring for 7,000 Gil. GameFAQs lists the recipe at Black Mage Village (Discs II–III), Alexandria, Treno and Lindblum (Discs III–IV), and Daguerreo. This is a repeatable item-type recovery route for the one-time Treno Auction offer and separate from Hades's one-time Common steal.",
+  },
+  {
     id: "synthesis-recipe.priests-racket",
     resultItemId: "game-item.priests-racket",
     ingredients: [

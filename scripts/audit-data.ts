@@ -10782,6 +10782,46 @@ if (!whiteRobeObjective ||
   !whiteRobeWalkthroughSteps.find((step) => step.id === "final-battle-kuja-steals")?.detail?.includes("Daguerreo synthesis routes")) {
   errors.push("White Robe must link the Sea at Dusk treasure, repeatable Daguerreo synthesis, Trance Kuja steal, source-specific inventory targets, abilities, and walkthrough checkpoints.");
 }
+const reflectRingPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.reflect-ring");
+const madainRingPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.madain-ring");
+const reflectRingObjective = objectives.find((objective) => objective.id === "disc-2.reflect-ring");
+const madainRingObjective = objectives.find((objective) => objective.id === "disc-2.madain-ring");
+const reflectRingRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.reflect-ring");
+const madainRingRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.madain-ring");
+const reflectRingSynthesisPaths = reflectRingPaths.filter((path) => path.method === "synthesis");
+const madainRingSynthesisPaths = madainRingPaths.filter((path) => path.method === "synthesis");
+const reflectRingTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.reflect-ring");
+const madainRingTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.madain-ring");
+const reflectRingAbilityNames = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.reflect-ring").map((claim) => claim.abilityName);
+const madainRingAbilityNames = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.madain-ring").map((claim) => claim.abilityName);
+const trenoRingAuctionStep = walkthroughChapters.flatMap((chapter) => chapter.sections.flatMap((section) => section.steps)).find((step) => step.id === "treno-fairy-earrings-auction");
+const fossilMadainRingStep = walkthroughChapters.flatMap((chapter) => chapter.sections.flatMap((section) => section.steps)).find((step) => step.id === "fossil-roo-madains-ring");
+const reflectRingSynthesisShops = ["alexandria.synthesis-shop.disc-3-4", "black-mage-village.synthesis-shop.disc-2-3", "daguerreo.synthesis-expert", "lindblum.synthesis-shop.disc-3-4", "treno.synthesis-shop.disc-3-4"];
+if (!gameItems.some((item) => item.id === "game-item.madain-ring" && item.name === "Madain's Ring") ||
+  reflectRingPaths.length !== 7 || madainRingPaths.length !== 8 ||
+  !reflectRingObjective || !madainRingObjective ||
+  !reflectRingObjective.chapterIds?.includes("disc-4.memoria") || !madainRingObjective.chapterIds?.includes("disc-3.forgotten-continent") ||
+  !reflectRingRecipe || reflectRingRecipe.resultItemId !== "game-item.reflect-ring" || reflectRingRecipe.cost.amount !== 7000 ||
+  !["game-item.anklet", "game-item.madain-ring"].every((itemId) => reflectRingRecipe.ingredients.some((ingredient) => ingredient.itemId === itemId)) ||
+  !madainRingRecipe || madainRingRecipe.resultItemId !== "game-item.madain-ring" || madainRingRecipe.cost.amount !== 3000 ||
+  !["game-item.bone-wrist", "game-item.stardust-rod"].every((itemId) => madainRingRecipe.ingredients.some((ingredient) => ingredient.itemId === itemId)) ||
+  !reflectRingSynthesisShops.every((shopId) => reflectRingSynthesisPaths.some((path) => path.shopId === shopId && path.availability === "repeatable" && path.cost?.amount === 7000)) ||
+  !reflectRingSynthesisShops.every((shopId) => madainRingSynthesisPaths.some((path) => path.shopId === shopId && path.availability === "repeatable" && path.cost?.amount === 3000)) ||
+  !reflectRingPaths.some((path) => path.method === "auction" && path.availability === "single-use") ||
+  !madainRingPaths.some((path) => path.method === "auction" && path.availability === "repeatable") ||
+  !madainRingPaths.some((path) => path.id === "item-path.disc-2.journey-to-outer-continent.madain-ring-fossil-roo-digging" && path.walkthroughObjectiveIds?.includes("disc-2.journey-to-outer-continent.one-ring")) ||
+  !madainRingPaths.some((path) => path.id === "item-path.disc-3.forgotten-continent.madain-ring-near-landing-mountain-crack" && path.conditions?.includes("#2") && path.conditions?.includes("#3")) ||
+  !reflectRingPaths.some((path) => path.id === "item-path.disc-4.memoria.hades-reflect-ring-steal" && path.walkthroughObjectiveIds?.includes("disc-2.reflect-ring")) ||
+  reflectRingTargets.find((target) => target.basis === "route-need")?.targetQuantity !== 9 ||
+  reflectRingTargets.find((target) => target.basis === "end-inventory")?.targetQuantity !== 8 ||
+  madainRingTargets.find((target) => target.basis === "route-need")?.targetQuantity !== 9 ||
+  madainRingTargets.find((target) => target.basis === "end-inventory")?.targetQuantity !== 22 ||
+  !["Auto-Reflect", "Distract", "Reflect"].every((abilityName) => reflectRingAbilityNames.includes(abilityName)) ||
+  !["Body Temp", "Chemist", "Guardian Mog"].every((abilityName) => madainRingAbilityNames.includes(abilityName)) ||
+  !trenoRingAuctionStep?.objectiveIds?.includes("disc-2.reflect-ring") ||
+  !fossilMadainRingStep?.detail?.includes("later sources provide alternatives")) {
+  errors.push("Reflect Ring and Madain's Ring must keep their auction, five-shop synthesis, Hades/Fossil Roo/Mountain Crack, ability, inventory-target, source, and walkthrough links complete.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }

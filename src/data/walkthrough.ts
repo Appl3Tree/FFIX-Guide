@@ -1741,9 +1741,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "treno-fairy-earrings-auction",
             kind: "optional",
-            text: "After the party reunites, return to the Auction House before leaving Treno and check its Disc II offers. Fairy Earrings are a repeatable option if you want an early copy; the Fossil Roo and later Desert Palace pickups remain available, too.",
-            detail: "GameFAQs lists Fairy Earrings as first available in the Disc II auction with no special inventory condition. Bids vary, so no fixed Gil price is recorded. If you skip this offer, the same auction item can appear again, and the item has separately documented chest and synthesis routes.",
-            objectiveIds: ["disc-2.treno.fairy-earrings-auction"],
+            text: "After the party reunites, return to the Auction House before leaving Treno and check its Disc II offers. Fairy Earrings and Madain's Ring are repeatable options; Reflect Ring is a one-time listing if it fits your goal. If you pass on Reflect Ring, Black Mage Village or later shops can synthesize it, and Hades carries a separate steal.",
+            detail: "GameFAQs lists Reflect Ring as a non-repeatable Disc II offer at an estimated 15,000 Gil, while Madain's Ring is repeatable at an estimated 8,700 Gil. These are source estimates, not fixed auction prices. Jegged also marks Reflect Ring as obtainable only once at the auction. Missing that listing does not remove Reflect Ring from item-type recovery; Fairy Earrings remains obtainable from Fossil Roo, later auction offers, and synthesis.",
+            objectiveIds: ["disc-2.treno.fairy-earrings-auction", "disc-2.reflect-ring", "disc-2.madain-ring"],
           },
           {
             id: "treno-mythril-dagger-supersoft",
@@ -2546,8 +2546,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "fossil-roo-madains-ring",
             kind: "optional",
             text: "If pursuing The One Ring achievement/trophy, mine the central pillar until Madain's Ring appears. The reward is random; when the dig spots stop yielding items, leave the mining screen and re-enter to refresh them, then continue if needed.",
-            detail: "This achievement objective is specific to Steam, PS4, and Xbox. The ring item and the mining achievement are separate goals; the project has not yet verified every later source for the item itself. Skip the grind if this achievement is excluded from your profile.",
-            objectiveIds: ["disc-2.journey-to-outer-continent.one-ring"],
+            detail: "The One Ring is specific to Steam, PS4, and Xbox and requires this mining route; an auction, Mountain Crack, or synthesis copy does not replace the achievement trigger. For item collection alone, those later sources provide alternatives. Skip the mining grind if this achievement is excluded from your profile.",
+            objectiveIds: ["disc-2.journey-to-outer-continent.one-ring", "disc-2.madain-ring"],
           },
           {
             id: "fossil-roo-survival-vest",
@@ -2844,9 +2844,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "black-mage-village-shop-check",
             kind: "optional",
-            text: "The Item Shop adds Hi-Potions and Remedies to its regular stock. The Weapon Shop has current gear, including Bone Wrist (330 Gil) if you want this shop copy, while the Black Cat Synthesis Shop can make Madain's Ring from a Bone Wrist and Stardust Rod, Rune Tooth from two Mythril Daggers, or Extension from Lamia's Tiara and Multina Racket.",
-            detail: "GameFAQs lists Bone Wrist in this Weapon Shop on Discs II–III and a different inventory on Disc IV; Alexandria remains a later seller. This checkpoint protects the Black Mage Village stock window only. Check your ability-learning needs and available components before spending Gil. The routes suggest keeping two Survival Vests if your inventory lacks them. Stiltzkin does not sell a bundle in this village; the next documented purchase is on Conde Petie Mountain Path for 666 Gil.",
-            objectiveIds: ["disc-2.outer-continent.black-mage-village-bone-wrist-stock"],
+            text: "The Item Shop adds Hi-Potions and Remedies to its regular stock. The Weapon Shop has current gear, including Bone Wrist (330 Gil) if you want this shop copy, while the Black Cat Synthesis Shop can make Madain's Ring from Bone Wrist + Stardust Rod for 3,000 Gil and Reflect Ring from Anklet + Madain's Ring for 7,000 Gil, along with Rune Tooth and Extension.",
+            detail: "GameFAQs lists these two repeatable recipes in Black Mage Village's Disc II–III synthesis stock. The sources also list Alexandria, later Treno/Lindblum, and Daguerreo as recovery shops. GameFAQs lists Bone Wrist in this Weapon Shop on Discs II–III and a different inventory on Disc IV; Alexandria remains a later seller. Check your ability-learning needs and available components before spending Gil. Stiltzkin does not sell a bundle in this village; the next documented purchase is on Conde Petie Mountain Path for 666 Gil.",
+            objectiveIds: ["disc-2.outer-continent.black-mage-village-bone-wrist-stock", "disc-2.reflect-ring", "disc-2.madain-ring"],
           },
           {
             id: "black-mage-village-virgo",
@@ -3729,8 +3729,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "home-front-shop-preparation",
             kind: "optional",
-            text: "Visit the reopened Item, Weapon, and Synthesis Shops before leaving. Check for a Mythril Dagger and Gladius to synthesize Angel Bless for Zidane; the Ice Lance, Gold Helm, Twist Headband, and Plate Mail are candidate upgrades for the current party.",
-            detail: "Pearl Rouge synthesis consumes a Moonstone, so save that limited stone if you are preserving rare copies; Treno's Auction House has another Pearl Rouge source. Buy for the party you are using and keep a Gil reserve for upcoming shops.",
+            text: "Visit the reopened Item, Weapon, and Synthesis Shops before leaving. Check for a Mythril Dagger and Gladius to synthesize Angel Bless for Zidane; the Ice Lance, Gold Helm, Twist Headband, and Plate Mail are candidate upgrades for the current party. Alexandria's synthesist can also make Madain's Ring and Reflect Ring from their listed ingredients.",
+            detail: "Madain's Ring uses Bone Wrist + Stardust Rod for 3,000 Gil; Reflect Ring uses Anklet + Madain's Ring for 7,000 Gil. Pearl Rouge synthesis consumes a Moonstone, so save that limited stone if you are preserving rare copies; Treno's Auction House has another Pearl Rouge source. Buy for the party you are using and keep a Gil reserve for upcoming shops.",
+            objectiveIds: ["disc-2.reflect-ring", "disc-2.madain-ring"],
           },
           {
             id: "home-front-found-in-shuffle",
@@ -4237,9 +4238,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-lindblum-stock",
             kind: "optional",
-            text: "Check the Lindblum Weapon Shop for the Magic Racket, Cypress Pile, Chimera Armlet, Dark Hat, Mantra Band, and Gold Helm. Revisit the Synthesis Shop for recipes or supplies you want before sailing again.",
-            detail: "GameFAQs lists Magic Racket for 1,350 Gil in the Disc III–IV combined shop; Jegged also lists the Disc III Lindblum seller. Lindblum is the documented late recovery route if you skip the Oeilvert or Desert Palace Mogshops. Compare current gear before buying duplicates; the optional source-specific Need 3 and end-inventory #3 figures are targets, not story requirements.",
-            objectiveIds: ["disc-3.magic-racket"],
+            text: "Check the Lindblum Weapon Shop for the Magic Racket, Cypress Pile, Chimera Armlet, Dark Hat, Mantra Band, and Gold Helm. Revisit the Synthesis Shop for recipes or supplies you want before sailing again; it can repeat Madain's Ring and Reflect Ring if their ingredients and Gil are available.",
+            detail: "GameFAQs lists Magic Racket for 1,350 Gil in the Disc III–IV combined shop; Jegged also lists the Disc III Lindblum seller. Lindblum is the documented late recovery route if you skip the Oeilvert or Desert Palace Mogshops. Madain's Ring costs 3,000 Gil from Bone Wrist + Stardust Rod, and Reflect Ring costs 7,000 Gil from Anklet + Madain's Ring. Compare current gear before buying duplicates; Magic Racket's optional Need 3 and end-inventory #3 figures are targets, not story requirements.",
+            objectiveIds: ["disc-3.magic-racket", "disc-2.reflect-ring", "disc-2.madain-ring"],
           },
         ],
       },
@@ -4431,9 +4432,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "high-seas-treno-auction",
             kind: "optional",
-            text: "Check Treno's Auction House for its updated Promist Ring and Thief Gloves stock. Bid only if the item fits your goals and budget; the sale price depends on the auction rather than a fixed shop price.",
-            detail: "Thief Gloves can help with later stealing. This step tracks the new auction opportunity, not a permanent-loss warning; continue to check the auction during its later visits if an item is not offered now.",
-            objectiveIds: ["disc-3.on-the-high-seas.auction-house"],
+            text: "Check Treno's Auction House for its updated Promist Ring and Thief Gloves stock. Madain's Ring remains a repeatable listing if you need a Reflect Ring ingredient; the one-time Reflect Ring listing does not repeat after purchase. Treno's synthesis shop can also repeat both recipes.",
+            detail: "Bids vary by session, so do not plan around a fixed auction price. The Disc III–IV synthesis shop can make Madain's Ring from Bone Wrist + Stardust Rod for 3,000 Gil, then Reflect Ring from Anklet + Madain's Ring for 7,000 Gil. The Disc II Reflect Ring offer and Hades steal remain separate routes.",
+            objectiveIds: ["disc-3.on-the-high-seas.auction-house", "disc-2.madain-ring"],
           },
         ],
       },
@@ -4619,7 +4620,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Use a Dead Pepper on each of the two Forgotten Continent mountain cracks. The crack near the landing area yields 19 Eye Drops, Madain's Ring, Genji Helm, and a Hilda Garde 1 Card; the crack farther southwest, near Oeilvert, yields Maiden Prayer, Dragon's Hair, Gauntlets, and an Odin Card.",
             detail: "GameFAQs reverses the #2/#3 labels for these reward sets compared with Jegged and Gamer Guides. The rewards and landmarks are the practical cross-check; avoid relying on the number alone. A Dead Pepper opens each crack only when Choco has Mountain ability.",
-            objectiveIds: ["disc-3.forgotten-continent.mountain-cracks"],
+            objectiveIds: ["disc-3.forgotten-continent.mountain-cracks", "disc-2.madain-ring"],
           },
           {
             id: "forgotten-continent-jabberwock",
@@ -5398,8 +5399,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "aerial-daguerreo-rank-and-synthesis",
             kind: "optional",
             text: "Continue to the Four-Armed Man. After your treasure sweep, ask him to check your Treasure Hunter rank; if he awards Rank S, return to the entrance area for the Rank S Medal. Save first if you still need to win cards from him.",
-            detail: "Treasure Hunter uses points: one for each opened chest, searched hidden field icon, item gained during an event sequence, and qualifying Treno Auction House key item; two for each Chocobo world-map treasure. Hot & Cold digging and Stiltzkin purchases score zero. GameFAQs excludes Magical Fingertip and Pearl Rouge from the Treno auction category, while Jegged does not name those exceptions. Rank S requires 340 points (about 75% of all treasures), and Another Man's Treasure unlocks at Rank S, so you do not need every treasure. The exact Rank S Medal handoff order differs between sources. Ride the lift to Noggy and inspect the synthesis shop; if Battle Boots are part of your item goal and you have Feather Boots plus Wing Edge, the recipe costs 6,500 Gil. Daguerreo also synthesizes White Robe from Gaia Gear + Jade Armlet for 8,000 Gil; this remains a repeatable recovery route and supplies the White Robe ingredient for Robe of Lords.",
-            objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep", "disc-3.aerial-exploration.daguerreo-stock", "disc-3.white-robe"],
+            detail: "Treasure Hunter uses points: one for each opened chest, searched hidden field icon, item gained during an event sequence, and qualifying Treno Auction House key item; two for each Chocobo world-map treasure. Hot & Cold digging and Stiltzkin purchases score zero. GameFAQs excludes Magical Fingertip and Pearl Rouge from the Treno auction category, while Jegged does not name those exceptions. Rank S requires 340 points (about 75% of all treasures), and Another Man's Treasure unlocks at Rank S, so you do not need every treasure. The exact Rank S Medal handoff order differs between sources. Ride the lift to Noggy and inspect the synthesis shop. If needed, Daguerreo repeats Madain's Ring (Bone Wrist + Stardust Rod, 3,000 Gil), Reflect Ring (Anklet + Madain's Ring, 7,000 Gil), Battle Boots (Feather Boots + Wing Edge, 6,500 Gil), or White Robe from Gaia Gear + Jade Armlet for 8,000 Gil. White Robe remains a recovery route and also supplies the Robe of Lords ingredient.",
+            objectiveIds: ["disc-3.aerial-exploration.daguerreo-sweep", "disc-3.aerial-exploration.daguerreo-stock", "disc-3.white-robe", "disc-2.reflect-ring", "disc-2.madain-ring"],
           },
           {
             id: "aerial-daguerreo-library-items",
@@ -5433,9 +5434,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "aerial-bmv-inventory",
             kind: "optional",
-            text: "Revisit Black Mage Village's Item, Weapon, and Black Cat Synthesis shops; their stock returns after the Mount Gulug events. Review the Disc II–III Weapon Shop products you still need before its Disc IV inventory change, then buy only your desired copies and equip ability-teaching items until the abilities are learned.",
+            text: "Revisit Black Mage Village's Item, Weapon, and Black Cat Synthesis shops; their stock returns after the Mount Gulug events. Review the Disc II–III Weapon Shop products you still need before its Disc IV inventory change. The Black Cat can also repeat Madain's Ring and Reflect Ring synthesis if you have the ingredients and Gil.",
             detail: "GameFAQs' Disc III route says the shops return with the same wares as the initial Disc II visit and that missable wares remain available for a while, without giving an exact stock-change trigger. Its Shops table lists Flame Staff (1,100 Gil), Lightning Staff (1,200), Glass Armlet (250), Leather Wrist (200), Mythril Fork (4,700), Feather Hat (200), Magus Hat (400), Mythril Dagger (950), Gladius (2,300), Headgear (330), Steepled Hat (260), Adaman Vest (1,600), and Oak Staff (2,400) in the Disc II–III Weapon Shop; the separate Disc IV table shows a different weapon inventory. This checkpoint protects the Black Mage Village seller window only. Other sellers and recovery routes remain item-specific, and stock behavior on newer releases has not been checked.",
-            objectiveIds: ["disc-3.aerial-exploration.black-mage-village-stock"],
+            objectiveIds: ["disc-3.aerial-exploration.black-mage-village-stock", "disc-2.reflect-ring", "disc-2.madain-ring"],
           },
           {
             id: "aerial-cotton-robe-trick",
@@ -6702,7 +6703,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "In the underwater Birth room, search behind the large rock formation and keep pressing the interaction button until a voice answers. Save and heal nearby, prepare against Shadow damage and status effects, then agree to fight optional boss Hades.",
             detail: "There is no field icon. Hades absorbs Shadow and nullifies Earth; use Holy attacks and Slow. Clear Headed, Body Temp, Auto-Haste, Auto-Regen, Auto-Life, and other status protection help. He steals Reflect Ring, Running Shoes, Battle Boots, and Robe of Lords, and drops Wing Edge. GameFAQs says the synthesis shop opens after victory and remains accessible at the same spot; RPGClassics describes a two-Pumice-Piece handoff before access, so verify the interaction in-game. GameFAQs calls Hades the last Running Shoes copy, but its Items and Shops tables list a later Disc IV Black Mage Village recipe: Battle Boots + Emerald for 12,000 Gil. Jegged and EliteGrindLab corroborate the recipe. Treat Hades as the final direct steal opportunity; the item type is recoverable only if the recipe materials remain, and an Emerald may still be needed for Friendly Jabberwock. If you skip the fight now, it remains available during Final Preparations before Kuja.",
-            objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals"],
+            objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals", "disc-2.reflect-ring"],
           },
           {
             id: "memoria-hades-synthesis-shop",
@@ -6833,9 +6834,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "final-preparations-open-activities",
             kind: "optional",
-            text: "Review the selected profile's open objectives and Missables warnings. Finish any remaining optional sidequest, treasure, shop, card, Mognet, ATE, Chocobo, Frog Catching, or achievement route that matters to this goal; use the White Robe Chocograph or Daguerreo recipe if its earlier route was skipped.",
-            detail: "GameFAQs says previously available activities remain available at this stage. This is a cleanup window, not a new permanent deadline for every earlier activity. White Robe can be recovered at Daguerreo from Gaia Gear + Jade Armlet for 8,000 Gil; the source-specific Need 3 and end-inventory #1 targets are optional inventory planning, not universal requirements. Use each chapter's recovery note for location-specific exceptions and route requirements.",
-            objectiveIds: ["disc-4.final-preparations.final-audit", "disc-3.white-robe"],
+            text: "Review the selected profile's open objectives and Missables warnings. Finish any remaining optional sidequest, treasure, shop, card, Mognet, ATE, Chocobo, Frog Catching, or achievement route that matters to this goal; use the White Robe, Reflect Ring, or Madain's Ring recovery routes if earlier opportunities were skipped.",
+            detail: "GameFAQs says previously available activities remain available at this stage. This is a cleanup window, not a new permanent deadline for every earlier activity. White Robe remains available at Daguerreo for 8,000 Gil; its source-specific Need 3 and end-inventory #1 figures are optional planning targets. Reflect Ring and Madain's Ring also have repeatable synthesis routes with separate optional Need and end-inventory targets. These figures are not universal requirements. Fossil Roo mining is still required for The One Ring achievement/trophy on supported releases.",
+            objectiveIds: ["disc-4.final-preparations.final-audit", "disc-3.white-robe", "disc-2.reflect-ring", "disc-2.madain-ring"],
           },
           {
             id: "final-preparations-ragtime-mouse",
