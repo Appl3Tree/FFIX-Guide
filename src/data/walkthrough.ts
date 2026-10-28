@@ -1543,8 +1543,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "burmecia-beatrix-steals",
             kind: "combat",
-            text: "In the Beatrix battle, keep the party alive and use Zidane to steal Phoenix Down and Chain Plate first. Try for the Mythril Sword only if you want the early copy; it is a very rare slot and later shops provide the weapon. Use Slow if available, and stop stealing if the party is in danger. The battle ends after Beatrix takes her tenth turn or her HP reaches zero; her finisher leaves the party at 1 HP.",
-            detail: "Sources report different HP/level values and differ on whether draining her HP counts as winning. They agree that the encounter ends on a short scripted window with the party at 1 HP; GameFAQs names Stock Break, while Jegged reports Stock Break or Climhazzard. Published tables place Mythril Sword in a very rare fourth slot; the route does not promise an attempt count or treat the early copy as permanently required.",
+            text: "In the Beatrix battle, keep the party alive and use Zidane to attempt the Common Phoenix Down and Uncommon Chain Plate steals first; either chance-based attempt can fail. Try for the Rare Mythril Sword only if the early copy matters; that attempt can fail too, and later shops provide the weapon. Use Slow if available, and stop stealing if the party is in danger. The battle ends after Beatrix takes her tenth turn or her HP reaches zero; her finisher leaves the party at 1 HP.",
+            detail: "Sources report different HP/level values and differ on whether draining her HP counts as winning. They agree that the encounter ends on a short scripted window with the party at 1 HP; GameFAQs names Stock Break, while Jegged reports Stock Break or Climhazzard. Published tables place Mythril Sword in the Rare fourth slot, but no success rate or attempt count is asserted, and the early copy is not permanently required.",
             objectiveIds: ["disc-1.burmecia.beatrix-steals"],
           },
           {

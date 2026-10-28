@@ -5267,9 +5267,9 @@ const burmeciaBoss = enemyRecords.find((enemy) => enemy.id === "enemy.beatrix-bu
 const burmeciaCityRoster = ["enemy.basilisk", "enemy.ironite", "enemy.magic-vice"];
 const burmeciaRegionRoster = ["enemy.lizard-man", "enemy.nymph", "enemy.sand-scorpion", "enemy.skeleton", "enemy.yeti"];
 const burmeciaBossSteals = [
-  { itemId: "game-item.phoenix-down", pathId: "item-path.burmecia.phoenix-down-beatrix" },
-  { itemId: "game-item.chain-plate", pathId: "item-path.burmecia.beatrix-chain-plate" },
-  { itemId: "game-item.mythril-sword", pathId: "item-path.burmecia.beatrix-mythril-sword" },
+  { itemId: "game-item.phoenix-down", slot: "common", pathId: "item-path.burmecia.phoenix-down-beatrix" },
+  { itemId: "game-item.chain-plate", slot: "uncommon", pathId: "item-path.burmecia.beatrix-chain-plate" },
+  { itemId: "game-item.mythril-sword", slot: "rare", pathId: "item-path.burmecia.beatrix-mythril-sword" },
 ];
 if (!burmeciaCityPool || burmeciaCityPool.chapterId !== "disc-1.burmecia" || burmeciaCityPool.kind !== "random-pool" ||
   burmeciaCityRoster.some((enemyId) => !burmeciaCityPool.formation.some((member) => member.enemyId === enemyId && member.quantity === null)) ||
@@ -5616,14 +5616,23 @@ if (!burmeciaBossEncounter || burmeciaBossEncounter.kind !== "boss" ||
   !burmeciaBoss.stats.some((stat) => stat.field === "MP" && stat.value === 3367 && stat.verification === "disputed")) {
   errors.push("Beatrix's Burmecia boss dossier must link the one-time steal warning/cutoff and retain both published stat profiles as disputed claims.");
 }
+if (itemAcquisitionPaths.filter((path) => path.enemyId === "enemy.beatrix-burmecia" && path.method === "steal").length !== burmeciaBossSteals.length) {
+  errors.push("Beatrix's Burmecia encounter must have exactly three linked steal item paths.");
+}
 for (const expected of burmeciaBossSteals) {
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
-  if (!burmeciaBoss?.steals.some((slot) => slot.itemId === expected.itemId) ||
+  const slot = burmeciaBoss?.steals.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(burmeciaBoss?.sourceIds ?? []), ...(burmeciaBossEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (!slot ||
     !burmeciaBoss.routeObjectiveIds.includes("disc-1.burmecia.beatrix-steals") ||
     !burmeciaBoss.missableIds.includes("missable.disc-1.burmecia.beatrix-steals") ||
-    !path || path.itemId !== expected.itemId || path.method !== "steal" || path.availability !== "one-time-encounter" ||
-    !path.walkthroughObjectiveIds?.includes("disc-1.burmecia.beatrix-steals")) {
-    errors.push(`Beatrix's ${expected.itemId} steal must connect the bestiary to its existing one-time objective and item path.`);
+    !path || path.itemId !== expected.itemId || path.method !== "steal" || path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.beatrix-burmecia" || path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.burmecia.beatrix"]) ||
+    !path.conditions?.includes("chance-based") || !path.conditions.includes("can fail") ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.burmecia.beatrix-steals") ||
+    [...requiredSources].some((sourceId) => !path.sourceIds.includes(sourceId))) {
+    errors.push(`Beatrix's ${expected.itemId} steal must connect the bestiary to its exact ${expected.slot} slot, one-time encounter, failure chance, objective, and provenance.`);
   }
 }
 const burmeciaBeatrixWarning = missablesById.get("missable.disc-1.burmecia.beatrix-steals");

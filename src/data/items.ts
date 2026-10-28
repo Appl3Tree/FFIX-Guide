@@ -226,6 +226,7 @@ const burmeciaSources = [
   "gamerguides-burmecia",
   "elitegrindlab-burmecia",
 ];
+const burmeciaBossEncounterSources = [...new Set([...burmeciaSources, "cavesofnarshe-enemies"])];
 const southGateDisc1Sources = [
   "gamefaqs-journey-to-burmecia-71891",
   "jegged-gizamaluke",
@@ -11755,9 +11756,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from Beatrix during her scripted first Burmecia fight.",
+    conditions: "Attempt Beatrix's Common Phoenix Down steal during her one-time scripted Burmecia battle; the chance-based attempt can fail.",
     walkthroughObjectiveIds: [beatrixStealObjective],
-    sourceIds: burmeciaSources,
+    enemyId: "enemy.beatrix-burmecia",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.burmecia.beatrix"],
+    sourceIds: burmeciaBossEncounterSources,
   },
   {
     id: "item-path.burmecia.tent-chest",
@@ -12377,9 +12381,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal from Beatrix during her scripted first Burmecia fight.",
+    conditions: "Attempt Beatrix's Uncommon Chain Plate steal during her one-time scripted Burmecia battle; the chance-based attempt can fail.",
     walkthroughObjectiveIds: [beatrixStealObjective],
-    sourceIds: burmeciaSources,
+    enemyId: "enemy.beatrix-burmecia",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.burmecia.beatrix"],
+    sourceIds: burmeciaBossEncounterSources,
   },
   {
     id: "item-path.burmecia.beatrix-mythril-sword",
@@ -12388,9 +12395,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Rare steal from Beatrix during her scripted first Burmecia fight.",
+    conditions: "Attempt Beatrix's Rare Mythril Sword steal during her one-time scripted Burmecia battle; the chance-based attempt can fail, and no success rate is asserted.",
     walkthroughObjectiveIds: [beatrixStealObjective],
-    sourceIds: burmeciaSources,
+    enemyId: "enemy.beatrix-burmecia",
+    enemyLootSlot: "rare",
+    encounterIds: ["encounter.burmecia.beatrix"],
+    sourceIds: burmeciaBossEncounterSources,
   },
   {
     id: "item-path.disc-1.exploring-lindblum-kingdom.frog-catching-battle-boots",
