@@ -2790,8 +2790,9 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     shopId: "oeilvert.mogshop",
     shopName: "Oeilvert Mogshop",
     cost: { currency: "gil", amount: 2200 },
-    conditions: "Buy Cross Helm from the Oeilvert Mogshop; this is one of the documented ingredient sources for Grand Helm.",
-    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891"],
+    conditions: "Buy Cross Helm from the Oeilvert Mogshop before travelling through Shimmering Island; this is one documented ingredient source for Grand Helm. Kumool's Mogshop at Ipsen's Castle is a later item-type source.",
+    walkthroughObjectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891"],
   },
   {
     id: "item-path.disc-4.return-to-gaia.cross-helm-ipsen-mogshop",
@@ -3772,12 +3773,21 @@ const iifaTreeShopRecoveryInputs = ([
     ? `${conditions} The older GameFAQs Shop Lists, GameFAQs Shops, Caves of Narshe, and RPGClassics list 1,770 Gil; the older GameFAQs Equipment List lists 1,170 Gil.`
     : conditions,
   cost: { currency: "gil" as const, amount },
+  ...(
+    id === "item-path.disc-3.forgotten-continent.healing-rod-oeilvert-mogshop" ||
+    id === "item-path.disc-3.desert-palace.healing-rod-mogshop" ||
+    id === "item-path.disc-3.forgotten-continent.brigandine-oeilvert-mogshop" ||
+    id === "item-path.disc-3.desert-palace.brigandine-mogshop"
+      ? { walkthroughObjectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"] }
+      : {}
+  ),
   sourceIds: [
     "gamefaqs-items-71891",
     "gamefaqs-shops-71891",
     "gamefaqs-item-locations-54996",
     itemSource,
     "rpgclassics-shops",
+    ...(availability === "limited-window" && (shopId === "mimoza-oeilvert" || shopId === "mojito-desert-palace") ? ["gamefaqs-preparing-to-leave-71891"] : []),
     ...(itemId === "game-item.lamias-flute" && shopId === "ipsens-castle.kumool-mogshop" ? ["gamefaqs-equipment-33383", "icksmehl-shops-disc-4"] : []),
     ...(itemId === "game-item.healing-rod" ? ["gamefaqs-shop-lists-9772", "gamefaqs-equipment-33383"] : []),
   ],
@@ -8160,9 +8170,10 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     availability: "limited-window",
     shopId: "mimoza-oeilvert",
     shopName: "Mimoza's Mogshop (Oeilvert)",
-    conditions: "Buy during the Oeilvert story visit; its removal after the Shimmering Island transition closes this particular shop source, while the Desert Palace, Daguerreo, and Lindblum routes remain.",
+    conditions: "Buy during the Oeilvert story visit; travelling through Shimmering Island closes this shop source, while the Desert Palace, Daguerreo, and Lindblum routes remain.",
     cost: { currency: "gil", amount: 1200 },
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-forgotten-continent-71891", "jegged-arm-gear", "rpgclassics-shops"],
+    walkthroughObjectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-forgotten-continent-71891", "gamefaqs-preparing-to-leave-71891", "jegged-arm-gear", "rpgclassics-shops"],
   },
   {
     id: "item-path.disc-3.desert-palace.chimera-armlet-mogshop",
@@ -8173,9 +8184,10 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     availability: "limited-window",
     shopId: "mojito-desert-palace",
     shopName: "Mojito's Mogshop (Desert Palace)",
-    conditions: "Buy from Mojito during the Desert Palace sequence; the item remains available through the later Daguerreo or Lindblum shop routes.",
+    conditions: "Buy from Mojito before travelling through Shimmering Island; the item remains available through the later Daguerreo or Lindblum shop routes.",
     cost: { currency: "gil", amount: 1200 },
-    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-desert-palace-71891", "jegged-arm-gear", "rpgclassics-shops"],
+    walkthroughObjectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
+    sourceIds: ["gamefaqs-shops-71891", "gamefaqs-items-71891", "gamefaqs-desert-palace-71891", "gamefaqs-preparing-to-leave-71891", "jegged-arm-gear", "rpgclassics-shops"],
   },
   {
     id: "item-path.disc-3.aerial-exploration.chimera-armlet-daguerreo-shop",

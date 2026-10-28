@@ -1025,6 +1025,62 @@ test("Disc II Atla Mogshop paths link to the pre-Cleyra stock checkpoint", () =>
   assert.match(step?.detail ?? "", /720 Gil.*980 Gil/i);
 });
 
+test("Disc III Mimoza and Mojito shop paths link to the final stock checkpoint", () => {
+  const objectiveId = "disc-3.preparing-to-leave.final-stock-ability-review";
+  const expectedPaths = [
+    ["item-path.disc-3.forgotten-continent.chimera-armlet-oeilvert-mogshop", "game-item.chimera-armlet", "disc-3.forgotten-continent", "mimoza-oeilvert", 1200],
+    ["item-path.disc-3.forgotten-continent.cross-helm-oeilvert-mogshop", "game-item.cross-helm", "disc-3.forgotten-continent", "oeilvert.mogshop", 2200],
+    ["item-path.disc-3.forgotten-continent.healing-rod-oeilvert-mogshop", "game-item.healing-rod", "disc-3.forgotten-continent", "mimoza-oeilvert", 1770],
+    ["item-path.disc-3.forgotten-continent.brigandine-oeilvert-mogshop", "game-item.brigandine", "disc-3.forgotten-continent", "mimoza-oeilvert", 4300],
+    ["item-path.disc-3.desert-palace.chimera-armlet-mogshop", "game-item.chimera-armlet", "disc-3.desert-palace", "mojito-desert-palace", 1200],
+    ["item-path.disc-3.desert-palace.healing-rod-mogshop", "game-item.healing-rod", "disc-3.desert-palace", "mojito-desert-palace", 1770],
+    ["item-path.disc-3.desert-palace.brigandine-mogshop", "game-item.brigandine", "disc-3.desert-palace", "mojito-desert-palace", 4300],
+  ];
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const paths = expectedPaths.map(([id]) => itemAcquisitionPaths.find((path) => path.id === id));
+  const oeilvertSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.forgotten-continent")
+    ?.sections.find((section) => section.id === "oeilvert-exterior");
+  const oeilvertStep = oeilvertSection?.steps.find((step) => step.id === "oeilvert-shop-and-party-stock");
+  const desertPalaceStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.desert-palace")
+    ?.sections.flatMap((section) => section.steps).find((step) => step.id === "desert-palace-mojito-letter-shop");
+
+  assert.equal(paths.length, expectedPaths.length);
+  assert.ok(objective?.chapterIds.includes("disc-3.forgotten-continent"));
+  assert.ok(objective?.chapterIds.includes("disc-3.desert-palace"));
+  for (const sourceId of ["gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891"]) {
+    assert.ok(objective?.sourceIds.includes(sourceId), `${objectiveId} is missing ${sourceId}`);
+    assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
+  }
+  for (const [index, [id, itemId, chapterId, shopId, price]] of expectedPaths.entries()) {
+    const path = paths[index];
+    assert.ok(path, `${id} exists`);
+    assert.equal(path.itemId, itemId, `${id} item`);
+    assert.equal(path.chapterId, chapterId, `${id} chapter`);
+    assert.equal(path.shopId, shopId, `${id} shop`);
+    assert.equal(path.method, "mogshop", `${id} method`);
+    assert.equal(path.availability, "limited-window", `${id} window`);
+    assert.equal(path.cost?.amount, price, `${id} price`);
+    assert.match(path.conditions ?? "", /Shimmering Island/i, `${id} cutoff`);
+    assert.ok(path.walkthroughObjectiveIds?.includes(objectiveId), `${id} is not linked to the final stock checkpoint`);
+    for (const sourceId of ["gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891"]) {
+      assert.ok(path.sourceIds.includes(sourceId), `${id} is missing ${sourceId}`);
+    }
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${id} has known sources`);
+    assert.ok(itemAcquisitionPaths.some((candidate) =>
+      candidate.itemId === itemId && candidate.id !== id && candidate.chapterId !== chapterId && candidate.availability === "repeatable",
+    ), `${id} closes a purchase source, not every later route for the item type`);
+  }
+  assert.ok(oeilvertStep?.objectiveIds?.includes(objectiveId));
+  assert.match(oeilvertStep?.detail ?? "", /taking the Gulug Stone as the ruin's point of no return/i);
+  assert.match(oeilvertStep?.detail ?? "", /do not settle when the exterior shop becomes unreachable/i);
+  assert.match(oeilvertStep?.detail ?? "", /buy what you need before entering/i);
+  assert.match(oeilvertStep?.detail ?? "", /purchase-source cutoff, not a claim that every item type becomes unavailable/i);
+  for (const sourceId of ["gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891", "elitegrindlab-oeilvert"]) {
+    assert.ok(oeilvertSection?.sourceIds.includes(sourceId), `Oeilvert shop route is missing ${sourceId}`);
+  }
+  assert.ok(desertPalaceStep?.objectiveIds?.includes(objectiveId));
+});
+
 test("Alexandria's Disc III pickups and Stiltzkin bundle have item-level paths", () => {
   const alexandria = itemAcquisitionPaths.filter((path) => path.chapterId === "disc-3.the-home-front");
   const sourcesForAll = ["gamefaqs-home-front-71891", "jegged-home-front", "gamerguides-home-front", "elitegrindlab-home-front"];

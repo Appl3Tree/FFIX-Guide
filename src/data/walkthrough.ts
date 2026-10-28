@@ -4624,14 +4624,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
       {
         id: "oeilvert-exterior",
         title: "Oeilvert exterior — shop, letter, and save",
-        summary: "Mimoza's Mogshop stocks gear and supplies for both teams. The sources disagree about how long Oeilvert remains accessible after the story sequence, so shop now before entering.",
-        sourceIds: ["gamefaqs-forgotten-continent-71891", "jegged-oeilvert"],
+        summary: "Mimoza's Mogshop stocks gear and supplies for both teams. The sources disagree about whether the exterior shop stays reachable after taking the Gulug Stone, so buy before entering.",
+        sourceIds: ["gamefaqs-forgotten-continent-71891", "gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"],
         steps: [
           {
             id: "oeilvert-shop-and-party-stock",
             kind: "optional",
             text: "Speak to Mimoza and shop for the equipment and supplies your two teams need. Green Beret teaches Clear Headed, which prevents Confuse; consider enough copies for characters who may face Ark.",
-            detail: "GameFAQs says the Mogshop remains available throughout Disc III, while a completionist audit marks taking the Gulug Stone as Oeilvert's point of no return. Use the safe timing and buy what you need before entering. Oeilvert's exterior encounter is Ogre.",
+            detail: "GameFAQs lists Mimoza's Mogshop on Disc III and places Oeilvert among the areas lost after travelling through Shimmering Island. EliteGrindLab instead marks taking the Gulug Stone as the ruin's point of no return; the sources do not settle when the exterior shop becomes unreachable. Buy what you need before entering and do not rely on a later return. This is a purchase-source cutoff, not a claim that every item type becomes unavailable; item records list later sources where documented. Oeilvert's exterior encounter is Ogre.",
             objectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {

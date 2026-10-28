@@ -9186,6 +9186,46 @@ if (
 }
 const finalStockAbilityWarning = missablesById.get("missable.disc-3.preparing-to-leave.final-stock-ability-review");
 const finalStockAbilityObjective = objectives.find((objective) => objective.id === "disc-3.preparing-to-leave.final-stock-ability-review");
+const oeilvertMogshopObjectiveId = "disc-3.preparing-to-leave.final-stock-ability-review";
+const oeilvertMogshopExpectedPaths = [
+  ["item-path.disc-3.forgotten-continent.chimera-armlet-oeilvert-mogshop", "game-item.chimera-armlet", "disc-3.forgotten-continent", "mimoza-oeilvert", 1200],
+  ["item-path.disc-3.forgotten-continent.cross-helm-oeilvert-mogshop", "game-item.cross-helm", "disc-3.forgotten-continent", "oeilvert.mogshop", 2200],
+  ["item-path.disc-3.forgotten-continent.healing-rod-oeilvert-mogshop", "game-item.healing-rod", "disc-3.forgotten-continent", "mimoza-oeilvert", 1770],
+  ["item-path.disc-3.forgotten-continent.brigandine-oeilvert-mogshop", "game-item.brigandine", "disc-3.forgotten-continent", "mimoza-oeilvert", 4300],
+  ["item-path.disc-3.desert-palace.chimera-armlet-mogshop", "game-item.chimera-armlet", "disc-3.desert-palace", "mojito-desert-palace", 1200],
+  ["item-path.disc-3.desert-palace.healing-rod-mogshop", "game-item.healing-rod", "disc-3.desert-palace", "mojito-desert-palace", 1770],
+  ["item-path.disc-3.desert-palace.brigandine-mogshop", "game-item.brigandine", "disc-3.desert-palace", "mojito-desert-palace", 4300],
+];
+const oeilvertMogshopPaths = oeilvertMogshopExpectedPaths.map(([id]) => itemAcquisitionPaths.find((path) => path.id === id));
+const oeilvertMogshopRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.forgotten-continent")
+  ?.sections.find((section) => section.id === "oeilvert-exterior");
+const oeilvertMogshopRouteStep = oeilvertMogshopRouteSection?.steps.find((step) => step.id === "oeilvert-shop-and-party-stock");
+const mojitoMogshopRouteStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.desert-palace")
+  ?.sections.flatMap((section) => section.steps).find((step) => step.id === "desert-palace-mojito-letter-shop");
+if (
+  oeilvertMogshopPaths.some((path, index) => {
+    const [id, itemId, chapterId, shopId, price] = oeilvertMogshopExpectedPaths[index];
+    return !path || path.itemId !== itemId || path.chapterId !== chapterId || path.shopId !== shopId ||
+      path.method !== "mogshop" || path.availability !== "limited-window" || path.cost?.amount !== price ||
+      !path.conditions.includes("Shimmering Island") ||
+      !path.walkthroughObjectiveIds?.includes(oeilvertMogshopObjectiveId) ||
+      !["gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891"].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+      !itemAcquisitionPaths.some((candidate) => candidate.itemId === itemId && candidate.id !== id &&
+        candidate.chapterId !== chapterId && candidate.availability === "repeatable");
+  }) ||
+  !finalStockAbilityObjective?.chapterIds.includes("disc-3.forgotten-continent") ||
+  !finalStockAbilityObjective.chapterIds.includes("disc-3.desert-palace") ||
+  !["gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891"].every((sourceId) => finalStockAbilityObjective.sourceIds.includes(sourceId)) ||
+  !oeilvertMogshopRouteStep?.objectiveIds.includes(oeilvertMogshopObjectiveId) ||
+  !oeilvertMogshopRouteStep.detail.includes("taking the Gulug Stone as the ruin's point of no return") ||
+  !oeilvertMogshopRouteStep.detail.includes("do not settle when the exterior shop becomes unreachable") ||
+  !oeilvertMogshopRouteStep.detail.includes("Buy what you need before entering") ||
+  !oeilvertMogshopRouteStep.detail.includes("purchase-source cutoff, not a claim that every item type becomes unavailable") ||
+  !["gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891", "elitegrindlab-oeilvert"].every((sourceId) => oeilvertMogshopRouteSection.sourceIds.includes(sourceId)) ||
+  !mojitoMogshopRouteStep?.objectiveIds.includes(oeilvertMogshopObjectiveId)
+) {
+  errors.push("Mimoza and Mojito's seven limited-window Mogshop paths must link to the sourced final-stock checkpoint, preserve the Shimmering Island cutoff and prices, and keep Oeilvert's Gulug Stone access conflict visible.");
+}
 const finalStockAbilitySources = ["gamefaqs-abilities-71891", "rpgclassics-abilities"];
 const finalStockTigerFangsSource = "ffwiki-tiger-fangs";
 const finalStockTigerFangsWindowSource = "jinsoku-limited-items";
