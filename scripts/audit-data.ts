@@ -5020,6 +5020,7 @@ for (const [path, chapterId, city] of [
     !path.sourceIds.includes("rpgclassics-shops") ||
     !path.sourceIds.includes("ffwiki-shops") ||
     !path.sourceIds.includes("gameclue-armlets") ||
+    !path.sourceIds.includes("ffdq-glass-armlet") ||
     (city === "Treno" && (
       !path.sourceIds.includes("drslice-treno-armory") ||
       !/DrSlice independently labels its Treno Armory listing as Disk 2/i.test(path.conditions ?? "")
@@ -5027,25 +5028,49 @@ for (const [path, chapterId, city] of [
     !/unverified candidate route/i.test(path.conditions ?? "") ||
     !/(?:does not prove|do not (?:prove|establish))/i.test(path.conditions ?? "") ||
     !/GameClue's iPhone\/Android\/PS1 armlet list/i.test(path.conditions ?? "") ||
+    !path.conditions.includes("FFDQ.com's disc-indexed table") ||
     !/Alexandria/i.test(path.conditions ?? "")
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
   }
 }
+for (const pathId of [
+  "item-path.disc-1.burmecia.glass-armlet-atla-mogshop",
+  "item-path.disc-2.journey-to-cleyra.glass-armlet-atla-mogshop",
+  "item-path.disc-1.lindblum.glass-armlet-shop",
+  "item-path.disc-2.journey-to-treno.glass-armlet-summit-station-shop",
+  "item-path.disc-2.treno.glass-armlet-shop",
+  "item-path.disc-2.return-to-lindblum.glass-armlet-shop",
+  "item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop",
+  "item-path.disc-3.the-home-front.glass-armlet-alexandria-shop",
+]) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+  if (!path?.sourceIds.includes("ffdq-glass-armlet")) {
+    errors.push("Glass Armlet source-listed shop path " + pathId + " must include the FFDQ arm-gear reference.");
+  }
+}
 if (
   !glassArmletTrenoSection?.sourceIds.includes("ffwiki-shops") ||
+  !glassArmletTrenoSection?.sourceIds.includes("ffdq-glass-armlet") ||
   !glassArmletTrenoSection?.steps.find((step) => step.id === "treno-mogrich-letter")?.detail?.includes("Final Fantasy Wiki omits them from its later city tables") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("ffdq-glass-armlet") ||
+  !sources.find((source) => source.id === "ffdq-glass-armlet")?.notes.includes("Lindblum (Discs I–II)") ||
+  !sources.find((source) => source.id === "ffdq-glass-armlet")?.notes.includes("Treno (II)") ||
+  !sources.find((source) => source.id === "ffdq-glass-armlet")?.notes.includes("does not identify a platform/build") ||
   !sources.find((source) => source.id === "ffwiki-shops")?.notes.includes("For Glass Armlet, Final Fantasy Wiki lists earlier Lindblum and Disc II Treno stock")
 ) {
-  errors.push("The Glass Armlet route and source register must preserve Final Fantasy Wiki's later-table omission as corroboration, not proof of unavailable stock.");
+  errors.push("The Glass Armlet route and source register must preserve the Japanese FFDQ and Final Fantasy Wiki later-table omissions as corroboration, not proof of unavailable stock.");
 }
 if (
   !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gameclue-armlets") ||
   !sources.find((source) => source.id === "gameclue-armlets")?.notes.includes("Lindblum (Discs I–II) and Burmecia") ||
   !sources.find((source) => source.id === "gameclue-armlets")?.notes.includes("not proof that the candidate Disc III stock is unavailable") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gameclue-armlets") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("ffdq-glass-armlet") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
-  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("these source differences do not prove Disc III stock is absent")
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("These source differences do not prove Disc III stock is absent") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table")
 ) {
   errors.push("GameClue's scoped Glass Armlet listing must be linked to the Lindblum candidate and framed as a non-conclusive source omission.");
 }
@@ -5082,7 +5107,7 @@ if (
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !glassArmletDisc3TrenoSection?.sourceIds.includes("gameclue-armlets") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("inspect Treno's displayed weapon stock") ||
-  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("GameClue's iPhone/Android/PS1 armlet list also omits Treno") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table omit the later sale") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("older positive listing does not establish the in-game stock window") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("Buy only if it appears")
 ) {

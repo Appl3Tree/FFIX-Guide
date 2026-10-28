@@ -1844,6 +1844,14 @@ export const sources = [
     notes: "Japanese equipment reference scoped in its title to iPhone, Android, and PS1. The Glass Armlet row lists shop stock at Lindblum (Discs I–II) and Burmecia, plus the Lindblum Castle pickup and Eiko's initial equipment; it does not list the disputed later Treno or Lindblum sales. Other rows include Disc III–IV locations for later armlets, but the page labels these as main acquisition methods. Record the omission as a source-specific discrepancy, not proof that the candidate Disc III stock is unavailable or that the list is exhaustive; other release/build behavior remains unverified.",
   },
   {
+    id: "ffdq-glass-armlet",
+    title: "Arm Armor — FFIX complete guide (防具・腕)",
+    publisher: "FFDQ.com",
+    url: "https://ffdq-kouryaku.com/ff9/bogu2.html",
+    accessed: "2026-10-28",
+    notes: "Japanese disc-indexed arm-gear table lists Glass Armlet for 250 Gil at Lindblum (Discs I–II), Burmecia (I–IV), Summit Station (II), Treno (II), Black Mage Village (II–III), and Alexandria (III–IV). The table does not list later Lindblum or Treno stock, adding an independent source-specific conflict with Jegged's Disc III city listings. It does not identify a platform/build or provide direct in-game stock observations, so the omissions do not prove the candidate sales are unavailable.",
+  },
+  {
     id: "gamefaqs-abilities-71891",
     title: "Abilities — FFIX character and Blue Magic reference",
     publisher: "GameFAQs",
