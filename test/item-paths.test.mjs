@@ -1304,6 +1304,57 @@ test("Crystal World Tiamat [B] has a separate source-scoped encounter and all ei
   }
 });
 
+test("Earth Guardian item paths link both conditional steals and its Always Phoenix Pinion drop", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.earth-guardian");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.breaking-the-seal.earth-guardian");
+  const expected = [
+    { id: "item-path.disc-3.breaking-the-seal.earth-guardian-avenger-steal", itemId: "game-item.avenger", method: "steal", slot: "common", rate: "70%", objectiveId: "disc-3.breaking-the-seal.earth-guardian-steals" },
+    { id: "item-path.disc-3.breaking-the-seal.earth-guardian-rubber-suit-steal", itemId: "game-item.rubber-suit", method: "steal", slot: "uncommon", rate: "23%", objectiveId: "disc-3.breaking-the-seal.earth-guardian-steals" },
+    { id: "item-path.disc-3.breaking-the-seal.earth-guardian-phoenix-pinion-drop", itemId: "game-item.phoenix-pinion", method: "drop", slot: "always", objectiveId: "disc-3.breaking-the-seal.complete-shrines" },
+  ];
+
+  assert.ok(enemy);
+  assert.equal(enemy.kind, "boss");
+  assert.ok(encounter);
+  assert.equal(encounter.kind, "boss");
+  assert.deepEqual(encounter.formation, [{ enemyId: "enemy.earth-guardian", quantity: 1 }]);
+
+  for (const expectedPath of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.id);
+    const lootTable = expectedPath.method === "steal" ? enemy.steals : enemy.drops;
+    const slot = lootTable.find((entry) => entry.itemId === expectedPath.itemId && entry.slot === expectedPath.slot);
+    const requiredSources = new Set([...(enemy.sourceIds ?? []), ...(encounter.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${expectedPath.id} exists`);
+    assert.ok(slot, `${expectedPath.id} matches an enemy loot slot`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.chapterId, "disc-3.breaking-the-seal");
+    assert.equal(path?.method, expectedPath.method);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.enemyId, "enemy.earth-guardian");
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, ["encounter.breaking-the-seal.earth-guardian"]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(expectedPath.objectiveId));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${expectedPath.id} retains enemy, encounter, and slot provenance`);
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.id} references known source ${sourceId}`);
+    }
+
+    if (expectedPath.method === "steal") {
+      assert.match(path?.conditions ?? "", new RegExp(expectedPath.rate));
+      assert.match(path?.conditions ?? "", /source-reported/);
+      assert.match(path?.conditions ?? "", /Steal attempt can fail/);
+    } else {
+      assert.match(path?.conditions ?? "", /Always drop/);
+      assert.match(path?.conditions ?? "", /guaranteed after defeating the boss/);
+    }
+  }
+
+  assert.match(itemAcquisitionPaths.find((path) => path.id === expected[0].id)?.conditions ?? "", /Moorock's Bran Bal Mogshop/);
+  assert.match(itemAcquisitionPaths.find((path) => path.id === expected[1].id)?.conditions ?? "", /Black Cat synthesis for 20,000 Gil/);
+});
+
 test("Disc II Mistodon steals separate fixed fights from the unverified downhill pool", () => {
   const expected = [
     { id: "item-path.disc-2.battle-of-iifa-tree.mistodon-upper-pair-ore-common-steal", itemId: "game-item.ore", slot: "common", encounterId: "encounter.iifa-tree-return.mistodon-upper-pair", availability: "one-time-encounter", routeSourceId: "gamefaqs-battle-iifa-tree-71891" },

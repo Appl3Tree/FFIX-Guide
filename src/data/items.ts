@@ -125,6 +125,7 @@ const tiamatBossPathSources = [
 ];
 const tiamatBossStealPathSources = [...tiamatBossPathSources, "opatil-steal-list"];
 const tiamatBossDropPathSources = [...tiamatBossPathSources, "opatil-drop-list"];
+const earthGuardianLootPathSources = ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra", "cavesofnarshe-earth-guardian", "rpgclassics-disc-3-walkthrough", "gamefaqs-items-71891", "gamefaqs-shops-71891"];
 const crystalTiamatPathSources = ["gamefaqs-enemy-list-71891", "gamefaqs-memoria-71891", "gamefaqs-abilities-71891"];
 const crystalTiamatWingEdgePathSources = [...crystalTiamatPathSources, "gamefaqs-item-locations-54996", "gamefaqs-items-71891"];
 const crystalTiamatPeridotPathSources = [...crystalTiamatPathSources, "cavesofnarshe-peridot"];
@@ -8913,9 +8914,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Phoenix Pinion is Earth Guardian's Always drop slot, so one is guaranteed after victory. Other Pinion routes remain available.",
+    conditions: "Phoenix Pinion is Earth Guardian's Always drop slot, so one is guaranteed after defeating the boss. This one-time route is separate from the other available Pinion sources.",
+    enemyId: "enemy.earth-guardian",
+    enemyLootSlot: "always",
+    encounterIds: ["encounter.breaking-the-seal.earth-guardian"],
     walkthroughObjectiveIds: ["disc-3.breaking-the-seal.complete-shrines"],
-    sourceIds: ["cavesofnarshe-earth-guardian", "gamefaqs-items-71891", "gamefaqs-breaking-the-seal-71891"],
+    sourceIds: earthGuardianLootPathSources,
   },
   {
     id: "item-path.disc-3.breaking-the-seal.earth-guardian-avenger-steal",
@@ -8924,9 +8928,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Attempt Zidane's common Avenger steal before defeating Earth Guardian. Jegged reports a 70% chance per connected steal check; after this fight, Avenger remains available from Moorock's Bran Bal Mogshop and the Disc IV Daguerreo Weapon Shop.",
+    conditions: "Attempt Zidane's common Avenger steal before defeating Earth Guardian. Jegged reports a 70% chance per connected steal check; this source-reported rate is not release-verified and a Steal attempt can fail. After this fight, Avenger remains available from Moorock's Bran Bal Mogshop and the Disc IV Daguerreo Weapon Shop.",
     walkthroughObjectiveIds: ["disc-3.breaking-the-seal.earth-guardian-steals"],
-    sourceIds: ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra", "gamefaqs-items-71891", "gamefaqs-shops-71891"],
+    enemyId: "enemy.earth-guardian",
+    enemyLootSlot: "common",
+    encounterIds: ["encounter.breaking-the-seal.earth-guardian"],
+    sourceIds: earthGuardianLootPathSources,
   },
   {
     id: "item-path.disc-3.breaking-the-seal.earth-guardian-rubber-suit-steal",
@@ -8935,9 +8942,12 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Attempt Zidane's uncommon Rubber Suit steal before defeating Earth Guardian. Jegged reports a 23% chance per connected steal check; the item type remains recoverable by Disc IV Black Cat synthesis for 20,000 Gil plus Minerva's Plate and Egoist's Armlet.",
+    conditions: "Attempt Zidane's uncommon Rubber Suit steal before defeating Earth Guardian. Jegged reports a 23% chance per connected steal check; this source-reported rate is not release-verified and a Steal attempt can fail. The item type remains recoverable by Disc IV Black Cat synthesis for 20,000 Gil plus Minerva's Plate and Egoist's Armlet.",
     walkthroughObjectiveIds: ["disc-3.breaking-the-seal.earth-guardian-steals"],
-    sourceIds: ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra", "gamefaqs-items-71891", "gamefaqs-shops-71891"],
+    enemyId: "enemy.earth-guardian",
+    enemyLootSlot: "uncommon",
+    encounterIds: ["encounter.breaking-the-seal.earth-guardian"],
+    sourceIds: earthGuardianLootPathSources,
   },
   {
     id: "item-path.disc-3.portal-to-another-world.avenger-bran-bal-mogshop",

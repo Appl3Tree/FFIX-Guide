@@ -9649,17 +9649,40 @@ if (!earthGuardianEncounter || earthGuardianEncounter.kind !== "boss" ||
 for (const expected of earthGuardianStealExpectations) {
   const steal = earthGuardianRecord?.steals.find((slot) => slot.slot === expected.slot && slot.itemId === expected.itemId);
   const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  const requiredSources = new Set([...(earthGuardianRecord?.sourceIds ?? []), ...(earthGuardianEncounter?.sourceIds ?? []), ...(steal?.sourceIds ?? [])]);
   if (!steal || !path || path.itemId !== expected.itemId || path.method !== "steal" ||
     path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.earth-guardian" ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.breaking-the-seal.earth-guardian"]) ||
     !path.walkthroughObjectiveIds?.includes("disc-3.breaking-the-seal.earth-guardian-steals") ||
-    !path.conditions?.includes(expected.rate)) {
-    errors.push(`Earth Guardian's ${expected.itemId} one-time steal must match its slot, objective, and sourced chance note.`);
+    !path.conditions?.includes(expected.rate) ||
+    !path.conditions?.includes("source-reported") ||
+    !path.conditions?.includes("Steal attempt can fail") ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))) {
+    errors.push(`Earth Guardian's ${expected.itemId} one-time steal must match its exact enemy slot, encounter, objective, chance note, and provenance.`);
   }
   if (!itemAcquisitionPaths.some((candidate) => candidate.itemId === expected.itemId &&
     candidate.chapterId !== "disc-3.breaking-the-seal" &&
     guideAreas.findIndex((area) => area.id === candidate.chapterId) > guideAreas.findIndex((area) => area.id === "disc-3.breaking-the-seal"))) {
     errors.push(`Earth Guardian's ${expected.itemId} steal must have a later item-type recovery path.`);
   }
+}
+const earthGuardianPinionSlot = earthGuardianRecord?.drops.find((slot) => slot.slot === "always" && slot.itemId === "game-item.phoenix-pinion");
+const earthGuardianPinionPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.breaking-the-seal.earth-guardian-phoenix-pinion-drop");
+const earthGuardianPinionSources = new Set([...(earthGuardianRecord?.sourceIds ?? []), ...(earthGuardianEncounter?.sourceIds ?? []), ...(earthGuardianPinionSlot?.sourceIds ?? [])]);
+if (!earthGuardianPinionSlot || !earthGuardianPinionPath ||
+  earthGuardianPinionPath.itemId !== "game-item.phoenix-pinion" ||
+  earthGuardianPinionPath.method !== "drop" ||
+  earthGuardianPinionPath.availability !== "one-time-encounter" ||
+  earthGuardianPinionPath.enemyId !== "enemy.earth-guardian" ||
+  earthGuardianPinionPath.enemyLootSlot !== "always" ||
+  JSON.stringify(earthGuardianPinionPath.encounterIds) !== JSON.stringify(["encounter.breaking-the-seal.earth-guardian"]) ||
+  !earthGuardianPinionPath.walkthroughObjectiveIds?.includes("disc-3.breaking-the-seal.complete-shrines") ||
+  !earthGuardianPinionPath.conditions?.includes("Always drop") ||
+  !earthGuardianPinionPath.conditions.includes("guaranteed after defeating the boss") ||
+  ![...earthGuardianPinionSources].every((sourceId) => earthGuardianPinionPath.sourceIds.includes(sourceId))) {
+  errors.push("Earth Guardian's Phoenix Pinion route must link its guaranteed Always drop to the exact one-time enemy encounter and provenance.");
 }
 const earthGuardianAvengerRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.portal-to-another-world.avenger-bran-bal-mogshop");
 const earthGuardianRubberSuitRecovery = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-4.return-to-gaia.rubber-suit-synthesis");
