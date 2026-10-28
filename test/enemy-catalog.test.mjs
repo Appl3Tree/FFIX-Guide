@@ -114,3 +114,30 @@ test("Hilgigars preparation keeps Kamigame's optional level benchmark source-sco
   assert.match(prepStep?.detail ?? "", /does not identify the platform or build/);
   assert.match(prepStep?.detail ?? "", /Excalibur II or low-experience route/);
 });
+
+test("Soulcage preparation explains the opening LV5 Death without inventing a party level", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.soulcage");
+  const guidance = enemy?.preparationGuidance;
+  const source = sources.find((entry) => entry.id === "kamigame-soulcage");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.iifa-tree")
+    ?.sections.find((entry) => entry.id === "iifa-tree-elevator-bottom");
+  const prepStep = section?.steps.find((entry) => entry.id === "iifa-tree-boss-preparation");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 26/);
+  assert.match(guidance.levelRationale, /rather than a party recommendation/);
+  assert.match(guidance.levelRationale, /divisible by five/);
+  assert.match(guidance.setupAdvice, /Body Temp/);
+  assert.match(guidance.setupAdvice, /before using Raise\/Life or a Phoenix Down/);
+  assert.match(guidance.optionalGrinding, /EXP-free route/);
+  assert.ok(guidance.sourceIds.includes("kamigame-soulcage"));
+  assert.ok(guidance.sourceIds.includes("gamefaqs-boss-guide-31490"));
+  assert.ok(enemy.sourceIds.includes("kamigame-soulcage"));
+  assert.match(source?.notes ?? "", /does not set a numeric party-level target/);
+  assert.ok(section?.sourceIds.includes("kamigame-soulcage"));
+  assert.match(prepStep?.detail ?? "", /opens with LV5 Death/);
+  assert.match(prepStep?.detail ?? "", /Level 26 is the enemy stat/);
+  assert.match(prepStep?.detail ?? "", /EXP-free route/);
+});

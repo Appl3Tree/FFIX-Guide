@@ -312,6 +312,7 @@ const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-7
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
 const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
 const firstIifaTreeEnemySources = [enemyListSourceId, "gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "elitegrindlab-iifa-tree"];
+const soulcagePreparationSources = [...firstIifaTreeEnemySources, "gamefaqs-boss-guide-31490", "kamigame-soulcage"];
 const firstIifaTreeStealsObjectiveId = "disc-2.iifa-tree.soulcage-steals";
 const firstIifaTreeStealsMissableId = "missable.disc-2.iifa-tree.soulcage-steals";
 const firstIifaTreeStealsCutoffId = "cutoff.iifa-tree.soulcage-steals";
@@ -3957,9 +3958,17 @@ const firstIifaTreeEnemyRecords: EnemyRecord[] = [
       { title: "Steal before using Life", detail: "Attempt Oak Staff, Magician Cloak, and Brigandine before ending the one-time fight. Life defeats Soulcage immediately, so it closes the steal window; the nearby Brigandine chest remains a guaranteed copy. A normal KO victory guarantees a Phoenix Pinion and checks three conditional Elixir drop slots.", sourceIds: [...firstIifaTreeEnemySources, "opatil-drop-list"] },
       { title: "Avoid Fire despite the listed weakness", detail: "Fire damage, including Soulcage's reflected Fira, triggers the Fire Blades counter. Use non-Fire damage or its Sleep, Slow, and Darkness vulnerabilities while Zidane steals; Life is a fast finish after stealing is complete.", sourceIds: firstIifaTreeEnemySources },
     ],
+    preparationGuidance: {
+      levelRationale: "Standard route tables list Soulcage at Level 26, which is the enemy stat rather than a party recommendation. Kamigame and other battle guides warn that the opening LV5 Death KOs characters whose levels are divisible by five, but the reviewed routes do not set a normal-party level target; no universal minimum is inferred.",
+      difficultyAssessment: "A PlayStation boss FAQ rates Soulcage Tough. This is a subjective, single-source label, not a gameplay-tested difficulty assessment.",
+      optionalGrinding: "The reviewed standard routes do not prescribe extra leveling. Changing a party member's level to avoid LV5 Death is optional; if following the chapter's EXP-free route, preserve its own EXP plan rather than grinding to satisfy a generic level recommendation.",
+      setupAdvice: "Before the far-left trigger, check which active characters have levels divisible by five and equip Body Temp where available. LV5 Death opens the fight; Body Temp instead prevents Mustard Bomb's Heat, which KOs a character if they act while heated. Keep a recovery plan for anyone hit by LV5 Death. If pursuing the one-time steals, let Zidane try Oak Staff, Magician Cloak, and Brigandine before using Raise/Life or a Phoenix Down. Do not use Fire even though it is listed as a weakness: Fire damage or a reflected Fira can trigger Fire Blades. After stealing, Raise/Life can end the fight quickly.",
+      confidence: "partial",
+      sourceIds: soulcagePreparationSources,
+    },
     routeObjectiveIds: [firstIifaTreeStealsObjectiveId],
     notes: ["GameFAQs, Jegged, and EliteGrindLab agree on level 26 and 9,765 HP. Published steal odds vary by rarity and rounding convention and are intentionally omitted. GameFAQs lists three separate conditional Elixir drop slots; Opa-Til lists the Always Phoenix Pinion and one Common Elixir slot only. The Fire weakness is a tactical trap because Fire triggers the Fire Blades counter."],
-  }, firstIifaTreeChapterId, [...firstIifaTreeEnemySources, "opatil-drop-list"], [firstIifaTreeStealsMissableId], [firstIifaTreeStealsCutoffId]),
+  }, firstIifaTreeChapterId, [...soulcagePreparationSources, "opatil-drop-list"], [firstIifaTreeStealsMissableId], [firstIifaTreeStealsCutoffId]),
 ];
 
 const battleIifaTreeEnemyRecords: EnemyRecord[] = [

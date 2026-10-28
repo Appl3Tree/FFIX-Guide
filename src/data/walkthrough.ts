@@ -3337,7 +3337,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "iifa-tree-elevator-bottom",
         title: "Elevator and lower floor — fixed battles and last chests",
         summary: "Step onto the platform to descend, survive two fixed battles, and collect both lower-floor chests before the boss.",
-        sourceIds: ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "elitegrindlab-iifa-tree"],
+        sourceIds: ["gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "gamerguides-iifa-tree-1", "elitegrindlab-iifa-tree", "gamefaqs-boss-guide-31490", "kamigame-soulcage"],
         steps: [
           {
             id: "iifa-tree-fixed-descent-battles",
@@ -3357,7 +3357,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "iifa-tree-boss-preparation",
             kind: "optional",
             text: "Before triggering the far-left field icon, equip Body Temp on every active character who has it. Check levels for LV5 Death and keep a recovery plan ready for characters whose level is divisible by five.",
-            detail: "Soulcage can inflict Heat with Mustard Bomb; acting while Heat is active knocks that character out. Body Temp prevents Heat. LV5 Death targets levels divisible by five. Grinding to change levels is optional; do not treat it as a requirement for this fight.",
+            detail: "Soulcage opens with LV5 Death, which KOs characters whose levels are divisible by five. Its Level 26 is the enemy stat, and the reviewed routes set no normal-party level target. Body Temp prevents Heat from Mustard Bomb; acting while Heat is active knocks that character out. Changing levels through extra encounters is optional; keep the chapter's EXP-free route on its own plan.",
             objectiveIds: ["disc-2.iifa-tree.treasure-sweep"],
           },
         ],

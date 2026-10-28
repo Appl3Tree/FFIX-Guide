@@ -7104,6 +7104,20 @@ if (
 ) {
   errors.push("Soulcage's Disc II boss record must preserve its cross-checked HP and connect the one-time steal warning.");
 }
+const soulcagePreparation = firstIifaTreeSoulcage?.preparationGuidance;
+const soulcagePrepSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.iifa-tree")?.sections.find((section) => section.id === "iifa-tree-elevator-bottom");
+const soulcagePrepStep = soulcagePrepSection?.steps.find((step) => step.id === "iifa-tree-boss-preparation");
+if (!soulcagePreparation || soulcagePreparation.suggestedLevelRange !== undefined ||
+  !soulcagePreparation.levelRationale.includes("Level 26") ||
+  !soulcagePreparation.levelRationale.includes("rather than a party recommendation") ||
+  !soulcagePreparation.levelRationale.includes("divisible by five") ||
+  !soulcagePreparation.sourceIds.includes("kamigame-soulcage") ||
+  !soulcagePreparation.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !soulcagePrepSection?.sourceIds.includes("kamigame-soulcage") ||
+  !soulcagePrepStep?.detail?.includes("opens with LV5 Death") ||
+  !soulcagePrepStep.detail.includes("EXP-free route")) {
+  errors.push("Soulcage preparation must separate its Level 26 enemy stat from party guidance, preserve the LV5 Death threshold, and keep the EXP-free route distinct.");
+}
 const firstIifaTreeSoulcageLootExpectations = [
   { id: "item-path.disc-2.iifa-tree.soulcage-oak-staff-steal", itemId: "game-item.oak-staff", method: "steal", slot: "common", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Common slot", "each attempt can fail"] },
   { id: "item-path.disc-2.iifa-tree.soulcage-magician-cloak-steal", itemId: "game-item.magician-cloak", method: "steal", slot: "uncommon", objectiveId: "disc-2.iifa-tree.soulcage-steals", markers: ["Uncommon slot", "each attempt can fail"] },
