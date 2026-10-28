@@ -2931,6 +2931,17 @@ for (const item of gameItems) {
     if (!sourceIds.has(sourceId)) errors.push(`Game item ${item.id} references unknown source ${sourceId}.`);
   }
 }
+const sourceDisputedOneTimeLootPathExceptions = [
+  {
+    pathId: "item-path.disc-4.memoria.kraken-right-tentacle-wing-edge-steal",
+    enemyId: "enemy.kraken-right-tentacle",
+    slot: "common",
+    pathItemId: "game-item.wing-edge",
+    normalizedSlotItemId: "game-item.elixir",
+    sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"],
+  },
+];
+const observedOneTimeLootPathExceptions = new Set<string>();
 for (const path of itemAcquisitionPaths) {
   if (!gameItemIds.has(path.itemId)) errors.push(`Item acquisition path ${path.id} references unknown item ${path.itemId}.`);
   if (!areaIds.has(path.chapterId)) errors.push(`Item acquisition path ${path.id} references unknown chapter ${path.chapterId}.`);
@@ -2953,6 +2964,39 @@ for (const path of itemAcquisitionPaths) {
   }
   if (path.method === "auction" && path.cost) {
     errors.push(`Auction acquisition path ${path.id} must not store a fixed bid price.`);
+  }
+  if ((path.method === "steal" || path.method === "drop") && path.availability === "one-time-encounter") {
+    const enemy = enemyRecords.find((record) => record.id === path.enemyId);
+    const lootSlots = path.method === "steal" ? enemy?.steals : enemy?.drops;
+    const lootSlot = lootSlots?.find((entry) => entry.slot === path.enemyLootSlot);
+    const encounterIds = path.encounterIds ?? [];
+    const linkedEncounters = encounterIds.map((encounterId) => enemyEncounters.find((entry) => entry.id === encounterId));
+    if (!enemy || !path.enemyLootSlot || encounterIds.length === 0 || linkedEncounters.some((encounter) =>
+      !encounter || !encounter.formation.some((member) => member.enemyId === path.enemyId))) {
+      errors.push(`One-time enemy loot path ${path.id} must link a registered enemy, loot slot, and matching encounter formation.`);
+    }
+    if (!lootSlot) {
+      errors.push(`One-time enemy loot path ${path.id} must match a registered ${path.method} slot on ${path.enemyId ?? "an enemy"}.`);
+    }
+    const declaredConflict = sourceDisputedOneTimeLootPathExceptions.find((entry) => entry.pathId === path.id);
+    if (declaredConflict) {
+      const conflictIsDocumented = path.method === "steal" &&
+        path.enemyId === declaredConflict.enemyId &&
+        path.enemyLootSlot === declaredConflict.slot &&
+        path.itemId === declaredConflict.pathItemId &&
+        lootSlot?.itemId === declaredConflict.normalizedSlotItemId &&
+        path.conditions?.toLowerCase().includes("disputed") &&
+        path.notes?.toLowerCase().includes("disputed") &&
+        lootSlot.note?.includes("Disputed Common-slot claim") &&
+        declaredConflict.sourceIds.every((sourceId) => path.sourceIds.includes(sourceId) && lootSlot.sourceIds.includes(sourceId));
+      if (!conflictIsDocumented) {
+        errors.push(`One-time enemy loot path ${path.id} must preserve its documented source disagreement and conflicting slot evidence.`);
+      } else {
+        observedOneTimeLootPathExceptions.add(path.id);
+      }
+    } else if (lootSlot?.itemId !== path.itemId) {
+      errors.push(`One-time enemy loot path ${path.id} item does not match its ${path.method} slot ${path.enemyLootSlot}.`);
+    }
   }
   if (path.method === "synthesis") {
     if (!path.recipeId || !synthesisRecipeIds.has(path.recipeId)) {
@@ -2984,6 +3028,11 @@ for (const path of itemAcquisitionPaths) {
     if (!sourceIds.has(sourceId)) errors.push(`Item acquisition path ${path.id} references unknown source ${sourceId}.`);
   }
   acquisitionCounts.set(path.itemId, (acquisitionCounts.get(path.itemId) ?? 0) + 1);
+}
+for (const exception of sourceDisputedOneTimeLootPathExceptions) {
+  if (!observedOneTimeLootPathExceptions.has(exception.pathId)) {
+    errors.push(`The documented one-time enemy loot disagreement ${exception.pathId} is missing from item acquisition coverage.`);
+  }
 }
 const aftermathCatalogPaths = [
   ["item-path.disc-3.the-aftermath.elixir-guest-room", "game-item.elixir", "chest", "single-use", "disc-3.the-aftermath.pickups"],

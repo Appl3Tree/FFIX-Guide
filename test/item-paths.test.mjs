@@ -6,6 +6,60 @@ import { equipmentAbilityClaims, gameItems, itemAcquisitionPaths, itemCatalogCov
 import { synthesisRecipes } from "../src/data/synthesis.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
+test("all one-time enemy loot paths link exact slots and encounters, preserving explicit conflicts", () => {
+  const oneTimeLootPaths = itemAcquisitionPaths.filter((path) =>
+    (path.method === "steal" || path.method === "drop") && path.availability === "one-time-encounter",
+  );
+  const documentedConflicts = new Map([
+    ["item-path.disc-4.memoria.kraken-right-tentacle-wing-edge-steal", {
+      enemyId: "enemy.kraken-right-tentacle",
+      slot: "common",
+      pathItemId: "game-item.wing-edge",
+      normalizedSlotItemId: "game-item.elixir",
+      sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "opatil-steal-list"],
+    }],
+  ]);
+  const actualConflicts = [];
+
+  assert.ok(oneTimeLootPaths.length > 0);
+  for (const path of oneTimeLootPaths) {
+    const enemy = enemyRecords.find((entry) => entry.id === path.enemyId);
+    const lootTable = path.method === "steal" ? enemy?.steals : enemy?.drops;
+    const lootSlot = lootTable?.find((entry) => entry.slot === path.enemyLootSlot);
+    const conflict = documentedConflicts.get(path.id);
+
+    assert.ok(enemy, `${path.id} links a registered enemy`);
+    assert.ok(path.enemyLootSlot, `${path.id} links an exact loot slot`);
+    assert.ok(lootSlot, `${path.id} slot exists in ${path.method} table`);
+    assert.ok(path.encounterIds?.length, `${path.id} links at least one encounter`);
+    for (const encounterId of path.encounterIds ?? []) {
+      const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+      assert.ok(encounter, `${path.id} encounter ${encounterId} exists`);
+      assert.ok(encounter?.formation.some((member) => member.enemyId === path.enemyId), `${path.id} enemy is present in ${encounterId}`);
+    }
+    for (const sourceId of path.sourceIds) assert.ok(sources.some((source) => source.id === sourceId), `${path.id} source ${sourceId} exists`);
+
+    if (conflict) {
+      actualConflicts.push(path.id);
+      assert.equal(path.method, "steal");
+      assert.equal(path.enemyId, conflict.enemyId);
+      assert.equal(path.enemyLootSlot, conflict.slot);
+      assert.equal(path.itemId, conflict.pathItemId);
+      assert.equal(lootSlot?.itemId, conflict.normalizedSlotItemId);
+      assert.match(path.conditions ?? "", /disputed/i);
+      assert.match(path.notes ?? "", /disputed/i);
+      assert.match(lootSlot?.note ?? "", /disputed/i);
+      for (const sourceId of conflict.sourceIds) {
+        assert.ok(path.sourceIds.includes(sourceId), `${path.id} cites conflict source ${sourceId}`);
+        assert.ok(lootSlot?.sourceIds.includes(sourceId), `${path.id} slot cites conflict source ${sourceId}`);
+      }
+    } else {
+      assert.equal(lootSlot?.itemId, path.itemId, `${path.id} item matches its normalized slot`);
+    }
+  }
+  assert.deepEqual(actualConflicts.sort(), [...documentedConflicts.keys()].sort());
+});
+
 test("both Baku fights link each steal path to its exact enemy slot and encounter", () => {
   const expected = [
     { pathId: "item-path.disc-1.alexandria.masked-man-potion-steal", enemyId: "enemy.masked-man-opening", encounterId: "encounter.alexandria.masked-man-opening", itemId: "game-item.potion", slot: "common", objectiveId: "disc-1.alexandria.masked-man-steals" },
