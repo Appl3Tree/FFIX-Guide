@@ -6525,7 +6525,7 @@ const zornThornShopCounts = new Map([
   ["game-item.partisan", 7],
   ["game-item.stardust-rod", 7],
   ["game-item.mythril-armor", 8],
-  ["game-item.mythril-armlet", 8],
+  ["game-item.mythril-armlet", 9],
 ]);
 for (const [itemId, expectedCount] of zornThornShopCounts) {
   const paths = itemAcquisitionPaths.filter((path) => path.itemId === itemId && path.method === "shop");
@@ -9495,6 +9495,23 @@ const drsliceDaguerreoExpectedPaths = ([
   ["item-path.disc-3.aerial-exploration.jade-armlet-daguerreo-shop", "game-item.jade-armlet", 3400],
   ["item-path.disc-3.aerial-exploration.chimera-armlet-daguerreo-shop", "game-item.chimera-armlet", 1200],
   ["item-path.disc-3.aerial-exploration.bone-wrist-daguerreo-shop", "game-item.bone-wrist", 330],
+  ["item-path.disc-3-stock.daguerreo.mage-masher", "game-item.mage-masher", 500],
+  ["item-path.disc-3-stock.daguerreo.mythril-dagger", "game-item.mythril-dagger", 950],
+  ["item-path.disc-3-stock.daguerreo.zorlin-shape", "game-item.zorlin-shape", 6000],
+  ["item-path.disc-3-stock.daguerreo.mythril-racket", "game-item.mythril-racket", 2250],
+  ["item-path.disc-3-stock.daguerreo.rising-sun", "game-item.rising-sun", 500],
+  ["item-path.disc-3-stock.daguerreo.mythril-armlet", "game-item.mythril-armlet", 500],
+  ["item-path.disc-3-stock.daguerreo.egoists-armlet", "game-item.egoists-armlet", 2000],
+  ["item-path.disc-3-stock.daguerreo.venetia-shield", "game-item.venetia-shield", 2800],
+  ["item-path.disc-3-stock.daguerreo.defense-gloves", "game-item.defense-gloves", 6000],
+  ["item-path.disc-3-stock.daguerreo.lamias-tiara", "game-item.lamias-tiara", 800],
+  ["item-path.disc-3-stock.daguerreo.twist-headband", "game-item.twist-headband", 1200],
+  ["item-path.disc-3-stock.daguerreo.golden-hairpin", "game-item.golden-hairpin", 3700],
+  ["item-path.disc-3-stock.daguerreo.coronet", "game-item.coronet", 4400],
+  ["item-path.disc-3-stock.daguerreo.diamond-helm", "game-item.diamond-helm", 3000],
+  ["item-path.disc-3-stock.daguerreo.gaia-gear", "game-item.gaia-gear", 8700],
+  ["item-path.disc-3-stock.daguerreo.demons-vest", "game-item.demons-vest", 10250],
+  ["item-path.disc-3-stock.daguerreo.demons-mail", "game-item.demons-mail", 5900],
 ] as const).map(([id, itemId, price]) => ({ id, itemId, price, path: itemAcquisitionPaths.find((candidate) => candidate.id === id) }));
 const drsliceDaguerreoSource = sources.find((source) => source.id === drsliceDaguerreoSourceId);
 const drsliceDaguerreoObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.daguerreo-stock");
@@ -9502,6 +9519,9 @@ const drsliceDaguerreoWarning = missablesById.get("missable.disc-3.aerial-explor
 const drsliceDaguerreoRoute = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
   ?.sections.find((section) => section.id === "aerial-daguerreo");
 const drsliceMagicArmlet = gameItems.find((item) => item.id === "game-item.magic-armlet");
+const daguerreoMagicArmletPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-armlet");
+const magicRacketItem = gameItems.find((item) => item.id === "game-item.magic-racket");
+const daguerreoMagicRacketPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-racket");
 if (
   !finalStockAbilityWarning || finalStockAbilityWarning.severity !== "info" ||
   !finalStockAbilityWarning.consequence.includes("GameFAQs and RPGClassics PlayStation ability tables both list") ||
@@ -9554,15 +9574,32 @@ if (
   !drsliceDaguerreoSource?.notes.includes("Lists 29 products and prices under Daguerreo (Disk 3)") ||
   !drsliceDaguerreoSource.notes.includes("does not establish Disc IV inventory") ||
   drsliceDaguerreoItems.length !== 29 || drsliceDaguerreoItems.some((item) => !item?.sourceIds.includes(drsliceDaguerreoSourceId)) ||
-  drsliceDaguerreoExpectedPaths.length !== 12 || drsliceDaguerreoExpectedPaths.some(({ itemId, price, path }) =>
-    !path || path.itemId !== itemId || path.cost?.amount !== price || !path.sourceIds.includes(drsliceDaguerreoSourceId)) ||
+  drsliceDaguerreoExpectedPaths.length !== 29 || drsliceDaguerreoExpectedPaths.some(({ itemId, price, path }) =>
+    !path || path.itemId !== itemId || path.cost?.amount !== price ||
+    !path.sourceIds.includes(drsliceDaguerreoSourceId) || !path.sourceIds.includes("rpgclassics-shops")) ||
   !drsliceMagicArmlet || drsliceMagicArmlet.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !daguerreoMagicArmletPath || daguerreoMagicArmletPath.itemId !== "game-item.magic-armlet" ||
+  daguerreoMagicArmletPath.cost?.amount !== 1000 || daguerreoMagicArmletPath.availability !== "repeatable" ||
+  !daguerreoMagicArmletPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  !daguerreoMagicArmletPath.sourceIds.includes("rpgclassics-shops") ||
+  daguerreoMagicArmletPath.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !magicRacketItem || !magicRacketItem.sourceIds.includes("gamefaqs-shops-71891") ||
+  magicRacketItem.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !daguerreoMagicRacketPath || daguerreoMagicRacketPath.itemId !== "game-item.magic-racket" ||
+  daguerreoMagicRacketPath.cost?.amount !== 1350 || daguerreoMagicRacketPath.availability !== "limited-window" ||
+  !daguerreoMagicRacketPath.sourceIds.includes("gamefaqs-shops-71891") ||
+  daguerreoMagicRacketPath.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !daguerreoMagicRacketPath.conditions.includes("Keep this GameFAQs row separate") ||
+  !daguerreoMagicRacketPath.notes.includes("Mythril Racket") ||
   !drsliceDaguerreoObjective?.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !drsliceDaguerreoObjective.sourceIds.includes("rpgclassics-shops") ||
   !drsliceDaguerreoWarning?.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !drsliceDaguerreoWarning.sourceIds.includes("rpgclassics-shops") ||
   !drsliceDaguerreoWarning.note.includes("omits Magic Armlet, which GameFAQs and RPGClassics list") ||
-  !drsliceDaguerreoRoute?.sourceIds.includes(drsliceDaguerreoSourceId)
+  !drsliceDaguerreoRoute?.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  !drsliceDaguerreoRoute.sourceIds.includes("rpgclassics-shops")
 ) {
-  errors.push("DrSlice's Disk 3 Daguerreo table must stay linked to its 29 listed item records, the 12 matching priced shop paths, and the stock objective/warning; its Magic Armlet omission and lack of Disc IV evidence must remain explicit.");
+  errors.push("DrSlice's Disk 3 Daguerreo table must stay linked to its 29 listed item records and all 29 matching priced shop paths, with the GameFAQs/RPGClassics Magic Armlet row and GameFAQs-only Magic Racket row kept separate from DrSlice provenance; the table's Disc IV limitation must remain explicit.");
 }
 const octagonRodWarning = missablesById.get("missable.disc-3.lost-continent.octagon-rod");
 const octagonRodObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.octagon-rod");

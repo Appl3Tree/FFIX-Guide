@@ -1924,6 +1924,74 @@ test("Bandana has a hidden pickup and source-backed Disc II/III shop routes", ()
   }
 });
 
+test("Daguerreo Disc III stock paths preserve the complete cross-source inventory", () => {
+  const expectedDrsliceRows = [
+    ["item-path.disc-3.aerial-exploration.gladius-daguerreo-shop", "game-item.gladius", 2300],
+    ["item-path.disc-3-stock.daguerreo.zorlin-shape", "game-item.zorlin-shape", 6000],
+    ["item-path.disc-3-stock.daguerreo.rune-blade", "game-item.rune-blade", 8900],
+    ["item-path.disc-3-stock.daguerreo.obelisk", "game-item.obelisk", 6000],
+    ["item-path.disc-3-stock.daguerreo.tiger-fangs", "game-item.tiger-fangs", 13500],
+    ["item-path.disc-3-stock.daguerreo.mythril-racket", "game-item.mythril-racket", 2250],
+    ["item-path.disc-3-stock.daguerreo.asuras-rod", "game-item.asuras-rod", 3180],
+    ["item-path.disc-3-stock.daguerreo.hamelin", "game-item.hamelin", 5700],
+    ["item-path.disc-3-stock.daguerreo.octagon-rod", "game-item.octagon-rod", 4500],
+    ["item-path.disc-3-stock.daguerreo.mage-masher", "game-item.mage-masher", 500],
+    ["item-path.disc-3-stock.daguerreo.mythril-dagger", "game-item.mythril-dagger", 950],
+    ["item-path.disc-3-stock.daguerreo.rising-sun", "game-item.rising-sun", 500],
+    ["item-path.disc-3.aerial-exploration.bone-wrist-daguerreo-shop", "game-item.bone-wrist", 330],
+    ["item-path.disc-3-stock.daguerreo.mythril-armlet", "game-item.mythril-armlet", 500],
+    ["item-path.disc-3.aerial-exploration.chimera-armlet-daguerreo-shop", "game-item.chimera-armlet", 1200],
+    ["item-path.disc-3-stock.daguerreo.egoists-armlet", "game-item.egoists-armlet", 2000],
+    ["item-path.disc-3.aerial-exploration.n-kai-armlet-daguerreo-shop", "game-item.n-kai-armlet", 3000],
+    ["item-path.disc-3.aerial-exploration.jade-armlet-daguerreo-shop", "game-item.jade-armlet", 3400],
+    ["item-path.disc-3-stock.daguerreo.venetia-shield", "game-item.venetia-shield", 2800],
+    ["item-path.disc-3-stock.daguerreo.defense-gloves", "game-item.defense-gloves", 6000],
+    ["item-path.disc-3-stock.daguerreo.lamias-tiara", "game-item.lamias-tiara", 800],
+    ["item-path.disc-3-stock.daguerreo.twist-headband", "game-item.twist-headband", 1200],
+    ["item-path.disc-3-stock.daguerreo.golden-hairpin", "game-item.golden-hairpin", 3700],
+    ["item-path.disc-3-stock.daguerreo.coronet", "game-item.coronet", 4400],
+    ["item-path.disc-3-stock.daguerreo.diamond-helm", "game-item.diamond-helm", 3000],
+    ["item-path.disc-3-stock.daguerreo.gaia-gear", "game-item.gaia-gear", 8700],
+    ["item-path.disc-3-stock.daguerreo.demons-vest", "game-item.demons-vest", 10250],
+    ["item-path.disc-3-stock.daguerreo.demons-mail", "game-item.demons-mail", 5900],
+    ["item-path.disc-3-stock.daguerreo.diamond-armor", "game-item.diamond-armor", 8800],
+  ];
+  const drsliceRows = expectedDrsliceRows.map(([id]) => itemAcquisitionPaths.find((path) => path.id === id));
+  const magicArmlet = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-armlet");
+  const magicRacket = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-racket");
+  const magicRacketItem = gameItems.find((item) => item.id === "game-item.magic-racket");
+  const stockObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.daguerreo-stock");
+
+  assert.equal(expectedDrsliceRows.length, 29);
+  for (const [index, [id, itemId, price]] of expectedDrsliceRows.entries()) {
+    const path = drsliceRows[index];
+    assert.ok(path, `${id} exists`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.cost?.amount, price);
+    assert.equal(path?.method, "shop");
+    assert.equal(path?.chapterId, "disc-3.aerial-exploration");
+    assert.match(path?.shopName ?? "", /Daguerreo/i);
+    assert.ok(path?.sourceIds.includes("drslice-daguerreo-armory"));
+    assert.ok(path?.sourceIds.includes("rpgclassics-shops"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.daguerreo-stock"));
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+
+  assert.equal(magicArmlet?.cost?.amount, 1000);
+  assert.equal(magicArmlet?.availability, "repeatable");
+  assert.ok(magicArmlet?.sourceIds.includes("gamefaqs-shops-71891"));
+  assert.ok(magicArmlet?.sourceIds.includes("rpgclassics-shops"));
+  assert.ok(!magicArmlet?.sourceIds.includes("drslice-daguerreo-armory"));
+  assert.equal(magicRacketItem?.category, "equipment");
+  assert.equal(magicRacket?.cost?.amount, 1350);
+  assert.equal(magicRacket?.availability, "limited-window");
+  assert.match(magicRacket?.conditions ?? "", /separate from DrSlice and RPGClassics' Mythril Racket listing/);
+  assert.ok(magicRacket?.notes?.includes("Mythril Racket"));
+  assert.ok(magicRacket?.sourceIds.includes("gamefaqs-shops-71891"));
+  assert.ok(!magicRacket?.sourceIds.includes("drslice-daguerreo-armory"));
+  assert.ok(stockObjective?.sourceIds.includes("rpgclassics-shops"));
+});
+
 test("Feather Boots has sourced recovery routes for the Battle Boots ingredient chain", () => {
   const featherBootsPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.feather-boots");
   const pathsById = new Map(featherBootsPaths.map((path) => [path.id, path]));
