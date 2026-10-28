@@ -3,7 +3,7 @@
 Last updated: 2026-10-28
 
 ## Latest verification
-Latest verification — `npm test` passes 127/127, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The latest build is 2,646.46 kB JavaScript (638.71 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Coral Ring now has a source-listed repeatable Disc II Treno recipe supported by DrSlice, RPGClassics, Gamer Guides, and Final Fantasy Wiki; GameFAQs Shops omits it from that table, and direct menu/release behavior remains unverified. Source records: 460. No Actions run, push, or deployment occurred.
+Latest verification — `npm test` passes 127/127, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The latest build is 2,649.22 kB JavaScript (639.54 kB gzip) and 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Neoseeker's search-indexed Lindblum and Treno tables list Glass Armlet for Disc II and omit it from Disc III–IV; direct page retrieval returned 403, so both later-shop paths remain `window-unverified`. Source records: 462. Direct browser/gameplay/release checks were not part of this validation. No Actions run, push, or deployment occurred.
 Previous verification — Reconciled the post-Cleyra Linen Cuirass stock difference across GameFAQs, RPGClassics, and Final Fantasy Wiki. Its path remains `window-unverified`, with a displayed-stock check. Validation then passed with 127/127 tests, lint, build, and whitespace checks.
 
 Previous verification — Reviewed FFDQ.com

@@ -5032,11 +5032,15 @@ for (const [path, chapterId, city] of [
     !/Alexandria/i.test(path.conditions ?? "") ||
     (city === "Treno" && (
       !path.sourceIds.includes("drslice-treno-disc3-armory") ||
-      !path.conditions.includes("DrSlice's Disc III Knight's Residence Armory list also omits it")
+      !path.conditions.includes("DrSlice's Disc III Knight's Residence Armory list also omits it") ||
+      !path.sourceIds.includes("neoseeker-treno-shops") ||
+      !path.conditions.includes("Neoseeker's search-indexed Treno tables omit the armlet from their later Treno tables")
     )) ||
     (city === "Lindblum" && (
       !path.sourceIds.includes("drslice-lindblum-disc3-armory") ||
-      !path.conditions.includes("DrSlice's Disc III Dragoos's Armory table also omits it")
+      !path.conditions.includes("DrSlice's Disc III Dragoos's Armory table also omits it") ||
+      !path.sourceIds.includes("neoseeker-lindblum-shops") ||
+      !path.conditions.includes("Neoseeker's search-indexed Lindblum page")
     ))
   ) {
     errors.push(`Glass Armlet's ${city} Disc III sale must remain a source-scoped, unverified candidate separate from Alexandria recovery.`);
@@ -5059,9 +5063,15 @@ for (const pathId of [
 }
 if (
   !glassArmletTrenoSection?.sourceIds.includes("ffwiki-shops") ||
+  !glassArmletTrenoSection?.sourceIds.includes("neoseeker-treno-shops") ||
   !glassArmletTrenoSection?.sourceIds.includes("ffdq-glass-armlet") ||
   !glassArmletTrenoSection?.steps.find((step) => step.id === "treno-mogrich-letter")?.detail?.includes("Final Fantasy Wiki omits them from its later city tables") ||
+  !glassArmletTrenoSection?.steps.find((step) => step.id === "treno-mogrich-letter")?.detail?.includes("Neoseeker's Treno tables also list Glass Armlet") ||
+  !objectives.find((objective) => objective.id === "disc-2.treno.shop-stock-window")?.sourceIds.includes("neoseeker-treno-shops") ||
+  !objectives.find((objective) => objective.id === "disc-2.return-to-lindblum.arm-gear-stock")?.sourceIds.includes("neoseeker-lindblum-shops") ||
   !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table") ||
+  !glassArmletDisc3TrenoSection?.sourceIds.includes("neoseeker-treno-shops") ||
+  !glassArmletDisc3TrenoSection?.steps.find((step) => step.id === "card-tournament-queen-stella")?.detail?.includes("Neoseeker's indexed Treno page") ||
   !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("ffdq-glass-armlet") ||
   !sources.find((source) => source.id === "ffdq-glass-armlet")?.notes.includes("Lindblum (Discs I–II)") ||
   !sources.find((source) => source.id === "ffdq-glass-armlet")?.notes.includes("Treno (II)") ||
@@ -5078,7 +5088,9 @@ if (
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("ffdq-glass-armlet") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("drslice-lindblum-disc3-armory") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.sourceIds.includes("neoseeker-lindblum-shops") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("DrSlice's Disc III Dragoos's Armory table also omits it") ||
+  !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("Neoseeker's indexed Lindblum Disc III–IV") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("These source differences do not prove Disc III stock is absent") ||
   !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.aerial-exploration")?.sections.find((section) => section.id === "aerial-lindblum-and-airship")?.steps.find((step) => step.id === "aerial-plan-route")?.detail?.includes("FFDQ.com's Japanese disc-indexed armlet table")
 ) {
@@ -5102,6 +5114,8 @@ const glassArmletAtadeoSource = sources.find((source) => source.id === "gamefaqs
 const glassArmletDrSliceAlexandriaSource = sources.find((source) => source.id === "drslice-alexandria-armory");
 const glassArmletDrSliceLindblumDisc3Source = sources.find((source) => source.id === "drslice-lindblum-disc3-armory");
 const glassArmletDrSliceTrenoDisc3Source = sources.find((source) => source.id === "drslice-treno-disc3-armory");
+const glassArmletNeoseekerLindblumSource = sources.find((source) => source.id === "neoseeker-lindblum-shops");
+const glassArmletNeoseekerTrenoSource = sources.find((source) => source.id === "neoseeker-treno-shops");
 if (
   !glassArmletAtadeoSource?.notes.includes("Disc III Alexandria and Treno equipment lists include Glass Armlet for 250 Gil") ||
   !glassArmletAtadeoSource.notes.includes("Lindblum Disc III list omits the armlet") ||
@@ -5121,10 +5135,20 @@ if (
   !glassArmletDrSliceTrenoDisc3Source?.url.includes("/shop/21") ||
   !glassArmletDrSliceTrenoDisc3Source.notes.includes("Treno (Disk 3)") ||
   !glassArmletDrSliceTrenoDisc3Source.notes.includes("does not list Glass Armlet") ||
+  !glassArmletNeoseekerTrenoSource?.url.includes("/wiki/Treno") ||
+  !glassArmletNeoseekerTrenoSource.notes.includes("Disc II list includes Glass Armlet") ||
+  !glassArmletNeoseekerTrenoSource.notes.includes("Disc III–IV table omits it") ||
+  !glassArmletNeoseekerTrenoSource.notes.includes("returned 403") ||
+  !glassArmletNeoseekerLindblumSource?.url.includes("/wiki/Lindblum_%28FFIX%29") ||
+  !glassArmletNeoseekerLindblumSource.notes.includes("Disc II table") ||
+  !glassArmletNeoseekerLindblumSource.notes.includes("omits it from the Disc III–IV") ||
+  !glassArmletNeoseekerLindblumSource.notes.includes("returned 403") ||
   !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("gamefaqs-walkthrough-9801") ||
   !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-alexandria-armory") ||
   !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-lindblum-disc3-armory") ||
-  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-treno-disc3-armory")
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("drslice-treno-disc3-armory") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("neoseeker-lindblum-shops") ||
+  !gameItems.find((item) => item.id === "game-item.glass-armlet")?.sourceIds.includes("neoseeker-treno-shops")
 ) {
   errors.push("The older _ATadeo_ walkthrough and DrSlice Alexandria table must support only their documented Disc III seller listings without resolving the unverified city candidates.");
 }
