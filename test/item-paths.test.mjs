@@ -358,6 +358,48 @@ test("Ozma item paths link all four steals and four drops to the optional boss t
   }
 });
 
+test("final-battle steal paths link Trance Kuja and Necron to their distinct loot slots", () => {
+  const expected = [
+    { id: "item-path.disc-4.the-final-battle.trance-kuja-ether-steal", enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", itemId: "game-item.ether", slot: "common", rate: "100%", objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"] },
+    { id: "item-path.disc-4.the-final-battle.trance-kuja-white-robe-steal", enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", itemId: "game-item.white-robe", slot: "uncommon", rate: "25%", objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"] },
+    { id: "item-path.disc-4.the-final-battle.rebirth-ring-trance-kuja-steal", enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", itemId: "game-item.rebirth-ring", slot: "rare", rate: "0.39%", objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"] },
+    { id: "item-path.disc-4.the-final-battle.necron-elixir-common-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "common", rate: "100%", objectiveIds: ["disc-4.the-final-battle.necron-steals", "disc-4.memoria.deathguise-steals"] },
+    { id: "item-path.disc-4.the-final-battle.necron-elixir-uncommon-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "uncommon", rate: "25%", objectiveIds: ["disc-4.the-final-battle.necron-steals"] },
+    { id: "item-path.disc-4.the-final-battle.necron-elixir-semi-rare-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "semi-rare", rate: "6.25%", objectiveIds: ["disc-4.the-final-battle.necron-steals"] },
+    { id: "item-path.disc-4.the-final-battle.necron-elixir-rare-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "rare", rate: "0.39%", objectiveIds: ["disc-4.the-final-battle.necron-steals"] },
+  ];
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const enemy = enemyRecords.find((entry) => entry.id === item.enemyId);
+    const encounter = enemyEncounters.find((entry) => entry.id === item.encounterId);
+    const slot = enemy?.steals.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a real steal slot`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-4.the-final-battle");
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, item.enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [item.encounterId]);
+    assert.equal(encounter?.kind, "boss");
+    assert.ok(encounter?.formation.some((member) => member.enemyId === item.enemyId));
+    assert.ok(item.objectiveIds.every((objectiveId) => path?.walkthroughObjectiveIds?.includes(objectiveId)));
+    assert.match(path?.conditions ?? "", new RegExp(item.rate.replace("%", "\\%")));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.includes("opatil-steal-list"));
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+    if (item.enemyId === "enemy.necron") {
+      assert.ok(path?.sourceIds.includes("gamefaqs-final-battle-79143"));
+      assert.match(path?.conditions ?? path?.notes ?? "", /Jegged/);
+    }
+  }
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

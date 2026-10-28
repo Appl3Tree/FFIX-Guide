@@ -6684,6 +6684,46 @@ for (const expected of ozmaLootPaths) {
     errors.push(`Ozma path ${expected.id} must match its one-time encounter, exact ${expected.slot} loot slot, yield condition, objective, and provenance.`);
   }
 }
+const finalBattleStealPaths = [
+  { id: "item-path.disc-4.the-final-battle.trance-kuja-ether-steal", enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", itemId: "game-item.ether", slot: "common", rate: "100%", objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"] },
+  { id: "item-path.disc-4.the-final-battle.trance-kuja-white-robe-steal", enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", itemId: "game-item.white-robe", slot: "uncommon", rate: "25%", objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"] },
+  { id: "item-path.disc-4.the-final-battle.rebirth-ring-trance-kuja-steal", enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", itemId: "game-item.rebirth-ring", slot: "rare", rate: "0.39%", objectiveIds: ["disc-4.the-final-battle.trance-kuja-steals"] },
+  { id: "item-path.disc-4.the-final-battle.necron-elixir-common-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "common", rate: "100%", objectiveIds: ["disc-4.the-final-battle.necron-steals", "disc-4.memoria.deathguise-steals"] },
+  { id: "item-path.disc-4.the-final-battle.necron-elixir-uncommon-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "uncommon", rate: "25%", objectiveIds: ["disc-4.the-final-battle.necron-steals"] },
+  { id: "item-path.disc-4.the-final-battle.necron-elixir-semi-rare-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "semi-rare", rate: "6.25%", objectiveIds: ["disc-4.the-final-battle.necron-steals"] },
+  { id: "item-path.disc-4.the-final-battle.necron-elixir-rare-steal", enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", itemId: "game-item.elixir", slot: "rare", rate: "0.39%", objectiveIds: ["disc-4.the-final-battle.necron-steals"] },
+];
+if (itemAcquisitionPaths.filter((path) => finalBattleStealPaths.some((expected) => expected.id === path.id)).length !== finalBattleStealPaths.length) {
+  errors.push("The final sequence must retain all three item-bearing Trance Kuja steals and all four Necron Elixir tiers.");
+}
+for (const expected of finalBattleStealPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === expected.encounterId);
+  const slot = enemy?.steals.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.the-final-battle" ||
+    path.method !== "steal" ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== expected.enemyId ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([expected.encounterId]) ||
+    encounter?.kind !== "boss" ||
+    !encounter.formation.some((member) => member.enemyId === expected.enemyId) ||
+    expected.objectiveIds.some((objectiveId) => !path.walkthroughObjectiveIds?.includes(objectiveId)) ||
+    !path.conditions?.includes(expected.rate) ||
+    !path.sourceIds.includes("opatil-steal-list") ||
+    (expected.enemyId === "enemy.necron" && (!path.sourceIds.includes("gamefaqs-final-battle-79143") || !`${path.conditions ?? ""} ${path.notes ?? ""}`.includes("Jegged"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Final-battle path ${expected.id} must link its exact boss steal slot, sourced rate, objective, and provenance while preserving known source differences.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);
