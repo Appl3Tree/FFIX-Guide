@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { missables, sources } from "../src/data/guide.ts";
-import { gameRouteCoverage, gameRouteEdges, storyPartySequences } from "../src/data/progression.ts";
+import { missables, objectives, sources } from "../src/data/guide.ts";
+import { gameRouteCoverage, gameRouteCutoffs, gameRouteEdges, storyPartySequences } from "../src/data/progression.ts";
 import { walkthroughChapters } from "../src/data/walkthrough.ts";
 
 test("the researched story route simulates through the ending and all optional paths rejoin", () => {
@@ -203,6 +203,34 @@ test("Cleyra's story departure records its closure and disputed local cutoff", (
   const treasureWindow = missables.find((entry) => entry.id === "missable.disc-2.cleyra.treasures");
   assert.ok(treasureWindow);
   assert.match(treasureWindow.deadline, /exact final cutoff is described differently across guides/);
+});
+
+test("Cleyra's evacuation keeps the final-choice conflict and indexed-source limit explicit", () => {
+  const warning = missables.find((entry) => entry.id === "missable.disc-2.cleyra.out-of-harms-way");
+  const objective = objectives.find((entry) => entry.id === "disc-2.cleyra.out-of-harms-way");
+  const cutoff = gameRouteCutoffs.find((entry) => entry.id === "cutoff.cleyra-evacuation.choice-window");
+  const source = sources.find((entry) => entry.id === "finalfantasywiki-cleyra-evacuation");
+  const evacuationStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections
+    .find((section) => section.id === "cleyra-antlion-evacuation")?.steps
+    .find((step) => step.id === "cleyra-evacuation-choices");
+
+  assert.ok(warning);
+  assert.ok(objective);
+  assert.ok(cutoff);
+  assert.ok(source);
+  assert.equal(warning.action.includes("choose Not Yet"), true);
+  assert.match(warning.note, /Not Yet as the conservative route/);
+  assert.match(warning.note, /indirect secondary evidence/);
+  assert.ok(warning.sourceIds.includes("finalfantasywiki-cleyra-evacuation"));
+  assert.ok(objective.sourceIds.includes("finalfantasywiki-cleyra-evacuation"));
+  assert.ok(cutoff.sourceIds.includes("finalfantasywiki-cleyra-evacuation"));
+  assert.match(cutoff.trigger, /HTTP 402/);
+  assert.match(source.notes, /either final observatory response/);
+  assert.match(source.notes, /HTTP 402/);
+  assert.match(evacuationStep.detail, /indirect evidence only/);
+  for (const sourceId of warning.sourceIds) {
+    assert.ok(sources.some((entry) => entry.id === sourceId), `${warning.id} references unknown source ${sourceId}`);
+  }
 });
 
 test("Disc III's Alexandria departure keeps the conservative Treno cutoff visible", () => {

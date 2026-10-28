@@ -1958,7 +1958,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "cleyra-antlion-evacuation",
         title: "Antlion, evacuation, and the Cleyra cutoff",
         summary: "Try the Antlion steals, claim the post-battle rewards, then follow the safe evacuation route and survive Beatrix's scripted battle.",
-        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "gamefaqs-boss-guide-31490", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-missables-71891", "jegged-missables", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
+        sourceIds: ["gamefaqs-cleyra-71891", "gamefaqs-enemy-list-71891", "gamefaqs-boss-guide-31490", "jegged-cleyra", "jegged-achievements", "playstation-trophies-cleyra", "trueachievements-cleyra", "gamerguides-cleyra", "finalfantasywiki-cleyra-evacuation", "elitegrindlab-cleyra", "elitegrindlab-stiltzkin-bundles", "rpgclassics-cleyra-settlement", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-missables-71891", "jegged-missables", "flactem-mognet", "jegged-treasure-hunter", "gamefaqs-chocobo-hot-cold-ysf-9771"],
         steps: [
           {
             id: "cleyra-antlion-steals",
@@ -2011,7 +2011,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "cleyra-evacuation-choices",
             kind: "cutoff",
             text: "During the evacuation, direct residents Right, then Left, then across the bridge to the Right. At the observatory, choose Not Yet to follow the published route, then speak with every rescued resident in the Cathedral lobby to collect the Phoenix Down, Remedy, Elixir, Ether, Phoenix Pinion, and both listed cards. The fourth response's achievement effect is disputed.",
-            detail: "Jegged and Gamer Guides include the not-safe-yet response in their achievement routes; Jegged and PlayStationTrophies label it Not Yet, while Gamer Guides prints We're not safe yet. A Steam walkthrough says the fourth observatory choice does not dictate the outcome, so this guide does not present it as a confirmed requirement. Speak to every survivor: reward lists agree on Phoenix Down, Remedy, Nymph Card, Elixir, Zuu Card, and Ether; GameFAQs and a Steam walkthrough also list a Phoenix Pinion, so check every NPC until no reward remains.",
+            detail: "Jegged and Gamer Guides include the not-safe-yet response in their achievement routes; Jegged and PlayStationTrophies label it Not Yet, while Gamer Guides prints We're not safe yet. A Steam walkthrough and Final Fantasy Wiki's search-indexed text say the fourth observatory choice does not alter the outcome; the Final Fantasy Wiki page returned HTTP 402 during review, so this is indirect evidence only. Keep Not Yet as the conservative route without treating it as a confirmed requirement. Speak to every survivor: reward lists agree on Phoenix Down, Remedy, Nymph Card, Elixir, Zuu Card, and Ether; GameFAQs and a Steam walkthrough also list a Phoenix Pinion, so check every NPC until no reward remains.",
             objectiveIds: ["disc-2.cleyra.out-of-harms-way", "disc-2.cleyra.treasure-sweep"],
           },
           {

@@ -1377,9 +1377,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "story.cleyra-to-return-to-alexandria",
     title: "Cleyra evacuation choices",
     certainty: "conservative",
-    trigger: "The evacuation choices are available only during this attack sequence. Guides agree on Right, Left, Right. Jegged and Gamer Guides also include Not Yet at the observatory, while a Steam walkthrough says the fourth choice does not affect the outcome. Keep Not Yet as the published recommended route, but do not present its necessity as confirmed; direct game/version verification remains open.",
+    trigger: "The evacuation choices are available only during this attack sequence. Guides agree on Right, Left, Right. Jegged, Gamer Guides, and PlayStationTrophies specify Not Yet at the observatory, while a Steam walkthrough and Final Fantasy Wiki's search-indexed text say the fourth choice does not affect the outcome. The Final Fantasy Wiki page returned HTTP 402 during review, so its text is indirect secondary evidence. Keep Not Yet as the conservative recommended route, but do not present its necessity as confirmed; direct game/version verification remains open.",
     missableIds: ["missable.disc-2.cleyra.out-of-harms-way"],
-    sourceIds: ["jegged-cleyra", "jegged-achievements", "gamerguides-cleyra", "steam-cleyra-achievement-walkthrough", "playstation-trophies-cleyra", "trueachievements-cleyra"],
+    sourceIds: ["jegged-cleyra", "jegged-achievements", "gamerguides-cleyra", "steam-cleyra-achievement-walkthrough", "finalfantasywiki-cleyra-evacuation", "playstation-trophies-cleyra", "trueachievements-cleyra"],
   },
   {
     id: "cutoff.cleyra-beatrix.boss-steals",

@@ -116,7 +116,12 @@ const achievementCatalogs = [
 ];
 
 const cleyraEvacuationWarning = missablesById.get("missable.disc-2.cleyra.out-of-harms-way");
+const cleyraEvacuationObjective = objectivesById.get("disc-2.cleyra.out-of-harms-way");
 const cleyraStiltzkinWarning = missablesById.get("missable.disc-2.cleyra.stiltzkin-2");
+const cleyraEvacuationWalkthroughStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-2.cleyra")?.sections
+  .find((section) => section.id === "cleyra-antlion-evacuation")?.steps
+  .find((step) => step.id === "cleyra-evacuation-choices");
 const eliteGrindLabStiltzkinSource = sources.find((source) => source.id === "elitegrindlab-stiltzkin-bundles");
 const cleyraEvacuationCutoff = cutoffsById.get("cutoff.cleyra-evacuation.choice-window");
 const cleyraFreyaCutoff = cutoffsById.get("cutoff.cleyra-freya.before-reunion");
@@ -198,14 +203,21 @@ for (const itemId of ["game-item.potion", "game-item.ether", "game-item.remedy",
 }
 if (
   !cleyraEvacuationWarning?.action.includes("Choose Right, then Left, then Right") ||
-  !cleyraEvacuationWarning.action.includes("Not Yet as the recommended route") ||
+  !cleyraEvacuationWarning.action.includes("Not Yet as the conservative recommendation") ||
   cleyraEvacuationWarning.classification.includes("version-dependent") ||
   !cleyraEvacuationWarning.note.includes("fourth observatory choice does not dictate the outcome") ||
+  !cleyraEvacuationWarning.note.includes("Final Fantasy Wiki's search-indexed text") ||
+  !cleyraEvacuationWarning.note.includes("indirect secondary evidence") ||
   !cleyraEvacuationWarning.sourceIds.includes("steam-cleyra-achievement-walkthrough") ||
+  !cleyraEvacuationWarning.sourceIds.includes("finalfantasywiki-cleyra-evacuation") ||
   !cleyraEvacuationWarning.sourceIds.includes("jegged-cleyra") ||
   !cleyraEvacuationWarning.sourceIds.includes("gamerguides-cleyra") ||
+  !cleyraEvacuationObjective?.sourceIds.includes("finalfantasywiki-cleyra-evacuation") ||
   !cleyraEvacuationCutoff?.trigger.includes("do not present its necessity as confirmed") ||
-  !cleyraEvacuationCutoff.sourceIds.includes("steam-cleyra-achievement-walkthrough")
+  !cleyraEvacuationCutoff.trigger.includes("search-indexed text") ||
+  !cleyraEvacuationCutoff.sourceIds.includes("steam-cleyra-achievement-walkthrough") ||
+  !cleyraEvacuationCutoff.sourceIds.includes("finalfantasywiki-cleyra-evacuation") ||
+  !cleyraEvacuationWalkthroughStep?.detail?.includes("indirect evidence only")
 ) {
   errors.push("Cleyra's evacuation route must preserve Right/Left/Right, identify Not Yet as recommended rather than confirmed, and cite the fourth-choice conflict.");
 }
