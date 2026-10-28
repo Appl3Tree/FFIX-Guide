@@ -1,4 +1,4 @@
-import type { CoverageState } from "./guide.ts";
+import { objectives, type CoverageState } from "./guide.ts";
 import { enemyEncounters, enemyRecords, type EnemyLootSlot, type EnemyTableSlot } from "./enemies.ts";
 
 export type GameItemCategory = "consumable" | "equipment" | "key-item";
@@ -454,6 +454,20 @@ const gizamalukeStealReferenceSources = [
   "rpgclassics-gizamaluke",
   "gamefaqs-enemy-list-71891",
 ];
+const gizamalukeBossEncounterId = "encounter.gizamaluke-grotto.gizamaluke";
+const gizamalukeBossLootPathSources = (method: "steal" | "drop", slotName: EnemyTableSlot, pathSources: string[], objectiveId: string) => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.gizamaluke");
+  const encounter = enemyEncounters.find((entry) => entry.id === gizamalukeBossEncounterId);
+  const lootSlot = (method === "steal" ? enemy?.steals : enemy?.drops)?.find((entry) => entry.slot === slotName);
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  return [...new Set([
+    ...pathSources,
+    ...(enemy?.sourceIds ?? []),
+    ...(encounter?.sourceIds ?? []),
+    ...(lootSlot?.sourceIds ?? []),
+    ...(objective?.sourceIds ?? []),
+  ])];
+};
 const iceStaffReferenceSources = [
   "gamefaqs-items-71891",
   "gamefaqs-shops-71891",
@@ -1723,9 +1737,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal Magus Hat (Uncommon) from Gizamaluke. This boss steal is a separate copy from the Bell Room chest and later shop routes.",
+    conditions: "Steal the Uncommon Magus Hat slot from Gizamaluke; the attempt is chance-based. This boss steal is a separate copy from the Bell Room chest and later shop routes.",
     walkthroughObjectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-steals"],
-    sourceIds: magusHatReferenceSources,
+    enemyId: "enemy.gizamaluke",
+    enemyLootSlot: "uncommon",
+    encounterIds: [gizamalukeBossEncounterId],
+    sourceIds: gizamalukeBossLootPathSources("steal", "uncommon", magusHatReferenceSources, "disc-1.journey-to-burmecia.gizamaluke-steals"),
   },
   {
     id: "item-path.disc-1.journey-to-burmecia.elixir-gizamaluke-steal",
@@ -1734,9 +1751,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal Elixir (Common) from Gizamaluke. Other Elixir sources appear later, so this is an early copy rather than the final item-type opportunity.",
+    conditions: "Steal the Common Elixir slot from Gizamaluke; the attempt is chance-based. Other Elixir sources appear later, so this is an early copy rather than the final item-type opportunity.",
     walkthroughObjectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-steals"],
-    sourceIds: gizamalukeStealReferenceSources,
+    enemyId: "enemy.gizamaluke",
+    enemyLootSlot: "common",
+    encounterIds: [gizamalukeBossEncounterId],
+    sourceIds: gizamalukeBossLootPathSources("steal", "common", gizamalukeStealReferenceSources, "disc-1.journey-to-burmecia.gizamaluke-steals"),
   },
   {
     id: "item-path.disc-1.journey-to-burmecia.ice-staff-gizamaluke-steal",
@@ -1745,9 +1765,12 @@ const powerBeltDependencyPaths: ItemAcquisitionPath[] = [
     method: "steal",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Steal Ice Staff (Semi-Rare) from Gizamaluke. The later Cleyra's Trunk chest guarantees another route to the item type.",
+    conditions: "Steal the Semi-Rare Ice Staff slot from Gizamaluke; the attempt is chance-based. The later Cleyra's Trunk chest guarantees another route to the item type.",
     walkthroughObjectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-steals"],
-    sourceIds: gizamalukeStealReferenceSources,
+    enemyId: "enemy.gizamaluke",
+    enemyLootSlot: "semi-rare",
+    encounterIds: [gizamalukeBossEncounterId],
+    sourceIds: gizamalukeBossLootPathSources("steal", "semi-rare", iceStaffReferenceSources, "disc-1.journey-to-burmecia.gizamaluke-steals"),
   },
   {
     id: "item-path.disc-2.cleyra.ice-staff-trunk-chest",
@@ -5396,10 +5419,13 @@ const gizamalukeDropPaths: ItemAcquisitionPath[] = [
     method: "drop",
     quantity: 1,
     availability: "one-time-encounter",
-    conditions: "Defeat Gizamaluke to receive its guaranteed Tent drop.",
+    conditions: "Gizamaluke's Always Tent drop is guaranteed on victory.",
     notes: "Caves of Narshe and Final Fantasy Online record Tent as the boss drop; Jegged independently lists Tent under Drops. This reward is separate from any Tent used on Gizamaluke during the fight.",
     walkthroughObjectiveIds: ["disc-1.journey-to-burmecia.gizamaluke-drops"],
-    sourceIds: gizamalukeDropSources,
+    enemyId: "enemy.gizamaluke",
+    enemyLootSlot: "always",
+    encounterIds: [gizamalukeBossEncounterId],
+    sourceIds: gizamalukeBossLootPathSources("drop", "always", gizamalukeDropSources, "disc-1.journey-to-burmecia.gizamaluke-drops"),
   },
 ];
 

@@ -2159,6 +2159,52 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
   }
 });
 
+test("Gizamaluke item paths link all three steals and the guaranteed Tent to exact boss slots", () => {
+  const enemyId = "enemy.gizamaluke";
+  const encounterId = "encounter.gizamaluke-grotto.gizamaluke";
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const expected = [
+    { id: "item-path.disc-1.journey-to-burmecia.elixir-gizamaluke-steal", itemId: "game-item.elixir", method: "steal", slot: "common", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-steals" },
+    { id: "item-path.disc-1.journey-to-burmecia.magus-hat-gizamaluke-steal", itemId: "game-item.magus-hat", method: "steal", slot: "uncommon", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-steals" },
+    { id: "item-path.disc-1.journey-to-burmecia.ice-staff-gizamaluke-steal", itemId: "game-item.ice-staff", method: "steal", slot: "semi-rare", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-steals" },
+    { id: "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop", itemId: "game-item.tent", method: "drop", slot: "always", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-drops" },
+  ];
+
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.slot === item.slot);
+    const objective = objectives.find((entry) => entry.id === item.objectiveId);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a source-backed loot slot`);
+    assert.equal(slot?.itemId, item.itemId);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-1.journey-to-burmecia");
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    assert.ok(objective?.sourceIds.every((sourceId) => path?.sourceIds.includes(sourceId)));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)));
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", /chance-based/);
+      assert.doesNotMatch(`${path?.conditions ?? ""} ${path?.notes ?? ""}`, /\d+(?:\.\d+)?%/);
+    } else {
+      assert.match(path?.conditions ?? "", /Always/);
+      assert.match(path?.conditions ?? "", /victory/);
+    }
+  }
+});
+
 test("Ice Cavern mist-jet steals and conditional drops are repeatable and slot-specific", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
   const encounterId = "encounter.ice-cavern.mist-jet-pool";

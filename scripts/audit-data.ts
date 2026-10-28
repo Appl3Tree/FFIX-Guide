@@ -4993,6 +4993,40 @@ if (!grottoPool || grottoPool.kind !== "random-pool" || grottoPool.formation.len
   !cleyraIceStaffPath || cleyraIceStaffPath.method !== "chest" || cleyraIceStaffPath.chapterId !== "disc-2.cleyra") {
   errors.push("Gizamaluke's Grotto must separate the three roaming enemies from its two fixed Type A pairs and retain the boss steal warning and later Ice Staff recovery.");
 }
+const gizamalukeBossLootPaths = [
+  { id: "item-path.disc-1.journey-to-burmecia.elixir-gizamaluke-steal", itemId: "game-item.elixir", method: "steal", slot: "common", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-steals" },
+  { id: "item-path.disc-1.journey-to-burmecia.magus-hat-gizamaluke-steal", itemId: "game-item.magus-hat", method: "steal", slot: "uncommon", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-steals" },
+  { id: "item-path.disc-1.journey-to-burmecia.ice-staff-gizamaluke-steal", itemId: "game-item.ice-staff", method: "steal", slot: "semi-rare", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-steals" },
+  { id: "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop", itemId: "game-item.tent", method: "drop", slot: "always", objectiveId: "disc-1.journey-to-burmecia.gizamaluke-drops" },
+];
+if (itemAcquisitionPaths.filter((path) => gizamalukeBossLootPaths.some((expected) => expected.id === path.id)).length !== gizamalukeBossLootPaths.length) {
+  errors.push("Gizamaluke must retain paths for its three named steals and Always Tent drop.");
+}
+for (const expected of gizamalukeBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const slot = (expected.method === "steal" ? gizamalukeRecord?.steals : gizamalukeRecord?.drops)?.find((entry) => entry.slot === expected.slot);
+  const objective = objectivesById.get(expected.objectiveId);
+  const requiredSources = new Set([...(gizamalukeRecord?.sourceIds ?? []), ...(gizamalukeEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? []), ...(objective?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    slot.itemId !== expected.itemId ||
+    path.itemId !== expected.itemId ||
+    path.method !== expected.method ||
+    path.chapterId !== "disc-1.journey-to-burmecia" ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== "enemy.gizamaluke" ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.gizamaluke-grotto.gizamaluke"]) ||
+    !path.walkthroughObjectiveIds?.includes(expected.objectiveId) ||
+    (expected.method === "steal" && !path.conditions?.includes("chance-based")) ||
+    (expected.method === "drop" && (!path.conditions?.includes("Always") || !path.conditions.includes("victory"))) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId))
+  ) {
+    errors.push(`Gizamaluke path ${expected.id} must match its exact enemy slot, one-time encounter, outcome, objective, and provenance.`);
+  }
+}
 const grottoRegularLootExpectations = [
   ["enemy.hornet", "steal", "common", "game-item.potion", "hornet-potion-common-steal"],
   ["enemy.hornet", "drop", "common", "game-item.potion", "hornet-potion-common-drop"],
