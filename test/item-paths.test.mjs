@@ -5398,3 +5398,73 @@ test("Rosetta Ring links its Stellazzio, Friendly Yan, Mountain Crack, and Disc 
     assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
   }
 });
+
+test("Coral Ring keeps its Festival prize, synthesis recovery routes, abilities, and optional quantities distinct", () => {
+  const coralPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.coral-ring");
+  const coralSynthesisPaths = coralPaths.filter((path) => path.method === "synthesis");
+  const festivalPath = coralPaths.find((path) => path.id === "item-path.disc-1.lindblum.coral-ring-freya-festival-reward");
+  const lindblumPath = coralPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.coral-ring-post-cleyra-synthesis");
+  const trenoCandidate = coralPaths.find((path) => path.id === "item-path.disc-2.treno.coral-ring-synthesis-candidate");
+  const laterTrenoPath = coralPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.coral-ring-treno-synthesis");
+  const recipe = synthesisRecipes.find((entry) => entry.id === "synthesis-recipe.coral-ring");
+  const targets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.coral-ring");
+  const abilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.coral-ring");
+  const item = gameItems.find((entry) => entry.id === "game-item.coral-ring");
+  const returnLindblumSections = walkthroughChapters.flatMap((chapter) => chapter.sections);
+  const returnLindblumStep = returnLindblumSections.flatMap((section) => section.steps)
+    .find((step) => step.id === "return-lindblum-shop-preparation");
+  const returnLindblumSection = returnLindblumSections.find((section) => section.id === "return-lindblum-business-district");
+
+  assert.equal(coralPaths.length, 9);
+  assert.equal(coralSynthesisPaths.length, 8);
+  assert.ok(coralSynthesisPaths.every((path) => path.recipeId === "synthesis-recipe.coral-ring" && path.cost?.amount === 1200));
+  assert.equal(festivalPath?.method, "quest-reward");
+  assert.equal(festivalPath?.availability, "conditional");
+  assert.equal(lindblumPath?.availability, "repeatable");
+  assert.equal(lindblumPath?.cost?.amount, 1200);
+  assert.ok(lindblumPath?.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops"));
+  assert.equal(trenoCandidate?.availability, "window-unverified");
+  assert.match(trenoCandidate?.conditions ?? "", /GameFAQs Shops.*omits Coral Ring/i);
+  assert.ok(trenoCandidate?.conditions?.includes("Disc III–IV Treno route"));
+  assert.equal(laterTrenoPath?.availability, "repeatable");
+
+  assert.equal(recipe?.resultItemId, "game-item.coral-ring");
+  assert.equal(recipe?.cost.amount, 1200);
+  assert.deepEqual(recipe?.ingredients.map((ingredient) => ingredient.itemId).sort(), ["game-item.lightning-staff", "game-item.rod"]);
+  assert.equal(targets.find((target) => target.basis === "route-need")?.targetQuantity, 9);
+  assert.equal(targets.find((target) => target.basis === "end-inventory")?.targetQuantity, 8);
+  assert.deepEqual(abilities.map((claim) => claim.abilityName).sort(), ["Insomniac", "Lancer", "Man Eater"]);
+  assert.ok(item?.sourceIds.includes("rpgclassics-synthesis"));
+  assert.ok(returnLindblumStep?.detail?.includes("Lightning Staff + Rod for 1,200 Gil"));
+  assert.ok(returnLindblumSection?.sourceIds?.includes("rpgclassics-synthesis"));
+  for (const path of coralPaths) {
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+});
+
+test("Rod links Garnet's starting copy, shop and chest sources, Coral Ring synthesis, and its abilities", () => {
+  const rodPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rod");
+  const startingPath = rodPaths.find((path) => path.method === "starting-equipment");
+  const daliPath = rodPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.rod-shop");
+  const lindblumPath = rodPaths.find((path) => path.id === "item-path.disc-1.lindblum.rod-pre-cleyra-shop");
+  const ipsenPath = rodPaths.find((path) => path.id === "item-path.disc-3.ipsens-castle.rod-chest");
+  const coralRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.coral-ring");
+  const targets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.rod");
+  const abilities = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.rod");
+
+  assert.equal(rodPaths.length, 4);
+  assert.equal(startingPath?.chapterId, "disc-1.alexandria");
+  assert.equal(daliPath?.cost?.amount, 260);
+  assert.equal(lindblumPath?.availability, "limited-window");
+  assert.equal(lindblumPath?.cost?.amount, 260);
+  assert.ok(lindblumPath?.walkthroughObjectiveIds?.includes("disc-1.lindblum.pre-cleyra-stock"));
+  assert.equal(ipsenPath?.method, "chest");
+  assert.ok(ipsenPath?.walkthroughObjectiveIds?.includes("disc-3.ipsens-castle.pickups"));
+  assert.ok(coralRecipe?.ingredients.some((ingredient) => ingredient.itemId === "game-item.rod"));
+  assert.equal(targets.find((target) => target.basis === "route-need")?.targetQuantity, 2);
+  assert.equal(targets.find((target) => target.basis === "end-inventory")?.targetQuantity, 8);
+  assert.deepEqual(abilities.map((claim) => claim.abilityName).sort(), ["Cure", "Panacea", "Protect"]);
+  for (const path of rodPaths) {
+    assert.ok(path.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+});

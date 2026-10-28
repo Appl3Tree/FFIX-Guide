@@ -368,6 +368,20 @@ export const synthesisRecipes: SynthesisRecipe[] = [
     notes: "Bone Wrist + Stardust Rod synthesizes Madain's Ring for 3,000 Gil. The recipe is listed at Black Mage Village (Discs II–III), Alexandria, Treno and Lindblum (Discs III–IV), and Daguerreo. The ring is also a repeatable Treno Auction item and a reward from the Fossil Roo digging game and a Forgotten Continent Mountain Crack; that crack's #2/#3 label differs by source.",
   },
   {
+    id: "synthesis-recipe.coral-ring",
+    resultItemId: "game-item.coral-ring",
+    ingredients: [
+      { itemId: "game-item.lightning-staff", quantity: 1 },
+      { itemId: "game-item.rod", quantity: 1 },
+    ],
+    chapterId: "disc-2.return-to-lindblum",
+    shopId: "lindblum.synthesis-shop.post-cleyra",
+    shopName: "Lindblum Synthesis Shop (post-Cleyra, Disc II)",
+    cost: { currency: "gil", amount: 1200 },
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "rpgclassics-synthesis"],
+    notes: "Lightning Staff + Rod synthesizes Coral Ring for 1,200 Gil. GameFAQs lists the recipe at Lindblum after Cleyra, Black Mage Village, Alexandria, Treno, and Daguerreo; RPGClassics also lists the Alexandria Alley Synthesist and Disc II Treno. GameFAQs Shops omits Coral Ring from its Disc II Treno recipe list, so that seller window remains an unverified candidate while the separate Disc III–IV Treno route is retained. The Festival of the Hunt is a separate one-time Freya prize.",
+  },
+  {
     id: "synthesis-recipe.reflect-ring",
     resultItemId: "game-item.reflect-ring",
     ingredients: [

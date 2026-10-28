@@ -10896,6 +10896,52 @@ if (!gameItems.some((item) => item.id === "game-item.rosetta-ring" &&
   !rosettaRingFinalPrepStep?.detail?.includes("end-inventory #13")) {
   errors.push("Rosetta Ring must link its Mountain Crack, Stellazzio, Friendly Yan, and Disc IV synthesis routes, preserve the Friendly Yan drop/gift distinction, and record its targets, abilities, and walkthrough checkpoints.");
 }
+const coralRingPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.coral-ring");
+const coralRingSynthesisPaths = coralRingPaths.filter((path) => path.method === "synthesis");
+const coralRingRecipe = synthesisRecipes.find((recipe) => recipe.id === "synthesis-recipe.coral-ring");
+const coralRingTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.coral-ring");
+const coralRingAbilityNames = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.coral-ring").map((claim) => claim.abilityName);
+const coralRingPostCleyraPath = coralRingPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.coral-ring-post-cleyra-synthesis");
+const coralRingTrenoCandidate = coralRingPaths.find((path) => path.id === "item-path.disc-2.treno.coral-ring-synthesis-candidate");
+const coralRingTrenoLaterPath = coralRingPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.coral-ring-treno-synthesis");
+const coralRingSections = walkthroughChapters.flatMap((chapter) => chapter.sections);
+const coralRingShopStep = coralRingSections.flatMap((section) => section.steps)
+  .find((step) => step.id === "return-lindblum-shop-preparation");
+const coralRingShopSection = coralRingSections.find((section) => section.id === "return-lindblum-business-district");
+if (!gameItems.some((item) => item.id === "game-item.coral-ring" &&
+    ["gamefaqs-hunt-minigame-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "rpgclassics-synthesis"].every((sourceId) => item.sourceIds.includes(sourceId))) ||
+  coralRingPaths.length !== 9 ||
+  coralRingSynthesisPaths.length !== 8 ||
+  !coralRingSynthesisPaths.every((path) => path.recipeId === "synthesis-recipe.coral-ring" && path.cost?.amount === 1200) ||
+  coralRingRecipe?.resultItemId !== "game-item.coral-ring" || coralRingRecipe.cost.amount !== 1200 ||
+  !["game-item.lightning-staff", "game-item.rod"].every((itemId) => coralRingRecipe.ingredients.some((ingredient) => ingredient.itemId === itemId)) ||
+  coralRingPostCleyraPath?.availability !== "repeatable" || coralRingPostCleyraPath.cost?.amount !== 1200 ||
+  !coralRingPostCleyraPath.walkthroughObjectiveIds?.includes("disc-2.return-to-lindblum.cleyra-recovery-shops") ||
+  coralRingTrenoCandidate?.availability !== "window-unverified" ||
+  !coralRingTrenoCandidate?.conditions?.includes("GameFAQs Shops' Disc II Treno recipe list omits Coral Ring") ||
+  coralRingTrenoLaterPath?.availability !== "repeatable" ||
+  coralRingTargets.find((target) => target.basis === "route-need")?.targetQuantity !== 9 ||
+  coralRingTargets.find((target) => target.basis === "end-inventory")?.targetQuantity !== 8 ||
+  !["Insomniac", "Lancer", "Man Eater"].every((abilityName) => coralRingAbilityNames.includes(abilityName)) ||
+  !coralRingShopStep?.detail?.includes("Lightning Staff + Rod for 1,200 Gil") ||
+  !coralRingShopSection?.sourceIds?.includes("rpgclassics-synthesis")) {
+  errors.push("Coral Ring must retain the Festival reward, priced synthesis recipe and source-listed seller routes, separate uncertain Disc II Treno stock from its later confirmed route, and preserve its targets, abilities, and walkthrough/source links.");
+}
+const rodPaths = itemAcquisitionPaths.filter((path) => path.itemId === "game-item.rod");
+const rodDaliPath = rodPaths.find((path) => path.id === "item-path.disc-1.village-of-dali.rod-shop");
+const rodNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.rod-need-two");
+const rodEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.rod-end-inventory-eight");
+const rodAbilityNames = equipmentAbilityClaims.filter((claim) => claim.itemId === "game-item.rod").map((claim) => claim.abilityName);
+if (!gameItems.some((item) => item.id === "game-item.rod" && ["gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-abilities-71891", "gamefaqs-ipsens-castle-71891"].every((sourceId) => item.sourceIds.includes(sourceId))) ||
+  rodPaths.length !== 4 ||
+  !rodPaths.some((path) => path.method === "starting-equipment" && path.chapterId === "disc-1.alexandria") ||
+  rodDaliPath?.chapterId !== "disc-1.village-of-dali" || rodDaliPath.cost?.amount !== 260 ||
+  !rodPaths.some((path) => path.method === "chest" && path.chapterId === "disc-3.ipsens-castle" && path.walkthroughObjectiveIds?.includes("disc-3.ipsens-castle.pickups")) ||
+  rodNeedTarget?.targetQuantity !== 2 || rodNeedTarget.basis !== "route-need" ||
+  rodEndInventoryTarget?.targetQuantity !== 8 || rodEndInventoryTarget.basis !== "end-inventory" ||
+  !["Cure", "Panacea", "Protect"].every((abilityName) => rodAbilityNames.includes(abilityName))) {
+  errors.push("Rod must link its Garnet, Dali/Lindblum, and Ipsen sources to the Coral Ring recipe, optional quantity targets, and three listed abilities.");
+}
 for (const item of gameItems) {
   if (!acquisitionCounts.has(item.id)) errors.push(`Game item ${item.id} has no acquisition paths.`);
 }
