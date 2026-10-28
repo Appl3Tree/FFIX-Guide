@@ -252,7 +252,7 @@ The source trace now covers every Disc II checkpoint through the start of Disc I
 
 ### Result and unresolved checks
 
-The source trace reaches the Desert Palace Rack at 08:36:57, with 03:23:03 before the 12-hour cutoff. Its baseline Excalibur II target remains 11:13:07; the optional tenth Promist Ring branch adds 21 minutes, leaving a source-derived 25:53 before that cutoff. These are arithmetic comparisons against source targets, not proof of timing. Full Movie Critic and platform achievement coverage, the optional-stat branches' complete cost arithmetic, the remaining Disc III/IV route, timer/version behavior, and the full-pickup route budget remain open. Continue with D3-07 Gulug Mountains at 08:52:28.
+The source trace reaches the Desert Palace Rack at 08:36:57, with 03:23:03 before the 12-hour cutoff. Its baseline Excalibur II target remains 11:13:07; the optional tenth Promist Ring branch adds 21 minutes, leaving a source-derived 25:53 before that cutoff. These are arithmetic comparisons against source targets, not proof of timing. Full Movie Critic and platform achievement coverage, the optional-stat branches' complete cost arithmetic, the remaining Disc III/IV route (including the post-destruction Alexandria Inn match checkpoint and the anecdotal first Disc IV Inn-entry fallback), timer/version behavior, and the full-pickup route budget remain open. Continue with D3-07 Gulug Mountains at 08:52:28.
 
 ## Excalibur II route static run 6 — Desert Palace through the Disc IV transition
 

@@ -52,6 +52,33 @@ test("the researched story route simulates through the ending and all optional p
   }
 });
 
+test("Alexandria Inn's Disc IV fallback is limited to a first-entry report", () => {
+  const sourceId = "steam-tetra-endgame-opponents-687154254";
+  const objective = objectives.find((entry) => entry.id === "disc-3.on-the-high-seas.alexandria-first-visit-card-players");
+  const warning = missables.find((entry) => entry.id === "missable.disc-3.on-the-high-seas.alexandria-first-visit-card-players");
+  const disc3Step = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.on-the-high-seas")
+    ?.sections.flatMap((section) => section.steps).find((step) => step.id === "high-seas-alexandria-first-visit-card-players");
+  const disc4Step = walkthroughChapters.find((chapter) => chapter.areaId === "disc-4.return-to-gaia")
+    ?.sections.flatMap((section) => section.steps).find((step) => step.id === "gaia-return-alexandria-first-visit-card-players");
+  const cutoffRecords = gameRouteCutoffs.filter((cutoff) => cutoff.missableIds.includes(warning?.id ?? ""));
+  const detour = gameRouteEdges.find((edge) => edge.id === "detour.high-seas-alexandria-ruins");
+  const source = sources.find((entry) => entry.id === sourceId);
+
+  assert.ok(objective?.sourceIds.includes(sourceId));
+  assert.ok(warning?.sourceIds.includes(sourceId));
+  assert.ok(source);
+  assert.match(source.notes, /first Alexandria Inn entry on Disc IV triggers a scene/);
+  assert.match(source.notes, /does not independently confirm the scene or Hippaul match/);
+  assert.match(disc3Step.text, /first post-destruction Alexandria visit/);
+  assert.match(disc4Step.text, /skipped the entire Disc III Alexandria visit/);
+  assert.match(disc4Step.text, /first Disc IV Inn entry/);
+  assert.match(disc4Step.text, /no source verifies a repeat/);
+  assert.match(warning.note, /applicable only when Disc IV is the first Inn entry/);
+  assert.equal(cutoffRecords.length, 2);
+  assert.ok(cutoffRecords.every((cutoff) => cutoff.certainty === "disputed" && cutoff.sourceIds.includes(sourceId)));
+  assert.ok(detour?.sourceIds.includes(sourceId));
+});
+
 test("the Oeilvert and Desert Palace route preserves the sourced party split order", () => {
   const splitGate = gameRouteEdges.find((edge) => edge.id === "story.picking-up-the-trail-to-forgotten-continent");
   assert.ok(splitGate);

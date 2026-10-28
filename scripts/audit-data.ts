@@ -8076,6 +8076,8 @@ const postDestructionAlexandriaCardSteps = walkthroughChapters
   .filter((chapter) => ["disc-3.on-the-high-seas", "disc-4.return-to-gaia"].includes(chapter.areaId))
   .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
   .filter((step) => step.objectiveIds?.includes(postDestructionAlexandriaCardObjectiveId));
+const postDestructionAlexandriaDisc3Step = postDestructionAlexandriaCardSteps.find((step) => step.id === "high-seas-alexandria-first-visit-card-players");
+const postDestructionAlexandriaDisc4Step = postDestructionAlexandriaCardSteps.find((step) => step.id === "gaia-return-alexandria-first-visit-card-players");
 const postDestructionAlexandriaCardCutoffs = gameRouteCutoffs.filter((cutoff) =>
   cutoff.missableIds.includes(postDestructionAlexandriaCardWarning?.id ?? ""),
 );
@@ -8086,6 +8088,7 @@ if (
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("cour89-card-players")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("gamefaqs-card-locations-24067")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+  || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-endgame-opponents-687154254")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
   || !postDestructionAlexandriaCardObjective.sourceIds.includes("trueachievements-tetra-master-guide")
   || !postDestructionAlexandriaCardObjective.chapterIds?.includes("disc-3.on-the-high-seas")
@@ -8095,19 +8098,24 @@ if (
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("cour89-card-players")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("gamefaqs-card-locations-24067")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+  || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-endgame-opponents-687154254")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
   || !postDestructionAlexandriaCardWarning.sourceIds.includes("trueachievements-tetra-master-guide")
-  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs' card-location FAQ lists two Red Mages and Hippaul")
+  || !postDestructionAlexandriaCardWarning.note?.includes("GameFAQs lists two Red Mages and Hippaul")
   || !postDestructionAlexandriaCardWarning.note.includes("Xbox achievement guide's indexed text")
-  || !postDestructionAlexandriaCardWarning.note.includes("recommend a later attempt if missed")
+  || !postDestructionAlexandriaCardWarning.note.includes("applicable only when Disc IV is the first Inn entry")
   || postDestructionAlexandriaCardSteps.length !== 2
-  || !postDestructionAlexandriaCardSteps.every((step) =>
-    ["male Red Mage", "female Red Mage", "Kabao"].every((name) => step.text.includes(name)),
-  )
+  || !postDestructionAlexandriaDisc3Step
+  || !["male Red Mage", "female Red Mage", "Kabao"].every((name) => postDestructionAlexandriaDisc3Step.text.includes(name))
+  || !postDestructionAlexandriaDisc3Step.text.includes("first post-destruction Alexandria visit")
+  || !postDestructionAlexandriaDisc4Step
+  || !postDestructionAlexandriaDisc4Step.text.includes("skipped the entire Disc III Alexandria visit")
+  || !postDestructionAlexandriaDisc4Step.text.includes("first Disc IV Inn entry")
   || postDestructionAlexandriaCardCutoffs.length !== 2
   || postDestructionAlexandriaCardCutoffs.some((cutoff) => cutoff.certainty !== "disputed")
   || postDestructionAlexandriaCardCutoffs.some((cutoff) =>
     !cutoff.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+    || !cutoff.sourceIds.includes("steam-tetra-endgame-opponents-687154254")
     || !cutoff.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
     || !cutoff.sourceIds.includes("trueachievements-tetra-master-guide")
   )
@@ -8116,6 +8124,7 @@ if (
   || postDestructionAlexandriaDetour.toChapterId !== "disc-1.alexandria"
   || !postDestructionAlexandriaDetour.sourceIds.includes("jegged-blue-narciss")
   || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-disc4-opponents-729676856")
+  || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-endgame-opponents-687154254")
   || !postDestructionAlexandriaDetour.sourceIds.includes("steam-tetra-opponents-disc4-2804532988")
   || !postDestructionAlexandriaDetour.sourceIds.includes("trueachievements-tetra-master-guide")
   || !postDestructionAlexandriaDetour.sourceIds.includes("rpgclassics-alexandria-ruins")
@@ -8128,10 +8137,12 @@ if (
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not identify or time its card matches")
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not document the return to the Blue Narciss")
   || !sources.find((source) => source.id === "steam-tetra-disc4-opponents-729676856")?.notes.includes("a 2023 comment reports that Hippaul and the Red Mage are not at Alexandria Inn on Disc IV")
+  || !sources.find((source) => source.id === "steam-tetra-endgame-opponents-687154254")?.notes.includes("the first Alexandria Inn entry on Disc IV triggers a scene")
+  || !sources.find((source) => source.id === "steam-tetra-endgame-opponents-687154254")?.notes.includes("does not independently confirm the scene or Hippaul match")
   || !sources.find((source) => source.id === "steam-tetra-opponents-disc4-2804532988")?.notes.includes("omission alone does not establish they are unavailable")
   || !sources.find((source) => source.id === "trueachievements-tetra-master-guide")?.notes.includes("two Red Mages and Hippaul are at the Alexandria Inn at endgame")
 ) {
-  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the Cour89/GameFAQs/TrueAchievements/Steam conflict, optional-match scope, and conditional later attempt; the harbor rejoin must cite the direct Blue Narciss return instruction.");
+  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the conflicting source reports, optional-match scope, and anecdotal first-Disc-IV-entry fallback; the harbor rejoin must cite the direct Blue Narciss return instruction.");
 }
 const mountainMoonstoneObjectiveId = "disc-2.conde-petie-mountain-path.moonstone";
 const mountainMoonstoneWarning = missablesById.get("missable.disc-2.conde-petie-mountain-path.moonstone");

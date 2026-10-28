@@ -735,8 +735,8 @@ export const gameRouteEdges: GameRouteEdge[] = [
     fromChapterId: "disc-3.on-the-high-seas",
     toChapterId: "disc-1.alexandria",
     relationship: "optional-return",
-    summary: "Land the Blue Narciss at Alexandria for the post-destruction harbor and town sweep. Cour89 describes first-visit Inn matches for the male and female Red Mages and Kabao; GameFAQs and an Xbox achievement guide also report two Red Mages and Hippaul at the Inn on Disc III–IV or endgame, while a Steam commenter disputes Disc IV availability. Use the Disc III visit as the safe checkpoint; if missed, a Disc IV attempt is worth trying but is not verified across releases.",
-    sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
+    summary: "Land the Blue Narciss at Alexandria for the post-destruction harbor and town sweep. Cour89 describes first-visit Inn matches for the male and female Red Mages and Kabao; GameFAQs and an Xbox achievement guide also report two Red Mages and Hippaul at the Inn on Disc III–IV or endgame. If the entire Disc III visit is skipped, a Steam commenter reports a one-time scene and three matches on the first Disc IV Inn entry, but this is anecdotal and does not establish a repeat after a Disc III Inn visit. Use the Disc III visit as the safe checkpoint.",
+    sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-endgame-opponents-687154254", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
   },
   {
     id: "detour.alexandria-ruins-rejoin-high-seas",
@@ -1719,9 +1719,9 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
     edgeId: "detour.high-seas-alexandria-ruins",
     title: "Alexandria Inn matches on the first post-destruction visit",
     certainty: "disputed",
-    trigger: "During the Disc III Blue Narciss route, use the first post-destruction Alexandria visit as the safe checkpoint: enter the Inn and try the male Red Mage, female Red Mage, and Kabao (Cour89's labels) before leaving. GameFAQs and an Xbox achievement guide also report two Red Mages and Hippaul at the Inn on Disc III–IV or endgame, while a Steam commenter disputes Disc IV availability; if this visit is skipped, a later attempt is worth trying but is not verified across releases.",
+    trigger: "During the Disc III Blue Narciss route, use the first post-destruction Alexandria visit as the safe checkpoint: enter the Inn and try the male Red Mage, female Red Mage, and Kabao (Cour89's labels) before leaving. If you skip the entire Disc III Alexandria visit, a Steam commenter reports three matches during a scene on the first Disc IV Inn entry. This is anecdotal, conflicts with another Steam comment, and does not establish a repeat after an earlier Disc III Inn visit or behavior across releases.",
     missableIds: ["missable.disc-3.on-the-high-seas.alexandria-first-visit-card-players"],
-    sourceIds: ["cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
+    sourceIds: ["cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-endgame-opponents-687154254", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
   },
   {
     id: "cutoff.blue-narciss.desert-palace-entry",
@@ -2131,11 +2131,11 @@ export const gameRouteCutoffs: GameRouteCutoff[] = [
   {
     id: "cutoff.return-to-gaia.alexandria-first-visit-card-players",
     edgeId: "detour.return-to-gaia-alexandria-mognet",
-    title: "Alexandria Inn matches if this is the first post-destruction visit",
+    title: "Alexandria Inn matches if this is the first post-destruction Inn entry",
     certainty: "disputed",
-    trigger: "If this is your first post-destruction Alexandria visit on Disc IV, enter the Inn and try any available card players before leaving: Cour89 describes a first-entry match event, and an Xbox achievement guide reports two Red Mages and Hippaul at endgame on entry. A Steam commenter reports those Disc IV players absent, so record only matches actually completed and treat availability as release- or visit-history-dependent; the Disc III check remains the safe checkpoint.",
+    trigger: "If you skipped the entire Disc III Alexandria visit and this is your first Alexandria Inn entry, try any available card players before leaving: a Steam commenter reports a one-time scene with Hippaul and two Red Mages, all challengeable, on the first Disc IV Inn entry. Another Steam comment disputes Disc IV availability, and no source verifies a repeat after a Disc III Inn visit; the Disc III check remains the safe checkpoint.",
     missableIds: ["missable.disc-3.on-the-high-seas.alexandria-first-visit-card-players"],
-    sourceIds: ["cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide", "gamefaqs-return-to-gaia-71891"],
+    sourceIds: ["cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-endgame-opponents-687154254", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide", "gamefaqs-return-to-gaia-71891"],
   },
   {
     id: "cutoff.memoria.maliris-steals",
