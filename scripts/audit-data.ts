@@ -3116,7 +3116,7 @@ for (const exception of sourceDisputedOneTimeLootPathExceptions) {
   }
 }
 const limitedWindowShopPathsWithoutRouteLink = itemAcquisitionPaths.filter((path) =>
-  ["shop", "mogshop"].includes(path.method) &&
+  ["shop", "mogshop", "moogle-shop"].includes(path.method) &&
   path.availability === "limited-window" &&
   !(path.walkthroughObjectiveIds ?? []).some((objectiveId) =>
     walkthroughChapters.some((chapter) =>
@@ -3127,7 +3127,7 @@ const limitedWindowShopPathsWithoutRouteLink = itemAcquisitionPaths.filter((path
   ),
 );
 if (limitedWindowShopPathsWithoutRouteLink.length) {
-  errors.push(`Limited-window shop and Mogshop paths need a walkthrough checkpoint; missing links: ${limitedWindowShopPathsWithoutRouteLink.map((path) => path.id).join(", ")}.`);
+  errors.push(`Limited-window shop, Mogshop, and Moogle-shop paths need a walkthrough checkpoint; missing links: ${limitedWindowShopPathsWithoutRouteLink.map((path) => path.id).join(", ")}.`);
 }
 const aftermathCatalogPaths = [
   ["item-path.disc-3.the-aftermath.elixir-guest-room", "game-item.elixir", "chest", "single-use", "disc-3.the-aftermath.pickups"],
