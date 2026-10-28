@@ -1436,7 +1436,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "burmecia-type-a-pair-loot",
             kind: "optional",
-            text: "Before defeating the two Type A Black Mages in the mandatory street fight, try stealing from each if you want their Phoenix Down or Tent slots. Any drops require KO victories, and each foe's drop slots are chance-based.",
+            text: "Before finishing the mandatory fight with the two Type A Black Mages beyond Burmecia's entrance, optionally use Zidane to try each enemy's Common Phoenix Down and Uncommon Tent steals; either attempt can fail. Any drops require KO victories, and each foe's drop slots are chance-based.",
             detail: "The enemy table lists Common Phoenix Down and Uncommon Tent steals, plus Common Potion, Uncommon Phoenix Down, and Rare Ether drop slots. Since this fixed battle has two Type A enemies, each listed slot has two per-enemy opportunities (up to two copies); the paths are one-time encounter opportunities and remain chance-based. These are separate from the two fixed Type A pairs in Gizamaluke's Grotto.",
           },
           {

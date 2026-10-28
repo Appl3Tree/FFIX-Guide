@@ -3004,6 +3004,63 @@ test("Gizamaluke's Grotto loot paths separate the random pool from fixed Type A 
     }
   }
 });
+
+test("Burmecia's fixed Type A pair loot paths link exact slots to both enemies", () => {
+  const expected = [
+    { itemId: "game-item.phoenix-down", method: "steal", slot: "common", pathId: "item-path.disc-1.burmecia.type-a-pair-phoenix-down-common-steal" },
+    { itemId: "game-item.tent", method: "steal", slot: "uncommon", pathId: "item-path.disc-1.burmecia.type-a-pair-tent-uncommon-steal" },
+    { itemId: "game-item.potion", method: "drop", slot: "common", pathId: "item-path.disc-1.burmecia.type-a-pair-potion-common-drop" },
+    { itemId: "game-item.phoenix-down", method: "drop", slot: "uncommon", pathId: "item-path.disc-1.burmecia.type-a-pair-phoenix-down-uncommon-drop" },
+    { itemId: "game-item.ether", method: "drop", slot: "rare", pathId: "item-path.disc-1.burmecia.type-a-pair-ether-rare-drop" },
+  ];
+  const enemyId = "enemy.type-a";
+  const encounterId = "encounter.burmecia.type-a-pair";
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.burmecia")
+    ?.sections.find((entry) => entry.id === "burmecia-lower-streets");
+  const step = section?.steps.find((entry) => entry.id === "burmecia-type-a-pair-loot");
+  const paths = itemAcquisitionPaths.filter((entry) => entry.encounterIds?.includes(encounterId));
+
+  assert.equal(encounter?.kind, "fixed");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 2 }]);
+  assert.ok(enemy?.encounterIds.includes(encounterId));
+  assert.equal(paths.length, expected.length);
+  assert.match(step?.text ?? "", /Common Phoenix Down and Uncommon Tent steals/);
+  assert.match(step?.text ?? "", /either attempt can fail/);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.pathId);
+    const slots = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const lootSlot = slots?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const catalogItem = gameItems.find((entry) => entry.id === item.itemId);
+    const requiredSources = new Set([...(encounter?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.pathId} exists`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 2);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.conditions?.includes("at most two"));
+    if (item.method === "steal") {
+      assert.ok(path?.conditions?.includes("chance-based"));
+      assert.ok(path?.conditions?.includes("can fail"));
+    } else {
+      assert.ok(path?.conditions?.includes("normal KO victories"));
+      assert.ok(path?.conditions?.includes("conditional"));
+    }
+    assert.ok(path?.notes?.includes("two per-enemy slot opportunities"));
+    assert.ok(path?.notes?.includes("separate from the two Type A pairs in Gizamaluke's Grotto"));
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.pathId} preserves encounter and slot sources`);
+    assert.ok([...requiredSources].every((sourceId) => catalogItem?.sourceIds.includes(sourceId)), `${item.itemId} includes acquisition provenance`);
+    assert.ok([...requiredSources].every((sourceId) => section?.sourceIds.includes(sourceId)), `${section?.id} includes acquisition provenance`);
+    assert.ok([...requiredSources].every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.pathId} references known sources`);
+  }
+});
+
 test("Burmecia's city-pool enemies have repeatable loot paths with the Magic Vice dispute retained", () => {
   const sourceIds = ["gamefaqs-enemy-list-71891", "gamefaqs-burmecia-71891", "jegged-burmecia"];
   const expected = [
@@ -3093,7 +3150,8 @@ test("Burmecia's fixed Type A pair has separate one-time loot opportunities", ()
   assert.equal(expected.length, 5);
   assert.equal(encounter?.kind, "fixed");
   assert.ok(encounter?.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2));
-  assert.match(step?.text ?? "", /stealing from each/);
+  assert.match(step?.text ?? "", /try each enemy's Common Phoenix Down and Uncommon Tent steals/);
+  assert.match(step?.text ?? "", /either attempt can fail/);
   assert.match(step?.detail ?? "", /each listed slot has two per-enemy opportunities/);
   assert.match(step?.detail ?? "", /separate from the two fixed Type A pairs in Gizamaluke's Grotto/);
   assert.equal(step?.objectiveIds, undefined);

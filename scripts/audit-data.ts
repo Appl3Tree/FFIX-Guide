@@ -5318,7 +5318,8 @@ const burmeciaTypeALootPathPrefix = "item-path.disc-1.burmecia.type-a-pair-";
 const burmeciaTypeALootStep = burmeciaCityLootSection?.steps.find((step) => step.id === "burmecia-type-a-pair-loot");
 if (!burmeciaTypeAPair || burmeciaTypeAPair.kind !== "fixed" ||
   !burmeciaTypeAPair.formation.some((member) => member.enemyId === "enemy.type-a" && member.quantity === 2) ||
-  !burmeciaTypeALootStep?.text.includes("stealing from each") ||
+  !burmeciaTypeALootStep?.text.includes("Common Phoenix Down and Uncommon Tent steals") ||
+  !burmeciaTypeALootStep.text.includes("either attempt can fail") ||
   !burmeciaTypeALootStep.detail?.includes("each listed slot has two per-enemy opportunities") ||
   !burmeciaTypeALootStep.detail.includes("separate from the two fixed Type A pairs in Gizamaluke's Grotto") ||
   burmeciaTypeALootStep.objectiveIds?.length ||
@@ -5330,14 +5331,20 @@ for (const [method, slotName, itemId, pathSuffix] of burmeciaTypeALootExpectatio
   const slots = method === "steal" ? enemy?.steals : enemy?.drops;
   const item = gameItems.find((entry) => entry.id === itemId);
   const path = itemAcquisitionPaths.find((entry) => entry.id === `${burmeciaTypeALootPathPrefix}${pathSuffix}`);
-  if (!slots?.some((slot) => slot.slot === slotName && slot.itemId === itemId) ||
+  const lootSlot = slots?.find((slot) => slot.slot === slotName && slot.itemId === itemId);
+  const requiredSources = new Set([...(burmeciaTypeAPair?.sourceIds ?? []), ...(lootSlot?.sourceIds ?? [])]);
+  if (!lootSlot ||
     !path || path.itemId !== itemId || path.chapterId !== "disc-1.burmecia" || path.method !== method ||
     path.quantity !== 2 || path.availability !== "one-time-encounter" || path.walkthroughObjectiveIds?.length ||
+    path.enemyId !== "enemy.type-a" || path.enemyLootSlot !== slotName ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify(["encounter.burmecia.type-a-pair"]) ||
+    !path.conditions?.includes("at most two") ||
     !path.notes?.includes("two per-enemy slot opportunities") || !item?.sourceIds.includes("gamefaqs-enemy-list-71891") ||
+    (method === "steal" && (!path.conditions?.includes("chance-based") || !path.conditions.includes("can fail"))) ||
     (method === "drop" && (!path.conditions?.includes("KO victories") || !path.conditions.includes("slot is conditional"))) ||
-    burmeciaCityLootSourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
-      !enemy?.sourceIds.includes(sourceId) || !burmeciaTypeAPair?.sourceIds.includes(sourceId) ||
-      !burmeciaCityLootSection?.sourceIds.includes(sourceId))) {
+    [...requiredSources].some((sourceId) => !path.sourceIds.includes(sourceId) ||
+      !item?.sourceIds.includes(sourceId) || !burmeciaTypeAPair?.sourceIds.includes(sourceId) ||
+      !burmeciaCityLootSection?.sourceIds.includes(sourceId) || !sources.some((source) => source.id === sourceId))) {
     errors.push(`Burmecia Type A ${method} path ${pathSuffix} must match the shared enemy table, two-enemy quantity, one-time window, and source chain.`);
   }
 }
