@@ -9521,6 +9521,17 @@ const drsliceDaguerreoRoute = walkthroughChapters.find((chapter) => chapter.area
 const drsliceMagicArmlet = gameItems.find((item) => item.id === "game-item.magic-armlet");
 const daguerreoMagicArmletPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-armlet");
 const magicRacketItem = gameItems.find((item) => item.id === "game-item.magic-racket");
+const magicRacketRoutePaths = [
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.on-the-high-seas.magic-racket-lindblum-shop"),
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.forgotten-continent.magic-racket-oeilvert-mogshop"),
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.desert-palace.magic-racket-mogshop"),
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3.lost-continent.magic-racket-esto-gaza-shop"),
+  itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-racket"),
+];
+const magicRacketObjective = objectives.find((objective) => objective.id === "disc-3.magic-racket");
+const magicRacketNeedTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.magic-racket-need-three");
+const magicRacketEndInventoryTarget = sourceInventoryTargets.find((target) => target.id === "item-target.disc-4.final-preparations.magic-racket-end-inventory");
+const jeggedRacketsSource = sources.find((source) => source.id === "jegged-rackets");
 const daguerreoMagicRacketPath = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-racket");
 if (
   !finalStockAbilityWarning || finalStockAbilityWarning.severity !== "info" ||
@@ -9584,7 +9595,23 @@ if (
   !daguerreoMagicArmletPath.sourceIds.includes("rpgclassics-shops") ||
   daguerreoMagicArmletPath.sourceIds.includes(drsliceDaguerreoSourceId) ||
   !magicRacketItem || !magicRacketItem.sourceIds.includes("gamefaqs-shops-71891") ||
+  !magicRacketItem.sourceIds.includes("jegged-rackets") ||
   magicRacketItem.sourceIds.includes(drsliceDaguerreoSourceId) ||
+  magicRacketRoutePaths.length !== 5 || magicRacketRoutePaths.some((path) =>
+    !path || path.itemId !== "game-item.magic-racket" || path.cost?.amount !== 1350 ||
+    !path.sourceIds.includes("gamefaqs-items-71891") || !path.sourceIds.includes("gamefaqs-shops-71891") ||
+    !path.walkthroughObjectiveIds?.includes("disc-3.magic-racket")) ||
+  magicRacketRoutePaths[0]?.availability !== "repeatable" ||
+  magicRacketRoutePaths.slice(1).some((path) => path?.availability !== "limited-window") ||
+  !magicRacketRoutePaths[1]?.conditions?.includes("exact point when the exterior shop stops being reachable") ||
+  !magicRacketRoutePaths[2]?.conditions?.includes("Lindblum retains a later source") ||
+  !magicRacketRoutePaths[3]?.conditions?.includes("Lindblum's later Disc III–IV stock") ||
+  !magicRacketObjective?.sourceIds.includes("jegged-rackets") ||
+  !magicRacketObjective.chapterIds.includes("disc-3.forgotten-continent") ||
+  !magicRacketObjective.chapterIds.includes("disc-4.final-preparations") ||
+  magicRacketNeedTarget?.targetQuantity !== 3 || magicRacketNeedTarget.basis !== "route-need" ||
+  magicRacketEndInventoryTarget?.targetQuantity !== 3 || magicRacketEndInventoryTarget.basis !== "end-inventory" ||
+  !jeggedRacketsSource?.notes.includes("Protect where GameFAQs Items says Cure") ||
   !daguerreoMagicRacketPath || daguerreoMagicRacketPath.itemId !== "game-item.magic-racket" ||
   daguerreoMagicRacketPath.cost?.amount !== 1350 || daguerreoMagicRacketPath.availability !== "limited-window" ||
   !daguerreoMagicRacketPath.sourceIds.includes("gamefaqs-shops-71891") ||
@@ -9599,7 +9626,7 @@ if (
   !drsliceDaguerreoRoute?.sourceIds.includes(drsliceDaguerreoSourceId) ||
   !drsliceDaguerreoRoute.sourceIds.includes("rpgclassics-shops")
 ) {
-  errors.push("DrSlice's Disk 3 Daguerreo table must stay linked to its 29 listed item records and all 29 matching priced shop paths, with the GameFAQs/RPGClassics Magic Armlet row and GameFAQs-only Magic Racket row kept separate from DrSlice provenance; the table's Disc IV limitation must remain explicit.");
+  errors.push("DrSlice's Disk 3 Daguerreo table must stay linked to its 29 listed item records and all 29 matching priced shop paths, with the separate Magic Armlet, five-source Magic Racket shop routes, optional inventory targets, source-specific racket labels, and Disc IV stock uncertainty preserved.");
 }
 const octagonRodWarning = missablesById.get("missable.disc-3.lost-continent.octagon-rod");
 const octagonRodObjective = objectives.find((objective) => objective.id === "disc-3.lost-continent.octagon-rod");

@@ -2948,6 +2948,14 @@ export const sources = [
     notes: "Independent route and restocked shop list for the post-Desert-Palace visit, hidden Wing Edge, Mogrika's Mognet letter, and route into Mount Gulug. It also recommends Vivi and Quina for current story and healing needs without treating party choices as fixed requirements.",
   },
   {
+    id: "jegged-rackets",
+    title: "Rackets — equipment and acquisition reference",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Weapons/Rackets.html",
+    accessed: "2026-10-28",
+    notes: "Independent Magic Racket seller cross-check: Lindblum, Oeilvert Mogshop, Desert Palace Mogshop, and Esto Gaza after reaching Desert Palace. It labels Lindblum as Disc III without ruling on the later stock that GameFAQs lists through Disc IV. Its Magic Racket ability list says Protect where GameFAQs Items says Cure; this source is used here for acquisition locations, not to resolve ability data.",
+  },
+  {
     id: "jegged-mount-gulug",
     title: "Mount Gulug — Disc III walkthrough",
     publisher: "Jegged",
@@ -5702,6 +5710,15 @@ export const objectives: GameObjective[] = [
     sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "gamefaqs-missables-21725", "gamefaqs-perfect-game-41181"],
     chapterIds: ["disc-3.on-the-high-seas"],
     profileIds: ["perfect", "custom"],
+    verification: "partial",
+  },
+  {
+    id: "disc-3.magic-racket",
+    title: "Review Magic Racket shop routes and the optional three-copy target",
+    category: "collection",
+    sourceIds: ["gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-rackets"],
+    chapterIds: ["disc-3.on-the-high-seas", "disc-3.forgotten-continent", "disc-3.desert-palace", "disc-3.lost-continent", "disc-3.aerial-exploration", "disc-3.preparing-to-leave", "disc-4.final-preparations"],
+    profileIds: ["comprehensive", "custom", "perfect"],
     verification: "partial",
   },
   {

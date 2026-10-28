@@ -4225,7 +4225,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "high-seas-lindblum-return",
         title: "Lindblum — collect the deferred Gil and shop stock",
         summary: "Return to the Theater District now that Give Me My Money has had its chance to trigger aboard the Blue Narciss.",
-        sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamefaqs-the-aftermath-71891", "jegged-blue-narciss"],
+        sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamefaqs-the-aftermath-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-rackets", "jegged-blue-narciss"],
         steps: [
           {
             id: "high-seas-tantalus-gil",
@@ -4238,7 +4238,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "high-seas-lindblum-stock",
             kind: "optional",
             text: "Check the Lindblum Weapon Shop for the Magic Racket, Cypress Pile, Chimera Armlet, Dark Hat, Mantra Band, and Gold Helm. Revisit the Synthesis Shop for recipes or supplies you want before sailing again.",
-            detail: "Compare abilities and current equipment before buying duplicates. The shop list is a gear check, not a fixed-copy requirement for every completion profile.",
+            detail: "GameFAQs lists Magic Racket for 1,350 Gil in the Disc III–IV combined shop; Jegged also lists the Disc III Lindblum seller. Lindblum is the documented late recovery route if you skip the Oeilvert or Desert Palace Mogshops. Compare current gear before buying duplicates; the optional source-specific Need 3 and end-inventory #3 figures are targets, not story requirements.",
+            objectiveIds: ["disc-3.magic-racket"],
           },
         ],
       },
@@ -4633,14 +4634,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "oeilvert-exterior",
         title: "Oeilvert exterior — shop, letter, and save",
         summary: "Mimoza's Mogshop stocks gear and supplies for both teams. The sources disagree about whether the exterior shop stays reachable after taking the Gulug Stone, so buy before entering.",
-        sourceIds: ["gamefaqs-forgotten-continent-71891", "gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891", "jegged-oeilvert", "elitegrindlab-oeilvert"],
+        sourceIds: ["gamefaqs-forgotten-continent-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-preparing-to-leave-71891", "jegged-oeilvert", "jegged-rackets", "elitegrindlab-oeilvert"],
         steps: [
           {
             id: "oeilvert-shop-and-party-stock",
             kind: "optional",
             text: "Speak to Mimoza and shop for the equipment and supplies your two teams need. Green Beret teaches Clear Headed, which prevents Confuse; consider enough copies for characters who may face Ark.",
             detail: "GameFAQs lists Mimoza's Mogshop on Disc III and places Oeilvert among the areas lost after travelling through Shimmering Island. EliteGrindLab instead marks taking the Gulug Stone as the ruin's point of no return; the sources do not settle when the exterior shop becomes unreachable. Buy what you need before entering and do not rely on a later return. This is a purchase-source cutoff, not a claim that every item type becomes unavailable; item records list later sources where documented. Oeilvert's exterior encounter is Ogre.",
-            objectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
+            objectiveIds: ["disc-3.magic-racket", "disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {
             id: "oeilvert-mimoza-letter",
@@ -4786,7 +4787,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "desert-palace-cid-and-mogshop",
         title: "Prison cells — free the party with Cid",
         summary: "The story returns to the four characters who stayed behind. Cid's stealth and scale puzzles open the cells; the palace party then gets a chance to reset equipment and abilities.",
-        sourceIds: ["gamefaqs-desert-palace-71891", "jegged-returning-desert-palace", "flactem-desert-palace", "gamefaqs-story-minigames-71891"],
+        sourceIds: ["gamefaqs-desert-palace-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "jegged-desert-palace", "jegged-returning-desert-palace", "jegged-rackets", "flactem-desert-palace", "gamefaqs-story-minigames-71891"],
         steps: [
           {
             id: "desert-palace-cid-hourglass-key",
@@ -4810,9 +4811,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "desert-palace-mojito-letter-shop",
             kind: "optional",
-            text: "From the prison room, take the right-hand path to Mojito. Restock at his Mogshop and use Mognet to accept his letter addressed to Mogsam before entering the palace maze.",
-            detail: "Mojito's Mogshop carries the same general inventory listed for the Oeilvert moogle shop. The letter can be delivered to Mogsam in the library once the hidden room opens. If you are carrying a Kupo Nut, defer that delivery until the nut is turned in; Mojito's letter can still be delivered on a later return through the mountain passage.",
-            objectiveIds: ["disc-3.preparing-to-leave.final-stock-ability-review"],
+            text: "From the prison room, take the right-hand path to Mojito. Restock at his Mogshop, including the 1,350-Gil Magic Racket if it fits your collection goal, and use Mognet to accept his letter addressed to Mogsam before entering the palace maze.",
+            detail: "GameFAQs says Mojito's Mogshop carries the same general inventory as Mimoza's Oeilvert shop, with Rising Sun added; its Magic Racket is 1,350 Gil. Lindblum has a later source if you skip this seller. The letter can be delivered to Mogsam in the library once the hidden room opens. If you are carrying a Kupo Nut, defer that delivery until the nut is turned in; Mojito's letter can still be delivered on a later return through the mountain passage.",
+            objectiveIds: ["disc-3.magic-racket", "disc-3.preparing-to-leave.final-stock-ability-review"],
           },
         ],
       },
@@ -5004,7 +5005,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "lost-continent-esto-gaza",
         title: "Esto Gaza — restocked equipment, Vaccine, and Mogrika's letter",
         summary: "Enter the central building for the story scene, then shop on the right and collect the hidden Wing Edge before continuing through the back of the settlement.",
-        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "rpgclassics-abilities"],
+        sourceIds: ["gamefaqs-lost-continent-71891", "jegged-esto-gaza", "jegged-rackets", "gamerguides-mount-gulug", "gamefaqs-shops-71891", "elitegrindlab-missables", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-abilities-71891", "rpgclassics-abilities"],
         steps: [
           {
             id: "lost-continent-esto-gaza-story",
@@ -5015,9 +5016,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "lost-continent-esto-gaza-shop",
             kind: "optional",
-            text: "Use the hallway on the right to reach the newly restocked shop. Buy Vaccines for the upcoming boss and check the gear against your collection goal, including Gladius (2,300 Gil) if you want this post-Desert Palace shop copy. If Vivi still needs Death and you have no Black Hood, buy one here; if you already hold one, equip it on Vivi until he learns the spell. Check Hamelin for Eiko if she still needs Jewel.",
+            text: "Use the hallway on the right to reach the newly restocked shop. Buy Vaccines for the upcoming boss and check the gear against your collection goal, including Magic Racket and Gladius (2,300 Gil) if you want these post-Desert Palace shop copies. If Vivi still needs Death and you have no Black Hood, buy one here; if you already hold one, equip it on Vivi until he learns the spell. Check Hamelin for Eiko if she still needs Jewel.",
             detail: "GameFAQs lists Gladius for 2,300 Gil in this post-Desert Palace Esto Gaza stock; Daguerreo is another documented Disc III seller. This path tracks the Esto Gaza shop copy only. GameFAQs' advanced inventory route recommends totals of two Flame Sabers, Heavy Lances, Scissor Fangs, and Silver Forks (one Fork if the Frog Catching reward is already owned), plus three Diamond Gloves and Gold Armors. Treat those copy counts as inventory targets, not story requirements. The initial Mythril stock also lists Mythril Spear for 1,100 Gil; its shop entry is replaced after Desert Palace, and Kumool sells it later in Ipsen's Castle, so this is an optional extra source rather than a permanent-loss window. GameFAQs and RPGClassics list Hamelin as Jewel's only documented equipment source; buy and equip one for Eiko before the Shimmering Island cutoff if she still needs the ability. For Death, the Esto Gaza purchase is the last reviewed PS source for a new Black Hood, but retaining and equipping one lets Vivi continue learning afterward. Esto Gaza remains available during the next open-world chapter. Its earlier Mythril Sword window is tracked separately in On the High Seas. Esto Gaza also sells Mythril Rod for 560 Gil; Kumool's Ipsen's Castle Mogshop is a later 560-Gil source, so missing this stock does not permanently close item access. Mythril Rod teaches Life, Silence, and Shell to Dagger; its Need 2 and end-inventory #5 figures are optional source-specific targets.",
-            objectiveIds: ["disc-3.lost-continent.esto-gaza-stock", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review"],
+            objectiveIds: ["disc-3.magic-racket", "disc-3.lost-continent.esto-gaza-stock", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review"],
           },
           {
             id: "lost-continent-esto-gaza-octagon-rod",
@@ -5412,7 +5413,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "cutoff",
             text: "Fix the lower hydrolift: pull the left lever twice, inspect the hole revealed behind the lowered platform, take the rod beside the levers and insert it, then pull the right lever twice. Ride the platform to the Weaponsmith and review the Disc III stock before leaving, including Gladius if you want the Daguerreo shop copy. Check the displayed prices on disputed rows before budgeting. Treno and Alexandria remain later purchase sources for Gladius.",
             detail: "The advanced stock target in GameFAQs is two each of Asura's Rod, Hamelin, Obelisk, Tiger Fangs, and Octagon Rod, three Diamond Armors, and eight total Zorlin Shapes/Sargatanas for synthesis. Diamond Armor teaches Ability Up; GameFAQs says it is only available at Daguerreo. These are route-specific collection targets, not story requirements. GameFAQs and RPGClassics list Hamelin as Jewel's only equipment source; if Eiko has not learned it, buy and equip one copy here or at Esto Gaza. The two-copy target is optional inventory planning. GameFAQs and RPGClassics list Rune Blade as the only equipment source for Iai Strike, so buy it and equip it on Steiner if he still needs the skill. The same tables list Cherry Blossom on Kain's Lance and Initiative on Battle Boots as alternatives to Obelisk; buy Obelisk here if the exact item copy matters or if you want to learn those skills earlier. GameFAQs lists Gladius for 2,300 Gil in the Disc III Daguerreo stock and omits it from the refreshed Disc IV weapon list. DrSlice lists the complete 29-row Disk 3 armory, but GameFAQs and RPGClassics differ on Zorlin Shape (2,300 vs 6,000 Gil), Tiger Fangs (8,000 vs 13,500), and Gaia Gear (8,000 vs 8,700). GameFAQs labels its separate 1,350-Gil Disc III row Magic Racket, while DrSlice/RPGClassics list Mythril Racket for 2,250 Gil; GameFAQs and RPGClassics also list Magic Armlet, which DrSlice omits. The DrSlice Disk 3 label does not establish Disc IV stock; compare the sources and inspect the displayed inventory when the exact purchase matters.",
-            objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock", "disc-3.aerial-exploration.diamond-armor", "disc-3.aerial-exploration.daguerreo-unique-abilities", "disc-3.lost-continent.hamelin-jewel"],
+            objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock", "disc-3.aerial-exploration.diamond-armor", "disc-3.aerial-exploration.daguerreo-unique-abilities", "disc-3.lost-continent.hamelin-jewel", "disc-3.magic-racket"],
           },
           {
             id: "aerial-daguerreo-octagon-rod",
@@ -5820,7 +5821,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             kind: "optional",
             text: "Before departing, compare your inventory with GameFAQs' last-stock list: Black Mage Village (Bandana, Chain Plate, Leather Plate, Mythril Vest); Oeilvert and Desert Palace Mogshops (Fairy Flute, Mythril Claws, Trident, Green Beret, Gold Armor, Judo Uniform, Diamond Gloves, Diamond Sword); Esto Gaza (Gold Armor, Judo Uniform, Diamond Gloves, Diamond Sword, Flame Saber, Heavy Lance, Scissor Fangs, Silver Fork, Black Hood, Asura's Rod, Hamelin, Octagon Rod); Daguerreo (Asura's Rod, Hamelin, Octagon Rod, Obelisk, Rune Blade, Tiger Fangs, Diamond Armor).",
             detail: "Source-specific total targets are Bandana ×12, Chain Plate ×3, Leather Plate ×3, Mythril Vest ×10; Fairy Flute ×2, Mythril Claws ×2, Trident ×2, Green Beret ×7, Gold Armor ×3, Judo Uniform ×7, Diamond Gloves ×3, Diamond Sword ×2; Flame Saber ×2, Heavy Lance ×2, Scissor Fangs ×2, Silver Fork ×2, Black Hood ×6, Asura's Rod ×2, Hamelin ×2, Octagon Rod ×2, Obelisk ×2, Rune Blade ×2, Tiger Fangs ×2, Diamond Armor ×3. These are the cited guide's inventory-planning totals, not universal minimums: count existing copies, subtract pieces consumed in synthesis, and buy only what your goals require. For Death, one retained Black Hood is enough to let Vivi continue learning after the transition; the six-copy target is optional. For Jewel, both reviewed PlayStation ability tables list Hamelin as Eiko's only equipment source; one copy is sufficient to learn it, while the two-copy quantity remains optional inventory planning. The original PlayStation Item Location Guide lists Bandana's Treno, Cleyra, Lindblum, Fossil Roo, and Black Mage Village shops, but no Find/Win/Steal source; the newer GameFAQs route/item references separately document the Dragon's Gate pickup. It also lists the earlier pickups, steals, and shops for Chain Plate, Leather Plate, and Mythril Vest. The reviewed Disc III–IV Treno, Lindblum, and Alexandria tables and Disc IV Black Mage Village list no later Bandana route; the final BMV stock has also changed for the other three. Bandana and Mythril Vest are consumed by the Silk Robe and Brave Suit recipes respectively, so reserve one of each if those syntheses are part of your goal. Esto Gaza's Mythril Vest listing closes with the Shimmering Island transition. Oeilvert, Desert Palace, and Esto Gaza close at the Shimmering Island transition. Black Mage Village and Daguerreo replace their Disc III weapon stock with new Disc IV lists, so buy listed items before leaving if you need those exact shop sources. The source's frog-reward line labels 33 frogs as Silver Fork, but its item and frog pages plus independent references place Silver Fork at 23 and Bistro Fork at 33. Tiger Fangs is listed at 8,000 Gil in the GameFAQs shops table and 13,500 in its preparation/item lists and independent weapon references. Final Fantasy Wiki's indexed item page says the 13,500-Gil Daguerreo purchase ends before the Shimmering Island portal, and Jinsoku's Japanese limited-item list independently places the purchase at Daguerreo on Disc III without giving build scope or resolving late stock; Caves of Narshe lists a conflicting Disc IV purchase and GameFAQs/RPGClassics omit it from their Disc IV shop tables; inspect displayed stock and price, and retain the Disc III copy if Duel Claws matters until confirmed. Ability claims remain partial: both reviewed PlayStation catalogs list Luna (Trident), Power Break (Diamond Sword), Magic Break (Flame Saber), and Six Dragons (Heavy Lance), with no alternate equipment sources for these four abilities in those tables. Aura and Counter on Scissor Fangs and Revive and Counter on Tiger Fangs are also recorded, with alternate gear sources listed for those claw abilities. Death (Black Hood), Jewel (Hamelin), Firaga/Blizzaga/Thundaga (Octagon Rod), and Iai Strike (Rune Blade) are also tracked. Cherry Blossom can also be learned from Kain's Lance in Memoria, while Initiative has the Battle Boots source. For the specific Rune Blade/Obelisk comparison, Iai Strike appears only on Rune Blade in the reviewed PlayStation ability tables. If Eiko still needs Jewel, learn it from Hamelin before leaving; the reviewed sources do not establish permanent ability loss for the other skills after the cutoff. Check what each character has learned before buying duplicates.",
-            objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock", "disc-3.aerial-exploration.diamond-armor", "disc-3.aerial-exploration.daguerreo-unique-abilities", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review"],
+            objectiveIds: ["disc-3.aerial-exploration.daguerreo-stock", "disc-3.aerial-exploration.diamond-armor", "disc-3.aerial-exploration.daguerreo-unique-abilities", "disc-3.lost-continent.hamelin-jewel", "disc-3.desert-palace.black-hood-death", "disc-3.preparing-to-leave.final-stock-ability-review", "disc-3.magic-racket"],
           },
         ],
       },

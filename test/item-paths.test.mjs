@@ -1960,6 +1960,17 @@ test("Daguerreo Disc III stock paths preserve the complete cross-source inventor
   const magicArmlet = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-armlet");
   const magicRacket = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-3-stock.daguerreo.magic-racket");
   const magicRacketItem = gameItems.find((item) => item.id === "game-item.magic-racket");
+  const magicRacketRouteIds = [
+    "item-path.disc-3.on-the-high-seas.magic-racket-lindblum-shop",
+    "item-path.disc-3.forgotten-continent.magic-racket-oeilvert-mogshop",
+    "item-path.disc-3.desert-palace.magic-racket-mogshop",
+    "item-path.disc-3.lost-continent.magic-racket-esto-gaza-shop",
+    "item-path.disc-3-stock.daguerreo.magic-racket",
+  ];
+  const magicRacketRoutes = magicRacketRouteIds.map((id) => itemAcquisitionPaths.find((path) => path.id === id));
+  const magicRacketObjective = objectives.find((objective) => objective.id === "disc-3.magic-racket");
+  const magicRacketTargets = sourceInventoryTargets.filter((target) => target.itemId === "game-item.magic-racket");
+  const jeggedRackets = sources.find((source) => source.id === "jegged-rackets");
   const stockObjective = objectives.find((objective) => objective.id === "disc-3.aerial-exploration.daguerreo-stock");
 
   assert.equal(expectedDrsliceRows.length, 29);
@@ -1989,6 +2000,33 @@ test("Daguerreo Disc III stock paths preserve the complete cross-source inventor
   assert.ok(magicRacket?.notes?.includes("Mythril Racket"));
   assert.ok(magicRacket?.sourceIds.includes("gamefaqs-shops-71891"));
   assert.ok(!magicRacket?.sourceIds.includes("drslice-daguerreo-armory"));
+  assert.ok(magicRacketItem?.sourceIds.includes("jegged-rackets"));
+  assert.equal(magicRacketRoutes.length, 5);
+  for (const path of magicRacketRoutes) {
+    assert.ok(path, "each source-listed Magic Racket seller has a path");
+    assert.equal(path?.itemId, "game-item.magic-racket");
+    assert.equal(path?.cost?.amount, 1350);
+    assert.ok(path?.sourceIds.includes("gamefaqs-items-71891"));
+    assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
+    assert.ok(path?.walkthroughObjectiveIds?.includes("disc-3.magic-racket"));
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)));
+  }
+  assert.equal(magicRacketRoutes[0]?.availability, "repeatable");
+  assert.deepEqual(magicRacketRoutes.slice(1).map((path) => path?.availability), [
+    "limited-window", "limited-window", "limited-window", "limited-window",
+  ]);
+  assert.ok(magicRacketRoutes[1]?.conditions?.includes("exact point when the exterior shop stops being reachable"));
+  assert.ok(magicRacketRoutes[2]?.conditions?.includes("Lindblum retains a later source"));
+  assert.ok(magicRacketRoutes[3]?.conditions?.includes("Lindblum's later Disc III–IV stock"));
+  assert.ok(magicRacketItem?.sourceIds.includes("gamefaqs-items-71891"));
+  assert.ok(!magicRacketItem?.sourceIds.includes("drslice-daguerreo-armory"));
+  assert.ok(magicRacketObjective?.chapterIds.includes("disc-3.on-the-high-seas"));
+  assert.ok(magicRacketObjective?.chapterIds.includes("disc-4.final-preparations"));
+  assert.equal(magicRacketTargets.find((target) => target.id.endsWith("magic-racket-need-three"))?.targetQuantity, 3);
+  assert.equal(magicRacketTargets.find((target) => target.id.endsWith("magic-racket-need-three"))?.basis, "route-need");
+  assert.equal(magicRacketTargets.find((target) => target.id.endsWith("magic-racket-end-inventory"))?.targetQuantity, 3);
+  assert.equal(magicRacketTargets.find((target) => target.id.endsWith("magic-racket-end-inventory"))?.basis, "end-inventory");
+  assert.ok(jeggedRackets?.notes.includes("Protect where GameFAQs Items says Cure"));
   assert.ok(stockObjective?.sourceIds.includes("rpgclassics-shops"));
 });
 
