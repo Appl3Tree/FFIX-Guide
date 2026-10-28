@@ -3476,21 +3476,27 @@ if (!sealionPreparation || !sealionLevelRange || sealionLevelRange.min !== 4 || 
   errors.push("Sealion preparation must retain the optional Zidane Lv. 4–5 source comparison in both bestiary and pre-boss route guidance.");
 }
 const iceCavernBossSteals = [
-  { enemyId: "enemy.black-waltz-1", itemId: "game-item.remedy" },
-  { enemyId: "enemy.black-waltz-1", itemId: "game-item.silk-shirt" },
-  { enemyId: "enemy.sealion", itemId: "game-item.ether" },
-  { enemyId: "enemy.sealion", itemId: "game-item.mythril-dagger" },
+  { enemyId: "enemy.black-waltz-1", itemId: "game-item.remedy", slot: "common", pathId: "item-path.disc-1.ice-cavern.black-waltz-1-remedy-steal" },
+  { enemyId: "enemy.black-waltz-1", itemId: "game-item.silk-shirt", slot: "uncommon", pathId: "item-path.disc-1.ice-cavern.black-waltz-1-silk-shirt-steal" },
+  { enemyId: "enemy.sealion", itemId: "game-item.ether", slot: "common", pathId: "item-path.disc-1.ice-cavern.sealion-ether-steal" },
+  { enemyId: "enemy.sealion", itemId: "game-item.mythril-dagger", slot: "uncommon", pathId: "item-path.disc-1.ice-cavern.sealion-mythril-dagger-steal" },
 ];
 for (const expected of iceCavernBossSteals) {
   const enemy = enemyRecords.find((candidate) => candidate.id === expected.enemyId);
-  if (!enemy?.steals.some((slot) => slot.itemId === expected.itemId) ||
-    !enemy.routeObjectiveIds.includes("disc-1.ice-cavern.boss-steals") ||
-    !enemy.missableIds.includes("missable.disc-1.ice-cavern.boss-steals")) {
+  const slot = enemy?.steals.find((candidate) => candidate.slot === expected.slot && candidate.itemId === expected.itemId);
+  const path = itemAcquisitionPaths.find((candidate) => candidate.id === expected.pathId);
+  if (!slot ||
+    !enemy?.routeObjectiveIds.includes("disc-1.ice-cavern.boss-steals") ||
+    !enemy?.missableIds.includes("missable.disc-1.ice-cavern.boss-steals")) {
     errors.push(`Ice Cavern boss dossier ${expected.enemyId} must connect its ${expected.itemId} steal to the shared one-time warning.`);
   }
-  const path = itemAcquisitionPaths.find((candidate) => candidate.itemId === expected.itemId && candidate.chapterId === "disc-1.ice-cavern" && candidate.method === "steal" && candidate.walkthroughObjectiveIds?.includes("disc-1.ice-cavern.boss-steals"));
-  if (!path || path.availability !== "one-time-encounter") {
-    errors.push(`Ice Cavern boss steal ${expected.itemId} must have a one-time item acquisition path linked to the steal objective.`);
+  if (!path || path.itemId !== expected.itemId || path.availability !== "one-time-encounter" ||
+    path.enemyId !== expected.enemyId || path.enemyLootSlot !== expected.slot ||
+    !path.encounterIds?.includes("encounter.ice-cavern.black-waltz-1-sealion") ||
+    !path.walkthroughObjectiveIds?.includes("disc-1.ice-cavern.boss-steals") ||
+    !path.conditions?.includes("chance-based") ||
+    slot?.sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId))) {
+    errors.push(`Ice Cavern boss steal ${expected.itemId} must link its exact enemy slot, one-time encounter, chance-based attempt, and source provenance.`);
   }
 }
 const iceCavernStealsWarning = missablesById.get("missable.disc-1.ice-cavern.boss-steals");
@@ -3846,8 +3852,8 @@ const earlyBossDropExpectations = [
     stepId: "ice-boss-guaranteed-drops",
     sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"],
     entries: [
-      ["enemy.black-waltz-1", "game-item.hi-potion", "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop"],
-      ["enemy.sealion", "game-item.phoenix-down", "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop"],
+      ["enemy.black-waltz-1", "game-item.hi-potion", "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop", "always"],
+      ["enemy.sealion", "game-item.phoenix-down", "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop", "always"],
     ],
   },
   {
@@ -3857,7 +3863,7 @@ const earlyBossDropExpectations = [
     stepId: "journey-gizamaluke-guaranteed-drop",
     sourceIds: ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"],
     entries: [
-      ["enemy.gizamaluke", "game-item.tent", "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop"],
+      ["enemy.gizamaluke", "game-item.tent", "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop", "always"],
     ],
   },
 ];
@@ -3868,15 +3874,19 @@ for (const expectation of earlyBossDropExpectations) {
     .flatMap((section) => section.steps).find((entry) => entry.id === expectation.stepId);
   if (!objective || !encounter?.objectiveIds.includes(expectation.objectiveId) ||
     !step?.objectiveIds.includes(expectation.objectiveId) ||
-    expectation.entries.some(([enemyId, itemId, pathId]) => {
+    expectation.entries.some(([enemyId, itemId, pathId, slotName]) => {
       const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+      const lootSlot = enemy?.drops.find((slot) => slot.slot === slotName && slot.itemId === itemId);
       const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
       const item = gameItems.find((entry) => entry.id === itemId);
       return !enemy?.routeObjectiveIds.includes(expectation.objectiveId) ||
-        !enemy.drops.some((slot) => slot.slot === "always" && slot.itemId === itemId) ||
+        !lootSlot ||
         !path || path.itemId !== itemId || path.chapterId !== expectation.chapterId || path.method !== "drop" ||
         path.quantity !== 1 || path.availability !== "one-time-encounter" ||
+        path.enemyId !== enemyId || path.enemyLootSlot !== slotName ||
+        !path.encounterIds?.includes(expectation.encounterId) ||
         !path.conditions?.includes("guaranteed") || !path.walkthroughObjectiveIds?.includes(expectation.objectiveId) ||
+        lootSlot?.sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId)) ||
         !item || expectation.sourceIds.some((sourceId) => !path.sourceIds.includes(sourceId) ||
           !item.sourceIds.includes(sourceId) || !objective.sourceIds.includes(sourceId));
     })) {

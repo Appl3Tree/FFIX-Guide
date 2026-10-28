@@ -2150,8 +2150,8 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
       stepId: "ice-boss-guaranteed-drops",
       sourceIds: ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern"],
       entries: [
-        ["enemy.black-waltz-1", "game-item.hi-potion", "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop"],
-        ["enemy.sealion", "game-item.phoenix-down", "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop"],
+        ["enemy.black-waltz-1", "game-item.hi-potion", "item-path.disc-1.ice-cavern.black-waltz-1-hi-potion-always-drop", "always"],
+        ["enemy.sealion", "game-item.phoenix-down", "item-path.disc-1.ice-cavern.sealion-phoenix-down-always-drop", "always"],
       ],
     },
     {
@@ -2161,7 +2161,7 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
       stepId: "journey-gizamaluke-guaranteed-drop",
       sourceIds: ["cavesofnarshe-gizamaluke", "ffonline-gizamaluke-boss", "jegged-gizamaluke"],
       entries: [
-        ["enemy.gizamaluke", "game-item.tent", "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop"],
+        ["enemy.gizamaluke", "game-item.tent", "item-path.disc-1.journey-to-burmecia.gizamaluke-tent-always-drop", "always"],
       ],
     },
   ];
@@ -2178,20 +2178,25 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
     assert.ok(encounter?.objectiveIds.includes(scenario.objectiveId));
     assert.ok(step?.objectiveIds.includes(scenario.objectiveId));
     assert.match(step?.text ?? "", /guaranteed/);
-    for (const [enemyId, itemId, pathId] of scenario.entries) {
+    for (const [enemyId, itemId, pathId, slotName] of scenario.entries) {
       const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+      const lootSlot = enemy?.drops.find((slot) => slot.slot === slotName && slot.itemId === itemId);
       const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
       const item = gameItems.find((entry) => entry.id === itemId);
       assert.ok(enemy?.routeObjectiveIds.includes(scenario.objectiveId));
-      assert.ok(enemy?.drops.some((slot) => slot.slot === "always" && slot.itemId === itemId));
+      assert.ok(lootSlot, `${enemyId} has the ${slotName} ${itemId} drop slot`);
       assert.ok(path, `${pathId} is missing`);
       assert.equal(path.itemId, itemId);
       assert.equal(path.chapterId, scenario.chapterId);
       assert.equal(path.method, "drop");
       assert.equal(path.quantity, 1);
       assert.equal(path.availability, "one-time-encounter");
+      assert.equal(path.enemyId, enemyId);
+      assert.equal(path.enemyLootSlot, slotName);
+      assert.deepEqual(path.encounterIds, [scenario.encounterId]);
       assert.match(path.conditions ?? "", /guaranteed/);
       assert.ok(path.walkthroughObjectiveIds?.includes(scenario.objectiveId));
+      for (const sourceId of lootSlot?.sourceIds ?? []) assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing loot-slot source ${sourceId}`);
       assert.ok(item, `${itemId} is missing`);
       for (const sourceId of scenario.sourceIds) {
         assert.ok(path.sourceIds.includes(sourceId), `${pathId} is missing ${sourceId}`);
@@ -2200,6 +2205,41 @@ test("early Disc I boss drops have guaranteed source-linked item paths", () => {
         assert.ok(sources.some((source) => source.id === sourceId), `unknown source ${sourceId}`);
       }
     }
+  }
+});
+
+test("Ice Cavern boss steals link every item path to its exact enemy slot and encounter", () => {
+  const objectiveId = "disc-1.ice-cavern.boss-steals";
+  const encounterId = "encounter.ice-cavern.black-waltz-1-sealion";
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const objective = objectives.find((entry) => entry.id === objectiveId);
+  const expected = [
+    { enemyId: "enemy.black-waltz-1", itemId: "game-item.remedy", slot: "common", pathId: "item-path.disc-1.ice-cavern.black-waltz-1-remedy-steal" },
+    { enemyId: "enemy.black-waltz-1", itemId: "game-item.silk-shirt", slot: "uncommon", pathId: "item-path.disc-1.ice-cavern.black-waltz-1-silk-shirt-steal" },
+    { enemyId: "enemy.sealion", itemId: "game-item.ether", slot: "common", pathId: "item-path.disc-1.ice-cavern.sealion-ether-steal" },
+    { enemyId: "enemy.sealion", itemId: "game-item.mythril-dagger", slot: "uncommon", pathId: "item-path.disc-1.ice-cavern.sealion-mythril-dagger-steal" },
+  ];
+
+  assert.equal(encounter?.kind, "boss");
+  assert.ok(encounter?.objectiveIds.includes(objectiveId));
+  assert.ok(objective, `${objectiveId} is missing`);
+  for (const expectedPath of expected) {
+    const enemy = enemyRecords.find((entry) => entry.id === expectedPath.enemyId);
+    const slot = enemy?.steals.find((entry) => entry.slot === expectedPath.slot && entry.itemId === expectedPath.itemId);
+    const path = itemAcquisitionPaths.find((entry) => entry.id === expectedPath.pathId);
+
+    assert.ok(slot, `${expectedPath.enemyId} ${expectedPath.slot} ${expectedPath.itemId} slot is missing`);
+    assert.ok(path, `${expectedPath.pathId} is missing`);
+    assert.equal(path?.itemId, expectedPath.itemId);
+    assert.equal(path?.method, "steal");
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, expectedPath.enemyId);
+    assert.equal(path?.enemyLootSlot, expectedPath.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.match(path?.conditions ?? "", /chance-based/);
+    for (const sourceId of slot?.sourceIds ?? []) assert.ok(path?.sourceIds.includes(sourceId), `${expectedPath.pathId} is missing slot source ${sourceId}`);
+    for (const sourceId of path?.sourceIds ?? []) assert.ok(sources.some((source) => source.id === sourceId), `${expectedPath.pathId} references unknown source ${sourceId}`);
   }
 });
 
