@@ -5431,8 +5431,9 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "aerial-bmv-inventory",
             kind: "optional",
-            text: "Visit the Item and Synthesis shops in Black Mage Village; their inventory is available again after the Mount Gulug events. Buy any documented pieces required by your chosen inventory goal and equip ability-teaching items until the abilities are learned.",
-            detail: "GameFAQs calls out missable stock but says the items remain available for a while. The full stock-by-stock and ability replacement audit is still in progress, so use the separate item/source register for exact targets.",
+            text: "Revisit Black Mage Village's Item, Weapon, and Black Cat Synthesis shops; their stock returns after the Mount Gulug events. Review the Disc II–III Weapon Shop products you still need before its Disc IV inventory change, then buy only your desired copies and equip ability-teaching items until the abilities are learned.",
+            detail: "GameFAQs' Disc III route says the shops return with the same wares as the initial Disc II visit and that missable wares remain available for a while, without giving an exact stock-change trigger. Its Shops table lists Flame Staff (1,100 Gil), Lightning Staff (1,200), Glass Armlet (250), Leather Wrist (200), Mythril Fork (4,700), Feather Hat (200), Magus Hat (400), Mythril Dagger (950), Gladius (2,300), Headgear (330), Steepled Hat (260), Adaman Vest (1,600), and Oak Staff (2,400) in the Disc II–III Weapon Shop; the separate Disc IV table shows a different weapon inventory. This checkpoint protects the Black Mage Village seller window only. Other sellers and recovery routes remain item-specific, and stock behavior on newer releases has not been checked.",
+            objectiveIds: ["disc-3.aerial-exploration.black-mage-village-stock"],
           },
           {
             id: "aerial-cotton-robe-trick",

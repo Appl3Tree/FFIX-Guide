@@ -9081,6 +9081,54 @@ for (const { itemId, slug, quantity, price } of finalStockItemSpecs) {
     errors.push(`Final-stock inventory target for ${slug} must remain the source-specific total of ${quantity}.`);
   }
 }
+const blackMageVillageDisc3StockObjective = objectivesById.get("disc-3.aerial-exploration.black-mage-village-stock");
+const blackMageVillageDisc3StockSpecs: [string, string, number, string][] = [
+  ["item-path.disc-2.magdalene-forest.black-mage-village-flame-staff-shop", "game-item.flame-staff", 1100, "Flame Staff"],
+  ["item-path.disc-2.magdalene-forest.black-mage-village-lightning-staff-shop", "game-item.lightning-staff", 1200, "Lightning Staff"],
+  ["item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop", "game-item.glass-armlet", 250, "Glass Armlet"],
+  ["item-path.disc-2.outer-continent.leather-wrist-black-mage-village-shop", "game-item.leather-wrist", 200, "Leather Wrist"],
+  ["item-path.disc-2.outer-continent.black-mage-village-mythril-fork-shop", "game-item.mythril-fork", 4700, "Mythril Fork"],
+  ["item-path.disc-2.outer-continent.feather-hat-shop", "game-item.feather-hat", 200, "Feather Hat"],
+  ["item-path.disc-2.outer-continent.magus-hat-shop", "game-item.magus-hat", 400, "Magus Hat"],
+  ["item-path.disc-2.outer-continent.mythril-dagger-black-mage-village-shop", "game-item.mythril-dagger", 950, "Mythril Dagger"],
+  ["item-path.disc-2.outer-continent.gladius-black-mage-village-shop", "game-item.gladius", 2300, "Gladius"],
+  ["item-path.disc-2.magdalene-forest.headgear-black-mage-village", "game-item.headgear", 330, "Headgear"],
+  ["item-path.disc-2.outer-continent.steepled-hat-black-mage-village-shop", "game-item.steepled-hat", 260, "Steepled Hat"],
+  ["item-path.disc-2.outer-continent.adaman-vest-black-mage-village-shop", "game-item.adaman-vest", 1600, "Adaman Vest"],
+  ["item-path.disc-2.outer-continent.oak-staff-black-mage-village-shop", "game-item.oak-staff", 2400, "Oak Staff"],
+];
+const blackMageVillageDisc3StockPaths = blackMageVillageDisc3StockSpecs.map(([pathId]) => itemAcquisitionPaths.find((path) => path.id === pathId));
+const blackMageVillageDisc3StockStep = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+  ?.sections.flatMap((section) => section.steps)
+  .find((step) => step.id === "aerial-bmv-inventory");
+const blackMageVillageAerialSource = sources.find((source) => source.id === "gamefaqs-aerial-exploration-71891");
+if (
+  !blackMageVillageDisc3StockObjective ||
+  blackMageVillageDisc3StockObjective.category !== "collection" ||
+  !blackMageVillageDisc3StockObjective.chapterIds?.includes("disc-3.aerial-exploration") ||
+  !blackMageVillageDisc3StockObjective.profileIds?.includes("comprehensive") ||
+  !["gamefaqs-aerial-exploration-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891"].every((sourceId) => blackMageVillageDisc3StockObjective.sourceIds.includes(sourceId)) ||
+  blackMageVillageDisc3StockPaths.some((path, index) => !path ||
+    path.itemId !== blackMageVillageDisc3StockSpecs[index][1] ||
+    path.method !== "shop" ||
+    path.availability !== "limited-window" ||
+    path.shopId !== "black-mage-village.weapon-shop.disc-2-3" ||
+    path.cost?.amount !== blackMageVillageDisc3StockSpecs[index][2] ||
+    !path.walkthroughObjectiveIds?.includes("disc-3.aerial-exploration.black-mage-village-stock") ||
+    !path.sourceIds.includes("gamefaqs-shops-71891")) ||
+  !blackMageVillageDisc3StockStep?.objectiveIds?.includes("disc-3.aerial-exploration.black-mage-village-stock") ||
+  !blackMageVillageDisc3StockStep.text.includes("Item, Weapon, and Black Cat Synthesis shops") ||
+  !blackMageVillageDisc3StockSpecs.every(([, , price, itemName]) => blackMageVillageDisc3StockStep.detail?.includes(`${itemName} (${price.toLocaleString("en-US")}`)) ||
+  !blackMageVillageDisc3StockStep.detail?.includes("available for a while") ||
+  !blackMageVillageDisc3StockStep.detail.includes("separate Disc IV table shows a different weapon inventory") ||
+  !blackMageVillageDisc3StockStep.detail.includes("without giving an exact stock-change trigger") ||
+  !blackMageVillageDisc3StockStep.detail.includes("This checkpoint protects the Black Mage Village seller window only") ||
+  !blackMageVillageAerialSource?.notes.includes("shops return with the initial Disc II wares") ||
+  !blackMageVillageAerialSource.notes.includes("without giving an exact stock-change trigger")
+) {
+  errors.push("Black Mage Village's 13 Disc II–III weapon paths must link their exact GameFAQs prices to the Disc III restock checkpoint while keeping the Disc IV inventory change separate from item-type loss and preserving the source's imprecise timing.");
+}
 const bandanaDragonGatePickup = itemAcquisitionPaths.find((path) => path.id === "item-path.disc-2.return-to-lindblum.dragon-gate-bandana-pickup");
 if (
   !bandanaDragonGatePickup ||

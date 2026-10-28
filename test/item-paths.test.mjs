@@ -2339,6 +2339,60 @@ test("Summit Station's limited-window shop paths link to the optional stock chec
     ?.walkthroughObjectiveIds?.includes("disc-2.treno.air-racket-purchase"));
 });
 
+test("Black Mage Village Disc II–III weapon paths link to the Disc III stock review", () => {
+  const objectiveId = "disc-3.aerial-exploration.black-mage-village-stock";
+  const expected = [
+    ["item-path.disc-2.magdalene-forest.black-mage-village-flame-staff-shop", "game-item.flame-staff", 1100],
+    ["item-path.disc-2.magdalene-forest.black-mage-village-lightning-staff-shop", "game-item.lightning-staff", 1200],
+    ["item-path.disc-2.outer-continent.glass-armlet-black-mage-village-shop", "game-item.glass-armlet", 250],
+    ["item-path.disc-2.outer-continent.leather-wrist-black-mage-village-shop", "game-item.leather-wrist", 200],
+    ["item-path.disc-2.outer-continent.black-mage-village-mythril-fork-shop", "game-item.mythril-fork", 4700],
+    ["item-path.disc-2.outer-continent.feather-hat-shop", "game-item.feather-hat", 200],
+    ["item-path.disc-2.outer-continent.magus-hat-shop", "game-item.magus-hat", 400],
+    ["item-path.disc-2.outer-continent.mythril-dagger-black-mage-village-shop", "game-item.mythril-dagger", 950],
+    ["item-path.disc-2.outer-continent.gladius-black-mage-village-shop", "game-item.gladius", 2300],
+    ["item-path.disc-2.magdalene-forest.headgear-black-mage-village", "game-item.headgear", 330],
+    ["item-path.disc-2.outer-continent.steepled-hat-black-mage-village-shop", "game-item.steepled-hat", 260],
+    ["item-path.disc-2.outer-continent.adaman-vest-black-mage-village-shop", "game-item.adaman-vest", 1600],
+    ["item-path.disc-2.outer-continent.oak-staff-black-mage-village-shop", "game-item.oak-staff", 2400],
+  ];
+  const stockObjective = objectives.find((objective) => objective.id === objectiveId);
+  const stockStep = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.aerial-exploration")
+    ?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "aerial-bmv-inventory");
+  const aerialSource = sources.find((source) => source.id === "gamefaqs-aerial-exploration-71891");
+
+  assert.equal(stockObjective?.category, "collection");
+  assert.ok(stockObjective?.chapterIds?.includes("disc-3.aerial-exploration"));
+  assert.ok(stockObjective?.profileIds?.includes("comprehensive"));
+  assert.ok(["gamefaqs-aerial-exploration-71891", "gamefaqs-shops-71891", "gamefaqs-items-71891"]
+    .every((sourceId) => stockObjective?.sourceIds.includes(sourceId)));
+  assert.ok(stockStep?.objectiveIds?.includes(objectiveId));
+  assert.match(stockStep?.text ?? "", /Item, Weapon, and Black Cat Synthesis shops/);
+  assert.match(stockStep?.detail ?? "", /missable wares remain available for a while/);
+  assert.match(stockStep?.detail ?? "", /separate Disc IV table shows a different weapon inventory/);
+  assert.match(stockStep?.detail ?? "", /exact stock-change trigger/);
+  assert.match(stockStep?.detail ?? "", /This checkpoint protects the Black Mage Village seller window only/);
+  assert.match(aerialSource?.notes ?? "", /shops return with the initial Disc II wares/);
+  assert.match(aerialSource?.notes ?? "", /without giving an exact stock-change trigger/);
+
+  for (const [pathId, itemId, price] of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === pathId);
+    assert.ok(path, `${pathId} exists`);
+    assert.equal(path?.itemId, itemId);
+    assert.equal(path?.method, "shop");
+    assert.equal(path?.availability, "limited-window");
+    assert.equal(path?.shopId, "black-mage-village.weapon-shop.disc-2-3");
+    assert.equal(path?.cost?.amount, price);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(objectiveId));
+    assert.ok(path?.sourceIds.includes("gamefaqs-shops-71891"));
+    for (const sourceId of path?.sourceIds ?? []) {
+      assert.ok(sources.some((source) => source.id === sourceId), `${pathId} references source ${sourceId}`);
+    }
+  }
+});
+
 test("Power Belt and Glass Buckle recipes have complete Disc II recovery and ingredient paths", () => {
   const itemIds = ["game-item.power-belt", "game-item.glass-buckle", "game-item.glass-armlet", "game-item.leather-wrist"];
   const pathCounts = [8, 9, 12, 10];
