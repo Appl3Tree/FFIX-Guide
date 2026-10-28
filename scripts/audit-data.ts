@@ -247,6 +247,7 @@ if (
 
 const lindblumTrolleyWarning = missablesById.get("missable.disc-1.lindblum.trolley-cutoff");
 const lindblumTrolleyCutoff = cutoffsById.get("cutoff.lindblum-grotto-entry.trolley-lockout");
+const lindblumCityAccessCutoff = cutoffsById.get("cutoff.lindblum-grotto-entry.city-access");
 const lindblumTrolleyObjective = objectivesById.get("disc-1.exploring-lindblum-kingdom.before-grotto-check");
 const lindblumTrolleyRoute = gameRouteEdgesById.get("story.lindblum-to-journey-to-burmecia");
 const lindblumTrolleySection = walkthroughChapters
@@ -256,24 +257,27 @@ const lindblumTrolleyStep = walkthroughChapters
   .flatMap((chapter) => chapter.sections.flatMap((section) => section.steps))
   .find((step) => step.id === "journey-before-enter-grotto-lindblum-cutoff");
 if (
-  !lindblumTrolleyWarning?.deadline.includes("Before entering Gizamaluke's Grotto") ||
-  !lindblumTrolleyWarning.deadline.includes("VGR says Lindblum is closed once the party enters") ||
-  !lindblumTrolleyWarning.note?.includes("Keep the pre-entry checkpoint conservative") ||
-  !lindblumTrolleyWarning.note.includes("GameFAQs says the Dragon's Gate remains open until the Grotto is completed") ||
-  !lindblumTrolleyWarning.note.includes("VGR independently says Lindblum is closed once the party enters the Grotto") ||
+  !lindblumTrolleyWarning?.deadline.includes("Complete remaining Lindblum city visits before entering") ||
+  !lindblumTrolleyWarning.deadline.includes("GameRevolution and EliteGrindLab explicitly place the trolley closure there") ||
+  !lindblumTrolleyWarning.note?.includes("GameRevolution and EliteGrindLab explicitly place trolley closure there") ||
+  !lindblumTrolleyWarning.note.includes("it does not say the trolley continues to run before completion") ||
   !["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke", "vgr-no-spoiler-walkthrough"].every((sourceId) => lindblumTrolleyWarning.sourceIds.includes(sourceId)) ||
   !lindblumTrolleyObjective?.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
   !lindblumTrolleyRoute?.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
   !lindblumTrolleySection?.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
-  lindblumTrolleyCutoff?.certainty !== "disputed" ||
-  !lindblumTrolleyCutoff.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
-  !lindblumTrolleyCutoff.trigger.includes("Use entry to Gizamaluke's Grotto as the conservative last checkpoint") ||
-  !lindblumTrolleyCutoff.trigger.includes("VGR independently says Lindblum closes on entry") ||
-  !lindblumTrolleyCutoff.trigger.includes("GameFAQs says the Dragon's Gate remains open until Grotto completion") ||
-  !lindblumTrolleyStep?.detail.includes("GameFAQs says the Dragon's Gate remains open until the Grotto is completed") ||
-  !lindblumTrolleyStep?.detail.includes("VGR independently says Lindblum closes on entry, but does not mention the trolley or resolve GameFAQs' optional-route wording")
+  lindblumCityAccessCutoff?.certainty !== "source-supported" ||
+  !lindblumCityAccessCutoff.missableIds.includes("missable.disc-1.lindblum.trolley-cutoff") ||
+  !["gamefaqs-optional-route-47344", "gamerguides-gizamaluke", "gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke", "vgr-no-spoiler-walkthrough"].every((sourceId) => lindblumCityAccessCutoff.sourceIds.includes(sourceId)) ||
+  !lindblumCityAccessCutoff.trigger.includes("Finish all remaining Lindblum castle and district visits before entering") ||
+  lindblumTrolleyCutoff?.certainty !== "source-supported" ||
+  !lindblumTrolleyCutoff.missableIds.includes("missable.disc-1.lindblum.trolley-cutoff") ||
+  !["gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"].every((sourceId) => lindblumTrolleyCutoff.sourceIds.includes(sourceId)) ||
+  !lindblumTrolleyCutoff.trigger.includes("The city/district closure at Grotto entry is recorded in the separate city-access cutoff") ||
+  !lindblumTrolleyCutoff.trigger.includes("GameRevolution and EliteGrindLab explicitly say that entering Gizamaluke's Grotto closes the trolley") ||
+  !lindblumTrolleyCutoff.trigger.includes("does not state that trolley service continues before completion") ||
+  !lindblumTrolleyStep?.detail.includes("explicitly place trolley closure at entry")
 ) {
-  errors.push("Lindblum's trolley cutoff must preserve the conservative pre-entry checkpoint and the conflicting entry/completion timing sources.");
+  errors.push("Lindblum's route must source the city and trolley closures at Grotto entry while distinguishing Dragon's Gate access.");
 }
 
 const lindblumKeyItemsWarning = missablesById.get("missable.disc-1.lindblum.autograph-moogle-suit");
@@ -330,8 +334,8 @@ if (
   lindblumJavelinWarning?.verification !== "partial" ||
   !lindblumJavelinWarning.deadline.includes("before entering Gizamaluke's Grotto") ||
   !lindblumJavelinWarning.note?.includes("the exact last reachable sale moment remains unresolved") ||
-  !lindblumJavelinWarning.note.includes("until the Grotto is complete") ||
-  !lindblumJavelinWarning.note.includes("describe the city-district lockout at entry") ||
+  !lindblumJavelinWarning.note.includes("city access closes at entry") ||
+  !lindblumJavelinWarning.note.includes("does not establish whether that gate window includes a trolley trip back into town") ||
   !lindblumJavelinWarning.note.includes("Disc II Lindblum weapon stock omits Javelin") ||
   !lindblumJavelinWarning.recovery.includes("Freya's starting Javelin") ||
   !lindblumJavelinWarning.recovery.includes("Ipsen's Castle copy") ||

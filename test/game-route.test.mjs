@@ -165,12 +165,25 @@ test("Journey to Cleyra includes the sourced Lindblum Basin frog detour", () => 
 
 test("Lindblum's city cutoff is attached to the Grotto entry route", () => {
   const lindblumExit = gameRouteEdges.find((edge) => edge.id === "story.lindblum-to-journey-to-burmecia");
+  const cityAccessCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.lindblum-grotto-entry.city-access");
+  const trolleyReturnCutoff = gameRouteCutoffs.find((cutoff) => cutoff.id === "cutoff.lindblum-grotto-entry.trolley-lockout");
   assert.ok(lindblumExit);
   assert.equal(lindblumExit.relationship, "required-story");
-  assert.match(lindblumExit.summary, /before entering the Grotto as the safe route checkpoint/);
-  assert.match(lindblumExit.summary, /sources disagree about whether the trolley\/district lockout begins at entry or after completing the Grotto/);
-  assert.match(lindblumExit.summary, /VGR independently says Lindblum closes on entry/);
-  assert.match(lindblumExit.summary, /[Oo]nly the Dragon's Gate merchant remains/);
+  assert.match(lindblumExit.summary, /Complete remaining city visits before entering/);
+  assert.match(lindblumExit.summary, /city\/district closure at Grotto entry/);
+  assert.match(lindblumExit.summary, /explicitly place the trolley closure there/);
+  assert.match(lindblumExit.summary, /[Oo]nly the Dragon's Gate merchant remains accessible/);
+
+  assert.ok(cityAccessCutoff);
+  assert.equal(cityAccessCutoff.certainty, "source-supported");
+  assert.ok(cityAccessCutoff.missableIds.includes("missable.disc-1.lindblum.trolley-cutoff"));
+  assert.match(cityAccessCutoff.trigger, /before entering Gizamaluke's Grotto/);
+  assert.ok(trolleyReturnCutoff);
+  assert.equal(trolleyReturnCutoff.certainty, "source-supported");
+  assert.ok(trolleyReturnCutoff.missableIds.includes("missable.disc-1.lindblum.trolley-cutoff"));
+  assert.match(trolleyReturnCutoff.trigger, /explicitly say that entering Gizamaluke's Grotto closes the trolley/);
+  assert.match(trolleyReturnCutoff.trigger, /does not state that trolley service continues before completion/);
+  assert.deepEqual(trolleyReturnCutoff.sourceIds, ["gamerevolution-ffix-walkthrough", "elitegrindlab-gizamaluke"]);
 
   for (const sourceId of [
     "gamefaqs-optional-route-47344",
