@@ -624,6 +624,67 @@ test("Memoria Lich item paths link all seven boss slots and preserve Black Robe'
   assert.match(itemAcquisitionPaths.find((entry) => entry.id === expected[2].id)?.notes ?? "", /Semi-Rare.*Rare/);
 });
 
+test("Memoria Deathguise item paths link all seven boss slots and preserve rate and rarity differences", () => {
+  const enemyId = "enemy.deathguise";
+  const encounterId = "encounter.memoria.deathguise";
+  const expected = [
+    { id: "item-path.disc-4.memoria.deathguise-elixir-steal", itemId: "game-item.elixir", method: "steal", slot: "common", rate: "100%", comparison: "70%", objectiveId: "disc-4.memoria.deathguise-steals" },
+    { id: "item-path.disc-4.memoria.deathguise-black-belt-steal", itemId: "game-item.black-belt", method: "steal", slot: "uncommon", rate: "25%", comparison: "23%", objectiveId: "disc-4.memoria.deathguise-steals" },
+    { id: "item-path.disc-4.memoria.deathguise-duel-claws-steal", itemId: "game-item.duel-claws", method: "steal", slot: "rare", rate: "0.39%", comparison: "0.4%", objectiveId: "disc-4.memoria.deathguise-steals" },
+    { id: "item-path.disc-4.memoria.deathguise-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", objectiveId: "disc-4.memoria.deathguise" },
+    { id: "item-path.disc-4.memoria.deathguise-phoenix-down-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%", label: "Uncommon", objectiveId: "disc-4.memoria.deathguise" },
+    { id: "item-path.disc-4.memoria.deathguise-ether-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%", label: "Rare", objectiveId: "disc-4.memoria.deathguise" },
+    { id: "item-path.disc-4.memoria.deathguise-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%", comparison: "0.4%", label: "Very Rare", objectiveId: "disc-4.memoria.deathguise" },
+  ];
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === encounterId);
+  const linkedPaths = itemAcquisitionPaths.filter((entry) => expected.some((item) => item.id === entry.id));
+
+  assert.equal(linkedPaths.length, expected.length);
+  assert.equal(encounter?.kind, "boss");
+  assert.deepEqual(encounter?.formation, [{ enemyId, quantity: 1 }]);
+
+  for (const item of expected) {
+    const path = itemAcquisitionPaths.find((entry) => entry.id === item.id);
+    const lootTable = item.method === "steal" ? enemy?.steals : enemy?.drops;
+    const slot = lootTable?.find((entry) => entry.itemId === item.itemId && entry.slot === item.slot);
+    const requiredSources = new Set([...(enemy?.sourceIds ?? []), ...(encounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+
+    assert.ok(path, `${item.id} exists`);
+    assert.ok(slot, `${item.id} maps to a real loot slot`);
+    assert.equal(path?.itemId, item.itemId);
+    assert.equal(path?.chapterId, "disc-4.memoria");
+    assert.equal(path?.method, item.method);
+    assert.equal(path?.quantity, 1);
+    assert.equal(path?.availability, "one-time-encounter");
+    assert.equal(path?.enemyId, enemyId);
+    assert.equal(path?.enemyLootSlot, item.slot);
+    assert.deepEqual(path?.encounterIds, [encounterId]);
+    assert.ok(path?.walkthroughObjectiveIds?.includes(item.objectiveId));
+    if (item.method === "steal") {
+      assert.match(path?.conditions ?? "", new RegExp(item.rate.replace("%", "\\%")));
+      assert.match(path?.conditions ?? "", new RegExp(item.comparison.replace("%", "\\%")));
+      assert.match(path?.conditions ?? "", /source-reported/);
+      assert.match(path?.conditions ?? "", /per connected steal/);
+      assert.ok(path?.sourceIds.includes("opatil-steal-list"));
+    } else if (item.slot === "always") {
+      assert.match(path?.conditions ?? "", /Always/);
+      assert.match(path?.conditions ?? "", /victory/);
+      assert.ok(path?.sourceIds.includes("opatil-drop-list"));
+    } else {
+      assert.match(path?.conditions ?? "", /conditional/);
+      assert.match(path?.conditions ?? "", new RegExp(item.rate.replace("%", "\\%")));
+      assert.match(path?.notes ?? "", /source-reported, not release-verified/);
+      assert.match(path?.conditions ?? "", /not guaranteed/);
+      assert.match(path?.notes ?? "", new RegExp(item.label));
+      if (item.comparison) assert.match(path?.notes ?? "", new RegExp(item.comparison.replace("%", "\\%")));
+    }
+    assert.ok([...requiredSources].every((sourceId) => path?.sourceIds.includes(sourceId)), `${item.id} includes enemy, encounter, and slot sources`);
+    assert.ok(path?.sourceIds.every((sourceId) => sources.some((source) => source.id === sourceId)), `${item.id} has known sources`);
+  }
+  assert.match(itemAcquisitionPaths.find((entry) => entry.id === expected[2].id)?.notes ?? "", /Rare.*Very Rare/);
+});
+
 test("item inventory targets preserve the source quantity they represent", () => {
   const target = (id) => sourceInventoryTargets.find((entry) => entry.id === id);
   const steepledHatNeed = target("item-target.disc-4.final-preparations.steepled-hat");

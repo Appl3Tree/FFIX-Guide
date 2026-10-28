@@ -6894,6 +6894,51 @@ for (const expected of lichBossLootPaths) {
     errors.push(`Memoria Lich path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
   }
 }
+const deathguiseBossLootPaths = [
+  { id: "item-path.disc-4.memoria.deathguise-elixir-steal", itemId: "game-item.elixir", method: "steal", slot: "common", rate: "100%", comparison: "70%", objectiveId: "disc-4.memoria.deathguise-steals" },
+  { id: "item-path.disc-4.memoria.deathguise-black-belt-steal", itemId: "game-item.black-belt", method: "steal", slot: "uncommon", rate: "25%", comparison: "23%", objectiveId: "disc-4.memoria.deathguise-steals" },
+  { id: "item-path.disc-4.memoria.deathguise-duel-claws-steal", itemId: "game-item.duel-claws", method: "steal", slot: "rare", rate: "0.39%", comparison: "0.4%", label: "Very Rare", objectiveId: "disc-4.memoria.deathguise-steals" },
+  { id: "item-path.disc-4.memoria.deathguise-wing-edge-drop", itemId: "game-item.wing-edge", method: "drop", slot: "always", objectiveId: "disc-4.memoria.deathguise" },
+  { id: "item-path.disc-4.memoria.deathguise-phoenix-down-drop", itemId: "game-item.phoenix-down", method: "drop", slot: "common", rate: "37.5%", label: "Uncommon", objectiveId: "disc-4.memoria.deathguise" },
+  { id: "item-path.disc-4.memoria.deathguise-ether-drop", itemId: "game-item.ether", method: "drop", slot: "uncommon", rate: "12.5%", label: "Rare", objectiveId: "disc-4.memoria.deathguise" },
+  { id: "item-path.disc-4.memoria.deathguise-elixir-drop", itemId: "game-item.elixir", method: "drop", slot: "rare", rate: "0.39%", comparison: "0.4%", label: "Very Rare", objectiveId: "disc-4.memoria.deathguise" },
+];
+const deathguiseEnemy = enemyRecords.find((enemy) => enemy.id === "enemy.deathguise");
+const deathguiseEncounterId = "encounter.memoria.deathguise";
+const deathguiseEncounter = enemyEncounters.find((encounter) => encounter.id === deathguiseEncounterId);
+if (itemAcquisitionPaths.filter((path) => deathguiseBossLootPaths.some((expected) => expected.id === path.id)).length !== deathguiseBossLootPaths.length) {
+  errors.push("Memoria Deathguise must retain all seven item-bearing boss slots.");
+}
+for (const expected of deathguiseBossLootPaths) {
+  const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id);
+  const lootTable = expected.method === "steal" ? deathguiseEnemy?.steals : deathguiseEnemy?.drops;
+  const slot = lootTable?.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
+  const requiredSources = new Set([...(deathguiseEnemy?.sourceIds ?? []), ...(deathguiseEncounter?.sourceIds ?? []), ...(slot?.sourceIds ?? [])]);
+  if (
+    !path ||
+    !slot ||
+    path.itemId !== expected.itemId ||
+    path.chapterId !== "disc-4.memoria" ||
+    path.method !== expected.method ||
+    path.quantity !== 1 ||
+    path.availability !== "one-time-encounter" ||
+    path.enemyId !== deathguiseEnemy?.id ||
+    path.enemyLootSlot !== expected.slot ||
+    JSON.stringify(path.encounterIds) !== JSON.stringify([deathguiseEncounterId]) ||
+    deathguiseEncounter?.kind !== "boss" ||
+    !deathguiseEncounter.formation.some((member) => member.enemyId === deathguiseEnemy?.id) ||
+    !path.walkthroughObjectiveIds?.includes(expected.objectiveId) ||
+    (expected.method === "steal" && (!path.conditions?.includes(expected.rate ?? "") || !path.conditions.includes(expected.comparison ?? "") || !path.conditions.includes("source-reported") || !path.conditions.includes("per connected steal") || !path.sourceIds.includes("opatil-steal-list"))) ||
+    (expected.slot === "always" && (!path.conditions?.includes("Always") || !path.conditions.includes("victory") || !path.sourceIds.includes("opatil-drop-list"))) ||
+    (expected.method === "drop" && expected.slot !== "always" && (!path.conditions?.includes("conditional") || !path.conditions.includes(expected.rate ?? "") || !path.conditions.includes("not guaranteed") || !path.notes?.includes("source-reported, not release-verified"))) ||
+    (expected.comparison && expected.method === "drop" && !path.notes?.includes(expected.comparison)) ||
+    (expected.label && !path.notes?.includes(expected.label)) ||
+    ![...requiredSources].every((sourceId) => path.sourceIds.includes(sourceId)) ||
+    (expected.itemId === "game-item.duel-claws" && (!path.notes?.includes("Rare") || !path.notes.includes("Very Rare")))
+  ) {
+    errors.push(`Memoria Deathguise path ${expected.id} must match its exact boss slot, encounter, yield semantics, objective, and provenance.`);
+  }
+}
 const tantarianItemIds = ["game-item.ether", "game-item.elixir", "game-item.silver-fork", "game-item.demons-mail"];
 for (const itemId of tantarianItemIds) {
   if (!gameItemIds.has(itemId)) errors.push(`Tantarian recovery coverage needs catalog item ${itemId}.`);
