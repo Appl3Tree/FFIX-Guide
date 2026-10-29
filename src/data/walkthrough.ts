@@ -5888,13 +5888,20 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-to-terra-party",
         title: "Shimmering Island passage — choose the party for Terra",
         summary: "The airship enters the passage after the Disc III cutoff review. Zidane is fixed in the party, while the other three slots are selected during the transition.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-four-shrines-terra", "gamerguides-four-shrines-terra"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-four-shrines-terra", "gamerguides-four-shrines-terra", "gamefaqs-perfect-game-41181"],
+        preparationGuidance: {
+          levelRationale: "The reviewed story route gives no numeric party-level target for entering Terra; its character advice depends on learned abilities and how well each character is trained.",
+          difficultyAssessment: "The sources publish no common difficulty rating. GameFAQs recommends a party based on Terra's elemental weaknesses, available summons, and character development rather than a fixed level.",
+          optionalGrinding: "No extra party-level grind is specified. The separate PlayStation Excalibur II route budgets three random encounters from the portal through Bran Bal, then keeps its later zero-encounter Pandemonium segments separate; follow that route's own EXP and timer plan.",
+          setupAdvice: "At the prompt, choose three characters alongside Zidane. Vivi is useful for Terra's elemental weaknesses, and Dagger can use Bahamut if she learned it. Dagger and Steiner leave after Bran Bal, so plan who can cover their roles before confirming; the party can be reformed after the village sequence.",
+          confidence: "partial",
+          sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-perfect-game-41181"],
+        },
         steps: [
           {
             id: "portal-to-terra-entry",
             kind: "required",
             text: "After saving and finishing the chosen Gaia-side checks, fly the Hilda Garde 3 to Shimmering Island and enter the portal. When prompted, choose three characters alongside Zidane; the story forces Zidane into the group.",
-            detail: "The other three slots are flexible at entry. Vivi's elemental magic and Dagger's Bahamut (if learned) are source-backed options, not requirements. Dagger and Steiner will be unavailable after the Bran Bal scenes, so plan for replacements before the party prompt.",
             objectiveIds: ["disc-3.portal-to-another-world.party-and-gate"],
           },
         ],

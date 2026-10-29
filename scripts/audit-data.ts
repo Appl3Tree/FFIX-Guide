@@ -2859,6 +2859,21 @@ if (!ipsensPreparation || ipsensPreparation.suggestedLevelRange !== undefined ||
   errors.push("Ipsen's Castle milestone guidance must preserve source-scoped party/difficulty advice and its separate zero-encounter Excalibur II plan.");
 }
 
+const terraPartySection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-to-terra-party");
+const terraPartyPreparation = terraPartySection?.preparationGuidance;
+if (!terraPartyPreparation || terraPartyPreparation.suggestedLevelRange !== undefined ||
+  !terraPartyPreparation.levelRationale.includes("no numeric party-level target") ||
+  !terraPartyPreparation.difficultyAssessment?.includes("no common difficulty rating") ||
+  !terraPartyPreparation.optionalGrinding.includes("three random encounters") ||
+  !terraPartyPreparation.optionalGrinding.includes("zero-encounter Pandemonium segments") ||
+  !terraPartyPreparation.setupAdvice.includes("Vivi is useful") ||
+  !terraPartyPreparation.setupAdvice.includes("Dagger and Steiner leave after Bran Bal") ||
+  !["gamefaqs-portal-to-another-world-71891", "gamefaqs-perfect-game-41181"].every((sourceId) => terraPartyPreparation.sourceIds.includes(sourceId))) {
+  errors.push("Terra party-entry guidance must preserve its optional party recommendations and separate Excalibur II encounter/EXP budget.");
+}
+
 for (const area of guideAreas) {
   if (area.state !== "planned" && !walkthroughAreaIds.has(area.id)) {
     errors.push(`Area ${area.id} has a non-planned coverage state but no walkthrough content.`);
