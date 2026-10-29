@@ -350,6 +350,47 @@ test("Silver Dragon preparation separates its Level 58 stat from party level and
   }
 });
 
+test("Garland preparation separates its Level 62 stat from party level and prioritizes Silence", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.garland");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.pandemonium.garland");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.portal-to-another-world");
+  const prepStep = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-maze-treasures")
+    ?.steps.find((entry) => entry.id === "portal-pandemonium-boss-prep");
+  const fightStep = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-final-bosses")
+    ?.steps.find((entry) => entry.id === "portal-pandemonium-garland");
+  const guidance = enemy?.preparationGuidance;
+  const sourceIds = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+
+  assert.ok(enemy);
+  assert.ok(encounter);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 62);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 62 as Garland's enemy stat/);
+  assert.match(guidance.levelRationale, /neither sets a party-level target/);
+  assert.match(guidance.optionalGrinding, /good optional grinding location/);
+  assert.match(guidance.optionalGrinding, /no reviewed source sets a Garland party-level target/);
+  assert.match(guidance.setupAdvice, /prioritize Silence to suppress Flare and Stop/);
+  assert.match(guidance.setupAdvice, /Locomotion to block Garland's Stop/);
+  assert.match(guidance.setupAdvice, /Darkness can make Wave miss more often/);
+  assert.match(guidance.setupAdvice, /no listed elemental weakness/);
+  assert.match(guidance.setupAdvice, /Bandit and Master Thief/);
+  assert.match(guidance.setupAdvice, /leave Auto-Reflect off for Kuja/);
+  for (const [value, sourceId] of [[40729, sourceIds[0]], [40728, sourceIds[1]], [50728, sourceIds[2]]]) {
+    assert.equal(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.verification, "disputed");
+    assert.ok(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.sourceIds.includes(sourceId));
+  }
+  assert.ok(encounter.sourceIds.includes("flactem-pandemonium"));
+  assert.match(prepStep?.detail ?? "", /leave Auto-Reflect off for the whole sequence/);
+  assert.match(fightStep?.text ?? "", /prioritize Silence to suppress Flare and Stop/);
+  assert.match(fightStep?.detail ?? "", /Level 62 is an enemy stat, not a party-level target/);
+  for (const sourceId of sourceIds) {
+    assert.ok(guidance.sourceIds.includes(sourceId));
+    assert.ok(enemy.sourceIds.includes(sourceId));
+    assert.ok(sources.some((source) => source.id === sourceId));
+  }
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

@@ -6150,8 +6150,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-garland",
             kind: "combat",
-            text: "In Garland's battle, attempt to steal Battle Boots, Ninja Gear, and Dark Gear. Use Silence or Blind if available, and keep Locomotion equipped to block Stop.",
-            detail: "This is the second fight in the uninterrupted sequence. Stop and keep the party healed while Zidane works through the steal table.",
+            text: "In Garland's battle, prioritize Silence to suppress Flare and Stop, keep Locomotion equipped to block Stop, and attempt to steal Battle Boots, Ninja Gear, and Dark Gear.",
+            detail: "Garland's Level 62 is an enemy stat, not a party-level target. HP reports conflict: GameFAQs lists 40,729, Jegged 40,728, and EliteGrindLab 50,728. He has no listed elemental weakness; Darkness can make Wave miss more often, and Slow is another listed vulnerability. Keep Auto-Reflect off because Kuja follows immediately and warns against Reflect.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-boss-steals", "disc-3.portal-to-another-world.pandemonium-climax"],
           },
           {

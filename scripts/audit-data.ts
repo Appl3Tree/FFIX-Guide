@@ -10897,6 +10897,31 @@ for (const value of [24056, 24055, 34055]) {
     errors.push(`Silver Dragon HP ${value} must remain marked as a disputed source report.`);
   }
 }
+const garlandRecord = enemyRecords.find((enemy) => enemy.id === "enemy.garland");
+const garlandPreparation = garlandRecord?.preparationGuidance;
+const garlandEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.garland");
+const garlandFightStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-final-bosses")
+  ?.steps.find((step) => step.id === "portal-pandemonium-garland");
+const garlandPrepSources = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+if (!garlandRecord || garlandRecord.kind !== "boss" || !garlandEncounter || garlandEncounter.kind !== "boss" ||
+  !garlandEncounter.formation.some((member) => member.enemyId === "enemy.garland" && member.quantity === 1) ||
+  !garlandPreparation || garlandPreparation.suggestedLevelRange !== undefined ||
+  !garlandPreparation.levelRationale.includes("Level 62 as Garland's enemy stat") ||
+  !garlandPreparation.levelRationale.includes("neither sets a party-level target") ||
+  !garlandPreparation.optionalGrinding.includes("no reviewed source sets a Garland party-level target") ||
+  !garlandPreparation.setupAdvice.includes("prioritize Silence to suppress Flare and Stop") ||
+  !garlandPreparation.setupAdvice.includes("Locomotion to block Garland's Stop") ||
+  !garlandPreparation.setupAdvice.includes("leave Auto-Reflect off for Kuja") ||
+  !garlandFightStep?.detail.includes("Level 62 is an enemy stat, not a party-level target") ||
+  garlandPrepSources.some((sourceId) => !garlandPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Garland preparation must distinguish its Level 62 enemy stat from party level and preserve sourced Silence, Locomotion, Auto-Reflect warning, and source-specific HP reports.");
+}
+for (const value of [40729, 40728, 50728]) {
+  if (garlandRecord?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification !== "disputed") {
+    errors.push(`Garland HP ${value} must remain marked as a disputed source report.`);
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");
