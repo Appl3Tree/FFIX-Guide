@@ -11286,7 +11286,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     enemyId: "enemy.silver-dragon",
     enemyLootSlot: "always",
     encounterIds: ["encounter.pandemonium.silver-dragon"],
-    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-item-locations-54996", "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"],
+    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "gamefaqs-item-locations-54996", "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"],
   },
   {
     id: "item-path.disc-3.portal-to-another-world.terra-demons-vest-chest",
@@ -13414,7 +13414,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     enemyId: "enemy.kuja",
     enemyLootSlot: "uncommon",
     encounterIds: ["encounter.pandemonium.kuja"],
-    sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "flactem-pandemonium"],
+    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "jegged-pandemonium", "elitegrindlab-pandemonium", "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "flactem-pandemonium"],
   },
   {
     id: "item-path.disc-3.portal-to-another-world.pandemonium-elixir-chest",
@@ -13451,7 +13451,7 @@ export const itemAcquisitionPaths: ItemAcquisitionPath[] = [
     enemyId: "enemy.garland",
     enemyLootSlot: "common",
     encounterIds: ["encounter.pandemonium.garland"],
-    sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "elitegrindlab-pandemonium", "flactem-pandemonium"],
+    sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "jegged-pandemonium", "gamefaqs-items-71891", "gamefaqs-enemy-list-71891", "elitegrindlab-pandemonium", "flactem-pandemonium"],
   },
   {
     id: "item-path.disc-4.memoria.hades-battle-boots-steal",

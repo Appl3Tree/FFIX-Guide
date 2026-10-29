@@ -312,7 +312,7 @@ const huntEnemySources = [enemyListSourceId, "gamefaqs-hunt-minigame-71891", "ca
 const huntLootSources = [enemyListSourceId, "cavesofnarshe-hunt-enemies"];
 const zaghnolHuntSources = ["gamefaqs-hunt-minigame-71891", "gamefaqs-lindblum-71891", "jegged-lindblum", "gamerguides-lindblum", "cavesofnarshe-hunt-enemies", "cavesofnarshe-hunt-walkthrough"];
 const mountGulugEnemySources = [enemyListSourceId, "gamefaqs-lost-continent-71891", "jegged-mount-gulug", "gamefaqs-abilities-71891"];
-const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+const pandemoniumEnemySources = [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
 const firstIifaTreeEnemySources = [enemyListSourceId, "gamefaqs-iifa-tree-71891", "jegged-iifa-tree", "elitegrindlab-iifa-tree"];
 const soulcagePreparationSources = [...firstIifaTreeEnemySources, "gamefaqs-boss-guide-31490", "kamigame-soulcage"];
 const firstIifaTreeStealsObjectiveId = "disc-2.iifa-tree.soulcage-steals";
@@ -3744,7 +3744,13 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
     id: "enemy.abadon-fixed",
     name: "Abadon (fixed fight)",
     encounterIds: ["encounter.pandemonium.fixed-abadon"],
-    stats: pandemoniumStats([["level", 54], ["HP", 10926], ["MP", 9383], ["EXP", 26376], ["AP", 4], ["Gil", 2348]]),
+    stats: [
+      { field: "level", value: 54, sourceIds: ["gamefaqs-portal-to-another-world-71891"], verification: "disputed" },
+      { field: "level", value: 58, sourceIds: ["jegged-pandemonium", "elitegrindlab-pandemonium"], verification: "disputed" },
+      { field: "HP", value: 10926, sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143"], verification: "disputed" },
+      { field: "HP", value: 12658, sourceIds: ["jegged-pandemonium", "elitegrindlab-pandemonium"], verification: "disputed" },
+      ...pandemoniumStats([["MP", 9383], ["EXP", 26376], ["AP", 4], ["Gil", 2348]]),
+    ],
     steals: [pandemoniumLoot("common", "game-item.vaccine"), pandemoniumLoot("uncommon", "game-item.ether"), pandemoniumLoot("semi-rare", null, "Nothing"), pandemoniumLoot("rare", null, "Nothing")],
     drops: [pandemoniumLoot("always", "game-item.ether"), pandemoniumLoot("common", null, "Nothing"), pandemoniumLoot("uncommon", null, "Nothing"), pandemoniumLoot("rare", null, "Nothing")],
     facts: [
@@ -3754,9 +3760,17 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
       pandemoniumFact("attack", "Blade, High Wind, and Thundaga", "Blade targets one character; High Wind hits the party."),
     ],
     blueMagic: [],
-    strategies: [{ title: "Keep Steiner and Quina healthy", detail: "They begin the battle before Zidane joins. Quina can heal with learned Blue Magic; the fight's scripted form is not listed as an Eat source for Twister.", sourceIds: ["gamefaqs-portal-to-another-world-71891", "flactem-pandemonium"] }],
+    strategies: [{ title: "Survive the two-turn opening", detail: "Steiner and Quina begin the fight; defend and heal as needed while watching for High Wind, then attack with Zidane when he joins after Abadon's second turn. Quina can use White Wind or Mighty Guard if learned. The scripted form cannot be eaten for Twister; that skill comes from a random Abadon or Red Dragon.", sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "flactem-pandemonium"] }],
+    preparationGuidance: {
+      levelRationale: "GameFAQs' story walkthrough lists Level 54 and 10,926 HP for the fixed encounter; a separate GameFAQs battle guide also reports 10,926 HP. Jegged and EliteGrindLab print Level 58 and 12,658 HP under the boss entry, matching the separate random Abadon [B] record; the scripted-fight identity remains unresolved. None of these figures is a party-level target.",
+      difficultyAssessment: "GameFAQs describes the fight as easier than Amdusias, but warns that High Wind damages the whole party heavily. Steiner and Quina have only the opening turns before Zidane joins, so keep them alive through that phase.",
+      optionalGrinding: "No reviewed route sets an Abadon-specific party-level target. EliteGrindLab describes extra Pandemonium encounters as optional grinding, not a requirement for this scripted fight.",
+      setupAdvice: "Before leaving Bran Bal, consider Coral Rings on Steiner and Quina to absorb Thundaga if available; the forced sequence offers no equipment-change break. Steiner and Quina start together. Defend for the first two enemy turns and heal as needed; High Wind hits the entire party hard, so avoid risking a KO to steal Vaccine or Ether. Zidane joins after Abadon's second turn; then use his attacks while Quina supports with White Wind or Mighty Guard if learned. If earning EXP/AP on all three matters, try to keep everyone alive without taking dangerous extra turns. Abadon is weak to Wind and nullifies Earth. Quina cannot Eat this scripted form for Twister; that opportunity is from a random Abadon or Red Dragon. GameFAQs lists Vaccine and Ether steals, but its strategy guide says they are not worth the risk; the next fixed Shell Dragon fight follows immediately.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"],
+    },
     routeObjectiveIds: [pandemoniumClimaxObjectiveId],
-    notes: ["This level-54 scripted variant is separate from the level-58 Abadon [B] in random encounters. The enemy-reference HP belongs to the random form."],
+    notes: ["GameFAQs 71891 lists the scripted fight at Level 54 and 10,926 HP; GameFAQs 79143 also reports 10,926 HP. Jegged and EliteGrindLab list Level 58 and 12,658 HP for the boss entry, matching the separate random Abadon [B]; the source evidence does not resolve whether they refer to the scripted fight. Preserve both records and claims without substituting the random encounter's stats into the fixed profile."],
   }),
   pandemoniumBoss({
     id: "enemy.shell-dragon-fixed",

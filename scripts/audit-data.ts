@@ -10798,6 +10798,35 @@ if (!amdusiasRecord || amdusiasRecord.kind !== "boss" || !amdusiasEncounter || a
   amdusiasPrepSources.some((sourceId) => !amdusiasPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
   errors.push("Amdusias preparation must preserve the fixed solo opening, Bran Bal preparation window, optional defenses, elemental facts, source-specific steal slots, and disputed stats without a party-level target.");
 }
+const abadonFixedRecord = enemyRecords.find((enemy) => enemy.id === "enemy.abadon-fixed");
+const abadonPreparation = abadonFixedRecord?.preparationGuidance;
+const abadonEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.fixed-abadon");
+const abadonBranBalPrepStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-bran-bal-ates-gate")
+  ?.steps.find((step) => step.id === "portal-bran-bal-final-sweep");
+const abadonFightStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-mind-control")
+  ?.steps.find((step) => step.id === "portal-pandemonium-abadon");
+const abadonPrepSources = ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+if (!abadonFixedRecord || abadonFixedRecord.kind !== "boss" || !abadonEncounter || abadonEncounter.kind !== "boss" ||
+  !abadonEncounter.formation.some((member) => member.enemyId === "enemy.abadon-fixed" && member.quantity === 1) ||
+  !abadonPreparation || abadonPreparation.suggestedLevelRange !== undefined ||
+  !abadonPreparation.levelRationale.includes("None of these figures is a party-level target") ||
+  !abadonPreparation.setupAdvice.includes("Coral Rings on Steiner and Quina to absorb Thundaga") ||
+  !abadonPreparation.setupAdvice.includes("Defend for the first two enemy turns") ||
+  !abadonPreparation.setupAdvice.includes("High Wind hits the entire party hard") ||
+  !abadonPreparation.setupAdvice.includes("White Wind or Mighty Guard if learned") ||
+  !abadonPreparation.setupAdvice.includes("scripted form for Twister") ||
+  !abadonBranBalPrepStep?.detail.includes("Coral Rings on Steiner and Quina can absorb Abadon's Thundaga") ||
+  !abadonFightStep?.detail.includes("the latter match the separate random Abadon entry") ||
+  abadonPrepSources.some((sourceId) => !abadonPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Fixed Abadon preparation must preserve its two-turn party opening, optional Coral Ring/Quina support, random-form Twister distinction, disputed record boundary, and lack of a party-level target.");
+}
+for (const [field, value] of [["level", 54], ["level", 58], ["HP", 10926], ["HP", 12658]] as const) {
+  if (abadonFixedRecord?.stats.find((claim) => claim.field === field && claim.value === value)?.verification !== "disputed") {
+    errors.push(`Fixed Abadon ${field} ${value} must remain marked disputed across the scripted/random record ambiguity.`);
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

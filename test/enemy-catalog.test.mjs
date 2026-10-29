@@ -220,6 +220,51 @@ test("Amdusias preparation preserves Pandemonium's forced solo opening and sourc
   assert.match(fightStep?.detail ?? "", /no party-level target is inferred/);
 });
 
+test("Abadon preparation preserves the scripted party opening and random-form record boundary", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.abadon-fixed");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqsStory = sources.find((entry) => entry.id === "gamefaqs-portal-to-another-world-71891");
+  const gamefaqsBattleGuide = sources.find((entry) => entry.id === "gamefaqs-pandemonium-79143");
+  const jegged = sources.find((entry) => entry.id === "jegged-pandemonium");
+  const eliteGrindLab = sources.find((entry) => entry.id === "elitegrindlab-pandemonium");
+  const flactem = sources.find((entry) => entry.id === "flactem-pandemonium");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.portal-to-another-world");
+  const branBal = chapter?.sections.find((entry) => entry.id === "portal-bran-bal-ates-gate");
+  const prepStep = branBal?.steps.find((entry) => entry.id === "portal-bran-bal-final-sweep");
+  const pandemonium = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-mind-control");
+  const fightStep = pandemonium?.steps.find((entry) => entry.id === "portal-pandemonium-abadon");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  for (const [field, value] of [["level", 54], ["level", 58], ["HP", 10926], ["HP", 12658]]) {
+    assert.equal(enemy.stats.find((entry) => entry.field === field && entry.value === value)?.verification, "disputed");
+  }
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /GameFAQs' story walkthrough lists Level 54 and 10,926 HP/);
+  assert.match(guidance.levelRationale, /matching the separate random Abadon \[B\] record/);
+  assert.match(guidance.levelRationale, /None of these figures is a party-level target/);
+  assert.match(guidance.difficultyAssessment ?? "", /High Wind damages the whole party heavily/);
+  assert.match(guidance.optionalGrinding, /No reviewed route sets an Abadon-specific party-level target/);
+  assert.match(guidance.setupAdvice, /Coral Rings on Steiner and Quina to absorb Thundaga/);
+  assert.match(guidance.setupAdvice, /Defend for the first two enemy turns/);
+  assert.match(guidance.setupAdvice, /High Wind hits the entire party hard/);
+  assert.match(guidance.setupAdvice, /White Wind or Mighty Guard if learned/);
+  assert.match(guidance.setupAdvice, /keep everyone alive without taking dangerous extra turns/);
+  assert.match(guidance.setupAdvice, /Quina cannot Eat this scripted form for Twister/);
+  assert.match(guidance.setupAdvice, /GameFAQs lists Vaccine and Ether steals/);
+  assert.match(enemy.notes.join(" "), /Preserve both records/);
+  assert.ok(["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-79143", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqsStory?.notes ?? "", /For fixed Abadon it reports Level 54, 10,926 HP/);
+  assert.match(gamefaqsBattleGuide?.notes ?? "", /defending with Steiner and Quina for two turns/);
+  assert.match(jegged?.notes ?? "", /Level 58\/12,658 HP/);
+  assert.match(eliteGrindLab?.notes ?? "", /does not claim that this resolves the scripted encounter's identity/);
+  assert.match(flactem?.notes ?? "", /scripted Abadon during You're Not Alone cannot be eaten/);
+  assert.match(prepStep?.detail ?? "", /Coral Rings on Steiner and Quina can absorb Abadon's Thundaga/);
+  assert.match(fightStep?.text ?? "", /Zidane joins after Abadon's second turn/);
+  assert.match(fightStep?.detail ?? "", /No party-level target is inferred/);
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

@@ -6021,7 +6021,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-bran-bal-final-sweep",
             kind: "save",
             text: "Before leaving, confirm the Terra and Bran Bal pickups, Stiltzkin #7, the four ATEs, any desired purchases, and a fresh save. Receive Moorock's letter here or use his Pandemonium fallback after the party regroups; then follow Mikoto through the green light and bridge.",
-            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. Heal and review equipment here: Pandemonium's fixed fights run consecutively without an equipment-change break. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
+            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. Heal and review equipment here: Pandemonium's fixed fights run consecutively without an equipment-change break. If available, Coral Rings on Steiner and Quina can absorb Abadon's Thundaga. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
             objectiveIds: ["disc-3.portal-to-another-world.bran-bal-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter", "disc-3.portal-to-another-world.stiltzkin-7", "disc-3.portal-to-another-world.bran-bal-ates", "disc-3.portal-to-another-world.party-and-gate"],
           },
         ],
@@ -6042,8 +6042,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-abadon",
             kind: "combat",
-            text: "Steiner and Quina begin the Abadon fight; Zidane joins partway through. Keep the opening pair healthy, then use your strongest attacks and support skills when Zidane arrives.",
-            detail: "Quina can use White Wind or Mighty Guard if learned. The scripted fight's identity and published HP are disputed against the ordinary Abadon entry; no number is required here.",
+            text: "Steiner and Quina begin the Abadon fight. Defend and heal through the opening two turns; Zidane joins after Abadon's second turn. Then attack while Quina supports with learned Blue Magic if needed.",
+            detail: "High Wind hits the whole party hard; Coral Rings can absorb Thundaga if equipped. White Wind or Mighty Guard can help if Quina has learned them. Keep all three alive for EXP/AP if safe, but do not risk a KO to steal. The scripted form cannot be eaten for Twister; random Abadon or Red Dragon are the listed opportunities. GameFAQs and Jegged/EliteGrindLab print different level/HP figures, and the latter match the separate random Abadon entry. No party-level target is inferred; Shell Dragon follows immediately.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-climax", "disc-3.portal-to-another-world.pandemonium-blue-magic"],
           },
           {
