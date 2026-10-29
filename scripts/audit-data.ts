@@ -6371,6 +6371,25 @@ const huntZaghnol = enemyRecords.find((enemy) => enemy.id === "enemy.zaghnol-hun
 if (outerZaghnol?.encounterIds.includes("encounter.lindblum.festival-zaghnol") || huntZaghnol?.encounterIds.some((encounterId) => encounterId.startsWith("encounter.outer-continent."))) {
   errors.push("The world-map Zaghnol [B] and Festival of the Hunt Zaghnol must remain separate variants.");
 }
+const huntZaghnolPreparation = huntZaghnol?.preparationGuidance;
+const lindblumFestivalSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.lindblum")?.sections.find((section) => section.id === "lindblum-telescope-festival");
+const lindblumFestivalPrepStep = lindblumFestivalSection?.steps.find((step) => step.id === "lindblum-festival-preparation");
+const lindblumFestivalFightStep = lindblumFestivalSection?.steps.find((step) => step.id === "lindblum-festival-zaghnol");
+if (!huntZaghnolPreparation || huntZaghnolPreparation.suggestedLevelRange !== undefined ||
+  !huntZaghnolPreparation.levelRationale.includes("Level 9") || !huntZaghnolPreparation.levelRationale.includes("not a party-level recommendation") ||
+  !huntZaghnolPreparation.difficultyAssessment?.includes("subjective") ||
+  !huntZaghnolPreparation.optionalGrinding.includes("12-minute Festival") ||
+  !huntZaghnolPreparation.setupAdvice.includes("Bandit and Beast Killer") ||
+  !huntZaghnolPreparation.setupAdvice.includes("Mythril Gloves and Needle Fork") ||
+  !huntZaghnolPreparation.setupAdvice.includes("weak to Water and halves Lightning") ||
+  !huntZaghnolPreparation.setupAdvice.includes("Vivi's achievement route") ||
+  !huntZaghnolPreparation.sourceIds.includes("gamefaqs-hunt-minigame-71891") ||
+  !lindblumFestivalSection?.sourceIds.includes("gamefaqs-hunt-minigame-71891") ||
+  !lindblumFestivalPrepStep?.detail.includes("Level 9 is Zaghnol's enemy stat") ||
+  !lindblumFestivalFightStep?.detail.includes("weak to Water") ||
+  !lindblumFestivalFightStep?.detail.includes("Freya can Jump or heal")) {
+  errors.push("Festival Zaghnol preparation must distinguish enemy level from party level and connect timed-event setup and combat advice to the route.");
+}
 const cleyraSoldier = enemyRecords.find((enemy) => enemy.id === "enemy.soldier-a");
 const cleyraReturnIds = [
   "encounter.cleyra-trunk.return.whirlpool-soldiers",

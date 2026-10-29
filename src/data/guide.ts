@@ -1625,7 +1625,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/lindblum",
     accessed: "2026-10-26",
-    notes: "Original PlayStation route for castle and district pickups, including the Guest Bedroom Ether; Business District Hi-Potion, Echo Screen, and Tent; Industrial District Bronze Vest; Theater District Ore; and Hideout Mini-Burmecia. It also gives the Autograph/Moogle Suit steps and their one-time window, says Vivi's Shopping ATE gives a Kupo Nut, and covers the Master Hunter Key Item plus Freya's Coral Ring, Vivi's Theater Ship Card, or Zidane's 5,000-Gil Festival prize. Its explicit missable alert says the two Theater District Key Items become unavailable once Zidane has gone to the Tantalus Hideout. After the Festival, it recommends using the Weapon Shop and Synthesis Shop before leaving for Gizamaluke's Grotto. The Javelin shop timing and Festival prize claims are cross-checked separately.",
+    notes: "Original PlayStation route for castle and district pickups, including the Guest Bedroom Ether; Business District Hi-Potion, Echo Screen, and Tent; Industrial District Bronze Vest; Theater District Ore; and Hideout Mini-Burmecia. It also gives the Autograph/Moogle Suit steps and their one-time window, says Vivi's Shopping ATE gives a Kupo Nut, and covers the Master Hunter Key Item plus Freya's Coral Ring, Vivi's Theater Ship Card, or Zidane's 5,000-Gil Festival prize. Its explicit missable alert says the two Theater District Key Items become unavailable once Zidane has gone to the Tantalus Hideout. After the Festival, it recommends using the Weapon Shop and Synthesis Shop before leaving for Gizamaluke's Grotto. The Javelin shop timing and Festival prize claims are cross-checked separately. Its Hunt advice identifies Freya's Jump and healing role while Zidane steals; it gives no party-level target.",
   },
   {
     id: "jegged-lindblum",
@@ -1633,7 +1633,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/08-Lindblum.html",
     accessed: "2026-10-26",
-    notes: "Independent cross-check for named rooms and pickups, including the Guest Bedroom Ether; Business District supplies and Church Street Tent; Industrial District Bronze Vest; Theater District Ore; and Hideout Mini-Burmecia. It also covers Mognet, six ATEs, the Autograph/Moogle Suit window, Festival setup, the Master Hunter Key Item, Freya's Coral Ring prize, Zaghnol, shops, and exit route. It does not mention the Kupo Nut reward from Vivi's Shopping ATE. Its route skips the Tantalus Hideout, collects both Theater District Key Items, then enters the hideout.",
+    notes: "Independent cross-check for named rooms and pickups, including the Guest Bedroom Ether; Business District supplies and Church Street Tent; Industrial District Bronze Vest; Theater District Ore; and Hideout Mini-Burmecia. It also covers Mognet, six ATEs, the Autograph/Moogle Suit window, Festival setup, the Master Hunter Key Item, Freya's Coral Ring prize, Zaghnol, shops, and exit route. Its Hunt route has Freya Jump or heal while Zidane steals and gives no normal party-level recommendation. It does not mention the Kupo Nut reward from Vivi's Shopping ATE. Its route skips the Tantalus Hideout, collects both Theater District Key Items, then enters the hideout.",
   },
   {
     id: "gamerguides-lindblum",
@@ -1641,7 +1641,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://earth.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/lindblum",
     accessed: "2026-10-23",
-    notes: "Independent route cross-check for the first Lindblum visit, Festival timer, Zaghnol appearance, prize outcomes, and the Vivi achievement route. Its Chocobo Forest directions give Mene's Gysahl Greens purchase price as 80 Gil.",
+    notes: "Independent route cross-check for the first Lindblum visit, Festival timer, Zaghnol appearance, prize outcomes, and the Vivi achievement route. It places Zaghnol at about 4:30 remaining and advises leaving/re-entering the plaza if needed; it also recommends stealing before the finish and describes Freya's Jump/healing support. Its Chocobo Forest directions give Mene's Gysahl Greens purchase price as 80 Gil.",
   },
   {
     id: "gamefaqs-hunt-minigame-71891",
@@ -1649,7 +1649,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/pc/184962-final-fantasy-ix/faqs/71891/storyline-mini-games",
     accessed: "2026-10-23",
-    notes: "Festival rules, winner outcomes, Zaghnol timing and steals, and strategies for routing the mutually exclusive awards. Original game route; source is used alongside independent area guides.",
+    notes: "Festival rules, winner outcomes, Zaghnol timing, stats and steals, and strategies for routing the mutually exclusive awards. It says the fight may seem tough but is not especially difficult (subjective route language), and recommends Zidane's Bandit and Beast Killer abilities where available. The Level 9 row is the enemy stat, not a party-level recommendation. Original game route; source is used alongside independent area guides.",
   },
   {
     id: "gamefaqs-shop-lists-9772",
@@ -1809,7 +1809,7 @@ export const sources = [
     publisher: "Caves of Narshe",
     url: "https://www.cavesofnarshe.com/ff9/enemies.php?type=hunt",
     accessed: "2026-10-25",
-    notes: "Hunt-specific stat rows for Fang, Mu, Trick Sparrow, and Zaghnol, including elemental and status traits and the event steal/drop tables. The Hunt Zaghnol row lists no stolen items, conflicting with GameFAQs and multiple route guides that recommend two steals; Mu's elemental traits also differ from GameFAQs.",
+    notes: "Hunt-specific stat rows for Fang, Mu, Trick Sparrow, and Zaghnol, including elemental and status traits and the event steal/drop tables. Its Zaghnol row gives Level 9 as the enemy stat and lists no stolen items, conflicting with GameFAQs and multiple route guides that recommend two steals; its status-resistance details also differ. Mu's elemental traits differ from GameFAQs.",
   },
   {
     id: "cavesofnarshe-hunt-walkthrough",

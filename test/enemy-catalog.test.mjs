@@ -329,3 +329,41 @@ test("Black Waltz 3's Summit Station guidance accounts for the rematch party and
   assert.match(prepStep?.detail ?? "", /Level 9 is Black Waltz 3's enemy stat, not a party target/);
   assert.match(prepStep?.detail ?? "", /avoid physical attacks on a frozen character/);
 });
+
+test("Festival Zaghnol preparation separates enemy level from the timed winner route", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.zaghnol-hunt");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-hunt-minigame-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-lindblum");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-1.lindblum")
+    ?.sections.find((entry) => entry.id === "lindblum-telescope-festival");
+  const prepStep = section?.steps.find((entry) => entry.id === "lindblum-festival-preparation");
+  const fightStep = section?.steps.find((entry) => entry.id === "lindblum-festival-zaghnol");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 9);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 9 is Zaghnol's Hunt enemy stat/);
+  assert.match(guidance.levelRationale, /not a party-level recommendation/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective, single-source/);
+  assert.match(guidance.optionalGrinding, /12-minute Festival/);
+  assert.match(guidance.setupAdvice, /Bandit and Beast Killer/);
+  assert.match(guidance.setupAdvice, /Jump or healing while Zidane steals/);
+  assert.match(guidance.setupAdvice, /about 4:30 left/);
+  assert.match(guidance.setupAdvice, /Mythril Gloves and Needle Fork/);
+  assert.match(guidance.setupAdvice, /weak to Water and halves Lightning/);
+  assert.match(guidance.setupAdvice, /Zidane KO himself so Freya can land the final hit/);
+  assert.match(guidance.setupAdvice, /KO Zidane and Freya/);
+  assert.ok(guidance.sourceIds.includes("gamefaqs-hunt-minigame-71891"));
+  assert.ok(guidance.sourceIds.includes("cavesofnarshe-hunt-enemies"));
+  assert.ok(enemy.sourceIds.includes("jegged-lindblum"));
+  assert.match(gamefaqs?.notes ?? "", /Level 9 row is the enemy stat/);
+  assert.match(jegged?.notes ?? "", /no normal party-level recommendation/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-hunt-minigame-71891"));
+  assert.match(prepStep?.text ?? "", /Bandit and Beast Killer/);
+  assert.match(prepStep?.detail ?? "", /Level 9 is Zaghnol's enemy stat/);
+  assert.match(fightStep?.detail ?? "", /weak to Water/);
+  assert.match(fightStep?.detail ?? "", /Freya can Jump or heal/);
+  assert.match(fightStep?.detail ?? "", /GameFAQs says Zidane usually needs to be KO/);
+});
