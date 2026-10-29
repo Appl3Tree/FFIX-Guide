@@ -8052,6 +8052,26 @@ const ipsensTaharka = ipsensEnemyById.get("enemy.taharka");
 const ipsensTaharkaEncounter = ipsensEncounterById.get("encounter.ipsens-castle.taharka");
 const ipsensTaharkaWarning = missablesById.get("missable.disc-3.ipsens-castle.taharka-steals");
 const ipsensTaharkaCutoff = cutoffsById.get("cutoff.ipsens-castle.taharka-steals");
+const ipsensTaharkaPreparation = ipsensTaharka?.preparationGuidance;
+const ipsensTaharkaPreparationSources = ["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "elitegrindlab-ipsens-castle", "rpgclassics-bestiary-t-z"];
+const ipsensTaharkaMirrorStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.ipsens-castle")
+  ?.sections.find((section) => section.id === "ipsens-mirrors-and-taharka")
+  ?.steps.find((step) => step.id === "ipsens-four-mirrors");
+if (!ipsensTaharkaPreparation || ipsensTaharkaPreparation.suggestedLevelRange !== undefined ||
+  !ipsensTaharkaPreparation.levelRationale.includes("Level 46 is Taharka's enemy stat") ||
+  !ipsensTaharkaPreparation.optionalGrinding.includes("0 EXP") ||
+  !ipsensTaharkaPreparation.optionalGrinding.includes("Everyone's Grudge") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("normal Attack-command damage improves with weaker weapons") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("magic and abilities ignore that inversion") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("Orichalcon Semi-Rare") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("Jegged calls it Rare") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("Mustard Bomb or Add Status") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("after the selected steals") ||
+  !ipsensTaharkaPreparation.setupAdvice.includes("avoid Earth, which is nullified") ||
+  !ipsensTaharkaMirrorStep?.detail.includes("No reviewed source gives a party-level target") ||
+  ipsensTaharkaPreparationSources.some((sourceId) => !ipsensTaharkaPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Taharka preparation must keep Level 46 separate from party level and preserve the inverted weapon rule, Tonberry warning, source-specific Orichalcon labels, and steal-before-Heat sequence.");
+}
 const ipsensTaharkaStealPaths = [
   ["item-path.disc-3.ipsens-castle.taharka-elixir-steal", "game-item.elixir", "common"],
   ["item-path.disc-3.ipsens-castle.taharka-mythril-claws-steal", "game-item.mythril-claws", "uncommon"],

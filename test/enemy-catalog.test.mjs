@@ -133,6 +133,50 @@ test("Earth Guardian preparation equips Zidane and Quina without inferring a par
   assert.match(stealsStep?.detail ?? "", /Auto-Reflect can blunt them/);
 });
 
+test("Taharka preparation preserves Ipsen's inverted weapon rule and source-specific Orichalcon labels", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.taharka");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-ipsens-castle-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-ipsens-castle");
+  const eliteGrindLab = sources.find((entry) => entry.id === "elitegrindlab-ipsens-castle");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.ipsens-castle");
+  const mural = chapter?.sections.find((entry) => entry.id === "ipsens-mirrors-and-taharka");
+  const prepStep = mural?.steps.find((entry) => entry.id === "ipsens-four-mirrors");
+  const fightStep = mural?.steps.find((entry) => entry.id === "ipsens-taharka");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 46);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 46 is Taharka's enemy stat/);
+  assert.match(guidance.levelRationale, /do not establish a normal-party level target/);
+  assert.match(guidance.difficultyAssessment ?? "", /reasonably difficult without status control/);
+  assert.match(guidance.difficultyAssessment ?? "", /Jegged calls it an easy fight/);
+  assert.match(guidance.optionalGrinding, /No reviewed source recommends a party-level target/);
+  assert.match(guidance.optionalGrinding, /Everyone's Grudge scales with total Tonberries killed/);
+  assert.match(guidance.optionalGrinding, /Taharka itself awards 0 EXP/);
+  assert.match(guidance.setupAdvice, /normal Attack-command damage improves with weaker weapons/);
+  assert.match(guidance.setupAdvice, /magic and abilities ignore that inversion/);
+  assert.match(guidance.setupAdvice, /Freya's Jump/);
+  assert.match(guidance.setupAdvice, /attempt Elixir, Mythril Claws, and Orichalcon/);
+  assert.match(guidance.setupAdvice, /Master Thief can help if learned/);
+  assert.match(guidance.setupAdvice, /GameFAQs and RPGClassics label Orichalcon Semi-Rare/);
+  assert.match(guidance.setupAdvice, /Jegged calls it Rare/);
+  assert.match(guidance.setupAdvice, /Mustard Bomb or Add Status/);
+  assert.match(guidance.setupAdvice, /use it only after the selected steals/);
+  assert.match(guidance.setupAdvice, /exploit Fire or Wind and avoid Earth, which is nullified/);
+  assert.match(enemy.notes.join(" "), /no rate is normalized/);
+  assert.ok(["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "elitegrindlab-ipsens-castle", "rpgclassics-bestiary-t-z"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /abilities and magic keep normal damage/);
+  assert.match(jegged?.notes ?? "", /calls Orichalcon Rare and reports 6% per connected attempt/);
+  assert.match(eliteGrindLab?.notes ?? "", /warns not to farm Tonberries/);
+  assert.match(prepStep?.detail ?? "", /No reviewed source gives a party-level target/);
+  assert.match(fightStep?.text ?? "", /Common Elixir, Uncommon Mythril Claws, and Semi-Rare Orichalcon/);
+  assert.match(fightStep?.detail ?? "", /wait until after selected steals/);
+  assert.match(fightStep?.detail ?? "", /all three item types have later sources/);
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

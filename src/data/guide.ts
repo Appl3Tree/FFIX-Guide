@@ -3264,8 +3264,8 @@ export const sources = [
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/ipsens-castle",
-    accessed: "2026-10-24",
-    notes: "Original PlayStation Disc III room route for the inverted weapon-power mechanic, Kumool and Mognet, castle pickups including the Broadsword ladder chest, fresco and pot puzzles, four mirrors, Taharka, steals, and Amarant's return. The chapter supports Kumool as an initial-visit shop location; its Disc III route does not establish the shop's stock on a later Disc IV return. Its initial-area, Stairwell & Lift, Mural Room, and Treasure Hunting rosters support separate bestiary pools; the Taharka table lists Level 46, 29,186 HP, 1,776 MP, 11 AP, 8,092 Gil, three steals, a Ramuh Card, elemental traits, and status vulnerabilities. These Taharka stats agree with RPGClassics, so the older generic HP-variance note has been removed.",
+    accessed: "2026-10-28",
+    notes: "Original PlayStation Disc III room route for the inverted weapon-power mechanic, Kumool and Mognet, castle pickups including the Broadsword ladder chest, fresco and pot puzzles, four mirrors, Taharka, steals, and Amarant's return. It says the Attack command alone follows the inverse weapon-power rule; abilities and magic keep normal damage. At Taharka, it recommends status control, Zidane's steals, and optional Heat from Mustard Bomb or Add Status after the chosen steals. The chapter supports Kumool as an initial-visit shop location; its Disc III route does not establish the shop's stock on a later Disc IV return. Its area rosters support separate bestiary pools; the Taharka table lists Level 46, 29,186 HP, 1,776 MP, 11 AP, 8,092 Gil, three steals, a Ramuh Card, elemental traits, and status vulnerabilities. These Taharka stats agree with RPGClassics; its Semi-Rare Orichalcon label differs from Jegged's Rare label.",
   },
   {
     id: "ffonline-ipsens-castle",
@@ -3304,8 +3304,8 @@ export const sources = [
     title: "Ipsen's Castle — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/37-Ipsens-Castle.html",
-    accessed: "2026-10-24",
-    notes: "Independent cross-check for the entrance choice, weak-weapon rule, party setup, letter and Kupo Nut conditions, room-by-room chests including the Broadsword stairwell pickup, fresco puzzle, and Quina's Veteran Blue Magic opportunity. It confirms the castle can be entered by airship or Sky Chocobo.",
+    accessed: "2026-10-28",
+    notes: "Independent cross-check for the entrance choice, weak-weapon rule, party setup, letter and Kupo Nut conditions, room-by-room chests including the Broadsword stairwell pickup, fresco puzzle, and Quina's Veteran Blue Magic opportunity. For Taharka it describes Silence, Slow, Poison, Power Break, Armor Break, and Zidane's three steals; it calls Orichalcon Rare and reports 6% per connected attempt, while GameFAQs/RPGClassics label it Semi-Rare. It confirms the castle can be entered by airship or Sky Chocobo.",
   },
   {
     id: "flactem-ipsens-castle",
@@ -3320,8 +3320,8 @@ export const sources = [
     title: "Ipsen's Castle — completionist walkthrough",
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/ipsens-castle/",
-    accessed: "2026-10-26",
-    notes: "Completionist cross-check for the seven weak weapons, enemy and boss mechanics, all treasure, and continued castle access after the main story route. Its Disc IV Mognet chain routes through Kumool, confirming late castle and Mogshop access; it does not establish whether any of the 12 consumable listings remain stocked on that return. Pair this with GameFAQs' Disc III/IV equipment listings for N-Kai Armlet and Jade Armlet. It distinguishes the unique Taharka encounter's steal opportunity from permanent item loss.",
+    accessed: "2026-10-28",
+    notes: "Completionist cross-check for the seven weak weapons, enemy and boss mechanics, all treasure, and continued castle access after the main story route. It warns not to farm Tonberries because Everyone's Grudge scales with the total defeated, and describes Mustard Bomb Heat as a way to end Taharka when it next acts after Zidane's steal opportunity. Its Disc IV Mognet chain routes through Kumool, confirming late castle and Mogshop access; it does not establish whether any of the 12 consumable listings remain stocked on that return. Pair this with GameFAQs' Disc III/IV equipment listings for N-Kai Armlet and Jade Armlet. It distinguishes the unique Taharka encounter's steal opportunity from permanent item loss.",
   },
   {
     id: "gamefaqs-breaking-the-seal-71891",
