@@ -6021,7 +6021,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-bran-bal-final-sweep",
             kind: "save",
             text: "Before leaving, confirm the Terra and Bran Bal pickups, Stiltzkin #7, the four ATEs, any desired purchases, and a fresh save. Receive Moorock's letter here or use his Pandemonium fallback after the party regroups; then follow Mikoto through the green light and bridge.",
-            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. Heal and review equipment here: Pandemonium's fixed fights run consecutively without an equipment-change break. If available, Coral Rings on Steiner and Quina can absorb Abadon's Thundaga. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
+            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. Heal and review equipment here: Pandemonium's fixed fights run consecutively without an equipment-change break. If available, Coral Rings on Steiner and Quina can absorb Abadon's Thundaga. For Shell Dragon, check that Dagger has Float available or equip Earth-absorbing Feather Boots on Zidane and Dagger; if relying on Feather Boots, leave Auto-Float off. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
             objectiveIds: ["disc-3.portal-to-another-world.bran-bal-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter", "disc-3.portal-to-another-world.stiltzkin-7", "disc-3.portal-to-another-world.bran-bal-ates", "disc-3.portal-to-another-world.party-and-gate"],
           },
         ],
@@ -6030,7 +6030,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-pandemonium-mind-control",
         title: "Pandemonium — survive the forced party-split battles",
         summary: "Three story fights use fixed, changing party groups. The full party reunites afterward in the Hall, where Moorock returns and can provide his letter if Bran Bal was skipped.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-shops-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "cour89-pandemonium", "cour89-mognet-letters", "game8-zorlin-shape", "rpgclassics-shops", "ffwiki-shops", "ff9-irodori-shops"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-29957", "gamefaqs-shops-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium", "cour89-pandemonium", "cour89-mognet-letters", "game8-zorlin-shape", "rpgclassics-shops", "ffwiki-shops", "ff9-irodori-shops"],
         steps: [
           {
             id: "portal-pandemonium-amdusias",
@@ -6050,8 +6050,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-pandemonium-shell-dragon",
             kind: "combat",
             text: "Zidane begins alone against Shell Dragon, then Dagger joins. Use Float against Earth Shake, heal promptly after Smash leaves a character at 1 HP, and finish the battle safely.",
-            detail: "If Quina still needs Earth Shake, try Eat while the dragon is weakened. Sources also list this encounter as a chance to learn the skill; this is an optional check, not a proven permanent cutoff.",
-            objectiveIds: ["disc-3.portal-to-another-world.pandemonium-climax", "disc-3.portal-to-another-world.pandemonium-blue-magic"],
+            detail: "Quina is not in this fixed fight's Zidane-and-Dagger roster, so she cannot Eat this Shell Dragon. Float protects against Earth Shake; Feather Boots can absorb it instead, but do not use Auto-Float if relying on absorption. Learn Earth Shake from the repeatable random Shell Dragon [B] after the party regroups.",
+            objectiveIds: ["disc-3.portal-to-another-world.pandemonium-climax"],
           },
           {
             id: "portal-pandemonium-moorock-holy-miter",
@@ -6095,7 +6095,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-pandemonium-maze-treasures",
         title: "Heading 4 — collect both blue-pad chests and Battle Boots",
         summary: "Ride the heading-4 elevator route into the teleport maze. Visit both blue-pad branches, then take the southern fork for Battle Boots.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "cour89-pandemonium", "cour89-mognet-letters"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium", "cour89-pandemonium", "cour89-mognet-letters"],
         steps: [
           {
             id: "portal-pandemonium-maze-entry",
@@ -6121,8 +6121,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-blue-magic",
             kind: "optional",
-            text: "If Quina is in the active party and any skill is missing, use Eat on Malboro for Bad Breath, Abadon for Twister, or Shell Dragon for Earth Shake when the enemy is weak enough.",
-            detail: "EliteGrindLab lists these three opportunities in Pandemonium. Availability and alternate later teachers are not fully audited for every skill, so treat them as convenient learning checks rather than permanent-loss warnings.",
+            text: "If Quina is in the active party and any skill is missing, use Eat on Malboro for Bad Breath, Abadon for Twister, or a random Shell Dragon [B] for Earth Shake when the enemy is weak enough.",
+            detail: "These are repeatable or area encounters after the party regroups. The fixed Abadon and fixed Shell Dragon story fights are not the listed Eat opportunities. Availability and alternate later teachers are not fully audited for every skill, so treat these as convenient learning checks rather than permanent-loss warnings.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-blue-magic"],
           },
           {

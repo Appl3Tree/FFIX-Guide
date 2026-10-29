@@ -394,8 +394,8 @@ function pandemoniumEnemy(record: LocalEnemyInput): EnemyRecord {
   return chapterEnemy(record, pandemoniumChapterId, pandemoniumEnemySources);
 }
 
-function pandemoniumBoss(record: LocalEnemyInput, missableIds: string[] = [], cutoffIds: string[] = []): EnemyRecord {
-  return chapterBoss(record, pandemoniumChapterId, pandemoniumEnemySources, missableIds, cutoffIds);
+function pandemoniumBoss(record: LocalEnemyInput, missableIds: string[] = [], cutoffIds: string[] = [], sourceIds: string[] = pandemoniumEnemySources): EnemyRecord {
+  return chapterBoss(record, pandemoniumChapterId, sourceIds, missableIds, cutoffIds);
 }
 
 function memoriaBoss(record: LocalEnemyInput, missableId: string, cutoffId: string, sourceIds = memoriaEnemySources): EnemyRecord {
@@ -2990,11 +2990,11 @@ const pandemoniumEncounters: EnemyEncounter[] = [
     location: "Mind-control chamber, third scripted fight",
     kind: "boss",
     formation: [{ enemyId: "enemy.shell-dragon-fixed", quantity: 1 }],
-    sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "flactem-pandemonium"],
-    objectiveIds: [pandemoniumClimaxObjectiveId, pandemoniumBlueMagicObjectiveId],
+    sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "gamefaqs-pandemonium-29957", "flactem-pandemonium"],
+    objectiveIds: [pandemoniumClimaxObjectiveId],
     missableIds: [],
     cutoffIds: [],
-    notes: ["Zidane begins alone and Dagger joins after the fight's scripted threshold. The sources disagree about whether Quina can learn Earth Shake from this fixed version; the random Shell Dragon [B] is a confirmed teacher."],
+    notes: ["Zidane begins alone and Dagger joins during the scripted fight. The fixed roster contains no Quina, so this encounter cannot teach Earth Shake with Eat; the repeatable random Shell Dragon [B] is the documented teacher."],
   },
   {
     id: "encounter.pandemonium.random-pool",
@@ -3700,7 +3700,7 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
       enemyFact("attack", "Snort", "Can eject one character from battle."),
       enemyFact("attack", "Charge", "Heavy physical damage."),
     ],
-    blueMagic: [pandemoniumBlueMagic("Earth Shake")],
+    blueMagic: [pandemoniumBlueMagic("Earth Shake", [enemyListSourceId, "gamefaqs-portal-to-another-world-71891", "flactem-pandemonium"])],
     strategies: [{ title: "Protect against its strongest attacks", detail: "Ice exploits its weakness. Prepare healing for Smash, and defend against Earth Shake; status attacks can also subdue it.", sourceIds: [enemyListSourceId] }],
     routeObjectiveIds: [pandemoniumBlueMagicObjectiveId],
     notes: ["This repeatable random form is listed separately from the fixed Shell Dragon story fight."],
@@ -3779,6 +3779,7 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
     stats: [
       ...pandemoniumStats([["level", 54], ["MP", 9335], ["EXP", 26376], ["AP", 4], ["Gil", 2332]]),
       { field: "HP", value: 10921, sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium"], verification: "disputed" },
+      { field: "HP", value: 12500, sourceIds: ["gamefaqs-pandemonium-29957"], verification: "disputed" },
       { field: "HP", value: 20921, sourceIds: ["elitegrindlab-pandemonium"], verification: "disputed" },
     ],
     steals: [pandemoniumLoot("common", "game-item.phoenix-down"), pandemoniumLoot("uncommon", "game-item.elixir"), pandemoniumLoot("semi-rare", null, "Nothing"), pandemoniumLoot("rare", null, "Nothing")],
@@ -3790,11 +3791,19 @@ const pandemoniumEnemyRecords: EnemyRecord[] = [
       pandemoniumFact("attack", "Earth Shake", "Heavy Earth-elemental damage."),
       pandemoniumFact("attack", "Charge", "Physical damage."),
     ],
-    blueMagic: [pandemoniumBlueMagic("Earth Shake", ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "flactem-pandemonium"])],
-    strategies: [{ title: "Survive the solo opening", detail: "Zidane begins alone. Use Float or Earth protection against Earth Shake and heal as soon as Smash leaves a character at 1 HP; Dagger joins during the encounter.", sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium"] }],
-    routeObjectiveIds: [pandemoniumClimaxObjectiveId, pandemoniumBlueMagicObjectiveId],
-    notes: ["GameFAQs and Jegged list 10,921 HP; EliteGrindLab lists 20,921. Whether Quina can learn Earth Shake from this fixed version remains disputed; the random Shell Dragon [B] is a confirmed teacher."],
-  }),
+    blueMagic: [],
+    strategies: [{ title: "Survive the solo opening", detail: "Zidane begins alone. Once Dagger joins, use Float to prevent Earth Shake or equip Earth-absorbing protection, and heal promptly after Smash leaves a character at 1 HP. The fixed party is Zidane and Dagger, so Quina cannot use Eat in this encounter.", sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "gamefaqs-pandemonium-29957"] }],
+    preparationGuidance: {
+      levelRationale: "The older GameFAQs walkthrough suggests Zidane Level 42 and Dagger around Level 35, while listing that route's party at Levels 44 and 35; treat those as an optional, source-specific benchmark, not a requirement. The enemy Level 54 is a separate stat. No newer reviewed route sets a party-level target.",
+      difficultyAssessment: "The older GameFAQs route calls Shell Dragon Semi-Hard and recommends Auto-Potion and Auto-Regen; newer routes emphasize surviving until Dagger joins. Zidane starts alone, and Smash can leave him at 1 HP.",
+      optionalGrinding: "No reviewed route makes grinding mandatory. Andrew_Testa's older single-source suggestion of Zidane Level 42 and Dagger around Level 35 is an optional route benchmark, not a verified minimum or general party target.",
+      setupAdvice: "Prepare in Bran Bal because the fixed fights continue without an equipment-change break. Check Zidane's HP and healing options before entering: the older GameFAQs route recommends Auto-Potion with Hi-Potions and Auto-Regen as optional defenses. Zidane begins alone; that route says Dagger joins after the third turn and heals after Smash, while other sources describe her arrival without fixing the turn. Once she joins, cast Float on both characters to prevent Earth Shake. As an alternative, the older route says Feather Boots absorb Earth Shake; if relying on absorption, do not enable Auto-Float. Heal promptly after Smash reduces a target to 1 HP, and use Ice damage against the dragon's weakness. The older route's Zidane 42/Dagger 35 suggestion is not a requirement. HP reports conflict: GameFAQs 71891 and Jegged list 10,921, Andrew_Testa lists 12,500, and EliteGrindLab lists 20,921.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium", "gamefaqs-pandemonium-29957"],
+    },
+    routeObjectiveIds: [pandemoniumClimaxObjectiveId],
+    notes: ["GameFAQs 71891 and Jegged list 10,921 HP, Andrew_Testa lists 12,500, and EliteGrindLab lists 20,921; preserve all as source-specific disputed reports. The older GameFAQs route lists a different steal table and later says there is nothing worth stealing, so item slots are not normalized. The fixed roster is Zidane and Dagger; Quina is absent and cannot Eat this version. The repeatable random Shell Dragon [B] is the documented Earth Shake teacher."],
+  }, [], [], [...pandemoniumEnemySources, "gamefaqs-pandemonium-29957"]),
   pandemoniumBoss({
     id: "enemy.silver-dragon",
     name: "Silver Dragon",

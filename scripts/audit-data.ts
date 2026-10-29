@@ -10827,6 +10827,46 @@ for (const [field, value] of [["level", 54], ["level", 58], ["HP", 10926], ["HP"
     errors.push(`Fixed Abadon ${field} ${value} must remain marked disputed across the scripted/random record ambiguity.`);
   }
 }
+const fixedShellDragonRecord = enemyRecords.find((enemy) => enemy.id === "enemy.shell-dragon-fixed");
+const randomShellDragonRecord = enemyRecords.find((enemy) => enemy.id === "enemy.shell-dragon-b");
+const fixedShellDragonEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.fixed-shell-dragon");
+const pandemoniumRandomPool = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.random-pool");
+const shellDragonPreparation = fixedShellDragonRecord?.preparationGuidance;
+const shellDragonFightStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-mind-control")
+  ?.steps.find((step) => step.id === "portal-pandemonium-shell-dragon");
+const shellDragonBlueMagicStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-maze-treasures")
+  ?.steps.find((step) => step.id === "portal-pandemonium-blue-magic");
+const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
+if (!fixedShellDragonRecord || fixedShellDragonRecord.kind !== "boss" ||
+  !fixedShellDragonEncounter || fixedShellDragonEncounter.kind !== "boss" ||
+  !fixedShellDragonEncounter.formation.some((member) => member.enemyId === "enemy.shell-dragon-fixed" && member.quantity === 1) ||
+  fixedShellDragonRecord.blueMagic.some((skill) => skill.name === "Earth Shake") ||
+  fixedShellDragonRecord.routeObjectiveIds.includes(pandemoniumBlueMagicObjectiveId) ||
+  fixedShellDragonEncounter.objectiveIds.includes(pandemoniumBlueMagicObjectiveId) ||
+  !fixedShellDragonEncounter.objectiveIds.includes("disc-3.portal-to-another-world.pandemonium-climax") ||
+  !shellDragonPreparation || shellDragonPreparation.suggestedLevelRange !== undefined ||
+  !shellDragonPreparation.setupAdvice.includes("Feather Boots absorb Earth Shake") ||
+  !shellDragonPreparation.setupAdvice.includes("do not enable Auto-Float") ||
+  !shellDragonPreparation.levelRationale.includes("optional, source-specific benchmark") ||
+  !shellDragonFightStep?.detail.includes("cannot Eat this Shell Dragon") ||
+  shellDragonFightStep.objectiveIds.includes(pandemoniumBlueMagicObjectiveId) ||
+  !shellDragonBlueMagicStep?.text.includes("random Shell Dragon [B]") ||
+  !shellDragonBlueMagicStep.detail.includes("fixed Shell Dragon story fights are not") ||
+  !randomShellDragonRecord?.blueMagic.some((skill) => skill.name === "Earth Shake" && skill.objectiveIds.includes(pandemoniumBlueMagicObjectiveId)) ||
+  !randomShellDragonRecord.routeObjectiveIds.includes(pandemoniumBlueMagicObjectiveId) ||
+  !pandemoniumRandomPool?.formation.some((member) => member.enemyId === "enemy.shell-dragon-b") ||
+  !pandemoniumRandomPool.objectiveIds.includes(pandemoniumBlueMagicObjectiveId) ||
+  !sourceIds.has("gamefaqs-pandemonium-29957") ||
+  !fixedShellDragonRecord.sourceIds.includes("gamefaqs-pandemonium-29957")) {
+  errors.push("The fixed Shell Dragon roster must not link Quina's Earth Shake Eat objective; preserve the random Shell Dragon teacher, optional older preparation advice, and source-specific HP/party-level reports.");
+}
+for (const value of [10921, 12500, 20921]) {
+  if (fixedShellDragonRecord?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification !== "disputed") {
+    errors.push(`Fixed Shell Dragon HP ${value} must remain a source-scoped disputed report.`);
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

@@ -265,6 +265,49 @@ test("Abadon preparation preserves the scripted party opening and random-form re
   assert.match(fightStep?.detail ?? "", /No party-level target is inferred/);
 });
 
+test("fixed Shell Dragon does not claim Quina's Earth Shake Eat opportunity", () => {
+  const fixed = enemyRecords.find((entry) => entry.id === "enemy.shell-dragon-fixed");
+  const random = enemyRecords.find((entry) => entry.id === "enemy.shell-dragon-b");
+  const fixedEncounter = enemyEncounters.find((entry) => entry.id === "encounter.pandemonium.fixed-shell-dragon");
+  const randomPool = enemyEncounters.find((entry) => entry.id === "encounter.pandemonium.random-pool");
+  const oldGameFaqs = sources.find((entry) => entry.id === "gamefaqs-pandemonium-29957");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.portal-to-another-world");
+  const mindControl = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-mind-control");
+  const fightStep = mindControl?.steps.find((entry) => entry.id === "portal-pandemonium-shell-dragon");
+  const maze = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-maze-treasures");
+  const blueMagicStep = maze?.steps.find((entry) => entry.id === "portal-pandemonium-blue-magic");
+  const objectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
+
+  assert.ok(fixed);
+  assert.ok(random);
+  assert.ok(fixedEncounter);
+  assert.ok(randomPool);
+  assert.ok(oldGameFaqs);
+  assert.deepEqual(fixed.blueMagic, []);
+  assert.ok(!fixed.routeObjectiveIds.includes(objectiveId));
+  assert.ok(!fixedEncounter.objectiveIds.includes(objectiveId));
+  assert.ok(fixedEncounter.objectiveIds.includes("disc-3.portal-to-another-world.pandemonium-climax"));
+  assert.ok(random.blueMagic.some((skill) => skill.name === "Earth Shake" && skill.objectiveIds.includes(objectiveId)));
+  assert.ok(random.routeObjectiveIds.includes(objectiveId));
+  assert.ok(randomPool.formation.some((member) => member.enemyId === "enemy.shell-dragon-b"));
+  assert.ok(randomPool.objectiveIds.includes(objectiveId));
+  for (const [field, value] of [["HP", 10921], ["HP", 12500], ["HP", 20921]]) {
+    assert.equal(fixed.stats.find((entry) => entry.field === field && entry.value === value)?.verification, "disputed");
+  }
+  assert.equal(fixed.preparationGuidance?.suggestedLevelRange, undefined);
+  assert.match(fixed.preparationGuidance?.levelRationale ?? "", /optional, source-specific benchmark/);
+  assert.match(fixed.preparationGuidance?.setupAdvice ?? "", /Feather Boots absorb Earth Shake/);
+  assert.match(fixed.preparationGuidance?.setupAdvice ?? "", /do not enable Auto-Float/);
+  assert.ok(fixed.sourceIds.includes("gamefaqs-pandemonium-29957"));
+  assert.match(fixed.notes.join(" "), /Quina is absent and cannot Eat this version/);
+  assert.match(oldGameFaqs.notes, /12,500 HP/);
+  assert.match(oldGameFaqs.notes, /Phoenix Pinion, Tent, Hi-Potion, and Vaccine/);
+  assert.match(fightStep?.detail ?? "", /cannot Eat this Shell Dragon/);
+  assert.ok(!fightStep?.objectiveIds.includes(objectiveId));
+  assert.match(blueMagicStep?.text ?? "", /random Shell Dragon \[B\]/);
+  assert.match(blueMagicStep?.detail ?? "", /fixed Shell Dragon story fights are not/);
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

@@ -3420,6 +3420,14 @@ export const sources = [
     notes: "Independent PlayStation battle-guide cross-check for the fixed Pandemonium fights. For Abadon it lists 10,926 HP, Vaccine and Ether steals, recommends defending with Steiner and Quina for two turns, healing as needed, and warns that High Wind hits all party members heavily. It says Zidane arrives after Abadon's second turn, recommends Coral Rings against Thundaga, and advises keeping all three alive for EXP/AP when safe. It calls stealing unnecessary because the items are replaceable and it risks Quina being KO'd. Its fixed-fight table agrees with GameFAQs 71891; it is retained alongside conflicting Level 58/12,658 reports from other references rather than treated as release verification.",
   },
   {
+    id: "gamefaqs-pandemonium-29957",
+    title: "Final Fantasy IX — Guide and Walkthrough by Andrew_Testa (FAQ 29957)",
+    publisher: "GameFAQs",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/29957",
+    accessed: "2026-10-28",
+    notes: "Older original PlayStation walkthrough for the fixed Pandemonium fights. For Shell Dragon it lists 12,500 HP and Zidane/Dagger, and recommends Zidane Lv. 42 and Dagger around Lv. 35 despite listing its route party at 44/35; those are optional, source-specific benchmarks, not requirements. It recommends Auto-Potion with Hi-Potions and Auto-Regen, and Feather Boots to absorb Earth Shake while warning not to use Auto-Float when relying on absorption. Its steal table lists Phoenix Pinion, Tent, Hi-Potion, and Vaccine, conflicting with GameFAQs 71891/Jegged; later battle prose says there is nothing worth stealing, so no mapping is normalized.",
+  },
+  {
     id: "jegged-bran-bal",
     title: "Bran Bal — Disc III walkthrough",
     publisher: "Jegged",
@@ -3457,7 +3465,7 @@ export const sources = [
     publisher: "Flactem Guides",
     url: "https://guides.flactem.com/final-fantasy-ix/disc-3/pandemonium/",
     accessed: "2026-10-28",
-    notes: "Independent cross-check for Pandemonium's enemy roster and scripted party-split battles, including the fixed-fight roster changes, and Quina's Blue Magic opportunities. Random Abadon can teach Twister, but the scripted Abadon during You're Not Alone cannot be eaten; the fixed fight is not the Twister learning opportunity. Earth Shake availability during the scripted Shell Dragon battle remains unresolved across guides.",
+    notes: "Independent cross-check for Pandemonium's enemy roster and scripted party-split battles, including the fixed-fight roster changes, and Quina's Blue Magic opportunities. Random Abadon can teach Twister, but the scripted Abadon during You're Not Alone cannot be eaten; the fixed fight is not the Twister learning opportunity. It explicitly says Quina can eat a randomly encountered Shell Dragon for Earth Shake; the scripted Shell Dragon fight instead has Zidane and Dagger, so it is not Quina's Eat opportunity.",
   },
   {
     id: "elitegrindlab-pandemonium",
