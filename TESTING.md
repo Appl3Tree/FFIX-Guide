@@ -3,7 +3,7 @@
 Last updated: 2026-10-28
 
 ## Latest verification
-Latest verification — `npm test` passes 139/139, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The build is 2,683.57 kB JavaScript (650.39 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Added audit and regression coverage for the Treno arena Griffin's Level 16 enemy stat versus optional Level 15–16 Steiner benchmark, source conflict over the event's disc label, equipment setup, Aero/Aera, and retry/cutoff guidance. Sources: 468. Direct browser/gameplay/release checks were not part of this validation. No Actions run, push, or deployment occurred.
+Latest verification — `npm test` passes 140/140, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The build is 2,686.18 kB JavaScript (651.22 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Added audit and regression coverage for Scarlet Hair's Level 22 enemy stat versus Zidane's unprescribed party level, optional setup, healing, chance-based steals, and the source disagreement about attacking during evasive movement. Sources: 468. Direct browser/gameplay/release checks were not part of this validation. No Actions run, push, or deployment occurred.
 Previous verification — Reconciled the post-Cleyra Linen Cuirass stock difference across GameFAQs, RPGClassics, and Final Fantasy Wiki. Its path remains `window-unverified`, with a displayed-stock check. Validation then passed with 127/127 tests, lint, build, and whitespace checks.
 
 Previous verification — Reviewed FFDQ.com

@@ -328,6 +328,7 @@ const scarletHairStealsObjectiveId = "disc-2.return-to-madain-sari.scarlet-hair-
 const scarletHairStealsMissableId = "missable.disc-2.return-to-madain-sari.scarlet-hair-steals";
 const scarletHairStealsCutoffId = "cutoff.return-to-madain-sari.scarlet-hair-steals";
 const scarletHairSources = ["gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "gamerguides-revisiting-madain-sari", "rpgclassics-bounty-hunters", "rpgclassics-bestiary-n-s", "elitegrindlab-madain-sari-eidolon-wall"];
+const scarletHairPreparationSources = ["gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "gamerguides-revisiting-madain-sari", "rpgclassics-bounty-hunters", "elitegrindlab-madain-sari-eidolon-wall"];
 const pandemoniumBlueMagicObjectiveId = "disc-3.portal-to-another-world.pandemonium-blue-magic";
 const pandemoniumStealsObjectiveId = "disc-3.portal-to-another-world.pandemonium-boss-steals";
 const pandemoniumClimaxObjectiveId = "disc-3.portal-to-another-world.pandemonium-climax";
@@ -4058,6 +4059,14 @@ const returnMadainSariEnemyRecords: EnemyRecord[] = [
       { title: "Attempt both steals before winning", detail: "Ether is in the Common slot and Poison Knuckles in the Uncommon slot. The encounter is one-time, but both item types are obtainable from other sources; no steal odds or number of attempts is promised here.", sourceIds: scarletHairSources },
       { title: "Time attacks for the return cue", detail: "Scarlet Hair spends time jumping around with higher evasion. Use the spoken “Here I go” cue as an opening to attack or try another steal, and keep Zidane healed during the solo fight.", sourceIds: ["gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "gamerguides-revisiting-madain-sari"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 22 is Scarlet Hair's enemy stat, not a Zidane target. The reviewed standard routes do not establish a required or recommended party-level range, so none is inferred.",
+      difficultyAssessment: "GameFAQs and Jegged describe the duel as straightforward; Gamer Guides emphasizes the pace of its physical damage and the need to heal. These are subjective, equipment-dependent assessments, not tested difficulty ratings.",
+      optionalGrinding: "No reviewed standard route prescribes extra battles for this duel or sets a party-level target. Use the available healing and equipment preparation; treat additional encounters as optional rather than a requirement.",
+      setupAdvice: "Before choosing to save Eiko, take Morrison's free healing and equip Zidane with Man Eater and Counter if learned; add Auto-Haste only if it fits the abilities available. Use his best available defensive gear and keep Hi-Potions ready because he fights alone against physical attacks and Counter. If pursuing the one-fight loot, try the Common Ether and Uncommon Poison Knuckles steals before winning; both attempts are chance-based, and both item types have other acquisition routes. Attack timing is source-disputed: Gamer Guides recommends waiting for the spoken “Here I go” cue, while Jegged says attacks can still hit during the evasive movement; GameFAQs notes that jumping raises evasion but says the fight remains manageable with its recommended setup. Treat the cue as a useful opening, not a guaranteed hit window. Enemy Level 22 is not a party-level recommendation.",
+      confidence: "disputed",
+      sourceIds: scarletHairPreparationSources,
+    },
     routeObjectiveIds: [scarletHairStealsObjectiveId],
     notes: [
       "Published HP values conflict: sources list 8,985, 8,986, 18,985, and 6,800. No value is selected for the walkthrough.",

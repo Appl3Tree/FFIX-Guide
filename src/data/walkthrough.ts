@@ -3488,7 +3488,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "return-madain-scarlet-steals",
             kind: "cutoff",
-            text: "During the fight, try to steal the Common Ether and Uncommon Poison Knuckles before defeating Scarlet Hair. Both attempts can fail. He moves around and becomes harder to hit; when he says “Here I go” and returns to attack, use the opening to strike or try another steal.",
+            text: "During the fight, try to steal the Common Ether and Uncommon Poison Knuckles before defeating Scarlet Hair. Both attempts can fail. His evasion rises while he moves: Gamer Guides recommends waiting for the “Here I go” cue, while Jegged says attacks can still hit during the movement; GameFAQs notes that jumping raises evasion but says the fight remains manageable with its setup. Use the cue as a useful opening, not a guaranteed hit window.",
             detail: "Defeating Scarlet Hair awards the Tent listed in his Always drop slot. Poison Knuckles can be purchased from Morrison for 5,000 Gil, and Ether has other sources, so missing either steal is a lost encounter opportunity, not permanent item loss. Published HP values disagree, and steal-rate conventions vary; no exact HP or turn count is given here.",
             objectiveIds: ["disc-2.return-to-madain-sari.scarlet-hair-steals"],
           },

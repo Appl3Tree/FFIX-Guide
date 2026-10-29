@@ -472,6 +472,39 @@ test("Treno Griffin preparation keeps the enemy stat separate from optional Stei
   assert.ok(section?.sourceIds.includes("vgr-no-spoiler-walkthrough"));
 });
 
+test("Scarlet Hair preparation keeps Zidane's level open and preserves the movement-timing disagreement", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.scarlet-hair");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-return-to-madain-sari-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-return-to-madain-sari");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-revisiting-madain-sari");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.return-to-madain-sari")
+    ?.sections.find((entry) => entry.id === "return-madain-scarlet-hair");
+  const fightStep = section?.steps.find((entry) => entry.id === "return-madain-scarlet-steals");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 22);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.equal(guidance.confidence, "disputed");
+  assert.match(guidance.levelRationale, /Level 22 is Scarlet Hair's enemy stat, not a Zidane target/);
+  assert.match(guidance.levelRationale, /do not establish a required or recommended party-level range/);
+  assert.match(guidance.optionalGrinding, /No reviewed standard route prescribes extra battles/);
+  assert.match(guidance.setupAdvice, /Morrison's free healing/);
+  assert.match(guidance.setupAdvice, /Man Eater and Counter if learned/);
+  assert.match(guidance.setupAdvice, /Auto-Haste only if it fits/);
+  assert.match(guidance.setupAdvice, /Common Ether and Uncommon Poison Knuckles/);
+  assert.match(guidance.setupAdvice, /Gamer Guides recommends waiting/);
+  assert.match(guidance.setupAdvice, /Jegged says attacks can still hit/);
+  assert.ok(["gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "gamerguides-revisiting-madain-sari"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /equipping Man Eater and Counter/);
+  assert.match(jegged?.notes ?? "", /Zidane can still hit it/);
+  assert.match(gamerGuides?.notes ?? "", /waiting for “Here I go”/);
+  assert.match(fightStep?.text ?? "", /while Jegged says attacks can still hit/);
+  assert.match(fightStep?.detail ?? "", /no exact HP or turn count/);
+});
+
 test("Prison Cage preparation prioritizes captive survival across the back-to-back forms", () => {
   const garnetEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-garnet");
   const viviEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-vivi");

@@ -7429,6 +7429,22 @@ if (
 ) {
   errors.push("Scarlet Hair must remain a solo Eidolon Wall boss with its HP/MP disputes, sourced loot, and existing one-fight steal warning/cutoff.");
 }
+const scarletHairPreparation = scarletHair?.preparationGuidance;
+const scarletHairPreparationSources = ["gamefaqs-return-to-madain-sari-71891", "jegged-return-to-madain-sari", "gamerguides-revisiting-madain-sari"];
+if (
+  !scarletHairPreparation ||
+  scarletHairPreparation.suggestedLevelRange !== undefined ||
+  !scarletHairPreparation.levelRationale.includes("Level 22 is Scarlet Hair's enemy stat") ||
+  !scarletHairPreparation.levelRationale.includes("not a Zidane target") ||
+  !scarletHairPreparation.setupAdvice.includes("Man Eater and Counter if learned") ||
+  !scarletHairPreparation.setupAdvice.includes("Common Ether and Uncommon Poison Knuckles") ||
+  !scarletHairPreparation.setupAdvice.includes("Gamer Guides recommends waiting") ||
+  !scarletHairPreparation.setupAdvice.includes("Jegged says attacks can still hit") ||
+  scarletHairPreparation.confidence !== "disputed" ||
+  scarletHairPreparationSources.some((sourceId) => !scarletHairPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))
+) {
+  errors.push("Scarlet Hair preparation must keep Level 22 separate from party level, cite Zidane's optional setup, and preserve the source-scoped movement timing disagreement.");
+}
 const scarletHairItemPathIds = [
   "item-path.disc-2.return-to-madain-sari.scarlet-hair-ether-steal",
   "item-path.disc-2.return-to-madain-sari.scarlet-hair-poison-knuckles-steal",
