@@ -6641,7 +6641,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-maliris-steals",
             kind: "combat",
             text: "Before starting the fight, equip Fire resistance and Body Temp. Steal Genji Armor, Ultima Sword, and Masamune with Zidane; Soul Blade with Ultima Weapon can put Maliris to Sleep. Maliris absorbs Fire and is weak to Ice.",
-            detail: "Maliris can use Firaga, physical sword attacks, Reflect, and Mustard Bomb, which causes Heat. Raining Swords hits the whole party as she is defeated, so heal before the final hit. The Phoenix Pinion is the listed guaranteed drop. If a steal is missed, Genji Armor also comes from Chocograph #21; Daguerreo sells Ultima Sword on Disc IV for 14,000 Gil; Black Cat synthesizes Masamune on Disc IV from Zorlin Shape + Orichalcon for 16,000 Gil. GameFAQs lists Genji Armor Need 3 but only two sources and end-inventory #2, so that copy target remains disputed.",
+            detail: "Level 72 is Maliris's enemy stat; the 56,497/59,497 HP reports remain disputed, and reviewed routes set no party-level target. Maliris can use Firaga, physical sword attacks, Reflect, and Mustard Bomb, which causes Heat. Raining Swords hits the whole party as she is defeated, so heal before the final hit. The Phoenix Pinion is the listed guaranteed drop. If a steal is missed, Genji Armor also comes from Chocograph #21; Daguerreo sells Ultima Sword on Disc IV for 14,000 Gil; Black Cat synthesizes Masamune on Disc IV from Zorlin Shape + Orichalcon for 16,000 Gil. GameFAQs lists Genji Armor Need 3 but only two sources and end-inventory #2, so that copy target remains disputed.",
             objectiveIds: ["disc-4.memoria.maliris-steals", "disc-4.memoria.maliris-achievement"],
           },
           {
@@ -6691,7 +6691,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-tiamat-steals",
             kind: "combat",
             text: "Before the Tiamat battle, bring Zidane and equip Wind resistance, Body Temp, and Loudmouth if available. Steal Blood Sword, Feather Boots, and Grand Helm; attack with Ice and use Sleep or Slow to control the fight.",
-            detail: "Tiamat absorbs Wind and can use Float on the party, then counter Float with Snort to remove a character from battle. Do not attack while a character is floating. The boss can also drain stats and MP and use Fire damage that may inflict Heat. Wing Edge is the listed guaranteed drop. This is the last documented Grand Helm steal if the Disc IV recipe cannot be assembled: Black Cat needs Cross Helm + Power Belt, and making a missing Power Belt requires Glass Buckle + Chain Mail. Cross Helm is still sold at Ipsen, but Chain Mail's listed shops end in Disc II, so the fallback requires Chain Mail retained from earlier.",
+            detail: "Level 72 is Tiamat's enemy stat; the 56,497/59,494 HP reports remain disputed, and reviewed routes set no party-level target. Tiamat absorbs Wind and can use Float on the party, then counter Float with Snort to remove a character from battle. Do not attack while a character is floating. The boss can also drain stats and MP and use Fire damage that may inflict Heat. Wing Edge is the listed guaranteed drop. This is the last documented Grand Helm steal if the Disc IV recipe cannot be assembled: Black Cat needs Cross Helm + Power Belt, and making a missing Power Belt requires Glass Buckle + Chain Mail. Cross Helm is still sold at Ipsen, but Chain Mail's listed shops end in Disc II, so the fallback requires Chain Mail retained from earlier.",
             objectiveIds: ["disc-4.memoria.tiamat-steals", "disc-4.memoria.tiamat-achievement"],
           },
           {
@@ -6707,7 +6707,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "memoria-ruins-ocean-and-kraken",
         title: "Ruins and Ocean — Hades, the Master Synthesist, and Kraken",
         summary: "Find the Strong Phantom and optional Hades, then prepare for Kraken's Water attacks and steal table.",
-        sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-frog-catching-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis", "rpgclassics-memoria", "gamefaqs-master-synthesist-71891", "gamefaqs-final-preparations-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamerguides-memoria-kraken", "jegged-memoria-nova-dragon"],
+        sourceIds: ["gamefaqs-memoria-71891", "gamefaqs-items-71891", "gamefaqs-shops-71891", "gamefaqs-frog-catching-71891", "rpgclassics-synthesis", "elitegrindlab-synthesis", "rpgclassics-memoria", "gamefaqs-master-synthesist-71891", "game8-jp-hades", "gamefaqs-final-preparations-71891", "gamefaqs-monster-list-20490", "rpgclassics-kraken-bestiary", "gamerguides-memoria-kraken", "jegged-memoria-nova-dragon"],
         steps: [
           {
             id: "memoria-ruins-checkpoints-09-10",
@@ -6720,7 +6720,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-hades",
             kind: "optional",
             text: "In the underwater Birth room, search behind the large rock formation and keep pressing the interaction button until a voice answers. Save and heal nearby, prepare against Shadow damage and status effects, then agree to fight optional boss Hades.",
-            detail: "There is no field icon. Hades absorbs Shadow and nullifies Earth; use Holy attacks and Slow. Clear Headed, Body Temp, Auto-Haste, Auto-Regen, Auto-Life, and other status protection help. He steals Reflect Ring, Running Shoes, Battle Boots, and Robe of Lords, and drops Wing Edge. GameFAQs says the synthesis shop opens after victory and remains accessible at the same spot; RPGClassics describes a two-Pumice-Piece handoff before access, so verify the interaction in-game. GameFAQs calls Hades the last Running Shoes copy, but its Items and Shops tables list a later Disc IV Black Mage Village recipe: Battle Boots + Emerald for 12,000 Gil. Jegged and EliteGrindLab corroborate the recipe. Treat Hades as the final direct steal opportunity; the item type is recoverable only if the recipe materials remain, and an Emerald may still be needed for Friendly Jabberwock. If you skip the fight now, it remains available during Final Preparations before Kuja.",
+            detail: "There is no field icon. Game8 Japan recommends party Level 60–70 as a single-source optional benchmark and says abilities may compensate for lower levels; its page does not identify platform or build. Level 92 is Hades's enemy stat, as listed by GameFAQs, not a party-level target. Hades absorbs Shadow and nullifies Earth; use Holy attacks and Slow. Clear Headed, Body Temp, Auto-Haste, Auto-Regen, Auto-Life, and other status protection help. He steals Reflect Ring, Running Shoes, Battle Boots, and Robe of Lords, and drops Wing Edge. GameFAQs says the synthesis shop opens after victory and remains accessible at the same spot; RPGClassics describes a two-Pumice-Piece handoff before access, so verify the interaction in-game. GameFAQs calls Hades the last Running Shoes copy, but its Items and Shops tables list a later Disc IV Black Mage Village recipe: Battle Boots + Emerald for 12,000 Gil. Jegged and EliteGrindLab corroborate the recipe. Treat Hades as the final direct steal opportunity; the item type is recoverable only if the recipe materials remain, and an Emerald may still be needed for Friendly Jabberwock. If you skip the fight now, it remains available during Final Preparations before Kuja.",
             objectiveIds: ["disc-4.memoria.hades", "disc-4.memoria.hades-steals", "disc-2.reflect-ring"],
           },
           {
@@ -6741,7 +6741,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-kraken-steals",
             kind: "combat",
             text: "Equip Water protection and Body Temp, bring Zidane, and steal Genji Helmet, Wizard Rod, and Glutton's Robe. Kraken is weak to Lightning and absorbs Water; Slow works.",
-            detail: "Kraken has two separately targetable tentacles. Removing them changes its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. GameFAQs lists a Common Elixir steal for each tentacle; its older monster list and RPGClassics instead list Wing Edge for the Right Tentacle. GameFAQs reports 10,001 HP per tentacle while RPGClassics lists 18,169/18,168. The guides also reverse which side uses Water-gun and Ink, so treat those component details as source-disputed. Phoenix Pinion is the body's listed guaranteed drop. Wizard Rod can be bought later at Black Mage Village's Disc IV Weapon Shop for 3,990 Gil. If Glutton's Robe is missed, Quale can yield it after the 99-frog milestone or Daguerreo can synthesize it for 6,000 Gil; the GameFAQs Items table lists 8,000 Gil, while its Shops table and independent synthesis references list 6,000.",
+            detail: "Level 72 is Kraken's enemy stat; the 55,536/59,496 HP reports remain disputed, and reviewed routes set no party-level target. Kraken has two separately targetable tentacles. Removing them changes its attack options, but Lightning that hits the body and both tentacles can trigger a Waterga counter. GameFAQs lists a Common Elixir steal for each tentacle; its older monster list and RPGClassics instead list Wing Edge for the Right Tentacle. GameFAQs reports 10,001 HP per tentacle while RPGClassics lists 18,169/18,168. The guides also reverse which side uses Water-gun and Ink, so treat those component details as source-disputed. Phoenix Pinion is the body's listed guaranteed drop. Wizard Rod can be bought later at Black Mage Village's Disc IV Weapon Shop for 3,990 Gil. If Glutton's Robe is missed, Quale can yield it after the 99-frog milestone or Daguerreo can synthesize it for 6,000 Gil; the GameFAQs Items table lists 8,000 Gil, while its Shops table and independent synthesis references list 6,000.",
             objectiveIds: ["disc-4.memoria.kraken-steals", "disc-4.memoria.kraken-achievement"],
           },
           {
@@ -6784,7 +6784,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-lich-steals",
             kind: "combat",
             text: "Before Lich, bring Zidane, remove anyone whose level is divisible by five if possible, and equip Earth protection, Antibody, Locomotion, and Devil Killer. Steal Genji Gloves, Siren's Flute, and Black Robe; attack with Fire, Wind, or Holy and apply Slow.",
-            detail: "Lich absorbs Earth and resists Shadow. LV5 Death KOs characters whose levels are multiples of five; other threats include Death, Stop, Doom, Venom, and Earth attacks. Do not cast Doomsday, which Lich absorbs. Phoenix Pinion is the listed guaranteed drop. If a steal is missed, unclaimed Dead Pepper Dive Spot #1 yields Genji Gloves and Black Robe; Black Mage Village sells Siren's Flute on Disc IV for 7,000 Gil, and Daguerreo synthesizes Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil. GameFAQs lists Genji Gloves Need 3 despite listing Dive Spot #1 and Lich as its sources and end-inventory #2, so the target remains unresolved. These routes do not recover Lich's steal copies.",
+            detail: "Level 71 is Lich's enemy stat, not a party-level target. Lich absorbs Earth and resists Shadow. LV5 Death KOs characters whose levels are multiples of five; other threats include Death, Stop, Doom, Venom, and Earth attacks. Do not cast Doomsday, which Lich absorbs. Phoenix Pinion is the listed guaranteed drop. If a steal is missed, unclaimed Dead Pepper Dive Spot #1 yields Genji Gloves and Black Robe; Black Mage Village sells Siren's Flute on Disc IV for 7,000 Gil, and Daguerreo synthesizes Black Robe from Gaia Gear + N-Kai Armlet for 8,000 Gil. GameFAQs lists Genji Gloves Need 3 despite listing Dive Spot #1 and Lich as its sources and end-inventory #2, so the target remains unresolved. These routes do not recover Lich's steal copies.",
             objectiveIds: ["disc-4.memoria.lich-steals", "disc-4.memoria.lich-achievement"],
           },
           {
@@ -6813,7 +6813,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "memoria-deathguise-preparation",
             kind: "save",
             text: "At the Crystal World save point, save, heal, select the final party, and equip Wind protection. Bring Zidane for steals; Eiko is a strong healer, while Vivi or Quina add magic and Blue Magic options. Avoid bringing a character at a level divisible by five unless protected against LV5 Death.",
-            detail: "Auto-Haste, Auto-Regen, Auto-Life, Devil Killer, and other non-status defenses help. No shop or party menu appears between the portal and Deathguise, so finish all setup here. Earlier Memoria pickups, Phantoms, and Hades remain reachable during Final Preparations after the battle, before starting the final fight.",
+            detail: "Level 74 is Deathguise's enemy stat, not a party target; the reviewed routes set no grinding target. Auto-Haste, Auto-Regen, Auto-Life, Devil Killer, and other non-status defenses help. No shop or party menu appears between the portal and Deathguise, so finish all setup here. Earlier Memoria pickups, Phantoms, and Hades remain reachable during Final Preparations after the battle, before starting the final fight.",
           },
           {
             id: "memoria-deathguise-steals",
@@ -6974,7 +6974,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "final-battle-final-save",
             kind: "save",
             text: "Save at the Crystal World orb, heal, and confirm the final party. If you are collecting Trance Kuja's steal table, include Zidane. Remove Auto-Reflect; protect against Holy, and protect against Shadow only if you plan to use Doomsday.",
-            detail: "A well-prepared offensive group such as Zidane, Dagger, Vivi, and Steiner is one option. Man Eater can boost damage against Kuja. Once you run toward him, the final sequence begins; there is no return to the save point after the boss battles.",
+            detail: "Level 76 is Trance Kuja's enemy stat, not a party target; HP reports differ by one point. A well-prepared offensive group such as Zidane, Dagger, Vivi, and Steiner is one option. Man Eater can boost damage against Kuja. Once you run toward him, the final sequence begins; there is no return to the save point after the boss battles.",
             objectiveIds: ["disc-4.final-preparations.final-audit", "disc-4.final-preparations.hammer-ending"],
           },
         ],
@@ -7011,7 +7011,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "final-battle-necron-loadout",
             kind: "save",
             text: "Choose your four for the last battle and equip the strongest status protection available. Add Fire, Ice, Lightning, and Holy resistance, Auto-Haste/Auto-Regen where available, and a healer plus group recovery such as Quina's Angel's Snack.",
-            detail: "A defensive party with Eiko and Quina is useful if they have their healing abilities; fill the remaining slots with your prepared attackers. Keep Remedies, Magic Tags, Phoenix Down, and healing items available. Zombie is not cured by Remedy, Esuna, or Angel's Snack; use a Magic Tag. Leaving this menu starts Necron.",
+            detail: "Level 69 is Necron's enemy stat, not a party target. A defensive party with Eiko and Quina is useful if they have their healing abilities; fill the remaining slots with your prepared attackers. Keep Remedies, Magic Tags, Phoenix Down, and healing items available. Zombie is not cured by Remedy, Esuna, or Angel's Snack; use a Magic Tag. Leaving this menu starts Necron.",
           },
         ],
       },

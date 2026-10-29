@@ -10972,6 +10972,57 @@ for (const value of [54941, 54940]) {
     errors.push(`Nova Dragon HP ${value} must remain marked as a disputed source report.`);
   }
 }
+const remainingBossPreparationExpectations = [
+  { enemyId: "enemy.maliris", encounterId: "encounter.memoria.maliris", level: 72, stepId: "memoria-maliris-steals", setup: "Fire resistance or absorption and Body Temp", sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"] },
+  { enemyId: "enemy.tiamat-memoria", encounterId: "encounter.memoria.tiamat", level: 72, stepId: "memoria-tiamat-steals", setup: "do not attack a floating character", sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"] },
+  { enemyId: "enemy.hades", encounterId: "encounter.memoria.hades", level: 92, stepId: "memoria-hades", setup: "nullifies or absorbs Shadow", sources: ["gamefaqs-master-synthesist-71891"] },
+  { enemyId: "enemy.kraken-memoria", encounterId: "encounter.memoria.kraken", level: 72, stepId: "memoria-kraken-steals", setup: "Avoid Lightning that strikes the body and both tentacles", sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken"] },
+  { enemyId: "enemy.lich-memoria", encounterId: "encounter.memoria.lich", level: 71, stepId: "memoria-lich-steals", setup: "Locomotion, Antibody, Devil Killer", sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"] },
+  { enemyId: "enemy.deathguise", encounterId: "encounter.memoria.deathguise", level: 74, stepId: "memoria-deathguise-preparation", setup: "Wind protection and keep HP high after the opening Meteor", sources: ["gamefaqs-memoria-71891", "jegged-crystal-world"] },
+  { enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", level: 76, stepId: "final-battle-final-save", setup: "remove Auto-Reflect to avoid provoking Flare Star", sources: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"] },
+  { enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", level: 69, stepId: "final-battle-necron-loadout", setup: "Magic Tag cures Zombie", sources: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"] },
+];
+for (const expected of remainingBossPreparationExpectations) {
+  const enemy = enemyRecords.find((entry) => entry.id === expected.enemyId);
+  const encounter = enemyEncounters.find((entry) => entry.id === expected.encounterId);
+  const preparation = enemy?.preparationGuidance;
+  const step = walkthroughChapters.find((chapter) => chapter.areaId === enemy?.chapterId)
+    ?.sections.flatMap((section) => section.steps).find((entry) => entry.id === expected.stepId);
+  if (!enemy || enemy.kind !== "boss" || !encounter || encounter.kind !== "boss" ||
+    !encounter.formation.some((member) => member.enemyId === expected.enemyId && member.quantity === 1) ||
+    !preparation || preparation.suggestedLevelRange !== undefined ||
+    !enemy.stats.some((claim) => claim.field === "level" && claim.value === expected.level) ||
+    !preparation.levelRationale.includes(`Level ${expected.level}`) || !preparation.levelRationale.includes("enemy stat") ||
+    !preparation.optionalGrinding.includes("party-level target") || !preparation.setupAdvice.includes(expected.setup) ||
+    !step || !`${step.text} ${step.detail ?? ""}`.includes(`Level ${expected.level} is`) ||
+    expected.sources.some((sourceId) => !preparation.sourceIds.includes(sourceId) || !enemy.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+    errors.push(`${expected.enemyId} preparation must link its exact encounter, enemy-level distinction, route step, setup guidance, and source provenance.`);
+  }
+}
+const hadesOptionalLevel = enemyRecords.find((entry) => entry.id === "enemy.hades")?.preparationGuidance;
+if (!hadesOptionalLevel?.levelRationale.includes("optional party Level 60–70 benchmark") ||
+  !hadesOptionalLevel.levelRationale.includes("platform or build") ||
+  !hadesOptionalLevel.sourceIds.includes("game8-jp-hades") ||
+  !sources.some((entry) => entry.id === "game8-jp-hades" && entry.notes.includes("single-source benchmark"))) {
+  errors.push("Hades's Game8 Japan party Level 60–70 advice must remain an optional, platform-unspecified single-source benchmark.");
+}
+const deathguisePreparation = enemyRecords.find((entry) => entry.id === "enemy.deathguise")?.preparationGuidance;
+if (!deathguisePreparation?.sourceIds.includes("rpgclassics-memoria") || !sourceIds.has("rpgclassics-memoria")) {
+  errors.push("Deathguise's optional Auto-Haste, Auto-Regen, Auto-Life, and Devil Killer advice must link to the RPGClassics preparation source.");
+}
+for (const [enemyId, values] of [
+  ["enemy.maliris", [56497, 59497]],
+  ["enemy.tiamat-memoria", [56497, 59494]],
+  ["enemy.kraken-memoria", [55536, 59496]],
+  ["enemy.trance-kuja", [55536, 55535]],
+]) {
+  const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+  for (const value of values) {
+    if (enemy?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification !== "disputed") {
+      errors.push(`${enemyId} HP ${value} must remain marked as a disputed source report.`);
+    }
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

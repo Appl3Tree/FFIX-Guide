@@ -465,6 +465,65 @@ test("Nova Dragon preparation protects the one-time steal attempt without invent
   }
 });
 
+test("Memoria and final-boss preparation covers every remaining boss without flattening Hades's benchmark", () => {
+  const cases = [
+    { enemyId: "enemy.maliris", encounterId: "encounter.memoria.maliris", chapterId: "disc-4.memoria", level: 72, stepId: "memoria-maliris-steals", setup: /Fire resistance or absorption and Body Temp/, sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"] },
+    { enemyId: "enemy.tiamat-memoria", encounterId: "encounter.memoria.tiamat", chapterId: "disc-4.memoria", level: 72, stepId: "memoria-tiamat-steals", setup: /do not attack a floating character/, sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"] },
+    { enemyId: "enemy.hades", encounterId: "encounter.memoria.hades", chapterId: "disc-4.memoria", level: 92, stepId: "memoria-hades", setup: /nullifies or absorbs Shadow/, sources: ["gamefaqs-master-synthesist-71891"] },
+    { enemyId: "enemy.kraken-memoria", encounterId: "encounter.memoria.kraken", chapterId: "disc-4.memoria", level: 72, stepId: "memoria-kraken-steals", setup: /Avoid Lightning that strikes the body and both tentacles/, sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon", "gamerguides-memoria-kraken"] },
+    { enemyId: "enemy.lich-memoria", encounterId: "encounter.memoria.lich", chapterId: "disc-4.memoria", level: 71, stepId: "memoria-lich-steals", setup: /Locomotion, Antibody, Devil Killer/, sources: ["gamefaqs-memoria-71891", "jegged-memoria-nova-dragon"] },
+    { enemyId: "enemy.deathguise", encounterId: "encounter.memoria.deathguise", chapterId: "disc-4.memoria", level: 74, stepId: "memoria-deathguise-preparation", setup: /Wind protection and keep HP high after the opening Meteor/, sources: ["gamefaqs-memoria-71891", "jegged-crystal-world"] },
+    { enemyId: "enemy.trance-kuja", encounterId: "encounter.final-battle.trance-kuja", chapterId: "disc-4.the-final-battle", level: 76, stepId: "final-battle-final-save", setup: /remove Auto-Reflect to avoid provoking Flare Star/, sources: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"] },
+    { enemyId: "enemy.necron", encounterId: "encounter.final-battle.necron", chapterId: "disc-4.the-final-battle", level: 69, stepId: "final-battle-necron-loadout", setup: /Magic Tag cures Zombie/, sources: ["gamefaqs-the-final-battle-71891", "jegged-kuja-necron-final-showdown", "rpgclassics-memoria"] },
+  ];
+
+  for (const entry of cases) {
+    const enemy = enemyRecords.find((candidate) => candidate.id === entry.enemyId);
+    const encounter = enemyEncounters.find((candidate) => candidate.id === entry.encounterId);
+    const chapter = walkthroughChapters.find((candidate) => candidate.areaId === entry.chapterId);
+    const step = chapter?.sections.flatMap((section) => section.steps).find((candidate) => candidate.id === entry.stepId);
+    const guidance = enemy?.preparationGuidance;
+
+    assert.ok(enemy, `missing ${entry.enemyId}`);
+    assert.ok(encounter, `missing ${entry.encounterId}`);
+    assert.ok(guidance, `${entry.enemyId} needs preparation guidance`);
+    assert.ok(encounter.formation.some((member) => member.enemyId === entry.enemyId && member.quantity === 1));
+    assert.equal(enemy.stats.find((claim) => claim.field === "level")?.value, entry.level);
+    assert.equal(guidance.suggestedLevelRange, undefined);
+    assert.match(guidance.levelRationale, new RegExp(`Level ${entry.level}.*enemy stat`));
+    assert.match(guidance.optionalGrinding, /party-level target/);
+    assert.match(guidance.setupAdvice, entry.setup);
+    assert.ok(step, `missing walkthrough preparation step ${entry.stepId}`);
+    assert.match(`${step.text} ${step.detail ?? ""}`, new RegExp(`Level ${entry.level} is .*enemy stat`));
+    for (const sourceId of entry.sources) {
+      assert.ok(guidance.sourceIds.includes(sourceId), `${entry.enemyId} guidance omits ${sourceId}`);
+      assert.ok(enemy.sourceIds.includes(sourceId), `${entry.enemyId} record omits ${sourceId}`);
+      assert.ok(sources.some((source) => source.id === sourceId), `missing source ${sourceId}`);
+    }
+  }
+
+  const hades = enemyRecords.find((entry) => entry.id === "enemy.hades");
+  assert.equal(hades?.preparationGuidance?.suggestedLevelRange, undefined);
+  assert.match(hades?.preparationGuidance?.levelRationale ?? "", /optional party Level 60–70 benchmark/);
+  assert.match(hades?.preparationGuidance?.levelRationale ?? "", /platform or build/);
+  assert.ok(hades?.preparationGuidance?.sourceIds.includes("game8-jp-hades"));
+  assert.ok(walkthroughChapters.find((entry) => entry.areaId === "disc-4.memoria")?.sections
+    .find((section) => section.id === "memoria-ruins-ocean-and-kraken")?.sourceIds.includes("game8-jp-hades"));
+  assert.ok(enemyRecords.find((entry) => entry.id === "enemy.deathguise")?.preparationGuidance?.sourceIds.includes("rpgclassics-memoria"));
+  assert.ok(walkthroughChapters.find((entry) => entry.areaId === "disc-4.memoria")?.sections
+    .find((section) => section.id === "memoria-crystal-world-and-deathguise")?.sourceIds.includes("rpgclassics-memoria"));
+  assert.match(sources.find((entry) => entry.id === "game8-jp-hades")?.notes ?? "", /single-source benchmark/);
+  for (const [enemyId, values] of [
+    ["enemy.maliris", [56497, 59497]],
+    ["enemy.tiamat-memoria", [56497, 59494]],
+    ["enemy.kraken-memoria", [55536, 59496]],
+    ["enemy.trance-kuja", [55536, 55535]],
+  ]) {
+    const enemy = enemyRecords.find((entry) => entry.id === enemyId);
+    for (const value of values) assert.equal(enemy?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification, "disputed");
+  }
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;
