@@ -10842,6 +10842,24 @@ if (!novaDragonSynthesisRecovery || novaDragonSynthesisRecovery.itemId !== "game
 const amdusiasRecord = enemyRecords.find((enemy) => enemy.id === "enemy.amdusias-fixed");
 const amdusiasPreparation = amdusiasRecord?.preparationGuidance;
 const amdusiasEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.fixed-amdusias");
+const pandemoniumPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-mind-control");
+const pandemoniumChapterPreparation = pandemoniumPreparationSection?.preparationGuidance;
+const pandemoniumPreparationSources = ["gamefaqs-portal-to-another-world-71891", "gamefaqs-perfect-game-41181"];
+if (!pandemoniumChapterPreparation || pandemoniumChapterPreparation.suggestedLevelRange !== undefined ||
+  !pandemoniumChapterPreparation.levelRationale.includes("no numeric party-level target") ||
+  !pandemoniumChapterPreparation.difficultyAssessment?.includes("no common difficulty rating") ||
+  !pandemoniumChapterPreparation.optionalGrinding.includes("zero random encounters") ||
+  !pandemoniumChapterPreparation.optionalGrinding.includes("three forced EXP fights") ||
+  !pandemoniumChapterPreparation.setupAdvice.includes("without a chance to change gear") ||
+  !pandemoniumChapterPreparation.setupAdvice.includes("Zidane starts alone against Amdusias") ||
+  !pandemoniumChapterPreparation.setupAdvice.includes("Steiner and Quina start against Abadon") ||
+  !pandemoniumChapterPreparation.setupAdvice.includes("Zidane starts alone against Shell Dragon") ||
+  !pandemoniumChapterPreparation.setupAdvice.includes("leave Auto-Float off") ||
+  pandemoniumPreparationSources.some((sourceId) => !pandemoniumChapterPreparation.sourceIds.includes(sourceId) ||
+    !pandemoniumPreparationSection.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Pandemonium chapter preparation must preserve the three fixed party openings, no unsupported level/difficulty benchmark, and its separate zero-random-encounter Excalibur II plan.");
+}
 const amdusiasBranBalPrepStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
   ?.sections.find((section) => section.id === "portal-bran-bal-ates-gate")
   ?.steps.find((step) => step.id === "portal-bran-bal-final-sweep");

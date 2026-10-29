@@ -110,6 +110,25 @@ test("Terra entry preparation keeps party advice separate from the Excalibur II 
   assert.ok(section.steps.some((step) => step.id === "portal-to-terra-entry" && step.objectiveIds?.includes("disc-3.portal-to-another-world.party-and-gate")));
 });
 
+test("Pandemonium preparation covers the consecutive fixed party splits without inventing a level target", () => {
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+    ?.sections.find((entry) => entry.id === "portal-pandemonium-mind-control");
+  const guidance = section?.preparationGuidance;
+
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.equal(guidance.confidence, "partial");
+  assert.match(guidance.levelRationale, /no numeric party-level target/i);
+  assert.match(guidance.difficultyAssessment, /no common difficulty rating/i);
+  assert.match(guidance.optionalGrinding, /zero random encounters.*three forced EXP fights/i);
+  assert.match(guidance.setupAdvice, /Zidane starts alone against Amdusias.*Steiner and Quina start against Abadon.*Zidane starts alone against Shell Dragon/i);
+  assert.match(guidance.setupAdvice, /without a chance to change gear/i);
+  assert.match(guidance.setupAdvice, /leave Auto-Float off/i);
+  assert.ok(guidance.sourceIds.every((sourceId) => section.sourceIds.includes(sourceId)));
+  assert.ok(guidance.sourceIds.includes("gamefaqs-perfect-game-41181"));
+});
+
 test("Alexandria Inn's Disc IV fallback is limited to a first-entry report", () => {
   const sourceId = "steam-tetra-endgame-opponents-687154254";
   const objective = objectives.find((entry) => entry.id === "disc-3.on-the-high-seas.alexandria-first-visit-card-players");

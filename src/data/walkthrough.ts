@@ -6040,7 +6040,15 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-pandemonium-mind-control",
         title: "Pandemonium — survive the forced party-split battles",
         summary: "Three story fights use fixed, changing party groups. The full party reunites afterward in the Hall, where Moorock returns and can provide his letter if Bran Bal was skipped.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-pandemonium-29957", "gamefaqs-shops-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium", "cour89-pandemonium", "cour89-mognet-letters", "game8-zorlin-shape", "rpgclassics-shops", "ffwiki-shops", "ff9-irodori-shops"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-perfect-game-41181", "gamefaqs-pandemonium-29957", "gamefaqs-shops-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium", "cour89-pandemonium", "cour89-mognet-letters", "game8-zorlin-shape", "rpgclassics-shops", "ffwiki-shops", "ff9-irodori-shops"],
+        preparationGuidance: {
+          levelRationale: "The reviewed story route gives no numeric party-level target before Pandemonium. The listed enemy levels describe the fixed bosses, not a recommended level for the party.",
+          difficultyAssessment: "The route gives tactics, including one subjective comment that Amdusias is not especially strong, but provides no common difficulty rating for the full three-fight sequence.",
+          optionalGrinding: "No standard-route grinding is recommended for this checkpoint; the story triggers three fixed fights back-to-back. The separate PlayStation Excalibur II D3-12 route budgets zero random encounters but plans around all three forced EXP fights using its selected stats path.",
+          setupAdvice: "Before crossing Bran Bal's green gate, rest and save with Moorock, then finish equipment and ability changes; the three fixed fights run back-to-back without a chance to change gear. Prepare characters who will enter the forced groups even if they are outside your chosen field party: Zidane starts alone against Amdusias before Freya and Amarant join, Steiner and Quina start against Abadon before Zidane joins after the second enemy turn, then Zidane starts alone against Shell Dragon before Dagger joins. Keep healing ready for Abadon's High Wind and Shell Dragon's Smash, which can leave a character at 1 HP. Use Float or Earth-absorbing Feather Boots against Shell Dragon's Earth Shake; if using Feather Boots for absorption, leave Auto-Float off.",
+          confidence: "partial",
+          sourceIds: ["gamefaqs-portal-to-another-world-71891", "gamefaqs-perfect-game-41181", "jegged-pandemonium", "elitegrindlab-pandemonium"],
+        },
         steps: [
           {
             id: "portal-pandemonium-amdusias",
