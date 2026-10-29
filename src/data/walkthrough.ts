@@ -6129,7 +6129,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-pandemonium-boss-prep",
             kind: "save",
             text: "Before entering the next room, save with Mozme, use a Tent, finalize your party, and equip Wind and Lightning protection plus Locomotion where available.",
-            detail: "The Silver Dragon, Garland, and Kuja fights follow one another without a shop or equipment break. Keep Auto-Reflect off for Kuja; he counters Reflect with Flare Star. The route allows a party choice, so use your strongest prepared team.",
+            detail: "The Silver Dragon, Garland, and Kuja fights follow one another without a shop or equipment break. The route allows a party choice, so use your strongest prepared team; Flactem's sample is Zidane, Freya, and Eiko, while GameFAQs suggests roles based on your most developed characters. Set Zidane's Bandit/Master Thief and Dragon Killer where available. Flactem lists Auto-Reflect, but GameFAQs and Jegged warn Reflect triggers Kuja's Flare Star, so leave Auto-Reflect off for the whole sequence.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-climax"],
           },
         ],
@@ -6138,13 +6138,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "portal-pandemonium-final-bosses",
         title: "Silver Dragon, Garland, and Kuja — consecutive boss battles",
         summary: "Attempt each encounter's steals before victory. Protect the party from wind, Stop, and Kuja's magic, then continue after the scripted finale.",
-        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"],
+        sourceIds: ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"],
         steps: [
           {
             id: "portal-pandemonium-silver-dragon",
             kind: "combat",
             text: "During Silver Dragon's fight, attempt to steal Elixir, Dragon Mail, and Kaiser Knuckles before defeating it. Wind resistance reduces its dangerous wind attacks; status skills can help create time for steals.",
-            detail: "The sources agree on the steal table but publish conflicting HP figures. Silver Dragon also always drops Wing Edge after the battle. No exact HP or fixed level is needed for this route.",
+            detail: "The sources agree on the steal table but publish conflicting HP figures. Silver Dragon also always drops Wing Edge after the battle. Level 58 is the enemy stat, not a party-level target; no party-level recommendation is inferred.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-boss-steals", "disc-3.portal-to-another-world.pandemonium-climax"],
           },
           {

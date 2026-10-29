@@ -308,6 +308,48 @@ test("fixed Shell Dragon does not claim Quina's Earth Shake Eat opportunity", ()
   assert.match(blueMagicStep?.detail ?? "", /fixed Shell Dragon story fights are not/);
 });
 
+test("Silver Dragon preparation separates its Level 58 stat from party level and covers the whole sequence", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.silver-dragon");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.pandemonium.silver-dragon");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.portal-to-another-world");
+  const prepSection = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-maze-treasures");
+  const bossSection = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-final-bosses");
+  const prepStep = prepSection?.steps.find((entry) => entry.id === "portal-pandemonium-boss-prep");
+  const fightStep = bossSection?.steps.find((entry) => entry.id === "portal-pandemonium-silver-dragon");
+  const guidance = enemy?.preparationGuidance;
+  const sourceIds = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+
+  assert.ok(enemy);
+  assert.ok(encounter);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 58);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 58 as Silver Dragon's enemy stat/);
+  assert.match(guidance.levelRationale, /neither sets a party-level target/);
+  assert.match(guidance.optionalGrinding, /No reviewed route sets a Silver Dragon party-level or grinding target/);
+  assert.match(guidance.setupAdvice, /At Mozme, save, use a Tent, select the party/);
+  assert.match(guidance.setupAdvice, /Wind resistance reduces Twister and Aerial Slash/);
+  assert.match(guidance.setupAdvice, /Locomotion protects against Garland's Stop/);
+  assert.match(guidance.setupAdvice, /Give Zidane Bandit and Master Thief/);
+  assert.match(guidance.setupAdvice, /Freya's Dragon Killer and Reis's Wind/);
+  assert.match(guidance.setupAdvice, /Do not equip Auto-Reflect/);
+  assert.match(guidance.setupAdvice, /Flactem lists Auto-Reflect among its general setup suggestions/);
+  assert.match(guidance.setupAdvice, /Silence, Darkness\/Blind, Sleep, and Slow/);
+  assert.match(guidance.setupAdvice, /weak to Ice and Wind and nullifies Earth/);
+  for (const [value, sourceId] of [[24056, sourceIds[0]], [24055, sourceIds[1]], [34055, sourceIds[2]]]) {
+    assert.equal(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.verification, "disputed");
+    assert.ok(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.sourceIds.includes(sourceId));
+  }
+  assert.ok(encounter.sourceIds.includes("flactem-pandemonium"));
+  assert.match(prepStep?.detail ?? "", /leave Auto-Reflect off for the whole sequence/);
+  assert.match(fightStep?.detail ?? "", /Level 58 is the enemy stat, not a party-level target/);
+  for (const sourceId of sourceIds) {
+    assert.ok(guidance.sourceIds.includes(sourceId));
+    assert.ok(enemy.sourceIds.includes(sourceId));
+    assert.ok(sources.some((source) => source.id === sourceId));
+  }
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

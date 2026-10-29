@@ -10867,6 +10867,36 @@ for (const value of [10921, 12500, 20921]) {
     errors.push(`Fixed Shell Dragon HP ${value} must remain a source-scoped disputed report.`);
   }
 }
+const silverDragonRecord = enemyRecords.find((enemy) => enemy.id === "enemy.silver-dragon");
+const silverDragonPreparation = silverDragonRecord?.preparationGuidance;
+const silverDragonEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.silver-dragon");
+const silverDragonPrepStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-maze-treasures")
+  ?.steps.find((step) => step.id === "portal-pandemonium-boss-prep");
+const silverDragonFightStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-final-bosses")
+  ?.steps.find((step) => step.id === "portal-pandemonium-silver-dragon");
+const silverDragonPrepSources = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+if (!silverDragonRecord || silverDragonRecord.kind !== "boss" || !silverDragonEncounter || silverDragonEncounter.kind !== "boss" ||
+  !silverDragonEncounter.formation.some((member) => member.enemyId === "enemy.silver-dragon" && member.quantity === 1) ||
+  !silverDragonPreparation || silverDragonPreparation.suggestedLevelRange !== undefined ||
+  !silverDragonPreparation.levelRationale.includes("Level 58 as Silver Dragon's enemy stat") ||
+  !silverDragonPreparation.levelRationale.includes("neither sets a party-level target") ||
+  !silverDragonPreparation.optionalGrinding.includes("No reviewed route sets a Silver Dragon party-level or grinding target") ||
+  !silverDragonPreparation.setupAdvice.includes("Locomotion protects against Garland's Stop") ||
+  !silverDragonPreparation.setupAdvice.includes("Give Zidane Bandit and Master Thief") ||
+  !silverDragonPreparation.setupAdvice.includes("Do not equip Auto-Reflect") ||
+  !silverDragonPreparation.setupAdvice.includes("Flactem lists Auto-Reflect") ||
+  !silverDragonPrepStep?.detail.includes("leave Auto-Reflect off for the whole sequence") ||
+  !silverDragonFightStep?.detail.includes("Level 58 is the enemy stat, not a party-level target") ||
+  silverDragonPrepSources.some((sourceId) => !silverDragonPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Silver Dragon preparation must distinguish its Level 58 enemy stat from party level and preserve sourced wind/status counterplay, no-Auto-Reflect Kuja warning, and source-specific HP reports.");
+}
+for (const value of [24056, 24055, 34055]) {
+  if (silverDragonRecord?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification !== "disputed") {
+    errors.push(`Silver Dragon HP ${value} must remain marked as a disputed source report.`);
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");
