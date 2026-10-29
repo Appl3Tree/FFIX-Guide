@@ -4824,6 +4824,24 @@ if (!maskedManPreparation || maskedManPreparation.suggestedLevelRange !== undefi
   !maskedManPreparationStep?.text.includes("no party-level target") || !maskedManPreparationStep?.detail.includes("older FAQ lists 160")) {
   errors.push("Opening Masked Man preparation must separate the enemy's Level 1 stat from party guidance and connect the steals, scripted opener, and disputed HP to the route.");
 }
+const crashSiteBakuPreparation = crashSiteBakuRecord?.preparationGuidance;
+const crashSiteBakuSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.evil-forest")
+  ?.sections.find((section) => section.id === "prima-vista-wreckage");
+const crashSiteBakuPreparationStep = crashSiteBakuSection?.steps.find((step) => step.id === "baku-wreckage-fight");
+if (!crashSiteBakuPreparation || crashSiteBakuPreparation.suggestedLevelRange !== undefined ||
+  !crashSiteBakuPreparation.levelRationale.includes("Level 2 is Baku's enemy stat") ||
+  !crashSiteBakuPreparation.levelRationale.includes("no party-level recommendation") ||
+  !crashSiteBakuPreparation.optionalGrinding.includes("0 EXP, AP, and Gil") ||
+  !crashSiteBakuPreparation.setupAdvice.includes("Mage Masher") ||
+  !crashSiteBakuPreparation.setupAdvice.includes("60 HP") ||
+  !crashSiteBakuPreparation.setupAdvice.includes("no Fire caster") ||
+  !crashSiteBakuPreparation.sourceIds.includes("jegged-evil-forest") ||
+  crashSiteBakuPreparation.sourceIds.some((sourceId) => !sourceIds.has(sourceId)) ||
+  !crashSiteBakuSection?.sourceIds.includes("jegged-evil-forest") ||
+  !crashSiteBakuPreparationStep?.detail.includes("older FAQ estimates about 160") ||
+  !crashSiteBakuPreparationStep.detail.includes("Jegged reports Rare at 6%")) {
+  errors.push("Crash Site Baku preparation must separate his enemy Level 2 from party guidance and preserve the solo setup, recovery, HP dispute, and source-specific steal reports.");
+}
 for (const [enemyId, itemId, slot, chapterId, objectiveId] of [
   ["enemy.masked-man-opening", "game-item.potion", "common", "disc-1.alexandria", "disc-1.alexandria.masked-man-steals"],
   ["enemy.masked-man-opening", "game-item.wrist", "uncommon", "disc-1.alexandria", "disc-1.alexandria.masked-man-steals"],

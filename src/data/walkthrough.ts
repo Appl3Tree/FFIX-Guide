@@ -318,8 +318,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "baku-wreckage-fight",
             kind: "combat",
-            text: "Fight Baku alone as Zidane. Steal the Hi-Potion and Iron Sword before defeating him; the Iron Sword is a strong early option for Steiner. Heal with Potions if needed.",
-            detail: "Published odds for the Iron Sword differ, so no fixed attempt count is promised. The item can be obtained through other routes later; the boss encounter itself cannot be replayed after it ends.",
+            text: "Fight Baku alone as Zidane. Steal the Hi-Potion and Iron Sword before defeating him; the Iron Sword is a strong early option for Steiner. Heal with a Potion before Zidane falls below roughly 60 HP.",
+            detail: "Level 2 is Baku's enemy stat, not a party target; the reviewed normal routes give no recommended party level. GameFAQs/Jegged list 202 HP, while an older FAQ estimates about 160. Physical attacks average roughly 25–35 damage and Baku may trip or miss a turn. GameFAQs, RPGClassics, and VGKAMI label Iron Sword Uncommon, while Jegged reports Rare at 6% per connected attempt; no fixed steal count is guaranteed. The Iron Sword is useful for Steiner, but its item type has later recovery. Baku awards 0 EXP, AP, and Gil.",
             objectiveIds: ["disc-1.evil-forest.baku-steals"],
           },
           {

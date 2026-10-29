@@ -403,6 +403,37 @@ test("Opening Masked Man preparation covers the forced tutorial and source-backe
   assert.match(stealStep?.text ?? "", /all four characters can attempt steals/);
 });
 
+test("Crash Site Baku preparation keeps the solo duel, level guidance, and steal conflicts scoped", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.baku-crash-site");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-evil-forest-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-evil-forest");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-1.evil-forest")
+    ?.sections.find((entry) => entry.id === "prima-vista-wreckage");
+  const fightStep = section?.steps.find((entry) => entry.id === "baku-wreckage-fight");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 2);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 2 is Baku's enemy stat/);
+  assert.match(guidance.levelRationale, /no party-level recommendation/);
+  assert.match(guidance.levelRationale, /Plant Brain, not Baku/);
+  assert.match(guidance.optionalGrinding, /0 EXP, AP, and Gil/);
+  assert.match(guidance.setupAdvice, /Potion from the chest/);
+  assert.match(guidance.setupAdvice, /Mage Masher/);
+  assert.match(guidance.setupAdvice, /60 HP/);
+  assert.match(guidance.setupAdvice, /no Fire caster/);
+  assert.ok(["gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamefaqs-walkthrough-15690"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /solo Zidane/);
+  assert.match(jegged?.notes ?? "", /Rare Iron Sword \(6%\) per connected steal attempt/);
+  assert.match(fightStep?.text ?? "", /Fight Baku alone as Zidane/);
+  assert.match(fightStep?.detail ?? "", /Level 2 is Baku's enemy stat, not a party target/);
+  assert.match(fightStep?.detail ?? "", /older FAQ estimates about 160/);
+  assert.match(fightStep?.detail ?? "", /Jegged reports Rare at 6%/);
+});
+
 test("Prison Cage preparation prioritizes captive survival across the back-to-back forms", () => {
   const garnetEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-garnet");
   const viviEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-vivi");

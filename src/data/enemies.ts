@@ -220,7 +220,7 @@ const prisonCageViviStealSources = [...evilForestBossSources, "opatil-steal-list
 const plantBrainEyeDropsStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"];
 const plantBrainIronHelmStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "gamerguides-evil-forest"];
 const maskedManSources = ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "jegged-prima-vista", "rpgclassics-primavista", "gamefaqs-walkthrough-15690"];
-const crashSiteBakuSources = ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest", "gamefaqs-walkthrough-15690"];
+const crashSiteBakuSources = ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "rpgclassics-bestiary-a-c", "vgkami-evil-forest", "gamefaqs-walkthrough-15690"];
 const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"];
 const iceCavernSealionSources = [...iceCavernBossSources, "gamefaqs-ice-cavern-79143", "kamigame-ice-cavern-boss"];
@@ -4805,8 +4805,8 @@ const evilForestEnemyRecords: EnemyRecord[] = [
     name: "Baku (Prima Vista Crash Site)",
     encounterIds: ["encounter.evil-forest.baku-crash-site"],
     stats: [
-      ...crossCheckedStats([["level", 2], ["MP", 1285], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c"]),
-      { field: "HP", value: 202, sourceIds: ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest"], verification: "disputed" },
+      ...crossCheckedStats([["level", 2], ["MP", 1285], ["EXP", 0], ["AP", 0], ["Gil", 0]], ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "rpgclassics-bestiary-a-c"]),
+      { field: "HP", value: 202, sourceIds: ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "rpgclassics-bestiary-a-c", "vgkami-evil-forest"], verification: "disputed" },
       { field: "HP", value: 160, sourceIds: ["gamefaqs-walkthrough-15690"], verification: "disputed" },
     ],
     steals: [
@@ -4826,18 +4826,27 @@ const evilForestEnemyRecords: EnemyRecord[] = [
       sourcedFact("elemental-weakness", "Fire", ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c"]),
       sourcedFact("elemental-resistance", "None listed", ["gamefaqs-evil-forest-71891"]),
       sourcedFact("status-vulnerability", "Slow", ["gamefaqs-evil-forest-71891", "vgkami-evil-forest"]),
-      sourcedFact("attack", "YEOWWW! / trip", ["vgkami-evil-forest"], "Baku falls over and loses his turn."),
-      sourcedFact("attack", "Physical attacks", ["gamefaqs-evil-forest-71891", "vgkami-evil-forest"], "Baku's attacks target Zidane while he fights alone."),
+      sourcedFact("attack", "YEOWWW! / trip", ["jegged-evil-forest", "vgkami-evil-forest"], "Baku falls over and loses his turn; Jegged also notes he can miss his attack entirely."),
+      sourcedFact("attack", "Physical attacks", ["gamefaqs-evil-forest-71891", "jegged-evil-forest", "vgkami-evil-forest"], "Baku targets solo Zidane; GameFAQs averages about 30 damage, while Jegged reports roughly 25–35."),
     ],
     blueMagic: [],
     strategies: [{
       title: "Steal the Iron Sword, then heal as needed",
-      detail: "Zidane fights alone. Attempt the Hi-Potion and Iron Sword steals before ending the battle; the Iron Sword is useful for Steiner after he joins. Heal with Potions if Zidane drops below roughly 60 HP.",
-      sourceIds: ["gamefaqs-evil-forest-71891", "vgkami-evil-forest"],
+      detail: "Zidane fights alone. Attempt the Hi-Potion and Iron Sword steals before ending the battle; the Iron Sword is useful for Steiner after he joins. GameFAQs, RPGClassics, and VGKAMI label the Iron Sword Uncommon; Jegged labels it Rare and reports a 6% chance per connected attempt, versus 70% for the Common Hi-Potion. Keep those source-specific rarity and rate claims separate. Heal with a Potion if Zidane drops below roughly 60 HP.",
+      sourceIds: crashSiteBakuSources,
     }],
+    preparationGuidance: {
+      levelRationale: "Level 2 is Baku's enemy stat. The reviewed standard-route sources give no party-level recommendation for this solo Zidane fight; Jegged's later Level 3–4 suggestion is for Plant Brain, not Baku.",
+      difficultyAssessment: "GameFAQs and Jegged describe the duel as straightforward, with weak physical hits and occasional trips or misses. This is a subjective assessment, not a tested level threshold.",
+      optionalGrinding: "No standard source recommends grinding specifically for Baku, and the fixed wreckage sequence offers no field encounters before the fight. Baku awards 0 EXP, AP, and Gil, so victory itself does not advance the party; keep separate low-level and timed-run rules intact.",
+      setupAdvice: "Take the Potion from the chest in Baku's room before starting the duel. If Zidane still has the Mage Masher stolen from the opening fight, equip it before speaking to Baku. Only Zidane fights. Try the Hi-Potion and Iron Sword steals before attacking; the sword is useful for Steiner. Physical attacks average about 25–35 damage, but Baku may trip and lose a turn. Use a Potion before Zidane falls below roughly 60 HP. Fire is listed as a weakness, but the standard solo route has no Fire caster.",
+      confidence: "disputed",
+      sourceIds: crashSiteBakuSources,
+    },
     routeObjectiveIds: ["disc-1.evil-forest.baku-steals"],
     notes: [
       "GameFAQs, RPGClassics, and VGKAMI list 202 HP. GheddonLN's older FAQ estimates about 160 HP for this later fight; the old value is retained as a disputed claim.",
+      "Jegged lists the Iron Sword as a Rare steal at 6% per connected attempt and the Hi-Potion as Common at 70%; GameFAQs, RPGClassics, and VGKAMI label the Iron Sword Uncommon. The guide preserves the conflicting slot/rate reports rather than combining them.",
       "This post-crash fight is a separate profile from the opening Masked Man, even though both encounters involve Baku.",
     ],
   }, evilForestChapterId, crashSiteBakuSources, ["missable.disc-1.evil-forest.baku-steals"], ["cutoff.evil-forest.escape"]),
