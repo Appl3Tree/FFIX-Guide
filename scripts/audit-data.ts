@@ -6778,6 +6778,19 @@ if (!qualeEncounter || qualeEncounter.kind !== "boss" ||
     .some((sourceId) => !qualeGluttonsRobePath.sourceIds.includes(sourceId))) {
   errors.push("Quale must link the 99th-frog trigger at any pond and its Glutton's Robe steal to the exact enemy slot, encounter, planned timing, and sources.");
 }
+const qualePreparation = qualeRecord?.preparationGuidance;
+const qualePreparationSources = ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh"];
+if (!qualePreparation || qualePreparation.suggestedLevelRange !== undefined ||
+  !qualePreparation.levelRationale.includes("Level 76 is Quale's enemy stat") ||
+  !qualePreparation.levelRationale.includes("no party-level target is inferred") ||
+  !qualePreparation.optionalGrinding.includes("Stop at 98 frogs") ||
+  !qualePreparation.setupAdvice.includes("Water-resistant gear") ||
+  !qualePreparation.setupAdvice.includes("Magic Hammer") ||
+  !qualePreparation.setupAdvice.includes("rare Robe of Lords") ||
+  !qualePreparation.setupAdvice.includes("exploit Lightning") ||
+  qualePreparationSources.some((sourceId) => !qualePreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Quale preparation must distinguish its Level 76 enemy stat, preserve the save-at-98 trigger, and cite the sourced defense, stealing, and Lightning advice.");
+}
 const huntPool = enemyEncounters.find((encounter) => encounter.id === "encounter.lindblum.festival-random-pool");
 const huntEnemyIds = ["enemy.fang-b", "enemy.mu-b", "enemy.trick-sparrow-hunt"];
 if (!huntPool || huntPool.kind !== "random-pool" || huntPool.chapterId !== "disc-1.lindblum" ||

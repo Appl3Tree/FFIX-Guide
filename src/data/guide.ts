@@ -1840,8 +1840,8 @@ export const sources = [
     title: "Frog Catching — FFIX sidequest guide",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/frog-catching",
-    accessed: "2026-10-24",
-    notes: "Frog-pool locations, shared count across four marshes, respawn timing, and strategy. Its 99th-frog section proceeds directly to the Quale boss and warns to save and prepare before that catch; it discusses the party taking damage even if the challenge occurs on Disc III. Disc IV is the walkthrough's planned target timing, not a game restriction. Confirms Battle Boots at 45 frogs, Silver Fork at 23 frogs, and Bistro Fork at 33, correcting the Disc III preparation table's mislabeled Silver Fork target. Supports leaving a male and female frog (and the golden frog, if present) in the pond; the route does not ask players to empty a pool or farm a target count here.",
+    accessed: "2026-10-28",
+    notes: "Frog-pool locations, shared count across four marshes, respawn timing, and strategy. Its 99th-frog section proceeds directly to the Quale boss and recommends saving at 98, water-resistant gear, the back row, learned Antibody/Clear Headed/Loudmouth and Accuracy+ against Darkness, plus Bandit and Master Thief for Zidane. It recommends Quina use Magic Hammer to drain MP while Zidane steals and the others defend/heal, then exploit Lightning; the catch triggers the battle immediately. It discusses party damage even if challenged on Disc III, so Disc IV is the walkthrough's planned timing, not a game restriction. Confirms Battle Boots at 45 frogs, Silver Fork at 23 frogs, and Bistro Fork at 33, correcting the Disc III preparation table's mislabeled Silver Fork target. Supports leaving a male and female frog (and the golden frog, if present) in the pond; the route does not ask players to empty a pool or farm a target count here.",
   },
   {
     id: "gamefaqs-qus-marsh-60521",
@@ -1952,8 +1952,8 @@ export const sources = [
     title: "Qu's Marsh — completionist notes",
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/qus-marsh/",
-    accessed: "2026-10-23",
-    notes: "Completionist review distinguishes the frog pond from nearby pickup locations and separates the first-marsh Axolotl and Gigan Toad [A] from later Sahagin/Anemone and Gigan Toad [B] variants. It cross-checks Quale's 99-frog trigger, 65,535 HP, steals, and four Elixir drop slots, while noting that the displayed HP equals the 16-bit maximum. It also inventories frog prizes/respawn behavior and flags inconsistent area labels.",
+    accessed: "2026-10-28",
+    notes: "Completionist review distinguishes the frog pond from nearby pickup locations and separates the first-marsh Axolotl and Gigan Toad [A] from later Sahagin/Anemone and Gigan Toad [B] variants. It cross-checks Quale's 99-frog trigger, save-at-98 advice, Master Thief recommendation for the rare Robe of Lords, 65,535 HP, steals, and four Elixir drop slots, while noting that the displayed HP equals the 16-bit maximum. It also inventories frog prizes/respawn behavior and flags inconsistent area labels.",
   },
   {
     id: "gamefaqs-journey-to-burmecia-71891",

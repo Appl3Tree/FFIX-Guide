@@ -3,7 +3,8 @@
 Last updated: 2026-10-28
 
 ## Latest verification
-Latest verification — `npm test` passes 140/140, `npm run lint` passes, and `npm run build` passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. `git diff --check` passes. The build is 2,686.18 kB JavaScript (651.22 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Added audit and regression coverage for Scarlet Hair's Level 22 enemy stat versus Zidane's unprescribed party level, optional setup, healing, chance-based steals, and the source disagreement about attacking during evasive movement. Sources: 468. Direct browser/gameplay/release checks were not part of this validation. No Actions run, push, or deployment occurred.
+Latest verification — npm test passes 141/141, npm run lint passes, and npm run build passes TypeScript plus data audit (0 errors; 189 coverage warnings) and Vite production build. git diff --check passes. The build is 2,688.10 kB JavaScript (651.86 kB gzip), 61.11 kB CSS (12.91 kB gzip); Vite's chunk-size advisory remains. Added regression and audit coverage for Quale's Level 76 enemy stat versus party level, automatic 99th-frog trigger, save-at-98 preparation, Water/status defenses, steal priorities, and Lightning strategy. Sources: 468. Direct browser/gameplay/release checks were not part of this validation.
+Previous verification — Added Scarlet Hair preparation with no Zidane party-level target and retained the source disagreement about attacking during its movement phase. npm test passed 140/140; lint, typecheck, build, audit, and whitespace checks passed.
 Previous verification — Reconciled the post-Cleyra Linen Cuirass stock difference across GameFAQs, RPGClassics, and Final Fantasy Wiki. Its path remains `window-unverified`, with a displayed-stock check. Validation then passed with 127/127 tests, lint, build, and whitespace checks.
 
 Previous verification — Reviewed FFDQ.com

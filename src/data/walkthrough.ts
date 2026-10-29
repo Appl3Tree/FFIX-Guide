@@ -6243,8 +6243,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "gaia-return-frog-catching",
             kind: "optional",
-            text: "Visit any accessible Qu's Marsh pond to continue Frog Catching. Leave at least one male and one female frog in a pond, and keep the golden frog if one is present; make a separate save before the 99th catch.",
-            detail: "The Disc IV route calls out the final pond visit and warns about the 99th frog. Catching 99 is a supported-version achievement goal; preserving the breeding population keeps future frog growth available before that milestone.",
+            text: "Visit any accessible Qu's Marsh pond with Quina to continue Frog Catching. Leave a male and female frog (and the golden frog, if present); stop at 98 until ready. Before catching frog 99, save separately, heal, equip Water resistance and status support, set the party to the back row, give Zidane learned steal abilities, and prepare Quina's Magic Hammer.",
+            detail: "The 99th catch automatically starts Quale at whichever pond, so prepare before catching it. The Disc IV placement is planned route timing, not a game restriction; the fight can trigger earlier. Quale absorbs Water and is weak to Lightning. Magic Hammer helps Quina drain its MP while Zidane steals; keep the breeding population for future frog growth if you are not making the final push.",
             objectiveIds: ["disc-4.return-to-gaia.frog-catching"],
           },
           {

@@ -6466,6 +6466,13 @@ const lindblumAreaEnemyRecords: EnemyRecord[] = [
       { title: "Steal the four slots before finishing", detail: "The optional boss has Elixir, Ninja Gear, Glutton's Robe, and Robe of Lords in its steal table. Glutton's Robe has a later synthesis route; the other item routes are tracked in the item catalog.", sourceIds: qualeSources },
       { title: "Save before frog 99 and protect against Water and status", detail: "The 99th frog triggers the fight. GameFAQs recommends saving at 98 frogs and preparing water resistance and status protection before returning to the pond.", sourceIds: ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 76 is Quale's enemy stat; GameFAQs and EliteGrindLab do not set a standard party-level recommendation. This optional encounter can trigger whenever the shared frog count reaches 99, including before the walkthrough's planned Disc IV timing, so no party-level target is inferred.",
+      optionalGrinding: "No reviewed completion route prescribes grinding or a party-level threshold. Stop at 98 frogs, heal and equip the party, then choose when to trigger the final catch; the Disc IV placement is route timing, not a game restriction.",
+      setupAdvice: "Before catching frog 99, equip Water-resistant gear, put the party in the back row, and equip learned support such as Antibody, Clear Headed, Loudmouth, and Accuracy+ against Darkness. Give Zidane Bandit and Master Thief if learned; have Quina ready with Magic Hammer, with Bad Breath or Vivi's Slow as optional control. The catch automatically starts the fight. Let Zidane steal Elixir, Ninja Gear, Glutton's Robe, and the rare Robe of Lords while Quina drains MP; have the other characters Defend or heal. After the selected steals, exploit Lightning and avoid Water, which Quale absorbs.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh"],
+    },
     routeObjectiveIds: ["disc-4.return-to-gaia.frog-catching"],
     notes: ["The optional battle triggers on the shared 99-frog count. All four drop slots list Elixir; victory also awards Gastro Fork, a quest reward rather than a battle-table drop. The printed 65,535 HP is shared by the reviewed references, though EliteGrindLab notes that this equals the 16-bit maximum and does not resolve the game's stored-value behavior."],
   }, returnToGaiaChapterId, qualeSources),

@@ -505,6 +505,38 @@ test("Scarlet Hair preparation keeps Zidane's level open and preserves the movem
   assert.match(fightStep?.detail ?? "", /no exact HP or turn count/);
 });
 
+test("Quale preparation keeps the 99-frog trigger optional and records sourced countermeasures", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.quale");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-frog-catching-71891");
+  const eliteGrindLab = sources.find((entry) => entry.id === "elitegrindlab-qus-marsh");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-4.return-to-gaia");
+  const frogStep = chapter?.sections.flatMap((section) => section.steps)
+    .find((step) => step.id === "gaia-return-frog-catching");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 76);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 76 is Quale's enemy stat/);
+  assert.match(guidance.levelRationale, /no party-level target is inferred/);
+  assert.match(guidance.optionalGrinding, /Stop at 98 frogs/);
+  assert.match(guidance.optionalGrinding, /not a game restriction/);
+  assert.match(guidance.setupAdvice, /Water-resistant gear/);
+  assert.match(guidance.setupAdvice, /Antibody, Clear Headed, Loudmouth, and Accuracy\+/);
+  assert.match(guidance.setupAdvice, /Bandit and Master Thief/);
+  assert.match(guidance.setupAdvice, /Quina ready with Magic Hammer/);
+  assert.match(guidance.setupAdvice, /rare Robe of Lords/);
+  assert.match(guidance.setupAdvice, /exploit Lightning and avoid Water/);
+  assert.ok(["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /saving at 98/);
+  assert.match(eliteGrindLab?.notes ?? "", /Master Thief recommendation/);
+  assert.match(frogStep?.text ?? "", /stop at 98 until ready/);
+  assert.match(frogStep?.detail ?? "", /automatically starts Quale at whichever pond/);
+  assert.match(frogStep?.detail ?? "", /planned route timing, not a game restriction/);
+});
+
 test("Prison Cage preparation prioritizes captive survival across the back-to-back forms", () => {
   const garnetEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-garnet");
   const viviEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-vivi");
