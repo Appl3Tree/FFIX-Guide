@@ -602,6 +602,7 @@ const daliAteRouteSection = walkthroughChapters.find((chapter) => chapter.areaId
 const trueAchievementsDaliAteSource = sources.find((source) => source.id === "trueachievements-dali-ate-walkthrough");
 const rpgClassicsDaliSource = sources.find((source) => source.id === "rpgclassics-dali-walkthrough");
 const arrPeeGeeZDaliSource = sources.find((source) => source.id === "arrpeegeez-dali-walkthrough");
+const gamerGuidesDaliSource = sources.find((source) => source.id === "gamerguides-dali");
 const daliCatEye2Event = activeTimeEvents.find((event) => event.objectiveId === "ate.dali-cats-eye-2");
 if (
   !daliDaggerTriesHarderEvent?.trigger.includes("returning from the eastern field") ||
@@ -621,6 +622,9 @@ if (
   arrPeeGeeZDaliSource?.url !== "https://www.arrpeegeez.com/2016/04/final-fantasy-ix-walkthrough-part-four.html" ||
   !rpgClassicsDaliSource?.notes.includes("not treated as the game's exact unlock condition") ||
   !arrPeeGeeZDaliSource?.notes.includes("neither each scene's screen trigger nor a mandatory order") ||
+  !gamerGuidesDaliSource?.notes.includes("After speaking with Vivi, it says Dagger Tries Harder may already have appeared or may appear then") ||
+  !gamerGuidesDaliSource.notes.includes("enter and leave a building to make the prompt appear") ||
+  !daliDaggerTriesHarderEvent.trigger.includes("Gamer Guides says that after speaking with Vivi the ATE may already have appeared or may appear then") ||
   !trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402")
 ) {
   errors.push("Dali's Dagger Tries Harder route must preserve the alternate source timing, conservative checks, and the indexed-source access limit.");

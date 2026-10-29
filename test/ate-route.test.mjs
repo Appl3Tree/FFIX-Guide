@@ -67,6 +67,7 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   const daliCatsEye2 = eventByObjective.get("ate.dali-cats-eye-2");
   const daliAteWarning = missables.find((entry) => entry.id === "missable.disc-1.village-of-dali.ates");
   const trueAchievementsDaliAteSource = sources.find((entry) => entry.id === "trueachievements-dali-ate-walkthrough");
+  const gamerGuidesDaliSource = sources.find((entry) => entry.id === "gamerguides-dali");
   const rpgClassicsDaliSource = sources.find((entry) => entry.id === "rpgclassics-dali-walkthrough");
   const arrPeeGeeZDaliSource = sources.find((entry) => entry.id === "arrpeegeez-dali-walkthrough");
   const daliAteRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")
@@ -86,6 +87,9 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   assert.ok(daliAteWarning?.action.includes("return to the inn to check for Dagger Tries Harder"));
   assert.ok(daliAteWarning?.note.includes("returned HTTP 402"));
   assert.ok(trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402"));
+  assert.ok(gamerGuidesDaliSource?.notes.includes("After speaking with Vivi, it says Dagger Tries Harder may already have appeared or may appear then"));
+  assert.ok(gamerGuidesDaliSource.notes.includes("enter and leave a building to make the prompt appear"));
+  assert.ok(daliDaggerTriesHarder?.trigger.includes("Gamer Guides says that after speaking with Vivi the ATE may already have appeared or may appear then"));
 
   const tournamentTrenoEvents = movieCriticEligibleEvents.filter((event) => event.chapterId === "disc-3.card-tournament");
   assert.deepEqual(

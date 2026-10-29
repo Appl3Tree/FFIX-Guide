@@ -1523,8 +1523,8 @@ export const sources = [
     title: "The Village of Dali — Disc 1 Walkthrough",
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/the-village-of-dali",
-    accessed: "2026-10-23",
-    notes: "Cross-check for Dali's six ATEs, first-visit pickups, and Observatory Mountain's hidden Hi-Potion behind the entrance cart and 135 Gil at the back-right. Its route then switches control to Steiner at the Observatory, supporting a later check for missed pickups, alongside the 156-Gil underground entrance, Eye Drops, optional rear-room treasure, Mognet letter, and Black Waltz 2 strategy. Its Ragtime Mouse section says a wrong response or strike on the Mouse advances to a prompt that will not repeat and documents the first four quiz encounters before the Outer Continent.",
+    accessed: "2026-10-28",
+    notes: "Cross-check for Dali's six ATEs, first-visit pickups, and Observatory Mountain's hidden Hi-Potion behind the entrance cart and 135 Gil at the back-right. After speaking with Vivi, it says Dagger Tries Harder may already have appeared or may appear then; if it has not appeared, enter and leave a building to make the prompt appear. The route then switches control to Steiner at the Observatory, supporting a later check for missed pickups, alongside the 156-Gil underground entrance, Eye Drops, optional rear-room treasure, Mognet letter, and Black Waltz 2 strategy. Its Ragtime Mouse section says a wrong response or strike on the Mouse advances to a prompt that will not repeat and documents the first four quiz encounters before the Outer Continent.",
   },
   {
     id: "trueachievements-dali-ate-walkthrough",
