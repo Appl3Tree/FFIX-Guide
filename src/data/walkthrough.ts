@@ -4006,18 +4006,20 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         title: "Alexandria streets — prepare Steiner and fight the Mistodons",
         summary: "Control shifts to Steiner with Beatrix temporarily in the party. Move south through the town as the scripted undead encounters begin.",
         sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front", "elitegrindlab-alexandria-bahamut"],
+        preparationGuidance: {
+          levelRationale: "The reviewed route sources give no recommended party level for Steiner or Beatrix. Enemy-table levels are not party-level targets.",
+          difficultyAssessment: "The sources publish no difficulty rating. They document seven fixed Mistodon fights, with the final four occurring back-to-back.",
+          optionalGrinding: "The reviewed route sources do not recommend extra grinding for this forced sequence. For an Excalibur II or low-EXP route, follow that route's own encounter budget rather than adding fights here.",
+          setupAdvice: "Before moving south, equip Steiner with the strongest current gear and add Insomniac, Undead Killer, and Ability Up if learned. Do not equip Steiner with Blood Sword because it heals undead. Keep healing items available if Steiner is under-geared. Beatrix is a temporary party member with a fixed weapon; avoid leaving limited-copy Add-Ons on her, and remove any you need back after the third fight. Her Life spell can defeat a Mistodon immediately.",
+          confidence: "partial",
+          sourceIds: ["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front"],
+        },
         steps: [
-          {
-            id: "trouble-steiner-preparation",
-            kind: "optional",
-            text: "Review Steiner's equipment and abilities before the first fight; he has been out of the active party for a while. Insomniac prevents Sleep, and Undead Killer improves damage against the Mistodons. Beatrix is strong in these scripted fights, but her weapon Save the Queen cannot be changed.",
-            detail: "No required level or grinding target is established for this story sequence. Use the equipment and abilities already available to you; healing items are useful if Steiner is under-geared.",
-          },
           {
             id: "trouble-seven-mistodon-fights",
             kind: "combat",
             text: "Defeat the seven fixed Mistodon encounters while moving south. The sequence is two single Mistodons, a pair, three more singles, then a final pair; the last four fights occur back-to-back without a break.",
-            detail: "Mistodons are undead, so Beatrix's Life spell defeats a target immediately. If you use limited-copy Add-Ons on Beatrix, remove them after the third fight before the rapid final stretch; she leaves the temporary party after the town sequence.",
+            detail: "Mistodons are undead, so Beatrix's Life spell defeats a target immediately. Steiner enters Trance in the final battle.",
           },
         ],
       },

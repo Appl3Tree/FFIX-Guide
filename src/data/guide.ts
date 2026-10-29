@@ -84,11 +84,22 @@ export type WalkthroughStep = {
   objectiveIds?: string[];
 };
 
+export type ChapterPreparationGuidance = {
+  suggestedLevelRange?: { min: number; max: number };
+  levelRationale: string;
+  difficultyAssessment?: string;
+  optionalGrinding: string;
+  setupAdvice: string;
+  confidence: "partial" | "disputed";
+  sourceIds: string[];
+};
+
 export type WalkthroughSection = {
   id: string;
   title: string;
   summary?: string;
   sourceIds: string[];
+  preparationGuidance?: ChapterPreparationGuidance;
   steps: WalkthroughStep[];
 };
 

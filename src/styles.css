@@ -410,6 +410,7 @@ h1, h2, p { margin-top: 0; }
 .walkthrough-section-heading { margin-bottom: 8px; }
 .walkthrough-section-heading h3 { margin: 0; color: #34433e; font: 600 18px var(--serif); }
 .walkthrough-section-heading p { max-width: 760px; margin: 5px 0 0; color: #78827c; font-size: 12px; line-height: 1.55; }
+.chapter-preparation-guidance { margin: 0 0 8px; }
 .walkthrough-steps { display: grid; gap: 0; margin: 0; padding: 0; list-style: none; counter-reset: walkthrough-step; }
 .walkthrough-step { min-width: 0; padding: 12px 0 13px; border-top: 1px solid #e9e7df; counter-increment: walkthrough-step; }
 .walkthrough-step-top { display: grid; grid-template-columns: 99px minmax(0, 1fr); align-items: start; gap: 12px; }

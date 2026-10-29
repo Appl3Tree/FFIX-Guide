@@ -52,6 +52,24 @@ test("the researched story route simulates through the ending and all optional p
   }
 });
 
+test("Alexandria's forced Mistodon sequence has partial chapter-level preparation without a guessed party level", () => {
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.trouble-on-the-home-front")
+    ?.sections.find((entry) => entry.id === "trouble-mistodon-defense");
+  const guidance = section?.preparationGuidance;
+
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.equal(guidance.confidence, "partial");
+  assert.match(guidance.levelRationale, /no recommended party level/i);
+  assert.match(guidance.difficultyAssessment, /seven fixed Mistodon fights.*final four.*back-to-back/i);
+  assert.match(guidance.optionalGrinding, /do not recommend extra grinding/i);
+  assert.match(guidance.optionalGrinding, /Excalibur II or low-EXP/i);
+  assert.match(guidance.setupAdvice, /Blood Sword/);
+  assert.ok(guidance.sourceIds.every((sourceId) => section.sourceIds.includes(sourceId)));
+  assert.ok(section.steps.some((step) => step.id === "trouble-seven-mistodon-fights"));
+});
+
 test("Alexandria Inn's Disc IV fallback is limited to a first-entry report", () => {
   const sourceId = "steam-tetra-endgame-opponents-687154254";
   const objective = objectives.find((entry) => entry.id === "disc-3.on-the-high-seas.alexandria-first-visit-card-players");

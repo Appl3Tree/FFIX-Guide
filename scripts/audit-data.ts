@@ -2793,6 +2793,24 @@ for (const chapter of walkthroughChapters) {
     for (const sourceId of section.sourceIds) {
       if (!sourceIds.has(sourceId)) errors.push(`Walkthrough section ${section.id} references unknown source ${sourceId}.`);
     }
+    if (section.preparationGuidance) {
+      const guidance = section.preparationGuidance;
+      if (!guidance.levelRationale.trim() || !guidance.optionalGrinding.trim() || !guidance.setupAdvice.trim()) {
+        errors.push(`Walkthrough section ${section.id} has incomplete chapter preparation guidance.`);
+      }
+      if (guidance.confidence !== "partial" && guidance.confidence !== "disputed") {
+        errors.push(`Walkthrough section ${section.id} has unsupported preparation confidence ${guidance.confidence}.`);
+      }
+      const levelRange = guidance.suggestedLevelRange;
+      if (levelRange && (!Number.isInteger(levelRange.min) || !Number.isInteger(levelRange.max) || levelRange.min < 1 || levelRange.max < levelRange.min)) {
+        errors.push(`Walkthrough section ${section.id} has an invalid optional party-level range.`);
+      }
+      if (guidance.sourceIds.length === 0) errors.push(`Walkthrough section ${section.id} preparation guidance has no source provenance.`);
+      for (const sourceId of guidance.sourceIds) {
+        if (!sourceIds.has(sourceId)) errors.push(`Walkthrough section ${section.id} preparation guidance references unknown source ${sourceId}.`);
+        else if (!section.sourceIds.includes(sourceId)) errors.push(`Walkthrough section ${section.id} omits preparation source ${sourceId} from its section sources.`);
+      }
+    }
     const stepIds = section.steps.map((step) => step.id);
     checkUnique(`${section.id} step`, stepIds);
     for (const step of section.steps) {
@@ -2805,6 +2823,22 @@ for (const chapter of walkthroughChapters) {
   const area = guideAreas.find((item) => item.id === chapter.areaId);
   if (area && area.state === "planned") errors.push(`Walkthrough chapter ${chapter.areaId} has content but its coverage state is still planned.`);
   if (area && area.state !== "verified") warnings.push(`Walkthrough chapter ${chapter.areaId} content is ${area.state}, not fully verified.`);
+}
+
+const alexandriaMistodonSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.trouble-on-the-home-front")
+  ?.sections.find((section) => section.id === "trouble-mistodon-defense");
+const alexandriaMistodonPreparation = alexandriaMistodonSection?.preparationGuidance;
+if (!alexandriaMistodonPreparation || alexandriaMistodonPreparation.suggestedLevelRange !== undefined ||
+  !alexandriaMistodonPreparation.levelRationale.includes("no recommended party level") ||
+  !alexandriaMistodonPreparation.difficultyAssessment?.includes("seven fixed Mistodon fights") ||
+  !alexandriaMistodonPreparation.optionalGrinding.includes("do not recommend extra grinding") ||
+  !alexandriaMistodonPreparation.optionalGrinding.includes("Excalibur II or low-EXP") ||
+  !alexandriaMistodonPreparation.setupAdvice.includes("Insomniac, Undead Killer, and Ability Up") ||
+  !alexandriaMistodonPreparation.setupAdvice.includes("Blood Sword") ||
+  !alexandriaMistodonPreparation.setupAdvice.includes("after the third fight") ||
+  !["gamefaqs-trouble-on-home-front-71891", "jegged-trouble-on-home-front"].every((sourceId) => alexandriaMistodonPreparation.sourceIds.includes(sourceId))) {
+  errors.push("The Alexandria defense milestone must preserve its source-backed setup, absent level/grind target, and Excalibur II/low-EXP separation.");
 }
 
 for (const area of guideAreas) {

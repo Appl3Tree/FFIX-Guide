@@ -145,7 +145,17 @@ function enemyChapterScope(areaId: string) {
 function walkthroughSearchText(areaId: string) {
   const content = walkthroughChapterContent(areaId);
   if (!content) return "";
-  return [content.overview, ...content.sections.flatMap((section) => [section.title, section.summary ?? "", ...section.steps.flatMap((step) => [step.text, step.detail ?? ""])])].join(" ").toLowerCase();
+  return [content.overview, ...content.sections.flatMap((section) => [
+    section.title,
+    section.summary ?? "",
+    ...(section.preparationGuidance ? [
+      section.preparationGuidance.levelRationale,
+      section.preparationGuidance.difficultyAssessment ?? "",
+      section.preparationGuidance.optionalGrinding,
+      section.preparationGuidance.setupAdvice,
+    ] : []),
+    ...section.steps.flatMap((step) => [step.text, step.detail ?? ""]),
+  ])].join(" ").toLowerCase();
 }
 
 function objectiveAppliesToProfile(objective: (typeof objectives)[number], profile: PlaythroughProfile) {
@@ -1323,6 +1333,14 @@ function Walkthrough({ profile, search, onClearSearch, onNavigate, onToggleObjec
               <div className="walkthrough-sections">
                 {chapter.sections.map((section) => <section className="walkthrough-section" key={section.id} aria-labelledby={`section-${section.id}`}>
                   <div className="walkthrough-section-heading"><h3 id={`section-${section.id}`}>{section.title}</h3>{section.summary && <p>{section.summary}</p>}</div>
+                  {section.preparationGuidance && <div className="chapter-preparation-guidance enemy-preparation-guidance">
+                    <h4>Story checkpoint preparation</h4>
+                    <p>{section.preparationGuidance.suggestedLevelRange && <><strong>Optional level range:</strong> Lv. {section.preparationGuidance.suggestedLevelRange.min}–{section.preparationGuidance.suggestedLevelRange.max}. </>}<strong>Party level:</strong> {section.preparationGuidance.levelRationale}</p>
+                    {section.preparationGuidance.difficultyAssessment && <p><strong>Encounter profile:</strong> {section.preparationGuidance.difficultyAssessment}</p>}
+                    <p><strong>Grinding:</strong> {section.preparationGuidance.optionalGrinding}</p>
+                    <p><strong>Setup:</strong> {section.preparationGuidance.setupAdvice}</p>
+                    <p className="enemy-preparation-confidence"><strong>Evidence status:</strong> {section.preparationGuidance.confidence === "partial" ? "Partial; source and version coverage is limited, and guidance is not gameplay-tested." : "Disputed; compare the linked sources."}</p>
+                  </div>}
                   <ol className="walkthrough-steps">
                     {section.steps.map((step) => {
                       const linkedObjectives = (step.objectiveIds ?? []).map((id) => objectives.find((objective) => objective.id === id)).filter((objective) => objective && objectiveAppliesToProfile(objective, profile));
