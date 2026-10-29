@@ -3408,8 +3408,8 @@ export const sources = [
     title: "Portal to Another World — Disc III story walkthrough",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/portal-to-another-world",
-    accessed: "2026-10-25",
-    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including Bran Bal's temporary Dagger/Steiner restriction, Eiko control handoff and party reformation, the fixed Amdusias, Abadon, and Shell Dragon roster changes, and the regroup and party selection at Moorock. It also covers seven Terra chests, five Pandemonium pickups, the timed puzzle, Elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It places Demon's Vest in the Terra chest sweep and identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. Its boss tables supply the Silver Dragon, Garland, and Kuja steals and drops linked in this chapter. The guide says Moorock has the same inventory at Pandemonium as before and identifies the Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations. After Kuja, it directs the party along a linear path into Bran Bal for more scenes; it does not say the earlier treasure rooms can be freely revisited.",
+    accessed: "2026-10-28",
+    notes: "Original PlayStation route for Terra, Bran Bal, and Pandemonium, including Bran Bal's temporary Dagger/Steiner restriction, Eiko control handoff and party reformation, the fixed Amdusias, Abadon, and Shell Dragon roster changes, and the regroup and party selection at Moorock. For Amdusias it lists Level 54, 10,926 HP, Wind weakness, Earth nullification, Bio/Thundara/Horn, and recommends healing or stalling with Zidane until Freya and Amarant join, then Jump and attacks. Its table assigns Common Tent and Uncommon Ether, which conflicts with Jegged's reversed slots. It also covers seven Terra chests, five Pandemonium pickups, the timed puzzle, Elevator ATE, Mognet delivery, boss sequence, and Disc IV handoff. It places Demon's Vest in the Terra chest sweep and identifies the Bran Bal Wing Edge chest and Silver Dragon's guaranteed Wing Edge drop. Its boss tables supply the Silver Dragon, Garland, and Kuja steals and drops linked in this chapter. The guide says Moorock has the same inventory at Pandemonium as before and identifies the Pandemonium Mogshop as the last Zorlin Shape purchase window; the companion item reference lists both Bran Bal and Pandemonium as stock locations. After Kuja, it directs the party along a linear path into Bran Bal for more scenes; it does not say the earlier treasure rooms can be freely revisited.",
   },
   {
     id: "jegged-bran-bal",
@@ -3432,8 +3432,8 @@ export const sources = [
     title: "Pandemonium — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/40-Pandemonium.html",
-    accessed: "2026-10-25",
-    notes: "Route cross-check for Pandemonium's fixed Amdusias (Zidane, then Freya and Amarant), Abadon (Steiner and Quina, then Zidane), and Shell Dragon (Zidane, then Dagger) fights, followed by the regroup and party change at Moorock. It also covers Holy Miter, the timed orb room, elevator ATE and treasure headings, maze pickups, Mozme's conditional Kupo Nut, and the Silver Dragon/Garland/Kuja sequence. It reports 70% Battle Boots and 23% Carabini Mail chances per connected steal check for Garland and Kuja; these rates are source-reported and not release-verified. Boss HP figures are excluded because references conflict; after Kuja, the route back through Bran Bal is linear, Zidane and Dagger gather the Genomes, and the party escapes aboard the Invincible. It does not document free recovery access to the earlier treasure rooms.",
+    accessed: "2026-10-28",
+    notes: "Route cross-check for Pandemonium's fixed Amdusias (Zidane, then Freya and Amarant), Abadon (Steiner and Quina, then Zidane), and Shell Dragon (Zidane, then Dagger) fights, followed by the regroup and party change at Moorock. It reports Amdusias at Level 42 and 20,926 HP, says to keep Zidane alive until the others join, and reverses GameFAQs' Tent/Ether steal slots (Common Ether, Uncommon Tent). Its 70%/23% rates are source-reported per connected check and are not normalized against GameFAQs' different item-slot assignments. It also covers Holy Miter, the timed orb room, elevator ATE and treasure headings, maze pickups, Mozme's conditional Kupo Nut, and the Silver Dragon/Garland/Kuja sequence. It reports 70% Battle Boots and 23% Carabini Mail chances per connected steal check for Garland and Kuja; these rates are source-reported and not release-verified. Boss HP figures are excluded from the route because references conflict; after Kuja, the route back through Bran Bal is linear, Zidane and Dagger gather the Genomes, and the party escapes aboard the Invincible. It does not document free recovery access to the earlier treasure rooms.",
   },
   {
     id: "cour89-pandemonium",
@@ -3456,8 +3456,8 @@ export const sources = [
     title: "Pandemonium — completionist walkthrough and source audit",
     publisher: "EliteGrindLab",
     url: "https://elitegrindlab.com/ff9/walkthrough/pandemonium/",
-    accessed: "2026-10-23",
-    notes: "Cross-check for Pandemonium's five fixed pickups, 30-second orb puzzle, forced battles, boss steals and preparation, Mozme's letter exchange, and optional Quina Blue Magic. Its discussion documents unresolved boss HP conflicts and ambiguity between scripted and random Abadon records; the guide omits those HP values and does not claim the optional skills or individual item types are permanently lost.",
+    accessed: "2026-10-28",
+    notes: "Cross-check for Pandemonium's five fixed pickups, 30-second orb puzzle, forced battles, boss steals and preparation, Mozme's letter exchange, and optional Quina Blue Magic. It says the forced fights have no shop or equipment change between them, so preparation belongs in Bran Bal, and recommends Wind/Lightning resistance and Locomotion for the area. It reports Amdusias at 20,926 HP and preserves the HP conflict without selecting a value. Its discussion also documents ambiguity between scripted and random Abadon records; the guide omits disputed HP values and does not claim optional skills or individual item types are permanently lost.",
   },
   {
     id: "rpgclassics-bran-bal",

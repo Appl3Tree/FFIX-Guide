@@ -10772,6 +10772,32 @@ if (!novaDragonSynthesisRecovery || novaDragonSynthesisRecovery.itemId !== "game
   novaDragonSynthesisRecovery.cost?.amount !== 45000 || !novaDragonSynthesisRecovery.conditions?.includes("Mythril Sword")) {
   errors.push("Nova Dragon's Grand Armor route must preserve its conditional Disc IV synthesis recovery when Mythril Sword was retained.");
 }
+const amdusiasRecord = enemyRecords.find((enemy) => enemy.id === "enemy.amdusias-fixed");
+const amdusiasPreparation = amdusiasRecord?.preparationGuidance;
+const amdusiasEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.fixed-amdusias");
+const amdusiasBranBalPrepStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-bran-bal-ates-gate")
+  ?.steps.find((step) => step.id === "portal-bran-bal-final-sweep");
+const amdusiasFightStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-mind-control")
+  ?.steps.find((step) => step.id === "portal-pandemonium-amdusias");
+const amdusiasPrepSources = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"];
+if (!amdusiasRecord || amdusiasRecord.kind !== "boss" || !amdusiasEncounter || amdusiasEncounter.kind !== "boss" ||
+  !amdusiasEncounter.formation.some((member) => member.enemyId === "enemy.amdusias-fixed" && member.quantity === 1) ||
+  !amdusiasPreparation || amdusiasPreparation.suggestedLevelRange !== undefined ||
+  !amdusiasPreparation.levelRationale.includes("Neither source sets a party-level target") ||
+  !amdusiasPreparation.optionalGrinding.includes("without an equipment-change break") ||
+  !amdusiasPreparation.setupAdvice.includes("Lightning reduction against Thundara and Antibody against Bio") ||
+  !amdusiasPreparation.setupAdvice.includes("defend or heal as needed until Freya and Amarant join") ||
+  !amdusiasPreparation.setupAdvice.includes("Freya can Jump") ||
+  !amdusiasPreparation.setupAdvice.includes("GameFAQs assigns Common Tent/Uncommon Ether") ||
+  !amdusiasPreparation.setupAdvice.includes("Jegged reverses those items") ||
+  !amdusiasPreparation.setupAdvice.includes("weak to Wind and nullifies Earth") ||
+  !amdusiasBranBalPrepStep?.detail.includes("Pandemonium's fixed fights run consecutively without an equipment-change break") ||
+  !amdusiasFightStep?.detail.includes("no party-level target is inferred") ||
+  amdusiasPrepSources.some((sourceId) => !amdusiasPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Amdusias preparation must preserve the fixed solo opening, Bran Bal preparation window, optional defenses, elemental facts, source-specific steal slots, and disputed stats without a party-level target.");
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

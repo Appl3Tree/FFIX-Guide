@@ -177,6 +177,49 @@ test("Taharka preparation preserves Ipsen's inverted weapon rule and source-spec
   assert.match(fightStep?.detail ?? "", /all three item types have later sources/);
 });
 
+test("Amdusias preparation preserves Pandemonium's forced solo opening and source-specific records", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.amdusias-fixed");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-portal-to-another-world-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-pandemonium");
+  const eliteGrindLab = sources.find((entry) => entry.id === "elitegrindlab-pandemonium");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.portal-to-another-world");
+  const branBal = chapter?.sections.find((entry) => entry.id === "portal-bran-bal-ates-gate");
+  const prepStep = branBal?.steps.find((entry) => entry.id === "portal-bran-bal-final-sweep");
+  const pandemonium = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-mind-control");
+  const fightStep = pandemonium?.steps.find((entry) => entry.id === "portal-pandemonium-amdusias");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level" && entry.value === 54)?.verification, "disputed");
+  assert.equal(enemy.stats.find((entry) => entry.field === "level" && entry.value === 42)?.verification, "disputed");
+  assert.equal(enemy.stats.find((entry) => entry.field === "HP" && entry.value === 10926)?.verification, "disputed");
+  assert.equal(enemy.stats.find((entry) => entry.field === "HP" && entry.value === 20926)?.verification, "disputed");
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /GameFAQs, while Jegged prints Level 42/);
+  assert.match(guidance.levelRationale, /Neither source sets a party-level target/);
+  assert.match(guidance.difficultyAssessment ?? "", /Zidane begins alone/);
+  assert.match(guidance.optionalGrinding, /No reviewed source gives an Amdusias-specific party-level or grind target/);
+  assert.match(guidance.optionalGrinding, /prepare in Bran Bal/);
+  assert.match(guidance.setupAdvice, /Lightning reduction against Thundara and Antibody against Bio/);
+  assert.match(guidance.setupAdvice, /defend or heal as needed until Freya and Amarant join/);
+  assert.match(guidance.setupAdvice, /Freya can Jump, Zidane can attack, and Amarant can use support or attack/);
+  assert.match(guidance.setupAdvice, /weak to Wind and nullifies Earth/);
+  assert.match(guidance.setupAdvice, /GameFAQs assigns Common Tent\/Uncommon Ether/);
+  assert.match(guidance.setupAdvice, /Jegged reverses those items/);
+  assert.match(enemy.notes.join(" "), /Level 54 and 10,926 HP/);
+  assert.match(enemy.notes.join(" "), /Level 42 and 20,926 HP/);
+  assert.ok(["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /Common Tent and Uncommon Ether/);
+  assert.match(jegged?.notes ?? "", /Level 42 and 20,926 HP/);
+  assert.match(jegged?.notes ?? "", /reverses GameFAQs' Tent\/Ether steal slots/);
+  assert.match(eliteGrindLab?.notes ?? "", /no shop or equipment change between them/);
+  assert.match(prepStep?.detail ?? "", /fixed fights run consecutively without an equipment-change break/);
+  assert.match(fightStep?.text ?? "", /with Zidane alone/);
+  assert.match(fightStep?.detail ?? "", /no party-level target is inferred/);
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

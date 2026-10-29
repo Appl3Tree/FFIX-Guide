@@ -6021,7 +6021,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "portal-bran-bal-final-sweep",
             kind: "save",
             text: "Before leaving, confirm the Terra and Bran Bal pickups, Stiltzkin #7, the four ATEs, any desired purchases, and a fresh save. Receive Moorock's letter here or use his Pandemonium fallback after the party regroups; then follow Mikoto through the green light and bridge.",
-            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
+            detail: "The post-Kuja story passage through Bran Bal is linear, so finish the village checks before entering the gate. Heal and review equipment here: Pandemonium's fixed fights run consecutively without an equipment-change break. The letter has a later pickup in Pandemonium, but both receiving it and delivering it close after passing through that area's Maze.",
             objectiveIds: ["disc-3.portal-to-another-world.bran-bal-treasures", "disc-3.portal-to-another-world.moorock-mognet-letter", "disc-3.portal-to-another-world.stiltzkin-7", "disc-3.portal-to-another-world.bran-bal-ates", "disc-3.portal-to-another-world.party-and-gate"],
           },
         ],
@@ -6035,8 +6035,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-amdusias",
             kind: "combat",
-            text: "After the cutscenes, fight Amdusias with Zidane alone. Keep Zidane alive until Freya and Amarant join, then finish the fight.",
-            detail: "The next encounter starts immediately. Exact Amdusias HP values disagree across sources, so this guide gives no number or required level.",
+            text: "After the cutscenes, fight Amdusias with Zidane alone. Defend or heal until Freya and Amarant join; then use Freya's Jump, Zidane's attacks, and Amarant's support or attacks.",
+            detail: "Amdusias is weak to Wind and nullifies Earth. GameFAQs and Jegged reverse the Tent/Ether steal slots, so treat steals as optional and source-specific. The next encounter starts immediately. Published level and HP figures also disagree; no party-level target is inferred.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-climax"],
           },
           {
