@@ -588,7 +588,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-3/side-questing-2",
     accessed: "2026-10-23",
-    notes: "Independent route for Blue Narciss controls and party changes, the third frog pond, Lanar Island and optional world-map side content, and Chocobo's Lagoon. Used as a cross-check rather than a replacement for item-specific tables.",
+    notes: "Independent route for Blue Narciss controls and party changes, the third frog pond, Lanar Island and optional world-map side content, and Chocobo's Lagoon. Its Disc III side-quest sequence covers Alexandria's harbor/town sweep, then directly tells the player to return to the Blue Narciss before the Lanar Island Blue Magic route; this supports the optional-visit rejoin. Used as a cross-check rather than a replacement for item-specific tables.",
   },
   {
     id: "flactem-esto-gaza-mount-gulug",

@@ -156,6 +156,24 @@ test("Alexandria Inn's Disc IV fallback is limited to a first-entry report", () 
   assert.ok(detour?.sourceIds.includes(sourceId));
 });
 
+test("Alexandria's ruined-town sweep has two direct Blue Narciss rejoin sources", () => {
+  const rejoin = gameRouteEdges.find((edge) => edge.id === "detour.alexandria-ruins-rejoin-high-seas");
+  const section = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.on-the-high-seas")
+    ?.sections.find((entry) => entry.id === "high-seas-alexandria-ruins");
+  const returnStep = section?.steps.find((step) => step.id === "high-seas-alexandria-return-blue-narciss");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-side-questing-2");
+
+  assert.ok(rejoin);
+  assert.equal(rejoin.relationship, "rejoin");
+  assert.ok(rejoin.sourceIds.includes("gamefaqs-on-the-high-seas-71891"));
+  assert.ok(rejoin.sourceIds.includes("gamerguides-side-questing-2"));
+  assert.ok(!rejoin.sourceIds.includes("jegged-blue-narciss"));
+  assert.ok(!rejoin.sourceIds.includes("rpgclassics-alexandria-ruins"));
+  assert.match(gamerGuides.notes, /directly tells the player to return to the Blue Narciss before the Lanar Island Blue Magic route/);
+  assert.match(returnStep.text, /return to the Blue Narciss/);
+  assert.ok(section.sourceIds.includes("gamerguides-side-questing-2"));
+});
+
 test("the Oeilvert and Desert Palace route preserves the sourced party split order", () => {
   const splitGate = gameRouteEdges.find((edge) => edge.id === "story.picking-up-the-trail-to-forgotten-continent");
   assert.ok(splitGate);

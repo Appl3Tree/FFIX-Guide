@@ -744,7 +744,7 @@ export const gameRouteEdges: GameRouteEdge[] = [
     toChapterId: "disc-3.on-the-high-seas",
     relationship: "rejoin",
     summary: "After the Alexandria harbor and ruined-town sweep, return to the Blue Narciss and resume the open-world route. The post-destruction visit does not imply access to the closed castle.",
-    sourceIds: ["gamefaqs-on-the-high-seas-71891"],
+    sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamerguides-side-questing-2"],
   },
   {
     id: "story.picking-up-the-trail-to-forgotten-continent",

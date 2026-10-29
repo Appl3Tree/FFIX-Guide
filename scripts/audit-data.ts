@@ -8611,8 +8611,13 @@ if (
   || !postDestructionAlexandriaDetourRejoin
   || postDestructionAlexandriaDetourRejoin.relationship !== "rejoin"
   || !postDestructionAlexandriaDetourRejoin.sourceIds.includes("gamefaqs-on-the-high-seas-71891")
+  || !postDestructionAlexandriaDetourRejoin.sourceIds.includes("gamerguides-side-questing-2")
   || postDestructionAlexandriaDetourRejoin.sourceIds.includes("jegged-blue-narciss")
   || postDestructionAlexandriaDetourRejoin.sourceIds.includes("rpgclassics-alexandria-ruins")
+  || !sources.find((source) => source.id === "gamerguides-side-questing-2")?.notes.includes("directly tells the player to return to the Blue Narciss before the Lanar Island Blue Magic route")
+  || !walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.on-the-high-seas")?.sections
+    .find((section) => section.id === "high-seas-alexandria-ruins")?.steps
+    .some((step) => step.id === "high-seas-alexandria-return-blue-narciss" && step.text.includes("return to the Blue Narciss"))
   || !sources.find((source) => source.id === "jegged-blue-narciss")?.notes.includes("does not specify returning from the Alexandria sweep to the Blue Narciss")
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not identify or time its card matches")
   || !sources.find((source) => source.id === "rpgclassics-alexandria-ruins")?.notes.includes("does not document the return to the Blue Narciss")
@@ -8622,7 +8627,7 @@ if (
   || !sources.find((source) => source.id === "steam-tetra-opponents-disc4-2804532988")?.notes.includes("omission alone does not establish they are unavailable")
   || !sources.find((source) => source.id === "trueachievements-tetra-master-guide")?.notes.includes("two Red Mages and Hippaul are at the Alexandria Inn at endgame")
 ) {
-  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the conflicting source reports, optional-match scope, and anecdotal first-Disc-IV-entry fallback; the harbor rejoin must cite the direct Blue Narciss return instruction.");
+  errors.push("The post-destruction Alexandria Inn matches must preserve the Disc III safe checkpoint, the conflicting source reports, optional-match scope, and anecdotal first-Disc-IV-entry fallback; the harbor rejoin must cite GameFAQs and Gamer Guides' direct Blue Narciss return instructions and retain the location-source boundary.");
 }
 const mountainMoonstoneObjectiveId = "disc-2.conde-petie-mountain-path.moonstone";
 const mountainMoonstoneWarning = missablesById.get("missable.disc-2.conde-petie-mountain-path.moonstone");

@@ -4347,7 +4347,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "high-seas-alexandria-ruins",
         title: "Alexandria — sweep the accessible harbor and ruined town",
         summary: "The castle is inaccessible, but the gondola dock and town streets still contain pickups, a card, and optional Inn matches; use this Disc III visit as the safe checkpoint. A Disc IV check is only an anecdotal first-entry fallback if you skipped this entire visit.",
-        sourceIds: ["gamefaqs-on-the-high-seas-71891", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-endgame-opponents-687154254", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
+        sourceIds: ["gamefaqs-on-the-high-seas-71891", "gamerguides-side-questing-2", "jegged-blue-narciss", "cour89-card-players", "gamefaqs-card-locations-24067", "rpgclassics-alexandria-ruins", "steam-tetra-disc4-opponents-729676856", "steam-tetra-endgame-opponents-687154254", "steam-tetra-opponents-disc4-2804532988", "trueachievements-tetra-master-guide"],
         steps: [
           {
             id: "high-seas-alexandria-harbor",
@@ -4375,6 +4375,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             text: "Search the flowerbed south of the Square for an Ether, the main street doorway opposite Ilia's grandmother's home for a Sapphire, and the ground just northeast of the Steeple entrance for a Tent. If Kuppo's Mognet letter is still in your inventory and you can carry a Kupo Nut, take it to Kupo at the Steeple to receive a Kupo Nut.",
             detail: "The Mognet exchange is conditional on still holding the letter and having room to receive the nut. If Mogki's earlier letter to Moodon is still pending, return to Lindblum's Inn and deliver it; skip that stop if the Aftermath route already completed it.",
             objectiveIds: ["disc-3.on-the-high-seas.alexandria-ruins", "disc-3.on-the-high-seas.kuppo-letter"],
+          },
+          {
+            id: "high-seas-alexandria-return-blue-narciss",
+            kind: "optional",
+            text: "After finishing the harbor and ruined-town sweep, return to the Blue Narciss and resume the Disc III free-roam route.",
+            detail: "GameFAQs and Gamer Guides both direct the player back to the ship after the Alexandria sweep. The closed castle remains outside this visit.",
           },
         ],
       },
