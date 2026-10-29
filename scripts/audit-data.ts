@@ -6039,6 +6039,34 @@ if (!burmeciaBossEncounter || burmeciaBossEncounter.kind !== "boss" ||
   !burmeciaBoss.stats.some((stat) => stat.field === "MP" && stat.value === 3367 && stat.verification === "disputed")) {
   errors.push("Beatrix's Burmecia boss dossier must link the one-time steal warning/cutoff and retain both published stat profiles as disputed claims.");
 }
+const burmeciaBeatrixPreparation = burmeciaBoss?.preparationGuidance;
+const burmeciaBeatrixPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.burmecia")
+  ?.sections.find((section) => section.id === "burmecia-beatrix-preparation");
+const burmeciaBeatrixPrepStep = burmeciaBeatrixPreparationSection?.steps.find((step) => step.id === "burmecia-palace-preparation");
+const burmeciaBeatrixStealStep = burmeciaBeatrixPreparationSection?.steps.find((step) => step.id === "burmecia-beatrix-steals");
+if (!burmeciaBeatrixPreparation || burmeciaBeatrixPreparation.suggestedLevelRange !== undefined ||
+  !burmeciaBeatrixPreparation.levelRationale.includes("Level 14") ||
+  !burmeciaBeatrixPreparation.levelRationale.includes("Level 16") ||
+  !burmeciaBeatrixPreparation.levelRationale.includes("not party-level targets") ||
+  !burmeciaBeatrixPreparation.difficultyAssessment?.includes("Gamer Guides describes Beatrix as tough") ||
+  !burmeciaBeatrixPreparation.difficultyAssessment.includes("subjective single-source") ||
+  !burmeciaBeatrixPreparation.optionalGrinding.includes("do not prescribe a party-level target") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("Coral Ring") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("Silk Shirt") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("Slow") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("Phoenix Down and Uncommon Chain Plate") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("Rare Mythril Sword") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("tenth turn or at 0 HP") ||
+  !burmeciaBeatrixPreparation.setupAdvice.includes("party at 1 HP") ||
+  !["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "cavesofnarshe-enemies"]
+    .every((sourceId) => burmeciaBeatrixPreparation.sourceIds.includes(sourceId) && burmeciaBoss?.sourceIds.includes(sourceId)) ||
+  !burmeciaBeatrixPrepStep?.text.includes("Coral Ring") ||
+  !burmeciaBeatrixPrepStep.text.includes("Silk Shirt") ||
+  !burmeciaBeatrixPrepStep.detail?.includes("enemy stats, not party targets") ||
+  !burmeciaBeatrixStealStep?.text.includes("Vivi try Slow") ||
+  !burmeciaBeatrixStealStep.text.includes("Common Phoenix Down and Uncommon Chain Plate")) {
+  errors.push("Burmecia Beatrix preparation must distinguish her disputed enemy stats from party level and preserve source-backed survival, steal-priority, and optional gear guidance.");
+}
 if (itemAcquisitionPaths.filter((path) => path.enemyId === "enemy.beatrix-burmecia" && path.method === "steal").length !== burmeciaBossSteals.length) {
   errors.push("Beatrix's Burmecia encounter must have exactly three linked steal item paths.");
 }

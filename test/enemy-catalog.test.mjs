@@ -250,3 +250,43 @@ test("Lani preparation distinguishes her enemy stat from party level and preserv
   assert.match(fightStep?.detail ?? "", /Medium while Gamer Guides calls it tough/);
   assert.match(fightStep?.detail ?? "", /Level 19 enemy stat is not a party target/);
 });
+
+test("Burmecia Beatrix preparation distinguishes disputed enemy stats and preserves survival and steal priorities", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.beatrix-burmecia");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-burmecia-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-burmecia");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-burmecia");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-1.burmecia")
+    ?.sections.find((entry) => entry.id === "burmecia-beatrix-preparation");
+  const prepStep = section?.steps.find((entry) => entry.id === "burmecia-palace-preparation");
+  const fightStep = section?.steps.find((entry) => entry.id === "burmecia-beatrix-steals");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 14/);
+  assert.match(guidance.levelRationale, /Level 16/);
+  assert.match(guidance.levelRationale, /not party-level targets/);
+  assert.match(guidance.difficultyAssessment ?? "", /Gamer Guides describes Beatrix as tough/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective single-source/);
+  assert.match(guidance.optionalGrinding, /do not prescribe a party-level target/);
+  assert.match(guidance.setupAdvice, /Coral Ring absorbs Thunder Slash/);
+  assert.match(guidance.setupAdvice, /Silk Shirt halves lightning damage/);
+  assert.match(guidance.setupAdvice, /Vivi try Slow/);
+  assert.match(guidance.setupAdvice, /Common Phoenix Down and Uncommon Chain Plate/);
+  assert.match(guidance.setupAdvice, /Rare Mythril Sword is optional/);
+  assert.match(guidance.setupAdvice, /tenth turn or at 0 HP/);
+  assert.match(guidance.setupAdvice, /party at 1 HP/);
+  assert.ok(["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "cavesofnarshe-enemies"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /tenth turn or 0 HP/);
+  assert.match(jegged?.notes ?? "", /Coral Ring\/Silk Shirt lightning protection/);
+  assert.match(gamerGuides?.notes ?? "", /subjective route language/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-burmecia-71891"));
+  assert.ok(section?.sourceIds.includes("jegged-burmecia"));
+  assert.match(prepStep?.text ?? "", /Coral Ring/);
+  assert.match(prepStep?.detail ?? "", /enemy stats, not party targets/);
+  assert.match(fightStep?.text ?? "", /Vivi try Slow/);
+  assert.match(fightStep?.text ?? "", /Common Phoenix Down and Uncommon Chain Plate/);
+});

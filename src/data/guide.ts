@@ -2273,7 +2273,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/burmecia",
     accessed: "2026-10-24",
-    notes: "Original PlayStation route for the Cancer coin, hidden pickups and floor trap, Wei and Kal dialogue prerequisite, Mognet and Kupo Nut, Stiltzkin, Atla's shop, the Basilisk/Ironite/Magic Vice/Mimic/Type A city roster, and Beatrix's boss table. Its Beatrix HP/MP/level figures differ from most other sources.",
+    notes: "Original PlayStation route for the Cancer coin, hidden pickups and floor trap, Wei and Kal dialogue prerequisite, Mognet and Kupo Nut, Stiltzkin, Atla's shop, the Basilisk/Ironite/Magic Vice/Mimic/Type A city roster, and Beatrix's boss table. It says the fight ends at Beatrix's tenth turn or 0 HP and that her Stock Break leaves the party at 1 HP; the HP/MP/level figures differ from most other sources. It gives no normal-party level target.",
   },
   {
     id: "ff9-kouryaku-burmecia",
@@ -2305,7 +2305,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/10-Burmecia.html",
     accessed: "2026-10-23",
-    notes: "Independent room route, hidden Protection Bell and Ether, Germinas Boots floor trap, Wei and Kal prerequisite for a later ATE, Stiltzkin's 333-Gil bundle, Atla's Mogshop, and Beatrix preparation.",
+    notes: "Independent room route, hidden Protection Bell and Ether, Germinas Boots floor trap, Wei and Kal prerequisite for a later ATE, Stiltzkin's 333-Gil bundle, Atla's Mogshop, and Beatrix preparation. It lists Beatrix at Level 14 / 3,630 HP, recommends survival over a normal victory, back-row defense, healing items, Slow, and the three steals, and describes Coral Ring/Silk Shirt lightning protection. It sets no party-level target.",
   },
   {
     id: "gamerguides-burmecia",
@@ -2313,7 +2313,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-1/burmecia",
     accessed: "2026-10-23",
-    notes: "Independent route for chest locations, Mimics, hidden pickups, Wei and Kal, Mognet, Stiltzkin, Atla's shop, and Beatrix. The guide maps three Mimic chests and mentions an Ether drop; the GameFAQs enemy table lists the Always Ether plus three additional conditional drops, and Opa-Til cross-checks their item names and reports the rates. The guide's shorter description does not establish that the other slots are absent.",
+    notes: "Independent route for chest locations, Mimics, hidden pickups, Wei and Kal, Mognet, Stiltzkin, Atla's shop, and Beatrix. It calls the fight tough, says it ends at 0 HP or after Beatrix's tenth turn, and recommends Slow, healing/revival, and the three steals; this is subjective route language, not a party-level recommendation. The guide maps three Mimic chests and mentions an Ether drop; the GameFAQs enemy table lists the Always Ether plus three additional conditional drops, and Opa-Til cross-checks their item names and reports the rates. The guide's shorter description does not establish that the other slots are absent.",
   },
   {
     id: "elitegrindlab-burmecia",

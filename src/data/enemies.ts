@@ -274,7 +274,7 @@ const qualeSources = ["gamefaqs-frog-catching-71891", "elitegrindlab-qus-marsh",
 const grottoEnemySources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "gamefaqs-grotto-south-gate-79143", "rpgclassics-gizamaluke", "gamefaqs-abilities-71891"];
 const burmeciaEnemySources = [enemyListSourceId, "gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia"];
 const burmeciaRegionSources = [enemyListSourceId, "gamefaqs-journey-to-burmecia-71891", "jegged-gizamaluke", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
-const burmeciaBossSources = ["gamefaqs-burmecia-71891", "jegged-burmecia", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
+const burmeciaBossSources = ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "cavesofnarshe-enemies", "elitegrindlab-burmecia"];
 const cleyraEnemySources = [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough", "gamefaqs-abilities-71891"];
 const cleyraEncounterSources = [enemyListSourceId, "gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies", "cavesofnarshe-cleyra-walkthrough"];
 const cleyraBossSources = ["gamefaqs-cleyra-71891", "jegged-cleyra", "gamerguides-cleyra", "elitegrindlab-cleyra", "cavesofnarshe-enemies"];
@@ -5320,9 +5320,17 @@ const burmeciaEnemyRecords: EnemyRecord[] = [
     ],
     blueMagic: [],
     strategies: [
-      { title: "Keep the party alive while Zidane steals", detail: "Use Slow if available, move vulnerable characters to the back row, heal through Thunder Slash and Shock, and attempt the selected steals before the scripted ending. Do not attack solely to force a faster finish while still stealing.", sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "elitegrindlab-burmecia"] },
+      { title: "Keep the party alive while Zidane steals", detail: "Use Slow if available and move the party to the back row. Coral Ring absorbs Thunder Slash, while Silk Shirt halves lightning damage if already owned. Heal with Potions or Hi-Potions and revive anyone Shock knocks out; attempt the selected steals before the scripted ending.", sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia"] },
       { title: "Treat the Mythril Sword as an optional lottery", detail: "The Mythril Sword occupies the very rare fourth steal slot. The one-time turn window is short, and later sources provide the item type; prioritize Phoenix Down and Chain Plate if those copies matter to the chosen goal.", sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "elitegrindlab-burmecia"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Jegged and Caves of Narshe list Beatrix at Level 14, while GameFAQs lists Level 16; these are disputed enemy stats, not party-level targets. The reviewed normal-route sources do not recommend a standard party level.",
+      difficultyAssessment: "Gamer Guides describes Beatrix as tough. This is subjective single-source wording, not a level recommendation; the other reviewed normal routes do not provide a comparable difficulty rating.",
+      optionalGrinding: "The reviewed normal-route sources do not prescribe a party-level target or grinding quota. This is a short scripted survival-and-steal encounter, so optional leveling is only for players who want extra room to recover from her attacks.",
+      setupAdvice: "Rest and save through Atla before approaching the palace. Start in the back row; if already owned, Coral Ring absorbs Thunder Slash and Silk Shirt halves lightning damage. Bring Potions or Hi-Potions and Phoenix Downs, since Shock can knock out a character. Have Vivi try Slow early if he knows it. Use Zidane's turns for the Common Phoenix Down and Uncommon Chain Plate steals first; the Rare Mythril Sword is optional and can be bought later. Heal or revive with the other characters and stop stealing if the party is in danger. The fight ends after Beatrix's tenth turn or at 0 HP, then her finisher leaves the party at 1 HP.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-burmecia-71891", "jegged-burmecia", "gamerguides-burmecia", "elitegrindlab-burmecia", "cavesofnarshe-enemies"],
+    },
     routeObjectiveIds: [burmeciaStealsObjectiveId],
     notes: ["Published Beatrix stat tables disagree: most reviewed publishers give Level 14, 3,630 HP, and 3,467 MP, while GameFAQs prints Level 16, 3,360 HP, and 3,367 MP. The fight's end condition is also described differently: some call it unwinnable, while others say it can end at 0 HP; the finisher and 1-HP party outcome are consistently described. Steal rates are not modeled."],
   }, burmeciaChapterId, burmeciaBossSources, [burmeciaStealsMissableId], [burmeciaStealsCutoffId]),

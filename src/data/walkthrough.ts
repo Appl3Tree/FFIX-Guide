@@ -1536,14 +1536,14 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "burmecia-palace-preparation",
             kind: "save",
-            text: "Use a Tent through Atla if needed, then save before going up the central route to the palace. Check the party's equipment and use the strongest available back-row defense; bring Phoenix Downs and healing items. Confirm the Wei and Kal conversation, all local chests, and Stiltzkin's 333-Gil purchase before advancing.",
-            detail: "Published guides disagree on Beatrix's level and HP, so no required level is set. The chapter records battle preparation based on her attacks and the short steal window, not a fixed stat threshold.",
+            text: "Use a Tent through Atla if needed, then save before going up the central route to the palace. Start in the back row and bring Phoenix Downs and healing items. If already owned, equip Coral Ring to absorb Thunder Slash or Silk Shirt to halve lightning damage. Confirm the Wei and Kal conversation, all local chests, and Stiltzkin's 333-Gil purchase before advancing.",
+            detail: "Published guides disagree on Beatrix's Level 14/16 and HP/MP values; these are enemy stats, not party targets. The chapter records battle preparation based on her attacks and short steal window, not a fixed stat threshold.",
             objectiveIds: ["disc-1.burmecia.treasure-sweep", "disc-1.burmecia.stiltzkin-1"],
           },
           {
             id: "burmecia-beatrix-steals",
             kind: "combat",
-            text: "In the Beatrix battle, keep the party alive and use Zidane to attempt the Common Phoenix Down and Uncommon Chain Plate steals first; either chance-based attempt can fail. Try for the Rare Mythril Sword only if the early copy matters; that attempt can fail too, and later shops provide the weapon. Use Slow if available, and stop stealing if the party is in danger. The battle ends after Beatrix takes her tenth turn or her HP reaches zero; her finisher leaves the party at 1 HP.",
+            text: "In the Beatrix battle, have Vivi try Slow if available, keep the party alive, and use Zidane to attempt the Common Phoenix Down and Uncommon Chain Plate steals first; either chance-based attempt can fail. Try for the Rare Mythril Sword only if the early copy matters; that attempt can fail too, and later shops provide the weapon. Heal or revive with other characters and stop stealing if the party is in danger. The battle ends after Beatrix takes her tenth turn or her HP reaches zero; her finisher leaves the party at 1 HP.",
             detail: "Sources report different HP/level values and differ on whether draining her HP counts as winning. They agree that the encounter ends on a short scripted window with the party at 1 HP; GameFAQs names Stock Break, while Jegged reports Stock Break or Climhazzard. Published tables place Mythril Sword in the Rare fourth slot, but no success rate or attempt count is asserted, and the early copy is not permanently required.",
             objectiveIds: ["disc-1.burmecia.beatrix-steals"],
           },
