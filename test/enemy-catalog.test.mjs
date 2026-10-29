@@ -430,6 +430,41 @@ test("Kuja preparation blocks Reflect and zero-MP Flare Star triggers without in
   }
 });
 
+test("Nova Dragon preparation protects the one-time steal attempt without inventing a party level", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.nova-dragon");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-4.second-battle-of-iifa-tree");
+  const setupStep = chapter?.sections.find((entry) => entry.id === "second-iifa-final-preparation")
+    ?.steps.find((entry) => entry.id === "second-iifa-equipment-check");
+  const guidance = enemy?.preparationGuidance;
+  const sourceIds = ["gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon"];
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 67);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 67 as Nova Dragon's enemy stat, not a party-level target/);
+  assert.match(guidance.levelRationale, /54,941 from GameFAQs and 54,940 from Jegged/);
+  assert.match(guidance.optionalGrinding, /No reviewed route sets a Nova Dragon party-level target/);
+  assert.match(guidance.setupAdvice, /Ribbons absorb both elements/);
+  assert.match(guidance.setupAdvice, /Protect Rings reduce elemental damage by 50%/);
+  assert.match(guidance.setupAdvice, /Grand Armor is needed and no Mythril Sword was retained/);
+  assert.match(guidance.setupAdvice, /Sleep is useful during steals/);
+  assert.match(guidance.setupAdvice, /Silence, Darkness, and Slow/);
+  assert.match(guidance.setupAdvice, /keep Wind protection equipped/);
+  assert.match(guidance.setupAdvice, /Ice attacks and Bird Killer are optional/);
+  for (const value of [54941, 54940]) {
+    assert.equal(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.verification, "disputed");
+  }
+  assert.match(setupStep?.detail ?? "", /Level 67 is Nova Dragon's enemy stat/);
+  assert.match(setupStep?.detail ?? "", /Ribbons absorb both Wind and Water/);
+  assert.match(setupStep?.detail ?? "", /no party-level target or extra-grinding requirement/);
+  for (const sourceId of sourceIds) {
+    assert.ok(guidance.sourceIds.includes(sourceId));
+    assert.ok(enemy.sourceIds.includes(sourceId));
+    assert.ok(sources.some((source) => source.id === sourceId));
+  }
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

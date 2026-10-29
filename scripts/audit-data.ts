@@ -10947,6 +10947,31 @@ for (const value of [42383, 42382, 52382]) {
     errors.push(`Kuja HP ${value} must remain marked as a disputed source report.`);
   }
 }
+const novaDragonPreparation = novaDragonRecord?.preparationGuidance;
+const novaDragonPrepStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-4.second-battle-of-iifa-tree")
+  ?.sections.find((section) => section.id === "second-iifa-final-preparation")
+  ?.steps.find((step) => step.id === "second-iifa-equipment-check");
+const novaDragonPrepSources = ["gamefaqs-second-battle-iifa-tree-71891", "jegged-memoria-nova-dragon"];
+if (!novaDragonRecord || novaDragonRecord.kind !== "boss" ||
+  !novaDragonRecord.encounterIds.includes("encounter.iifa-tree.nova-dragon") ||
+  !novaDragonPreparation || novaDragonPreparation.suggestedLevelRange !== undefined ||
+  !novaDragonPreparation.levelRationale.includes("Level 67 as Nova Dragon's enemy stat, not a party-level target") ||
+  !novaDragonPreparation.levelRationale.includes("54,941 from GameFAQs and 54,940 from Jegged") ||
+  !novaDragonPreparation.optionalGrinding.includes("No reviewed route sets a Nova Dragon party-level target") ||
+  !novaDragonPreparation.setupAdvice.includes("Ribbons absorb both elements") ||
+  !novaDragonPreparation.setupAdvice.includes("Protect Rings reduce elemental damage by 50%") ||
+  !novaDragonPreparation.setupAdvice.includes("Master Thief if learned") ||
+  !novaDragonPreparation.setupAdvice.includes("Sleep is useful during steals") ||
+  !novaDragonPreparation.setupAdvice.includes("keep Wind protection equipped") ||
+  !novaDragonPrepStep?.detail.includes("no party-level target or extra-grinding requirement") ||
+  novaDragonPrepSources.some((sourceId) => !novaDragonPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Nova Dragon preparation must preserve the Level 67 enemy stat, disputed HP, sourced Wind/Water setup, one-time Grand Armor route, and lack of a party-level target.");
+}
+for (const value of [54941, 54940]) {
+  if (novaDragonRecord?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification !== "disputed") {
+    errors.push(`Nova Dragon HP ${value} must remain marked as a disputed source report.`);
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

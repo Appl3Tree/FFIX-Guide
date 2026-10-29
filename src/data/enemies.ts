@@ -4185,6 +4185,14 @@ const iifaTreeEnemyRecords: EnemyRecord[] = [
       { title: "Prioritize Wind and Water protection", detail: "Equip Wind resistance first, then Water resistance. Ribbons absorb both elements; Protect Rings reduce elemental damage. Bird Killer also increases damage against this Aerial enemy.", sourceIds: novaDragonSources },
       { title: "Use Sleep during the Grand Armor steal attempt", detail: "Sleep can keep Nova Dragon from attacking while Zidane tries to steal. Ultima Weapon's Soul Blade can inflict Sleep; Master Thief improves the very-rare steal chance. Silence may shift attacks toward Shockwave and Psychokinesis when Wind is already nullified.", sourceIds: novaDragonSources },
     ],
+    preparationGuidance: {
+      levelRationale: "GameFAQs and Jegged list Level 67 as Nova Dragon's enemy stat, not a party-level target. Their HP reports differ by one point: 54,941 from GameFAQs and 54,940 from Jegged.",
+      difficultyAssessment: "The one-time fight combines all-party Wind attacks and Tidal Wave's all-party Water damage while Zidane may spend turns stealing. Wind and Water protection helps keep the party stable through the steal attempts.",
+      optionalGrinding: "No reviewed route sets a Nova Dragon party-level target or prescribes extra grinding. Finish party, equipment, and ability setup at the Invincible before entering the purple orb.",
+      setupAdvice: "Prioritize Wind reduction, then Water resistance. Jegged says Ribbons absorb both elements and Protect Rings reduce elemental damage by 50%. Equip Zidane with Master Thief if learned; if Grand Armor is needed and no Mythril Sword was retained for the conditional synthesis route, attempt the one-time steal before defeating the dragon. Sleep is useful during steals, including Soul Blade with Ultima Weapon; Silence, Darkness, and Slow are other listed vulnerabilities. If using Silence, keep Wind protection equipped because it may shift the boss toward Shockwave and Psychokinesis. Ice attacks and Bird Killer are optional damage choices; avoid Earth because it is nullified.",
+      confidence: "partial",
+      sourceIds: novaDragonSources,
+    },
     routeObjectiveIds: [novaDragonStealsObjectiveId, memoriaEntryObjectiveId],
     notes: [
       "HP claims conflict by one point: GameFAQs lists 54,941 and Jegged lists 54,940. The conflict remains visible pending direct game verification.",

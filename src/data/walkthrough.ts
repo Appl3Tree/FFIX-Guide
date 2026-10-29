@@ -6543,7 +6543,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "second-iifa-equipment-check",
             kind: "optional",
             text: "Equip Wind protection first, then Water resistance. Add Bird Killer if available, and give Zidane Master Thief for the rare steal. If Zidane has Ultima Weapon, equip it so Soul Blade can inflict Sleep.",
-            detail: "Nova Dragon is vulnerable to Sleep, Silence, Darkness, and Slow. Sleep is especially useful while Zidane tries to steal; Silence may change the boss's action choices, so keep Wind protection in place if you use it. Choose any four-character party at the Invincible before taking off.",
+            detail: "Level 67 is Nova Dragon's enemy stat; the reviewed routes set no party-level target or extra-grinding requirement. Ribbons absorb both Wind and Water, while Protect Rings reduce elemental damage by 50%. Nova Dragon is vulnerable to Sleep, Silence, Darkness, and Slow. Sleep is especially useful while Zidane tries to steal; Silence may change the boss's action choices, so keep Wind protection in place if you use it. Choose any four-character party at the Invincible before taking off.",
           },
           {
             id: "second-iifa-enter-portal",
