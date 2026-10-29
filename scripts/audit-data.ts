@@ -603,21 +603,27 @@ const trueAchievementsDaliAteSource = sources.find((source) => source.id === "tr
 const rpgClassicsDaliSource = sources.find((source) => source.id === "rpgclassics-dali-walkthrough");
 const arrPeeGeeZDaliSource = sources.find((source) => source.id === "arrpeegeez-dali-walkthrough");
 const gamerGuidesDaliSource = sources.find((source) => source.id === "gamerguides-dali");
+const steamAteGuideDaliSource = sources.find((source) => source.id === "steam-community-ate-guide");
 const daliCatEye2Event = activeTimeEvents.find((event) => event.objectiveId === "ate.dali-cats-eye-2");
 if (
   !daliDaggerTriesHarderEvent?.trigger.includes("returning from the eastern field") ||
   !daliDaggerTriesHarderEvent.trigger.includes("Exact trigger timing remains unverified") ||
   !daliDaggerTriesHarderEvent.sourceIds.includes("trueachievements-dali-ate-walkthrough") ||
+  !daliDaggerTriesHarderEvent.sourceIds.includes("steam-community-ate-guide") ||
+  !daliDaggerTriesHarderEvent.trigger.includes("Steam ATE checklist reports other patterns") ||
   !["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"].every((sourceId) => daliDaggerTriesHarderEvent.sourceIds.includes(sourceId)) ||
   !["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"].every((sourceId) => daliCatEye2Event?.sourceIds.includes(sourceId)) ||
   !daliAteWarning?.note?.includes("trigger timing differs by route") ||
   !["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"].every((sourceId) => daliAteWarning.sourceIds.includes(sourceId)) ||
   !daliAteWarning.note.includes("returned HTTP 402") ||
   !daliAteWarning.action.includes("return to the inn to check for Dagger Tries Harder") ||
+  !daliAteWarning.action.includes("Steam ATE guide also reports area-transition and Inn-window routes") ||
+  !daliAteWarning.sourceIds.includes("steam-community-ate-guide") ||
   !daliAteRouteStep?.detail?.includes("indirect evidence") ||
   !daliAteRouteStep.detail.includes("do not settle the exact unlock trigger") ||
   !daliAteRouteSection?.sourceIds.includes("rpgclassics-dali-walkthrough") ||
   !daliAteRouteSection.sourceIds.includes("arrpeegeez-dali-walkthrough") ||
+  !daliAteRouteSection.sourceIds.includes("steam-community-ate-guide") ||
   rpgClassicsDaliSource?.url !== "https://shrines.rpgclassics.com/psx/ffix/dali.shtml" ||
   arrPeeGeeZDaliSource?.url !== "https://www.arrpeegeez.com/2016/04/final-fantasy-ix-walkthrough-part-four.html" ||
   !rpgClassicsDaliSource?.notes.includes("not treated as the game's exact unlock condition") ||
@@ -625,6 +631,10 @@ if (
   !gamerGuidesDaliSource?.notes.includes("After speaking with Vivi, it says Dagger Tries Harder may already have appeared or may appear then") ||
   !gamerGuidesDaliSource.notes.includes("enter and leave a building to make the prompt appear") ||
   !daliDaggerTriesHarderEvent.trigger.includes("Gamer Guides says that after speaking with Vivi the ATE may already have appeared or may appear then") ||
+  !steamAteGuideDaliSource?.notes.includes("three possible trigger routes") ||
+  !steamAteGuideDaliSource.notes.includes("explore enough areas") ||
+  !daliAteRouteStep?.text.includes("Steam ATE guide also reports area-transition and Inn-window trigger routes") ||
+  !daliAteRouteStep.detail.includes("does not verify one game-state condition") ||
   !trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402")
 ) {
   errors.push("Dali's Dagger Tries Harder route must preserve the alternate source timing, conservative checks, and the indexed-source access limit.");

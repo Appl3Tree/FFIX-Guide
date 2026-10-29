@@ -67,26 +67,37 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
   const daliCatsEye2 = eventByObjective.get("ate.dali-cats-eye-2");
   const daliAteWarning = missables.find((entry) => entry.id === "missable.disc-1.village-of-dali.ates");
   const trueAchievementsDaliAteSource = sources.find((entry) => entry.id === "trueachievements-dali-ate-walkthrough");
+  const steamAteGuideDaliSource = sources.find((entry) => entry.id === "steam-community-ate-guide");
   const gamerGuidesDaliSource = sources.find((entry) => entry.id === "gamerguides-dali");
   const rpgClassicsDaliSource = sources.find((entry) => entry.id === "rpgclassics-dali-walkthrough");
   const arrPeeGeeZDaliSource = sources.find((entry) => entry.id === "arrpeegeez-dali-walkthrough");
   const daliAteRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")
     ?.sections.find((section) => section.id === "village-road-and-windmill");
+  const daliAteRouteStep = daliAteRouteSection?.steps.find((step) => step.id === "dali-town-ate-followup");
   assert.ok(daliDaggerTriesHarder?.trigger.includes("returning from the eastern field"));
   assert.ok(daliDaggerTriesHarder?.trigger.includes("Exact trigger timing remains unverified"));
   assert.ok(daliDaggerTriesHarder?.sourceIds.includes("trueachievements-dali-ate-walkthrough"));
+  assert.ok(daliDaggerTriesHarder?.sourceIds.includes("steam-community-ate-guide"));
+  assert.ok(daliDaggerTriesHarder?.trigger.includes("Steam ATE checklist reports other patterns"));
   for (const sourceId of ["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"]) {
     assert.ok(daliDaggerTriesHarder?.sourceIds.includes(sourceId));
     assert.ok(daliCatsEye2?.sourceIds.includes(sourceId));
     assert.ok(daliAteWarning?.sourceIds.includes(sourceId));
     assert.ok(daliAteRouteSection?.sourceIds.includes(sourceId));
   }
+  assert.ok(daliAteRouteSection?.sourceIds.includes("steam-community-ate-guide"));
   assert.ok(rpgClassicsDaliSource?.notes.includes("not treated as the game's exact unlock condition"));
   assert.ok(arrPeeGeeZDaliSource?.notes.includes("neither each scene's screen trigger nor a mandatory order"));
-  assert.ok(daliAteRouteSection?.steps.find((step) => step.id === "dali-town-ate-followup")?.detail.includes("do not settle the exact unlock trigger"));
+  assert.ok(daliAteRouteStep?.detail.includes("do not settle the exact unlock trigger"));
+  assert.ok(daliAteRouteStep?.detail.includes("does not verify one game-state condition"));
+  assert.ok(daliAteRouteStep?.text.includes("Steam ATE guide also reports area-transition and Inn-window trigger routes"));
   assert.ok(daliAteWarning?.action.includes("return to the inn to check for Dagger Tries Harder"));
+  assert.ok(daliAteWarning?.action.includes("Steam ATE guide also reports area-transition and Inn-window routes"));
+  assert.ok(daliAteWarning?.sourceIds.includes("steam-community-ate-guide"));
   assert.ok(daliAteWarning?.note.includes("returned HTTP 402"));
   assert.ok(trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402"));
+  assert.ok(steamAteGuideDaliSource?.notes.includes("three possible trigger routes"));
+  assert.ok(steamAteGuideDaliSource?.notes.includes("explore enough areas"));
   assert.ok(gamerGuidesDaliSource?.notes.includes("After speaking with Vivi, it says Dagger Tries Harder may already have appeared or may appear then"));
   assert.ok(gamerGuidesDaliSource.notes.includes("enter and leave a building to make the prompt appear"));
   assert.ok(daliDaggerTriesHarder?.trigger.includes("Gamer Guides says that after speaking with Vivi the ATE may already have appeared or may appear then"));
