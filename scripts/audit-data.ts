@@ -4868,6 +4868,28 @@ if (summitStationWaltzRecord?.stats.find((stat) => stat.field === "level")?.valu
   !summitStationWaltzRecord?.notes.some((note) => note.includes("semi-rare") && note.includes("rare"))) {
   errors.push("The Summit Station Black Waltz 3 profile must preserve its rematch stats, StrategyWiki HP discrepancy, Freeze facts, steal-slot disagreement, and version note.");
 }
+const summitWaltzPreparation = summitStationWaltzRecord?.preparationGuidance;
+const summitWaltzPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.journey-to-treno")
+  ?.sections.find((section) => section.id === "journey-treno-black-waltz-3");
+const summitWaltzPreparationStep = summitWaltzPreparationSection?.steps.find((step) => step.id === "journey-treno-black-waltz-3-preparation");
+if (!summitWaltzPreparation || summitWaltzPreparation.suggestedLevelRange !== undefined ||
+  !summitWaltzPreparation.levelRationale.includes("Level 9 is Black Waltz 3's enemy stat") ||
+  !summitWaltzPreparation.levelRationale.includes("do not recommend a party level") ||
+  !summitWaltzPreparation.difficultyAssessment?.includes("subjective route assessments") ||
+  !summitWaltzPreparation.optionalGrinding.includes("prescribes extra grinding") ||
+  !summitWaltzPreparation.setupAdvice.includes("Dagger, Steiner, and Marcus") ||
+  !summitWaltzPreparation.setupAdvice.includes("Freeze prevents actions") ||
+  !summitWaltzPreparation.setupAdvice.includes("wait for it to clear or use a Remedy") ||
+  !summitWaltzPreparation.setupAdvice.includes("Steepled Hat and Lightning Staff") ||
+  !summitWaltzPreparation.setupAdvice.includes("Flame Staff") ||
+  !["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station"]
+    .every((sourceId) => summitWaltzPreparation.sourceIds.includes(sourceId) && summitStationWaltzRecord?.sourceIds.includes(sourceId)) ||
+  !summitWaltzPreparationStep?.text.includes("Dagger, Steiner, and Marcus") ||
+  !summitWaltzPreparationStep.text.includes("Shell") ||
+  !summitWaltzPreparationStep.detail?.includes("Level 9 is Black Waltz 3's enemy stat") ||
+  !summitWaltzPreparationSection?.sourceIds.includes("gamefaqs-journey-to-treno-71891")) {
+  errors.push("Summit Station Black Waltz 3 preparation must distinguish enemy level from party targets and cover the changed party, Freeze response, and source-backed steal choices.");
+}
 const bentiniHeightsPool = enemyEncounters.find((encounter) => encounter.id === "encounter.bentini-heights.world-map-pool");
 const bentiniTrickSparrow = enemyRecords.find((enemy) => enemy.id === "enemy.trick-sparrow");
 const bentiniExpectedEnemies = ["enemy.carve-spider", "enemy.mu", "enemy.ladybird", "enemy.mandragora", "enemy.trick-sparrow"];

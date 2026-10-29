@@ -290,3 +290,42 @@ test("Burmecia Beatrix preparation distinguishes disputed enemy stats and preser
   assert.match(fightStep?.text ?? "", /Vivi try Slow/);
   assert.match(fightStep?.text ?? "", /Common Phoenix Down and Uncommon Chain Plate/);
 });
+
+test("Black Waltz 3's Summit Station guidance accounts for the rematch party and Freeze", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.black-waltz-3-rematch");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-journey-to-treno-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-summit-station");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-summit-station");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.journey-to-treno")
+    ?.sections.find((entry) => entry.id === "journey-treno-black-waltz-3");
+  const prepStep = section?.steps.find((entry) => entry.id === "journey-treno-black-waltz-3-preparation");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 9);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 9 is Black Waltz 3's enemy stat/);
+  assert.match(guidance.levelRationale, /do not recommend a party level/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective route assessments/);
+  assert.match(guidance.optionalGrinding, /prescribes extra grinding/);
+  assert.match(guidance.setupAdvice, /Dagger, Steiner, and Marcus/);
+  assert.match(guidance.setupAdvice, /Black Waltz 3 does not target Dagger/);
+  assert.match(guidance.setupAdvice, /Freeze prevents actions/);
+  assert.match(guidance.setupAdvice, /physical hit while it remains active instantly KOs/);
+  assert.match(guidance.setupAdvice, /wait for it to clear or use a Remedy/);
+  assert.match(guidance.setupAdvice, /Darkness\/Blind/);
+  assert.match(guidance.setupAdvice, /Marcus to try for Steepled Hat and Lightning Staff/);
+  assert.match(guidance.setupAdvice, /Flame Staff if the early copy matters/);
+  assert.ok(["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /Freeze's physical-hit KO risk/);
+  assert.match(jegged?.notes ?? "", /without setting a party-level target/);
+  assert.match(gamerGuides?.notes ?? "", /Dagger should Shell and heal Steiner\/Marcus/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-journey-to-treno-71891"));
+  assert.ok(section?.sourceIds.includes("strategywiki-summit-station"));
+  assert.match(prepStep?.text ?? "", /save and heal before boarding/);
+  assert.match(prepStep?.text ?? "", /Marcus providing Steal/);
+  assert.match(prepStep?.detail ?? "", /Level 9 is Black Waltz 3's enemy stat, not a party target/);
+  assert.match(prepStep?.detail ?? "", /avoid physical attacks on a frozen character/);
+});

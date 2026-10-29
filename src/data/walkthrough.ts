@@ -1598,6 +1598,12 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station", "gamefaqs-items-71891", "gamefaqs-shops-71891", "flactem-disc-2-cleyra", "jegged-mognet-central"],
         steps: [
           {
+            id: "journey-treno-black-waltz-3-preparation",
+            kind: "save",
+            text: "At Summit Station, save and heal before boarding. Check Dagger's learned healing spells and consider Shell on Steiner and Marcus if she has learned it; restock Potions and Remedies if needed. This rematch uses Dagger, Steiner, and Marcus, with Marcus providing Steal.",
+            detail: "Level 9 is Black Waltz 3's enemy stat, not a party target; reviewed normal-route sources do not prescribe grinding. The HP listings disagree between 1,292 and 1,300. Freeze is the main hazard: avoid physical attacks on a frozen character until the status clears, or use a Remedy if available.",
+          },
+          {
             id: "journey-treno-black-waltz-3-steals",
             kind: "combat",
             text: "During the Black Waltz 3 rematch, use Marcus to attempt Steepled Hat, Lightning Staff, and Flame Staff before ending the battle. Dagger is not targeted by Black Waltz 3, so use her to heal Steiner and Marcus. If Freeze lands on a character, avoid hitting that character with a physical attack until the status clears.",

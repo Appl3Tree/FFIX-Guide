@@ -2425,7 +2425,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/journey-to-treno",
     accessed: "2026-10-24",
-    notes: "Covers Summit Station, Nazna's Mognet handoff, the second Black Waltz 3 battle, South Gate route, Bentini Heights, and Quan's Dwelling. Some equipment stock and exact battle values are not independently confirmed.",
+    notes: "Covers Summit Station, Nazna's Mognet handoff, the second Black Waltz 3 battle, South Gate route, Bentini Heights, and Quan's Dwelling. It lists Level 9 / 1,292 HP, describes Freeze's physical-hit KO risk and Dagger's protected role, and identifies Marcus as the stealer; it gives no normal-party level target. Some equipment stock and exact battle values are not independently confirmed.",
   },
   {
     id: "jegged-summit-station",
@@ -2433,7 +2433,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/11-Summit-Station-Alexandria-Station-South-Gate.html",
     accessed: "2026-10-24",
-    notes: "Independent route for the Phoenix Down, Nazna's two-step letter handoff, shop, Black Waltz 3 rematch, Dali return, South Gate Gil, Bentini Heights, Ghost, and Quan's Dwelling.",
+    notes: "Independent route for the Phoenix Down, Nazna's two-step letter handoff, shop, Black Waltz 3 rematch, Dali return, South Gate Gil, Bentini Heights, Ghost, and Quan's Dwelling. It calls the fight fairly easy, lists Level 9 / 1,292 HP, and describes Dagger's healing role, Freeze, and Marcus's three steals without setting a party-level target.",
   },
   {
     id: "gamerguides-summit-station",
@@ -2441,7 +2441,7 @@ export const sources = [
     publisher: "Gamer Guides",
     url: "https://www.gamerguides.com/final-fantasy-ix/guide/walkthrough/disc-2/summit-station",
     accessed: "2026-10-23",
-    notes: "Cross-checks Nazna's return letter, shop/equipment advice, Black Waltz 3's Freeze mechanic and Dagger behavior, the South Gate 1,610-Gil chest, Ghost, and Quan's Dwelling pickups. Its Treno Flame Staff recovery note is corroborated by the dedicated GameFAQs item/shop tables, which also list Cleyra, Lindblum, Conde Petie, Black Mage Village, and Alexandria.",
+    notes: "Cross-checks Nazna's return letter, shop/equipment advice, Black Waltz 3's Freeze mechanic and Dagger behavior, the South Gate 1,610-Gil chest, Ghost, and Quan's Dwelling pickups. It says Dagger should Shell and heal Steiner/Marcus, describes the fight as not difficult, and identifies Flame Staff as optional because Treno sells it next. Its Treno Flame Staff recovery note is corroborated by the dedicated GameFAQs item/shop tables, which also list Cleyra, Lindblum, Conde Petie, Black Mage Village, and Alexandria.",
   },
   {
     id: "strategywiki-summit-station",

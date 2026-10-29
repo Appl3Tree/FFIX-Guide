@@ -5900,6 +5900,14 @@ const summitStationEnemyRecords: EnemyRecord[] = [
       { title: "Steal before ending the one-time fight", detail: "Have Marcus attempt Steepled Hat, Lightning Staff, and Flame Staff before attacking to finish the encounter. Exact steal percentages are omitted because the references differ in their labels and rates.", sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station"] },
       { title: "Let Dagger heal and protect frozen allies", detail: "Black Waltz 3 ignores Dagger, so use her to heal the others. Freeze prevents actions, and a normal physical hit can instantly KO a frozen ally; use Shell on Marcus and Steiner if available.", sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 9 is Black Waltz 3's enemy stat; the reviewed normal-route sources do not recommend a party level. Its HP is listed as 1,292 by GameFAQs and Jegged and 1,300 by StrategyWiki.",
+      difficultyAssessment: "Jegged calls the rematch fairly easy, and Gamer Guides describes it as not difficult. These are subjective route assessments, not gameplay-tested ratings or party-level recommendations.",
+      optionalGrinding: "No reviewed normal-route source prescribes extra grinding or a party-level target. Use Summit Station's save, shop, and healing stop to prepare; the sources emphasize handling Freeze and keeping Dagger available to heal.",
+      setupAdvice: "At Summit Station, save and heal before boarding. Check Dagger's learned healing spells; if she has Shell, cast it on Steiner and Marcus to reduce spell damage. The rematch party is Dagger, Steiner, and Marcus, and Black Waltz 3 does not target Dagger, so use her to heal the others. Freeze prevents actions, and a physical hit while it remains active instantly KOs the frozen character; wait for it to clear or use a Remedy if available, and avoid physical attacks on that target. Darkness/Blind is an optional way to reduce the risk from its physical follow-up. Use Marcus to try for Steepled Hat and Lightning Staff, then Flame Staff if the early copy matters; the three chance-based steals can fail, and Flame Staff is sold at Treno after the fight. If only Dagger remains, the boss attacks itself rather than her.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-journey-to-treno-71891", "jegged-summit-station", "gamerguides-summit-station", "strategywiki-summit-station"],
+    },
     routeObjectiveIds: [summitStationBlackWaltzStealsObjectiveId],
     notes: [
       "The rematch is a distinct enemy version from the Cargo Ship fight. GameFAQs and Jegged list Level 9 and 1,292 HP; StrategyWiki reports 1,300 HP, which appears to be a rounded value.",
