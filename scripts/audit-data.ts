@@ -3772,6 +3772,28 @@ if (!prisonCageViviEncounter || !prisonCageViviEncounter.objectiveIds.includes(p
 if (!broadswordWarning?.classification.includes("recoverable-later") || !broadswordWarning.recovery.includes("Dali") || !broadswordWarning.recovery.includes("Ipsen")) {
   errors.push("The Prison Cage steal warning must distinguish the one-time steal from Broadsword's Dali and Ipsen recovery routes.");
 }
+const prisonCageGarnet = enemyRecords.find((enemy) => enemy.id === "enemy.prison-cage-garnet");
+const prisonCageGarnetPreparation = prisonCageGarnet?.preparationGuidance;
+const prisonCageViviPreparation = broadswordEnemy?.preparationGuidance;
+const prisonCageRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.evil-forest")?.sections.find((section) => section.id === "crash-site-and-prison-cages");
+const prisonCageGarnetStep = prisonCageRouteSection?.steps.find((step) => step.id === "prison-cage-garnet");
+const prisonCageViviStep = prisonCageRouteSection?.steps.find((step) => step.id === "prison-cage-vivi");
+if (!prisonCageGarnetPreparation || prisonCageGarnetPreparation.suggestedLevelRange !== undefined ||
+  !prisonCageGarnetPreparation.levelRationale.includes("Level 2") ||
+  !prisonCageGarnetPreparation.optionalGrinding.includes("do not recommend grinding") ||
+  !prisonCageGarnetPreparation.setupAdvice.includes("Free Energy") || !prisonCageGarnetPreparation.setupAdvice.includes("Tidal Flame") ||
+  !prisonCageGarnetPreparation.setupAdvice.includes("After two Absorb attacks") ||
+  !prisonCageGarnetPreparation.sourceIds.includes("gamefaqs-evil-forest-71891") ||
+  !prisonCageViviPreparation || prisonCageViviPreparation.suggestedLevelRange !== undefined ||
+  !prisonCageViviPreparation.levelRationale.includes("Level 2") ||
+  !prisonCageViviPreparation.setupAdvice.includes("no pause to prepare") ||
+  !prisonCageViviPreparation.setupAdvice.includes("Broadsword and Uncommon Leather Wrist") ||
+  !prisonCageViviPreparation.setupAdvice.includes("Potion after two Absorb") ||
+  !prisonCageGarnetStep?.detail.includes("no party-level target") ||
+  !prisonCageViviStep?.text.includes("no preparation pause") ||
+  !prisonCageViviStep?.detail.includes("GameFAQs reports 533 HP")) {
+  errors.push("Prison Cage preparation must keep captive survival, back-to-back timing, the Level 2 enemy stat, and the Vivi-form steal/HP disputes linked to both rescue steps.");
+}
 const iceCavernBossEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.ice-cavern.black-waltz-1-sealion");
 if (!iceCavernBossEncounter || iceCavernBossEncounter.kind !== "boss" ||
   !iceCavernBossEncounter.formation.some((entry) => entry.enemyId === "enemy.black-waltz-1") ||
@@ -4787,6 +4809,20 @@ if (!openingMaskedManEncounter || openingMaskedManEncounter.chapterId !== "disc-
   !crashSiteBakuWarning?.classification.includes("recoverable-later") ||
   !evilForestEscapeCutoff?.missableIds.includes("missable.disc-1.evil-forest.baku-steals")) {
   errors.push("The opening Masked Man and Crash Site Baku must remain separate boss encounters with their respective steal windows and disputed HP claims.");
+}
+const maskedManPreparation = openingMaskedManRecord?.preparationGuidance;
+const maskedManOpeningSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.alexandria")?.sections.find((section) => section.id === "tantalus-opening");
+const maskedManPreparationStep = maskedManOpeningSection?.steps.find((step) => step.id === "masked-man-preparation");
+if (!maskedManPreparation || maskedManPreparation.suggestedLevelRange !== undefined ||
+  !maskedManPreparation.levelRationale.includes("Level 1") || !maskedManPreparation.levelRationale.includes("no party-level recommendation") ||
+  !maskedManPreparation.difficultyAssessment?.includes("subjective") ||
+  !maskedManPreparation.optionalGrinding.includes("no EXP or AP") ||
+  !maskedManPreparation.setupAdvice.includes("Potion, Wrist, and Mage Masher") ||
+  !maskedManPreparation.setupAdvice.includes("Ow") || !maskedManPreparation.setupAdvice.includes("188") ||
+  !maskedManPreparation.sourceIds.includes("jegged-prima-vista") || maskedManPreparation.sourceIds.some((sourceId) => !sourceIds.has(sourceId)) ||
+  !maskedManOpeningSection?.sourceIds.includes("jegged-prima-vista") ||
+  !maskedManPreparationStep?.text.includes("no party-level target") || !maskedManPreparationStep?.detail.includes("older FAQ lists 160")) {
+  errors.push("Opening Masked Man preparation must separate the enemy's Level 1 stat from party guidance and connect the steals, scripted opener, and disputed HP to the route.");
 }
 for (const [enemyId, itemId, slot, chapterId, objectiveId] of [
   ["enemy.masked-man-opening", "game-item.potion", "common", "disc-1.alexandria", "disc-1.alexandria.masked-man-steals"],

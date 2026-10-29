@@ -977,7 +977,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/alexandria",
     accessed: "2026-10-26",
-    notes: "Detailed Disc I route for Alexandria town, the performance, Moonstone claim, guardhouse, Knights of Pluto, and escape. Its town item list and route include the Main Street, square, residence, North Street, tavern, and steeple pickups; it places the Remedy near the shop counter and the 63 Gil in a rooftop bird's nest, while other guides vary on the nearby exact marker. Original PlayStation guide; some pickup placements and enemy data differ across guides.",
+    notes: "Detailed Disc I route for Alexandria town, the performance, Moonstone claim, guardhouse, Knights of Pluto, and escape. Its opening table lists the Masked Man at Level 1 with 188 HP and Potion/Wrist/Mage Masher steals; it notes that all four party members can steal and that 'Ow' makes Baku trip and miss a turn. The 188-HP claim conflicts with an older GameFAQs FAQ's 160. Its town item list includes Main Street, square, residence, North Street, tavern, and steeple pickups; it places Remedy near the shop counter and 63 Gil in a rooftop bird's nest, while other guides vary on the nearby exact marker. Original PlayStation guide; some pickup placements and enemy data differ across guides.",
   },
   {
     id: "gamefaqs-walkthrough-15690",
@@ -1018,6 +1018,14 @@ export const sources = [
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/storyline-mini-games",
     accessed: "2026-10-28",
     notes: "Documents the sword-fight score/retry rules, the eight Knights of Pluto besides Steiner and their Elixir reward, and Cooking in Madain Sari. For the meal it assigns Momatose to fishing, Mocha to potatoes, and Chimomo to kitchen help; recommends 11 servings, no Oglop, keeping Momatose's fish, and asking Quina for help. It says the meal has no item reward but changes later scenes.",
+  },
+  {
+    id: "jegged-prima-vista",
+    title: "Final Fantasy IX Walkthrough: M.S. Prima Vista",
+    publisher: "Jegged",
+    url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/01-MS-Prima-Vista.html",
+    accessed: "2026-10-28",
+    notes: "Independent route cross-check for the opening Masked Man: Level 1, 188 HP, three steals, low damage, and occasional missed turns when Baku trips. It recommends taking all three items before defeating him and describes the encounter as fairly easy; these are route observations, not a party-level target or gameplay-tested difficulty rating.",
   },
   {
     id: "jegged-alexandria",
@@ -1121,7 +1129,7 @@ export const sources = [
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/evil-forest",
     accessed: "2026-10-24",
-    notes: "Crash Site, ATEs, two Prison Cage fights, Prima Vista wreckage sweep, Baku, Monty/Mognet, spring, Plant Brain, and escape route. Its second Prison Cage table lists Broadsword as Common and Leather Wrist as Uncommon. Its Plant Brain table lists Common Eye Drops and Uncommon Iron Helm steals, one guaranteed Phoenix Down, and three Potion drop slots; the exact Potion rarity labels differ from Jegged's listed rates. Its Evil Forest trail lists Dendrobium, Fang [A], and Goblin, and its Gunitas Basin route lists Goblin, Mu, and Python. Its Movie Critic sidebar lists eight events and groups Lesson 2 with Evil Forest; the Moogle FAQ places Lesson 2 after freeing Mois in Ice Cavern, so this guide tracks it there. Steal odds and some enemy data are cross-checked rather than repeated where disputed.",
+    notes: "Crash Site, ATEs, two Prison Cage fights, Prima Vista wreckage sweep, Baku, Monty/Mognet, spring, Plant Brain, and escape route. For the first Cage, it recommends a Potion for Garnet after two Absorbs, Free Energy instead of Tidal Flame, and says Trance does not carry between fights; the second Cage automatically begins with Vivi trapped and casting Fire, and it suggests healing him after two Absorbs. Its second Prison Cage table lists Broadsword as Common and Leather Wrist as Uncommon. Its Plant Brain table lists Common Eye Drops and Uncommon Iron Helm steals, one guaranteed Phoenix Down, and three Potion drop slots; the exact Potion rarity labels differ from Jegged's listed rates. Its Evil Forest trail lists Dendrobium, Fang [A], and Goblin, and its Gunitas Basin route lists Goblin, Mu, and Python. Its Movie Critic sidebar lists eight events and groups Lesson 2 with Evil Forest; the Moogle FAQ places Lesson 2 after freeing Mois in Ice Cavern, so this guide tracks it there. Steal odds and some enemy data are cross-checked rather than repeated where disputed.",
   },
   {
     id: "gamefaqs-evil-forest-79143",
@@ -1137,7 +1145,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-1/04-The-Evil-Forest.html",
     accessed: "2026-10-23",
-    notes: "Independent route and boss cross-check for cages, wreckage pickups, Cinna's shop, Monty, the spring, Plant Brain, and escape. For the second Prison Cage, it lists Common Broadsword (70%) and Uncommon Leather Wrist (23%), specifying odds per connected steal attempt. Its Gunitas Basin route lists Goblin, Mu, and Python. It lists Eye Drops as Plant Brain's Common steal, Iron Helm as Rare (6% per connected attempt), a guaranteed Phoenix Down, and three chance-based Potion drops (37.5%, 12.5%, and 0.4%); the Potion rarity labels differ from GameFAQs' table, and GameFAQs/Gamer Guides label Iron Helm Uncommon. These source-specific steal claims are not normalized into a single rate. Its recommended level 3–4 is treated as secondary comfort guidance, not a universal requirement.",
+    notes: "Independent route and boss cross-check for cages, wreckage pickups, Cinna's shop, Monty, the spring, Plant Brain, and escape. For the first Prison Cage, it says Garnet can survive two Absorbs, recommends Potion afterward and Free Energy rather than Tidal Flame, which hits Garnet. The second battle follows immediately; Vivi casts Fire and should receive a Potion after two Absorbs. Jegged lists 513 HP for both cages, while GameFAQs lists 533 HP for the second. For that second Prison Cage, Jegged lists Common Broadsword (70%) and Uncommon Leather Wrist (23%), specifying odds per connected steal attempt. Its Gunitas Basin route lists Goblin, Mu, and Python. It lists Eye Drops as Plant Brain's Common steal, Iron Helm as Rare (6% per connected attempt), a guaranteed Phoenix Down, and three chance-based Potion drops (37.5%, 12.5%, and 0.4%); the Potion rarity labels differ from GameFAQs' table, and GameFAQs/Gamer Guides label Iron Helm Uncommon. These source-specific steal claims are not normalized into a single rate. Its Lv. 3–4 suggestion is for Plant Brain preparation, not the Prison Cage fights, and is treated as secondary comfort guidance rather than a universal requirement.",
   },
   {
     id: "vgkami-evil-forest",

@@ -219,7 +219,7 @@ const evilForestBossSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", 
 const prisonCageViviStealSources = [...evilForestBossSources, "opatil-steal-list"];
 const plantBrainEyeDropsStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "jegged-evil-forest", "gamerguides-evil-forest"];
 const plantBrainIronHelmStealSources = [enemyListSourceId, "gamefaqs-evil-forest-71891", "gamefaqs-evil-forest-79143", "gamerguides-evil-forest"];
-const maskedManSources = ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "rpgclassics-primavista", "gamefaqs-walkthrough-15690"];
+const maskedManSources = ["gamefaqs-alexandria-71891", "gamefaqs-alexandria-79143", "jegged-prima-vista", "rpgclassics-primavista", "gamefaqs-walkthrough-15690"];
 const crashSiteBakuSources = ["gamefaqs-evil-forest-71891", "rpgclassics-bestiary-a-c", "vgkami-evil-forest", "gamefaqs-walkthrough-15690"];
 const iceCavernEnemySources = [enemyListSourceId, "gamefaqs-ice-cavern-71891", "jegged-ice-cavern"];
 const iceCavernBossSources = ["gamefaqs-ice-cavern-71891", "jegged-ice-cavern", "rpgclassics-ice-cavern"];
@@ -4652,9 +4652,17 @@ const alexandriaEnemyRecords: EnemyRecord[] = [
     blueMagic: [],
     strategies: [{
       title: "Steal the three useful items before finishing the fight",
-      detail: "Use Steal until Potion, Wrist, and Mage Masher are collected; Mage Masher is the strongest early weapon for Zidane. The items have later recovery routes, so these are valuable early copies rather than permanent item-type losses.",
+      detail: "All four starting characters can use Steal; take Potion, Wrist, and Mage Masher before attacking, prioritizing Mage Masher as Zidane's early weapon upgrade. Baku's weak physical attacks and occasional trip make the opening tutorial low pressure. The items have later recovery routes, so these are valuable early copies rather than permanent item-type losses.",
       sourceIds: maskedManSources,
     }],
+    preparationGuidance: {
+      levelRationale: "Level 1 is the Masked Man's enemy stat. This is the scripted opening tutorial with Zidane, Blank, Cinna, and Marcus; the reviewed routes give no party-level recommendation.",
+      difficultyAssessment: "Jegged describes the fight as fairly easy and says Baku does little damage, sometimes tripping and missing a turn. This is a subjective route assessment; an older GameFAQs walkthrough says Cinna can take a stronger hit.",
+      optionalGrinding: "No grinding is possible before this first battle, and the sources give no reason to delay it. The opening fight awards no EXP or AP; Level 1 is the enemy stat, not a party target.",
+      setupAdvice: "Before lighting the candle, collect the room's 47 Gil and Potion; naming Zidane triggers the fight immediately. All four characters have Steal, so try for Potion, Wrist, and Mage Masher before attacking; prioritize Mage Masher as an early Zidane weapon. Baku uses weak physical attacks and may trip with Ow, losing his turn. Use a Potion if a character is in danger. HP is listed as 188 by current route tables and 160 by an older GameFAQs guide; either way, finish with ordinary attacks after the steals.",
+      confidence: "disputed",
+      sourceIds: maskedManSources,
+    },
     routeObjectiveIds: ["disc-1.alexandria.masked-man-steals"],
     notes: [
       "GameFAQs 71891 lists 188 HP, while GheddonLN's older FAQ lists 160 HP for the opening Baku battle. The discrepancy is preserved; the older guide does not establish whether it reflects a different release or a table error.",
@@ -4693,6 +4701,13 @@ const evilForestEnemyRecords: EnemyRecord[] = [
     strategies: [
       { title: "Keep Garnet alive", detail: "Absorb drains Garnet's HP. Heal her before a third successful drain can cause a Game Over, and use Zidane's automatic Trance on the cage rather than Tidal Flame.", sourceIds: evilForestBossSources },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 2 is this Prison Cage form's enemy stat. It is the first scripted rescue battle; the examined routes do not give a party-level target.",
+      optionalGrinding: "The reviewed routes do not recommend grinding for this scripted encounter. Prioritize Garnet's survival: her KO causes a Game Over, so manage her HP rather than extending the fight.",
+      setupAdvice: "Zidane enters Trance automatically. Use Free Energy on the cage and do not use Tidal Flame, which also hits Garnet. The cage is weak to Fire and has nothing to steal. After two Absorb attacks, use a Potion on Garnet before the next drain can KO her. Trance does not carry into the immediately following Prison Cage fight, so use it now.",
+      confidence: "partial",
+      sourceIds: evilForestBossSources,
+    },
     routeObjectiveIds: ["disc-1.evil-forest.getting-emotional"],
     notes: ["The first scripted boss fight begins with Zidane in Trance and is the supported Steam Getting Emotional trigger."],
   }, evilForestChapterId, [...evilForestBossSources, "steam-achievements"]),
@@ -4727,6 +4742,13 @@ const evilForestEnemyRecords: EnemyRecord[] = [
     strategies: [
       { title: "Attempt both equipment steals", detail: "The second battle is the first Prison Cage encounter with stealable equipment. Broadsword is Common and Leather Wrist is Uncommon; either attempt can fail. Heal Vivi after repeated Absorb attacks and retry before finishing the boss.", sourceIds: prisonCageViviStealSources },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 2 is the Prison Cage's enemy stat. The sources do not recommend a party level for this immediate second rescue fight; its HP is disputed at 513 or 533.",
+      optionalGrinding: "No reviewed source recommends grinding for the second cage. The fight starts immediately after the Garnet battle, and Vivi's HP—not party level—is the practical limit while Zidane steals.",
+      setupAdvice: "There is no pause to prepare between cage battles. Vivi starts trapped and casts Fire for about 80 damage whenever his turn arrives, but Absorb can still KO him and cause a Game Over. Have Zidane try the Common Broadsword and Uncommon Leather Wrist steals while Vivi is safe; the rates differ by source and either attempt can fail. Use a Potion after two Absorb attacks, or stop stealing and finish the cage if Vivi is in danger. The cage is weak to Fire, and its HP is listed as 533 by GameFAQs versus 513 by Jegged.",
+      confidence: "disputed",
+      sourceIds: prisonCageViviStealSources,
+    },
     routeObjectiveIds: ["disc-1.evil-forest.prison-cage-steals"],
     notes: [
       "The two sources disagree on the second battle's HP: GameFAQs lists 533 and Jegged repeats 513. Both values are preserved without assuming cross-release parity.",

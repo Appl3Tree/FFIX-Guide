@@ -367,3 +367,84 @@ test("Festival Zaghnol preparation separates enemy level from the timed winner r
   assert.match(fightStep?.detail ?? "", /Freya can Jump or heal/);
   assert.match(fightStep?.detail ?? "", /GameFAQs says Zidane usually needs to be KO/);
 });
+
+test("Opening Masked Man preparation covers the forced tutorial and source-backed steals", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.masked-man-opening");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-alexandria-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-prima-vista");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-1.alexandria")
+    ?.sections.find((entry) => entry.id === "tantalus-opening");
+  const prepStep = section?.steps.find((entry) => entry.id === "masked-man-preparation");
+  const stealStep = section?.steps.find((entry) => entry.id === "masked-man-steals");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 1);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 1 is the Masked Man's enemy stat/);
+  assert.match(guidance.levelRationale, /no party-level recommendation/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective route assessment/);
+  assert.match(guidance.optionalGrinding, /No grinding is possible/);
+  assert.match(guidance.optionalGrinding, /no EXP or AP/);
+  assert.match(guidance.setupAdvice, /collect the room's 47 Gil and Potion/);
+  assert.match(guidance.setupAdvice, /All four characters have Steal/);
+  assert.match(guidance.setupAdvice, /Potion, Wrist, and Mage Masher/);
+  assert.match(guidance.setupAdvice, /Ow/);
+  assert.match(guidance.setupAdvice, /188/);
+  assert.match(guidance.setupAdvice, /160/);
+  assert.ok(["gamefaqs-alexandria-71891", "jegged-prima-vista", "rpgclassics-primavista"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /all four party members can steal/);
+  assert.match(jegged?.notes ?? "", /Level 1, 188 HP/);
+  assert.ok(section?.sourceIds.includes("jegged-prima-vista"));
+  assert.match(prepStep?.text ?? "", /no party-level target/);
+  assert.match(prepStep?.detail ?? "", /older FAQ lists 160/);
+  assert.match(stealStep?.text ?? "", /all four characters can attempt steals/);
+});
+
+test("Prison Cage preparation prioritizes captive survival across the back-to-back forms", () => {
+  const garnetEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-garnet");
+  const viviEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-vivi");
+  const garnetGuidance = garnetEnemy?.preparationGuidance;
+  const viviGuidance = viviEnemy?.preparationGuidance;
+  const jegged = sources.find((entry) => entry.id === "jegged-evil-forest");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-1.evil-forest")
+    ?.sections.find((entry) => entry.id === "crash-site-and-prison-cages");
+  const garnetStep = section?.steps.find((entry) => entry.id === "prison-cage-garnet");
+  const viviStep = section?.steps.find((entry) => entry.id === "prison-cage-vivi");
+
+  assert.ok(garnetEnemy);
+  assert.ok(viviEnemy);
+  assert.ok(garnetGuidance);
+  assert.ok(viviGuidance);
+  assert.equal(garnetEnemy.stats.find((entry) => entry.field === "level")?.value, 2);
+  assert.equal(viviEnemy.stats.find((entry) => entry.field === "level")?.value, 2);
+  assert.equal(garnetGuidance.suggestedLevelRange, undefined);
+  assert.equal(viviGuidance.suggestedLevelRange, undefined);
+  assert.match(garnetGuidance.levelRationale, /Level 2 is this Prison Cage form's enemy stat/);
+  assert.match(garnetGuidance.optionalGrinding, /Garnet's survival/);
+  assert.match(garnetGuidance.setupAdvice, /enters Trance automatically/);
+  assert.match(garnetGuidance.setupAdvice, /Free Energy/);
+  assert.match(garnetGuidance.setupAdvice, /do not use Tidal Flame/);
+  assert.match(garnetGuidance.setupAdvice, /[Aa]fter two Absorb attacks/);
+  assert.match(garnetGuidance.setupAdvice, /Trance does not carry/);
+  assert.equal(garnetGuidance.confidence, "partial");
+  assert.match(viviGuidance.levelRationale, /Level 2 is the Prison Cage's enemy stat/);
+  assert.match(viviGuidance.levelRationale, /513 or 533/);
+  assert.match(viviGuidance.optionalGrinding, /starts immediately after the Garnet battle/);
+  assert.match(viviGuidance.setupAdvice, /Vivi starts trapped and casts Fire/);
+  assert.match(viviGuidance.setupAdvice, /Common Broadsword and Uncommon Leather Wrist/);
+  assert.match(viviGuidance.setupAdvice, /Potion after two Absorb attacks/);
+  assert.match(viviGuidance.setupAdvice, /533 by GameFAQs versus 513 by Jegged/);
+  assert.equal(viviGuidance.confidence, "disputed");
+  assert.ok(["gamefaqs-evil-forest-71891", "jegged-evil-forest"].every((id) =>
+    garnetGuidance.sourceIds.includes(id) && viviGuidance.sourceIds.includes(id)));
+  assert.match(jegged?.notes ?? "", /Lv\. 3–4 suggestion is for Plant Brain preparation, not the Prison Cage fights/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-evil-forest-71891"));
+  assert.match(garnetStep?.detail ?? "", /[Uu]se a Potion after two Absorbs/);
+  assert.match(garnetStep?.detail ?? "", /no party-level target/);
+  assert.match(viviStep?.text ?? "", /no preparation pause/);
+  assert.match(viviStep?.text ?? "", /after two Absorbs/);
+  assert.match(viviStep?.detail ?? "", /70%\/23% per connected steal attempt/);
+});
