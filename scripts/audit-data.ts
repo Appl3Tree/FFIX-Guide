@@ -2841,6 +2841,24 @@ if (!alexandriaMistodonPreparation || alexandriaMistodonPreparation.suggestedLev
   errors.push("The Alexandria defense milestone must preserve its source-backed setup, absent level/grind target, and Excalibur II/low-EXP separation.");
 }
 
+const ipsensPreparationSection = walkthroughChapters
+  .find((chapter) => chapter.areaId === "disc-3.ipsens-castle")
+  ?.sections.find((section) => section.id === "ipsens-preparation");
+const ipsensPreparation = ipsensPreparationSection?.preparationGuidance;
+if (!ipsensPreparation || ipsensPreparation.suggestedLevelRange !== undefined ||
+  !ipsensPreparation.levelRationale.includes("No reviewed route gives a numeric party-level target") ||
+  !ipsensPreparation.levelRationale.includes("Taharka's Level 46 is an enemy stat") ||
+  !ipsensPreparation.difficultyAssessment?.includes("GameFAQs qualifies") ||
+  !ipsensPreparation.difficultyAssessment.includes("no shared difficulty rating") ||
+  !ipsensPreparation.optionalGrinding.includes("zero random encounters") ||
+  !ipsensPreparation.optionalGrinding.includes("Excalibur II") ||
+  !ipsensPreparation.setupAdvice.includes("Amarant leaves") ||
+  !ipsensPreparation.setupAdvice.includes("Attack command") ||
+  !ipsensPreparation.setupAdvice.includes("abilities, magic, and armor") ||
+  !["gamefaqs-ipsens-castle-71891", "jegged-ipsens-castle", "gamefaqs-perfect-game-41181"].every((sourceId) => ipsensPreparation.sourceIds.includes(sourceId))) {
+  errors.push("Ipsen's Castle milestone guidance must preserve source-scoped party/difficulty advice and its separate zero-encounter Excalibur II plan.");
+}
+
 for (const area of guideAreas) {
   if (area.state !== "planned" && !walkthroughAreaIds.has(area.id)) {
     errors.push(`Area ${area.id} has a non-planned coverage state but no walkthrough content.`);

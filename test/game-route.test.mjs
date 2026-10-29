@@ -70,6 +70,27 @@ test("Alexandria's forced Mistodon sequence has partial chapter-level preparatio
   assert.ok(section.steps.some((step) => step.id === "trouble-seven-mistodon-fights"));
 });
 
+test("Ipsen's Castle preparation separates its weapon rule, party choice, and Excalibur II route", () => {
+  const section = walkthroughChapters
+    .find((chapter) => chapter.areaId === "disc-3.ipsens-castle")
+    ?.sections.find((entry) => entry.id === "ipsens-preparation");
+  const guidance = section?.preparationGuidance;
+
+  assert.ok(guidance);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.equal(guidance.confidence, "partial");
+  assert.match(guidance.levelRationale, /No reviewed route gives a numeric party-level target/i);
+  assert.match(guidance.levelRationale, /Taharka's Level 46 is an enemy stat/i);
+  assert.match(guidance.difficultyAssessment, /no shared difficulty rating.*GameFAQs/i);
+  assert.match(guidance.optionalGrinding, /zero random encounters/i);
+  assert.match(guidance.optionalGrinding, /Excalibur II/i);
+  assert.match(guidance.setupAdvice, /Attack command.*abilities, magic, and armor are not inverted/i);
+  assert.match(guidance.setupAdvice, /Amarant leaves/i);
+  assert.ok(guidance.sourceIds.every((sourceId) => section.sourceIds.includes(sourceId)));
+  assert.ok(section.steps.some((step) => step.id === "ipsens-location-and-party" && step.objectiveIds?.includes("disc-3.ipsens-castle.preparation")));
+  assert.ok(!section.steps.some((step) => step.id === "ipsens-weak-weapons"));
+});
+
 test("Alexandria Inn's Disc IV fallback is limited to a first-entry report", () => {
   const sourceId = "steam-tetra-endgame-opponents-687154254";
   const objective = objectives.find((entry) => entry.id === "disc-3.on-the-high-seas.alexandria-first-visit-card-players");
