@@ -5657,7 +5657,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
             id: "breaking-seal-restore-weapons",
             kind: "required",
             text: "Open the equipment menu and restore the characters' normal weapons after leaving Ipsen's Castle. Then check Quina's weapon, armor, learned Blue Magic, and current HP; Quina is assigned to the Earth Shrine with Zidane.",
-            detail: "The reversed weapon-power rule belongs to Ipsen's Castle. Use your usual equipment and abilities for the shrine sequence; no fixed level requirement is supported by the inspected sources.",
+            detail: "The reversed weapon-power rule belongs to Ipsen's Castle. Check optional sidequests while the full party is together, and make sure Quina has the support Blue Magic you want before the shrine assignments. The inspected sources do not set a party-level target.",
             objectiveIds: ["disc-3.breaking-the-seal.restore-equipment"],
           },
           {
@@ -5707,8 +5707,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "breaking-seal-earth-shrine-landing",
             kind: "required",
-            text: "Fly to the Earth Shrine southwest of the Desert Palace on the Outer Continent. Before entering, equip Zidane and Quina with Earth protection where available, such as Gaia Gear, Feather Boots, or Auto-Float; add Auto-Reflect if your setup supports it.",
-            detail: "Devil Killer is a helpful damage ability for Zidane if already learned. These are preparation options, not mandatory gear checks.",
+            text: "Fly to the Earth Shrine southwest of the Desert Palace on the Outer Continent. Before entering, protect Zidane and Quina with Gaia Gear, Circlet, Feather Boots, or Auto-Float where available; use Auto-Reflect if learned. Give Zidane Devil Killer if learned, and equip Insomniac if Quina will use Night.",
+            detail: "Quina's White Wind, Mighty Guard, and Bad Breath are useful support options; Magic Hammer can disrupt the Guardian's -ga spells if Auto-Reflect is unavailable. These are preparation choices, not mandatory gear checks.",
             objectiveIds: ["disc-3.breaking-the-seal.four-shrines"],
           },
           {
@@ -5721,8 +5721,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "breaking-seal-earth-mirror",
             kind: "required",
-            text: "Place the Earth Mirror on the altar to trigger the guardian battle. Check that Quina's support Blue Magic is ready and allow Zidane time to attempt both boss steals.",
-            detail: "The mirror interaction begins combat immediately. The next step contains the encounter-specific steals and strategy.",
+            text: "Place the Earth Mirror on the altar to start the boss battle. Recheck Quina's support abilities and plan time for Zidane to attempt the Avenger and Rubber Suit steals before finishing the Guardian.",
+            detail: "The mirror interaction begins combat immediately. The steal attempts are chance-based; no fixed number of attempts is required, and both item types have later recovery routes.",
             objectiveIds: ["disc-3.breaking-the-seal.four-shrines"],
           },
         ],
@@ -5736,8 +5736,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "breaking-seal-earth-guardian-steals",
             kind: "combat",
-            text: "Have Zidane attempt to steal the Avenger and Rubber Suit before ending the encounter. Quina can use Bad Breath to attempt Darkness, Mini, and Slow; Night can exploit the Guardian's Sleep weakness, but equip Insomniac first if you use it so your own party is not put to sleep.",
-            detail: "The fight is a one-time opportunity for these two steals, but both item types have later sources. Earth protection helps against Earthquake; the Guardian can also use strong elemental spells and a physical attack. Use Wind or Holy damage when available and heal as needed.",
+            text: "Have Zidane attempt to steal the Avenger and Rubber Suit before ending the encounter. Quina can use Bad Breath to try for Darkness, Mini, and Slow, then Night can exploit the Guardian's Sleep weakness if Insomniac is equipped so your party is protected.",
+            detail: "The boss's -ga spells are single-target; Auto-Reflect can blunt them, while Magic Hammer is an alternative if that ability is unavailable. Earth protection helps against Earthquake. The one-time steal attempts can fail, but both item types have later sources. Use Wind or Holy damage and heal as needed.",
             objectiveIds: ["disc-3.breaking-the-seal.earth-guardian-steals"],
           },
           {

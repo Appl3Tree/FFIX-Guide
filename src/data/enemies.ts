@@ -2369,6 +2369,13 @@ const earthGuardianEnemyRecords: EnemyRecord[] = [
       { title: "Use status before attempting the steals", detail: "GameFAQs lists Darkness, Mini, Sleep, and Slow as vulnerabilities. Night can put the boss to sleep; Bad Breath can attempt several listed statuses. Have Zidane try Avenger and Rubber Suit before finishing the one-time fight.", sourceIds: ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra"] },
       { title: "Eat for Earth Shake if Quina still needs it", detail: "Quina can learn Earth Shake from this boss with Eat. Use it after the boss is weakened, since the action ends the fight when the learning check succeeds.", sourceIds: earthGuardianSources },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 54 is the boss's stat. GameFAQs and Jegged provide no normal-party level target, so this profile does not infer one; the Earth Shrine encounter pairs Zidane and Quina regardless of the earlier active-party choice.",
+      optionalGrinding: "No reviewed route prescribes extra battles or a grind target. Complete any desired optional errands while the full party is available before entering the shrines; Earth Guardian awards 0 EXP, and Excalibur II runs should follow their separate timer and encounter plan.",
+      setupAdvice: "After Ipsen, restore normal weapons and equip Quina for support. Before entering Earth Shrine, protect Zidane and Quina with Gaia Gear, Circlet, Feather Boots, or Auto-Float where available; Auto-Reflect can blunt the -ga spells if learned. Equip Insomniac if using Quina's Night, and Devil Killer on Zidane if learned. Bring Quina's White Wind, Mighty Guard, and Bad Breath if learned; Magic Hammer can disrupt the -ga spells when Auto-Reflect is unavailable. In combat, use Bad Breath to try for Darkness, Mini, or Slow, then Night with Insomniac if Sleep control helps, while Zidane attempts the Avenger and Rubber Suit steals. Heal and protect against Earthquake and strong magic; after the selected steals, use Wind or Holy, avoid Earth (absorbed), and let Quina Eat once the boss is weakened if she still needs Earth Shake.",
+      confidence: "partial",
+      sourceIds: ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra"],
+    },
     routeObjectiveIds: [earthGuardianStealsObjectiveId, earthGuardianCompleteObjectiveId],
     notes: [
       "GameFAQs and Caves of Narshe list Avenger as the common steal and Rubber Suit as the uncommon steal; Jegged reports 70% and 23% respectively per connected steal check. These odds are source context, not required attempt targets.",

@@ -3328,8 +3328,8 @@ export const sources = [
     title: "Breaking the Seal — four shrines and Earth Guardian",
     publisher: "GameFAQs",
     url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/71891/breaking-the-seal",
-    accessed: "2026-10-25",
-    notes: "Original PlayStation route for Water (Dagger/Eiko), Fire (Freya/Amarant), Wind (Vivi/Steiner), then Earth (Zidane/Quina), including the full-party preparation window, Earth Shrine movement, Earth Guardian steals, elements, status vulnerabilities, Quina's Earth Shake opportunity, and automatic return to the Hilda Garde 3. This is the route the guide follows; the page does not state whether the first three stops are mandatory in that order or can be reordered. Exact steal rates are not repeated as completion requirements.",
+    accessed: "2026-10-28",
+    notes: "Original PlayStation route for Water (Dagger/Eiko), Fire (Freya/Amarant), Wind (Vivi/Steiner), then Earth (Zidane/Quina), including the full-party preparation window, Earth Shrine movement, and Earth Guardian battle. Recommends Earth protection, Insomniac if using Night, Auto-Reflect, Devil Killer, and Quina's White Wind, Mighty Guard, and Bad Breath; it also notes Magic Hammer as a way to stop the -ga spells. Lists the steals, elements, status vulnerabilities, Earth Shake opportunity, and automatic return to the Hilda Garde 3. This is the route the guide follows; the page does not state whether the first three stops are mandatory in that order or can be reordered. Exact steal rates are not repeated as completion requirements.",
   },
   {
     id: "gamefaqs-four-shrines-gbness-26505",
@@ -3384,8 +3384,8 @@ export const sources = [
     title: "The Four Shrines and Terra — Disc III walkthrough",
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-3/38-Four-Seals-Terra.html",
-    accessed: "2026-10-25",
-    notes: "Independent cross-check for the four shrine locations, restoring the normal weapon loadout after Ipsen, preparing Quina and the Earth Guardian fight, post-battle party selection, the upcoming Shimmering Island cutoff, and listed equipment ability sources. It lists Water, Fire, Wind, and Earth in the route order used here but does not state that order is mandatory or flexible.",
+    accessed: "2026-10-28",
+    notes: "Independent cross-check for the four shrine locations, restoring the normal weapon loadout after Ipsen, and preparing Quina and the Earth Guardian fight. Recommends Earth protection such as Gaia Gear, Reflect Ring for Auto-Reflect, and Devil Killer, then using Mighty Guard, White Wind, and Bad Breath before Zidane attempts the Avenger and Rubber Suit steals. Also covers post-battle party selection, the upcoming Shimmering Island cutoff, and listed equipment ability sources. It lists Water, Fire, Wind, and Earth in the route order used here but does not state that order is mandatory or flexible.",
   },
   {
     id: "rpgclassics-disc-3-walkthrough",

@@ -90,6 +90,49 @@ test("Disc IV bestiary and Quina lessons share the Return to Gaia checklist", ()
   }
 });
 
+test("Earth Guardian preparation equips Zidane and Quina without inferring a party level", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.earth-guardian");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqs = sources.find((entry) => entry.id === "gamefaqs-breaking-the-seal-71891");
+  const jegged = sources.find((entry) => entry.id === "jegged-four-shrines-terra");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.breaking-the-seal");
+  const recovery = chapter?.sections.find((entry) => entry.id === "breaking-seal-recovery");
+  const restorationStep = recovery?.steps.find((entry) => entry.id === "breaking-seal-restore-weapons");
+  const shrine = chapter?.sections.find((entry) => entry.id === "breaking-seal-earth-shrine");
+  const landingStep = shrine?.steps.find((entry) => entry.id === "breaking-seal-earth-shrine-landing");
+  const mirrorStep = shrine?.steps.find((entry) => entry.id === "breaking-seal-earth-mirror");
+  const fight = chapter?.sections.find((entry) => entry.id === "breaking-seal-earth-guardian");
+  const stealsStep = fight?.steps.find((entry) => entry.id === "breaking-seal-earth-guardian-steals");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 54);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 54 is the boss's stat/);
+  assert.match(guidance.levelRationale, /no normal-party level target/);
+  assert.match(guidance.optionalGrinding, /No reviewed route prescribes extra battles or a grind target/);
+  assert.match(guidance.optionalGrinding, /awards 0 EXP/);
+  assert.match(guidance.setupAdvice, /restore normal weapons/);
+  assert.match(guidance.setupAdvice, /Gaia Gear, Circlet, Feather Boots, or Auto-Float/);
+  assert.match(guidance.setupAdvice, /Auto-Reflect/);
+  assert.match(guidance.setupAdvice, /Insomniac if using Quina's Night/);
+  assert.match(guidance.setupAdvice, /Devil Killer/);
+  assert.match(guidance.setupAdvice, /White Wind, Mighty Guard, and Bad Breath/);
+  assert.match(guidance.setupAdvice, /Magic Hammer/);
+  assert.match(guidance.setupAdvice, /Avenger and Rubber Suit steals/);
+  assert.match(guidance.setupAdvice, /avoid Earth \(absorbed\)/);
+  assert.match(guidance.setupAdvice, /Earth Shake/);
+  assert.ok(["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra"]
+    .every((id) => guidance.sourceIds.includes(id) && enemy.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(gamefaqs?.notes ?? "", /Magic Hammer as a way to stop the -ga spells/);
+  assert.match(jegged?.notes ?? "", /Mighty Guard, White Wind, and Bad Breath/);
+  assert.match(restorationStep?.detail ?? "", /do not set a party-level target/);
+  assert.match(landingStep?.text ?? "", /Gaia Gear, Circlet, Feather Boots, or Auto-Float/);
+  assert.match(landingStep?.detail ?? "", /Magic Hammer can disrupt/);
+  assert.match(mirrorStep?.detail ?? "", /both item types have later recovery routes/);
+  assert.match(stealsStep?.detail ?? "", /Auto-Reflect can blunt them/);
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;

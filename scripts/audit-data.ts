@@ -10767,6 +10767,23 @@ if (!earthGuardianRecord || earthGuardianRecord.kind !== "boss" ||
   !earthGuardianRecord.drops.some((slot) => slot.slot === "always" && slot.itemId === "game-item.phoenix-pinion")) {
   errors.push("Earth Guardian's bestiary profile must include its fixed encounter, cross-checked HP, Earth Shake opportunity, and guaranteed Phoenix Pinion.");
 }
+const earthGuardianPreparation = earthGuardianRecord?.preparationGuidance;
+const earthGuardianPreparationSources = ["gamefaqs-breaking-the-seal-71891", "jegged-four-shrines-terra"];
+const earthGuardianLandingStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.breaking-the-seal")
+  ?.sections.find((section) => section.id === "breaking-seal-earth-shrine")
+  ?.steps.find((step) => step.id === "breaking-seal-earth-shrine-landing");
+if (!earthGuardianPreparation || earthGuardianPreparation.suggestedLevelRange !== undefined ||
+  !earthGuardianPreparation.levelRationale.includes("Level 54 is the boss's stat") ||
+  !earthGuardianPreparation.optionalGrinding.includes("0 EXP") ||
+  !earthGuardianPreparation.setupAdvice.includes("Insomniac if using Quina's Night") ||
+  !earthGuardianPreparation.setupAdvice.includes("White Wind, Mighty Guard, and Bad Breath") ||
+  !earthGuardianPreparation.setupAdvice.includes("Magic Hammer") ||
+  !earthGuardianPreparation.setupAdvice.includes("avoid Earth (absorbed)") ||
+  !earthGuardianLandingStep?.text.includes("Circlet") ||
+  !earthGuardianLandingStep?.text.includes("Devil Killer") ||
+  earthGuardianPreparationSources.some((sourceId) => !earthGuardianPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Earth Guardian preparation must separate its Level 54 boss stat from party level and preserve the sourced protection, Quina support, and Earth Shake strategy.");
+}
 if (!earthGuardianEncounter || earthGuardianEncounter.kind !== "boss" ||
   !earthGuardianEncounter.formation.some((entry) => entry.enemyId === "enemy.earth-guardian" && entry.quantity === 1) ||
   !earthGuardianEncounter.objectiveIds.includes("disc-3.breaking-the-seal.earth-guardian-steals") ||
