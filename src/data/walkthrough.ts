@@ -1706,7 +1706,7 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "treno-city-pickups-and-mognet",
         title: "First-visit sweep — coins, cards, Mogrich, and hidden Gil",
         summary: "Finish the collectible route before triggering the next story sequence. The first Auction House scene is story-driven; bidding opens after the party reunites in Treno.",
-        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-weapon-shop-monsters-71891", "jegged-treno", "jegged-arm-gear", "elitegrindlab-treno", "rpgclassics-treno-monsters", "rpgclassics-shops", "ffwiki-shops", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566", "ffdq-glass-armlet", "cour89-air-racket", "drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno", "rpgclassics-synthesis", "neoseeker-treno-shops"],
+        sourceIds: ["gamefaqs-treno-71891", "gamefaqs-weapon-shop-monsters-71891", "gamefaqs-boss-guide-37182", "jegged-treno", "jegged-arm-gear", "elitegrindlab-treno", "rpgclassics-treno-monsters", "vgr-no-spoiler-walkthrough", "rpgclassics-shops", "ffwiki-shops", "flactem-disc-2-south-gate-treno", "gamefaqs-missables-71891", "gamefaqs-items-71891", "gamefaqs-item-locations-54996", "gamefaqs-shops-71891", "neoseeker-item-locations-182566", "ffdq-glass-armlet", "cour89-air-racket", "drslice-treno-synthesis-disc2", "ffwiki-treno", "gamerguides-treno", "rpgclassics-synthesis", "neoseeker-treno-shops"],
         steps: [
           {
             id: "treno-gemini-and-slums",
@@ -1732,8 +1732,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "treno-griffin-arena",
             kind: "combat",
-            text: "Before leaving Treno, consider the first Knight's House Monster Challenge. Speak with the Weapon Shop owner and choose one active fighter; Steiner is a strong pick. Jegged recommends Blood Sword, Gold Choker, and Bird Killer. Win the solo Griffin fight to receive a Tonberry Card.",
-            detail: "This is the Disc II stage of a multi-visit arena ladder. The arena Griffin is a modified version with its own reward rules: GameFAQs says arena monsters give no EXP, AP, Gil, or item drops beyond the fixed victory prize. The fight is lost after leaving Treno as the sequence advances. The Tonberry Card itself has separate later sources, tracked by its own objective. No fixed level is required.",
+            text: "Before leaving Treno, consider the first Knight's House Monster Challenge. Speak with the Weapon Shop owner and choose one active fighter; Steiner is a strong pick. Equip Blood Sword, Gold Choker, and Bird Killer, then win the solo Griffin fight for the Tonberry Card.",
+            detail: "Level 16 is the arena Griffin's enemy stat, not a party target. An older GameFAQs guide suggests a Level 15–16 Steiner, but labels the fight Disc I; the current route sources place it in Disc II, so that benchmark remains optional. Jegged says Blood Sword, Gold Choker, and Bird Killer can win in two or three hits even at lower levels. VGR's MP Attack/Counter options require the relevant Power Belt abilities; Aero/Aera can still KO the fighter, and Auto-Reflect does not block them. Quina's Twister is a separate alternative only if already learned. GameFAQs says the arena grants no EXP, AP, or Gil and no ordinary drops beyond its fixed reward. VGR says a loss can be retried after healing while Treno is still at this stage; leaving advances the ladder and closes the Griffin fight. The Tonberry Card itself has later sources, tracked separately.",
             objectiveIds: ["disc-2.treno.griffin-challenge", "disc-2.tonberry-card"],
           },
         ],

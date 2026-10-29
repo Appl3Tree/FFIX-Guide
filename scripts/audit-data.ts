@@ -8149,6 +8149,27 @@ if (
 ) {
   errors.push("The Treno arena Griffin needs a separate single-enemy profile, fixed-card objective, one-time cutoff, no copied field loot, and sourced arena battle-result data.");
 }
+const trenoGriffinPreparation = trenoGriffinArena?.preparationGuidance;
+const trenoGriffinPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.treno")
+  ?.sections.find((section) => section.id === "treno-city-pickups-and-mognet");
+const trenoGriffinPreparationStep = trenoGriffinPreparationSection?.steps.find((step) => step.id === "treno-griffin-arena");
+if (!trenoGriffinPreparation || trenoGriffinPreparation.suggestedLevelRange !== undefined ||
+  !trenoGriffinPreparation.levelRationale.includes("Level 16 is the arena Griffin's enemy stat") ||
+  !trenoGriffinPreparation.levelRationale.includes("optional PlayStation benchmark") ||
+  !trenoGriffinPreparation.levelRationale.includes("Disc I") ||
+  !trenoGriffinPreparation.optionalGrinding.includes("No reviewed route establishes a required party level") ||
+  !trenoGriffinPreparation.setupAdvice.includes("Blood Sword") ||
+  !trenoGriffinPreparation.setupAdvice.includes("Gold Choker") ||
+  !trenoGriffinPreparation.setupAdvice.includes("Bird Killer") ||
+  !trenoGriffinPreparation.sourceIds.includes("gamefaqs-boss-guide-37182") ||
+  !trenoGriffinPreparation.sourceIds.includes("vgr-no-spoiler-walkthrough") ||
+  trenoGriffinPreparation.sourceIds.some((sourceId) => !sourceIds.has(sourceId)) ||
+  !trenoGriffinPreparationStep?.detail.includes("older GameFAQs guide suggests a Level 15–16 Steiner") ||
+  !trenoGriffinPreparationStep.detail.includes("Auto-Reflect does not block them") ||
+  !trenoGriffinPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-37182") ||
+  !trenoGriffinPreparationSection.sourceIds.includes("vgr-no-spoiler-walkthrough")) {
+  errors.push("Treno Griffin preparation must separate its Level 16 enemy stat from the optional party benchmark and preserve source-backed setup, threat, retry, and disc-label details.");
+}
 const pualeiPlainsPool = enemyEncounters.find((encounter) => encounter.id === "encounter.journey-to-iifa-tree.pualei-plains-pool");
 const pualeiFriendlyNymphEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.journey-to-iifa-tree.friendly-nymph");
 const pualeiFriendlyNymph = enemyRecords.find((enemy) => enemy.id === "enemy.friendly-nymph");

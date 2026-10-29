@@ -434,6 +434,44 @@ test("Crash Site Baku preparation keeps the solo duel, level guidance, and steal
   assert.match(fightStep?.detail ?? "", /Jegged reports Rare at 6%/);
 });
 
+test("Treno Griffin preparation keeps the enemy stat separate from optional Steiner benchmarks", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.griffin-treno-arena");
+  const guidance = enemy?.preparationGuidance;
+  const olderGameFAQs = sources.find((entry) => entry.id === "gamefaqs-boss-guide-37182");
+  const jegged = sources.find((entry) => entry.id === "jegged-treno");
+  const vgr = sources.find((entry) => entry.id === "vgr-no-spoiler-walkthrough");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.treno")
+    ?.sections.find((entry) => entry.id === "treno-city-pickups-and-mognet");
+  const fightStep = section?.steps.find((entry) => entry.id === "treno-griffin-arena");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 16);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 16 is the arena Griffin's enemy stat/);
+  assert.match(guidance.levelRationale, /optional PlayStation benchmark/);
+  assert.match(guidance.levelRationale, /Disc I/);
+  assert.match(guidance.optionalGrinding, /No reviewed route establishes a required party level/);
+  assert.match(guidance.optionalGrinding, /lower levels/);
+  assert.match(guidance.setupAdvice, /Blood Sword/);
+  assert.match(guidance.setupAdvice, /Gold Choker/);
+  assert.match(guidance.setupAdvice, /Bird Killer/);
+  assert.match(guidance.setupAdvice, /Auto-Reflect does not block Aero or Aera/);
+  assert.match(guidance.setupAdvice, /Quina's Twister/);
+  assert.ok(["gamefaqs-boss-guide-37182", "jegged-treno", "rpgclassics-treno-monsters", "vgr-no-spoiler-walkthrough"]
+    .every((id) => guidance.sourceIds.includes(id) && sources.some((source) => source.id === id)));
+  assert.match(olderGameFAQs?.notes ?? "", /Level 15–16/);
+  assert.match(olderGameFAQs?.notes ?? "", /labels the Knight's House Griffin Disc I/);
+  assert.match(jegged?.notes ?? "", /two or three hits even at lower levels/);
+  assert.match(vgr?.notes ?? "", /Auto-Reflect does not block the spells/);
+  assert.match(fightStep?.text ?? "", /choose one active fighter/);
+  assert.match(fightStep?.detail ?? "", /Level 16 is the arena Griffin's enemy stat/);
+  assert.match(fightStep?.detail ?? "", /Level 15–16 Steiner/);
+  assert.match(fightStep?.detail ?? "", /Aero\/Aera can still KO the fighter/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-boss-guide-37182"));
+  assert.ok(section?.sourceIds.includes("vgr-no-spoiler-walkthrough"));
+});
+
 test("Prison Cage preparation prioritizes captive survival across the back-to-back forms", () => {
   const garnetEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-garnet");
   const viviEnemy = enemyRecords.find((entry) => entry.id === "enemy.prison-cage-vivi");

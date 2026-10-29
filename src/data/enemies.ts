@@ -5882,6 +5882,14 @@ const trenoGriffinEnemyRecords: EnemyRecord[] = [
       { title: "Use Steiner's recommended equipment", detail: "Jegged recommends Blood Sword, Gold Choker, and Bird Killer: the sword restores HP on each hit, the accessory halves Wind damage, and Bird Killer increases damage against the Griffin.", sourceIds: ["jegged-treno"] },
       { title: "Choose Quina if Twister is ready", detail: "RPGClassics also recommends fighting with Quina and casting Twister if the spell has been learned.", sourceIds: ["rpgclassics-treno-monsters"] },
     ],
+    preparationGuidance: {
+      levelRationale: "Level 16 is the arena Griffin's enemy stat, not a party target. An older GameFAQs arena guide says a Level 15–16 Steiner can probably win, but this is one optional PlayStation benchmark and that FAQ labels the fight Disc I; the reviewed route sources place this first Knight's House stage in Disc II.",
+      difficultyAssessment: "Jegged says Steiner's recommended equipment makes the fight fairly easy, even at lower levels, while VGR warns Aero/Aera can still win the duel and says a loss may take a few tries. These are subjective route assessments, not a tested level threshold.",
+      optionalGrinding: "No reviewed route establishes a required party level. Do not grind solely to match the enemy's Level 16 stat: the older Steiner 15–16 benchmark is optional, and Jegged reports the recommended setup can win in two or three hits at lower levels. VGR says to heal and retry after a loss while Treno is still at this arena stage; leaving the city advances the ladder and permanently closes the Griffin fight.",
+      setupAdvice: "Choose Steiner when possible and equip Blood Sword for HP drain, Gold Choker to halve Wind damage, and Bird Killer for extra damage. If available, MP Attack or Counter from Power Belt can speed up the fight; Auto-Reflect does not block Aero or Aera. Quina's Twister is an alternative only if she has already learned it. Prepare healing items because one character fights alone; the fixed victory reward is the Tonberry Card.",
+      confidence: "disputed",
+      sourceIds: ["gamefaqs-weapon-shop-monsters-71891", "gamefaqs-boss-guide-37182", "jegged-treno", "elitegrindlab-treno", "rpgclassics-treno-monsters", "vgr-no-spoiler-walkthrough"],
+    },
     routeObjectiveIds: [trenoGriffinObjectiveId],
     notes: [
       "EliteGrindLab gives the arena form Level 16 and 1,470 HP. These match the ordinary Griffin's Enemy List profile, but this is a separate arena record because the arena version has different reward and battle-result behavior.",

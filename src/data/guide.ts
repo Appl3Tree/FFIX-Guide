@@ -836,6 +836,14 @@ export const sources = [
     notes: "Lists the Disc II Griffin and Tonberry Card reward, then the later Catoblepas, Amdusias, and Behemoth stages. The arena monsters yield no EXP, AP, Gil, or item drops beyond their fixed victory prizes; this is kept separate from their ordinary field loot tables. The Running Shoes item has other documented sources, so the missed Amdusias fight is tracked as a one-time reward opportunity rather than permanent loss of the item type.",
   },
   {
+    id: "gamefaqs-boss-guide-37182",
+    title: "Battle Arena — Final Fantasy IX walkthrough",
+    publisher: "GameFAQs (Masvega)",
+    url: "https://gamefaqs.gamespot.com/ps/197338-final-fantasy-ix/faqs/37182",
+    accessed: "2026-10-28",
+    notes: "Older PlayStation arena guide that recommends Steiner for the Griffin and says Level 15–16 can probably win, especially with Blood Sword; otherwise it advises attacks, healing, and Minus Strike. Its entry labels the Knight's House Griffin Disc I, while the reviewed current routes identify this first arena stage as Disc II, so the party-level benchmark stays optional and the disc label is not adopted.",
+  },
+  {
     id: "gamefaqs-conde-petie-colored-stones-71891",
     title: "Conde Petie Colored Stones — sidequest guide",
     publisher: "GameFAQs",
@@ -1001,7 +1009,7 @@ export const sources = [
     publisher: "GitHub mirror (dammit9x/vgr)",
     url: "https://github.com/dammit9x/vgr/blob/master/faqs/Final-Fantasy-IX-no-spoiler-walkthrough.txt",
     accessed: "2026-10-28",
-    notes: "Community walkthrough mirror that marks read-only Mognet messages with an asterisk. It lists Kupo's message to Mosh in Disc I Alexandria and again after Zorn and Thorn on the Disc II return, independently corroborating the second read opportunity. Its Gizamaluke's Grotto section also says Lindblum is closed once the party enters, independently supporting the conservative pre-entry visit checkpoint. That statement does not reconcile GameFAQs' optional-route wording about the Dragon's Gate or establish release scope; its general warning about missed delivery letters is not applied to the read-only Mognet message.",
+    notes: "Community walkthrough mirror that marks read-only Mognet messages with an asterisk. It lists Kupo's message to Mosh in Disc I Alexandria and again after Zorn and Thorn on the Disc II return, independently corroborating the second read opportunity. Its Gizamaluke's Grotto section also says Lindblum is closed once the party enters, independently supporting the conservative pre-entry visit checkpoint. That statement does not reconcile GameFAQs' optional-route wording about the Dragon's Gate or establish release scope; its general warning about missed delivery letters is not applied to the read-only Mognet message. For Treno's Griffin it recommends Steiner with Blood Sword, Bird Killer, and MP Attack or Counter from Power Belt; it says Aero/Aera can still defeat him, Auto-Reflect does not block the spells, and a lost attempt can be retried after healing.",
   },
   {
     id: "gamefaqs-jump-rope-board-60852153",
@@ -2497,7 +2505,7 @@ export const sources = [
     publisher: "Jegged",
     url: "https://jegged.com/Games/Final-Fantasy-IX/Walkthrough/Disc-2/12-Treno.html",
     accessed: "2026-10-24",
-    notes: "Independent ATE route and item sweep; covers Power Belt capture, fountain Gemini, slum Yeti Card and Taurus, Mogrich, shop and synthesis stock, Griffin challenge reward, Mythril Dagger, Supersoft, and final Crime and Punishment ATE.",
+    notes: "Independent ATE route and item sweep; covers Power Belt capture, fountain Gemini, slum Yeti Card and Taurus, Mogrich, shop and synthesis stock, Griffin challenge reward, Mythril Dagger, Supersoft, and final Crime and Punishment ATE. For the Griffin it recommends Steiner with Blood Sword, Gold Choker, and Bird Killer; it says the setup can win in two or three hits even at lower levels and does not set a party-level requirement.",
   },
   {
     id: "jegged-returning-treno-disc-3",
@@ -2537,7 +2545,7 @@ export const sources = [
     publisher: "RPGClassics",
     url: "https://shrines.rpgclassics.com/psx/ffix/pitmonsters.shtml",
     accessed: "2026-10-23",
-    notes: "Cross-checks the Treno arena's Disc II Griffin and later opponent stages; its reward list identifies the Tonberry Card for the Griffin victory.",
+    notes: "Cross-checks the Treno arena's Disc II Griffin and later opponent stages; its reward list identifies the Tonberry Card for the Griffin victory. It also offers Quina's Twister as an alternative if that Blue Magic spell has already been learned.",
   },
   {
     id: "gamefaqs-journey-to-cleyra-71891",
