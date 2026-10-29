@@ -2439,13 +2439,13 @@ export const walkthroughChapters: WalkthroughChapter[] = [
         id: "fossil-roo-entrance-and-lani",
         title: "Fossil Roo entrance — Armodullahan and Lani",
         summary: "Pass the trap corridor, fight Lani, then backtrack for the Elixir before entering the Gargant tunnels.",
-        sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-enemy-list-71891"],
+        sourceIds: ["gamefaqs-journey-to-outer-continent-71891", "jegged-fossil-roo", "gamerguides-fossil-roo", "rpgclassics-fossil-roo", "elitegrindlab-fossil-roo", "gamefaqs-enemy-list-71891", "gamefaqs-boss-guide-31490"],
         steps: [
           {
             id: "fossil-roo-prepare",
             kind: "optional",
             text: "Before going down the tunnel, equip Man Eater on Zidane if available and confirm that Dagger can heal the party. The random enemies here include Abomination, Feather Circle, Griffin, and Seeker Bat; use Quina's Eat command on Abomination (or Seeker Bat) for Night, Feather Circle for LV4 Holy, and Griffin for White Wind if those skills are still missing.",
-            detail: "These are additional Blue Magic opportunities, not proven last chances. Night is also available from Nymph; LV4 Holy and White Wind have later teachers. No chapter level range has been verified. The corridor also contains the Armodullahan chase; avoiding its swinging axes prevents unnecessary fights.",
+            detail: "These are additional Blue Magic opportunities, not proven last chances. Night is also available from Nymph; LV4 Holy and White Wind have later teachers. Lani's Level 19 is an enemy stat; the reviewed normal-route sources publish no party-level target. The corridor also contains the Armodullahan chase; avoiding its swinging axes prevents unnecessary fights and preserves the Excalibur II route budget.",
             objectiveIds: ["disc-2.journey-to-outer-continent.blue-magic", "disc-1.journey-to-burmecia.blue-magic-night"],
           },
           {
@@ -2457,8 +2457,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "fossil-roo-lani-steals",
             kind: "combat",
-            text: "During the Lani fight, have Zidane attempt to steal the Ether, Gladius, and Coral Sword before ending the battle. Slow or Blind can reduce pressure; keep Dagger healed because Lani tends to target her. If Quina knows Magic Hammer, it can be used to reduce Lani's MP, but do not rely on it as required preparation.",
-            detail: "Try for the complete steal list if the items are useful, but keep the party safe. Sources list a small discrepancy in her HP and publish different steal percentages, so this guide uses no exact HP total, attempt count, or minimum level.",
+            text: "During the Lani fight, have Zidane attempt to steal the Ether, Gladius, and Coral Sword before ending the battle. Keep Dagger alive: Chemist/Auto-Potion or Reflect can help if available, while Slow or Blind can reduce pressure. Quina's White Wind heals through Reflect; Magic Hammer can drain Lani's MP if already learned.",
+            detail: "Lani tends to target Dagger and switches to Vivi if she is KO'd. GameFAQs rates the fight Medium while Gamer Guides calls it tough; these are subjective guide ratings. Try for the complete steal list only while the party is stable: the item types have later recovery, and the Level 19 enemy stat is not a party target.",
             objectiveIds: ["disc-2.journey-to-outer-continent.lani-steals"],
           },
           {

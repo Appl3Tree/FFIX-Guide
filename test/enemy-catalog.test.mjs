@@ -211,3 +211,42 @@ test("Ark preparation keeps the GameFAQs party benchmark optional and distinguis
   assert.match(prepStep?.detail ?? "", /Switch title but identifies itself as a PlayStation walkthrough/);
   assert.match(prepStep?.detail ?? "", /preserve the selected Excalibur II timer\/EXP plan/);
 });
+
+test("Lani preparation distinguishes her enemy stat from party level and preserves Dagger-focused counterplay", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.lani");
+  const guidance = enemy?.preparationGuidance;
+  const gamefaqsBossGuide = sources.find((entry) => entry.id === "gamefaqs-boss-guide-31490");
+  const gamerGuides = sources.find((entry) => entry.id === "gamerguides-fossil-roo");
+  const section = walkthroughChapters.find((entry) => entry.areaId === "disc-2.journey-to-outer-continent")
+    ?.sections.find((entry) => entry.id === "fossil-roo-entrance-and-lani");
+  const prepStepIndex = section?.steps.findIndex((entry) => entry.id === "fossil-roo-prepare") ?? -1;
+  const fightStepIndex = section?.steps.findIndex((entry) => entry.id === "fossil-roo-lani-steals") ?? -1;
+  const fightStep = section?.steps.find((entry) => entry.id === "fossil-roo-lani-steals");
+
+  assert.ok(enemy);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 19);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 19 is Lani's enemy stat/);
+  assert.match(guidance.levelRationale, /no standard party-level target/);
+  assert.match(guidance.difficultyAssessment ?? "", /GameFAQs boss guide calls Lani Medium/);
+  assert.match(guidance.difficultyAssessment ?? "", /Gamer Guides describes her as tough/);
+  assert.match(guidance.difficultyAssessment ?? "", /subjective/);
+  assert.match(guidance.optionalGrinding, /gives a party-level target/);
+  assert.match(guidance.optionalGrinding, /Excalibur II timer plan/);
+  assert.match(guidance.setupAdvice, /Dagger's HP/);
+  assert.match(guidance.setupAdvice, /Chemist and Auto-Potion/);
+  assert.match(guidance.setupAdvice, /Reflect/);
+  assert.match(guidance.setupAdvice, /White Wind/);
+  assert.match(guidance.setupAdvice, /Magic Hammer/);
+  assert.ok(guidance.sourceIds.includes("gamefaqs-boss-guide-31490"));
+  assert.ok(guidance.sourceIds.includes("gamerguides-fossil-roo"));
+  assert.ok(guidance.sourceIds.every((id) => sources.some((source) => source.id === id)));
+  assert.ok(gamefaqsBossGuide);
+  assert.match(gamerGuides?.notes ?? "", /calls the fight tough/);
+  assert.match(gamerGuides?.notes ?? "", /no numeric party-level target/);
+  assert.ok(section?.sourceIds.includes("gamefaqs-boss-guide-31490"));
+  assert.ok(prepStepIndex >= 0 && fightStepIndex > prepStepIndex);
+  assert.match(fightStep?.detail ?? "", /Medium while Gamer Guides calls it tough/);
+  assert.match(fightStep?.detail ?? "", /Level 19 enemy stat is not a party target/);
+});

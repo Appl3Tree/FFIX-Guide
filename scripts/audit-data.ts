@@ -1545,6 +1545,24 @@ if (!laniRecord || laniRecord.kind !== "boss" || laniRecord.chapterId !== "disc-
   !laniWarningRecord || !laniCutoffRecord) {
   errors.push("Lani must have a separate one-time Fossil Roo boss encounter with her published HP disagreement and existing warning/cutoff.");
 }
+const laniPreparation = laniRecord?.preparationGuidance;
+const laniPreparationSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-2.journey-to-outer-continent")
+  ?.sections.find((section) => section.id === "fossil-roo-entrance-and-lani");
+const laniPreparationStepIndex = laniPreparationSection?.steps.findIndex((step) => step.id === "fossil-roo-prepare") ?? -1;
+const laniCombatStepIndex = laniPreparationSection?.steps.findIndex((step) => step.id === "fossil-roo-lani-steals") ?? -1;
+const laniCombatStep = laniPreparationSection?.steps.find((step) => step.id === "fossil-roo-lani-steals");
+if (!laniRecord || laniRecord.stats.find((stat) => stat.field === "level")?.value !== 19 ||
+  !laniPreparation || laniPreparation.suggestedLevelRange !== undefined ||
+  !laniPreparation.levelRationale.includes("enemy stat") || !laniPreparation.levelRationale.includes("no standard party-level target") ||
+  !laniPreparation.difficultyAssessment?.includes("subjective and differ") ||
+  !laniPreparation.optionalGrinding.includes("Excalibur II timer plan") ||
+  !laniPreparation.setupAdvice.includes("Dagger's HP") || !laniPreparation.setupAdvice.includes("White Wind") ||
+  !laniPreparation.setupAdvice.includes("Magic Hammer") ||
+  !laniPreparationSection?.sourceIds.includes("gamefaqs-boss-guide-31490") ||
+  !laniCombatStep?.detail?.includes("Medium") || !laniCombatStep?.detail?.includes("tough") ||
+  laniPreparationStepIndex < 0 || laniCombatStepIndex <= laniPreparationStepIndex) {
+  errors.push("Lani preparation must distinguish her Level 19 stat from party level, preserve conflicting subjective ratings and the Excalibur II budget, and precede the one-time encounter.");
+}
 for (const expected of expectedLaniStealPaths) {
   const path = itemAcquisitionPaths.find((entry) => entry.id === expected.id && entry.itemId === expected.itemId);
   const slot = laniRecord?.steals.find((entry) => entry.itemId === expected.itemId && entry.slot === expected.slot);
