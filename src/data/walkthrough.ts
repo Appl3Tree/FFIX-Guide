@@ -6157,8 +6157,8 @@ export const walkthroughChapters: WalkthroughChapter[] = [
           {
             id: "portal-pandemonium-kuja",
             kind: "combat",
-            text: "Attempt to steal Ether, Carabini Mail, and Light Robe from Kuja. Cast Shell on the party to blunt his magic, and do not use Reflect or Carbuncle's Reflect effect.",
-            detail: "Kuja counters Reflect with Flare Star. When his HP reaches zero, a scripted Ultima ends the encounter; continue through the scene afterward. Published HP values conflict, so none is shown.",
+            text: "Use Shell against Kuja's magic and attempt the Ether, Carabini Mail, and Light Robe steals. Do not use Reflect/Carbuncle or reduce his MP to zero; either can provoke repeated Flare Star.",
+            detail: "Kuja's Level 64 is an enemy stat, not a party-level target. HP reports conflict: GameFAQs lists 42,383, Jegged 42,382, and EliteGrindLab 52,382. Slow is the useful listed status vulnerability. When his HP reaches zero, a scripted Ultima reduces the party to 1 HP and ends the encounter; continue through the scene afterward.",
             objectiveIds: ["disc-3.portal-to-another-world.pandemonium-boss-steals", "disc-3.portal-to-another-world.pandemonium-climax"],
           },
         ],

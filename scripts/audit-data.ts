@@ -10922,6 +10922,31 @@ for (const value of [40729, 40728, 50728]) {
     errors.push(`Garland HP ${value} must remain marked as a disputed source report.`);
   }
 }
+const kujaRecord = enemyRecords.find((enemy) => enemy.id === "enemy.kuja");
+const kujaPreparation = kujaRecord?.preparationGuidance;
+const kujaEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.pandemonium.kuja");
+const kujaFightStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-3.portal-to-another-world")
+  ?.sections.find((section) => section.id === "portal-pandemonium-final-bosses")
+  ?.steps.find((step) => step.id === "portal-pandemonium-kuja");
+const kujaPrepSources = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+if (!kujaRecord || kujaRecord.kind !== "boss" || !kujaEncounter || kujaEncounter.kind !== "boss" ||
+  !kujaEncounter.formation.some((member) => member.enemyId === "enemy.kuja" && member.quantity === 1) ||
+  !kujaPreparation || kujaPreparation.suggestedLevelRange !== undefined ||
+  !kujaPreparation.levelRationale.includes("Level 64 as Kuja's enemy stat") ||
+  !kujaPreparation.levelRationale.includes("neither sets a party-level target") ||
+  !kujaPreparation.setupAdvice.includes("use Shell to reduce his magic damage") ||
+  !kujaPreparation.setupAdvice.includes("do not cast Reflect, use Carbuncle's Reflect effect, or reduce his MP to zero") ||
+  !kujaPreparation.setupAdvice.includes("repeated Flare Star") ||
+  !kujaPreparation.setupAdvice.includes("scripted Ultima reduces the party to 1 HP") ||
+  !kujaFightStep?.detail.includes("Level 64 is an enemy stat, not a party-level target") ||
+  kujaPrepSources.some((sourceId) => !kujaPreparation.sourceIds.includes(sourceId) || !sourceIds.has(sourceId))) {
+  errors.push("Kuja preparation must distinguish its Level 64 enemy stat from party level and preserve sourced Shell, no-Reflect/MP-depletion counterplay, scripted Ultima, and disputed HP.");
+}
+for (const value of [42383, 42382, 52382]) {
+  if (kujaRecord?.stats.find((claim) => claim.field === "HP" && claim.value === value)?.verification !== "disputed") {
+    errors.push(`Kuja HP ${value} must remain marked as a disputed source report.`);
+  }
+}
 const earthGuardianRecord = enemyRecords.find((enemy) => enemy.id === "enemy.earth-guardian");
 const earthGuardianEncounter = enemyEncounters.find((encounter) => encounter.id === "encounter.breaking-the-seal.earth-guardian");
 const earthGuardianWarning = missablesById.get("missable.disc-3.breaking-the-seal.earth-guardian-steals");

@@ -391,6 +391,45 @@ test("Garland preparation separates its Level 62 stat from party level and prior
   }
 });
 
+test("Kuja preparation blocks Reflect and zero-MP Flare Star triggers without inventing a party level", () => {
+  const enemy = enemyRecords.find((entry) => entry.id === "enemy.kuja");
+  const encounter = enemyEncounters.find((entry) => entry.id === "encounter.pandemonium.kuja");
+  const chapter = walkthroughChapters.find((entry) => entry.areaId === "disc-3.portal-to-another-world");
+  const prepStep = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-maze-treasures")
+    ?.steps.find((entry) => entry.id === "portal-pandemonium-boss-prep");
+  const fightStep = chapter?.sections.find((entry) => entry.id === "portal-pandemonium-final-bosses")
+    ?.steps.find((entry) => entry.id === "portal-pandemonium-kuja");
+  const guidance = enemy?.preparationGuidance;
+  const sourceIds = ["gamefaqs-portal-to-another-world-71891", "jegged-pandemonium", "elitegrindlab-pandemonium", "flactem-pandemonium"];
+
+  assert.ok(enemy);
+  assert.ok(encounter);
+  assert.ok(guidance);
+  assert.equal(enemy.stats.find((entry) => entry.field === "level")?.value, 64);
+  assert.equal(guidance.suggestedLevelRange, undefined);
+  assert.match(guidance.levelRationale, /Level 64 as Kuja's enemy stat/);
+  assert.match(guidance.levelRationale, /neither sets a party-level target/);
+  assert.match(guidance.optionalGrinding, /no reviewed source sets a Kuja party-level target/);
+  assert.match(guidance.setupAdvice, /use Shell to reduce his magic damage/);
+  assert.match(guidance.setupAdvice, /do not cast Reflect, use Carbuncle's Reflect effect, or reduce his MP to zero/);
+  assert.match(guidance.setupAdvice, /repeated Flare Star/);
+  assert.match(guidance.setupAdvice, /Ether, Carabini Mail, and the rare Light Robe/);
+  assert.match(guidance.setupAdvice, /scripted Ultima reduces the party to 1 HP/);
+  for (const [value, sourceId] of [[42383, sourceIds[0]], [42382, sourceIds[1]], [52382, sourceIds[2]]]) {
+    assert.equal(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.verification, "disputed");
+    assert.ok(enemy.stats.find((entry) => entry.field === "HP" && entry.value === value)?.sourceIds.includes(sourceId));
+  }
+  assert.ok(encounter.sourceIds.includes("flactem-pandemonium"));
+  assert.match(prepStep?.detail ?? "", /leave Auto-Reflect off for the whole sequence/);
+  assert.match(fightStep?.text ?? "", /do not use Reflect\/Carbuncle or reduce his MP to zero/i);
+  assert.match(fightStep?.detail ?? "", /Level 64 is an enemy stat, not a party-level target/);
+  for (const sourceId of sourceIds) {
+    assert.ok(guidance.sourceIds.includes(sourceId));
+    assert.ok(enemy.sourceIds.includes(sourceId));
+    assert.ok(sources.some((source) => source.id === sourceId));
+  }
+});
+
 test("Hilgigars preparation keeps Kamigame's optional level benchmark source-scoped", () => {
   const enemy = enemyRecords.find((entry) => entry.id === "enemy.hilgigars");
   const guidance = enemy?.preparationGuidance;
