@@ -597,15 +597,30 @@ const daliDaggerTriesHarderEvent = activeTimeEvents.find((event) => event.object
 const daliAteWarning = missables.find((missable) => missable.id === "missable.disc-1.village-of-dali.ates");
 const daliAteRouteStep = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")
   ?.sections.find((section) => section.id === "village-road-and-windmill")?.steps.find((step) => step.id === "dali-town-ate-followup");
+const daliAteRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+  ?.sections.find((section) => section.id === "village-road-and-windmill");
 const trueAchievementsDaliAteSource = sources.find((source) => source.id === "trueachievements-dali-ate-walkthrough");
+const rpgClassicsDaliSource = sources.find((source) => source.id === "rpgclassics-dali-walkthrough");
+const arrPeeGeeZDaliSource = sources.find((source) => source.id === "arrpeegeez-dali-walkthrough");
+const daliCatEye2Event = activeTimeEvents.find((event) => event.objectiveId === "ate.dali-cats-eye-2");
 if (
   !daliDaggerTriesHarderEvent?.trigger.includes("returning from the eastern field") ||
   !daliDaggerTriesHarderEvent.trigger.includes("Exact trigger timing remains unverified") ||
   !daliDaggerTriesHarderEvent.sourceIds.includes("trueachievements-dali-ate-walkthrough") ||
+  !["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"].every((sourceId) => daliDaggerTriesHarderEvent.sourceIds.includes(sourceId)) ||
+  !["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"].every((sourceId) => daliCatEye2Event?.sourceIds.includes(sourceId)) ||
   !daliAteWarning?.note?.includes("trigger timing differs by route") ||
+  !["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"].every((sourceId) => daliAteWarning.sourceIds.includes(sourceId)) ||
   !daliAteWarning.note.includes("returned HTTP 402") ||
   !daliAteWarning.action.includes("return to the inn to check for Dagger Tries Harder") ||
   !daliAteRouteStep?.detail?.includes("indirect evidence") ||
+  !daliAteRouteStep.detail.includes("do not settle the exact unlock trigger") ||
+  !daliAteRouteSection?.sourceIds.includes("rpgclassics-dali-walkthrough") ||
+  !daliAteRouteSection.sourceIds.includes("arrpeegeez-dali-walkthrough") ||
+  rpgClassicsDaliSource?.url !== "https://shrines.rpgclassics.com/psx/ffix/dali.shtml" ||
+  arrPeeGeeZDaliSource?.url !== "https://www.arrpeegeez.com/2016/04/final-fantasy-ix-walkthrough-part-four.html" ||
+  !rpgClassicsDaliSource?.notes.includes("not treated as the game's exact unlock condition") ||
+  !arrPeeGeeZDaliSource?.notes.includes("neither each scene's screen trigger nor a mandatory order") ||
   !trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402")
 ) {
   errors.push("Dali's Dagger Tries Harder route must preserve the alternate source timing, conservative checks, and the indexed-source access limit.");

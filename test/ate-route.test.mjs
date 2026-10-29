@@ -64,11 +64,25 @@ test("each supported Movie Critic catalog has an ordered 79-view single-save rou
     }
   }
   const daliDaggerTriesHarder = eventByObjective.get("ate.dali-dagger-tries-harder");
+  const daliCatsEye2 = eventByObjective.get("ate.dali-cats-eye-2");
   const daliAteWarning = missables.find((entry) => entry.id === "missable.disc-1.village-of-dali.ates");
   const trueAchievementsDaliAteSource = sources.find((entry) => entry.id === "trueachievements-dali-ate-walkthrough");
+  const rpgClassicsDaliSource = sources.find((entry) => entry.id === "rpgclassics-dali-walkthrough");
+  const arrPeeGeeZDaliSource = sources.find((entry) => entry.id === "arrpeegeez-dali-walkthrough");
+  const daliAteRouteSection = walkthroughChapters.find((chapter) => chapter.areaId === "disc-1.village-of-dali")
+    ?.sections.find((section) => section.id === "village-road-and-windmill");
   assert.ok(daliDaggerTriesHarder?.trigger.includes("returning from the eastern field"));
   assert.ok(daliDaggerTriesHarder?.trigger.includes("Exact trigger timing remains unverified"));
   assert.ok(daliDaggerTriesHarder?.sourceIds.includes("trueachievements-dali-ate-walkthrough"));
+  for (const sourceId of ["rpgclassics-dali-walkthrough", "arrpeegeez-dali-walkthrough"]) {
+    assert.ok(daliDaggerTriesHarder?.sourceIds.includes(sourceId));
+    assert.ok(daliCatsEye2?.sourceIds.includes(sourceId));
+    assert.ok(daliAteWarning?.sourceIds.includes(sourceId));
+    assert.ok(daliAteRouteSection?.sourceIds.includes(sourceId));
+  }
+  assert.ok(rpgClassicsDaliSource?.notes.includes("not treated as the game's exact unlock condition"));
+  assert.ok(arrPeeGeeZDaliSource?.notes.includes("neither each scene's screen trigger nor a mandatory order"));
+  assert.ok(daliAteRouteSection?.steps.find((step) => step.id === "dali-town-ate-followup")?.detail.includes("do not settle the exact unlock trigger"));
   assert.ok(daliAteWarning?.action.includes("return to the inn to check for Dagger Tries Harder"));
   assert.ok(daliAteWarning?.note.includes("returned HTTP 402"));
   assert.ok(trueAchievementsDaliAteSource?.notes.includes("Direct page access returned HTTP 402"));
